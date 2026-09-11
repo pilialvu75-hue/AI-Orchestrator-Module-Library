@@ -16,7 +16,9 @@
     "provenance",
     "validation",
     "security",
-    "integration"
+    "integration",
+    "connector",
+    "payload"
   ],
   "properties": {
     "id": {"type": "string", "minLength": 3},
@@ -60,7 +62,7 @@
       "additionalProperties": false,
       "required": ["origin"],
       "properties": {
-        "origin": {"enum": ["built_in", "cantiere", "open_source", "imported"]},
+        "origin": {"enum": ["built_in", "cantiere", "researcher", "open_source", "imported"]},
         "source_repository": {"type": ["string", "null"]},
         "source_commit": {"type": ["string", "null"]},
         "source_tag": {"type": ["string", "null"]},
@@ -104,6 +106,21 @@
         "adaptation_allowed": {"type": "boolean"},
         "known_constraints": {"type": "array", "items": {"type": "string"}},
         "adapter_notes": {"type": ["string", "null"]}
+      }
+    },
+    "connector": {
+      "$ref": "./lego.connector.schema.json"
+    },
+    "payload": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["type"],
+      "properties": {
+        "type": {"enum": ["repository_path", "upstream_reference", "archive"]},
+        "path": {"type": ["string", "null"]},
+        "sha256": {"type": ["string", "null"], "pattern": "^[A-Fa-f0-9]{64}$"},
+        "upstream_repository": {"type": ["string", "null"]},
+        "upstream_commit": {"type": ["string", "null"]}
       }
     },
     "quality": {
