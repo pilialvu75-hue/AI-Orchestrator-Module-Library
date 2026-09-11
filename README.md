@@ -6,15 +6,33 @@ Private reusable-asset library for the AI Orchestrator Cantiere/App Factory.
 
 `Cantiere -> Module Library <- Researcher`
 
-The Module Library is the authoritative store. It does not perform open-source discovery itself.
+The Module Library is the authoritative exchange store. Cantiere and Researcher do not depend on each other directly.
 
-- **Cantiere** reads certified assets when they reduce real integration cost, and deposits newly created assets only after successful validation.
-- **Researcher** searches open-source ecosystems, compares candidates and proposes qualified assets to this library.
-- **Module Library** stores accepted reusable assets, metadata, versions, provenance, validation evidence, compatibility, licenses and deprecation status.
+- **Cantiere** reads certified assets when they reduce real integration cost, and deposits newly created reusable assets after successful validation.
+- **Researcher** is a separate autonomous project/service. It reads the Library needs list, searches open-source ecosystems, compares candidates and submits normalized candidates.
+- **Module Library** stores reusable assets, versions, provenance, validation evidence, compatibility, licenses, security state and deprecation/revocation status.
+
+See `ARCHITECTURE.md` for the complete boundary definition.
 
 ## Purpose
 
-The Cantiere should **reuse proven software before generating new software**. This repository stores reusable assets that have passed the relevant admission and validation gates.
+The Cantiere should **reuse proven software before generating new software**, but only when reuse is genuinely cheaper/safer than fresh implementation.
+
+The Library provides the durable, versioned and machine-readable supply layer that makes this possible.
+
+## Lego interchange standard
+
+Every reusable asset exposes the same exchange envelope through `schemas/lego.connector.schema.json`.
+
+The Cantiere selects pieces by **capability + connector contract**, not by project-specific filenames.
+
+Example:
+
+`voice.stt -> voice.stt.v1`
+
+Multiple certified implementations can therefore compete for the same logical slot and be swapped after compatibility, migration-cost and project-test checks.
+
+See `policies/LEGO_CONNECTOR.md`.
 
 ## Asset classes
 
@@ -27,30 +45,48 @@ The Cantiere should **reuse proven software before generating new software**. Th
 
 ## Library lifecycle
 
-`submitted -> quarantined -> normalized -> tested -> certified -> deprecated/revoked`
+`discovered -> quarantined -> normalized -> tested -> certified -> deprecated/revoked`
 
 Only `certified` assets are eligible for automatic Cantiere reuse.
 
 ## Reuse rule
 
-An asset is reused only when its estimated total integration/adaptation cost is lower than fresh generation/implementation and it satisfies target, capability, license, security and validation requirements. A local match is never reused merely because it exists.
+An asset is reused only when its estimated total integration/adaptation cost is lower than fresh generation/implementation and it satisfies target, capability, connector, dependency, license, security and validation requirements.
+
+A match is never reused merely because it exists.
+
+## Durable state
+
+- `catalog/index.json` — authoritative catalog of version-pinned reusable assets
+- `catalog/needs.json` — machine-readable list of capabilities the Library currently wants the Researcher to improve/fill
+- Git history — immutable audit trail for catalog/contract evolution
 
 ## Repository layout
 
-- `catalog/` — machine-readable index of certified assets
-- `modules/` — certified reusable assets or pinned internal implementations
-- `intake/` — submissions arriving from the Researcher or Cantiere before certification
-- `schemas/` — manifest schemas
-- `policies/` — admission, licensing, security and deprecation policies
-- `benchmarks/` — reproducible comparison/validation results retained with accepted assets
+- `catalog/` — machine-readable catalog + needs queue
+- `modules/` — promoted versioned reusable assets
+- `intake/` — submissions arriving from Researcher or Cantiere before certification
+- `schemas/` — manifest/catalog/needs/Lego contracts
+- `policies/` — acceptance, connector and versioning rules
+- `examples/` — canonical submission examples
+- `tools/` — deterministic repository validators
+- `benchmarks/` — reproducible comparison/validation evidence retained with accepted assets
 - `licenses/` — preserved third-party notices when required
 
 ## Researcher boundary
 
-Open-source discovery, candidate collection and candidate-to-candidate comparison belong in the separate Researcher repository. This library receives only structured submissions with immutable upstream provenance, license data, evidence and test/benchmark material.
+The Researcher never certifies its own discoveries. It submits candidates through `intake/` using the same manifest + Lego connector envelope used by Cantiere-originated assets.
+
+When all current Library needs are covered, the Researcher should revisit the list and look for better, safer, faster or easier-to-integrate alternatives.
 
 ## Relationship with Ai-orchestrator-riserva
 
-`Ai-orchestrator-riserva` owns project planning, approval, workspace mutation, adaptation, validation and final build. After project approval, the Cantiere derives a capability shopping list, queries this certified catalog and reuses only assets that beat fresh work on compatibility, quality, time and resource cost.
+`Ai-orchestrator-riserva` owns project planning, approval, workspace mutation, adaptation, validation and final build.
 
-Generated Cantiere work can be submitted back into this library only after successful validation/emission, preserving provenance and version history.
+The future bridge will let the Cantiere derive a capability shopping list from an approved project, query this Library, pin exact asset versions, assemble/adapt selected pieces, and submit reusable verified work back through Library intake.
+
+## Validation
+
+Repository changes are checked by `tools/validate_library.py` and `.github/workflows/validate-library.yml`.
+
+The validator rejects duplicate needs/assets, malformed versions, catalog/manifest mismatches, connector inconsistencies and uncertified module-state errors before the Library is consumed by the Cantiere.
