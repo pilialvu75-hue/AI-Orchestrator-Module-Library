@@ -33,3 +33,9 @@ jobs:
 
       - name: Run Library tests
         run: python -m unittest discover -s tests -p 'test_*.py' -v
+
+      - name: Export deterministic offline Library snapshot
+        run: python tools/library_resolver.py export-cache --output /tmp/ai-orchestrator-module-library.json
+
+      - name: Validate offline snapshot
+        run: python tools/validate_snapshot.py /tmp/ai-orchestrator-module-library.json
