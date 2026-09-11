@@ -11,9 +11,9 @@ from datetime import datetime, timezone
 from pathlib import Path
 
 SEMVER = re.compile(r"^(\d+)\.(\d+)\.(\d+)(?:[-+][0-9A-Za-z.-]+)?$")
+ASSET_ID = re.compile(r"^[A-Za-z0-9][A-Za-z0-9._-]{2,127}$")
 COMMIT_LIKE = re.compile(r"^[A-Fa-f0-9]{7,64}$")
 EXTERNAL_ORIGINS = {"researcher", "open_source", "imported"}
-RESTRICTED_LICENSE_MARKERS = ("AGPL", "SSPL", "GPL-")
 
 INTAKE_TRANSITIONS = {
     "discovered": "quarantined",
@@ -68,13 +68,19 @@ def nonempty(value: object) -> bool:
 
 
 def validate_ref(ref: AssetRef) -> None:
-    require(nonempty(ref.asset_id), "asset id cannot be empty")
+    require(ASSET_ID.fullmatch(ref.asset_id) is not None, "asset id must use only letters, digits, dot, underscore or hyphen and cannot contain path separators")
     require(SEMVER.fullmatch(ref.version) is not None, f"invalid semantic version: {ref.version}")
 
 
 def validate_identity(manifest: dict, ref: AssetRef) -> None:
     require(manifest.get("id") == ref.asset_id, "manifest id does not match intake path")
     require(manifest.get("version") == ref.version, "manifest version does not match intake path")
+
+
+def validate_no_symlinks(base: Path) -> None:
+    require(not base.is_symlink(), "asset directory cannot be a symlink")
+    for path in base.rglob("*"):
+        require(not path.is_symlink(), f"symlinks are not allowed in untrusted intake: {path.relative_to(base)}")
 
 
 def validate_external_provenance(manifest: dict, base: Path) -> None:
@@ -140,6 +146,8 @@ def validate_payload(manifest: dict, base: Path) -> None:
         provenance = manifest.get("provenance") or {}
         if provenance.get("source_commit"):
             require(str(provenance["source_commit"]) == str(commit), "payload and provenance commits differ")
+        if provenance.get("source_repository"):
+            require(str(provenance["source_repository"]).rstrip("/") == str(payload["upstream_repository"]).rstrip("/"), "payload and provenance repositories differ")
         return
 
     relative = payload.get("path")
@@ -156,6 +164,7 @@ def validate_payload(manifest: dict, base: Path) -> None:
 
 
 def validate_normalization_gates(manifest: dict, base: Path) -> None:
+    validate_no_symlinks(base)
     require(isinstance(manifest.get("capabilities"), list) and manifest["capabilities"], "capabilities must not be empty")
     require(isinstance(manifest.get("platforms"), list) and manifest["platforms"], "platforms must not be empty")
     validate_external_provenance(manifest, base)
@@ -176,6 +185,13 @@ def validate_testing_gates(manifest: dict) -> None:
     require(isinstance(validated_on, list) and validated_on, "tested asset requires validation.validated_on")
 
 
+def license_requires_explicit_review(license_name: str) -> bool:
+    normalized = license_name.upper().strip()
+    if "AGPL" in normalized or "SSPL" in normalized:
+        return True
+    return re.search(r"(^|[ (|])GPL-[0-9]", normalized) is not None
+
+
 def validate_certification_gates(manifest: dict, base: Path) -> None:
     validate_normalization_gates(manifest, base)
     validate_testing_gates(manifest)
@@ -187,8 +203,8 @@ def validate_certification_gates(manifest: dict, base: Path) -> None:
     require(isinstance(known, int) and known >= 0, "security.known_vulnerabilities must be a non-negative integer")
     require(known == 0, "automatic certification is blocked when known vulnerabilities are present")
 
-    license_name = str((manifest.get("provenance") or {}).get("license") or "").upper()
-    if any(marker in license_name for marker in RESTRICTED_LICENSE_MARKERS):
+    license_name = str((manifest.get("provenance") or {}).get("license") or "")
+    if license_requires_explicit_review(license_name):
         raise PipelineError("automatic certification is blocked for strong/network copyleft licenses; explicit project-level review is required")
 
 
