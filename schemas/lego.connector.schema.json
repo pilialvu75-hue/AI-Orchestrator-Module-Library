@@ -1,0 +1,79 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ai-orchestrator.local/schemas/lego.connector.schema.json",
+  "title": "AI Orchestrator Lego Connector",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "standard",
+    "standard_version",
+    "provides",
+    "requires",
+    "integration_mode"
+  ],
+  "properties": {
+    "standard": {
+      "const": "ai-orchestrator-lego"
+    },
+    "standard_version": {
+      "type": "string",
+      "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"
+    },
+    "provides": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["capability_id", "contract_id"],
+        "properties": {
+          "capability_id": {"type": "string", "minLength": 3},
+          "contract_id": {"type": "string", "minLength": 3},
+          "contract_version": {"type": "string", "pattern": "^[0-9]+\\.[0-9]+$"}
+        }
+      }
+    },
+    "requires": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["capability_id", "optional"],
+        "properties": {
+          "capability_id": {"type": "string", "minLength": 3},
+          "contract_id": {"type": ["string", "null"]},
+          "minimum_contract_version": {"type": ["string", "null"]},
+          "optional": {"type": "boolean"}
+        }
+      }
+    },
+    "integration_mode": {
+      "enum": ["package", "adapter", "source_bundle", "recipe", "policy"]
+    },
+    "adapters": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["target", "entry_path"],
+        "properties": {
+          "target": {"type": "string", "minLength": 1},
+          "framework": {"type": ["string", "null"]},
+          "entry_path": {"type": "string", "minLength": 1},
+          "adapter_contract": {"type": ["string", "null"]}
+        }
+      }
+    },
+    "configuration_schema": {
+      "type": ["string", "null"]
+    },
+    "healthcheck": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "type": {"enum": ["test", "probe", "none"]},
+        "path": {"type": ["string", "null"]}
+      }
+    }
+  }
+}
