@@ -2,7 +2,7 @@ name: Validate Module Library
 
 on:
   push:
-    branches: ["main"]
+    branches: ["main", "library-promotion-v1"]
   pull_request:
     branches: ["main"]
   workflow_dispatch:
@@ -24,3 +24,6 @@ jobs:
 
       - name: Validate catalog, needs and module contracts
         run: python tools/validate_library.py
+
+      - name: Test intake and promotion pipeline
+        run: python -m unittest discover -s tests -p 'test_*.py' -v
