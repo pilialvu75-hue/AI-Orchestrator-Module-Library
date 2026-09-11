@@ -1,0 +1,78 @@
+{
+  "schema_version": 1,
+  "updated_at": "2026-09-11T20:45:00Z",
+  "items": [
+    {
+      "capability_id": "auth.session",
+      "title": "Authentication and session management",
+      "priority": "high",
+      "desired_candidates": 2,
+      "status": "needed",
+      "targets": ["android", "desktop", "web"]
+    },
+    {
+      "capability_id": "storage.secrets",
+      "title": "Secure local storage / secrets abstraction",
+      "priority": "high",
+      "desired_candidates": 2,
+      "status": "needed",
+      "targets": ["android", "desktop"]
+    },
+    {
+      "capability_id": "network.http",
+      "title": "HTTP/API client with retries, timeout and cancellation",
+      "priority": "high",
+      "desired_candidates": 2,
+      "status": "needed",
+      "targets": ["android", "desktop", "web"]
+    },
+    {
+      "capability_id": "storage.local_db",
+      "title": "Local database / persistence",
+      "priority": "high",
+      "desired_candidates": 2,
+      "status": "needed",
+      "targets": ["android", "desktop"]
+    },
+    {
+      "capability_id": "diagnostics.logging",
+      "title": "Structured logging and diagnostics",
+      "priority": "high",
+      "desired_candidates": 2,
+      "status": "needed",
+      "targets": ["android", "desktop", "web"]
+    },
+    {
+      "capability_id": "release.update_manager",
+      "title": "Update/download manager",
+      "priority": "high",
+      "desired_candidates": 2,
+      "status": "needed",
+      "targets": ["android", "desktop"]
+    },
+    {
+      "capability_id": "ai.local_inference",
+      "title": "Local LLM runtime integration bundle",
+      "priority": "high",
+      "desired_candidates": 2,
+      "status": "needed",
+      "targets": ["android", "desktop", "raspberry_pi"]
+    },
+    {
+      "capability_id": "voice.stt",
+      "title": "Speech-to-text integration bundle",
+      "priority": "high",
+      "desired_candidates": 2,
+      "status": "needed",
+      "targets": ["android", "desktop", "raspberry_pi"]
+    },
+    {
+      "capability_id": "voice.tts",
+      "title": "Text-to-speech integration bundle",
+      "priority": "high",
+      "desired_candidates": 2,
+      "status": "needed",
+      "targets": ["android", "desktop", "raspberry_pi"]
+    }
+  ]
+}
