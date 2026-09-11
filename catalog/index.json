@@ -1,7 +1,7 @@
 {
-  "schemaVersion": 1,
-  "generatedAt": null,
-  "certified": [],
-  "deprecated": [],
-  "revoked": []
+  "schema_version": 1,
+  "library_id": "ai-orchestrator-module-library",
+  "catalog_version": "1.0.0",
+  "updated_at": "2026-09-11T20:50:00Z",
+  "assets": []
 }
