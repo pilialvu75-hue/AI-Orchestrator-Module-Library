@@ -10,7 +10,7 @@ The Module Library is the authoritative exchange store. Cantiere and Researcher 
 
 - **Cantiere** reads certified assets when they reduce real integration cost, and deposits newly created reusable assets after successful validation.
 - **Researcher** is a separate autonomous project/service. It reads the Library needs list, searches open-source ecosystems, compares candidates and submits normalized candidates.
-- **Module Library** stores reusable assets, versions, provenance, validation evidence, compatibility, licenses, security state and deprecation/revocation status.
+- **Module Library** stores reusable assets, immutable versions, provenance, validation evidence, operational history, compatibility, licenses, security state and deprecation/revocation status.
 
 See `ARCHITECTURE.md` for the complete boundary definition.
 
@@ -59,17 +59,22 @@ A match is never reused merely because it exists.
 
 - `catalog/index.json` — authoritative catalog of version-pinned reusable assets
 - `catalog/needs.json` — machine-readable list of capabilities the Library currently wants the Researcher to improve/fill
-- Git history — immutable audit trail for catalog/contract evolution
+- `modules/<asset-id>/<version>/` — immutable certified implementation versions
+- `observations/<asset-id>/<version>.json` — append-only operational evidence learned after certification
+- Git history — audit trail for catalog/contract/policy evolution
+
+The immutable module is never rewritten merely to increase reuse counters or record a later compatibility result. Operational quality is derived from observations. See `policies/VERSIONING.md`.
 
 ## Repository layout
 
 - `catalog/` — machine-readable catalog + needs queue
-- `modules/` — promoted versioned reusable assets
+- `modules/` — promoted immutable versioned reusable assets
 - `intake/` — submissions arriving from Researcher or Cantiere before certification
-- `schemas/` — manifest/catalog/needs/Lego contracts
+- `observations/` — append-only per-version runtime/integration history
+- `schemas/` — manifest/catalog/needs/Lego/history contracts
 - `policies/` — acceptance, connector and versioning rules
 - `examples/` — canonical submission examples
-- `tools/` — deterministic repository validators
+- `tools/` — deterministic repository validators and lifecycle/history tooling
 - `benchmarks/` — reproducible comparison/validation evidence retained with accepted assets
 - `licenses/` — preserved third-party notices when required
 
@@ -77,16 +82,20 @@ A match is never reused merely because it exists.
 
 The Researcher never certifies its own discoveries. It submits candidates through `intake/` using the same manifest + Lego connector envelope used by Cantiere-originated assets.
 
-When all current Library needs are covered, the Researcher should revisit the list and look for better, safer, faster or easier-to-integrate alternatives.
+When all current Library needs are covered, the Researcher should revisit the list and look for better, safer, faster or easier-to-integrate alternatives according to its configured operating phase.
 
 ## Relationship with Ai-orchestrator-riserva
 
 `Ai-orchestrator-riserva` owns project planning, approval, workspace mutation, adaptation, validation and final build.
 
-The future bridge will let the Cantiere derive a capability shopping list from an approved project, query this Library, pin exact asset versions, assemble/adapt selected pieces, and submit reusable verified work back through Library intake.
+The future bridge will let the Cantiere derive a capability shopping list from an approved project, query this Library, pin exact asset versions, assemble/adapt selected pieces, report integration outcomes into `observations/`, and submit reusable verified work back through Library intake.
 
 ## Validation
 
-Repository changes are checked by `tools/validate_library.py` and `.github/workflows/validate-library.yml`.
+Repository changes are checked by:
 
-The validator rejects duplicate needs/assets, malformed versions, catalog/manifest mismatches, connector inconsistencies and uncertified module-state errors before the Library is consumed by the Cantiere.
+- `tools/validate_library.py` — catalog, needs, contracts and module/intake integrity;
+- `tools/validate_history.py` — operational-history integrity;
+- `.github/workflows/validate-library.yml` — CI orchestration plus unit/integration tests.
+
+The validators reject duplicate needs/assets, malformed versions, catalog/manifest mismatches, connector inconsistencies, invalid history and uncertified module-state errors before the Library is consumed by the Cantiere.
