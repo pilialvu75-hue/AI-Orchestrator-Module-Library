@@ -7,6 +7,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 SEMVER = re.compile(r"^[0-9]+\.[0-9]+\.[0-9]+(?:[-+][0-9A-Za-z.-]+)?$")
+CONTRACT_VERSION = re.compile(r"^[0-9]+\.[0-9]+$")
 VALID_STATUSES = {
     "discovered",
     "quarantined",
@@ -38,13 +39,60 @@ def require(obj: dict, keys: list[str], path: Path) -> None:
         )
 
 
-def validate_needs() -> None:
+def validate_contracts() -> dict[str, tuple[str, str]]:
+    path = ROOT / "contracts" / "index.json"
+    data = load_json(path)
+    require(data, ["schema_version", "updated_at", "contracts"], path)
+    if not isinstance(data["contracts"], list):
+        raise ValidationError("contracts/index.json: contracts must be an array")
+
+    registry: dict[str, tuple[str, str]] = {}
+    capability_to_contracts: dict[str, set[str]] = {}
+
+    for item in data["contracts"]:
+        if not isinstance(item, dict):
+            raise ValidationError("contracts/index.json: each contract must be an object")
+        require(
+            item,
+            ["capability_id", "contract_id", "contract_version", "status", "description"],
+            path,
+        )
+        capability_id = str(item["capability_id"]).strip()
+        contract_id = str(item["contract_id"]).strip()
+        version = str(item["contract_version"]).strip()
+        status = str(item["status"]).strip()
+
+        if not capability_id or not contract_id:
+            raise ValidationError(
+                "contracts/index.json: capability_id and contract_id cannot be empty"
+            )
+        if contract_id in registry:
+            raise ValidationError(
+                f"contracts/index.json: duplicate contract_id {contract_id}"
+            )
+        if not CONTRACT_VERSION.match(version):
+            raise ValidationError(
+                f"contracts/index.json: invalid contract_version {version} for {contract_id}"
+            )
+        if status not in {"draft", "stable", "deprecated"}:
+            raise ValidationError(
+                f"contracts/index.json: invalid status {status} for {contract_id}"
+            )
+
+        registry[contract_id] = (capability_id, version)
+        capability_to_contracts.setdefault(capability_id, set()).add(contract_id)
+
+    return registry
+
+
+def validate_needs(contract_registry: dict[str, tuple[str, str]]) -> None:
     path = ROOT / "catalog" / "needs.json"
     data = load_json(path)
     require(data, ["schema_version", "updated_at", "items"], path)
     if not isinstance(data["items"], list):
         raise ValidationError("catalog/needs.json: items must be an array")
 
+    registered_capabilities = {capability for capability, _ in contract_registry.values()}
     seen: set[str] = set()
     for item in data["items"]:
         if not isinstance(item, dict):
@@ -69,13 +117,21 @@ def validate_needs() -> None:
                 f"catalog/needs.json: duplicate capability_id {capability_id}"
             )
         seen.add(capability_id)
+        if capability_id not in registered_capabilities:
+            raise ValidationError(
+                f"catalog/needs.json: capability {capability_id} has no registered contract"
+            )
         if int(item["desired_candidates"]) < 1:
             raise ValidationError(
                 f"catalog/needs.json: {capability_id} desired_candidates must be >= 1"
             )
 
 
-def validate_connector(connector: dict, path: Path) -> None:
+def validate_connector(
+    connector: dict,
+    path: Path,
+    contract_registry: dict[str, tuple[str, str]],
+) -> None:
     require(
         connector,
         ["standard", "standard_version", "provides", "requires", "integration_mode"],
@@ -85,6 +141,11 @@ def validate_connector(connector: dict, path: Path) -> None:
         raise ValidationError(
             f"{path.relative_to(ROOT)}: connector.standard must be ai-orchestrator-lego"
         )
+    if not SEMVER.match(str(connector["standard_version"])):
+        raise ValidationError(
+            f"{path.relative_to(ROOT)}: connector.standard_version must be semantic"
+        )
+
     provides = connector["provides"]
     if not isinstance(provides, list) or not provides:
         raise ValidationError(
@@ -95,13 +156,30 @@ def validate_connector(connector: dict, path: Path) -> None:
             raise ValidationError(
                 f"{path.relative_to(ROOT)}: connector.provides entries must be objects"
             )
-        if not provided.get("capability_id") or not provided.get("contract_id"):
+        capability_id = str(provided.get("capability_id", "")).strip()
+        contract_id = str(provided.get("contract_id", "")).strip()
+        if not capability_id or not contract_id:
             raise ValidationError(
                 f"{path.relative_to(ROOT)}: every provided capability needs capability_id + contract_id"
             )
+        registered = contract_registry.get(contract_id)
+        if registered is None:
+            raise ValidationError(
+                f"{path.relative_to(ROOT)}: unknown contract_id {contract_id}"
+            )
+        registered_capability, _ = registered
+        if registered_capability != capability_id:
+            raise ValidationError(
+                f"{path.relative_to(ROOT)}: {contract_id} belongs to {registered_capability}, not {capability_id}"
+            )
 
 
-def validate_manifest(path: Path, *, under_modules: bool) -> tuple[str, str, str, list[str]]:
+def validate_manifest(
+    path: Path,
+    *,
+    under_modules: bool,
+    contract_registry: dict[str, tuple[str, str]],
+) -> tuple[str, str, str, list[str]]:
     data = load_json(path)
     require(
         data,
@@ -142,7 +220,7 @@ def validate_manifest(path: Path, *, under_modules: bool) -> tuple[str, str, str
             f"{path.relative_to(ROOT)}: capabilities must contain non-empty values"
         )
 
-    validate_connector(data["connector"], path)
+    validate_connector(data["connector"], path, contract_registry)
     provided_capabilities = {
         str(value["capability_id"]).strip()
         for value in data["connector"]["provides"]
@@ -233,12 +311,15 @@ def validate_catalog(module_manifests: dict[tuple[str, str], tuple[Path, str, li
 
 def main() -> int:
     try:
-        validate_needs()
+        contract_registry = validate_contracts()
+        validate_needs(contract_registry)
 
         module_manifests: dict[tuple[str, str], tuple[Path, str, list[str]]] = {}
         for path in manifest_files("modules"):
             asset_id, version, status, capabilities = validate_manifest(
-                path, under_modules=True
+                path,
+                under_modules=True,
+                contract_registry=contract_registry,
             )
             key = (asset_id, version)
             if key in module_manifests:
@@ -248,7 +329,11 @@ def main() -> int:
             module_manifests[key] = (path, status, capabilities)
 
         for path in manifest_files("intake"):
-            validate_manifest(path, under_modules=False)
+            validate_manifest(
+                path,
+                under_modules=False,
+                contract_registry=contract_registry,
+            )
 
         validate_catalog(module_manifests)
     except ValidationError as exc:
