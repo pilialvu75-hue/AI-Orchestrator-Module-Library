@@ -1,0 +1,40 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ai-orchestrator.local/schemas/asset.observations.schema.json",
+  "title": "AI Orchestrator Asset Operational History",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "asset_id", "version", "revision", "updated_at", "events"],
+  "properties": {
+    "schema_version": {"const": 1},
+    "asset_id": {"type": "string", "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{2,127}$"},
+    "version": {"type": "string", "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+(?:[-+][0-9A-Za-z.-]+)?$"},
+    "revision": {"type": "integer", "minimum": 0},
+    "updated_at": {"type": ["string", "null"], "format": "date-time"},
+    "events": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["event_id", "type", "occurred_at", "source", "outcome"],
+        "properties": {
+          "event_id": {"type": "string", "minLength": 3},
+          "type": {
+            "enum": ["integration", "compatibility", "validation", "benchmark", "incident"]
+          },
+          "occurred_at": {"type": "string", "format": "date-time"},
+          "source": {"enum": ["cantiere", "library", "researcher", "manual", "ci"]},
+          "outcome": {
+            "enum": ["success", "failure", "compatible", "incompatible", "pass", "fail", "warning", "info"]
+          },
+          "target": {"type": ["string", "null"]},
+          "contract_id": {"type": ["string", "null"]},
+          "project_id": {"type": ["string", "null"]},
+          "score": {"type": ["number", "null"], "minimum": 0, "maximum": 1},
+          "notes": {"type": ["string", "null"]},
+          "metadata": {"type": "object"}
+        }
+      }
+    }
+  }
+}

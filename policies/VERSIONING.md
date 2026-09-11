@@ -1,43 +1,91 @@
-# Library Versioning Policy
+# Asset Versioning and Evolution Policy
 
-The library versions three different things independently.
+The Library versions implementation artifacts, Lego connector contracts and the catalog independently.
 
-## 1. Asset version
+## 1. Immutable asset versions
 
-Each reusable asset uses semantic versioning: `MAJOR.MINOR.PATCH`.
+Each reusable implementation lineage has a stable `asset_id` and Semantic Version:
 
-- `PATCH` — bug/security/implementation fix that preserves the public connector contract.
-- `MINOR` — backward-compatible capability improvement.
-- `MAJOR` — breaking behavior, requirements or integration changes.
+`MAJOR.MINOR.PATCH[-PRERELEASE][+BUILD]`
 
-A published historical version is never overwritten. New work creates a new version directory and manifest.
+Guideline:
 
-## 2. Connector contract version
+- `PATCH` — compatible bug/security/implementation/performance fix;
+- `MINOR` — backward-compatible capability improvement;
+- `MAJOR` — intentionally incompatible behavior, requirements, configuration or integration change.
 
-The logical interface exposed by an asset is versioned independently from the implementation.
+A certified historical version is never overwritten. `modules/<asset-id>/<version>/` is a historical fact.
+
+Different implementations of the same Lego contract use different asset ids. They remain interchangeable candidates because they provide the same capability/contract, not because they belong to one implementation lineage.
 
 Example:
 
-- asset: `voice.sherpa_stt@2.4.1`
-- provided contract: `voice.stt.v1` / contract version `1.2`
+```text
+voice.sherpa_stt@2.4.1 -> voice.stt.v1
+voice.whisper_stt@1.8.0 -> voice.stt.v1
+```
 
-Several different assets may implement the same connector contract and therefore compete for the same Cantiere slot.
+## 2. Connector contract versions
 
-Breaking interface changes create a new contract generation (for example `voice.stt.v2`).
+The logical interface exposed by an asset is versioned independently from its implementation.
+
+Several assets may implement the same connector contract and compete for the same Cantiere slot.
+
+Breaking logical-interface changes create a new contract generation, for example `voice.stt.v2`.
 
 ## 3. Catalog version
 
-`catalog/index.json` has its own semantic `catalog_version`. It changes when the machine-readable catalog contract or certified inventory meaningfully changes.
+`catalog/index.json` has its own semantic `catalog_version`. Inventory mutations advance that version without rewriting historical module versions.
 
-## Upgrade behavior
+## No silent upgrades
 
-An application is never silently moved to a newer module merely because a newer one exists. The Cantiere must compare compatibility, migration cost, security and project tests before upgrading.
+An application is never moved to a newer module merely because a newer one exists.
+
+The Cantiere may later recommend an upgrade, but it must evaluate compatibility, adaptation/migration cost, security, operational evidence and project tests first.
 
 Known-good application builds remain reproducible by pinning exact asset id + version + provenance.
 
-## Deprecation and revocation
+## Certification-time vs operational evidence
 
-- `deprecated`: still traceable and potentially usable for an existing pinned project, but not preferred for new work.
-- `revoked`: must not be selected for new work. Existing projects should be flagged for review/replacement.
+The immutable module manifest contains certification-time facts such as provenance, dependencies, validation score, tested platforms, connector contracts and security review.
 
-A replacement reference should be recorded where available.
+Later real-world experience MUST NOT mutate the certified module merely to update counters. It is stored separately under:
+
+```text
+observations/<asset-id>/<version>.json
+```
+
+Examples:
+
+- successful/failed Cantiere integrations;
+- observed target/contract compatibility;
+- later revalidation results;
+- benchmark observations;
+- incidents/regressions.
+
+This resolves an important tension: module versions stay reproducible while the Library can still learn from every use.
+
+## Append-only history semantics
+
+Observation files are append-only event ledgers.
+
+Every event has a stable `event_id`.
+
+- sending the exact same event again is an idempotent no-op;
+- reusing an existing event id with different content is an error;
+- `revision` equals the number of recorded events and detects destructive edits.
+
+Operational summaries such as reuse count, successful integrations, failed integrations, success rate and latest compatibility are derived from events instead of becoming mutable source-of-truth counters inside the module.
+
+## Version comparison
+
+Version ordering follows Semantic Version precedence, including prereleases. Build metadata does not alter precedence.
+
+Comparison tooling may display every catalogued version together with observed quality. The latest semantic version is not automatically assumed to be the best version for every target/project.
+
+## Deprecation, revocation and rollback
+
+- `deprecated`: still traceable and potentially usable for a pinned existing project, but not preferred for new work;
+- `revoked`: must not be selected for new work; pinned projects must be flagged for replacement/review.
+
+The concrete deprecation/revocation/rollback mechanics are the next dedicated roadmap step. Old versions and their observations remain traceable throughout those transitions.

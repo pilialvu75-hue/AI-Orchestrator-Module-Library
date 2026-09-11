@@ -16,7 +16,7 @@ The Module Library is developed before Cantiere integration. The independent Res
 - [x] Durable Library catalog, needs list, manifest schema and Lego connector foundation
 - [x] Library CI validator for catalog, needs and contract references
 - [x] **Capture/Promotion pipeline**: gated intake lifecycle, dry-run, certification, immutable promotion, catalog registration, idempotency and E2E tests
-- [ ] Versioning/evolution policy and historical quality/compatibility records
+- [x] **Versioning/evolution + historical quality/compatibility**: immutable SemVer asset lineages, separate append-only per-version observations, idempotent event recording, derived quality summaries and semantic version comparison
 - [ ] Deprecation/revocation/rollback mechanics
 - [ ] Library query/resolution API/CLI suitable for Cantiere and offline cache generation
 - [ ] Cantiere capability shopping list after project approval
