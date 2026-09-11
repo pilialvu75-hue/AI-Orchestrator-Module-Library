@@ -18,7 +18,7 @@ The Module Library is developed before Cantiere integration. The independent Res
 - [x] **Capture/Promotion pipeline**: gated intake lifecycle, dry-run, certification, immutable promotion, catalog registration, idempotency and E2E tests
 - [x] **Versioning/evolution + historical quality/compatibility**: immutable SemVer asset lineages, separate append-only per-version observations, idempotent event recording, derived quality summaries and semantic version comparison
 - [x] **Deprecation/revocation/rollback mechanics**: separate catalog availability, append-only transition ledger, sticky revocation, explicit replacement links and non-mutating rollback planning
-- [ ] Library query/resolution API/CLI suitable for Cantiere and offline cache generation
+- [x] **Library query/resolution + offline cache**: deterministic hard filters, transparent `balanced-v1` candidate ranking, revoked/deprecated safeguards, exact-version inspection, deterministic snapshot export and integrity hashes
 - [ ] Cantiere capability shopping list after project approval
 - [ ] Planner reuse-first against Library candidates
 - [ ] Assembly/adaptation into project workspace
