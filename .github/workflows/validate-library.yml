@@ -28,5 +28,8 @@ jobs:
       - name: Validate version history and observations
         run: python tools/validate_history.py
 
+      - name: Validate lifecycle ledger and availability state
+        run: python tools/validate_lifecycle.py
+
       - name: Run Library tests
         run: python -m unittest discover -s tests -p 'test_*.py' -v
