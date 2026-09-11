@@ -1,0 +1,89 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ai-orchestrator.local/schemas/library.snapshot.schema.json",
+  "title": "AI Orchestrator Module Library Offline Snapshot",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "library_id",
+    "catalog_version",
+    "source_state",
+    "resolution_policy",
+    "contracts",
+    "needs",
+    "assets",
+    "snapshot_sha256"
+  ],
+  "properties": {
+    "schema_version": {"const": 1},
+    "library_id": {"type": "string", "minLength": 1},
+    "catalog_version": {"type": "string", "minLength": 1},
+    "source_state": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "catalog_updated_at",
+        "contracts_updated_at",
+        "needs_updated_at",
+        "lifecycle_revision",
+        "lifecycle_updated_at"
+      ],
+      "properties": {
+        "catalog_updated_at": {"type": ["string", "null"]},
+        "contracts_updated_at": {"type": ["string", "null"]},
+        "needs_updated_at": {"type": ["string", "null"]},
+        "lifecycle_revision": {"type": "integer", "minimum": 0},
+        "lifecycle_updated_at": {"type": ["string", "null"]}
+      }
+    },
+    "resolution_policy": {
+      "type": "object",
+      "required": ["id", "weights"],
+      "properties": {
+        "id": {"type": "string"},
+        "weights": {"type": "object"}
+      }
+    },
+    "contracts": {"type": "array", "items": {"type": "object"}},
+    "needs": {"type": "array", "items": {"type": "object"}},
+    "assets": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "version",
+          "status",
+          "availability",
+          "capabilities",
+          "platforms",
+          "contracts",
+          "ranking",
+          "integrity",
+          "paths"
+        ],
+        "properties": {
+          "id": {"type": "string"},
+          "version": {"type": "string"},
+          "status": {"type": "string"},
+          "availability": {"enum": ["active", "deprecated", "revoked"]},
+          "capabilities": {"type": "array", "items": {"type": "string"}},
+          "platforms": {"type": "array", "items": {"type": "string"}},
+          "contracts": {"type": "array", "items": {"type": "object"}},
+          "ranking": {"type": "object"},
+          "integrity": {
+            "type": "object",
+            "required": ["manifest_sha256", "module_tree_sha256"],
+            "properties": {
+              "manifest_sha256": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+              "module_tree_sha256": {"type": "string", "pattern": "^[a-f0-9]{64}$"}
+            }
+          },
+          "paths": {"type": "object"}
+        }
+      }
+    },
+    "snapshot_sha256": {"type": "string", "pattern": "^[a-f0-9]{64}$"}
+  }
+}
