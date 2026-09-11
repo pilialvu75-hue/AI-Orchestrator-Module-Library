@@ -1,0 +1,89 @@
+{
+  "id": "voice.example_stt",
+  "name": "Example STT Module",
+  "version": "1.0.0",
+  "kind": "integration_bundle",
+  "status": "normalized",
+  "description": "Example only: normalized speech-to-text asset using the Lego connector standard.",
+  "tags": ["voice", "stt"],
+  "capabilities": ["voice.stt"],
+  "platforms": ["android"],
+  "languages": ["dart"],
+  "frameworks": ["flutter"],
+  "entry_paths": ["payload/lib/stt_adapter.dart"],
+  "dependencies": [],
+  "provenance": {
+    "origin": "researcher",
+    "source_repository": "https://example.invalid/upstream",
+    "source_commit": "0123456789abcdef0123456789abcdef01234567",
+    "source_tag": null,
+    "source_project_id": null,
+    "source_task_id": null,
+    "license": "MIT",
+    "license_file": "provenance/LICENSE",
+    "retrieved_at": "2026-09-11T20:55:00Z"
+  },
+  "validation": {
+    "score": 0.0,
+    "tests_passed": false,
+    "test_report": null,
+    "validated_at": null,
+    "validated_on": []
+  },
+  "security": {
+    "reviewed": false,
+    "reviewed_at": null,
+    "known_vulnerabilities": 0,
+    "sbom": null,
+    "notes": null
+  },
+  "integration": {
+    "estimated_effort": "low",
+    "adaptation_allowed": true,
+    "known_constraints": [],
+    "adapter_notes": null
+  },
+  "connector": {
+    "standard": "ai-orchestrator-lego",
+    "standard_version": "1.0.0",
+    "provides": [
+      {
+        "capability_id": "voice.stt",
+        "contract_id": "voice.stt.v1",
+        "contract_version": "1.0"
+      }
+    ],
+    "requires": [],
+    "integration_mode": "adapter",
+    "adapters": [
+      {
+        "target": "android",
+        "framework": "flutter",
+        "entry_path": "payload/lib/stt_adapter.dart",
+        "adapter_contract": "voice.stt.v1"
+      }
+    ],
+    "configuration_schema": null,
+    "healthcheck": {
+      "type": "test",
+      "path": "tests/stt_adapter_test.dart"
+    }
+  },
+  "payload": {
+    "type": "upstream_reference",
+    "path": null,
+    "sha256": null,
+    "upstream_repository": "https://example.invalid/upstream",
+    "upstream_commit": "0123456789abcdef0123456789abcdef01234567"
+  },
+  "quality": {
+    "reuse_count": 0,
+    "successful_integrations": 0,
+    "failed_integrations": 0,
+    "last_used_at": null
+  },
+  "deprecation": {
+    "reason": null,
+    "replacement": null
+  }
+}
