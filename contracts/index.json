@@ -1,0 +1,78 @@
+{
+  "schema_version": 1,
+  "updated_at": "2026-09-11T21:05:00Z",
+  "contracts": [
+    {
+      "capability_id": "auth.session",
+      "contract_id": "auth.session.v1",
+      "contract_version": "1.0",
+      "status": "draft",
+      "description": "Logical authentication/session capability boundary.",
+      "replacement": null
+    },
+    {
+      "capability_id": "storage.secrets",
+      "contract_id": "storage.secrets.v1",
+      "contract_version": "1.0",
+      "status": "draft",
+      "description": "Logical secure secret storage capability boundary.",
+      "replacement": null
+    },
+    {
+      "capability_id": "network.http",
+      "contract_id": "network.http.v1",
+      "contract_version": "1.0",
+      "status": "draft",
+      "description": "Logical HTTP client capability boundary with timeout/cancellation/retry semantics.",
+      "replacement": null
+    },
+    {
+      "capability_id": "storage.local_db",
+      "contract_id": "storage.local_db.v1",
+      "contract_version": "1.0",
+      "status": "draft",
+      "description": "Logical local persistence capability boundary.",
+      "replacement": null
+    },
+    {
+      "capability_id": "diagnostics.logging",
+      "contract_id": "diagnostics.logging.v1",
+      "contract_version": "1.0",
+      "status": "draft",
+      "description": "Logical structured logging and diagnostic-event boundary.",
+      "replacement": null
+    },
+    {
+      "capability_id": "release.update_manager",
+      "contract_id": "release.update_manager.v1",
+      "contract_version": "1.0",
+      "status": "draft",
+      "description": "Logical download/update management boundary.",
+      "replacement": null
+    },
+    {
+      "capability_id": "ai.local_inference",
+      "contract_id": "ai.local_inference.v1",
+      "contract_version": "1.0",
+      "status": "draft",
+      "description": "Logical local inference runtime boundary.",
+      "replacement": null
+    },
+    {
+      "capability_id": "voice.stt",
+      "contract_id": "voice.stt.v1",
+      "contract_version": "1.0",
+      "status": "draft",
+      "description": "Logical speech-to-text boundary independent from the concrete engine.",
+      "replacement": null
+    },
+    {
+      "capability_id": "voice.tts",
+      "contract_id": "voice.tts.v1",
+      "contract_version": "1.0",
+      "status": "draft",
+      "description": "Logical text-to-speech boundary independent from the concrete engine.",
+      "replacement": null
+    }
+  ]
+}
