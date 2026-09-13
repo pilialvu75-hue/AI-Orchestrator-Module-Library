@@ -106,6 +106,20 @@ The immutable module is never rewritten merely to increase reuse counters or rec
 - `benchmarks/` — reproducible comparison/validation evidence retained with accepted assets
 - `licenses/` — preserved third-party notices when required
 
+## Shared Diagnostics
+
+The Library has an opt-in producer for the shared public Diagnostics service at `pilialvu75-hue/Ai-orchestrator-diagnostics`.
+
+Its namespace is isolated from the Android app and Researcher:
+
+- `diagnostics-library-v1-<instance-id>`
+- `library-diag-<sha256>.jsonl`
+- `library-latest.jsonl`
+
+Publishing uses `tools/library_diagnostics.py` and requires a dedicated `AI_ORCHESTRATOR_DIAGNOSTICS_TOKEN`; the normal Library/Researcher credential is not reused. No recurring Diagnostics workflow is enabled, preserving the current zero-mandatory-cost policy.
+
+See `docs/DIAGNOSTICS.md` for the exact manual command, privacy rules, verification requirements, retry/idempotency behavior and producer-scoped retention.
+
 ## Researcher boundary
 
 The Researcher never certifies its own discoveries. It submits candidates through `intake/` using the same manifest + Lego connector envelope used by Cantiere-originated assets.
