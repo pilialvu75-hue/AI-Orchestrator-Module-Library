@@ -7,6 +7,7 @@ import sys
 import tempfile
 from pathlib import Path
 
+from library_package import PackageError, build_package
 from library_pipeline import (
     AssetRef,
     PipelineError,
@@ -16,6 +17,7 @@ from library_pipeline import (
     transition_intake,
     validate_ref,
 )
+from library_resolver import export_snapshot
 
 
 class AutopilotError(Exception):
@@ -47,7 +49,6 @@ def _advance_all(root: Path, ref: AssetRef) -> dict[str, object]:
     path = manifest_path(root, "intake", ref)
     if not path.is_file():
         raise AutopilotError(f"missing intake manifest: {path}")
-
     manifest = load_json(path)
     status = str(manifest.get("status") or "")
     transitions = {
@@ -59,10 +60,8 @@ def _advance_all(root: Path, ref: AssetRef) -> dict[str, object]:
     targets = transitions.get(status)
     if targets is None:
         raise AutopilotError(f"unsupported intake status: {status!r}")
-
     for target in targets:
         transition_intake(root, ref, target)
-
     return promote(root, ref)
 
 
@@ -85,9 +84,6 @@ def process_one(root: Path, ref: AssetRef) -> dict[str, object]:
             "result": str(result.get("result") or "promoted"),
         }
     except (PipelineError, AutopilotError, OSError, ValueError) as exc:
-        # Any failed gate restores the exact intake state that existed before
-        # this asset was evaluated. A failed candidate is never left halfway
-        # through the lifecycle by the autopilot.
         if source.exists():
             shutil.rmtree(source)
         source.parent.mkdir(parents=True, exist_ok=True)
@@ -101,16 +97,88 @@ def process_one(root: Path, ref: AssetRef) -> dict[str, object]:
         shutil.rmtree(backup_parent, ignore_errors=True)
 
 
+def refresh_consumption_exports(root: Path) -> dict[str, object]:
+    """Persist the exact resolver snapshot and packages consumed by Cantiere."""
+    snapshot_path = root / "catalog" / "offline-snapshot.json"
+    snapshot_result = export_snapshot(root, snapshot_path)
+    snapshot = load_json(snapshot_path)
+
+    packages_root = root / "packages"
+    if packages_root.exists():
+        shutil.rmtree(packages_root)
+    packages_root.mkdir(parents=True, exist_ok=True)
+
+    catalog = load_json(root / "catalog" / "index.json")
+    rows: list[dict[str, object]] = []
+    for entry in sorted(
+        (item for item in catalog.get("assets", []) if isinstance(item, dict)),
+        key=lambda item: (str(item.get("id")), str(item.get("version"))),
+    ):
+        availability = str(entry.get("availability") or "active")
+        if availability == "revoked" or entry.get("status") != "certified":
+            continue
+        asset_id = str(entry.get("id") or "")
+        version = str(entry.get("version") or "")
+        try:
+            envelope = build_package(
+                root,
+                asset_id,
+                version,
+                include_deprecated=availability == "deprecated",
+            )
+        except PackageError as exc:
+            raise AutopilotError(
+                f"cannot export certified package {asset_id}@{version}: {exc}"
+            ) from exc
+        relative = Path(asset_id) / version / "package.json"
+        output = packages_root / relative
+        output.parent.mkdir(parents=True, exist_ok=True)
+        output.write_text(
+            json.dumps(envelope, indent=2, ensure_ascii=False) + "\n",
+            encoding="utf-8",
+        )
+        package = envelope.get("package") or {}
+        integrity = package.get("integrity") or {}
+        rows.append(
+            {
+                "pin": f"{asset_id}@{version}",
+                "path": f"packages/{relative.as_posix()}",
+                "package_sha256": envelope.get("package_sha256"),
+                "module_tree_sha256": integrity.get("module_tree_sha256"),
+            }
+        )
+
+    index = {
+        "schema": "ai-orchestrator.library-package-index.v1",
+        "snapshot_sha256": snapshot.get("snapshot_sha256"),
+        "packages": rows,
+    }
+    (packages_root / "index.json").write_text(
+        json.dumps(index, indent=2, ensure_ascii=False) + "\n",
+        encoding="utf-8",
+    )
+    return {
+        "snapshot_sha256": snapshot_result["snapshot_sha256"],
+        "package_count": len(rows),
+    }
+
+
 def run(root: Path) -> dict[str, object]:
     resolved = root.resolve()
     results = [process_one(resolved, ref) for ref in _discover(resolved)]
-    promoted = sum(1 for item in results if item["result"] in {"promoted", "already_promoted"})
+    promoted = sum(
+        1
+        for item in results
+        if item["result"] in {"promoted", "already_promoted"}
+    )
     blocked = sum(1 for item in results if item["result"] == "blocked")
+    exports = refresh_consumption_exports(resolved)
     return {
         "schema": "ai-orchestrator.library-autopilot-report.v1",
         "processed": len(results),
         "promoted": promoted,
         "blocked": blocked,
+        "exports": exports,
         "results": results,
     }
 
@@ -133,9 +201,6 @@ def _main(argv: list[str]) -> int:
         args.report.parent.mkdir(parents=True, exist_ok=True)
         args.report.write_text(rendered, encoding="utf-8")
     print(rendered, end="")
-    # Blocked candidates are an expected quarantine outcome, not an automation
-    # failure. CI validation still decides whether the resulting repository is
-    # internally consistent.
     return 0
 
 
