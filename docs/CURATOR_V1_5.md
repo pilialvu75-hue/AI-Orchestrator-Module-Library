@@ -2,7 +2,7 @@
 
 ## Status
 
-Ring 1 foundation complete. Ring 2 Gemini provider implemented.
+Rings 1-3 implemented: provider-neutral authority boundary, Gemini provider and semantic/explainable candidate ranking.
 
 The Curator is an advisory layer above the deterministic Module Library core. It may reason over sanitized Library context, but it is never an authority for certification, security, lifecycle, compatibility or repository mutation.
 
@@ -138,6 +138,32 @@ The workflow:
 
 To enable a real call, configure one repository Actions secret named `GEMINI_API_KEY`. No other secret is required for the Curator.
 
+## Ring 3 — semantic matching and explainable ranking
+
+`tools/library_curator_semantic.py` is the higher-level semantic ranking service for one capability at a time.
+
+When candidates exist, Gemini must rank every supplied candidate exactly once. The response carries six explicit advisory factors per asset:
+
+- `semantic_fit` — how closely the supplied description/capabilities match the requested need;
+- `target_fit` — fit to requested platforms/targets;
+- `contract_fit` — fit to the declared capability contract boundary;
+- `evidence_strength` — strength of the supplied test/security state;
+- `integration_fit` — expected integration/adaptation fit from supplied constraints;
+- `overall` — provider's combined advisory score.
+
+The deterministic core does not blindly trust those numbers. It verifies that:
+
+- every factor is in `[0, 1]`;
+- every cited asset exists in the exact request context;
+- each candidate appears exactly once;
+- `ranking_factors` follow the exact same order as `asset_refs`;
+- `overall` values are non-increasing in the returned ranking;
+- rationales are short observable explanations, not hidden reasoning traces.
+
+The AI is deliberately allowed to rank an uncertified intake candidate for evaluation. That does not change its lifecycle state and does not make it reusable. The pre-existing deterministic guard still rejects any `reuse_recommendation` for intake, deprecated, revoked or otherwise non-active/non-certified material.
+
+If a capability has no candidates at all, `run_semantic_ranking` skips the API call entirely and emits a deterministic `coverage_gap` with `ai_called=false`. This saves quota/cost and avoids asking an AI a question the Library can answer exactly itself.
+
 ## Next rings
 
-Ring 3 adds semantic capability matching and explainable ranking behavior on top of this provider. Ring 4 adds duplicate/alternative/adapter suggestions, Ring 5 uses operational observations for health reasoning, and Ring 6 surfaces clearly labeled AI advice in the Cantiere/Modules UI.
+Ring 4 adds duplicate/alternative/adapter suggestions, Ring 5 uses operational observations for health reasoning, and Ring 6 surfaces clearly labeled AI advice in the Cantiere/Modules UI.

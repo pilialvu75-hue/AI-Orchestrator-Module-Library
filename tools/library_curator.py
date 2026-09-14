@@ -26,6 +26,16 @@ ALLOWED_RECOMMENDATION_TYPES = {
     "adapter_hint",
     "health_warning",
 }
+RANKING_FACTOR_KEYS = {
+    "asset_ref",
+    "semantic_fit",
+    "target_fit",
+    "contract_fit",
+    "evidence_strength",
+    "integration_fit",
+    "overall",
+    "rationale",
+}
 
 
 class CuratorError(Exception):
@@ -285,6 +295,82 @@ def _validate_string_list(value: object, where: str) -> list[str]:
     return values
 
 
+def _score(value: object, where: str) -> float:
+    if not isinstance(value, (int, float)) or isinstance(value, bool):
+        raise CuratorError(f"{where} must be numeric")
+    result = float(value)
+    if result < 0.0 or result > 1.0:
+        raise CuratorError(f"{where} must be between 0 and 1")
+    return result
+
+
+def _validate_ranking_factors(
+    value: object,
+    *,
+    asset_by_ref: dict[str, dict[str, object]],
+    where: str,
+) -> list[dict[str, object]]:
+    if value is None:
+        return []
+    if not isinstance(value, list):
+        raise CuratorError(f"{where} must be an array")
+
+    result: list[dict[str, object]] = []
+    seen: set[str] = set()
+    for index, item in enumerate(value):
+        item_where = f"{where}[{index}]"
+        if not isinstance(item, dict):
+            raise CuratorError(f"{item_where} must be an object")
+        _require_exact_keys(item, RANKING_FACTOR_KEYS, item_where)
+        missing = sorted(RANKING_FACTOR_KEYS - set(item))
+        if missing:
+            raise CuratorError(
+                f"{item_where}: missing fields: {', '.join(missing)}"
+            )
+
+        asset_ref = item.get("asset_ref")
+        if not isinstance(asset_ref, str) or not asset_ref.strip():
+            raise CuratorError(f"{item_where}.asset_ref must be non-empty")
+        asset_ref = asset_ref.strip()
+        if asset_ref not in asset_by_ref:
+            raise CuratorError(f"{item_where}: unknown asset_ref {asset_ref}")
+        if asset_ref in seen:
+            raise CuratorError(f"{where} contains duplicate asset_ref {asset_ref}")
+        seen.add(asset_ref)
+
+        rationale = item.get("rationale")
+        if not isinstance(rationale, str) or not rationale.strip():
+            raise CuratorError(f"{item_where}.rationale must be non-empty")
+        if len(rationale) > 800:
+            raise CuratorError(f"{item_where}.rationale is too long")
+
+        result.append(
+            {
+                "asset_ref": asset_ref,
+                "semantic_fit": _score(
+                    item.get("semantic_fit"), f"{item_where}.semantic_fit"
+                ),
+                "target_fit": _score(
+                    item.get("target_fit"), f"{item_where}.target_fit"
+                ),
+                "contract_fit": _score(
+                    item.get("contract_fit"), f"{item_where}.contract_fit"
+                ),
+                "evidence_strength": _score(
+                    item.get("evidence_strength"),
+                    f"{item_where}.evidence_strength",
+                ),
+                "integration_fit": _score(
+                    item.get("integration_fit"),
+                    f"{item_where}.integration_fit",
+                ),
+                "overall": _score(item.get("overall"), f"{item_where}.overall"),
+                "rationale": rationale.strip(),
+            }
+        )
+    return result
+
+
 def verify_response(
     request: dict[str, object],
     response: dict[str, object],
@@ -341,6 +427,7 @@ def verify_response(
                 "capability_ids",
                 "adapter_suggestions",
                 "warnings",
+                "ranking_factors",
             },
             where,
         )
@@ -349,12 +436,7 @@ def verify_response(
         if recommendation_type not in ALLOWED_RECOMMENDATION_TYPES:
             raise CuratorError(f"{where}: unsupported recommendation type")
 
-        confidence = item.get("confidence")
-        if not isinstance(confidence, (int, float)) or isinstance(confidence, bool):
-            raise CuratorError(f"{where}.confidence must be numeric")
-        confidence = float(confidence)
-        if confidence < 0.0 or confidence > 1.0:
-            raise CuratorError(f"{where}.confidence must be between 0 and 1")
+        confidence = _score(item.get("confidence"), f"{where}.confidence")
 
         summary = item.get("summary")
         if not isinstance(summary, str) or not summary.strip():
@@ -385,6 +467,25 @@ def verify_response(
             f"{where}.adapter_suggestions",
         )
         warnings = _validate_string_list(item.get("warnings"), f"{where}.warnings")
+        ranking_factors = _validate_ranking_factors(
+            item.get("ranking_factors"),
+            asset_by_ref=asset_by_ref,
+            where=f"{where}.ranking_factors",
+        )
+
+        if recommendation_type == "candidate_ranking":
+            if not refs:
+                raise CuratorError(f"{where}: candidate ranking requires asset_refs")
+            factor_refs = [str(factor["asset_ref"]) for factor in ranking_factors]
+            if factor_refs != refs:
+                raise CuratorError(
+                    f"{where}: ranking_factors must cover asset_refs in the same order"
+                )
+            overall = [float(factor["overall"]) for factor in ranking_factors]
+            if any(current < following for current, following in zip(overall, overall[1:])):
+                raise CuratorError(
+                    f"{where}: asset_refs must be ordered by non-increasing overall score"
+                )
 
         if recommendation_type == "reuse_recommendation":
             if not refs:
@@ -409,6 +510,7 @@ def verify_response(
                 "capability_ids": cited_capabilities,
                 "adapter_suggestions": adapter_suggestions,
                 "warnings": warnings,
+                "ranking_factors": ranking_factors,
             }
         )
 

@@ -23,6 +23,7 @@ security, lifecycle, compatibility, deprecation/revocation and repository mutati
 Use only the supplied request context. Never invent asset refs or capabilities. Never claim that
 an intake candidate is reusable production material. Return only JSON matching the supplied schema.
 Keep summaries concise and decision-oriented; do not expose hidden chain-of-thought.
+When ranking candidates, give short observable rationales, not private reasoning traces.
 """
 
 GEMINI_RESPONSE_SCHEMA = {
@@ -52,6 +53,32 @@ GEMINI_RESPONSE_SCHEMA = {
                     "capability_ids": {"type": "array", "items": {"type": "string"}},
                     "adapter_suggestions": {"type": "array", "items": {"type": "string"}},
                     "warnings": {"type": "array", "items": {"type": "string"}},
+                    "ranking_factors": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "asset_ref": {"type": "string"},
+                                "semantic_fit": {"type": "number", "minimum": 0, "maximum": 1},
+                                "target_fit": {"type": "number", "minimum": 0, "maximum": 1},
+                                "contract_fit": {"type": "number", "minimum": 0, "maximum": 1},
+                                "evidence_strength": {"type": "number", "minimum": 0, "maximum": 1},
+                                "integration_fit": {"type": "number", "minimum": 0, "maximum": 1},
+                                "overall": {"type": "number", "minimum": 0, "maximum": 1},
+                                "rationale": {"type": "string"},
+                            },
+                            "required": [
+                                "asset_ref",
+                                "semantic_fit",
+                                "target_fit",
+                                "contract_fit",
+                                "evidence_strength",
+                                "integration_fit",
+                                "overall",
+                                "rationale",
+                            ],
+                        },
+                    },
                 },
                 "required": [
                     "type",
@@ -61,6 +88,7 @@ GEMINI_RESPONSE_SCHEMA = {
                     "capability_ids",
                     "adapter_suggestions",
                     "warnings",
+                    "ranking_factors",
                 ],
             },
         },
@@ -74,6 +102,42 @@ Sleeper = Callable[[float], None]
 
 class GeminiProviderError(Exception):
     pass
+
+
+def _task_instruction(request: dict[str, object]) -> str:
+    task = request.get("task")
+    if task == "rank_candidates":
+        return (
+            "Rank every supplied asset candidate for the requested capability. "
+            "Return one candidate_ranking recommendation when candidates exist. "
+            "asset_refs must be best-to-worst and ranking_factors must cover the same refs "
+            "in the same order. Score semantic_fit, target_fit, contract_fit, "
+            "evidence_strength, integration_fit and overall from 0 to 1. overall must be "
+            "non-increasing in the returned order. Base scores only on supplied fields. "
+            "A discovered/quarantined/normalized/tested intake asset may be ranked for evaluation "
+            "but must never be returned as reuse_recommendation."
+        )
+    if task == "coverage":
+        return (
+            "Assess capability coverage against desired_candidates. Return coverage_gap when the "
+            "known certified/active supply is insufficient. ranking_factors may be empty."
+        )
+    if task == "find_duplicates":
+        return (
+            "Identify only plausible duplicate or near-duplicate assets from the supplied context. "
+            "Use duplicate_hint and cite exact asset_refs. ranking_factors may be empty."
+        )
+    if task == "suggest_adapters":
+        return (
+            "Suggest adapters only when the supplied contracts/platforms/integration constraints "
+            "show a concrete mismatch. Use adapter_hint. ranking_factors may be empty."
+        )
+    if task == "health_review":
+        return (
+            "Surface only health or evidence concerns visible in the supplied context. "
+            "Use health_warning. ranking_factors may be empty."
+        )
+    return "Follow the request task using only supplied context."
 
 
 def _default_transport(
@@ -177,7 +241,18 @@ class GeminiCuratorProvider:
         )
 
     def _body(self, request: dict[str, object]) -> bytes:
-        prompt = json.dumps(request, ensure_ascii=False, sort_keys=True, separators=(",", ":"))
+        request_json = json.dumps(
+            request,
+            ensure_ascii=False,
+            sort_keys=True,
+            separators=(",", ":"),
+        )
+        prompt = (
+            "TASK INSTRUCTIONS:\n"
+            + _task_instruction(request)
+            + "\n\nREQUEST JSON:\n"
+            + request_json
+        )
         payload = {
             "systemInstruction": {
                 "parts": [{"text": SYSTEM_PROMPT}],

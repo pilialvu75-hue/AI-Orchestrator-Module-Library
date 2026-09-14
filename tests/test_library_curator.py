@@ -178,21 +178,41 @@ class LibraryCuratorTest(unittest.TestCase):
         }
 
     @staticmethod
-    def _response(request: dict, *, recommendation_type: str, refs: list[str]) -> dict:
+    def _ranking_factors(refs: list[str]) -> list[dict]:
+        factors = []
+        for index, ref in enumerate(refs):
+            overall = max(0.0, 0.9 - index * 0.1)
+            factors.append(
+                {
+                    "asset_ref": ref,
+                    "semantic_fit": overall,
+                    "target_fit": 0.9,
+                    "contract_fit": 0.9,
+                    "evidence_strength": 0.9 if "certified" in ref else 0.4,
+                    "integration_fit": 0.8,
+                    "overall": overall,
+                    "rationale": "Observable fit from supplied Library metadata.",
+                }
+            )
+        return factors
+
+    @classmethod
+    def _response(cls, request: dict, *, recommendation_type: str, refs: list[str]) -> dict:
+        recommendation = {
+            "type": recommendation_type,
+            "confidence": 0.91,
+            "summary": "Advisory result based only on supplied Library context.",
+            "asset_refs": refs,
+            "capability_ids": ["storage.local_db"],
+            "adapter_suggestions": [],
+            "warnings": [],
+        }
+        if recommendation_type == "candidate_ranking":
+            recommendation["ranking_factors"] = cls._ranking_factors(refs)
         return {
             "schema": RESPONSE_SCHEMA,
             "request_id": request["request_id"],
-            "recommendations": [
-                {
-                    "type": recommendation_type,
-                    "confidence": 0.91,
-                    "summary": "Advisory result based only on supplied Library context.",
-                    "asset_refs": refs,
-                    "capability_ids": ["storage.local_db"],
-                    "adapter_suggestions": [],
-                    "warnings": [],
-                }
-            ],
+            "recommendations": [recommendation],
         }
 
     def test_request_is_deterministic_and_sanitized(self) -> None:
@@ -284,6 +304,23 @@ class LibraryCuratorTest(unittest.TestCase):
         mutation["mutate_catalog"] = True
         with self.assertRaisesRegex(CuratorError, "unsupported fields"):
             verify_response(request, mutation)
+
+    def test_ranking_order_must_match_non_increasing_overall_score(self) -> None:
+        request = build_request(
+            self.root,
+            task="rank_candidates",
+            capability_id="storage.local_db",
+        )
+        response = self._response(
+            request,
+            recommendation_type="candidate_ranking",
+            refs=["storage.certified_db@1.0.0", "storage.research_candidate@0.1.0"],
+        )
+        factors = response["recommendations"][0]["ranking_factors"]
+        factors[0]["overall"] = 0.4
+        factors[1]["overall"] = 0.8
+        with self.assertRaisesRegex(CuratorError, "non-increasing overall"):
+            verify_response(request, response)
 
     def test_gateway_does_not_mutate_library(self) -> None:
         before = {
