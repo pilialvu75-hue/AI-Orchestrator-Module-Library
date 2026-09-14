@@ -76,7 +76,13 @@ The AI layer sits **above** the deterministic V1 core. AI can improve semantic r
   - adapter analysis runs only when candidates exist;
   - adapter hints must cite known assets and contain concrete adapter suggestions;
   - all outputs remain advisory and tests prove no Library mutation.
-- [ ] **Ring 5 — observations/health reasoning and degrading-module warnings**
+- [x] **Ring 5 — observations/health reasoning and degrading-module warnings**
+  - health facts originate only from append-only Library observations;
+  - deterministic signals are derived before the AI provider is called;
+  - healthy histories skip the AI call entirely;
+  - warnings must cite exact modules with deterministic health signals;
+  - recent events are bounded and stripped of project IDs, notes and metadata;
+  - AI cannot change certification, availability, lifecycle or repository state.
 - [ ] **Ring 6 — Cantiere/Modules UI surface for clearly labeled AI advice**
 
 The Curator may suggest; deterministic Library code still decides what is eligible, trusted and reusable.

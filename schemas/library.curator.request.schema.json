@@ -90,6 +90,84 @@
               "integration": {"type": "object"}
             }
           }
+        },
+        "observations": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "asset_ref",
+              "availability",
+              "revision",
+              "reuse_count",
+              "successful_integrations",
+              "failed_integrations",
+              "success_rate",
+              "incident_count",
+              "benchmark_count",
+              "last_observed_at",
+              "latest_validation",
+              "compatibility",
+              "recent_events",
+              "signals"
+            ],
+            "properties": {
+              "asset_ref": {"type": "string"},
+              "availability": {"enum": ["active", "deprecated", "revoked"]},
+              "revision": {"type": "integer", "minimum": 0},
+              "reuse_count": {"type": "integer", "minimum": 0},
+              "successful_integrations": {"type": "integer", "minimum": 0},
+              "failed_integrations": {"type": "integer", "minimum": 0},
+              "success_rate": {"type": ["number", "null"], "minimum": 0, "maximum": 1},
+              "incident_count": {"type": "integer", "minimum": 0},
+              "benchmark_count": {"type": "integer", "minimum": 0},
+              "last_observed_at": {"type": ["string", "null"]},
+              "latest_validation": {"type": ["object", "null"]},
+              "compatibility": {"type": "array", "items": {"type": "object"}},
+              "recent_events": {
+                "type": "array",
+                "maxItems": 20,
+                "items": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "type",
+                    "occurred_at",
+                    "source",
+                    "outcome",
+                    "target",
+                    "contract_id",
+                    "score"
+                  ],
+                  "properties": {
+                    "type": {"type": ["string", "null"]},
+                    "occurred_at": {"type": ["string", "null"]},
+                    "source": {"type": ["string", "null"]},
+                    "outcome": {"type": ["string", "null"]},
+                    "target": {"type": ["string", "null"]},
+                    "contract_id": {"type": ["string", "null"]},
+                    "score": {"type": ["number", "null"], "minimum": 0, "maximum": 1}
+                  }
+                }
+              },
+              "signals": {
+                "type": "array",
+                "uniqueItems": true,
+                "items": {
+                  "enum": [
+                    "no_operational_history",
+                    "integration_failures_observed",
+                    "low_integration_success_rate",
+                    "incidents_observed",
+                    "incompatible_observation",
+                    "latest_validation_concern",
+                    "recent_integration_failure_streak"
+                  ]
+                }
+              }
+            }
+          }
         }
       }
     },
