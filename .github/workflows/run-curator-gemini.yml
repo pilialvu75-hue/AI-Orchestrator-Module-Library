@@ -53,16 +53,6 @@ jobs:
         with:
           python-version: "3.12"
 
-      - name: Verify Gemini credential is configured
-        shell: bash
-        env:
-          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
-        run: |
-          if [[ -z "$GEMINI_API_KEY" ]]; then
-            echo "GEMINI_API_KEY repository secret is not configured." >&2
-            exit 1
-          fi
-
       - name: Run read-only Curator
         shell: bash
         env:
