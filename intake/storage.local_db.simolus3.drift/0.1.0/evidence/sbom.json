@@ -1,0 +1,945 @@
+{
+  "asset_id": "storage.local_db.simolus3.drift",
+  "generated_at": "2026-09-14T17:52:38Z",
+  "generator": "dart pub deps --json",
+  "packages": [
+    {
+      "ecosystem": "Pub",
+      "name": "_fe_analyzer_shared",
+      "version": "108.0.0"
+    },
+    {
+      "ecosystem": "Pub",
+      "name": "analyzer",
+      "version": "14.4.0"
+    },
+    {
+      "ecosystem": "Pub",
+      "name": "android_file_picker",
+      "version": "1.1.1"
+    },
+    {
+      "ecosystem": "Pub",
+      "name": "ansi_styles",
+      "version": "0.3.2+1"
+    },
+    {
+      "ecosystem": "Pub",
+      "name": "archive",
+      "version": "4.3.0"
+    },
+    {
+      "ecosystem": "Pub",
+      "name": "args",
+      "version": "2.7.0"
+    },
+    {
+      "ecosystem": "Pub",
+      "name": "async",
+      "version": "2.13.1"
+    },
+    {
+      "ecosystem": "Pub",
+      "name": "bazel_worker",
+      "version": "1.1.5"
+    },
+    {
+      "ecosystem": "Pub",
+      "name": "benchmark_harness",
+      "version": "2.4.0"
+    },
+    {
+      "ecosystem": "Pub",
+      "name": "boolean_selector",
+      "version": "2.1.2"
+    },
+    {
+      "ecosystem": "Pub",
+      "name": "buffer",
+      "version": "1.2.3"
+    },
+    {
+      "ecosystem": "Pub",
+      "name": "build",
+      "version": "4.0.11"
+    },
+    {
+      "ecosystem": "Pub",
+      "name": "build_config",
+      "version": "1.3.3"
+    },
+    {
+      "ecosystem": "Pub",
+      "name": "build_daemon",
+      "version": "4.1.6"
+    },
+    {
+      "ecosystem": "Pub",
+      "name": "build_runner",
+      "version": "2.16.1"
+    },
+    {
+      "ecosystem": "Pub",
+      "name": "build_test",
+      "version": "3.5.20"
+    },
+    {
+      "ecosystem": "Pub",
+      "name": "build_verify",
+      "version": "3.1.1"
+    },
+    {
+      "ecosystem": "Pub",
+      "name": "build_web_compilers",
+      "version": "4.8.10"
+    },
+    {
+      "ecosystem": "Pub",
+      "name": "built_collection",
+      "version": "5.1.1"
+    },
+    {
+      "ecosystem": "Pub",
+      "name": "built_value",
+      "version": "8.13.0"
+    },
+    {
+      "ecosystem": "Pub",
+      "name": "built_value_generator",
+      "version": "8.13.0"
+    },
+    {
+      "ecosystem": "Pub",
+      "name": "characters",
+      "version": "1.4.1"
+    },
+    {
+      "ecosystem": "Pub",
+      "name": "charcode",
+      "version": "1.4.0"
+    },
+    {
+      "ecosystem": "Pub",
+      "name": "checked_yaml",
+      "version": "2.0.4"
+    },
+    {
+      "ecosystem": "Pub",
+      "name": "cli_config",
+      "version": "0.2.0"
+    },
+    {
+      "ecosystem": "Pub",
+      "name": "cli_launcher",
+      "version": "0.3.3+2"
+    },
+    {
+      "ecosystem": "Pub",
+      "name": "cli_util",
+      "version": "0.5.2"
+    },
+    {
+      "ecosystem": "Pub",
+      "name": "clock",
+      "version": "1.1.3"
+    },
+    {
+      "ecosystem": "Pub",
+      "name": "code_assets",
+      "version": "2.0.0"
+    },
+    {
+      "ecosystem": "Pub",
+      "name": "code_builder",
+      "version": "4.12.0"
+    },
+    {
+      "ecosystem": "Pub",
+      "name": "collection",
+      "version": "1.19.1"
+    },
+    {
+      "ecosystem": "Pub",
+      "name": "conventional_commit",
+      "version": "0.6.1+1"
+    },
+    {
+      "ecosystem": "Pub",
+      "name": "convert",
+      "version": "3.1.2"
+    },
+    {
+      "ecosystem": "Pub",
+      "name": "coverage",
+      "version": "1.15.1"
+    },
+    {
+      "ecosystem": "Pub",
+      "name": "cross_file",
+      "version": "0.3.5+5"
+    },
+    {
+      "ecosystem": "Pub",
+      "name": "crypto",
+      "version": "3.0.7"
+    },
+    {
+      "ecosystem": "Pub",
+      "name": "csslib",
+      "version": "1.0.2"
+    },
+    {
+      "ecosystem": "Pub",
+      "name": "dap",
+      "version": "1.4.0"
+    },
+    {
+      "ecosystem": "Pub",
+      "name": "dart_service_protocol_shared",
+      "version": "0.0.3"
+    },
+    {
+      "ecosystem": "Pub",
+      "name": "dart_style",
+      "version": "3.1.13"
+    },
+    {
+      "ecosystem": "Pub",
+      "name": "dbus",
+      "version": "0.7.15"
+    },
+    {
+      "ecosystem": "Pub",
+      "name": "dds_service_extensions",
+      "version": "2.1.0"
+    },
+    {
+      "ecosystem": "Pub",
+      "name": "devtools_app_shared",
+      "version": "0.5.1"
+    },
+    {
+      "ecosystem": "Pub",
+      "name": "devtools_extensions",
+      "version": "0.5.1"
+    },
+    {
+      "ecosystem": "Pub",
+      "name": "devtools_shared",
+      "version": "13.1.0"
+    },
+    {
+      "ecosystem": "Pub",
+      "name": "dtd",
+      "version": "4.0.0"
+    },
+    {
+      "ecosystem": "Pub",
+      "name": "extension_discovery",
+      "version": "2.1.0"
+    },
+    {
+      "ecosystem": "Pub",
+      "name": "fake_async",
+      "version": "1.3.3"
+    },
+    {
+      "ecosystem": "Pub",
+      "name": "ffi",
+      "version": "2.2.0"
+    },
+    {
+      "ecosystem": "Pub",
+      "name": "ffi_leak_tracker",
+      "version": "0.1.2"
+    },
+    {
+      "ecosystem": "Pub",
+      "name": "file",
+      "version": "7.0.1"
+    },
+    {
+      "ecosystem": "Pub",
+      "name": "file_picker",
+      "version": "12.3.0"
+    },
+    {
+      "ecosystem": "Pub",
+      "name": "file_picker_darwin",
+      "version": "1.2.0"
+    },
+    {
+      "ecosystem": "Pub",
+      "name": "file_picker_linux",
+      "version": "1.1.0"
+    },
+    {
+      "ecosystem": "Pub",
+      "name": "file_picker_platform_interface",
+      "version": "3.4.0"
+    },
+    {
+      "ecosystem": "Pub",
+      "name": "file_picker_web",
+      "version": "3.1.0"
+    },
+    {
+      "ecosystem": "Pub",
+      "name": "fixnum",
+      "version": "1.1.1"
+    },
+    {
+      "ecosystem": "Pub",
+      "name": "flutter_colorpicker",
+      "version": "1.1.0"
+    },
+    {
+      "ecosystem": "Pub",
+      "name": "flutter_lints",
+      "version": "6.0.0"
+    },
+    {
+      "ecosystem": "Pub",
+      "name": "flutter_riverpod",
+      "version": "3.4.3"
+    },
+    {
+      "ecosystem": "Pub",
+      "name": "frontend_server_client",
+      "version": "4.0.0"
+    },
+    {
+      "ecosystem": "Pub",
+      "name": "glob",
+      "version": "2.2.0"
+    },
+    {
+      "ecosystem": "Pub",
+      "name": "go_router",
+      "version": "17.5.0"
+    },
+    {
+      "ecosystem": "Pub",
+      "name": "graphs",
+      "version": "2.3.2"
+    },
+    {
+      "ecosystem": "Pub",
+      "name": "hooks",
+      "version": "2.2.0"
+    },
+    {
+      "ecosystem": "Pub",
+      "name": "html",
+      "version": "0.15.7"
+    },
+    {
+      "ecosystem": "Pub",
+      "name": "http",
+      "version": "1.6.0"
+    },
+    {
+      "ecosystem": "Pub",
+      "name": "http_methods",
+      "version": "1.1.1"
+    },
+    {
+      "ecosystem": "Pub",
+      "name": "http_multi_server",
+      "version": "3.2.2"
+    },
+    {
+      "ecosystem": "Pub",
+      "name": "http_parser",
+      "version": "4.1.2"
+    },
+    {
+      "ecosystem": "Pub",
+      "name": "intl",
+      "version": "0.20.3"
+    },
+    {
+      "ecosystem": "Pub",
+      "name": "io",
+      "version": "1.1.0"
+    },
+    {
+      "ecosystem": "Pub",
+      "name": "jni",
+      "version": "1.0.3"
+    },
+    {
+      "ecosystem": "Pub",
+      "name": "jni_flutter",
+      "version": "1.0.3"
+    },
+    {
+      "ecosystem": "Pub",
+      "name": "jni_util",
+      "version": "1.0.0"
+    },
+    {
+      "ecosystem": "Pub",
+      "name": "json_annotation",
+      "version": "4.12.0"
+    },
+    {
+      "ecosystem": "Pub",
+      "name": "json_rpc_2",
+      "version": "4.1.0"
+    },
+    {
+      "ecosystem": "Pub",
+      "name": "json_serializable",
+      "version": "6.14.1"
+    },
+    {
+      "ecosystem": "Pub",
+      "name": "leak_tracker",
+      "version": "11.0.2"
+    },
+    {
+      "ecosystem": "Pub",
+      "name": "leak_tracker_flutter_testing",
+      "version": "3.0.10"
+    },
+    {
+      "ecosystem": "Pub",
+      "name": "leak_tracker_testing",
+      "version": "3.0.2"
+    },
+    {
+      "ecosystem": "Pub",
+      "name": "lints",
+      "version": "6.1.0"
+    },
+    {
+      "ecosystem": "Pub",
+      "name": "listen",
+      "version": "1.0.1"
+    },
+    {
+      "ecosystem": "Pub",
+      "name": "logging",
+      "version": "1.3.0"
+    },
+    {
+      "ecosystem": "Pub",
+      "name": "matcher",
+      "version": "0.12.20"
+    },
+    {
+      "ecosystem": "Pub",
+      "name": "material_color_utilities",
+      "version": "0.13.0"
+    },
+    {
+      "ecosystem": "Pub",
+      "name": "melos",
+      "version": "8.7.0"
+    },
+    {
+      "ecosystem": "Pub",
+      "name": "meta",
+      "version": "1.19.0"
+    },
+    {
+      "ecosystem": "Pub",
+      "name": "mime",
+      "version": "2.1.0"
+    },
+    {
+      "ecosystem": "Pub",
+      "name": "mockito",
+      "version": "5.8.1"
+    },
+    {
+      "ecosystem": "Pub",
+      "name": "mustache_template",
+      "version": "2.0.5"
+    },
+    {
+      "ecosystem": "Pub",
+      "name": "mysql_client",
+      "version": "0.0.27"
+    },
+    {
+      "ecosystem": "Pub",
+      "name": "native_toolchain_c",
+      "version": "0.19.4"
+    },
+    {
+      "ecosystem": "Pub",
+      "name": "nested",
+      "version": "1.0.0"
+    },
+    {
+      "ecosystem": "Pub",
+      "name": "node_preamble",
+      "version": "2.0.2"
+    },
+    {
+      "ecosystem": "Pub",
+      "name": "objective_c",
+      "version": "9.6.0"
+    },
+    {
+      "ecosystem": "Pub",
+      "name": "package_config",
+      "version": "3.0.0"
+    },
+    {
+      "ecosystem": "Pub",
+      "name": "path",
+      "version": "1.9.1"
+    },
+    {
+      "ecosystem": "Pub",
+      "name": "path_provider",
+      "version": "2.1.6"
+    },
+    {
+      "ecosystem": "Pub",
+      "name": "path_provider_android",
+      "version": "2.3.1"
+    },
+    {
+      "ecosystem": "Pub",
+      "name": "path_provider_foundation",
+      "version": "2.6.0"
+    },
+    {
+      "ecosystem": "Pub",
+      "name": "path_provider_linux",
+      "version": "2.2.2"
+    },
+    {
+      "ecosystem": "Pub",
+      "name": "path_provider_platform_interface",
+      "version": "2.1.3"
+    },
+    {
+      "ecosystem": "Pub",
+      "name": "path_provider_windows",
+      "version": "2.3.0"
+    },
+    {
+      "ecosystem": "Pub",
+      "name": "petitparser",
+      "version": "7.0.2"
+    },
+    {
+      "ecosystem": "Pub",
+      "name": "platform",
+      "version": "3.1.6"
+    },
+    {
+      "ecosystem": "Pub",
+      "name": "plugin_platform_interface",
+      "version": "2.1.8"
+    },
+    {
+      "ecosystem": "Pub",
+      "name": "pointer_interceptor",
+      "version": "0.10.1+2"
+    },
+    {
+      "ecosystem": "Pub",
+      "name": "pointer_interceptor_ios",
+      "version": "0.10.1+1"
+    },
+    {
+      "ecosystem": "Pub",
+      "name": "pointer_interceptor_platform_interface",
+      "version": "0.10.0+1"
+    },
+    {
+      "ecosystem": "Pub",
+      "name": "pointer_interceptor_web",
+      "version": "0.10.3"
+    },
+    {
+      "ecosystem": "Pub",
+      "name": "pool",
+      "version": "1.5.3"
+    },
+    {
+      "ecosystem": "Pub",
+      "name": "posix",
+      "version": "6.5.2"
+    },
+    {
+      "ecosystem": "Pub",
+      "name": "postgres",
+      "version": "3.5.12"
+    },
+    {
+      "ecosystem": "Pub",
+      "name": "process",
+      "version": "5.0.6"
+    },
+    {
+      "ecosystem": "Pub",
+      "name": "prompts",
+      "version": "2.0.0"
+    },
+    {
+      "ecosystem": "Pub",
+      "name": "protobuf",
+      "version": "6.1.0"
+    },
+    {
+      "ecosystem": "Pub",
+      "name": "provider",
+      "version": "6.1.5+1"
+    },
+    {
+      "ecosystem": "Pub",
+      "name": "pub_semver",
+      "version": "2.2.1"
+    },
+    {
+      "ecosystem": "Pub",
+      "name": "pub_updater",
+      "version": "0.6.0"
+    },
+    {
+      "ecosystem": "Pub",
+      "name": "pubspec_parse",
+      "version": "1.6.0"
+    },
+    {
+      "ecosystem": "Pub",
+      "name": "recase",
+      "version": "4.1.0"
+    },
+    {
+      "ecosystem": "Pub",
+      "name": "record_use",
+      "version": "1.1.1"
+    },
+    {
+      "ecosystem": "Pub",
+      "name": "riverpod",
+      "version": "3.4.3"
+    },
+    {
+      "ecosystem": "Pub",
+      "name": "rxdart",
+      "version": "0.28.0"
+    },
+    {
+      "ecosystem": "Pub",
+      "name": "scratch_space",
+      "version": "1.2.2"
+    },
+    {
+      "ecosystem": "Pub",
+      "name": "shelf",
+      "version": "1.4.2"
+    },
+    {
+      "ecosystem": "Pub",
+      "name": "shelf_packages_handler",
+      "version": "3.0.2"
+    },
+    {
+      "ecosystem": "Pub",
+      "name": "shelf_proxy",
+      "version": "1.0.5"
+    },
+    {
+      "ecosystem": "Pub",
+      "name": "shelf_router",
+      "version": "1.1.4"
+    },
+    {
+      "ecosystem": "Pub",
+      "name": "shelf_static",
+      "version": "1.1.3"
+    },
+    {
+      "ecosystem": "Pub",
+      "name": "shelf_web_socket",
+      "version": "3.0.0"
+    },
+    {
+      "ecosystem": "Pub",
+      "name": "source_gen",
+      "version": "4.3.0"
+    },
+    {
+      "ecosystem": "Pub",
+      "name": "source_helper",
+      "version": "1.3.13"
+    },
+    {
+      "ecosystem": "Pub",
+      "name": "source_map_stack_trace",
+      "version": "2.1.2"
+    },
+    {
+      "ecosystem": "Pub",
+      "name": "source_maps",
+      "version": "0.10.14"
+    },
+    {
+      "ecosystem": "Pub",
+      "name": "source_span",
+      "version": "1.10.2"
+    },
+    {
+      "ecosystem": "Pub",
+      "name": "sqflite",
+      "version": "2.4.4"
+    },
+    {
+      "ecosystem": "Pub",
+      "name": "sqflite_android",
+      "version": "2.4.4"
+    },
+    {
+      "ecosystem": "Pub",
+      "name": "sqflite_common",
+      "version": "2.5.12"
+    },
+    {
+      "ecosystem": "Pub",
+      "name": "sqflite_darwin",
+      "version": "2.4.4"
+    },
+    {
+      "ecosystem": "Pub",
+      "name": "sqflite_platform_interface",
+      "version": "2.4.2"
+    },
+    {
+      "ecosystem": "Pub",
+      "name": "sqflite_sqlcipher",
+      "version": "3.4.1"
+    },
+    {
+      "ecosystem": "Pub",
+      "name": "sqlcipher_flutter_libs",
+      "version": "0.7.0+eol"
+    },
+    {
+      "ecosystem": "Pub",
+      "name": "sqlite3",
+      "version": "3.6.0"
+    },
+    {
+      "ecosystem": "Pub",
+      "name": "sqlite3_connection_pool",
+      "version": "0.2.11"
+    },
+    {
+      "ecosystem": "Pub",
+      "name": "sqlite3_flutter_libs",
+      "version": "0.6.0+eol"
+    },
+    {
+      "ecosystem": "Pub",
+      "name": "sqlite3_web",
+      "version": "0.9.4"
+    },
+    {
+      "ecosystem": "Pub",
+      "name": "sse",
+      "version": "4.2.0"
+    },
+    {
+      "ecosystem": "Pub",
+      "name": "stack_trace",
+      "version": "1.12.2"
+    },
+    {
+      "ecosystem": "Pub",
+      "name": "state_notifier",
+      "version": "1.0.0"
+    },
+    {
+      "ecosystem": "Pub",
+      "name": "stream_channel",
+      "version": "2.1.4"
+    },
+    {
+      "ecosystem": "Pub",
+      "name": "stream_transform",
+      "version": "2.1.2"
+    },
+    {
+      "ecosystem": "Pub",
+      "name": "string_scanner",
+      "version": "1.4.1"
+    },
+    {
+      "ecosystem": "Pub",
+      "name": "sync_http",
+      "version": "0.3.1"
+    },
+    {
+      "ecosystem": "Pub",
+      "name": "synchronized",
+      "version": "3.4.2"
+    },
+    {
+      "ecosystem": "Pub",
+      "name": "term_glyph",
+      "version": "1.2.2"
+    },
+    {
+      "ecosystem": "Pub",
+      "name": "test",
+      "version": "1.32.0"
+    },
+    {
+      "ecosystem": "Pub",
+      "name": "test_api",
+      "version": "0.7.14"
+    },
+    {
+      "ecosystem": "Pub",
+      "name": "test_core",
+      "version": "0.6.20"
+    },
+    {
+      "ecosystem": "Pub",
+      "name": "test_descriptor",
+      "version": "2.0.2"
+    },
+    {
+      "ecosystem": "Pub",
+      "name": "tuple",
+      "version": "2.0.2"
+    },
+    {
+      "ecosystem": "Pub",
+      "name": "typed_data",
+      "version": "1.4.0"
+    },
+    {
+      "ecosystem": "Pub",
+      "name": "unified_analytics",
+      "version": "8.0.18"
+    },
+    {
+      "ecosystem": "Pub",
+      "name": "url_launcher",
+      "version": "6.3.2"
+    },
+    {
+      "ecosystem": "Pub",
+      "name": "url_launcher_android",
+      "version": "6.3.33"
+    },
+    {
+      "ecosystem": "Pub",
+      "name": "url_launcher_ios",
+      "version": "6.4.2"
+    },
+    {
+      "ecosystem": "Pub",
+      "name": "url_launcher_linux",
+      "version": "3.2.3"
+    },
+    {
+      "ecosystem": "Pub",
+      "name": "url_launcher_macos",
+      "version": "3.2.6"
+    },
+    {
+      "ecosystem": "Pub",
+      "name": "url_launcher_platform_interface",
+      "version": "2.3.2"
+    },
+    {
+      "ecosystem": "Pub",
+      "name": "url_launcher_web",
+      "version": "2.4.3"
+    },
+    {
+      "ecosystem": "Pub",
+      "name": "url_launcher_windows",
+      "version": "3.1.6"
+    },
+    {
+      "ecosystem": "Pub",
+      "name": "uuid",
+      "version": "4.6.0"
+    },
+    {
+      "ecosystem": "Pub",
+      "name": "vector_math",
+      "version": "2.4.2"
+    },
+    {
+      "ecosystem": "Pub",
+      "name": "vm_service",
+      "version": "15.3.0"
+    },
+    {
+      "ecosystem": "Pub",
+      "name": "watcher",
+      "version": "1.2.1"
+    },
+    {
+      "ecosystem": "Pub",
+      "name": "web",
+      "version": "1.1.1"
+    },
+    {
+      "ecosystem": "Pub",
+      "name": "web_socket",
+      "version": "1.0.1"
+    },
+    {
+      "ecosystem": "Pub",
+      "name": "web_socket_channel",
+      "version": "3.0.3"
+    },
+    {
+      "ecosystem": "Pub",
+      "name": "webdriver",
+      "version": "3.2.0"
+    },
+    {
+      "ecosystem": "Pub",
+      "name": "webkit_inspection_protocol",
+      "version": "1.2.1"
+    },
+    {
+      "ecosystem": "Pub",
+      "name": "win32",
+      "version": "6.4.0"
+    },
+    {
+      "ecosystem": "Pub",
+      "name": "windows_file_picker",
+      "version": "1.3.0"
+    },
+    {
+      "ecosystem": "Pub",
+      "name": "xdg_directories",
+      "version": "1.1.0"
+    },
+    {
+      "ecosystem": "Pub",
+      "name": "xml",
+      "version": "7.0.1"
+    },
+    {
+      "ecosystem": "Pub",
+      "name": "yaml",
+      "version": "3.1.4"
+    },
+    {
+      "ecosystem": "Pub",
+      "name": "yaml_edit",
+      "version": "2.2.4"
+    }
+  ],
+  "schema": "ai-orchestrator.library-sbom.v1",
+  "source_commit": "1e8bb788a8815d1e18e5c18d1705a2ca3cba6580",
+  "version": "0.1.0"
+}

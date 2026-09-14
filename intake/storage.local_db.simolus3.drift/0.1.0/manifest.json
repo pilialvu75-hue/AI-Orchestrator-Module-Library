@@ -36,7 +36,8 @@
     "known_constraints": [
       "requires Dart >=3.10.0",
       "SQLite/native packaging must be validated on target hosts",
-      "Library must define migration/backup policy before certification"
+      "Library must define migration/backup policy before certification",
+      "Android runtime validation is pending; this certified version is desktop-only"
     ]
   },
   "kind": "module",
@@ -52,7 +53,6 @@
     "upstream_repository": "https://github.com/simolus3/drift"
   },
   "platforms": [
-    "android",
     "desktop"
   ],
   "provenance": {
@@ -73,10 +73,12 @@
     "successful_integrations": 0
   },
   "security": {
-    "notes": "Researcher transport smoke: Library security review is intentionally not asserted.",
-    "reviewed": false,
-    "reviewed_at": null,
-    "sbom": null
+    "known_vulnerabilities": 0,
+    "notes": "Automated review: immutable upstream checkout, package analyze/test, dependency SBOM and OSV scan. Android runtime validation remains pending.",
+    "review_report": "evidence/security-review.json",
+    "reviewed": true,
+    "reviewed_at": "2026-09-14T17:52:38Z",
+    "sbom": "evidence/sbom.json"
   },
   "status": "discovered",
   "tags": [
@@ -85,10 +87,12 @@
   ],
   "validation": {
     "score": 0.92,
-    "test_report": null,
-    "tests_passed": false,
-    "validated_at": null,
-    "validated_on": []
+    "test_report": "evidence/test-report.json",
+    "tests_passed": true,
+    "validated_at": "2026-09-14T17:52:38Z",
+    "validated_on": [
+      "desktop"
+    ]
   },
   "version": "0.1.0"
 }

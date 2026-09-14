@@ -1,0 +1,21 @@
+{
+  "asset_id": "storage.local_db.simolus3.drift",
+  "evidence": {
+    "commands": [
+      "flutter pub get (workspace)",
+      "dart analyze --fatal-infos (drift package)",
+      "dart test (drift package)",
+      "dart pub deps --json (drift package)"
+    ],
+    "scope_note": "Certification is limited to desktop until a separate Android runtime validation is recorded.",
+    "upstream_checkout": "1e8bb788a8815d1e18e5c18d1705a2ca3cba6580"
+  },
+  "generated_at": "2026-09-14T17:52:38Z",
+  "passed": true,
+  "schema": "ai-orchestrator.library-test-report.v1",
+  "source_commit": "1e8bb788a8815d1e18e5c18d1705a2ca3cba6580",
+  "validated_on": [
+    "desktop"
+  ],
+  "version": "0.1.0"
+}
