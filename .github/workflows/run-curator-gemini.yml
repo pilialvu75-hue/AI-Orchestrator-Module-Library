@@ -1,0 +1,81 @@
+name: Run Gemini Curator
+
+on:
+  workflow_dispatch:
+    inputs:
+      task:
+        description: Curator advisory task
+        required: true
+        type: choice
+        options:
+          - coverage
+          - rank_candidates
+          - find_duplicates
+          - suggest_adapters
+          - health_review
+      capability:
+        description: Optional capability id, for example storage.local_db
+        required: false
+        default: ""
+        type: string
+      model:
+        description: Gemini model id
+        required: true
+        default: gemini-3.6-flash
+        type: string
+
+permissions:
+  contents: read
+
+concurrency:
+  group: module-library-curator-manual
+  cancel-in-progress: false
+
+jobs:
+  curate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Checkout Library main
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          persist-credentials: false
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Verify Gemini credential is configured
+        shell: bash
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+        run: |
+          if [[ -z "$GEMINI_API_KEY" ]]; then
+            echo "GEMINI_API_KEY repository secret is not configured." >&2
+            exit 1
+          fi
+
+      - name: Run read-only Curator
+        shell: bash
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          CURATOR_TASK: ${{ inputs.task }}
+          CURATOR_CAPABILITY: ${{ inputs.capability }}
+          CURATOR_MODEL: ${{ inputs.model }}
+        run: |
+          set -euo pipefail
+          args=(--task "$CURATOR_TASK" --model "$CURATOR_MODEL")
+          if [[ -n "$CURATOR_CAPABILITY" ]]; then
+            args+=(--capability "$CURATOR_CAPABILITY")
+          fi
+          python tools/run_curator_gemini.py "${args[@]}" > /tmp/library-curator-result.json
+
+      - name: Upload verified advisory result
+        uses: actions/upload-artifact@v4
+        with:
+          name: library-curator-gemini-result
+          path: /tmp/library-curator-result.json
+          if-no-files-found: error
+          retention-days: 7
