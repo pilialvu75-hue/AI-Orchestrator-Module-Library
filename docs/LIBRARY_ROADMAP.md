@@ -83,7 +83,14 @@ The AI layer sits **above** the deterministic V1 core. AI can improve semantic r
   - warnings must cite exact modules with deterministic health signals;
   - recent events are bounded and stripped of project IDs, notes and metadata;
   - AI cannot change certification, availability, lifecycle or repository state.
-- [ ] **Ring 6 — Cantiere/Modules UI surface for clearly labeled AI advice**
+- [x] **Ring 6 — Cantiere/Modules UI surface for clearly labeled AI advice**
+  - per-capability `Consiglio AI` and global `Salute moduli — AI Curator` are surfaced in Cantiere > Moduli;
+  - the APK never contains the Gemini API key: requests are dispatched to the private Library GitHub Actions workflow;
+  - mobile requests use a unique correlation id and download only their verified advisory artifact;
+  - the app accepts advice only when deterministic core verification confirms advisory-only, no mutation and deterministic Library authority;
+  - certified counts, lifecycle state and Researcher progress remain visually and logically separate from AI advice.
+
+All six V1.5 Rings are implemented in code. **Operational activation is a separate account-level gate**: the installed GitHub App must have Actions read/write permission on the private Library and the Library repository must contain the `GEMINI_API_KEY` Actions secret. A live phone -> GitHub Actions -> Gemini -> verified artifact -> phone smoke test is required before tagging/releasing V1.5.0.
 
 The Curator may suggest; deterministic Library code still decides what is eligible, trusted and reusable.
 
