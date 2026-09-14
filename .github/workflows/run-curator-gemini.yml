@@ -1,4 +1,5 @@
 name: Run Gemini Curator
+run-name: Curator ${{ inputs.task }} ${{ inputs.capability || 'all' }} [${{ inputs.client_request_id || 'manual' }}]
 
 on:
   workflow_dispatch:
@@ -22,6 +23,11 @@ on:
         description: Gemini model id
         required: true
         default: gemini-3.6-flash
+        type: string
+      client_request_id:
+        description: Optional caller correlation id; never sent to Gemini
+        required: false
+        default: "manual"
         type: string
 
 permissions:
