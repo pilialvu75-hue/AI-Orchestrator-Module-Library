@@ -69,7 +69,13 @@ The AI layer sits **above** the deterministic V1 core. AI can improve semantic r
   - factor refs/order/scores are deterministically verified;
   - uncertified intake may be evaluated but cannot become a reuse recommendation;
   - no-candidate cases are answered deterministically without consuming an AI call.
-- [ ] **Ring 4 — duplicate/alternative/adapter suggestions**
+- [x] **Ring 4 — duplicate/alternative/adapter suggestions**
+  - alternatives are deterministically the known candidates for the selected capability;
+  - duplicate/near-duplicate AI analysis runs only when at least two candidates exist;
+  - duplicate hints must cite at least two exact known refs;
+  - adapter analysis runs only when candidates exist;
+  - adapter hints must cite known assets and contain concrete adapter suggestions;
+  - all outputs remain advisory and tests prove no Library mutation.
 - [ ] **Ring 5 — observations/health reasoning and degrading-module warnings**
 - [ ] **Ring 6 — Cantiere/Modules UI surface for clearly labeled AI advice**
 
