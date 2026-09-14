@@ -2,19 +2,67 @@ from __future__ import annotations
 
 import argparse
 import json
+import os
 import sys
 from pathlib import Path
 
-from library_curator import ALLOWED_TASKS, CuratorError, run_curator
-from library_curator_gemini import GeminiCuratorProvider, GeminiProviderError
+from library_curator import (
+    ALLOWED_TASKS,
+    CuratorError,
+    LibraryCuratorProvider,
+    run_curator,
+)
+from library_curator_gemini import (
+    DEFAULT_MODEL,
+    GeminiCuratorProvider,
+    GeminiProviderError,
+)
 from library_curator_health import run_health_review
 from library_curator_relations import run_adapter_analysis, run_duplicate_analysis
 from library_curator_semantic import run_semantic_ranking
 
 
+class LazyGeminiCuratorProvider:
+    """Instantiate the network provider only when a task truly needs AI."""
+
+    def __init__(
+        self,
+        *,
+        model: str | None = None,
+        timeout_seconds: float = 30.0,
+    ) -> None:
+        if timeout_seconds <= 0:
+            raise GeminiProviderError("timeout_seconds must be > 0")
+        resolved_model = (
+            model
+            or os.environ.get("AI_ORCHESTRATOR_CURATOR_GEMINI_MODEL")
+            or DEFAULT_MODEL
+        ).strip()
+        if not resolved_model:
+            raise GeminiProviderError("Gemini model is empty")
+
+        self._model = resolved_model
+        self._timeout_seconds = float(timeout_seconds)
+        self._delegate: GeminiCuratorProvider | None = None
+
+    @property
+    def name(self) -> str:
+        return f"gemini:{self._model}"
+
+    def advise(self, request: dict[str, object]) -> dict[str, object]:
+        delegate = self._delegate
+        if delegate is None:
+            delegate = GeminiCuratorProvider(
+                model=self._model,
+                timeout_seconds=self._timeout_seconds,
+            )
+            self._delegate = delegate
+        return delegate.advise(request)
+
+
 def dispatch_curator(
     root: Path,
-    provider: GeminiCuratorProvider,
+    provider: LibraryCuratorProvider,
     *,
     task: str,
     capability_id: str | None,
@@ -61,7 +109,7 @@ def dispatch_curator(
 
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(
-        description="Run the AI Curator through the Gemini API"
+        description="Run the AI Curator through the Gemini API when AI is required"
     )
     parser.add_argument(
         "--root",
@@ -75,7 +123,7 @@ def main(argv: list[str] | None = None) -> int:
     args = parser.parse_args(argv)
 
     try:
-        provider = GeminiCuratorProvider(
+        provider = LazyGeminiCuratorProvider(
             model=args.model,
             timeout_seconds=args.timeout,
         )
