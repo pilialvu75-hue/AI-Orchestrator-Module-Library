@@ -1,0 +1,67 @@
+{
+  "schema_version": 1,
+  "updated_at": "2026-09-14T19:23:00Z",
+  "policy": {
+    "common_core_rule": "Business/orchestration logic stays in the shared core; platform branches implement adapters only.",
+    "certification_rule": "A capability is advertised for a target only after target-specific validation evidence exists.",
+    "desktop_alias": ["windows", "linux", "macos"]
+  },
+  "platforms": {
+    "android": {
+      "role": "mobile-full",
+      "interaction": ["text", "voice"],
+      "required_adapters": ["platform.filesystem", "platform.permissions", "platform.audio_io", "platform.background_execution", "platform.lifecycle", "platform.connectivity", "platform.power_thermal", "platform.notifications", "platform.file_picker_share", "release.packaging", "release.auto_update", "ai.acceleration_backend", "ai.model_storage", "voice.device_policy"],
+      "constraints": ["sandboxed filesystem", "runtime permissions", "background execution restrictions", "battery and thermal pressure", "APK/app-bundle signing"]
+    },
+    "windows": {
+      "role": "desktop-full",
+      "interaction": ["text", "voice"],
+      "required_adapters": ["platform.filesystem", "platform.process", "platform.permissions", "platform.audio_io", "platform.background_execution", "platform.lifecycle", "platform.connectivity", "platform.power_thermal", "platform.notifications", "platform.desktop_shell", "platform.startup_service", "platform.file_picker_share", "release.packaging", "release.auto_update", "ai.acceleration_backend", "ai.model_storage", "voice.device_policy"],
+      "constraints": ["window/tray lifecycle", "code signing", "DirectML/CUDA/Vulkan/CPU backend selection", "service/login startup policy"]
+    },
+    "linux": {
+      "role": "desktop-full",
+      "interaction": ["text", "voice"],
+      "required_adapters": ["platform.filesystem", "platform.process", "platform.permissions", "platform.audio_io", "platform.background_execution", "platform.lifecycle", "platform.connectivity", "platform.power_thermal", "platform.notifications", "platform.desktop_shell", "platform.startup_service", "platform.file_picker_share", "release.packaging", "release.auto_update", "ai.acceleration_backend", "ai.model_storage", "voice.device_policy"],
+      "constraints": ["X11/Wayland variation", "PipeWire/PulseAudio/ALSA variation", "package-format diversity", "systemd optionality"]
+    },
+    "macos": {
+      "role": "desktop-full",
+      "interaction": ["text", "voice"],
+      "required_adapters": ["platform.filesystem", "platform.process", "platform.permissions", "platform.audio_io", "platform.background_execution", "platform.lifecycle", "platform.connectivity", "platform.power_thermal", "platform.notifications", "platform.desktop_shell", "platform.startup_service", "platform.file_picker_share", "release.packaging", "release.auto_update", "ai.acceleration_backend", "ai.model_storage", "voice.device_policy"],
+      "constraints": ["App Sandbox/TCC permissions", "notarization", "Metal acceleration", "login-item rules"]
+    },
+    "ios": {
+      "role": "mobile-restricted",
+      "interaction": ["text", "voice"],
+      "required_adapters": ["platform.filesystem", "platform.permissions", "platform.audio_io", "platform.background_execution", "platform.lifecycle", "platform.connectivity", "platform.power_thermal", "platform.notifications", "platform.file_picker_share", "release.packaging", "ai.acceleration_backend", "ai.model_storage", "voice.device_policy"],
+      "constraints": ["no general shell/process execution", "strict background limits", "App Store signing/review", "sandboxed model storage", "Metal/CoreML availability depends on runtime design"]
+    },
+    "web": {
+      "role": "browser-restricted",
+      "interaction": ["text", "voice-when-permitted"],
+      "required_adapters": ["platform.permissions", "platform.audio_io", "platform.lifecycle", "platform.connectivity", "platform.notifications", "platform.file_picker_share", "release.packaging", "ai.acceleration_backend", "voice.device_policy"],
+      "constraints": ["no unrestricted native filesystem", "no local process execution", "browser permission model", "service-worker lifecycle", "WebGPU availability is optional", "large-model storage depends on browser quotas"]
+    },
+    "raspberry_pi": {
+      "role": "headless-edge",
+      "interaction": ["voice-only", "optional-text-admin"],
+      "required_adapters": ["platform.filesystem", "platform.process", "platform.audio_io", "platform.background_execution", "platform.lifecycle", "platform.connectivity", "platform.power_thermal", "platform.startup_service", "release.packaging", "release.auto_update", "ai.acceleration_backend", "ai.model_storage", "voice.device_policy"],
+      "constraints": ["headless boot", "systemd service", "ALSA/PipeWire device selection", "CPU/RAM/thermal limits", "optional Vulkan/NPU acceleration", "offline-first operation"]
+    }
+  },
+  "shared_core": {
+    "must_remain_platform_neutral": ["conversation/orchestration", "provider routing", "memory policy", "tool policy", "project state", "Cantiere planning", "Library contracts/resolution", "cloud provider abstractions", "model metadata", "diagnostics schema"],
+    "existing_capabilities_reused": ["auth.session", "storage.secrets", "network.http", "storage.local_db", "diagnostics.logging", "release.update_manager", "ai.local_inference", "voice.stt", "voice.tts"]
+  },
+  "implementation_order": [
+    "formalize contracts for platform adapters",
+    "certify common Dart/Flutter candidates first",
+    "complete Windows and Linux desktop adapters",
+    "complete Raspberry Pi headless/voice adapters",
+    "complete macOS adapters",
+    "complete iOS restricted adapters",
+    "complete Web restricted adapters",
+    "run target-specific E2E certification before advertising support"
+  ]
+}
