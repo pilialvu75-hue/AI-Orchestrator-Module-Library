@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import hashlib
 import json
 import sys
 import tempfile
@@ -62,6 +63,44 @@ class LibraryAutopilotTest(unittest.TestCase):
         base = self.root / "intake" / "voice.autopilot_stt" / "1.0.0"
         (base / "provenance").mkdir(parents=True)
         (base / "provenance" / "LICENSE").write_text("MIT\n", encoding="utf-8")
+        source_commit = "0123456789abcdef0123456789abcdef01234567"
+
+        if valid:
+            self._write(
+                base / "tests" / "report.json",
+                {
+                    "schema": "ai-orchestrator.library-test-report.v1",
+                    "asset_id": "voice.autopilot_stt",
+                    "version": "1.0.0",
+                    "source_commit": source_commit,
+                    "passed": True,
+                    "validated_on": ["android"],
+                },
+            )
+            self._write(
+                base / "security" / "sbom.json",
+                {
+                    "bomFormat": "CycloneDX",
+                    "specVersion": "1.5",
+                    "components": [],
+                },
+            )
+            sbom_sha256 = hashlib.sha256(
+                (base / "security" / "sbom.json").read_bytes()
+            ).hexdigest()
+            self._write(
+                base / "security" / "review.json",
+                {
+                    "schema": "ai-orchestrator.library-security-review.v1",
+                    "asset_id": "voice.autopilot_stt",
+                    "version": "1.0.0",
+                    "source_commit": source_commit,
+                    "reviewed": True,
+                    "known_vulnerabilities": 0,
+                    "sbom_sha256": sbom_sha256,
+                },
+            )
+
         self._write(
             base / "manifest.json",
             {
@@ -80,7 +119,7 @@ class LibraryAutopilotTest(unittest.TestCase):
                 "provenance": {
                     "origin": "researcher",
                     "source_repository": "https://github.com/example/project",
-                    "source_commit": "0123456789abcdef0123456789abcdef01234567",
+                    "source_commit": source_commit,
                     "source_tag": None,
                     "source_project_id": None,
                     "source_task_id": None,
@@ -99,7 +138,8 @@ class LibraryAutopilotTest(unittest.TestCase):
                     "reviewed": valid,
                     "reviewed_at": "2026-09-11T01:30:00Z" if valid else None,
                     "known_vulnerabilities": 0,
-                    "sbom": None,
+                    "sbom": "security/sbom.json" if valid else None,
+                    "review_report": "security/review.json" if valid else None,
                     "notes": None,
                 },
                 "integration": {
@@ -127,7 +167,7 @@ class LibraryAutopilotTest(unittest.TestCase):
                     "path": None,
                     "sha256": None,
                     "upstream_repository": "https://github.com/example/project",
-                    "upstream_commit": "0123456789abcdef0123456789abcdef01234567",
+                    "upstream_commit": source_commit,
                 },
                 "quality": {
                     "reuse_count": 0,
@@ -168,6 +208,15 @@ class LibraryAutopilotTest(unittest.TestCase):
         self.assertTrue((self.root / "catalog" / "offline-snapshot.json").is_file())
         package_index = json.loads((self.root / "packages" / "index.json").read_text())
         self.assertEqual([], package_index["packages"])
+
+    def test_claimed_success_without_evidence_is_blocked(self) -> None:
+        base = self._asset(valid=True)
+        (base / "tests" / "report.json").unlink()
+        before = (base / "manifest.json").read_bytes()
+        report = run(self.root)
+        self.assertEqual(1, report["blocked"])
+        self.assertIn("validation.test_report does not exist", report["results"][0]["reason"])
+        self.assertEqual(before, (base / "manifest.json").read_bytes())
 
 
 if __name__ == "__main__":

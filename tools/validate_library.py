@@ -5,6 +5,8 @@ import re
 import sys
 from pathlib import Path
 
+from library_evidence import EvidenceError, verify_manifest_evidence
+
 ROOT = Path(__file__).resolve().parents[1]
 SEMVER = re.compile(r"^[0-9]+\.[0-9]+\.[0-9]+(?:[-+][0-9A-Za-z.-]+)?$")
 CONTRACT_VERSION = re.compile(r"^[0-9]+\.[0-9]+$")
@@ -231,6 +233,11 @@ def validate_manifest(
             f"{path.relative_to(ROOT)}: capabilities missing from connector.provides: "
             + ", ".join(sorted(missing_connector))
         )
+
+    try:
+        verify_manifest_evidence(path.parent, data)
+    except EvidenceError as exc:
+        raise ValidationError(f"{path.relative_to(ROOT)}: {exc}") from exc
 
     if under_modules and status not in CATALOG_STATUSES:
         raise ValidationError(

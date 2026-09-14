@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import hashlib
 import json
 import sys
 import tempfile
@@ -51,6 +52,42 @@ class LibraryPipelineTest(unittest.TestCase):
         (base / "provenance" / "LICENSE").write_text("test license\n", encoding="utf-8")
 
         tested = tests_passed
+        source_commit = "0123456789abcdef0123456789abcdef01234567"
+        if tested:
+            self.write_json(
+                base / "tests" / "report.json",
+                {
+                    "schema": "ai-orchestrator.library-test-report.v1",
+                    "asset_id": ref.asset_id,
+                    "version": ref.version,
+                    "source_commit": source_commit,
+                    "passed": True,
+                    "validated_on": ["android"],
+                },
+            )
+            self.write_json(
+                base / "security" / "sbom.json",
+                {
+                    "bomFormat": "CycloneDX",
+                    "specVersion": "1.5",
+                    "components": [],
+                },
+            )
+            sbom = base / "security" / "sbom.json"
+            sbom_sha256 = hashlib.sha256(sbom.read_bytes()).hexdigest()
+            self.write_json(
+                base / "security" / "review.json",
+                {
+                    "schema": "ai-orchestrator.library-security-review.v1",
+                    "asset_id": ref.asset_id,
+                    "version": ref.version,
+                    "source_commit": source_commit,
+                    "reviewed": True,
+                    "known_vulnerabilities": known_vulnerabilities,
+                    "sbom_sha256": sbom_sha256,
+                },
+            )
+
         manifest = {
             "id": ref.asset_id,
             "name": "Test STT",
@@ -67,7 +104,7 @@ class LibraryPipelineTest(unittest.TestCase):
             "provenance": {
                 "origin": "researcher",
                 "source_repository": "https://github.com/example/project",
-                "source_commit": "0123456789abcdef0123456789abcdef01234567",
+                "source_commit": source_commit,
                 "source_tag": None,
                 "source_project_id": None,
                 "source_task_id": None,
@@ -86,7 +123,8 @@ class LibraryPipelineTest(unittest.TestCase):
                 "reviewed": tested,
                 "reviewed_at": "2026-09-11T01:30:00Z" if tested else None,
                 "known_vulnerabilities": known_vulnerabilities,
-                "sbom": None,
+                "sbom": "security/sbom.json" if tested else None,
+                "review_report": "security/review.json" if tested else None,
                 "notes": None,
             },
             "integration": {
@@ -116,7 +154,7 @@ class LibraryPipelineTest(unittest.TestCase):
                 "path": None,
                 "sha256": None,
                 "upstream_repository": "https://github.com/example/project",
-                "upstream_commit": "0123456789abcdef0123456789abcdef01234567",
+                "upstream_commit": source_commit,
             },
             "quality": {
                 "reuse_count": 0,
@@ -144,6 +182,12 @@ class LibraryPipelineTest(unittest.TestCase):
         with self.assertRaisesRegex(PipelineError, "tests_passed"):
             transition_intake(self.root, ref, "tested")
 
+    def test_tested_transition_rejects_missing_test_report(self) -> None:
+        ref = self.make_asset(status="normalized", tests_passed=True, score=0.95)
+        (self.root / "intake" / ref.asset_id / ref.version / "tests" / "report.json").unlink()
+        with self.assertRaisesRegex(PipelineError, "validation.test_report does not exist"):
+            transition_intake(self.root, ref, "tested")
+
     def test_certification_rejects_known_vulnerabilities(self) -> None:
         ref = self.make_asset(
             status="tested",
@@ -162,6 +206,13 @@ class LibraryPipelineTest(unittest.TestCase):
             license_name="AGPL-3.0-only",
         )
         with self.assertRaisesRegex(PipelineError, "copyleft"):
+            promote(self.root, ref)
+
+    def test_certification_rejects_tampered_sbom(self) -> None:
+        ref = self.make_asset(status="tested", tests_passed=True, score=0.95)
+        sbom = self.root / "intake" / ref.asset_id / ref.version / "security" / "sbom.json"
+        sbom.write_text('{"tampered":true}\n', encoding="utf-8")
+        with self.assertRaisesRegex(PipelineError, "SBOM digest"):
             promote(self.root, ref)
 
     def test_dry_run_does_not_mutate_repository(self) -> None:
