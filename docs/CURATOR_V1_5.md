@@ -2,7 +2,7 @@
 
 ## Status
 
-Rings 1-4 implemented: provider-neutral authority boundary, Gemini provider, semantic/explainable ranking, and duplicate/alternative/adapter analysis.
+Rings 1-5 implemented: provider-neutral authority boundary, Gemini provider, semantic/explainable ranking, duplicate/alternative/adapter analysis, and observation-backed health reasoning.
 
 The Curator is an advisory layer above the deterministic Module Library core. It may reason over sanitized Library context, but it is never an authority for certification, security, lifecycle, compatibility or repository mutation.
 
@@ -32,6 +32,8 @@ The Curator is not allowed to certify/revoke anything, mutate catalog/module/int
 `tools/library_curator.py` defines the provider-neutral `LibraryCuratorProvider`. Requests use `schemas/library.curator.request.schema.json`; responses use `schemas/library.curator.response.schema.json`.
 
 Only advisory metadata is sent: needs/targets, asset identity/version/source area, lifecycle/availability, capabilities/platforms/contracts, upstream repository/commit/license identity, high-level validation/security state and integration effort/constraints. Evidence paths, SBOM contents, test reports, security notes, adapter notes, credentials and unrelated repository data are excluded.
+
+For health review, only a bounded sanitized observation view is added: aggregate integration/incident/validation/compatibility counters, deterministic health signals, and at most the 20 most recent event outcomes. Observation `notes`, `metadata` and `project_id` are never sent to the AI provider.
 
 Every response is deterministically verified: request ID, supported fields, known refs/capabilities and confidence ranges are checked. A `reuse_recommendation` is accepted only for an active certified asset under `modules/`.
 
@@ -71,6 +73,24 @@ Adapter analysis is run only when at least one candidate exists. Every accepted 
 
 Both services expose whether AI was actually called and preserve a deterministic list of the alternative candidates considered. Tests verify insufficient-candidate short-circuits, malformed duplicate/adapter hints, exact known references and no Library mutation.
 
-## Next rings
+## Ring 5 — observations and health reasoning
 
-Ring 5 adds observations/health reasoning and degrading-module warnings. Ring 6 surfaces clearly labeled AI advice in the Cantiere/Modules UI.
+`tools/library_curator_health.py` reasons over the append-only operational ledger without granting the AI any lifecycle authority.
+
+The deterministic core first derives factual health signals for each certified Library module, including:
+
+- observed integration failures;
+- low integration success rate after enough attempts;
+- recent consecutive integration failures;
+- recorded incidents;
+- incompatible compatibility observations;
+- latest validation failure/warning or low score;
+- absence of operational history.
+
+Gemini is called only when at least one signal indicates actual degradation beyond simple lack of history. A returned `health_warning` is accepted only when it cites exact known module refs that already have deterministic health signals. Health output cannot contain ranking factors or adapter suggestions and cannot change availability, certification, revocation or any repository state.
+
+Health requests expose only aggregate facts plus a maximum of 20 sanitized recent events. Project IDs, free-form notes and event metadata are deliberately removed before the provider boundary. Tests verify healthy short-circuiting, degrading-module warnings, privacy stripping, deterministic signal binding and no Library mutation.
+
+## Next ring
+
+Ring 6 surfaces clearly labeled AI advice in the Cantiere/Modules UI. The deterministic Library state remains visually and logically separate from Curator advice.
