@@ -41,17 +41,18 @@ jobs:
           python -m unittest discover -s tests -p 'test_*.py' -v
           python tools/library_resolver.py export-cache --output /tmp/ai-orchestrator-module-library.json
           python tools/validate_snapshot.py /tmp/ai-orchestrator-module-library.json
+          python tools/validate_snapshot.py catalog/offline-snapshot.json
 
       - name: Commit certified Library changes
         shell: bash
         run: |
           if git diff --quiet --exit-code; then
-            echo "No eligible intake was promoted."
+            echo "No Library certification/export changes."
             exit 0
           fi
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add catalog modules intake
+          git add catalog modules intake packages
           git commit -m "library: certify eligible intake [skip ci]"
           git push origin HEAD:main
 
