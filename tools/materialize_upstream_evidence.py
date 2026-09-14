@@ -83,6 +83,8 @@ def _hosted_pub_packages(deps: dict) -> list[dict[str, str]]:
 
 
 def _query_osv(packages: list[dict[str, str]], timeout: float = 30.0) -> tuple[list[dict], list[str]]:
+    if not packages:
+        return [], []
     queries = [
         {
             "package": {"ecosystem": row["ecosystem"], "name": row["name"]},
@@ -90,8 +92,6 @@ def _query_osv(packages: list[dict[str, str]], timeout: float = 30.0) -> tuple[l
         }
         for row in packages
     ]
-    if not queries:
-        raise EvidenceMaterializationError("no hosted Pub dependencies available for OSV review")
     body = json.dumps({"queries": queries}, separators=(",", ":")).encode("utf-8")
     request = urllib.request.Request(
         OSV_BATCH_URL,
@@ -123,7 +123,19 @@ def _query_osv(packages: list[dict[str, str]], timeout: float = 30.0) -> tuple[l
     return normalized, sorted(vulnerability_ids)
 
 
-def materialize(asset_dir: Path, upstream_dir: Path, deps_json: Path) -> dict:
+def materialize(
+    asset_dir: Path,
+    upstream_dir: Path,
+    deps_json: Path,
+    *,
+    validated_on: list[str] | None = None,
+    package_label: str = "upstream package",
+    scope_note: str | None = None,
+) -> dict:
+    validated_on = validated_on or ["desktop"]
+    if not validated_on or any(not item.strip() for item in validated_on):
+        raise EvidenceMaterializationError("validated_on must contain at least one non-empty platform")
+
     manifest_path = asset_dir / "manifest.json"
     manifest = _load_json(manifest_path)
     provenance = manifest.get("provenance") or {}
@@ -134,6 +146,13 @@ def materialize(asset_dir: Path, upstream_dir: Path, deps_json: Path) -> dict:
     if actual_head != source_commit:
         raise EvidenceMaterializationError(
             f"upstream checkout mismatch: expected {source_commit}, got {actual_head}"
+        )
+
+    declared_platforms = {str(item) for item in manifest.get("platforms") or []}
+    unexpected = [item for item in validated_on if item not in declared_platforms]
+    if unexpected:
+        raise EvidenceMaterializationError(
+            "validated platform was not declared by candidate: " + ", ".join(unexpected)
         )
 
     deps = _load_json(deps_json)
@@ -157,23 +176,26 @@ def materialize(asset_dir: Path, upstream_dir: Path, deps_json: Path) -> dict:
     }
     _write_json(sbom_path, sbom)
 
+    note = scope_note or (
+        "Certification is limited to the platforms explicitly validated by this immutable upstream run."
+    )
     test_report = {
         "schema": TEST_REPORT_SCHEMA,
         "asset_id": manifest.get("id"),
         "version": manifest.get("version"),
         "source_commit": source_commit,
         "passed": True,
-        "validated_on": ["desktop"],
+        "validated_on": validated_on,
         "generated_at": generated_at,
         "evidence": {
             "upstream_checkout": actual_head,
             "commands": [
-                "flutter pub get (workspace)",
-                "dart analyze --fatal-infos (drift package)",
-                "dart test (drift package)",
-                "dart pub deps --json (drift package)",
+                f"dependency resolution ({package_label})",
+                f"dart analyze --fatal-infos ({package_label})",
+                f"dart test ({package_label})",
+                f"dart pub deps --json ({package_label})",
             ],
-            "scope_note": "Certification is limited to desktop until a separate Android runtime validation is recorded.",
+            "scope_note": note,
         },
     }
     _write_json(test_report_path, test_report)
@@ -203,7 +225,7 @@ def materialize(asset_dir: Path, upstream_dir: Path, deps_json: Path) -> dict:
     validation = manifest.setdefault("validation", {})
     validation["tests_passed"] = True
     validation["validated_at"] = generated_at
-    validation["validated_on"] = ["desktop"]
+    validation["validated_on"] = validated_on
     validation["test_report"] = "evidence/test-report.json"
 
     security = manifest.setdefault("security", {})
@@ -214,24 +236,22 @@ def materialize(asset_dir: Path, upstream_dir: Path, deps_json: Path) -> dict:
     security["review_report"] = "evidence/security-review.json"
     security["notes"] = (
         "Automated review: immutable upstream checkout, package analyze/test, dependency SBOM and OSV scan. "
-        "Android runtime validation remains pending."
+        + note
     )
 
-    # Keep the certified compatibility surface honest. The Researcher candidate declared Android
-    # support, but this evidence run validates only desktop. A later immutable version can add
-    # Android after device/emulator validation.
-    manifest["platforms"] = ["desktop"]
+    # Certified compatibility is never broader than the evidence actually produced.
+    manifest["platforms"] = validated_on
     integration = manifest.setdefault("integration", {})
     constraints = integration.setdefault("known_constraints", [])
-    pending = "Android runtime validation is pending; this certified version is desktop-only"
-    if pending not in constraints:
+    pending = "Additional platform support requires separate immutable runtime validation"
+    if declared_platforms - set(validated_on) and pending not in constraints:
         constraints.append(pending)
 
     _write_json(manifest_path, manifest)
     return {
         "asset": f"{manifest.get('id')}@{manifest.get('version')}",
         "source_commit": source_commit,
-        "validated_on": ["desktop"],
+        "validated_on": validated_on,
         "package_count": len(packages),
         "known_vulnerabilities": 0,
     }
@@ -242,8 +262,18 @@ def main() -> int:
     parser.add_argument("--asset-dir", type=Path, required=True)
     parser.add_argument("--upstream-dir", type=Path, required=True)
     parser.add_argument("--deps-json", type=Path, required=True)
+    parser.add_argument("--validated-on", action="append", dest="validated_on")
+    parser.add_argument("--package-label", default="upstream package")
+    parser.add_argument("--scope-note")
     args = parser.parse_args()
-    result = materialize(args.asset_dir.resolve(), args.upstream_dir.resolve(), args.deps_json.resolve())
+    result = materialize(
+        args.asset_dir.resolve(),
+        args.upstream_dir.resolve(),
+        args.deps_json.resolve(),
+        validated_on=args.validated_on,
+        package_label=args.package_label,
+        scope_note=args.scope_note,
+    )
     print(json.dumps(result, indent=2, sort_keys=True))
     return 0
 
