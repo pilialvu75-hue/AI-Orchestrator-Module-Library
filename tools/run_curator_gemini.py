@@ -12,14 +12,27 @@ from library_curator import (
     LibraryCuratorProvider,
     run_curator,
 )
-from library_curator_gemini import (
-    DEFAULT_MODEL,
-    GeminiCuratorProvider,
-    GeminiProviderError,
-)
+from library_curator_gemini import GeminiCuratorProvider, GeminiProviderError
 from library_curator_health import run_health_review
 from library_curator_relations import run_adapter_analysis, run_duplicate_analysis
 from library_curator_semantic import run_semantic_ranking
+
+
+CURRENT_GEMINI_MODEL = "gemini-3.8-flash"
+LEGACY_MODEL_ALIASES = {
+    "gemini-3.6-flash": CURRENT_GEMINI_MODEL,
+}
+
+
+def normalize_model(model: str | None) -> str:
+    requested = (
+        model
+        or os.environ.get("AI_ORCHESTRATOR_CURATOR_GEMINI_MODEL")
+        or CURRENT_GEMINI_MODEL
+    ).strip()
+    if not requested:
+        raise GeminiProviderError("Gemini model is empty")
+    return LEGACY_MODEL_ALIASES.get(requested, requested)
 
 
 class LazyGeminiCuratorProvider:
@@ -33,15 +46,8 @@ class LazyGeminiCuratorProvider:
     ) -> None:
         if timeout_seconds <= 0:
             raise GeminiProviderError("timeout_seconds must be > 0")
-        resolved_model = (
-            model
-            or os.environ.get("AI_ORCHESTRATOR_CURATOR_GEMINI_MODEL")
-            or DEFAULT_MODEL
-        ).strip()
-        if not resolved_model:
-            raise GeminiProviderError("Gemini model is empty")
 
-        self._model = resolved_model
+        self._model = normalize_model(model)
         self._timeout_seconds = float(timeout_seconds)
         self._delegate: GeminiCuratorProvider | None = None
 
