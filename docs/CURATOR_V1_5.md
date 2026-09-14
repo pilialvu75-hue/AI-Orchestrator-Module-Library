@@ -2,7 +2,7 @@
 
 ## Status
 
-Rings 1-3 implemented: provider-neutral authority boundary, Gemini provider and semantic/explainable candidate ranking.
+Rings 1-4 implemented: provider-neutral authority boundary, Gemini provider, semantic/explainable ranking, and duplicate/alternative/adapter analysis.
 
 The Curator is an advisory layer above the deterministic Module Library core. It may reason over sanitized Library context, but it is never an authority for certification, security, lifecycle, compatibility or repository mutation.
 
@@ -23,147 +23,54 @@ The deterministic Library core remains the only authority for:
 - deprecation, revocation and rollback state;
 - catalog/package/snapshot writes.
 
-The Curator is allowed to:
+The Curator is allowed to identify coverage gaps, rank known candidates, flag possible duplicates or alternatives, suggest adapters, surface health concerns and recommend only already-active certified assets for reuse.
 
-- identify capability coverage gaps;
-- rank or compare known candidates;
-- flag possible duplicates;
-- suggest adapters;
-- surface health/quality concerns;
-- recommend an already-active certified asset for reuse.
+The Curator is not allowed to certify/revoke anything, mutate catalog/module/intake state, bypass deterministic gates, turn an intake candidate into reusable material, or invent assets/capabilities absent from the supplied context.
 
-The Curator is not allowed to:
+## Provider contract and data minimization
 
-- certify or revoke anything;
-- create or modify catalog/module/intake state;
-- bypass deterministic eligibility checks;
-- turn an intake candidate into a reusable asset;
-- invent asset IDs, versions or capabilities that are absent from its request context.
+`tools/library_curator.py` defines the provider-neutral `LibraryCuratorProvider`. Requests use `schemas/library.curator.request.schema.json`; responses use `schemas/library.curator.response.schema.json`.
 
-## Provider contract
+Only advisory metadata is sent: needs/targets, asset identity/version/source area, lifecycle/availability, capabilities/platforms/contracts, upstream repository/commit/license identity, high-level validation/security state and integration effort/constraints. Evidence paths, SBOM contents, test reports, security notes, adapter notes, credentials and unrelated repository data are excluded.
 
-`tools/library_curator.py` defines the provider-neutral `LibraryCuratorProvider` protocol.
-
-A provider receives only a sanitized request using:
-
-- `schemas/library.curator.request.schema.json`
-
-and must return:
-
-- `schemas/library.curator.response.schema.json`
-
-The provider has no repository handle, no write callback and no access to Library credentials through this interface.
-
-## Data minimization
-
-The request builder sends only fields required for advisory reasoning:
-
-- capability needs and targets;
-- asset identity/version/source area;
-- lifecycle/availability state;
-- capability/platform/contract metadata;
-- upstream repository/commit/license identity;
-- high-level validation/security state;
-- integration effort/constraints.
-
-It intentionally excludes local evidence paths, SBOM contents, test reports, security notes, adapter notes and unrelated repository data.
-
-## Deterministic response verification
-
-Every provider response is checked before the caller sees it as verified advice:
-
-- request ID must match;
-- only the response contract fields are accepted;
-- cited assets/capabilities must exist in the exact request context;
-- confidence must be in `[0, 1]`;
-- unsupported mutation-like fields fail closed;
-- `reuse_recommendation` is accepted only for an asset stored under `modules/` with `status=certified` and `availability=active`.
-
-An uncertified Researcher/Cantiere intake may be compared or ranked, but the Curator cannot recommend it as reusable production material.
+Every response is deterministically verified: request ID, supported fields, known refs/capabilities and confidence ranges are checked. A `reuse_recommendation` is accepted only for an active certified asset under `modules/`.
 
 ## Ring 2 — Gemini provider
 
-`tools/library_curator_gemini.py` implements the first and only V1.5 network provider behind the same `LibraryCuratorProvider` contract.
+`tools/library_curator_gemini.py` is the first and only V1.5 network provider. Default model is `gemini-3.6-flash`, model-overridable without changing the Curator contract. It uses structured JSON output, a 30-second timeout, up to two retries for transient 429/5xx failures, a 512 KiB request cap and 1 MiB response cap.
 
-Current defaults:
+`GEMINI_API_KEY` is read only from runtime environment and sent only through `x-goog-api-key`; it is never placed in URL, body, Library state or returned results. CI uses injected transports rather than live Gemini calls.
 
-- provider: Gemini API;
-- stable default model: `gemini-3.6-flash`;
-- endpoint family: Gemini `models.generateContent`;
-- structured JSON output using Gemini response schema support;
-- timeout: 30 seconds;
-- retries: up to 2 for 429/5xx transient failures;
-- request size cap: 512 KiB;
-- response size cap: 1 MiB.
-
-The model can be changed without changing the Curator contract by setting:
-
-```bash
-AI_ORCHESTRATOR_CURATOR_GEMINI_MODEL=gemini-3.7-flash
-```
-
-The API credential is read only from the process environment:
-
-```bash
-GEMINI_API_KEY=...
-```
-
-It is sent only in the `x-goog-api-key` HTTP header. It is never placed in the URL, request body, Library state or Curator result. Error messages intentionally omit response bodies and credentials.
-
-A manual invocation is available through:
-
-```bash
-GEMINI_API_KEY=... python tools/run_curator_gemini.py \
-  --task rank_candidates \
-  --capability storage.local_db
-```
-
-The command prints a verified Curator result. The result is advisory; running it does not write to the Library.
-
-CI does not call the live Gemini API and does not require a Gemini secret. Provider behavior is tested with an injected transport, including structured output parsing, transient retry behavior, non-retryable failures and secret placement.
-
-## Trusted GitHub manual run
-
-`.github/workflows/run-curator-gemini.yml` provides a phone-friendly `workflow_dispatch` entry point for real Curator calls without putting the API key in the app or repository.
-
-The workflow:
-
-- has `contents: read` only;
-- checks out `main` without persisted Git credentials;
-- reads `GEMINI_API_KEY` only from the repository Actions secret;
-- accepts task, optional capability and model as dispatch inputs;
-- runs the same provider + deterministic verifier used by the CLI;
-- uploads the verified advisory JSON as a 7-day artifact;
-- has no schedule, no cron and no write permission to Library state.
-
-To enable a real call, configure one repository Actions secret named `GEMINI_API_KEY`. No other secret is required for the Curator.
+`.github/workflows/run-curator-gemini.yml` is a manual, phone-friendly, read-only execution path. It has `contents: read`, no schedule, no persisted Git credential and requires one repository Actions secret named `GEMINI_API_KEY`. Verified advisory output is retained as a seven-day artifact.
 
 ## Ring 3 — semantic matching and explainable ranking
 
-`tools/library_curator_semantic.py` is the higher-level semantic ranking service for one capability at a time.
+`tools/library_curator_semantic.py` ranks one capability at a time. When candidates exist, every candidate must appear exactly once. Six transparent advisory factors are returned per asset: `semantic_fit`, `target_fit`, `contract_fit`, `evidence_strength`, `integration_fit`, and `overall`, each constrained to `[0,1]`, plus a concise observable rationale.
 
-When candidates exist, Gemini must rank every supplied candidate exactly once. The response carries six explicit advisory factors per asset:
+The deterministic core verifies exact candidate coverage, factor/ref alignment and non-increasing overall score order. Intake candidates may be evaluated but are never made reusable by ranking. With zero candidates, the service skips Gemini entirely and emits a deterministic coverage gap.
 
-- `semantic_fit` — how closely the supplied description/capabilities match the requested need;
-- `target_fit` — fit to requested platforms/targets;
-- `contract_fit` — fit to the declared capability contract boundary;
-- `evidence_strength` — strength of the supplied test/security state;
-- `integration_fit` — expected integration/adaptation fit from supplied constraints;
-- `overall` — provider's combined advisory score.
+## Ring 4 — duplicates, alternatives and adapters
 
-The deterministic core does not blindly trust those numbers. It verifies that:
+`tools/library_curator_relations.py` adds two higher-level services without changing Library authority.
 
-- every factor is in `[0, 1]`;
-- every cited asset exists in the exact request context;
-- each candidate appears exactly once;
-- `ranking_factors` follow the exact same order as `asset_refs`;
-- `overall` values are non-increasing in the returned ranking;
-- rationales are short observable explanations, not hidden reasoning traces.
+### Duplicate / alternative analysis
 
-The AI is deliberately allowed to rank an uncertified intake candidate for evaluation. That does not change its lifecycle state and does not make it reusable. The pre-existing deterministic guard still rejects any `reuse_recommendation` for intake, deprecated, revoked or otherwise non-active/non-certified material.
+All assets that provide the selected capability are deterministically known **alternative candidates**. AI is used only when at least two alternatives exist, to flag subsets that appear duplicate or near-duplicate from supplied metadata.
 
-If a capability has no candidates at all, `run_semantic_ranking` skips the API call entirely and emits a deterministic `coverage_gap` with `ai_called=false`. This saves quota/cost and avoids asking an AI a question the Library can answer exactly itself.
+A duplicate hint must:
+
+- cite at least two exact known asset refs;
+- use only refs from the selected capability context;
+- remain an advisory similarity signal, never a lifecycle or reuse decision.
+
+When fewer than two candidates exist, the AI call is skipped because duplicate analysis cannot add information.
+
+### Adapter analysis
+
+Adapter analysis is run only when at least one candidate exists. Every accepted `adapter_hint` must cite at least one exact known asset and contain at least one concrete `adapter_suggestions` entry. The AI may describe a bridge required by declared contracts/platforms/constraints, but it cannot create files or mutate the Cantiere/Library workspace.
+
+Both services expose whether AI was actually called and preserve a deterministic list of the alternative candidates considered. Tests verify insufficient-candidate short-circuits, malformed duplicate/adapter hints, exact known references and no Library mutation.
 
 ## Next rings
 
-Ring 4 adds duplicate/alternative/adapter suggestions, Ring 5 uses operational observations for health reasoning, and Ring 6 surfaces clearly labeled AI advice in the Cantiere/Modules UI.
+Ring 5 adds observations/health reasoning and degrading-module warnings. Ring 6 surfaces clearly labeled AI advice in the Cantiere/Modules UI.
