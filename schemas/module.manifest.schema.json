@@ -94,6 +94,7 @@
         "reviewed_at": {"type": ["string", "null"], "format": "date-time"},
         "known_vulnerabilities": {"type": "integer", "minimum": 0},
         "sbom": {"type": ["string", "null"]},
+        "review_report": {"type": ["string", "null"]},
         "notes": {"type": ["string", "null"]}
       }
     },
