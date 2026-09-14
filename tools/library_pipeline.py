@@ -10,6 +10,8 @@ from dataclasses import dataclass
 from datetime import datetime, timezone
 from pathlib import Path
 
+from library_evidence import EvidenceError, verify_manifest_evidence
+
 SEMVER = re.compile(r"^(\d+)\.(\d+)\.(\d+)(?:[-+][0-9A-Za-z.-]+)?$")
 ASSET_ID = re.compile(r"^[A-Za-z0-9][A-Za-z0-9._-]{2,127}$")
 COMMIT_LIKE = re.compile(r"^[A-Fa-f0-9]{7,64}$")
@@ -185,6 +187,13 @@ def validate_testing_gates(manifest: dict) -> None:
     require(isinstance(validated_on, list) and validated_on, "tested asset requires validation.validated_on")
 
 
+def validate_evidence_gates(manifest: dict, base: Path) -> None:
+    try:
+        verify_manifest_evidence(base, manifest)
+    except EvidenceError as exc:
+        raise PipelineError(str(exc)) from exc
+
+
 def license_requires_explicit_review(license_name: str) -> bool:
     normalized = license_name.upper().strip()
     if "AGPL" in normalized or "SSPL" in normalized:
@@ -195,6 +204,7 @@ def license_requires_explicit_review(license_name: str) -> bool:
 def validate_certification_gates(manifest: dict, base: Path) -> None:
     validate_normalization_gates(manifest, base)
     validate_testing_gates(manifest)
+    validate_evidence_gates(manifest, base)
 
     security = manifest.get("security") or {}
     require(security.get("reviewed") is True, "certification requires security.reviewed=true")
@@ -225,6 +235,7 @@ def transition_intake(root: Path, ref: AssetRef, target_status: str) -> dict:
         validate_normalization_gates(manifest, base)
     if target_status == "tested":
         validate_testing_gates(manifest)
+        validate_evidence_gates(manifest, base)
 
     manifest["status"] = target_status
     write_json(path, manifest)
