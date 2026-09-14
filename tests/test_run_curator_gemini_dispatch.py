@@ -110,12 +110,26 @@ class CuratorOperationalDispatchTest(unittest.TestCase):
         self.assertEqual(expected, result)
         semantic.assert_called_once()
 
+    def test_legacy_mobile_model_is_routed_to_current_stable_model(self) -> None:
+        provider = runner.LazyGeminiCuratorProvider(model="gemini-3.6-flash")
+        self.assertEqual("gemini:gemini-3.8-flash", provider.name)
+
+    def test_default_model_is_current_stable_model(self) -> None:
+        with patch.dict(os.environ, {}, clear=True):
+            provider = runner.LazyGeminiCuratorProvider()
+        self.assertEqual("gemini:gemini-3.8-flash", provider.name)
+
+    def test_explicit_nonlegacy_model_is_preserved(self) -> None:
+        provider = runner.LazyGeminiCuratorProvider(model="gemini-3.7-flash")
+        self.assertEqual("gemini:gemini-3.7-flash", provider.name)
+
     def test_workflow_does_not_precheck_gemini_secret(self) -> None:
         workflow = (
             ROOT / ".github" / "workflows" / "run-curator-gemini.yml"
         ).read_text(encoding="utf-8")
         self.assertNotIn("Verify Gemini credential is configured", workflow)
         self.assertIn("GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}", workflow)
+        self.assertIn("default: gemini-3.8-flash", workflow)
 
 
 if __name__ == "__main__":
