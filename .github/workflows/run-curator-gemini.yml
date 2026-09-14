@@ -22,7 +22,7 @@ on:
       model:
         description: Gemini model id
         required: true
-        default: gemini-3.6-flash
+        default: gemini-3.8-flash
         type: string
       client_request_id:
         description: Optional caller correlation id; never sent to Gemini
