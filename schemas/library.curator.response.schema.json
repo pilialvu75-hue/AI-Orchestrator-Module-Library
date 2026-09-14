@@ -1,0 +1,62 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ai-orchestrator.local/schemas/library.curator.response.schema.json",
+  "title": "AI Orchestrator Module Library Curator Response",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema", "request_id", "recommendations"],
+  "properties": {
+    "schema": {"const": "ai-orchestrator.library-curator-response.v1"},
+    "request_id": {"type": "string", "pattern": "^[a-f0-9]{24}$"},
+    "recommendations": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "type",
+          "confidence",
+          "summary",
+          "asset_refs",
+          "capability_ids",
+          "adapter_suggestions",
+          "warnings"
+        ],
+        "properties": {
+          "type": {
+            "enum": [
+              "coverage_gap",
+              "candidate_ranking",
+              "reuse_recommendation",
+              "duplicate_hint",
+              "adapter_hint",
+              "health_warning"
+            ]
+          },
+          "confidence": {"type": "number", "minimum": 0, "maximum": 1},
+          "summary": {"type": "string", "minLength": 1, "maxLength": 1200},
+          "asset_refs": {
+            "type": "array",
+            "items": {"type": "string"},
+            "uniqueItems": true
+          },
+          "capability_ids": {
+            "type": "array",
+            "items": {"type": "string"},
+            "uniqueItems": true
+          },
+          "adapter_suggestions": {
+            "type": "array",
+            "items": {"type": "string"},
+            "uniqueItems": true
+          },
+          "warnings": {
+            "type": "array",
+            "items": {"type": "string"},
+            "uniqueItems": true
+          }
+        }
+      }
+    }
+  }
+}

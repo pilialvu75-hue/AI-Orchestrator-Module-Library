@@ -45,12 +45,35 @@ V1 completion means the **Library engine and exchange contracts are operational 
 
 The production Drift smoke is intentionally still non-certified until real execution/security evidence exists. A release must never be manufactured by changing `tests_passed` or `security.reviewed` without evidence.
 
-## After V1
+## V1.5 — AI Curator / Advisor
 
-The following are evolution/population work rather than blockers for the deterministic V1 core:
+The AI layer sits **above** the deterministic V1 core. AI can improve semantic reasoning and explanation, but it never becomes certification/security/lifecycle authority.
+
+- [x] **Ring 1 — provider-neutral Curator contract and guardrails**
+  - sanitized request contract;
+  - strict response contract;
+  - provider interface with no repository mutation handle;
+  - deterministic verification of cited assets/capabilities;
+  - reuse recommendations restricted to active certified Library modules;
+  - intake candidates may be compared/ranked but never treated as reusable production assets.
+- [ ] **Ring 2 — single Gemini API adapter**
+  - one configured API provider;
+  - strict JSON response parsing;
+  - timeout/retry/error accounting;
+  - secrets only from runtime environment/secure configuration;
+  - zero-secret diagnostics.
+- [ ] **Ring 3 — semantic capability matching and explainable ranking**
+- [ ] **Ring 4 — duplicate/alternative/adapter suggestions**
+- [ ] **Ring 5 — observations/health reasoning and degrading-module warnings**
+- [ ] **Ring 6 — Cantiere/Modules UI surface for clearly labeled AI advice**
+
+The Curator may suggest; deterministic Library code still decides what is eligible, trusted and reusable.
+
+## Ongoing population/evolution work
+
+These continue in parallel and are not blockers for the deterministic core or Curator foundation:
 
 - increase coverage toward the desired candidate count for each capability;
 - run target-specific validation for shortlisted open-source candidates;
 - collect real reuse success/failure observations from emitted apps;
-- refine cost accounting with operational data;
-- add the V1.5 AI Curator/Advisor above the deterministic core without transferring certification authority to AI.
+- refine cost accounting with operational data.
