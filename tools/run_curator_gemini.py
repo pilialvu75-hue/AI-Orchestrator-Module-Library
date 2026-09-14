@@ -12,7 +12,14 @@ from library_curator import (
     LibraryCuratorProvider,
     run_curator,
 )
-from library_curator_gemini import GeminiCuratorProvider, GeminiProviderError
+from library_curator_gemini import (
+    GEMINI_RESPONSE_SCHEMA,
+    MAX_REQUEST_BYTES,
+    SYSTEM_PROMPT,
+    GeminiCuratorProvider,
+    GeminiProviderError,
+    _task_instruction,
+)
 from library_curator_health import run_health_review
 from library_curator_relations import run_adapter_analysis, run_duplicate_analysis
 from library_curator_semantic import run_semantic_ranking
@@ -35,6 +42,52 @@ def normalize_model(model: str | None) -> str:
     return LEGACY_MODEL_ALIASES.get(requested, requested)
 
 
+class GenerateContentGeminiCuratorProvider(GeminiCuratorProvider):
+    """Gemini provider using the legacy generateContent structured-output contract.
+
+    The generateContent endpoint expects responseMimeType + responseJsonSchema
+    inside generationConfig. responseFormat belongs to the newer Interactions API.
+    """
+
+    def _body(self, request: dict[str, object]) -> bytes:
+        request_json = json.dumps(
+            request,
+            ensure_ascii=False,
+            sort_keys=True,
+            separators=(",", ":"),
+        )
+        prompt = (
+            "TASK INSTRUCTIONS:\n"
+            + _task_instruction(request)
+            + "\n\nREQUEST JSON:\n"
+            + request_json
+        )
+        payload = {
+            "systemInstruction": {
+                "parts": [{"text": SYSTEM_PROMPT}],
+            },
+            "contents": [
+                {
+                    "role": "user",
+                    "parts": [{"text": prompt}],
+                }
+            ],
+            "generationConfig": {
+                "temperature": 0.2,
+                "responseMimeType": "application/json",
+                "responseJsonSchema": GEMINI_RESPONSE_SCHEMA,
+            },
+        }
+        encoded = json.dumps(
+            payload,
+            ensure_ascii=False,
+            separators=(",", ":"),
+        ).encode("utf-8")
+        if len(encoded) > MAX_REQUEST_BYTES:
+            raise GeminiProviderError("Gemini request exceeded size limit")
+        return encoded
+
+
 class LazyGeminiCuratorProvider:
     """Instantiate the network provider only when a task truly needs AI."""
 
@@ -49,7 +102,7 @@ class LazyGeminiCuratorProvider:
 
         self._model = normalize_model(model)
         self._timeout_seconds = float(timeout_seconds)
-        self._delegate: GeminiCuratorProvider | None = None
+        self._delegate: GenerateContentGeminiCuratorProvider | None = None
 
     @property
     def name(self) -> str:
@@ -58,7 +111,7 @@ class LazyGeminiCuratorProvider:
     def advise(self, request: dict[str, object]) -> dict[str, object]:
         delegate = self._delegate
         if delegate is None:
-            delegate = GeminiCuratorProvider(
+            delegate = GenerateContentGeminiCuratorProvider(
                 model=self._model,
                 timeout_seconds=self._timeout_seconds,
             )

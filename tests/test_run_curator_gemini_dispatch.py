@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import json
 import os
 import sys
 import unittest
@@ -122,6 +123,18 @@ class CuratorOperationalDispatchTest(unittest.TestCase):
     def test_explicit_nonlegacy_model_is_preserved(self) -> None:
         provider = runner.LazyGeminiCuratorProvider(model="gemini-3.7-flash")
         self.assertEqual("gemini:gemini-3.7-flash", provider.name)
+
+    def test_generatecontent_payload_uses_supported_structured_output_fields(self) -> None:
+        provider = runner.GenerateContentGeminiCuratorProvider(
+            api_key="test-key",
+            model="gemini-3.8-flash",
+            max_retries=0,
+        )
+        body = json.loads(provider._body({"task": "coverage"}).decode("utf-8"))
+        config = body["generationConfig"]
+        self.assertEqual("application/json", config["responseMimeType"])
+        self.assertIn("responseJsonSchema", config)
+        self.assertNotIn("responseFormat", config)
 
     def test_workflow_does_not_precheck_gemini_secret(self) -> None:
         workflow = (
