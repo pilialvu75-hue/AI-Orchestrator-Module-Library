@@ -1,0 +1,157 @@
+name: Certify upstream Researcher intakes
+
+on:
+  push:
+    branches: ["main"]
+    paths:
+      - "intake/**/manifest.json"
+      - "intake/**/provenance/**"
+      - ".github/workflows/certify-upstream-intakes.yml"
+      - "tools/materialize_upstream_evidence.py"
+      - "tools/library_autopilot.py"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: module-library-upstream-certification-main
+  cancel-in-progress: false
+
+jobs:
+  certify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - name: Checkout Module Library main
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - name: Set up Flutter stable
+        uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+          cache: true
+
+      - name: Discover and validate upstream intake candidates
+        shell: bash
+        run: |
+          set -euo pipefail
+          mapfile -t manifests < <(python - <<'PY'
+          import json
+          from pathlib import Path
+          for path in sorted(Path('intake').glob('*/*/manifest.json')):
+              data = json.loads(path.read_text(encoding='utf-8'))
+              payload = data.get('payload') or {}
+              if data.get('status') == 'discovered' and payload.get('type') == 'upstream_reference':
+                  print(path.as_posix())
+          PY
+          )
+
+          if [ "${#manifests[@]}" -eq 0 ]; then
+            echo "No discovered upstream-reference intakes require certification."
+            exit 0
+          fi
+
+          index=0
+          for manifest in "${manifests[@]}"; do
+            index=$((index + 1))
+            asset_dir="$(dirname "$manifest")"
+            eval "$(python - "$manifest" <<'PY'
+          import json, shlex, sys
+          from pathlib import Path
+          data = json.loads(Path(sys.argv[1]).read_text(encoding='utf-8'))
+          payload = data.get('payload') or {}
+          provenance = data.get('provenance') or {}
+          entry_paths = data.get('entry_paths') or []
+          component = str(entry_paths[0]) if entry_paths else '.'
+          values = {
+              'ASSET_ID': str(data['id']),
+              'ASSET_VERSION': str(data['version']),
+              'SOURCE_REPOSITORY': str(payload.get('upstream_repository') or provenance.get('source_repository') or ''),
+              'SOURCE_COMMIT': str(payload.get('upstream_commit') or provenance.get('source_commit') or ''),
+              'COMPONENT_PATH': component,
+          }
+          for key, value in values.items():
+              if not value:
+                  raise SystemExit(f'missing {key} in {sys.argv[1]}')
+              print(f'{key}={shlex.quote(value)}')
+          PY
+          )"
+
+            upstream="/tmp/library-upstream-${index}"
+            deps="/tmp/library-deps-${index}.json"
+            rm -rf "$upstream" "$deps"
+            git init "$upstream"
+            git -C "$upstream" remote add origin "$SOURCE_REPOSITORY"
+            git -C "$upstream" fetch --depth=1 origin "$SOURCE_COMMIT"
+            git -C "$upstream" checkout --detach FETCH_HEAD
+            test "$(git -C "$upstream" rev-parse HEAD)" = "$SOURCE_COMMIT"
+
+            package_dir="$upstream/$COMPONENT_PATH"
+            test -f "$package_dir/pubspec.yaml"
+
+            if grep -Eq '^[[:space:]]*resolution:[[:space:]]*workspace' "$package_dir/pubspec.yaml"; then
+              (cd "$upstream" && flutter pub get)
+            else
+              (cd "$package_dir" && dart pub get)
+            fi
+
+            (cd "$package_dir" && dart analyze --fatal-infos)
+            (cd "$package_dir" && dart test)
+            (cd "$package_dir" && dart pub deps --json > "$deps")
+
+            python tools/materialize_upstream_evidence.py \
+              --asset-dir "$asset_dir" \
+              --upstream-dir "$upstream" \
+              --deps-json "$deps" \
+              --package-label "$ASSET_ID"
+
+            python - "$asset_dir" <<'PY'
+          import json, sys
+          from pathlib import Path
+          sys.path.insert(0, str(Path('tools').resolve()))
+          from library_evidence import verify_manifest_evidence
+          base = Path(sys.argv[1])
+          manifest = json.loads((base / 'manifest.json').read_text(encoding='utf-8'))
+          verify_manifest_evidence(base, manifest)
+          PY
+          done
+
+      - name: Run fail-closed certification autopilot
+        run: python tools/library_autopilot.py --report /tmp/library-autopilot-report.json
+
+      - name: Validate certified Library state
+        run: |
+          python tools/validate_library.py
+          python tools/validate_history.py
+          python tools/validate_lifecycle.py
+          python -m unittest discover -s tests -p 'test_*.py' -v
+          python tools/library_resolver.py export-cache --output /tmp/ai-orchestrator-module-library.json
+          python tools/validate_snapshot.py /tmp/ai-orchestrator-module-library.json
+          python tools/validate_snapshot.py catalog/offline-snapshot.json
+
+      - name: Commit verified certifications and exports
+        shell: bash
+        run: |
+          set -euo pipefail
+          if git diff --quiet --exit-code; then
+            echo "No certification/export changes."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add catalog modules intake packages
+          git commit -m "library: certify verified upstream intakes [skip ci]"
+          git push origin HEAD:main
+
+      - name: Upload certification report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: upstream-intake-certification-report
+          path: /tmp/library-autopilot-report.json
+          if-no-files-found: ignore
+          retention-days: 7
