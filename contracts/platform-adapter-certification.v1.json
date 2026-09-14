@@ -1,0 +1,45 @@
+{
+  "schema_version": 1,
+  "policy_id": "platform-adapter-certification.v1",
+  "updated_at": "2026-09-14T19:55:00Z",
+  "principles": [
+    "Certification is per immutable module version and per target.",
+    "Declared support is never inferred from package metadata alone.",
+    "A target is advertised only when all required evidence for that target is present and verified.",
+    "A generic Dart/Flutter test may establish shared logic quality but never substitutes for target runtime evidence.",
+    "Restricted targets may omit unsupported contracts; they must not emulate forbidden capabilities unsafely."
+  ],
+  "required_evidence": {
+    "all_targets": [
+      "immutable source revision",
+      "license provenance",
+      "dependency inventory/SBOM",
+      "static analysis",
+      "automated tests",
+      "known-vulnerability review",
+      "contract conformance report",
+      "target identifier in validated_on"
+    ],
+    "runtime_targets": [
+      "build or package succeeds for target",
+      "adapter initializes on target runtime",
+      "minimum happy-path contract test passes",
+      "failure/cancellation path is exercised when applicable"
+    ],
+    "hardware_sensitive": [
+      "device/backend identity recorded",
+      "resource/permission availability recorded",
+      "fallback behavior verified"
+    ]
+  },
+  "targets": {
+    "android": {"runtime_evidence": true, "special": ["runtime permissions", "background restrictions", "thermal/battery behavior when relevant", "signed package for release.packaging"]},
+    "windows": {"runtime_evidence": true, "special": ["window/service policy when relevant", "backend selection when relevant", "package/signing metadata for release capabilities"]},
+    "linux": {"runtime_evidence": true, "special": ["display/audio stack recorded when relevant", "service manager assumptions recorded", "package format recorded"]},
+    "macos": {"runtime_evidence": true, "special": ["TCC/sandbox state when relevant", "Metal/backend identity when relevant", "signing/notarization evidence for release capabilities"]},
+    "ios": {"runtime_evidence": true, "special": ["permission entitlement evidence", "background-mode compliance when relevant", "no general process/shell capability", "signed device/simulator build as appropriate"]},
+    "web": {"runtime_evidence": true, "special": ["browser family/version recorded", "permission/quota behavior when relevant", "service-worker lifecycle when relevant", "WebGPU fallback when relevant"]},
+    "raspberry_pi": {"runtime_evidence": true, "special": ["board/SoC and OS recorded", "headless boot/service behavior when relevant", "audio device stack when relevant", "CPU/RAM/thermal fallback verified when relevant"]}
+  },
+  "promotion_rule": "The manifest platforms list after certification must equal the subset of targets with verified target evidence. Unverified declared targets remain pending and are not exported as certified support."
+}
