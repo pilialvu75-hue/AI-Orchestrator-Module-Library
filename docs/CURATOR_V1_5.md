@@ -2,7 +2,7 @@
 
 ## Status
 
-Rings 1-5 implemented: provider-neutral authority boundary, Gemini provider, semantic/explainable ranking, duplicate/alternative/adapter analysis, and observation-backed health reasoning.
+Rings 1-6 implemented: provider-neutral authority boundary, Gemini provider, semantic/explainable ranking, duplicate/alternative/adapter analysis, observation-backed health reasoning, and clearly labeled Cantiere/Modules UI advice.
 
 The Curator is an advisory layer above the deterministic Module Library core. It may reason over sanitized Library context, but it is never an authority for certification, security, lifecycle, compatibility or repository mutation.
 
@@ -44,6 +44,8 @@ Every response is deterministically verified: request ID, supported fields, know
 `GEMINI_API_KEY` is read only from runtime environment and sent only through `x-goog-api-key`; it is never placed in URL, body, Library state or returned results. CI uses injected transports rather than live Gemini calls.
 
 `.github/workflows/run-curator-gemini.yml` is a manual, phone-friendly, read-only execution path. It has `contents: read`, no schedule, no persisted Git credential and requires one repository Actions secret named `GEMINI_API_KEY`. Verified advisory output is retained as a seven-day artifact.
+
+The operational runner dispatches specialized verification paths rather than the generic provider wrapper: semantic ranking uses the Ring 3 verifier, duplicate/adapter tasks use Ring 4 verifiers, and health review uses the Ring 5 observation-backed verifier. A mobile `client_request_id` is used only to correlate one workflow run with one caller and is not sent to Gemini.
 
 ## Ring 3 — semantic matching and explainable ranking
 
@@ -91,6 +93,20 @@ Gemini is called only when at least one signal indicates actual degradation beyo
 
 Health requests expose only aggregate facts plus a maximum of 20 sanitized recent events. Project IDs, free-form notes and event metadata are deliberately removed before the provider boundary. Tests verify healthy short-circuiting, degrading-module warnings, privacy stripping, deterministic signal binding and no Library mutation.
 
-## Next ring
+## Ring 6 — Cantiere/Modules UI
 
-Ring 6 surfaces clearly labeled AI advice in the Cantiere/Modules UI. The deterministic Library state remains visually and logically separate from Curator advice.
+`Ai-orchestrator-riserva` exposes the Curator from **Cantiere > Moduli** without moving Gemini credentials into the APK.
+
+Per capability, **Consiglio AI** dispatches a correlated private-Library GitHub Actions run, waits for the exact run, downloads the seven-day verified result artifact and shows only advice that still declares deterministic Library authority, advisory-only behavior and zero Library mutation. A global **Salute moduli — AI Curator** action exposes Ring 5 health review.
+
+The UI never merges Curator output into authoritative certified counts, lifecycle state or Researcher progress. Advice is visually labeled as AI/consultive and the dialog indicates whether Gemini was actually called or a deterministic short-circuit answered the request.
+
+The installed GitHub App therefore needs repository **Actions: Read and write** permission in addition to the existing Library permissions. Gemini remains server-side through the `GEMINI_API_KEY` Actions secret.
+
+## Operational activation gate
+
+The implementation is complete, but V1.5.0 should not be tagged until a real end-to-end smoke passes on the installed app:
+
+`phone -> GitHub Device Flow token -> Library workflow_dispatch -> Gemini or deterministic short-circuit -> core verification -> artifact -> phone`
+
+This requires the account-level GitHub App permission and repository secret to be configured. Failure of this activation step does not weaken or alter the deterministic V1 Library core.
