@@ -54,6 +54,33 @@
             "type": "array",
             "items": {"type": "string"},
             "uniqueItems": true
+          },
+          "ranking_factors": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "asset_ref",
+                "semantic_fit",
+                "target_fit",
+                "contract_fit",
+                "evidence_strength",
+                "integration_fit",
+                "overall",
+                "rationale"
+              ],
+              "properties": {
+                "asset_ref": {"type": "string"},
+                "semantic_fit": {"type": "number", "minimum": 0, "maximum": 1},
+                "target_fit": {"type": "number", "minimum": 0, "maximum": 1},
+                "contract_fit": {"type": "number", "minimum": 0, "maximum": 1},
+                "evidence_strength": {"type": "number", "minimum": 0, "maximum": 1},
+                "integration_fit": {"type": "number", "minimum": 0, "maximum": 1},
+                "overall": {"type": "number", "minimum": 0, "maximum": 1},
+                "rationale": {"type": "string", "minLength": 1, "maxLength": 800}
+              }
+            }
           }
         }
       }
