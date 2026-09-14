@@ -5,7 +5,11 @@ on:
     branches: ["main"]
     paths:
       - "intake/**"
+      - "schemas/module.manifest.schema.json"
       - "tools/library_autopilot.py"
+      - "tools/library_pipeline.py"
+      - "tools/library_evidence.py"
+      - "tools/validate_library.py"
       - ".github/workflows/certify-intake.yml"
   workflow_dispatch:
 
