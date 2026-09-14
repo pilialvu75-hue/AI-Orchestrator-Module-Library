@@ -122,6 +122,22 @@ The command prints a verified Curator result. The result is advisory; running it
 
 CI does not call the live Gemini API and does not require a Gemini secret. Provider behavior is tested with an injected transport, including structured output parsing, transient retry behavior, non-retryable failures and secret placement.
 
+## Trusted GitHub manual run
+
+`.github/workflows/run-curator-gemini.yml` provides a phone-friendly `workflow_dispatch` entry point for real Curator calls without putting the API key in the app or repository.
+
+The workflow:
+
+- has `contents: read` only;
+- checks out `main` without persisted Git credentials;
+- reads `GEMINI_API_KEY` only from the repository Actions secret;
+- accepts task, optional capability and model as dispatch inputs;
+- runs the same provider + deterministic verifier used by the CLI;
+- uploads the verified advisory JSON as a 7-day artifact;
+- has no schedule, no cron and no write permission to Library state.
+
+To enable a real call, configure one repository Actions secret named `GEMINI_API_KEY`. No other secret is required for the Curator.
+
 ## Next rings
 
 Ring 3 adds semantic capability matching and explainable ranking behavior on top of this provider. Ring 4 adds duplicate/alternative/adapter suggestions, Ring 5 uses operational observations for health reasoning, and Ring 6 surfaces clearly labeled AI advice in the Cantiere/Modules UI.
