@@ -63,7 +63,12 @@ The AI layer sits **above** the deterministic V1 core. AI can improve semantic r
   - API key only from runtime environment and only in `x-goog-api-key` header;
   - no live API call or secret requirement in CI;
   - zero-secret error messages and request/result state.
-- [ ] **Ring 3 — semantic capability matching and explainable ranking**
+- [x] **Ring 3 — semantic capability matching and explainable ranking**
+  - every available candidate for the selected capability must be ranked exactly once;
+  - transparent advisory factors: semantic, target, contract, evidence and integration fit plus overall score;
+  - factor refs/order/scores are deterministically verified;
+  - uncertified intake may be evaluated but cannot become a reuse recommendation;
+  - no-candidate cases are answered deterministically without consuming an AI call.
 - [ ] **Ring 4 — duplicate/alternative/adapter suggestions**
 - [ ] **Ring 5 — observations/health reasoning and degrading-module warnings**
 - [ ] **Ring 6 — Cantiere/Modules UI surface for clearly labeled AI advice**
