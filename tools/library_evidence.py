@@ -1,0 +1,99 @@
+from __future__ import annotations
+
+import hashlib
+import json
+from pathlib import Path
+
+
+TEST_REPORT_SCHEMA = "ai-orchestrator.library-test-report.v1"
+SECURITY_REPORT_SCHEMA = "ai-orchestrator.library-security-review.v1"
+
+
+class EvidenceError(Exception):
+    pass
+
+
+def _require(condition: bool, message: str) -> None:
+    if not condition:
+        raise EvidenceError(message)
+
+
+def _safe_file(base: Path, raw: object, label: str) -> Path:
+    _require(isinstance(raw, str) and bool(raw.strip()), f"{label} is required")
+    relative = Path(str(raw))
+    _require(not relative.is_absolute(), f"{label} must be relative to the asset directory")
+    resolved = (base / relative).resolve()
+    root = base.resolve()
+    _require(resolved == root or root in resolved.parents, f"{label} escapes the asset directory")
+    _require(resolved.is_file(), f"{label} does not exist: {raw}")
+    _require(not resolved.is_symlink(), f"{label} cannot be a symlink")
+    _require(resolved.stat().st_size > 0, f"{label} cannot be empty")
+    return resolved
+
+
+def _json_object(path: Path, label: str) -> dict:
+    try:
+        value = json.loads(path.read_text(encoding="utf-8"))
+    except Exception as exc:
+        raise EvidenceError(f"invalid JSON in {label}: {exc}") from exc
+    _require(isinstance(value, dict), f"{label} must contain a JSON object")
+    return value
+
+
+def _sha256(path: Path) -> str:
+    digest = hashlib.sha256()
+    with path.open("rb") as handle:
+        for chunk in iter(lambda: handle.read(1024 * 1024), b""):
+            digest.update(chunk)
+    return digest.hexdigest()
+
+
+def _identity(report: dict, manifest: dict, label: str) -> None:
+    _require(report.get("asset_id") == manifest.get("id"), f"{label} asset_id does not match manifest")
+    _require(report.get("version") == manifest.get("version"), f"{label} version does not match manifest")
+    source_commit = (manifest.get("provenance") or {}).get("source_commit")
+    if source_commit:
+        _require(report.get("source_commit") == source_commit, f"{label} source_commit does not match manifest provenance")
+
+
+def verify_test_evidence(base: Path, manifest: dict) -> None:
+    validation = manifest.get("validation") or {}
+    if validation.get("tests_passed") is not True:
+        return
+
+    report_path = _safe_file(base, validation.get("test_report"), "validation.test_report")
+    report = _json_object(report_path, "validation.test_report")
+    _require(report.get("schema") == TEST_REPORT_SCHEMA, "validation.test_report has unsupported schema")
+    _identity(report, manifest, "validation.test_report")
+    _require(report.get("passed") is True, "validation.test_report must assert passed=true")
+
+    report_targets = report.get("validated_on")
+    manifest_targets = validation.get("validated_on")
+    _require(isinstance(report_targets, list) and bool(report_targets), "validation.test_report validated_on must not be empty")
+    _require(isinstance(manifest_targets, list) and bool(manifest_targets), "validation.validated_on must not be empty")
+    _require(sorted(map(str, report_targets)) == sorted(map(str, manifest_targets)), "validation.test_report targets do not match manifest validation.validated_on")
+    supported = {str(item) for item in manifest.get("platforms") or []}
+    _require(set(map(str, manifest_targets)).issubset(supported), "validation.validated_on contains a platform not declared by the asset")
+
+
+def verify_security_evidence(base: Path, manifest: dict) -> None:
+    security = manifest.get("security") or {}
+    if security.get("reviewed") is not True:
+        return
+
+    report_path = _safe_file(base, security.get("review_report"), "security.review_report")
+    sbom_path = _safe_file(base, security.get("sbom"), "security.sbom")
+    report = _json_object(report_path, "security.review_report")
+    _require(report.get("schema") == SECURITY_REPORT_SCHEMA, "security.review_report has unsupported schema")
+    _identity(report, manifest, "security.review_report")
+    _require(report.get("reviewed") is True, "security.review_report must assert reviewed=true")
+
+    known = security.get("known_vulnerabilities")
+    _require(isinstance(known, int) and known >= 0, "security.known_vulnerabilities must be a non-negative integer")
+    _require(report.get("known_vulnerabilities") == known, "security.review_report vulnerability count does not match manifest")
+    _require(report.get("sbom_sha256") == _sha256(sbom_path), "security.review_report SBOM digest does not match security.sbom")
+
+
+def verify_manifest_evidence(base: Path, manifest: dict) -> None:
+    verify_test_evidence(base, manifest)
+    verify_security_evidence(base, manifest)
