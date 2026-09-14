@@ -1,9 +1,11 @@
 from __future__ import annotations
 
 import json
+import os
 import sys
 import unittest
 from pathlib import Path
+from unittest.mock import patch
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "tools"))
@@ -55,8 +57,9 @@ class LibraryCuratorGeminiTest(unittest.TestCase):
         ).encode("utf-8")
 
     def test_missing_key_is_rejected_before_network(self) -> None:
-        with self.assertRaisesRegex(GeminiProviderError, "GEMINI_API_KEY"):
-            GeminiCuratorProvider(api_key="")
+        with patch.dict(os.environ, {}, clear=True):
+            with self.assertRaisesRegex(GeminiProviderError, "GEMINI_API_KEY"):
+                GeminiCuratorProvider(api_key="")
 
     def test_key_uses_header_and_never_url(self) -> None:
         captured = {}
