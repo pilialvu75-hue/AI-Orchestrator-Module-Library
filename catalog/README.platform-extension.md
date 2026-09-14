@@ -1,0 +1,1 @@
+The platform extension is staged in `needs.platform-extension.json` pending merge into the authoritative `needs.json` after validation of target naming and compatibility semantics. `platform-targets.json` defines the concrete target vocabulary and keeps `desktop` only as a compatibility alias.
