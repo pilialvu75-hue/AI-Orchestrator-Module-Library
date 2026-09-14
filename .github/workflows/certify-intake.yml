@@ -1,0 +1,68 @@
+name: Certify eligible intake
+
+on:
+  push:
+    branches: ["main"]
+    paths:
+      - "intake/**"
+      - "tools/library_autopilot.py"
+      - ".github/workflows/certify-intake.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: module-library-certification-main
+  cancel-in-progress: false
+
+jobs:
+  certify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout Library main
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Run fail-closed certification autopilot
+        run: python tools/library_autopilot.py --report /tmp/library-autopilot-report.json
+
+      - name: Validate resulting Library state
+        run: |
+          python tools/validate_library.py
+          python tools/validate_history.py
+          python tools/validate_lifecycle.py
+          python -m unittest discover -s tests -p 'test_*.py' -v
+          python tools/library_resolver.py export-cache --output /tmp/ai-orchestrator-module-library.json
+          python tools/validate_snapshot.py /tmp/ai-orchestrator-module-library.json
+          python tools/validate_snapshot.py catalog/offline-snapshot.json
+
+      - name: Commit certified Library changes
+        shell: bash
+        run: |
+          if git diff --quiet --exit-code; then
+            echo "No Library certification/export changes."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add catalog modules intake packages
+          git commit -m "library: certify eligible intake [skip ci]"
+          git push origin HEAD:main
+
+      - name: Upload certification report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: library-autopilot-report
+          path: /tmp/library-autopilot-report.json
+          if-no-files-found: ignore
+          retention-days: 7
