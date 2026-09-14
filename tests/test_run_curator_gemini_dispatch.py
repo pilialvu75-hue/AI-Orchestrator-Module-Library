@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import os
 import sys
 import unittest
 from pathlib import Path
@@ -10,6 +11,7 @@ sys.path.insert(0, str(ROOT / "tools"))
 
 import run_curator_gemini as runner  # noqa: E402
 from library_curator import CuratorError  # noqa: E402
+from library_curator_gemini import GeminiProviderError  # noqa: E402
 
 
 class FakeProvider:
@@ -76,6 +78,44 @@ class CuratorOperationalDispatchTest(unittest.TestCase):
             )
         self.assertEqual(expected, result)
         health.assert_called_once()
+
+    def test_lazy_provider_does_not_require_secret_until_advise(self) -> None:
+        with patch.dict(os.environ, {}, clear=True):
+            provider = runner.LazyGeminiCuratorProvider(
+                model="gemini-test",
+                timeout_seconds=1.0,
+            )
+            self.assertEqual("gemini:gemini-test", provider.name)
+            with self.assertRaisesRegex(GeminiProviderError, "GEMINI_API_KEY"):
+                provider.advise({})
+
+    def test_deterministic_specialized_route_can_skip_secret(self) -> None:
+        expected = {
+            "provider": "deterministic-core:no-candidates",
+            "core_verification": {"ai_called": False},
+        }
+        with patch.dict(os.environ, {}, clear=True):
+            provider = runner.LazyGeminiCuratorProvider(model="gemini-test")
+            with patch.object(
+                runner,
+                "run_semantic_ranking",
+                return_value=expected,
+            ) as semantic:
+                result = runner.dispatch_curator(
+                    Path("/tmp/library"),
+                    provider,
+                    task="rank_candidates",
+                    capability_id="storage.local_db",
+                )
+        self.assertEqual(expected, result)
+        semantic.assert_called_once()
+
+    def test_workflow_does_not_precheck_gemini_secret(self) -> None:
+        workflow = (
+            ROOT / ".github" / "workflows" / "run-curator-gemini.yml"
+        ).read_text(encoding="utf-8")
+        self.assertNotIn("Verify Gemini credential is configured", workflow)
+        self.assertIn("GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}", workflow)
 
 
 if __name__ == "__main__":
