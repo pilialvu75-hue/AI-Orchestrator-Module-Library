@@ -1,0 +1,78 @@
+{
+  "schema_version": 1,
+  "updated_at": "2026-09-14T19:03:00Z",
+  "items": [
+    {
+      "capability_id": "platform.filesystem",
+      "title": "Native/sandboxed filesystem abstraction",
+      "priority": "high",
+      "desired_candidates": 2,
+      "status": "needed",
+      "targets": ["android", "windows", "linux", "macos", "ios", "raspberry_pi"]
+    },
+    {
+      "capability_id": "platform.process",
+      "title": "Local process and shell execution abstraction",
+      "priority": "high",
+      "desired_candidates": 2,
+      "status": "needed",
+      "targets": ["windows", "linux", "macos", "raspberry_pi"]
+    },
+    {
+      "capability_id": "platform.permissions",
+      "title": "Runtime permissions and capability broker",
+      "priority": "high",
+      "desired_candidates": 2,
+      "status": "needed",
+      "targets": ["android", "windows", "linux", "macos", "ios", "web"]
+    },
+    {
+      "capability_id": "platform.audio_io",
+      "title": "Microphone, speaker and audio-device routing abstraction",
+      "priority": "high",
+      "desired_candidates": 2,
+      "status": "needed",
+      "targets": ["android", "windows", "linux", "macos", "ios", "web", "raspberry_pi"]
+    },
+    {
+      "capability_id": "platform.background_execution",
+      "title": "Background task and service lifecycle abstraction",
+      "priority": "high",
+      "desired_candidates": 2,
+      "status": "needed",
+      "targets": ["android", "windows", "linux", "macos", "ios", "raspberry_pi"]
+    },
+    {
+      "capability_id": "platform.notifications",
+      "title": "Native notification abstraction",
+      "priority": "medium",
+      "desired_candidates": 2,
+      "status": "needed",
+      "targets": ["android", "windows", "linux", "macos", "ios", "web"]
+    },
+    {
+      "capability_id": "platform.desktop_shell",
+      "title": "Desktop window, tray and lifecycle integration",
+      "priority": "medium",
+      "desired_candidates": 2,
+      "status": "needed",
+      "targets": ["windows", "linux", "macos"]
+    },
+    {
+      "capability_id": "release.packaging",
+      "title": "Platform packaging, signing and distribution pipeline",
+      "priority": "high",
+      "desired_candidates": 2,
+      "status": "needed",
+      "targets": ["android", "windows", "linux", "macos", "ios", "web", "raspberry_pi"]
+    },
+    {
+      "capability_id": "ai.acceleration_backend",
+      "title": "Target-specific local inference acceleration backend",
+      "priority": "high",
+      "desired_candidates": 2,
+      "status": "needed",
+      "targets": ["android", "windows", "linux", "macos", "web", "raspberry_pi"]
+    }
+  ]
+}
