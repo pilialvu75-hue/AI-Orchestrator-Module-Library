@@ -1,0 +1,98 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ai-orchestrator.local/schemas/library.curator.request.schema.json",
+  "title": "AI Orchestrator Module Library Curator Request",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema",
+    "request_id",
+    "task",
+    "capability_id",
+    "policy",
+    "context",
+    "context_sha256"
+  ],
+  "properties": {
+    "schema": {"const": "ai-orchestrator.library-curator-request.v1"},
+    "request_id": {"type": "string", "pattern": "^[a-f0-9]{24}$"},
+    "task": {
+      "enum": [
+        "coverage",
+        "rank_candidates",
+        "find_duplicates",
+        "suggest_adapters",
+        "health_review"
+      ]
+    },
+    "capability_id": {"type": ["string", "null"]},
+    "policy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "advisory_only",
+        "core_is_authoritative",
+        "provider_may_mutate_library",
+        "provider_may_certify",
+        "provider_may_revoke"
+      ],
+      "properties": {
+        "advisory_only": {"const": true},
+        "core_is_authoritative": {"const": true},
+        "provider_may_mutate_library": {"const": false},
+        "provider_may_certify": {"const": false},
+        "provider_may_revoke": {"const": false}
+      }
+    },
+    "context": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["needs", "assets"],
+      "properties": {
+        "needs": {"type": "array", "items": {"type": "object"}},
+        "assets": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "ref",
+              "id",
+              "version",
+              "source_area",
+              "status",
+              "availability",
+              "kind",
+              "description",
+              "capabilities",
+              "platforms",
+              "contracts",
+              "provenance",
+              "validation",
+              "security",
+              "integration"
+            ],
+            "properties": {
+              "ref": {"type": "string"},
+              "id": {"type": "string"},
+              "version": {"type": "string"},
+              "source_area": {"enum": ["modules", "intake"]},
+              "status": {"type": "string"},
+              "availability": {"enum": ["active", "deprecated", "revoked", "not_certified"]},
+              "kind": {"type": "string"},
+              "description": {"type": "string"},
+              "capabilities": {"type": "array", "items": {"type": "string"}},
+              "platforms": {"type": "array", "items": {"type": "string"}},
+              "contracts": {"type": "array", "items": {"type": "string"}},
+              "provenance": {"type": "object"},
+              "validation": {"type": "object"},
+              "security": {"type": "object"},
+              "integration": {"type": "object"}
+            }
+          }
+        }
+      }
+    },
+    "context_sha256": {"type": "string", "pattern": "^[a-f0-9]{64}$"}
+  }
+}
