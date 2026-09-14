@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-09-14T19:03:00Z",
+  "updated_at": "2026-09-14T19:23:00Z",
   "items": [
     {
       "capability_id": "platform.filesystem",
@@ -43,6 +43,30 @@
       "targets": ["android", "windows", "linux", "macos", "ios", "raspberry_pi"]
     },
     {
+      "capability_id": "platform.lifecycle",
+      "title": "Application lifecycle, suspend/resume and shutdown abstraction",
+      "priority": "high",
+      "desired_candidates": 2,
+      "status": "needed",
+      "targets": ["android", "windows", "linux", "macos", "ios", "web", "raspberry_pi"]
+    },
+    {
+      "capability_id": "platform.connectivity",
+      "title": "Connectivity state, metering and offline/online transition abstraction",
+      "priority": "high",
+      "desired_candidates": 2,
+      "status": "needed",
+      "targets": ["android", "windows", "linux", "macos", "ios", "web", "raspberry_pi"]
+    },
+    {
+      "capability_id": "platform.power_thermal",
+      "title": "Battery, power mode and thermal-pressure signals",
+      "priority": "high",
+      "desired_candidates": 2,
+      "status": "needed",
+      "targets": ["android", "windows", "linux", "macos", "ios", "raspberry_pi"]
+    },
+    {
       "capability_id": "platform.notifications",
       "title": "Native notification abstraction",
       "priority": "medium",
@@ -59,6 +83,30 @@
       "targets": ["windows", "linux", "macos"]
     },
     {
+      "capability_id": "platform.startup_service",
+      "title": "OS startup, login item and headless service integration",
+      "priority": "medium",
+      "desired_candidates": 2,
+      "status": "needed",
+      "targets": ["windows", "linux", "macos", "raspberry_pi"]
+    },
+    {
+      "capability_id": "platform.file_picker_share",
+      "title": "File picker, document provider and share/export abstraction",
+      "priority": "medium",
+      "desired_candidates": 2,
+      "status": "needed",
+      "targets": ["android", "windows", "linux", "macos", "ios", "web"]
+    },
+    {
+      "capability_id": "platform.clipboard",
+      "title": "Clipboard abstraction with platform policy boundaries",
+      "priority": "low",
+      "desired_candidates": 1,
+      "status": "needed",
+      "targets": ["android", "windows", "linux", "macos", "ios", "web"]
+    },
+    {
       "capability_id": "release.packaging",
       "title": "Platform packaging, signing and distribution pipeline",
       "priority": "high",
@@ -67,12 +115,36 @@
       "targets": ["android", "windows", "linux", "macos", "ios", "web", "raspberry_pi"]
     },
     {
+      "capability_id": "release.auto_update",
+      "title": "Platform-aware self-update and update-channel integration",
+      "priority": "high",
+      "desired_candidates": 2,
+      "status": "needed",
+      "targets": ["android", "windows", "linux", "macos", "raspberry_pi"]
+    },
+    {
       "capability_id": "ai.acceleration_backend",
       "title": "Target-specific local inference acceleration backend",
       "priority": "high",
       "desired_candidates": 2,
       "status": "needed",
-      "targets": ["android", "windows", "linux", "macos", "web", "raspberry_pi"]
+      "targets": ["android", "windows", "linux", "macos", "ios", "web", "raspberry_pi"]
+    },
+    {
+      "capability_id": "ai.model_storage",
+      "title": "Large-model storage, integrity and migration abstraction",
+      "priority": "high",
+      "desired_candidates": 2,
+      "status": "needed",
+      "targets": ["android", "windows", "linux", "macos", "ios", "raspberry_pi"]
+    },
+    {
+      "capability_id": "voice.device_policy",
+      "title": "Voice-device selection, duplex policy and interruption handling",
+      "priority": "high",
+      "desired_candidates": 2,
+      "status": "needed",
+      "targets": ["android", "windows", "linux", "macos", "ios", "web", "raspberry_pi"]
     }
   ]
 }
