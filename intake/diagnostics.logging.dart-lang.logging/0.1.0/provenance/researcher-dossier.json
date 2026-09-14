@@ -1,0 +1,209 @@
+{
+  "schema_version": 1,
+  "capability": {
+    "capability_id": "diagnostics.logging",
+    "contract_id": "diagnostics.logging.v1",
+    "contract_version": "1.0",
+    "targets": [
+      "android",
+      "desktop",
+      "web"
+    ],
+    "title": "Structured logging and diagnostics"
+  },
+  "candidate": {
+    "provider": "github",
+    "repository": "dart-lang/core",
+    "component_path": "pkgs/logging",
+    "project": "logging",
+    "owner": "dart-lang",
+    "upstream_url": "https://github.com/dart-lang/core",
+    "commit_sha": "8151b9f57fa3fee10421a19ce24470e143c0dee5",
+    "tree_sha": "5873e0f9715c30bc7701b3376d04b61cbaf75e48",
+    "source_version": "1.3.0",
+    "source_tag": "logging-v1.3.0",
+    "release_tag_verified": true,
+    "acquired_at": "2026-09-14T17:13:20Z",
+    "license": "BSD-3-Clause",
+    "license_file": "https://github.com/dart-lang/core/blob/8151b9f57fa3fee10421a19ce24470e143c0dee5/pkgs/logging/LICENSE",
+    "language": "Dart",
+    "platforms": [
+      "android",
+      "desktop",
+      "web"
+    ]
+  },
+  "evidence": {
+    "functional": {
+      "named_loggers": true,
+      "severity_levels": true,
+      "structured_record_object": true,
+      "error_and_stacktrace": true,
+      "record_stream": true,
+      "hierarchical_configuration": true,
+      "persistent_history_builtin": false,
+      "remote_transport_builtin": false
+    },
+    "maintenance": {
+      "repository_archived": false,
+      "official_dart_monorepo": true,
+      "stable_tag_verified": true,
+      "release_commit_verified_signature": true,
+      "legacy_repo_archived_due_to_monorepo_migration": true
+    },
+    "quality": {
+      "tests_present": true,
+      "dedicated_ci_workflow_present": true,
+      "documentation_present": true,
+      "runtime_dependencies": 0
+    },
+    "security": {
+      "reviewed": false,
+      "library_review_pending": true,
+      "untrusted_code_executed": false,
+      "admission_gate": {
+        "status": "PASSED",
+        "verdict": "CLEAR",
+        "complete": true,
+        "admission_eligible": true,
+        "repository": "dart-lang/core",
+        "commit_sha": "8151b9f57fa3fee10421a19ce24470e143c0dee5",
+        "tree_sha": "5873e0f9715c30bc7701b3376d04b61cbaf75e48",
+        "component_path": "pkgs/logging",
+        "total_entries": 18,
+        "blobs_seen": 13,
+        "relevant_blobs": 8,
+        "scanned_files": 8,
+        "scanned_bytes": 39182,
+        "skipped_assets": 5,
+        "findings": [],
+        "opaque_artifacts": [],
+        "submodules": [],
+        "symlinks": []
+      },
+      "supply_chain": {
+        "status": "PASSED",
+        "verdict": "CLEAR",
+        "admission_eligible": true,
+        "manifests_analyzed": [
+          "pkgs/logging/pubspec.yaml"
+        ],
+        "lockfiles_present": [],
+        "dependencies_detected": 2,
+        "runtime_dependencies": 0,
+        "development_dependencies": [
+          "dart_flutter_team_lints",
+          "test"
+        ],
+        "findings": []
+      },
+      "vulnerability_gate": {
+        "status": "PASSED",
+        "database": "OSV",
+        "database_checked": true,
+        "verdict": "CLEAR",
+        "admission_eligible": true,
+        "known_vulnerability_count": 0,
+        "queried_runtime_components": 0,
+        "hits": [],
+        "error": null
+      },
+      "sbom": {
+        "format": "researcher-sbom",
+        "schema_version": 1,
+        "complete": true,
+        "components": [],
+        "unresolved": [],
+        "source_files": [
+          "pkgs/logging/pubspec.yaml"
+        ],
+        "fingerprint": "0f00fda1c7f4f668db9b06a8ecc119be7c1b0a9001d04147cbcc65ee33a9263e"
+      },
+      "certification_eligible": false
+    },
+    "benchmark": {
+      "status": "PLANNED_NOT_EXECUTED",
+      "reason": "Researcher admission is static/supply-chain/SBOM/OSV only; untrusted candidate code is not executed before Library sandbox/review."
+    }
+  },
+  "dependency_evidence": {
+    "manifest_files_detected": [
+      "pkgs/logging/pubspec.yaml"
+    ],
+    "dependencies_enumerated": true,
+    "dependency_count": 2,
+    "supply_chain_verdict": "CLEAR",
+    "manifests_analyzed": [
+      "pkgs/logging/pubspec.yaml"
+    ],
+    "lockfiles_present": [],
+    "sbom_complete": true,
+    "sbom_component_count": 0,
+    "sbom_fingerprint": "0f00fda1c7f4f668db9b06a8ecc119be7c1b0a9001d04147cbcc65ee33a9263e",
+    "vulnerability_database_checked": true,
+    "vulnerability_verdict": "CLEAR",
+    "known_vulnerability_count": 0,
+    "note": "Static source, dependency provenance, SBOM and vulnerability admission only; candidate/package-manager code was not executed."
+  },
+  "fingerprint": "1de78a2a5d72fe405f43cc9baed2e315bd87a6a2be635bead112d2691922c2ea",
+  "integration_assessment": {
+    "adapter_model": "diagnostics.logging.v1 adapter over package:logging LogRecord streams",
+    "human_estimated_effort": "low",
+    "strengths": [
+      "small neutral logging primitive",
+      "official Dart project provenance",
+      "zero runtime package dependencies at the evaluated stable release",
+      "Android/desktop/web suitable pure-Dart boundary",
+      "named loggers, levels, errors and record stream are adapter-friendly",
+      "Researcher admission completed without executing upstream code",
+      "Library can own redaction, persistence and remote Diagnostics transport"
+    ],
+    "weaknesses": [
+      "does not provide persistent history itself",
+      "does not provide a remote diagnostics transport itself",
+      "component lives inside a monorepo and the adapter must retain pkgs/logging component identity"
+    ],
+    "additional_costs": [
+      "define Library-owned structured event projection without inventing contract semantics",
+      "connect the event stream to the existing redaction/persistence/Diagnostics adapters",
+      "Library sandbox/test/security review is still required before certification"
+    ]
+  },
+  "lifecycle": "SHORTLISTED",
+  "research_recommendation": "SHORTLIST",
+  "certification_eligible": false,
+  "scores": {
+    "functional_fit": 0.92,
+    "contract_fit": 0.91,
+    "maintenance": 0.96,
+    "security": 0.9,
+    "license_fit": 0.98,
+    "platform_fit": 1.0,
+    "test_quality": 0.94,
+    "integration_cost": 0.94,
+    "performance": 0.82,
+    "footprint": 0.98,
+    "documentation": 0.92,
+    "recommendation": 0.93,
+    "reasons": [
+      "diagnostics.logging.v1 is a logical boundary only",
+      "stable logging-v1.3.0 is pinned to an immutable verified commit",
+      "the package moved to the active official dart-lang/core monorepo",
+      "minimal pure-Dart event API avoids forcing a diagnostics backend",
+      "component-scoped Full-Tree and supply-chain admission passed",
+      "runtime SBOM is complete with zero runtime dependencies",
+      "OSV check completed with zero known vulnerabilities",
+      "Library review and certification remain intentionally pending"
+    ]
+  },
+  "admission_run": {
+    "researcher_version": "1.0.0",
+    "run_id": 34873400000,
+    "workflow": "One-time Gate Check - diagnostics.logging",
+    "completed_at": "2026-09-14T17:13:24Z",
+    "result": "PASS",
+    "library_write_performed_by_gate_run": false,
+    "transport_note": "GitHub Actions lacked RESEARCHER_LIBRARY_TOKEN; this intake PR is transported by the authorized chat GitHub connector using the same intake-only boundary."
+  },
+  "recommendation": "SHORTLIST. Preferred minimal diagnostics.logging base. Researcher automated admission passed; Library normalization, sandbox/test and security review remain required before certification."
+}
