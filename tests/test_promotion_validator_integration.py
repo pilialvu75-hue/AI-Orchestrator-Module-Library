@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import hashlib
 import json
 import sys
 import tempfile
@@ -23,6 +24,7 @@ class PromotionValidatorIntegrationTest(unittest.TestCase):
         with tempfile.TemporaryDirectory() as temp:
             root = Path(temp)
             ref = AssetRef("voice.integration_stt", "1.0.0")
+            source_commit = "0123456789abcdef0123456789abcdef01234567"
 
             self.write_json(
                 root / "contracts" / "index.json",
@@ -73,6 +75,40 @@ class PromotionValidatorIntegrationTest(unittest.TestCase):
             (base / "provenance").mkdir(parents=True)
             (base / "provenance" / "LICENSE").write_text("MIT\n", encoding="utf-8")
             self.write_json(
+                base / "tests" / "report.json",
+                {
+                    "schema": "ai-orchestrator.library-test-report.v1",
+                    "asset_id": ref.asset_id,
+                    "version": ref.version,
+                    "source_commit": source_commit,
+                    "passed": True,
+                    "validated_on": ["android"],
+                },
+            )
+            self.write_json(
+                base / "security" / "sbom.json",
+                {
+                    "bomFormat": "CycloneDX",
+                    "specVersion": "1.5",
+                    "components": [],
+                },
+            )
+            sbom_sha256 = hashlib.sha256(
+                (base / "security" / "sbom.json").read_bytes()
+            ).hexdigest()
+            self.write_json(
+                base / "security" / "review.json",
+                {
+                    "schema": "ai-orchestrator.library-security-review.v1",
+                    "asset_id": ref.asset_id,
+                    "version": ref.version,
+                    "source_commit": source_commit,
+                    "reviewed": True,
+                    "known_vulnerabilities": 0,
+                    "sbom_sha256": sbom_sha256,
+                },
+            )
+            self.write_json(
                 base / "manifest.json",
                 {
                     "id": ref.asset_id,
@@ -90,7 +126,7 @@ class PromotionValidatorIntegrationTest(unittest.TestCase):
                     "provenance": {
                         "origin": "researcher",
                         "source_repository": "https://github.com/example/project",
-                        "source_commit": "0123456789abcdef0123456789abcdef01234567",
+                        "source_commit": source_commit,
                         "source_tag": None,
                         "source_project_id": None,
                         "source_task_id": None,
@@ -101,7 +137,7 @@ class PromotionValidatorIntegrationTest(unittest.TestCase):
                     "validation": {
                         "score": 0.95,
                         "tests_passed": True,
-                        "test_report": None,
+                        "test_report": "tests/report.json",
                         "validated_at": "2026-09-11T01:00:00Z",
                         "validated_on": ["android"],
                     },
@@ -109,7 +145,8 @@ class PromotionValidatorIntegrationTest(unittest.TestCase):
                         "reviewed": True,
                         "reviewed_at": "2026-09-11T01:30:00Z",
                         "known_vulnerabilities": 0,
-                        "sbom": None,
+                        "sbom": "security/sbom.json",
+                        "review_report": "security/review.json",
                         "notes": None,
                     },
                     "integration": {
@@ -139,7 +176,7 @@ class PromotionValidatorIntegrationTest(unittest.TestCase):
                         "path": None,
                         "sha256": None,
                         "upstream_repository": "https://github.com/example/project",
-                        "upstream_commit": "0123456789abcdef0123456789abcdef01234567",
+                        "upstream_commit": source_commit,
                     },
                     "quality": {
                         "reuse_count": 0,
