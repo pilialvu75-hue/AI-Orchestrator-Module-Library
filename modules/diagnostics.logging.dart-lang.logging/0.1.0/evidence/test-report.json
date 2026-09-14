@@ -1,0 +1,21 @@
+{
+  "asset_id": "diagnostics.logging.dart-lang.logging",
+  "evidence": {
+    "commands": [
+      "dependency resolution (diagnostics.logging.dart-lang.logging)",
+      "dart analyze --fatal-infos (diagnostics.logging.dart-lang.logging)",
+      "dart test (diagnostics.logging.dart-lang.logging)",
+      "dart pub deps --json (diagnostics.logging.dart-lang.logging)"
+    ],
+    "scope_note": "Certification is limited to the platforms explicitly validated by this immutable upstream run.",
+    "upstream_checkout": "8151b9f57fa3fee10421a19ce24470e143c0dee5"
+  },
+  "generated_at": "2026-09-14T18:37:10Z",
+  "passed": true,
+  "schema": "ai-orchestrator.library-test-report.v1",
+  "source_commit": "8151b9f57fa3fee10421a19ce24470e143c0dee5",
+  "validated_on": [
+    "desktop"
+  ],
+  "version": "0.1.0"
+}

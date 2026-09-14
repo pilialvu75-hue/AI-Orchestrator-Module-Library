@@ -1,9 +1,9 @@
 {
   "schema_version": 1,
   "library_id": "ai-orchestrator-module-library",
-  "catalog_version": "1.0.1",
+  "catalog_version": "1.0.2",
   "source_state": {
-    "catalog_updated_at": "2026-09-14T17:56:55Z",
+    "catalog_updated_at": "2026-09-14T18:37:11Z",
     "contracts_updated_at": "2026-09-11T21:05:00Z",
     "needs_updated_at": "2026-09-11T20:45:00Z",
     "lifecycle_revision": 0,
@@ -201,6 +201,139 @@
   ],
   "assets": [
     {
+      "id": "diagnostics.logging.dart-lang.logging",
+      "version": "0.1.0",
+      "kind": "module",
+      "status": "certified",
+      "availability": "active",
+      "description": "Researcher candidate adapter for diagnostics.logging.v1 using package:logging 1.3.0 from dart-lang/core.",
+      "capabilities": [
+        "diagnostics.logging"
+      ],
+      "platforms": [
+        "desktop"
+      ],
+      "contracts": [
+        {
+          "contract_id": "diagnostics.logging.v1",
+          "status": "draft",
+          "contract_version": "1.0",
+          "known": true
+        }
+      ],
+      "dependencies": [],
+      "provenance": {
+        "license": "BSD-3-Clause",
+        "license_file": "provenance/LICENSE",
+        "origin": "researcher",
+        "retrieved_at": "2026-09-14T17:13:20Z",
+        "source_commit": "8151b9f57fa3fee10421a19ce24470e143c0dee5",
+        "source_project_id": null,
+        "source_repository": "https://github.com/dart-lang/core",
+        "source_tag": "logging-v1.3.0",
+        "source_task_id": "1de78a2a5d72fe405f43cc9baed2e315bd87a6a2be635bead112d2691922c2ea"
+      },
+      "validation": {
+        "score": 0.93,
+        "test_report": "evidence/test-report.json",
+        "tests_passed": true,
+        "validated_at": "2026-09-14T18:37:10Z",
+        "validated_on": [
+          "desktop"
+        ]
+      },
+      "security": {
+        "known_vulnerabilities": 0,
+        "notes": "Automated review: immutable upstream checkout, package analyze/test, dependency SBOM and OSV scan. Certification is limited to the platforms explicitly validated by this immutable upstream run.",
+        "review_report": "evidence/security-review.json",
+        "reviewed": true,
+        "reviewed_at": "2026-09-14T18:37:10Z",
+        "sbom": "evidence/sbom.json"
+      },
+      "integration": {
+        "adaptation_allowed": true,
+        "adapter_notes": "Adapt LogRecord streams to diagnostics.logging.v1 after Library normalization.",
+        "estimated_effort": "low",
+        "known_constraints": [
+          "source component is pkgs/logging inside the dart-lang/core monorepo",
+          "Library owns redaction, persistence and remote Diagnostics transport policy",
+          "Additional platform support requires separate immutable runtime validation"
+        ]
+      },
+      "connector": {
+        "adapters": [],
+        "configuration_schema": null,
+        "healthcheck": {
+          "path": null,
+          "type": "none"
+        },
+        "integration_mode": "adapter",
+        "provides": [
+          {
+            "capability_id": "diagnostics.logging",
+            "contract_id": "diagnostics.logging.v1",
+            "contract_version": "1.0"
+          }
+        ],
+        "requires": [],
+        "standard": "ai-orchestrator-lego",
+        "standard_version": "1.0.0"
+      },
+      "payload": {
+        "path": null,
+        "sha256": null,
+        "type": "upstream_reference",
+        "upstream_commit": "8151b9f57fa3fee10421a19ce24470e143c0dee5",
+        "upstream_repository": "https://github.com/dart-lang/core"
+      },
+      "observations": {
+        "revision": 0,
+        "reuse_count": 0,
+        "successful_integrations": 0,
+        "failed_integrations": 0,
+        "success_rate": null,
+        "compatibility": {},
+        "latest_validation": null,
+        "benchmark_count": 0,
+        "incident_count": 0,
+        "last_observed_at": null
+      },
+      "ranking": {
+        "policy": "balanced-v1",
+        "score": 0.7185,
+        "components": {
+          "validation": 0.93,
+          "integration_effort": 0.8,
+          "operational_reliability": 0.5,
+          "evidence_confidence": 0.0
+        },
+        "weights": {
+          "validation": 0.45,
+          "integration_effort": 0.25,
+          "operational_reliability": 0.2,
+          "evidence_confidence": 0.1
+        },
+        "evidence": {
+          "successful_integrations": 0,
+          "failed_integrations": 0,
+          "attempts": 0,
+          "estimated_effort": "low"
+        },
+        "note": "Ranking compares Library candidates only; it does not decide whether reuse is cheaper than fresh implementation."
+      },
+      "integrity": {
+        "manifest_sha256": "f5f682f2d31cd3972a578b203a07b7991995a91635f4393430610af4c3639392",
+        "module_tree_sha256": "ad240555cd9219cc4ba16e15f8c4e17be25f690548e8facbe7abebe7d807841e"
+      },
+      "paths": {
+        "manifest": "modules/diagnostics.logging.dart-lang.logging/0.1.0/manifest.json",
+        "module": "modules/diagnostics.logging.dart-lang.logging/0.1.0"
+      },
+      "warnings": [
+        "non-stable contracts: diagnostics.logging.v1"
+      ]
+    },
+    {
       "id": "storage.local_db.simolus3.drift",
       "version": "0.1.0",
       "kind": "module",
@@ -335,5 +468,5 @@
       ]
     }
   ],
-  "snapshot_sha256": "9a9d3e6a49819f3300bcd13e971a952a52496efd9d24318a6d0e0cef1f9aaa04"
+  "snapshot_sha256": "48f6dd9d5197308c9f14d4c3cff295add6ede12a24731b9834ab904474c02e0f"
 }

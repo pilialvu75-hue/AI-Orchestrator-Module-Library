@@ -1,9 +1,25 @@
 {
   "schema_version": 1,
   "library_id": "ai-orchestrator-module-library",
-  "catalog_version": "1.0.1",
-  "updated_at": "2026-09-14T17:56:55Z",
+  "catalog_version": "1.0.2",
+  "updated_at": "2026-09-14T18:37:11Z",
   "assets": [
+    {
+      "id": "diagnostics.logging.dart-lang.logging",
+      "version": "0.1.0",
+      "manifest": "modules/diagnostics.logging.dart-lang.logging/0.1.0/manifest.json",
+      "status": "certified",
+      "kind": "module",
+      "capabilities": [
+        "diagnostics.logging"
+      ],
+      "platforms": [
+        "desktop"
+      ],
+      "contracts": [
+        "diagnostics.logging.v1"
+      ]
+    },
     {
       "id": "storage.local_db.simolus3.drift",
       "version": "0.1.0",

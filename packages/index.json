@@ -1,7 +1,13 @@
 {
   "schema": "ai-orchestrator.library-package-index.v1",
-  "snapshot_sha256": "9a9d3e6a49819f3300bcd13e971a952a52496efd9d24318a6d0e0cef1f9aaa04",
+  "snapshot_sha256": "48f6dd9d5197308c9f14d4c3cff295add6ede12a24731b9834ab904474c02e0f",
   "packages": [
+    {
+      "pin": "diagnostics.logging.dart-lang.logging@0.1.0",
+      "path": "packages/diagnostics.logging.dart-lang.logging/0.1.0/package.json",
+      "package_sha256": "006836daa35fe26768a718fbc3f142356d3b0b64ff3b64dad9a03a12a0ca51ce",
+      "module_tree_sha256": "ad240555cd9219cc4ba16e15f8c4e17be25f690548e8facbe7abebe7d807841e"
+    },
     {
       "pin": "storage.local_db.simolus3.drift@0.1.0",
       "path": "packages/storage.local_db.simolus3.drift/0.1.0/package.json",

@@ -1,0 +1,400 @@
+{
+  "asset_id": "diagnostics.logging.dart-lang.logging",
+  "known_vulnerabilities": 0,
+  "package_count": 48,
+  "results": [
+    {
+      "package": {
+        "ecosystem": "Pub",
+        "name": "_fe_analyzer_shared",
+        "version": "108.0.0"
+      },
+      "vulnerability_ids": []
+    },
+    {
+      "package": {
+        "ecosystem": "Pub",
+        "name": "analyzer",
+        "version": "14.4.0"
+      },
+      "vulnerability_ids": []
+    },
+    {
+      "package": {
+        "ecosystem": "Pub",
+        "name": "args",
+        "version": "2.7.0"
+      },
+      "vulnerability_ids": []
+    },
+    {
+      "package": {
+        "ecosystem": "Pub",
+        "name": "async",
+        "version": "2.13.1"
+      },
+      "vulnerability_ids": []
+    },
+    {
+      "package": {
+        "ecosystem": "Pub",
+        "name": "boolean_selector",
+        "version": "2.1.2"
+      },
+      "vulnerability_ids": []
+    },
+    {
+      "package": {
+        "ecosystem": "Pub",
+        "name": "cli_config",
+        "version": "0.2.0"
+      },
+      "vulnerability_ids": []
+    },
+    {
+      "package": {
+        "ecosystem": "Pub",
+        "name": "collection",
+        "version": "1.19.1"
+      },
+      "vulnerability_ids": []
+    },
+    {
+      "package": {
+        "ecosystem": "Pub",
+        "name": "convert",
+        "version": "3.1.2"
+      },
+      "vulnerability_ids": []
+    },
+    {
+      "package": {
+        "ecosystem": "Pub",
+        "name": "coverage",
+        "version": "1.15.1"
+      },
+      "vulnerability_ids": []
+    },
+    {
+      "package": {
+        "ecosystem": "Pub",
+        "name": "crypto",
+        "version": "3.0.7"
+      },
+      "vulnerability_ids": []
+    },
+    {
+      "package": {
+        "ecosystem": "Pub",
+        "name": "dart_flutter_team_lints",
+        "version": "3.5.2"
+      },
+      "vulnerability_ids": []
+    },
+    {
+      "package": {
+        "ecosystem": "Pub",
+        "name": "file",
+        "version": "7.0.1"
+      },
+      "vulnerability_ids": []
+    },
+    {
+      "package": {
+        "ecosystem": "Pub",
+        "name": "frontend_server_client",
+        "version": "4.0.0"
+      },
+      "vulnerability_ids": []
+    },
+    {
+      "package": {
+        "ecosystem": "Pub",
+        "name": "glob",
+        "version": "2.2.0"
+      },
+      "vulnerability_ids": []
+    },
+    {
+      "package": {
+        "ecosystem": "Pub",
+        "name": "http_multi_server",
+        "version": "3.2.2"
+      },
+      "vulnerability_ids": []
+    },
+    {
+      "package": {
+        "ecosystem": "Pub",
+        "name": "http_parser",
+        "version": "4.1.2"
+      },
+      "vulnerability_ids": []
+    },
+    {
+      "package": {
+        "ecosystem": "Pub",
+        "name": "io",
+        "version": "1.1.0"
+      },
+      "vulnerability_ids": []
+    },
+    {
+      "package": {
+        "ecosystem": "Pub",
+        "name": "lints",
+        "version": "6.1.0"
+      },
+      "vulnerability_ids": []
+    },
+    {
+      "package": {
+        "ecosystem": "Pub",
+        "name": "matcher",
+        "version": "0.12.20"
+      },
+      "vulnerability_ids": []
+    },
+    {
+      "package": {
+        "ecosystem": "Pub",
+        "name": "meta",
+        "version": "1.19.0"
+      },
+      "vulnerability_ids": []
+    },
+    {
+      "package": {
+        "ecosystem": "Pub",
+        "name": "mime",
+        "version": "2.1.0"
+      },
+      "vulnerability_ids": []
+    },
+    {
+      "package": {
+        "ecosystem": "Pub",
+        "name": "node_preamble",
+        "version": "2.0.2"
+      },
+      "vulnerability_ids": []
+    },
+    {
+      "package": {
+        "ecosystem": "Pub",
+        "name": "package_config",
+        "version": "3.0.0"
+      },
+      "vulnerability_ids": []
+    },
+    {
+      "package": {
+        "ecosystem": "Pub",
+        "name": "path",
+        "version": "1.9.1"
+      },
+      "vulnerability_ids": []
+    },
+    {
+      "package": {
+        "ecosystem": "Pub",
+        "name": "pool",
+        "version": "1.5.3"
+      },
+      "vulnerability_ids": []
+    },
+    {
+      "package": {
+        "ecosystem": "Pub",
+        "name": "pub_semver",
+        "version": "2.2.1"
+      },
+      "vulnerability_ids": []
+    },
+    {
+      "package": {
+        "ecosystem": "Pub",
+        "name": "shelf",
+        "version": "1.4.2"
+      },
+      "vulnerability_ids": []
+    },
+    {
+      "package": {
+        "ecosystem": "Pub",
+        "name": "shelf_packages_handler",
+        "version": "3.0.2"
+      },
+      "vulnerability_ids": []
+    },
+    {
+      "package": {
+        "ecosystem": "Pub",
+        "name": "shelf_static",
+        "version": "1.1.3"
+      },
+      "vulnerability_ids": []
+    },
+    {
+      "package": {
+        "ecosystem": "Pub",
+        "name": "shelf_web_socket",
+        "version": "3.0.0"
+      },
+      "vulnerability_ids": []
+    },
+    {
+      "package": {
+        "ecosystem": "Pub",
+        "name": "source_map_stack_trace",
+        "version": "2.1.2"
+      },
+      "vulnerability_ids": []
+    },
+    {
+      "package": {
+        "ecosystem": "Pub",
+        "name": "source_maps",
+        "version": "0.10.14"
+      },
+      "vulnerability_ids": []
+    },
+    {
+      "package": {
+        "ecosystem": "Pub",
+        "name": "source_span",
+        "version": "1.10.2"
+      },
+      "vulnerability_ids": []
+    },
+    {
+      "package": {
+        "ecosystem": "Pub",
+        "name": "stack_trace",
+        "version": "1.12.2"
+      },
+      "vulnerability_ids": []
+    },
+    {
+      "package": {
+        "ecosystem": "Pub",
+        "name": "stream_channel",
+        "version": "2.1.4"
+      },
+      "vulnerability_ids": []
+    },
+    {
+      "package": {
+        "ecosystem": "Pub",
+        "name": "string_scanner",
+        "version": "1.4.1"
+      },
+      "vulnerability_ids": []
+    },
+    {
+      "package": {
+        "ecosystem": "Pub",
+        "name": "term_glyph",
+        "version": "1.2.2"
+      },
+      "vulnerability_ids": []
+    },
+    {
+      "package": {
+        "ecosystem": "Pub",
+        "name": "test",
+        "version": "1.32.0"
+      },
+      "vulnerability_ids": []
+    },
+    {
+      "package": {
+        "ecosystem": "Pub",
+        "name": "test_api",
+        "version": "0.7.14"
+      },
+      "vulnerability_ids": []
+    },
+    {
+      "package": {
+        "ecosystem": "Pub",
+        "name": "test_core",
+        "version": "0.6.20"
+      },
+      "vulnerability_ids": []
+    },
+    {
+      "package": {
+        "ecosystem": "Pub",
+        "name": "typed_data",
+        "version": "1.4.0"
+      },
+      "vulnerability_ids": []
+    },
+    {
+      "package": {
+        "ecosystem": "Pub",
+        "name": "vm_service",
+        "version": "15.3.0"
+      },
+      "vulnerability_ids": []
+    },
+    {
+      "package": {
+        "ecosystem": "Pub",
+        "name": "watcher",
+        "version": "1.2.1"
+      },
+      "vulnerability_ids": []
+    },
+    {
+      "package": {
+        "ecosystem": "Pub",
+        "name": "web",
+        "version": "1.1.1"
+      },
+      "vulnerability_ids": []
+    },
+    {
+      "package": {
+        "ecosystem": "Pub",
+        "name": "web_socket",
+        "version": "1.0.1"
+      },
+      "vulnerability_ids": []
+    },
+    {
+      "package": {
+        "ecosystem": "Pub",
+        "name": "web_socket_channel",
+        "version": "3.0.3"
+      },
+      "vulnerability_ids": []
+    },
+    {
+      "package": {
+        "ecosystem": "Pub",
+        "name": "webkit_inspection_protocol",
+        "version": "1.2.1"
+      },
+      "vulnerability_ids": []
+    },
+    {
+      "package": {
+        "ecosystem": "Pub",
+        "name": "yaml",
+        "version": "3.1.4"
+      },
+      "vulnerability_ids": []
+    }
+  ],
+  "reviewed": true,
+  "reviewed_at": "2026-09-14T18:37:10Z",
+  "sbom_sha256": "d9fbcb15ee514ed4eabe8c56e67b67d3c350baa689d174183928ceeff16aa498",
+  "scanner": "OSV querybatch",
+  "scanner_endpoint": "https://api.osv.dev/v1/querybatch",
+  "schema": "ai-orchestrator.library-security-review.v1",
+  "source_commit": "8151b9f57fa3fee10421a19ce24470e143c0dee5",
+  "version": "0.1.0",
+  "vulnerability_ids": []
+}
