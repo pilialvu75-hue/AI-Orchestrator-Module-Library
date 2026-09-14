@@ -77,10 +77,10 @@
     "notes": "Automated review: immutable upstream checkout, package analyze/test, dependency SBOM and OSV scan. Android runtime validation remains pending.",
     "review_report": "evidence/security-review.json",
     "reviewed": true,
-    "reviewed_at": "2026-09-14T17:52:38Z",
+    "reviewed_at": "2026-09-14T17:56:55Z",
     "sbom": "evidence/sbom.json"
   },
-  "status": "discovered",
+  "status": "certified",
   "tags": [
     "storage.local_db",
     "researcher-candidate"
@@ -89,7 +89,7 @@
     "score": 0.92,
     "test_report": "evidence/test-report.json",
     "tests_passed": true,
-    "validated_at": "2026-09-14T17:52:38Z",
+    "validated_at": "2026-09-14T17:56:55Z",
     "validated_on": [
       "desktop"
     ]

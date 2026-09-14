@@ -1,0 +1,339 @@
+{
+  "schema_version": 1,
+  "library_id": "ai-orchestrator-module-library",
+  "catalog_version": "1.0.1",
+  "source_state": {
+    "catalog_updated_at": "2026-09-14T17:56:55Z",
+    "contracts_updated_at": "2026-09-11T21:05:00Z",
+    "needs_updated_at": "2026-09-11T20:45:00Z",
+    "lifecycle_revision": 0,
+    "lifecycle_updated_at": null
+  },
+  "resolution_policy": {
+    "id": "balanced-v1",
+    "weights": {
+      "validation": 0.45,
+      "integration_effort": 0.25,
+      "operational_reliability": 0.2,
+      "evidence_confidence": 0.1
+    }
+  },
+  "contracts": [
+    {
+      "capability_id": "ai.local_inference",
+      "contract_id": "ai.local_inference.v1",
+      "contract_version": "1.0",
+      "status": "draft",
+      "description": "Logical local inference runtime boundary.",
+      "replacement": null
+    },
+    {
+      "capability_id": "auth.session",
+      "contract_id": "auth.session.v1",
+      "contract_version": "1.0",
+      "status": "draft",
+      "description": "Logical authentication/session capability boundary.",
+      "replacement": null
+    },
+    {
+      "capability_id": "diagnostics.logging",
+      "contract_id": "diagnostics.logging.v1",
+      "contract_version": "1.0",
+      "status": "draft",
+      "description": "Logical structured logging and diagnostic-event boundary.",
+      "replacement": null
+    },
+    {
+      "capability_id": "network.http",
+      "contract_id": "network.http.v1",
+      "contract_version": "1.0",
+      "status": "draft",
+      "description": "Logical HTTP client capability boundary with timeout/cancellation/retry semantics.",
+      "replacement": null
+    },
+    {
+      "capability_id": "release.update_manager",
+      "contract_id": "release.update_manager.v1",
+      "contract_version": "1.0",
+      "status": "draft",
+      "description": "Logical download/update management boundary.",
+      "replacement": null
+    },
+    {
+      "capability_id": "storage.local_db",
+      "contract_id": "storage.local_db.v1",
+      "contract_version": "1.0",
+      "status": "draft",
+      "description": "Logical local persistence capability boundary.",
+      "replacement": null
+    },
+    {
+      "capability_id": "storage.secrets",
+      "contract_id": "storage.secrets.v1",
+      "contract_version": "1.0",
+      "status": "draft",
+      "description": "Logical secure secret storage capability boundary.",
+      "replacement": null
+    },
+    {
+      "capability_id": "voice.stt",
+      "contract_id": "voice.stt.v1",
+      "contract_version": "1.0",
+      "status": "draft",
+      "description": "Logical speech-to-text boundary independent from the concrete engine.",
+      "replacement": null
+    },
+    {
+      "capability_id": "voice.tts",
+      "contract_id": "voice.tts.v1",
+      "contract_version": "1.0",
+      "status": "draft",
+      "description": "Logical text-to-speech boundary independent from the concrete engine.",
+      "replacement": null
+    }
+  ],
+  "needs": [
+    {
+      "capability_id": "ai.local_inference",
+      "title": "Local LLM runtime integration bundle",
+      "priority": "high",
+      "desired_candidates": 2,
+      "status": "needed",
+      "targets": [
+        "android",
+        "desktop",
+        "raspberry_pi"
+      ]
+    },
+    {
+      "capability_id": "auth.session",
+      "title": "Authentication and session management",
+      "priority": "high",
+      "desired_candidates": 2,
+      "status": "needed",
+      "targets": [
+        "android",
+        "desktop",
+        "web"
+      ]
+    },
+    {
+      "capability_id": "diagnostics.logging",
+      "title": "Structured logging and diagnostics",
+      "priority": "high",
+      "desired_candidates": 2,
+      "status": "needed",
+      "targets": [
+        "android",
+        "desktop",
+        "web"
+      ]
+    },
+    {
+      "capability_id": "network.http",
+      "title": "HTTP/API client with retries, timeout and cancellation",
+      "priority": "high",
+      "desired_candidates": 2,
+      "status": "needed",
+      "targets": [
+        "android",
+        "desktop",
+        "web"
+      ]
+    },
+    {
+      "capability_id": "release.update_manager",
+      "title": "Update/download manager",
+      "priority": "high",
+      "desired_candidates": 2,
+      "status": "needed",
+      "targets": [
+        "android",
+        "desktop"
+      ]
+    },
+    {
+      "capability_id": "storage.local_db",
+      "title": "Local database / persistence",
+      "priority": "high",
+      "desired_candidates": 2,
+      "status": "needed",
+      "targets": [
+        "android",
+        "desktop"
+      ]
+    },
+    {
+      "capability_id": "storage.secrets",
+      "title": "Secure local storage / secrets abstraction",
+      "priority": "high",
+      "desired_candidates": 2,
+      "status": "needed",
+      "targets": [
+        "android",
+        "desktop"
+      ]
+    },
+    {
+      "capability_id": "voice.stt",
+      "title": "Speech-to-text integration bundle",
+      "priority": "high",
+      "desired_candidates": 2,
+      "status": "needed",
+      "targets": [
+        "android",
+        "desktop",
+        "raspberry_pi"
+      ]
+    },
+    {
+      "capability_id": "voice.tts",
+      "title": "Text-to-speech integration bundle",
+      "priority": "high",
+      "desired_candidates": 2,
+      "status": "needed",
+      "targets": [
+        "android",
+        "desktop",
+        "raspberry_pi"
+      ]
+    }
+  ],
+  "assets": [
+    {
+      "id": "storage.local_db.simolus3.drift",
+      "version": "0.1.0",
+      "kind": "module",
+      "status": "certified",
+      "availability": "active",
+      "description": "Drift is an easy to use, reactive, typesafe persistence library for Dart & Flutter.",
+      "capabilities": [
+        "storage.local_db"
+      ],
+      "platforms": [
+        "desktop"
+      ],
+      "contracts": [
+        {
+          "contract_id": "storage.local_db.v1",
+          "status": "draft",
+          "contract_version": "1.0",
+          "known": true
+        }
+      ],
+      "dependencies": [],
+      "provenance": {
+        "license": "MIT",
+        "license_file": "provenance/LICENSE",
+        "origin": "researcher",
+        "retrieved_at": "2026-09-13T16:15:00Z",
+        "source_commit": "1e8bb788a8815d1e18e5c18d1705a2ca3cba6580",
+        "source_project_id": null,
+        "source_repository": "https://github.com/simolus3/drift",
+        "source_tag": "drift-2.35.0",
+        "source_task_id": "2a70f312704f56cf5cf8237a07f13102b4b383fe348937e0c3847bb6e7ad8a09"
+      },
+      "validation": {
+        "score": 0.92,
+        "test_report": "evidence/test-report.json",
+        "tests_passed": true,
+        "validated_at": "2026-09-14T17:56:55Z",
+        "validated_on": [
+          "desktop"
+        ]
+      },
+      "security": {
+        "known_vulnerabilities": 0,
+        "notes": "Automated review: immutable upstream checkout, package analyze/test, dependency SBOM and OSV scan. Android runtime validation remains pending.",
+        "review_report": "evidence/security-review.json",
+        "reviewed": true,
+        "reviewed_at": "2026-09-14T17:56:55Z",
+        "sbom": "evidence/sbom.json"
+      },
+      "integration": {
+        "adaptation_allowed": true,
+        "adapter_notes": "Library normalization/test must validate adapter and contract fit.",
+        "estimated_effort": "medium",
+        "known_constraints": [
+          "requires Dart >=3.10.0",
+          "SQLite/native packaging must be validated on target hosts",
+          "Library must define migration/backup policy before certification",
+          "Android runtime validation is pending; this certified version is desktop-only"
+        ]
+      },
+      "connector": {
+        "adapters": [],
+        "configuration_schema": null,
+        "healthcheck": {
+          "path": null,
+          "type": "none"
+        },
+        "integration_mode": "adapter",
+        "provides": [
+          {
+            "capability_id": "storage.local_db",
+            "contract_id": "storage.local_db.v1",
+            "contract_version": "1.0"
+          }
+        ],
+        "requires": [],
+        "standard": "ai-orchestrator-lego",
+        "standard_version": "1.0.0"
+      },
+      "payload": {
+        "path": null,
+        "sha256": null,
+        "type": "upstream_reference",
+        "upstream_commit": "1e8bb788a8815d1e18e5c18d1705a2ca3cba6580",
+        "upstream_repository": "https://github.com/simolus3/drift"
+      },
+      "observations": {
+        "revision": 0,
+        "reuse_count": 0,
+        "successful_integrations": 0,
+        "failed_integrations": 0,
+        "success_rate": null,
+        "compatibility": {},
+        "latest_validation": null,
+        "benchmark_count": 0,
+        "incident_count": 0,
+        "last_observed_at": null
+      },
+      "ranking": {
+        "policy": "balanced-v1",
+        "score": 0.639,
+        "components": {
+          "validation": 0.92,
+          "integration_effort": 0.5,
+          "operational_reliability": 0.5,
+          "evidence_confidence": 0.0
+        },
+        "weights": {
+          "validation": 0.45,
+          "integration_effort": 0.25,
+          "operational_reliability": 0.2,
+          "evidence_confidence": 0.1
+        },
+        "evidence": {
+          "successful_integrations": 0,
+          "failed_integrations": 0,
+          "attempts": 0,
+          "estimated_effort": "medium"
+        },
+        "note": "Ranking compares Library candidates only; it does not decide whether reuse is cheaper than fresh implementation."
+      },
+      "integrity": {
+        "manifest_sha256": "facc18995d1ebf7ce1ee384de1b023657924ae9fc0b8946a6b02176fe4c0d1b7",
+        "module_tree_sha256": "ef95252b9e53f05f42c7af16ee77fc5b45c7a86b7651aa4dd4d6d361c1e0601b"
+      },
+      "paths": {
+        "manifest": "modules/storage.local_db.simolus3.drift/0.1.0/manifest.json",
+        "module": "modules/storage.local_db.simolus3.drift/0.1.0"
+      },
+      "warnings": [
+        "non-stable contracts: storage.local_db.v1"
+      ]
+    }
+  ],
+  "snapshot_sha256": "9a9d3e6a49819f3300bcd13e971a952a52496efd9d24318a6d0e0cef1f9aaa04"
+}

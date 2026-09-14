@@ -1,0 +1,12 @@
+{
+  "schema": "ai-orchestrator.library-package-index.v1",
+  "snapshot_sha256": "9a9d3e6a49819f3300bcd13e971a952a52496efd9d24318a6d0e0cef1f9aaa04",
+  "packages": [
+    {
+      "pin": "storage.local_db.simolus3.drift@0.1.0",
+      "path": "packages/storage.local_db.simolus3.drift/0.1.0/package.json",
+      "package_sha256": "a20c0a620424e27a6cc422344ab6df3f12b16e65ca1dc13e9a22c438dcc87905",
+      "module_tree_sha256": "ef95252b9e53f05f42c7af16ee77fc5b45c7a86b7651aa4dd4d6d361c1e0601b"
+    }
+  ]
+}

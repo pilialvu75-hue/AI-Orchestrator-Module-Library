@@ -1501,8 +1501,8 @@
     }
   ],
   "reviewed": true,
-  "reviewed_at": "2026-09-14T17:52:38Z",
-  "sbom_sha256": "c3c46edbaefe18e371ceda199abcbea8927ab79e4544344f929f6b07a46bd896",
+  "reviewed_at": "2026-09-14T17:56:55Z",
+  "sbom_sha256": "de25a10e3e6cc69750dfba9b48a2513bba17142d03fe42d518b789d79637c197",
   "scanner": "OSV querybatch",
   "scanner_endpoint": "https://api.osv.dev/v1/querybatch",
   "schema": "ai-orchestrator.library-security-review.v1",
