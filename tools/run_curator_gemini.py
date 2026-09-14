@@ -7,6 +7,56 @@ from pathlib import Path
 
 from library_curator import ALLOWED_TASKS, CuratorError, run_curator
 from library_curator_gemini import GeminiCuratorProvider, GeminiProviderError
+from library_curator_health import run_health_review
+from library_curator_relations import run_adapter_analysis, run_duplicate_analysis
+from library_curator_semantic import run_semantic_ranking
+
+
+def dispatch_curator(
+    root: Path,
+    provider: GeminiCuratorProvider,
+    *,
+    task: str,
+    capability_id: str | None,
+) -> dict[str, object]:
+    """Route workflow execution through the strongest task-specific verifier."""
+
+    if task == "rank_candidates":
+        if not capability_id:
+            raise CuratorError("rank_candidates requires --capability")
+        return run_semantic_ranking(
+            root,
+            provider,
+            capability_id=capability_id,
+        )
+    if task == "find_duplicates":
+        if not capability_id:
+            raise CuratorError("find_duplicates requires --capability")
+        return run_duplicate_analysis(
+            root,
+            provider,
+            capability_id=capability_id,
+        )
+    if task == "suggest_adapters":
+        if not capability_id:
+            raise CuratorError("suggest_adapters requires --capability")
+        return run_adapter_analysis(
+            root,
+            provider,
+            capability_id=capability_id,
+        )
+    if task == "health_review":
+        return run_health_review(
+            root,
+            provider,
+            capability_id=capability_id,
+        )
+    return run_curator(
+        root,
+        provider,
+        task=task,
+        capability_id=capability_id,
+    )
 
 
 def main(argv: list[str] | None = None) -> int:
@@ -29,7 +79,7 @@ def main(argv: list[str] | None = None) -> int:
             model=args.model,
             timeout_seconds=args.timeout,
         )
-        result = run_curator(
+        result = dispatch_curator(
             args.root.resolve(),
             provider,
             task=args.task,
