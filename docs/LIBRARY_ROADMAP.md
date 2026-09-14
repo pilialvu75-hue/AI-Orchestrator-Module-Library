@@ -56,12 +56,13 @@ The AI layer sits **above** the deterministic V1 core. AI can improve semantic r
   - deterministic verification of cited assets/capabilities;
   - reuse recommendations restricted to active certified Library modules;
   - intake candidates may be compared/ranked but never treated as reusable production assets.
-- [ ] **Ring 2 — single Gemini API adapter**
-  - one configured API provider;
-  - strict JSON response parsing;
-  - timeout/retry/error accounting;
-  - secrets only from runtime environment/secure configuration;
-  - zero-secret diagnostics.
+- [x] **Ring 2 — single Gemini API adapter**
+  - one configured API provider (`gemini-3.6-flash` default, model overridable);
+  - structured JSON response request and strict core-side parsing/verification;
+  - timeout plus bounded retry handling for transient 429/5xx failures;
+  - API key only from runtime environment and only in `x-goog-api-key` header;
+  - no live API call or secret requirement in CI;
+  - zero-secret error messages and request/result state.
 - [ ] **Ring 3 — semantic capability matching and explainable ranking**
 - [ ] **Ring 4 — duplicate/alternative/adapter suggestions**
 - [ ] **Ring 5 — observations/health reasoning and degrading-module warnings**

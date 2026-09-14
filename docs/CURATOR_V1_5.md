@@ -2,7 +2,7 @@
 
 ## Status
 
-Ring 1 foundation.
+Ring 1 foundation complete. Ring 2 Gemini provider implemented.
 
 The Curator is an advisory layer above the deterministic Module Library core. It may reason over sanitized Library context, but it is never an authority for certification, security, lifecycle, compatibility or repository mutation.
 
@@ -81,12 +81,47 @@ Every provider response is checked before the caller sees it as verified advice:
 
 An uncertified Researcher/Cantiere intake may be compared or ranked, but the Curator cannot recommend it as reusable production material.
 
-## First provider
+## Ring 2 — Gemini provider
 
-The architecture is intentionally provider-neutral. The first network implementation will be Gemini through an API-backed adapter in the next V1.5 ring.
+`tools/library_curator_gemini.py` implements the first and only V1.5 network provider behind the same `LibraryCuratorProvider` contract.
 
-No Gemini credential, API endpoint or model-specific behavior is introduced in Ring 1. This keeps the authority boundary independently testable before a live network dependency is added.
+Current defaults:
 
-## Next ring
+- provider: Gemini API;
+- stable default model: `gemini-3.6-flash`;
+- endpoint family: Gemini `models.generateContent`;
+- structured JSON output using Gemini response schema support;
+- timeout: 30 seconds;
+- retries: up to 2 for 429/5xx transient failures;
+- request size cap: 512 KiB;
+- response size cap: 1 MiB.
 
-Ring 2 will add one Gemini adapter behind `LibraryCuratorProvider`, strict JSON response handling, timeout/error accounting and zero-secret logging. The deterministic request builder and response verifier in this Ring remain unchanged.
+The model can be changed without changing the Curator contract by setting:
+
+```bash
+AI_ORCHESTRATOR_CURATOR_GEMINI_MODEL=gemini-3.7-flash
+```
+
+The API credential is read only from the process environment:
+
+```bash
+GEMINI_API_KEY=...
+```
+
+It is sent only in the `x-goog-api-key` HTTP header. It is never placed in the URL, request body, Library state or Curator result. Error messages intentionally omit response bodies and credentials.
+
+A manual invocation is available through:
+
+```bash
+GEMINI_API_KEY=... python tools/run_curator_gemini.py \
+  --task rank_candidates \
+  --capability storage.local_db
+```
+
+The command prints a verified Curator result. The result is advisory; running it does not write to the Library.
+
+CI does not call the live Gemini API and does not require a Gemini secret. Provider behavior is tested with an injected transport, including structured output parsing, transient retry behavior, non-retryable failures and secret placement.
+
+## Next rings
+
+Ring 3 adds semantic capability matching and explainable ranking behavior on top of this provider. Ring 4 adds duplicate/alternative/adapter suggestions, Ring 5 uses operational observations for health reasoning, and Ring 6 surfaces clearly labeled AI advice in the Cantiere/Modules UI.
