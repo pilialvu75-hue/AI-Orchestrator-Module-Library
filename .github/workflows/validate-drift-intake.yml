@@ -1,0 +1,100 @@
+name: Validate Drift intake evidence
+
+on:
+  push:
+    branches: ["main"]
+    paths:
+      - ".github/workflows/validate-drift-intake.yml"
+      - "tools/materialize_upstream_evidence.py"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: module-library-drift-evidence-main
+  cancel-in-progress: false
+
+env:
+  ASSET_ID: storage.local_db.simolus3.drift
+  ASSET_VERSION: 0.1.0
+  SOURCE_REPOSITORY: https://github.com/simolus3/drift.git
+  SOURCE_COMMIT: 1e8bb788a8815d1e18e5c18d1705a2ca3cba6580
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Checkout Module Library main
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - name: Checkout immutable Drift upstream
+        shell: bash
+        run: |
+          set -euo pipefail
+          git init /tmp/drift-upstream
+          git -C /tmp/drift-upstream remote add origin "$SOURCE_REPOSITORY"
+          git -C /tmp/drift-upstream fetch --depth=1 origin "$SOURCE_COMMIT"
+          git -C /tmp/drift-upstream checkout --detach FETCH_HEAD
+          test "$(git -C /tmp/drift-upstream rev-parse HEAD)" = "$SOURCE_COMMIT"
+
+      - name: Set up Flutter stable
+        uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+          cache: true
+
+      - name: Resolve immutable workspace dependencies
+        working-directory: /tmp/drift-upstream
+        run: flutter pub get
+
+      - name: Analyze Drift package
+        working-directory: /tmp/drift-upstream/drift
+        run: dart analyze --fatal-infos
+
+      - name: Test Drift package
+        working-directory: /tmp/drift-upstream/drift
+        run: dart test
+
+      - name: Capture dependency graph
+        working-directory: /tmp/drift-upstream/drift
+        run: dart pub deps --json > /tmp/drift-deps.json
+
+      - name: Materialize test and security evidence
+        run: |
+          python tools/materialize_upstream_evidence.py \
+            --asset-dir "intake/${ASSET_ID}/${ASSET_VERSION}" \
+            --upstream-dir /tmp/drift-upstream \
+            --deps-json /tmp/drift-deps.json
+
+      - name: Verify evidence against Library gates
+        run: |
+          python - <<'PY'
+          import json
+          import sys
+          from pathlib import Path
+          sys.path.insert(0, str(Path('tools').resolve()))
+          from library_evidence import verify_manifest_evidence
+          base = Path('intake/storage.local_db.simolus3.drift/0.1.0')
+          manifest = json.loads((base / 'manifest.json').read_text(encoding='utf-8'))
+          verify_manifest_evidence(base, manifest)
+          PY
+          python tools/validate_library.py
+
+      - name: Commit verified evidence only
+        shell: bash
+        run: |
+          set -euo pipefail
+          if git diff --quiet --exit-code; then
+            echo "No evidence changes to commit."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add "intake/${ASSET_ID}/${ASSET_VERSION}"
+          git commit -m "library: record verified Drift evidence"
+          git push origin HEAD:main
