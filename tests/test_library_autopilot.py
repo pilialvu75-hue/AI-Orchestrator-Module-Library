@@ -27,6 +27,28 @@ class LibraryAutopilotTest(unittest.TestCase):
                 "assets": [],
             },
         )
+        self._write(
+            self.root / "catalog" / "needs.json",
+            {
+                "schema_version": 1,
+                "updated_at": "2026-09-11T00:00:00Z",
+                "items": [],
+            },
+        )
+        self._write(
+            self.root / "contracts" / "index.json",
+            {
+                "schema_version": 1,
+                "updated_at": "2026-09-11T00:00:00Z",
+                "contracts": [
+                    {
+                        "contract_id": "voice.stt.v1",
+                        "contract_version": "1.0",
+                        "status": "stable",
+                    }
+                ],
+            },
+        )
 
     def tearDown(self) -> None:
         self.temp.cleanup()
@@ -128,6 +150,9 @@ class LibraryAutopilotTest(unittest.TestCase):
         self.assertEqual("certified", manifest["status"])
         catalog = json.loads((self.root / "catalog" / "index.json").read_text())
         self.assertEqual(1, len(catalog["assets"]))
+        self.assertTrue((self.root / "catalog" / "offline-snapshot.json").is_file())
+        package_index = json.loads((self.root / "packages" / "index.json").read_text())
+        self.assertEqual(1, len(package_index["packages"]))
 
     def test_failed_gate_restores_exact_intake_and_does_not_certify(self) -> None:
         base = self._asset(valid=False)
@@ -140,6 +165,9 @@ class LibraryAutopilotTest(unittest.TestCase):
         )
         catalog = json.loads((self.root / "catalog" / "index.json").read_text())
         self.assertEqual([], catalog["assets"])
+        self.assertTrue((self.root / "catalog" / "offline-snapshot.json").is_file())
+        package_index = json.loads((self.root / "packages" / "index.json").read_text())
+        self.assertEqual([], package_index["packages"])
 
 
 if __name__ == "__main__":
