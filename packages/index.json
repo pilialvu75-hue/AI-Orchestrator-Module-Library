@@ -1,6 +1,6 @@
 {
   "schema": "ai-orchestrator.library-package-index.v1",
-  "snapshot_sha256": "48f6dd9d5197308c9f14d4c3cff295add6ede12a24731b9834ab904474c02e0f",
+  "snapshot_sha256": "3aae2379a72de17e08bffcb1e7dc5c06b114a04a86e910a51a0ad624086d4a28",
   "packages": [
     {
       "pin": "diagnostics.logging.dart-lang.logging@0.1.0",
