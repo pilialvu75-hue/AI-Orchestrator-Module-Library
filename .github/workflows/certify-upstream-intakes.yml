@@ -103,10 +103,14 @@ jobs:
             (cd "$package_dir" && dart test)
             (cd "$package_dir" && dart pub deps --json > "$deps")
 
+            # This job executes only on ubuntu-latest. Do not claim runtime
+            # validation for Android/Windows/macOS/iOS/Raspberry Pi from a
+            # Linux-only run; additional platforms need their own runners.
             python tools/materialize_upstream_evidence.py \
               --asset-dir "$asset_dir" \
               --upstream-dir "$upstream" \
               --deps-json "$deps" \
+              --validated-on linux \
               --package-label "$ASSET_ID"
 
             python - "$asset_dir" <<'PY'
