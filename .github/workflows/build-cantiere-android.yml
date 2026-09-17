@@ -62,7 +62,6 @@ jobs:
         run: |
           set -euo pipefail
           test -d "$SOURCE_ROOT"
-          test -f "$SOURCE_ROOT/pubspec.yaml"
           test -f "$SOURCE_ROOT/lib/main.dart"
           if find "$SOURCE_ROOT" -type l -print -quit | grep -q .; then
             echo "Symbolic links are not allowed in staged Cantiere source." >&2
@@ -101,7 +100,11 @@ jobs:
             --project-name=cantiere_generated_app \
             --org=ai.orchestrator.generated \
             "$WORKSPACE"
-          rsync -a --delete-excluded "$SOURCE_ROOT/" "$WORKSPACE/"
+          # The generic scaffold is toolchain infrastructure. Cantiere source
+          # overlays it but must not delete platform boilerplate it did not need
+          # to generate itself. A Cantiere-provided pubspec/android tree, when
+          # present, still wins because rsync overwrites matching paths.
+          rsync -a "$SOURCE_ROOT/" "$WORKSPACE/"
           test -f "$WORKSPACE/pubspec.yaml"
           test -f "$WORKSPACE/lib/main.dart"
           echo "path=$WORKSPACE" >> "$GITHUB_OUTPUT"
