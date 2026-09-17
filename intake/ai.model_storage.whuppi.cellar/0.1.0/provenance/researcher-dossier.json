@@ -1,0 +1,568 @@
+{
+  "benchmark_plan": {
+    "capability_id": "ai.model_storage",
+    "commit_sha": "430784710654f9ea329067e1978e82e7b6f91fec",
+    "metrics": [
+      "correctness",
+      "latency",
+      "resource_usage",
+      "footprint"
+    ],
+    "reason": "Sandbox policy/planning exists, but no untrusted-code executor is enabled.",
+    "repository": "whuppi/cellar",
+    "required_sandbox": {
+      "cleanup": "mandatory",
+      "cpu_limit": true,
+      "ephemeral_filesystem": true,
+      "memory_limit": true,
+      "network": "disabled_by_default",
+      "secrets": "none",
+      "timeout": true
+    },
+    "sandbox_foundation": {
+      "candidate_source_mount": "read_only",
+      "capabilities": "drop_all",
+      "cleanup": "mandatory_when_executor_exists",
+      "cpu_limit": true,
+      "docker_socket": "forbidden",
+      "ephemeral_work_tmpfs": true,
+      "executor_enabled": false,
+      "host_devices": "none",
+      "memory_limit": true,
+      "network": "none",
+      "no_new_privileges": true,
+      "pid_limit": true,
+      "planner": "researcher.sandbox.DockerSandboxPlanner",
+      "project_repository_mounts": "forbidden",
+      "root_filesystem": "read_only",
+      "secrets": "none",
+      "trusted_image_digest_required": true,
+      "wall_clock_limit": true
+    },
+    "status": "PLANNED_NOT_EXECUTED",
+    "targets": [
+      "android",
+      "windows",
+      "linux",
+      "macos",
+      "ios",
+      "raspberry_pi"
+    ]
+  },
+  "candidate": {
+    "acquired_at": "2026-09-17T19:59:47.267037Z",
+    "archived": false,
+    "commit_sha": "430784710654f9ea329067e1978e82e7b6f91fec",
+    "default_branch": "dev",
+    "description": "Cross-platform object storage for Dart & Flutter \u2014 pure Dart: filesystem + IndexedDB backends behind one key/value contract, partitions, lifecycle, BYO encryption, streaming I/O",
+    "extra": {
+      "ci_present": true,
+      "codeql_present": false,
+      "dependabot_present": true,
+      "dependency_manifests": [
+        "pubspec.lock",
+        "pubspec.yaml"
+      ],
+      "disabled": false,
+      "fork": false,
+      "pinned_admission": true,
+      "provenance_tree_sha": "f6c78d35d69ff436c8f987ef2da37485ceeac3ae",
+      "readme_present": true,
+      "release_tag_verified": true,
+      "security_policy_present": true,
+      "source_stable": true,
+      "source_version": "v1.0.0",
+      "tests_present": true,
+      "tree_truncated": false,
+      "visibility": "public"
+    },
+    "forks": 0,
+    "has_issues": true,
+    "has_wiki": false,
+    "homepage": "https://pub.dev/packages/cellar",
+    "language": "Dart",
+    "license_file_url": "https://github.com/whuppi/cellar/blob/430784710654f9ea329067e1978e82e7b6f91fec/LICENSE",
+    "license_spdx": "MIT",
+    "name": "cellar",
+    "open_issues": 3,
+    "owner": "whuppi",
+    "provider": "github",
+    "pushed_at": "2026-09-12T12:01:04Z",
+    "release_tag": "v1.0.0",
+    "repository": "whuppi/cellar",
+    "size_kb": 6878,
+    "stars": 2,
+    "topics": [
+      "cache",
+      "cross-platform",
+      "dart",
+      "encryption",
+      "flutter",
+      "indexeddb",
+      "key-value",
+      "object-storage",
+      "storage",
+      "streaming"
+    ],
+    "upstream_url": "https://github.com/whuppi/cellar"
+  },
+  "capability_id": "ai.model_storage",
+  "created_at": "2026-09-17T20:00:21.899459Z",
+  "dependency_evidence": {
+    "dependencies_enumerated": true,
+    "dependency_count": 3,
+    "known_vulnerability_count": 0,
+    "lockfiles_present": [
+      "pubspec.lock"
+    ],
+    "manifest_files_detected": [
+      "pubspec.lock",
+      "pubspec.yaml"
+    ],
+    "manifests_analyzed": [
+      "pubspec.yaml"
+    ],
+    "note": "Static source, dependency provenance, SBOM and vulnerability admission only; candidate/package-manager code was not executed.",
+    "sbom_complete": true,
+    "sbom_component_count": 49,
+    "sbom_fingerprint": "0c60a60f6709719780bc028472da388076fdc1978a024a69b38e40427b716912",
+    "supply_chain_verdict": "CLEAR",
+    "vulnerability_database_checked": true,
+    "vulnerability_verdict": "CLEAR"
+  },
+  "fingerprint": "96d6374867d1251967920d06538851db096096b2bb0765e87c6ae80a645bbb36",
+  "integration_estimate": {
+    "adapters": 1,
+    "effort": "medium",
+    "native_build_changes_possible": false,
+    "reasons": [
+      "adapter_required_until_contract_validation"
+    ],
+    "score": 0.55
+  },
+  "license_evidence": {
+    "classification": "permissive",
+    "fit": 1.0,
+    "warning": null
+  },
+  "lifecycle": "SHORTLISTED",
+  "maintenance_evidence": {
+    "archived": false,
+    "forks_signal_only": 0,
+    "last_push_age_days": 5,
+    "open_issues": 3,
+    "score": 1.0,
+    "stars_signal_only": 2
+  },
+  "schema_version": 1,
+  "scores": {
+    "contract_fit": 0.75,
+    "documentation": 0.7,
+    "footprint": 0.9,
+    "functional_fit": 0.5785714285714285,
+    "integration_cost": 0.55,
+    "license_fit": 1.0,
+    "maintenance": 1.0,
+    "performance": 0.5,
+    "platform_fit": 0.65,
+    "reasons": [
+      "functional keywords matched: 1/7",
+      "maintenance score: 1.00",
+      "license: permissive",
+      "integration effort: medium",
+      "contract present: True",
+      "tests present signal: True",
+      "CI present signal: True"
+    ],
+    "recommendation": 0.7319,
+    "security": 0.65,
+    "test_quality": 0.9
+  },
+  "security_evidence": {
+    "admission_gate": {
+      "admission_eligible": true,
+      "blobs_seen": 110,
+      "commit_sha": "430784710654f9ea329067e1978e82e7b6f91fec",
+      "complete": true,
+      "executed_untrusted_code": false,
+      "findings": [],
+      "opaque_artifacts": [],
+      "relevant_blobs": 87,
+      "repository": "whuppi/cellar",
+      "scanned_bytes": 459767,
+      "scanned_files": 87,
+      "skipped_assets": 23,
+      "submodules": [],
+      "supply_chain": {
+        "admission_eligible": true,
+        "dependencies": [
+          {
+            "constraint": "^2.1.0",
+            "ecosystem": "pub",
+            "immutable": true,
+            "manifest_path": "pubspec.yaml",
+            "name": "ffi",
+            "source": "hosted"
+          },
+          {
+            "constraint": "^1.16.0",
+            "ecosystem": "pub",
+            "immutable": true,
+            "manifest_path": "pubspec.yaml",
+            "name": "meta",
+            "source": "hosted"
+          },
+          {
+            "constraint": "^1.1.0",
+            "ecosystem": "pub",
+            "immutable": true,
+            "manifest_path": "pubspec.yaml",
+            "name": "web",
+            "source": "hosted"
+          }
+        ],
+        "executed_untrusted_code": false,
+        "findings": [],
+        "lockfiles_present": [
+          "pubspec.lock"
+        ],
+        "manifests_analyzed": [
+          "pubspec.yaml"
+        ],
+        "verdict": "CLEAR",
+        "vulnerability_database_checked": false
+      },
+      "symlinks": [],
+      "total_entries": 140,
+      "tree_sha": "f6c78d35d69ff436c8f987ef2da37485ceeac3ae",
+      "verdict": "CLEAR"
+    },
+    "score": 0.65,
+    "static_metadata_only": true,
+    "untrusted_code_executed": false,
+    "vulnerability_gate": {
+      "admission_eligible": true,
+      "sbom": {
+        "complete": true,
+        "components": [
+          {
+            "ecosystem": "Pub",
+            "name": "_fe_analyzer_shared",
+            "source_path": "pubspec.lock",
+            "version": "104.0.0"
+          },
+          {
+            "ecosystem": "Pub",
+            "name": "analyzer",
+            "source_path": "pubspec.lock",
+            "version": "14.0.0"
+          },
+          {
+            "ecosystem": "Pub",
+            "name": "args",
+            "source_path": "pubspec.lock",
+            "version": "2.7.0"
+          },
+          {
+            "ecosystem": "Pub",
+            "name": "async",
+            "source_path": "pubspec.lock",
+            "version": "2.13.1"
+          },
+          {
+            "ecosystem": "Pub",
+            "name": "boolean_selector",
+            "source_path": "pubspec.lock",
+            "version": "2.1.2"
+          },
+          {
+            "ecosystem": "Pub",
+            "name": "cli_config",
+            "source_path": "pubspec.lock",
+            "version": "0.2.0"
+          },
+          {
+            "ecosystem": "Pub",
+            "name": "collection",
+            "source_path": "pubspec.lock",
+            "version": "1.19.1"
+          },
+          {
+            "ecosystem": "Pub",
+            "name": "convert",
+            "source_path": "pubspec.lock",
+            "version": "3.1.2"
+          },
+          {
+            "ecosystem": "Pub",
+            "name": "coverage",
+            "source_path": "pubspec.lock",
+            "version": "1.15.1"
+          },
+          {
+            "ecosystem": "Pub",
+            "name": "crypto",
+            "source_path": "pubspec.lock",
+            "version": "3.0.7"
+          },
+          {
+            "ecosystem": "Pub",
+            "name": "ffi",
+            "source_path": "pubspec.lock",
+            "version": "2.2.0"
+          },
+          {
+            "ecosystem": "Pub",
+            "name": "file",
+            "source_path": "pubspec.lock",
+            "version": "7.0.1"
+          },
+          {
+            "ecosystem": "Pub",
+            "name": "frontend_server_client",
+            "source_path": "pubspec.lock",
+            "version": "4.0.0"
+          },
+          {
+            "ecosystem": "Pub",
+            "name": "glob",
+            "source_path": "pubspec.lock",
+            "version": "2.1.3"
+          },
+          {
+            "ecosystem": "Pub",
+            "name": "http_multi_server",
+            "source_path": "pubspec.lock",
+            "version": "3.2.2"
+          },
+          {
+            "ecosystem": "Pub",
+            "name": "http_parser",
+            "source_path": "pubspec.lock",
+            "version": "4.1.2"
+          },
+          {
+            "ecosystem": "Pub",
+            "name": "io",
+            "source_path": "pubspec.lock",
+            "version": "1.0.5"
+          },
+          {
+            "ecosystem": "Pub",
+            "name": "lints",
+            "source_path": "pubspec.lock",
+            "version": "6.1.0"
+          },
+          {
+            "ecosystem": "Pub",
+            "name": "logging",
+            "source_path": "pubspec.lock",
+            "version": "1.3.0"
+          },
+          {
+            "ecosystem": "Pub",
+            "name": "matcher",
+            "source_path": "pubspec.lock",
+            "version": "0.12.20"
+          },
+          {
+            "ecosystem": "Pub",
+            "name": "meta",
+            "source_path": "pubspec.lock",
+            "version": "1.18.3"
+          },
+          {
+            "ecosystem": "Pub",
+            "name": "mime",
+            "source_path": "pubspec.lock",
+            "version": "2.0.0"
+          },
+          {
+            "ecosystem": "Pub",
+            "name": "node_preamble",
+            "source_path": "pubspec.lock",
+            "version": "2.0.2"
+          },
+          {
+            "ecosystem": "Pub",
+            "name": "package_config",
+            "source_path": "pubspec.lock",
+            "version": "3.0.0"
+          },
+          {
+            "ecosystem": "Pub",
+            "name": "path",
+            "source_path": "pubspec.lock",
+            "version": "1.9.1"
+          },
+          {
+            "ecosystem": "Pub",
+            "name": "pool",
+            "source_path": "pubspec.lock",
+            "version": "1.5.2"
+          },
+          {
+            "ecosystem": "Pub",
+            "name": "pub_semver",
+            "source_path": "pubspec.lock",
+            "version": "2.2.0"
+          },
+          {
+            "ecosystem": "Pub",
+            "name": "shelf",
+            "source_path": "pubspec.lock",
+            "version": "1.4.2"
+          },
+          {
+            "ecosystem": "Pub",
+            "name": "shelf_packages_handler",
+            "source_path": "pubspec.lock",
+            "version": "3.0.2"
+          },
+          {
+            "ecosystem": "Pub",
+            "name": "shelf_static",
+            "source_path": "pubspec.lock",
+            "version": "1.1.3"
+          },
+          {
+            "ecosystem": "Pub",
+            "name": "shelf_web_socket",
+            "source_path": "pubspec.lock",
+            "version": "3.0.0"
+          },
+          {
+            "ecosystem": "Pub",
+            "name": "source_map_stack_trace",
+            "source_path": "pubspec.lock",
+            "version": "2.1.2"
+          },
+          {
+            "ecosystem": "Pub",
+            "name": "source_maps",
+            "source_path": "pubspec.lock",
+            "version": "0.10.13"
+          },
+          {
+            "ecosystem": "Pub",
+            "name": "source_span",
+            "source_path": "pubspec.lock",
+            "version": "1.10.2"
+          },
+          {
+            "ecosystem": "Pub",
+            "name": "stack_trace",
+            "source_path": "pubspec.lock",
+            "version": "1.12.1"
+          },
+          {
+            "ecosystem": "Pub",
+            "name": "stream_channel",
+            "source_path": "pubspec.lock",
+            "version": "2.1.4"
+          },
+          {
+            "ecosystem": "Pub",
+            "name": "string_scanner",
+            "source_path": "pubspec.lock",
+            "version": "1.4.1"
+          },
+          {
+            "ecosystem": "Pub",
+            "name": "term_glyph",
+            "source_path": "pubspec.lock",
+            "version": "1.2.2"
+          },
+          {
+            "ecosystem": "Pub",
+            "name": "test",
+            "source_path": "pubspec.lock",
+            "version": "1.31.2"
+          },
+          {
+            "ecosystem": "Pub",
+            "name": "test_api",
+            "source_path": "pubspec.lock",
+            "version": "0.7.13"
+          },
+          {
+            "ecosystem": "Pub",
+            "name": "test_core",
+            "source_path": "pubspec.lock",
+            "version": "0.6.19"
+          },
+          {
+            "ecosystem": "Pub",
+            "name": "typed_data",
+            "source_path": "pubspec.lock",
+            "version": "1.4.0"
+          },
+          {
+            "ecosystem": "Pub",
+            "name": "vm_service",
+            "source_path": "pubspec.lock",
+            "version": "15.2.0"
+          },
+          {
+            "ecosystem": "Pub",
+            "name": "watcher",
+            "source_path": "pubspec.lock",
+            "version": "1.2.1"
+          },
+          {
+            "ecosystem": "Pub",
+            "name": "web",
+            "source_path": "pubspec.lock",
+            "version": "1.1.1"
+          },
+          {
+            "ecosystem": "Pub",
+            "name": "web_socket",
+            "source_path": "pubspec.lock",
+            "version": "1.0.1"
+          },
+          {
+            "ecosystem": "Pub",
+            "name": "web_socket_channel",
+            "source_path": "pubspec.lock",
+            "version": "3.0.3"
+          },
+          {
+            "ecosystem": "Pub",
+            "name": "webkit_inspection_protocol",
+            "source_path": "pubspec.lock",
+            "version": "1.2.1"
+          },
+          {
+            "ecosystem": "Pub",
+            "name": "yaml",
+            "source_path": "pubspec.lock",
+            "version": "3.1.3"
+          }
+        ],
+        "fingerprint": "0c60a60f6709719780bc028472da388076fdc1978a024a69b38e40427b716912",
+        "format": "researcher-sbom",
+        "schema_version": 1,
+        "source_files": [
+          "pubspec.lock",
+          "pubspec.yaml"
+        ],
+        "unresolved": []
+      },
+      "vulnerability_report": {
+        "admission_eligible": true,
+        "database": "OSV",
+        "database_checked": true,
+        "error": null,
+        "executed_untrusted_code": false,
+        "hits": [],
+        "queried_components": 49,
+        "sbom_fingerprint": "0c60a60f6709719780bc028472da388076fdc1978a024a69b38e40427b716912",
+        "unresolved": [],
+        "verdict": "CLEAR"
+      }
+    },
+    "warnings": []
+  },
+  "warnings": []
+}
