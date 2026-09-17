@@ -1,0 +1,21 @@
+{
+  "asset_id": "ai.model_storage.whuppi.cellar",
+  "evidence": {
+    "commands": [
+      "dependency resolution (ai.model_storage.whuppi.cellar)",
+      "dart analyze --fatal-infos (ai.model_storage.whuppi.cellar)",
+      "dart test (ai.model_storage.whuppi.cellar)",
+      "dart pub deps --json (ai.model_storage.whuppi.cellar)"
+    ],
+    "scope_note": "Certification is limited to the platforms explicitly validated by this immutable upstream run.",
+    "upstream_checkout": "430784710654f9ea329067e1978e82e7b6f91fec"
+  },
+  "generated_at": "2026-09-17T21:33:23Z",
+  "passed": true,
+  "schema": "ai-orchestrator.library-test-report.v1",
+  "source_commit": "430784710654f9ea329067e1978e82e7b6f91fec",
+  "validated_on": [
+    "linux"
+  ],
+  "version": "0.1.0"
+}

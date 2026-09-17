@@ -34,7 +34,8 @@
     "adapter_notes": "Library normalization/test must validate adapter and contract fit.",
     "estimated_effort": "medium",
     "known_constraints": [
-      "adapter_required_until_contract_validation"
+      "adapter_required_until_contract_validation",
+      "Additional platform support requires separate immutable runtime validation"
     ]
   },
   "kind": "integration_bundle",
@@ -50,12 +51,7 @@
     "upstream_repository": "https://github.com/whuppi/cellar"
   },
   "platforms": [
-    "android",
-    "windows",
-    "linux",
-    "macos",
-    "ios",
-    "raspberry_pi"
+    "linux"
   ],
   "provenance": {
     "license": "MIT",
@@ -75,10 +71,12 @@
     "successful_integrations": 0
   },
   "security": {
-    "notes": "Metadata pre-screen only; external code has not been executed by Researcher V1.",
-    "reviewed": false,
-    "reviewed_at": null,
-    "sbom": null
+    "known_vulnerabilities": 0,
+    "notes": "Automated review: immutable upstream checkout, package analyze/test, dependency SBOM and OSV scan. Certification is limited to the platforms explicitly validated by this immutable upstream run.",
+    "review_report": "evidence/security-review.json",
+    "reviewed": true,
+    "reviewed_at": "2026-09-17T21:33:23Z",
+    "sbom": "evidence/sbom.json"
   },
   "status": "discovered",
   "tags": [
@@ -87,10 +85,12 @@
   ],
   "validation": {
     "score": 0.7319,
-    "test_report": null,
-    "tests_passed": false,
-    "validated_at": null,
-    "validated_on": []
+    "test_report": "evidence/test-report.json",
+    "tests_passed": true,
+    "validated_at": "2026-09-17T21:33:23Z",
+    "validated_on": [
+      "linux"
+    ]
   },
   "version": "0.1.0"
 }
