@@ -1,0 +1,96 @@
+{
+  "capabilities": [
+    "ai.model_storage"
+  ],
+  "connector": {
+    "adapters": [],
+    "configuration_schema": null,
+    "healthcheck": {
+      "path": null,
+      "type": "none"
+    },
+    "integration_mode": "adapter",
+    "provides": [
+      {
+        "capability_id": "ai.model_storage",
+        "contract_id": "ai.model_storage.v1",
+        "contract_version": "1.0"
+      }
+    ],
+    "requires": [],
+    "standard": "ai-orchestrator-lego",
+    "standard_version": "1.0.0"
+  },
+  "deprecation": {
+    "reason": null,
+    "replacement": null
+  },
+  "description": "Cross-platform object storage for Dart & Flutter \u2014 pure Dart: filesystem + IndexedDB backends behind one key/value contract, partitions, lifecycle, BYO encryption, streaming I/O",
+  "entry_paths": [],
+  "frameworks": [],
+  "id": "ai.model_storage.whuppi.cellar",
+  "integration": {
+    "adaptation_allowed": true,
+    "adapter_notes": "Library normalization/test must validate adapter and contract fit.",
+    "estimated_effort": "medium",
+    "known_constraints": [
+      "adapter_required_until_contract_validation"
+    ]
+  },
+  "kind": "integration_bundle",
+  "languages": [
+    "dart"
+  ],
+  "name": "cellar",
+  "payload": {
+    "path": null,
+    "sha256": null,
+    "type": "upstream_reference",
+    "upstream_commit": "430784710654f9ea329067e1978e82e7b6f91fec",
+    "upstream_repository": "https://github.com/whuppi/cellar"
+  },
+  "platforms": [
+    "android",
+    "windows",
+    "linux",
+    "macos",
+    "ios",
+    "raspberry_pi"
+  ],
+  "provenance": {
+    "license": "MIT",
+    "license_file": "provenance/LICENSE",
+    "origin": "researcher",
+    "retrieved_at": "2026-09-17T19:59:47.267037Z",
+    "source_commit": "430784710654f9ea329067e1978e82e7b6f91fec",
+    "source_project_id": null,
+    "source_repository": "https://github.com/whuppi/cellar",
+    "source_tag": "v1.0.0",
+    "source_task_id": "96d6374867d1251967920d06538851db096096b2bb0765e87c6ae80a645bbb36"
+  },
+  "quality": {
+    "failed_integrations": 0,
+    "last_used_at": null,
+    "reuse_count": 0,
+    "successful_integrations": 0
+  },
+  "security": {
+    "notes": "Metadata pre-screen only; external code has not been executed by Researcher V1.",
+    "reviewed": false,
+    "reviewed_at": null,
+    "sbom": null
+  },
+  "status": "discovered",
+  "tags": [
+    "ai.model_storage",
+    "researcher-candidate"
+  ],
+  "validation": {
+    "score": 0.7319,
+    "test_report": null,
+    "tests_passed": false,
+    "validated_at": null,
+    "validated_on": []
+  },
+  "version": "0.1.0"
+}
