@@ -223,6 +223,14 @@ def materialize(
         )
 
     validation = manifest.setdefault("validation", {})
+    researcher_score = validation.get("score")
+    if researcher_score is not None and "researcher_recommendation_score" not in validation:
+        validation["researcher_recommendation_score"] = researcher_score
+    # The Researcher score ranks discovery candidates; it is not certification evidence.
+    # A complete immutable Library run owns the certification score. Reaching this point
+    # means dependency resolution, fatal-info analysis, tests, SBOM and OSV all passed.
+    validation["score"] = 1.0
+    validation["score_basis"] = "library_immutable_validation_v1"
     validation["tests_passed"] = True
     validation["validated_at"] = generated_at
     validation["validated_on"] = validated_on
@@ -252,6 +260,7 @@ def materialize(
         "asset": f"{manifest.get('id')}@{manifest.get('version')}",
         "source_commit": source_commit,
         "validated_on": validated_on,
+        "validation_score": 1.0,
         "package_count": len(packages),
         "known_vulnerabilities": 0,
     }
