@@ -1,0 +1,185 @@
+name: Cantiere Private Android Build
+run-name: Cantiere Android build [${{ inputs.request_id }}]
+
+on:
+  workflow_dispatch:
+    inputs:
+      request_id:
+        description: Stable Cantiere build request id
+        required: true
+        type: string
+      source_root:
+        description: Repository-relative staged source root
+        required: true
+        default: .cantiere-build/source
+        type: string
+      target:
+        description: Build target
+        required: true
+        default: android
+        type: choice
+        options:
+          - android
+
+permissions:
+  contents: read
+
+concurrency:
+  group: cantiere-build-${{ inputs.request_id }}
+  cancel-in-progress: false
+
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: "true"
+
+jobs:
+  build-android:
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+
+    steps:
+      - name: Validate dispatch inputs
+        shell: bash
+        env:
+          REQUEST_ID: ${{ inputs.request_id }}
+          SOURCE_ROOT: ${{ inputs.source_root }}
+          TARGET: ${{ inputs.target }}
+        run: |
+          set -euo pipefail
+          [[ "$REQUEST_ID" =~ ^[A-Za-z0-9._-]{1,64}$ ]]
+          [[ "$SOURCE_ROOT" == ".cantiere-build/source" ]]
+          [[ "$TARGET" == "android" ]]
+
+      - name: Checkout staged Cantiere source
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 1
+          submodules: false
+
+      - name: Validate staged source boundary
+        shell: bash
+        env:
+          SOURCE_ROOT: ${{ inputs.source_root }}
+        run: |
+          set -euo pipefail
+          test -d "$SOURCE_ROOT"
+          test -f "$SOURCE_ROOT/pubspec.yaml"
+          test -f "$SOURCE_ROOT/lib/main.dart"
+          if find "$SOURCE_ROOT" -type l -print -quit | grep -q .; then
+            echo "Symbolic links are not allowed in staged Cantiere source." >&2
+            exit 41
+          fi
+          FILE_COUNT="$(find "$SOURCE_ROOT" -type f | wc -l | tr -d ' ')"
+          TOTAL_BYTES="$(du -sb "$SOURCE_ROOT" | cut -f1)"
+          test "$FILE_COUNT" -le 1024
+          test "$TOTAL_BYTES" -le 25165824
+
+      - name: Setup Java
+        uses: actions/setup-java@v6
+        with:
+          distribution: temurin
+          java-version: '17'
+          cache: gradle
+
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+          cache: true
+
+      - name: Materialize generic Android scaffold
+        id: workspace
+        shell: bash
+        env:
+          SOURCE_ROOT: ${{ inputs.source_root }}
+        run: |
+          set -euo pipefail
+          WORKSPACE="${RUNNER_TEMP}/cantiere-generated-app"
+          rm -rf "$WORKSPACE"
+          flutter create \
+            --empty \
+            --platforms=android \
+            --project-name=cantiere_generated_app \
+            --org=ai.orchestrator.generated \
+            "$WORKSPACE"
+          rsync -a --delete-excluded "$SOURCE_ROOT/" "$WORKSPACE/"
+          test -f "$WORKSPACE/pubspec.yaml"
+          test -f "$WORKSPACE/lib/main.dart"
+          echo "path=$WORKSPACE" >> "$GITHUB_OUTPUT"
+
+      - name: Resolve dependencies
+        shell: bash
+        working-directory: ${{ steps.workspace.outputs.path }}
+        run: |
+          set -euo pipefail
+          flutter pub get
+
+      - name: Validate generated project
+        shell: bash
+        working-directory: ${{ steps.workspace.outputs.path }}
+        run: |
+          set -euo pipefail
+          FORMAT_PATHS=(lib)
+          if find test -type f -name '*.dart' -print -quit 2>/dev/null | grep -q .; then
+            FORMAT_PATHS+=(test)
+          fi
+          dart format --output=none --set-exit-if-changed "${FORMAT_PATHS[@]}"
+          flutter analyze
+          if find test -type f -name '*.dart' -print -quit 2>/dev/null | grep -q .; then
+            flutter test --reporter expanded
+          fi
+
+      - name: Build Android APK
+        id: build
+        shell: bash
+        working-directory: ${{ steps.workspace.outputs.path }}
+        run: |
+          set -euo pipefail
+          flutter build apk --release
+          APK="build/app/outputs/flutter-apk/app-release.apk"
+          test -s "$APK"
+          BYTES="$(stat -c%s "$APK")"
+          SHA256="$(sha256sum "$APK" | awk '{print $1}')"
+          echo "apk=$APK" >> "$GITHUB_OUTPUT"
+          echo "bytes=$BYTES" >> "$GITHUB_OUTPUT"
+          echo "sha256=$SHA256" >> "$GITHUB_OUTPUT"
+
+      - name: Package verified artifact
+        shell: bash
+        env:
+          REQUEST_ID: ${{ inputs.request_id }}
+          WORKSPACE: ${{ steps.workspace.outputs.path }}
+          APK_REL: ${{ steps.build.outputs.apk }}
+          APK_BYTES: ${{ steps.build.outputs.bytes }}
+          APK_SHA256: ${{ steps.build.outputs.sha256 }}
+        run: |
+          set -euo pipefail
+          OUT="${RUNNER_TEMP}/cantiere-artifact"
+          mkdir -p "$OUT"
+          cp "$WORKSPACE/$APK_REL" "$OUT/app-release.apk"
+          printf '%s  %s\n' "$APK_SHA256" 'app-release.apk' > "$OUT/app-release.apk.sha256"
+          python3 - <<'PY' > "$OUT/build-manifest.json"
+          import json, os
+          print(json.dumps({
+              "version": 1,
+              "request_id": os.environ["REQUEST_ID"],
+              "target": "android",
+              "source_commit": os.environ["GITHUB_SHA"],
+              "apk": "app-release.apk",
+              "apk_bytes": int(os.environ["APK_BYTES"]),
+              "apk_sha256": os.environ["APK_SHA256"],
+              "validation": {
+                  "format": "passed",
+                  "analyze": "passed",
+                  "tests": "passed_or_not_present",
+                  "build": "passed"
+              }
+          }, sort_keys=True))
+          PY
+
+      - name: Upload Cantiere APK
+        uses: actions/upload-artifact@v6
+        with:
+          name: cantiere-android-${{ inputs.request_id }}
+          path: ${{ runner.temp }}/cantiere-artifact/
+          if-no-files-found: error
+          retention-days: 7
