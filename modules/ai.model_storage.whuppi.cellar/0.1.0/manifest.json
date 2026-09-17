@@ -75,19 +75,21 @@
     "notes": "Automated review: immutable upstream checkout, package analyze/test, dependency SBOM and OSV scan. Certification is limited to the platforms explicitly validated by this immutable upstream run.",
     "review_report": "evidence/security-review.json",
     "reviewed": true,
-    "reviewed_at": "2026-09-17T21:33:23Z",
+    "reviewed_at": "2026-09-17T23:10:06Z",
     "sbom": "evidence/sbom.json"
   },
-  "status": "discovered",
+  "status": "certified",
   "tags": [
     "ai.model_storage",
     "researcher-candidate"
   ],
   "validation": {
-    "score": 0.7319,
+    "researcher_recommendation_score": 0.7319,
+    "score": 1.0,
+    "score_basis": "library_immutable_validation_v1",
     "test_report": "evidence/test-report.json",
     "tests_passed": true,
-    "validated_at": "2026-09-17T21:33:23Z",
+    "validated_at": "2026-09-17T23:10:06Z",
     "validated_on": [
       "linux"
     ]

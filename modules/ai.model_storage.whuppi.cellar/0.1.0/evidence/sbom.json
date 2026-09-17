@@ -1,6 +1,6 @@
 {
   "asset_id": "ai.model_storage.whuppi.cellar",
-  "generated_at": "2026-09-17T21:33:23Z",
+  "generated_at": "2026-09-17T23:10:06Z",
   "generator": "dart pub deps --json",
   "packages": [
     {

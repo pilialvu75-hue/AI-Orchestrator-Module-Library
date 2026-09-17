@@ -1,9 +1,25 @@
 {
   "schema_version": 1,
   "library_id": "ai-orchestrator-module-library",
-  "catalog_version": "1.0.2",
-  "updated_at": "2026-09-14T18:37:11Z",
+  "catalog_version": "1.0.3",
+  "updated_at": "2026-09-17T23:10:06Z",
   "assets": [
+    {
+      "id": "ai.model_storage.whuppi.cellar",
+      "version": "0.1.0",
+      "manifest": "modules/ai.model_storage.whuppi.cellar/0.1.0/manifest.json",
+      "status": "certified",
+      "kind": "integration_bundle",
+      "capabilities": [
+        "ai.model_storage"
+      ],
+      "platforms": [
+        "linux"
+      ],
+      "contracts": [
+        "ai.model_storage.v1"
+      ]
+    },
     {
       "id": "diagnostics.logging.dart-lang.logging",
       "version": "0.1.0",

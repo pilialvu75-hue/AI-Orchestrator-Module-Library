@@ -1,0 +1,47 @@
+{
+  "schema": "ai-orchestrator.library-module-package-envelope.v1",
+  "package": {
+    "schema": "ai-orchestrator.library-module-package.v1",
+    "asset_id": "ai.model_storage.whuppi.cellar",
+    "version": "0.1.0",
+    "pin": "ai.model_storage.whuppi.cellar@0.1.0",
+    "availability": "active",
+    "capabilities": [
+      "ai.model_storage"
+    ],
+    "contracts": [
+      "ai.model_storage.v1"
+    ],
+    "targets": [
+      "linux"
+    ],
+    "files": [],
+    "requirements": [
+      {
+        "kind": "manualReview",
+        "description": "Additional platform support requires separate immutable runtime validation",
+        "required": false
+      },
+      {
+        "kind": "manualReview",
+        "description": "Resolve immutable upstream source https://github.com/whuppi/cellar@430784710654f9ea329067e1978e82e7b6f91fec",
+        "required": true
+      },
+      {
+        "kind": "manualReview",
+        "description": "adapter_required_until_contract_validation",
+        "required": false
+      }
+    ],
+    "integrity": {
+      "manifest_sha256": "77c7db645419122665d63bef4884e325e1facda677b6c30e69f3c3587b3fe833",
+      "module_tree_sha256": "712675141f6120f734cd9ed2295ef77bb4dabdf021826e0b21efbaf30680cc13"
+    },
+    "source": {
+      "payload_type": "upstream_reference",
+      "upstream_repository": "https://github.com/whuppi/cellar",
+      "upstream_commit": "430784710654f9ea329067e1978e82e7b6f91fec"
+    }
+  },
+  "package_sha256": "4840dbfac51c761fd2e88b49cd7c8fa82f7786cf1141c09a4b701d1fd8b4bd6d"
+}

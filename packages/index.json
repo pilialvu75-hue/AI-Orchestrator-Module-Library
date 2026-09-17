@@ -1,7 +1,13 @@
 {
   "schema": "ai-orchestrator.library-package-index.v1",
-  "snapshot_sha256": "3aae2379a72de17e08bffcb1e7dc5c06b114a04a86e910a51a0ad624086d4a28",
+  "snapshot_sha256": "a31660f18b9706f0d27981f6d12c508e2b6174b4ae30af1731bf6232c98ac5ad",
   "packages": [
+    {
+      "pin": "ai.model_storage.whuppi.cellar@0.1.0",
+      "path": "packages/ai.model_storage.whuppi.cellar/0.1.0/package.json",
+      "package_sha256": "4840dbfac51c761fd2e88b49cd7c8fa82f7786cf1141c09a4b701d1fd8b4bd6d",
+      "module_tree_sha256": "712675141f6120f734cd9ed2295ef77bb4dabdf021826e0b21efbaf30680cc13"
+    },
     {
       "pin": "diagnostics.logging.dart-lang.logging@0.1.0",
       "path": "packages/diagnostics.logging.dart-lang.logging/0.1.0/package.json",

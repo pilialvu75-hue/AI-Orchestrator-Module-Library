@@ -1,9 +1,9 @@
 {
   "schema_version": 1,
   "library_id": "ai-orchestrator-module-library",
-  "catalog_version": "1.0.2",
+  "catalog_version": "1.0.3",
   "source_state": {
-    "catalog_updated_at": "2026-09-14T18:37:11Z",
+    "catalog_updated_at": "2026-09-17T23:10:06Z",
     "contracts_updated_at": "2026-09-14T19:55:00Z",
     "needs_updated_at": "2026-09-11T20:45:00Z",
     "lifecycle_revision": 0,
@@ -345,6 +345,140 @@
   ],
   "assets": [
     {
+      "id": "ai.model_storage.whuppi.cellar",
+      "version": "0.1.0",
+      "kind": "integration_bundle",
+      "status": "certified",
+      "availability": "active",
+      "description": "Cross-platform object storage for Dart & Flutter — pure Dart: filesystem + IndexedDB backends behind one key/value contract, partitions, lifecycle, BYO encryption, streaming I/O",
+      "capabilities": [
+        "ai.model_storage"
+      ],
+      "platforms": [
+        "linux"
+      ],
+      "contracts": [
+        {
+          "contract_id": "ai.model_storage.v1",
+          "status": "draft",
+          "contract_version": "1.0",
+          "known": true
+        }
+      ],
+      "dependencies": [],
+      "provenance": {
+        "license": "MIT",
+        "license_file": "provenance/LICENSE",
+        "origin": "researcher",
+        "retrieved_at": "2026-09-17T19:59:47.267037Z",
+        "source_commit": "430784710654f9ea329067e1978e82e7b6f91fec",
+        "source_project_id": null,
+        "source_repository": "https://github.com/whuppi/cellar",
+        "source_tag": "v1.0.0",
+        "source_task_id": "96d6374867d1251967920d06538851db096096b2bb0765e87c6ae80a645bbb36"
+      },
+      "validation": {
+        "researcher_recommendation_score": 0.7319,
+        "score": 1.0,
+        "score_basis": "library_immutable_validation_v1",
+        "test_report": "evidence/test-report.json",
+        "tests_passed": true,
+        "validated_at": "2026-09-17T23:10:06Z",
+        "validated_on": [
+          "linux"
+        ]
+      },
+      "security": {
+        "known_vulnerabilities": 0,
+        "notes": "Automated review: immutable upstream checkout, package analyze/test, dependency SBOM and OSV scan. Certification is limited to the platforms explicitly validated by this immutable upstream run.",
+        "review_report": "evidence/security-review.json",
+        "reviewed": true,
+        "reviewed_at": "2026-09-17T23:10:06Z",
+        "sbom": "evidence/sbom.json"
+      },
+      "integration": {
+        "adaptation_allowed": true,
+        "adapter_notes": "Library normalization/test must validate adapter and contract fit.",
+        "estimated_effort": "medium",
+        "known_constraints": [
+          "adapter_required_until_contract_validation",
+          "Additional platform support requires separate immutable runtime validation"
+        ]
+      },
+      "connector": {
+        "adapters": [],
+        "configuration_schema": null,
+        "healthcheck": {
+          "path": null,
+          "type": "none"
+        },
+        "integration_mode": "adapter",
+        "provides": [
+          {
+            "capability_id": "ai.model_storage",
+            "contract_id": "ai.model_storage.v1",
+            "contract_version": "1.0"
+          }
+        ],
+        "requires": [],
+        "standard": "ai-orchestrator-lego",
+        "standard_version": "1.0.0"
+      },
+      "payload": {
+        "path": null,
+        "sha256": null,
+        "type": "upstream_reference",
+        "upstream_commit": "430784710654f9ea329067e1978e82e7b6f91fec",
+        "upstream_repository": "https://github.com/whuppi/cellar"
+      },
+      "observations": {
+        "revision": 0,
+        "reuse_count": 0,
+        "successful_integrations": 0,
+        "failed_integrations": 0,
+        "success_rate": null,
+        "compatibility": {},
+        "latest_validation": null,
+        "benchmark_count": 0,
+        "incident_count": 0,
+        "last_observed_at": null
+      },
+      "ranking": {
+        "policy": "balanced-v1",
+        "score": 0.675,
+        "components": {
+          "validation": 1.0,
+          "integration_effort": 0.5,
+          "operational_reliability": 0.5,
+          "evidence_confidence": 0.0
+        },
+        "weights": {
+          "validation": 0.45,
+          "integration_effort": 0.25,
+          "operational_reliability": 0.2,
+          "evidence_confidence": 0.1
+        },
+        "evidence": {
+          "successful_integrations": 0,
+          "failed_integrations": 0,
+          "attempts": 0,
+          "estimated_effort": "medium"
+        },
+        "note": "Ranking compares Library candidates only; it does not decide whether reuse is cheaper than fresh implementation."
+      },
+      "integrity": {
+        "manifest_sha256": "77c7db645419122665d63bef4884e325e1facda677b6c30e69f3c3587b3fe833",
+        "module_tree_sha256": "712675141f6120f734cd9ed2295ef77bb4dabdf021826e0b21efbaf30680cc13"
+      },
+      "paths": {
+        "manifest": "modules/ai.model_storage.whuppi.cellar/0.1.0/manifest.json",
+        "module": "modules/ai.model_storage.whuppi.cellar/0.1.0"
+      },
+      "warnings": [
+        "non-stable contracts: ai.model_storage.v1"
+      ]
+    },
+    {
       "id": "diagnostics.logging.dart-lang.logging",
       "version": "0.1.0",
       "kind": "module",
@@ -612,5 +746,5 @@
       ]
     }
   ],
-  "snapshot_sha256": "3aae2379a72de17e08bffcb1e7dc5c06b114a04a86e910a51a0ad624086d4a28"
+  "snapshot_sha256": "a31660f18b9706f0d27981f6d12c508e2b6174b4ae30af1731bf6232c98ac5ad"
 }
