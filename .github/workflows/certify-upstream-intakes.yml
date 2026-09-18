@@ -127,6 +127,9 @@ jobs:
       - name: Run fail-closed certification autopilot
         run: python tools/library_autopilot.py --report /tmp/library-autopilot-report.json
 
+      - name: Reconcile capability needs from certified state
+        run: python tools/library_needs_reconciler.py
+
       - name: Validate certified Library state
         run: |
           python tools/validate_library.py
