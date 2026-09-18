@@ -1,54 +1,22 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-09-11T20:45:00Z",
+  "updated_at": "2026-09-18T12:30:13.301815Z",
   "items": [
     {
-      "capability_id": "auth.session",
-      "title": "Authentication and session management",
+      "capability_id": "ai.acceleration_backend",
+      "title": "Target-specific local inference acceleration backend",
       "priority": "high",
       "desired_candidates": 2,
       "status": "needed",
-      "targets": ["android", "desktop", "web"]
-    },
-    {
-      "capability_id": "storage.secrets",
-      "title": "Secure local storage / secrets abstraction",
-      "priority": "high",
-      "desired_candidates": 2,
-      "status": "needed",
-      "targets": ["android", "desktop"]
-    },
-    {
-      "capability_id": "network.http",
-      "title": "HTTP/API client with retries, timeout and cancellation",
-      "priority": "high",
-      "desired_candidates": 2,
-      "status": "needed",
-      "targets": ["android", "desktop", "web"]
-    },
-    {
-      "capability_id": "storage.local_db",
-      "title": "Local database / persistence",
-      "priority": "high",
-      "desired_candidates": 2,
-      "status": "needed",
-      "targets": ["android", "desktop"]
-    },
-    {
-      "capability_id": "diagnostics.logging",
-      "title": "Structured logging and diagnostics",
-      "priority": "high",
-      "desired_candidates": 2,
-      "status": "needed",
-      "targets": ["android", "desktop", "web"]
-    },
-    {
-      "capability_id": "release.update_manager",
-      "title": "Update/download manager",
-      "priority": "high",
-      "desired_candidates": 2,
-      "status": "needed",
-      "targets": ["android", "desktop"]
+      "targets": [
+        "android",
+        "windows",
+        "linux",
+        "macos",
+        "ios",
+        "web",
+        "raspberry_pi"
+      ]
     },
     {
       "capability_id": "ai.local_inference",
@@ -56,7 +24,332 @@
       "priority": "high",
       "desired_candidates": 2,
       "status": "needed",
-      "targets": ["android", "desktop", "raspberry_pi"]
+      "targets": [
+        "android",
+        "desktop",
+        "raspberry_pi"
+      ]
+    },
+    {
+      "capability_id": "ai.model_storage",
+      "title": "Large-model storage, integrity and migration abstraction",
+      "priority": "high",
+      "desired_candidates": 2,
+      "status": "needed",
+      "targets": [
+        "android",
+        "windows",
+        "linux",
+        "macos",
+        "ios",
+        "raspberry_pi"
+      ]
+    },
+    {
+      "capability_id": "auth.session",
+      "title": "Authentication and session management",
+      "priority": "high",
+      "desired_candidates": 2,
+      "status": "needed",
+      "targets": [
+        "android",
+        "desktop",
+        "web"
+      ]
+    },
+    {
+      "capability_id": "diagnostics.logging",
+      "title": "Structured logging and diagnostics",
+      "priority": "high",
+      "desired_candidates": 2,
+      "status": "needed",
+      "targets": [
+        "android",
+        "desktop",
+        "web"
+      ]
+    },
+    {
+      "capability_id": "network.http",
+      "title": "HTTP/API client with retries, timeout and cancellation",
+      "priority": "high",
+      "desired_candidates": 2,
+      "status": "needed",
+      "targets": [
+        "android",
+        "desktop",
+        "web"
+      ]
+    },
+    {
+      "capability_id": "platform.audio_io",
+      "title": "Microphone, speaker and audio-device routing abstraction",
+      "priority": "high",
+      "desired_candidates": 2,
+      "status": "needed",
+      "targets": [
+        "android",
+        "windows",
+        "linux",
+        "macos",
+        "ios",
+        "web",
+        "raspberry_pi"
+      ]
+    },
+    {
+      "capability_id": "platform.background_execution",
+      "title": "Background task and service lifecycle abstraction",
+      "priority": "high",
+      "desired_candidates": 2,
+      "status": "needed",
+      "targets": [
+        "android",
+        "windows",
+        "linux",
+        "macos",
+        "ios",
+        "raspberry_pi"
+      ]
+    },
+    {
+      "capability_id": "platform.clipboard",
+      "title": "Clipboard abstraction with platform policy boundaries",
+      "priority": "low",
+      "desired_candidates": 1,
+      "status": "needed",
+      "targets": [
+        "android",
+        "windows",
+        "linux",
+        "macos",
+        "ios",
+        "web"
+      ]
+    },
+    {
+      "capability_id": "platform.connectivity",
+      "title": "Connectivity state, metering and offline/online transition abstraction",
+      "priority": "high",
+      "desired_candidates": 2,
+      "status": "needed",
+      "targets": [
+        "android",
+        "windows",
+        "linux",
+        "macos",
+        "ios",
+        "web",
+        "raspberry_pi"
+      ]
+    },
+    {
+      "capability_id": "platform.desktop_shell",
+      "title": "Desktop window, tray and lifecycle integration",
+      "priority": "medium",
+      "desired_candidates": 2,
+      "status": "needed",
+      "targets": [
+        "windows",
+        "linux",
+        "macos"
+      ]
+    },
+    {
+      "capability_id": "platform.file_picker_share",
+      "title": "File picker, document provider and share/export abstraction",
+      "priority": "medium",
+      "desired_candidates": 2,
+      "status": "needed",
+      "targets": [
+        "android",
+        "windows",
+        "linux",
+        "macos",
+        "ios",
+        "web"
+      ]
+    },
+    {
+      "capability_id": "platform.filesystem",
+      "title": "Native/sandboxed filesystem abstraction",
+      "priority": "high",
+      "desired_candidates": 2,
+      "status": "needed",
+      "targets": [
+        "android",
+        "windows",
+        "linux",
+        "macos",
+        "ios",
+        "raspberry_pi"
+      ]
+    },
+    {
+      "capability_id": "platform.lifecycle",
+      "title": "Application lifecycle, suspend/resume and shutdown abstraction",
+      "priority": "high",
+      "desired_candidates": 2,
+      "status": "needed",
+      "targets": [
+        "android",
+        "windows",
+        "linux",
+        "macos",
+        "ios",
+        "web",
+        "raspberry_pi"
+      ]
+    },
+    {
+      "capability_id": "platform.notifications",
+      "title": "Native notification abstraction",
+      "priority": "medium",
+      "desired_candidates": 2,
+      "status": "needed",
+      "targets": [
+        "android",
+        "windows",
+        "linux",
+        "macos",
+        "ios",
+        "web"
+      ]
+    },
+    {
+      "capability_id": "platform.permissions",
+      "title": "Runtime permissions and capability broker",
+      "priority": "high",
+      "desired_candidates": 2,
+      "status": "needed",
+      "targets": [
+        "android",
+        "windows",
+        "linux",
+        "macos",
+        "ios",
+        "web"
+      ]
+    },
+    {
+      "capability_id": "platform.power_thermal",
+      "title": "Battery, power mode and thermal-pressure signals",
+      "priority": "high",
+      "desired_candidates": 2,
+      "status": "needed",
+      "targets": [
+        "android",
+        "windows",
+        "linux",
+        "macos",
+        "ios",
+        "raspberry_pi"
+      ]
+    },
+    {
+      "capability_id": "platform.process",
+      "title": "Local process and shell execution abstraction",
+      "priority": "high",
+      "desired_candidates": 2,
+      "status": "needed",
+      "targets": [
+        "windows",
+        "linux",
+        "macos",
+        "raspberry_pi"
+      ]
+    },
+    {
+      "capability_id": "platform.startup_service",
+      "title": "OS startup, login item and headless service integration",
+      "priority": "medium",
+      "desired_candidates": 2,
+      "status": "needed",
+      "targets": [
+        "windows",
+        "linux",
+        "macos",
+        "raspberry_pi"
+      ]
+    },
+    {
+      "capability_id": "release.auto_update",
+      "title": "Platform-aware self-update and update-channel integration",
+      "priority": "high",
+      "desired_candidates": 2,
+      "status": "needed",
+      "targets": [
+        "android",
+        "windows",
+        "linux",
+        "macos",
+        "raspberry_pi"
+      ]
+    },
+    {
+      "capability_id": "release.packaging",
+      "title": "Platform packaging, signing and distribution pipeline",
+      "priority": "high",
+      "desired_candidates": 2,
+      "status": "needed",
+      "targets": [
+        "android",
+        "windows",
+        "linux",
+        "macos",
+        "ios",
+        "web",
+        "raspberry_pi"
+      ]
+    },
+    {
+      "capability_id": "release.update_manager",
+      "title": "Update/download manager",
+      "priority": "high",
+      "desired_candidates": 2,
+      "status": "needed",
+      "targets": [
+        "android",
+        "desktop"
+      ]
+    },
+    {
+      "capability_id": "storage.local_db",
+      "title": "Local database / persistence",
+      "priority": "high",
+      "desired_candidates": 2,
+      "status": "needed",
+      "targets": [
+        "android",
+        "desktop"
+      ]
+    },
+    {
+      "capability_id": "storage.secrets",
+      "title": "Secure local storage / secrets abstraction",
+      "priority": "high",
+      "desired_candidates": 2,
+      "status": "needed",
+      "targets": [
+        "android",
+        "desktop"
+      ]
+    },
+    {
+      "capability_id": "voice.device_policy",
+      "title": "Voice-device selection, duplex policy and interruption handling",
+      "priority": "high",
+      "desired_candidates": 2,
+      "status": "needed",
+      "targets": [
+        "android",
+        "windows",
+        "linux",
+        "macos",
+        "ios",
+        "web",
+        "raspberry_pi"
+      ]
     },
     {
       "capability_id": "voice.stt",
@@ -64,7 +357,11 @@
       "priority": "high",
       "desired_candidates": 2,
       "status": "needed",
-      "targets": ["android", "desktop", "raspberry_pi"]
+      "targets": [
+        "android",
+        "desktop",
+        "raspberry_pi"
+      ]
     },
     {
       "capability_id": "voice.tts",
@@ -72,7 +369,11 @@
       "priority": "high",
       "desired_candidates": 2,
       "status": "needed",
-      "targets": ["android", "desktop", "raspberry_pi"]
+      "targets": [
+        "android",
+        "desktop",
+        "raspberry_pi"
+      ]
     }
   ]
 }
