@@ -163,7 +163,9 @@ def _default_transport(
         if len(payload) > MAX_RESPONSE_BYTES:
             payload = b""
         return int(exc.code), payload
-    except urllib.error.URLError as exc:
+    except (TimeoutError, urllib.error.URLError) as exc:
+        if isinstance(exc, TimeoutError):
+            raise GeminiProviderError("Gemini request timed out") from exc
         raise GeminiProviderError("Gemini network request failed") from exc
 
 

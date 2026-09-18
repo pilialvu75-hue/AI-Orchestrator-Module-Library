@@ -91,6 +91,27 @@ class LibraryCuratorGeminiTest(unittest.TestCase):
         serialized_body = captured["body"].decode("utf-8")
         self.assertNotIn("test-secret-key", serialized_body)
 
+    def test_timeout_retries_then_succeeds(self) -> None:
+        calls = []
+        sleeps = []
+
+        def transport(url, headers, body, timeout):
+            calls.append(timeout)
+            if len(calls) == 1:
+                raise GeminiProviderError("Gemini request timed out")
+            return 200, self.gemini_success(self.request()["request_id"])
+
+        provider = GeminiCuratorProvider(
+            api_key="key",
+            max_retries=2,
+            transport=transport,
+            sleeper=sleeps.append,
+        )
+        result = provider.advise(self.request())
+        self.assertEqual(RESPONSE_SCHEMA, result["schema"])
+        self.assertEqual(2, len(calls))
+        self.assertEqual([1.0], sleeps)
+
     def test_transient_status_retries_then_succeeds(self) -> None:
         calls = []
         sleeps = []
