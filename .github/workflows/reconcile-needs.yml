@@ -1,0 +1,58 @@
+name: Reconcile Library Needs
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "7 */6 * * *"
+  push:
+    branches: ["main"]
+    paths:
+      - "catalog/index.json"
+      - "catalog/needs.platform-extension.json"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: library-needs-reconcile-main
+  cancel-in-progress: false
+
+jobs:
+  reconcile:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Reconcile authoritative needs
+        run: python tools/library_needs_reconciler.py > /tmp/needs-reconcile.json
+      - name: Validate reconciled Library
+        run: |
+          python tools/validate_library.py
+          python -m unittest discover -s tests -p 'test_*.py' -v
+      - name: Commit semantic needs changes
+        shell: bash
+        run: |
+          set -euo pipefail
+          if git diff --quiet -- catalog/needs.json; then
+            echo "No needs changes."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add catalog/needs.json
+          git commit -m "library: reconcile capability needs [skip ci]"
+          git push origin HEAD:main
+      - name: Upload reconciliation report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: library-needs-reconcile
+          path: /tmp/needs-reconcile.json
+          if-no-files-found: ignore
+          retention-days: 14
