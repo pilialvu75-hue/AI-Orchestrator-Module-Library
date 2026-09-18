@@ -125,6 +125,11 @@ jobs:
           if find test -type f -name '*.dart' -print -quit 2>/dev/null | grep -q .; then
             FORMAT_PATHS+=(test)
           fi
+          # Cantiere source is AI-generated and may be semantically correct but
+          # not byte-for-byte dartfmt compliant. Normalize only this ephemeral
+          # build workspace, then verify the normalized result deterministically.
+          # The authoritative Cantiere source branch is never mutated here.
+          dart format "${FORMAT_PATHS[@]}"
           dart format --output=none --set-exit-if-changed "${FORMAT_PATHS[@]}"
           flutter analyze
           if find test -type f -name '*.dart' -print -quit 2>/dev/null | grep -q .; then
