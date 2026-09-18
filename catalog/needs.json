@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-09-18T12:30:13.301815Z",
+  "updated_at": "2026-09-18T18:24:59.976780Z",
   "items": [
     {
       "capability_id": "ai.acceleration_backend",
@@ -10,12 +10,12 @@
       "status": "needed",
       "targets": [
         "android",
-        "windows",
+        "ios",
         "linux",
         "macos",
-        "ios",
+        "raspberry_pi",
         "web",
-        "raspberry_pi"
+        "windows"
       ]
     },
     {
@@ -38,11 +38,11 @@
       "status": "needed",
       "targets": [
         "android",
-        "windows",
+        "ios",
         "linux",
         "macos",
-        "ios",
-        "raspberry_pi"
+        "raspberry_pi",
+        "windows"
       ]
     },
     {
@@ -89,12 +89,12 @@
       "status": "needed",
       "targets": [
         "android",
-        "windows",
+        "ios",
         "linux",
         "macos",
-        "ios",
+        "raspberry_pi",
         "web",
-        "raspberry_pi"
+        "windows"
       ]
     },
     {
@@ -105,11 +105,11 @@
       "status": "needed",
       "targets": [
         "android",
-        "windows",
+        "ios",
         "linux",
         "macos",
-        "ios",
-        "raspberry_pi"
+        "raspberry_pi",
+        "windows"
       ]
     },
     {
@@ -120,11 +120,11 @@
       "status": "needed",
       "targets": [
         "android",
-        "windows",
+        "ios",
         "linux",
         "macos",
-        "ios",
-        "web"
+        "web",
+        "windows"
       ]
     },
     {
@@ -135,12 +135,12 @@
       "status": "needed",
       "targets": [
         "android",
-        "windows",
+        "ios",
         "linux",
         "macos",
-        "ios",
+        "raspberry_pi",
         "web",
-        "raspberry_pi"
+        "windows"
       ]
     },
     {
@@ -150,9 +150,9 @@
       "desired_candidates": 2,
       "status": "needed",
       "targets": [
-        "windows",
         "linux",
-        "macos"
+        "macos",
+        "windows"
       ]
     },
     {
@@ -163,11 +163,11 @@
       "status": "needed",
       "targets": [
         "android",
-        "windows",
+        "ios",
         "linux",
         "macos",
-        "ios",
-        "web"
+        "web",
+        "windows"
       ]
     },
     {
@@ -178,11 +178,11 @@
       "status": "needed",
       "targets": [
         "android",
-        "windows",
+        "ios",
         "linux",
         "macos",
-        "ios",
-        "raspberry_pi"
+        "raspberry_pi",
+        "windows"
       ]
     },
     {
@@ -193,12 +193,12 @@
       "status": "needed",
       "targets": [
         "android",
-        "windows",
+        "ios",
         "linux",
         "macos",
-        "ios",
+        "raspberry_pi",
         "web",
-        "raspberry_pi"
+        "windows"
       ]
     },
     {
@@ -209,11 +209,11 @@
       "status": "needed",
       "targets": [
         "android",
-        "windows",
+        "ios",
         "linux",
         "macos",
-        "ios",
-        "web"
+        "web",
+        "windows"
       ]
     },
     {
@@ -224,11 +224,11 @@
       "status": "needed",
       "targets": [
         "android",
-        "windows",
+        "ios",
         "linux",
         "macos",
-        "ios",
-        "web"
+        "web",
+        "windows"
       ]
     },
     {
@@ -239,11 +239,11 @@
       "status": "needed",
       "targets": [
         "android",
-        "windows",
+        "ios",
         "linux",
         "macos",
-        "ios",
-        "raspberry_pi"
+        "raspberry_pi",
+        "windows"
       ]
     },
     {
@@ -253,10 +253,10 @@
       "desired_candidates": 2,
       "status": "needed",
       "targets": [
-        "windows",
         "linux",
         "macos",
-        "raspberry_pi"
+        "raspberry_pi",
+        "windows"
       ]
     },
     {
@@ -266,10 +266,10 @@
       "desired_candidates": 2,
       "status": "needed",
       "targets": [
-        "windows",
         "linux",
         "macos",
-        "raspberry_pi"
+        "raspberry_pi",
+        "windows"
       ]
     },
     {
@@ -280,10 +280,10 @@
       "status": "needed",
       "targets": [
         "android",
-        "windows",
         "linux",
         "macos",
-        "raspberry_pi"
+        "raspberry_pi",
+        "windows"
       ]
     },
     {
@@ -294,12 +294,12 @@
       "status": "needed",
       "targets": [
         "android",
-        "windows",
+        "ios",
         "linux",
         "macos",
-        "ios",
+        "raspberry_pi",
         "web",
-        "raspberry_pi"
+        "windows"
       ]
     },
     {
@@ -343,12 +343,12 @@
       "status": "needed",
       "targets": [
         "android",
-        "windows",
+        "ios",
         "linux",
         "macos",
-        "ios",
+        "raspberry_pi",
         "web",
-        "raspberry_pi"
+        "windows"
       ]
     },
     {
