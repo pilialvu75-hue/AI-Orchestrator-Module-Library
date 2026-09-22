@@ -1,22 +1,35 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "repository": "pilialvu75-hue/AI-Orchestrator-Module-Library",
   "updated_at": "2026-09-22",
-  "current_phase": "L1",
-  "status": "ACTIVE",
+  "lifecycle_status": "ACTIVE",
+  "current_phase": "L2",
+  "completed": [
+    "L1"
+  ],
   "next_actions": [
     "L2",
-    "L3"
+    "L3",
+    "L5",
+    "L8"
   ],
+  "current_main_before_roadmap_update": "6ca7b0b92ea0a4b2441903dd00250b154864f02e",
   "security_boundary": {
-    "untrusted_upstream_execution": "isolated_no_repo_permissions",
-    "trusted_promotion": "separate_fresh_runner",
-    "cantiere_build": "read_only_sparse_checkout",
-    "direct_researcher_to_cantiere_code": "forbidden"
+    "untrusted_upstream_execution": "isolated_no_repository_permissions",
+    "trusted_promotion": "separate_fresh_writer_runner",
+    "cantiere_build": "read_only_sparse_checkout_no_persisted_credentials",
+    "direct_researcher_to_cantiere_code": "forbidden",
+    "researcher_cantiere_control_plane": "future_structured_sanitized_non_code_only"
+  },
+  "operational_cadence": {
+    "needs_reconcile_cron": "7 */6 * * *"
   },
   "related_repositories": {
     "researcher": "pilialvu75-hue/AI-Orchestrator-Module-Researcher",
-    "cantiere": "pilialvu75-hue/Ai-orchestrator-riserva",
-    "diagnostics": "pilialvu75-hue/Ai-orchestrator-diagnostics"
-  }
+    "cantiere_public": "pilialvu75-hue/Ai-orchestrator-riserva",
+    "researcher_predecessor": "pilialvu75-hue/Ai_orchestrator-prova1",
+    "diagnostics_public": "pilialvu75-hue/Ai-orchestrator-diagnostics",
+    "stable_core_reference": "pilialvu75-hue/AI-Orchestrator-Core"
+  },
+  "release_rule": "No evolved application version becomes stable without real physical-device validation."
 }
