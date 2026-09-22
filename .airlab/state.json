@@ -5,15 +5,17 @@
   "lifecycle_status": "ACTIVE",
   "current_phase": "L2",
   "completed": [
-    "L1"
+    "L1",
+    "L13"
   ],
   "next_actions": [
     "L2",
     "L3",
     "L5",
-    "L8"
+    "L8",
+    "L12"
   ],
-  "current_main_before_roadmap_update": "6ca7b0b92ea0a4b2441903dd00250b154864f02e",
+  "current_main_before_roadmap_update": "02482cc734385654a26947ab77435ba22ab10581",
   "security_boundary": {
     "untrusted_upstream_execution": "isolated_no_repository_permissions",
     "trusted_promotion": "separate_fresh_writer_runner",
@@ -31,5 +33,15 @@
     "diagnostics_public": "pilialvu75-hue/Ai-orchestrator-diagnostics",
     "stable_core_reference": "pilialvu75-hue/AI-Orchestrator-Core"
   },
-  "release_rule": "No evolved application version becomes stable without real physical-device validation."
+  "release_rule": "No evolved application version becomes stable without real physical-device validation.",
+  "public_repository_roadmaps": {
+    "authority": "module_library_private",
+    "path": ".airlab/public-repositories",
+    "repository_count": 5
+  },
+  "first_party_legacy_mining": {
+    "status": "PLANNED",
+    "source_manifest": ".airlab/first-party-sources.yaml",
+    "execution_policy": "read_only_static_analysis_then_library_intake"
+  }
 }
