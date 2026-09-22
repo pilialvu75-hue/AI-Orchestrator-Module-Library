@@ -1,0 +1,23 @@
+schema_version: 1
+repository: pilialvu75-hue/Ai-orchestrator-riservas
+visibility: public
+roadmap_storage: private_library
+updated_at: 2026-09-22
+
+lifecycle:
+  status: empty_placeholder
+  active_development: false
+
+facts:
+  - "Repository is currently empty."
+  - "It must not be confused with active pilialvu75-hue/Ai-orchestrator-riserva."
+
+roadmap:
+  - id: RP1
+    title: Prevent duplicate-repository confusion
+    state: active_guardrail
+    priority: P0
+  - id: RP2
+    title: Decide archive/delete/redirect only after reference audit
+    state: pending_owner_decision
+    priority: P2
