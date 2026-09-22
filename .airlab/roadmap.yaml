@@ -1,0 +1,95 @@
+schema_version: 1
+repository: pilialvu75-hue/AI-Orchestrator-Module-Library
+visibility_policy: private_only
+updated_at: 2026-09-22
+authority: repository_local
+mission: >-
+  Be the authoritative quarantine, certification, reuse and dependency boundary
+  between Researcher discoveries, Cantiere-created reusable code and applications.
+
+current_state:
+  needs_reconciliation:
+    status: active
+    schedule: "7 */6 * * *"
+    source: catalog/needs.json
+  researcher_intake:
+    status: active
+    rule: "Researcher code enters intake only; never Cantiere directly."
+  upstream_runtime_isolation:
+    status: active
+    rule: "Untrusted upstream code executes without repository permissions or Library checkout."
+  trusted_promotion:
+    status: active
+    rule: "Promotion runs on a fresh writer job and revalidates current intake identity."
+  cantiere_build_isolation:
+    status: active
+    rule: "Read-only sparse checkout of .cantiere-build/source with no persisted checkout credential."
+  cantiere_return_path:
+    status: active
+    rule: "Validated Cantiere output may enter only intake/<asset>/<version> as discovered."
+
+invariants:
+  - "No untrusted executable code may run with Library write credentials."
+  - "No Researcher candidate code may bypass Library and execute directly in Cantiere."
+  - "No Cantiere output may write directly to modules/ or the certified catalog."
+  - "Every reusable Cantiere-created capability is captured on first successful validated creation."
+  - "Reuse is attempted before regeneration."
+  - "A newly built application version is never stable/released solely because CI is green."
+  - "Physical-device validation is mandatory before stable distribution of evolved applications."
+
+roadmap:
+  - id: L1
+    title: Persist private repository roadmap
+    state: in_progress
+    priority: P0
+  - id: L2
+    title: Immediate capability-gap registration
+    state: planned
+    priority: P0
+    outcome: >-
+      When Cantiere discovers a missing capability, Library records the need
+      immediately so Researcher can discover it on the next autonomous sweep.
+  - id: L3
+    title: Created-once reusable capture
+    state: planned
+    priority: P0
+    outcome: >-
+      The first validated reusable capability created by Cantiere is submitted
+      to Library intake immediately, with provenance, tests, security evidence,
+      contracts, version and hashes.
+  - id: L4
+    title: Application bill of capabilities
+    state: planned
+    priority: P1
+    outcome: >-
+      Persist which certified capability/module versions are used by every
+      maintained application.
+  - id: L5
+    title: Capability-update impact graph
+    state: planned
+    priority: P1
+    outcome: >-
+      A newly certified capability version identifies affected applications and
+      whether the change is security, bugfix, compatibility, performance or feature.
+  - id: L6
+    title: Continuous Application Evolution queue
+    state: planned
+    priority: P1
+    outcome: >-
+      Create durable upgrade candidates for affected applications and let
+      Cantiere process them when higher-priority user work is absent.
+  - id: L7
+    title: Physical Device Validation gate
+    state: planned
+    priority: P0
+    outcome: >-
+      Candidate app versions must pass real-device installation, launch,
+      affected-feature tests, crash/regression checks and runtime observations
+      before stable release.
+  - id: L8
+    title: Release policy per application
+    state: planned
+    priority: P1
+    outcome: >-
+      Support manual_release, auto_internal, guarded_auto_stable and never_auto
+      without weakening physical validation.
