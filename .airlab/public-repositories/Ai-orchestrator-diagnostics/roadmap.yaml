@@ -1,0 +1,58 @@
+schema_version: 1
+repository: pilialvu75-hue/Ai-orchestrator-diagnostics
+visibility: public
+roadmap_storage: private_library
+updated_at: 2026-09-22
+baseline_commit: 39700dbc006afd6f7b055ff0c3a38f54a07c7d47
+
+lifecycle:
+  status: active
+  role: shared_public_sanitized_diagnostics_sink
+
+mission: >-
+  Preserve privacy-safe technical evidence from app, Library and Researcher producers,
+  enabling incident analysis and correlation without exposing conversations, prompts, source
+  payloads, credentials or personal data.
+
+current_state:
+  app_namespace: active
+  library_namespace: defined
+  researcher_namespace: defined
+  event_schema_v2: active
+  storage: github_releases_and_assets
+  local_app_opt_in: required
+
+invariants:
+  - "Public diagnostics contain only filtered technical metadata."
+  - "Never publish credentials, prompts, conversations, source payloads, cookies or unrestricted paths."
+  - "Each producer rotates only its own release/assets."
+  - "Delivery is acknowledged only after required remote writes are verified."
+  - "Historical event origin is distinguished from the build that later collected it."
+  - "Strong/user-visible incident escalation is separate from ordinary telemetry volume."
+
+roadmap:
+  - id: D1
+    title: Complete Library and Researcher producer implementations against event v2
+    state: active
+    priority: P0
+  - id: D2
+    title: Cross-component correlation ids and incident reconstruction
+    state: planned
+    priority: P0
+  - id: D3
+    title: Strong diagnostic/incident escalation contract
+    state: planned
+    priority: P1
+    outcome: "Escalate important sanitized incidents without turning all diagnostics into notifications."
+  - id: D4
+    title: Durable querying/analysis tooling over release history
+    state: planned
+    priority: P1
+  - id: D5
+    title: Privacy regression tests and producer SDK/validators
+    state: planned
+    priority: P0
+  - id: D6
+    title: Integrate AIrLab provider/resource diagnostics
+    state: planned
+    priority: P1
