@@ -1,0 +1,69 @@
+schema_version: 1
+updated_at: 2026-09-22
+purpose: >-
+  Read-only first-party source allowlist for future Researcher legacy mining.
+  Inclusion here does not mean automatic execution, trust or certification.
+
+policy:
+  access: read_only
+  execute_source: false
+  submit_destination: library_intake_only
+  certification_required: true
+  secrets_allowed_in_output: false
+  provenance_required: true
+
+sources:
+  - repository: pilialvu75-hue/AI-Orchestrator-Core
+    priority: high
+    status: frozen_reference
+    mine_for:
+      - stable_runtime_patterns
+      - orchestration_core
+      - memory_patterns
+      - android_ffi_runtime
+  - repository: pilialvu75-hue/MobileIde
+    priority: medium
+    status: legacy_source
+    mine_for:
+      - offline_project_state
+      - project_templates
+      - update_rollback
+      - editor_preview
+      - shared_project_channel
+  - repository: pilialvu75-hue/Mia
+    priority: medium
+    status: paused_modular_scaffold
+    mine_for:
+      - long_term_memory
+      - voice_live
+      - hybrid_routing
+      - assistant_domain_modules
+  - repository: pilialvu75-hue/FLUTTERIDE
+    priority: medium
+    status: legacy_flutter_prototype
+    mine_for:
+      - hive_project_storage
+      - offline_editor
+      - flutter_project_crud
+  - repository: pilialvu75-hue/Template-webview
+    priority: low
+    status: legacy_template_snapshot
+    mine_for:
+      - offline_bootstrap
+      - generic_shell_lessons
+      - update_patterns
+  - repository: pilialvu75-hue/Template-AI-1
+    priority: low
+    status: dormant_template_reference
+    mine_for:
+      - fastapi_service_template
+      - docker_service_patterns
+      - self_hosted_ai_service_patterns
+  - repository: pilialvu75-hue/Ai_orchestrator-prova1
+    priority: medium
+    status: superseded_researcher_snapshot
+    mine_for:
+      - researcher_regression_reference
+      - durable_sqlite_state
+      - library_need_contract
+      - dry_run_intake
