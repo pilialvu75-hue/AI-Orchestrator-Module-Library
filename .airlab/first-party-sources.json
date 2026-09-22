@@ -1,0 +1,159 @@
+{
+  "schema_version": 1,
+  "updated_at": "2026-09-22",
+  "policy": {
+    "access": "read_only",
+    "execute_source": false,
+    "fetch_arbitrary_file_contents": false,
+    "submit_destination": "library_intake_only",
+    "certification_required": true,
+    "provenance_required": true,
+    "secret_paths_forbidden": true
+  },
+  "sources": [
+    {
+      "repository": "pilialvu75-hue/AI-Orchestrator-Core",
+      "priority": "high",
+      "lifecycle": "frozen_reference",
+      "candidates": [
+        {
+          "capability_id": "ai.local_inference",
+          "component_path": "lib/core/runtime/inference",
+          "kind": "integration_bundle"
+        },
+        {
+          "capability_id": "ai.acceleration_backend",
+          "component_path": "native/android",
+          "kind": "integration_bundle"
+        },
+        {
+          "capability_id": "ai.model_storage",
+          "component_path": "lib/features/local_ai/data/services",
+          "kind": "module"
+        },
+        {
+          "capability_id": "release.update_manager",
+          "component_path": "lib/core/system/update",
+          "kind": "module"
+        },
+        {
+          "capability_id": "diagnostics.logging",
+          "component_path": "lib/core/runtime/inference/local_runtime_diagnostics_service.dart",
+          "kind": "component"
+        }
+      ]
+    },
+    {
+      "repository": "pilialvu75-hue/MobileIde",
+      "priority": "medium",
+      "lifecycle": "legacy_source",
+      "candidates": [
+        {
+          "capability_id": "storage.local_db",
+          "component_path": "flutter_app/lib/data/database",
+          "kind": "module"
+        },
+        {
+          "capability_id": "platform.filesystem",
+          "component_path": "flutter_app/lib/data/files",
+          "kind": "module"
+        },
+        {
+          "capability_id": "release.packaging",
+          "component_path": "flutter_app/android",
+          "kind": "project_template"
+        }
+      ]
+    },
+    {
+      "repository": "pilialvu75-hue/Mia",
+      "priority": "medium",
+      "lifecycle": "paused_modular_scaffold",
+      "candidates": [
+        {
+          "capability_id": "voice.stt",
+          "component_path": "mia-voice",
+          "kind": "integration_bundle"
+        },
+        {
+          "capability_id": "voice.tts",
+          "component_path": "mia-voice",
+          "kind": "integration_bundle"
+        },
+        {
+          "capability_id": "release.update_manager",
+          "component_path": "services/mia-ota-manager",
+          "kind": "module"
+        },
+        {
+          "capability_id": "release.packaging",
+          "component_path": "scripts",
+          "kind": "project_template"
+        }
+      ]
+    },
+    {
+      "repository": "pilialvu75-hue/FLUTTERIDE",
+      "priority": "medium",
+      "lifecycle": "legacy_flutter_prototype",
+      "candidates": [
+        {
+          "capability_id": "storage.local_db",
+          "component_path": "lib/data/database",
+          "kind": "module"
+        },
+        {
+          "capability_id": "platform.filesystem",
+          "component_path": "lib/data/files",
+          "kind": "module"
+        },
+        {
+          "capability_id": "release.packaging",
+          "component_path": "android",
+          "kind": "project_template"
+        }
+      ]
+    },
+    {
+      "repository": "pilialvu75-hue/Template-webview",
+      "priority": "low",
+      "lifecycle": "legacy_template_snapshot",
+      "candidates": [
+        {
+          "capability_id": "auth.session",
+          "component_path": "backend/cloud-service/src/auth",
+          "kind": "module"
+        },
+        {
+          "capability_id": "storage.local_db",
+          "component_path": "flutter_app/lib/data/database",
+          "kind": "module"
+        },
+        {
+          "capability_id": "release.packaging",
+          "component_path": "android",
+          "kind": "project_template"
+        }
+      ]
+    },
+    {
+      "repository": "pilialvu75-hue/Template-AI-1",
+      "priority": "low",
+      "lifecycle": "dormant_template_reference",
+      "candidates": [
+        {
+          "capability_id": "release.packaging",
+          "component_path": "project-template/docker",
+          "kind": "project_template"
+        }
+      ]
+    },
+    {
+      "repository": "pilialvu75-hue/Ai_orchestrator-prova1",
+      "priority": "medium",
+      "lifecycle": "superseded_researcher_snapshot",
+      "purpose": "researcher_regression_reference",
+      "candidates": []
+    }
+  ]
+}
