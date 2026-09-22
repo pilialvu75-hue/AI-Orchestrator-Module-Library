@@ -27,12 +27,31 @@ jobs:
     timeout-minutes: 30
     steps:
       - name: Checkout Module Library main
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
         with:
           ref: main
           fetch-depth: 0
 
+      - name: Detect pending Drift intake
+        id: intake
+        shell: bash
+        run: |
+          set -euo pipefail
+          intake="intake/${ASSET_ID}/${ASSET_VERSION}/manifest.json"
+          certified="modules/${ASSET_ID}/${ASSET_VERSION}/manifest.json"
+          if [[ -f "${intake}" ]]; then
+            echo "pending=true" >> "${GITHUB_OUTPUT}"
+            echo "Drift intake is pending validation."
+          elif [[ -f "${certified}" ]]; then
+            echo "pending=false" >> "${GITHUB_OUTPUT}"
+            echo "Drift is already certified; validation workflow is idempotently complete."
+          else
+            echo "::error title=Drift state missing::Neither intake nor certified manifest exists for ${ASSET_ID}@${ASSET_VERSION}."
+            exit 1
+          fi
+
       - name: Checkout immutable Drift upstream
+        if: ${{ steps.intake.outputs.pending == 'true' }}
         shell: bash
         run: |
           set -euo pipefail
@@ -43,28 +62,34 @@ jobs:
           test "$(git -C /tmp/drift-upstream rev-parse HEAD)" = "$SOURCE_COMMIT"
 
       - name: Set up Flutter stable
+        if: ${{ steps.intake.outputs.pending == 'true' }}
         uses: subosito/flutter-action@v2
         with:
           channel: stable
           cache: true
 
       - name: Resolve immutable workspace dependencies
+        if: ${{ steps.intake.outputs.pending == 'true' }}
         working-directory: /tmp/drift-upstream
         run: flutter pub get
 
       - name: Analyze Drift package
+        if: ${{ steps.intake.outputs.pending == 'true' }}
         working-directory: /tmp/drift-upstream/drift
         run: dart analyze --fatal-infos
 
       - name: Test Drift package
+        if: ${{ steps.intake.outputs.pending == 'true' }}
         working-directory: /tmp/drift-upstream/drift
         run: dart test
 
       - name: Capture dependency graph
+        if: ${{ steps.intake.outputs.pending == 'true' }}
         working-directory: /tmp/drift-upstream/drift
         run: dart pub deps --json > /tmp/drift-deps.json
 
       - name: Materialize test and security evidence
+        if: ${{ steps.intake.outputs.pending == 'true' }}
         run: |
           python tools/materialize_upstream_evidence.py \
             --asset-dir "intake/${ASSET_ID}/${ASSET_VERSION}" \
@@ -72,6 +97,7 @@ jobs:
             --deps-json /tmp/drift-deps.json
 
       - name: Verify evidence against Library gates
+        if: ${{ steps.intake.outputs.pending == 'true' }}
         run: |
           python - <<'PY'
           import json
@@ -86,9 +112,11 @@ jobs:
           python tools/validate_library.py
 
       - name: Run fail-closed certification autopilot
+        if: ${{ steps.intake.outputs.pending == 'true' }}
         run: python tools/library_autopilot.py --report /tmp/library-autopilot-report.json
 
       - name: Validate certified Library state
+        if: ${{ steps.intake.outputs.pending == 'true' }}
         run: |
           python tools/validate_library.py
           python tools/validate_history.py
@@ -99,6 +127,7 @@ jobs:
           python tools/validate_snapshot.py catalog/offline-snapshot.json
 
       - name: Commit certified Drift and consumption exports
+        if: ${{ steps.intake.outputs.pending == 'true' }}
         shell: bash
         run: |
           set -euo pipefail
@@ -113,8 +142,8 @@ jobs:
           git push origin HEAD:main
 
       - name: Upload certification report
-        if: always()
-        uses: actions/upload-artifact@v4
+        if: ${{ always() && steps.intake.outputs.pending == 'true' }}
+        uses: actions/upload-artifact@v6
         with:
           name: drift-certification-report
           path: /tmp/library-autopilot-report.json
