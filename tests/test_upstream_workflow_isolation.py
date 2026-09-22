@@ -40,6 +40,9 @@ class UpstreamWorkflowIsolationTest(unittest.TestCase):
         text = CANTIERE_BUILD.read_text(encoding="utf-8")
         self.assertIn("permissions:\n  contents: read", text)
         self.assertIn("persist-credentials: false", text)
+        self.assertIn("sparse-checkout:", text)
+        self.assertIn(".cantiere-build/source", text)
+        self.assertIn("sparse-checkout-cone-mode: false", text)
         self.assertNotIn("contents: write", text)
 
 
