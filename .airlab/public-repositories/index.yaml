@@ -1,0 +1,23 @@
+schema_version: 1
+updated_at: 2026-09-22
+authority_repository: pilialvu75-hue/AI-Orchestrator-Module-Library
+privacy_rule: >-
+  These roadmaps are private coordination metadata for public repositories.
+  Do not copy them into public repositories unless the owner explicitly changes policy.
+
+repositories:
+  - repository: pilialvu75-hue/Ai-orchestrator-riserva
+    file: Ai-orchestrator-riserva/roadmap.yaml
+    lifecycle: active_primary_cantiere
+  - repository: pilialvu75-hue/Ai_orchestrator-prova
+    file: Ai_orchestrator-prova/roadmap.yaml
+    lifecycle: active_airlab_control_plane
+  - repository: pilialvu75-hue/Ai-orchestrator-diagnostics
+    file: Ai-orchestrator-diagnostics/roadmap.yaml
+    lifecycle: active_shared_diagnostics
+  - repository: pilialvu75-hue/FLUTTERIDE1
+    file: FLUTTERIDE1/roadmap.yaml
+    lifecycle: empty_public_placeholder
+  - repository: pilialvu75-hue/Ai-orchestrator-riservas
+    file: Ai-orchestrator-riservas/roadmap.yaml
+    lifecycle: empty_public_placeholder
