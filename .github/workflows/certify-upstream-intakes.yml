@@ -11,126 +11,396 @@ on:
       - "tools/library_autopilot.py"
   workflow_dispatch:
 
+# Read-only is the workflow default. Only the final trusted promotion job may
+# request write access to the Library.
 permissions:
-  contents: write
+  contents: read
 
 concurrency:
   group: module-library-upstream-certification-main
   cancel-in-progress: false
 
 jobs:
-  certify:
+  prepare:
     runs-on: ubuntu-24.04
-    timeout-minutes: 45
+    timeout-minutes: 5
+    permissions:
+      contents: read
+    outputs:
+      matrix: ${{ steps.plan.outputs.matrix }}
+      count: ${{ steps.plan.outputs.count }}
     steps:
-      - name: Checkout Module Library main
-        uses: actions/checkout@v4
+      - name: Checkout Library metadata only
+        uses: actions/checkout@v6
         with:
           ref: main
-          fetch-depth: 0
+          fetch-depth: 1
+          persist-credentials: false
 
+      - name: Build immutable upstream validation plan
+        id: plan
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import json
+          import os
+          import re
+          from pathlib import Path, PurePosixPath
+
+          repo_re = re.compile(
+              r"^https://github\.com/[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+(?:\.git)?$"
+          )
+          sha_re = re.compile(r"^[a-fA-F0-9]{40}$")
+          id_re = re.compile(r"^[A-Za-z0-9][A-Za-z0-9._-]{2,127}$")
+          version_re = re.compile(
+              r"^[0-9]+\.[0-9]+\.[0-9]+(?:[-+][0-9A-Za-z.-]+)?$"
+          )
+
+          rows = []
+          for path in sorted(Path("intake").glob("*/*/manifest.json")):
+              data = json.loads(path.read_text(encoding="utf-8"))
+              payload = data.get("payload") or {}
+              if (
+                  data.get("status") != "discovered"
+                  or payload.get("type") != "upstream_reference"
+              ):
+                  continue
+
+              provenance = data.get("provenance") or {}
+              asset_id = str(data.get("id") or "").strip()
+              version = str(data.get("version") or "").strip()
+              repository = str(
+                  payload.get("upstream_repository")
+                  or provenance.get("source_repository")
+                  or ""
+              ).strip()
+              commit = str(
+                  payload.get("upstream_commit")
+                  or provenance.get("source_commit")
+                  or ""
+              ).strip().lower()
+              entry_paths = data.get("entry_paths") or []
+              component = str(entry_paths[0]).strip() if entry_paths else "."
+
+              if not id_re.fullmatch(asset_id):
+                  raise SystemExit(f"unsafe asset id in {path}")
+              if not version_re.fullmatch(version):
+                  raise SystemExit(f"unsafe version in {path}")
+              if not repo_re.fullmatch(repository):
+                  raise SystemExit(f"unsafe upstream repository in {path}")
+              if not sha_re.fullmatch(commit):
+                  raise SystemExit(f"unsafe upstream commit in {path}")
+              if component != ".":
+                  pure = PurePosixPath(component)
+                  if (
+                      pure.is_absolute()
+                      or ".." in pure.parts
+                      or "." in pure.parts
+                      or "\\" in component
+                      or ":" in component
+                  ):
+                      raise SystemExit(f"unsafe component path in {path}")
+
+              rows.append(
+                  {
+                      "index": f"{len(rows) + 1:04d}",
+                      "asset_id": asset_id,
+                      "version": version,
+                      "source_repository": repository,
+                      "source_commit": commit,
+                      "component_path": component,
+                  }
+              )
+
+          matrix = {"include": rows}
+          output = os.environ["GITHUB_OUTPUT"]
+          with open(output, "a", encoding="utf-8") as handle:
+              handle.write(
+                  "matrix="
+                  + json.dumps(matrix, sort_keys=True, separators=(",", ":"))
+                  + "\n"
+              )
+              handle.write(f"count={len(rows)}\n")
+          print(json.dumps(matrix, indent=2, sort_keys=True))
+          PY
+
+  validate_untrusted:
+    needs: prepare
+    if: ${{ needs.prepare.outputs.count != '0' }}
+    strategy:
+      fail-fast: true
+      matrix: ${{ fromJson(needs.prepare.outputs.matrix) }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 35
+
+    # This job intentionally has no repository permission and does not checkout
+    # the private Library. It is the only job that executes upstream code.
+    permissions: {}
+
+    steps:
       - name: Set up Flutter stable
         uses: subosito/flutter-action@v2
         with:
           channel: stable
-          cache: true
+          cache: false
 
-      - name: Discover and validate upstream intake candidates
+      - name: Execute immutable upstream validation in unprivileged job
         shell: bash
+        env:
+          ASSET_ID: ${{ matrix.asset_id }}
+          ASSET_VERSION: ${{ matrix.version }}
+          SOURCE_REPOSITORY: ${{ matrix.source_repository }}
+          SOURCE_COMMIT: ${{ matrix.source_commit }}
+          COMPONENT_PATH: ${{ matrix.component_path }}
+          PLAN_INDEX: ${{ matrix.index }}
+          GITHUB_TOKEN: ""
+          GH_TOKEN: ""
         run: |
           set -euo pipefail
-          mapfile -t manifests < <(python - <<'PY'
-          import json
-          from pathlib import Path
-          for path in sorted(Path('intake').glob('*/*/manifest.json')):
-              data = json.loads(path.read_text(encoding='utf-8'))
-              payload = data.get('payload') or {}
-              if data.get('status') == 'discovered' and payload.get('type') == 'upstream_reference':
-                  print(path.as_posix())
-          PY
-          )
+          UPSTREAM="${RUNNER_TEMP}/upstream-${PLAN_INDEX}"
+          OUT="${RUNNER_TEMP}/validation"
+          rm -rf "${UPSTREAM}" "${OUT}"
+          mkdir -p "${OUT}"
 
-          if [ "${#manifests[@]}" -eq 0 ]; then
-            echo "No discovered upstream-reference intakes require certification."
-            exit 0
+          git init "${UPSTREAM}"
+          git -C "${UPSTREAM}" remote add origin "${SOURCE_REPOSITORY}"
+          git -C "${UPSTREAM}" fetch --depth=1 origin "${SOURCE_COMMIT}"
+          git -C "${UPSTREAM}" checkout --detach FETCH_HEAD
+          test "$(git -C "${UPSTREAM}" rev-parse HEAD)" = "${SOURCE_COMMIT}"
+
+          PACKAGE_DIR="${UPSTREAM}/${COMPONENT_PATH}"
+          test -f "${PACKAGE_DIR}/pubspec.yaml"
+
+          if grep -Eq '^[[:space:]]*resolution:[[:space:]]*workspace' "${PACKAGE_DIR}/pubspec.yaml"; then
+            (cd "${UPSTREAM}" && flutter pub get)
+          else
+            (cd "${PACKAGE_DIR}" && dart pub get)
           fi
 
-          index=0
-          for manifest in "${manifests[@]}"; do
-            index=$((index + 1))
-            asset_dir="$(dirname "$manifest")"
-            eval "$(python - "$manifest" <<'PY'
-          import json, shlex, sys
+          (cd "${PACKAGE_DIR}" && dart analyze --fatal-infos)
+          (cd "${PACKAGE_DIR}" && dart test)
+          (cd "${PACKAGE_DIR}" && dart pub deps --json > "${OUT}/deps.json")
+
+          python3 - <<'PY'
+          import json
+          import os
           from pathlib import Path
-          data = json.loads(Path(sys.argv[1]).read_text(encoding='utf-8'))
-          payload = data.get('payload') or {}
-          provenance = data.get('provenance') or {}
-          entry_paths = data.get('entry_paths') or []
-          component = str(entry_paths[0]) if entry_paths else '.'
-          values = {
-              'ASSET_ID': str(data['id']),
-              'ASSET_VERSION': str(data['version']),
-              'SOURCE_REPOSITORY': str(payload.get('upstream_repository') or provenance.get('source_repository') or ''),
-              'SOURCE_COMMIT': str(payload.get('upstream_commit') or provenance.get('source_commit') or ''),
-              'COMPONENT_PATH': component,
+
+          out = Path(os.environ["RUNNER_TEMP"]) / "validation"
+          receipt = {
+              "schema": "ai-orchestrator.library-upstream-validation.v1",
+              "index": os.environ["PLAN_INDEX"],
+              "asset_id": os.environ["ASSET_ID"],
+              "version": os.environ["ASSET_VERSION"],
+              "source_repository": os.environ["SOURCE_REPOSITORY"],
+              "source_commit": os.environ["SOURCE_COMMIT"],
+              "component_path": os.environ["COMPONENT_PATH"],
+              "runner": "ubuntu-24.04",
+              "analyze": "passed",
+              "tests": "passed",
           }
-          for key, value in values.items():
-              if not value:
-                  raise SystemExit(f'missing {key} in {sys.argv[1]}')
-              print(f'{key}={shlex.quote(value)}')
+          (out / "receipt.json").write_text(
+              json.dumps(receipt, indent=2, sort_keys=True) + "\n",
+              encoding="utf-8",
+          )
           PY
-          )"
 
-            upstream="/tmp/library-upstream-${index}"
-            deps="/tmp/library-deps-${index}.json"
-            rm -rf "$upstream" "$deps"
-            git init "$upstream"
-            git -C "$upstream" remote add origin "$SOURCE_REPOSITORY"
-            git -C "$upstream" fetch --depth=1 origin "$SOURCE_COMMIT"
-            git -C "$upstream" checkout --detach FETCH_HEAD
-            test "$(git -C "$upstream" rev-parse HEAD)" = "$SOURCE_COMMIT"
+      - name: Upload bounded validation evidence
+        uses: actions/upload-artifact@v6
+        with:
+          name: upstream-validation-${{ matrix.index }}
+          path: ${{ runner.temp }}/validation/
+          if-no-files-found: error
+          retention-days: 2
 
-            package_dir="$upstream/$COMPONENT_PATH"
-            test -f "$package_dir/pubspec.yaml"
+  promote_trusted:
+    needs: [prepare, validate_untrusted]
+    if: ${{ always() && needs.prepare.result == 'success' && (needs.prepare.outputs.count == '0' || needs.validate_untrusted.result == 'success') }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    permissions:
+      contents: write
 
-            if grep -Eq '^[[:space:]]*resolution:[[:space:]]*workspace' "$package_dir/pubspec.yaml"; then
-              (cd "$upstream" && flutter pub get)
-            else
-              (cd "$package_dir" && dart pub get)
-            fi
+    steps:
+      - name: Checkout trusted Library main
+        uses: actions/checkout@v6
+        with:
+          ref: main
+          fetch-depth: 0
 
-            (cd "$package_dir" && dart analyze --fatal-infos)
-            (cd "$package_dir" && dart test)
-            (cd "$package_dir" && dart pub deps --json > "$deps")
+      - name: Set up Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
 
-            # This job executes only on ubuntu-24.04. Do not claim runtime
-            # validation for Android/Windows/macOS/iOS/Raspberry Pi from a
-            # Linux-only run; additional platforms need their own runners.
-            python tools/materialize_upstream_evidence.py \
-              --asset-dir "$asset_dir" \
-              --upstream-dir "$upstream" \
-              --deps-json "$deps" \
-              --validated-on linux \
-              --package-label "$ASSET_ID"
+      - name: Download untrusted-job evidence
+        if: ${{ needs.prepare.outputs.count != '0' }}
+        uses: actions/download-artifact@v6
+        with:
+          pattern: upstream-validation-*
+          path: ${{ runner.temp }}/upstream-validation
+          merge-multiple: false
 
-            python - "$asset_dir" <<'PY'
-          import json, sys
+      - name: Materialize evidence without executing upstream code
+        id: evidence
+        env:
+          PLAN_JSON: ${{ needs.prepare.outputs.matrix }}
+          EVIDENCE_ROOT: ${{ runner.temp }}/upstream-validation
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import json
+          import os
+          import shutil
+          import subprocess
+          import sys
           from pathlib import Path
-          sys.path.insert(0, str(Path('tools').resolve()))
+
+          sys.path.insert(0, str(Path("tools").resolve()))
           from library_evidence import verify_manifest_evidence
-          base = Path(sys.argv[1])
-          manifest = json.loads((base / 'manifest.json').read_text(encoding='utf-8'))
-          verify_manifest_evidence(base, manifest)
+
+          plan = json.loads(os.environ["PLAN_JSON"]).get("include", [])
+          evidence_root = Path(os.environ["EVIDENCE_ROOT"])
+          applied = 0
+
+          for item in plan:
+              index = str(item["index"])
+              asset_id = str(item["asset_id"])
+              version = str(item["version"])
+              expected = {
+                  "index": index,
+                  "asset_id": asset_id,
+                  "version": version,
+                  "source_repository": str(item["source_repository"]),
+                  "source_commit": str(item["source_commit"]).lower(),
+                  "component_path": str(item["component_path"]),
+              }
+
+              artifact = evidence_root / f"upstream-validation-{index}"
+              receipt_path = artifact / "receipt.json"
+              deps_path = artifact / "deps.json"
+              if not receipt_path.is_file() or not deps_path.is_file():
+                  raise SystemExit(f"missing validation evidence for plan item {index}")
+
+              receipt = json.loads(receipt_path.read_text(encoding="utf-8"))
+              for key, value in expected.items():
+                  if str(receipt.get(key, "")) != value:
+                      raise SystemExit(
+                          f"validation receipt mismatch for {asset_id}@{version}: {key}"
+                      )
+              if (
+                  receipt.get("schema")
+                  != "ai-orchestrator.library-upstream-validation.v1"
+                  or receipt.get("analyze") != "passed"
+                  or receipt.get("tests") != "passed"
+                  or receipt.get("runner") != "ubuntu-24.04"
+              ):
+                  raise SystemExit(f"invalid validation receipt for {asset_id}@{version}")
+
+              asset_dir = Path("intake") / asset_id / version
+              manifest_path = asset_dir / "manifest.json"
+              certified_path = Path("modules") / asset_id / version / "manifest.json"
+              if not manifest_path.is_file():
+                  if certified_path.is_file():
+                      print(f"{asset_id}@{version} already certified; skipping.")
+                      continue
+                  raise SystemExit(f"intake disappeared for {asset_id}@{version}")
+
+              manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+              payload = manifest.get("payload") or {}
+              provenance = manifest.get("provenance") or {}
+              current_repository = str(
+                  payload.get("upstream_repository")
+                  or provenance.get("source_repository")
+                  or ""
+              ).strip()
+              current_commit = str(
+                  payload.get("upstream_commit")
+                  or provenance.get("source_commit")
+                  or ""
+              ).strip().lower()
+              entry_paths = manifest.get("entry_paths") or []
+              current_component = (
+                  str(entry_paths[0]).strip() if entry_paths else "."
+              )
+              if (
+                  current_repository != expected["source_repository"]
+                  or current_commit != expected["source_commit"]
+                  or current_component != expected["component_path"]
+                  or manifest.get("status") != "discovered"
+                  or (payload.get("type") or "") != "upstream_reference"
+              ):
+                  raise SystemExit(
+                      f"current Library intake diverged for {asset_id}@{version}"
+                  )
+
+              upstream = Path("/tmp") / f"trusted-upstream-{index}"
+              shutil.rmtree(upstream, ignore_errors=True)
+              subprocess.run(["git", "init", str(upstream)], check=True)
+              subprocess.run(
+                  ["git", "-C", str(upstream), "remote", "add", "origin", current_repository],
+                  check=True,
+              )
+              subprocess.run(
+                  [
+                      "git",
+                      "-C",
+                      str(upstream),
+                      "fetch",
+                      "--depth=1",
+                      "origin",
+                      current_commit,
+                  ],
+                  check=True,
+              )
+              subprocess.run(
+                  ["git", "-C", str(upstream), "checkout", "--detach", "FETCH_HEAD"],
+                  check=True,
+              )
+              actual_commit = subprocess.check_output(
+                  ["git", "-C", str(upstream), "rev-parse", "HEAD"],
+                  text=True,
+              ).strip().lower()
+              if actual_commit != current_commit:
+                  raise SystemExit(f"immutable commit mismatch for {asset_id}@{version}")
+
+              subprocess.run(
+                  [
+                      sys.executable,
+                      "tools/materialize_upstream_evidence.py",
+                      "--asset-dir",
+                      str(asset_dir),
+                      "--upstream-dir",
+                      str(upstream),
+                      "--deps-json",
+                      str(deps_path),
+                      "--validated-on",
+                      "linux",
+                      "--package-label",
+                      asset_id,
+                  ],
+                  check=True,
+              )
+              refreshed = json.loads(manifest_path.read_text(encoding="utf-8"))
+              verify_manifest_evidence(asset_dir, refreshed)
+              applied += 1
+
+          with open(os.environ["GITHUB_OUTPUT"], "a", encoding="utf-8") as handle:
+              handle.write(f"pending={'true' if applied else 'false'}\n")
+          print(f"Trusted evidence materialized for {applied} intake candidate(s).")
           PY
-          done
 
       - name: Run fail-closed certification autopilot
+        if: ${{ steps.evidence.outputs.pending == 'true' }}
         run: python tools/library_autopilot.py --report /tmp/library-autopilot-report.json
 
       - name: Reconcile capability needs from certified state
+        if: ${{ steps.evidence.outputs.pending == 'true' }}
         run: python tools/library_needs_reconciler.py
 
       - name: Validate certified Library state
+        if: ${{ steps.evidence.outputs.pending == 'true' }}
         run: |
           python tools/validate_library.py
           python tools/validate_history.py
@@ -141,6 +411,7 @@ jobs:
           python tools/validate_snapshot.py catalog/offline-snapshot.json
 
       - name: Commit verified certifications and exports
+        if: ${{ steps.evidence.outputs.pending == 'true' }}
         shell: bash
         run: |
           set -euo pipefail
@@ -155,8 +426,8 @@ jobs:
           git push origin HEAD:main
 
       - name: Upload certification report
-        if: always()
-        uses: actions/upload-artifact@v4
+        if: ${{ always() && steps.evidence.outputs.pending == 'true' }}
+        uses: actions/upload-artifact@v6
         with:
           name: upstream-intake-certification-report
           path: /tmp/library-autopilot-report.json
