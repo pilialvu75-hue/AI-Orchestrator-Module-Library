@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "repository": "pilialvu75-hue/AI-Orchestrator-Module-Library",
+  "updated_at": "2026-09-22",
+  "current_phase": "L1",
+  "status": "ACTIVE",
+  "next_actions": [
+    "L2",
+    "L3"
+  ],
+  "security_boundary": {
+    "untrusted_upstream_execution": "isolated_no_repo_permissions",
+    "trusted_promotion": "separate_fresh_runner",
+    "cantiere_build": "read_only_sparse_checkout",
+    "direct_researcher_to_cantiere_code": "forbidden"
+  },
+  "related_repositories": {
+    "researcher": "pilialvu75-hue/AI-Orchestrator-Module-Researcher",
+    "cantiere": "pilialvu75-hue/Ai-orchestrator-riserva",
+    "diagnostics": "pilialvu75-hue/Ai-orchestrator-diagnostics"
+  }
+}
