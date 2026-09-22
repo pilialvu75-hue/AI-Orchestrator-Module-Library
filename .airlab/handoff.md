@@ -21,3 +21,8 @@ Current direction:
 Do not reactivate retired direct Researcher -> Cantiere code paths.
 
 When a roadmap item changes state, update `roadmap.yaml`, `state.json` and any new architectural decision in `decisions.md` in the same PR.
+
+
+Public repository roadmaps live under `.airlab/public-repositories/`.
+
+Future Researcher first-party mining sources are declared in `.airlab/first-party-sources.yaml`. Treat that manifest as an allowlist, not as a trust waiver: all extracted candidates still require Library intake and certification.
