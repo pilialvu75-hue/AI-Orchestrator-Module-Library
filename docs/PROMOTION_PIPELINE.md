@@ -48,6 +48,21 @@ The candidate has reproducible validation evidence, `tests_passed=true`, score >
 
 Certification is only created by promotion. Automatic certification additionally requires a completed security review, zero recorded known vulnerabilities and no license class that requires an explicit project-level decision.
 
+
+## Untrusted runtime isolation
+
+Upstream candidate code is never executed in a job that can write to the Module Library.
+
+The automatic upstream certification workflow is split into three security domains:
+
+1. **prepare** — reads only Library intake metadata and builds an immutable validation plan;
+2. **validate_untrusted** — has no repository permissions and no Library checkout, fetches only the exact pinned public upstream commit, then runs dependency resolution, static analysis and tests;
+3. **promote_trusted** — runs on a fresh runner with Library write permission, cross-checks the validation receipt against the current intake, re-fetches the exact upstream commit **without executing it**, materializes evidence, re-runs deterministic Library gates and only then may commit certification state.
+
+Validation artifacts are evidence, not authority. The trusted promotion job cross-checks asset id, version, repository, commit and component path against the current Library intake before using them.
+
+Cantiere-generated build validation follows the same principle: the private build workflow has read-only repository permission and does not persist checkout credentials while generated source is analyzed, tested or built.
+
 ## Commands
 
 Advance exactly one lifecycle state:
