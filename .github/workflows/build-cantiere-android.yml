@@ -49,11 +49,14 @@ jobs:
           [[ "$SOURCE_ROOT" == ".cantiere-build/source" ]]
           [[ "$TARGET" == "android" ]]
 
-      - name: Checkout staged Cantiere source
+      - name: Checkout staged Cantiere source only
         uses: actions/checkout@v6
         with:
           fetch-depth: 1
           persist-credentials: false
+          sparse-checkout: |
+            .cantiere-build/source
+          sparse-checkout-cone-mode: false
           submodules: false
 
       - name: Validate staged source boundary
