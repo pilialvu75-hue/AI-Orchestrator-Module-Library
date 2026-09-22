@@ -34,3 +34,18 @@ Reconstructed from historical project chats and current repository state.
 - Persistent roadmap/state is stored only in private repositories for now.
 - Future chats/agents must read `.airlab/handoff.md`, then roadmap/state/decisions before changing architecture.
 - Roadmap state must be updated in the same PR when a roadmap item materially changes.
+
+
+## Public repository roadmap storage
+
+- Roadmaps for public repositories are stored privately under `.airlab/public-repositories/` in Module Library.
+- Public repositories do not receive private roadmap/state files.
+- Empty public placeholders are tracked privately so future chats do not confuse them with active repositories.
+
+## First-party legacy mining
+
+- Owner-controlled legacy private repositories are legitimate first-party source material for Researcher.
+- They must be accessed through an explicit read-only allowlist.
+- Mining is static/read-only by default; legacy source is not executed merely to decide whether it is reusable.
+- Extracted code/patterns remain untrusted candidates and still enter Library intake/certification before reuse.
+- Provenance back to the originating repository/commit is mandatory.
