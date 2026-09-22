@@ -1,0 +1,77 @@
+schema_version: 1
+repository: pilialvu75-hue/Ai_orchestrator-prova
+visibility: public
+roadmap_storage: private_library
+updated_at: 2026-09-22
+baseline_commit: 519cff2f551ae91b2b84c6fae8362a93bd0a6378
+
+lifecycle:
+  status: active
+  role: airlab_control_and_execution_plane
+
+mission: >-
+  Provide provider-neutral capability execution, routing, shared memory/resource state and
+  remote worker infrastructure for Cantiere while never creating a second project lifecycle.
+
+current_state:
+  architecture_v1: merged
+  deterministic_mock: active_contract_oracle
+  intelligence_gateway: implemented_v1
+  memory_fabric: implemented_v1
+  free_resource_pool: implemented_v1_core
+  resource_gateway_convergence: merged
+  cloudflare_worker: active_staging_adapter
+  real_provider_execution: incomplete
+  library_adapter: null_in_worker
+  researcher_adapter: null_in_worker
+  diagnostics_adapter: partial
+  durable_orchestrator_authority: cantiere_parent
+  budget_default: "0 EUR/month"
+
+invariants:
+  - "AIrLab is an orchestrator/control plane, not a single model runtime."
+  - "Capabilities are stable; providers are replaceable."
+  - "Cantiere owns Project/Task/Execution/review/approval/apply."
+  - "AIrLab cannot write directly to the real Cantiere repository/workspace."
+  - "Free-first/spend-safe policy is explicit; paid fallback requires authorization."
+  - "Memory Fabric adds backends; it does not replace local memory."
+  - "Cloudflare is an adapter, not an architectural dependency."
+  - "Diagnostics exclude raw prompts, source payloads and secrets."
+
+roadmap:
+  - id: AIR-1
+    title: Real provider adapters and authenticated health/quota probes
+    state: active
+    priority: P0
+  - id: AIR-2
+    title: Shared Dart-side capability/resource adapter for Cantiere
+    state: planned
+    priority: P0
+  - id: AIR-3
+    title: Wire real Module Library, Researcher and Diagnostics adapters
+    state: planned
+    priority: P0
+  - id: AIR-4
+    title: Normalize quota/reset/freshness end to end
+    state: planned
+    priority: P0
+  - id: AIR-5
+    title: Durable external-event correlation with Cantiere
+    state: active
+    priority: P0
+  - id: AIR-6
+    title: Atomic distributed orchestration storage
+    state: planned
+    priority: P1
+  - id: AIR-7
+    title: build.web worker and repeatable 0 EUR web MVP
+    state: planned
+    priority: P1
+  - id: AIR-8
+    title: Extend build workers to Android/desktop after web reliability
+    state: planned
+    priority: P1
+  - id: AIR-9
+    title: Naming/repository identity decision
+    state: pending_owner_decision
+    priority: P2

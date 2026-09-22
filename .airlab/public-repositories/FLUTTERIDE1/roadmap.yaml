@@ -1,0 +1,23 @@
+schema_version: 1
+repository: pilialvu75-hue/FLUTTERIDE1
+visibility: public
+roadmap_storage: private_library
+updated_at: 2026-09-22
+
+lifecycle:
+  status: empty_placeholder
+  active_development: false
+
+facts:
+  - "Repository is currently empty."
+  - "It must not be confused with private pilialvu75-hue/FLUTTERIDE."
+
+roadmap:
+  - id: FP1
+    title: Prevent repository identity confusion
+    state: active_guardrail
+    priority: P0
+  - id: FP2
+    title: Decide archive/delete/redirect only after reference audit
+    state: pending_owner_decision
+    priority: P2

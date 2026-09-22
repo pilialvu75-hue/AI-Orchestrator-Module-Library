@@ -1,0 +1,108 @@
+schema_version: 1
+repository: pilialvu75-hue/Ai-orchestrator-riserva
+visibility: public
+roadmap_storage: private_library
+updated_at: 2026-09-22
+baseline_commit: 8f6cc27e857dce79ae4ef9d3b70890b3983c02e2
+
+lifecycle:
+  status: active_primary
+  role: cantiere_and_offline_first_ai_orchestrator
+  authority:
+    - project_lifecycle
+    - task_execution
+    - review_validation_approval_apply
+    - local_user_experience
+
+mission: >-
+  Remain the primary offline-first Flutter AI Orchestrator and Cantiere application,
+  coordinating local/cloud intelligence, Library reuse, project generation, durable execution
+  and real artifacts without becoming dependent on one provider or a live chat session.
+
+current_state:
+  local_runtime:
+    status: active
+    focus: phi3_5_mini_android_vulkan_stability_latency
+  cantiere:
+    status: active
+    recent:
+      - neutral_opening_and_explicit_project_restore
+      - project_identity_and_recovery_hardening
+      - durable_orchestrator_v1
+      - library_reuse_and_submission_paths
+  researcher_code_boundary:
+    status: hardened
+    rule: "Researcher candidate code cannot execute directly; code crosses Library."
+  voice:
+    status: active_incomplete
+    focus: sherpa_onnx_stt_kokoro_tts_live_interaction
+  cloud:
+    status: active_transition
+    rule: "Provider/resource infrastructure should converge through AIrLab rather than duplicate inside Cantiere."
+  desktop_platforms:
+    status: active
+    targets: [windows, linux, macos]
+  updates:
+    status: active
+    focus: verified_ota_and_release_lifecycle
+
+invariants:
+  - "Cantiere remains authoritative for Project/Task/Execution/review/validation/approval/apply."
+  - "Library reuse is checked before regeneration."
+  - "Missing capabilities are recorded immediately for Library/Researcher while Cantiere may implement them in parallel."
+  - "Reusable Cantiere-created capability code returns to Library intake after validation."
+  - "Researcher code never bypasses Library quarantine/certification."
+  - "No evolved application version becomes stable without real physical-device validation."
+  - "Durable work must survive restart and must not require the user to type continue."
+  - "Local mode remains useful offline; web access is optional capability, not a cloud-mode requirement."
+  - "GPU/Vulkan claims require runtime proof."
+
+roadmap:
+  - id: CANT-1
+    title: Repository/PR convergence and clean main
+    state: active
+    priority: P0
+    outcome: "Resolve/merge/rebuild/close historical open PRs so main remains understandable."
+  - id: CANT-2
+    title: Assistant local runtime stabilization
+    state: active
+    priority: P0
+    outcome: "Stable multi-turn local inference, no crashes, lower latency, correct context and continuous streaming."
+  - id: CANT-3
+    title: Voice and live interaction
+    state: active
+    priority: P0
+    outcome: "Reliable Sherpa-ONNX STT, audible Kokoro TTS, full local/live interaction loop."
+  - id: CANT-4
+    title: Immediate Library gap registration and first-use capture
+    state: planned
+    priority: P0
+  - id: CANT-5
+    title: Structured Researcher-Cantiere non-code control plane
+    state: planned
+    priority: P1
+  - id: CANT-6
+    title: Continuous Application Evolution
+    state: planned
+    priority: P1
+    outcome: "Rebuild maintained apps when a materially better certified capability affects them."
+  - id: CANT-7
+    title: Physical Device Lab
+    state: planned
+    priority: P0
+    outcome: "Real-device validation receipts gate stable distribution of evolved app versions."
+  - id: CANT-8
+    title: Durable external execution convergence
+    state: active
+    priority: P0
+    outcome: "WAITING_EXTERNAL/event reconciliation/watchdog/idempotency without busy-wait."
+  - id: CANT-9
+    title: AIrLab capability execution integration
+    state: active
+    priority: P0
+    outcome: "Use AIrLab provider-neutral capabilities without surrendering Cantiere lifecycle ownership."
+  - id: CANT-10
+    title: Platform/release hardening
+    state: active
+    priority: P1
+    outcome: "Android/Windows/Linux/macOS builds, verified update lifecycle and rollback."

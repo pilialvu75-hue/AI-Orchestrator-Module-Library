@@ -53,6 +53,14 @@ current_state:
   cantiere_build_isolation:
     status: active
     rule: "Read-only sparse checkout of .cantiere-build/source with no persisted checkout credential."
+  public_repository_roadmap_registry:
+    status: active
+    path: ".airlab/public-repositories/"
+    rule: "Roadmaps for public repositories are stored privately in Module Library, not in the public repositories."
+  first_party_legacy_mining:
+    status: planned
+    source_manifest: ".airlab/first-party-sources.yaml"
+    rule: "Legacy private repositories may be mined read-only; extracted candidates still enter Library intake and certification."
 
 architecture:
   trusted_code_flow:
@@ -165,3 +173,20 @@ roadmap:
     outcome: >-
       Keep Library contracts portable for future NAS/local/cloud storage without replacing
       the current GitHub authority prematurely.
+
+  - id: L12
+    title: First-party legacy repository mining
+    state: planned
+    priority: P1
+    outcome: >-
+      Give Researcher a read-only, explicit allowlist of owner-controlled legacy repositories
+      so it can statically identify reusable code/patterns and submit candidates to Library
+      intake without executing legacy source or bypassing certification.
+
+  - id: L13
+    title: Private roadmap registry for public repositories
+    state: done
+    priority: P0
+    outcome: >-
+      Keep the reconstructed roadmaps of public ecosystem repositories under
+      .airlab/public-repositories/ inside this private Library.
