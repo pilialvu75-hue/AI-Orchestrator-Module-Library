@@ -81,6 +81,8 @@ jobs:
             sed -i "/package:provider\/provider.dart/d" lib/main.dart
           fi
           dart format lib
+          dart fix --apply
+          dart format lib
           dart format --output=none --set-exit-if-changed lib
           flutter analyze
           if find test -type f -name '*.dart' -print -quit 2>/dev/null | grep -q .; then
