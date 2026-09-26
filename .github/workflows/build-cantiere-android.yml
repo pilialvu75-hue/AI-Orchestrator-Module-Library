@@ -81,7 +81,11 @@ jobs:
         with:
           distribution: temurin
           java-version: '17'
-          cache: gradle
+        # Do not enable setup-java's Gradle cache here. Security isolation
+        # intentionally sparse-checks out only .cantiere-build/source, while
+        # the generic Android scaffold (and therefore Gradle files) is created
+        # later under RUNNER_TEMP. setup-java treats "no Gradle files matched"
+        # as a hard failure before Flutter ever gets a chance to build.
 
       - name: Setup Flutter
         uses: subosito/flutter-action@v2
