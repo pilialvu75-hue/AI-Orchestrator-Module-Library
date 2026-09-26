@@ -65,6 +65,14 @@ jobs:
           rsync -a .cantiere-build/source/ "$WORKSPACE/"
           cd "$WORKSPACE"
           flutter pub get
+          python3 - <<'PY'
+          from pathlib import Path
+          for path in Path("lib").rglob("*.dart"):
+              text = path.read_text(encoding="utf-8")
+              lines = text.splitlines()
+              if len(lines) >= 2 and lines[0].strip() in {"```", "```dart"} and lines[-1].strip() == "```":
+                  path.write_text("\n".join(lines[1:-1]) + "\n", encoding="utf-8")
+          PY
           dart format lib
           dart format --output=none --set-exit-if-changed lib
           flutter analyze
