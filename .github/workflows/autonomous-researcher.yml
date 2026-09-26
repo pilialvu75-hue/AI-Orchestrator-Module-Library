@@ -25,7 +25,10 @@ jobs:
         with:
           python-version: "3.12"
       - name: Select one bounded first-party candidate
-        run: python tools/autonomous_researcher.py | tee /tmp/autonomous-researcher.json
+        shell: bash
+        run: |
+          set -euo pipefail
+          python tools/autonomous_researcher.py | tee /tmp/autonomous-researcher.json
       - name: Validate Library before publishing discovery
         run: |
           python tools/validate_library.py
