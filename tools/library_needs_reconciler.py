@@ -73,9 +73,29 @@ def reconcile(root: Path, *, now: str | None = None) -> dict[str, Any]:
     semantic_changed = previous.get("items") != rendered_items
     if semantic_changed:
         target.write_text(json.dumps(result, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
+
+    coverage_result = {
+        "schema_version": 1,
+        "updated_at": timestamp,
+        "certified": coverage["certified"],
+        "adaptable": coverage["adaptable"],
+    }
+    coverage_target = root / "catalog" / "coverage.json"
+    previous_coverage = _load(coverage_target) if coverage_target.is_file() else None
+    coverage_changed = previous_coverage is None or {
+        "certified": previous_coverage.get("certified", {}),
+        "adaptable": previous_coverage.get("adaptable", {}),
+    } != {
+        "certified": coverage_result["certified"],
+        "adaptable": coverage_result["adaptable"],
+    }
+    if coverage_changed:
+        coverage_target.write_text(json.dumps(coverage_result, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
+
     return {
         "schema": "ai-orchestrator.library-needs-reconcile.v1",
         "semantic_changed": semantic_changed,
+        "coverage_changed": coverage_changed,
         "status_changes": changed,
         "needs": len(rendered_items),
         "certified_capabilities": len(coverage["certified"]),

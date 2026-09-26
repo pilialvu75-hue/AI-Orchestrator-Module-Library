@@ -48,6 +48,9 @@ class NeedsReconcilerTest(unittest.TestCase):
         self.assertEqual("needed", data["items"][0]["status"])
         self.assertEqual(1, report["coverage"]["adaptable"]["a.cap"]["linux"])
         self.assertNotIn("a.cap", report["coverage"]["certified"])
+        persisted=json.loads((self.root/"catalog"/"coverage.json").read_text())
+        self.assertEqual(1, persisted["adaptable"]["a.cap"]["linux"])
+        self.assertNotIn("a.cap", persisted["certified"])
 
     def test_revoked_asset_does_not_satisfy_need(self):
         self.write("needs.json", {"schema_version":1,"updated_at":"x","items":[
