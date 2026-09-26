@@ -149,6 +149,8 @@ class LibraryResolverTest(unittest.TestCase):
         effort: str,
         availability: str,
         capability: str = "voice.stt",
+        status: str = "certified",
+        immutable_provenance: bool = False,
         contract_id: str = "voice.stt.v1",
     ) -> dict:
         path = self.root / "modules" / asset_id / version / "manifest.json"
@@ -157,15 +159,15 @@ class LibraryResolverTest(unittest.TestCase):
             "name": asset_id,
             "version": version,
             "kind": "integration_bundle",
-            "status": "certified",
+            "status": status,
             "description": f"Fixture {asset_id}",
             "capabilities": [capability],
             "platforms": ["android"],
             "dependencies": [],
             "provenance": {
                 "origin": "cantiere",
-                "source_repository": None,
-                "source_commit": None,
+                "source_repository": "https://github.com/example/fixture" if immutable_provenance else None,
+                "source_commit": "0123456789abcdef0123456789abcdef01234567" if immutable_provenance else None,
                 "source_tag": None,
                 "source_project_id": "fixture",
                 "source_task_id": None,
@@ -222,7 +224,7 @@ class LibraryResolverTest(unittest.TestCase):
             "id": asset_id,
             "version": version,
             "manifest": str(path.relative_to(self.root).as_posix()),
-            "status": "certified",
+            "status": status,
             "availability": availability,
             "kind": "integration_bundle",
             "capabilities": [capability],
@@ -282,6 +284,28 @@ class LibraryResolverTest(unittest.TestCase):
             require_stable_contract=True,
         )
         self.assertEqual([], strict)
+
+    def test_adaptable_tested_candidate_is_opt_in_and_never_implicit_certified(self) -> None:
+        adaptable = self.make_asset(
+            "voice.adaptable",
+            "1.0.0",
+            score=0.70,
+            effort="medium",
+            availability="active",
+            status="tested",
+            immutable_provenance=True,
+        )
+        catalog = json.loads((self.root / "catalog" / "index.json").read_text(encoding="utf-8"))
+        catalog["assets"].append(adaptable)
+        self.write_json(self.root / "catalog" / "index.json", catalog)
+
+        strict = query(self.root, capability="voice.stt")
+        self.assertNotIn("voice.adaptable", [item["id"] for item in strict])
+
+        pragmatic = query(self.root, capability="voice.stt", include_adaptable=True)
+        record = next(item for item in pragmatic if item["id"] == "voice.adaptable")
+        self.assertEqual("tested", record["status"])
+        self.assertTrue(record["integration"]["adaptation_allowed"])
 
     def test_snapshot_is_deterministic_and_includes_revoked_for_awareness(self) -> None:
         first = build_snapshot(self.root)

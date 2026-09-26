@@ -235,10 +235,27 @@ def candidate_matches(
     kind: str | None,
     max_effort: str | None,
     include_deprecated: bool,
+    include_adaptable: bool,
     require_stable_contract: bool,
 ) -> bool:
-    if record["status"] != "certified":
-        return False
+    status = record["status"]
+    if status != "certified":
+        if not include_adaptable or status != "tested":
+            return False
+        integration = record.get("integration") or {}
+        security = record.get("security") or {}
+        validation = record.get("validation") or {}
+        provenance = record.get("provenance") or {}
+        # Adaptable candidates are visible for Cantiere transformation only. They are
+        # never equivalent to certified assets and must still have concrete evidence.
+        if not integration.get("adaptation_allowed"):
+            return False
+        if not validation.get("tests_passed") or normalize_score(validation.get("score")) < 0.60:
+            return False
+        if not security.get("reviewed") or int(security.get("known_vulnerabilities") or 0) != 0:
+            return False
+        if not provenance.get("source_repository") or not provenance.get("source_commit"):
+            return False
     current_availability = record["availability"]
     if current_availability == "revoked":
         return False
@@ -303,6 +320,7 @@ def query(
     kind: str | None = None,
     max_effort: str | None = None,
     include_deprecated: bool = False,
+    include_adaptable: bool = False,
     require_stable_contract: bool = False,
 ) -> list[dict]:
     require(bool(capability.strip()), "capability is required")
@@ -321,6 +339,7 @@ def query(
             kind=kind,
             max_effort=max_effort,
             include_deprecated=include_deprecated,
+            include_adaptable=include_adaptable,
             require_stable_contract=require_stable_contract,
         ):
             records.append(record)
@@ -393,6 +412,7 @@ def common_filters(parser: argparse.ArgumentParser) -> None:
     parser.add_argument("--kind")
     parser.add_argument("--max-effort", choices=sorted(EFFORT_ORDER, key=lambda value: EFFORT_ORDER[value]))
     parser.add_argument("--include-deprecated", action="store_true")
+    parser.add_argument("--include-adaptable", action="store_true", help="include tested, evidenced candidates that require Cantiere adaptation")
     parser.add_argument("--require-stable-contract", action="store_true")
 
 
@@ -404,6 +424,7 @@ def filters_from_args(args: argparse.Namespace) -> dict:
         "kind": args.kind,
         "max_effort": args.max_effort,
         "include_deprecated": args.include_deprecated,
+        "include_adaptable": args.include_adaptable,
         "require_stable_contract": args.require_stable_contract,
     }
 
