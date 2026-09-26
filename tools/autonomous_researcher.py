@@ -76,7 +76,9 @@ def materialize(root: Path, selected: dict[str, object]) -> Path:
     candidate = selected["candidate"]
     asset_id = selected["asset_id"]
     repo = source["repository"]
-    sha = _head_sha(repo)
+    sha = str(source.get("source_commit") or "").lower()
+    if len(sha) != 40 or any(ch not in "0123456789abcdef" for ch in sha):
+        sha = _head_sha(repo)
     version = "0.1.0"
     out = root / "intake" / asset_id / version
     out.mkdir(parents=True, exist_ok=False)
