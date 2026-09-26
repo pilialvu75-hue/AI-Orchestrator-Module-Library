@@ -1,0 +1,53 @@
+name: Autonomous Researcher
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "37 */6 * * *"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: module-library-autonomous-researcher
+  cancel-in-progress: false
+
+jobs:
+  discover:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          ref: main
+          fetch-depth: 0
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+      - name: Select one bounded first-party candidate
+        run: python tools/autonomous_researcher.py | tee /tmp/autonomous-researcher.json
+      - name: Validate Library before publishing discovery
+        run: |
+          python tools/validate_library.py
+          python -m unittest discover -s tests -p 'test_*.py' -v
+      - name: Commit discovered intake only
+        shell: bash
+        run: |
+          set -euo pipefail
+          if git diff --quiet -- intake; then
+            echo "No eligible candidate discovered."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add intake
+          git commit -m "researcher: discover bounded first-party intake candidate"
+          git push origin HEAD:main
+      - name: Upload discovery report
+        if: always()
+        uses: actions/upload-artifact@v6
+        with:
+          name: autonomous-researcher-discovery
+          path: /tmp/autonomous-researcher.json
+          if-no-files-found: ignore
+          retention-days: 14
