@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-09-22",
+  "updated_at": "2026-09-26",
   "policy": {
     "access": "read_only",
     "execute_source": false,
@@ -41,7 +41,8 @@
           "component_path": "lib/core/runtime/inference/local_runtime_diagnostics_service.dart",
           "kind": "component"
         }
-      ]
+      ],
+      "source_commit": "c65a8b8702930a40620dea34f1f14439532a5a9b"
     },
     {
       "repository": "pilialvu75-hue/MobileIde",
@@ -63,7 +64,8 @@
           "component_path": "flutter_app/android",
           "kind": "project_template"
         }
-      ]
+      ],
+      "source_commit": "b964aa2869ac6d7e24f857a9a74b958ed120945d"
     },
     {
       "repository": "pilialvu75-hue/Mia",
@@ -90,7 +92,8 @@
           "component_path": "scripts",
           "kind": "project_template"
         }
-      ]
+      ],
+      "source_commit": "ebeaa2884bce22e891d15da7c1f61962dde0699a"
     },
     {
       "repository": "pilialvu75-hue/FLUTTERIDE",
@@ -112,7 +115,8 @@
           "component_path": "android",
           "kind": "project_template"
         }
-      ]
+      ],
+      "source_commit": "c005f94bed41bf699043ee5d40c20d03440561be"
     },
     {
       "repository": "pilialvu75-hue/Template-webview",
@@ -134,7 +138,8 @@
           "component_path": "android",
           "kind": "project_template"
         }
-      ]
+      ],
+      "source_commit": "95b7f49f297d33f46d9eb5a091d1f3b69dcdd089"
     },
     {
       "repository": "pilialvu75-hue/Template-AI-1",
@@ -146,7 +151,8 @@
           "component_path": "project-template/docker",
           "kind": "project_template"
         }
-      ]
+      ],
+      "source_commit": "23ff34ba3f437bee13abee5e56685ab6de8a84e0"
     },
     {
       "repository": "pilialvu75-hue/Ai_orchestrator-prova1",
