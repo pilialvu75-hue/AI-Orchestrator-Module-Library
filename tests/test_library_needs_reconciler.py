@@ -36,6 +36,19 @@ class NeedsReconcilerTest(unittest.TestCase):
         self.assertEqual("satisfied", rows["a.cap"]["status"])
         self.assertEqual("needed", rows["b.cap"]["status"])
         self.assertEqual(2, report["needs"])
+    def test_tested_asset_is_reported_as_adaptable_but_does_not_fake_satisfaction(self):
+        self.write("needs.json", {"schema_version":1,"updated_at":"x","items":[
+            {"capability_id":"a.cap","title":"A","priority":"high","desired_candidates":1,"status":"needed","targets":["linux"]}
+        ]})
+        self.write("index.json", {"assets":[
+            {"id":"a","status":"tested","capabilities":["a.cap"],"platforms":["linux"]}
+        ]})
+        report = reconcile(self.root, now="2026-09-18T00:00:00Z")
+        data=json.loads((self.root/"catalog"/"needs.json").read_text())
+        self.assertEqual("needed", data["items"][0]["status"])
+        self.assertEqual(1, report["coverage"]["adaptable"]["a.cap"]["linux"])
+        self.assertNotIn("a.cap", report["coverage"]["certified"])
+
     def test_revoked_asset_does_not_satisfy_need(self):
         self.write("needs.json", {"schema_version":1,"updated_at":"x","items":[
             {"capability_id":"a.cap","title":"A","priority":"high","desired_candidates":1,"status":"satisfied","targets":["linux"]}
