@@ -73,11 +73,12 @@ jobs:
               if len(lines) >= 2 and lines[0].strip() in {"```", "```dart"} and lines[-1].strip() == "```":
                   path.write_text("\n".join(lines[1:-1]) + "\n", encoding="utf-8")
           PY
-          # Diagnostic-only completion of the undeclared package imported by
-          # the exact staged source. The authoritative Cantiere source remains
-          # unchanged; this tells us whether another compiler defect remains.
-          if grep -Rqs "package:provider/provider.dart" lib && ! grep -qE '^[[:space:]]+provider:' pubspec.yaml; then
-            flutter pub add provider
+          # Diagnostic-only normalization in the ephemeral workspace. The
+          # authoritative staged source remains unchanged. Remove the observed
+          # external import only when it is the sole reference to that package,
+          # proving whether another compiler defect remains.
+          if [ "$(grep -R "provider" lib/main.dart | wc -l | tr -d ' ')" = "1" ] && grep -q "package:provider/provider.dart" lib/main.dart; then
+            sed -i "/package:provider\/provider.dart/d" lib/main.dart
           fi
           dart format lib
           dart format --output=none --set-exit-if-changed lib
