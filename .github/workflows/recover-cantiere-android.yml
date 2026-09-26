@@ -1,0 +1,88 @@
+name: Cantiere Recovery Android Build
+
+on:
+  push:
+    branches:
+      - cantiere-recovery/b-9185fdd3ddb6c5bb48c0ca4e
+
+permissions:
+  contents: read
+
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: "true"
+
+jobs:
+  build-recovered-android:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 35
+
+    steps:
+      - name: Checkout recovered Cantiere source only
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 1
+          persist-credentials: false
+          sparse-checkout: |
+            .cantiere-build/source
+          sparse-checkout-cone-mode: false
+          submodules: false
+
+      - name: Validate recovered source boundary
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -d .cantiere-build/source
+          test -f .cantiere-build/source/lib/main.dart
+          if find .cantiere-build/source -type l -print -quit | grep -q .; then
+            echo "Symbolic links are not allowed." >&2
+            exit 41
+          fi
+
+      - name: Setup Java
+        uses: actions/setup-java@v6
+        with:
+          distribution: temurin
+          java-version: '17'
+
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+          cache: true
+
+      - name: Build exact recovered Cantiere project
+        shell: bash
+        run: |
+          set -euo pipefail
+          WORKSPACE="$RUNNER_TEMP/cantiere-recovered-app"
+          rm -rf "$WORKSPACE"
+          flutter create \
+            --empty \
+            --platforms=android \
+            --project-name=cantiere_generated_app \
+            --org=ai.orchestrator.generated \
+            "$WORKSPACE"
+          rsync -a .cantiere-build/source/ "$WORKSPACE/"
+          cd "$WORKSPACE"
+          flutter pub get
+          dart format lib
+          dart format --output=none --set-exit-if-changed lib
+          flutter analyze
+          if find test -type f -name '*.dart' -print -quit 2>/dev/null | grep -q .; then
+            flutter test --reporter expanded
+          fi
+          flutter build apk --release
+          test -s build/app/outputs/flutter-apk/app-release.apk
+          mkdir -p "$GITHUB_WORKSPACE/build/cantiere-recovery"
+          cp build/app/outputs/flutter-apk/app-release.apk \
+            "$GITHUB_WORKSPACE/build/cantiere-recovery/app-release.apk"
+          sha256sum "$GITHUB_WORKSPACE/build/cantiere-recovery/app-release.apk" \
+            > "$GITHUB_WORKSPACE/build/cantiere-recovery/app-release.apk.sha256"
+
+      - name: Upload recovered Cantiere APK
+        uses: actions/upload-artifact@v6
+        with:
+          name: cantiere-recovered-first-app
+          path: build/cantiere-recovery/
+          if-no-files-found: error
+          retention-days: 7
