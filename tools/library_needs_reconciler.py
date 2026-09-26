@@ -38,21 +38,23 @@ def reconcile(root: Path, *, now: str | None = None) -> dict[str, Any]:
             else:
                 merged[cid] = item
 
-    coverage: dict[str, dict[str, int]] = {}
+    coverage: dict[str, dict[str, dict[str, int]]] = {"certified": {}, "adaptable": {}}
     for asset in catalog.get("assets", []):
-        if asset.get("status") != "certified" or asset.get("availability", "active") == "revoked":
+        status = str(asset.get("status"))
+        if asset.get("availability", "active") == "revoked" or status not in {"certified", "tested"}:
             continue
+        lane = "certified" if status == "certified" else "adaptable"
         platforms = {str(x).lower() for x in asset.get("platforms", [])}
         for capability in asset.get("capabilities", []):
             cid = str(capability)
-            row = coverage.setdefault(cid, {})
+            row = coverage[lane].setdefault(cid, {})
             for platform in platforms:
                 row[platform] = row.get(platform, 0) + 1
 
     changed = 0
     for cid, item in merged.items():
         desired = int(item["desired_candidates"])
-        counts = coverage.get(cid, {})
+        counts = coverage["certified"].get(cid, {})
         targets = [str(x).lower() for x in item["targets"]]
         satisfied = all(
             sum(count for platform, count in counts.items() if _target_covered(target, {platform})) >= desired
@@ -76,7 +78,9 @@ def reconcile(root: Path, *, now: str | None = None) -> dict[str, Any]:
         "semantic_changed": semantic_changed,
         "status_changes": changed,
         "needs": len(rendered_items),
-        "certified_capabilities": len(coverage),
+        "certified_capabilities": len(coverage["certified"]),
+        "adaptable_capabilities": len(coverage["adaptable"]),
+        "coverage": coverage,
     }
 
 
