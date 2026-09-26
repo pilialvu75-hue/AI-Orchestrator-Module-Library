@@ -150,6 +150,7 @@ class LibraryResolverTest(unittest.TestCase):
         availability: str,
         capability: str = "voice.stt",
         status: str = "certified",
+        immutable_provenance: bool = False,
         contract_id: str = "voice.stt.v1",
     ) -> dict:
         path = self.root / "modules" / asset_id / version / "manifest.json"
@@ -165,8 +166,8 @@ class LibraryResolverTest(unittest.TestCase):
             "dependencies": [],
             "provenance": {
                 "origin": "cantiere",
-                "source_repository": None,
-                "source_commit": None,
+                "source_repository": "https://github.com/example/fixture" if immutable_provenance else None,
+                "source_commit": "0123456789abcdef0123456789abcdef01234567" if immutable_provenance else None,
                 "source_tag": None,
                 "source_project_id": "fixture",
                 "source_task_id": None,
@@ -292,6 +293,7 @@ class LibraryResolverTest(unittest.TestCase):
             effort="medium",
             availability="active",
             status="tested",
+            immutable_provenance=True,
         )
         catalog = json.loads((self.root / "catalog" / "index.json").read_text(encoding="utf-8"))
         catalog["assets"].append(adaptable)
