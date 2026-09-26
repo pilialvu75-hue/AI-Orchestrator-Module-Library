@@ -44,6 +44,13 @@ class UpstreamWorkflowIsolationTest(unittest.TestCase):
         self.assertIn(".cantiere-build/source", text)
         self.assertIn("sparse-checkout-cone-mode: false", text)
         self.assertNotIn("contents: write", text)
+        setup_java, _ = text.split("      - name: Setup Flutter", 1)
+        setup_java = setup_java.split("      - name: Setup Java", 1)[1]
+        self.assertNotIn("cache: gradle", setup_java)
+        self.assertIn(
+            "Do not enable setup-java's Gradle cache here",
+            setup_java,
+        )
 
 
 if __name__ == "__main__":
