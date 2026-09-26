@@ -82,6 +82,7 @@ jobs:
           fi
           dart format lib
           dart fix --apply
+          sed -i 's/_WalkingTrackerState createState()/State<WalkingTracker> createState()/' lib/main.dart
           dart format lib
           dart format --output=none --set-exit-if-changed lib
           flutter analyze
