@@ -320,6 +320,7 @@ def query(
     kind: str | None = None,
     max_effort: str | None = None,
     include_deprecated: bool = False,
+    include_adaptable: bool = False,
     require_stable_contract: bool = False,
 ) -> list[dict]:
     require(bool(capability.strip()), "capability is required")
