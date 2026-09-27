@@ -2,107 +2,776 @@ schema_version: 1
 repository: pilialvu75-hue/Ai-orchestrator-riserva
 visibility: public
 roadmap_storage: private_library
-updated_at: 2026-09-22
-baseline_commit: 8f6cc27e857dce79ae4ef9d3b70890b3983c02e2
-
+updated_at: '2026-09-27'
+baseline_commit: 0c1fa14c154308a03a62a6ad730d639d7ace3e65
 lifecycle:
   status: active_primary
   role: cantiere_and_offline_first_ai_orchestrator
   authority:
-    - project_lifecycle
-    - task_execution
-    - review_validation_approval_apply
-    - local_user_experience
-
-mission: >-
-  Remain the primary offline-first Flutter AI Orchestrator and Cantiere application,
-  coordinating local/cloud intelligence, Library reuse, project generation, durable execution
-  and real artifacts without becoming dependent on one provider or a live chat session.
-
+  - project_lifecycle
+  - task_execution
+  - review_validation_approval_apply
+  - local_user_experience
+mission: Remain the primary offline-first Flutter AI Orchestrator and Cantiere application, coordinating local/cloud
+  intelligence, Library reuse, project generation, durable execution and real artifacts without becoming dependent
+  on one provider or a live chat session.
 current_state:
   local_runtime:
     status: active
     focus: phi3_5_mini_android_vulkan_stability_latency
+    audit_findings:
+    - CANT-AUDIT-05
+    - CANT-AUDIT-09
+    - CANT-AUDIT-10
+    - CANT-AUDIT-11
+    compiled_backends_at_baseline:
+      mlc: disabled
+      vulkan: enabled
+    validation_rule: Compiled backend and requested layers do not prove actual offload, stability or latency on
+      a physical device.
   cantiere:
     status: active
     recent:
-      - neutral_opening_and_explicit_project_restore
-      - project_identity_and_recovery_hardening
-      - durable_orchestrator_v1
-      - library_reuse_and_submission_paths
+    - neutral_opening_and_explicit_project_restore
+    - project_identity_and_recovery_hardening
+    - durable_orchestrator_v1
+    - library_reuse_and_submission_paths
+    audit_findings:
+    - CANT-AUDIT-01
+    - CANT-AUDIT-02
+    - CANT-AUDIT-03
+    - CANT-AUDIT-04
+    - CANT-AUDIT-06
+    - CANT-AUDIT-13
+    integration_caveat: Durable components exist, but the production private GitHub build path still needs persisted
+      external-run recovery and per-request deadlines.
   researcher_code_boundary:
     status: hardened
-    rule: "Researcher candidate code cannot execute directly; code crosses Library."
+    rule: Researcher candidate code cannot execute directly; code crosses Library.
   voice:
     status: active_incomplete
     focus: sherpa_onnx_stt_kokoro_tts_live_interaction
+    implementation_note: Active DI uses Sherpa from Dart and isolate-backed Kokoro; legacy Kotlin channel stubs
+      do not prove the active voice engine is unimplemented.
   cloud:
     status: active_transition
-    rule: "Provider/resource infrastructure should converge through AIrLab rather than duplicate inside Cantiere."
+    rule: Provider/resource infrastructure should converge through AIrLab rather than duplicate inside Cantiere.
+    audit_findings:
+    - CANT-AUDIT-12
   desktop_platforms:
     status: active
-    targets: [windows, linux, macos]
+    targets:
+    - windows
+    - linux
+    - macos
   updates:
     status: active
     focus: verified_ota_and_release_lifecycle
-
+    audit_findings:
+    - CANT-AUDIT-07
+    - CANT-AUDIT-08
+    - CANT-AUDIT-20
 invariants:
-  - "Cantiere remains authoritative for Project/Task/Execution/review/validation/approval/apply."
-  - "Library reuse is checked before regeneration."
-  - "Missing capabilities are recorded immediately for Library/Researcher while Cantiere may implement them in parallel."
-  - "Reusable Cantiere-created capability code returns to Library intake after validation."
-  - "Researcher code never bypasses Library quarantine/certification."
-  - "No evolved application version becomes stable without real physical-device validation."
-  - "Durable work must survive restart and must not require the user to type continue."
-  - "Local mode remains useful offline; web access is optional capability, not a cloud-mode requirement."
-  - "GPU/Vulkan claims require runtime proof."
-
+- Cantiere remains authoritative for Project/Task/Execution/review/validation/approval/apply.
+- Library reuse is checked before regeneration.
+- Missing capabilities are recorded immediately for Library/Researcher while Cantiere may implement them in parallel.
+- Reusable Cantiere-created capability code returns to Library intake after validation.
+- Researcher code never bypasses Library quarantine/certification.
+- No evolved application version becomes stable without real physical-device validation.
+- Durable work must survive restart and must not require the user to type continue.
+- Local mode remains useful offline; web access is optional capability, not a cloud-mode requirement.
+- GPU/Vulkan claims require runtime proof.
 roadmap:
-  - id: CANT-1
-    title: Repository/PR convergence and clean main
-    state: active
-    priority: P0
-    outcome: "Resolve/merge/rebuild/close historical open PRs so main remains understandable."
-  - id: CANT-2
-    title: Assistant local runtime stabilization
-    state: active
-    priority: P0
-    outcome: "Stable multi-turn local inference, no crashes, lower latency, correct context and continuous streaming."
-  - id: CANT-3
-    title: Voice and live interaction
-    state: active
-    priority: P0
-    outcome: "Reliable Sherpa-ONNX STT, audible Kokoro TTS, full local/live interaction loop."
-  - id: CANT-4
-    title: Immediate Library gap registration and first-use capture
-    state: planned
-    priority: P0
-  - id: CANT-5
-    title: Structured Researcher-Cantiere non-code control plane
-    state: planned
-    priority: P1
-  - id: CANT-6
-    title: Continuous Application Evolution
-    state: planned
-    priority: P1
-    outcome: "Rebuild maintained apps when a materially better certified capability affects them."
-  - id: CANT-7
-    title: Physical Device Lab
-    state: planned
-    priority: P0
-    outcome: "Real-device validation receipts gate stable distribution of evolved app versions."
-  - id: CANT-8
-    title: Durable external execution convergence
-    state: active
-    priority: P0
-    outcome: "WAITING_EXTERNAL/event reconciliation/watchdog/idempotency without busy-wait."
-  - id: CANT-9
-    title: AIrLab capability execution integration
-    state: active
-    priority: P0
-    outcome: "Use AIrLab provider-neutral capabilities without surrendering Cantiere lifecycle ownership."
-  - id: CANT-10
-    title: Platform/release hardening
-    state: active
-    priority: P1
-    outcome: "Android/Windows/Linux/macOS builds, verified update lifecycle and rollback."
+- id: CANT-1
+  title: Repository/PR convergence and clean main
+  state: active
+  priority: P0
+  outcome: Resolve/merge/rebuild/close historical open PRs so main remains understandable.
+  audit_findings:
+  - CANT-AUDIT-21
+- id: CANT-2
+  title: Assistant local runtime stabilization
+  state: active
+  priority: P0
+  outcome: Stable multi-turn local inference, no crashes, lower latency, correct context and continuous streaming.
+  audit_findings:
+  - CANT-AUDIT-05
+  - CANT-AUDIT-09
+  - CANT-AUDIT-10
+  - CANT-AUDIT-11
+- id: CANT-3
+  title: Voice and live interaction
+  state: active
+  priority: P0
+  outcome: Reliable Sherpa-ONNX STT, audible Kokoro TTS, full local/live interaction loop.
+- id: CANT-4
+  title: Immediate Library gap registration and first-use capture
+  state: planned
+  priority: P0
+  audit_findings:
+  - CANT-AUDIT-13
+- id: CANT-5
+  title: Structured Researcher-Cantiere non-code control plane
+  state: planned
+  priority: P1
+- id: CANT-6
+  title: Continuous Application Evolution
+  state: planned
+  priority: P1
+  outcome: Rebuild maintained apps when a materially better certified capability affects them.
+- id: CANT-7
+  title: Physical Device Lab
+  state: planned
+  priority: P0
+  outcome: Real-device validation receipts gate stable distribution of evolved app versions.
+  audit_findings:
+  - CANT-AUDIT-06
+  - CANT-AUDIT-07
+- id: CANT-8
+  title: Durable external execution convergence
+  state: active
+  priority: P0
+  outcome: WAITING_EXTERNAL/event reconciliation/watchdog/idempotency without busy-wait.
+  audit_findings:
+  - CANT-AUDIT-04
+  - CANT-AUDIT-18
+- id: CANT-9
+  title: AIrLab capability execution integration
+  state: active
+  priority: P0
+  outcome: Use AIrLab provider-neutral capabilities without surrendering Cantiere lifecycle ownership.
+  audit_findings:
+  - CANT-AUDIT-12
+  - CANT-AUDIT-17
+- id: CANT-10
+  title: Platform/release hardening
+  state: active
+  priority: P1
+  outcome: Android/Windows/Linux/macOS builds, verified update lifecycle and rollback.
+  audit_findings:
+  - CANT-AUDIT-07
+  - CANT-AUDIT-08
+  - CANT-AUDIT-20
+- id: CANT-11
+  title: 'First real app: shared contract, bounded tasks and complete review'
+  state: active
+  priority: P0
+  outcome: Produce a real installable app through coherent role contracts, small tasks and review coverage of every
+    staged change.
+  audit_findings:
+  - CANT-AUDIT-01
+  - CANT-AUDIT-02
+  - CANT-AUDIT-03
+  - CANT-AUDIT-06
+  related_prs:
+  - https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/608
+- id: CANT-12
+  title: Shared memory correctness and observable integration
+  state: planned
+  priority: P1
+  outcome: Preserve concurrent Assistant updates and establish convergent, complete, authenticated synchronization
+    before enabling distributed memory.
+  audit_findings:
+  - CANT-AUDIT-14
+  - CANT-AUDIT-15
+  - CANT-AUDIT-16
+  - CANT-AUDIT-17
+  activation_gate: Distributed sync remains gated on convergence, cursor completeness, pairing and privacy export
+    tests.
+- id: CANT-13
+  title: Canonical composition, module boundaries and current architecture baseline
+  state: planned
+  priority: P2
+  outcome: Build one final dependency graph, move lifecycle ownership out of presentation, align documentation and
+    remove only proven obsolete paths.
+  audit_findings:
+  - CANT-AUDIT-18
+  - CANT-AUDIT-19
+audit_review:
+  reviewed_at: '2026-09-27'
+  audited_repository: pilialvu75-hue/Ai-orchestrator-riserva
+  audited_commit: 0c1fa14c154308a03a62a6ad730d639d7ace3e65
+  source_audits:
+  - repository_code_api_ci_review
+  - user_supplied_grok_audit
+  - user_supplied_claude_audit
+  decision_rule: Use current code, reachable call paths and reproducible evidence; audit agreement alone does not
+    establish a defect.
+  findings_count: 21
+  evidence_scope: Pinned source, GitHub API/CI logs and targeted Dart probes on the same commit; no new physical-device
+    benchmark.
+  execution_rule: Read this roadmap, refresh the target main and linked PRs, preserve existing work, then implement
+    only the remaining delta.
+  priority_rule: Existing CANT epic priorities are preserved. Finding priorities describe audited severity; activation
+    gates and delivery_order define sequencing.
+  repository_snapshot:
+    remote_branches: 716
+    distinct_branch_head_shas: 682
+    duplicate_head_groups: 20
+    additional_names_in_duplicate_groups: 34
+    open_prs: 12
+    delete_branch_on_merge: false
+    main_protected: false
+    rulesets_count: 0
+  ci_snapshot:
+    run_id: 36318915202
+    job_id: 108618819593
+    conclusion: success
+    duration_seconds: 1125
+    apk_seconds: 569
+    aab_seconds: 104
+    native_cache: restored_primary_key_hit
+    flutter_tests_passed: 1252
+    flutter_tests_skipped: 1
+    analyzer_warnings: 18
+    analyzer_infos: 158
+  already_implemented:
+  - Android native model/session creation and release run off the UI isolate.
+  - Android final prompt budgeting uses the native tokenizer, output reservation and explicit capacity failure.
+  - Android model/voice downloads use persistent DownloadManager requests and transfer deduplication.
+  - Voice DI uses Sherpa from Dart and isolate-backed Kokoro; legacy Kotlin stubs do not describe the active engine.
+  - Android native cache is preserved; do not reintroduce a full clean as the default optimization.
+  - Gradle configures MLC OFF and Vulkan ON; these are independent execution paths.
+  - Analyzer errors remain fatal; only warnings and infos are non-fatal under the current flags.
+  safeguards:
+  - Do not treat a green scripted Cantiere smoke test as physical validation of real-model generation.
+  - Do not mark an open PR as implemented on main or a proposed profile as physically validated.
+  - Do not weaken cancellation, memory guards, review, approval/apply or Library certification boundaries.
+  - 'Do not delete duplicate-head branches blindly: the group at feab579e4d5e53cd394d12521d09dca561be9c60 contains
+    open PR #583''s head.'
+  - Do not enable LAN sync before convergence, cursors, authentication and privacy export rules are verified.
+  - Do not attribute device latency to branch count, file size, class count or MLC being disabled without execution
+    evidence.
+delivery_order:
+- stage: first_real_cantiere_app
+  findings:
+  - CANT-AUDIT-01
+  - CANT-AUDIT-02
+  - CANT-AUDIT-03
+  outcome: Shared task contract, bounded work and complete review coverage.
+- stage: parallel_runtime_and_acceptance
+  findings:
+  - CANT-AUDIT-05
+  - CANT-AUDIT-06
+  - CANT-AUDIT-08
+  outcome: 'Validate existing PR #640 on S24 FE; fix reproducible inputs and real-device acceptance without waiting
+    for a broad refactor.'
+- stage: durable_execution_and_release
+  findings:
+  - CANT-AUDIT-04
+  - CANT-AUDIT-07
+  outcome: Recover the same external run and promote only the validated commit/artifacts.
+- stage: bounded_independent_fixes
+  findings:
+  - CANT-AUDIT-11
+  - CANT-AUDIT-12
+  - CANT-AUDIT-09
+  - CANT-AUDIT-10
+  - CANT-AUDIT-13
+  - CANT-AUDIT-16
+  outcome: Reuse the existing web/OAuth/KV/Library PRs; profile changes and preserve memory updates.
+- stage: before_shared_memory_activation
+  findings:
+  - CANT-AUDIT-14
+  - CANT-AUDIT-15
+  - CANT-AUDIT-17
+  outcome: Convergent, complete, authenticated synchronization and observable Fabric integration.
+- stage: incremental_architecture_and_maintenance
+  findings:
+  - CANT-AUDIT-18
+  - CANT-AUDIT-19
+  - CANT-AUDIT-20
+  - CANT-AUDIT-21
+  outcome: Canonical ownership, current docs, measurable CI improvements and branch cleanup with preserved work.
+audit_findings:
+- id: CANT-AUDIT-01
+  audit_item: 1
+  title: Contratto incoerente tra Architect, Engineer, Reviewer e Validation
+  state: active
+  priority: P1
+  source_priority: P1
+  epics:
+  - CANT-11
+  evidence_level: Confermato nel percorso attivo
+  problem: Engineer riceve al massimo 900 caratteri del piano Architect, 600 nel retry; Reviewer e Validation usano
+    limiti diversi. Anche istruzioni e vincoli possono essere tagliati diversamente. Un requisito può essere richiesto
+    in revisione pur non essendo stato comunicato all’Engineer.
+  implementation: 'Produrre una proiezione strutturata e comune del task, con requisiti identificati, vincoli, file
+    e criteri di accettazione. Gestire il budget prima della distribuzione ai ruoli; recuperare selettivamente la
+    PR #608, oggi in conflitto.'
+  done_when: Con un piano lungo e un requisito in coda, tutti i ruoli e i retry ricevono lo stesso contratto; nessuna
+    correzione sullo scope già presente in main viene persa.
+  evidence_urls:
+  - https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/blob/0c1fa14c154308a03a62a6ad730d639d7ace3e65/lib/app_factory/workshop/workshop_proposal_implementation_runner.dart
+  - https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/blob/0c1fa14c154308a03a62a6ad730d639d7ace3e65/lib/app_factory/workshop/workshop_proposal_review_runner.dart
+  - https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/blob/0c1fa14c154308a03a62a6ad730d639d7ace3e65/lib/app_factory/workshop/workshop_proposal_validation_runner.dart#L175-L227
+  - https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/608
+  related_prs:
+  - number: 608
+    url: https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/608
+    state_at_review: open
+    head_at_review: eaa42ca19ea16cf8acfde6a15b31a80c4f5d00e0
+- id: CANT-AUDIT-02
+  audit_item: 2
+  title: Piano di produzione con un unico task e budget inadatto a richieste ampie
+  state: active
+  priority: P1
+  source_priority: P1
+  epics:
+  - CANT-11
+  evidence_level: Limite funzionale confermato
+  problem: Il controller costruisce task:initial-implementation come unica unità. Engineer deve produrre contenuti
+    completi con un limite principale di 640 token. Questo non rende impossibile ogni modifica piccola, ma non offre
+    una strategia adeguata per un’intera app. L’avanzamento per fasi e quello per task rappresentano grandezze diverse.
+  implementation: Scomporre il progetto in task piccoli con file e criteri espliciti; stimare la fattibilità prima
+    dell’inferenza. La barra deve derivare da eventi reali di esecuzione, distinguendo fase corrente e task completati.
+  done_when: Una prima app minima arriva ad APK con più unità verificabili quando necessario; il riavvio riprende
+    il task corretto e l’interfaccia mostra lo stato operativo senza percentuali arbitrarie.
+  evidence_urls:
+  - https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/blob/0c1fa14c154308a03a62a6ad730d639d7ace3e65/lib/app_factory/workshop/workshop_dashboard_controller.dart#L482-L512
+  - https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/blob/0c1fa14c154308a03a62a6ad730d639d7ace3e65/lib/app_factory/workshop/workshop_proposal_implementation_runner.dart
+  related_prs:
+  - number: 608
+    url: https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/608
+    state_at_review: open
+    head_at_review: eaa42ca19ea16cf8acfde6a15b31a80c4f5d00e0
+- id: CANT-AUDIT-03
+  audit_item: 3
+  title: Revisione parziale con verdetto globale
+  state: planned
+  priority: P1
+  source_priority: P1
+  epics:
+  - CANT-11
+  evidence_level: Lacuna confermata nel controllo
+  problem: Reviewer riceve soltanto i primi quattro file modificati, due nel retry, con contenuti ulteriormente
+    limitati. Il gate accetta approved senza una prova di copertura di tutti i file. I controlli successivi possono
+    trovare alcuni errori, ma non rendono completa questa revisione.
+  implementation: Revisionare gruppi di modifiche con hash e manifest di copertura; aggregare l’approvazione solo
+    quando tutte le modifiche previste sono state esaminate. Un nuovo diff invalida i verdetti precedenti pertinenti.
+  done_when: Un difetto introdotto nel quinto file o nella parte omessa non può attraversare il gate grazie all’approvazione
+    dei soli file iniziali.
+  evidence_urls:
+  - https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/blob/0c1fa14c154308a03a62a6ad730d639d7ace3e65/lib/app_factory/workshop/workshop_proposal_review_runner.dart
+  - https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/blob/0c1fa14c154308a03a62a6ad730d639d7ace3e65/lib/app_factory/workshop/workshop_proposal_review_gate.dart
+- id: CANT-AUDIT-04
+  audit_item: 4
+  title: Build remota dipendente dall’esecuzione viva dell’app
+  state: planned
+  priority: P1
+  source_priority: P1
+  epics:
+  - CANT-8
+  evidence_level: Lacune di durabilità e timeout confermate
+  problem: Il percorso di produzione usa WorkshopPrivateGitHubBuildProvider; la presenza di WorkshopDurableOrchestrator
+    non prova che governi quel percorso. Gli identificativi della build restano nel flusso in memoria. La deadline
+    complessiva non limita le singole get/post/delete e l’annullamento non garantisce l’interruzione delle richieste
+    pendenti.
+  implementation: Persistire identificativo progetto/task/tentativo, workflow run e artefatto; usare un coordinatore
+    ripristinabile. Introdurre timeout per richiesta e cleanup, cancellazione definita e riconciliazione prima di
+    un nuovo dispatch.
+  done_when: Avviare la build, chiudere il processo, riaprire e ritrovare lo stesso run senza rilancio. Un’API bloccata
+    termina entro il limite previsto e non lascia l’interfaccia in attesa infinita.
+  evidence_urls:
+  - https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/blob/0c1fa14c154308a03a62a6ad730d639d7ace3e65/lib/app_factory/workshop/workshop_production_lifecycle_bundle.dart#L256-L270
+  - https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/blob/0c1fa14c154308a03a62a6ad730d639d7ace3e65/lib/app_factory/workshop/workshop_private_github_build_provider.dart
+  - https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/blob/0c1fa14c154308a03a62a6ad730d639d7ace3e65/lib/app_factory/workshop/workshop_private_github_build_provider.dart#L656-L697
+  - https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/blob/0c1fa14c154308a03a62a6ad730d639d7ace3e65/lib/app/app_shell.dart#L163
+- id: CANT-AUDIT-05
+  audit_item: 5
+  title: Pressione RAM dimenticata dopo il rilascio della sessione
+  state: active
+  priority: P1
+  source_priority: P1
+  epics:
+  - CANT-2
+  evidence_level: Politica attuale confermata; beneficio della correzione da provare sul telefono
+  problem: main richiede fino a 50 layer GPU e sceglie contesto/batch da profili prestabiliti. Scaricare il modello
+    può far tornare sana la RAM libera e portare al riuso dello stesso profilo pesante. Il fallback CPU in creazione
+    è distinto da un arresto per memoria durante la generazione. MLC OFF non spiega questo comportamento.
+  implementation: 'Completare la verifica della PR #640 già esistente: conserva la pressione osservata per modello
+    e propone per Phi 1536/64/16 senza spegnere la GPU. Affiancare una politica esplicita per RAM, contesto e offload;
+    evitare retry automatici indiscriminati.'
+  done_when: 'S24 FE: più richieste consecutive, pressione RAM, rilascio, background e ripresa. Registrare layer
+    richiesti e realmente usati, contesto, primo token e cancellazioni. La PR riduce KV/compute, non il peso del
+    modello, e richiede accettazione fisica.'
+  evidence_urls:
+  - https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/blob/0c1fa14c154308a03a62a6ad730d639d7ace3e65/lib/core/runtime/inference/ffi/llama_native_types.dart#L93
+  - https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/blob/0c1fa14c154308a03a62a6ad730d639d7ace3e65/lib/core/runtime/inference/resource_monitor.dart#L55-L99
+  - https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/blob/0c1fa14c154308a03a62a6ad730d639d7ace3e65/lib/core/runtime/inference/android/sessions/android_ffi_runtime_provider_native_session_subsystem.part.dart#L144
+  - https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/blob/0c1fa14c154308a03a62a6ad730d639d7ace3e65/lib/core/runtime/inference/android/streaming/android_ffi_runtime_provider_streaming.part.dart#L385-L429
+  - https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/640
+  physical_validation_required: true
+  related_prs:
+  - number: 640
+    url: https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/640
+    state_at_review: open
+    head_at_review: 446c4c63d2b2fe54223cbea402a7e03929b8cf97
+- id: CANT-AUDIT-06
+  audit_item: 6
+  title: CI verde non dimostra la prima app prodotta dal modello reale
+  state: planned
+  priority: P1
+  source_priority: P1
+  epics:
+  - CANT-7
+  - CANT-11
+  evidence_level: Lacuna di accettazione confermata
+  problem: Lo smoke test Cantiere usa risposte predeterminate tramite _ScriptedRuntimeProvider. È utile per verificare
+    orchestration, workspace e build, ma non verifica che Phi produca una proposta valida sul telefono, né che RAM,
+    voce e ripresa funzionino in uso reale.
+  implementation: Mantenere gli smoke test deterministici e aggiungere una prova di accettazione con modello reale
+    e artefatto installabile, registrando SHA dell’app, modello, prompt, risultato e log. Per i rilasci runtime/Cantiere,
+    richiedere un esito esplicito sul dispositivo.
+  done_when: Una richiesta minima genera file, supera i controlli, produce un APK e l’APK viene aperto; il resoconto
+    distingue fallimento del modello, parsing, revisione e build.
+  evidence_urls:
+  - https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/blob/0c1fa14c154308a03a62a6ad730d639d7ace3e65/tool/cantiere_first_app_smoke.dart#L91-L104
+  - https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/blob/0c1fa14c154308a03a62a6ad730d639d7ace3e65/test/app_factory/workshop/cantiere_first_app_smoke_test.dart
+- id: CANT-AUDIT-07
+  audit_item: 7
+  title: Promozione della release e controlli obbligatori insufficienti
+  state: planned
+  priority: P1
+  source_priority: P1
+  epics:
+  - CANT-10
+  - CANT-7
+  evidence_level: Rischi di rilascio confermati; alcuni dipendono dalla configurazione
+  problem: 'main risulta non protetto e la lista ruleset è vuota. Il publisher Android usa una condizione evento
+    diverso da pull_request, senza restrizione esplicita del ref per workflow_dispatch; non coordina l’esito delle
+    altre piattaforme. Esiste un fallback di firma debug in caso di materiale release mancante o invalido. Questo
+    non significa che la release +2549 sia firmata debug: nel log verificato la firma release era disponibile. Il
+    publisher macOS può risultare verde pur saltando la pubblicazione.'
+  implementation: Definire controlli richiesti sul commit, una promozione stable da ref ammesso e separazione degli
+    artefatti sperimentali. Bloccare stable se firma/asset richiesti mancano; dichiarare esplicitamente le piattaforme
+    effettivamente distribuite.
+  done_when: Dispatch da branch non ammesso e firma release mancante non producono stable. Tutti i controlli richiesti
+    si riferiscono allo stesso SHA e un asset macOS assente non viene presentato come pubblicato.
+  evidence_urls:
+  - https://api.github.com/repos/pilialvu75-hue/Ai-orchestrator-riserva
+  - https://api.github.com/repos/pilialvu75-hue/Ai-orchestrator-riserva/rulesets
+  - https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/blob/0c1fa14c154308a03a62a6ad730d639d7ace3e65/.github/workflows/build.yml
+  - https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/blob/0c1fa14c154308a03a62a6ad730d639d7ace3e65/.github/workflows/macos-release-publish.yml#L67-L93
+- id: CANT-AUDIT-08
+  audit_item: 8
+  title: Dipendenze e toolchain non fissate
+  state: planned
+  priority: P1
+  source_priority: P1
+  epics:
+  - CANT-10
+  evidence_level: Confermato
+  problem: pubspec.lock non è tra i file tracciati, mp_audio_stream usa any e la CI seleziona Flutter stable senza
+    versione esatta. Il lock è citato anche nella chiave cache. Gli override record_linux/record_platform_interface
+    esistono, ma la loro sola presenza non dimostra un bug attuale.
+  implementation: Generare e versionare il lock con la toolchain scelta, fissare Flutter, sostituire any con un
+    vincolo verificato e far rispettare il lock in CI. Rimuovere gli override soltanto dopo una prova multipiattaforma.
+    Completare .gitignore con esclusioni Flutter mirate.
+  done_when: Una nuova risoluzione sullo stesso SHA non aggiorna dipendenze implicitamente; un aggiornamento produce
+    un diff esplicito e passa i controlli delle piattaforme supportate.
+  evidence_urls:
+  - https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/blob/0c1fa14c154308a03a62a6ad730d639d7ace3e65/pubspec.yaml#L51
+  - https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/blob/0c1fa14c154308a03a62a6ad730d639d7ace3e65/.github/workflows/build.yml#L60
+  - https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/blob/0c1fa14c154308a03a62a6ad730d639d7ace3e65/.gitignore
+- id: CANT-AUDIT-09
+  audit_item: 9
+  title: Logging sincrono sul percorso operativo
+  state: planned
+  priority: P2
+  source_priority: P2
+  epics:
+  - CANT-2
+  evidence_level: I/O confermato; costo non ancora misurato
+  problem: 'Esiste già sampling in release, ma non copre allo stesso modo tutti gli eventi: consegna token riuscita
+    ed eventi terminali sono conservati. Il sink scrive con writeAsStringSync, flush immediato e controllo sincrono
+    della dimensione. Contare debugPrint non misura l’impatto.'
+  implementation: Separare marcatori critici e telemetria ordinaria; usare buffer limitato e scrittore dedicato,
+    flush periodico e persistenza esplicita ai confini sensibili.
+  done_when: Con lo stesso modello e prompt, misurare tempo del logging, frame e primo token; verificare che dopo
+    un crash controllato resti la traccia diagnostica necessaria.
+  evidence_urls:
+  - https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/blob/0c1fa14c154308a03a62a6ad730d639d7ace3e65/lib/core/runtime/inference/android/logging/android_ffi_runtime_provider_logging.part.dart#L3
+  - https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/blob/0c1fa14c154308a03a62a6ad730d639d7ace3e65/lib/core/runtime/inference/runtime_crash_log_sink.dart#L85-L154
+  measurement_required: Do not claim runtime/build savings before a controlled before/after measurement.
+- id: CANT-AUDIT-10
+  audit_item: 10
+  title: KV del prompt azzerata a ogni generazione
+  state: active
+  priority: P2
+  source_priority: P2
+  epics:
+  - CANT-2
+  evidence_level: Assenza di riuso confermata; guadagno da misurare
+  problem: L’avvio nativo chiama llama_memory_clear. Tenere caricati i pesi evita parte del caricamento, ma non
+    conserva automaticamente il prefisso già elaborato. È un’opportunità concreta per turni consecutivi, non una
+    percentuale di accelerazione già dimostrata.
+  implementation: 'Completare la PR #620 con riuso limitato a conversazione, modello e prefisso esatto; invalidare
+    dopo cambio scope, errori e cancellazioni pertinenti.'
+  done_when: Misurare token di prefisso riusati e primo token; nessun riuso tra conversazioni o progetti differenti,
+    con confronto sul percorso senza cache.
+  evidence_urls:
+  - https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/blob/0c1fa14c154308a03a62a6ad730d639d7ace3e65/native/android/llama_bridge.cpp#L1250-L1255
+  - https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/620
+  measurement_required: Do not claim runtime/build savings before a controlled before/after measurement.
+  related_prs:
+  - number: 620
+    url: https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/620
+    state_at_review: open
+    head_at_review: 1cd5b26754fa611b0c951d7b3111c6e0e33d1dc8
+- id: CANT-AUDIT-11
+  audit_item: 11
+  title: Ricerca web attivata da domande statiche
+  state: active
+  priority: P2
+  source_priority: P2
+  epics:
+  - CANT-2
+  evidence_level: Difetto riprodotto
+  problem: La funzione reale attiva la ricerca per ultimo elemento di una lista Dart, current index in a Dart loop
+    e Qual è il risultato di 2 + 2?. L’opt-out esplicito dall’uso di internet è invece rispettato. Questo introduce
+    richieste di rete e contesto non necessari.
+  implementation: 'Completare la PR #598 distinguendo domanda attuale, soggetto e intento; mantenere richieste esplicite,
+    meteo, notizie e dati correnti.'
+  done_when: 'Corpus IT/FR/EN/ES: domande statiche senza ricerca, richieste attuali con ricerca, opt-out sempre
+    rispettato. Misurare chiamate superflue e latenza.'
+  evidence_urls:
+  - https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/blob/0c1fa14c154308a03a62a6ad730d639d7ace3e65/lib/core/tools/search/assistant_web_search_policy.dart#L205-L253
+  - https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/598
+  related_prs:
+  - number: 598
+    url: https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/598
+    state_at_review: open
+    head_at_review: 3e2c8bc85eeaa8cbe81535c68f2e45365b5e088a
+- id: CANT-AUDIT-12
+  audit_item: 12
+  title: OAuth dichiarato oltre le capacità dell’inferenza
+  state: active
+  priority: P2
+  source_priority: P2
+  epics:
+  - CANT-9
+  evidence_level: Incoerenza confermata
+  problem: Il catalogo espone supporto OAuth per provider il cui percorso non distingue adeguatamente token OAuth
+    e API key; Gemini usa x-goog-api-key con il segreto restituito dallo store. La presenza di un campo credenziale
+    non costituisce un flusso OAuth completo.
+  implementation: 'Portare a conclusione la PR #618, riallineando ciò che la UI dichiara ai metodi realmente supportati.
+    Aggiungere OAuth completo in un intervento distinto quando necessario.'
+  done_when: Ogni modalità pubblicizzata completa una chiamata reale con la credenziale prevista; credenziali incompatibili
+    vengono respinte con un messaggio chiaro.
+  evidence_urls:
+  - https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/blob/0c1fa14c154308a03a62a6ad730d639d7ace3e65/lib/core/runtime/inference/cloud_provider_catalog.dart#L94-L161
+  - https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/blob/0c1fa14c154308a03a62a6ad730d639d7ace3e65/lib/core/runtime/inference/cloud_credential_store.dart#L115-L133
+  - https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/blob/0c1fa14c154308a03a62a6ad730d639d7ace3e65/lib/features/cloud_ai/data/datasources/gemini_datasource.dart#L35-L50
+  - https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/618
+  related_prs:
+  - number: 618
+    url: https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/618
+    state_at_review: open
+    head_at_review: 8e4f6faabae15eebe72df95dcf2aa92180824705
+- id: CANT-AUDIT-13
+  audit_item: 13
+  title: Riutilizzo dei moduli certificati interrotto quando serve adattamento
+  state: active
+  priority: P2
+  source_priority: P2
+  epics:
+  - CANT-4
+  evidence_level: Limite confermato
+  problem: WorkshopLibraryReuseService ritorna al percorso normale anche per requiresAdaptation, oltre che per veri
+    conflitti. Un modulo valido che richiede integrazione può così non essere usato. Questo audit non certifica
+    lo stato del Ricercatore nel suo repository esterno.
+  implementation: 'Ricostruire la PR #583 dopo l’allineamento del contratto Cantiere: trasportare origine, versione,
+    hash, file disponibili e task d’integrazione, preservando integrità e approvazione.'
+  done_when: Un modulo valido con una dipendenza aggiuntiva viene adattato e utilizzato; un modulo corrotto resta
+    bloccato. Mostrare separatamente trovato, verificato, adattato e usato.
+  evidence_urls:
+  - https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/blob/0c1fa14c154308a03a62a6ad730d639d7ace3e65/lib/app_factory/workshop/workshop_library_reuse_service.dart#L80-L119
+  - https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/583
+  related_prs:
+  - number: 583
+    url: https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/583
+    state_at_review: open
+    head_at_review: feab579e4d5e53cd394d12521d09dca561be9c60
+- id: CANT-AUDIT-14
+  audit_item: 14
+  title: CRDT non convergente con timestamp concorrenti uguali
+  state: planned
+  priority: P1
+  source_priority: P1 prima di attivare la sincronizzazione
+  epics:
+  - CANT-12
+  evidence_level: Difetto riprodotto
+  problem: 'Con stesso wall time e contatore, il confronto usato dall’applicazione ignora il nodo: vince il primo
+    record arrivato. Le classi reali producono node-a con ordine A,B e node-b con ordine B,A.'
+  implementation: Usare un ordinamento totale deterministico coerente in merge e persistenza, oppure un modello
+    esplicito di conflitto con risoluzione convergente.
+  done_when: Tutte le permutazioni di consegna, retry e restart producono lo stesso stato. Il difetto non va confuso
+    con un malfunzionamento della chat attuale, dato che il trasporto LAN non risulta avviato in produzione.
+  evidence_urls:
+  - https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/blob/0c1fa14c154308a03a62a6ad730d639d7ace3e65/lib/core/sync/crdt/hlc.dart#L103-L120
+  - https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/blob/0c1fa14c154308a03a62a6ad730d639d7ace3e65/lib/core/sync/crdt/crdt_document.dart#L136-L142
+  activation_gate: distributed_sync_before_production_enablement
+- id: CANT-AUDIT-15
+  audit_item: 15
+  title: Cursore di sync può saltare record; server LAN da proteggere
+  state: planned
+  priority: P1
+  source_priority: P1 prima di attivare la sincronizzazione
+  epics:
+  - CANT-12
+  evidence_level: Difetto riprodotto e rischio di esposizione latente
+  problem: 'Il massimo HLC locale viene usato come cursore del peer: un record remoto sconosciuto a tempo 2000 viene
+    escluso da un cursore locale 3000. Inoltre il server HTTP LAN si lega a tutte le interfacce senza pairing/autenticazione
+    o limiti del corpo visibili. Non risulta avviato dal percorso di produzione: non è una porta oggi dimostrata
+    aperta sul telefono.'
+  implementation: Persistire cursori per peer/flusso e introdurre riconciliazione anti-entropia; prima di abilitare
+    il server aggiungere pairing, autenticazione, cifratura, limiti e filtri di esportazione dei dati riservati.
+  done_when: Nodi offline con chiavi diverse si riconciliano completamente; peer non autorizzati e payload eccessivi
+    sono respinti e i record deviceOnly/secret non vengono esportati.
+  evidence_urls:
+  - https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/blob/0c1fa14c154308a03a62a6ad730d639d7ace3e65/lib/core/sync/network/local_sync_client.dart#L36-L50
+  - https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/blob/0c1fa14c154308a03a62a6ad730d639d7ace3e65/lib/core/sync/sync_manager.dart#L125-L135
+  - https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/blob/0c1fa14c154308a03a62a6ad730d639d7ace3e65/lib/core/sync/network/local_sync_server.dart#L42-L143
+  activation_gate: distributed_sync_before_production_enablement
+- id: CANT-AUDIT-16
+  audit_item: 16
+  title: Aggiornamenti della memoria Assistant possono sovrascriversi
+  state: planned
+  priority: P2
+  source_priority: P2
+  epics:
+  - CANT-12
+  evidence_level: Rischio di concorrenza individuato; non riprodotto nella sessione
+  problem: Lo store legge una lista JSON per scope, la modifica e la riscrive; upsert, confirm e remove non racchiudono
+    il ciclo in una transazione comune o in una serializzazione per scope. Scritture concorrenti possono perdere
+    una modifica.
+  implementation: Passare a record distinti e transazioni con chiavi stabili; come intervento contenuto, serializzare
+    per scope e controllare la versione. Preservare dati e conferme nella migrazione.
+  done_when: Due upsert di chiavi diverse e combinazioni confirm/remove/upsert mantengono tutte le modifiche valide.
+  evidence_urls:
+  - https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/blob/0c1fa14c154308a03a62a6ad730d639d7ace3e65/lib/core/memory/assistant_durable_memory_store.dart#L91-L109
+  reproduction_status: Risk identified from read-modify-write structure; not reproduced during this audit.
+- id: CANT-AUDIT-17
+  audit_item: 17
+  title: Memory Fabric non ancora memoria condivisa effettiva
+  state: planned
+  priority: P2
+  source_priority: P2 prima di espandere l’integrazione
+  epics:
+  - CANT-12
+  - CANT-9
+  evidence_level: Lacuna e semantiche confermate nel componente
+  problem: La DI registra un provider CRDT locale; adattatore AIrLab e memoria progetti Cantiere non risultano collegati
+    ai percorsi attivi esaminati. Nel componente, write aggiorna dato e metadati con scritture distinte, read privilegia
+    il primo nodo valido mentre search confronta le versioni. Non è dimostrato che questo rallenti oggi l’Assistant.
+  implementation: Definire una composizione del contesto con provenienza, budget e precedenza; migrare i consumatori
+    gradualmente. Separare stato di replica dal dato, rendere coerenti read/search e usare replica persistente e
+    query indicizzate.
+  done_when: Un evento del Cantiere è leggibile tramite l’API comune anche offline; al ritorno della rete replica
+    e lettura restituiscono versioni coerenti e rendono visibili i nodi realmente attivi.
+  evidence_urls:
+  - https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/blob/0c1fa14c154308a03a62a6ad730d639d7ace3e65/lib/injection_container.dart#L281-L302
+  - https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/blob/0c1fa14c154308a03a62a6ad730d639d7ace3e65/lib/core/memory/fabric/memory_fabric.dart#L112-L221
+  - https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/blob/0c1fa14c154308a03a62a6ad730d639d7ace3e65/lib/core/memory/fabric/local_crdt_memory_fabric_provider.dart#L38-L106
+- id: CANT-AUDIT-18
+  audit_item: 18
+  title: Composizione e confini dei moduli poco chiari
+  state: planned
+  priority: P2
+  source_priority: P2
+  epics:
+  - CANT-13
+  - CANT-8
+  evidence_level: Debito architetturale confermato
+  problem: CloudRoutingBootstrap sostituisce registrazioni dopo initDependencies; core importa features; code_context
+    e semantic_index dipendono l’uno dall’altro a livello di modulo; gli updater desktop richiedono un tipo Android.
+    AppShell possiede la costruzione e gestione del ciclo Cantiere. Non è prova di cinque motori in conflitto a
+    runtime.
+  implementation: Costruire il grafo finale una sola volta; spostare il wiring nell’app, usare porte canoniche e
+    introdurre controlli degli import. Estrarre una sessione applicativa del Cantiere e un launcher di installer
+    per piattaforma, mantenendo ownership e cancellazione esplicite.
+  done_when: Nessuna nuova dipendenza vietata; avvio Cloud indipendente dall’Assistant Orchestrator; apertura/chiusura
+    della UI non duplica controller o perde il checkpoint.
+  evidence_urls:
+  - https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/blob/0c1fa14c154308a03a62a6ad730d639d7ace3e65/lib/app/runtime_bootstrap.dart#L62
+  - https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/blob/0c1fa14c154308a03a62a6ad730d639d7ace3e65/lib/core/runtime/inference/cloud_routing_bootstrap.dart#L29
+  - https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/blob/0c1fa14c154308a03a62a6ad730d639d7ace3e65/docs/MODULAR_ARCHITECTURE.md#L211
+  - https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/blob/0c1fa14c154308a03a62a6ad730d639d7ace3e65/lib/app/app_shell.dart#L163
+  - https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/blob/0c1fa14c154308a03a62a6ad730d639d7ace3e65/lib/core/system/update/windows_update_manager.dart#L29
+  - https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/blob/0c1fa14c154308a03a62a6ad730d639d7ace3e65/lib/features/code_context/context_retrieval_service.dart#L1
+  - https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/blob/0c1fa14c154308a03a62a6ad730d639d7ace3e65/lib/features/semantic_index/project_indexer.dart#L1
+- id: CANT-AUDIT-19
+  audit_item: 19
+  title: Documenti divergenti, percorsi storici e file troppo estesi
+  state: planned
+  priority: P2
+  source_priority: P2/P3
+  epics:
+  - CANT-13
+  evidence_level: Debito documentale e di manutenzione confermato
+  problem: ARCHITECTURE_LOCK descrive un avvio diverso da main; RISERVA_SEPARATION_AUDIT non fotografa il prodotto
+    attuale. Esistono una ModelsPage non collegata al percorso app, due workspace e un alias AiModel ambiguo. I
+    file grandi aumentano il costo di revisione, ma la dimensione non misura da sola CPU o latenza.
+  implementation: Aggiornare la baseline; distinguere decisioni vigenti e rapporti storici. Deprecare gli import
+    alternativi e rimuovere solo codice effettivamente escluso da entrypoint e test. Separare responsabilità in
+    ChatPage/update manager quando si interviene su quei percorsi; mantenere distinti modello scaricato e configurazione
+    provider.
+  done_when: Documenti e grafo attuale concordano; ogni rimozione ha un controllo dei riferimenti; i tipi hanno
+    un significato univoco. Nessuna promessa di accelerazione derivata dal solo calo di righe.
+  evidence_urls:
+  - https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/blob/0c1fa14c154308a03a62a6ad730d639d7ace3e65/docs/ARCHITECTURE_LOCK.md#L7
+  - https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/blob/0c1fa14c154308a03a62a6ad730d639d7ace3e65/docs/RISERVA_SEPARATION_AUDIT.md
+  - https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/blob/0c1fa14c154308a03a62a6ad730d639d7ace3e65/lib/main.dart#L122
+  - https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/blob/0c1fa14c154308a03a62a6ad730d639d7ace3e65/lib/features/local_ai/presentation/pages/models_page.dart
+  - https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/blob/0c1fa14c154308a03a62a6ad730d639d7ace3e65/lib/core/config/ai/ai_model.dart
+  - https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/blob/0c1fa14c154308a03a62a6ad730d639d7ace3e65/lib/features/chat/presentation/pages/chat_page.dart#L1446
+- id: CANT-AUDIT-20
+  audit_item: 20
+  title: CI onerosa e warning non bloccanti
+  state: planned
+  priority: P2
+  source_priority: P2/P3
+  epics:
+  - CANT-10
+  evidence_level: Costo CI misurato; ottimizzazioni da verificare
+  problem: 'Il run Android esaminato dura 18m45s: APK 9m29s, AAB 1m44s, test 2m05s, CodeQL finale 2m50s. La cache
+    nativa è stata ripristinata; main non contiene più flutter clean né cancellazione della .cxx nello step indicato
+    da Claude. APK e AAB sono però prodotti anche sulle PR; più workflow ripetono attività. L’analyzer lascia passare
+    warning/info, non gli errori: nel run c’erano 18 warning e 158 info.'
+  implementation: Misurare tempi e hit rate; valutare APK sulle PR e AAB alla promozione, riutilizzare gli artefatti
+    validati nei publisher e ridurre duplicazioni mantenendo i controlli necessari. Bloccare nuovi warning con una
+    baseline progressiva. Verificare copertura CodeQL dopo ogni modifica della strategia di cache.
+  done_when: Riduzione documentata di tempo/minuti di esecuzione senza perdita dei controlli ABI, dei test o dell’analisi
+    richiesta. Non dividere APK/AAB in job paralleli senza valutare duplicazione del lavoro e costo.
+  evidence_urls:
+  - https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/36318915202/job/108618819593
+  - https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/blob/0c1fa14c154308a03a62a6ad730d639d7ace3e65/.github/workflows/build.yml#L60
+  - https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/blob/0c1fa14c154308a03a62a6ad730d639d7ace3e65/.github/workflows/build.yml#L346
+  - https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/blob/0c1fa14c154308a03a62a6ad730d639d7ace3e65/.github/workflows/build.yml
+  - https://github.com/flutter/flutter/blob/stable/packages/flutter_tools/lib/src/commands/analyze_once.dart
+  measurement_required: Do not claim runtime/build savings before a controlled before/after measurement.
+- id: CANT-AUDIT-21
+  audit_item: 21
+  title: Accumulo di branch e rischio operativo nella bonifica
+  state: planned
+  priority: P2
+  source_priority: P2
+  epics:
+  - CANT-1
+  evidence_level: Inventario GitHub confermato; impatto sulle prestazioni non misurato
+  problem: 'Enumerate nove pagine API: 716 branch, 682 SHA di testa distinti, 20 gruppi duplicati e 34 nomi oltre
+    un riferimento per gruppo. Otto branch assistant-interaction-wiring condividono c6c397f. Un altro gruppo contiene
+    il branch della PR aperta #583 e rebuild/pr583-certified-library-evidence-current-main sullo stesso SHA. delete_branch_on_merge
+    è false. Non sono 716 lavori tutti attivi e i branch non rallentano l’inferenza sul telefono.'
+  implementation: Creare un inventario branch→SHA→PR→stato di assorbimento, conservare riferimenti canonici e lavoro
+    non integrato, verificare dipendenze prima delle cancellazioni. Abilitare in seguito l’eliminazione automatica
+    dopo merge; la sola chiusura di una PR non equivale al merge. Non cancellare in blocco tutti i nomi di un gruppo
+    identico.
+  done_when: Nessuna PR attiva o automazione perde il riferimento; nessun commit unico utile viene abbandonato.
+    Un report prima/dopo documenta la bonifica; solo una misura separata può attribuire un miglioramento a clone/fetch.
+  evidence_urls:
+  - https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/branches
+  - https://api.github.com/repos/pilialvu75-hue/Ai-orchestrator-riserva
+  - https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/583
+  - https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/configuring-pull-request-merges/managing-the-automatic-deletion-of-branches
