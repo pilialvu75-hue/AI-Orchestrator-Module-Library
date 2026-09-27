@@ -775,3 +775,16 @@ audit_findings:
   - https://api.github.com/repos/pilialvu75-hue/Ai-orchestrator-riserva
   - https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/583
   - https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/configuring-pull-request-merges/managing-the-automatic-deletion-of-branches
+
+autonomous_execution:
+  executor: chatgpt_scheduled_task
+  automation_id: '6ab936e182e88191a138246790477161'
+  control_document: .airlab/public-repositories/Ai-orchestrator-riserva/autonomy.md
+  execution_state_ref: automation/riserva-state
+  execution_state_path: .airlab/public-repositories/Ai-orchestrator-riserva/execution.json
+  cadence: hourly
+  timezone: Europe/Paris
+  activation_authorized_at: '2026-09-27'
+  status_authority: live_scheduler_and_execution_checkpoint
+  max_active_implementation_prs: 1
+  completion_rule: Verified acceptance evidence; CI green alone is not physical-device validation.
