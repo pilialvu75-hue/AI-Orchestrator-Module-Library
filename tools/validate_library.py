@@ -208,6 +208,7 @@ def validate_manifest(
     version = str(data["version"]).strip()
     status = str(data["status"]).strip()
     capabilities = [str(value).strip() for value in data["capabilities"]]
+    integration = data.get("integration") or {}
 
     if not asset_id:
         raise ValidationError(f"{path.relative_to(ROOT)}: id cannot be empty")
@@ -217,6 +218,15 @@ def validate_manifest(
         )
     if status not in VALID_STATUSES:
         raise ValidationError(f"{path.relative_to(ROOT)}: invalid status {status}")
+    if integration.get("estimated_effort") not in {"trivial", "low", "medium", "high"}:
+        raise ValidationError(
+            f"{path.relative_to(ROOT)}: integration.estimated_effort must be trivial, low, medium or high"
+        )
+    if not isinstance(integration.get("adaptation_allowed"), bool):
+        raise ValidationError(
+            f"{path.relative_to(ROOT)}: integration.adaptation_allowed must be boolean"
+        )
+
     if not capabilities or any(not value for value in capabilities):
         raise ValidationError(
             f"{path.relative_to(ROOT)}: capabilities must contain non-empty values"
