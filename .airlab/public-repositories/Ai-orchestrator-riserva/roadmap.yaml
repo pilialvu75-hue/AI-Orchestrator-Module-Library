@@ -157,7 +157,8 @@ roadmap:
   state: active
   priority: P0
   outcome: Produce a real installable app through coherent role contracts, small tasks and review coverage of every
-    staged change.
+    staged change. Contract, task decomposition and complete Reviewer coverage are merged; physical-device acceptance
+    remains tracked by CANT-AUDIT-06.
   audit_findings:
   - CANT-AUDIT-01
   - CANT-AUDIT-02
@@ -322,7 +323,7 @@ audit_findings:
 - id: CANT-AUDIT-02
   audit_item: 2
   title: Piano di produzione con un unico task e budget inadatto a richieste ampie
-  state: active
+  state: done
   priority: P1
   source_priority: P1
   epics:
@@ -331,10 +332,11 @@ audit_findings:
   problem: Il controller costruisce task:initial-implementation come unica unità. Engineer deve produrre contenuti
     completi con un limite principale di 640 token. Questo non rende impossibile ogni modifica piccola, ma non offre
     una strategia adeguata per un’intera app. L’avanzamento per fasi e quello per task rappresentano grandezze diverse.
-  implementation: 'PR #644 è in esecuzione su main e sostituisce il task unico delle produzioni normali con unità
+  implementation: 'PR #644 è stata mergiata su main e sostituisce il task unico delle produzioni normali con unità
     bounded sequenziali, file/criteri/dipendenze espliciti e ripresa del prossimo task incompleto. La barra usa solo
     completedTasks/totalTasks; lo stage operativo resta separato. Il build-repair conserva il target dinamico per non
-    introdurre regressioni. CI in corso; la prova fisica della prima app resta obbligatoria.'
+    introdurre regressioni. Il first-app smoke attraversa più task e produce l''APK in CI. Merge:
+    270a98d36e8936af21ad7de2d7ed64897bb9d9b1. La prova fisica resta nel gate separato CANT-AUDIT-06.'
   done_when: Una prima app minima arriva ad APK con più unità verificabili quando necessario; il riavvio riprende
     il task corretto e l’interfaccia mostra lo stato operativo senza percentuali arbitrarie.
   evidence_urls:
@@ -347,8 +349,9 @@ audit_findings:
     head_at_review: eaa42ca19ea16cf8acfde6a15b31a80c4f5d00e0
   - number: 644
     url: https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/644
-    state_at_review: open_ci_macos_retry
+    state_at_review: merged_ci_green
     head_at_review: dd4eb251e07c206ceb6a313dd720ff9479813e5f
+    merge_commit: 270a98d36e8936af21ad7de2d7ed64897bb9d9b1
 - id: CANT-AUDIT-03
   audit_item: 3
   title: Revisione parziale con verdetto globale
