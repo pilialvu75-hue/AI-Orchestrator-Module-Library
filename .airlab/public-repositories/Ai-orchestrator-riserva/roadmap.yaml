@@ -413,9 +413,10 @@ audit_findings:
   problem: main richiede fino a 50 layer GPU e sceglie contesto/batch da profili prestabiliti. Scaricare il modello
     può far tornare sana la RAM libera e portare al riuso dello stesso profilo pesante. Il fallback CPU in creazione
     è distinto da un arresto per memoria durante la generazione. MLC OFF non spiega questo comportamento.
-  implementation: 'Completare la verifica della PR #640 già esistente: conserva la pressione osservata per modello
-    e propone per Phi 1536/64/16 senza spegnere la GPU. Affiancare una politica esplicita per RAM, contesto e offload;
-    evitare retry automatici indiscriminati.'
+  implementation: 'La vecchia PR #640 è stata chiusa come superseded perché divergeva di 20 commit da main.
+    PR #645 ricostruisce il delta utile sul main corrente: conserva la pressione osservata per modello e propone per
+    Phi 1536/64/16 senza spegnere la GPU; ricicla una sessione più grande prima del riuso e registra
+    phi_memory_recovery nei Diagnostics. CI in corso. La prova fisica resta obbligatoria.'
   done_when: 'S24 FE: più richieste consecutive, pressione RAM, rilascio, background e ripresa. Registrare layer
     richiesti e realmente usati, contesto, primo token e cancellazioni. La PR riduce KV/compute, non il peso del
     modello, e richiede accettazione fisica.'
@@ -429,8 +430,12 @@ audit_findings:
   related_prs:
   - number: 640
     url: https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/640
-    state_at_review: open
+    state_at_review: closed_superseded
     head_at_review: 446c4c63d2b2fe54223cbea402a7e03929b8cf97
+  - number: 645
+    url: https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/645
+    state_at_review: open_ci_running
+    head_at_review: fce001072ed5b985070bdf8c5b17468d87c0edb2
 - id: CANT-AUDIT-06
   audit_item: 6
   title: CI verde non dimostra la prima app prodotta dal modello reale
