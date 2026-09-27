@@ -312,7 +312,7 @@ audit_findings:
   related_prs:
   - number: 608
     url: https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/608
-    state_at_review: open
+    state_at_review: closed_superseded
     head_at_review: eaa42ca19ea16cf8acfde6a15b31a80c4f5d00e0
   - number: 642
     url: https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/642
@@ -343,12 +343,12 @@ audit_findings:
   related_prs:
   - number: 608
     url: https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/608
-    state_at_review: open
+    state_at_review: closed_superseded
     head_at_review: eaa42ca19ea16cf8acfde6a15b31a80c4f5d00e0
   - number: 644
     url: https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/644
     state_at_review: open_ci_running
-    head_at_review: a0d201e6d44cdb91c852e8b30db814fe9684e93c
+    head_at_review: dd4eb251e07c206ceb6a313dd720ff9479813e5f
 - id: CANT-AUDIT-03
   audit_item: 3
   title: Revisione parziale con verdetto globale
