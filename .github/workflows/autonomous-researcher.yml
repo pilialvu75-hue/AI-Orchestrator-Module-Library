@@ -48,11 +48,31 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git commit -m "researcher: discover bounded first-party intake candidate"
           git push origin HEAD:main
+      - name: Publish discovery summary
+        if: always()
+        shell: bash
+        run: |
+          {
+            echo "## Autonomous Researcher"
+            echo
+            echo "- event: ${{ github.event_name }}"
+            echo "- run_id: ${{ github.run_id }}"
+            echo "- main_sha: $(git rev-parse HEAD)"
+            if [ -s /tmp/autonomous-researcher.json ]; then
+              echo "- result:"
+              echo '~~~json'
+              cat /tmp/autonomous-researcher.json
+              echo
+              echo '~~~'
+            else
+              echo "- result: discovery report missing"
+            fi
+          } >> "$GITHUB_STEP_SUMMARY"
       - name: Upload discovery report
         if: always()
         uses: actions/upload-artifact@v6
         with:
-          name: autonomous-researcher-discovery
+          name: autonomous-researcher-discovery-${{ github.run_id }}
           path: /tmp/autonomous-researcher.json
-          if-no-files-found: ignore
+          if-no-files-found: warn
           retention-days: 14
