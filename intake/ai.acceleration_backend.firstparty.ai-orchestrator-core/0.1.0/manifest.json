@@ -34,7 +34,7 @@
   "integration": {
     "adaptation_allowed": true,
     "adapter_notes": "Researcher discovery only; certification must establish license, security and target compatibility.",
-    "estimated_effort": "unknown",
+    "estimated_effort": "medium",
     "known_constraints": [
       "license unresolved at discovery; fail closed until trusted evidence establishes it"
     ]
