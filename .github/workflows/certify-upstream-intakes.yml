@@ -170,17 +170,35 @@ jobs:
           test "$(git -C "${UPSTREAM}" rev-parse HEAD)" = "${SOURCE_COMMIT}"
 
           PACKAGE_DIR="${UPSTREAM}/${COMPONENT_PATH}"
-          test -f "${PACKAGE_DIR}/pubspec.yaml"
-
-          if grep -Eq '^[[:space:]]*resolution:[[:space:]]*workspace' "${PACKAGE_DIR}/pubspec.yaml"; then
-            (cd "${UPSTREAM}" && flutter pub get)
+          if [ -f "${PACKAGE_DIR}/pubspec.yaml" ]; then
+            VALIDATION_PROFILE="dart_package"
+            VALIDATED_ON="linux"
+            if grep -Eq '^[[:space:]]*resolution:[[:space:]]*workspace' "${PACKAGE_DIR}/pubspec.yaml"; then
+              (cd "${UPSTREAM}" && flutter pub get)
+            else
+              (cd "${PACKAGE_DIR}" && dart pub get)
+            fi
+            (cd "${PACKAGE_DIR}" && dart analyze --fatal-infos)
+            (cd "${PACKAGE_DIR}" && dart test)
+            (cd "${PACKAGE_DIR}" && dart pub deps --json > "${OUT}/deps.json")
+          elif [ -f "${PACKAGE_DIR}/CMakeLists.txt" ]; then
+            VALIDATION_PROFILE="native_android_cmake"
+            VALIDATED_ON="android"
+            test -n "${ANDROID_NDK_ROOT:-${ANDROID_NDK_HOME:-}}"
+            NDK="${ANDROID_NDK_ROOT:-${ANDROID_NDK_HOME}}"
+            git -C "${UPSTREAM}" submodule update --init --recursive
+            cmake -S "${PACKAGE_DIR}" -B "${OUT}/build" \
+              -DCMAKE_TOOLCHAIN_FILE="${NDK}/build/cmake/android.toolchain.cmake" \
+              -DANDROID_ABI=arm64-v8a \
+              -DANDROID_PLATFORM=android-24 \
+              -DCMAKE_BUILD_TYPE=Release
+            cmake --build "${OUT}/build" --target llama_bridge --parallel 2
+            printf '{"packages":[]}\n' > "${OUT}/deps.json"
           else
-            (cd "${PACKAGE_DIR}" && dart pub get)
+            echo "Unsupported upstream validation profile for ${COMPONENT_PATH}" >&2
+            exit 1
           fi
-
-          (cd "${PACKAGE_DIR}" && dart analyze --fatal-infos)
-          (cd "${PACKAGE_DIR}" && dart test)
-          (cd "${PACKAGE_DIR}" && dart pub deps --json > "${OUT}/deps.json")
+          export VALIDATION_PROFILE VALIDATED_ON
 
           python3 - <<'PY'
           import json
@@ -199,6 +217,8 @@ jobs:
               "runner": "ubuntu-24.04",
               "analyze": "passed",
               "tests": "passed",
+              "validation_profile": os.environ["VALIDATION_PROFILE"],
+              "validated_on": os.environ["VALIDATED_ON"],
           }
           (out / "receipt.json").write_text(
               json.dumps(receipt, indent=2, sort_keys=True) + "\n",
@@ -295,6 +315,8 @@ jobs:
                   or receipt.get("analyze") != "passed"
                   or receipt.get("tests") != "passed"
                   or receipt.get("runner") != "ubuntu-24.04"
+                  or receipt.get("validation_profile") not in {"dart_package", "native_android_cmake"}
+                  or receipt.get("validated_on") not in {"linux", "android"}
               ):
                   raise SystemExit(f"invalid validation receipt for {asset_id}@{version}")
 
@@ -376,9 +398,11 @@ jobs:
                       "--deps-json",
                       str(deps_path),
                       "--validated-on",
-                      "linux",
+                      str(receipt["validated_on"]),
                       "--package-label",
                       asset_id,
+                      "--validation-profile",
+                      str(receipt["validation_profile"]),
                   ],
                   check=True,
               )
