@@ -434,8 +434,9 @@ audit_findings:
     head_at_review: 446c4c63d2b2fe54223cbea402a7e03929b8cf97
   - number: 645
     url: https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/645
-    state_at_review: open_ci_running
+    state_at_review: merged_ci_green_physical_pending
     head_at_review: fce001072ed5b985070bdf8c5b17468d87c0edb2
+    merge_commit: 648260b6cda7079b12a115326388ab22603a4366
 - id: CANT-AUDIT-06
   audit_item: 6
   title: CI verde non dimostra la prima app prodotta dal modello reale
