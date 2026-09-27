@@ -165,6 +165,8 @@ roadmap:
   - CANT-AUDIT-06
   related_prs:
   - https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/608
+  - https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/642
+  - https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/643
 - id: CANT-12
   title: Shared memory correctness and observable integration
   state: planned
@@ -297,8 +299,9 @@ audit_findings:
     limiti diversi. Anche istruzioni e vincoli possono essere tagliati diversamente. Un requisito può essere richiesto
     in revisione pur non essendo stato comunicato all’Engineer.
   implementation: 'Produrre una proiezione strutturata e comune del task, con requisiti identificati, vincoli, file
-    e criteri di accettazione. Gestire il budget prima della distribuzione ai ruoli; recuperare selettivamente la
-    PR #608, oggi in conflitto.'
+    e criteri di accettazione. Gestire il budget prima della distribuzione ai ruoli. Esecuzione corrente: PR #642
+    ricostruisce su main il delta ancora necessario; PR #608 resta una fonte storica in conflitto e non va mergiata
+    direttamente.'
   done_when: Con un piano lungo e un requisito in coda, tutti i ruoli e i retry ricevono lo stesso contratto; nessuna
     correzione sullo scope già presente in main viene persa.
   evidence_urls:
@@ -311,6 +314,10 @@ audit_findings:
     url: https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/608
     state_at_review: open
     head_at_review: eaa42ca19ea16cf8acfde6a15b31a80c4f5d00e0
+  - number: 642
+    url: https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/642
+    state_at_review: open_ci_running
+    head_at_review: 945e6b89beb8b79b7e2bc2d97cb33908ca47336b
 - id: CANT-AUDIT-02
   audit_item: 2
   title: Piano di produzione con un unico task e budget inadatto a richieste ampie
@@ -338,7 +345,7 @@ audit_findings:
 - id: CANT-AUDIT-03
   audit_item: 3
   title: Revisione parziale con verdetto globale
-  state: planned
+  state: active
   priority: P1
   source_priority: P1
   epics:
@@ -347,13 +354,21 @@ audit_findings:
   problem: Reviewer riceve soltanto i primi quattro file modificati, due nel retry, con contenuti ulteriormente
     limitati. Il gate accetta approved senza una prova di copertura di tutti i file. I controlli successivi possono
     trovare alcuni errori, ma non rendono completa questa revisione.
-  implementation: Revisionare gruppi di modifiche con hash e manifest di copertura; aggregare l’approvazione solo
+  implementation: 'Revisionare gruppi di modifiche con hash e manifest di copertura; aggregare l’approvazione solo
     quando tutte le modifiche previste sono state esaminate. Un nuovo diff invalida i verdetti precedenti pertinenti.
+    Esecuzione corrente: PR #643, stacked e riallineata su #642, implementa batch completi, fingerprint del diff e
+    invalidazione su mutazione.'
   done_when: Un difetto introdotto nel quinto file o nella parte omessa non può attraversare il gate grazie all’approvazione
     dei soli file iniziali.
   evidence_urls:
   - https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/blob/0c1fa14c154308a03a62a6ad730d639d7ace3e65/lib/app_factory/workshop/workshop_proposal_review_runner.dart
   - https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/blob/0c1fa14c154308a03a62a6ad730d639d7ace3e65/lib/app_factory/workshop/workshop_proposal_review_gate.dart
+  related_prs:
+  - number: 643
+    url: https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/643
+    state_at_review: open_ci_running
+    head_at_review: 833b6e5b980f66c423010229ed87845dbb928f5e
+    stacked_on: 642
 - id: CANT-AUDIT-04
   audit_item: 4
   title: Build remota dipendente dall’esecuzione viva dell’app
