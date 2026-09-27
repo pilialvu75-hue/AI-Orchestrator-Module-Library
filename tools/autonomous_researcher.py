@@ -128,7 +128,7 @@ def materialize(root: Path, selected: dict[str, object]) -> Path:
         },
         "integration": {
             "adaptation_allowed": True,
-            "estimated_effort": "unknown",
+            "estimated_effort": "medium",
             "adapter_notes": "Researcher discovery only; certification must establish license, security and target compatibility.",
             "known_constraints": ["license unresolved at discovery; fail closed until trusted evidence establishes it"],
         },
