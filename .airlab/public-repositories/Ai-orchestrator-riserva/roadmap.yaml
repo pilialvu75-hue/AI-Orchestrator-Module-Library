@@ -440,7 +440,7 @@ audit_findings:
 - id: CANT-AUDIT-06
   audit_item: 6
   title: CI verde non dimostra la prima app prodotta dal modello reale
-  state: planned
+  state: active
   priority: P1
   source_priority: P1
   epics:
@@ -450,14 +450,22 @@ audit_findings:
   problem: Lo smoke test Cantiere usa risposte predeterminate tramite _ScriptedRuntimeProvider. È utile per verificare
     orchestration, workspace e build, ma non verifica che Phi produca una proposta valida sul telefono, né che RAM,
     voce e ripresa funzionino in uso reale.
-  implementation: Mantenere gli smoke test deterministici e aggiungere una prova di accettazione con modello reale
-    e artefatto installabile, registrando SHA dell’app, modello, prompt, risultato e log. Per i rilasci runtime/Cantiere,
-    richiedere un esito esplicito sul dispositivo.
+  implementation: 'PR #646 aggiunge il gate separato di accettazione fisica: commit/versione host, modelli assegnati,
+    fingerprint SHA-256 del prompt senza testo privato, SHA-256 dell''APK generato, esiti task/review/validation/build,
+    apertura installer e conferma manuale dell''avvio dell''app. I fallimenti sono classificati in modelRuntime,
+    parsing, review, validation, build, install e launch; Diagnostics esporta solo grammatica chiusa. CI in corso.
+    Dopo merge serve comunque una prova reale Android con receipt status=passed.'
   done_when: Una richiesta minima genera file, supera i controlli, produce un APK e l’APK viene aperto; il resoconto
     distingue fallimento del modello, parsing, revisione e build.
   evidence_urls:
   - https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/blob/0c1fa14c154308a03a62a6ad730d639d7ace3e65/tool/cantiere_first_app_smoke.dart#L91-L104
   - https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/blob/0c1fa14c154308a03a62a6ad730d639d7ace3e65/test/app_factory/workshop/cantiere_first_app_smoke_test.dart
+  related_prs:
+  - number: 646
+    url: https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/646
+    state_at_review: open_ci_running
+    head_at_review: e4aab7b2639554bf480c88ed2bb190e31426218a
+  physical_validation_required: true
 - id: CANT-AUDIT-07
   audit_item: 7
   title: Promozione della release e controlli obbligatori insufficienti
