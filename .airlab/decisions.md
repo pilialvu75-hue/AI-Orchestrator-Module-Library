@@ -49,3 +49,21 @@ Reconstructed from historical project chats and current repository state.
 - Mining is static/read-only by default; legacy source is not executed merely to decide whether it is reusable.
 - Extracted code/patterns remain untrusted candidates and still enter Library intake/certification before reuse.
 - Provenance back to the originating repository/commit is mandatory.
+
+## 2026-09-27 — Riserva roadmap executor
+
+- The owner authorized the ChatGPT scheduled task **Avanza roadmap Riserva** to
+  advance the existing Riserva roadmap, using bounded implementation PRs and
+  current GitHub evidence.
+- The private operating contract is
+  `.airlab/public-repositories/Ai-orchestrator-riserva/autonomy.md` on main.
+- Mutable execution checkpoints live at
+  `.airlab/public-repositories/Ai-orchestrator-riserva/execution.json` on the
+  dedicated `automation/riserva-state` branch. This branch is operational state,
+  not a code branch to merge; ordinary checkpoint writes must not trigger builds.
+- Conditional blob-SHA writes and expiring leases coordinate this executor's
+  runs. Other chats still require explicit PR/head checks: this is not a global
+  lock over every contributor.
+- Roadmap completion still requires acceptance evidence. Existing physical
+  validation, certification, release, privacy and approval requirements remain
+  applicable. No additional spending or paid API activation is authorized.
