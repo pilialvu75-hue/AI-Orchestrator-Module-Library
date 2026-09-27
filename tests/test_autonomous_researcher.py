@@ -5,7 +5,7 @@ from pathlib import Path
 import sys
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "tools"))
-from autonomous_researcher import select_candidate
+from autonomous_researcher import materialize, select_candidate
 
 
 class AutonomousResearcherTest(unittest.TestCase):
@@ -29,6 +29,26 @@ class AutonomousResearcherTest(unittest.TestCase):
             selected = select_candidate(root)
             self.assertEqual("high.cap", selected["need"]["capability_id"])
             self.assertEqual("high", selected["candidate"]["component_path"])
+
+    def test_materialize_uses_pinned_private_source_commit_without_network(self):
+        with tempfile.TemporaryDirectory() as td:
+            root = Path(td)
+            (root / "intake").mkdir()
+            pinned = "c65a8b8702930a40620dea34f1f14439532a5a9b"
+            selected = {
+                "need": {"capability_id": "ai.acceleration_backend", "targets": ["android"]},
+                "source": {
+                    "repository": "pilialvu75-hue/AI-Orchestrator-Core",
+                    "source_commit": pinned,
+                },
+                "candidate": {"component_path": "native/android", "kind": "integration_bundle"},
+                "asset_id": "ai.acceleration_backend.firstparty.ai-orchestrator-core",
+            }
+            path = materialize(root, selected)
+            manifest = json.loads((path / "manifest.json").read_text(encoding="utf-8"))
+            self.assertEqual(pinned, manifest["payload"]["upstream_commit"])
+            self.assertEqual(pinned, manifest["provenance"]["source_commit"])
+            self.assertEqual("discovered", manifest["status"])
 
     def test_skips_already_present_asset(self):
         with tempfile.TemporaryDirectory() as td:
