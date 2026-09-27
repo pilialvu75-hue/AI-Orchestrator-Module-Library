@@ -24,8 +24,7 @@
         {
           "capability_id": "ai.acceleration_backend",
           "component_path": "native/android",
-          "kind": "integration_bundle",
-          "validation_profile": "native_cmake_static"
+          "kind": "integration_bundle"
         },
         {
           "capability_id": "ai.model_storage",
