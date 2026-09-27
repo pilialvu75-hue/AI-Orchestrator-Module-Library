@@ -1,0 +1,100 @@
+{
+  "capabilities": [
+    "ai.acceleration_backend"
+  ],
+  "connector": {
+    "adapters": [],
+    "configuration_schema": null,
+    "healthcheck": {
+      "path": null,
+      "type": "none"
+    },
+    "integration_mode": "adapter",
+    "provides": [
+      {
+        "capability_id": "ai.acceleration_backend",
+        "contract_id": "ai.acceleration_backend.v1",
+        "contract_version": "1.0"
+      }
+    ],
+    "requires": [],
+    "standard": "ai-orchestrator-lego",
+    "standard_version": "1.0.0"
+  },
+  "deprecation": {
+    "reason": null,
+    "replacement": null
+  },
+  "description": "Autonomously discovered first-party candidate for ai.acceleration_backend.",
+  "entry_paths": [
+    "native/android"
+  ],
+  "frameworks": [],
+  "id": "ai.acceleration_backend.firstparty.ai-orchestrator-core",
+  "integration": {
+    "adaptation_allowed": true,
+    "adapter_notes": "Researcher discovery only; certification must establish license, security and target compatibility.",
+    "estimated_effort": "unknown",
+    "known_constraints": [
+      "license unresolved at discovery; fail closed until trusted evidence establishes it"
+    ]
+  },
+  "kind": "integration_bundle",
+  "languages": [],
+  "name": "AI-Orchestrator-Core:native/android",
+  "payload": {
+    "path": null,
+    "sha256": null,
+    "type": "upstream_reference",
+    "upstream_commit": "c65a8b8702930a40620dea34f1f14439532a5a9b",
+    "upstream_repository": "https://github.com/pilialvu75-hue/AI-Orchestrator-Core"
+  },
+  "platforms": [
+    "android",
+    "ios",
+    "linux",
+    "macos",
+    "raspberry_pi",
+    "web",
+    "windows"
+  ],
+  "provenance": {
+    "license": "NOASSERTION",
+    "license_file": null,
+    "origin": "researcher",
+    "retrieved_at": "2026-09-27T18:45:45.492112Z",
+    "source_commit": "c65a8b8702930a40620dea34f1f14439532a5a9b",
+    "source_project_id": "pilialvu75-hue/AI-Orchestrator-Core",
+    "source_repository": "https://github.com/pilialvu75-hue/AI-Orchestrator-Core",
+    "source_tag": null,
+    "source_task_id": "autonomous-first-party:ai.acceleration_backend:c65a8b8702930a40620dea34f1f14439532a5a9b"
+  },
+  "quality": {
+    "failed_integrations": 0,
+    "last_used_at": null,
+    "reuse_count": 0,
+    "successful_integrations": 0
+  },
+  "security": {
+    "known_vulnerabilities": 0,
+    "notes": "Not yet reviewed.",
+    "review_report": null,
+    "reviewed": false,
+    "reviewed_at": null,
+    "sbom": null
+  },
+  "status": "discovered",
+  "tags": [
+    "ai.acceleration_backend",
+    "researcher-candidate",
+    "first-party"
+  ],
+  "validation": {
+    "score": 0.0,
+    "test_report": null,
+    "tests_passed": false,
+    "validated_at": null,
+    "validated_on": []
+  },
+  "version": "0.1.0"
+}
