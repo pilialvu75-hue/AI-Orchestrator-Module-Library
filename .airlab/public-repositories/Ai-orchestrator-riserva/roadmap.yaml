@@ -348,11 +348,11 @@ audit_findings:
   - number: 644
     url: https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/644
     state_at_review: open_ci_running
-    head_at_review: 5ed549559415ed7f46cc0bb863487a00ae8475ea
+    head_at_review: a0d201e6d44cdb91c852e8b30db814fe9684e93c
 - id: CANT-AUDIT-03
   audit_item: 3
   title: Revisione parziale con verdetto globale
-  state: active
+  state: done
   priority: P1
   source_priority: P1
   epics:
@@ -361,9 +361,9 @@ audit_findings:
   problem: Reviewer riceve soltanto i primi quattro file modificati, due nel retry, con contenuti ulteriormente
     limitati. Il gate accetta approved senza una prova di copertura di tutti i file. I controlli successivi possono
     trovare alcuni errori, ma non rendono completa questa revisione.
-  implementation: 'PR #643 è stata ricostruita direttamente su main dopo il merge squash di #642. Il delta corrente
-    contiene solo Reviewer gate/runner/test: batch completi, manifest e fingerprint del diff, approvazione aggregata
-    solo dopo la copertura completa e invalidazione dei verdetti quando il diff muta. CI finale in corso.'
+  implementation: 'PR #643 è stata ricostruita direttamente su main dopo il merge squash di #642 e poi mergiata
+    con CI completa verde. Il Reviewer ora usa batch completi, manifest e fingerprint del diff, approvazione aggregata
+    solo dopo la copertura completa e invalidazione dei verdetti quando il diff muta. Merge: 48772c2e4edf2b889252fedcff73f988444cd4d4.'
   done_when: Un difetto introdotto nel quinto file o nella parte omessa non può attraversare il gate grazie all’approvazione
     dei soli file iniziali.
   evidence_urls:
@@ -372,8 +372,9 @@ audit_findings:
   related_prs:
   - number: 643
     url: https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/643
-    state_at_review: open_ci_running
+    state_at_review: merged_ci_green
     head_at_review: 7e41e59ff712b8be07dafbd81d8e49241b64dffb
+    merge_commit: 48772c2e4edf2b889252fedcff73f988444cd4d4
 - id: CANT-AUDIT-04
   audit_item: 4
   title: Build remota dipendente dall’esecuzione viva dell’app
