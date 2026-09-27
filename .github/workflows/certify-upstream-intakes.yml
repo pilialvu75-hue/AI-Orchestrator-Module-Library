@@ -350,9 +350,6 @@ jobs:
                       continue
               if receipt.get("validation_profile") != "native_android_cmake" and native_dependencies:
                   raise SystemExit(f"unexpected native dependency inventory for {asset_id}@{version}")
-              if False:
-                  raise SystemExit(f"invalid validation receipt for {asset_id}@{version}")
-
               asset_dir = Path("intake") / asset_id / version
               manifest_path = asset_dir / "manifest.json"
               certified_path = Path("modules") / asset_id / version / "manifest.json"
