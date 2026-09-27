@@ -131,6 +131,7 @@ def materialize(
     validated_on: list[str] | None = None,
     package_label: str = "upstream package",
     scope_note: str | None = None,
+    validation_profile: str = "dart_package",
 ) -> dict:
     validated_on = validated_on or ["desktop"]
     if not validated_on or any(not item.strip() for item in validated_on):
@@ -171,7 +172,7 @@ def materialize(
         "version": manifest.get("version"),
         "source_commit": source_commit,
         "generated_at": generated_at,
-        "generator": "dart pub deps --json",
+        "generator": "dart pub deps --json" if validation_profile == "dart_package" else "native CMake dependency inventory",
         "packages": packages,
     }
     _write_json(sbom_path, sbom)
@@ -189,12 +190,20 @@ def materialize(
         "generated_at": generated_at,
         "evidence": {
             "upstream_checkout": actual_head,
-            "commands": [
-                f"dependency resolution ({package_label})",
-                f"dart analyze --fatal-infos ({package_label})",
-                f"dart test ({package_label})",
-                f"dart pub deps --json ({package_label})",
-            ],
+            "commands": (
+                [
+                    f"dependency resolution ({package_label})",
+                    f"dart analyze --fatal-infos ({package_label})",
+                    f"dart test ({package_label})",
+                    f"dart pub deps --json ({package_label})",
+                ]
+                if validation_profile == "dart_package"
+                else [
+                    f"git submodule update --init --recursive ({package_label})",
+                    f"cmake configure Android arm64-v8a API 24 ({package_label})",
+                    f"cmake build --target llama_bridge ({package_label})",
+                ]
+            ),
             "scope_note": note,
         },
     }
@@ -274,6 +283,7 @@ def main() -> int:
     parser.add_argument("--validated-on", action="append", dest="validated_on")
     parser.add_argument("--package-label", default="upstream package")
     parser.add_argument("--scope-note")
+    parser.add_argument("--validation-profile", choices=["dart_package", "native_android_cmake"], default="dart_package")
     args = parser.parse_args()
     result = materialize(
         args.asset_dir.resolve(),
@@ -282,6 +292,7 @@ def main() -> int:
         validated_on=args.validated_on,
         package_label=args.package_label,
         scope_note=args.scope_note,
+        validation_profile=args.validation_profile,
     )
     print(json.dumps(result, indent=2, sort_keys=True))
     return 0
