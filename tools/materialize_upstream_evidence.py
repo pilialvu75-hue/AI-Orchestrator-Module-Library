@@ -149,6 +149,34 @@ def materialize(
             f"upstream checkout mismatch: expected {source_commit}, got {actual_head}"
         )
 
+    source_repository = str(provenance.get("source_repository") or "").removeprefix("https://github.com/").removesuffix(".git")
+    if provenance.get("license") in {None, "", "NOASSERTION"}:
+        allowlist_path = Path(__file__).resolve().parents[1] / ".airlab" / "first-party-sources.json"
+        allowlist = _load_json(allowlist_path)
+        trusted = any(
+            str(item.get("repository") or "") == source_repository
+            and str(item.get("source_commit") or "").lower() == source_commit.lower()
+            for item in allowlist.get("sources", [])
+        )
+        if trusted:
+            provenance_dir = asset_dir / "provenance"
+            attestation = provenance_dir / "FIRST_PARTY_PROVENANCE.txt"
+            attestation.parent.mkdir(parents=True, exist_ok=True)
+            attestation.write_text(
+                "AI-Orchestrator first-party provenance attestation\n"
+                f"repository={source_repository}\n"
+                f"commit={source_commit}\n"
+                "classification=LicenseRef-AI-Orchestrator-First-Party-Internal\n"
+                "scope=first-party component only; third-party dependencies retain independent licensing\n",
+                encoding="utf-8",
+            )
+            provenance["license"] = "LicenseRef-AI-Orchestrator-First-Party-Internal"
+            provenance["license_file"] = "provenance/FIRST_PARTY_PROVENANCE.txt"
+        else:
+            raise EvidenceMaterializationError(
+                "license unresolved and source is not an immutable allowlisted first-party repository"
+            )
+
     declared_platforms = {str(item) for item in manifest.get("platforms") or []}
     unexpected = [item for item in validated_on if item not in declared_platforms]
     if unexpected:

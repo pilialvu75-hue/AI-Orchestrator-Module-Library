@@ -41,7 +41,7 @@ class MaterializeUpstreamEvidenceTest(unittest.TestCase):
                 "id": "storage.local_db.example",
                 "version": "0.1.0",
                 "platforms": ["android", "windows", "linux", "macos", "ios", "raspberry_pi"],
-                "provenance": {"source_commit": source_commit},
+                "provenance": {"source_commit": source_commit, "license": "MIT"},
                 "validation": {"score": 0.92, "tests_passed": False, "validated_on": []},
                 "security": {"reviewed": False, "sbom": None},
                 "integration": {"known_constraints": []},
@@ -99,7 +99,7 @@ class MaterializeUpstreamEvidenceTest(unittest.TestCase):
                 "id": "storage.local_db.example",
                 "version": "0.1.0",
                 "platforms": ["android", "windows"],
-                "provenance": {"source_commit": source_commit},
+                "provenance": {"source_commit": source_commit, "license": "MIT"},
                 "validation": {"score": 0.92, "tests_passed": False, "validated_on": []},
                 "security": {"reviewed": False},
                 "integration": {"known_constraints": []},
@@ -135,7 +135,7 @@ class MaterializeUpstreamEvidenceTest(unittest.TestCase):
                 "id": "storage.local_db.example",
                 "version": "0.1.0",
                 "platforms": ["linux"],
-                "provenance": {"source_commit": source_commit},
+                "provenance": {"source_commit": source_commit, "license": "MIT"},
                 "validation": {"score": 0.92, "tests_passed": False, "validated_on": []},
                 "security": {"reviewed": False},
                 "integration": {"known_constraints": []},
@@ -160,6 +160,45 @@ class MaterializeUpstreamEvidenceTest(unittest.TestCase):
 
             unchanged = json.loads((asset / "manifest.json").read_text(encoding="utf-8"))
             self.assertFalse(unchanged["security"]["reviewed"])
+
+
+    def test_refuses_unresolved_license_for_non_allowlisted_source(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            upstream = root / "upstream"
+            upstream.mkdir()
+            subprocess.run(["git", "init"], cwd=upstream, check=True, capture_output=True)
+            subprocess.run(["git", "config", "user.email", "test@example.com"], cwd=upstream, check=True)
+            subprocess.run(["git", "config", "user.name", "Test"], cwd=upstream, check=True)
+            (upstream / "README.md").write_text("fixture\n", encoding="utf-8")
+            subprocess.run(["git", "add", "README.md"], cwd=upstream, check=True)
+            subprocess.run(["git", "commit", "-m", "fixture"], cwd=upstream, check=True, capture_output=True)
+            source_commit = subprocess.run(
+                ["git", "rev-parse", "HEAD"], cwd=upstream, check=True, capture_output=True, text=True
+            ).stdout.strip()
+            asset = root / "asset"
+            asset.mkdir()
+            manifest = {
+                "id": "external.example",
+                "version": "0.1.0",
+                "platforms": ["linux"],
+                "provenance": {
+                    "source_commit": source_commit,
+                    "source_repository": "https://github.com/example/external",
+                    "license": "NOASSERTION",
+                },
+                "validation": {"score": 0.0, "tests_passed": False, "validated_on": []},
+                "security": {"reviewed": False},
+                "integration": {"known_constraints": []},
+            }
+            (asset / "manifest.json").write_text(json.dumps(manifest), encoding="utf-8")
+            deps_path = root / "deps.json"
+            deps_path.write_text(json.dumps({"packages": []}), encoding="utf-8")
+            with self.assertRaisesRegex(
+                evidence.EvidenceMaterializationError,
+                "not an immutable allowlisted first-party repository",
+            ):
+                evidence.materialize(asset, upstream, deps_path, validated_on=["linux"])
 
 
 if __name__ == "__main__":
