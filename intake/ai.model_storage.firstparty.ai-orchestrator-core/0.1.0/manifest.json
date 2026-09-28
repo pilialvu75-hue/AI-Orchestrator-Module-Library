@@ -1,0 +1,99 @@
+{
+  "capabilities": [
+    "ai.model_storage"
+  ],
+  "connector": {
+    "adapters": [],
+    "configuration_schema": null,
+    "healthcheck": {
+      "path": null,
+      "type": "none"
+    },
+    "integration_mode": "adapter",
+    "provides": [
+      {
+        "capability_id": "ai.model_storage",
+        "contract_id": "ai.model_storage.v1",
+        "contract_version": "1.0"
+      }
+    ],
+    "requires": [],
+    "standard": "ai-orchestrator-lego",
+    "standard_version": "1.0.0"
+  },
+  "deprecation": {
+    "reason": null,
+    "replacement": null
+  },
+  "description": "Autonomously discovered first-party candidate for ai.model_storage.",
+  "entry_paths": [
+    "lib/features/local_ai/data/services"
+  ],
+  "frameworks": [],
+  "id": "ai.model_storage.firstparty.ai-orchestrator-core",
+  "integration": {
+    "adaptation_allowed": true,
+    "adapter_notes": "Researcher discovery only; certification must establish license, security and target compatibility.",
+    "estimated_effort": "medium",
+    "known_constraints": [
+      "license unresolved at discovery; fail closed until trusted evidence establishes it"
+    ]
+  },
+  "kind": "module",
+  "languages": [],
+  "name": "AI-Orchestrator-Core:lib/features/local_ai/data/services",
+  "payload": {
+    "path": null,
+    "sha256": null,
+    "type": "upstream_reference",
+    "upstream_commit": "c65a8b8702930a40620dea34f1f14439532a5a9b",
+    "upstream_repository": "https://github.com/pilialvu75-hue/AI-Orchestrator-Core"
+  },
+  "platforms": [
+    "android",
+    "ios",
+    "linux",
+    "macos",
+    "raspberry_pi",
+    "windows"
+  ],
+  "provenance": {
+    "license": "NOASSERTION",
+    "license_file": null,
+    "origin": "researcher",
+    "retrieved_at": "2026-09-28T07:11:59.792599Z",
+    "source_commit": "c65a8b8702930a40620dea34f1f14439532a5a9b",
+    "source_project_id": "pilialvu75-hue/AI-Orchestrator-Core",
+    "source_repository": "https://github.com/pilialvu75-hue/AI-Orchestrator-Core",
+    "source_tag": null,
+    "source_task_id": "autonomous-first-party:ai.model_storage:c65a8b8702930a40620dea34f1f14439532a5a9b"
+  },
+  "quality": {
+    "failed_integrations": 0,
+    "last_used_at": null,
+    "reuse_count": 0,
+    "successful_integrations": 0
+  },
+  "security": {
+    "known_vulnerabilities": 0,
+    "notes": "Not yet reviewed.",
+    "review_report": null,
+    "reviewed": false,
+    "reviewed_at": null,
+    "sbom": null
+  },
+  "status": "discovered",
+  "tags": [
+    "ai.model_storage",
+    "researcher-candidate",
+    "first-party"
+  ],
+  "validation": {
+    "score": 0.0,
+    "test_report": null,
+    "tests_passed": false,
+    "validated_at": null,
+    "validated_on": []
+  },
+  "version": "0.1.0"
+}
