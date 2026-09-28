@@ -79,6 +79,49 @@ class MaterializeUpstreamEvidenceTest(unittest.TestCase):
             )
             verify_manifest_evidence(asset, updated)
 
+    def test_snapshot_accepts_matching_attested_commit_without_git_metadata(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            snapshot = root / "payload"
+            snapshot.mkdir()
+            (snapshot / "README.md").write_text("immutable snapshot\n", encoding="utf-8")
+            source_commit = "a" * 40
+            asset = root / "asset"
+            asset.mkdir()
+            manifest = {
+                "id": "storage.local_db.example",
+                "version": "0.1.0",
+                "platforms": ["linux"],
+                "provenance": {"source_commit": source_commit, "license": "MIT"},
+                "validation": {"score": 0.0, "tests_passed": False, "validated_on": []},
+                "security": {"reviewed": False},
+                "integration": {"known_constraints": []},
+            }
+            (asset / "manifest.json").write_text(json.dumps(manifest), encoding="utf-8")
+            deps_path = root / "deps.json"
+            deps_path.write_text(json.dumps({"packages": []}), encoding="utf-8")
+            with patch.object(evidence, "_query_osv", return_value=([], [])):
+                result = evidence.materialize(
+                    asset,
+                    snapshot,
+                    deps_path,
+                    validated_on=["linux"],
+                    attested_source_commit=source_commit,
+                )
+            self.assertEqual(source_commit, result["source_commit"])
+
+            with self.assertRaisesRegex(
+                evidence.EvidenceMaterializationError,
+                "attested source mismatch",
+            ):
+                evidence.materialize(
+                    asset,
+                    snapshot,
+                    deps_path,
+                    validated_on=["linux"],
+                    attested_source_commit="b" * 40,
+                )
+
     def test_refuses_undeclared_runner_platform(self) -> None:
         with tempfile.TemporaryDirectory() as temporary:
             root = Path(temporary)
