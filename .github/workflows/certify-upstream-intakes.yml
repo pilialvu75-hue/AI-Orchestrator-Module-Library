@@ -67,6 +67,16 @@ jobs:
               ):
                   continue
 
+              # Legacy manifest-only candidates cannot be certified without
+              # re-reading their private upstream repository. Keep them
+              # discovered, but never let them block snapshot-backed intakes.
+              snapshot_dir = path.parent / "payload"
+              if not snapshot_dir.is_dir() or not any(
+                  item.is_file() for item in snapshot_dir.rglob("*")
+              ):
+                  print(f"Skipping legacy manifest-only intake: {path}")
+                  continue
+
               provenance = data.get("provenance") or {}
               asset_id = str(data.get("id") or "").strip()
               version = str(data.get("version") or "").strip()
@@ -112,10 +122,10 @@ jobs:
                       "component_path": component,
                       "snapshot_path": (
                           f"intake/{asset_id}/{version}/payload"
-                          if (path.parent / "payload").is_dir()
+                          if snapshot_dir.is_dir()
                           else ""
                       ),
-                      "snapshot_backed": (path.parent / "payload").is_dir(),
+                      "snapshot_backed": True,
                   }
               )
 
