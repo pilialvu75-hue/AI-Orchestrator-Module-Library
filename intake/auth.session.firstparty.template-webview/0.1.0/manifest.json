@@ -1,0 +1,96 @@
+{
+  "capabilities": [
+    "auth.session"
+  ],
+  "connector": {
+    "adapters": [],
+    "configuration_schema": null,
+    "healthcheck": {
+      "path": null,
+      "type": "none"
+    },
+    "integration_mode": "adapter",
+    "provides": [
+      {
+        "capability_id": "auth.session",
+        "contract_id": "auth.session.v1",
+        "contract_version": "1.0"
+      }
+    ],
+    "requires": [],
+    "standard": "ai-orchestrator-lego",
+    "standard_version": "1.0.0"
+  },
+  "deprecation": {
+    "reason": null,
+    "replacement": null
+  },
+  "description": "Autonomously discovered first-party candidate for auth.session.",
+  "entry_paths": [
+    "backend/cloud-service/src/auth"
+  ],
+  "frameworks": [],
+  "id": "auth.session.firstparty.template-webview",
+  "integration": {
+    "adaptation_allowed": true,
+    "adapter_notes": "Researcher discovery only; certification must establish license, security and target compatibility.",
+    "estimated_effort": "medium",
+    "known_constraints": [
+      "license unresolved at discovery; fail closed until trusted evidence establishes it"
+    ]
+  },
+  "kind": "module",
+  "languages": [],
+  "name": "Template-webview:backend/cloud-service/src/auth",
+  "payload": {
+    "path": null,
+    "sha256": null,
+    "type": "upstream_reference",
+    "upstream_commit": "95b7f49f297d33f46d9eb5a091d1f3b69dcdd089",
+    "upstream_repository": "https://github.com/pilialvu75-hue/Template-webview"
+  },
+  "platforms": [
+    "android",
+    "desktop",
+    "web"
+  ],
+  "provenance": {
+    "license": "NOASSERTION",
+    "license_file": null,
+    "origin": "researcher",
+    "retrieved_at": "2026-09-28T12:56:08.701140Z",
+    "source_commit": "95b7f49f297d33f46d9eb5a091d1f3b69dcdd089",
+    "source_project_id": "pilialvu75-hue/Template-webview",
+    "source_repository": "https://github.com/pilialvu75-hue/Template-webview",
+    "source_tag": null,
+    "source_task_id": "autonomous-first-party:auth.session:95b7f49f297d33f46d9eb5a091d1f3b69dcdd089"
+  },
+  "quality": {
+    "failed_integrations": 0,
+    "last_used_at": null,
+    "reuse_count": 0,
+    "successful_integrations": 0
+  },
+  "security": {
+    "known_vulnerabilities": 0,
+    "notes": "Not yet reviewed.",
+    "review_report": null,
+    "reviewed": false,
+    "reviewed_at": null,
+    "sbom": null
+  },
+  "status": "discovered",
+  "tags": [
+    "auth.session",
+    "researcher-candidate",
+    "first-party"
+  ],
+  "validation": {
+    "score": 0.0,
+    "test_report": null,
+    "tests_passed": false,
+    "validated_at": null,
+    "validated_on": []
+  },
+  "version": "0.1.0"
+}
