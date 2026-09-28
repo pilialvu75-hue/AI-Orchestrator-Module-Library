@@ -132,6 +132,7 @@ def materialize(
     package_label: str = "upstream package",
     scope_note: str | None = None,
     validation_profile: str = "dart_package",
+    attested_source_commit: str | None = None,
 ) -> dict:
     validated_on = validated_on or ["desktop"]
     if not validated_on or any(not item.strip() for item in validated_on):
@@ -143,11 +144,18 @@ def materialize(
     source_commit = str(provenance.get("source_commit") or "")
     if not source_commit:
         raise EvidenceMaterializationError("manifest provenance.source_commit is missing")
-    actual_head = _git_head(upstream_dir)
-    if actual_head != source_commit:
-        raise EvidenceMaterializationError(
-            f"upstream checkout mismatch: expected {source_commit}, got {actual_head}"
-        )
+    if attested_source_commit is not None:
+        actual_head = attested_source_commit.strip().lower()
+        if actual_head != source_commit.lower():
+            raise EvidenceMaterializationError(
+                f"attested source mismatch: expected {source_commit}, got {actual_head}"
+            )
+    else:
+        actual_head = _git_head(upstream_dir)
+        if actual_head != source_commit:
+            raise EvidenceMaterializationError(
+                f"upstream checkout mismatch: expected {source_commit}, got {actual_head}"
+            )
 
     source_repository = str(provenance.get("source_repository") or "").removeprefix("https://github.com/").removesuffix(".git")
     if provenance.get("license") in {None, "", "NOASSERTION"}:
@@ -312,6 +320,7 @@ def main() -> int:
     parser.add_argument("--package-label", default="upstream package")
     parser.add_argument("--scope-note")
     parser.add_argument("--validation-profile", choices=["dart_package", "native_android_cmake"], default="dart_package")
+    parser.add_argument("--attested-source-commit")
     args = parser.parse_args()
     result = materialize(
         args.asset_dir.resolve(),
@@ -321,6 +330,7 @@ def main() -> int:
         package_label=args.package_label,
         scope_note=args.scope_note,
         validation_profile=args.validation_profile,
+        attested_source_commit=args.attested_source_commit,
     )
     print(json.dumps(result, indent=2, sort_keys=True))
     return 0

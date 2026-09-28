@@ -115,6 +115,7 @@ jobs:
                           if (path.parent / "payload").is_dir()
                           else ""
                       ),
+                      "snapshot_backed": (path.parent / "payload").is_dir(),
                   }
               )
 
@@ -209,6 +210,7 @@ jobs:
           SOURCE_REPOSITORY: ${{ matrix.source_repository }}
           SOURCE_COMMIT: ${{ matrix.source_commit }}
           COMPONENT_PATH: ${{ matrix.component_path }}
+          SNAPSHOT_BACKED: ${{ matrix.snapshot_backed }}
           PLAN_INDEX: ${{ matrix.index }}
           GITHUB_TOKEN: ""
           GH_TOKEN: ""
@@ -224,7 +226,11 @@ jobs:
             -C "${UPSTREAM}" --strip-components=1
           test -d "${UPSTREAM}"
 
-          PACKAGE_DIR="${UPSTREAM}/${COMPONENT_PATH}"
+          if [[ "${SNAPSHOT_BACKED}" == "true" ]]; then
+            PACKAGE_DIR="${UPSTREAM}"
+          else
+            PACKAGE_DIR="${UPSTREAM}/${COMPONENT_PATH}"
+          fi
           if [ -f "${PACKAGE_DIR}/pubspec.yaml" ]; then
             VALIDATION_PROFILE="dart_package"
             VALIDATED_ON="linux"
@@ -275,6 +281,7 @@ jobs:
               "source_repository": os.environ["SOURCE_REPOSITORY"],
               "source_commit": os.environ["SOURCE_COMMIT"],
               "component_path": os.environ["COMPONENT_PATH"],
+              "snapshot_backed": os.environ.get("SNAPSHOT_BACKED") == "true",
               "runner": "ubuntu-24.04",
               "analyze": "passed",
               "tests": "passed",
@@ -367,6 +374,7 @@ jobs:
                   "source_repository": str(item["source_repository"]),
                   "source_commit": str(item["source_commit"]).lower(),
                   "component_path": str(item["component_path"]),
+                  "snapshot_backed": str(bool(item.get("snapshot_backed"))).lower(),
               }
 
               artifact = evidence_root / f"upstream-validation-{index}"
@@ -377,7 +385,8 @@ jobs:
 
               receipt = json.loads(receipt_path.read_text(encoding="utf-8"))
               for key, value in expected.items():
-                  if str(receipt.get(key, "")) != value:
+                  actual = str(receipt.get(key, "")).lower() if key == "snapshot_backed" else str(receipt.get(key, ""))
+                  if actual != value:
                       raise SystemExit(
                           f"validation receipt mismatch for {asset_id}@{version}: {key}"
                       )
@@ -444,52 +453,46 @@ jobs:
                       f"current Library intake diverged for {asset_id}@{version}"
                   )
 
-              upstream = Path("/tmp") / f"trusted-upstream-{index}"
-              shutil.rmtree(upstream, ignore_errors=True)
-              subprocess.run(["git", "init", str(upstream)], check=True)
-              subprocess.run(
-                  ["git", "-C", str(upstream), "remote", "add", "origin", current_repository],
-                  check=True,
-              )
-              subprocess.run(
-                  [
-                      "git",
-                      "-C",
-                      str(upstream),
-                      "fetch",
-                      "--depth=1",
-                      "origin",
-                      current_commit,
-                  ],
-                  check=True,
-              )
-              subprocess.run(
-                  ["git", "-C", str(upstream), "checkout", "--detach", "FETCH_HEAD"],
-                  check=True,
-              )
-              actual_commit = subprocess.check_output(
-                  ["git", "-C", str(upstream), "rev-parse", "HEAD"],
-                  text=True,
-              ).strip().lower()
-              if actual_commit != current_commit:
-                  raise SystemExit(f"immutable commit mismatch for {asset_id}@{version}")
+              snapshot_backed = bool(item.get("snapshot_backed"))
+              extra_args = []
+              if snapshot_backed:
+                  upstream = asset_dir / "payload"
+                  if not upstream.is_dir() or not any(upstream.rglob("*")):
+                      raise SystemExit(f"snapshot payload missing for {asset_id}@{version}")
+                  extra_args = ["--attested-source-commit", current_commit]
+              else:
+                  upstream = Path("/tmp") / f"trusted-upstream-{index}"
+                  shutil.rmtree(upstream, ignore_errors=True)
+                  subprocess.run(["git", "init", str(upstream)], check=True)
+                  subprocess.run(
+                      ["git", "-C", str(upstream), "remote", "add", "origin", current_repository],
+                      check=True,
+                  )
+                  subprocess.run(
+                      ["git", "-C", str(upstream), "fetch", "--depth=1", "origin", current_commit],
+                      check=True,
+                  )
+                  subprocess.run(
+                      ["git", "-C", str(upstream), "checkout", "--detach", "FETCH_HEAD"],
+                      check=True,
+                  )
+                  actual_commit = subprocess.check_output(
+                      ["git", "-C", str(upstream), "rev-parse", "HEAD"], text=True
+                  ).strip().lower()
+                  if actual_commit != current_commit:
+                      raise SystemExit(f"immutable commit mismatch for {asset_id}@{version}")
 
               subprocess.run(
                   [
                       sys.executable,
                       "tools/materialize_upstream_evidence.py",
-                      "--asset-dir",
-                      str(asset_dir),
-                      "--upstream-dir",
-                      str(upstream),
-                      "--deps-json",
-                      str(deps_path),
-                      "--validated-on",
-                      str(receipt["validated_on"]),
-                      "--package-label",
-                      asset_id,
-                      "--validation-profile",
-                      str(receipt["validation_profile"]),
+                      "--asset-dir", str(asset_dir),
+                      "--upstream-dir", str(upstream),
+                      "--deps-json", str(deps_path),
+                      "--validated-on", str(receipt["validated_on"]),
+                      "--package-label", asset_id,
+                      "--validation-profile", str(receipt["validation_profile"]),
+                      *extra_args,
                   ],
                   check=True,
               )
