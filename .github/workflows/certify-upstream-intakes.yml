@@ -126,7 +126,7 @@ jobs:
           PY
 
   stage_trusted_source:
-    needs: [prepare, stage_trusted_source]
+    needs: prepare
     if: ${{ needs.prepare.outputs.count != '0' }}
     strategy:
       fail-fast: true
@@ -160,7 +160,7 @@ jobs:
           retention-days: 1
 
   validate_untrusted:
-    needs: prepare
+    needs: [prepare, stage_trusted_source]
     if: ${{ needs.prepare.outputs.count != '0' }}
     strategy:
       fail-fast: true
