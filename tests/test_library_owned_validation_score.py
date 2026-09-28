@@ -37,7 +37,7 @@ class LibraryOwnedValidationScoreTest(unittest.TestCase):
                 "id": "ai.model_storage.example",
                 "version": "0.1.0",
                 "platforms": ["linux"],
-                "provenance": {"source_commit": source_commit},
+                "provenance": {"source_commit": source_commit, "license": "MIT"},
                 "validation": {
                     "score": 0.7319,
                     "tests_passed": False,
