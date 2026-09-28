@@ -36,6 +36,15 @@ class UpstreamWorkflowIsolationTest(unittest.TestCase):
         self.assertNotRegex(trusted, re.compile(r"\bdart\s+analyze\b"))
         self.assertNotIn("flutter pub get", trusted)
 
+    def test_private_source_staging_dependency_is_acyclic(self) -> None:
+        text = WORKFLOW.read_text(encoding="utf-8")
+        staging = text.split("  stage_trusted_source:", 1)[1].split("  validate_untrusted:", 1)[0]
+        validation = text.split("  validate_untrusted:", 1)[1].split("  promote_trusted:", 1)[0]
+
+        self.assertIn("needs: prepare", staging)
+        self.assertNotIn("needs: [prepare, stage_trusted_source]", staging)
+        self.assertIn("needs: [prepare, stage_trusted_source]", validation)
+
     def test_cantiere_build_does_not_keep_checkout_credentials(self) -> None:
         text = CANTIERE_BUILD.read_text(encoding="utf-8")
         self.assertIn("permissions:\n  contents: read", text)
