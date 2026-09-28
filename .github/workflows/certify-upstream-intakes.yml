@@ -110,6 +110,11 @@ jobs:
                       "source_repository": repository,
                       "source_commit": commit,
                       "component_path": component,
+                      "snapshot_path": (
+                          f"intake/{asset_id}/{version}/payload"
+                          if (path.parent / "payload").is_dir()
+                          else ""
+                      ),
                   }
               )
 
@@ -136,6 +141,12 @@ jobs:
     permissions:
       contents: read
     steps:
+      - name: Checkout Library snapshot metadata
+        uses: actions/checkout@v6
+        with:
+          ref: main
+          fetch-depth: 1
+          persist-credentials: false
       - name: Stage immutable private source without executing it
         shell: bash
         env:
@@ -145,11 +156,16 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         run: |
           set -euo pipefail
-          OWNER_REPO="${SOURCE_REPOSITORY#https://github.com/}"
-          OWNER_REPO="${OWNER_REPO%.git}"
           ARCHIVE="${RUNNER_TEMP}/source-${PLAN_INDEX}.tar.gz"
-          gh api -H "Accept: application/vnd.github+json" \
-            "/repos/${OWNER_REPO}/tarball/${SOURCE_COMMIT}" > "${ARCHIVE}"
+          SNAPSHOT="intake/${{ matrix.asset_id }}/${{ matrix.version }}/payload"
+          if [[ -d "${SNAPSHOT}" ]] && find "${SNAPSHOT}" -type f -print -quit | grep -q .; then
+            tar -czf "${ARCHIVE}" -C "${SNAPSHOT}" .
+          else
+            OWNER_REPO="${SOURCE_REPOSITORY#https://github.com/}"
+            OWNER_REPO="${OWNER_REPO%.git}"
+            gh api -H "Accept: application/vnd.github+json" \
+              "/repos/${OWNER_REPO}/tarball/${SOURCE_COMMIT}" > "${ARCHIVE}"
+          fi
           test -s "${ARCHIVE}"
       - name: Upload immutable source artifact
         uses: actions/upload-artifact@v6
