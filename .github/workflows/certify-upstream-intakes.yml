@@ -125,6 +125,40 @@ jobs:
           print(json.dumps(matrix, indent=2, sort_keys=True))
           PY
 
+  stage_trusted_source:
+    needs: [prepare, stage_trusted_source]
+    if: ${{ needs.prepare.outputs.count != '0' }}
+    strategy:
+      fail-fast: true
+      matrix: ${{ fromJson(needs.prepare.outputs.matrix) }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    permissions:
+      contents: read
+    steps:
+      - name: Stage immutable private source without executing it
+        shell: bash
+        env:
+          SOURCE_REPOSITORY: ${{ matrix.source_repository }}
+          SOURCE_COMMIT: ${{ matrix.source_commit }}
+          PLAN_INDEX: ${{ matrix.index }}
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          OWNER_REPO="${SOURCE_REPOSITORY#https://github.com/}"
+          OWNER_REPO="${OWNER_REPO%.git}"
+          ARCHIVE="${RUNNER_TEMP}/source-${PLAN_INDEX}.tar.gz"
+          gh api -H "Accept: application/vnd.github+json" \
+            "/repos/${OWNER_REPO}/tarball/${SOURCE_COMMIT}" > "${ARCHIVE}"
+          test -s "${ARCHIVE}"
+      - name: Upload immutable source artifact
+        uses: actions/upload-artifact@v6
+        with:
+          name: upstream-source-${{ matrix.index }}
+          path: ${{ runner.temp }}/source-${{ matrix.index }}.tar.gz
+          if-no-files-found: error
+          retention-days: 1
+
   validate_untrusted:
     needs: prepare
     if: ${{ needs.prepare.outputs.count != '0' }}
@@ -139,6 +173,12 @@ jobs:
     permissions: {}
 
     steps:
+      - name: Download immutable source artifact
+        uses: actions/download-artifact@v6
+        with:
+          name: upstream-source-${{ matrix.index }}
+          path: ${{ runner.temp }}/staged-source
+
       - name: Set up Flutter stable
         uses: subosito/flutter-action@v2
         with:
@@ -163,11 +203,10 @@ jobs:
           rm -rf "${UPSTREAM}" "${OUT}"
           mkdir -p "${OUT}"
 
-          git init "${UPSTREAM}"
-          git -C "${UPSTREAM}" remote add origin "${SOURCE_REPOSITORY}"
-          git -C "${UPSTREAM}" fetch --depth=1 origin "${SOURCE_COMMIT}"
-          git -C "${UPSTREAM}" checkout --detach FETCH_HEAD
-          test "$(git -C "${UPSTREAM}" rev-parse HEAD)" = "${SOURCE_COMMIT}"
+          mkdir -p "${UPSTREAM}"
+          tar -xzf "${RUNNER_TEMP}/staged-source/source-${PLAN_INDEX}.tar.gz" \
+            -C "${UPSTREAM}" --strip-components=1
+          test -d "${UPSTREAM}"
 
           PACKAGE_DIR="${UPSTREAM}/${COMPONENT_PATH}"
           if [ -f "${PACKAGE_DIR}/pubspec.yaml" ]; then
@@ -182,6 +221,8 @@ jobs:
             (cd "${PACKAGE_DIR}" && dart test)
             (cd "${PACKAGE_DIR}" && dart pub deps --json > "${OUT}/deps.json")
           elif [ -f "${PACKAGE_DIR}/CMakeLists.txt" ]; then
+            echo "Native private-source validation requires separately staged immutable submodules; keeping candidate un-certified." >&2
+            exit 1
             VALIDATION_PROFILE="native_android_cmake"
             VALIDATED_ON="android"
             test -n "${ANDROID_NDK_ROOT:-${ANDROID_NDK_HOME:-}}"
