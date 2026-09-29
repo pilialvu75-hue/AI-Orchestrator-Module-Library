@@ -30,6 +30,6 @@
     "type": "library_intake_bundle"
   },
   "schema": "ai-orchestrator.evolution-work-queue.v1",
-  "state": "staged",
+  "state": "claimed",
   "work_id": "evo-a18f2c13c19927904ced0bbd"
 }
