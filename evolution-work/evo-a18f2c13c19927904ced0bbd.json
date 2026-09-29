@@ -1,0 +1,35 @@
+{
+  "acceptance_gates": [
+    "implementation_tests_pass",
+    "security_gates_pass",
+    "regression_tests_pass",
+    "library_contract_pass"
+  ],
+  "capability_id": "ai.acceleration_backend",
+  "knowledge_delta": [
+    "concept:\"skip",
+    "concept:awesome",
+    "concept:community",
+    "concept:daily",
+    "concept:honest",
+    "concept:install",
+    "concept:maturity",
+    "concept:open-source",
+    "concept:scored",
+    "concept:setup",
+    "concept:tells",
+    "concept:tools",
+    "practice:readme_present"
+  ],
+  "mutation_policy": "isolated_candidate_no_library_mutation",
+  "objective": "Evaluate and implement only the useful capability delta; preserve existing behavior unless tests justify a change.",
+  "proposal_id": "46d3210c343113b4c5831284dcc3f1ff78add85561f6a06c636bcd1883a1553d",
+  "required_output": {
+    "path_scope": "intake/<asset>/<version>",
+    "status": "discovered",
+    "type": "library_intake_bundle"
+  },
+  "schema": "ai-orchestrator.evolution-work-queue.v1",
+  "state": "staged",
+  "work_id": "evo-a18f2c13c19927904ced0bbd"
+}
