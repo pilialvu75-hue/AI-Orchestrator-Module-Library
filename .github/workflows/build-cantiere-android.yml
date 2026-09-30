@@ -18,6 +18,11 @@ on:
         required: true
         default: cantiere_generated_app
         type: string
+      display_name:
+        description: Human-readable launcher name for the generated app
+        required: false
+        default: Cantiere App
+        type: string
       target:
         description: Build target
         required: true
@@ -48,12 +53,397 @@ jobs:
           REQUEST_ID: ${{ inputs.request_id }}
           SOURCE_ROOT: ${{ inputs.source_root }}
           PROJECT_NAME: ${{ inputs.project_name }}
+          DISPLAY_NAME: ${{ inputs.display_name }}
           TARGET: ${{ inputs.target }}
         run: |
           set -euo pipefail
           [[ "$REQUEST_ID" =~ ^[A-Za-z0-9._-]{1,64}$ ]]
           [[ "$SOURCE_ROOT" == ".cantiere-build/source" ]]
           [[ "$PROJECT_NAME" =~ ^[a-z][a-z0-9_]{0,49}$ ]]
+          [[ -n "$DISPLAY_NAME" ]]
+          [[ "${#DISPLAY_NAME}" -le 80 ]]
+          [[ "$DISPLAY_NAME" != *
+
+      - name: Checkout staged Cantiere source only
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 1
+          persist-credentials: false
+          sparse-checkout: |
+            .cantiere-build/source
+          sparse-checkout-cone-mode: false
+          submodules: false
+
+      - name: Validate staged source boundary
+        shell: bash
+        env:
+          SOURCE_ROOT: ${{ inputs.source_root }}
+        run: |
+          set -euo pipefail
+          if [[ ! -d "$SOURCE_ROOT" ]]; then
+            echo "CANTIERE_SOURCE_BOUNDARY: staged source root is missing: $SOURCE_ROOT" >&2
+            exit 40
+          fi
+          if [[ ! -f "$SOURCE_ROOT/lib/main.dart" ]]; then
+            echo "CANTIERE_SOURCE_BOUNDARY: missing required Flutter entry point lib/main.dart." >&2
+            echo "Staged source files:" >&2
+            find "$SOURCE_ROOT" -maxdepth 4 -type f -print | sort >&2
+            exit 41
+          fi
+          if find "$SOURCE_ROOT/lib/test" -type f -name '*_test.dart' -print -quit 2>/dev/null | grep -q .; then
+            echo "CANTIERE_SOURCE_BOUNDARY: Flutter tests must live under test/, not lib/test/." >&2
+            find "$SOURCE_ROOT/lib/test" -type f -name '*_test.dart' -print | sort >&2
+            exit 42
+          fi
+          if find "$SOURCE_ROOT" -type l -print -quit | grep -q .; then
+            echo "CANTIERE_SOURCE_BOUNDARY: symbolic links are not allowed in staged source." >&2
+            exit 43
+          fi
+          FILE_COUNT="$(find "$SOURCE_ROOT" -type f | wc -l | tr -d ' ')"
+          TOTAL_BYTES="$(du -sb "$SOURCE_ROOT" | cut -f1)"
+          if [[ "$FILE_COUNT" -gt 1024 ]]; then
+            echo "CANTIERE_SOURCE_BOUNDARY: staged source exceeds 1024 files." >&2
+            exit 44
+          fi
+          if [[ "$TOTAL_BYTES" -gt 25165824 ]]; then
+            echo "CANTIERE_SOURCE_BOUNDARY: staged source exceeds 24 MiB." >&2
+            exit 45
+          fi
+
+      - name: Setup Java
+        uses: actions/setup-java@v6
+        with:
+          distribution: temurin
+          java-version: '17'
+        # Do not enable setup-java's Gradle cache here. Security isolation
+        # intentionally sparse-checks out only .cantiere-build/source, while
+        # the generic Android scaffold (and therefore Gradle files) is created
+        # later under RUNNER_TEMP. setup-java treats "no Gradle files matched"
+        # as a hard failure before Flutter ever gets a chance to build.
+
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+          cache: true
+
+      - name: Materialize generic Android scaffold
+        id: workspace
+        shell: bash
+        env:
+          SOURCE_ROOT: ${{ inputs.source_root }}
+          PROJECT_NAME: ${{ inputs.project_name }}
+          DISPLAY_NAME: ${{ inputs.display_name }}
+        run: |
+          set -euo pipefail
+          WORKSPACE="${RUNNER_TEMP}/cantiere-generated-app"
+          rm -rf "$WORKSPACE"
+          flutter create \
+            --empty \
+            --platforms=android \
+            --project-name="$PROJECT_NAME" \
+            --org=ai.orchestrator.generated \
+            "$WORKSPACE"
+          # The generic scaffold is toolchain infrastructure. Cantiere source
+          # overlays it but must not delete platform boilerplate it did not need
+          # to generate itself. A Cantiere-provided pubspec/android tree, when
+          # present, still wins because rsync overwrites matching paths.
+          rsync -a "$SOURCE_ROOT/" "$WORKSPACE/"
+          test -f "$WORKSPACE/pubspec.yaml"
+          test -f "$WORKSPACE/lib/main.dart"
+          DISPLAY_NAME="$DISPLAY_NAME" WORKSPACE="$WORKSPACE" python3 - <<'PY'
+          import os
+          import xml.etree.ElementTree as ET
+
+          workspace = os.environ["WORKSPACE"]
+          display_name = os.environ["DISPLAY_NAME"].strip()
+          manifest = os.path.join(
+              workspace, "android", "app", "src", "main", "AndroidManifest.xml"
+          )
+          android_ns = "http://schemas.android.com/apk/res/android"
+          ET.register_namespace("android", android_ns)
+          tree = ET.parse(manifest)
+          root = tree.getroot()
+          application = root.find("application")
+          if application is None:
+              raise SystemExit("Generated Android manifest has no <application>")
+          application.set("{" + android_ns + "}label", display_name)
+          tree.write(manifest, encoding="utf-8", xml_declaration=True)
+          PY
+          echo "path=$WORKSPACE" >> "$GITHUB_OUTPUT"
+
+      - name: Resolve dependencies
+        shell: bash
+        working-directory: ${{ steps.workspace.outputs.path }}
+        run: |
+          set -euo pipefail
+          flutter pub get
+
+      - name: Validate generated project
+        shell: bash
+        working-directory: ${{ steps.workspace.outputs.path }}
+        run: |
+          set -euo pipefail
+          FORMAT_PATHS=(lib)
+          if find test -type f -name '*.dart' -print -quit 2>/dev/null | grep -q .; then
+            FORMAT_PATHS+=(test)
+          fi
+          # Cantiere source is AI-generated and may be semantically correct but
+          # not byte-for-byte dartfmt compliant. Normalize only this ephemeral
+          # build workspace, then verify the normalized result deterministically.
+          # The authoritative Cantiere source branch is never mutated here.
+          dart format "${FORMAT_PATHS[@]}"
+          dart format --output=none --set-exit-if-changed "${FORMAT_PATHS[@]}"
+          # Generated MVPs must still pass static analysis, but style-level
+          # analyzer infos (for example use_key_in_widget_constructors) do not
+          # make an otherwise compilable APK invalid. Warnings/errors remain
+          # fatal and the analyzer output stays visible in the CI log.
+          flutter analyze --no-fatal-infos
+          if find test -type f -name '*.dart' -print -quit 2>/dev/null | grep -q .; then
+            flutter test --reporter expanded
+          fi
+
+      - name: Build Android APK
+        id: build
+        shell: bash
+        working-directory: ${{ steps.workspace.outputs.path }}
+        run: |
+          set -euo pipefail
+          flutter build apk --release
+          APK="build/app/outputs/flutter-apk/app-release.apk"
+          test -s "$APK"
+          BYTES="$(stat -c%s "$APK")"
+          SHA256="$(sha256sum "$APK" | awk '{print $1}')"
+          echo "apk=$APK" >> "$GITHUB_OUTPUT"
+          echo "bytes=$BYTES" >> "$GITHUB_OUTPUT"
+          echo "sha256=$SHA256" >> "$GITHUB_OUTPUT"
+
+      - name: Package verified artifact
+        shell: bash
+        env:
+          REQUEST_ID: ${{ inputs.request_id }}
+          PROJECT_NAME: ${{ inputs.project_name }}
+          DISPLAY_NAME: ${{ inputs.display_name }}
+          WORKSPACE: ${{ steps.workspace.outputs.path }}
+          APK_REL: ${{ steps.build.outputs.apk }}
+          APK_BYTES: ${{ steps.build.outputs.bytes }}
+          APK_SHA256: ${{ steps.build.outputs.sha256 }}
+        run: |
+          set -euo pipefail
+          OUT="${RUNNER_TEMP}/cantiere-artifact"
+          mkdir -p "$OUT"
+          cp "$WORKSPACE/$APK_REL" "$OUT/app-release.apk"
+          printf '%s  %s\n' "$APK_SHA256" 'app-release.apk' > "$OUT/app-release.apk.sha256"
+          python3 - <<'PY' > "$OUT/build-manifest.json"
+          import json, os
+          print(json.dumps({
+              "version": 1,
+              "request_id": os.environ["REQUEST_ID"],
+              "project_name": os.environ["PROJECT_NAME"],
+              "display_name": os.environ["DISPLAY_NAME"],
+              "application_id": "ai.orchestrator.generated." + os.environ["PROJECT_NAME"],
+              "target": "android",
+              "source_commit": os.environ["GITHUB_SHA"],
+              "apk": "app-release.apk",
+              "apk_bytes": int(os.environ["APK_BYTES"]),
+              "apk_sha256": os.environ["APK_SHA256"],
+              "validation": {
+                  "format": "passed",
+                  "analyze": "passed",
+                  "tests": "passed_or_not_present",
+                  "build": "passed"
+              }
+          }, sort_keys=True))
+          PY
+
+      - name: Upload Cantiere APK
+        uses: actions/upload-artifact@v6
+        with:
+          name: cantiere-android-${{ inputs.request_id }}
+          path: ${{ runner.temp }}/cantiere-artifact/
+          if-no-files-found: error
+          retention-days: 7
+\n'* ]]
+          [[ "$DISPLAY_NAME" != *
+
+      - name: Checkout staged Cantiere source only
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 1
+          persist-credentials: false
+          sparse-checkout: |
+            .cantiere-build/source
+          sparse-checkout-cone-mode: false
+          submodules: false
+
+      - name: Validate staged source boundary
+        shell: bash
+        env:
+          SOURCE_ROOT: ${{ inputs.source_root }}
+        run: |
+          set -euo pipefail
+          if [[ ! -d "$SOURCE_ROOT" ]]; then
+            echo "CANTIERE_SOURCE_BOUNDARY: staged source root is missing: $SOURCE_ROOT" >&2
+            exit 40
+          fi
+          if [[ ! -f "$SOURCE_ROOT/lib/main.dart" ]]; then
+            echo "CANTIERE_SOURCE_BOUNDARY: missing required Flutter entry point lib/main.dart." >&2
+            echo "Staged source files:" >&2
+            find "$SOURCE_ROOT" -maxdepth 4 -type f -print | sort >&2
+            exit 41
+          fi
+          if find "$SOURCE_ROOT/lib/test" -type f -name '*_test.dart' -print -quit 2>/dev/null | grep -q .; then
+            echo "CANTIERE_SOURCE_BOUNDARY: Flutter tests must live under test/, not lib/test/." >&2
+            find "$SOURCE_ROOT/lib/test" -type f -name '*_test.dart' -print | sort >&2
+            exit 42
+          fi
+          if find "$SOURCE_ROOT" -type l -print -quit | grep -q .; then
+            echo "CANTIERE_SOURCE_BOUNDARY: symbolic links are not allowed in staged source." >&2
+            exit 43
+          fi
+          FILE_COUNT="$(find "$SOURCE_ROOT" -type f | wc -l | tr -d ' ')"
+          TOTAL_BYTES="$(du -sb "$SOURCE_ROOT" | cut -f1)"
+          if [[ "$FILE_COUNT" -gt 1024 ]]; then
+            echo "CANTIERE_SOURCE_BOUNDARY: staged source exceeds 1024 files." >&2
+            exit 44
+          fi
+          if [[ "$TOTAL_BYTES" -gt 25165824 ]]; then
+            echo "CANTIERE_SOURCE_BOUNDARY: staged source exceeds 24 MiB." >&2
+            exit 45
+          fi
+
+      - name: Setup Java
+        uses: actions/setup-java@v6
+        with:
+          distribution: temurin
+          java-version: '17'
+        # Do not enable setup-java's Gradle cache here. Security isolation
+        # intentionally sparse-checks out only .cantiere-build/source, while
+        # the generic Android scaffold (and therefore Gradle files) is created
+        # later under RUNNER_TEMP. setup-java treats "no Gradle files matched"
+        # as a hard failure before Flutter ever gets a chance to build.
+
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+          cache: true
+
+      - name: Materialize generic Android scaffold
+        id: workspace
+        shell: bash
+        env:
+          SOURCE_ROOT: ${{ inputs.source_root }}
+          PROJECT_NAME: ${{ inputs.project_name }}
+        run: |
+          set -euo pipefail
+          WORKSPACE="${RUNNER_TEMP}/cantiere-generated-app"
+          rm -rf "$WORKSPACE"
+          flutter create \
+            --empty \
+            --platforms=android \
+            --project-name="$PROJECT_NAME" \
+            --org=ai.orchestrator.generated \
+            "$WORKSPACE"
+          # The generic scaffold is toolchain infrastructure. Cantiere source
+          # overlays it but must not delete platform boilerplate it did not need
+          # to generate itself. A Cantiere-provided pubspec/android tree, when
+          # present, still wins because rsync overwrites matching paths.
+          rsync -a "$SOURCE_ROOT/" "$WORKSPACE/"
+          test -f "$WORKSPACE/pubspec.yaml"
+          test -f "$WORKSPACE/lib/main.dart"
+          echo "path=$WORKSPACE" >> "$GITHUB_OUTPUT"
+
+      - name: Resolve dependencies
+        shell: bash
+        working-directory: ${{ steps.workspace.outputs.path }}
+        run: |
+          set -euo pipefail
+          flutter pub get
+
+      - name: Validate generated project
+        shell: bash
+        working-directory: ${{ steps.workspace.outputs.path }}
+        run: |
+          set -euo pipefail
+          FORMAT_PATHS=(lib)
+          if find test -type f -name '*.dart' -print -quit 2>/dev/null | grep -q .; then
+            FORMAT_PATHS+=(test)
+          fi
+          # Cantiere source is AI-generated and may be semantically correct but
+          # not byte-for-byte dartfmt compliant. Normalize only this ephemeral
+          # build workspace, then verify the normalized result deterministically.
+          # The authoritative Cantiere source branch is never mutated here.
+          dart format "${FORMAT_PATHS[@]}"
+          dart format --output=none --set-exit-if-changed "${FORMAT_PATHS[@]}"
+          # Generated MVPs must still pass static analysis, but style-level
+          # analyzer infos (for example use_key_in_widget_constructors) do not
+          # make an otherwise compilable APK invalid. Warnings/errors remain
+          # fatal and the analyzer output stays visible in the CI log.
+          flutter analyze --no-fatal-infos
+          if find test -type f -name '*.dart' -print -quit 2>/dev/null | grep -q .; then
+            flutter test --reporter expanded
+          fi
+
+      - name: Build Android APK
+        id: build
+        shell: bash
+        working-directory: ${{ steps.workspace.outputs.path }}
+        run: |
+          set -euo pipefail
+          flutter build apk --release
+          APK="build/app/outputs/flutter-apk/app-release.apk"
+          test -s "$APK"
+          BYTES="$(stat -c%s "$APK")"
+          SHA256="$(sha256sum "$APK" | awk '{print $1}')"
+          echo "apk=$APK" >> "$GITHUB_OUTPUT"
+          echo "bytes=$BYTES" >> "$GITHUB_OUTPUT"
+          echo "sha256=$SHA256" >> "$GITHUB_OUTPUT"
+
+      - name: Package verified artifact
+        shell: bash
+        env:
+          REQUEST_ID: ${{ inputs.request_id }}
+          PROJECT_NAME: ${{ inputs.project_name }}
+          WORKSPACE: ${{ steps.workspace.outputs.path }}
+          APK_REL: ${{ steps.build.outputs.apk }}
+          APK_BYTES: ${{ steps.build.outputs.bytes }}
+          APK_SHA256: ${{ steps.build.outputs.sha256 }}
+        run: |
+          set -euo pipefail
+          OUT="${RUNNER_TEMP}/cantiere-artifact"
+          mkdir -p "$OUT"
+          cp "$WORKSPACE/$APK_REL" "$OUT/app-release.apk"
+          printf '%s  %s\n' "$APK_SHA256" 'app-release.apk' > "$OUT/app-release.apk.sha256"
+          python3 - <<'PY' > "$OUT/build-manifest.json"
+          import json, os
+          print(json.dumps({
+              "version": 1,
+              "request_id": os.environ["REQUEST_ID"],
+              "project_name": os.environ["PROJECT_NAME"],
+              "application_id": "ai.orchestrator.generated." + os.environ["PROJECT_NAME"],
+              "target": "android",
+              "source_commit": os.environ["GITHUB_SHA"],
+              "apk": "app-release.apk",
+              "apk_bytes": int(os.environ["APK_BYTES"]),
+              "apk_sha256": os.environ["APK_SHA256"],
+              "validation": {
+                  "format": "passed",
+                  "analyze": "passed",
+                  "tests": "passed_or_not_present",
+                  "build": "passed"
+              }
+          }, sort_keys=True))
+          PY
+
+      - name: Upload Cantiere APK
+        uses: actions/upload-artifact@v6
+        with:
+          name: cantiere-android-${{ inputs.request_id }}
+          path: ${{ runner.temp }}/cantiere-artifact/
+          if-no-files-found: error
+          retention-days: 7
+\r'* ]]
           [[ "$TARGET" == "android" ]]
 
       - name: Checkout staged Cantiere source only
