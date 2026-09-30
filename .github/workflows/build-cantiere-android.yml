@@ -13,6 +13,11 @@ on:
         required: true
         default: .cantiere-build/source
         type: string
+      project_name:
+        description: Stable Flutter/Dart project name for this Cantiere project
+        required: true
+        default: cantiere_generated_app
+        type: string
       target:
         description: Build target
         required: true
@@ -42,11 +47,13 @@ jobs:
         env:
           REQUEST_ID: ${{ inputs.request_id }}
           SOURCE_ROOT: ${{ inputs.source_root }}
+          PROJECT_NAME: ${{ inputs.project_name }}
           TARGET: ${{ inputs.target }}
         run: |
           set -euo pipefail
           [[ "$REQUEST_ID" =~ ^[A-Za-z0-9._-]{1,64}$ ]]
           [[ "$SOURCE_ROOT" == ".cantiere-build/source" ]]
+          [[ "$PROJECT_NAME" =~ ^[a-z][a-z0-9_]{0,49}$ ]]
           [[ "$TARGET" == "android" ]]
 
       - name: Checkout staged Cantiere source only
@@ -117,6 +124,7 @@ jobs:
         shell: bash
         env:
           SOURCE_ROOT: ${{ inputs.source_root }}
+          PROJECT_NAME: ${{ inputs.project_name }}
         run: |
           set -euo pipefail
           WORKSPACE="${RUNNER_TEMP}/cantiere-generated-app"
@@ -124,7 +132,7 @@ jobs:
           flutter create \
             --empty \
             --platforms=android \
-            --project-name=cantiere_generated_app \
+            --project-name="$PROJECT_NAME" \
             --org=ai.orchestrator.generated \
             "$WORKSPACE"
           # The generic scaffold is toolchain infrastructure. Cantiere source
@@ -186,6 +194,7 @@ jobs:
         shell: bash
         env:
           REQUEST_ID: ${{ inputs.request_id }}
+          PROJECT_NAME: ${{ inputs.project_name }}
           WORKSPACE: ${{ steps.workspace.outputs.path }}
           APK_REL: ${{ steps.build.outputs.apk }}
           APK_BYTES: ${{ steps.build.outputs.bytes }}
@@ -201,6 +210,8 @@ jobs:
           print(json.dumps({
               "version": 1,
               "request_id": os.environ["REQUEST_ID"],
+              "project_name": os.environ["PROJECT_NAME"],
+              "application_id": "ai.orchestrator.generated." + os.environ["PROJECT_NAME"],
               "target": "android",
               "source_commit": os.environ["GITHUB_SHA"],
               "apk": "app-release.apk",
