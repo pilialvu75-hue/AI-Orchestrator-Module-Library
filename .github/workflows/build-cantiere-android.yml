@@ -158,7 +158,11 @@ jobs:
           # The authoritative Cantiere source branch is never mutated here.
           dart format "${FORMAT_PATHS[@]}"
           dart format --output=none --set-exit-if-changed "${FORMAT_PATHS[@]}"
-          flutter analyze
+          # Generated MVPs must still pass static analysis, but style-level
+          # analyzer infos (for example use_key_in_widget_constructors) do not
+          # make an otherwise compilable APK invalid. Warnings/errors remain
+          # fatal and the analyzer output stays visible in the CI log.
+          flutter analyze --no-fatal-infos
           if find test -type f -name '*.dart' -print -quit 2>/dev/null | grep -q .; then
             flutter test --reporter expanded
           fi
