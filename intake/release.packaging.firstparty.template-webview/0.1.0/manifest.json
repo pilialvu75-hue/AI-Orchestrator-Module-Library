@@ -1,0 +1,100 @@
+{
+  "capabilities": [
+    "release.packaging"
+  ],
+  "connector": {
+    "adapters": [],
+    "configuration_schema": null,
+    "healthcheck": {
+      "path": null,
+      "type": "none"
+    },
+    "integration_mode": "adapter",
+    "provides": [
+      {
+        "capability_id": "release.packaging",
+        "contract_id": "release.packaging.v1",
+        "contract_version": "1.0"
+      }
+    ],
+    "requires": [],
+    "standard": "ai-orchestrator-lego",
+    "standard_version": "1.0.0"
+  },
+  "deprecation": {
+    "reason": null,
+    "replacement": null
+  },
+  "description": "Autonomously discovered first-party candidate for release.packaging.",
+  "entry_paths": [
+    "android"
+  ],
+  "frameworks": [],
+  "id": "release.packaging.firstparty.template-webview",
+  "integration": {
+    "adaptation_allowed": true,
+    "adapter_notes": "Researcher discovery only; certification must establish license, security and target compatibility.",
+    "estimated_effort": "medium",
+    "known_constraints": [
+      "license unresolved at discovery; fail closed until trusted evidence establishes it"
+    ]
+  },
+  "kind": "project_template",
+  "languages": [],
+  "name": "Template-webview:android",
+  "payload": {
+    "path": null,
+    "sha256": null,
+    "type": "upstream_reference",
+    "upstream_commit": "95b7f49f297d33f46d9eb5a091d1f3b69dcdd089",
+    "upstream_repository": "https://github.com/pilialvu75-hue/Template-webview"
+  },
+  "platforms": [
+    "android",
+    "ios",
+    "linux",
+    "macos",
+    "raspberry_pi",
+    "web",
+    "windows"
+  ],
+  "provenance": {
+    "license": "NOASSERTION",
+    "license_file": null,
+    "origin": "researcher",
+    "retrieved_at": "2026-09-30T12:57:46.100902Z",
+    "source_commit": "95b7f49f297d33f46d9eb5a091d1f3b69dcdd089",
+    "source_project_id": "pilialvu75-hue/Template-webview",
+    "source_repository": "https://github.com/pilialvu75-hue/Template-webview",
+    "source_tag": null,
+    "source_task_id": "autonomous-first-party:release.packaging:95b7f49f297d33f46d9eb5a091d1f3b69dcdd089"
+  },
+  "quality": {
+    "failed_integrations": 0,
+    "last_used_at": null,
+    "reuse_count": 0,
+    "successful_integrations": 0
+  },
+  "security": {
+    "known_vulnerabilities": 0,
+    "notes": "Not yet reviewed.",
+    "review_report": null,
+    "reviewed": false,
+    "reviewed_at": null,
+    "sbom": null
+  },
+  "status": "discovered",
+  "tags": [
+    "release.packaging",
+    "researcher-candidate",
+    "first-party"
+  ],
+  "validation": {
+    "score": 0.0,
+    "test_report": null,
+    "tests_passed": false,
+    "validated_at": null,
+    "validated_on": []
+  },
+  "version": "0.1.0"
+}
