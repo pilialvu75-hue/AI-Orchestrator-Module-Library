@@ -1,0 +1,95 @@
+{
+  "capabilities": [
+    "release.update_manager"
+  ],
+  "connector": {
+    "adapters": [],
+    "configuration_schema": null,
+    "healthcheck": {
+      "path": null,
+      "type": "none"
+    },
+    "integration_mode": "adapter",
+    "provides": [
+      {
+        "capability_id": "release.update_manager",
+        "contract_id": "release.update_manager.v1",
+        "contract_version": "1.0"
+      }
+    ],
+    "requires": [],
+    "standard": "ai-orchestrator-lego",
+    "standard_version": "1.0.0"
+  },
+  "deprecation": {
+    "reason": null,
+    "replacement": null
+  },
+  "description": "Autonomously discovered first-party candidate for release.update_manager.",
+  "entry_paths": [
+    "lib/core/system/update"
+  ],
+  "frameworks": [],
+  "id": "release.update_manager.firstparty.ai-orchestrator-core",
+  "integration": {
+    "adaptation_allowed": true,
+    "adapter_notes": "Researcher discovery only; certification must establish license, security and target compatibility.",
+    "estimated_effort": "medium",
+    "known_constraints": [
+      "license unresolved at discovery; fail closed until trusted evidence establishes it"
+    ]
+  },
+  "kind": "module",
+  "languages": [],
+  "name": "AI-Orchestrator-Core:lib/core/system/update",
+  "payload": {
+    "path": null,
+    "sha256": null,
+    "type": "upstream_reference",
+    "upstream_commit": "c65a8b8702930a40620dea34f1f14439532a5a9b",
+    "upstream_repository": "https://github.com/pilialvu75-hue/AI-Orchestrator-Core"
+  },
+  "platforms": [
+    "android",
+    "desktop"
+  ],
+  "provenance": {
+    "license": "NOASSERTION",
+    "license_file": null,
+    "origin": "researcher",
+    "retrieved_at": "2026-09-30T18:50:26.474895Z",
+    "source_commit": "c65a8b8702930a40620dea34f1f14439532a5a9b",
+    "source_project_id": "pilialvu75-hue/AI-Orchestrator-Core",
+    "source_repository": "https://github.com/pilialvu75-hue/AI-Orchestrator-Core",
+    "source_tag": null,
+    "source_task_id": "autonomous-first-party:release.update_manager:c65a8b8702930a40620dea34f1f14439532a5a9b"
+  },
+  "quality": {
+    "failed_integrations": 0,
+    "last_used_at": null,
+    "reuse_count": 0,
+    "successful_integrations": 0
+  },
+  "security": {
+    "known_vulnerabilities": 0,
+    "notes": "Not yet reviewed.",
+    "review_report": null,
+    "reviewed": false,
+    "reviewed_at": null,
+    "sbom": null
+  },
+  "status": "discovered",
+  "tags": [
+    "release.update_manager",
+    "researcher-candidate",
+    "first-party"
+  ],
+  "validation": {
+    "score": 0.0,
+    "test_report": null,
+    "tests_passed": false,
+    "validated_at": null,
+    "validated_on": []
+  },
+  "version": "0.1.0"
+}
