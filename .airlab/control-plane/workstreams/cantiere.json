@@ -3,22 +3,22 @@
   "id": "cantiere",
   "title": "Cantiere",
   "role": "worker",
-  "status": "CLAIMED",
+  "status": "EVIDENCE_READY",
   "activation": "active",
   "scope": "Exclusive Cantiere/App Factory execution, durability, build/review/validation/apply and first-real-app reliability.",
   "shared_engine_policy": "shared_or_control_plane",
-  "state_version": 3,
+  "state_version": 4,
   "updated_at": "2026-10-01",
   "active_claim": {
     "claim_id": "cantiere-manga-online-failure-repro-v1-20261001",
     "owner_lane": "cantiere",
-    "work_item": "manga-online-failure-repro-v1",
+    "work_item": "phase1-online-generated-app-repro-v1",
     "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
-    "scope": "Bounded Phase 1 ONLINE reproduction/diagnosis of the recent manga-drawing generated-app failure using current main and available Diagnostics evidence; implement only a directly evidenced minimal fix.",
+    "scope": "Bounded Phase 1 ONLINE generated-app reproduction on current Android release.",
     "branch": "cantiere/manga-online-failure-repro-v1-20261001",
     "started_at": "2026-10-01T09:34:00Z",
-    "heartbeat_at": "2026-10-01T09:34:00Z",
-    "lease_until": "2026-10-01T21:34:00Z",
+    "heartbeat_at": "2026-10-01T09:38:00Z",
+    "lease_until": "2026-10-01T21:38:00Z",
     "lease_hours": 12
   },
   "dependencies": [],
@@ -42,7 +42,7 @@
     "reviewed_by": null,
     "reviewed_at": null
   },
-  "next_action": "Inspect current main and Diagnostics evidence for the recent manga-drawing app failure; isolate one concrete failure before changing code.",
+  "next_action": "Run the same generated-app request on Android release +2860 and preserve Diagnostics evidence.",
   "historical_backlog": [
     "Stay in Phase 1 ONLINE until a real generated Android app is physically accepted.",
     "Reproduce the recent manga-drawing app failure from current main with Diagnostics; do not restart generic audits.",
@@ -61,5 +61,39 @@
       "do not claim physical success without target evidence",
       "remain in Phase 1 ONLINE"
     ]
+  },
+  "checkpoints": [
+    {
+      "seq": 1,
+      "at": "2026-10-01T09:38:00Z",
+      "claim_id": "cantiere-manga-online-failure-repro-v1-20261001",
+      "work_item": "phase1-online-generated-app-repro-v1",
+      "summary": "Current main already includes #739 Engineer empty-change recovery. Release +2860 includes it. Current-build Android evidence is now required.",
+      "decisions": [
+        "Keep Phase 1 ONLINE."
+      ],
+      "evidence_refs": [
+        "Ai-orchestrator-riserva#739",
+        "v1.0.12+2860"
+      ],
+      "next_action": "Run the same generated-app request on Android release +2860 and preserve Diagnostics evidence.",
+      "kind": "PHYSICAL_GATE"
+    }
+  ],
+  "last_checkpoint": {
+    "seq": 1,
+    "at": "2026-10-01T09:38:00Z",
+    "claim_id": "cantiere-manga-online-failure-repro-v1-20261001",
+    "work_item": "phase1-online-generated-app-repro-v1",
+    "summary": "Current main already includes #739 Engineer empty-change recovery. Release +2860 includes it. Current-build Android evidence is now required.",
+    "decisions": [
+      "Keep Phase 1 ONLINE."
+    ],
+    "evidence_refs": [
+      "Ai-orchestrator-riserva#739",
+      "v1.0.12+2860"
+    ],
+    "next_action": "Run the same generated-app request on Android release +2860 and preserve Diagnostics evidence.",
+    "kind": "PHYSICAL_GATE"
   }
 }
