@@ -135,6 +135,23 @@ def validate(root=ROOT):
                 errors.append(f"{lane_id}: active_claim owner_lane mismatch")
             if state not in {"CLAIMED","IMPLEMENTING","EVIDENCE_READY","REVIEW_REQUIRED"}:
                 errors.append(f"{lane_id}: active claim is inconsistent with state {state}")
+            registry_entry = next((item for item in (registry.get("lanes") or []) if item.get("id") == lane_id), {})
+            allowed_repositories = {registry_entry.get("primary_repository")}
+            allowed_repositories.update(registry_entry.get("secondary_repositories") or [])
+            allowed_repositories.discard(None)
+            if claim.get("repository") not in allowed_repositories:
+                errors.append(
+                    f"{lane_id}: active_claim repository {claim.get('repository')} is outside registered lane scope"
+                )
+            if role != "reviewer" and state in {"CLAIMED","IMPLEMENTING","EVIDENCE_READY"}:
+                reviewer = lane.get("reviewer") or {}
+                if reviewer.get("state") == "APPROVED":
+                    errors.append(f"{lane_id}: active pre-review worker cannot retain reviewer approval")
+                if (lane.get("gates") or {}).get("G6_REVIEWER") == "PASS":
+                    errors.append(f"{lane_id}: active pre-review worker cannot retain G6_REVIEWER=PASS")
+                packet = lane.get("review_packet")
+                if packet and packet.get("claim_id") != claim.get("claim_id"):
+                    errors.append(f"{lane_id}: active claim cannot retain a review_packet from another claim")
             if role != "reviewer" and state == "CLAIMED":
                 reviewer = lane.get("reviewer") or {}
                 if reviewer.get("state") != "PENDING":
@@ -191,6 +208,13 @@ def validate(root=ROOT):
                     control_plane_manager._validate_review_packet(lane_id, claim, packet)
                 except ValueError as error:
                     errors.append(f"{lane_id}: review_packet schema invalid: {error}")
+        if state == "BLOCKED" and (lane.get("block_reason") or {}).get("code") == "CANONICAL_SYNC_REQUIRED":
+            if claim:
+                errors.append(f"{lane_id}: CANONICAL_SYNC_REQUIRED must have no active claim")
+            if (lane.get("gates") or {}).get("G7_CANONICAL_SYNC") != "PENDING_ROADMAP_SYNC":
+                errors.append(f"{lane_id}: CANONICAL_SYNC_REQUIRED requires G7_CANONICAL_SYNC=PENDING_ROADMAP_SYNC")
+            if not (lane.get("block_reason") or {}).get("roadmap_refs"):
+                errors.append(f"{lane_id}: CANONICAL_SYNC_REQUIRED requires roadmap_refs")
         if state in {"VERIFIED","DONE"} and not lane.get("evidence"):
             errors.append(f"{lane_id}: {state} requires evidence")
         if state == "DONE":
