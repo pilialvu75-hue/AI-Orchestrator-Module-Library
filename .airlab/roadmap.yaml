@@ -251,7 +251,7 @@ roadmap:
 
   - id: L20
     title: Continuous autonomous chat checkpointing
-    state: active
+    state: done
     priority: P0
     outcome: >-
       Persist material lane progress continuously during work so context exhaustion, app closure or chat rollover
