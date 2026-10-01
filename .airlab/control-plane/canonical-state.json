@@ -7,7 +7,7 @@
     "policy": "This private repository is the single coordination authority. Chats and agents are workers, not independent sources of truth."
   },
   "updated_at": "2026-10-01",
-  "state_revision": 14,
+  "state_revision": 15,
   "lifecycle_status": "BOOTSTRAP_ACTIVE",
   "roadmap_authority": {
     "library": ".airlab/roadmap.yaml",
@@ -77,12 +77,21 @@
     "no_change_no_commit": true
   },
   "projection": {
-    "source_digest": "5003cb8ffb4b88c7449bb9560dd12189a94b2429d0b1c7fc885696357d18a0bd",
-    "projected_at": "2026-10-01T09:16:37Z",
+    "source_digest": "ae82a1a37c4ebac13c36e6816759adc3bf9150dacb9fb6917909ebabe535f412",
+    "projected_at": "2026-10-01T09:32:54Z",
     "counts": {
-      "READY": 15
+      "CLAIMED": 1,
+      "READY": 14
     },
-    "active_claims": [],
+    "active_claims": [
+      {
+        "lane": "main-reviewer",
+        "claim_id": "main-reviewer-cantiere-autopilot-pilot-v1-20261001",
+        "work_item": "cantiere-autopilot-pilot-v1",
+        "repository": "pilialvu75-hue/AI-Orchestrator-Module-Library",
+        "lease_until": "2026-10-01T21:33:00Z"
+      }
+    ],
     "review_required": [],
     "blocked": [],
     "checkpoint_watch": [],
@@ -195,15 +204,20 @@
       },
       {
         "id": "main-reviewer",
-        "status": "READY",
+        "status": "CLAIMED",
         "activation": "active",
-        "state_version": 10,
+        "state_version": 11,
         "updated_at": "2026-10-01",
-        "active_claim": null,
+        "active_claim": {
+          "claim_id": "main-reviewer-cantiere-autopilot-pilot-v1-20261001",
+          "work_item": "cantiere-autopilot-pilot-v1",
+          "repository": "pilialvu75-hue/AI-Orchestrator-Module-Library",
+          "lease_until": "2026-10-01T21:33:00Z"
+        },
         "reviewer_state": "AUTHORITY",
         "inference_profile_status": null,
         "historical_backlog_count": 0,
-        "next_action": "Review worker lanes, checkpoint-watch alerts and canonical backlogs."
+        "next_action": "Record Cantiere autonomous pilot and update historical chat cleanup registry."
       },
       {
         "id": "platform-android",
