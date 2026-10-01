@@ -2,7 +2,7 @@ schema_version: 1
 repository: pilialvu75-hue/Ai-orchestrator-riserva
 visibility: public
 roadmap_storage: private_library
-updated_at: '2026-09-27'
+updated_at: '2026-10-01'
 baseline_commit: 0c1fa14c154308a03a62a6ad730d639d7ace3e65
 lifecycle:
   status: active_primary
@@ -71,6 +71,12 @@ current_state:
     - CANT-AUDIT-07
     - CANT-AUDIT-08
     - CANT-AUDIT-20
+  coordination_control_plane:
+    status: active_foundation
+    authority: pilialvu75-hue/AI-Orchestrator-Module-Library/.airlab/control-plane
+    reviewer_lane: main-reviewer
+    worker_rule: Specialized chats stop at REVIEW_REQUIRED; Main/Reviewer promotes VERIFIED/DONE.
+    platform_rule: One shared engine; platform lanes adapt target boundaries instead of forking engine semantics.
 invariants:
 - Cantiere remains authoritative for Project/Task/Execution/review/validation/approval/apply.
 - Library reuse is checked before regeneration.
@@ -82,6 +88,13 @@ invariants:
 - Local mode remains useful offline; web access is optional capability, not a cloud-mode requirement.
 - GPU/Vulkan claims require runtime proof.
 roadmap:
+- id: CANT-CP1
+  title: Canonical multi-chat control plane and strong gates
+  state: active
+  priority: P0
+  outcome: >-
+    Coordinate Cantiere, Voice/Live, shared runtime, Diagnostics and platform-specific chats through
+    one private canonical authority, unique bounded claims, strong evidence gates and Main/Reviewer consolidation.
 - id: CANT-1
   title: Repository/PR convergence and clean main
   state: active
