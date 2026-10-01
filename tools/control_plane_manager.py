@@ -58,11 +58,41 @@ def _lanes(root: Path, canonical: dict[str, Any]) -> list[tuple[Path, dict[str, 
     return [(path, _load(path)) for path in _lane_paths(root, canonical)]
 
 
+def _lanes_isolated(
+    root: Path,
+    canonical: dict[str, Any],
+) -> tuple[list[tuple[Path, dict[str, Any]]], list[dict[str, Any]]]:
+    lanes: list[tuple[Path, dict[str, Any]]] = []
+    incidents: list[dict[str, Any]] = []
+    for path in _lane_paths(root, canonical):
+        try:
+            lane = _load(path)
+        except Exception as error:
+            incidents.append({
+                "path": str(path.relative_to(root)),
+                "code": "LANE_UNREADABLE",
+                "error": f"{type(error).__name__}: {error}",
+            })
+            continue
+        if not isinstance(lane, dict):
+            incidents.append({
+                "path": str(path.relative_to(root)),
+                "code": "LANE_INVALID_ROOT",
+                "error": "lane root must be an object",
+            })
+            continue
+        lanes.append((path, lane))
+    return lanes, incidents
+
+
 def _lane_by_id(root: Path, canonical: dict[str, Any], lane_id: str) -> tuple[Path, dict[str, Any]]:
-    for path, lane in _lanes(root, canonical):
+    lanes, incidents = _lanes_isolated(root, canonical)
+    for path, lane in lanes:
         if lane.get("id") == lane_id:
             return path, lane
-    raise ValueError(f"unknown lane: {lane_id}")
+    incident_paths = ", ".join(item["path"] for item in incidents)
+    suffix = f"; unreadable workstreams={incident_paths}" if incident_paths else ""
+    raise ValueError(f"unknown or unreadable lane: {lane_id}{suffix}")
 
 
 def _allowed_repositories_for_lane(root: Path, lane_id: str) -> set[str]:
@@ -107,6 +137,7 @@ def _projection_payload(
     *,
     now: datetime,
     checkpoint_warning_minutes: int,
+    projection_incidents: list[dict[str, Any]] | None = None,
 ) -> dict[str, Any]:
     summaries: list[dict[str, Any]] = []
     active_claims: list[dict[str, Any]] = []
@@ -187,6 +218,10 @@ def _projection_payload(
         "review_required": sorted(review_required),
         "blocked": sorted(blocked, key=lambda item: item["lane"]),
         "checkpoint_watch": sorted(checkpoint_watch, key=lambda item: item["lane"]),
+        "projection_incidents": sorted(
+            projection_incidents or [],
+            key=lambda item: (str(item.get("path") or ""), str(item.get("code") or "")),
+        ),
         "platform_inference_profiles": sorted(platform_profiles, key=lambda item: item["lane"]),
         "lanes": summaries,
     }
@@ -196,10 +231,12 @@ def project(root: Path = ROOT, now: datetime | None = None) -> bool:
     now = now or _now()
     canonical_path, canonical = _canonical(root)
     checkpoint_warning_minutes = _checkpoint_watch_policy(canonical)
+    lanes, incidents = _lanes_isolated(root, canonical)
     payload = _projection_payload(
-        _lanes(root, canonical),
+        lanes,
         now=now,
         checkpoint_warning_minutes=checkpoint_warning_minutes,
+        projection_incidents=incidents,
     )
     digest_source = json.dumps(payload, sort_keys=True, separators=(",", ":"), ensure_ascii=False)
     digest = hashlib.sha256(digest_source.encode("utf-8")).hexdigest()
@@ -768,8 +805,9 @@ def reconcile(root: Path = ROOT, now: datetime | None = None) -> list[str]:
     now = now or _now()
     _, canonical = _canonical(root)
     changed: list[str] = []
+    lanes, _ = _lanes_isolated(root, canonical)
 
-    for lane_path, lane in _lanes(root, canonical):
+    for lane_path, lane in lanes:
         claim_data = lane.get("active_claim")
         if not claim_data:
             continue

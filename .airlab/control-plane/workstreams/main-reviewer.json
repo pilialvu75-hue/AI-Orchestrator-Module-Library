@@ -40,7 +40,7 @@
     "reviewed_by": null,
     "reviewed_at": null
   },
-  "next_action": "Implement transactional inbox and fail-isolated projection path for CP-HARDEN-01.",
+  "next_action": "Complete CP-HARDEN-01 CI and migrate operational automation state writes to the transactional inbox; then proceed to CP-HARDEN-02 resource locks.",
   "inference_review_policy": {
     "policy": ".airlab/control-plane/inference-policy.json",
     "check": [
@@ -413,7 +413,9 @@
       "priority": "P0",
       "title": "Pre-commit canonical state mutation guard",
       "problem": "Direct API/main writes can place an invalid lane state on main before post-push validation catches it; one malformed lane can also make the global reconcile/validation workflow fail and leave the canonical projection stale.",
-      "target": "Route worker/reviewer state transitions through an atomic validated mutation path or equivalent protected update gate, and isolate/quarantine invalid-lane projection failures so one lane cannot blind the whole control plane."
+      "target": "Route worker/reviewer state transitions through an atomic validated mutation path or equivalent protected update gate, and isolate/quarantine invalid-lane projection failures so one lane cannot blind the whole control plane.",
+      "status": "IMPLEMENTING",
+      "implementation": "Transactional compare-and-swap inbox + per-lane projection incident isolation."
     },
     {
       "id": "CP-HARDEN-02",

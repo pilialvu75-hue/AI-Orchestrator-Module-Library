@@ -74,7 +74,8 @@
     "destination": ".airlab/control-plane/canonical-state.json#projection",
     "periodic_reconcile": "hourly",
     "event_reconcile": "main changes to workstreams/roadmaps/inference policy",
-    "no_change_no_commit": true
+    "no_change_no_commit": true,
+    "invalid_lane_behavior": "ISOLATE_AND_SURFACE_PROJECTION_INCIDENT"
   },
   "projection": {
     "source_digest": "a7409b0c44f91f588030017cfbfeabe2d7c51dd5472d2e6fea585feed17c1084",
@@ -411,5 +412,17 @@
       "automatic_block_before_claim_expiry": false,
       "rationale": "Detect lanes that may be working without recently persisted resume state while avoiding false blocking during legitimate waits."
     }
+  },
+  "mutation_policy": {
+    "mode": "transactional_inbox_compare_and_swap",
+    "processor": "tools/control_plane_inbox.py",
+    "pending": ".airlab/control-plane/inbox/pending/",
+    "processed": ".airlab/control-plane/inbox/processed/",
+    "quarantine": ".airlab/control-plane/inbox/quarantine/",
+    "expected_state_version_required": true,
+    "api_direct_workstream_writes": "FORBIDDEN",
+    "candidate_validation": "TEMP_COPY_BEFORE_APPLY",
+    "invalid_request_behavior": "QUARANTINE_WITHOUT_LANE_MUTATION",
+    "projection_failure_isolation": "PER_LANE_INCIDENT"
   }
 }
