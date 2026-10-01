@@ -3,11 +3,11 @@
   "id": "cantiere",
   "title": "Cantiere",
   "role": "worker",
-  "status": "IMPLEMENTING",
+  "status": "REVIEW_REQUIRED",
   "activation": "active",
   "scope": "Exclusive Cantiere/App Factory execution, durability, build/review/validation/apply and first-real-app reliability.",
   "shared_engine_policy": "shared_or_control_plane",
-  "state_version": 8,
+  "state_version": 9,
   "updated_at": "2026-10-01",
   "active_claim": {
     "claim_id": "cantiere-manga-online-failure-repro-v1-20261001",
@@ -17,7 +17,7 @@
     "scope": "Bounded Phase 1 ONLINE generated-app reproduction on current Android release.",
     "branch": "cantiere/manga-online-failure-repro-v1-20261001",
     "started_at": "2026-10-01T09:34:00Z",
-    "heartbeat_at": "2026-10-01T10:12:00Z",
+    "heartbeat_at": "2026-10-01T11:11:00Z",
     "lease_until": "2026-10-01T21:38:00Z",
     "lease_hours": 12
   },
@@ -30,19 +30,19 @@
     "G0_CLAIM": "PASS",
     "G1_IMPLEMENTATION": "PASS",
     "G2_STATIC": "PASS_REVIEW_FINDINGS_ADDRESSED",
-    "G3_CI": "PENDING_UPDATED_HEAD",
-    "G4_INTEGRATION": "PENDING",
+    "G3_CI": "PASS",
+    "G4_INTEGRATION": "PASS_CI_ONLY",
     "G5_TARGET_RUNTIME": "NOT_APPLICABLE_UNTIL_RUNTIME_CHANGE",
-    "G6_REVIEWER": "PENDING",
+    "G6_REVIEWER": "REVIEW_REQUIRED",
     "G7_CANONICAL_SYNC": "PENDING"
   },
   "reviewer": {
     "required": true,
-    "state": "PENDING",
+    "state": "REVIEW_REQUIRED",
     "reviewed_by": null,
     "reviewed_at": null
   },
-  "next_action": "Wait for CI on PR #745 head 1de46c1; if green, submit REVIEW_REQUIRED to Main/Reviewer without self-promotion.",
+  "next_action": "Main/Reviewer: review PR #745 and the addressed Copilot findings. If approved, merge/release; then return lane for physical Manga Kids retest.",
   "historical_backlog": [
     "Stay in Phase 1 ONLINE until a real generated Android app is physically accepted.",
     "Reproduce the recent manga-drawing app failure from current main with Diagnostics; do not restart generic audits.",
@@ -152,24 +152,44 @@
       ],
       "next_action": "Wait for CI on PR #745 head 1de46c1; if green, submit REVIEW_REQUIRED to Main/Reviewer without self-promotion.",
       "kind": "REVIEW_FIX"
+    },
+    {
+      "seq": 6,
+      "at": "2026-10-01T11:11:00Z",
+      "claim_id": "cantiere-manga-online-failure-repro-v1-20261001",
+      "work_item": "phase1-online-generated-app-repro-v1",
+      "summary": "Updated PR #745 head 1de46c1 completed all six CI workflows successfully after both Copilot findings were addressed. Worker implementation is complete and is handed off at the reviewer boundary; no merge or physical-success claim is made.",
+      "decisions": [
+        "Set lane REVIEW_REQUIRED.",
+        "Do not self-merge or self-promote.",
+        "Keep Phase 1 ONLINE until approved merge/release and physical Manga Kids acceptance."
+      ],
+      "evidence_refs": [
+        "Ai-orchestrator-riserva#745",
+        "commit:1de46c10346036f7add4c62cc4a359967249784d",
+        "CI:36850241272,36850241169,36850241205,36850241270,36850241189,36850241326"
+      ],
+      "next_action": "Main/Reviewer: review PR #745 and the addressed Copilot findings. If approved, merge/release; then return lane for physical Manga Kids retest.",
+      "kind": "REVIEW_HANDOFF"
     }
   ],
   "last_checkpoint": {
-    "seq": 5,
-    "at": "2026-10-01T10:12:00Z",
+    "seq": 6,
+    "at": "2026-10-01T11:11:00Z",
     "claim_id": "cantiere-manga-online-failure-repro-v1-20261001",
     "work_item": "phase1-online-generated-app-repro-v1",
-    "summary": "Both concrete Copilot findings on PR #745 are now addressed on the branch: retry telemetry distinguishes attempt 3 after a runtime retry, and runWithResumeContext has a three-call regression test asserting stable request/project/task/execution/attempt/checkpoint identity and 640/512/768 token budgets.",
+    "summary": "Updated PR #745 head 1de46c1 completed all six CI workflows successfully after both Copilot findings were addressed. Worker implementation is complete and is handed off at the reviewer boundary; no merge or physical-success claim is made.",
     "decisions": [
-      "No physical retest until updated PR CI completes and reviewer boundary is respected.",
-      "Phase 1 ONLINE remains open."
+      "Set lane REVIEW_REQUIRED.",
+      "Do not self-merge or self-promote.",
+      "Keep Phase 1 ONLINE until approved merge/release and physical Manga Kids acceptance."
     ],
     "evidence_refs": [
       "Ai-orchestrator-riserva#745",
-      "commit:c6541c289eebfc736750a2359ab774ea00f32f16",
-      "commit:1de46c10346036f7add4c62cc4a359967249784d"
+      "commit:1de46c10346036f7add4c62cc4a359967249784d",
+      "CI:36850241272,36850241169,36850241205,36850241270,36850241189,36850241326"
     ],
-    "next_action": "Wait for CI on PR #745 head 1de46c1; if green, submit REVIEW_REQUIRED to Main/Reviewer without self-promotion.",
-    "kind": "REVIEW_FIX"
+    "next_action": "Main/Reviewer: review PR #745 and the addressed Copilot findings. If approved, merge/release; then return lane for physical Manga Kids retest.",
+    "kind": "REVIEW_HANDOFF"
   }
 }
