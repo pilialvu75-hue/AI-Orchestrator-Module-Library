@@ -1,0 +1,12 @@
+{
+  "schema_version": 1,
+  "request_id": "wl-checkpoint-0c-01",
+  "status": "APPLIED",
+  "processed_at": "2026-10-01T18:23:41Z",
+  "source_file": "wl-checkpoint-0c-01.json",
+  "lane_id": "platform-windows-legacy",
+  "operation": "checkpoint",
+  "actor_id": "automation:windows-legacy:6abc720a44b081919bd7a8d71b45e8d2",
+  "errors": [],
+  "result_state_version": 7
+}

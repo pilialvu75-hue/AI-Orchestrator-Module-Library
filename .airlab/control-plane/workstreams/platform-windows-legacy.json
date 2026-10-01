@@ -7,7 +7,7 @@
   "activation": "active",
   "scope": "Legacy Windows compatibility layer, installer/update and target-specific adapters with target-optimized inference while preserving shared orchestration/contracts.",
   "shared_engine_policy": "adapter_only",
-  "state_version": 6,
+  "state_version": 7,
   "updated_at": "2026-10-01",
   "active_claim": {
     "claim_id": "9234ab59756e8f7ce3be",
@@ -17,8 +17,8 @@
     "scope": "Continue the #721 Windows 7 interaction/model-load blocker only: use current descendant PR #736 to isolate the first crashing model-load stage with one physical probe at a time; preserve Win8.1/10/11 behavior and do not merge before target evidence.",
     "branch": "test/windows7-model-load-deep-probes",
     "started_at": "2026-10-01T15:24:13Z",
-    "heartbeat_at": "2026-10-01T15:24:13Z",
-    "lease_until": "2026-10-02T03:24:13Z",
+    "heartbeat_at": "2026-10-01T18:23:41Z",
+    "lease_until": "2026-10-02T06:23:41Z",
     "lease_hours": 12
   },
   "dependencies": [],
@@ -42,7 +42,7 @@
     "reviewed_by": null,
     "reviewed_at": null
   },
-  "next_action": "On physical Windows 7, install the #1175/#736 candidate and press only 0C · Test scansione file modelli. Record whether the app remains open or crashes; no other probe in the same run.",
+  "next_action": "Run only physical Win7 probe 0C and record open or crash.",
   "inference_profile_policy": "target_owned_benchmark_gated",
   "inference_profile": {
     "status": "NEEDS_TARGET_PROFILE",
@@ -83,25 +83,36 @@
       ],
       "next_action": "On physical Windows 7, install the #1175/#736 candidate and press only 0C · Test scansione file modelli. Record whether the app remains open or crashes; no other probe in the same run.",
       "work_item": "pr-721-win7-model-load-crash-isolation"
+    },
+    {
+      "seq": 2,
+      "at": "2026-10-01T18:23:41Z",
+      "claim_id": "9234ab59756e8f7ce3be",
+      "work_item": "pr-721-win7-model-load-crash-isolation",
+      "summary": "PR 736 and Windows build 1175 revalidated; physical Win7 probe 0C is the only remaining step.",
+      "decisions": [
+        "No merge before physical evidence."
+      ],
+      "evidence_refs": [
+        "PR 736",
+        "build 1175"
+      ],
+      "next_action": "Run only physical Win7 probe 0C and record open or crash."
     }
   ],
   "last_checkpoint": {
-    "seq": 1,
-    "at": "2026-10-01T15:24:13Z",
-    "kind": "MATERIAL_PROGRESS",
+    "seq": 2,
+    "at": "2026-10-01T18:23:41Z",
     "claim_id": "9234ab59756e8f7ce3be",
-    "summary": "Revalidated current GitHub state for the #721 descendant isolation path. PR #736 is open at 2a2aecf1745f92551d003041ca819eede010bb76; Windows workflow #1175 completed SUCCESS and its installer artifact is still available. Previous physical evidence established 0/0A/0B stable and full probe 1 crashing, so the next bounded target gate is only 0C (built-in model filesystem scan).",
-    "evidence": [
-      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/736",
-      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/36771281277",
-      "artifact:11124492312 sha256:84dd359fc7b69384d38d6584b93c7896c4a4ad9ca6d4dde4b4db208303f6e416"
-    ],
+    "work_item": "pr-721-win7-model-load-crash-isolation",
+    "summary": "PR 736 and Windows build 1175 revalidated; physical Win7 probe 0C is the only remaining step.",
     "decisions": [
-      "Do not merge #736 from CI alone.",
-      "Keep Win7 target gate separate from Win8.1/10/11.",
-      "Do not run 0D or full probe 1 until 0C physical result is recorded."
+      "No merge before physical evidence."
     ],
-    "next_action": "On physical Windows 7, install the #1175/#736 candidate and press only 0C · Test scansione file modelli. Record whether the app remains open or crashes; no other probe in the same run.",
-    "work_item": "pr-721-win7-model-load-crash-isolation"
+    "evidence_refs": [
+      "PR 736",
+      "build 1175"
+    ],
+    "next_action": "Run only physical Win7 probe 0C and record open or crash."
   }
 }
