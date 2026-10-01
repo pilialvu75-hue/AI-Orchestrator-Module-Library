@@ -7,7 +7,7 @@
     "policy": "This private repository is the single coordination authority. Chats and agents are workers, not independent sources of truth."
   },
   "updated_at": "2026-10-01",
-  "state_revision": 16,
+  "state_revision": 17,
   "lifecycle_status": "BOOTSTRAP_ACTIVE",
   "roadmap_authority": {
     "library": ".airlab/roadmap.yaml",
@@ -77,19 +77,19 @@
     "no_change_no_commit": true
   },
   "projection": {
-    "source_digest": "df2e03e935d88e9372eae320df9235e9de50ed3869a603eaf600f253e579d624",
-    "projected_at": "2026-10-01T09:34:21Z",
+    "source_digest": "bace224ec0ff004a4906a4b1440355982fabce3cbdc56f09fbc7421a10dae4c7",
+    "projected_at": "2026-10-01T09:35:05Z",
     "counts": {
-      "CLAIMED": 1,
+      "EVIDENCE_READY": 1,
       "READY": 14
     },
     "active_claims": [
       {
         "lane": "cantiere",
         "claim_id": "cantiere-manga-online-failure-repro-v1-20261001",
-        "work_item": "manga-online-failure-repro-v1",
+        "work_item": "phase1-online-generated-app-repro-v1",
         "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
-        "lease_until": "2026-10-01T21:34:00Z"
+        "lease_until": "2026-10-01T21:38:00Z"
       }
     ],
     "review_required": [],
@@ -168,20 +168,20 @@
       },
       {
         "id": "cantiere",
-        "status": "CLAIMED",
+        "status": "EVIDENCE_READY",
         "activation": "active",
-        "state_version": 3,
+        "state_version": 4,
         "updated_at": "2026-10-01",
         "active_claim": {
           "claim_id": "cantiere-manga-online-failure-repro-v1-20261001",
-          "work_item": "manga-online-failure-repro-v1",
+          "work_item": "phase1-online-generated-app-repro-v1",
           "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
-          "lease_until": "2026-10-01T21:34:00Z"
+          "lease_until": "2026-10-01T21:38:00Z"
         },
         "reviewer_state": "PENDING",
         "inference_profile_status": null,
         "historical_backlog_count": 3,
-        "next_action": "Inspect current main and Diagnostics evidence for the recent manga-drawing app failure; isolate one concrete failure before changing code."
+        "next_action": "Run the same generated-app request on Android release +2860 and preserve Diagnostics evidence."
       },
       {
         "id": "diagnostics",
