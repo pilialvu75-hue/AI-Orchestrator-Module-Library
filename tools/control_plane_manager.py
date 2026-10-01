@@ -321,13 +321,30 @@ def submit_review(
     if not packet.get("reviewer_checks"):
         raise ValueError("review packet requires reviewer_checks")
 
+    final_next_action = "Main/Reviewer must inspect the review_packet, linked evidence and required gates before promotion or rework."
+    checkpoints = lane.setdefault("checkpoints", [])
+    seq = int(checkpoints[-1]["seq"]) + 1 if checkpoints else 1
+    final_checkpoint = {
+        "seq": seq,
+        "at": _iso(now),
+        "claim_id": claim_data.get("claim_id"),
+        "work_item": claim_data.get("work_item"),
+        "summary": packet["summary"],
+        "decisions": [],
+        "evidence_refs": [str(item.get("ref")) for item in packet["evidence"] if item.get("ref")],
+        "next_action": final_next_action,
+        "kind": "REVIEW_HANDOFF",
+    }
+    checkpoints.append(final_checkpoint)
+    lane["checkpoints"] = checkpoints[-50:]
+    lane["last_checkpoint"] = final_checkpoint
     lane["review_packet"] = packet
     lane["evidence"] = packet["evidence"]
     lane["status"] = "REVIEW_REQUIRED"
     lane["updated_at"] = _date(now)
     lane["state_version"] = int(lane.get("state_version", 0)) + 1
     lane.setdefault("reviewer", {})["state"] = "PENDING"
-    lane["next_action"] = "Main/Reviewer must inspect the review_packet, linked evidence and required gates before promotion or rework."
+    lane["next_action"] = final_next_action
     _write(lane_path, lane)
     project(root=root, now=now)
 
