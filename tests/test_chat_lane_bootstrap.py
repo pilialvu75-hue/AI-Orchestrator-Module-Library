@@ -39,6 +39,12 @@ class ChatLaneBootstrapTests(unittest.TestCase):
         self.assertIn("benchmark-gated target profile", text)
         self.assertIn("may differ from every other platform", text)
 
+    def test_bootstrap_requires_continuous_checkpointing(self):
+        text = bootstrap.build_prompt("cantiere", ROOT)
+        self.assertIn("Do not wait for the chat to become full", text)
+        self.assertIn("tools/chat_checkpoint.py", text)
+        self.assertIn("last_checkpoint=", text)
+
     def test_unknown_lane_fails(self):
         with self.assertRaisesRegex(ValueError, "unknown chat lane"):
             bootstrap.build_prompt("does-not-exist", ROOT)
