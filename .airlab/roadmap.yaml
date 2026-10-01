@@ -269,7 +269,7 @@ roadmap:
 
   - id: L22
     title: Reviewer inbox and deterministic decision transitions
-    state: active
+    state: done
     priority: P0
     outcome: >-
       Make Main/Reviewer consume REVIEW_REQUIRED work directly from raw workstream state rather than
