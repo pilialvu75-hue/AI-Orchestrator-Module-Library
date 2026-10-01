@@ -9,7 +9,8 @@
     "L13",
     "L15",
     "L17",
-    "L18"
+    "L18",
+    "L20"
   ],
   "next_actions": [
     "L19",
@@ -100,6 +101,14 @@
         "Windows Legacy Autonomous",
         "Library Progress Updates (most recent active thread)"
       ]
+    },
+    "continuous_checkpoints": {
+      "status": "ACTIVE",
+      "tool": "tools/chat_checkpoint.py",
+      "mode": "event_driven_incremental",
+      "user_full_chat_signal_required": false,
+      "final_review_checkpoint": "AUTOMATIC",
+      "validation": "CI_PASS_REQUIRED_AND_RESUME_CHECKPOINT_ENFORCED"
     }
   }
 }

@@ -248,3 +248,12 @@ roadmap:
       - ai.acceleration_backend.firstparty.ai-orchestrator-core/0.1.0 exists in intake as discovered.
       - ai.local_inference.firstparty.ai-orchestrator-core/0.1.0 exists in intake as discovered.
       - evo-a18f2c13c19927904ced0bbd is claimed for ai.acceleration_backend with implementation, security, regression and Library-contract acceptance gates.
+
+  - id: L20
+    title: Continuous autonomous chat checkpointing
+    state: done
+    priority: P0
+    outcome: >-
+      Persist material lane progress continuously during work so context exhaustion, app closure or chat rollover
+      does not require a user-triggered emergency save. Checkpoints carry safe resume state, decisions, evidence
+      references and the next action, renew the claim lease, and final review handoff checkpoints automatically.

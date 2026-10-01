@@ -135,3 +135,31 @@ The old chat may be deleted only after the archive gate in `canonical-state.json
 
 The private inventory of consolidated historical chats lives at
 `.airlab/control-plane/historical-chat-consolidation.json`.
+
+
+## Continuous chat checkpoints
+
+Do **not** wait for a chat to report that it is nearly full.
+
+Operational continuity is event-driven. While a lane holds a claim, persist a checkpoint whenever material project state changes:
+
+```bash
+python tools/chat_checkpoint.py \
+  --lane cantiere \
+  --summary "Implemented bounded reviewer fix and CI is green." \
+  --next-action "Run physical generated-app acceptance." \
+  --decision "Keep Phase 1 ONLINE until physical acceptance." \
+  --evidence-ref "PR #123"
+```
+
+A checkpoint:
+- stores the safe resume point, decisions, evidence refs and next action in the lane;
+- advances a freshly claimed lane to `IMPLEMENTING`;
+- refreshes the active claim heartbeat/lease;
+- updates the canonical projection.
+
+Checkpoints are required after meaningful milestones, new blockers/diagnoses, material PR/CI/Diagnostics/runtime results, roadmap changes, and before long/high-risk work.
+
+`submit-review` automatically records a final `REVIEW_HANDOFF` checkpoint.
+
+The ChatGPT product does not need to expose a reliable "context almost full" signal for continuity. If a chat fills unexpectedly, the replacement chat reads the same lane and resumes from `last_checkpoint`.
