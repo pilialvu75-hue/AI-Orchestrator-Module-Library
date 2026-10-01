@@ -7,7 +7,7 @@
     "policy": "This private repository is the single coordination authority. Chats and agents are workers, not independent sources of truth."
   },
   "updated_at": "2026-10-01",
-  "state_revision": 25,
+  "state_revision": 26,
   "lifecycle_status": "BOOTSTRAP_ACTIVE",
   "roadmap_authority": {
     "library": ".airlab/roadmap.yaml",
@@ -77,12 +77,21 @@
     "no_change_no_commit": true
   },
   "projection": {
-    "source_digest": "e7b534da4bbadbdf6b557f5b810fa233d9d7eca622a9f55e716e368af395c5ec",
-    "projected_at": "2026-10-01T14:13:51Z",
+    "source_digest": "e70fd63102adcb26472df9d6cbe72053b3985bde856d260dce0c9deff2eaa122",
+    "projected_at": "2026-10-01T15:12:29Z",
     "counts": {
-      "READY": 15
+      "CLAIMED": 1,
+      "READY": 14
     },
-    "active_claims": [],
+    "active_claims": [
+      {
+        "lane": "main-reviewer",
+        "claim_id": "main-reviewer-lifecycle-integrity-hardening-v1-20261001",
+        "work_item": "control-plane-lifecycle-integrity-v1",
+        "repository": "pilialvu75-hue/AI-Orchestrator-Module-Library",
+        "lease_until": "2026-10-02T03:12:00Z"
+      }
+    ],
     "review_required": [],
     "blocked": [],
     "checkpoint_watch": [],
@@ -195,15 +204,20 @@
       },
       {
         "id": "main-reviewer",
-        "status": "READY",
+        "status": "CLAIMED",
         "activation": "active",
-        "state_version": 14,
+        "state_version": 15,
         "updated_at": "2026-10-01",
-        "active_claim": null,
+        "active_claim": {
+          "claim_id": "main-reviewer-lifecycle-integrity-hardening-v1-20261001",
+          "work_item": "control-plane-lifecycle-integrity-v1",
+          "repository": "pilialvu75-hue/AI-Orchestrator-Module-Library",
+          "lease_until": "2026-10-02T03:12:00Z"
+        },
         "reviewer_state": "AUTHORITY",
         "inference_profile_status": null,
         "historical_backlog_count": 0,
-        "next_action": "Review raw worker lanes in REVIEW_REQUIRED, reconcile projection drift, and preserve downstream physical gates."
+        "next_action": "Harden claim lifecycle, lease expiry, review schema and canonical-sync semantics."
       },
       {
         "id": "platform-android",
