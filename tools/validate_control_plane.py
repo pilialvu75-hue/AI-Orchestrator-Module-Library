@@ -85,6 +85,17 @@ def validate(root=ROOT):
             errors.append(f"{lane_id}: chat-registry missing primary_repository")
         if not entry.get("chat_title"):
             errors.append(f"{lane_id}: chat-registry missing chat_title")
+    projection_incidents = (canonical.get("projection") or {}).get("projection_incidents") or []
+    if not isinstance(projection_incidents, list):
+        errors.append("canonical projection_incidents must be a list")
+    else:
+        for index, incident in enumerate(projection_incidents):
+            if not isinstance(incident, dict):
+                errors.append(f"projection_incidents[{index}] must be an object")
+                continue
+            if not incident.get("path") or not incident.get("code") or not incident.get("error"):
+                errors.append(f"projection_incidents[{index}] requires path, code and error")
+
     paths = canonical.get("workstreams") or []
     seen_ids = set()
     active_claims = {}
@@ -93,7 +104,14 @@ def validate(root=ROOT):
         if not p.exists():
             errors.append(f"missing workstream: {rel}")
             continue
-        lane = load(p)
+        try:
+            lane = load(p)
+        except Exception as error:
+            errors.append(f"{rel}: unreadable workstream: {type(error).__name__}: {error}")
+            continue
+        if not isinstance(lane, dict):
+            errors.append(f"{rel}: workstream root must be an object")
+            continue
         lane_id = lane.get("id")
         if not lane_id:
             errors.append(f"{rel}: missing id")
