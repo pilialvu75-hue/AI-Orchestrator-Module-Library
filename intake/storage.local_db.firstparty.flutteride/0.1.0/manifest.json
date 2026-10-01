@@ -1,0 +1,95 @@
+{
+  "capabilities": [
+    "storage.local_db"
+  ],
+  "connector": {
+    "adapters": [],
+    "configuration_schema": null,
+    "healthcheck": {
+      "path": null,
+      "type": "none"
+    },
+    "integration_mode": "adapter",
+    "provides": [
+      {
+        "capability_id": "storage.local_db",
+        "contract_id": "storage.local_db.v1",
+        "contract_version": "1.0"
+      }
+    ],
+    "requires": [],
+    "standard": "ai-orchestrator-lego",
+    "standard_version": "1.0.0"
+  },
+  "deprecation": {
+    "reason": null,
+    "replacement": null
+  },
+  "description": "Autonomously discovered first-party candidate for storage.local_db.",
+  "entry_paths": [
+    "lib/data/database"
+  ],
+  "frameworks": [],
+  "id": "storage.local_db.firstparty.flutteride",
+  "integration": {
+    "adaptation_allowed": true,
+    "adapter_notes": "Researcher discovery only; certification must establish license, security and target compatibility.",
+    "estimated_effort": "medium",
+    "known_constraints": [
+      "license unresolved at discovery; fail closed until trusted evidence establishes it"
+    ]
+  },
+  "kind": "module",
+  "languages": [],
+  "name": "FLUTTERIDE:lib/data/database",
+  "payload": {
+    "path": null,
+    "sha256": null,
+    "type": "upstream_reference",
+    "upstream_commit": "c005f94bed41bf699043ee5d40c20d03440561be",
+    "upstream_repository": "https://github.com/pilialvu75-hue/FLUTTERIDE"
+  },
+  "platforms": [
+    "android",
+    "desktop"
+  ],
+  "provenance": {
+    "license": "NOASSERTION",
+    "license_file": null,
+    "origin": "researcher",
+    "retrieved_at": "2026-10-01T07:00:40.435694Z",
+    "source_commit": "c005f94bed41bf699043ee5d40c20d03440561be",
+    "source_project_id": "pilialvu75-hue/FLUTTERIDE",
+    "source_repository": "https://github.com/pilialvu75-hue/FLUTTERIDE",
+    "source_tag": null,
+    "source_task_id": "autonomous-first-party:storage.local_db:c005f94bed41bf699043ee5d40c20d03440561be"
+  },
+  "quality": {
+    "failed_integrations": 0,
+    "last_used_at": null,
+    "reuse_count": 0,
+    "successful_integrations": 0
+  },
+  "security": {
+    "known_vulnerabilities": 0,
+    "notes": "Not yet reviewed.",
+    "review_report": null,
+    "reviewed": false,
+    "reviewed_at": null,
+    "sbom": null
+  },
+  "status": "discovered",
+  "tags": [
+    "storage.local_db",
+    "researcher-candidate",
+    "first-party"
+  ],
+  "validation": {
+    "score": 0.0,
+    "test_report": null,
+    "tests_passed": false,
+    "validated_at": null,
+    "validated_on": []
+  },
+  "version": "0.1.0"
+}
