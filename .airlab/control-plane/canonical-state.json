@@ -7,7 +7,7 @@
     "policy": "This private repository is the single coordination authority. Chats and agents are workers, not independent sources of truth."
   },
   "updated_at": "2026-10-01",
-  "state_revision": 21,
+  "state_revision": 22,
   "lifecycle_status": "BOOTSTRAP_ACTIVE",
   "roadmap_authority": {
     "library": ".airlab/roadmap.yaml",
@@ -77,11 +77,11 @@
     "no_change_no_commit": true
   },
   "projection": {
-    "source_digest": "da6e949f159799bb0ee9617e97f5d2bc5aab2dea69e3e1f6ad51d3a7d7039662",
-    "projected_at": "2026-10-01T10:37:13Z",
+    "source_digest": "6d14d7a0452906028139c35a07f90c4379c3303e8423da0ede248e4e13f0497f",
+    "projected_at": "2026-10-01T14:07:19Z",
     "counts": {
-      "IMPLEMENTING": 1,
-      "READY": 14
+      "READY": 14,
+      "REVIEW_REQUIRED": 1
     },
     "active_claims": [
       {
@@ -92,9 +92,22 @@
         "lease_until": "2026-10-01T21:38:00Z"
       }
     ],
-    "review_required": [],
+    "review_required": [
+      "cantiere"
+    ],
     "blocked": [],
-    "checkpoint_watch": [],
+    "checkpoint_watch": [
+      {
+        "lane": "cantiere",
+        "claim_id": "cantiere-manga-online-failure-repro-v1-20261001",
+        "work_item": "phase1-online-generated-app-repro-v1",
+        "status": "REVIEW_REQUIRED",
+        "reason": "CHECKPOINT_STALE",
+        "last_checkpoint_at": "2026-10-01T11:11:00Z",
+        "due_since": "2026-10-01T13:11:00Z",
+        "warning_after_minutes": 120
+      }
+    ],
     "platform_inference_profiles": [
       {
         "lane": "platform-android",
@@ -168,9 +181,9 @@
       },
       {
         "id": "cantiere",
-        "status": "IMPLEMENTING",
+        "status": "REVIEW_REQUIRED",
         "activation": "active",
-        "state_version": 8,
+        "state_version": 10,
         "updated_at": "2026-10-01",
         "active_claim": {
           "claim_id": "cantiere-manga-online-failure-repro-v1-20261001",
@@ -178,10 +191,10 @@
           "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
           "lease_until": "2026-10-01T21:38:00Z"
         },
-        "reviewer_state": "PENDING",
+        "reviewer_state": "REVIEW_REQUIRED",
         "inference_profile_status": null,
         "historical_backlog_count": 3,
-        "next_action": "Wait for CI on PR #745 head 1de46c1; if green, submit REVIEW_REQUIRED to Main/Reviewer without self-promotion."
+        "next_action": "Main/Reviewer: review PR #745 and the addressed Copilot findings. If approved, merge/release; then return lane for physical Manga Kids retest."
       },
       {
         "id": "diagnostics",
