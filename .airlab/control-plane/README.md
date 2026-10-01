@@ -178,3 +178,32 @@ This is a reviewer-attention signal only. It does **not** fabricate missing chat
 does not block a lane before the normal claim lease expires. Main/Reviewer can then inspect the
 lane, current PR/CI/Diagnostics state and decide whether a real checkpoint, wait-state note,
 rework or reconciliation is needed.
+
+
+## Reviewer inbox and decisions
+
+Reviewer intake is derived from the raw worker workstream files, not from
+`canonical-state.json#projection.review_required` alone.
+
+The projection is a convenience index and may temporarily lag or fail to update if a worker
+handoff is invalid. Main/Reviewer must therefore use:
+
+```bash
+python tools/control_plane_manager.py review-inbox
+python tools/control_plane_manager.py review-accept \
+  --lane cantiere \
+  --summary "Bounded implementation accepted." \
+  --next-action "Run target acceptance." \
+  --evidence-ref "PR #123"
+
+python tools/control_plane_manager.py review-rework \
+  --lane cantiere \
+  --reason "Regression coverage incomplete." \
+  --next-action "Add the missing regression test."
+```
+
+`review-inbox` scans the raw lane files and validates each review packet against its active
+claim. A stale projection must never hide a valid `REVIEW_REQUIRED` lane.
+
+Workers must never set `REVIEW_REQUIRED` by changing only the status field. A valid handoff is
+atomic: active claim + valid review packet + claim-bound review checkpoint + REVIEW_REQUIRED.
