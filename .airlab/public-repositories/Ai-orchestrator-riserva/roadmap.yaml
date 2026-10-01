@@ -277,6 +277,46 @@ roadmap:
   outcome: >-
     For third-party installations, every user supplies/owns their credentials; no owner API key or paid quota is embedded
     or shared, and cloud sessions/memory are isolated so one user's chats or credentials cannot contaminate another user's state.
+- id: CANT-17
+  title: macOS modern and High Sierra legacy remain separate targets
+  state: planned
+  priority: P1
+  outcome: >-
+    Preserve the modern macOS Flutter/Universal/Metal/DMG path without lowering its target while maintaining a
+    separate low-resource High Sierra x86_64 CPU-only compatibility profile and target-specific inference choices.
+  current_evidence:
+  - PR #418 macOS build foundation is merged.
+  - PR #420 local llama.cpp/Metal runtime is merged.
+  - PR #424 installable DMG is merged.
+  - PR #441 coordinated verified DMG release asset is merged.
+  - PR #442 verified DMG updater installer port is merged.
+  - PR #443 updater lifecycle was closed without merge and must not be assumed complete.
+  - PR #444 High Sierra low-resource runtime/native shell is merged.
+  remaining_acceptance:
+  - Real modern/legacy install and launch evidence, Gatekeeper/signing/notarization as applicable.
+  - Sandbox-safe GGUF import/copy and target inference validation.
+  - Microphone, audio/STT/TTS and Keychain/BYOK behavior on real Macs.
+- id: CANT-18
+  title: Raspberry Pi and ARM autonomous node
+  state: planned
+  priority: P2
+  outcome: >-
+    After Android/shared runtime contracts are stable enough, deliver Raspberry Pi as a distinct target profile and
+    optional autonomous AI node for local support, home/vehicle integration and hardware I/O rather than treating it
+    as generic Linux.
+  preserved_scope:
+  - target-optimized local inference, potentially larger models where RAM/hardware permits
+  - headless and UI modes
+  - GPIO, UART, CAN bus, I2C and SPI adapters
+  - voice/audio and Diagnostics parity
+  - delegation to/from phone and desktop while preserving one orchestration contract
+- id: CANT-19
+  title: Cross-platform branding and launcher assets
+  state: planned
+  priority: P2
+  outcome: >-
+    Integrate one coherent original AI Orchestrator visual identity across Android, Windows, macOS, iOS, Linux,
+    Web/PWA and Raspberry Pi/ARM; historical icon assets were prepared but repository integration was not completed.
 audit_review:
   reviewed_at: '2026-09-27'
   audited_repository: pilialvu75-hue/Ai-orchestrator-riserva
