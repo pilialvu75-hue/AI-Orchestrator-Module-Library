@@ -7,7 +7,7 @@
     "policy": "This private repository is the single coordination authority. Chats and agents are workers, not independent sources of truth."
   },
   "updated_at": "2026-10-01",
-  "state_revision": 23,
+  "state_revision": 24,
   "lifecycle_status": "BOOTSTRAP_ACTIVE",
   "roadmap_authority": {
     "library": ".airlab/roadmap.yaml",
@@ -77,21 +77,13 @@
     "no_change_no_commit": true
   },
   "projection": {
-    "source_digest": "c899ceaa9117a8fa99463483709d483e321b91b3bee4a2585798b960b2360b38",
-    "projected_at": "2026-10-01T14:07:44Z",
+    "source_digest": "19961be99252994bb2cf61034b121e608dd1a8ddf0aabea38a3054deaa2f0c2c",
+    "projected_at": "2026-10-01T14:07:59Z",
     "counts": {
       "CLAIMED": 1,
-      "READY": 13,
-      "REVIEW_REQUIRED": 1
+      "READY": 14
     },
     "active_claims": [
-      {
-        "lane": "cantiere",
-        "claim_id": "cantiere-manga-online-failure-repro-v1-20261001",
-        "work_item": "phase1-online-generated-app-repro-v1",
-        "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
-        "lease_until": "2026-10-01T21:38:00Z"
-      },
       {
         "lane": "main-reviewer",
         "claim_id": "main-reviewer-reviewer-pipeline-repair-v1-20261001",
@@ -100,22 +92,9 @@
         "lease_until": "2026-10-02T02:05:00Z"
       }
     ],
-    "review_required": [
-      "cantiere"
-    ],
+    "review_required": [],
     "blocked": [],
-    "checkpoint_watch": [
-      {
-        "lane": "cantiere",
-        "claim_id": "cantiere-manga-online-failure-repro-v1-20261001",
-        "work_item": "phase1-online-generated-app-repro-v1",
-        "status": "REVIEW_REQUIRED",
-        "reason": "CHECKPOINT_STALE",
-        "last_checkpoint_at": "2026-10-01T11:11:00Z",
-        "due_since": "2026-10-01T13:11:00Z",
-        "warning_after_minutes": 120
-      }
-    ],
+    "checkpoint_watch": [],
     "platform_inference_profiles": [
       {
         "lane": "platform-android",
@@ -189,20 +168,15 @@
       },
       {
         "id": "cantiere",
-        "status": "REVIEW_REQUIRED",
+        "status": "READY",
         "activation": "active",
-        "state_version": 10,
+        "state_version": 11,
         "updated_at": "2026-10-01",
-        "active_claim": {
-          "claim_id": "cantiere-manga-online-failure-repro-v1-20261001",
-          "work_item": "phase1-online-generated-app-repro-v1",
-          "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
-          "lease_until": "2026-10-01T21:38:00Z"
-        },
-        "reviewer_state": "REVIEW_REQUIRED",
+        "active_claim": null,
+        "reviewer_state": "APPROVED",
         "inference_profile_status": null,
         "historical_backlog_count": 3,
-        "next_action": "Main/Reviewer: review PR #745 and the addressed Copilot findings. If approved, merge/release; then return lane for physical Manga Kids retest."
+        "next_action": "Claim one bounded physical Manga Kids retest on the first Android release that contains merge b7abc54; preserve Diagnostics and keep Phase 1 ONLINE open until real-device acceptance."
       },
       {
         "id": "diagnostics",
