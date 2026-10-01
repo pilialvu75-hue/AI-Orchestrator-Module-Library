@@ -7,7 +7,7 @@
   "activation": "active",
   "scope": "Exclusive Cantiere/App Factory execution, durability, build/review/validation/apply and first-real-app reliability.",
   "shared_engine_policy": "shared_or_control_plane",
-  "state_version": 9,
+  "state_version": 10,
   "updated_at": "2026-10-01",
   "active_claim": {
     "claim_id": "cantiere-manga-online-failure-repro-v1-20261001",
@@ -191,5 +191,88 @@
     ],
     "next_action": "Main/Reviewer: review PR #745 and the addressed Copilot findings. If approved, merge/release; then return lane for physical Manga Kids retest.",
     "kind": "REVIEW_HANDOFF"
+  },
+  "review_packet": {
+    "schema_version": 1,
+    "submitted_at": "2026-10-01T11:11:00Z",
+    "lane_id": "cantiere",
+    "claim_id": "cantiere-manga-online-failure-repro-v1-20261001",
+    "work_item": "phase1-online-generated-app-repro-v1",
+    "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
+    "summary": "PR #745 fixes the Phase 1 ONLINE Manga Kids empty-proposal failure path by allowing one bounded malformed-output repair after a runtime retry. Both Copilot findings were addressed and the exact head passed all six relevant CI workflows. Physical acceptance remains pending.",
+    "changes": [
+      {
+        "ref": "Ai-orchestrator-riserva#745",
+        "description": "Allow structural malformed-output recovery after an already-consumed runtime retry, bounded to a maximum three Engineer calls."
+      },
+      {
+        "ref": "commit:1de46c10346036f7add4c62cc4a359967249784d",
+        "description": "Correct retry telemetry to attempt 3 after runtime retry and add resume-path regression coverage with stable identity."
+      }
+    ],
+    "evidence": [
+      {
+        "type": "physical_failure",
+        "ref": "Android +2860 Manga Kids 28%",
+        "result": "REPRODUCED"
+      },
+      {
+        "type": "pull_request",
+        "ref": "Ai-orchestrator-riserva#745",
+        "result": "MERGED",
+        "merge_commit": "b7abc54c02c8d65e8a67532afe6f873674e2c4ed"
+      },
+      {
+        "type": "ci",
+        "ref": "36850241169",
+        "result": "PASS",
+        "name": "Cantiere First App APK"
+      },
+      {
+        "type": "ci",
+        "ref": "36850241270",
+        "result": "PASS",
+        "name": "Build & Release APK"
+      },
+      {
+        "type": "ci",
+        "ref": "36850241272",
+        "result": "PASS",
+        "name": "Web Cantiere Build"
+      },
+      {
+        "type": "ci",
+        "ref": "36850241205",
+        "result": "PASS",
+        "name": "Build Linux Desktop"
+      },
+      {
+        "type": "ci",
+        "ref": "36850241189",
+        "result": "PASS",
+        "name": "Build macOS Desktop"
+      },
+      {
+        "type": "ci",
+        "ref": "36850241326",
+        "result": "PASS",
+        "name": "Build Windows Desktop"
+      }
+    ],
+    "known_risks": [
+      "CI and code review do not prove the generated Manga Kids app now completes on a physical Android device.",
+      "Phase 1 ONLINE must remain open until a release containing merge b7abc54 is physically retested."
+    ],
+    "reviewer_checks": [
+      "Verify PR #745 remains bounded to Engineer retry/recovery behavior.",
+      "Verify Copilot telemetry finding is addressed by attempt=${didRetry ? 3 : 2}.",
+      "Verify runWithResumeContext regression covers timeout -> empty -> valid proposal and preserves request/project/task/execution/attempt/checkpoint identity.",
+      "Do not promote Phase 1 ONLINE to complete without physical target evidence."
+    ],
+    "roadmap_impact": {
+      "item": "CANT-11",
+      "effect": "Implementation blocker addressed; move next gate to physical Manga Kids retest after a release containing PR #745.",
+      "phase_completion": false
+    }
   }
 }
