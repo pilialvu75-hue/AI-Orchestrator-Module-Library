@@ -3,29 +3,18 @@
   "id": "main-reviewer",
   "title": "Main / Reviewer",
   "role": "reviewer",
-  "status": "CLAIMED",
+  "status": "READY",
   "activation": "active",
   "scope": "Global architecture, cross-lane review, consolidation, roadmap/state authority and hardening, including target inference profile balance and shared-contract compatibility.",
   "shared_engine_policy": "shared_or_control_plane",
-  "state_version": 19,
+  "state_version": 20,
   "updated_at": "2026-10-01",
-  "active_claim": {
-    "claim_id": "main-reviewer-lifecycle-gap-v2-20261001",
-    "owner_lane": "main-reviewer",
-    "work_item": "control-plane-lifecycle-integrity-gap-v2",
-    "repository": "pilialvu75-hue/AI-Orchestrator-Module-Library",
-    "scope": "Close post-PR89 lifecycle gaps: repository scope, expired release/review submission, review-wait preservation, material G7 blocking, and validator invariants.",
-    "branch": "control-plane/lifecycle-integrity-gap-v2-20261001",
-    "started_at": "2026-10-01T16:52:00Z",
-    "heartbeat_at": "2026-10-01T16:52:00Z",
-    "lease_until": "2026-10-02T04:52:00Z",
-    "lease_hours": 12
-  },
+  "active_claim": null,
   "dependencies": [],
   "roadmap_refs": [],
   "evidence": [],
   "gates": {
-    "G0_CLAIM": "PASS",
+    "G0_CLAIM": "PENDING",
     "G1_IMPLEMENTATION": "PENDING",
     "G2_STATIC": "PENDING",
     "G3_CI": "PENDING",
@@ -40,7 +29,7 @@
     "reviewed_by": null,
     "reviewed_at": null
   },
-  "next_action": "Implement only the lifecycle gaps not already merged by PR #89/#90.",
+  "next_action": "Prioritize CP-HARDEN-01 atomic mutation/projection isolation, then CP-HARDEN-02 serialized resource locks and CP-HARDEN-04 canonical automation registry before broad AIR-10 dispatch.",
   "inference_review_policy": {
     "policy": ".airlab/control-plane/inference-policy.json",
     "check": [
@@ -224,6 +213,27 @@
         }
       ],
       "summary": "Restored green main validation after archiving real pilot review history."
+    },
+    {
+      "claim_id": "main-reviewer-lifecycle-gap-v2-20261001",
+      "work_item": "control-plane-lifecycle-integrity-gap-v2",
+      "completed_at": "2026-10-01T16:55:00Z",
+      "result": "MERGED_VERIFIED",
+      "pull_request": 92,
+      "merge_commit": "f47abe484e74898ac23ced2888425f47fb4a3a48",
+      "evidence": [
+        {
+          "type": "ci",
+          "ref": "Validate Module Library run 36895201406",
+          "result": "PASS"
+        },
+        {
+          "type": "pull_request",
+          "ref": "AI-Orchestrator-Module-Library#92",
+          "result": "PASS"
+        }
+      ],
+      "summary": "Closed remaining post-PR89 lifecycle gaps and documented structural hardening still required."
     }
   ],
   "checkpoints": [
@@ -340,39 +350,66 @@
       ],
       "next_action": "Proceed with structural backlog CP-HARDEN-01..05; no active incident remains in the control plane.",
       "kind": "COMPLETION"
+    },
+    {
+      "seq": 7,
+      "at": "2026-10-01T16:55:00Z",
+      "claim_id": "main-reviewer-lifecycle-gap-v2-20261001",
+      "work_item": "control-plane-lifecycle-integrity-gap-v2",
+      "summary": "Second-pass control-plane audit completed. PR #92 merged remaining lifecycle safeguards; stale Windows projection incident repaired; legacy split-brain PR #59 and conflicted duplicate PR #91 closed; Reviewer and Windows automations were constrained to canonical ownership rules.",
+      "decisions": [
+        "Do not allow Reviewer automation to take over active main-reviewer implementation claims.",
+        "A malformed checkpoint is an incident because it can blind global projection until repaired.",
+        "Keep remaining structural hardening explicit rather than declaring the control plane fully autonomous."
+      ],
+      "evidence_refs": [
+        "AI-Orchestrator-Module-Library#92",
+        "merge:f47abe484e74898ac23ced2888425f47fb4a3a48",
+        "Validate Module Library run 36895201406",
+        "AI-Orchestrator-Module-Library#59 CLOSED_SUPERSEDED",
+        "AI-Orchestrator-Module-Library#91 CLOSED_SUPERSEDED",
+        "Reconcile run 36894725327 PASS"
+      ],
+      "next_action": "Prioritize CP-HARDEN-01 atomic mutation/projection isolation, then CP-HARDEN-02 serialized resource locks and CP-HARDEN-04 canonical automation registry before broad AIR-10 dispatch.",
+      "kind": "AUDIT_COMPLETION"
     }
   ],
   "last_checkpoint": {
-    "seq": 6,
-    "at": "2026-10-01T15:27:00Z",
-    "claim_id": "main-reviewer-test-isolation-fix-v1-20261001",
-    "work_item": "control-plane-test-isolation-fix-v1",
-    "summary": "Post-hardening test isolation fixed. PR #90 merged after full Library validation passed.",
+    "seq": 7,
+    "at": "2026-10-01T16:55:00Z",
+    "claim_id": "main-reviewer-lifecycle-gap-v2-20261001",
+    "work_item": "control-plane-lifecycle-integrity-gap-v2",
+    "summary": "Second-pass control-plane audit completed. PR #92 merged remaining lifecycle safeguards; stale Windows projection incident repaired; legacy split-brain PR #59 and conflicted duplicate PR #91 closed; Reviewer and Windows automations were constrained to canonical ownership rules.",
     "decisions": [
-      "Persisted review history is valid fixture state and tests must not assume an empty repository history."
+      "Do not allow Reviewer automation to take over active main-reviewer implementation claims.",
+      "A malformed checkpoint is an incident because it can blind global projection until repaired.",
+      "Keep remaining structural hardening explicit rather than declaring the control plane fully autonomous."
     ],
     "evidence_refs": [
-      "AI-Orchestrator-Module-Library#90",
-      "merge:18729b890ffe17a34426cee664960f767a9f9aa5",
-      "Validate Module Library run 36883514623"
+      "AI-Orchestrator-Module-Library#92",
+      "merge:f47abe484e74898ac23ced2888425f47fb4a3a48",
+      "Validate Module Library run 36895201406",
+      "AI-Orchestrator-Module-Library#59 CLOSED_SUPERSEDED",
+      "AI-Orchestrator-Module-Library#91 CLOSED_SUPERSEDED",
+      "Reconcile run 36894725327 PASS"
     ],
-    "next_action": "Proceed with structural backlog CP-HARDEN-01..05; no active incident remains in the control plane.",
-    "kind": "COMPLETION"
+    "next_action": "Prioritize CP-HARDEN-01 atomic mutation/projection isolation, then CP-HARDEN-02 serialized resource locks and CP-HARDEN-04 canonical automation registry before broad AIR-10 dispatch.",
+    "kind": "AUDIT_COMPLETION"
   },
   "hardening_backlog": [
     {
       "id": "CP-HARDEN-01",
       "priority": "P0",
       "title": "Pre-commit canonical state mutation guard",
-      "problem": "Direct API/main writes can place an invalid lane state on main before post-push validation catches it.",
-      "target": "Route worker/reviewer state transitions through an atomic validated mutation path or an equivalent protected update gate."
+      "problem": "Direct API/main writes can place an invalid lane state on main before post-push validation catches it; one malformed lane can also make the global reconcile/validation workflow fail and leave the canonical projection stale.",
+      "target": "Route worker/reviewer state transitions through an atomic validated mutation path or equivalent protected update gate, and isolate/quarantine invalid-lane projection failures so one lane cannot blind the whole control plane."
     },
     {
       "id": "CP-HARDEN-02",
       "priority": "P1",
       "title": "Resource-level conflict locks",
-      "problem": "Duplicate protection uses exact work_item identity; different work_item names can still overlap the same files/contracts/resources.",
-      "target": "Add explicit resource/scope lock keys with conflict detection while preserving safe parallel platform work."
+      "problem": "Duplicate protection uses exact work_item identity and separate lane files; simultaneous cross-lane claims or different work_item names can still overlap the same files/contracts/resources.",
+      "target": "Add serialized claim authority plus explicit resource/scope lock keys with conflict detection while preserving safe parallel platform work."
     },
     {
       "id": "CP-HARDEN-03",
@@ -385,8 +422,8 @@
       "id": "CP-HARDEN-04",
       "priority": "P1",
       "title": "Canonical automation registry",
-      "problem": "Scheduled mutating tasks can exist outside lane ownership unless their prompts are manually migrated.",
-      "target": "Register enabled mutating automations to lane ids and reject/flag any mutating automation with no canonical owner."
+      "problem": "Scheduled mutating tasks can exist outside lane ownership or overreach their role. During this audit the automatic Reviewer continued the active main-reviewer hardening claim and produced PR #89 in parallel.",
+      "target": "Register enabled mutating automations to lane ids and role capabilities; reject/flag unowned automation and forbid Reviewer takeover of active main-reviewer implementation claims."
     },
     {
       "id": "CP-HARDEN-05",
@@ -394,6 +431,13 @@
       "title": "Roadmap dispatcher",
       "problem": "READY lanes still do not autonomously select and execute roadmap work; only specifically scheduled automations advance.",
       "target": "Complete AIR-10 bounded dispatcher with claim, checkpoint, reviewer and physical-gate semantics."
+    },
+    {
+      "id": "CP-HARDEN-06",
+      "priority": "P1",
+      "title": "Evidence-backed canonical sync receipts",
+      "problem": "canonical-sync-complete currently verifies referenced roadmap identifiers but does not cryptographically prove that the referenced roadmap content actually changed to match the accepted work.",
+      "target": "Record before/after content digest or commit/ref evidence for every material roadmap synchronization before G7 can become PASS."
     }
   ]
 }
