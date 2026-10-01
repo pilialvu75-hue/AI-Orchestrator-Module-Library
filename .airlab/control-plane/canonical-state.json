@@ -7,7 +7,7 @@
     "policy": "This private repository is the single coordination authority. Chats and agents are workers, not independent sources of truth."
   },
   "updated_at": "2026-10-01",
-  "state_revision": 9,
+  "state_revision": 10,
   "lifecycle_status": "BOOTSTRAP_ACTIVE",
   "roadmap_authority": {
     "library": ".airlab/roadmap.yaml",
@@ -344,5 +344,24 @@
     ],
     "chat_is_never_authority": true,
     "canonical_state_survives_chat_deletion": true
+  },
+  "continuous_checkpoint_policy": {
+    "mode": "event_driven_incremental",
+    "tool": "tools/chat_checkpoint.py",
+    "purpose": "Persist meaningful progress continuously so chat context exhaustion is not a continuity event.",
+    "checkpoint_on": [
+      "material milestone",
+      "architectural or product decision",
+      "new blocker or changed diagnosis",
+      "PR created merged closed or materially changed",
+      "CI result that changes next action",
+      "Diagnostics/runtime/physical-device result",
+      "roadmap priority/scope/dependency change",
+      "before long or risky work",
+      "before worker review handoff"
+    ],
+    "autonomous_rule": "Operational chats must checkpoint as part of normal work without waiting for the user to report that the chat is full.",
+    "native_context_limit_signal_required": false,
+    "rollover_rule": "When a chat fills, replacement chat resumes from the same lane's last_checkpoint and canonical state."
   }
 }
