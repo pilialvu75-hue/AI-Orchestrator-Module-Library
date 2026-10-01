@@ -3,29 +3,18 @@
   "id": "main-reviewer",
   "title": "Main / Reviewer",
   "role": "reviewer",
-  "status": "CLAIMED",
+  "status": "READY",
   "activation": "active",
   "scope": "Global architecture, cross-lane review, consolidation, roadmap/state authority and hardening, including target inference profile balance and shared-contract compatibility.",
   "shared_engine_policy": "shared_or_control_plane",
-  "state_version": 5,
+  "state_version": 6,
   "updated_at": "2026-10-01",
-  "active_claim": {
-    "claim_id": "main-reviewer-historical-chat-consolidation-v1-20261001",
-    "owner_lane": "main-reviewer",
-    "work_item": "historical-chat-consolidation-v1",
-    "repository": "pilialvu75-hue/AI-Orchestrator-Module-Library",
-    "scope": "Recover accessible historical AI Orchestrator chats, migrate unique unfinished work and decisions into private roadmaps/canonical state, and classify chats for safe deletion only after preservation.",
-    "branch": "control-plane/historical-chat-consolidation-v1-20261001",
-    "started_at": "2026-10-01T08:40:00Z",
-    "heartbeat_at": "2026-10-01T08:40:00Z",
-    "lease_until": "2026-10-01T20:40:00Z",
-    "lease_hours": 12
-  },
+  "active_claim": null,
   "dependencies": [],
   "roadmap_refs": [],
   "evidence": [],
   "gates": {
-    "G0_CLAIM": "PASS",
+    "G0_CLAIM": "PENDING",
     "G1_IMPLEMENTATION": "PENDING",
     "G2_STATIC": "PENDING",
     "G3_CI": "PENDING",
@@ -40,7 +29,7 @@
     "reviewed_by": null,
     "reviewed_at": null
   },
-  "next_action": "Consolidate historical chat-only work into private roadmaps/canonical state and produce a deletion-safe chat archive register.",
+  "next_action": "Review worker lanes in REVIEW_REQUIRED, reconcile BLOCKED work, and use canonical roadmaps/backlogs rather than legacy chat history.",
   "inference_review_policy": {
     "policy": ".airlab/control-plane/inference-policy.json",
     "check": [
@@ -72,6 +61,27 @@
         }
       ],
       "summary": "Canonical chat registry, generated lane bootstraps, claim-bound review packets, submit-review transition and validation/tests merged."
+    },
+    {
+      "claim_id": "main-reviewer-historical-chat-consolidation-v1-20261001",
+      "work_item": "historical-chat-consolidation-v1",
+      "completed_at": "2026-10-01T09:00:00Z",
+      "result": "MERGED_VERIFIED",
+      "pull_request": 84,
+      "merge_commit": "5607c1447d0288e530739f98a5abb73d409f3e0a",
+      "evidence": [
+        {
+          "type": "ci",
+          "ref": "AI-Orchestrator-Module-Library Validate Module Library run #215",
+          "result": "PASS"
+        },
+        {
+          "type": "pull_request",
+          "ref": "AI-Orchestrator-Module-Library#84",
+          "result": "PASS"
+        }
+      ],
+      "summary": "Recovered historical chat-only work into canonical roadmaps/workstreams, added deletion-safe archive policy and backlog visibility."
     }
   ]
 }
