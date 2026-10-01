@@ -58,5 +58,22 @@
     ".airlab/control-plane/workstreams/library-researcher.json",
     ".airlab/control-plane/workstreams/airlab.json"
   ],
-  "inference_policy": ".airlab/control-plane/inference-policy.json"
+  "inference_policy": ".airlab/control-plane/inference-policy.json",
+  "claim_policy": {
+    "mode": "lease_with_heartbeat",
+    "default_lease_hours": 12,
+    "max_lease_hours": 24,
+    "stale_action": "BLOCKED_REQUIRES_REVIEWER",
+    "duplicate_work_item": "FORBIDDEN",
+    "manager": "tools/control_plane_manager.py",
+    "reconciliation_workflow": ".github/workflows/control-plane-reconcile.yml"
+  },
+  "projection_policy": {
+    "mode": "deterministic_on_change",
+    "source": "merged workstream state",
+    "destination": ".airlab/control-plane/canonical-state.json#projection",
+    "periodic_reconcile": "hourly",
+    "event_reconcile": "main changes to workstreams/roadmaps/inference policy",
+    "no_change_no_commit": true
+  }
 }
