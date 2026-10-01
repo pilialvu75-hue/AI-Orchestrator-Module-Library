@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 import json
+import control_plane_manager
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -134,6 +135,18 @@ def validate(root=ROOT):
                 errors.append(f"{lane_id}: active_claim owner_lane mismatch")
             if state not in {"CLAIMED","IMPLEMENTING","EVIDENCE_READY","REVIEW_REQUIRED"}:
                 errors.append(f"{lane_id}: active claim is inconsistent with state {state}")
+            if role != "reviewer" and state == "CLAIMED":
+                reviewer = lane.get("reviewer") or {}
+                if reviewer.get("state") != "PENDING":
+                    errors.append(f"{lane_id}: fresh CLAIMED worker must reset reviewer state to PENDING")
+                if lane.get("review_packet"):
+                    errors.append(f"{lane_id}: fresh CLAIMED worker must not retain a prior review_packet")
+                gs = lane.get("gates") or {}
+                for gate in ("G1_IMPLEMENTATION","G2_STATIC","G3_CI","G4_INTEGRATION","G6_REVIEWER","G7_CANONICAL_SYNC"):
+                    if gs.get(gate) != "PENDING":
+                        errors.append(f"{lane_id}: fresh CLAIMED worker must reset {gate}=PENDING")
+                if lane.get("evidence"):
+                    errors.append(f"{lane_id}: fresh CLAIMED worker must reset current evidence")
         if state in {"IMPLEMENTING","EVIDENCE_READY","REVIEW_REQUIRED"}:
             checkpoint = lane.get("last_checkpoint") or {}
             if not checkpoint:
@@ -173,6 +186,11 @@ def validate(root=ROOT):
                 errors.append(f"{lane_id}: review_packet requires evidence")
             if not packet.get("reviewer_checks"):
                 errors.append(f"{lane_id}: review_packet requires reviewer_checks")
+            if claim:
+                try:
+                    control_plane_manager._validate_review_packet(lane_id, claim, packet)
+                except ValueError as error:
+                    errors.append(f"{lane_id}: review_packet schema invalid: {error}")
         if state in {"VERIFIED","DONE"} and not lane.get("evidence"):
             errors.append(f"{lane_id}: {state} requires evidence")
         if state == "DONE":

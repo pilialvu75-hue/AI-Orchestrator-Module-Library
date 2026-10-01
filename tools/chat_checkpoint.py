@@ -29,6 +29,13 @@ def iso(value: datetime) -> str:
     return value.astimezone(timezone.utc).isoformat().replace("+00:00", "Z")
 
 
+def parse_iso(value: str) -> datetime:
+    parsed = datetime.fromisoformat(value.replace("Z", "+00:00"))
+    if parsed.tzinfo is None:
+        parsed = parsed.replace(tzinfo=timezone.utc)
+    return parsed.astimezone(timezone.utc)
+
+
 def lane_path(lane_id: str, root: Path = ROOT) -> Path:
     canonical = load(root / ".airlab/control-plane/canonical-state.json")
     for rel in canonical.get("workstreams", []):
@@ -55,6 +62,13 @@ def checkpoint(
     claim = lane.get("active_claim")
     if not claim:
         raise ValueError(f"lane {lane_id} has no active claim")
+    lease_until = claim.get("lease_until")
+    if not lease_until:
+        raise ValueError(f"lane {lane_id} active claim is missing lease_until")
+    if parse_iso(str(lease_until)) <= now:
+        raise ValueError(
+            f"checkpoint cannot renew an expired claim ({lease_until}); reconcile/reviewer action is required"
+        )
     if lane.get("status") in {"READY", "BLOCKED", "PAUSED", "VERIFIED", "DONE", "REVIEW_REQUIRED"}:
         raise ValueError(f"lane {lane_id} cannot checkpoint from state {lane.get('status')}")
     if not summary.strip():

@@ -71,6 +71,20 @@ class ChatCheckpointTests(unittest.TestCase):
         self.assertEqual(lane["active_claim"]["heartbeat_at"], "2026-10-01T10:00:00Z")
         self.assertEqual(lane["active_claim"]["lease_until"], "2026-10-01T22:00:00Z")
 
+    def test_checkpoint_rejects_expired_claim(self):
+        path = self.root / ".airlab/control-plane/workstreams/cantiere.json"
+        lane = json.loads(path.read_text(encoding="utf-8"))
+        lane["active_claim"]["lease_until"] = "2026-10-01T09:00:00Z"
+        path.write_text(json.dumps(lane, indent=2) + "\n", encoding="utf-8")
+        with self.assertRaisesRegex(ValueError, "expired claim"):
+            module.checkpoint(
+                "cantiere",
+                "summary",
+                "next",
+                root=self.root,
+                now=datetime(2026, 10, 1, 10, 0, tzinfo=timezone.utc),
+            )
+
     def test_checkpoint_requires_active_claim(self):
         path = self.root / ".airlab/control-plane/workstreams/cantiere.json"
         lane = json.loads(path.read_text(encoding="utf-8"))
