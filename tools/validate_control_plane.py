@@ -135,6 +135,15 @@ def validate(root=ROOT):
                 errors.append(f"{lane_id}: active_claim owner_lane mismatch")
             if state not in {"CLAIMED","IMPLEMENTING","EVIDENCE_READY","REVIEW_REQUIRED"}:
                 errors.append(f"{lane_id}: active claim is inconsistent with state {state}")
+            if role != "reviewer" and state in {"CLAIMED","IMPLEMENTING","EVIDENCE_READY"}:
+                reviewer = lane.get("reviewer") or {}
+                if reviewer.get("state") == "APPROVED":
+                    errors.append(f"{lane_id}: active pre-review worker cannot retain reviewer approval")
+                if (lane.get("gates") or {}).get("G6_REVIEWER") == "PASS":
+                    errors.append(f"{lane_id}: active pre-review worker cannot retain G6_REVIEWER=PASS")
+                packet = lane.get("review_packet")
+                if packet and packet.get("claim_id") != claim.get("claim_id"):
+                    errors.append(f"{lane_id}: active claim cannot retain a review_packet from another claim")
             if role != "reviewer" and state == "CLAIMED":
                 reviewer = lane.get("reviewer") or {}
                 if reviewer.get("state") != "PENDING":
