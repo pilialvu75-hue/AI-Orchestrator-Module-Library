@@ -3,18 +3,29 @@
   "id": "main-reviewer",
   "title": "Main / Reviewer",
   "role": "reviewer",
-  "status": "READY",
+  "status": "CLAIMED",
   "activation": "active",
   "scope": "Global architecture, cross-lane review, consolidation, roadmap/state authority and hardening, including target inference profile balance and shared-contract compatibility.",
   "shared_engine_policy": "shared_or_control_plane",
-  "state_version": 12,
+  "state_version": 13,
   "updated_at": "2026-10-01",
-  "active_claim": null,
+  "active_claim": {
+    "claim_id": "main-reviewer-reviewer-pipeline-repair-v1-20261001",
+    "owner_lane": "main-reviewer",
+    "work_item": "reviewer-pipeline-repair-v1",
+    "repository": "pilialvu75-hue/AI-Orchestrator-Module-Library",
+    "scope": "Repair malformed Cantiere reviewer handoff, restore projection/reviewer flow, and harden automatic reviewer intake against stale projections.",
+    "branch": "control-plane/reviewer-pipeline-repair-v1-20261001",
+    "started_at": "2026-10-01T14:05:00Z",
+    "heartbeat_at": "2026-10-01T14:05:00Z",
+    "lease_until": "2026-10-02T02:05:00Z",
+    "lease_hours": 12
+  },
   "dependencies": [],
   "roadmap_refs": [],
   "evidence": [],
   "gates": {
-    "G0_CLAIM": "PENDING",
+    "G0_CLAIM": "PASS",
     "G1_IMPLEMENTATION": "PENDING",
     "G2_STATIC": "PENDING",
     "G3_CI": "PENDING",
@@ -29,7 +40,7 @@
     "reviewed_by": null,
     "reviewed_at": null
   },
-  "next_action": "Observe the bounded Cantiere autopilot pilot, then decide whether to automate the next legacy chat replacement.",
+  "next_action": "Repair Cantiere #745 review handoff, then harden reviewer protocol and automation.",
   "inference_review_policy": {
     "policy": ".airlab/control-plane/inference-policy.json",
     "check": [
