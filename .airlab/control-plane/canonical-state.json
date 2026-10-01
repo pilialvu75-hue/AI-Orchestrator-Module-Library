@@ -7,7 +7,7 @@
     "policy": "This private repository is the single coordination authority. Chats and agents are workers, not independent sources of truth."
   },
   "updated_at": "2026-10-01",
-  "state_revision": 31,
+  "state_revision": 32,
   "lifecycle_status": "BOOTSTRAP_ACTIVE",
   "roadmap_authority": {
     "library": ".airlab/roadmap.yaml",
@@ -77,13 +77,21 @@
     "no_change_no_commit": true
   },
   "projection": {
-    "source_digest": "b866bf6fd0e2f21c7b944c6f39a7819dbf58ae57581e395dd1a09993034f2531",
-    "projected_at": "2026-10-01T16:48:26Z",
+    "source_digest": "6f194f56cae8ee92b99c2c01a4f58015ed6d487f9a2c858928ad24b27d78ced4",
+    "projected_at": "2026-10-01T16:49:31Z",
     "counts": {
+      "CLAIMED": 1,
       "IMPLEMENTING": 1,
-      "READY": 14
+      "READY": 13
     },
     "active_claims": [
+      {
+        "lane": "main-reviewer",
+        "claim_id": "main-reviewer-lifecycle-gap-v2-20261001",
+        "work_item": "control-plane-lifecycle-integrity-gap-v2",
+        "repository": "pilialvu75-hue/AI-Orchestrator-Module-Library",
+        "lease_until": "2026-10-02T04:52:00Z"
+      },
       {
         "lane": "platform-windows-legacy",
         "claim_id": "9234ab59756e8f7ce3be",
@@ -204,15 +212,20 @@
       },
       {
         "id": "main-reviewer",
-        "status": "READY",
+        "status": "CLAIMED",
         "activation": "active",
-        "state_version": 18,
+        "state_version": 19,
         "updated_at": "2026-10-01",
-        "active_claim": null,
+        "active_claim": {
+          "claim_id": "main-reviewer-lifecycle-gap-v2-20261001",
+          "work_item": "control-plane-lifecycle-integrity-gap-v2",
+          "repository": "pilialvu75-hue/AI-Orchestrator-Module-Library",
+          "lease_until": "2026-10-02T04:52:00Z"
+        },
         "reviewer_state": "AUTHORITY",
         "inference_profile_status": null,
         "historical_backlog_count": 0,
-        "next_action": "Proceed with structural backlog CP-HARDEN-01..05; no active incident remains in the control plane."
+        "next_action": "Implement only the lifecycle gaps not already merged by PR #89/#90."
       },
       {
         "id": "platform-android",
