@@ -7,11 +7,13 @@
   "activation": "active",
   "scope": "Provider-neutral intelligence gateway, durable orchestration, resource pool and web control-plane services.",
   "shared_engine_policy": "shared_or_control_plane",
-  "state_version": 1,
+  "state_version": 2,
   "updated_at": "2026-10-01",
   "active_claim": null,
   "dependencies": [],
-  "roadmap_refs": [],
+  "roadmap_refs": [
+    ".airlab/public-repositories/Ai_orchestrator-prova/roadmap.yaml#AIR-10"
+  ],
   "evidence": [],
   "gates": {
     "G0_CLAIM": "PENDING",
@@ -29,5 +31,12 @@
     "reviewed_by": null,
     "reviewed_at": null
   },
-  "next_action": "Claim one bounded work item before implementation."
+  "next_action": "Advance AIR-10 as a bounded dispatcher/executor task without creating a second Project/Execution authority.",
+  "historical_backlog": [
+    "AIrLab remains provider-neutral and subordinate to Cantiere lifecycle ownership.",
+    "Durable external waits use persisted event correlation/watchdog/idempotency, never a chat blocked on CI.",
+    "Memory Fabric adds storage backends without replacing local/project lifecycle authority.",
+    "0 EUR/month and free-first/spend-safe remain defaults; paid fallback requires explicit authorization.",
+    "A canonical roadmap executor/lane dispatcher is still planned; claims/gates exist but autonomous worker dispatch is not yet complete."
+  ]
 }
