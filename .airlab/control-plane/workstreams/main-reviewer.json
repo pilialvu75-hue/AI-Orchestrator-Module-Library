@@ -3,18 +3,29 @@
   "id": "main-reviewer",
   "title": "Main / Reviewer",
   "role": "reviewer",
-  "status": "READY",
+  "status": "CLAIMED",
   "activation": "active",
   "scope": "Global architecture, cross-lane review, consolidation, roadmap/state authority and hardening, including target inference profile balance and shared-contract compatibility.",
   "shared_engine_policy": "shared_or_control_plane",
-  "state_version": 14,
+  "state_version": 15,
   "updated_at": "2026-10-01",
-  "active_claim": null,
+  "active_claim": {
+    "claim_id": "main-reviewer-lifecycle-integrity-hardening-v1-20261001",
+    "owner_lane": "main-reviewer",
+    "work_item": "control-plane-lifecycle-integrity-v1",
+    "repository": "pilialvu75-hue/AI-Orchestrator-Module-Library",
+    "scope": "Reset per-claim ephemeral approvals/gates, reject expired-lease resurrection, enforce review packet schema semantics, and make canonical sync gate honest.",
+    "branch": "control-plane/lifecycle-integrity-hardening-v1-20261001",
+    "started_at": "2026-10-01T15:12:00Z",
+    "heartbeat_at": "2026-10-01T15:12:00Z",
+    "lease_until": "2026-10-02T03:12:00Z",
+    "lease_hours": 12
+  },
   "dependencies": [],
   "roadmap_refs": [],
   "evidence": [],
   "gates": {
-    "G0_CLAIM": "PENDING",
+    "G0_CLAIM": "PASS",
     "G1_IMPLEMENTATION": "PENDING",
     "G2_STATIC": "PENDING",
     "G3_CI": "PENDING",
@@ -29,7 +40,7 @@
     "reviewed_by": null,
     "reviewed_at": null
   },
-  "next_action": "Review raw worker lanes in REVIEW_REQUIRED, reconcile projection drift, and preserve downstream physical gates.",
+  "next_action": "Harden claim lifecycle, lease expiry, review schema and canonical-sync semantics.",
   "inference_review_policy": {
     "policy": ".airlab/control-plane/inference-policy.json",
     "check": [
