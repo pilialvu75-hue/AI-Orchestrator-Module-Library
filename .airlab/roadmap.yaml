@@ -275,3 +275,13 @@ roadmap:
       Make Main/Reviewer consume REVIEW_REQUIRED work directly from raw workstream state rather than
       relying on a potentially stale projection, enforce complete atomic worker handoffs, and provide
       explicit accept/rework transitions that preserve claim and evidence semantics.
+
+  - id: L23
+    title: Control-plane lifecycle integrity hardening
+    state: active
+    priority: P0
+    outcome: >-
+      Prevent claim-scoped approvals/evidence from leaking into later work, forbid resurrection or
+      voluntary escape of expired worker leases, preserve valid REVIEW_REQUIRED handoffs while reviewer
+      action is pending, enforce review-packet schema semantics, and keep material roadmap sync pending
+      until real synchronization evidence exists.
