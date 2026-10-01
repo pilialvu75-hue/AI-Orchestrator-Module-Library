@@ -71,12 +71,26 @@ current_state:
     - CANT-AUDIT-07
     - CANT-AUDIT-08
     - CANT-AUDIT-20
+  inference_profile_architecture:
+    status: active
+    policy: pilialvu75-hue/AI-Orchestrator-Module-Library/.airlab/control-plane/inference-policy.json
+    shared_owner: runtime-core
+    target_owners:
+    - platform-android
+    - platform-windows
+    - platform-windows-legacy
+    - platform-linux
+    - platform-macos
+    - platform-ios
+    - platform-web
+    - platform-raspberry-pi
+    rule: Shared inference/routing semantics, target-specific benchmark-gated model/backend/runtime profiles.
   coordination_control_plane:
     status: active_foundation
     authority: pilialvu75-hue/AI-Orchestrator-Module-Library/.airlab/control-plane
     reviewer_lane: main-reviewer
     worker_rule: Specialized chats stop at REVIEW_REQUIRED; Main/Reviewer promotes VERIFIED/DONE.
-    platform_rule: One shared engine; platform lanes adapt target boundaries instead of forking engine semantics.
+    platform_rule: One Orchestrator and shared contracts; each platform owns a benchmark-gated inference profile and may use different LLMs/backends/quantizations for its hardware/software target.
 invariants:
 - Cantiere remains authoritative for Project/Task/Execution/review/validation/approval/apply.
 - Library reuse is checked before regeneration.
@@ -88,6 +102,14 @@ invariants:
 - Local mode remains useful offline; web access is optional capability, not a cloud-mode requirement.
 - GPU/Vulkan claims require runtime proof.
 roadmap:
+- id: CANT-INF1
+  title: Per-target inference optimization matrix
+  state: active
+  priority: P0
+  outcome: >-
+    Select and maintain the strongest practical stable inference profile for each hardware/software target,
+    allowing different LLMs, quantizations, backends, acceleration settings and role assignments while
+    preserving the shared inference/routing contract and Diagnostics evidence format.
 - id: CANT-CP1
   title: Canonical multi-chat control plane and strong gates
   state: active
