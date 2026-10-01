@@ -7,7 +7,7 @@
     "policy": "This private repository is the single coordination authority. Chats and agents are workers, not independent sources of truth."
   },
   "updated_at": "2026-10-01",
-  "state_revision": 17,
+  "state_revision": 18,
   "lifecycle_status": "BOOTSTRAP_ACTIVE",
   "roadmap_authority": {
     "library": ".airlab/roadmap.yaml",
@@ -77,10 +77,10 @@
     "no_change_no_commit": true
   },
   "projection": {
-    "source_digest": "bace224ec0ff004a4906a4b1440355982fabce3cbdc56f09fbc7421a10dae4c7",
-    "projected_at": "2026-10-01T09:35:05Z",
+    "source_digest": "7d93e65686a5605fe7e835f06a9d76bbfc4201bc1e2d52327664fd4c3e7a564c",
+    "projected_at": "2026-10-01T10:00:50Z",
     "counts": {
-      "EVIDENCE_READY": 1,
+      "IMPLEMENTING": 1,
       "READY": 14
     },
     "active_claims": [
@@ -168,9 +168,9 @@
       },
       {
         "id": "cantiere",
-        "status": "EVIDENCE_READY",
+        "status": "IMPLEMENTING",
         "activation": "active",
-        "state_version": 4,
+        "state_version": 5,
         "updated_at": "2026-10-01",
         "active_claim": {
           "claim_id": "cantiere-manga-online-failure-repro-v1-20261001",
@@ -181,7 +181,7 @@
         "reviewer_state": "PENDING",
         "inference_profile_status": null,
         "historical_backlog_count": 3,
-        "next_action": "Run the same generated-app request on Android release +2860 and preserve Diagnostics evidence."
+        "next_action": "Trace why the empty-change recovery is bypassed after the Engineer runtime retry and implement one bounded regression fix."
       },
       {
         "id": "diagnostics",
