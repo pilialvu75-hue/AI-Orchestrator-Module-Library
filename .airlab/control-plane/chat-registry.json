@@ -1,0 +1,116 @@
+{
+  "schema_version": 1,
+  "updated_at": "2026-10-01",
+  "authority": ".airlab/control-plane/canonical-state.json",
+  "bootstrap_generator": "tools/chat_lane_bootstrap.py",
+  "lanes": [
+    {
+      "id": "main-reviewer",
+      "chat_title": "AI ORCHESTRATOR — MAIN / REVIEWER",
+      "mode": "reviewer",
+      "primary_repository": "pilialvu75-hue/AI-Orchestrator-Module-Library",
+      "purpose": "Global review, consolidation, strengthening, canonical promotion and roadmap/state authority."
+    },
+    {
+      "id": "cantiere",
+      "chat_title": "AI ORCHESTRATOR — CANTIERE",
+      "mode": "worker",
+      "primary_repository": "pilialvu75-hue/Ai-orchestrator-riserva",
+      "purpose": "Exclusive Cantiere/App Factory planning, execution, durability, review/validation/apply and real artifact production."
+    },
+    {
+      "id": "voice-live",
+      "chat_title": "AI ORCHESTRATOR — VOICE + LIVE",
+      "mode": "worker",
+      "primary_repository": "pilialvu75-hue/Ai-orchestrator-riserva",
+      "purpose": "Shared STT/TTS/live interaction contracts and implementation; platform device bindings remain platform-owned."
+    },
+    {
+      "id": "runtime-core",
+      "chat_title": "AI ORCHESTRATOR — RUNTIME CORE",
+      "mode": "worker",
+      "primary_repository": "pilialvu75-hue/Ai-orchestrator-riserva",
+      "purpose": "Shared inference/routing contract, context, streaming, cancellation, model-profile schema and runtime lifecycle."
+    },
+    {
+      "id": "diagnostics",
+      "chat_title": "AI ORCHESTRATOR — DIAGNOSTICS",
+      "mode": "worker",
+      "primary_repository": "pilialvu75-hue/Ai-orchestrator-diagnostics",
+      "purpose": "Cross-platform observability, evidence receipts, logs and comparable diagnostics contracts."
+    },
+    {
+      "id": "platform-android",
+      "chat_title": "AI ORCHESTRATOR — ANDROID",
+      "mode": "worker",
+      "primary_repository": "pilialvu75-hue/Ai-orchestrator-riserva",
+      "purpose": "Android shell, packaging, device integration and benchmark-gated Android inference profile."
+    },
+    {
+      "id": "platform-windows",
+      "chat_title": "AI ORCHESTRATOR — WINDOWS",
+      "mode": "worker",
+      "primary_repository": "pilialvu75-hue/Ai-orchestrator-riserva",
+      "purpose": "Modern Windows shell, installer/update, device/voice integration and benchmark-gated Windows inference profile."
+    },
+    {
+      "id": "platform-windows-legacy",
+      "chat_title": "AI ORCHESTRATOR — WINDOWS 7/8.1",
+      "mode": "worker",
+      "primary_repository": "pilialvu75-hue/Ai-orchestrator-riserva",
+      "purpose": "Windows 7/8.1 compatibility, installer/update and target inference/device adapters without changing shared contracts."
+    },
+    {
+      "id": "platform-linux",
+      "chat_title": "AI ORCHESTRATOR — LINUX",
+      "mode": "worker",
+      "primary_repository": "pilialvu75-hue/Ai-orchestrator-riserva",
+      "purpose": "Linux packaging, shell, device/voice adapters and benchmark-gated Linux inference profile."
+    },
+    {
+      "id": "platform-macos",
+      "chat_title": "AI ORCHESTRATOR — macOS",
+      "mode": "worker",
+      "primary_repository": "pilialvu75-hue/Ai-orchestrator-riserva",
+      "purpose": "macOS packaging, shell, device/voice adapters and benchmark-gated macOS inference profile."
+    },
+    {
+      "id": "platform-ios",
+      "chat_title": "AI ORCHESTRATOR — iOS",
+      "mode": "worker",
+      "primary_repository": "pilialvu75-hue/Ai-orchestrator-riserva",
+      "purpose": "iOS packaging, permissions, UI/device integration and benchmark-gated iOS inference profile."
+    },
+    {
+      "id": "platform-web",
+      "chat_title": "AI ORCHESTRATOR — WEB / PWA",
+      "mode": "worker",
+      "primary_repository": "pilialvu75-hue/Ai_orchestrator-prova",
+      "purpose": "Web/PWA shell, browser adapters, web inference profile and AIrLab-aligned provider execution."
+    },
+    {
+      "id": "platform-raspberry-pi",
+      "chat_title": "AI ORCHESTRATOR — RASPBERRY PI",
+      "mode": "worker",
+      "primary_repository": "pilialvu75-hue/Ai-orchestrator-riserva",
+      "purpose": "Raspberry Pi deployment, headless/UI modes, hardware/audio integration and target inference profile."
+    },
+    {
+      "id": "library-researcher",
+      "chat_title": "AI ORCHESTRATOR — LIBRARY + RESEARCHER",
+      "mode": "worker",
+      "primary_repository": "pilialvu75-hue/AI-Orchestrator-Module-Library",
+      "secondary_repositories": [
+        "pilialvu75-hue/AI-Orchestrator-Module-Researcher"
+      ],
+      "purpose": "Needs, discovery, intake, certification, reuse, evolution and Researcher safety boundary."
+    },
+    {
+      "id": "airlab",
+      "chat_title": "AI ORCHESTRATOR — AIRLAB",
+      "mode": "worker",
+      "primary_repository": "pilialvu75-hue/Ai_orchestrator-prova",
+      "purpose": "Provider-neutral intelligence gateway, durable orchestration, free-resource pool and web control-plane services."
+    }
+  ]
+}
