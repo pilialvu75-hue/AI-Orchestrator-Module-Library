@@ -7,7 +7,7 @@
   "activation": "active",
   "scope": "Legacy Windows compatibility layer, installer/update and target-specific adapters with target-optimized inference while preserving shared orchestration/contracts.",
   "shared_engine_policy": "adapter_only",
-  "state_version": 7,
+  "state_version": 8,
   "updated_at": "2026-10-01",
   "active_claim": {
     "claim_id": "9234ab59756e8f7ce3be",
@@ -17,8 +17,8 @@
     "scope": "Continue the #721 Windows 7 interaction/model-load blocker only: use current descendant PR #736 to isolate the first crashing model-load stage with one physical probe at a time; preserve Win8.1/10/11 behavior and do not merge before target evidence.",
     "branch": "test/windows7-model-load-deep-probes",
     "started_at": "2026-10-01T15:24:13Z",
-    "heartbeat_at": "2026-10-01T18:23:41Z",
-    "lease_until": "2026-10-02T06:23:41Z",
+    "heartbeat_at": "2026-10-01T19:19:04Z",
+    "lease_until": "2026-10-02T07:19:04Z",
     "lease_hours": 12
   },
   "dependencies": [],
@@ -98,16 +98,33 @@
         "build 1175"
       ],
       "next_action": "Run only physical Win7 probe 0C and record open or crash."
+    },
+    {
+      "seq": 3,
+      "at": "2026-10-01T19:19:04Z",
+      "claim_id": "9234ab59756e8f7ce3be",
+      "work_item": "pr-721-win7-model-load-crash-isolation",
+      "summary": "No new owner runtime evidence is available; software isolation is complete up to the next bounded physical gate.",
+      "decisions": [
+        "Do not merge from CI alone.",
+        "Stop software mutation until Win7 probe 0C provides new evidence."
+      ],
+      "evidence_refs": [
+        "PR 736",
+        "build 1175"
+      ],
+      "next_action": "Run only physical Win7 probe 0C and record open or crash."
     }
   ],
   "last_checkpoint": {
-    "seq": 2,
-    "at": "2026-10-01T18:23:41Z",
+    "seq": 3,
+    "at": "2026-10-01T19:19:04Z",
     "claim_id": "9234ab59756e8f7ce3be",
     "work_item": "pr-721-win7-model-load-crash-isolation",
-    "summary": "PR 736 and Windows build 1175 revalidated; physical Win7 probe 0C is the only remaining step.",
+    "summary": "No new owner runtime evidence is available; software isolation is complete up to the next bounded physical gate.",
     "decisions": [
-      "No merge before physical evidence."
+      "Do not merge from CI alone.",
+      "Stop software mutation until Win7 probe 0C provides new evidence."
     ],
     "evidence_refs": [
       "PR 736",
