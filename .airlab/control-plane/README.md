@@ -53,8 +53,11 @@ They may adapt:
 - filesystem/process/window integration;
 - UI shell/layout where target conventions require it.
 
-They must not independently fork shared inference, routing, memory, voice-core, Diagnostics contracts or Cantiere lifecycle.
-A needed shared change is proposed to the relevant shared lane and reviewed for all affected platforms.
+They must not fork shared orchestration semantics, inference contracts, routing contracts, memory, voice-core contracts, Diagnostics contracts or Cantiere lifecycle.
+
+Inference is the deliberate exception at the implementation/profile layer: each platform may use different LLM families, sizes, quantizations, backends and acceleration settings when target benchmarks justify them. The shared Runtime Core owns the inference contract and routing semantics; each platform lane owns its target inference profile.
+
+A needed shared-contract change is proposed to the relevant shared lane and reviewed for all affected platforms.
 
 ## Gate ladder
 
@@ -64,3 +67,14 @@ A needed shared change is proposed to the relevant shared lane and reviewed for 
 
 CI green is G3, not DONE.
 Runtime/hardware claims require G5 target evidence.
+
+
+## Target-specific inference profiles
+
+The product is shared; the local inference implementation is not required to be identical.
+
+Each platform lane maintains a benchmark-gated target profile covering hardware/software fingerprint, candidate models, role assignments, backend/accelerator settings, resource limits and fallbacks. See `.airlab/control-plane/inference-policy.json`.
+
+The selection objective is balance: use the strongest practical model/profile for the target without creating memory, thermal, latency or stability problems, while avoiding an unnecessarily small model on hardware that can reliably run more capable options.
+
+No platform profile may be promoted from benchmark results alone when installation, launch or runtime behavior also changed: G5 target-runtime evidence remains mandatory.
