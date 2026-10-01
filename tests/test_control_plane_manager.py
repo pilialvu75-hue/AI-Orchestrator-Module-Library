@@ -36,6 +36,15 @@ class ControlPlaneManagerTests(unittest.TestCase):
             dst = self.root / rel
             dst.parent.mkdir(parents=True, exist_ok=True)
             shutil.copyfile(src, dst)
+            lane = json.loads(dst.read_text(encoding="utf-8"))
+            lane["status"] = "READY"
+            lane["active_claim"] = None
+            lane.pop("review_packet", None)
+            lane.pop("block_reason", None)
+            lane.setdefault("gates", {})["G0_CLAIM"] = "PENDING"
+            if lane.get("role") != "reviewer":
+                lane.setdefault("reviewer", {})["state"] = "PENDING"
+            dst.write_text(json.dumps(lane, indent=2) + "\n", encoding="utf-8")
 
     def tearDown(self):
         self.temp.cleanup()
@@ -97,6 +106,72 @@ class ControlPlaneManagerTests(unittest.TestCase):
         self.assertIsNone(lane["active_claim"])
         self.assertEqual(lane["block_reason"]["code"], "CLAIM_LEASE_EXPIRED")
         self.assertTrue(lane["block_reason"]["review_required"])
+
+    def test_submit_review_requires_matching_claim(self):
+        now = datetime(2026, 10, 1, 8, 0, tzinfo=timezone.utc)
+        claim_id = manager.claim(
+            "cantiere",
+            "issue-126",
+            "owner/repo",
+            "bounded fix",
+            root=self.root,
+            now=now,
+        )
+        packet = {
+            "schema_version": 1,
+            "submitted_at": "2026-10-01T09:00:00Z",
+            "lane_id": "cantiere",
+            "claim_id": claim_id,
+            "work_item": "issue-126",
+            "repository": "owner/repo",
+            "branch": "fix/issue-126",
+            "pull_request": 126,
+            "summary": "Implemented bounded fix.",
+            "changes": ["Changed one bounded behavior."],
+            "evidence": [{"type": "test", "ref": "unit-test", "result": "PASS", "note": None}],
+            "known_risks": [],
+            "reviewer_checks": ["Verify no scope drift."],
+            "roadmap_impact": {"material": False, "refs": []},
+        }
+        packet_path = self.root / "packet.json"
+        packet_path.write_text(json.dumps(packet), encoding="utf-8")
+        manager.submit_review("cantiere", packet_path, root=self.root, now=now + timedelta(hours=1))
+        lane = json.loads(
+            (self.root / ".airlab/control-plane/workstreams/cantiere.json").read_text(encoding="utf-8")
+        )
+        self.assertEqual(lane["status"], "REVIEW_REQUIRED")
+        self.assertEqual(lane["review_packet"]["claim_id"], claim_id)
+        self.assertEqual(lane["evidence"][0]["result"], "PASS")
+        self.assertIsNotNone(lane["active_claim"])
+
+    def test_submit_review_rejects_wrong_claim(self):
+        now = datetime(2026, 10, 1, 8, 0, tzinfo=timezone.utc)
+        manager.claim(
+            "cantiere",
+            "issue-127",
+            "owner/repo",
+            "bounded fix",
+            root=self.root,
+            now=now,
+        )
+        packet = {
+            "schema_version": 1,
+            "submitted_at": "2026-10-01T09:00:00Z",
+            "lane_id": "cantiere",
+            "claim_id": "wrong-claim",
+            "work_item": "issue-127",
+            "repository": "owner/repo",
+            "summary": "Implemented bounded fix.",
+            "changes": ["Changed one bounded behavior."],
+            "evidence": [{"type": "test", "ref": "unit-test", "result": "PASS"}],
+            "known_risks": [],
+            "reviewer_checks": ["Verify claim."],
+            "roadmap_impact": {"material": False, "refs": []},
+        }
+        packet_path = self.root / "bad-packet.json"
+        packet_path.write_text(json.dumps(packet), encoding="utf-8")
+        with self.assertRaisesRegex(ValueError, "claim_id mismatch"):
+            manager.submit_review("cantiere", packet_path, root=self.root, now=now + timedelta(hours=1))
 
     def test_projection_is_deterministic_when_sources_do_not_change(self):
         now = datetime(2026, 10, 1, 8, 0, tzinfo=timezone.utc)

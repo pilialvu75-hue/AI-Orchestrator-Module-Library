@@ -90,3 +90,27 @@ Each platform lane maintains a benchmark-gated target profile covering hardware/
 The selection objective is balance: use the strongest practical model/profile for the target without creating memory, thermal, latency or stability problems, while avoiding an unnecessarily small model on hardware that can reliably run more capable options.
 
 No platform profile may be promoted from benchmark results alone when installation, launch or runtime behavior also changed: G5 target-runtime evidence remains mandatory.
+
+
+## Chat lane bootstrap
+
+Every operational chat has one canonical lane registered in `.airlab/control-plane/chat-registry.json`.
+
+Generate a current bootstrap relay from repository state instead of maintaining hand-written prompts:
+
+```bash
+python tools/chat_lane_bootstrap.py --lane main-reviewer
+python tools/chat_lane_bootstrap.py --lane cantiere
+python tools/chat_lane_bootstrap.py --lane voice-live
+python tools/chat_lane_bootstrap.py --lane platform-windows
+```
+
+The generated relay embeds the lane identity, repository, current state, scope and mandatory operating rules. It always instructs the chat to re-read canonical repository state before work, so an old copied relay cannot override newer state.
+
+Worker completion is a structured handoff, not a prose "done". Build a packet conforming to `.airlab/control-plane/schemas/review-packet.schema.json`, then transition the lane:
+
+```bash
+python tools/control_plane_manager.py submit-review --lane voice-live --packet /path/to/review-packet.json
+```
+
+The claim remains active while Main/Reviewer inspects the packet. Main/Reviewer then promotes, requests rework or explicitly releases/reconciles the claim.

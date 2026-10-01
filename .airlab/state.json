@@ -7,7 +7,8 @@
   "completed": [
     "L1",
     "L13",
-    "L15"
+    "L15",
+    "L17"
   ],
   "next_actions": [
     "L14",
@@ -76,6 +77,15 @@
       ],
       "write_rule": "only when deterministic source digest changes",
       "status": "AUTOMATED"
+    },
+    "chat_lanes": {
+      "status": "ACTIVE",
+      "registry": ".airlab/control-plane/chat-registry.json",
+      "bootstrap_generator": "tools/chat_lane_bootstrap.py",
+      "review_packet_schema": ".airlab/control-plane/schemas/review-packet.schema.json",
+      "worker_submission": "tools/control_plane_manager.py submit-review",
+      "registry_coverage": 15,
+      "worker_review_handoff": "ENFORCED"
     }
   }
 }

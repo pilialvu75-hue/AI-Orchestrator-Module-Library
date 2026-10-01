@@ -7,7 +7,7 @@
     "policy": "This private repository is the single coordination authority. Chats and agents are workers, not independent sources of truth."
   },
   "updated_at": "2026-10-01",
-  "state_revision": 4,
+  "state_revision": 5,
   "lifecycle_status": "BOOTSTRAP_ACTIVE",
   "roadmap_authority": {
     "library": ".airlab/roadmap.yaml",
@@ -309,5 +309,12 @@
         "inference_profile_status": null
       }
     ]
+  },
+  "chat_registry": ".airlab/control-plane/chat-registry.json",
+  "chat_protocol": {
+    "bootstrap_generator": "tools/chat_lane_bootstrap.py",
+    "review_packet_schema": ".airlab/control-plane/schemas/review-packet.schema.json",
+    "worker_submission": "tools/control_plane_manager.py submit-review",
+    "rule": "Worker chats claim bounded work, maintain heartbeat, submit REVIEW_REQUIRED packet; Main/Reviewer alone promotes VERIFIED/DONE."
   }
 }

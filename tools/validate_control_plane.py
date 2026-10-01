@@ -16,6 +16,7 @@ def validate(root=ROOT):
     canonical = load(root / ".airlab/control-plane/canonical-state.json")
     gates = load(root / ".airlab/control-plane/gates.json")
     inference = load(root / ".airlab/control-plane/inference-policy.json")
+    registry = load(root / ".airlab/control-plane/chat-registry.json")
     if canonical.get("schema_version") != 1:
         errors.append("canonical-state schema_version must be 1")
     if gates.get("schema_version") != 1:
@@ -35,6 +36,25 @@ def validate(root=ROOT):
         errors.append("claim_policy.max_lease_hours must be >= default_lease_hours")
     if claim_policy.get("stale_action") != "BLOCKED_REQUIRES_REVIEWER":
         errors.append("stale claim action must be BLOCKED_REQUIRES_REVIEWER")
+    if canonical.get("chat_registry") != ".airlab/control-plane/chat-registry.json":
+        errors.append("canonical state must reference chat-registry.json")
+    if registry.get("schema_version") != 1:
+        errors.append("chat-registry schema_version must be 1")
+    registry_ids = set()
+    for entry in registry.get("lanes") or []:
+        lane_id = entry.get("id")
+        if not lane_id:
+            errors.append("chat-registry entry missing id")
+            continue
+        if lane_id in registry_ids:
+            errors.append(f"duplicate chat-registry lane: {lane_id}")
+        registry_ids.add(lane_id)
+        if entry.get("mode") not in {"worker", "reviewer"}:
+            errors.append(f"{lane_id}: chat-registry mode must be worker or reviewer")
+        if not entry.get("primary_repository"):
+            errors.append(f"{lane_id}: chat-registry missing primary_repository")
+        if not entry.get("chat_title"):
+            errors.append(f"{lane_id}: chat-registry missing chat_title")
     paths = canonical.get("workstreams") or []
     seen_ids = set()
     active_claims = {}
@@ -85,6 +105,32 @@ def validate(root=ROOT):
                 errors.append(f"{lane_id}: active_claim owner_lane mismatch")
             if state not in {"CLAIMED","IMPLEMENTING","EVIDENCE_READY","REVIEW_REQUIRED"}:
                 errors.append(f"{lane_id}: active claim is inconsistent with state {state}")
+        if state == "REVIEW_REQUIRED":
+            packet = lane.get("review_packet") or {}
+            if role == "reviewer":
+                errors.append(f"{lane_id}: reviewer lane must not use worker REVIEW_REQUIRED state")
+            if not claim:
+                errors.append(f"{lane_id}: REVIEW_REQUIRED requires active claim")
+            else:
+                if packet.get("claim_id") != claim.get("claim_id"):
+                    errors.append(f"{lane_id}: review_packet claim_id mismatch")
+                if packet.get("work_item") != claim.get("work_item"):
+                    errors.append(f"{lane_id}: review_packet work_item mismatch")
+                if packet.get("repository") != claim.get("repository"):
+                    errors.append(f"{lane_id}: review_packet repository mismatch")
+            for field in ("schema_version","submitted_at","lane_id","claim_id","work_item","repository","summary","changes","evidence","known_risks","reviewer_checks","roadmap_impact"):
+                if field not in packet:
+                    errors.append(f"{lane_id}: REVIEW_REQUIRED review_packet missing {field}")
+            if packet.get("lane_id") != lane_id:
+                errors.append(f"{lane_id}: review_packet lane_id mismatch")
+            if packet.get("schema_version") != 1:
+                errors.append(f"{lane_id}: review_packet schema_version must be 1")
+            if not packet.get("changes"):
+                errors.append(f"{lane_id}: review_packet requires changes")
+            if not packet.get("evidence"):
+                errors.append(f"{lane_id}: review_packet requires evidence")
+            if not packet.get("reviewer_checks"):
+                errors.append(f"{lane_id}: review_packet requires reviewer_checks")
         if state in {"VERIFIED","DONE"} and not lane.get("evidence"):
             errors.append(f"{lane_id}: {state} requires evidence")
         if state == "DONE":
@@ -92,6 +138,11 @@ def validate(root=ROOT):
             for gate in ("G0_CLAIM","G1_IMPLEMENTATION","G2_STATIC","G3_CI","G4_INTEGRATION","G6_REVIEWER","G7_CANONICAL_SYNC"):
                 if gs.get(gate) != "PASS":
                     errors.append(f"{lane_id}: DONE requires {gate}=PASS")
+    if registry_ids != seen_ids:
+        errors.append(
+            "chat-registry does not match canonical workstreams: "
+            f"missing={sorted(seen_ids - registry_ids)} extra={sorted(registry_ids - seen_ids)}"
+        )
     if canonical.get("promotion_policy",{}).get("worker_max_state") != "REVIEW_REQUIRED":
         errors.append("canonical promotion_policy.worker_max_state must be REVIEW_REQUIRED")
     return errors

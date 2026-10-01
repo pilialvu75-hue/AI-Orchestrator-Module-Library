@@ -7,13 +7,16 @@ Read in this order before starting work:
 1. `.airlab/control-plane/README.md`
 2. `.airlab/control-plane/canonical-state.json`
 3. `.airlab/control-plane/gates.json`
-4. the relevant `.airlab/control-plane/workstreams/<lane>.json`
-5. `.airlab/roadmap.yaml` and/or the relevant private public-repository roadmap
-6. `.airlab/state.json`
-7. `.airlab/decisions.md`
-8. Current repository CI/workflows, open work and Diagnostics evidence relevant to the selected roadmap item.
+4. `.airlab/control-plane/chat-registry.json`
+5. the relevant `.airlab/control-plane/workstreams/<lane>.json`
+6. `.airlab/roadmap.yaml` and/or the relevant private public-repository roadmap
+7. `.airlab/state.json`
+8. `.airlab/decisions.md`
+9. Current repository CI/workflows, open work and Diagnostics evidence relevant to the selected roadmap item.
 
 The main/reviewer lane is the only lane that may promote worker results to VERIFIED/DONE. Worker lanes stop at REVIEW_REQUIRED.
+
+Use `tools/chat_lane_bootstrap.py --lane <lane-id>` to generate the current relay for a chat. Worker completion must be submitted as a structured `review_packet` and stop at REVIEW_REQUIRED.
 
 Before implementation, a worker lane must hold a non-expired canonical claim lease. Use `tools/control_plane_manager.py` or an equivalent atomic update through the same schema. Heartbeat long-running work; never bypass a BLOCKED stale-claim reconciliation.
 
