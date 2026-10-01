@@ -7,11 +7,13 @@
   "activation": "ready",
   "scope": "Raspberry Pi deployment, target-optimized local inference/hardware/audio adapters and headless/UI modes using shared contracts.",
   "shared_engine_policy": "adapter_only",
-  "state_version": 2,
+  "state_version": 3,
   "updated_at": "2026-10-01",
   "active_claim": null,
   "dependencies": [],
-  "roadmap_refs": [],
+  "roadmap_refs": [
+    ".airlab/public-repositories/Ai-orchestrator-riserva/roadmap.yaml#CANT-18"
+  ],
   "evidence": [],
   "gates": {
     "G0_CLAIM": "PENDING",
@@ -29,7 +31,7 @@
     "reviewed_by": null,
     "reviewed_at": null
   },
-  "next_action": "Claim one bounded work item before implementation.",
+  "next_action": "Keep ready; claim a bounded Raspberry Pi foundation item only after shared runtime/platform contracts needed by it are stable.",
   "inference_profile_policy": "target_owned_benchmark_gated",
   "inference_profile": {
     "status": "NEEDS_TARGET_PROFILE",
@@ -42,5 +44,11 @@
     "accelerator": null,
     "fallback_chain": [],
     "evidence": []
-  }
+  },
+  "historical_backlog": [
+    "Raspberry Pi is a distinct target, not generic Linux.",
+    "Future node scope includes headless/UI operation, local inference sized to hardware, audio/voice and Diagnostics parity.",
+    "Preserve planned GPIO/UART/CAN/I2C/SPI integration for home/vehicle/embedded use.",
+    "Do not start broad Pi porting before shared runtime contracts are stable enough to avoid another fork."
+  ]
 }
