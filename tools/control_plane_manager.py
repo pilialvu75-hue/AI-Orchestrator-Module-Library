@@ -334,6 +334,12 @@ def release(
     claim_data = lane.get("active_claim")
     if not claim_data:
         raise ValueError(f"lane {lane_id} has no active claim")
+    try:
+        _assert_claim_live(claim_data, now)
+    except ValueError as error:
+        raise ValueError(
+            f"release cannot bypass an expired claim: {error}"
+        ) from error
 
     events = lane.setdefault("reconciliation_events", [])
     events.append({
@@ -348,7 +354,28 @@ def release(
     lane["status"] = "READY"
     lane["updated_at"] = _date(now)
     lane["state_version"] = int(lane.get("state_version", 0)) + 1
-    lane.setdefault("gates", {})["G0_CLAIM"] = "PENDING"
+    lane["evidence"] = []
+    lane.pop("review_packet", None)
+    gates = lane.setdefault("gates", {})
+    gates.update({
+        "G0_CLAIM": "PENDING",
+        "G1_IMPLEMENTATION": "PENDING",
+        "G2_STATIC": "PENDING",
+        "G3_CI": "PENDING",
+        "G4_INTEGRATION": "PENDING",
+        "G5_TARGET_RUNTIME": "NOT_APPLICABLE_UNTIL_RUNTIME_CHANGE",
+        "G7_CANONICAL_SYNC": "PENDING",
+    })
+    if lane.get("role") == "reviewer":
+        gates["G6_REVIEWER"] = "SELF_AUTHORITY_FOR_CROSS_LANE_REVIEW_ONLY"
+    else:
+        gates["G6_REVIEWER"] = "PENDING"
+        lane["reviewer"] = {
+            "required": True,
+            "state": "PENDING",
+            "reviewed_by": None,
+            "reviewed_at": None,
+        }
     _write(lane_path, lane)
     project(root=root, now=now)
 
@@ -633,6 +660,7 @@ def submit_review(
     claim_data = lane.get("active_claim")
     if not claim_data:
         raise ValueError(f"lane {lane_id} has no active claim")
+    _assert_claim_live(claim_data, now)
     if lane.get("status") not in {"CLAIMED", "IMPLEMENTING", "EVIDENCE_READY"}:
         raise ValueError(f"lane {lane_id} cannot submit review from state {lane.get('status')}")
 
@@ -681,6 +709,35 @@ def reconcile(root: Path = ROOT, now: datetime | None = None) -> list[str]:
             continue
         if _parse_iso(str(lease_until)) > now:
             continue
+
+        if lane.get("status") == "REVIEW_REQUIRED":
+            packet = lane.get("review_packet") or {}
+            try:
+                _validate_review_packet(str(lane.get("id")), claim_data, packet)
+            except ValueError:
+                pass
+            else:
+                events = lane.setdefault("reconciliation_events", [])
+                already_recorded = any(
+                    item.get("type") == "REVIEW_WAIT_OVERDUE"
+                    and item.get("claim_id") == claim_data.get("claim_id")
+                    for item in events
+                )
+                if not already_recorded:
+                    events.append({
+                        "type": "REVIEW_WAIT_OVERDUE",
+                        "claim_id": claim_data.get("claim_id"),
+                        "work_item": claim_data.get("work_item"),
+                        "lease_until": lease_until,
+                        "detected_at": _iso(now),
+                        "review_required": True,
+                    })
+                    lane["reconciliation_events"] = events[-20:]
+                    lane["updated_at"] = _date(now)
+                    lane["state_version"] = int(lane.get("state_version", 0)) + 1
+                    _write(lane_path, lane)
+                    changed.append(str(lane_path.relative_to(root)))
+                continue
 
         event = {
             "type": "CLAIM_LEASE_EXPIRED",
