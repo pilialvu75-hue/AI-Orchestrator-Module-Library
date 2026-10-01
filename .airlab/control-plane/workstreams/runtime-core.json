@@ -5,9 +5,9 @@
   "role": "worker",
   "status": "READY",
   "activation": "active",
-  "scope": "Shared local/cloud inference, model routing, context, streaming, acceleration contracts and model lifecycle.",
+  "scope": "Shared inference contract, capability/model routing semantics, context, streaming, cancellation, errors, model-profile schema and lifecycle. Target platforms own their benchmark-gated LLM/backend/runtime profiles.",
   "shared_engine_policy": "shared_or_control_plane",
-  "state_version": 1,
+  "state_version": 2,
   "updated_at": "2026-10-01",
   "active_claim": null,
   "dependencies": [],
@@ -29,5 +29,21 @@
     "reviewed_by": null,
     "reviewed_at": null
   },
-  "next_action": "Claim one bounded work item before implementation."
+  "next_action": "Claim one bounded work item before implementation.",
+  "inference_ownership": {
+    "owns": [
+      "shared inference API",
+      "streaming/cancellation/error semantics",
+      "routing contract",
+      "profile schema",
+      "fallback semantics"
+    ],
+    "does_not_own": [
+      "one universal LLM",
+      "one universal quantization",
+      "one universal backend",
+      "one universal acceleration configuration"
+    ],
+    "target_profile_policy": ".airlab/control-plane/inference-policy.json"
+  }
 }
