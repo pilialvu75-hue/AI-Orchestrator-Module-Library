@@ -15,6 +15,8 @@ Read in this order before starting work:
 
 The main/reviewer lane is the only lane that may promote worker results to VERIFIED/DONE. Worker lanes stop at REVIEW_REQUIRED.
 
+Before implementation, a worker lane must hold a non-expired canonical claim lease. Use `tools/control_plane_manager.py` or an equivalent atomic update through the same schema. Heartbeat long-running work; never bypass a BLOCKED stale-claim reconciliation.
+
 Current direction:
 
 - Library is the security, certification, reuse and dependency hub between Researcher and Cantiere.
