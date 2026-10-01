@@ -7,11 +7,13 @@
   "activation": "active",
   "scope": "Exclusive Cantiere/App Factory execution, durability, build/review/validation/apply and first-real-app reliability.",
   "shared_engine_policy": "shared_or_control_plane",
-  "state_version": 1,
+  "state_version": 2,
   "updated_at": "2026-10-01",
   "active_claim": null,
   "dependencies": [],
-  "roadmap_refs": [],
+  "roadmap_refs": [
+    ".airlab/public-repositories/Ai-orchestrator-riserva/roadmap.yaml#CANT-11"
+  ],
   "evidence": [],
   "gates": {
     "G0_CLAIM": "PENDING",
@@ -29,5 +31,10 @@
     "reviewed_by": null,
     "reviewed_at": null
   },
-  "next_action": "Claim one bounded work item before implementation."
+  "next_action": "Claim the smallest bounded reproduction/fix for the current Phase 1 ONLINE generated-app failure.",
+  "historical_backlog": [
+    "Stay in Phase 1 ONLINE until a real generated Android app is physically accepted.",
+    "Reproduce the recent manga-drawing app failure from current main with Diagnostics; do not restart generic audits.",
+    "Preserve merged project isolation, stage-aware progress and complete review/validation gates."
+  ]
 }
