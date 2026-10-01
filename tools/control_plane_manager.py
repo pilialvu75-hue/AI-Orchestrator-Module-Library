@@ -194,17 +194,6 @@ def _projection_payload(
 
 def project(root: Path = ROOT, now: datetime | None = None) -> bool:
     now = now or _now()
-    if not isinstance(work_item, str) or not work_item.strip():
-        raise ValueError("work_item must be a non-empty string")
-    if not isinstance(repository, str) or not repository.strip():
-        raise ValueError("repository must be a non-empty string")
-    if not isinstance(scope, str) or not scope.strip():
-        raise ValueError("scope must be a non-empty string")
-    allowed_repositories = _allowed_repositories_for_lane(root, lane_id)
-    if repository not in allowed_repositories:
-        raise ValueError(
-            f"repository {repository} is outside lane {lane_id} scope; allowed={sorted(allowed_repositories)}"
-        )
     canonical_path, canonical = _canonical(root)
     checkpoint_warning_minutes = _checkpoint_watch_policy(canonical)
     payload = _projection_payload(
@@ -242,6 +231,17 @@ def claim(
     now: datetime | None = None,
 ) -> str:
     now = now or _now()
+    if not isinstance(work_item, str) or not work_item.strip():
+        raise ValueError("work_item must be a non-empty string")
+    if not isinstance(repository, str) or not repository.strip():
+        raise ValueError("repository must be a non-empty string")
+    if not isinstance(scope, str) or not scope.strip():
+        raise ValueError("scope must be a non-empty string")
+    allowed_repositories = _allowed_repositories_for_lane(root, lane_id)
+    if repository not in allowed_repositories:
+        raise ValueError(
+            f"repository {repository} is outside lane {lane_id} scope; allowed={sorted(allowed_repositories)}"
+        )
     canonical_path, canonical = _canonical(root)
     default_hours, max_hours = _lease_policy(canonical)
     hours = default_hours if lease_hours is None else int(lease_hours)
