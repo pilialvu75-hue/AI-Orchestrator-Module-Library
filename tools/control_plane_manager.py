@@ -351,7 +351,8 @@ def release(
     })
     lane["reconciliation_events"] = events[-20:]
     lane["active_claim"] = None
-    lane["status"] = "READY"
+    roadmap_material = bool((packet.get("roadmap_impact") or {}).get("material"))
+    lane["status"] = "BLOCKED" if roadmap_material else "READY"
     lane["updated_at"] = _date(now)
     lane["state_version"] = int(lane.get("state_version", 0)) + 1
     lane["evidence"] = []
@@ -571,11 +572,59 @@ def review_accept(
         "reviewed_at": _iso(now),
     })
     lane.setdefault("gates", {})["G6_REVIEWER"] = "PASS"
-    roadmap_material = bool((packet.get("roadmap_impact") or {}).get("material"))
     lane["gates"]["G7_CANONICAL_SYNC"] = (
         "PASS" if not roadmap_material else "PENDING_ROADMAP_SYNC"
     )
-    lane["next_action"] = next_action.strip()
+    if roadmap_material:
+        roadmap_refs = list((packet.get("roadmap_impact") or {}).get("refs") or [])
+        lane["block_reason"] = {
+            "code": "CANONICAL_SYNC_REQUIRED",
+            "roadmap_refs": roadmap_refs,
+            "reviewed_claim_id": claim_data.get("claim_id"),
+            "work_item": claim_data.get("work_item"),
+            "detected_at": _iso(now),
+        }
+        lane["next_action"] = "Synchronize the material roadmap refs, then record canonical sync completion before new work can be claimed."
+    else:
+        lane.pop("block_reason", None)
+        lane["next_action"] = next_action.strip()
+    _write(lane_path, lane)
+    project(root=root, now=now)
+
+
+def canonical_sync_complete(
+    lane_id: str,
+    *,
+    refs: list[str],
+    root: Path = ROOT,
+    now: datetime | None = None,
+) -> None:
+    now = now or _now()
+    _, canonical = _canonical(root)
+    lane_path, lane = _lane_by_id(root, canonical, lane_id)
+    block = lane.get("block_reason") or {}
+    if lane.get("status") != "BLOCKED" or block.get("code") != "CANONICAL_SYNC_REQUIRED":
+        raise ValueError(f"lane {lane_id} is not blocked on canonical sync")
+    clean_refs = [item.strip() for item in refs if item and item.strip()]
+    if not clean_refs:
+        raise ValueError("canonical sync completion requires at least one synchronized ref")
+    expected_refs = set(block.get("roadmap_refs") or [])
+    if expected_refs and not expected_refs.issubset(set(clean_refs)):
+        missing = sorted(expected_refs - set(clean_refs))
+        raise ValueError("canonical sync refs missing required roadmap refs: " + ", ".join(missing))
+
+    lane.setdefault("gates", {})["G7_CANONICAL_SYNC"] = "PASS"
+    lane["status"] = "READY"
+    lane["block_reason"] = None
+    lane["updated_at"] = _date(now)
+    lane["state_version"] = int(lane.get("state_version", 0)) + 1
+    events = lane.setdefault("reconciliation_events", [])
+    events.append({
+        "type": "CANONICAL_SYNC_COMPLETED",
+        "refs": clean_refs,
+        "at": _iso(now),
+    })
+    lane["reconciliation_events"] = events[-20:]
     _write(lane_path, lane)
     project(root=root, now=now)
 
@@ -807,6 +856,10 @@ def _build_parser() -> argparse.ArgumentParser:
     rework_cmd.add_argument("--reason", required=True)
     rework_cmd.add_argument("--next-action", required=True)
 
+    sync_cmd = sub.add_parser("canonical-sync-complete")
+    sync_cmd.add_argument("--lane", required=True)
+    sync_cmd.add_argument("--ref", action="append", default=[], required=True)
+
     sub.add_parser("reconcile")
     sub.add_parser("project")
     return parser
@@ -849,6 +902,9 @@ def main() -> int:
             next_action=args.next_action,
         )
         print("review-rework")
+    elif args.command == "canonical-sync-complete":
+        canonical_sync_complete(args.lane, refs=args.ref)
+        print("canonical-sync-complete")
     elif args.command == "reconcile":
         changed = reconcile()
         print("\n".join(changed) if changed else "no changes")
