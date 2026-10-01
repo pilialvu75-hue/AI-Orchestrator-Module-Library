@@ -3,7 +3,7 @@
   "repository": "pilialvu75-hue/AI-Orchestrator-Module-Library",
   "updated_at": "2026-10-01",
   "lifecycle_status": "ACTIVE",
-  "current_phase": "L22",
+  "current_phase": "L14",
   "completed": [
     "L1",
     "L13",
@@ -11,10 +11,10 @@
     "L17",
     "L18",
     "L20",
-    "L21"
+    "L21",
+    "L22"
   ],
   "next_actions": [
-    "L22",
     "L19",
     "L14",
     "L16",
@@ -128,13 +128,14 @@
       "rule": "one bounded work item per cycle; stop at reviewer or physical-owner gates"
     },
     "reviewer_pipeline": {
-      "status": "ACTIVE_ROLLOUT",
+      "status": "ACTIVE",
       "intake": "raw_workstreams",
       "projection_role": "secondary_index",
       "inbox_command": "tools/control_plane_manager.py review-inbox",
       "accept_command": "tools/control_plane_manager.py review-accept",
       "rework_command": "tools/control_plane_manager.py review-rework",
-      "status_only_review_handoff": "FORBIDDEN"
+      "status_only_review_handoff": "FORBIDDEN",
+      "validation": "CI_PASS_WITH_RAW_INBOX_AND_ACCEPT_REWORK_TESTS"
     }
   }
 }
