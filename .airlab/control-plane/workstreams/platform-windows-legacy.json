@@ -7,7 +7,7 @@
   "activation": "active",
   "scope": "Legacy Windows compatibility layer, installer/update and target-specific adapters with target-optimized inference while preserving shared orchestration/contracts.",
   "shared_engine_policy": "adapter_only",
-  "state_version": 5,
+  "state_version": 6,
   "updated_at": "2026-10-01",
   "active_claim": {
     "claim_id": "9234ab59756e8f7ce3be",
@@ -81,7 +81,8 @@
         "Keep Win7 target gate separate from Win8.1/10/11.",
         "Do not run 0D or full probe 1 until 0C physical result is recorded."
       ],
-      "next_action": "On physical Windows 7, install the #1175/#736 candidate and press only 0C · Test scansione file modelli. Record whether the app remains open or crashes; no other probe in the same run."
+      "next_action": "On physical Windows 7, install the #1175/#736 candidate and press only 0C · Test scansione file modelli. Record whether the app remains open or crashes; no other probe in the same run.",
+      "work_item": "pr-721-win7-model-load-crash-isolation"
     }
   ],
   "last_checkpoint": {
@@ -100,6 +101,7 @@
       "Keep Win7 target gate separate from Win8.1/10/11.",
       "Do not run 0D or full probe 1 until 0C physical result is recorded."
     ],
-    "next_action": "On physical Windows 7, install the #1175/#736 candidate and press only 0C · Test scansione file modelli. Record whether the app remains open or crashes; no other probe in the same run."
+    "next_action": "On physical Windows 7, install the #1175/#736 candidate and press only 0C · Test scansione file modelli. Record whether the app remains open or crashes; no other probe in the same run.",
+    "work_item": "pr-721-win7-model-load-crash-isolation"
   }
 }
