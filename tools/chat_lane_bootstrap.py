@@ -72,12 +72,16 @@ activation={lane.get('activation')}
 state_version={lane.get('state_version')}
 scope={lane.get('scope')}
 active_claim={json.dumps(lane.get('active_claim'), ensure_ascii=False)}
+last_checkpoint={json.dumps(lane.get('last_checkpoint'), ensure_ascii=False)}
 
 OPERATING RULES:
 - Do not restart from a generic audit when a bounded next action already exists.
 - Before implementation, hold a unique non-expired canonical claim for one bounded work_item.
 - Do not duplicate another active claim.
 - Keep the claim heartbeat current during long work.
+- Persist a canonical checkpoint after every material milestone, decision, newly discovered blocker, merged/closed PR, physical/runtime result, or change to the next action.
+- Do not wait for the chat to become full. Use tools/chat_checkpoint.py while working; a checkpoint also renews the active claim lease.
+- Before a long/high-risk step, checkpoint the current safe resume point.
 - CI green is only one gate and never proves runtime/hardware behavior by itself.
 - Record evidence as work advances.
 - Update the affected roadmap/state when accepted evidence materially changes scope, priority, dependency or completion.
