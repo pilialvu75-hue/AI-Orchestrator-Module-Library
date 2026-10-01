@@ -89,6 +89,8 @@
     "A platform build may not copy or fork shared engine logic merely to make the platform pass.",
     "Shared-core changes require affected platform impact review.",
     "Physical/runtime evidence is mandatory for claims about device acceleration, audio, installation, launch, thermal behavior or local inference.",
-    "A stale or conflicting claim blocks new overlapping implementation until reconciled."
+    "A stale or conflicting claim blocks new overlapping implementation until reconciled.",
+    "Target inference profiles are platform-owned and benchmark-gated; no universal LLM/backend may be required across all targets.",
+    "Inference profile promotion requires target resource headroom, quality, latency/stability and fallback evidence; CI alone is insufficient."
   ]
 }
