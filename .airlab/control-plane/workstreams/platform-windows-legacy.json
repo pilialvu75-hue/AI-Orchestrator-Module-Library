@@ -3,20 +3,31 @@
   "id": "platform-windows-legacy",
   "title": "Windows 7/8.1",
   "role": "worker",
-  "status": "READY",
+  "status": "CLAIMED",
   "activation": "active",
   "scope": "Legacy Windows compatibility layer, installer/update and target-specific adapters with target-optimized inference while preserving shared orchestration/contracts.",
   "shared_engine_policy": "adapter_only",
-  "state_version": 3,
+  "state_version": 4,
   "updated_at": "2026-10-01",
-  "active_claim": null,
+  "active_claim": {
+    "claim_id": "9234ab59756e8f7ce3be",
+    "owner_lane": "platform-windows-legacy",
+    "work_item": "pr-721-win7-model-load-crash-isolation",
+    "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
+    "scope": "Continue the #721 Windows 7 interaction/model-load blocker only: use current descendant PR #736 to isolate the first crashing model-load stage with one physical probe at a time; preserve Win8.1/10/11 behavior and do not merge before target evidence.",
+    "branch": "test/windows7-model-load-deep-probes",
+    "started_at": "2026-10-01T15:24:13Z",
+    "heartbeat_at": "2026-10-01T15:24:13Z",
+    "lease_until": "2026-10-02T03:24:13Z",
+    "lease_hours": 12
+  },
   "dependencies": [],
   "roadmap_refs": [
     ".airlab/public-repositories/Ai-orchestrator-riserva/roadmap.yaml#CANT-15"
   ],
   "evidence": [],
   "gates": {
-    "G0_CLAIM": "PENDING",
+    "G0_CLAIM": "PASS",
     "G1_IMPLEMENTATION": "PENDING",
     "G2_STATIC": "PENDING",
     "G3_CI": "PENDING",
@@ -31,7 +42,7 @@
     "reviewed_by": null,
     "reviewed_at": null
   },
-  "next_action": "Claim one bounded Windows legacy blocker from #639/#674/#690/#721 and require real target evidence before promotion.",
+  "next_action": "Verify PR #736 CI/artifact state, checkpoint the current physical gate, then run only Win7 probe 0C; do not advance to 0D until 0C has target evidence.",
   "inference_profile_policy": "target_owned_benchmark_gated",
   "inference_profile": {
     "status": "NEEDS_TARGET_PROFILE",
