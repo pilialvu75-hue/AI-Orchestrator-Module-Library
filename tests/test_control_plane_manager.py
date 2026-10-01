@@ -31,6 +31,23 @@ class ControlPlaneManagerTests(unittest.TestCase):
         (self.root / ".airlab/control-plane/canonical-state.json").write_text(
             json.dumps(canonical, indent=2) + "\n", encoding="utf-8"
         )
+        registry_path = self.root / ".airlab/control-plane/chat-registry.json"
+        registry_path.parent.mkdir(parents=True, exist_ok=True)
+        registry_path.write_text(json.dumps({
+            "schema_version": 1,
+            "lanes": [
+                {
+                    "id": "main-reviewer",
+                    "primary_repository": "owner/repo",
+                    "secondary_repositories": [],
+                },
+                {
+                    "id": "cantiere",
+                    "primary_repository": "owner/repo",
+                    "secondary_repositories": ["owner/secondary"],
+                },
+            ],
+        }, indent=2) + "\n", encoding="utf-8")
         for rel in self.paths:
             src = ROOT / rel
             dst = self.root / rel
@@ -48,6 +65,35 @@ class ControlPlaneManagerTests(unittest.TestCase):
 
     def tearDown(self):
         self.temp.cleanup()
+
+    def test_claim_rejects_repository_outside_lane_scope(self):
+        with self.assertRaisesRegex(ValueError, "outside lane cantiere scope"):
+            manager.claim(
+                "cantiere",
+                "scope-check",
+                "other/repo",
+                "bounded fix",
+                root=self.root,
+                now=datetime(2026, 10, 1, 8, 0, tzinfo=timezone.utc),
+            )
+
+    def test_claim_allows_registered_secondary_repository(self):
+        claim_id = manager.claim(
+            "cantiere",
+            "secondary-scope",
+            "owner/secondary",
+            "bounded fix",
+            root=self.root,
+            now=datetime(2026, 10, 1, 8, 0, tzinfo=timezone.utc),
+        )
+        self.assertTrue(claim_id)
+
+    def test_claim_rejects_empty_work_item_and_scope(self):
+        now = datetime(2026, 10, 1, 8, 0, tzinfo=timezone.utc)
+        with self.assertRaisesRegex(ValueError, "work_item must be"):
+            manager.claim("cantiere", "", "owner/repo", "bounded", root=self.root, now=now)
+        with self.assertRaisesRegex(ValueError, "scope must be"):
+            manager.claim("cantiere", "x", "owner/repo", " ", root=self.root, now=now)
 
     def test_claim_prevents_duplicate_work_item(self):
         now = datetime(2026, 10, 1, 8, 0, tzinfo=timezone.utc)
