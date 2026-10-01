@@ -97,7 +97,6 @@
       "deletion_rule": "Delete a chat only after its unique actionable value is represented in canonical roadmap/workstream state.",
       "full_chat_rule": "When a chat fills, start a new chat from the same lane bootstrap; the lane/state persists outside the chat.",
       "keep_until_replaced": [
-        "Cantiere 2.6",
         "Issued 3",
         "Windows Legacy Autonomous",
         "Library Progress Updates (most recent active thread)"
@@ -117,6 +116,15 @@
         "auto_block": false,
         "fabricate_content": false
       }
+    },
+    "chat_automation_pilot": {
+      "lane": "cantiere",
+      "title": "Cantiere Auto-Pilot",
+      "status": "ACTIVE_TEST",
+      "cadence": "hourly",
+      "max_cycles": 4,
+      "started_at": "2026-10-01T09:32:01Z",
+      "rule": "one bounded work item per cycle; stop at reviewer or physical-owner gates"
     }
   }
 }

@@ -99,8 +99,8 @@
     {
       "title": "Cantiere 2.6",
       "lane": "cantiere",
-      "status": "KEEP_UNTIL_REPLACED",
-      "reason": "Most recent active Cantiere working surface; latest manga-app failure is migrated but keep until canonical Cantiere chat is opened."
+      "status": "DELETE_CANDIDATE",
+      "reason": "Canonical Cantiere replacement is now active as the bounded `Cantiere Auto-Pilot` test; backlog and next action are preserved in the cantiere lane/control plane."
     },
     {
       "title": "Cantiere 2.0",
@@ -227,6 +227,18 @@
       "lane": "runtime-core",
       "status": "DELETE_CANDIDATE",
       "reason": "Spark-X2.5 4B requirement is migrated and PR #744 is the live implementation record."
+    }
+  ],
+  "updated_at": "2026-10-01",
+  "automation_replacements": [
+    {
+      "legacy_chat": "Cantiere 2.6",
+      "canonical_lane": "cantiere",
+      "replacement_title": "AI ORCHESTRATOR — CANTIERE",
+      "pilot": "Cantiere Auto-Pilot",
+      "mode": "bounded_4_hourly_cycles",
+      "status": "ACTIVE_TEST",
+      "started_at": "2026-10-01T09:32:01Z"
     }
   ]
 }

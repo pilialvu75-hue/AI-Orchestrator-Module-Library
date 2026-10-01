@@ -47,5 +47,19 @@
     "Stay in Phase 1 ONLINE until a real generated Android app is physically accepted.",
     "Reproduce the recent manga-drawing app failure from current main with Diagnostics; do not restart generic audits.",
     "Preserve merged project isolation, stage-aware progress and complete review/validation gates."
-  ]
+  ],
+  "automation_pilot": {
+    "status": "ACTIVE_TEST",
+    "mode": "bounded_recurring_chat_execution",
+    "max_cycles": 4,
+    "cadence": "hourly",
+    "started_at": "2026-10-01T09:32:01Z",
+    "safeguards": [
+      "one bounded work item at a time",
+      "resume from canonical last_checkpoint",
+      "do not cross REVIEW_REQUIRED without Main/Reviewer",
+      "do not claim physical success without target evidence",
+      "remain in Phase 1 ONLINE"
+    ]
+  }
 }
