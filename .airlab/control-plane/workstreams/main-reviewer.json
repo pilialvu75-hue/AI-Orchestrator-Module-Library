@@ -3,18 +3,29 @@
   "id": "main-reviewer",
   "title": "Main / Reviewer",
   "role": "reviewer",
-  "status": "READY",
+  "status": "CLAIMED",
   "activation": "active",
   "scope": "Global architecture, cross-lane review, consolidation, roadmap/state authority and hardening, including target inference profile balance and shared-contract compatibility.",
   "shared_engine_policy": "shared_or_control_plane",
-  "state_version": 18,
+  "state_version": 19,
   "updated_at": "2026-10-01",
-  "active_claim": null,
+  "active_claim": {
+    "claim_id": "main-reviewer-lifecycle-gap-v2-20261001",
+    "owner_lane": "main-reviewer",
+    "work_item": "control-plane-lifecycle-integrity-gap-v2",
+    "repository": "pilialvu75-hue/AI-Orchestrator-Module-Library",
+    "scope": "Close post-PR89 lifecycle gaps: repository scope, expired release/review submission, review-wait preservation, material G7 blocking, and validator invariants.",
+    "branch": "control-plane/lifecycle-integrity-gap-v2-20261001",
+    "started_at": "2026-10-01T16:52:00Z",
+    "heartbeat_at": "2026-10-01T16:52:00Z",
+    "lease_until": "2026-10-02T04:52:00Z",
+    "lease_hours": 12
+  },
   "dependencies": [],
   "roadmap_refs": [],
   "evidence": [],
   "gates": {
-    "G0_CLAIM": "PENDING",
+    "G0_CLAIM": "PASS",
     "G1_IMPLEMENTATION": "PENDING",
     "G2_STATIC": "PENDING",
     "G3_CI": "PENDING",
@@ -29,7 +40,7 @@
     "reviewed_by": null,
     "reviewed_at": null
   },
-  "next_action": "Proceed with structural backlog CP-HARDEN-01..05; no active incident remains in the control plane.",
+  "next_action": "Implement only the lifecycle gaps not already merged by PR #89/#90.",
   "inference_review_policy": {
     "policy": ".airlab/control-plane/inference-policy.json",
     "check": [
