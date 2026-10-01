@@ -47,3 +47,13 @@ When this chat becomes full, open a replacement chat for the **same lane** using
 Do not keep an old chat solely as project memory. Delete it only after its unique actionable
 value has been migrated and the entry in `.airlab/control-plane/historical-chat-consolidation.json`
 is classified as deletion-safe.
+
+
+## Continuous checkpoint rule
+
+Do not wait for the user to say that the chat is full. While doing claimed work, write a
+canonical checkpoint after every material change and before long/high-risk steps using
+`tools/chat_checkpoint.py`. A replacement chat for the same lane resumes from
+`last_checkpoint` plus current repository evidence.
+
+The final worker handoff to `REVIEW_REQUIRED` creates a final checkpoint automatically.
