@@ -7,7 +7,7 @@
     "policy": "This private repository is the single coordination authority. Chats and agents are workers, not independent sources of truth."
   },
   "updated_at": "2026-10-01",
-  "state_revision": 32,
+  "state_revision": 33,
   "lifecycle_status": "BOOTSTRAP_ACTIVE",
   "roadmap_authority": {
     "library": ".airlab/roadmap.yaml",
@@ -77,21 +77,13 @@
     "no_change_no_commit": true
   },
   "projection": {
-    "source_digest": "6f194f56cae8ee92b99c2c01a4f58015ed6d487f9a2c858928ad24b27d78ced4",
-    "projected_at": "2026-10-01T16:49:31Z",
+    "source_digest": "3e8b07b4cc0c0173144c650d9562c93a2b61f6c11270423946d253d01c1e6b3b",
+    "projected_at": "2026-10-01T16:53:43Z",
     "counts": {
-      "CLAIMED": 1,
       "IMPLEMENTING": 1,
-      "READY": 13
+      "READY": 14
     },
     "active_claims": [
-      {
-        "lane": "main-reviewer",
-        "claim_id": "main-reviewer-lifecycle-gap-v2-20261001",
-        "work_item": "control-plane-lifecycle-integrity-gap-v2",
-        "repository": "pilialvu75-hue/AI-Orchestrator-Module-Library",
-        "lease_until": "2026-10-02T04:52:00Z"
-      },
       {
         "lane": "platform-windows-legacy",
         "claim_id": "9234ab59756e8f7ce3be",
@@ -212,20 +204,15 @@
       },
       {
         "id": "main-reviewer",
-        "status": "CLAIMED",
+        "status": "READY",
         "activation": "active",
-        "state_version": 19,
+        "state_version": 20,
         "updated_at": "2026-10-01",
-        "active_claim": {
-          "claim_id": "main-reviewer-lifecycle-gap-v2-20261001",
-          "work_item": "control-plane-lifecycle-integrity-gap-v2",
-          "repository": "pilialvu75-hue/AI-Orchestrator-Module-Library",
-          "lease_until": "2026-10-02T04:52:00Z"
-        },
+        "active_claim": null,
         "reviewer_state": "AUTHORITY",
         "inference_profile_status": null,
         "historical_backlog_count": 0,
-        "next_action": "Implement only the lifecycle gaps not already merged by PR #89/#90."
+        "next_action": "Prioritize CP-HARDEN-01 atomic mutation/projection isolation, then CP-HARDEN-02 serialized resource locks and CP-HARDEN-04 canonical automation registry before broad AIR-10 dispatch."
       },
       {
         "id": "platform-android",
