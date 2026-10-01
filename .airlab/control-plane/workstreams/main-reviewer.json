@@ -3,18 +3,29 @@
   "id": "main-reviewer",
   "title": "Main / Reviewer",
   "role": "reviewer",
-  "status": "READY",
+  "status": "CLAIMED",
   "activation": "active",
   "scope": "Global architecture, cross-lane review, consolidation, roadmap/state authority and hardening, including target inference profile balance and shared-contract compatibility.",
   "shared_engine_policy": "shared_or_control_plane",
-  "state_version": 20,
+  "state_version": 21,
   "updated_at": "2026-10-01",
-  "active_claim": null,
+  "active_claim": {
+    "claim_id": "main-reviewer-cp-harden-01-v1-20261001",
+    "owner_lane": "main-reviewer",
+    "work_item": "CP-HARDEN-01",
+    "repository": "pilialvu75-hue/AI-Orchestrator-Module-Library",
+    "scope": "Add transactional control-plane mutation inbox with validate-before-apply semantics and quarantine so malformed automation/API requests cannot corrupt workstreams or blind global projection.",
+    "branch": "control-plane/cp-harden-01-transactional-inbox-v1-20261001",
+    "started_at": "2026-10-01T17:58:00Z",
+    "heartbeat_at": "2026-10-01T17:58:00Z",
+    "lease_until": "2026-10-02T05:58:00Z",
+    "lease_hours": 12
+  },
   "dependencies": [],
   "roadmap_refs": [],
   "evidence": [],
   "gates": {
-    "G0_CLAIM": "PENDING",
+    "G0_CLAIM": "PASS",
     "G1_IMPLEMENTATION": "PENDING",
     "G2_STATIC": "PENDING",
     "G3_CI": "PENDING",
@@ -29,7 +40,7 @@
     "reviewed_by": null,
     "reviewed_at": null
   },
-  "next_action": "Prioritize CP-HARDEN-01 atomic mutation/projection isolation, then CP-HARDEN-02 serialized resource locks and CP-HARDEN-04 canonical automation registry before broad AIR-10 dispatch.",
+  "next_action": "Implement transactional inbox and fail-isolated projection path for CP-HARDEN-01.",
   "inference_review_policy": {
     "policy": ".airlab/control-plane/inference-policy.json",
     "check": [
