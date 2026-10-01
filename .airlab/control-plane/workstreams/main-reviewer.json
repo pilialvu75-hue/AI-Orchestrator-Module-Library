@@ -3,29 +3,18 @@
   "id": "main-reviewer",
   "title": "Main / Reviewer",
   "role": "reviewer",
-  "status": "CLAIMED",
+  "status": "READY",
   "activation": "active",
   "scope": "Global architecture, cross-lane review, consolidation, roadmap/state authority and hardening, including target inference profile balance and shared-contract compatibility.",
   "shared_engine_policy": "shared_or_control_plane",
-  "state_version": 11,
+  "state_version": 12,
   "updated_at": "2026-10-01",
-  "active_claim": {
-    "claim_id": "main-reviewer-cantiere-autopilot-pilot-v1-20261001",
-    "owner_lane": "main-reviewer",
-    "work_item": "cantiere-autopilot-pilot-v1",
-    "repository": "pilialvu75-hue/AI-Orchestrator-Module-Library",
-    "scope": "Record the first bounded autonomous Cantiere chat pilot and promote superseded Cantiere 2.6 chat to deletion candidate.",
-    "branch": "control-plane/cantiere-autopilot-pilot-v1-20261001",
-    "started_at": "2026-10-01T09:33:00Z",
-    "heartbeat_at": "2026-10-01T09:33:00Z",
-    "lease_until": "2026-10-01T21:33:00Z",
-    "lease_hours": 12
-  },
+  "active_claim": null,
   "dependencies": [],
   "roadmap_refs": [],
   "evidence": [],
   "gates": {
-    "G0_CLAIM": "PASS",
+    "G0_CLAIM": "PENDING",
     "G1_IMPLEMENTATION": "PENDING",
     "G2_STATIC": "PENDING",
     "G3_CI": "PENDING",
@@ -40,7 +29,7 @@
     "reviewed_by": null,
     "reviewed_at": null
   },
-  "next_action": "Record Cantiere autonomous pilot and update historical chat cleanup registry.",
+  "next_action": "Observe the bounded Cantiere autopilot pilot, then decide whether to automate the next legacy chat replacement.",
   "inference_review_policy": {
     "policy": ".airlab/control-plane/inference-policy.json",
     "check": [
@@ -135,6 +124,27 @@
         }
       ],
       "summary": "Added autonomous checkpoint freshness watchdog to canonical projection."
+    },
+    {
+      "claim_id": "main-reviewer-cantiere-autopilot-pilot-v1-20261001",
+      "work_item": "cantiere-autopilot-pilot-v1",
+      "completed_at": "2026-10-01T09:35:00Z",
+      "result": "MERGED_VERIFIED",
+      "pull_request": 87,
+      "merge_commit": "64bf3dfbe8264af2c8ca5d62841e7512c700592f",
+      "evidence": [
+        {
+          "type": "ci",
+          "ref": "Validate Module Library run #229",
+          "result": "PASS"
+        },
+        {
+          "type": "pull_request",
+          "ref": "AI-Orchestrator-Module-Library#87",
+          "result": "PASS"
+        }
+      ],
+      "summary": "Registered bounded Cantiere automation pilot and deletion-safe replacement of Cantiere 2.6."
     }
   ],
   "checkpoints": [
@@ -173,24 +183,42 @@
       ],
       "next_action": "Use projection.checkpoint_watch to detect lanes that may be working without recently persisted resume state.",
       "kind": "COMPLETION"
+    },
+    {
+      "seq": 3,
+      "at": "2026-10-01T09:35:00Z",
+      "claim_id": "main-reviewer-cantiere-autopilot-pilot-v1-20261001",
+      "work_item": "cantiere-autopilot-pilot-v1",
+      "summary": "First bounded autonomous chat pilot registered for Cantiere and old Cantiere 2.6 promoted to deletion candidate via PR #87.",
+      "decisions": [
+        "Pilot limited to 4 hourly cycles.",
+        "One bounded Cantiere work item per cycle.",
+        "Stop at Main/Reviewer or physical-owner gates."
+      ],
+      "evidence_refs": [
+        "AI-Orchestrator-Module-Library#87",
+        "Validate Module Library run #229"
+      ],
+      "next_action": "Observe first Cantiere Auto-Pilot cycles and compare canonical checkpoints/results before enabling additional chat lanes.",
+      "kind": "COMPLETION"
     }
   ],
   "last_checkpoint": {
-    "seq": 2,
-    "at": "2026-10-01T09:18:00Z",
-    "claim_id": "main-reviewer-checkpoint-watchdog-v1-20261001",
-    "work_item": "checkpoint-watchdog-v1",
-    "summary": "Checkpoint freshness watchdog implemented, tested and merged via PR #86.",
+    "seq": 3,
+    "at": "2026-10-01T09:35:00Z",
+    "claim_id": "main-reviewer-cantiere-autopilot-pilot-v1-20261001",
+    "work_item": "cantiere-autopilot-pilot-v1",
+    "summary": "First bounded autonomous chat pilot registered for Cantiere and old Cantiere 2.6 promoted to deletion candidate via PR #87.",
     "decisions": [
-      "Warn after 120 minutes without a current-claim checkpoint.",
-      "Surface to Main/Reviewer instead of fabricating content.",
-      "Do not auto-block before normal claim lease expiry."
+      "Pilot limited to 4 hourly cycles.",
+      "One bounded Cantiere work item per cycle.",
+      "Stop at Main/Reviewer or physical-owner gates."
     ],
     "evidence_refs": [
-      "AI-Orchestrator-Module-Library#86",
-      "Validate Module Library run #225"
+      "AI-Orchestrator-Module-Library#87",
+      "Validate Module Library run #229"
     ],
-    "next_action": "Use projection.checkpoint_watch to detect lanes that may be working without recently persisted resume state.",
+    "next_action": "Observe first Cantiere Auto-Pilot cycles and compare canonical checkpoints/results before enabling additional chat lanes.",
     "kind": "COMPLETION"
   }
 }
