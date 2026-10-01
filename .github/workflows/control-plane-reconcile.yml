@@ -1,0 +1,67 @@
+name: Reconcile Canonical Control Plane
+
+on:
+  push:
+    branches: ["main"]
+    paths:
+      - ".airlab/control-plane/workstreams/**"
+      - ".airlab/control-plane/inference-policy.json"
+      - ".airlab/roadmap.yaml"
+      - ".airlab/public-repositories/**/roadmap.yaml"
+  schedule:
+    - cron: "17 * * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: canonical-control-plane-reconcile
+  cancel-in-progress: false
+
+jobs:
+  reconcile:
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Checkout main
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Reconcile latest main and project canonical state
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "ai-orchestrator-control-plane"
+          git config user.email "actions@users.noreply.github.com"
+
+          for attempt in 1 2 3; do
+            git fetch origin main
+            git reset --hard origin/main
+
+            python tools/control_plane_manager.py reconcile
+            python tools/validate_control_plane.py
+
+            if git diff --quiet; then
+              echo "Canonical state already current."
+              exit 0
+            fi
+
+            git add .airlab/control-plane/canonical-state.json .airlab/control-plane/workstreams/
+            git commit -m "control-plane: reconcile canonical operational state"
+
+            if git push origin HEAD:main; then
+              exit 0
+            fi
+
+            echo "Push raced with another main update; retrying from latest main."
+          done
+
+          echo "Unable to reconcile main after three attempts." >&2
+          exit 1
