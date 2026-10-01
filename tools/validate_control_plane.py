@@ -26,6 +26,15 @@ def validate(root=ROOT):
         errors.append("inference-policy must forbid a universal default model")
     if canonical.get("inference_policy") != ".airlab/control-plane/inference-policy.json":
         errors.append("canonical state must reference inference-policy.json")
+    claim_policy = canonical.get("claim_policy") or {}
+    default_lease = claim_policy.get("default_lease_hours")
+    max_lease = claim_policy.get("max_lease_hours")
+    if not isinstance(default_lease, int) or default_lease <= 0:
+        errors.append("claim_policy.default_lease_hours must be a positive integer")
+    if not isinstance(max_lease, int) or max_lease < default_lease:
+        errors.append("claim_policy.max_lease_hours must be >= default_lease_hours")
+    if claim_policy.get("stale_action") != "BLOCKED_REQUIRES_REVIEWER":
+        errors.append("stale claim action must be BLOCKED_REQUIRES_REVIEWER")
     paths = canonical.get("workstreams") or []
     seen_ids = set()
     active_claims = {}
@@ -69,9 +78,13 @@ def validate(root=ROOT):
                 errors.append(f"duplicate active claim {key}: {active_claims[key]} and {lane_id}")
             else:
                 active_claims[key] = lane_id
-            for field in ("repository","started_at","scope"):
+            for field in ("claim_id","owner_lane","repository","scope","started_at","heartbeat_at","lease_until","lease_hours"):
                 if not claim.get(field):
                     errors.append(f"{lane_id}: active_claim missing {field}")
+            if claim.get("owner_lane") != lane_id:
+                errors.append(f"{lane_id}: active_claim owner_lane mismatch")
+            if state not in {"CLAIMED","IMPLEMENTING","EVIDENCE_READY","REVIEW_REQUIRED"}:
+                errors.append(f"{lane_id}: active claim is inconsistent with state {state}")
         if state in {"VERIFIED","DONE"} and not lane.get("evidence"):
             errors.append(f"{lane_id}: {state} requires evidence")
         if state == "DONE":
