@@ -260,7 +260,7 @@ roadmap:
 
   - id: L21
     title: Checkpoint freshness watchdog
-    state: active
+    state: done
     priority: P0
     outcome: >-
       Detect claimed lanes that have not persisted a current resume checkpoint recently and surface them
