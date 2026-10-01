@@ -37,3 +37,13 @@ When a roadmap item changes state, update `roadmap.yaml`, `state.json` and any n
 Public repository roadmaps live under `.airlab/public-repositories/`.
 
 Future Researcher first-party mining sources are declared in `.airlab/first-party-sources.yaml`. Treat that manifest as an allowlist, not as a trust waiver: all extracted candidates still require Library intake and certification.
+
+
+## Chat rollover
+
+When this chat becomes full, open a replacement chat for the **same lane** using
+`tools/chat_lane_bootstrap.py --lane <lane-id>`. The repository state is the handoff.
+
+Do not keep an old chat solely as project memory. Delete it only after its unique actionable
+value has been migrated and the entry in `.airlab/control-plane/historical-chat-consolidation.json`
+is classified as deletion-safe.
