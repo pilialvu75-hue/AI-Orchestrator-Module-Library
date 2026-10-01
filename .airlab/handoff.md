@@ -4,10 +4,16 @@ This directory is the private continuity contract for Module Library.
 
 Read in this order before starting work:
 
-1. `.airlab/roadmap.yaml`
-2. `.airlab/state.json`
-3. `.airlab/decisions.md`
-4. Current repository CI/workflows and the files relevant to the selected roadmap item.
+1. `.airlab/control-plane/README.md`
+2. `.airlab/control-plane/canonical-state.json`
+3. `.airlab/control-plane/gates.json`
+4. the relevant `.airlab/control-plane/workstreams/<lane>.json`
+5. `.airlab/roadmap.yaml` and/or the relevant private public-repository roadmap
+6. `.airlab/state.json`
+7. `.airlab/decisions.md`
+8. Current repository CI/workflows, open work and Diagnostics evidence relevant to the selected roadmap item.
+
+The main/reviewer lane is the only lane that may promote worker results to VERIFIED/DONE. Worker lanes stop at REVIEW_REQUIRED.
 
 Current direction:
 
