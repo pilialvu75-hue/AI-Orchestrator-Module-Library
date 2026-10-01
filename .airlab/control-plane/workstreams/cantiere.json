@@ -7,7 +7,7 @@
   "activation": "active",
   "scope": "Exclusive Cantiere/App Factory execution, durability, build/review/validation/apply and first-real-app reliability.",
   "shared_engine_policy": "shared_or_control_plane",
-  "state_version": 7,
+  "state_version": 8,
   "updated_at": "2026-10-01",
   "active_claim": {
     "claim_id": "cantiere-manga-online-failure-repro-v1-20261001",
@@ -17,7 +17,7 @@
     "scope": "Bounded Phase 1 ONLINE generated-app reproduction on current Android release.",
     "branch": "cantiere/manga-online-failure-repro-v1-20261001",
     "started_at": "2026-10-01T09:34:00Z",
-    "heartbeat_at": "2026-10-01T10:07:00Z",
+    "heartbeat_at": "2026-10-01T10:12:00Z",
     "lease_until": "2026-10-01T21:38:00Z",
     "lease_hours": 12
   },
@@ -29,8 +29,8 @@
   "gates": {
     "G0_CLAIM": "PASS",
     "G1_IMPLEMENTATION": "PASS",
-    "G2_STATIC": "REVIEW_FINDINGS",
-    "G3_CI": "PASS",
+    "G2_STATIC": "PASS_REVIEW_FINDINGS_ADDRESSED",
+    "G3_CI": "PENDING_UPDATED_HEAD",
     "G4_INTEGRATION": "PENDING",
     "G5_TARGET_RUNTIME": "NOT_APPLICABLE_UNTIL_RUNTIME_CHANGE",
     "G6_REVIEWER": "PENDING",
@@ -42,7 +42,7 @@
     "reviewed_by": null,
     "reviewed_at": null
   },
-  "next_action": "Add bounded runWithResumeContext timeout -> empty proposal -> valid proposal regression coverage with identity preservation, then re-evaluate PR #745 CI/review.",
+  "next_action": "Wait for CI on PR #745 head 1de46c1; if green, submit REVIEW_REQUIRED to Main/Reviewer without self-promotion.",
   "historical_backlog": [
     "Stay in Phase 1 ONLINE until a real generated Android app is physically accepted.",
     "Reproduce the recent manga-drawing app failure from current main with Diagnostics; do not restart generic audits.",
@@ -134,26 +134,42 @@
       ],
       "next_action": "Add bounded runWithResumeContext timeout -> empty proposal -> valid proposal regression coverage with identity preservation, then re-evaluate PR #745 CI/review.",
       "kind": "REVIEW_PROGRESS"
+    },
+    {
+      "seq": 5,
+      "at": "2026-10-01T10:12:00Z",
+      "claim_id": "cantiere-manga-online-failure-repro-v1-20261001",
+      "work_item": "phase1-online-generated-app-repro-v1",
+      "summary": "Both concrete Copilot findings on PR #745 are now addressed on the branch: retry telemetry distinguishes attempt 3 after a runtime retry, and runWithResumeContext has a three-call regression test asserting stable request/project/task/execution/attempt/checkpoint identity and 640/512/768 token budgets.",
+      "decisions": [
+        "No physical retest until updated PR CI completes and reviewer boundary is respected.",
+        "Phase 1 ONLINE remains open."
+      ],
+      "evidence_refs": [
+        "Ai-orchestrator-riserva#745",
+        "commit:c6541c289eebfc736750a2359ab774ea00f32f16",
+        "commit:1de46c10346036f7add4c62cc4a359967249784d"
+      ],
+      "next_action": "Wait for CI on PR #745 head 1de46c1; if green, submit REVIEW_REQUIRED to Main/Reviewer without self-promotion.",
+      "kind": "REVIEW_FIX"
     }
   ],
   "last_checkpoint": {
-    "seq": 4,
-    "at": "2026-10-01T10:07:00Z",
+    "seq": 5,
+    "at": "2026-10-01T10:12:00Z",
     "claim_id": "cantiere-manga-online-failure-repro-v1-20261001",
     "work_item": "phase1-online-generated-app-repro-v1",
-    "summary": "PR #745 CI completed successfully across Android first-app APK/release, Web, Linux, macOS and Windows. Copilot review found two concrete gaps. The bounded telemetry gap was fixed on the PR branch: malformed recovery now records attempt 3 when preceded by runtime retry. Resume-path regression coverage remains required before reviewer handoff.",
+    "summary": "Both concrete Copilot findings on PR #745 are now addressed on the branch: retry telemetry distinguishes attempt 3 after a runtime retry, and runWithResumeContext has a three-call regression test asserting stable request/project/task/execution/attempt/checkpoint identity and 640/512/768 token budgets.",
     "decisions": [
-      "CI green is evidence only, not Phase 1 acceptance.",
-      "Address review findings before Main/Reviewer handoff."
+      "No physical retest until updated PR CI completes and reviewer boundary is respected.",
+      "Phase 1 ONLINE remains open."
     ],
     "evidence_refs": [
       "Ai-orchestrator-riserva#745",
       "commit:c6541c289eebfc736750a2359ab774ea00f32f16",
-      "CI:36846473979,36846474088,36846474065,36846473818,36846474035,36846473869",
-      "Copilot:discussion_r4154183233",
-      "Copilot:discussion_r4154183332"
+      "commit:1de46c10346036f7add4c62cc4a359967249784d"
     ],
-    "next_action": "Add bounded runWithResumeContext timeout -> empty proposal -> valid proposal regression coverage with identity preservation, then re-evaluate PR #745 CI/review.",
-    "kind": "REVIEW_PROGRESS"
+    "next_action": "Wait for CI on PR #745 head 1de46c1; if green, submit REVIEW_REQUIRED to Main/Reviewer without self-promotion.",
+    "kind": "REVIEW_FIX"
   }
 }
