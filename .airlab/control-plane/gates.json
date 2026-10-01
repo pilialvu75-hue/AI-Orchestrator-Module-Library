@@ -1,0 +1,94 @@
+{
+  "schema_version": 1,
+  "allowed_states": [
+    "READY",
+    "CLAIMED",
+    "IMPLEMENTING",
+    "EVIDENCE_READY",
+    "REVIEW_REQUIRED",
+    "VERIFIED",
+    "DONE",
+    "BLOCKED",
+    "PAUSED"
+  ],
+  "worker_terminal_state": "REVIEW_REQUIRED",
+  "gates": [
+    {
+      "id": "G0_CLAIM",
+      "required": true,
+      "pass_when": [
+        "work_item_unique",
+        "scope_declared",
+        "dependencies_checked"
+      ]
+    },
+    {
+      "id": "G1_IMPLEMENTATION",
+      "required": true,
+      "pass_when": [
+        "change_or_analysis_complete",
+        "files_or_decision_identified"
+      ]
+    },
+    {
+      "id": "G2_STATIC",
+      "required": true,
+      "pass_when": [
+        "relevant_static_checks_pass",
+        "no_known_contract_violation"
+      ]
+    },
+    {
+      "id": "G3_CI",
+      "required": true,
+      "pass_when": [
+        "required_ci_checks_pass"
+      ],
+      "note": "CI alone never proves runtime correctness."
+    },
+    {
+      "id": "G4_INTEGRATION",
+      "required": true,
+      "pass_when": [
+        "shared_contracts_preserved",
+        "cross_component_regressions_checked"
+      ]
+    },
+    {
+      "id": "G5_TARGET_RUNTIME",
+      "required": "conditional",
+      "when": "runtime_or_hardware_behavior_changed_or_claimed",
+      "pass_when": [
+        "target_runtime_receipt_recorded",
+        "diagnostics_or_equivalent_evidence_attached"
+      ]
+    },
+    {
+      "id": "G6_REVIEWER",
+      "required": true,
+      "pass_when": [
+        "main_reviewer_reviewed",
+        "scope_drift_checked",
+        "duplicate_work_checked",
+        "evidence_sufficient"
+      ]
+    },
+    {
+      "id": "G7_CANONICAL_SYNC",
+      "required": true,
+      "pass_when": [
+        "workstream_state_updated",
+        "roadmap_updated_if_material",
+        "canonical_state_updated"
+      ]
+    }
+  ],
+  "strong_rules": [
+    "UNKNOWN never becomes PASS by inference.",
+    "A worker lane cannot self-promote to VERIFIED or DONE.",
+    "A platform build may not copy or fork shared engine logic merely to make the platform pass.",
+    "Shared-core changes require affected platform impact review.",
+    "Physical/runtime evidence is mandatory for claims about device acceleration, audio, installation, launch, thermal behavior or local inference.",
+    "A stale or conflicting claim blocks new overlapping implementation until reconciled."
+  ]
+}

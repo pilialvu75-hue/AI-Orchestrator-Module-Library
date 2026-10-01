@@ -1,19 +1,21 @@
 {
-  "schema_version": 2,
+  "schema_version": 3,
   "repository": "pilialvu75-hue/AI-Orchestrator-Module-Library",
-  "updated_at": "2026-09-22",
+  "updated_at": "2026-10-01",
   "lifecycle_status": "ACTIVE",
-  "current_phase": "L2",
+  "current_phase": "L14",
   "completed": [
     "L1",
     "L13"
   ],
   "next_actions": [
+    "L14",
     "L2",
     "L3",
     "L5",
     "L8",
-    "L12"
+    "L12",
+    "L15"
   ],
   "current_main_before_roadmap_update": "02482cc734385654a26947ab77435ba22ab10581",
   "security_boundary": {
@@ -43,5 +45,15 @@
     "status": "PLANNED",
     "source_manifest": ".airlab/first-party-sources.yaml",
     "execution_policy": "read_only_static_analysis_then_library_intake"
+  },
+  "canonical_control_plane": {
+    "status": "ACTIVE_FOUNDATION",
+    "authority": ".airlab/control-plane/canonical-state.json",
+    "gates": ".airlab/control-plane/gates.json",
+    "workstreams": ".airlab/control-plane/workstreams/",
+    "reviewer_lane": "main-reviewer",
+    "worker_promotion_ceiling": "REVIEW_REQUIRED",
+    "validation": "tools/validate_control_plane.py",
+    "roadmap_sync_rule": "Material accepted state/scope/priority changes update roadmap and lane state in the same PR."
   }
 }
