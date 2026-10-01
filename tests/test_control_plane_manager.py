@@ -473,6 +473,51 @@ class ControlPlaneManagerTests(unittest.TestCase):
         )
         lane = json.loads(path.read_text(encoding="utf-8"))
         self.assertEqual(lane["gates"]["G7_CANONICAL_SYNC"], "PENDING_ROADMAP_SYNC")
+        self.assertEqual(lane["status"], "BLOCKED")
+        self.assertEqual(lane["block_reason"]["code"], "CANONICAL_SYNC_REQUIRED")
+        with self.assertRaisesRegex(ValueError, "must be READY"):
+            manager.claim(
+                "cantiere",
+                "must-not-start",
+                "owner/repo",
+                "blocked by roadmap sync",
+                root=self.root,
+                now=now + timedelta(hours=3),
+            )
+
+    def test_canonical_sync_complete_unblocks_material_review(self):
+        claim_id, now = self._submit_ready_review("issue-roadmap-complete")
+        path = self.root / ".airlab/control-plane/workstreams/cantiere.json"
+        lane = json.loads(path.read_text(encoding="utf-8"))
+        lane["review_packet"]["roadmap_impact"] = {
+            "material": True,
+            "refs": [".airlab/roadmap.yaml#L1"],
+        }
+        path.write_text(json.dumps(lane, indent=2) + "\n", encoding="utf-8")
+        manager.review_accept(
+            "cantiere",
+            summary="Implementation accepted; roadmap sync required.",
+            next_action="Sync roadmap.",
+            root=self.root,
+            now=now + timedelta(hours=2),
+        )
+        with self.assertRaisesRegex(ValueError, "missing required roadmap refs"):
+            manager.canonical_sync_complete(
+                "cantiere",
+                refs=["wrong-ref"],
+                root=self.root,
+                now=now + timedelta(hours=3),
+            )
+        manager.canonical_sync_complete(
+            "cantiere",
+            refs=[".airlab/roadmap.yaml#L1"],
+            root=self.root,
+            now=now + timedelta(hours=3),
+        )
+        lane = json.loads(path.read_text(encoding="utf-8"))
+        self.assertEqual(lane["status"], "READY")
+        self.assertEqual(lane["gates"]["G7_CANONICAL_SYNC"], "PASS")
+        self.assertIsNone(lane["block_reason"])
 
     def test_review_rework_keeps_claim_and_returns_implementing(self):
         claim_id, now = self._submit_ready_review("issue-rework")
