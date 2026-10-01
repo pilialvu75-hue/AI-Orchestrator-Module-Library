@@ -7,7 +7,7 @@
     "policy": "This private repository is the single coordination authority. Chats and agents are workers, not independent sources of truth."
   },
   "updated_at": "2026-10-01",
-  "state_revision": 1,
+  "state_revision": 2,
   "lifecycle_status": "BOOTSTRAP_ACTIVE",
   "roadmap_authority": {
     "library": ".airlab/roadmap.yaml",
@@ -16,17 +16,17 @@
   },
   "shared_engine": {
     "primary_repository": "pilialvu75-hue/Ai-orchestrator-riserva",
-    "principle": "one_shared_engine_many_platform_adapters",
+    "principle": "one_orchestrator_shared_contracts_target_optimized_runtimes",
     "protected_shared_domains": [
-      "inference",
-      "model_routing",
+      "inference_contract",
+      "model_routing_contract",
       "memory",
       "voice_core",
       "diagnostics_contract",
       "cantiere_lifecycle",
       "library_contracts"
     ],
-    "platform_rule": "Platform lanes adapt IO, packaging, hardware integration and UI shell. They must not fork shared engine behavior without main-reviewer approval."
+    "platform_rule": "Platform lanes share orchestration/contracts but may and should optimize inference backends, LLMs, quantization and runtime settings for their actual hardware/software target. They must preserve shared inference semantics and evidence gates."
   },
   "promotion_policy": {
     "worker_max_state": "REVIEW_REQUIRED",
@@ -57,5 +57,6 @@
     ".airlab/control-plane/workstreams/platform-raspberry-pi.json",
     ".airlab/control-plane/workstreams/library-researcher.json",
     ".airlab/control-plane/workstreams/airlab.json"
-  ]
+  ],
+  "inference_policy": ".airlab/control-plane/inference-policy.json"
 }
