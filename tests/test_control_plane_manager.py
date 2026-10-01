@@ -107,6 +107,40 @@ class ControlPlaneManagerTests(unittest.TestCase):
             self.assertEqual(lane["gates"][gate], "PENDING")
         self.assertEqual(lane["gates"]["G5_TARGET_RUNTIME"], "NOT_APPLICABLE_UNTIL_RUNTIME_CHANGE")
 
+    def test_release_resets_claim_scoped_state(self):
+        now = datetime(2026, 10, 1, 8, 0, tzinfo=timezone.utc)
+        manager.claim(
+            "cantiere",
+            "release-reset",
+            "owner/repo",
+            "bounded fix",
+            root=self.root,
+            now=now,
+        )
+        path = self.root / ".airlab/control-plane/workstreams/cantiere.json"
+        lane = json.loads(path.read_text(encoding="utf-8"))
+        lane["evidence"] = [{"type": "ci", "ref": "temporary", "result": "PASS"}]
+        lane["review_packet"] = {"schema_version": 1}
+        lane["reviewer"]["state"] = "APPROVED"
+        for gate in ("G1_IMPLEMENTATION","G2_STATIC","G3_CI","G4_INTEGRATION","G6_REVIEWER","G7_CANONICAL_SYNC"):
+            lane["gates"][gate] = "PASS"
+        path.write_text(json.dumps(lane, indent=2) + "\n", encoding="utf-8")
+
+        manager.release(
+            "cantiere",
+            reason="abandon bounded work",
+            root=self.root,
+            now=now + timedelta(minutes=30),
+        )
+        lane = json.loads(path.read_text(encoding="utf-8"))
+        self.assertEqual(lane["status"], "READY")
+        self.assertIsNone(lane["active_claim"])
+        self.assertEqual(lane["reviewer"]["state"], "PENDING")
+        self.assertEqual(lane["evidence"], [])
+        self.assertNotIn("review_packet", lane)
+        for gate in ("G0_CLAIM","G1_IMPLEMENTATION","G2_STATIC","G3_CI","G4_INTEGRATION","G6_REVIEWER","G7_CANONICAL_SYNC"):
+            self.assertEqual(lane["gates"][gate], "PENDING")
+
     def test_heartbeat_extends_lease(self):
         now = datetime(2026, 10, 1, 8, 0, tzinfo=timezone.utc)
         manager.claim(
@@ -143,6 +177,25 @@ class ControlPlaneManagerTests(unittest.TestCase):
                 now=now + timedelta(hours=2),
             )
 
+    def test_expired_release_cannot_bypass_reconciliation(self):
+        now = datetime(2026, 10, 1, 8, 0, tzinfo=timezone.utc)
+        manager.claim(
+            "cantiere",
+            "expired-release",
+            "owner/repo",
+            "bounded fix",
+            lease_hours=1,
+            root=self.root,
+            now=now,
+        )
+        with self.assertRaisesRegex(ValueError, "release cannot bypass an expired claim"):
+            manager.release(
+                "cantiere",
+                reason="try to escape expiry",
+                root=self.root,
+                now=now + timedelta(hours=2),
+            )
+
     def test_expired_claim_blocks_for_reviewer(self):
         now = datetime(2026, 10, 1, 8, 0, tzinfo=timezone.utc)
         manager.claim(
@@ -162,6 +215,41 @@ class ControlPlaneManagerTests(unittest.TestCase):
         self.assertIsNone(lane["active_claim"])
         self.assertEqual(lane["block_reason"]["code"], "CLAIM_LEASE_EXPIRED")
         self.assertTrue(lane["block_reason"]["review_required"])
+
+    def test_submit_review_rejects_expired_claim(self):
+        now = datetime(2026, 10, 1, 8, 0, tzinfo=timezone.utc)
+        claim_id = manager.claim(
+            "cantiere",
+            "expired-review",
+            "owner/repo",
+            "bounded fix",
+            lease_hours=1,
+            root=self.root,
+            now=now,
+        )
+        packet = {
+            "schema_version": 1,
+            "submitted_at": "2026-10-01T10:00:00Z",
+            "lane_id": "cantiere",
+            "claim_id": claim_id,
+            "work_item": "expired-review",
+            "repository": "owner/repo",
+            "summary": "Late handoff.",
+            "changes": ["One change."],
+            "evidence": [{"type": "test", "ref": "unit-test", "result": "PASS"}],
+            "known_risks": [],
+            "reviewer_checks": ["Verify expiry."],
+            "roadmap_impact": {"material": False, "refs": []},
+        }
+        packet_path = self.root / "expired-review.json"
+        packet_path.write_text(json.dumps(packet), encoding="utf-8")
+        with self.assertRaisesRegex(ValueError, "claim lease expired"):
+            manager.submit_review(
+                "cantiere",
+                packet_path,
+                root=self.root,
+                now=now + timedelta(hours=2),
+            )
 
     def test_submit_review_requires_matching_claim(self):
         now = datetime(2026, 10, 1, 8, 0, tzinfo=timezone.utc)
@@ -293,6 +381,25 @@ class ControlPlaneManagerTests(unittest.TestCase):
         packet_path.write_text(json.dumps(packet), encoding="utf-8")
         manager.submit_review("cantiere", packet_path, root=self.root, now=now + timedelta(hours=1))
         return claim_id, now
+
+    def test_expired_review_wait_preserves_valid_handoff(self):
+        claim_id, now = self._submit_ready_review("issue-review-wait")
+        lane_path = self.root / ".airlab/control-plane/workstreams/cantiere.json"
+        lane = json.loads(lane_path.read_text(encoding="utf-8"))
+        lane["active_claim"]["lease_until"] = "2026-10-01T09:30:00Z"
+        lane_path.write_text(json.dumps(lane, indent=2) + "\n", encoding="utf-8")
+
+        manager.reconcile(root=self.root, now=now + timedelta(hours=2))
+        lane = json.loads(lane_path.read_text(encoding="utf-8"))
+        self.assertEqual(lane["status"], "REVIEW_REQUIRED")
+        self.assertEqual(lane["active_claim"]["claim_id"], claim_id)
+        self.assertTrue(any(
+            event.get("type") == "REVIEW_WAIT_OVERDUE"
+            and event.get("claim_id") == claim_id
+            for event in lane["reconciliation_events"]
+        ))
+        inbox = manager.review_inbox(root=self.root)
+        self.assertEqual([item["lane_id"] for item in inbox], ["cantiere"])
 
     def test_review_inbox_reads_raw_lane_even_if_projection_is_stale(self):
         claim_id, now = self._submit_ready_review("issue-inbox")
