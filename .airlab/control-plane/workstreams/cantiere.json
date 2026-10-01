@@ -1,0 +1,33 @@
+{
+  "schema_version": 1,
+  "id": "cantiere",
+  "title": "Cantiere",
+  "role": "worker",
+  "status": "READY",
+  "activation": "active",
+  "scope": "Exclusive Cantiere/App Factory execution, durability, build/review/validation/apply and first-real-app reliability.",
+  "shared_engine_policy": "shared_or_control_plane",
+  "state_version": 1,
+  "updated_at": "2026-10-01",
+  "active_claim": null,
+  "dependencies": [],
+  "roadmap_refs": [],
+  "evidence": [],
+  "gates": {
+    "G0_CLAIM": "PENDING",
+    "G1_IMPLEMENTATION": "PENDING",
+    "G2_STATIC": "PENDING",
+    "G3_CI": "PENDING",
+    "G4_INTEGRATION": "PENDING",
+    "G5_TARGET_RUNTIME": "NOT_APPLICABLE_UNTIL_RUNTIME_CHANGE",
+    "G6_REVIEWER": "PENDING",
+    "G7_CANONICAL_SYNC": "PENDING"
+  },
+  "reviewer": {
+    "required": true,
+    "state": "PENDING",
+    "reviewed_by": null,
+    "reviewed_at": null
+  },
+  "next_action": "Claim one bounded work item before implementation."
+}
