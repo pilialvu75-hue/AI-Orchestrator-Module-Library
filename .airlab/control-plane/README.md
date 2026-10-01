@@ -114,3 +114,24 @@ python tools/control_plane_manager.py submit-review --lane voice-live --packet /
 ```
 
 The claim remains active while Main/Reviewer inspects the packet. Main/Reviewer then promotes, requests rework or explicitly releases/reconciles the claim.
+
+
+## Full chat rollover and deletion
+
+A chat is an execution surface, not project storage.
+
+When a chat becomes full:
+1. keep the same canonical lane id;
+2. generate a fresh relay with `python tools/chat_lane_bootstrap.py --lane <lane-id>`;
+3. open a new chat and paste/use that current relay;
+4. the new chat reads canonical state, roadmap, workstream, claims, PR/CI and Diagnostics before continuing;
+5. do not reconstruct state from the old chat unless a specific unmigrated fact is discovered.
+
+The old chat may be deleted only after the archive gate in `canonical-state.json#chat_archive_policy` passes:
+- unique actionable work migrated;
+- unresolved work linked to roadmap/workstream;
+- reusable evidence/decisions preserved;
+- a replacement lane/bootstrap exists when work is ongoing.
+
+The private inventory of consolidated historical chats lives at
+`.airlab/control-plane/historical-chat-consolidation.json`.
