@@ -3,7 +3,7 @@
   "repository": "pilialvu75-hue/AI-Orchestrator-Module-Library",
   "updated_at": "2026-10-01",
   "lifecycle_status": "ACTIVE",
-  "current_phase": "L14",
+  "current_phase": "L21",
   "completed": [
     "L1",
     "L13",
@@ -13,6 +13,7 @@
     "L20"
   ],
   "next_actions": [
+    "L21",
     "L19",
     "L14",
     "L16",
@@ -108,7 +109,14 @@
       "mode": "event_driven_incremental",
       "user_full_chat_signal_required": false,
       "final_review_checkpoint": "AUTOMATIC",
-      "validation": "CI_PASS_REQUIRED_AND_RESUME_CHECKPOINT_ENFORCED"
+      "validation": "CI_PASS_REQUIRED_AND_RESUME_CHECKPOINT_ENFORCED",
+      "watchdog": {
+        "status": "ACTIVE_ROLLOUT",
+        "warning_after_minutes": 120,
+        "action": "SURFACE_TO_MAIN_REVIEWER",
+        "auto_block": false,
+        "fabricate_content": false
+      }
     }
   }
 }
