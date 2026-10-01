@@ -49,3 +49,17 @@ Reconstructed from historical project chats and current repository state.
 - Mining is static/read-only by default; legacy source is not executed merely to decide whether it is reusable.
 - Extracted code/patterns remain untrusted candidates and still enter Library intake/certification before reuse.
 - Provenance back to the originating repository/commit is mandatory.
+
+
+## Canonical multi-chat control plane
+
+Decision date: 2026-10-01
+
+- The private Module Library hosts the single coordination authority for the AI Orchestrator ecosystem under `.airlab/control-plane/`.
+- Roadmaps remain continuously updated planning documents; workstream files represent current lane execution state; `canonical-state.json` is the global authority/projection.
+- The Main/Reviewer lane owns cross-lane consolidation and is the only lane allowed to promote worker output to `VERIFIED` or `DONE`.
+- Specialized worker chats may independently implement and collect evidence, but self-promotion stops at `REVIEW_REQUIRED`.
+- Every bounded task must be claimed before implementation; overlapping active claims are invalid.
+- CI green is only one gate. Runtime/hardware claims require target-runtime evidence and Diagnostics or equivalent receipts.
+- Platform lanes share one engine. Windows, legacy Windows, Linux, macOS, iOS, Android, Web and Raspberry Pi adapt platform IO/packaging/hardware/UI boundaries; they do not fork inference, routing, memory, voice-core, Diagnostics or Cantiere lifecycle semantics without Main/Reviewer approval.
+- A result is not DONE while roadmap or canonical state is stale.
