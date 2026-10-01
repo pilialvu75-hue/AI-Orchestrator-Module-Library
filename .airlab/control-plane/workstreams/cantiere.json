@@ -7,7 +7,7 @@
   "activation": "active",
   "scope": "Exclusive Cantiere/App Factory execution, durability, build/review/validation/apply and first-real-app reliability.",
   "shared_engine_policy": "shared_or_control_plane",
-  "state_version": 6,
+  "state_version": 7,
   "updated_at": "2026-10-01",
   "active_claim": {
     "claim_id": "cantiere-manga-online-failure-repro-v1-20261001",
@@ -17,7 +17,7 @@
     "scope": "Bounded Phase 1 ONLINE generated-app reproduction on current Android release.",
     "branch": "cantiere/manga-online-failure-repro-v1-20261001",
     "started_at": "2026-10-01T09:34:00Z",
-    "heartbeat_at": "2026-10-01T10:02:00Z",
+    "heartbeat_at": "2026-10-01T10:07:00Z",
     "lease_until": "2026-10-01T21:38:00Z",
     "lease_hours": 12
   },
@@ -29,8 +29,8 @@
   "gates": {
     "G0_CLAIM": "PASS",
     "G1_IMPLEMENTATION": "PASS",
-    "G2_STATIC": "PENDING",
-    "G3_CI": "PENDING",
+    "G2_STATIC": "REVIEW_FINDINGS",
+    "G3_CI": "PASS",
     "G4_INTEGRATION": "PENDING",
     "G5_TARGET_RUNTIME": "NOT_APPLICABLE_UNTIL_RUNTIME_CHANGE",
     "G6_REVIEWER": "PENDING",
@@ -42,7 +42,7 @@
     "reviewed_by": null,
     "reviewed_at": null
   },
-  "next_action": "Wait for PR #745 CI, then hand the result to Main/Reviewer; after approved merge/release, repeat the physical Manga Kids task.",
+  "next_action": "Add bounded runWithResumeContext timeout -> empty proposal -> valid proposal regression coverage with identity preservation, then re-evaluate PR #745 CI/review.",
   "historical_backlog": [
     "Stay in Phase 1 ONLINE until a real generated Android app is physically accepted.",
     "Reproduce the recent manga-drawing app failure from current main with Diagnostics; do not restart generic audits.",
@@ -114,25 +114,46 @@
       ],
       "next_action": "Wait for PR #745 CI, then hand the result to Main/Reviewer; after approved merge/release, repeat the physical Manga Kids task.",
       "kind": "IMPLEMENTATION"
+    },
+    {
+      "seq": 4,
+      "at": "2026-10-01T10:07:00Z",
+      "claim_id": "cantiere-manga-online-failure-repro-v1-20261001",
+      "work_item": "phase1-online-generated-app-repro-v1",
+      "summary": "PR #745 CI completed successfully across Android first-app APK/release, Web, Linux, macOS and Windows. Copilot review found two concrete gaps. The bounded telemetry gap was fixed on the PR branch: malformed recovery now records attempt 3 when preceded by runtime retry. Resume-path regression coverage remains required before reviewer handoff.",
+      "decisions": [
+        "CI green is evidence only, not Phase 1 acceptance.",
+        "Address review findings before Main/Reviewer handoff."
+      ],
+      "evidence_refs": [
+        "Ai-orchestrator-riserva#745",
+        "commit:c6541c289eebfc736750a2359ab774ea00f32f16",
+        "CI:36846473979,36846474088,36846474065,36846473818,36846474035,36846473869",
+        "Copilot:discussion_r4154183233",
+        "Copilot:discussion_r4154183332"
+      ],
+      "next_action": "Add bounded runWithResumeContext timeout -> empty proposal -> valid proposal regression coverage with identity preservation, then re-evaluate PR #745 CI/review.",
+      "kind": "REVIEW_PROGRESS"
     }
   ],
   "last_checkpoint": {
-    "seq": 3,
-    "at": "2026-10-01T10:02:00Z",
+    "seq": 4,
+    "at": "2026-10-01T10:07:00Z",
     "claim_id": "cantiere-manga-online-failure-repro-v1-20261001",
     "work_item": "phase1-online-generated-app-repro-v1",
-    "summary": "Bounded root cause isolated and PR #745 opened. #739 recovery was bypassed whenever the same Engineer task had already used its runtime retry (`didRetry`). PR #745 permits the existing structural repair after that runtime retry, keeping the path bounded to max three Engineer calls, with regression coverage for timeout -> empty changes -> recovered file change.",
+    "summary": "PR #745 CI completed successfully across Android first-app APK/release, Web, Linux, macOS and Windows. Copilot review found two concrete gaps. The bounded telemetry gap was fixed on the PR branch: malformed recovery now records attempt 3 when preceded by runtime retry. Resume-path regression coverage remains required before reviewer handoff.",
     "decisions": [
-      "Keep decoder/reviewer/validation gates strict.",
-      "Do not merge or claim success from this worker lane.",
-      "Phase 1 ONLINE remains open pending CI, Main/Reviewer, a release containing the fix, and physical Manga Kids acceptance."
+      "CI green is evidence only, not Phase 1 acceptance.",
+      "Address review findings before Main/Reviewer handoff."
     ],
     "evidence_refs": [
       "Ai-orchestrator-riserva#745",
-      "commit:e61803654a16e7e07588eada718c7ee5b50be329",
-      "physical:Android:+2860:Manga Kids:28%"
+      "commit:c6541c289eebfc736750a2359ab774ea00f32f16",
+      "CI:36846473979,36846474088,36846474065,36846473818,36846474035,36846473869",
+      "Copilot:discussion_r4154183233",
+      "Copilot:discussion_r4154183332"
     ],
-    "next_action": "Wait for PR #745 CI, then hand the result to Main/Reviewer; after approved merge/release, repeat the physical Manga Kids task.",
-    "kind": "IMPLEMENTATION"
+    "next_action": "Add bounded runWithResumeContext timeout -> empty proposal -> valid proposal regression coverage with identity preservation, then re-evaluate PR #745 CI/review.",
+    "kind": "REVIEW_PROGRESS"
   }
 }
