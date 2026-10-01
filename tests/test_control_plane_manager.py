@@ -143,6 +143,8 @@ class ControlPlaneManagerTests(unittest.TestCase):
         self.assertEqual(lane["review_packet"]["claim_id"], claim_id)
         self.assertEqual(lane["evidence"][0]["result"], "PASS")
         self.assertIsNotNone(lane["active_claim"])
+        self.assertEqual(lane["last_checkpoint"]["kind"], "REVIEW_HANDOFF")
+        self.assertEqual(lane["last_checkpoint"]["claim_id"], claim_id)
 
     def test_submit_review_rejects_wrong_claim(self):
         now = datetime(2026, 10, 1, 8, 0, tzinfo=timezone.utc)
