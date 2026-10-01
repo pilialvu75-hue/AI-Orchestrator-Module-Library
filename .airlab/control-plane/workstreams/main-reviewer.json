@@ -3,18 +3,29 @@
   "id": "main-reviewer",
   "title": "Main / Reviewer",
   "role": "reviewer",
-  "status": "READY",
+  "status": "CLAIMED",
   "activation": "active",
   "scope": "Global architecture, cross-lane review, consolidation, roadmap/state authority and hardening, including target inference profile balance and shared-contract compatibility.",
   "shared_engine_policy": "shared_or_control_plane",
-  "state_version": 2,
+  "state_version": 3,
   "updated_at": "2026-10-01",
-  "active_claim": null,
+  "active_claim": {
+    "claim_id": "main-reviewer-chat-lanes-v1-20261001",
+    "owner_lane": "main-reviewer",
+    "work_item": "control-plane-chat-lanes-v1",
+    "repository": "pilialvu75-hue/AI-Orchestrator-Module-Library",
+    "scope": "Create canonical chat bootstrap/handoff contracts so specialized ChatGPT lanes can self-identify, claim bounded work, report evidence and hand off to Main/Reviewer without reconstructing state.",
+    "branch": "control-plane/chat-lane-bootstrap-v1-20261001",
+    "started_at": "2026-10-01T08:28:00Z",
+    "heartbeat_at": "2026-10-01T08:28:00Z",
+    "lease_until": "2026-10-01T20:28:00Z",
+    "lease_hours": 12
+  },
   "dependencies": [],
   "roadmap_refs": [],
   "evidence": [],
   "gates": {
-    "G0_CLAIM": "PENDING",
+    "G0_CLAIM": "PASS",
     "G1_IMPLEMENTATION": "PENDING",
     "G2_STATIC": "PENDING",
     "G3_CI": "PENDING",
@@ -29,7 +40,7 @@
     "reviewed_by": null,
     "reviewed_at": null
   },
-  "next_action": "Review worker evidence, prevent duplicate work, strengthen accepted changes and keep roadmap/canonical state synchronized.",
+  "next_action": "Create and validate canonical chat bootstraps, lane reporting protocol and Main/Reviewer intake workflow.",
   "inference_review_policy": {
     "policy": ".airlab/control-plane/inference-policy.json",
     "check": [
