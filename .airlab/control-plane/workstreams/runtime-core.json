@@ -7,11 +7,14 @@
   "activation": "active",
   "scope": "Shared inference contract, capability/model routing semantics, context, streaming, cancellation, errors, model-profile schema and lifecycle. Target platforms own their benchmark-gated LLM/backend/runtime profiles.",
   "shared_engine_policy": "shared_or_control_plane",
-  "state_version": 2,
+  "state_version": 3,
   "updated_at": "2026-10-01",
   "active_claim": null,
   "dependencies": [],
-  "roadmap_refs": [],
+  "roadmap_refs": [
+    ".airlab/public-repositories/Ai-orchestrator-riserva/roadmap.yaml#CANT-14",
+    ".airlab/public-repositories/Ai-orchestrator-riserva/roadmap.yaml#CANT-INF1"
+  ],
   "evidence": [],
   "gates": {
     "G0_CLAIM": "PENDING",
@@ -29,7 +32,7 @@
     "reviewed_by": null,
     "reviewed_at": null
   },
-  "next_action": "Claim one bounded work item before implementation.",
+  "next_action": "Claim one bounded benchmark/runtime item; prefer closing the physical Vulkan evidence gap before unrelated runtime expansion.",
   "inference_ownership": {
     "owns": [
       "shared inference API",
@@ -45,5 +48,11 @@
       "one universal acceleration configuration"
     ],
     "target_profile_policy": ".airlab/control-plane/inference-policy.json"
-  }
+  },
+  "historical_backlog": [
+    "Issue #286 stays open until a conclusive physical Vulkan 0/10/99 receipt exists.",
+    "PR #743 is open for thermal-gate handling after 45.0C sweep termination without LOCAL_VULKAN_SWEEP_END.",
+    "PR #744 is open to add Spark-X2.5 4B Q4_K_M to the downloadable catalog.",
+    "Complete Benchmark Lab suites for installed models while keeping General Score and Orchestrator Score separate."
+  ]
 }
