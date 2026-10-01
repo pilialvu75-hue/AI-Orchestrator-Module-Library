@@ -35,6 +35,20 @@ def validate(root=ROOT):
         errors.append("continuous checkpoint watchdog warning_after_minutes must be a positive integer")
     if checkpoint_watchdog.get("automatic_content_generation") is not False:
         errors.append("continuous checkpoint watchdog must not fabricate chat content")
+    mutation_policy = canonical.get("mutation_policy") or {}
+    if mutation_policy.get("mode") != "transactional_inbox_compare_and_swap":
+        errors.append("mutation_policy.mode must be transactional_inbox_compare_and_swap")
+    if mutation_policy.get("processor") != "tools/control_plane_inbox.py":
+        errors.append("mutation_policy.processor must reference control_plane_inbox.py")
+    if mutation_policy.get("expected_state_version_required") is not True:
+        errors.append("mutation_policy must require expected_state_version")
+    if mutation_policy.get("api_direct_workstream_writes") != "FORBIDDEN":
+        errors.append("mutation_policy must forbid direct API workstream writes")
+    if mutation_policy.get("invalid_request_behavior") != "QUARANTINE_WITHOUT_LANE_MUTATION":
+        errors.append("mutation_policy invalid requests must quarantine without lane mutation")
+    if mutation_policy.get("projection_failure_isolation") != "PER_LANE_INCIDENT":
+        errors.append("mutation_policy must isolate projection failures per lane")
+
     claim_policy = canonical.get("claim_policy") or {}
     default_lease = claim_policy.get("default_lease_hours")
     max_lease = claim_policy.get("max_lease_hours")
