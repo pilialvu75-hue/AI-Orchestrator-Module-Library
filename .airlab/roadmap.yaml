@@ -1,7 +1,7 @@
 schema_version: 2
 repository: pilialvu75-hue/AI-Orchestrator-Module-Library
 visibility_policy: private_only
-updated_at: 2026-09-22
+updated_at: 2026-10-01
 authority: repository_local
 reconstructed_from:
   - historical_project_chats
@@ -190,3 +190,19 @@ roadmap:
     outcome: >-
       Keep the reconstructed roadmaps of public ecosystem repositories under
       .airlab/public-repositories/ inside this private Library.
+
+  - id: L14
+    title: Canonical multi-chat control plane
+    state: active
+    priority: P0
+    outcome: >-
+      Keep one continuously updated private coordination authority with specialized workstream
+      lanes, bounded claims, strong evidence gates and Main/Reviewer-only promotion to VERIFIED/DONE.
+
+  - id: L15
+    title: Automated claim leases and canonical-state projection
+    state: planned
+    priority: P0
+    outcome: >-
+      Add machine-driven stale-claim expiry/reconciliation and deterministic projection of merged
+      workstream evidence into the global canonical state without allowing worker self-promotion.
