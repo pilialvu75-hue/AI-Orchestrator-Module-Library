@@ -3,29 +3,18 @@
   "id": "main-reviewer",
   "title": "Main / Reviewer",
   "role": "reviewer",
-  "status": "CLAIMED",
+  "status": "READY",
   "activation": "active",
   "scope": "Global architecture, cross-lane review, consolidation, roadmap/state authority and hardening, including target inference profile balance and shared-contract compatibility.",
   "shared_engine_policy": "shared_or_control_plane",
-  "state_version": 9,
+  "state_version": 10,
   "updated_at": "2026-10-01",
-  "active_claim": {
-    "claim_id": "main-reviewer-checkpoint-watchdog-v1-20261001",
-    "owner_lane": "main-reviewer",
-    "work_item": "checkpoint-watchdog-v1",
-    "repository": "pilialvu75-hue/AI-Orchestrator-Module-Library",
-    "scope": "Add autonomous checkpoint freshness watchdog to surface claimed lanes that have not persisted progress recently, without fabricating chat content or auto-blocking legitimate waits.",
-    "branch": "control-plane/checkpoint-watchdog-v1-20261001",
-    "started_at": "2026-10-01T09:20:00Z",
-    "heartbeat_at": "2026-10-01T09:20:00Z",
-    "lease_until": "2026-10-01T21:20:00Z",
-    "lease_hours": 12
-  },
+  "active_claim": null,
   "dependencies": [],
   "roadmap_refs": [],
   "evidence": [],
   "gates": {
-    "G0_CLAIM": "PASS",
+    "G0_CLAIM": "PENDING",
     "G1_IMPLEMENTATION": "PENDING",
     "G2_STATIC": "PENDING",
     "G3_CI": "PENDING",
@@ -40,7 +29,7 @@
     "reviewed_by": null,
     "reviewed_at": null
   },
-  "next_action": "Implement checkpoint freshness watchdog and canonical projection visibility.",
+  "next_action": "Review worker lanes, checkpoint-watch alerts and canonical backlogs.",
   "inference_review_policy": {
     "policy": ".airlab/control-plane/inference-policy.json",
     "check": [
@@ -114,6 +103,27 @@
         }
       ],
       "summary": "Continuous checkpoints now persist safe resume state throughout work and final review handoff."
+    },
+    {
+      "claim_id": "main-reviewer-checkpoint-watchdog-v1-20261001",
+      "work_item": "checkpoint-watchdog-v1",
+      "completed_at": "2026-10-01T09:18:00Z",
+      "result": "MERGED_VERIFIED",
+      "pull_request": 86,
+      "merge_commit": "2788701c7a9f08761de3064fd03ddd25338b3f04",
+      "evidence": [
+        {
+          "type": "ci",
+          "ref": "Validate Module Library run #225",
+          "result": "PASS"
+        },
+        {
+          "type": "pull_request",
+          "ref": "AI-Orchestrator-Module-Library#86",
+          "result": "PASS"
+        }
+      ],
+      "summary": "Added autonomous checkpoint freshness watchdog to canonical projection."
     }
   ],
   "checkpoints": [
@@ -134,24 +144,42 @@
       ],
       "next_action": "Use continuous checkpoints automatically in every claimed lane; user intervention is not required for normal chat rollover.",
       "kind": "COMPLETION"
+    },
+    {
+      "seq": 2,
+      "at": "2026-10-01T09:18:00Z",
+      "claim_id": "main-reviewer-checkpoint-watchdog-v1-20261001",
+      "work_item": "checkpoint-watchdog-v1",
+      "summary": "Checkpoint freshness watchdog implemented, tested and merged via PR #86.",
+      "decisions": [
+        "Warn after 120 minutes without a current-claim checkpoint.",
+        "Surface to Main/Reviewer instead of fabricating content.",
+        "Do not auto-block before normal claim lease expiry."
+      ],
+      "evidence_refs": [
+        "AI-Orchestrator-Module-Library#86",
+        "Validate Module Library run #225"
+      ],
+      "next_action": "Use projection.checkpoint_watch to detect lanes that may be working without recently persisted resume state.",
+      "kind": "COMPLETION"
     }
   ],
   "last_checkpoint": {
-    "seq": 1,
-    "at": "2026-10-01T09:10:00Z",
-    "claim_id": "main-reviewer-continuous-checkpoint-v1-20261001",
-    "work_item": "continuous-chat-checkpoint-v1",
-    "summary": "Continuous autonomous chat checkpointing implemented, validated and merged via PR #85.",
+    "seq": 2,
+    "at": "2026-10-01T09:18:00Z",
+    "claim_id": "main-reviewer-checkpoint-watchdog-v1-20261001",
+    "work_item": "checkpoint-watchdog-v1",
+    "summary": "Checkpoint freshness watchdog implemented, tested and merged via PR #86.",
     "decisions": [
-      "Do not depend on detecting native chat context exhaustion.",
-      "Persist material progress event-by-event during work.",
-      "Replacement chats resume from canonical state plus last_checkpoint."
+      "Warn after 120 minutes without a current-claim checkpoint.",
+      "Surface to Main/Reviewer instead of fabricating content.",
+      "Do not auto-block before normal claim lease expiry."
     ],
     "evidence_refs": [
-      "AI-Orchestrator-Module-Library#85",
-      "Validate Module Library run 36840784171"
+      "AI-Orchestrator-Module-Library#86",
+      "Validate Module Library run #225"
     ],
-    "next_action": "Use continuous checkpoints automatically in every claimed lane; user intervention is not required for normal chat rollover.",
+    "next_action": "Use projection.checkpoint_watch to detect lanes that may be working without recently persisted resume state.",
     "kind": "COMPLETION"
   }
 }
