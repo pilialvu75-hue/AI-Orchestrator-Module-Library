@@ -8,9 +8,11 @@
     "L1",
     "L13",
     "L15",
-    "L17"
+    "L17",
+    "L18"
   ],
   "next_actions": [
+    "L19",
     "L14",
     "L16",
     "L2",
@@ -86,6 +88,18 @@
       "worker_submission": "tools/control_plane_manager.py submit-review",
       "registry_coverage": 15,
       "worker_review_handoff": "ENFORCED"
+    },
+    "historical_chat_archive": {
+      "status": "CONSOLIDATED",
+      "registry": ".airlab/control-plane/historical-chat-consolidation.json",
+      "deletion_rule": "Delete a chat only after its unique actionable value is represented in canonical roadmap/workstream state.",
+      "full_chat_rule": "When a chat fills, start a new chat from the same lane bootstrap; the lane/state persists outside the chat.",
+      "keep_until_replaced": [
+        "Cantiere 2.6",
+        "Issued 3",
+        "Windows Legacy Autonomous",
+        "Library Progress Updates (most recent active thread)"
+      ]
     }
   }
 }
