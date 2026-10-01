@@ -7,7 +7,7 @@
     "policy": "This private repository is the single coordination authority. Chats and agents are workers, not independent sources of truth."
   },
   "updated_at": "2026-10-01",
-  "state_revision": 3,
+  "state_revision": 4,
   "lifecycle_status": "BOOTSTRAP_ACTIVE",
   "roadmap_authority": {
     "library": ".airlab/roadmap.yaml",
@@ -77,12 +77,21 @@
     "no_change_no_commit": true
   },
   "projection": {
-    "source_digest": "4ddee3d0fac78a2d8fd3c1b303baca31f61e19d0125082b158993ef8d30a88f8",
-    "projected_at": "2026-10-01T08:21:07Z",
+    "source_digest": "97601a21b1c59b16c0898c06b3e2181b87e6f425233141bb2dbad57542cbbb3e",
+    "projected_at": "2026-10-01T08:29:38Z",
     "counts": {
-      "READY": 15
+      "CLAIMED": 1,
+      "READY": 14
     },
-    "active_claims": [],
+    "active_claims": [
+      {
+        "lane": "main-reviewer",
+        "claim_id": "main-reviewer-chat-lanes-v1-20261001",
+        "work_item": "control-plane-chat-lanes-v1",
+        "repository": "pilialvu75-hue/AI-Orchestrator-Module-Library",
+        "lease_until": "2026-10-01T20:28:00Z"
+      }
+    ],
     "review_required": [],
     "blocked": [],
     "platform_inference_profiles": [
@@ -186,11 +195,16 @@
       },
       {
         "id": "main-reviewer",
-        "status": "READY",
+        "status": "CLAIMED",
         "activation": "active",
-        "state_version": 2,
+        "state_version": 3,
         "updated_at": "2026-10-01",
-        "active_claim": null,
+        "active_claim": {
+          "claim_id": "main-reviewer-chat-lanes-v1-20261001",
+          "work_item": "control-plane-chat-lanes-v1",
+          "repository": "pilialvu75-hue/AI-Orchestrator-Module-Library",
+          "lease_until": "2026-10-01T20:28:00Z"
+        },
         "reviewer_state": "AUTHORITY",
         "inference_profile_status": null
       },
