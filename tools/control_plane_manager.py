@@ -315,26 +315,7 @@ def release(
     project(root=root, now=now)
 
 
-def submit_review(
-    lane_id: str,
-    packet_path: Path,
-    *,
-    root: Path = ROOT,
-    now: datetime | None = None,
-) -> None:
-    now = now or _now()
-    _, canonical = _canonical(root)
-    lane_path, lane = _lane_by_id(root, canonical, lane_id)
-
-    if lane.get("role") == "reviewer":
-        raise ValueError("reviewer lane does not submit worker review packets")
-    claim_data = lane.get("active_claim")
-    if not claim_data:
-        raise ValueError(f"lane {lane_id} has no active claim")
-    if lane.get("status") not in {"CLAIMED", "IMPLEMENTING", "EVIDENCE_READY"}:
-        raise ValueError(f"lane {lane_id} cannot submit review from state {lane.get('status')}")
-
-    packet = _load(packet_path)
+def _validate_review_packet(lane_id: str, claim_data: dict[str, Any], packet: dict[str, Any]) -> None:
     required = (
         "schema_version", "submitted_at", "lane_id", "claim_id", "work_item",
         "repository", "summary", "changes", "evidence", "known_risks",
@@ -359,6 +340,198 @@ def submit_review(
         raise ValueError("review packet requires at least one evidence item")
     if not packet.get("reviewer_checks"):
         raise ValueError("review packet requires reviewer_checks")
+
+
+def review_inbox(root: Path = ROOT) -> list[dict[str, Any]]:
+    _, canonical = _canonical(root)
+    items: list[dict[str, Any]] = []
+    for _, lane in _lanes(root, canonical):
+        if lane.get("role") == "reviewer" or lane.get("status") != "REVIEW_REQUIRED":
+            continue
+        claim_data = lane.get("active_claim") or {}
+        packet = lane.get("review_packet") or {}
+        packet_valid = True
+        packet_error = None
+        try:
+            _validate_review_packet(str(lane.get("id")), claim_data, packet)
+        except ValueError as error:
+            packet_valid = False
+            packet_error = str(error)
+        items.append({
+            "lane_id": lane.get("id"),
+            "state_version": lane.get("state_version"),
+            "claim_id": claim_data.get("claim_id"),
+            "work_item": claim_data.get("work_item"),
+            "repository": claim_data.get("repository"),
+            "packet_valid": packet_valid,
+            "packet_error": packet_error,
+            "next_action": lane.get("next_action"),
+        })
+    return sorted(items, key=lambda item: str(item.get("lane_id") or ""))
+
+
+def review_accept(
+    lane_id: str,
+    *,
+    summary: str,
+    next_action: str,
+    evidence_refs: list[str] | None = None,
+    root: Path = ROOT,
+    now: datetime | None = None,
+) -> None:
+    now = now or _now()
+    _, canonical = _canonical(root)
+    lane_path, lane = _lane_by_id(root, canonical, lane_id)
+    if lane.get("role") == "reviewer":
+        raise ValueError("reviewer lane cannot review itself")
+    if lane.get("status") != "REVIEW_REQUIRED":
+        raise ValueError(f"lane {lane_id} must be REVIEW_REQUIRED; current={lane.get('status')}")
+    claim_data = lane.get("active_claim")
+    if not claim_data:
+        raise ValueError(f"lane {lane_id} REVIEW_REQUIRED has no active claim")
+    packet = lane.get("review_packet") or {}
+    _validate_review_packet(lane_id, claim_data, packet)
+    if not summary.strip():
+        raise ValueError("review summary is required")
+    if not next_action.strip():
+        raise ValueError("review next_action is required")
+
+    refs = [item for item in (evidence_refs or []) if item.strip()]
+    checkpoints = lane.setdefault("checkpoints", [])
+    seq = int(checkpoints[-1]["seq"]) + 1 if checkpoints else 1
+    checkpoint = {
+        "seq": seq,
+        "at": _iso(now),
+        "claim_id": claim_data.get("claim_id"),
+        "work_item": claim_data.get("work_item"),
+        "summary": summary.strip(),
+        "decisions": ["Main/Reviewer accepted the implementation/review gate."],
+        "evidence_refs": refs,
+        "next_action": next_action.strip(),
+        "kind": "REVIEW_ACCEPTED",
+    }
+    checkpoints.append(checkpoint)
+    lane["checkpoints"] = checkpoints[-50:]
+    lane["last_checkpoint"] = checkpoint
+    lane.setdefault("review_history", []).append({
+        "reviewed_at": _iso(now),
+        "reviewed_by": "main-reviewer",
+        "claim_id": claim_data.get("claim_id"),
+        "work_item": claim_data.get("work_item"),
+        "decision": "APPROVED",
+        "summary": summary.strip(),
+        "evidence_refs": refs,
+    })
+    lane["review_history"] = lane["review_history"][-20:]
+    events = lane.setdefault("reconciliation_events", [])
+    events.append({
+        "type": "CLAIM_RELEASED_AFTER_REVIEW",
+        "claim_id": claim_data.get("claim_id"),
+        "work_item": claim_data.get("work_item"),
+        "reason": "Main/Reviewer accepted the bounded implementation/review gate.",
+        "at": _iso(now),
+    })
+    lane["reconciliation_events"] = events[-20:]
+    lane["active_claim"] = None
+    lane["status"] = "READY"
+    lane["updated_at"] = _date(now)
+    lane["state_version"] = int(lane.get("state_version", 0)) + 1
+    lane.setdefault("reviewer", {}).update({
+        "state": "APPROVED",
+        "reviewed_by": "main-reviewer",
+        "reviewed_at": _iso(now),
+    })
+    lane.setdefault("gates", {})["G6_REVIEWER"] = "PASS"
+    lane["gates"]["G7_CANONICAL_SYNC"] = "PASS"
+    lane["next_action"] = next_action.strip()
+    _write(lane_path, lane)
+    project(root=root, now=now)
+
+
+def review_rework(
+    lane_id: str,
+    *,
+    reason: str,
+    next_action: str,
+    root: Path = ROOT,
+    now: datetime | None = None,
+) -> None:
+    now = now or _now()
+    _, canonical = _canonical(root)
+    lane_path, lane = _lane_by_id(root, canonical, lane_id)
+    if lane.get("role") == "reviewer":
+        raise ValueError("reviewer lane cannot review itself")
+    if lane.get("status") != "REVIEW_REQUIRED":
+        raise ValueError(f"lane {lane_id} must be REVIEW_REQUIRED; current={lane.get('status')}")
+    claim_data = lane.get("active_claim")
+    if not claim_data:
+        raise ValueError(f"lane {lane_id} REVIEW_REQUIRED has no active claim")
+    _validate_review_packet(lane_id, claim_data, lane.get("review_packet") or {})
+    if not reason.strip():
+        raise ValueError("review rework reason is required")
+    if not next_action.strip():
+        raise ValueError("review rework next_action is required")
+
+    checkpoints = lane.setdefault("checkpoints", [])
+    seq = int(checkpoints[-1]["seq"]) + 1 if checkpoints else 1
+    checkpoint = {
+        "seq": seq,
+        "at": _iso(now),
+        "claim_id": claim_data.get("claim_id"),
+        "work_item": claim_data.get("work_item"),
+        "summary": reason.strip(),
+        "decisions": ["Main/Reviewer requested bounded rework."],
+        "evidence_refs": [],
+        "next_action": next_action.strip(),
+        "kind": "REVIEW_REWORK",
+    }
+    checkpoints.append(checkpoint)
+    lane["checkpoints"] = checkpoints[-50:]
+    lane["last_checkpoint"] = checkpoint
+    lane.setdefault("review_history", []).append({
+        "reviewed_at": _iso(now),
+        "reviewed_by": "main-reviewer",
+        "claim_id": claim_data.get("claim_id"),
+        "work_item": claim_data.get("work_item"),
+        "decision": "CHANGES_REQUESTED",
+        "summary": reason.strip(),
+    })
+    lane["review_history"] = lane["review_history"][-20:]
+    lane["status"] = "IMPLEMENTING"
+    lane["updated_at"] = _date(now)
+    lane["state_version"] = int(lane.get("state_version", 0)) + 1
+    lane.setdefault("reviewer", {}).update({
+        "state": "CHANGES_REQUESTED",
+        "reviewed_by": "main-reviewer",
+        "reviewed_at": _iso(now),
+    })
+    lane.setdefault("gates", {})["G6_REVIEWER"] = "PENDING"
+    lane["next_action"] = next_action.strip()
+    _write(lane_path, lane)
+    project(root=root, now=now)
+
+
+def submit_review(
+    lane_id: str,
+    packet_path: Path,
+    *,
+    root: Path = ROOT,
+    now: datetime | None = None,
+) -> None:
+    now = now or _now()
+    _, canonical = _canonical(root)
+    lane_path, lane = _lane_by_id(root, canonical, lane_id)
+
+    if lane.get("role") == "reviewer":
+        raise ValueError("reviewer lane does not submit worker review packets")
+    claim_data = lane.get("active_claim")
+    if not claim_data:
+        raise ValueError(f"lane {lane_id} has no active claim")
+    if lane.get("status") not in {"CLAIMED", "IMPLEMENTING", "EVIDENCE_READY"}:
+        raise ValueError(f"lane {lane_id} cannot submit review from state {lane.get('status')}")
+
+    packet = _load(packet_path)
+    _validate_review_packet(lane_id, claim_data, packet)
 
     final_next_action = "Main/Reviewer must inspect the review_packet, linked evidence and required gates before promotion or rework."
     checkpoints = lane.setdefault("checkpoints", [])
@@ -459,6 +632,19 @@ def _build_parser() -> argparse.ArgumentParser:
     submit_cmd.add_argument("--lane", required=True)
     submit_cmd.add_argument("--packet", required=True, type=Path)
 
+    sub.add_parser("review-inbox")
+
+    accept_cmd = sub.add_parser("review-accept")
+    accept_cmd.add_argument("--lane", required=True)
+    accept_cmd.add_argument("--summary", required=True)
+    accept_cmd.add_argument("--next-action", required=True)
+    accept_cmd.add_argument("--evidence-ref", action="append", default=[])
+
+    rework_cmd = sub.add_parser("review-rework")
+    rework_cmd.add_argument("--lane", required=True)
+    rework_cmd.add_argument("--reason", required=True)
+    rework_cmd.add_argument("--next-action", required=True)
+
     sub.add_parser("reconcile")
     sub.add_parser("project")
     return parser
@@ -484,6 +670,23 @@ def main() -> int:
     elif args.command == "submit-review":
         submit_review(args.lane, args.packet)
         print("review-required")
+    elif args.command == "review-inbox":
+        print(json.dumps(review_inbox(), indent=2, ensure_ascii=False))
+    elif args.command == "review-accept":
+        review_accept(
+            args.lane,
+            summary=args.summary,
+            next_action=args.next_action,
+            evidence_refs=args.evidence_ref,
+        )
+        print("review-accepted")
+    elif args.command == "review-rework":
+        review_rework(
+            args.lane,
+            reason=args.reason,
+            next_action=args.next_action,
+        )
+        print("review-rework")
     elif args.command == "reconcile":
         changed = reconcile()
         print("\n".join(changed) if changed else "no changes")

@@ -175,6 +175,92 @@ class ControlPlaneManagerTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "claim_id mismatch"):
             manager.submit_review("cantiere", packet_path, root=self.root, now=now + timedelta(hours=1))
 
+    def _submit_ready_review(self, work_item="issue-review"):
+        now = datetime(2026, 10, 1, 8, 0, tzinfo=timezone.utc)
+        claim_id = manager.claim(
+            "cantiere",
+            work_item,
+            "owner/repo",
+            "bounded fix",
+            root=self.root,
+            now=now,
+        )
+        packet = {
+            "schema_version": 1,
+            "submitted_at": "2026-10-01T09:00:00Z",
+            "lane_id": "cantiere",
+            "claim_id": claim_id,
+            "work_item": work_item,
+            "repository": "owner/repo",
+            "summary": "Implemented bounded fix.",
+            "changes": ["Changed one bounded behavior."],
+            "evidence": [{"type": "test", "ref": "unit-test", "result": "PASS"}],
+            "known_risks": [],
+            "reviewer_checks": ["Verify no scope drift."],
+            "roadmap_impact": {"material": False, "refs": []},
+        }
+        packet_path = self.root / f"{work_item}.json"
+        packet_path.write_text(json.dumps(packet), encoding="utf-8")
+        manager.submit_review("cantiere", packet_path, root=self.root, now=now + timedelta(hours=1))
+        return claim_id, now
+
+    def test_review_inbox_reads_raw_lane_even_if_projection_is_stale(self):
+        claim_id, now = self._submit_ready_review("issue-inbox")
+        canonical_path = self.root / ".airlab/control-plane/canonical-state.json"
+        canonical = json.loads(canonical_path.read_text(encoding="utf-8"))
+        canonical["projection"]["review_required"] = []
+        for lane in canonical["projection"]["lanes"]:
+            if lane["id"] == "cantiere":
+                lane["status"] = "IMPLEMENTING"
+                lane["state_version"] = 0
+        canonical_path.write_text(json.dumps(canonical, indent=2) + "\n", encoding="utf-8")
+
+        inbox = manager.review_inbox(root=self.root)
+        self.assertEqual(len(inbox), 1)
+        self.assertEqual(inbox[0]["lane_id"], "cantiere")
+        self.assertEqual(inbox[0]["claim_id"], claim_id)
+        self.assertTrue(inbox[0]["packet_valid"])
+
+    def test_review_accept_releases_claim_and_returns_ready(self):
+        claim_id, now = self._submit_ready_review("issue-accept")
+        manager.review_accept(
+            "cantiere",
+            summary="Reviewed and accepted.",
+            next_action="Run physical acceptance.",
+            evidence_refs=["PR #1", "CI #2"],
+            root=self.root,
+            now=now + timedelta(hours=2),
+        )
+        lane = json.loads(
+            (self.root / ".airlab/control-plane/workstreams/cantiere.json").read_text(encoding="utf-8")
+        )
+        self.assertEqual(lane["status"], "READY")
+        self.assertIsNone(lane["active_claim"])
+        self.assertEqual(lane["reviewer"]["state"], "APPROVED")
+        self.assertEqual(lane["gates"]["G6_REVIEWER"], "PASS")
+        self.assertEqual(lane["gates"]["G7_CANONICAL_SYNC"], "PASS")
+        self.assertEqual(lane["last_checkpoint"]["kind"], "REVIEW_ACCEPTED")
+        self.assertEqual(lane["last_checkpoint"]["claim_id"], claim_id)
+        self.assertEqual(lane["next_action"], "Run physical acceptance.")
+
+    def test_review_rework_keeps_claim_and_returns_implementing(self):
+        claim_id, now = self._submit_ready_review("issue-rework")
+        manager.review_rework(
+            "cantiere",
+            reason="Regression coverage incomplete.",
+            next_action="Add the missing regression test.",
+            root=self.root,
+            now=now + timedelta(hours=2),
+        )
+        lane = json.loads(
+            (self.root / ".airlab/control-plane/workstreams/cantiere.json").read_text(encoding="utf-8")
+        )
+        self.assertEqual(lane["status"], "IMPLEMENTING")
+        self.assertEqual(lane["active_claim"]["claim_id"], claim_id)
+        self.assertEqual(lane["reviewer"]["state"], "CHANGES_REQUESTED")
+        self.assertEqual(lane["last_checkpoint"]["kind"], "REVIEW_REWORK")
+        self.assertEqual(lane["next_action"], "Add the missing regression test.")
+
     def test_checkpoint_watch_surfaces_claim_without_recent_checkpoint(self):
         now = datetime(2026, 10, 1, 8, 0, tzinfo=timezone.utc)
         manager.claim(

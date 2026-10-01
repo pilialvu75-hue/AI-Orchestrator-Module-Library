@@ -266,3 +266,12 @@ roadmap:
       Detect claimed lanes that have not persisted a current resume checkpoint recently and surface them
       to Main/Reviewer through canonical projection, without fabricating conversation content or blocking
       legitimate external waits before claim expiry.
+
+  - id: L22
+    title: Reviewer inbox and deterministic decision transitions
+    state: done
+    priority: P0
+    outcome: >-
+      Make Main/Reviewer consume REVIEW_REQUIRED work directly from raw workstream state rather than
+      relying on a potentially stale projection, enforce complete atomic worker handoffs, and provide
+      explicit accept/rework transitions that preserve claim and evidence semantics.

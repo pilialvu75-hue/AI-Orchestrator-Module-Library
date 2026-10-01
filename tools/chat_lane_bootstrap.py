@@ -98,6 +98,9 @@ MAIN / REVIEWER RULES:
 - UNKNOWN remains UNKNOWN; do not infer PASS.
 - Reconcile BLOCKED stale claims explicitly before allowing reassignment.
 - Inspect canonical checkpoint_watch and follow up on claimed lanes that have not persisted progress recently.
+- Read worker workstream files directly for REVIEW_REQUIRED intake. projection.review_required is an index, not reviewer authority; never use it as the sole reviewer queue.
+- If a raw lane and canonical projection disagree, treat the raw lane as the intake source, reconcile the projection, and do not silently skip the review.
+- Use control_plane_manager.py review-inbox / review-accept / review-rework semantics for reviewer transitions.
 - For inference, preserve shared contracts while allowing target-specific LLM/backend/runtime profiles.
 """
     else:
@@ -107,6 +110,8 @@ WORKER RULES:
 - Your maximum self-declared state is REVIEW_REQUIRED.
 - Do not self-promote VERIFIED or DONE.
 - When implementation is ready, attach a review_packet conforming to .airlab/control-plane/schemas/review-packet.schema.json.
+- Never set REVIEW_REQUIRED by editing only the status field. The transition is atomic: valid review_packet + claim-bound REVIEW_HANDOFF checkpoint + REVIEW_REQUIRED.
+- Prefer tools/control_plane_manager.py submit-review semantics; if operating through repository APIs, reproduce that complete atomic state or remain EVIDENCE_READY.
 - Keep the active claim until Main/Reviewer accepts, rejects or explicitly releases/reconciles it.
 - If work requires a shared-contract change owned by another lane, record the dependency instead of silently forking the contract.
 """
