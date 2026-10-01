@@ -3,7 +3,7 @@
   "repository": "pilialvu75-hue/AI-Orchestrator-Module-Library",
   "updated_at": "2026-10-01",
   "lifecycle_status": "ACTIVE",
-  "current_phase": "CP-HARDEN-01",
+  "current_phase": "CP-HARDEN-02",
   "completed": [
     "L1",
     "L13",
@@ -15,7 +15,9 @@
     "L22"
   ],
   "next_actions": [
-    "CP-HARDEN-01",
+    "CP-HARDEN-02",
+    "CP-HARDEN-04",
+    "CP-HARDEN-07",
     "L19",
     "L14",
     "L16",
@@ -139,12 +141,18 @@
       "validation": "CI_PASS_WITH_RAW_INBOX_AND_ACCEPT_REWORK_TESTS"
     },
     "mutation_guard": {
-      "status": "ACTIVE_ROLLOUT",
+      "status": "ACTIVE",
       "mode": "TRANSACTIONAL_INBOX",
       "compare_and_swap": true,
       "invalid_request": "QUARANTINE",
       "direct_api_workstream_write": "FORBIDDEN",
-      "projection_incidents": "ISOLATED_PER_LANE"
+      "projection_incidents": "ISOLATED_PER_LANE",
+      "validation": "PR93_CI_PASS_AND_REAL_INBOX_CHECKPOINT_RELEASE_APPLIED"
+    },
+    "external_wait": {
+      "status": "GAP_REGISTERED",
+      "backlog_id": "CP-HARDEN-07",
+      "current_workaround": "checkpoint_then_release_claim_when_only_owner_physical_input_remains"
     }
   }
 }

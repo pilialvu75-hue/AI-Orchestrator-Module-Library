@@ -71,6 +71,25 @@ class ChatCheckpointTests(unittest.TestCase):
         self.assertEqual(lane["active_claim"]["heartbeat_at"], "2026-10-01T10:00:00Z")
         self.assertEqual(lane["active_claim"]["lease_until"], "2026-10-01T22:00:00Z")
 
+    def test_checkpoint_ignores_unreadable_unrelated_lane(self):
+        canonical_path = self.root / ".airlab/control-plane/canonical-state.json"
+        canonical = json.loads(canonical_path.read_text(encoding="utf-8"))
+        broken_rel = ".airlab/control-plane/workstreams/broken.json"
+        canonical["workstreams"] = [broken_rel] + canonical["workstreams"]
+        canonical_path.write_text(json.dumps(canonical, indent=2) + "\n", encoding="utf-8")
+        broken_path = self.root / broken_rel
+        broken_path.parent.mkdir(parents=True, exist_ok=True)
+        broken_path.write_text("{not-json", encoding="utf-8")
+
+        result = module.checkpoint(
+            "cantiere",
+            "Healthy checkpoint.",
+            "Continue.",
+            root=self.root,
+            now=datetime(2026, 10, 1, 10, 0, tzinfo=timezone.utc),
+        )
+        self.assertEqual(result["summary"], "Healthy checkpoint.")
+
     def test_checkpoint_rejects_expired_claim(self):
         path = self.root / ".airlab/control-plane/workstreams/cantiere.json"
         lane = json.loads(path.read_text(encoding="utf-8"))

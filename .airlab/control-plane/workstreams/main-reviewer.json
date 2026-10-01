@@ -29,7 +29,7 @@
     "reviewed_by": null,
     "reviewed_at": null
   },
-  "next_action": "Migrate mutating automation state writes to the transactional inbox, then proceed to CP-HARDEN-02 resource-level conflict locks.",
+  "next_action": "Proceed to CP-HARDEN-02 resource-level conflict locks, then CP-HARDEN-04 automation registry; design CP-HARDEN-07 before broad dispatcher rollout.",
   "inference_review_policy": {
     "policy": ".airlab/control-plane/inference-policy.json",
     "check": [
@@ -417,8 +417,14 @@
       "title": "Pre-commit canonical state mutation guard",
       "problem": "Direct API/main writes can place an invalid lane state on main before post-push validation catches it; one malformed lane can also make the global reconcile/validation workflow fail and leave the canonical projection stale.",
       "target": "Route worker/reviewer state transitions through an atomic validated mutation path or equivalent protected update gate, and isolate/quarantine invalid-lane projection failures so one lane cannot blind the whole control plane.",
-      "status": "IMPLEMENTING",
-      "implementation": "Transactional compare-and-swap inbox + per-lane projection incident isolation."
+      "status": "DONE",
+      "implementation": "Transactional compare-and-swap inbox + per-lane projection incident isolation.",
+      "evidence": [
+        "AI-Orchestrator-Module-Library#93",
+        "merge:6672c94055143d4bce875938d8c3d95e36086ee3",
+        "inbox receipt main-reviewer-cp-harden-01-checkpoint-20261001T180200Z APPLIED",
+        "inbox receipt main-reviewer-cp-harden-01-release-20261001T180400Z APPLIED"
+      ]
     },
     {
       "id": "CP-HARDEN-02",
@@ -454,6 +460,13 @@
       "title": "Evidence-backed canonical sync receipts",
       "problem": "canonical-sync-complete currently verifies referenced roadmap identifiers but does not cryptographically prove that the referenced roadmap content actually changed to match the accepted work.",
       "target": "Record before/after content digest or commit/ref evidence for every material roadmap synchronization before G7 can become PASS."
+    },
+    {
+      "id": "CP-HARDEN-07",
+      "priority": "P1",
+      "title": "Machine-readable external/owner wait state",
+      "problem": "A lane waiting only for physical-device or owner input can remain IMPLEMENTING with a live claim, producing false checkpoint-stale alerts and unnecessary lease heartbeats.",
+      "target": "Represent external/owner waits explicitly without holding an implementation claim; preserve exact resume evidence and prevent the dispatcher from reacquiring the same blocked work until new input arrives."
     }
   ],
   "reconciliation_events": [

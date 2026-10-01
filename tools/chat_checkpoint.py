@@ -38,12 +38,8 @@ def parse_iso(value: str) -> datetime:
 
 def lane_path(lane_id: str, root: Path = ROOT) -> Path:
     canonical = load(root / ".airlab/control-plane/canonical-state.json")
-    for rel in canonical.get("workstreams", []):
-        path = root / rel
-        lane = load(path)
-        if lane.get("id") == lane_id:
-            return path
-    raise ValueError(f"unknown lane: {lane_id}")
+    path, _ = control_plane_manager._lane_by_id(root, canonical, lane_id)
+    return path
 
 
 def checkpoint(
