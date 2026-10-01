@@ -222,3 +222,20 @@ Additional invariants close failure modes found after the first autonomous pilot
 
 These rules complement, rather than replace, the remaining structural backlog for resource-level locks,
 unclaimed external-change ingress detection, automation registration, and the AIR-10 dispatcher.
+
+
+## Transactional mutation guard
+
+API-driven operational state changes use the transactional inbox documented at
+`.airlab/control-plane/inbox/README.md`.
+
+A request is compare-and-swap guarded by the lane's `expected_state_version`. The workflow
+applies it to an isolated temporary copy, validates the resulting lane/control plane, and
+only then commits the accepted state. Invalid or stale requests are quarantined with a
+receipt and cannot partially mutate a workstream.
+
+Projection/reconciliation also isolates unreadable lane files. A malformed lane is surfaced
+through `canonical-state.json#projection.projection_incidents`; healthy lanes remain visible.
+Full validation still fails closed until the malformed lane is repaired.
+
+Operational automations must not write workstream/canonical JSON directly to `main`.
