@@ -7,11 +7,13 @@
   "activation": "active",
   "scope": "Shared STT/TTS/live interaction engine and cross-platform voice contracts. Platform device bindings remain in platform lanes.",
   "shared_engine_policy": "shared_or_control_plane",
-  "state_version": 1,
+  "state_version": 2,
   "updated_at": "2026-10-01",
   "active_claim": null,
   "dependencies": [],
-  "roadmap_refs": [],
+  "roadmap_refs": [
+    ".airlab/public-repositories/Ai-orchestrator-riserva/roadmap.yaml#CANT-3"
+  ],
   "evidence": [],
   "gates": {
     "G0_CLAIM": "PENDING",
@@ -29,5 +31,13 @@
     "reviewed_by": null,
     "reviewed_at": null
   },
-  "next_action": "Claim one bounded work item before implementation."
+  "next_action": "Claim the smallest shared Voice/Live blocker that can be proved with target audio evidence; prioritize audible playback and model-install integrity.",
+  "historical_backlog": [
+    "Keep Sherpa-ONNX streaming STT as the shared speech-recognition direction.",
+    "Voice downloads must preserve .part/resume and atomically validate/extract coherent STT/TTS assets.",
+    "Kokoro/VITS-class offline TTS must be audibly validated, not accepted from PLAY_BEGIN alone.",
+    "Add/retain playback diagnostics for samples, sample rate, peak/RMS, buffer acceptance and Android/device routing.",
+    "Live remains incomplete; do not reintroduce crash-prone automatic speech before target stability.",
+    "Multilingual target remains IT/FR/EN/ES."
+  ]
 }
