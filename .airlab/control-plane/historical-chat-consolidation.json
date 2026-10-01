@@ -1,0 +1,232 @@
+{
+  "schema_version": 1,
+  "consolidated_at": "2026-10-01",
+  "scope": "Accessible AI Orchestrator project chat history recovered from prior conversations and current project history; unique operational value migrated into canonical roadmaps/workstreams before deletion recommendations.",
+  "deletion_rule": "A chat is DELETE_CANDIDATE only when its unique actionable work, decisions, evidence and unresolved items have a canonical repository home. Conversation text is never the source of truth after migration.",
+  "statuses": {
+    "DELETE_CANDIDATE": "Canonical state/roadmap now preserves all unique actionable value found in this chat.",
+    "KEEP_UNTIL_REPLACED": "Still useful as an active working surface; canonical state preserves its backlog, but keep it until a replacement canonical lane chat is started.",
+    "KEEP_SEPARATE": "Not part of AI Orchestrator consolidation or still has independent user value."
+  },
+  "preserved_backlog": {
+    "cantiere": [
+      "Phase 1 ONLINE remains the active Cantiere phase; do not move to offline/dedicated builder until real generated-app reliability is physically accepted.",
+      "Latest recent Cantiere test path includes the Android manga-drawing app request; failure occurred during progress before leave/re-entry, so reproduce with Diagnostics instead of reopening generic audits.",
+      "Project isolation, stage-aware progress, bounded Architect/Engineer/Reviewer/Validation contracts and real APK artifact requirements are already merged and must not be reimplemented."
+    ],
+    "runtime_benchmark": [
+      "Issue #286 remains open until a conclusive physical Vulkan 0/10/99 sweep on Galaxy S24 FE reaches a valid end receipt.",
+      "PR #743 is open for Vulkan thermal-gate handling after a physical run reached 45.0C without LOCAL_VULKAN_SWEEP_END.",
+      "DeepSeek-R1 reasoning-aware correction PR #740 is merged; heavy 6.7B/7B RAM preflight safety skip was physically observed and must remain safety behavior, not benchmark failure.",
+      "Benchmark Lab keeps separate General Score and Orchestrator Score and should cover installed models plus quality, performance, Vulkan, thermal stress, memory/context, multilingual and stability suites.",
+      "Spark-X2.5 4B Q4_K_M was accepted for the downloadable catalog; PR #744 remains open."
+    ],
+    "windows_legacy": [
+      "Universal Windows 7-11 compatibility PR #671 is merged, but Windows 7/8.1 physical acceptance is not complete.",
+      "PR #639 remains open for Windows 7 compatibility rebuild on current main.",
+      "PR #674 remains open for end-to-end Windows updater manager flow.",
+      "PR #690 remains open for Windows 7 Flutter child-view visibility/black-window diagnostics.",
+      "PR #721 remains open for Flutter 3.44 pointer-interaction crash isolation.",
+      "Diagnostics parity PR #711 is merged; future Windows work must emit comparable remote Diagnostics rather than rely on screenshot-only diagnosis."
+    ],
+    "voice_live": [
+      "Preserve Sherpa-ONNX streaming STT direction and offline Kokoro/VITS-quality TTS goals, with multilingual IT/FR/EN/ES behavior.",
+      "Voice model downloads must support persistent partials/resume, coherent archive extraction and atomic asset validation; never save an archive as encoder.onnx.",
+      "TTS success requires audible playback, not only PLAY_BEGIN/native success; preserve audio sample/rate/RMS/buffer/routing diagnostics.",
+      "Live interaction remains incomplete; avoid auto-speaking responses that can crash, and keep user-controlled voice/live behavior until runtime stability is proven."
+    ],
+    "diagnostics": [
+      "Cross-platform remote runtime parity PR #711 is merged and is the baseline for Android/Windows/Linux/macOS evidence.",
+      "Privacy-filtered Diagnostics -> PostHog PR #543 is merged; raw prompts/text/paths/credentials remain excluded.",
+      "Still require real-event validation of privacy-safe PostHog/remote Diagnostics on target builds and useful dashboards/incident correlation rather than treating merge as operational proof."
+    ],
+    "library_researcher": [
+      "Library first-party candidates for ai.acceleration_backend and ai.local_inference now exist as discovered intake assets and must proceed through validation/security/certification rather than be rediscovered repeatedly.",
+      "Evolution work evo-a18f2c13c19927904ced0bbd for ai.acceleration_backend is claimed with acceptance gates implementation_tests_pass, security_gates_pass, regression_tests_pass and library_contract_pass.",
+      "Keep recurring Researcher needs-driven discovery, but require tangible intake/certification progress and preserve the less-binary experimental/validated/production maturity view."
+    ],
+    "airlab": [
+      "AIrLab remains provider-neutral and subordinate to Cantiere project lifecycle ownership.",
+      "Durable external waits must use persisted WAITING_EXTERNAL/event correlation/watchdog/idempotency rather than keeping chats blocked.",
+      "Memory Fabric adds backends to existing memory; it must not create a second project/execution authority.",
+      "0 EUR/month and free-first/spend-safe remain defaults; paid fallback requires explicit authorization.",
+      "Web/PWA and Cloudflare are adapters, not architectural dependencies."
+    ],
+    "cloud_identity": [
+      "For third-party app distribution, preserve per-user credential isolation/BYOK: no embedded owner API keys, no sharing the owner's quota, and no cross-user chat/memory contamination."
+    ],
+    "macos": [
+      "Modern macOS and High Sierra legacy remain separate targets.",
+      "PRs #418/#420/#424/#441/#442 are merged for modern build/Metal/DMG/release/updater installer.",
+      "PR #443 updater lifecycle is closed unmerged; do not infer completion.",
+      "PR #444 High Sierra low-resource runtime/native shell is merged.",
+      "Remaining target acceptance includes real install/Gatekeeper/signing-notarization where applicable, sandbox-safe GGUF import, mic/voice, Keychain/BYOK and target inference evidence."
+    ],
+    "raspberry_pi": [
+      "Raspberry Pi remains a future distinct ARM target rather than generic Linux.",
+      "Preserve planned autonomous-node role for phone/desktop/home/vehicle support and hardware I/O.",
+      "Preserve GPIO/UART/CAN/I2C/SPI integration scope, but start only after shared runtime/platform contracts are stable enough."
+    ],
+    "branding": [
+      "A cross-platform icon/branding asset set was historically prepared for macOS, Windows, Android, iOS, Linux, Web/PWA and Raspberry Pi/ARM but repository integration was not completed."
+    ]
+  },
+  "chats": [
+    {
+      "title": "Kiusa Cantiere 2.2",
+      "lane": "cantiere",
+      "status": "DELETE_CANDIDATE",
+      "reason": "+2430/+2432 gate-repair history is superseded; invariant and first-real-app gates are canonical."
+    },
+    {
+      "title": "Kiusa Cantiere 2.3",
+      "lane": "cantiere",
+      "status": "DELETE_CANDIDATE",
+      "reason": "0%/resume/language failure history has been superseded by later Cantiere fixes and roadmap."
+    },
+    {
+      "title": "Kiusa Cantiere 2.4",
+      "lane": "cantiere",
+      "status": "DELETE_CANDIDATE",
+      "reason": "online->offline->builder order and +2643-era fixes are now canonical."
+    },
+    {
+      "title": "Kiusa Cantiere 2.5",
+      "lane": "cantiere",
+      "status": "DELETE_CANDIDATE",
+      "reason": "workspace/build failures and fixes #651/#656/#664 are merged and preserved."
+    },
+    {
+      "title": "Cantiere 2.6",
+      "lane": "cantiere",
+      "status": "KEEP_UNTIL_REPLACED",
+      "reason": "Most recent active Cantiere working surface; latest manga-app failure is migrated but keep until canonical Cantiere chat is opened."
+    },
+    {
+      "title": "Cantiere 2.0",
+      "lane": "cantiere",
+      "status": "DELETE_CANDIDATE",
+      "reason": "#532/#541/#544/#545-era parking/restore work is superseded and canonical."
+    },
+    {
+      "title": "Kiusa Risoluzione issue orchestrator",
+      "lane": "main-reviewer",
+      "status": "DELETE_CANDIDATE",
+      "reason": "Legacy issue/PR cleanup completed; remaining live issue #286 is explicitly migrated."
+    },
+    {
+      "title": "45 PR GitHub",
+      "lane": "main-reviewer",
+      "status": "DELETE_CANDIDATE",
+      "reason": "Historical convergence/legacy recovery is represented by CANT-1 and current repository state."
+    },
+    {
+      "title": "Audit riserva work",
+      "lane": "main-reviewer",
+      "status": "DELETE_CANDIDATE",
+      "reason": "21 audit findings and branch-sprawl risks are already in the private Riserva roadmap."
+    },
+    {
+      "title": "CI PR #642 e #643",
+      "lane": "cantiere",
+      "status": "DELETE_CANDIDATE",
+      "reason": "Both PRs are merged; task-contract/reviewer coverage is canonical."
+    },
+    {
+      "title": "Kiusa Issue",
+      "lane": "runtime-core",
+      "status": "DELETE_CANDIDATE",
+      "reason": "Benchmark Lab menu work #666/#668 is merged; remaining benchmark suites are migrated."
+    },
+    {
+      "title": "Kiusa Issued 2",
+      "lane": "runtime-core",
+      "status": "DELETE_CANDIDATE",
+      "reason": "+2852 benchmark safety work is migrated to runtime backlog."
+    },
+    {
+      "title": "Issued 3",
+      "lane": "runtime-core",
+      "status": "KEEP_UNTIL_REPLACED",
+      "reason": "Contains the most recent +2854/Vulkan physical-test handoff; keep until canonical Runtime/Android benchmark chat is opened."
+    },
+    {
+      "title": "PR 625 CI Gate",
+      "lane": "runtime-core",
+      "status": "DELETE_CANDIDATE",
+      "reason": "PR #625 is merged; benchmark evidence and remaining suite expansion are migrated."
+    },
+    {
+      "title": "Confronta Diagnostics Modelli",
+      "lane": "runtime-core",
+      "status": "DELETE_CANDIDATE",
+      "reason": "Phi/Nemotron benchmark conclusions are preserved; PR #625 is merged."
+    },
+    {
+      "title": "Analisi log Phi 3.5",
+      "lane": "runtime-core",
+      "status": "DELETE_CANDIDATE",
+      "reason": "RAM/session-thrashing and real-runtime evidence are preserved in runtime/benchmark backlog."
+    },
+    {
+      "title": "Diagnostics parity PR 711",
+      "lane": "diagnostics",
+      "status": "DELETE_CANDIDATE",
+      "reason": "PR #711 is merged; remaining target validation is migrated."
+    },
+    {
+      "title": "Windows Legacy Autonomous",
+      "lane": "platform-windows-legacy",
+      "status": "KEEP_UNTIL_REPLACED",
+      "reason": "Current legacy-Windows surface contains unresolved physical/runtime work; backlog is migrated but keep until canonical Windows 7/8.1 chat is opened."
+    },
+    {
+      "title": "Checkpoint Windows legacy",
+      "lane": "platform-windows-legacy",
+      "status": "DELETE_CANDIDATE",
+      "reason": "Earlier checkpoint is superseded by current #639/#674/#690/#721 backlog."
+    },
+    {
+      "title": "Library e ricercatore",
+      "lane": "library-researcher",
+      "status": "DELETE_CANDIDATE",
+      "reason": "Foundation/pipeline history is canonical; current candidate maturation is migrated."
+    },
+    {
+      "title": "Library Progress Updates (older threads)",
+      "lane": "library-researcher",
+      "status": "DELETE_CANDIDATE",
+      "reason": "Historical cycle/candidate ideas are consolidated into Library roadmap and current intake/evolution state."
+    },
+    {
+      "title": "Library Progress Updates (most recent active thread)",
+      "lane": "library-researcher",
+      "status": "KEEP_UNTIL_REPLACED",
+      "reason": "Keep as working surface until canonical Library + Researcher chat is opened."
+    },
+    {
+      "title": "Progetta Intelligence Gateway",
+      "lane": "airlab",
+      "status": "DELETE_CANDIDATE",
+      "reason": "Provider-neutral capability routing is already in AIrLab roadmap/control-plane rules."
+    },
+    {
+      "title": "Kiusa Avvio versione web",
+      "lane": "platform-web",
+      "status": "DELETE_CANDIDATE",
+      "reason": "Web/PWA/Cloudflare ideas are preserved in AIrLab/Web roadmap; old W0-W7 relay is superseded."
+    },
+    {
+      "title": "Implementazione staging AIrLab",
+      "lane": "airlab",
+      "status": "DELETE_CANDIDATE",
+      "reason": "Staging/VirtualWorkspace history is superseded by current AIrLab architecture and roadmap."
+    },
+    {
+      "title": "Analisi link YouTube",
+      "lane": "runtime-core",
+      "status": "DELETE_CANDIDATE",
+      "reason": "Spark-X2.5 4B requirement is migrated and PR #744 is the live implementation record."
+    }
+  ]
+}

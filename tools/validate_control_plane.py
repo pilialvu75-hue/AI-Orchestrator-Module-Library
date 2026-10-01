@@ -17,6 +17,7 @@ def validate(root=ROOT):
     gates = load(root / ".airlab/control-plane/gates.json")
     inference = load(root / ".airlab/control-plane/inference-policy.json")
     registry = load(root / ".airlab/control-plane/chat-registry.json")
+    archive = load(root / ".airlab/control-plane/historical-chat-consolidation.json")
     if canonical.get("schema_version") != 1:
         errors.append("canonical-state schema_version must be 1")
     if gates.get("schema_version") != 1:
@@ -40,6 +41,28 @@ def validate(root=ROOT):
         errors.append("canonical state must reference chat-registry.json")
     if registry.get("schema_version") != 1:
         errors.append("chat-registry schema_version must be 1")
+    if canonical.get("chat_archive_policy", {}).get("consolidation_registry") != ".airlab/control-plane/historical-chat-consolidation.json":
+        errors.append("canonical state must reference historical-chat-consolidation.json")
+    if archive.get("schema_version") != 1:
+        errors.append("historical-chat-consolidation schema_version must be 1")
+    archive_statuses = {"DELETE_CANDIDATE","KEEP_UNTIL_REPLACED","KEEP_SEPARATE"}
+    archive_titles = set()
+    for entry in archive.get("chats") or []:
+        title = entry.get("title")
+        lane_id = entry.get("lane")
+        status = entry.get("status")
+        if not title:
+            errors.append("historical chat entry missing title")
+            continue
+        if title in archive_titles:
+            errors.append(f"duplicate historical chat title: {title}")
+        archive_titles.add(title)
+        if status not in archive_statuses:
+            errors.append(f"{title}: invalid historical chat status {status}")
+        if not entry.get("reason"):
+            errors.append(f"{title}: historical chat entry missing reason")
+        if lane_id and lane_id not in {item.get("id") for item in registry.get("lanes") or []}:
+            errors.append(f"{title}: unknown canonical lane {lane_id}")
     registry_ids = set()
     for entry in registry.get("lanes") or []:
         lane_id = entry.get("id")

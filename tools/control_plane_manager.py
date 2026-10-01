@@ -122,6 +122,8 @@ def _projection_payload(lanes: list[tuple[Path, dict[str, Any]]]) -> dict[str, A
             "active_claim": claim_summary,
             "reviewer_state": (lane.get("reviewer") or {}).get("state"),
             "inference_profile_status": (profile or {}).get("status") if profile else None,
+            "historical_backlog_count": len(lane.get("historical_backlog") or []),
+            "next_action": lane.get("next_action"),
         })
 
     return {

@@ -85,6 +85,10 @@ current_state:
     - platform-web
     - platform-raspberry-pi
     rule: Shared inference/routing semantics, target-specific benchmark-gated model/backend/runtime profiles.
+  historical_chat_recovery:
+    status: consolidated_2026_10_01
+    registry: .airlab/control-plane/historical-chat-consolidation.json
+    rule: Old chat text is non-authoritative after its unique work/decisions/evidence are migrated here or into lane state.
   coordination_control_plane:
     status: active_foundation
     authority: pilialvu75-hue/AI-Orchestrator-Module-Library/.airlab/control-plane
@@ -110,6 +114,11 @@ roadmap:
     Select and maintain the strongest practical stable inference profile for each hardware/software target,
     allowing different LLMs, quantizations, backends, acceleration settings and role assignments while
     preserving the shared inference/routing contract and Diagnostics evidence format.
+  current_evidence:
+  - Android Galaxy S24 FE is the active physical benchmark target.
+  - Heavy 6.7B/7B models have demonstrated RAM-preflight safety skip behavior and must not be forced when headroom is insufficient.
+  - DeepSeek-R1 reasoning-aware benchmark correction is merged via PR #740.
+  - Spark-X2.5 4B Q4_K_M is accepted for the downloadable catalog; PR #744 remains open and must not be marked available on main until merged and validated.
 - id: CANT-CP1
   title: Canonical multi-chat control plane and strong gates
   state: active
@@ -139,6 +148,13 @@ roadmap:
   state: active
   priority: P0
   outcome: Reliable Sherpa-ONNX STT, audible Kokoro TTS, full local/live interaction loop.
+  preserved_acceptance:
+  - STT remains Sherpa-ONNX streaming; downloads/install must produce one coherent encoder/decoder/joiner/tokens set.
+  - Voice model downloads preserve partial files/resume and validate/extract archives atomically.
+  - TTS success requires audible playback on the target, not only native creation or PLAY_BEGIN.
+  - Diagnostics must expose samples/rate/peak-RMS/buffer/playback/routing evidence for silent-audio failures.
+  - Voice/Live remains user-controlled until runtime stability is demonstrated; do not reintroduce crash-prone automatic speech.
+  - Multilingual target remains IT/FR/EN/ES with natural offline speech quality.
 - id: CANT-4
   title: Immediate Library gap registration and first-use capture
   state: planned
@@ -194,6 +210,10 @@ roadmap:
   outcome: Produce a real installable app through coherent role contracts, small tasks and review coverage of every
     staged change. Contract, task decomposition and complete Reviewer coverage are merged; physical-device acceptance
     remains tracked by CANT-AUDIT-06.
+  current_checkpoint: >-
+    Remain in Phase 1 ONLINE. The recent Android manga-drawing app test failed during progress before the leave/re-enter
+    recovery step could be exercised; reproduce with Diagnostics from the current main instead of reopening generic audits.
+    Do not advance to offline/dedicated Builder until real generated-app reliability is physically accepted.
   audit_findings:
   - CANT-AUDIT-01
   - CANT-AUDIT-02
@@ -226,6 +246,77 @@ roadmap:
   audit_findings:
   - CANT-AUDIT-18
   - CANT-AUDIT-19
+- id: CANT-14
+  title: Benchmark Lab completion and physical Vulkan acceptance
+  state: active
+  priority: P0
+  outcome: >-
+    Complete the Benchmark Lab across installed models and the quality, performance, Vulkan 0/10/99, thermal stress,
+    memory/context, multilingual and stability suites while keeping General Score distinct from Orchestrator Score.
+  current_blockers:
+  - Issue #286 remains open until a conclusive physical Vulkan 0/10/99 receipt is produced on the Galaxy S24 FE.
+  - PR #743 remains open for the thermal gate after the physical sweep reached 45.0 C without LOCAL_VULKAN_SWEEP_END.
+- id: CANT-15
+  title: Windows modern and Windows 7/8.1 physical parity
+  state: active
+  priority: P0
+  outcome: >-
+    Deliver the same orchestration/contracts with Windows-specific UI/device/update adapters and target-optimized inference,
+    with real Windows 7/8.1 installation, interaction, updater and Diagnostics acceptance.
+  current_evidence:
+  - PR #671 universal Windows 7-11 compatibility layer is merged.
+  - PR #639 remains open for the Windows 7 compatibility rebuild.
+  - PR #674 remains open for end-to-end updater-manager flow.
+  - PR #690 remains open for Windows 7 child-view visibility/black-window diagnosis.
+  - PR #721 remains open for Flutter 3.44 pointer-interaction crash isolation.
+  - PR #711 cross-platform remote Diagnostics parity is merged and should be used for evidence.
+- id: CANT-16
+  title: Per-user cloud credentials and BYOK isolation
+  state: planned
+  priority: P0
+  outcome: >-
+    For third-party installations, every user supplies/owns their credentials; no owner API key or paid quota is embedded
+    or shared, and cloud sessions/memory are isolated so one user's chats or credentials cannot contaminate another user's state.
+- id: CANT-17
+  title: macOS modern and High Sierra legacy remain separate targets
+  state: planned
+  priority: P1
+  outcome: >-
+    Preserve the modern macOS Flutter/Universal/Metal/DMG path without lowering its target while maintaining a
+    separate low-resource High Sierra x86_64 CPU-only compatibility profile and target-specific inference choices.
+  current_evidence:
+  - PR #418 macOS build foundation is merged.
+  - PR #420 local llama.cpp/Metal runtime is merged.
+  - PR #424 installable DMG is merged.
+  - PR #441 coordinated verified DMG release asset is merged.
+  - PR #442 verified DMG updater installer port is merged.
+  - PR #443 updater lifecycle was closed without merge and must not be assumed complete.
+  - PR #444 High Sierra low-resource runtime/native shell is merged.
+  remaining_acceptance:
+  - Real modern/legacy install and launch evidence, Gatekeeper/signing/notarization as applicable.
+  - Sandbox-safe GGUF import/copy and target inference validation.
+  - Microphone, audio/STT/TTS and Keychain/BYOK behavior on real Macs.
+- id: CANT-18
+  title: Raspberry Pi and ARM autonomous node
+  state: planned
+  priority: P2
+  outcome: >-
+    After Android/shared runtime contracts are stable enough, deliver Raspberry Pi as a distinct target profile and
+    optional autonomous AI node for local support, home/vehicle integration and hardware I/O rather than treating it
+    as generic Linux.
+  preserved_scope:
+  - target-optimized local inference, potentially larger models where RAM/hardware permits
+  - headless and UI modes
+  - GPIO, UART, CAN bus, I2C and SPI adapters
+  - voice/audio and Diagnostics parity
+  - delegation to/from phone and desktop while preserving one orchestration contract
+- id: CANT-19
+  title: Cross-platform branding and launcher assets
+  state: planned
+  priority: P2
+  outcome: >-
+    Integrate one coherent original AI Orchestrator visual identity across Android, Windows, macOS, iOS, Linux,
+    Web/PWA and Raspberry Pi/ARM; historical icon assets were prepared but repository integration was not completed.
 audit_review:
   reviewed_at: '2026-09-27'
   audited_repository: pilialvu75-hue/Ai-orchestrator-riserva

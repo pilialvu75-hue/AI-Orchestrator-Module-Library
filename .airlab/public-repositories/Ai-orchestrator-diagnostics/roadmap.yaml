@@ -2,7 +2,7 @@ schema_version: 1
 repository: pilialvu75-hue/Ai-orchestrator-diagnostics
 visibility: public
 roadmap_storage: private_library
-updated_at: 2026-09-22
+updated_at: 2026-10-01
 baseline_commit: 39700dbc006afd6f7b055ff0c3a38f54a07c7d47
 
 lifecycle:
@@ -15,6 +15,14 @@ mission: >-
   payloads, credentials or personal data.
 
 current_state:
+  cross_platform_runtime_parity:
+    status: merged_baseline
+    source: Ai-orchestrator-riserva PR #711
+    rule: Windows/Linux/macOS/Android runtime evidence should be remotely comparable before platform-specific guesswork.
+  privacy_posthog_bridge:
+    status: merged_needs_real_event_acceptance
+    source: Ai-orchestrator-riserva PR #543
+    rule: Only allowlisted technical metadata may leave Diagnostics; raw prompts, response text, paths, ids and credentials remain excluded.
   app_namespace: active
   library_namespace: defined
   researcher_namespace: defined
@@ -56,3 +64,18 @@ roadmap:
     title: Integrate AIrLab provider/resource diagnostics
     state: planned
     priority: P1
+
+  - id: D7
+    title: Cross-platform runtime parity physical acceptance
+    state: active
+    priority: P0
+    outcome: >-
+      Validate that Windows, Windows legacy, Linux, macOS and Android emit equivalent runtime/build/crash evidence through
+      the remote Diagnostics path, including bundle/runtime identity and enough detail to distinguish UI, inference and native crashes.
+  - id: D8
+    title: Privacy-safe PostHog operational acceptance
+    state: active
+    priority: P1
+    outcome: >-
+      Verify real target events from the merged privacy-filtered bridge, then maintain useful health/error/performance views
+      without exporting prompts, conversation text, unrestricted paths, identifiers or credentials.

@@ -2,7 +2,7 @@ schema_version: 1
 repository: pilialvu75-hue/Ai_orchestrator-prova
 visibility: public
 roadmap_storage: private_library
-updated_at: 2026-09-22
+updated_at: 2026-10-01
 baseline_commit: 519cff2f551ae91b2b84c6fae8362a93bd0a6378
 
 lifecycle:
@@ -14,6 +14,9 @@ mission: >-
   remote worker infrastructure for Cantiere while never creating a second project lifecycle.
 
 current_state:
+  historical_chat_recovery:
+    status: consolidated_2026_10_01
+    rule: Old AIrLab/Web chat relays are superseded by this roadmap plus the canonical airlab/platform-web lanes.
   architecture_v1: merged
   deterministic_mock: active_contract_oracle
   intelligence_gateway: implemented_v1
@@ -75,3 +78,12 @@ roadmap:
     title: Naming/repository identity decision
     state: pending_owner_decision
     priority: P2
+
+  - id: AIR-10
+    title: Canonical roadmap executor and lane dispatcher
+    state: planned
+    priority: P0
+    outcome: >-
+      Turn canonical roadmap items into bounded claimed work for authorized workers, persist external waits/events,
+      avoid duplicate execution, and return structured review packets to Main/Reviewer without making physical-device
+      gates or owner policy decisions automatically.

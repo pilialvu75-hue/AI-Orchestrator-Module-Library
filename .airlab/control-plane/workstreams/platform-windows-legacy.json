@@ -7,11 +7,13 @@
   "activation": "active",
   "scope": "Legacy Windows compatibility layer, installer/update and target-specific adapters with target-optimized inference while preserving shared orchestration/contracts.",
   "shared_engine_policy": "adapter_only",
-  "state_version": 2,
+  "state_version": 3,
   "updated_at": "2026-10-01",
   "active_claim": null,
   "dependencies": [],
-  "roadmap_refs": [],
+  "roadmap_refs": [
+    ".airlab/public-repositories/Ai-orchestrator-riserva/roadmap.yaml#CANT-15"
+  ],
   "evidence": [],
   "gates": {
     "G0_CLAIM": "PENDING",
@@ -29,7 +31,7 @@
     "reviewed_by": null,
     "reviewed_at": null
   },
-  "next_action": "Claim one bounded work item before implementation.",
+  "next_action": "Claim one bounded Windows legacy blocker from #639/#674/#690/#721 and require real target evidence before promotion.",
   "inference_profile_policy": "target_owned_benchmark_gated",
   "inference_profile": {
     "status": "NEEDS_TARGET_PROFILE",
@@ -42,5 +44,13 @@
     "accelerator": null,
     "fallback_chain": [],
     "evidence": []
-  }
+  },
+  "historical_backlog": [
+    "PR #671 universal Windows 7-11 compatibility layer is merged.",
+    "PR #639 remains open for the Windows 7 compatibility rebuild on current main.",
+    "PR #674 remains open for end-to-end Windows updater flow.",
+    "PR #690 remains open for child-view visibility/black-window diagnostics.",
+    "PR #721 remains open for Flutter 3.44 pointer-interaction crash isolation.",
+    "Physical Windows 7/8.1 install, launch, interaction, updater and target inference validation are still required."
+  ]
 }

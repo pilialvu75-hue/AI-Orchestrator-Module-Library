@@ -7,11 +7,13 @@
   "activation": "active",
   "scope": "Modern Windows output: target-optimized inference profile, voice/device integration, UI shell, installer/update and diagnostics parity.",
   "shared_engine_policy": "adapter_only",
-  "state_version": 2,
+  "state_version": 3,
   "updated_at": "2026-10-01",
   "active_claim": null,
   "dependencies": [],
-  "roadmap_refs": [],
+  "roadmap_refs": [
+    ".airlab/public-repositories/Ai-orchestrator-riserva/roadmap.yaml#CANT-15"
+  ],
   "evidence": [],
   "gates": {
     "G0_CLAIM": "PENDING",
@@ -29,7 +31,7 @@
     "reviewed_by": null,
     "reviewed_at": null
   },
-  "next_action": "Claim one bounded work item before implementation.",
+  "next_action": "Claim a bounded modern-Windows parity or updater task only if it does not overlap the active legacy-Windows blockers.",
   "inference_profile_policy": "target_owned_benchmark_gated",
   "inference_profile": {
     "status": "NEEDS_TARGET_PROFILE",
@@ -42,5 +44,10 @@
     "accelerator": null,
     "fallback_chain": [],
     "evidence": []
-  }
+  },
+  "historical_backlog": [
+    "Modern Windows and legacy Windows share orchestration/contracts but own separate target inference/runtime constraints where required.",
+    "PR #674 remains open for end-to-end updater-manager flow and should inform both Windows lanes where compatible.",
+    "Use remote Diagnostics parity from PR #711 before platform-specific guesswork."
+  ]
 }

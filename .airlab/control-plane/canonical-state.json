@@ -316,5 +316,17 @@
     "review_packet_schema": ".airlab/control-plane/schemas/review-packet.schema.json",
     "worker_submission": "tools/control_plane_manager.py submit-review",
     "rule": "Worker chats claim bounded work, maintain heartbeat, submit REVIEW_REQUIRED packet; Main/Reviewer alone promotes VERIFIED/DONE."
+  },
+  "chat_archive_policy": {
+    "consolidation_registry": ".airlab/control-plane/historical-chat-consolidation.json",
+    "when_chat_is_full": "Open a replacement chat for the same lane using tools/chat_lane_bootstrap.py; do not create a new project state.",
+    "deletion_gate": [
+      "unique actionable work migrated",
+      "unresolved items linked to roadmap/workstream",
+      "evidence/decisions with future value preserved",
+      "replacement lane/bootstrap available when ongoing work continues"
+    ],
+    "chat_is_never_authority": true,
+    "canonical_state_survives_chat_deletion": true
   }
 }

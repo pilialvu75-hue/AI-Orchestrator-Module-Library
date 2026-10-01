@@ -7,11 +7,13 @@
   "activation": "active",
   "scope": "Capability needs, discovery, intake, certification, reuse/evolution and safe Researcher boundary.",
   "shared_engine_policy": "shared_or_control_plane",
-  "state_version": 1,
+  "state_version": 2,
   "updated_at": "2026-10-01",
   "active_claim": null,
   "dependencies": [],
-  "roadmap_refs": [],
+  "roadmap_refs": [
+    ".airlab/roadmap.yaml#L19"
+  ],
   "evidence": [],
   "gates": {
     "G0_CLAIM": "PENDING",
@@ -29,5 +31,11 @@
     "reviewed_by": null,
     "reviewed_at": null
   },
-  "next_action": "Claim one bounded work item before implementation."
+  "next_action": "Advance the currently claimed acceleration-backend evolution item through its acceptance gates before opening duplicate discovery work.",
+  "historical_backlog": [
+    "ai.acceleration_backend.firstparty.ai-orchestrator-core/0.1.0 exists as discovered intake.",
+    "ai.local_inference.firstparty.ai-orchestrator-core/0.1.0 exists as discovered intake.",
+    "evo-a18f2c13c19927904ced0bbd is claimed for ai.acceleration_backend with implementation/security/regression/Library-contract gates.",
+    "Do not rediscover existing candidates; mature/adapt/test/certify them and expose maturity without binary-only pass/reject."
+  ]
 }
