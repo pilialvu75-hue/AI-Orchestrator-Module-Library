@@ -1,0 +1,63 @@
+{
+  "schema_version": 1,
+  "updated_at": "2026-10-01",
+  "principle": "shared_inference_contract_target_specific_runtime_profiles",
+  "contract_owner": "runtime-core",
+  "profile_owners": "platform lanes",
+  "goal": "Avoid a universal inference stack that is too heavy for constrained targets or unnecessarily weak for capable targets.",
+  "shared_across_targets": [
+    "inference request/response contract",
+    "streaming/cancellation/error semantics",
+    "capability and role routing contract",
+    "model metadata/profile schema",
+    "Diagnostics inference evidence schema",
+    "fallback semantics and user-visible behavior"
+  ],
+  "target_specific_and_expected_to_differ": [
+    "LLM families and model sizes",
+    "quantization",
+    "runtime/backend implementation",
+    "CPU/GPU/NPU/WebGPU/Metal/Vulkan/delegate selection",
+    "GPU/offload layers or equivalent accelerator settings",
+    "context size, batch size and thread settings",
+    "memory and thermal limits",
+    "role-specific model assignment",
+    "fallback chain",
+    "download/install packaging"
+  ],
+  "profile_selection": {
+    "benchmark_gated": true,
+    "physical_or_target_runtime_required": true,
+    "no_universal_default_model": true,
+    "hardware_fingerprint_required": true,
+    "criteria": [
+      "quality_for_role",
+      "first_content_latency",
+      "total_latency",
+      "decode_tokens_per_second",
+      "peak_memory_and_headroom",
+      "stability_and_crash_rate",
+      "thermal_behavior",
+      "accelerator_effectiveness",
+      "energy_or_cpu_pressure_when_measurable",
+      "storage_and_download_cost",
+      "offline_availability",
+      "software_and_driver_compatibility"
+    ],
+    "balance_rule": "Choose the strongest profile that remains stable and practical on the target; reject profiles that are needlessly heavy or materially underuse available hardware.",
+    "fallback_rule": "Every local target profile must define at least one lower-resource fallback when practical.",
+    "role_rule": "Different roles may use different models on the same target; a single universal model is not required."
+  },
+  "promotion_gate": {
+    "worker_ceiling": "REVIEW_REQUIRED",
+    "reviewer": "main-reviewer",
+    "requires": [
+      "target benchmark evidence",
+      "Diagnostics or equivalent runtime receipt",
+      "resource headroom evidence",
+      "quality evidence for intended role",
+      "fallback behavior verified",
+      "shared inference contract preserved"
+    ]
+  }
+}
