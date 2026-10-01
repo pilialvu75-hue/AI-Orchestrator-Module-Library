@@ -175,6 +175,57 @@ class ControlPlaneManagerTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "claim_id mismatch"):
             manager.submit_review("cantiere", packet_path, root=self.root, now=now + timedelta(hours=1))
 
+    def test_checkpoint_watch_surfaces_claim_without_recent_checkpoint(self):
+        now = datetime(2026, 10, 1, 8, 0, tzinfo=timezone.utc)
+        manager.claim(
+            "cantiere",
+            "issue-128",
+            "owner/repo",
+            "bounded fix",
+            root=self.root,
+            now=now,
+        )
+        self.assertTrue(manager.project(root=self.root, now=now + timedelta(hours=2, minutes=1)))
+        canonical = json.loads(
+            (self.root / ".airlab/control-plane/canonical-state.json").read_text(encoding="utf-8")
+        )
+        watch = canonical["projection"]["checkpoint_watch"]
+        self.assertEqual(len(watch), 1)
+        self.assertEqual(watch[0]["lane"], "cantiere")
+        self.assertEqual(watch[0]["reason"], "NO_CHECKPOINT_YET")
+        self.assertEqual(watch[0]["due_since"], "2026-10-01T10:00:00Z")
+
+    def test_recent_checkpoint_clears_checkpoint_watch(self):
+        now = datetime(2026, 10, 1, 8, 0, tzinfo=timezone.utc)
+        claim_id = manager.claim(
+            "cantiere",
+            "issue-129",
+            "owner/repo",
+            "bounded fix",
+            root=self.root,
+            now=now,
+        )
+        lane_path = self.root / ".airlab/control-plane/workstreams/cantiere.json"
+        lane = json.loads(lane_path.read_text(encoding="utf-8"))
+        lane["status"] = "IMPLEMENTING"
+        lane["last_checkpoint"] = {
+            "seq": 1,
+            "at": "2026-10-01T09:30:00Z",
+            "claim_id": claim_id,
+            "work_item": "issue-129",
+            "summary": "progress",
+            "decisions": [],
+            "evidence_refs": [],
+            "next_action": "continue",
+        }
+        lane["checkpoints"] = [lane["last_checkpoint"]]
+        lane_path.write_text(json.dumps(lane, indent=2) + "\n", encoding="utf-8")
+        self.assertTrue(manager.project(root=self.root, now=now + timedelta(hours=2, minutes=1)))
+        canonical = json.loads(
+            (self.root / ".airlab/control-plane/canonical-state.json").read_text(encoding="utf-8")
+        )
+        self.assertEqual(canonical["projection"]["checkpoint_watch"], [])
+
     def test_projection_is_deterministic_when_sources_do_not_change(self):
         now = datetime(2026, 10, 1, 8, 0, tzinfo=timezone.utc)
         self.assertTrue(manager.project(root=self.root, now=now))
