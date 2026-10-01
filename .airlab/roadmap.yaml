@@ -215,3 +215,12 @@ roadmap:
       Maintain benchmark-gated inference profiles per platform and hardware class so constrained
       targets are not overloaded and capable targets are not artificially limited, while preserving
       one shared inference/routing contract and reviewer-controlled promotion.
+
+  - id: L17
+    title: Canonical chat lane bootstrap and structured reviewer handoff
+    state: active
+    priority: P0
+    outcome: >-
+      Bind every operational chat to one canonical lane through a generated relay, enforce one current
+      repository-backed identity/scope per chat, and require worker results to enter Main/Reviewer through
+      a structured claim-bound review packet rather than conversational success claims.
