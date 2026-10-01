@@ -5,9 +5,9 @@
   "role": "worker",
   "status": "READY",
   "activation": "ready",
-  "scope": "iOS packaging, permissions, native adapters, UI integration, inference/voice bindings and diagnostics parity.",
+  "scope": "iOS packaging, permissions, native adapters, UI integration, target-optimized inference and voice bindings and diagnostics parity.",
   "shared_engine_policy": "adapter_only",
-  "state_version": 1,
+  "state_version": 2,
   "updated_at": "2026-10-01",
   "active_claim": null,
   "dependencies": [],
@@ -29,5 +29,18 @@
     "reviewed_by": null,
     "reviewed_at": null
   },
-  "next_action": "Claim one bounded work item before implementation."
+  "next_action": "Claim one bounded work item before implementation.",
+  "inference_profile_policy": "target_owned_benchmark_gated",
+  "inference_profile": {
+    "status": "NEEDS_TARGET_PROFILE",
+    "owner": "platform-ios",
+    "shared_contract_owner": "runtime-core",
+    "policy": ".airlab/control-plane/inference-policy.json",
+    "hardware_fingerprint": null,
+    "selected_models_by_role": {},
+    "backend": null,
+    "accelerator": null,
+    "fallback_chain": [],
+    "evidence": []
+  }
 }
