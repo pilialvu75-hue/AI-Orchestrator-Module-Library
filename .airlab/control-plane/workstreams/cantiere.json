@@ -7,7 +7,7 @@
   "activation": "active",
   "scope": "Exclusive Cantiere/App Factory execution, durability, build/review/validation/apply and first-real-app reliability.",
   "shared_engine_policy": "shared_or_control_plane",
-  "state_version": 5,
+  "state_version": 6,
   "updated_at": "2026-10-01",
   "active_claim": {
     "claim_id": "cantiere-manga-online-failure-repro-v1-20261001",
@@ -17,7 +17,7 @@
     "scope": "Bounded Phase 1 ONLINE generated-app reproduction on current Android release.",
     "branch": "cantiere/manga-online-failure-repro-v1-20261001",
     "started_at": "2026-10-01T09:34:00Z",
-    "heartbeat_at": "2026-10-01T09:57:00Z",
+    "heartbeat_at": "2026-10-01T10:02:00Z",
     "lease_until": "2026-10-01T21:38:00Z",
     "lease_hours": 12
   },
@@ -28,7 +28,7 @@
   "evidence": [],
   "gates": {
     "G0_CLAIM": "PASS",
-    "G1_IMPLEMENTATION": "PENDING",
+    "G1_IMPLEMENTATION": "PASS",
     "G2_STATIC": "PENDING",
     "G3_CI": "PENDING",
     "G4_INTEGRATION": "PENDING",
@@ -42,7 +42,7 @@
     "reviewed_by": null,
     "reviewed_at": null
   },
-  "next_action": "Trace why the empty-change recovery is bypassed after the Engineer runtime retry and implement one bounded regression fix.",
+  "next_action": "Wait for PR #745 CI, then hand the result to Main/Reviewer; after approved merge/release, repeat the physical Manga Kids task.",
   "historical_backlog": [
     "Stay in Phase 1 ONLINE until a real generated Android app is physically accepted.",
     "Reproduce the recent manga-drawing app failure from current main with Diagnostics; do not restart generic audits.",
@@ -95,23 +95,44 @@
       ],
       "next_action": "Trace why the empty-change recovery is bypassed after the Engineer runtime retry and implement one bounded regression fix.",
       "kind": "PHYSICAL_RESULT"
+    },
+    {
+      "seq": 3,
+      "at": "2026-10-01T10:02:00Z",
+      "claim_id": "cantiere-manga-online-failure-repro-v1-20261001",
+      "work_item": "phase1-online-generated-app-repro-v1",
+      "summary": "Bounded root cause isolated and PR #745 opened. #739 recovery was bypassed whenever the same Engineer task had already used its runtime retry (`didRetry`). PR #745 permits the existing structural repair after that runtime retry, keeping the path bounded to max three Engineer calls, with regression coverage for timeout -> empty changes -> recovered file change.",
+      "decisions": [
+        "Keep decoder/reviewer/validation gates strict.",
+        "Do not merge or claim success from this worker lane.",
+        "Phase 1 ONLINE remains open pending CI, Main/Reviewer, a release containing the fix, and physical Manga Kids acceptance."
+      ],
+      "evidence_refs": [
+        "Ai-orchestrator-riserva#745",
+        "commit:e61803654a16e7e07588eada718c7ee5b50be329",
+        "physical:Android:+2860:Manga Kids:28%"
+      ],
+      "next_action": "Wait for PR #745 CI, then hand the result to Main/Reviewer; after approved merge/release, repeat the physical Manga Kids task.",
+      "kind": "IMPLEMENTATION"
     }
   ],
   "last_checkpoint": {
-    "seq": 2,
-    "at": "2026-10-01T09:57:00Z",
+    "seq": 3,
+    "at": "2026-10-01T10:02:00Z",
     "claim_id": "cantiere-manga-online-failure-repro-v1-20261001",
     "work_item": "phase1-online-generated-app-repro-v1",
-    "summary": "Physical Android +2860 retry reproduced the Manga Kids failure at 28%: FormatException: Workshop proposal must contain at least one file change. PR #739 recovery is present on main but did not recover this production path.",
+    "summary": "Bounded root cause isolated and PR #745 opened. #739 recovery was bypassed whenever the same Engineer task had already used its runtime retry (`didRetry`). PR #745 permits the existing structural repair after that runtime retry, keeping the path bounded to max three Engineer calls, with regression coverage for timeout -> empty changes -> recovered file change.",
     "decisions": [
-      "Keep Phase 1 ONLINE.",
-      "Do not ask for another physical retry until the production retry path is corrected."
+      "Keep decoder/reviewer/validation gates strict.",
+      "Do not merge or claim success from this worker lane.",
+      "Phase 1 ONLINE remains open pending CI, Main/Reviewer, a release containing the fix, and physical Manga Kids acceptance."
     ],
     "evidence_refs": [
-      "physical:Android:+2860:Manga Kids:28%",
-      "Ai-orchestrator-riserva#739"
+      "Ai-orchestrator-riserva#745",
+      "commit:e61803654a16e7e07588eada718c7ee5b50be329",
+      "physical:Android:+2860:Manga Kids:28%"
     ],
-    "next_action": "Trace why the empty-change recovery is bypassed after the Engineer runtime retry and implement one bounded regression fix.",
-    "kind": "PHYSICAL_RESULT"
+    "next_action": "Wait for PR #745 CI, then hand the result to Main/Reviewer; after approved merge/release, repeat the physical Manga Kids task.",
+    "kind": "IMPLEMENTATION"
   }
 }
