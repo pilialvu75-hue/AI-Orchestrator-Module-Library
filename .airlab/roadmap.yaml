@@ -201,7 +201,7 @@ roadmap:
 
   - id: L15
     title: Automated claim leases and canonical-state projection
-    state: planned
+    state: active
     priority: P0
     outcome: >-
       Add machine-driven stale-claim expiry/reconciliation and deterministic projection of merged
