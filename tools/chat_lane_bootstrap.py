@@ -97,6 +97,7 @@ MAIN / REVIEWER RULES:
 - Only promote VERIFIED/DONE when required gates and evidence are actually satisfied.
 - UNKNOWN remains UNKNOWN; do not infer PASS.
 - Reconcile BLOCKED stale claims explicitly before allowing reassignment.
+- Inspect canonical checkpoint_watch and follow up on claimed lanes that have not persisted progress recently.
 - For inference, preserve shared contracts while allowing target-specific LLM/backend/runtime profiles.
 """
     else:
