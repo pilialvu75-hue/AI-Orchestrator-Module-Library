@@ -207,3 +207,29 @@ claim. A stale projection must never hide a valid `REVIEW_REQUIRED` lane.
 
 Workers must never set `REVIEW_REQUIRED` by changing only the status field. A valid handoff is
 atomic: active claim + valid review packet + claim-bound review checkpoint + REVIEW_REQUIRED.
+
+
+## Claim lifecycle integrity
+
+Claim-scoped approvals and evidence must never leak into the next work item.
+
+When a new claim is acquired:
+- prior current evidence is cleared;
+- worker reviewer state resets to PENDING;
+- G1/G2/G3/G4/G6/G7 reset to PENDING;
+- any prior review packet is archived out of the current claim surface;
+- G5 returns to NOT_APPLICABLE_UNTIL_RUNTIME_CHANGE until the new work proves otherwise.
+
+Expired worker leases are hard boundaries. Heartbeat, checkpoint, submit-review and voluntary release
+must not renew or bypass an already expired lease; reconciliation/reviewer action is required.
+
+A valid REVIEW_REQUIRED handoff is reviewer-owned once submitted. If the worker lease time passes while
+waiting for review, reconciliation records REVIEW_WAIT_OVERDUE but preserves the claim, packet and
+REVIEW_REQUIRED state so the handoff cannot disappear from the reviewer inbox.
+
+Review packets are validated against the schema semantics, including field types, allowed evidence
+types/results and roadmap-impact shape. Main/Reviewer cannot accept a handoff while G0-G4 are not
+actually PASS-equivalent.
+
+For material roadmap impact, review acceptance leaves G7_CANONICAL_SYNC=PENDING_ROADMAP_SYNC. A boolean
+or command-line assertion is not sufficient evidence that the roadmap was actually synchronized.
