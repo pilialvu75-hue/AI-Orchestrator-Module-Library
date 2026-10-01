@@ -10,7 +10,8 @@
     "L15",
     "L17",
     "L18",
-    "L20"
+    "L20",
+    "L21"
   ],
   "next_actions": [
     "L19",
@@ -108,7 +109,14 @@
       "mode": "event_driven_incremental",
       "user_full_chat_signal_required": false,
       "final_review_checkpoint": "AUTOMATIC",
-      "validation": "CI_PASS_REQUIRED_AND_RESUME_CHECKPOINT_ENFORCED"
+      "validation": "CI_PASS_REQUIRED_AND_RESUME_CHECKPOINT_ENFORCED",
+      "watchdog": {
+        "status": "ACTIVE",
+        "warning_after_minutes": 120,
+        "action": "SURFACE_TO_MAIN_REVIEWER",
+        "auto_block": false,
+        "fabricate_content": false
+      }
     }
   }
 }

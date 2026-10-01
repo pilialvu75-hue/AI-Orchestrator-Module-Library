@@ -71,11 +71,26 @@ def _lease_policy(canonical: dict[str, Any]) -> tuple[int, int]:
     return default_hours, max_hours
 
 
-def _projection_payload(lanes: list[tuple[Path, dict[str, Any]]]) -> dict[str, Any]:
+def _checkpoint_watch_policy(canonical: dict[str, Any]) -> int:
+    policy = canonical.get("continuous_checkpoint_policy") or {}
+    watchdog = policy.get("watchdog") or {}
+    minutes = int(watchdog.get("warning_after_minutes", 120))
+    if minutes <= 0:
+        raise ValueError("continuous checkpoint watchdog warning_after_minutes must be positive")
+    return minutes
+
+
+def _projection_payload(
+    lanes: list[tuple[Path, dict[str, Any]]],
+    *,
+    now: datetime,
+    checkpoint_warning_minutes: int,
+) -> dict[str, Any]:
     summaries: list[dict[str, Any]] = []
     active_claims: list[dict[str, Any]] = []
     review_required: list[str] = []
     blocked: list[dict[str, Any]] = []
+    checkpoint_watch: list[dict[str, Any]] = []
     platform_profiles: list[dict[str, Any]] = []
     counts: Counter[str] = Counter()
 
@@ -94,6 +109,24 @@ def _projection_payload(lanes: list[tuple[Path, dict[str, Any]]]) -> dict[str, A
                 "lease_until": claim.get("lease_until"),
             }
             active_claims.append({"lane": lane_id, **claim_summary})
+
+            checkpoint = lane.get("last_checkpoint") or {}
+            same_claim = checkpoint.get("claim_id") == claim.get("claim_id")
+            base_at_raw = checkpoint.get("at") if same_claim else claim.get("started_at")
+            if base_at_raw:
+                base_at = _parse_iso(str(base_at_raw))
+                due_at = base_at + timedelta(minutes=checkpoint_warning_minutes)
+                if now >= due_at:
+                    checkpoint_watch.append({
+                        "lane": lane_id,
+                        "claim_id": claim.get("claim_id"),
+                        "work_item": claim.get("work_item"),
+                        "status": state,
+                        "reason": "CHECKPOINT_STALE" if same_claim else "NO_CHECKPOINT_YET",
+                        "last_checkpoint_at": checkpoint.get("at") if same_claim else None,
+                        "due_since": _iso(due_at),
+                        "warning_after_minutes": checkpoint_warning_minutes,
+                    })
 
         if state == "REVIEW_REQUIRED":
             review_required.append(lane_id)
@@ -131,6 +164,7 @@ def _projection_payload(lanes: list[tuple[Path, dict[str, Any]]]) -> dict[str, A
         "active_claims": sorted(active_claims, key=lambda item: (item["lane"], item.get("work_item") or "")),
         "review_required": sorted(review_required),
         "blocked": sorted(blocked, key=lambda item: item["lane"]),
+        "checkpoint_watch": sorted(checkpoint_watch, key=lambda item: item["lane"]),
         "platform_inference_profiles": sorted(platform_profiles, key=lambda item: item["lane"]),
         "lanes": summaries,
     }
@@ -139,7 +173,12 @@ def _projection_payload(lanes: list[tuple[Path, dict[str, Any]]]) -> dict[str, A
 def project(root: Path = ROOT, now: datetime | None = None) -> bool:
     now = now or _now()
     canonical_path, canonical = _canonical(root)
-    payload = _projection_payload(_lanes(root, canonical))
+    checkpoint_warning_minutes = _checkpoint_watch_policy(canonical)
+    payload = _projection_payload(
+        _lanes(root, canonical),
+        now=now,
+        checkpoint_warning_minutes=checkpoint_warning_minutes,
+    )
     digest_source = json.dumps(payload, sort_keys=True, separators=(",", ":"), ensure_ascii=False)
     digest = hashlib.sha256(digest_source.encode("utf-8")).hexdigest()
 
