@@ -54,6 +54,21 @@
     ],
     "cloud_identity": [
       "For third-party app distribution, preserve per-user credential isolation/BYOK: no embedded owner API keys, no sharing the owner's quota, and no cross-user chat/memory contamination."
+    ],
+    "macos": [
+      "Modern macOS and High Sierra legacy remain separate targets.",
+      "PRs #418/#420/#424/#441/#442 are merged for modern build/Metal/DMG/release/updater installer.",
+      "PR #443 updater lifecycle is closed unmerged; do not infer completion.",
+      "PR #444 High Sierra low-resource runtime/native shell is merged.",
+      "Remaining target acceptance includes real install/Gatekeeper/signing-notarization where applicable, sandbox-safe GGUF import, mic/voice, Keychain/BYOK and target inference evidence."
+    ],
+    "raspberry_pi": [
+      "Raspberry Pi remains a future distinct ARM target rather than generic Linux.",
+      "Preserve planned autonomous-node role for phone/desktop/home/vehicle support and hardware I/O.",
+      "Preserve GPIO/UART/CAN/I2C/SPI integration scope, but start only after shared runtime/platform contracts are stable enough."
+    ],
+    "branding": [
+      "A cross-platform icon/branding asset set was historically prepared for macOS, Windows, Android, iOS, Linux, Web/PWA and Raspberry Pi/ARM but repository integration was not completed."
     ]
   },
   "chats": [
