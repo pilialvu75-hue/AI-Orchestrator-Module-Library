@@ -3,7 +3,7 @@
   "repository": "pilialvu75-hue/AI-Orchestrator-Module-Library",
   "updated_at": "2026-10-01",
   "lifecycle_status": "ACTIVE",
-  "current_phase": "L14",
+  "current_phase": "CP-HARDEN-01",
   "completed": [
     "L1",
     "L13",
@@ -15,6 +15,7 @@
     "L22"
   ],
   "next_actions": [
+    "CP-HARDEN-01",
     "L19",
     "L14",
     "L16",
@@ -136,6 +137,14 @@
       "rework_command": "tools/control_plane_manager.py review-rework",
       "status_only_review_handoff": "FORBIDDEN",
       "validation": "CI_PASS_WITH_RAW_INBOX_AND_ACCEPT_REWORK_TESTS"
+    },
+    "mutation_guard": {
+      "status": "ACTIVE_ROLLOUT",
+      "mode": "TRANSACTIONAL_INBOX",
+      "compare_and_swap": true,
+      "invalid_request": "QUARANTINE",
+      "direct_api_workstream_write": "FORBIDDEN",
+      "projection_incidents": "ISOLATED_PER_LANE"
     }
   }
 }
