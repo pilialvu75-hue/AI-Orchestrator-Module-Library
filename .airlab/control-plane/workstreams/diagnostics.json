@@ -7,11 +7,14 @@
   "activation": "active",
   "scope": "Shared observability contract, logs, evidence receipts and comparable telemetry across all platforms.",
   "shared_engine_policy": "shared_or_control_plane",
-  "state_version": 1,
+  "state_version": 2,
   "updated_at": "2026-10-01",
   "active_claim": null,
   "dependencies": [],
-  "roadmap_refs": [],
+  "roadmap_refs": [
+    ".airlab/public-repositories/Ai-orchestrator-diagnostics/roadmap.yaml#D7",
+    ".airlab/public-repositories/Ai-orchestrator-diagnostics/roadmap.yaml#D8"
+  ],
   "evidence": [],
   "gates": {
     "G0_CLAIM": "PENDING",
@@ -29,5 +32,10 @@
     "reviewed_by": null,
     "reviewed_at": null
   },
-  "next_action": "Claim one bounded work item before implementation."
+  "next_action": "Claim one bounded parity/operational-validation item and collect remote evidence rather than relying on screenshots.",
+  "historical_backlog": [
+    "PR #711 cross-platform remote runtime parity is merged and is the baseline.",
+    "PR #543 privacy-filtered PostHog bridge is merged; raw prompts/text/paths/credentials remain excluded.",
+    "Real target events and useful cross-platform crash/runtime correlation still need operational acceptance."
+  ]
 }
