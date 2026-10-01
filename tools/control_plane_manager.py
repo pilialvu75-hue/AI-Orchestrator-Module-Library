@@ -71,6 +71,16 @@ def _lease_policy(canonical: dict[str, Any]) -> tuple[int, int]:
     return default_hours, max_hours
 
 
+def _assert_claim_live(claim_data: dict[str, Any], now: datetime) -> None:
+    lease_until = claim_data.get("lease_until")
+    if not lease_until:
+        raise ValueError("active claim missing lease_until")
+    if _parse_iso(str(lease_until)) <= now:
+        raise ValueError(
+            f"claim lease expired at {lease_until}; reconcile/reviewer action is required before more worker progress"
+        )
+
+
 def _checkpoint_watch_policy(canonical: dict[str, Any]) -> int:
     policy = canonical.get("continuous_checkpoint_policy") or {}
     watchdog = policy.get("watchdog") or {}
@@ -230,6 +240,35 @@ def claim(
     claim_id = hashlib.sha256(seed.encode("utf-8")).hexdigest()[:20]
     lease_until = now + timedelta(hours=hours)
 
+    previous_packet = lane.pop("review_packet", None)
+    if previous_packet:
+        history = lane.setdefault("review_packet_history", [])
+        history.append(previous_packet)
+        lane["review_packet_history"] = history[-20:]
+    lane["evidence"] = []
+    if lane.get("role") != "reviewer":
+        lane["reviewer"] = {
+            "required": True,
+            "state": "PENDING",
+            "reviewed_by": None,
+            "reviewed_at": None,
+        }
+
+    gates = lane.setdefault("gates", {})
+    gates.update({
+        "G0_CLAIM": "PASS",
+        "G1_IMPLEMENTATION": "PENDING",
+        "G2_STATIC": "PENDING",
+        "G3_CI": "PENDING",
+        "G4_INTEGRATION": "PENDING",
+        "G5_TARGET_RUNTIME": "NOT_APPLICABLE_UNTIL_RUNTIME_CHANGE",
+        "G7_CANONICAL_SYNC": "PENDING",
+    })
+    if lane.get("role") == "reviewer":
+        gates["G6_REVIEWER"] = "SELF_AUTHORITY_FOR_CROSS_LANE_REVIEW_ONLY"
+    else:
+        gates["G6_REVIEWER"] = "PENDING"
+
     lane["active_claim"] = {
         "claim_id": claim_id,
         "owner_lane": lane_id,
@@ -246,8 +285,6 @@ def claim(
     lane["updated_at"] = _date(now)
     lane["state_version"] = int(lane.get("state_version", 0)) + 1
     lane.pop("block_reason", None)
-    gates = lane.setdefault("gates", {})
-    gates["G0_CLAIM"] = "PASS"
     _write(lane_path, lane)
 
     project(root=root, now=now)
@@ -272,6 +309,7 @@ def heartbeat(
     claim_data = lane.get("active_claim")
     if not claim_data:
         raise ValueError(f"lane {lane_id} has no active claim")
+    _assert_claim_live(claim_data, now)
 
     claim_data["heartbeat_at"] = _iso(now)
     claim_data["lease_until"] = _iso(now + timedelta(hours=hours))
@@ -334,12 +372,63 @@ def _validate_review_packet(lane_id: str, claim_data: dict[str, Any], packet: di
         raise ValueError("review packet work_item mismatch")
     if packet.get("repository") != claim_data.get("repository"):
         raise ValueError("review packet repository mismatch")
-    if not packet.get("changes"):
-        raise ValueError("review packet requires at least one change")
-    if not packet.get("evidence"):
-        raise ValueError("review packet requires at least one evidence item")
-    if not packet.get("reviewer_checks"):
-        raise ValueError("review packet requires reviewer_checks")
+    for field in ("submitted_at", "lane_id", "claim_id", "work_item", "repository", "summary"):
+        if not isinstance(packet.get(field), str) or not packet[field].strip():
+            raise ValueError(f"review packet {field} must be a non-empty string")
+
+    branch = packet.get("branch")
+    if branch is not None and not isinstance(branch, str):
+        raise ValueError("review packet branch must be a string or null")
+    pull_request = packet.get("pull_request")
+    if pull_request is not None and (not isinstance(pull_request, int) or isinstance(pull_request, bool) or pull_request < 1):
+        raise ValueError("review packet pull_request must be a positive integer or null")
+
+    changes = packet.get("changes")
+    if not isinstance(changes, list) or not changes or any(
+        not isinstance(item, str) or not item.strip() for item in changes
+    ):
+        raise ValueError("review packet changes must be a non-empty list of non-empty strings")
+
+    allowed_evidence_types = {
+        "ci", "test", "diagnostics", "runtime", "physical_device",
+        "commit", "pull_request", "analysis", "other",
+    }
+    allowed_results = {"PASS", "FAIL", "INFO", "PENDING"}
+    evidence = packet.get("evidence")
+    if not isinstance(evidence, list) or not evidence:
+        raise ValueError("review packet evidence must be a non-empty list")
+    for index, item in enumerate(evidence):
+        if not isinstance(item, dict):
+            raise ValueError(f"review packet evidence[{index}] must be an object")
+        if set(item) - {"type", "ref", "result", "note"}:
+            raise ValueError(f"review packet evidence[{index}] contains unsupported fields")
+        if item.get("type") not in allowed_evidence_types:
+            raise ValueError(f"review packet evidence[{index}].type is invalid")
+        if not isinstance(item.get("ref"), str) or not item["ref"].strip():
+            raise ValueError(f"review packet evidence[{index}].ref must be a non-empty string")
+        if item.get("result") not in allowed_results:
+            raise ValueError(f"review packet evidence[{index}].result is invalid")
+        if "note" in item and item["note"] is not None and not isinstance(item["note"], str):
+            raise ValueError(f"review packet evidence[{index}].note must be a string or null")
+
+    risks = packet.get("known_risks")
+    if not isinstance(risks, list) or any(not isinstance(item, str) for item in risks):
+        raise ValueError("review packet known_risks must be a list of strings")
+
+    checks = packet.get("reviewer_checks")
+    if not isinstance(checks, list) or not checks or any(
+        not isinstance(item, str) or not item.strip() for item in checks
+    ):
+        raise ValueError("review packet reviewer_checks must be a non-empty list of non-empty strings")
+
+    roadmap = packet.get("roadmap_impact")
+    if not isinstance(roadmap, dict) or set(roadmap) != {"material", "refs"}:
+        raise ValueError("review packet roadmap_impact must contain exactly material and refs")
+    if not isinstance(roadmap.get("material"), bool):
+        raise ValueError("review packet roadmap_impact.material must be boolean")
+    refs = roadmap.get("refs")
+    if not isinstance(refs, list) or any(not isinstance(item, str) or not item.strip() for item in refs):
+        raise ValueError("review packet roadmap_impact.refs must be a list of non-empty strings")
 
 
 def review_inbox(root: Path = ROOT) -> list[dict[str, Any]]:
@@ -370,12 +459,17 @@ def review_inbox(root: Path = ROOT) -> list[dict[str, Any]]:
     return sorted(items, key=lambda item: str(item.get("lane_id") or ""))
 
 
+def _review_gate_passed(value: Any) -> bool:
+    return isinstance(value, str) and value.startswith("PASS")
+
+
 def review_accept(
     lane_id: str,
     *,
     summary: str,
     next_action: str,
     evidence_refs: list[str] | None = None,
+    roadmap_synced: bool = False,
     root: Path = ROOT,
     now: datetime | None = None,
 ) -> None:
@@ -391,6 +485,15 @@ def review_accept(
         raise ValueError(f"lane {lane_id} REVIEW_REQUIRED has no active claim")
     packet = lane.get("review_packet") or {}
     _validate_review_packet(lane_id, claim_data, packet)
+    gates = lane.setdefault("gates", {})
+    missing_gates = [
+        gate for gate in ("G0_CLAIM", "G1_IMPLEMENTATION", "G2_STATIC", "G3_CI", "G4_INTEGRATION")
+        if not _review_gate_passed(gates.get(gate))
+    ]
+    if missing_gates:
+        raise ValueError(
+            "cannot accept review while required gates are not PASS: " + ", ".join(missing_gates)
+        )
     if not summary.strip():
         raise ValueError("review summary is required")
     if not next_action.strip():
@@ -442,7 +545,10 @@ def review_accept(
         "reviewed_at": _iso(now),
     })
     lane.setdefault("gates", {})["G6_REVIEWER"] = "PASS"
-    lane["gates"]["G7_CANONICAL_SYNC"] = "PASS"
+    roadmap_material = bool((packet.get("roadmap_impact") or {}).get("material"))
+    lane["gates"]["G7_CANONICAL_SYNC"] = (
+        "PASS" if (not roadmap_material or roadmap_synced) else "PENDING_ROADMAP_SYNC"
+    )
     lane["next_action"] = next_action.strip()
     _write(lane_path, lane)
     project(root=root, now=now)
@@ -639,6 +745,7 @@ def _build_parser() -> argparse.ArgumentParser:
     accept_cmd.add_argument("--summary", required=True)
     accept_cmd.add_argument("--next-action", required=True)
     accept_cmd.add_argument("--evidence-ref", action="append", default=[])
+    accept_cmd.add_argument("--roadmap-synced", action="store_true")
 
     rework_cmd = sub.add_parser("review-rework")
     rework_cmd.add_argument("--lane", required=True)
@@ -678,6 +785,7 @@ def main() -> int:
             summary=args.summary,
             next_action=args.next_action,
             evidence_refs=args.evidence_ref,
+            roadmap_synced=args.roadmap_synced,
         )
         print("review-accepted")
     elif args.command == "review-rework":
