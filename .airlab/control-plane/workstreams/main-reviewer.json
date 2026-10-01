@@ -3,11 +3,11 @@
   "id": "main-reviewer",
   "title": "Main / Reviewer",
   "role": "reviewer",
-  "status": "CLAIMED",
+  "status": "IMPLEMENTING",
   "activation": "active",
   "scope": "Global architecture, cross-lane review, consolidation, roadmap/state authority and hardening, including target inference profile balance and shared-contract compatibility.",
   "shared_engine_policy": "shared_or_control_plane",
-  "state_version": 21,
+  "state_version": 22,
   "updated_at": "2026-10-01",
   "active_claim": {
     "claim_id": "main-reviewer-cp-harden-01-v1-20261001",
@@ -17,8 +17,8 @@
     "scope": "Add transactional control-plane mutation inbox with validate-before-apply semantics and quarantine so malformed automation/API requests cannot corrupt workstreams or blind global projection.",
     "branch": "control-plane/cp-harden-01-transactional-inbox-v1-20261001",
     "started_at": "2026-10-01T17:58:00Z",
-    "heartbeat_at": "2026-10-01T17:58:00Z",
-    "lease_until": "2026-10-02T05:58:00Z",
+    "heartbeat_at": "2026-10-01T18:00:59Z",
+    "lease_until": "2026-10-02T06:00:59Z",
     "lease_hours": 12
   },
   "dependencies": [],
@@ -40,7 +40,7 @@
     "reviewed_by": null,
     "reviewed_at": null
   },
-  "next_action": "Complete CP-HARDEN-01 CI and migrate operational automation state writes to the transactional inbox; then proceed to CP-HARDEN-02 resource locks.",
+  "next_action": "Migrate mutating automation state writes to the transactional inbox, then proceed to CP-HARDEN-02 resource-level conflict locks.",
   "inference_review_policy": {
     "policy": ".airlab/control-plane/inference-policy.json",
     "check": [
@@ -383,29 +383,43 @@
       ],
       "next_action": "Prioritize CP-HARDEN-01 atomic mutation/projection isolation, then CP-HARDEN-02 serialized resource locks and CP-HARDEN-04 canonical automation registry before broad AIR-10 dispatch.",
       "kind": "AUDIT_COMPLETION"
+    },
+    {
+      "seq": 8,
+      "at": "2026-10-01T18:00:59Z",
+      "claim_id": "main-reviewer-cp-harden-01-v1-20261001",
+      "work_item": "CP-HARDEN-01",
+      "summary": "CP-HARDEN-01 implemented and merged via PR #93. Transactional compare-and-swap mutation inbox, quarantine receipts, and per-lane projection incident isolation are operational.",
+      "decisions": [
+        "Operational API writers must not edit workstream or canonical-state JSON directly on main.",
+        "Invalid or stale mutation requests are quarantined without changing lane state.",
+        "Unreadable lanes are isolated in projection_incidents instead of blinding healthy lanes."
+      ],
+      "evidence_refs": [
+        "AI-Orchestrator-Module-Library#93",
+        "merge:6672c94055143d4bce875938d8c3d95e36086ee3",
+        "Validate Module Library PR run 36903506691"
+      ],
+      "next_action": "Migrate mutating automation state writes to the transactional inbox, then proceed to CP-HARDEN-02 resource-level conflict locks."
     }
   ],
   "last_checkpoint": {
-    "seq": 7,
-    "at": "2026-10-01T16:55:00Z",
-    "claim_id": "main-reviewer-lifecycle-gap-v2-20261001",
-    "work_item": "control-plane-lifecycle-integrity-gap-v2",
-    "summary": "Second-pass control-plane audit completed. PR #92 merged remaining lifecycle safeguards; stale Windows projection incident repaired; legacy split-brain PR #59 and conflicted duplicate PR #91 closed; Reviewer and Windows automations were constrained to canonical ownership rules.",
+    "seq": 8,
+    "at": "2026-10-01T18:00:59Z",
+    "claim_id": "main-reviewer-cp-harden-01-v1-20261001",
+    "work_item": "CP-HARDEN-01",
+    "summary": "CP-HARDEN-01 implemented and merged via PR #93. Transactional compare-and-swap mutation inbox, quarantine receipts, and per-lane projection incident isolation are operational.",
     "decisions": [
-      "Do not allow Reviewer automation to take over active main-reviewer implementation claims.",
-      "A malformed checkpoint is an incident because it can blind global projection until repaired.",
-      "Keep remaining structural hardening explicit rather than declaring the control plane fully autonomous."
+      "Operational API writers must not edit workstream or canonical-state JSON directly on main.",
+      "Invalid or stale mutation requests are quarantined without changing lane state.",
+      "Unreadable lanes are isolated in projection_incidents instead of blinding healthy lanes."
     ],
     "evidence_refs": [
-      "AI-Orchestrator-Module-Library#92",
-      "merge:f47abe484e74898ac23ced2888425f47fb4a3a48",
-      "Validate Module Library run 36895201406",
-      "AI-Orchestrator-Module-Library#59 CLOSED_SUPERSEDED",
-      "AI-Orchestrator-Module-Library#91 CLOSED_SUPERSEDED",
-      "Reconcile run 36894725327 PASS"
+      "AI-Orchestrator-Module-Library#93",
+      "merge:6672c94055143d4bce875938d8c3d95e36086ee3",
+      "Validate Module Library PR run 36903506691"
     ],
-    "next_action": "Prioritize CP-HARDEN-01 atomic mutation/projection isolation, then CP-HARDEN-02 serialized resource locks and CP-HARDEN-04 canonical automation registry before broad AIR-10 dispatch.",
-    "kind": "AUDIT_COMPLETION"
+    "next_action": "Migrate mutating automation state writes to the transactional inbox, then proceed to CP-HARDEN-02 resource-level conflict locks."
   },
   "hardening_backlog": [
     {
