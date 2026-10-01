@@ -257,3 +257,12 @@ roadmap:
       Persist material lane progress continuously during work so context exhaustion, app closure or chat rollover
       does not require a user-triggered emergency save. Checkpoints carry safe resume state, decisions, evidence
       references and the next action, renew the claim lease, and final review handoff checkpoints automatically.
+
+  - id: L21
+    title: Checkpoint freshness watchdog
+    state: active
+    priority: P0
+    outcome: >-
+      Detect claimed lanes that have not persisted a current resume checkpoint recently and surface them
+      to Main/Reviewer through canonical projection, without fabricating conversation content or blocking
+      legitimate external waits before claim expiry.
