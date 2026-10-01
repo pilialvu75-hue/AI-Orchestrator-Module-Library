@@ -128,6 +128,19 @@ def validate(root=ROOT):
                 errors.append(f"{lane_id}: active_claim owner_lane mismatch")
             if state not in {"CLAIMED","IMPLEMENTING","EVIDENCE_READY","REVIEW_REQUIRED"}:
                 errors.append(f"{lane_id}: active claim is inconsistent with state {state}")
+        if state in {"IMPLEMENTING","EVIDENCE_READY","REVIEW_REQUIRED"}:
+            checkpoint = lane.get("last_checkpoint") or {}
+            if not checkpoint:
+                errors.append(f"{lane_id}: {state} requires last_checkpoint")
+            elif claim:
+                if checkpoint.get("claim_id") != claim.get("claim_id"):
+                    errors.append(f"{lane_id}: last_checkpoint claim_id mismatch")
+                if checkpoint.get("work_item") != claim.get("work_item"):
+                    errors.append(f"{lane_id}: last_checkpoint work_item mismatch")
+                if not checkpoint.get("summary"):
+                    errors.append(f"{lane_id}: last_checkpoint missing summary")
+                if not checkpoint.get("next_action"):
+                    errors.append(f"{lane_id}: last_checkpoint missing next_action")
         if state == "REVIEW_REQUIRED":
             packet = lane.get("review_packet") or {}
             if role == "reviewer":
