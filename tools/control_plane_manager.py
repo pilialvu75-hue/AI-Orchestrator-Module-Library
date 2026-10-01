@@ -11,6 +11,7 @@ from typing import Any
 
 ROOT = Path(__file__).resolve().parents[1]
 CANONICAL_REL = Path(".airlab/control-plane/canonical-state.json")
+REGISTRY_REL = Path(".airlab/control-plane/chat-registry.json")
 DEFAULT_LEASE_HOURS = 12
 MAX_LEASE_HOURS = 24
 
@@ -62,6 +63,17 @@ def _lane_by_id(root: Path, canonical: dict[str, Any], lane_id: str) -> tuple[Pa
         if lane.get("id") == lane_id:
             return path, lane
     raise ValueError(f"unknown lane: {lane_id}")
+
+
+def _allowed_repositories_for_lane(root: Path, lane_id: str) -> set[str]:
+    registry = _load(root / REGISTRY_REL)
+    for entry in registry.get("lanes") or []:
+        if entry.get("id") != lane_id:
+            continue
+        allowed = {str(entry.get("primary_repository") or "").strip()}
+        allowed.update(str(item).strip() for item in (entry.get("secondary_repositories") or []))
+        return {item for item in allowed if item}
+    raise ValueError(f"lane {lane_id} is missing from chat registry")
 
 
 def _lease_policy(canonical: dict[str, Any]) -> tuple[int, int]:
@@ -182,6 +194,17 @@ def _projection_payload(
 
 def project(root: Path = ROOT, now: datetime | None = None) -> bool:
     now = now or _now()
+    if not isinstance(work_item, str) or not work_item.strip():
+        raise ValueError("work_item must be a non-empty string")
+    if not isinstance(repository, str) or not repository.strip():
+        raise ValueError("repository must be a non-empty string")
+    if not isinstance(scope, str) or not scope.strip():
+        raise ValueError("scope must be a non-empty string")
+    allowed_repositories = _allowed_repositories_for_lane(root, lane_id)
+    if repository not in allowed_repositories:
+        raise ValueError(
+            f"repository {repository} is outside lane {lane_id} scope; allowed={sorted(allowed_repositories)}"
+        )
     canonical_path, canonical = _canonical(root)
     checkpoint_warning_minutes = _checkpoint_watch_policy(canonical)
     payload = _projection_payload(
