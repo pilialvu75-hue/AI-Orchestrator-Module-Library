@@ -72,6 +72,7 @@ class ControlPlaneManagerTests(unittest.TestCase):
     def test_claim_resets_previous_review_state(self):
         path = self.root / ".airlab/control-plane/workstreams/cantiere.json"
         lane = json.loads(path.read_text(encoding="utf-8"))
+        previous_history_count = len(lane.get("review_packet_history", []))
         lane["reviewer"] = {
             "required": True,
             "state": "APPROVED",
@@ -101,7 +102,8 @@ class ControlPlaneManagerTests(unittest.TestCase):
         self.assertIsNone(lane["reviewer"]["reviewed_by"])
         self.assertEqual(lane["evidence"], [])
         self.assertNotIn("review_packet", lane)
-        self.assertEqual(len(lane["review_packet_history"]), 1)
+        self.assertEqual(len(lane["review_packet_history"]), previous_history_count + 1)
+        self.assertEqual(lane["review_packet_history"][-1]["claim_id"], "old-claim")
         self.assertEqual(lane["gates"]["G0_CLAIM"], "PASS")
         for gate in ("G1_IMPLEMENTATION", "G2_STATIC", "G3_CI", "G4_INTEGRATION", "G6_REVIEWER", "G7_CANONICAL_SYNC"):
             self.assertEqual(lane["gates"][gate], "PENDING")
