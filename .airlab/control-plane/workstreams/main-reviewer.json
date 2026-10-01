@@ -3,18 +3,29 @@
   "id": "main-reviewer",
   "title": "Main / Reviewer",
   "role": "reviewer",
-  "status": "READY",
+  "status": "CLAIMED",
   "activation": "active",
   "scope": "Global architecture, cross-lane review, consolidation, roadmap/state authority and hardening, including target inference profile balance and shared-contract compatibility.",
   "shared_engine_policy": "shared_or_control_plane",
-  "state_version": 6,
+  "state_version": 7,
   "updated_at": "2026-10-01",
-  "active_claim": null,
+  "active_claim": {
+    "claim_id": "main-reviewer-continuous-checkpoint-v1-20261001",
+    "owner_lane": "main-reviewer",
+    "work_item": "continuous-chat-checkpoint-v1",
+    "repository": "pilialvu75-hue/AI-Orchestrator-Module-Library",
+    "scope": "Make chat continuity autonomous by checkpointing material progress continuously instead of waiting for chat-full detection.",
+    "branch": "control-plane/continuous-chat-checkpoint-v1-20261001",
+    "started_at": "2026-10-01T09:05:00Z",
+    "heartbeat_at": "2026-10-01T09:05:00Z",
+    "lease_until": "2026-10-01T21:05:00Z",
+    "lease_hours": 12
+  },
   "dependencies": [],
   "roadmap_refs": [],
   "evidence": [],
   "gates": {
-    "G0_CLAIM": "PENDING",
+    "G0_CLAIM": "PASS",
     "G1_IMPLEMENTATION": "PENDING",
     "G2_STATIC": "PENDING",
     "G3_CI": "PENDING",
@@ -29,7 +40,7 @@
     "reviewed_by": null,
     "reviewed_at": null
   },
-  "next_action": "Review worker lanes in REVIEW_REQUIRED, reconcile BLOCKED work, and use canonical roadmaps/backlogs rather than legacy chat history.",
+  "next_action": "Add continuous checkpoint policy/tooling so chats persist material progress without waiting for context exhaustion.",
   "inference_review_policy": {
     "policy": ".airlab/control-plane/inference-policy.json",
     "check": [
