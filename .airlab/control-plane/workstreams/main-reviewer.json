@@ -3,18 +3,29 @@
   "id": "main-reviewer",
   "title": "Main / Reviewer",
   "role": "reviewer",
-  "status": "READY",
+  "status": "CLAIMED",
   "activation": "active",
   "scope": "Global architecture, cross-lane review, consolidation, roadmap/state authority and hardening, including target inference profile balance and shared-contract compatibility.",
   "shared_engine_policy": "shared_or_control_plane",
-  "state_version": 16,
+  "state_version": 17,
   "updated_at": "2026-10-01",
-  "active_claim": null,
+  "active_claim": {
+    "claim_id": "main-reviewer-test-isolation-fix-v1-20261001",
+    "owner_lane": "main-reviewer",
+    "work_item": "control-plane-test-isolation-fix-v1",
+    "repository": "pilialvu75-hue/AI-Orchestrator-Module-Library",
+    "scope": "Fix lifecycle hardening test so it is independent of persisted review_packet_history.",
+    "branch": "control-plane/test-isolation-fix-v1-20261001",
+    "started_at": "2026-10-01T15:24:00Z",
+    "heartbeat_at": "2026-10-01T15:24:00Z",
+    "lease_until": "2026-10-02T03:24:00Z",
+    "lease_hours": 12
+  },
   "dependencies": [],
   "roadmap_refs": [],
   "evidence": [],
   "gates": {
-    "G0_CLAIM": "PENDING",
+    "G0_CLAIM": "PASS",
     "G1_IMPLEMENTATION": "PENDING",
     "G2_STATIC": "PENDING",
     "G3_CI": "PENDING",
@@ -29,7 +40,7 @@
     "reviewed_by": null,
     "reviewed_at": null
   },
-  "next_action": "Address remaining structural hardening: pre-commit state mutation guard, resource-level conflict locks, unclaimed external-change ingress detection, then AIR-10 dispatcher.",
+  "next_action": "Fix review_packet_history test isolation and restore green main validation.",
   "inference_review_policy": {
     "policy": ".airlab/control-plane/inference-policy.json",
     "check": [
