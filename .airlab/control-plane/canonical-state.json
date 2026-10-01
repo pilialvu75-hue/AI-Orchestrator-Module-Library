@@ -7,7 +7,7 @@
     "policy": "This private repository is the single coordination authority. Chats and agents are workers, not independent sources of truth."
   },
   "updated_at": "2026-10-01",
-  "state_revision": 2,
+  "state_revision": 3,
   "lifecycle_status": "BOOTSTRAP_ACTIVE",
   "roadmap_authority": {
     "library": ".airlab/roadmap.yaml",
@@ -75,5 +75,225 @@
     "periodic_reconcile": "hourly",
     "event_reconcile": "main changes to workstreams/roadmaps/inference policy",
     "no_change_no_commit": true
+  },
+  "projection": {
+    "source_digest": "4ddee3d0fac78a2d8fd3c1b303baca31f61e19d0125082b158993ef8d30a88f8",
+    "projected_at": "2026-10-01T08:21:07Z",
+    "counts": {
+      "READY": 15
+    },
+    "active_claims": [],
+    "review_required": [],
+    "blocked": [],
+    "platform_inference_profiles": [
+      {
+        "lane": "platform-android",
+        "status": "ACTIVE_BENCHMARKING",
+        "backend": null,
+        "accelerator": null,
+        "selected_models_by_role": {}
+      },
+      {
+        "lane": "platform-ios",
+        "status": "NEEDS_TARGET_PROFILE",
+        "backend": null,
+        "accelerator": null,
+        "selected_models_by_role": {}
+      },
+      {
+        "lane": "platform-linux",
+        "status": "NEEDS_TARGET_PROFILE",
+        "backend": null,
+        "accelerator": null,
+        "selected_models_by_role": {}
+      },
+      {
+        "lane": "platform-macos",
+        "status": "NEEDS_TARGET_PROFILE",
+        "backend": null,
+        "accelerator": null,
+        "selected_models_by_role": {}
+      },
+      {
+        "lane": "platform-raspberry-pi",
+        "status": "NEEDS_TARGET_PROFILE",
+        "backend": null,
+        "accelerator": null,
+        "selected_models_by_role": {}
+      },
+      {
+        "lane": "platform-web",
+        "status": "NEEDS_TARGET_PROFILE",
+        "backend": null,
+        "accelerator": null,
+        "selected_models_by_role": {}
+      },
+      {
+        "lane": "platform-windows",
+        "status": "NEEDS_TARGET_PROFILE",
+        "backend": null,
+        "accelerator": null,
+        "selected_models_by_role": {}
+      },
+      {
+        "lane": "platform-windows-legacy",
+        "status": "NEEDS_TARGET_PROFILE",
+        "backend": null,
+        "accelerator": null,
+        "selected_models_by_role": {}
+      }
+    ],
+    "lanes": [
+      {
+        "id": "airlab",
+        "status": "READY",
+        "activation": "active",
+        "state_version": 1,
+        "updated_at": "2026-10-01",
+        "active_claim": null,
+        "reviewer_state": "PENDING",
+        "inference_profile_status": null
+      },
+      {
+        "id": "cantiere",
+        "status": "READY",
+        "activation": "active",
+        "state_version": 1,
+        "updated_at": "2026-10-01",
+        "active_claim": null,
+        "reviewer_state": "PENDING",
+        "inference_profile_status": null
+      },
+      {
+        "id": "diagnostics",
+        "status": "READY",
+        "activation": "active",
+        "state_version": 1,
+        "updated_at": "2026-10-01",
+        "active_claim": null,
+        "reviewer_state": "PENDING",
+        "inference_profile_status": null
+      },
+      {
+        "id": "library-researcher",
+        "status": "READY",
+        "activation": "active",
+        "state_version": 1,
+        "updated_at": "2026-10-01",
+        "active_claim": null,
+        "reviewer_state": "PENDING",
+        "inference_profile_status": null
+      },
+      {
+        "id": "main-reviewer",
+        "status": "READY",
+        "activation": "active",
+        "state_version": 2,
+        "updated_at": "2026-10-01",
+        "active_claim": null,
+        "reviewer_state": "AUTHORITY",
+        "inference_profile_status": null
+      },
+      {
+        "id": "platform-android",
+        "status": "READY",
+        "activation": "active",
+        "state_version": 2,
+        "updated_at": "2026-10-01",
+        "active_claim": null,
+        "reviewer_state": "PENDING",
+        "inference_profile_status": "ACTIVE_BENCHMARKING"
+      },
+      {
+        "id": "platform-ios",
+        "status": "READY",
+        "activation": "ready",
+        "state_version": 2,
+        "updated_at": "2026-10-01",
+        "active_claim": null,
+        "reviewer_state": "PENDING",
+        "inference_profile_status": "NEEDS_TARGET_PROFILE"
+      },
+      {
+        "id": "platform-linux",
+        "status": "READY",
+        "activation": "ready",
+        "state_version": 2,
+        "updated_at": "2026-10-01",
+        "active_claim": null,
+        "reviewer_state": "PENDING",
+        "inference_profile_status": "NEEDS_TARGET_PROFILE"
+      },
+      {
+        "id": "platform-macos",
+        "status": "READY",
+        "activation": "ready",
+        "state_version": 2,
+        "updated_at": "2026-10-01",
+        "active_claim": null,
+        "reviewer_state": "PENDING",
+        "inference_profile_status": "NEEDS_TARGET_PROFILE"
+      },
+      {
+        "id": "platform-raspberry-pi",
+        "status": "READY",
+        "activation": "ready",
+        "state_version": 2,
+        "updated_at": "2026-10-01",
+        "active_claim": null,
+        "reviewer_state": "PENDING",
+        "inference_profile_status": "NEEDS_TARGET_PROFILE"
+      },
+      {
+        "id": "platform-web",
+        "status": "READY",
+        "activation": "active",
+        "state_version": 2,
+        "updated_at": "2026-10-01",
+        "active_claim": null,
+        "reviewer_state": "PENDING",
+        "inference_profile_status": "NEEDS_TARGET_PROFILE"
+      },
+      {
+        "id": "platform-windows",
+        "status": "READY",
+        "activation": "active",
+        "state_version": 2,
+        "updated_at": "2026-10-01",
+        "active_claim": null,
+        "reviewer_state": "PENDING",
+        "inference_profile_status": "NEEDS_TARGET_PROFILE"
+      },
+      {
+        "id": "platform-windows-legacy",
+        "status": "READY",
+        "activation": "active",
+        "state_version": 2,
+        "updated_at": "2026-10-01",
+        "active_claim": null,
+        "reviewer_state": "PENDING",
+        "inference_profile_status": "NEEDS_TARGET_PROFILE"
+      },
+      {
+        "id": "runtime-core",
+        "status": "READY",
+        "activation": "active",
+        "state_version": 2,
+        "updated_at": "2026-10-01",
+        "active_claim": null,
+        "reviewer_state": "PENDING",
+        "inference_profile_status": null
+      },
+      {
+        "id": "voice-live",
+        "status": "READY",
+        "activation": "active",
+        "state_version": 1,
+        "updated_at": "2026-10-01",
+        "active_claim": null,
+        "reviewer_state": "PENDING",
+        "inference_profile_status": null
+      }
+    ]
   }
 }
