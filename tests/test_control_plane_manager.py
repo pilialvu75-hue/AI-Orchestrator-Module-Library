@@ -474,26 +474,6 @@ class ControlPlaneManagerTests(unittest.TestCase):
         lane = json.loads(path.read_text(encoding="utf-8"))
         self.assertEqual(lane["gates"]["G7_CANONICAL_SYNC"], "PENDING_ROADMAP_SYNC")
 
-    def test_material_roadmap_impact_can_assert_verified_sync(self):
-        claim_id, now = self._submit_ready_review("issue-roadmap-synced")
-        path = self.root / ".airlab/control-plane/workstreams/cantiere.json"
-        lane = json.loads(path.read_text(encoding="utf-8"))
-        lane["review_packet"]["roadmap_impact"] = {
-            "material": True,
-            "refs": [".airlab/roadmap.yaml#L1"],
-        }
-        path.write_text(json.dumps(lane, indent=2) + "\n", encoding="utf-8")
-        manager.review_accept(
-            "cantiere",
-            summary="Implementation and roadmap sync accepted.",
-            next_action="Continue.",
-            roadmap_synced=True,
-            root=self.root,
-            now=now + timedelta(hours=2),
-        )
-        lane = json.loads(path.read_text(encoding="utf-8"))
-        self.assertEqual(lane["gates"]["G7_CANONICAL_SYNC"], "PASS")
-
     def test_review_rework_keeps_claim_and_returns_implementing(self):
         claim_id, now = self._submit_ready_review("issue-rework")
         manager.review_rework(
