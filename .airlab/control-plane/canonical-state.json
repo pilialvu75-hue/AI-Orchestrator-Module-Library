@@ -7,7 +7,7 @@
     "policy": "This private repository is the single coordination authority. Chats and agents are workers, not independent sources of truth."
   },
   "updated_at": "2026-10-01",
-  "state_revision": 7,
+  "state_revision": 8,
   "lifecycle_status": "BOOTSTRAP_ACTIVE",
   "roadmap_authority": {
     "library": ".airlab/roadmap.yaml",
@@ -77,8 +77,8 @@
     "no_change_no_commit": true
   },
   "projection": {
-    "source_digest": "830c3cf2080ca110627e53069034cb37cf9627f6a59463bc96695250da82d55d",
-    "projected_at": "2026-10-01T08:47:59Z",
+    "source_digest": "4846da420b2e9f01cd7ecaa300e5e04e74f0635e9e8ac0d3aae5d2869ef389b7",
+    "projected_at": "2026-10-01T08:57:11Z",
     "counts": {
       "CLAIMED": 1,
       "READY": 14
@@ -157,41 +157,49 @@
         "id": "airlab",
         "status": "READY",
         "activation": "active",
-        "state_version": 1,
+        "state_version": 2,
         "updated_at": "2026-10-01",
         "active_claim": null,
         "reviewer_state": "PENDING",
-        "inference_profile_status": null
+        "inference_profile_status": null,
+        "historical_backlog_count": 5,
+        "next_action": "Advance AIR-10 as a bounded dispatcher/executor task without creating a second Project/Execution authority."
       },
       {
         "id": "cantiere",
         "status": "READY",
         "activation": "active",
-        "state_version": 1,
+        "state_version": 2,
         "updated_at": "2026-10-01",
         "active_claim": null,
         "reviewer_state": "PENDING",
-        "inference_profile_status": null
+        "inference_profile_status": null,
+        "historical_backlog_count": 3,
+        "next_action": "Claim the smallest bounded reproduction/fix for the current Phase 1 ONLINE generated-app failure."
       },
       {
         "id": "diagnostics",
         "status": "READY",
         "activation": "active",
-        "state_version": 1,
+        "state_version": 2,
         "updated_at": "2026-10-01",
         "active_claim": null,
         "reviewer_state": "PENDING",
-        "inference_profile_status": null
+        "inference_profile_status": null,
+        "historical_backlog_count": 3,
+        "next_action": "Claim one bounded parity/operational-validation item and collect remote evidence rather than relying on screenshots."
       },
       {
         "id": "library-researcher",
         "status": "READY",
         "activation": "active",
-        "state_version": 1,
+        "state_version": 2,
         "updated_at": "2026-10-01",
         "active_claim": null,
         "reviewer_state": "PENDING",
-        "inference_profile_status": null
+        "inference_profile_status": null,
+        "historical_backlog_count": 4,
+        "next_action": "Advance the currently claimed acceleration-backend evolution item through its acceptance gates before opening duplicate discovery work."
       },
       {
         "id": "main-reviewer",
@@ -206,17 +214,21 @@
           "lease_until": "2026-10-01T20:40:00Z"
         },
         "reviewer_state": "AUTHORITY",
-        "inference_profile_status": null
+        "inference_profile_status": null,
+        "historical_backlog_count": 0,
+        "next_action": "Consolidate historical chat-only work into private roadmaps/canonical state and produce a deletion-safe chat archive register."
       },
       {
         "id": "platform-android",
         "status": "READY",
         "activation": "active",
-        "state_version": 2,
+        "state_version": 3,
         "updated_at": "2026-10-01",
         "active_claim": null,
         "reviewer_state": "PENDING",
-        "inference_profile_status": "ACTIVE_BENCHMARKING"
+        "inference_profile_status": "ACTIVE_BENCHMARKING",
+        "historical_backlog_count": 3,
+        "next_action": "After the relevant runtime change is on main, perform target-runtime evidence on Galaxy S24 FE and update the Android inference profile."
       },
       {
         "id": "platform-ios",
@@ -226,7 +238,9 @@
         "updated_at": "2026-10-01",
         "active_claim": null,
         "reviewer_state": "PENDING",
-        "inference_profile_status": "NEEDS_TARGET_PROFILE"
+        "inference_profile_status": "NEEDS_TARGET_PROFILE",
+        "historical_backlog_count": 0,
+        "next_action": "Claim one bounded work item before implementation."
       },
       {
         "id": "platform-linux",
@@ -236,77 +250,93 @@
         "updated_at": "2026-10-01",
         "active_claim": null,
         "reviewer_state": "PENDING",
-        "inference_profile_status": "NEEDS_TARGET_PROFILE"
+        "inference_profile_status": "NEEDS_TARGET_PROFILE",
+        "historical_backlog_count": 0,
+        "next_action": "Claim one bounded work item before implementation."
       },
       {
         "id": "platform-macos",
         "status": "READY",
         "activation": "ready",
-        "state_version": 2,
+        "state_version": 3,
         "updated_at": "2026-10-01",
         "active_claim": null,
         "reviewer_state": "PENDING",
-        "inference_profile_status": "NEEDS_TARGET_PROFILE"
+        "inference_profile_status": "NEEDS_TARGET_PROFILE",
+        "historical_backlog_count": 5,
+        "next_action": "Claim one bounded macOS target-acceptance gap without collapsing modern and High Sierra constraints."
       },
       {
         "id": "platform-raspberry-pi",
         "status": "READY",
         "activation": "ready",
-        "state_version": 2,
+        "state_version": 3,
         "updated_at": "2026-10-01",
         "active_claim": null,
         "reviewer_state": "PENDING",
-        "inference_profile_status": "NEEDS_TARGET_PROFILE"
+        "inference_profile_status": "NEEDS_TARGET_PROFILE",
+        "historical_backlog_count": 4,
+        "next_action": "Keep ready; claim a bounded Raspberry Pi foundation item only after shared runtime/platform contracts needed by it are stable."
       },
       {
         "id": "platform-web",
         "status": "READY",
         "activation": "active",
-        "state_version": 2,
+        "state_version": 3,
         "updated_at": "2026-10-01",
         "active_claim": null,
         "reviewer_state": "PENDING",
-        "inference_profile_status": "NEEDS_TARGET_PROFILE"
+        "inference_profile_status": "NEEDS_TARGET_PROFILE",
+        "historical_backlog_count": 3,
+        "next_action": "Claim a bounded Web/PWA reliability task aligned with AIR-7; do not create a second project lifecycle."
       },
       {
         "id": "platform-windows",
         "status": "READY",
         "activation": "active",
-        "state_version": 2,
+        "state_version": 3,
         "updated_at": "2026-10-01",
         "active_claim": null,
         "reviewer_state": "PENDING",
-        "inference_profile_status": "NEEDS_TARGET_PROFILE"
+        "inference_profile_status": "NEEDS_TARGET_PROFILE",
+        "historical_backlog_count": 3,
+        "next_action": "Claim a bounded modern-Windows parity or updater task only if it does not overlap the active legacy-Windows blockers."
       },
       {
         "id": "platform-windows-legacy",
         "status": "READY",
         "activation": "active",
-        "state_version": 2,
+        "state_version": 3,
         "updated_at": "2026-10-01",
         "active_claim": null,
         "reviewer_state": "PENDING",
-        "inference_profile_status": "NEEDS_TARGET_PROFILE"
+        "inference_profile_status": "NEEDS_TARGET_PROFILE",
+        "historical_backlog_count": 6,
+        "next_action": "Claim one bounded Windows legacy blocker from #639/#674/#690/#721 and require real target evidence before promotion."
       },
       {
         "id": "runtime-core",
         "status": "READY",
         "activation": "active",
-        "state_version": 2,
+        "state_version": 3,
         "updated_at": "2026-10-01",
         "active_claim": null,
         "reviewer_state": "PENDING",
-        "inference_profile_status": null
+        "inference_profile_status": null,
+        "historical_backlog_count": 4,
+        "next_action": "Claim one bounded benchmark/runtime item; prefer closing the physical Vulkan evidence gap before unrelated runtime expansion."
       },
       {
         "id": "voice-live",
         "status": "READY",
         "activation": "active",
-        "state_version": 1,
+        "state_version": 2,
         "updated_at": "2026-10-01",
         "active_claim": null,
         "reviewer_state": "PENDING",
-        "inference_profile_status": null
+        "inference_profile_status": null,
+        "historical_backlog_count": 6,
+        "next_action": "Claim the smallest shared Voice/Live blocker that can be proved with target audio evidence; prioritize audible playback and model-install integrity."
       }
     ]
   },
