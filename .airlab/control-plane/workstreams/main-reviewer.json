@@ -3,29 +3,18 @@
   "id": "main-reviewer",
   "title": "Main / Reviewer",
   "role": "reviewer",
-  "status": "CLAIMED",
+  "status": "READY",
   "activation": "active",
   "scope": "Global architecture, cross-lane review, consolidation, roadmap/state authority and hardening, including target inference profile balance and shared-contract compatibility.",
   "shared_engine_policy": "shared_or_control_plane",
-  "state_version": 17,
+  "state_version": 18,
   "updated_at": "2026-10-01",
-  "active_claim": {
-    "claim_id": "main-reviewer-test-isolation-fix-v1-20261001",
-    "owner_lane": "main-reviewer",
-    "work_item": "control-plane-test-isolation-fix-v1",
-    "repository": "pilialvu75-hue/AI-Orchestrator-Module-Library",
-    "scope": "Fix lifecycle hardening test so it is independent of persisted review_packet_history.",
-    "branch": "control-plane/test-isolation-fix-v1-20261001",
-    "started_at": "2026-10-01T15:24:00Z",
-    "heartbeat_at": "2026-10-01T15:24:00Z",
-    "lease_until": "2026-10-02T03:24:00Z",
-    "lease_hours": 12
-  },
+  "active_claim": null,
   "dependencies": [],
   "roadmap_refs": [],
   "evidence": [],
   "gates": {
-    "G0_CLAIM": "PASS",
+    "G0_CLAIM": "PENDING",
     "G1_IMPLEMENTATION": "PENDING",
     "G2_STATIC": "PENDING",
     "G3_CI": "PENDING",
@@ -40,7 +29,7 @@
     "reviewed_by": null,
     "reviewed_at": null
   },
-  "next_action": "Fix review_packet_history test isolation and restore green main validation.",
+  "next_action": "Proceed with structural backlog CP-HARDEN-01..05; no active incident remains in the control plane.",
   "inference_review_policy": {
     "policy": ".airlab/control-plane/inference-policy.json",
     "check": [
@@ -203,6 +192,27 @@
         }
       ],
       "summary": "Hardened control-plane lifecycle integrity after first autonomous Cantiere pilot."
+    },
+    {
+      "claim_id": "main-reviewer-test-isolation-fix-v1-20261001",
+      "work_item": "control-plane-test-isolation-fix-v1",
+      "completed_at": "2026-10-01T15:27:00Z",
+      "result": "MERGED_VERIFIED",
+      "pull_request": 90,
+      "merge_commit": "18729b890ffe17a34426cee664960f767a9f9aa5",
+      "evidence": [
+        {
+          "type": "ci",
+          "ref": "Validate Module Library run 36883514623",
+          "result": "PASS"
+        },
+        {
+          "type": "pull_request",
+          "ref": "AI-Orchestrator-Module-Library#90",
+          "result": "PASS"
+        }
+      ],
+      "summary": "Restored green main validation after archiving real pilot review history."
     }
   ],
   "checkpoints": [
@@ -302,29 +312,41 @@
       ],
       "next_action": "Address remaining structural hardening: pre-commit state mutation guard, resource-level conflict locks, unclaimed external-change ingress detection, then AIR-10 dispatcher.",
       "kind": "AUDIT_COMPLETION"
+    },
+    {
+      "seq": 6,
+      "at": "2026-10-01T15:27:00Z",
+      "claim_id": "main-reviewer-test-isolation-fix-v1-20261001",
+      "work_item": "control-plane-test-isolation-fix-v1",
+      "summary": "Post-hardening test isolation fixed. PR #90 merged after full Library validation passed.",
+      "decisions": [
+        "Persisted review history is valid fixture state and tests must not assume an empty repository history."
+      ],
+      "evidence_refs": [
+        "AI-Orchestrator-Module-Library#90",
+        "merge:18729b890ffe17a34426cee664960f767a9f9aa5",
+        "Validate Module Library run 36883514623"
+      ],
+      "next_action": "Proceed with structural backlog CP-HARDEN-01..05; no active incident remains in the control plane.",
+      "kind": "COMPLETION"
     }
   ],
   "last_checkpoint": {
-    "seq": 5,
-    "at": "2026-10-01T15:22:00Z",
-    "claim_id": "main-reviewer-lifecycle-integrity-hardening-v1-20261001",
-    "work_item": "control-plane-lifecycle-integrity-v1",
-    "summary": "Post-pilot control-plane audit completed. PR #89 hardened per-claim reset, lease expiry, review schema, required review gates and roadmap-sync semantics. Windows Legacy automation was migrated to canonical lane rules and Cantiere pilot metadata was closed/cleaned.",
+    "seq": 6,
+    "at": "2026-10-01T15:27:00Z",
+    "claim_id": "main-reviewer-test-isolation-fix-v1-20261001",
+    "work_item": "control-plane-test-isolation-fix-v1",
+    "summary": "Post-hardening test isolation fixed. PR #90 merged after full Library validation passed.",
     "decisions": [
-      "A new claim must not inherit reviewer approval, evidence, review packet or PASS gates.",
-      "Expired claims cannot be revived by heartbeat/checkpoint.",
-      "Review packets must conform to canonical schema, not only contain required keys.",
-      "Material roadmap impact keeps G7 pending until synchronization is actually verified.",
-      "Enabled mutating automations must operate through a canonical lane."
+      "Persisted review history is valid fixture state and tests must not assume an empty repository history."
     ],
     "evidence_refs": [
-      "AI-Orchestrator-Module-Library#89",
-      "merge:52ac6c765aaa7072842615b5af474fad18f89239",
-      "Validate Module Library run 36883027227",
-      "Ai-orchestrator-riserva#747"
+      "AI-Orchestrator-Module-Library#90",
+      "merge:18729b890ffe17a34426cee664960f767a9f9aa5",
+      "Validate Module Library run 36883514623"
     ],
-    "next_action": "Address remaining structural hardening: pre-commit state mutation guard, resource-level conflict locks, unclaimed external-change ingress detection, then AIR-10 dispatcher.",
-    "kind": "AUDIT_COMPLETION"
+    "next_action": "Proceed with structural backlog CP-HARDEN-01..05; no active incident remains in the control plane.",
+    "kind": "COMPLETION"
   },
   "hardening_backlog": [
     {
