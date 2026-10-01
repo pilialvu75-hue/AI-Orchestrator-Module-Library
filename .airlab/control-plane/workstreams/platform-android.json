@@ -7,11 +7,14 @@
   "activation": "active",
   "scope": "Android packaging, permissions, hardware/runtime adapters, UI integration and releases using shared orchestration/contracts with target-optimized inference.",
   "shared_engine_policy": "adapter_only",
-  "state_version": 2,
+  "state_version": 3,
   "updated_at": "2026-10-01",
   "active_claim": null,
   "dependencies": [],
-  "roadmap_refs": [],
+  "roadmap_refs": [
+    ".airlab/public-repositories/Ai-orchestrator-riserva/roadmap.yaml#CANT-14",
+    ".airlab/public-repositories/Ai-orchestrator-riserva/roadmap.yaml#CANT-INF1"
+  ],
   "evidence": [],
   "gates": {
     "G0_CLAIM": "PENDING",
@@ -29,7 +32,7 @@
     "reviewed_by": null,
     "reviewed_at": null
   },
-  "next_action": "Claim one bounded work item before implementation.",
+  "next_action": "After the relevant runtime change is on main, perform target-runtime evidence on Galaxy S24 FE and update the Android inference profile.",
   "inference_profile_policy": "target_owned_benchmark_gated",
   "inference_profile": {
     "status": "ACTIVE_BENCHMARKING",
@@ -42,5 +45,10 @@
     "accelerator": null,
     "fallback_chain": [],
     "evidence": []
-  }
+  },
+  "historical_backlog": [
+    "Galaxy S24 FE is the current physical inference/thermal benchmark target.",
+    "Heavy 6.7B/7B models must remain safely skipped when RAM headroom is insufficient.",
+    "Repeat Vulkan 0/10/99 only with the thermal-gate fix present and capture end receipt/Diagnostics."
+  ]
 }
