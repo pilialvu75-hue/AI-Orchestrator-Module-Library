@@ -163,3 +163,18 @@ Checkpoints are required after meaningful milestones, new blockers/diagnoses, ma
 `submit-review` automatically records a final `REVIEW_HANDOFF` checkpoint.
 
 The ChatGPT product does not need to expose a reliable "context almost full" signal for continuity. If a chat fills unexpectedly, the replacement chat reads the same lane and resumes from `last_checkpoint`.
+
+
+## Checkpoint freshness watchdog
+
+Hourly/event reconciliation also evaluates active claims for checkpoint freshness.
+
+After 120 minutes without a checkpoint for the current claim, the lane appears in
+`canonical-state.json#projection.checkpoint_watch` as either:
+- `NO_CHECKPOINT_YET`
+- `CHECKPOINT_STALE`
+
+This is a reviewer-attention signal only. It does **not** fabricate missing chat content and
+does not block a lane before the normal claim lease expires. Main/Reviewer can then inspect the
+lane, current PR/CI/Diagnostics state and decide whether a real checkpoint, wait-state note,
+rework or reconciliation is needed.
