@@ -496,7 +496,6 @@ def review_accept(
     summary: str,
     next_action: str,
     evidence_refs: list[str] | None = None,
-    roadmap_synced: bool = False,
     root: Path = ROOT,
     now: datetime | None = None,
 ) -> None:
@@ -574,7 +573,7 @@ def review_accept(
     lane.setdefault("gates", {})["G6_REVIEWER"] = "PASS"
     roadmap_material = bool((packet.get("roadmap_impact") or {}).get("material"))
     lane["gates"]["G7_CANONICAL_SYNC"] = (
-        "PASS" if (not roadmap_material or roadmap_synced) else "PENDING_ROADMAP_SYNC"
+        "PASS" if not roadmap_material else "PENDING_ROADMAP_SYNC"
     )
     lane["next_action"] = next_action.strip()
     _write(lane_path, lane)
@@ -802,7 +801,6 @@ def _build_parser() -> argparse.ArgumentParser:
     accept_cmd.add_argument("--summary", required=True)
     accept_cmd.add_argument("--next-action", required=True)
     accept_cmd.add_argument("--evidence-ref", action="append", default=[])
-    accept_cmd.add_argument("--roadmap-synced", action="store_true")
 
     rework_cmd = sub.add_parser("review-rework")
     rework_cmd.add_argument("--lane", required=True)
@@ -842,7 +840,6 @@ def main() -> int:
             summary=args.summary,
             next_action=args.next_action,
             evidence_refs=args.evidence_ref,
-            roadmap_synced=args.roadmap_synced,
         )
         print("review-accepted")
     elif args.command == "review-rework":
