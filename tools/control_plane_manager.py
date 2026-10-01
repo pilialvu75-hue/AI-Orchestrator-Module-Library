@@ -274,6 +274,62 @@ def release(
     project(root=root, now=now)
 
 
+def submit_review(
+    lane_id: str,
+    packet_path: Path,
+    *,
+    root: Path = ROOT,
+    now: datetime | None = None,
+) -> None:
+    now = now or _now()
+    _, canonical = _canonical(root)
+    lane_path, lane = _lane_by_id(root, canonical, lane_id)
+
+    if lane.get("role") == "reviewer":
+        raise ValueError("reviewer lane does not submit worker review packets")
+    claim_data = lane.get("active_claim")
+    if not claim_data:
+        raise ValueError(f"lane {lane_id} has no active claim")
+    if lane.get("status") not in {"CLAIMED", "IMPLEMENTING", "EVIDENCE_READY"}:
+        raise ValueError(f"lane {lane_id} cannot submit review from state {lane.get('status')}")
+
+    packet = _load(packet_path)
+    required = (
+        "schema_version", "submitted_at", "lane_id", "claim_id", "work_item",
+        "repository", "summary", "changes", "evidence", "known_risks",
+        "reviewer_checks", "roadmap_impact",
+    )
+    for field in required:
+        if field not in packet:
+            raise ValueError(f"review packet missing {field}")
+    if packet.get("schema_version") != 1:
+        raise ValueError("review packet schema_version must be 1")
+    if packet.get("lane_id") != lane_id:
+        raise ValueError("review packet lane_id mismatch")
+    if packet.get("claim_id") != claim_data.get("claim_id"):
+        raise ValueError("review packet claim_id mismatch")
+    if packet.get("work_item") != claim_data.get("work_item"):
+        raise ValueError("review packet work_item mismatch")
+    if packet.get("repository") != claim_data.get("repository"):
+        raise ValueError("review packet repository mismatch")
+    if not packet.get("changes"):
+        raise ValueError("review packet requires at least one change")
+    if not packet.get("evidence"):
+        raise ValueError("review packet requires at least one evidence item")
+    if not packet.get("reviewer_checks"):
+        raise ValueError("review packet requires reviewer_checks")
+
+    lane["review_packet"] = packet
+    lane["evidence"] = packet["evidence"]
+    lane["status"] = "REVIEW_REQUIRED"
+    lane["updated_at"] = _date(now)
+    lane["state_version"] = int(lane.get("state_version", 0)) + 1
+    lane.setdefault("reviewer", {})["state"] = "PENDING"
+    lane["next_action"] = "Main/Reviewer must inspect the review_packet, linked evidence and required gates before promotion or rework."
+    _write(lane_path, lane)
+    project(root=root, now=now)
+
+
 def reconcile(root: Path = ROOT, now: datetime | None = None) -> list[str]:
     now = now or _now()
     _, canonical = _canonical(root)
@@ -341,6 +397,10 @@ def _build_parser() -> argparse.ArgumentParser:
     release_cmd.add_argument("--lane", required=True)
     release_cmd.add_argument("--reason", required=True)
 
+    submit_cmd = sub.add_parser("submit-review")
+    submit_cmd.add_argument("--lane", required=True)
+    submit_cmd.add_argument("--packet", required=True, type=Path)
+
     sub.add_parser("reconcile")
     sub.add_parser("project")
     return parser
@@ -363,6 +423,9 @@ def main() -> int:
     elif args.command == "release":
         release(args.lane, reason=args.reason)
         print("released")
+    elif args.command == "submit-review":
+        submit_review(args.lane, args.packet)
+        print("review-required")
     elif args.command == "reconcile":
         changed = reconcile()
         print("\n".join(changed) if changed else "no changes")
