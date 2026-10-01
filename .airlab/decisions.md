@@ -91,3 +91,15 @@ Decision date: 2026-10-01
 - `.github/workflows/control-plane-reconcile.yml` reconciles on relevant main changes and hourly, with serialized execution and bounded retry on push races.
 - The global `canonical-state.json#projection` is derived from merged lane state. It is only rewritten when the source digest changes, avoiding timestamp-only commit churn.
 - The reconciliation automation cannot promote worker output to `VERIFIED` or `DONE`; promotion authority remains with Main/Reviewer.
+
+
+## Chat rollover and historical deletion policy
+
+Decision date: 2026-10-01
+
+- Chat conversations are execution surfaces, not authoritative project storage.
+- When a chat is full, a replacement chat reuses the same canonical lane and reads current repository state through the generated lane bootstrap.
+- No new project state or parallel roadmap is created merely because the conversation changes.
+- A historical chat becomes deletion-safe only after its unique actionable work, unresolved items, reusable evidence and architectural decisions have a canonical repository home.
+- The private registry `.airlab/control-plane/historical-chat-consolidation.json` records the deletion decision and migration rationale for recovered legacy chats.
+- Ongoing chats may remain temporarily as bridges, but their backlog is duplicated into canonical workstream/roadmap state before they are considered replaceable.
