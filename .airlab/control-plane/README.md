@@ -207,3 +207,18 @@ claim. A stale projection must never hide a valid `REVIEW_REQUIRED` lane.
 
 Workers must never set `REVIEW_REQUIRED` by changing only the status field. A valid handoff is
 atomic: active claim + valid review packet + claim-bound review checkpoint + REVIEW_REQUIRED.
+
+
+## Lifecycle gap safeguards
+
+Additional invariants close failure modes found after the first autonomous pilot:
+
+- a claim may target only repositories registered for its lane in `chat-registry.json`;
+- heartbeat, checkpoint, submit-review and voluntary release cannot revive or bypass an expired lease;
+- a valid `REVIEW_REQUIRED` handoff stays reviewer-owned even when its worker lease time passes; reconciliation records `REVIEW_WAIT_OVERDUE` instead of destroying the handoff;
+- material roadmap impact makes the lane `BLOCKED` with `CANONICAL_SYNC_REQUIRED` after review acceptance, so no new claim can start until the referenced roadmap state is actually synchronized;
+- `canonical-sync-complete` requires the expected roadmap refs before returning the lane to `READY`;
+- direct JSON edits are still validated against registered repository scope and pre-review approval invariants.
+
+These rules complement, rather than replace, the remaining structural backlog for resource-level locks,
+unclaimed external-change ingress detection, automation registration, and the AIR-10 dispatcher.
