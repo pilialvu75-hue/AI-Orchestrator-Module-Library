@@ -7,7 +7,7 @@
     "policy": "This private repository is the single coordination authority. Chats and agents are workers, not independent sources of truth."
   },
   "updated_at": "2026-10-01",
-  "state_revision": 34,
+  "state_revision": 35,
   "lifecycle_status": "BOOTSTRAP_ACTIVE",
   "roadmap_authority": {
     "library": ".airlab/roadmap.yaml",
@@ -77,13 +77,21 @@
     "no_change_no_commit": true
   },
   "projection": {
-    "source_digest": "f63c1f22fec49774f94689c173634bf4702ec72bd8959a33731335bc02429c9e",
-    "projected_at": "2026-10-01T17:28:31Z",
+    "source_digest": "a7409b0c44f91f588030017cfbfeabe2d7c51dd5472d2e6fea585feed17c1084",
+    "projected_at": "2026-10-01T17:54:35Z",
     "counts": {
+      "CLAIMED": 1,
       "IMPLEMENTING": 1,
-      "READY": 14
+      "READY": 13
     },
     "active_claims": [
+      {
+        "lane": "main-reviewer",
+        "claim_id": "main-reviewer-cp-harden-01-v1-20261001",
+        "work_item": "CP-HARDEN-01",
+        "repository": "pilialvu75-hue/AI-Orchestrator-Module-Library",
+        "lease_until": "2026-10-02T05:58:00Z"
+      },
       {
         "lane": "platform-windows-legacy",
         "claim_id": "9234ab59756e8f7ce3be",
@@ -215,15 +223,20 @@
       },
       {
         "id": "main-reviewer",
-        "status": "READY",
+        "status": "CLAIMED",
         "activation": "active",
-        "state_version": 20,
+        "state_version": 21,
         "updated_at": "2026-10-01",
-        "active_claim": null,
+        "active_claim": {
+          "claim_id": "main-reviewer-cp-harden-01-v1-20261001",
+          "work_item": "CP-HARDEN-01",
+          "repository": "pilialvu75-hue/AI-Orchestrator-Module-Library",
+          "lease_until": "2026-10-02T05:58:00Z"
+        },
         "reviewer_state": "AUTHORITY",
         "inference_profile_status": null,
         "historical_backlog_count": 0,
-        "next_action": "Prioritize CP-HARDEN-01 atomic mutation/projection isolation, then CP-HARDEN-02 serialized resource locks and CP-HARDEN-04 canonical automation registry before broad AIR-10 dispatch."
+        "next_action": "Implement transactional inbox and fail-isolated projection path for CP-HARDEN-01."
       },
       {
         "id": "platform-android",
