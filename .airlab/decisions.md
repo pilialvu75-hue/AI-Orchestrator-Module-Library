@@ -77,3 +77,17 @@ Decision date: 2026-10-01
 - The objective is the strongest practical stable profile for the target, not the largest model and not the smallest model.
 - Each practical local profile defines a lower-resource fallback.
 - Main/Reviewer promotes a target inference profile only after target-runtime evidence and shared-contract compatibility are demonstrated.
+
+
+## Automated claim leases and projection
+
+Decision date: 2026-10-01
+
+- Worker claims are time-bounded leases with heartbeat, not permanent locks.
+- Default lease is 12 hours and the maximum lease is 24 hours unless the canonical policy is explicitly changed.
+- Duplicate active `work_item` claims are invalid across lanes.
+- An expired lease is never treated as success and is never silently reassigned. Reconciliation clears the stale claim, marks the lane `BLOCKED`, records an expiry event and requires Main/Reviewer reconciliation.
+- `tools/control_plane_manager.py` is the deterministic claim/heartbeat/release/reconcile/project implementation.
+- `.github/workflows/control-plane-reconcile.yml` reconciles on relevant main changes and hourly, with serialized execution and bounded retry on push races.
+- The global `canonical-state.json#projection` is derived from merged lane state. It is only rewritten when the source digest changes, avoiding timestamp-only commit churn.
+- The reconciliation automation cannot promote worker output to `VERIFIED` or `DONE`; promotion authority remains with Main/Reviewer.
