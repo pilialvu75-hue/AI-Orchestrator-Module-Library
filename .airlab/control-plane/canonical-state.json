@@ -7,7 +7,7 @@
     "policy": "This private repository is the single coordination authority. Chats and agents are workers, not independent sources of truth."
   },
   "updated_at": "2026-10-01",
-  "state_revision": 34,
+  "state_revision": 35,
   "lifecycle_status": "BOOTSTRAP_ACTIVE",
   "roadmap_authority": {
     "library": ".airlab/roadmap.yaml",
@@ -74,7 +74,8 @@
     "destination": ".airlab/control-plane/canonical-state.json#projection",
     "periodic_reconcile": "hourly",
     "event_reconcile": "main changes to workstreams/roadmaps/inference policy",
-    "no_change_no_commit": true
+    "no_change_no_commit": true,
+    "invalid_lane_behavior": "ISOLATE_AND_SURFACE_PROJECTION_INCIDENT"
   },
   "projection": {
     "source_digest": "f63c1f22fec49774f94689c173634bf4702ec72bd8959a33731335bc02429c9e",
@@ -398,5 +399,17 @@
       "automatic_block_before_claim_expiry": false,
       "rationale": "Detect lanes that may be working without recently persisted resume state while avoiding false blocking during legitimate waits."
     }
+  },
+  "mutation_policy": {
+    "mode": "transactional_inbox_compare_and_swap",
+    "processor": "tools/control_plane_inbox.py",
+    "pending": ".airlab/control-plane/inbox/pending/",
+    "processed": ".airlab/control-plane/inbox/processed/",
+    "quarantine": ".airlab/control-plane/inbox/quarantine/",
+    "expected_state_version_required": true,
+    "api_direct_workstream_writes": "FORBIDDEN",
+    "candidate_validation": "TEMP_COPY_BEFORE_APPLY",
+    "invalid_request_behavior": "QUARANTINE_WITHOUT_LANE_MUTATION",
+    "projection_failure_isolation": "PER_LANE_INCIDENT"
   }
 }
