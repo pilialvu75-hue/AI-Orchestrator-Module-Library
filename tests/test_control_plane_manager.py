@@ -36,6 +36,15 @@ class ControlPlaneManagerTests(unittest.TestCase):
             dst = self.root / rel
             dst.parent.mkdir(parents=True, exist_ok=True)
             shutil.copyfile(src, dst)
+            lane = json.loads(dst.read_text(encoding="utf-8"))
+            lane["status"] = "READY"
+            lane["active_claim"] = None
+            lane.pop("review_packet", None)
+            lane.pop("block_reason", None)
+            lane.setdefault("gates", {})["G0_CLAIM"] = "PENDING"
+            if lane.get("role") != "reviewer":
+                lane.setdefault("reviewer", {})["state"] = "PENDING"
+            dst.write_text(json.dumps(lane, indent=2) + "\n", encoding="utf-8")
 
     def tearDown(self):
         self.temp.cleanup()
