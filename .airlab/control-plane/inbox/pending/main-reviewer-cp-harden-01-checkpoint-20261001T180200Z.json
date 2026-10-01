@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "request_id": "main-reviewer-cp-harden-01-checkpoint-20261001T180200Z",
+  "submitted_at": "2026-10-01T18:02:00Z",
+  "actor_id": "chat:main-reviewer",
+  "lane_id": "main-reviewer",
+  "operation": "checkpoint",
+  "expected_state_version": 21,
+  "payload": {
+    "summary": "CP-HARDEN-01 implemented and merged via PR #93. Transactional compare-and-swap mutation inbox, quarantine receipts, and per-lane projection incident isolation are operational.",
+    "next_action": "Migrate mutating automation state writes to the transactional inbox, then proceed to CP-HARDEN-02 resource-level conflict locks.",
+    "decisions": [
+      "Operational API writers must not edit workstream or canonical-state JSON directly on main.",
+      "Invalid or stale mutation requests are quarantined without changing lane state.",
+      "Unreadable lanes are isolated in projection_incidents instead of blinding healthy lanes."
+    ],
+    "evidence_refs": [
+      "AI-Orchestrator-Module-Library#93",
+      "merge:6672c94055143d4bce875938d8c3d95e36086ee3",
+      "Validate Module Library PR run 36903506691"
+    ]
+  }
+}
