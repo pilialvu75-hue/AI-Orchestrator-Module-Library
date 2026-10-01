@@ -61,5 +61,19 @@ Decision date: 2026-10-01
 - Specialized worker chats may independently implement and collect evidence, but self-promotion stops at `REVIEW_REQUIRED`.
 - Every bounded task must be claimed before implementation; overlapping active claims are invalid.
 - CI green is only one gate. Runtime/hardware claims require target-runtime evidence and Diagnostics or equivalent receipts.
-- Platform lanes share one engine. Windows, legacy Windows, Linux, macOS, iOS, Android, Web and Raspberry Pi adapt platform IO/packaging/hardware/UI boundaries; they do not fork inference, routing, memory, voice-core, Diagnostics or Cantiere lifecycle semantics without Main/Reviewer approval.
+- Platform lanes share one Orchestrator and stable contracts. Inference implementations are deliberately target-specific: Windows, legacy Windows, Linux, macOS, iOS, Android, Web and Raspberry Pi may use different LLMs, sizes, quantizations, backends and acceleration settings when benchmark evidence justifies them. They must preserve shared inference/routing semantics, Diagnostics contracts and Cantiere lifecycle.
 - A result is not DONE while roadmap or canonical state is stale.
+
+
+## Target-specific inference architecture
+
+Decision date: 2026-10-01
+
+- Runtime Core owns the shared inference contract, routing semantics, streaming/cancellation/error behavior and model-profile schema.
+- Each platform lane owns its actual inference profile for its hardware/software target.
+- There is no mandatory universal local LLM, quantization, backend or accelerator configuration across platforms.
+- A single platform may assign different models to different roles/capabilities.
+- Selection is benchmark-gated using quality, first-content latency, total latency, decode throughput, memory/headroom, stability, thermal behavior, accelerator effectiveness, compatibility and practical storage/download cost.
+- The objective is the strongest practical stable profile for the target, not the largest model and not the smallest model.
+- Each practical local profile defines a lower-resource fallback.
+- Main/Reviewer promotes a target inference profile only after target-runtime evidence and shared-contract compatibility are demonstrated.

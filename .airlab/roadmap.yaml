@@ -206,3 +206,12 @@ roadmap:
     outcome: >-
       Add machine-driven stale-claim expiry/reconciliation and deterministic projection of merged
       workstream evidence into the global canonical state without allowing worker self-promotion.
+
+  - id: L16
+    title: Target-specific inference profile matrix
+    state: active
+    priority: P0
+    outcome: >-
+      Maintain benchmark-gated inference profiles per platform and hardware class so constrained
+      targets are not overloaded and capable targets are not artificially limited, while preserving
+      one shared inference/routing contract and reviewer-controlled promotion.

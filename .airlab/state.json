@@ -10,6 +10,7 @@
   ],
   "next_actions": [
     "L14",
+    "L16",
     "L2",
     "L3",
     "L5",
@@ -54,6 +55,9 @@
     "reviewer_lane": "main-reviewer",
     "worker_promotion_ceiling": "REVIEW_REQUIRED",
     "validation": "tools/validate_control_plane.py",
-    "roadmap_sync_rule": "Material accepted state/scope/priority changes update roadmap and lane state in the same PR."
+    "roadmap_sync_rule": "Material accepted state/scope/priority changes update roadmap and lane state in the same PR.",
+    "inference_policy": ".airlab/control-plane/inference-policy.json",
+    "inference_architecture": "shared_contract_target_specific_profiles",
+    "inference_profile_promotion": "target evidence -> REVIEW_REQUIRED -> main-reviewer -> VERIFIED/DONE"
   }
 }
