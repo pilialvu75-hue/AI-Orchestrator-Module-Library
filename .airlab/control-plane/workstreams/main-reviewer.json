@@ -3,18 +3,29 @@
   "id": "main-reviewer",
   "title": "Main / Reviewer",
   "role": "reviewer",
-  "status": "READY",
+  "status": "CLAIMED",
   "activation": "active",
   "scope": "Global architecture, cross-lane review, consolidation, roadmap/state authority and hardening, including target inference profile balance and shared-contract compatibility.",
   "shared_engine_policy": "shared_or_control_plane",
-  "state_version": 8,
+  "state_version": 9,
   "updated_at": "2026-10-01",
-  "active_claim": null,
+  "active_claim": {
+    "claim_id": "main-reviewer-checkpoint-watchdog-v1-20261001",
+    "owner_lane": "main-reviewer",
+    "work_item": "checkpoint-watchdog-v1",
+    "repository": "pilialvu75-hue/AI-Orchestrator-Module-Library",
+    "scope": "Add autonomous checkpoint freshness watchdog to surface claimed lanes that have not persisted progress recently, without fabricating chat content or auto-blocking legitimate waits.",
+    "branch": "control-plane/checkpoint-watchdog-v1-20261001",
+    "started_at": "2026-10-01T09:20:00Z",
+    "heartbeat_at": "2026-10-01T09:20:00Z",
+    "lease_until": "2026-10-01T21:20:00Z",
+    "lease_hours": 12
+  },
   "dependencies": [],
   "roadmap_refs": [],
   "evidence": [],
   "gates": {
-    "G0_CLAIM": "PENDING",
+    "G0_CLAIM": "PASS",
     "G1_IMPLEMENTATION": "PENDING",
     "G2_STATIC": "PENDING",
     "G3_CI": "PENDING",
@@ -29,7 +40,7 @@
     "reviewed_by": null,
     "reviewed_at": null
   },
-  "next_action": "Review worker lanes and rely on continuous canonical checkpoints for chat continuity.",
+  "next_action": "Implement checkpoint freshness watchdog and canonical projection visibility.",
   "inference_review_policy": {
     "policy": ".airlab/control-plane/inference-policy.json",
     "check": [
