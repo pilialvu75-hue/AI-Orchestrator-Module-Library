@@ -3,13 +3,14 @@
   "repository": "pilialvu75-hue/AI-Orchestrator-Module-Library",
   "updated_at": "2026-10-01",
   "lifecycle_status": "ACTIVE",
-  "current_phase": "L14",
+  "current_phase": "L17",
   "completed": [
     "L1",
     "L13",
     "L15"
   ],
   "next_actions": [
+    "L17",
     "L14",
     "L16",
     "L2",
@@ -76,6 +77,13 @@
       ],
       "write_rule": "only when deterministic source digest changes",
       "status": "AUTOMATED"
+    },
+    "chat_lanes": {
+      "status": "ACTIVE_ROLLOUT",
+      "registry": ".airlab/control-plane/chat-registry.json",
+      "bootstrap_generator": "tools/chat_lane_bootstrap.py",
+      "review_packet_schema": ".airlab/control-plane/schemas/review-packet.schema.json",
+      "worker_submission": "tools/control_plane_manager.py submit-review"
     }
   }
 }
