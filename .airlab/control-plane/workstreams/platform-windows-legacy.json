@@ -3,36 +3,25 @@
   "id": "platform-windows-legacy",
   "title": "Windows 7/8.1",
   "role": "worker",
-  "status": "IMPLEMENTING",
+  "status": "READY",
   "activation": "active",
   "scope": "Legacy Windows compatibility layer, installer/update and target-specific adapters with target-optimized inference while preserving shared orchestration/contracts.",
   "shared_engine_policy": "adapter_only",
-  "state_version": 8,
+  "state_version": 9,
   "updated_at": "2026-10-01",
-  "active_claim": {
-    "claim_id": "9234ab59756e8f7ce3be",
-    "owner_lane": "platform-windows-legacy",
-    "work_item": "pr-721-win7-model-load-crash-isolation",
-    "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
-    "scope": "Continue the #721 Windows 7 interaction/model-load blocker only: use current descendant PR #736 to isolate the first crashing model-load stage with one physical probe at a time; preserve Win8.1/10/11 behavior and do not merge before target evidence.",
-    "branch": "test/windows7-model-load-deep-probes",
-    "started_at": "2026-10-01T15:24:13Z",
-    "heartbeat_at": "2026-10-01T19:19:04Z",
-    "lease_until": "2026-10-02T07:19:04Z",
-    "lease_hours": 12
-  },
+  "active_claim": null,
   "dependencies": [],
   "roadmap_refs": [
     ".airlab/public-repositories/Ai-orchestrator-riserva/roadmap.yaml#CANT-15"
   ],
   "evidence": [],
   "gates": {
-    "G0_CLAIM": "PASS",
-    "G1_IMPLEMENTATION": "PASS",
-    "G2_STATIC": "PASS",
-    "G3_CI": "PASS",
-    "G4_INTEGRATION": "PASS",
-    "G5_TARGET_RUNTIME": "PENDING",
+    "G0_CLAIM": "PENDING",
+    "G1_IMPLEMENTATION": "PENDING",
+    "G2_STATIC": "PENDING",
+    "G3_CI": "PENDING",
+    "G4_INTEGRATION": "PENDING",
+    "G5_TARGET_RUNTIME": "NOT_APPLICABLE_UNTIL_RUNTIME_CHANGE",
     "G6_REVIEWER": "PENDING",
     "G7_CANONICAL_SYNC": "PENDING"
   },
@@ -131,5 +120,14 @@
       "build 1175"
     ],
     "next_action": "Run only physical Win7 probe 0C and record open or crash."
-  }
+  },
+  "reconciliation_events": [
+    {
+      "type": "CLAIM_RELEASED",
+      "claim_id": "9234ab59756e8f7ce3be",
+      "work_item": "pr-721-win7-model-load-crash-isolation",
+      "reason": "WAITING_OWNER_PHYSICAL",
+      "at": "2026-10-01T20:21:39Z"
+    }
+  ]
 }
