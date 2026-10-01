@@ -3,29 +3,18 @@
   "id": "main-reviewer",
   "title": "Main / Reviewer",
   "role": "reviewer",
-  "status": "CLAIMED",
+  "status": "READY",
   "activation": "active",
   "scope": "Global architecture, cross-lane review, consolidation, roadmap/state authority and hardening, including target inference profile balance and shared-contract compatibility.",
   "shared_engine_policy": "shared_or_control_plane",
-  "state_version": 13,
+  "state_version": 14,
   "updated_at": "2026-10-01",
-  "active_claim": {
-    "claim_id": "main-reviewer-reviewer-pipeline-repair-v1-20261001",
-    "owner_lane": "main-reviewer",
-    "work_item": "reviewer-pipeline-repair-v1",
-    "repository": "pilialvu75-hue/AI-Orchestrator-Module-Library",
-    "scope": "Repair malformed Cantiere reviewer handoff, restore projection/reviewer flow, and harden automatic reviewer intake against stale projections.",
-    "branch": "control-plane/reviewer-pipeline-repair-v1-20261001",
-    "started_at": "2026-10-01T14:05:00Z",
-    "heartbeat_at": "2026-10-01T14:05:00Z",
-    "lease_until": "2026-10-02T02:05:00Z",
-    "lease_hours": 12
-  },
+  "active_claim": null,
   "dependencies": [],
   "roadmap_refs": [],
   "evidence": [],
   "gates": {
-    "G0_CLAIM": "PASS",
+    "G0_CLAIM": "PENDING",
     "G1_IMPLEMENTATION": "PENDING",
     "G2_STATIC": "PENDING",
     "G3_CI": "PENDING",
@@ -40,7 +29,7 @@
     "reviewed_by": null,
     "reviewed_at": null
   },
-  "next_action": "Repair Cantiere #745 review handoff, then harden reviewer protocol and automation.",
+  "next_action": "Review raw worker lanes in REVIEW_REQUIRED, reconcile projection drift, and preserve downstream physical gates.",
   "inference_review_policy": {
     "policy": ".airlab/control-plane/inference-policy.json",
     "check": [
@@ -156,6 +145,32 @@
         }
       ],
       "summary": "Registered bounded Cantiere automation pilot and deletion-safe replacement of Cantiere 2.6."
+    },
+    {
+      "claim_id": "main-reviewer-reviewer-pipeline-repair-v1-20261001",
+      "work_item": "reviewer-pipeline-repair-v1",
+      "completed_at": "2026-10-01T14:14:00Z",
+      "result": "MERGED_VERIFIED",
+      "pull_request": 88,
+      "merge_commit": "fd41efe8e6f211d5e42a61fa1bf67b6c27f92e52",
+      "evidence": [
+        {
+          "type": "ci",
+          "ref": "Validate Module Library run 36874437149",
+          "result": "PASS"
+        },
+        {
+          "type": "pull_request",
+          "ref": "AI-Orchestrator-Module-Library#88",
+          "result": "PASS"
+        },
+        {
+          "type": "incident_recovery",
+          "ref": "Cantiere PR #745 reviewer handoff",
+          "result": "PASS"
+        }
+      ],
+      "summary": "Reviewer intake no longer depends on a possibly stale projection; explicit accept/rework transitions and atomic handoff rules are operational."
     }
   ],
   "checkpoints": [
@@ -212,24 +227,48 @@
       ],
       "next_action": "Observe first Cantiere Auto-Pilot cycles and compare canonical checkpoints/results before enabling additional chat lanes.",
       "kind": "COMPLETION"
+    },
+    {
+      "seq": 4,
+      "at": "2026-10-01T14:14:00Z",
+      "claim_id": "main-reviewer-reviewer-pipeline-repair-v1-20261001",
+      "work_item": "reviewer-pipeline-repair-v1",
+      "summary": "Reviewer pipeline repaired. PR #88 merged, raw workstreams are now authoritative for reviewer intake, review-accept/review-rework transitions exist, and the Cantiere #745 malformed handoff was repaired and reviewed without claiming physical acceptance.",
+      "decisions": [
+        "Reviewer must scan raw workstream files, not projection.review_required alone.",
+        "Status-only REVIEW_REQUIRED handoffs are forbidden.",
+        "Cantiere #745 implementation is approved; Phase 1 ONLINE remains open for physical Manga Kids retest."
+      ],
+      "evidence_refs": [
+        "AI-Orchestrator-Module-Library#88",
+        "merge:fd41efe8e6f211d5e42a61fa1bf67b6c27f92e52",
+        "Validate Module Library run 36874437149",
+        "Ai-orchestrator-riserva#745",
+        "merge:b7abc54c02c8d65e8a67532afe6f873674e2c4ed"
+      ],
+      "next_action": "Let the automatic Main/Reviewer scan raw lanes on each cycle; Cantiere next gate is a bounded physical Manga Kids retest on a release containing #745.",
+      "kind": "COMPLETION"
     }
   ],
   "last_checkpoint": {
-    "seq": 3,
-    "at": "2026-10-01T09:35:00Z",
-    "claim_id": "main-reviewer-cantiere-autopilot-pilot-v1-20261001",
-    "work_item": "cantiere-autopilot-pilot-v1",
-    "summary": "First bounded autonomous chat pilot registered for Cantiere and old Cantiere 2.6 promoted to deletion candidate via PR #87.",
+    "seq": 4,
+    "at": "2026-10-01T14:14:00Z",
+    "claim_id": "main-reviewer-reviewer-pipeline-repair-v1-20261001",
+    "work_item": "reviewer-pipeline-repair-v1",
+    "summary": "Reviewer pipeline repaired. PR #88 merged, raw workstreams are now authoritative for reviewer intake, review-accept/review-rework transitions exist, and the Cantiere #745 malformed handoff was repaired and reviewed without claiming physical acceptance.",
     "decisions": [
-      "Pilot limited to 4 hourly cycles.",
-      "One bounded Cantiere work item per cycle.",
-      "Stop at Main/Reviewer or physical-owner gates."
+      "Reviewer must scan raw workstream files, not projection.review_required alone.",
+      "Status-only REVIEW_REQUIRED handoffs are forbidden.",
+      "Cantiere #745 implementation is approved; Phase 1 ONLINE remains open for physical Manga Kids retest."
     ],
     "evidence_refs": [
-      "AI-Orchestrator-Module-Library#87",
-      "Validate Module Library run #229"
+      "AI-Orchestrator-Module-Library#88",
+      "merge:fd41efe8e6f211d5e42a61fa1bf67b6c27f92e52",
+      "Validate Module Library run 36874437149",
+      "Ai-orchestrator-riserva#745",
+      "merge:b7abc54c02c8d65e8a67532afe6f873674e2c4ed"
     ],
-    "next_action": "Observe first Cantiere Auto-Pilot cycles and compare canonical checkpoints/results before enabling additional chat lanes.",
+    "next_action": "Let the automatic Main/Reviewer scan raw lanes on each cycle; Cantiere next gate is a bounded physical Manga Kids retest on a release containing #745.",
     "kind": "COMPLETION"
   }
 }
