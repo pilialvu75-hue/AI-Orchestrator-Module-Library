@@ -1,0 +1,12 @@
+{
+  "schema_version": 1,
+  "request_id": "main-reviewer-cp-harden-01-release-20261001T180400Z",
+  "submitted_at": "2026-10-01T18:04:00Z",
+  "actor_id": "chat:main-reviewer",
+  "lane_id": "main-reviewer",
+  "operation": "release",
+  "expected_state_version": 22,
+  "payload": {
+    "reason": "CP-HARDEN-01 implementation merged and transactionally verified through a real APPLIED inbox checkpoint; release bounded implementation claim."
+  }
+}
