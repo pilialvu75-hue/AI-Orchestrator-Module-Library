@@ -1,0 +1,12 @@
+{
+  "schema_version": 1,
+  "request_id": "main-reviewer-cp-harden-01-release-20261001T180400Z",
+  "status": "APPLIED",
+  "processed_at": "2026-10-01T18:01:35Z",
+  "source_file": "main-reviewer-cp-harden-01-release-20261001T180400Z.json",
+  "lane_id": "main-reviewer",
+  "operation": "release",
+  "actor_id": "chat:main-reviewer",
+  "errors": [],
+  "result_state_version": 23
+}

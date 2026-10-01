@@ -3,29 +3,18 @@
   "id": "main-reviewer",
   "title": "Main / Reviewer",
   "role": "reviewer",
-  "status": "IMPLEMENTING",
+  "status": "READY",
   "activation": "active",
   "scope": "Global architecture, cross-lane review, consolidation, roadmap/state authority and hardening, including target inference profile balance and shared-contract compatibility.",
   "shared_engine_policy": "shared_or_control_plane",
-  "state_version": 22,
+  "state_version": 23,
   "updated_at": "2026-10-01",
-  "active_claim": {
-    "claim_id": "main-reviewer-cp-harden-01-v1-20261001",
-    "owner_lane": "main-reviewer",
-    "work_item": "CP-HARDEN-01",
-    "repository": "pilialvu75-hue/AI-Orchestrator-Module-Library",
-    "scope": "Add transactional control-plane mutation inbox with validate-before-apply semantics and quarantine so malformed automation/API requests cannot corrupt workstreams or blind global projection.",
-    "branch": "control-plane/cp-harden-01-transactional-inbox-v1-20261001",
-    "started_at": "2026-10-01T17:58:00Z",
-    "heartbeat_at": "2026-10-01T18:00:59Z",
-    "lease_until": "2026-10-02T06:00:59Z",
-    "lease_hours": 12
-  },
+  "active_claim": null,
   "dependencies": [],
   "roadmap_refs": [],
   "evidence": [],
   "gates": {
-    "G0_CLAIM": "PASS",
+    "G0_CLAIM": "PENDING",
     "G1_IMPLEMENTATION": "PENDING",
     "G2_STATIC": "PENDING",
     "G3_CI": "PENDING",
@@ -465,6 +454,15 @@
       "title": "Evidence-backed canonical sync receipts",
       "problem": "canonical-sync-complete currently verifies referenced roadmap identifiers but does not cryptographically prove that the referenced roadmap content actually changed to match the accepted work.",
       "target": "Record before/after content digest or commit/ref evidence for every material roadmap synchronization before G7 can become PASS."
+    }
+  ],
+  "reconciliation_events": [
+    {
+      "type": "CLAIM_RELEASED",
+      "claim_id": "main-reviewer-cp-harden-01-v1-20261001",
+      "work_item": "CP-HARDEN-01",
+      "reason": "CP-HARDEN-01 implementation merged and transactionally verified through a real APPLIED inbox checkpoint; release bounded implementation claim.",
+      "at": "2026-10-01T18:01:35Z"
     }
   ]
 }
