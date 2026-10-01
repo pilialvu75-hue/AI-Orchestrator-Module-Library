@@ -57,6 +57,13 @@ class ChatLaneBootstrapTests(unittest.TestCase):
         self.assertIn("Never set REVIEW_REQUIRED by editing only the status field", text)
         self.assertIn("submit-review", text)
 
+    def test_bootstrap_requires_transactional_mutation_inbox(self):
+        text = bootstrap.build_prompt("cantiere", ROOT)
+        self.assertIn("TRANSACTIONAL MUTATION RULE", text)
+        self.assertIn(".airlab/control-plane/inbox/pending/", text)
+        self.assertIn("expected_state_version", text)
+        self.assertIn("never edit workstream JSON or canonical-state.json directly", text)
+
     def test_unknown_lane_fails(self):
         with self.assertRaisesRegex(ValueError, "unknown chat lane"):
             bootstrap.build_prompt("does-not-exist", ROOT)
