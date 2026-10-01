@@ -28,6 +28,12 @@ def validate(root=ROOT):
         errors.append("inference-policy must forbid a universal default model")
     if canonical.get("inference_policy") != ".airlab/control-plane/inference-policy.json":
         errors.append("canonical state must reference inference-policy.json")
+    checkpoint_watchdog = (canonical.get("continuous_checkpoint_policy") or {}).get("watchdog") or {}
+    warning_minutes = checkpoint_watchdog.get("warning_after_minutes")
+    if not isinstance(warning_minutes, int) or warning_minutes <= 0:
+        errors.append("continuous checkpoint watchdog warning_after_minutes must be a positive integer")
+    if checkpoint_watchdog.get("automatic_content_generation") is not False:
+        errors.append("continuous checkpoint watchdog must not fabricate chat content")
     claim_policy = canonical.get("claim_policy") or {}
     default_lease = claim_policy.get("default_lease_hours")
     max_lease = claim_policy.get("max_lease_hours")
