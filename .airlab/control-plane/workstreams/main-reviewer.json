@@ -3,29 +3,18 @@
   "id": "main-reviewer",
   "title": "Main / Reviewer",
   "role": "reviewer",
-  "status": "CLAIMED",
+  "status": "READY",
   "activation": "active",
   "scope": "Global architecture, cross-lane review, consolidation, roadmap/state authority and hardening, including target inference profile balance and shared-contract compatibility.",
   "shared_engine_policy": "shared_or_control_plane",
-  "state_version": 15,
+  "state_version": 16,
   "updated_at": "2026-10-01",
-  "active_claim": {
-    "claim_id": "main-reviewer-lifecycle-integrity-hardening-v1-20261001",
-    "owner_lane": "main-reviewer",
-    "work_item": "control-plane-lifecycle-integrity-v1",
-    "repository": "pilialvu75-hue/AI-Orchestrator-Module-Library",
-    "scope": "Reset per-claim ephemeral approvals/gates, reject expired-lease resurrection, enforce review packet schema semantics, and make canonical sync gate honest.",
-    "branch": "control-plane/lifecycle-integrity-hardening-v1-20261001",
-    "started_at": "2026-10-01T15:12:00Z",
-    "heartbeat_at": "2026-10-01T15:12:00Z",
-    "lease_until": "2026-10-02T03:12:00Z",
-    "lease_hours": 12
-  },
+  "active_claim": null,
   "dependencies": [],
   "roadmap_refs": [],
   "evidence": [],
   "gates": {
-    "G0_CLAIM": "PASS",
+    "G0_CLAIM": "PENDING",
     "G1_IMPLEMENTATION": "PENDING",
     "G2_STATIC": "PENDING",
     "G3_CI": "PENDING",
@@ -40,7 +29,7 @@
     "reviewed_by": null,
     "reviewed_at": null
   },
-  "next_action": "Harden claim lifecycle, lease expiry, review schema and canonical-sync semantics.",
+  "next_action": "Address remaining structural hardening: pre-commit state mutation guard, resource-level conflict locks, unclaimed external-change ingress detection, then AIR-10 dispatcher.",
   "inference_review_policy": {
     "policy": ".airlab/control-plane/inference-policy.json",
     "check": [
@@ -182,6 +171,27 @@
         }
       ],
       "summary": "Reviewer intake no longer depends on a possibly stale projection; explicit accept/rework transitions and atomic handoff rules are operational."
+    },
+    {
+      "claim_id": "main-reviewer-lifecycle-integrity-hardening-v1-20261001",
+      "work_item": "control-plane-lifecycle-integrity-v1",
+      "completed_at": "2026-10-01T15:22:00Z",
+      "result": "MERGED_VERIFIED",
+      "pull_request": 89,
+      "merge_commit": "52ac6c765aaa7072842615b5af474fad18f89239",
+      "evidence": [
+        {
+          "type": "ci",
+          "ref": "Validate Module Library run 36883027227",
+          "result": "PASS"
+        },
+        {
+          "type": "pull_request",
+          "ref": "AI-Orchestrator-Module-Library#89",
+          "result": "PASS"
+        }
+      ],
+      "summary": "Hardened control-plane lifecycle integrity after first autonomous Cantiere pilot."
     }
   ],
   "checkpoints": [
@@ -259,27 +269,87 @@
       ],
       "next_action": "Let the automatic Main/Reviewer scan raw lanes on each cycle; Cantiere next gate is a bounded physical Manga Kids retest on a release containing #745.",
       "kind": "COMPLETION"
+    },
+    {
+      "seq": 5,
+      "at": "2026-10-01T15:22:00Z",
+      "claim_id": "main-reviewer-lifecycle-integrity-hardening-v1-20261001",
+      "work_item": "control-plane-lifecycle-integrity-v1",
+      "summary": "Post-pilot control-plane audit completed. PR #89 hardened per-claim reset, lease expiry, review schema, required review gates and roadmap-sync semantics. Windows Legacy automation was migrated to canonical lane rules and Cantiere pilot metadata was closed/cleaned.",
+      "decisions": [
+        "A new claim must not inherit reviewer approval, evidence, review packet or PASS gates.",
+        "Expired claims cannot be revived by heartbeat/checkpoint.",
+        "Review packets must conform to canonical schema, not only contain required keys.",
+        "Material roadmap impact keeps G7 pending until synchronization is actually verified.",
+        "Enabled mutating automations must operate through a canonical lane."
+      ],
+      "evidence_refs": [
+        "AI-Orchestrator-Module-Library#89",
+        "merge:52ac6c765aaa7072842615b5af474fad18f89239",
+        "Validate Module Library run 36883027227",
+        "Ai-orchestrator-riserva#747"
+      ],
+      "next_action": "Address remaining structural hardening: pre-commit state mutation guard, resource-level conflict locks, unclaimed external-change ingress detection, then AIR-10 dispatcher.",
+      "kind": "AUDIT_COMPLETION"
     }
   ],
   "last_checkpoint": {
-    "seq": 4,
-    "at": "2026-10-01T14:14:00Z",
-    "claim_id": "main-reviewer-reviewer-pipeline-repair-v1-20261001",
-    "work_item": "reviewer-pipeline-repair-v1",
-    "summary": "Reviewer pipeline repaired. PR #88 merged, raw workstreams are now authoritative for reviewer intake, review-accept/review-rework transitions exist, and the Cantiere #745 malformed handoff was repaired and reviewed without claiming physical acceptance.",
+    "seq": 5,
+    "at": "2026-10-01T15:22:00Z",
+    "claim_id": "main-reviewer-lifecycle-integrity-hardening-v1-20261001",
+    "work_item": "control-plane-lifecycle-integrity-v1",
+    "summary": "Post-pilot control-plane audit completed. PR #89 hardened per-claim reset, lease expiry, review schema, required review gates and roadmap-sync semantics. Windows Legacy automation was migrated to canonical lane rules and Cantiere pilot metadata was closed/cleaned.",
     "decisions": [
-      "Reviewer must scan raw workstream files, not projection.review_required alone.",
-      "Status-only REVIEW_REQUIRED handoffs are forbidden.",
-      "Cantiere #745 implementation is approved; Phase 1 ONLINE remains open for physical Manga Kids retest."
+      "A new claim must not inherit reviewer approval, evidence, review packet or PASS gates.",
+      "Expired claims cannot be revived by heartbeat/checkpoint.",
+      "Review packets must conform to canonical schema, not only contain required keys.",
+      "Material roadmap impact keeps G7 pending until synchronization is actually verified.",
+      "Enabled mutating automations must operate through a canonical lane."
     ],
     "evidence_refs": [
-      "AI-Orchestrator-Module-Library#88",
-      "merge:fd41efe8e6f211d5e42a61fa1bf67b6c27f92e52",
-      "Validate Module Library run 36874437149",
-      "Ai-orchestrator-riserva#745",
-      "merge:b7abc54c02c8d65e8a67532afe6f873674e2c4ed"
+      "AI-Orchestrator-Module-Library#89",
+      "merge:52ac6c765aaa7072842615b5af474fad18f89239",
+      "Validate Module Library run 36883027227",
+      "Ai-orchestrator-riserva#747"
     ],
-    "next_action": "Let the automatic Main/Reviewer scan raw lanes on each cycle; Cantiere next gate is a bounded physical Manga Kids retest on a release containing #745.",
-    "kind": "COMPLETION"
-  }
+    "next_action": "Address remaining structural hardening: pre-commit state mutation guard, resource-level conflict locks, unclaimed external-change ingress detection, then AIR-10 dispatcher.",
+    "kind": "AUDIT_COMPLETION"
+  },
+  "hardening_backlog": [
+    {
+      "id": "CP-HARDEN-01",
+      "priority": "P0",
+      "title": "Pre-commit canonical state mutation guard",
+      "problem": "Direct API/main writes can place an invalid lane state on main before post-push validation catches it.",
+      "target": "Route worker/reviewer state transitions through an atomic validated mutation path or an equivalent protected update gate."
+    },
+    {
+      "id": "CP-HARDEN-02",
+      "priority": "P1",
+      "title": "Resource-level conflict locks",
+      "problem": "Duplicate protection uses exact work_item identity; different work_item names can still overlap the same files/contracts/resources.",
+      "target": "Add explicit resource/scope lock keys with conflict detection while preserving safe parallel platform work."
+    },
+    {
+      "id": "CP-HARDEN-03",
+      "priority": "P1",
+      "title": "Unclaimed external-change ingress detection",
+      "problem": "Repository work can merge without any canonical lane claim/checkpoint. PR #747 is a current example: roadmap captured it, workstream claim history did not.",
+      "target": "Main/Reviewer detects relevant merged PRs/commits without a matching lane claim and requires reconciliation before treating them as canonical progress."
+    },
+    {
+      "id": "CP-HARDEN-04",
+      "priority": "P1",
+      "title": "Canonical automation registry",
+      "problem": "Scheduled mutating tasks can exist outside lane ownership unless their prompts are manually migrated.",
+      "target": "Register enabled mutating automations to lane ids and reject/flag any mutating automation with no canonical owner."
+    },
+    {
+      "id": "CP-HARDEN-05",
+      "priority": "P1",
+      "title": "Roadmap dispatcher",
+      "problem": "READY lanes still do not autonomously select and execute roadmap work; only specifically scheduled automations advance.",
+      "target": "Complete AIR-10 bounded dispatcher with claim, checkpoint, reviewer and physical-gate semantics."
+    }
+  ]
 }
