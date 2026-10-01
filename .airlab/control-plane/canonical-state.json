@@ -7,7 +7,7 @@
     "policy": "This private repository is the single coordination authority. Chats and agents are workers, not independent sources of truth."
   },
   "updated_at": "2026-10-01",
-  "state_revision": 20,
+  "state_revision": 21,
   "lifecycle_status": "BOOTSTRAP_ACTIVE",
   "roadmap_authority": {
     "library": ".airlab/roadmap.yaml",
@@ -77,8 +77,8 @@
     "no_change_no_commit": true
   },
   "projection": {
-    "source_digest": "771ff48280b67c42eac4b9845cc83f47e99b600ef5904e1493acc1308677fddd",
-    "projected_at": "2026-10-01T10:34:27Z",
+    "source_digest": "da6e949f159799bb0ee9617e97f5d2bc5aab2dea69e3e1f6ad51d3a7d7039662",
+    "projected_at": "2026-10-01T10:37:13Z",
     "counts": {
       "IMPLEMENTING": 1,
       "READY": 14
@@ -170,7 +170,7 @@
         "id": "cantiere",
         "status": "IMPLEMENTING",
         "activation": "active",
-        "state_version": 7,
+        "state_version": 8,
         "updated_at": "2026-10-01",
         "active_claim": {
           "claim_id": "cantiere-manga-online-failure-repro-v1-20261001",
@@ -181,7 +181,7 @@
         "reviewer_state": "PENDING",
         "inference_profile_status": null,
         "historical_backlog_count": 3,
-        "next_action": "Add bounded runWithResumeContext timeout -> empty proposal -> valid proposal regression coverage with identity preservation, then re-evaluate PR #745 CI/review."
+        "next_action": "Wait for CI on PR #745 head 1de46c1; if green, submit REVIEW_REQUIRED to Main/Reviewer without self-promotion."
       },
       {
         "id": "diagnostics",
