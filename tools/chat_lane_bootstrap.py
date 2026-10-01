@@ -77,6 +77,7 @@ last_checkpoint={json.dumps(lane.get('last_checkpoint'), ensure_ascii=False)}
 OPERATING RULES:
 - Do not restart from a generic audit when a bounded next action already exists.
 - Before implementation, hold a unique non-expired canonical claim for one bounded work_item.
+- TRANSACTIONAL MUTATION RULE: when operating through ChatGPT/GitHub API against main, never edit workstream JSON or canonical-state.json directly. Submit a compare-and-swap request under .airlab/control-plane/inbox/pending/ with the current expected_state_version and wait for an APPLIED receipt. Direct workstream edits are reserved for control-plane implementation branches/PRs, not operational state.
 - Do not duplicate another active claim.
 - Keep the claim heartbeat current during long work.
 - Persist a canonical checkpoint after every material milestone, decision, newly discovered blocker, merged/closed PR, physical/runtime result, or change to the next action.
