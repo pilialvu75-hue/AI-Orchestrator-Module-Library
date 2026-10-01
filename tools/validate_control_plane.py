@@ -15,10 +15,17 @@ def validate(root=ROOT):
     errors = []
     canonical = load(root / ".airlab/control-plane/canonical-state.json")
     gates = load(root / ".airlab/control-plane/gates.json")
+    inference = load(root / ".airlab/control-plane/inference-policy.json")
     if canonical.get("schema_version") != 1:
         errors.append("canonical-state schema_version must be 1")
     if gates.get("schema_version") != 1:
         errors.append("gates schema_version must be 1")
+    if inference.get("schema_version") != 1:
+        errors.append("inference-policy schema_version must be 1")
+    if inference.get("profile_selection", {}).get("no_universal_default_model") is not True:
+        errors.append("inference-policy must forbid a universal default model")
+    if canonical.get("inference_policy") != ".airlab/control-plane/inference-policy.json":
+        errors.append("canonical state must reference inference-policy.json")
     paths = canonical.get("workstreams") or []
     seen_ids = set()
     active_claims = {}
@@ -45,6 +52,14 @@ def validate(root=ROOT):
                 errors.append(f"{lane_id}: worker cannot be {state} without reviewer APPROVED")
         if lane_id.startswith("platform-") and lane.get("shared_engine_policy") != "adapter_only":
             errors.append(f"{lane_id}: platform lane must use adapter_only shared engine policy")
+        if lane_id.startswith("platform-"):
+            if lane.get("inference_profile_policy") != "target_owned_benchmark_gated":
+                errors.append(f"{lane_id}: missing target_owned_benchmark_gated inference policy")
+            profile = lane.get("inference_profile") or {}
+            if profile.get("owner") != lane_id:
+                errors.append(f"{lane_id}: inference profile owner must be the platform lane")
+            if profile.get("shared_contract_owner") != "runtime-core":
+                errors.append(f"{lane_id}: inference shared contract owner must be runtime-core")
         claim = lane.get("active_claim")
         if claim:
             key = claim.get("work_item")
