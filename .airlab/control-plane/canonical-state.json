@@ -7,7 +7,7 @@
     "policy": "This private repository is the single coordination authority. Chats and agents are workers, not independent sources of truth."
   },
   "updated_at": "2026-10-01",
-  "state_revision": 26,
+  "state_revision": 27,
   "lifecycle_status": "BOOTSTRAP_ACTIVE",
   "roadmap_authority": {
     "library": ".airlab/roadmap.yaml",
@@ -77,8 +77,8 @@
     "no_change_no_commit": true
   },
   "projection": {
-    "source_digest": "e70fd63102adcb26472df9d6cbe72053b3985bde856d260dce0c9deff2eaa122",
-    "projected_at": "2026-10-01T15:12:29Z",
+    "source_digest": "8bb514fcbc4788e24be1be9f4ead3c91ce5010bd1495a735432db169bd6a2da0",
+    "projected_at": "2026-10-01T15:18:37Z",
     "counts": {
       "CLAIMED": 1,
       "READY": 14
@@ -170,7 +170,7 @@
         "id": "cantiere",
         "status": "READY",
         "activation": "active",
-        "state_version": 11,
+        "state_version": 12,
         "updated_at": "2026-10-01",
         "active_claim": null,
         "reviewer_state": "APPROVED",
