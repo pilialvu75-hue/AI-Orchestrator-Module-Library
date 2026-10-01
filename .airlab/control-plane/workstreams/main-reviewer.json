@@ -5,9 +5,9 @@
   "role": "reviewer",
   "status": "READY",
   "activation": "active",
-  "scope": "Global architecture, cross-lane review, consolidation, roadmap/state authority and hardening.",
+  "scope": "Global architecture, cross-lane review, consolidation, roadmap/state authority and hardening, including target inference profile balance and shared-contract compatibility.",
   "shared_engine_policy": "shared_or_control_plane",
-  "state_version": 1,
+  "state_version": 2,
   "updated_at": "2026-10-01",
   "active_claim": null,
   "dependencies": [],
@@ -29,5 +29,15 @@
     "reviewed_by": null,
     "reviewed_at": null
   },
-  "next_action": "Review worker evidence, prevent duplicate work, strengthen accepted changes and keep roadmap/canonical state synchronized."
+  "next_action": "Review worker evidence, prevent duplicate work, strengthen accepted changes and keep roadmap/canonical state synchronized.",
+  "inference_review_policy": {
+    "policy": ".airlab/control-plane/inference-policy.json",
+    "check": [
+      "target benchmark evidence",
+      "quality/resource balance",
+      "fallback",
+      "shared contract compatibility",
+      "no unnecessary universal model constraint"
+    ]
+  }
 }
