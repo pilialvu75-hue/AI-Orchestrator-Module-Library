@@ -11,6 +11,7 @@ from typing import Any
 
 ROOT = Path(__file__).resolve().parents[1]
 CANONICAL_REL = Path(".airlab/control-plane/canonical-state.json")
+REGISTRY_REL = Path(".airlab/control-plane/chat-registry.json")
 DEFAULT_LEASE_HOURS = 12
 MAX_LEASE_HOURS = 24
 
@@ -62,6 +63,17 @@ def _lane_by_id(root: Path, canonical: dict[str, Any], lane_id: str) -> tuple[Pa
         if lane.get("id") == lane_id:
             return path, lane
     raise ValueError(f"unknown lane: {lane_id}")
+
+
+def _allowed_repositories_for_lane(root: Path, lane_id: str) -> set[str]:
+    registry = _load(root / REGISTRY_REL)
+    for entry in registry.get("lanes") or []:
+        if entry.get("id") != lane_id:
+            continue
+        allowed = {str(entry.get("primary_repository") or "").strip()}
+        allowed.update(str(item).strip() for item in (entry.get("secondary_repositories") or []))
+        return {item for item in allowed if item}
+    raise ValueError(f"lane {lane_id} is missing from chat registry")
 
 
 def _lease_policy(canonical: dict[str, Any]) -> tuple[int, int]:
@@ -219,6 +231,17 @@ def claim(
     now: datetime | None = None,
 ) -> str:
     now = now or _now()
+    if not isinstance(work_item, str) or not work_item.strip():
+        raise ValueError("work_item must be a non-empty string")
+    if not isinstance(repository, str) or not repository.strip():
+        raise ValueError("repository must be a non-empty string")
+    if not isinstance(scope, str) or not scope.strip():
+        raise ValueError("scope must be a non-empty string")
+    allowed_repositories = _allowed_repositories_for_lane(root, lane_id)
+    if repository not in allowed_repositories:
+        raise ValueError(
+            f"repository {repository} is outside lane {lane_id} scope; allowed={sorted(allowed_repositories)}"
+        )
     canonical_path, canonical = _canonical(root)
     default_hours, max_hours = _lease_policy(canonical)
     hours = default_hours if lease_hours is None else int(lease_hours)
@@ -334,6 +357,10 @@ def release(
     claim_data = lane.get("active_claim")
     if not claim_data:
         raise ValueError(f"lane {lane_id} has no active claim")
+    try:
+        _assert_claim_live(claim_data, now)
+    except ValueError as error:
+        raise ValueError(f"release cannot bypass an expired claim: {error}") from error
 
     events = lane.setdefault("reconciliation_events", [])
     events.append({
@@ -348,7 +375,28 @@ def release(
     lane["status"] = "READY"
     lane["updated_at"] = _date(now)
     lane["state_version"] = int(lane.get("state_version", 0)) + 1
-    lane.setdefault("gates", {})["G0_CLAIM"] = "PENDING"
+    lane["evidence"] = []
+    lane.pop("review_packet", None)
+    gates = lane.setdefault("gates", {})
+    gates.update({
+        "G0_CLAIM": "PENDING",
+        "G1_IMPLEMENTATION": "PENDING",
+        "G2_STATIC": "PENDING",
+        "G3_CI": "PENDING",
+        "G4_INTEGRATION": "PENDING",
+        "G5_TARGET_RUNTIME": "NOT_APPLICABLE_UNTIL_RUNTIME_CHANGE",
+        "G7_CANONICAL_SYNC": "PENDING",
+    })
+    if lane.get("role") == "reviewer":
+        gates["G6_REVIEWER"] = "SELF_AUTHORITY_FOR_CROSS_LANE_REVIEW_ONLY"
+    else:
+        gates["G6_REVIEWER"] = "PENDING"
+        lane["reviewer"] = {
+            "required": True,
+            "state": "PENDING",
+            "reviewed_by": None,
+            "reviewed_at": None,
+        }
     _write(lane_path, lane)
     project(root=root, now=now)
 
@@ -469,7 +517,6 @@ def review_accept(
     summary: str,
     next_action: str,
     evidence_refs: list[str] | None = None,
-    roadmap_synced: bool = False,
     root: Path = ROOT,
     now: datetime | None = None,
 ) -> None:
@@ -536,7 +583,8 @@ def review_accept(
     })
     lane["reconciliation_events"] = events[-20:]
     lane["active_claim"] = None
-    lane["status"] = "READY"
+    roadmap_material = bool((packet.get("roadmap_impact") or {}).get("material"))
+    lane["status"] = "BLOCKED" if roadmap_material else "READY"
     lane["updated_at"] = _date(now)
     lane["state_version"] = int(lane.get("state_version", 0)) + 1
     lane.setdefault("reviewer", {}).update({
@@ -545,14 +593,62 @@ def review_accept(
         "reviewed_at": _iso(now),
     })
     lane.setdefault("gates", {})["G6_REVIEWER"] = "PASS"
-    roadmap_material = bool((packet.get("roadmap_impact") or {}).get("material"))
     lane["gates"]["G7_CANONICAL_SYNC"] = (
-        "PASS" if (not roadmap_material or roadmap_synced) else "PENDING_ROADMAP_SYNC"
+        "PASS" if not roadmap_material else "PENDING_ROADMAP_SYNC"
     )
-    lane["next_action"] = next_action.strip()
+    if roadmap_material:
+        roadmap_refs = list((packet.get("roadmap_impact") or {}).get("refs") or [])
+        lane["block_reason"] = {
+            "code": "CANONICAL_SYNC_REQUIRED",
+            "roadmap_refs": roadmap_refs,
+            "reviewed_claim_id": claim_data.get("claim_id"),
+            "work_item": claim_data.get("work_item"),
+            "detected_at": _iso(now),
+        }
+        lane["next_action"] = "Synchronize the material roadmap refs, then record canonical sync completion before new work can be claimed."
+    else:
+        lane.pop("block_reason", None)
+        lane["next_action"] = next_action.strip()
     _write(lane_path, lane)
     project(root=root, now=now)
 
+
+
+def canonical_sync_complete(
+    lane_id: str,
+    *,
+    refs: list[str],
+    root: Path = ROOT,
+    now: datetime | None = None,
+) -> None:
+    now = now or _now()
+    _, canonical = _canonical(root)
+    lane_path, lane = _lane_by_id(root, canonical, lane_id)
+    block = lane.get("block_reason") or {}
+    if lane.get("status") != "BLOCKED" or block.get("code") != "CANONICAL_SYNC_REQUIRED":
+        raise ValueError(f"lane {lane_id} is not blocked on canonical sync")
+    clean_refs = [item.strip() for item in refs if item and item.strip()]
+    if not clean_refs:
+        raise ValueError("canonical sync completion requires at least one synchronized ref")
+    expected_refs = set(block.get("roadmap_refs") or [])
+    if expected_refs and not expected_refs.issubset(set(clean_refs)):
+        missing = sorted(expected_refs - set(clean_refs))
+        raise ValueError("canonical sync refs missing required roadmap refs: " + ", ".join(missing))
+
+    lane.setdefault("gates", {})["G7_CANONICAL_SYNC"] = "PASS"
+    lane["status"] = "READY"
+    lane.pop("block_reason", None)
+    lane["updated_at"] = _date(now)
+    lane["state_version"] = int(lane.get("state_version", 0)) + 1
+    events = lane.setdefault("reconciliation_events", [])
+    events.append({
+        "type": "CANONICAL_SYNC_COMPLETED",
+        "refs": clean_refs,
+        "at": _iso(now),
+    })
+    lane["reconciliation_events"] = events[-20:]
+    _write(lane_path, lane)
+    project(root=root, now=now)
 
 def review_rework(
     lane_id: str,
@@ -633,6 +729,7 @@ def submit_review(
     claim_data = lane.get("active_claim")
     if not claim_data:
         raise ValueError(f"lane {lane_id} has no active claim")
+    _assert_claim_live(claim_data, now)
     if lane.get("status") not in {"CLAIMED", "IMPLEMENTING", "EVIDENCE_READY"}:
         raise ValueError(f"lane {lane_id} cannot submit review from state {lane.get('status')}")
 
@@ -681,6 +778,35 @@ def reconcile(root: Path = ROOT, now: datetime | None = None) -> list[str]:
             continue
         if _parse_iso(str(lease_until)) > now:
             continue
+
+        if lane.get("status") == "REVIEW_REQUIRED":
+            packet = lane.get("review_packet") or {}
+            try:
+                _validate_review_packet(str(lane.get("id")), claim_data, packet)
+            except ValueError:
+                pass
+            else:
+                events = lane.setdefault("reconciliation_events", [])
+                already_recorded = any(
+                    item.get("type") == "REVIEW_WAIT_OVERDUE"
+                    and item.get("claim_id") == claim_data.get("claim_id")
+                    for item in events
+                )
+                if not already_recorded:
+                    events.append({
+                        "type": "REVIEW_WAIT_OVERDUE",
+                        "claim_id": claim_data.get("claim_id"),
+                        "work_item": claim_data.get("work_item"),
+                        "lease_until": lease_until,
+                        "detected_at": _iso(now),
+                        "review_required": True,
+                    })
+                    lane["reconciliation_events"] = events[-20:]
+                    lane["updated_at"] = _date(now)
+                    lane["state_version"] = int(lane.get("state_version", 0)) + 1
+                    _write(lane_path, lane)
+                    changed.append(str(lane_path.relative_to(root)))
+                continue
 
         event = {
             "type": "CLAIM_LEASE_EXPIRED",
@@ -745,12 +871,15 @@ def _build_parser() -> argparse.ArgumentParser:
     accept_cmd.add_argument("--summary", required=True)
     accept_cmd.add_argument("--next-action", required=True)
     accept_cmd.add_argument("--evidence-ref", action="append", default=[])
-    accept_cmd.add_argument("--roadmap-synced", action="store_true")
 
     rework_cmd = sub.add_parser("review-rework")
     rework_cmd.add_argument("--lane", required=True)
     rework_cmd.add_argument("--reason", required=True)
     rework_cmd.add_argument("--next-action", required=True)
+
+    sync_cmd = sub.add_parser("canonical-sync-complete")
+    sync_cmd.add_argument("--lane", required=True)
+    sync_cmd.add_argument("--ref", action="append", default=[], required=True)
 
     sub.add_parser("reconcile")
     sub.add_parser("project")
@@ -785,7 +914,6 @@ def main() -> int:
             summary=args.summary,
             next_action=args.next_action,
             evidence_refs=args.evidence_ref,
-            roadmap_synced=args.roadmap_synced,
         )
         print("review-accepted")
     elif args.command == "review-rework":
@@ -795,6 +923,9 @@ def main() -> int:
             next_action=args.next_action,
         )
         print("review-rework")
+    elif args.command == "canonical-sync-complete":
+        canonical_sync_complete(args.lane, refs=args.ref)
+        print("canonical-sync-complete")
     elif args.command == "reconcile":
         changed = reconcile()
         print("\n".join(changed) if changed else "no changes")
