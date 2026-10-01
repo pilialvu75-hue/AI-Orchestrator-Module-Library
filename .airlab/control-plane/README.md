@@ -40,7 +40,19 @@ Before work:
 3. record repository, issue/PR/branch when known;
 4. do not start overlapping implementation if another active lane owns the same work item.
 
-Claims are leases in meaning even before lease automation exists. A stale claim must be reconciled, never silently ignored.
+Claims are real leases with heartbeat. Default lease: 12 hours; maximum: 24 hours. A stale claim is never silently freed: reconciliation clears the lease, marks the lane `BLOCKED`, records the expiry event and requires reviewer reconciliation before new work.
+
+Canonical commands:
+
+```bash
+python tools/control_plane_manager.py claim --lane cantiere --work-item issue-123 --repository pilialvu75-hue/Ai-orchestrator-riserva --scope "bounded task"
+python tools/control_plane_manager.py heartbeat --lane cantiere
+python tools/control_plane_manager.py release --lane cantiere --reason "superseded"
+python tools/control_plane_manager.py project
+python tools/control_plane_manager.py reconcile
+```
+
+The scheduled/event-driven reconciliation workflow projects merged lane state into `canonical-state.json` and only commits when the deterministic source digest changes.
 
 ## One engine, many bodies
 
