@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "request_id": "main-reviewer-20261002T172300Z-cp-harden-07-claim",
+  "submitted_at": "2026-10-02T17:23:00Z",
+  "actor_id": "chatgpt:main-reviewer",
+  "lane_id": "main-reviewer",
+  "operation": "claim",
+  "expected_state_version": 33,
+  "payload": {
+    "work_item": "CP-HARDEN-07",
+    "repository": "pilialvu75-hue/AI-Orchestrator-Module-Library",
+    "scope": "Implement machine-readable WAITING_OWNER / WAITING_EXTERNAL lifecycle without live implementation leases, preserving resume evidence/work item/resource reservations and blocking dispatcher reacquisition until explicit resume evidence arrives.",
+    "branch": "main-reviewer/cp-harden-07-wait-states",
+    "resource_locks": [
+      "contract:control-plane-wait-lifecycle",
+      "file:pilialvu75-hue/AI-Orchestrator-Module-Library:tools/control_plane_manager.py",
+      "file:pilialvu75-hue/AI-Orchestrator-Module-Library:tools/control_plane_inbox.py",
+      "file:pilialvu75-hue/AI-Orchestrator-Module-Library:tools/validate_control_plane.py",
+      "file:pilialvu75-hue/AI-Orchestrator-Module-Library:.airlab/control-plane/automation-registry.json",
+      "file:pilialvu75-hue/AI-Orchestrator-Module-Library:tools/chat_lane_bootstrap.py"
+    ]
+  }
+}
