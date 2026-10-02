@@ -113,6 +113,7 @@ def validate(root=ROOT):
     paths = canonical.get("workstreams") or []
     seen_ids = set()
     active_claims = {}
+    active_resource_locks = {}
     for rel in paths:
         p = root / rel
         if not p.exists():
@@ -160,6 +161,39 @@ def validate(root=ROOT):
                 errors.append(f"duplicate active claim {key}: {active_claims[key]} and {lane_id}")
             else:
                 active_claims[key] = lane_id
+
+            resource_locks = claim.get("resource_locks") or []
+            try:
+                normalized_locks = control_plane_manager._normalize_resource_locks(
+                    resource_locks,
+                    repository=str(claim.get("repository") or ""),
+                    branch=None,
+                )
+            except ValueError as error:
+                errors.append(f"{lane_id}: active_claim resource_locks invalid: {error}")
+                normalized_locks = []
+            else:
+                if resource_locks != normalized_locks:
+                    errors.append(
+                        f"{lane_id}: active_claim resource_locks must be sorted unique canonical keys"
+                    )
+                branch = claim.get("branch")
+                if branch is not None:
+                    if not isinstance(branch, str) or not branch.strip():
+                        errors.append(f"{lane_id}: active_claim branch must be a non-empty string or null")
+                    else:
+                        branch_lock = f"branch:{claim.get('repository')}:{branch.strip()}"
+                        if branch_lock not in normalized_locks:
+                            errors.append(f"{lane_id}: active_claim missing derived branch lock {branch_lock}")
+                for lock_key in normalized_locks:
+                    owner = active_resource_locks.get(lock_key)
+                    if owner:
+                        errors.append(
+                            f"duplicate active resource lock {lock_key}: {owner} and {lane_id}"
+                        )
+                    else:
+                        active_resource_locks[lock_key] = lane_id
+
             for field in ("claim_id","owner_lane","repository","scope","started_at","heartbeat_at","lease_until","lease_hours"):
                 if not claim.get(field):
                     errors.append(f"{lane_id}: active_claim missing {field}")

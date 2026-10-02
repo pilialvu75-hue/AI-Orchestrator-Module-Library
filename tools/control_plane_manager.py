@@ -113,6 +113,41 @@ def _lease_policy(canonical: dict[str, Any]) -> tuple[int, int]:
     return default_hours, max_hours
 
 
+def _normalize_resource_locks(
+    resource_locks: list[str] | None,
+    *,
+    repository: str,
+    branch: str | None,
+) -> list[str]:
+    if resource_locks is None:
+        resource_locks = []
+    if not isinstance(resource_locks, list):
+        raise ValueError("resource_locks must be a list of strings")
+
+    normalized: list[str] = []
+    for index, item in enumerate(resource_locks):
+        if not isinstance(item, str) or not item.strip():
+            raise ValueError(f"resource_locks[{index}] must be a non-empty string")
+        key = item.strip()
+        if len(key) > 256:
+            raise ValueError(f"resource_locks[{index}] exceeds 256 characters")
+        if ":" not in key:
+            raise ValueError(
+                f"resource_locks[{index}] must use a namespace:value key, got {key!r}"
+            )
+        normalized.append(key)
+
+    if branch is not None:
+        if not isinstance(branch, str) or not branch.strip():
+            raise ValueError("branch must be a non-empty string or null")
+        normalized.append(f"branch:{repository}:{branch.strip()}")
+
+    unique = sorted(set(normalized))
+    if len(unique) > 64:
+        raise ValueError("resource_locks may contain at most 64 unique keys")
+    return unique
+
+
 def _assert_claim_live(claim_data: dict[str, Any], now: datetime) -> None:
     lease_until = claim_data.get("lease_until")
     if not lease_until:
@@ -141,6 +176,7 @@ def _projection_payload(
 ) -> dict[str, Any]:
     summaries: list[dict[str, Any]] = []
     active_claims: list[dict[str, Any]] = []
+    active_resource_locks: list[dict[str, Any]] = []
     review_required: list[str] = []
     blocked: list[dict[str, Any]] = []
     checkpoint_watch: list[dict[str, Any]] = []
@@ -160,8 +196,16 @@ def _projection_payload(
                 "work_item": claim.get("work_item"),
                 "repository": claim.get("repository"),
                 "lease_until": claim.get("lease_until"),
+                "resource_locks": list(claim.get("resource_locks") or []),
             }
             active_claims.append({"lane": lane_id, **claim_summary})
+            for lock_key in claim_summary["resource_locks"]:
+                active_resource_locks.append({
+                    "key": lock_key,
+                    "lane": lane_id,
+                    "claim_id": claim.get("claim_id"),
+                    "work_item": claim.get("work_item"),
+                })
 
             checkpoint = lane.get("last_checkpoint") or {}
             same_claim = checkpoint.get("claim_id") == claim.get("claim_id")
@@ -215,6 +259,10 @@ def _projection_payload(
     return {
         "counts": dict(sorted(counts.items())),
         "active_claims": sorted(active_claims, key=lambda item: (item["lane"], item.get("work_item") or "")),
+        "active_resource_locks": sorted(
+            active_resource_locks,
+            key=lambda item: (str(item.get("key") or ""), str(item.get("lane") or "")),
+        ),
         "review_required": sorted(review_required),
         "blocked": sorted(blocked, key=lambda item: item["lane"]),
         "checkpoint_watch": sorted(checkpoint_watch, key=lambda item: item["lane"]),
@@ -263,6 +311,7 @@ def claim(
     scope: str,
     *,
     branch: str | None = None,
+    resource_locks: list[str] | None = None,
     lease_hours: int | None = None,
     root: Path = ROOT,
     now: datetime | None = None,
@@ -274,6 +323,11 @@ def claim(
         raise ValueError("repository must be a non-empty string")
     if not isinstance(scope, str) or not scope.strip():
         raise ValueError("scope must be a non-empty string")
+    lock_keys = _normalize_resource_locks(
+        resource_locks,
+        repository=repository.strip(),
+        branch=branch,
+    )
     allowed_repositories = _allowed_repositories_for_lane(root, lane_id)
     if repository not in allowed_repositories:
         raise ValueError(
@@ -293,8 +347,19 @@ def claim(
 
     for _, other in _lanes(root, canonical):
         other_claim = other.get("active_claim")
-        if other_claim and other_claim.get("work_item") == work_item:
+        if not other_claim:
+            continue
+        if other_claim.get("work_item") == work_item:
             raise ValueError(f"work_item already claimed by {other.get('id')}: {work_item}")
+        other_locks = other_claim.get("resource_locks") or []
+        if not isinstance(other_locks, list):
+            raise ValueError(f"lane {other.get('id')} has invalid active_claim resource_locks")
+        overlap = sorted(set(lock_keys).intersection(other_locks))
+        if overlap:
+            raise ValueError(
+                "resource lock conflict with "
+                f"{other.get('id')} claim {other_claim.get('claim_id')}: {', '.join(overlap)}"
+            )
 
     seed = f"{lane_id}|{work_item}|{_iso(now)}"
     claim_id = hashlib.sha256(seed.encode("utf-8")).hexdigest()[:20]
@@ -336,6 +401,7 @@ def claim(
         "repository": repository,
         "scope": scope,
         "branch": branch,
+        "resource_locks": lock_keys,
         "started_at": _iso(now),
         "heartbeat_at": _iso(now),
         "lease_until": _iso(lease_until),
@@ -850,6 +916,7 @@ def reconcile(root: Path = ROOT, now: datetime | None = None) -> list[str]:
             "type": "CLAIM_LEASE_EXPIRED",
             "claim_id": claim_data.get("claim_id"),
             "work_item": claim_data.get("work_item"),
+            "resource_locks": list(claim_data.get("resource_locks") or []),
             "lease_until": lease_until,
             "detected_at": _iso(now),
         }
@@ -860,6 +927,7 @@ def reconcile(root: Path = ROOT, now: datetime | None = None) -> list[str]:
             "code": "CLAIM_LEASE_EXPIRED",
             "work_item": claim_data.get("work_item"),
             "claim_id": claim_data.get("claim_id"),
+            "resource_locks": list(claim_data.get("resource_locks") or []),
             "lease_until": lease_until,
             "detected_at": _iso(now),
             "review_required": True,
@@ -888,6 +956,7 @@ def _build_parser() -> argparse.ArgumentParser:
     claim_cmd.add_argument("--repository", required=True)
     claim_cmd.add_argument("--scope", required=True)
     claim_cmd.add_argument("--branch")
+    claim_cmd.add_argument("--resource-lock", action="append", default=[])
     claim_cmd.add_argument("--lease-hours", type=int)
 
     hb_cmd = sub.add_parser("heartbeat")
@@ -933,6 +1002,7 @@ def main() -> int:
             args.repository,
             args.scope,
             branch=args.branch,
+            resource_locks=args.resource_lock,
             lease_hours=args.lease_hours,
         )
         print(claim_id)

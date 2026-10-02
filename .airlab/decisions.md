@@ -103,3 +103,17 @@ Decision date: 2026-10-01
 - A historical chat becomes deletion-safe only after its unique actionable work, unresolved items, reusable evidence and architectural decisions have a canonical repository home.
 - The private registry `.airlab/control-plane/historical-chat-consolidation.json` records the deletion decision and migration rationale for recovered legacy chats.
 - Ongoing chats may remain temporarily as bridges, but their backlog is duplicated into canonical workstream/roadmap state before they are considered replaceable.
+
+
+## Resource-level conflict locks
+
+Decision date: 2026-10-02
+
+- Active claims own explicit machine-readable resource locks in addition to their unique `work_item` identity.
+- Resource-lock authority is global across canonical lanes. Two different work items may not concurrently own the same lock key.
+- Lock keys are namespaced and stable: examples include `file:<repo>:<path>`, `contract:<name>`, `resource:<name>`, `scope:<name>` and `pr:<repo>#<number>`.
+- A declared branch is automatically represented by `branch:<repo>:<branch>`, preventing two lanes from writing the same branch under different work-item names.
+- Different resource keys remain parallelizable; this hardening serializes only declared overlap rather than globally serializing all platform work.
+- Resource locks live on the active claim, persist through `REVIEW_REQUIRED` and reviewer rework, and are released only when the claim is released/accepted or stale ownership is reconciled.
+- An expired but unreconciled claim continues to block its resources. Reconciliation records its lock set before clearing the claim and blocking the stale lane for reviewer attention.
+- Transactional inbox compare-and-swap remains the operational mutation path; resource locks close the cross-lane race that independent lane state versions cannot detect.

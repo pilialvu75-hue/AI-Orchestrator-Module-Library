@@ -7,7 +7,7 @@
   "activation": "active",
   "scope": "Global architecture, cross-lane review, consolidation, roadmap/state authority and hardening, including target inference profile balance and shared-contract compatibility.",
   "shared_engine_policy": "shared_or_control_plane",
-  "state_version": 25,
+  "state_version": 26,
   "updated_at": "2026-10-02",
   "active_claim": {
     "claim_id": "4b7ee936fd5c3fd06fa7",
@@ -40,7 +40,7 @@
     "reviewed_by": null,
     "reviewed_at": null
   },
-  "next_action": "Implement resource-level conflict locks, validation and inbox race tests on a bounded branch; do not overlap Windows Legacy.",
+  "next_action": "Proceed to CP-HARDEN-04 canonical automation registry, then design/implement CP-HARDEN-07 external/owner wait states before broad AIR-10 rollout.",
   "inference_review_policy": {
     "policy": ".airlab/control-plane/inference-policy.json",
     "check": [
@@ -458,7 +458,14 @@
       "priority": "P1",
       "title": "Resource-level conflict locks",
       "problem": "Duplicate protection uses exact work_item identity and separate lane files; simultaneous cross-lane claims or different work_item names can still overlap the same files/contracts/resources.",
-      "target": "Add serialized claim authority plus explicit resource/scope lock keys with conflict detection while preserving safe parallel platform work."
+      "target": "Add serialized claim authority plus explicit resource/scope lock keys with conflict detection while preserving safe parallel platform work.",
+      "status": "DONE",
+      "implementation": "Global namespaced resource locks on active claims, automatic branch locks, cross-lane conflict detection, canonical projection visibility, and transactional-inbox race rejection.",
+      "evidence": [
+        "AI-Orchestrator-Module-Library#95",
+        "tests/test_control_plane_manager.py resource lock lifecycle coverage",
+        "tests/test_control_plane_inbox.py cross-lane mutation race coverage"
+      ]
     },
     {
       "id": "CP-HARDEN-03",

@@ -45,7 +45,11 @@ Example:
   "payload": {
     "work_item": "manga-physical-retest",
     "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
-    "scope": "One bounded physical-retest preparation item"
+    "scope": "One bounded physical-retest preparation item",
+    "resource_locks": [
+      "resource:manga-kids-physical-acceptance",
+      "contract:cantiere-lifecycle"
+    ]
   }
 }
 ```
@@ -56,6 +60,17 @@ Accepted requests are removed from `pending/` and receive a receipt under
 
 The compare-and-swap `expected_state_version` is mandatory. A stale writer must reread
 the lane and submit a new request instead of overwriting newer work.
+
+Claim requests may declare `payload.resource_locks` as namespaced strings such as
+`file:<repo>:<path>`, `contract:<name>`, `resource:<name>`, `scope:<name>` or
+`pr:<repo>#<number>`. If `payload.branch` is present, the claim manager adds the
+corresponding `branch:<repo>:<branch>` lock automatically. A request is quarantined if
+any requested lock is already owned by another active claim, even when the two work items
+and lanes are different. Distinct lock keys remain safe to process in parallel.
+
+The serialized reconcile workflow plus lane compare-and-swap protects the lane mutation;
+resource locks protect shared cross-lane resources that lane-local state versions alone
+cannot detect. Locks remain held while the claim remains active, including reviewer rework.
 
 This inbox protects API-driven state changes. Repository code changes to the control-plane
 implementation itself still use normal branches, pull requests and CI.
