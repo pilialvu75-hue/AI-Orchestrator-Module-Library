@@ -3,37 +3,18 @@
   "id": "main-reviewer",
   "title": "Main / Reviewer",
   "role": "reviewer",
-  "status": "IMPLEMENTING",
+  "status": "READY",
   "activation": "active",
   "scope": "Global architecture, cross-lane review, consolidation, roadmap/state authority and hardening, including target inference profile balance and shared-contract compatibility.",
   "shared_engine_policy": "shared_or_control_plane",
-  "state_version": 32,
+  "state_version": 33,
   "updated_at": "2026-10-02",
-  "active_claim": {
-    "claim_id": "a1abc6a753db99f16609",
-    "owner_lane": "main-reviewer",
-    "work_item": "CP-HARDEN-04",
-    "repository": "pilialvu75-hue/AI-Orchestrator-Module-Library",
-    "scope": "Create a canonical enabled-automation registry and enforce mutation ownership/capabilities/allowed transitions so unregistered or out-of-scope automations cannot mutate canonical control-plane state or take over another lane.",
-    "branch": "main-reviewer/cp-harden-04-automation-registry",
-    "resource_locks": [
-      "branch:pilialvu75-hue/AI-Orchestrator-Module-Library:main-reviewer/cp-harden-04-automation-registry",
-      "contract:control-plane-automation-ownership",
-      "file:pilialvu75-hue/AI-Orchestrator-Module-Library:.airlab/control-plane/automation-registry.json",
-      "file:pilialvu75-hue/AI-Orchestrator-Module-Library:tools/chat_lane_bootstrap.py",
-      "file:pilialvu75-hue/AI-Orchestrator-Module-Library:tools/control_plane_inbox.py",
-      "file:pilialvu75-hue/AI-Orchestrator-Module-Library:tools/validate_control_plane.py"
-    ],
-    "started_at": "2026-10-02T17:09:54Z",
-    "heartbeat_at": "2026-10-02T17:19:59Z",
-    "lease_until": "2026-10-03T05:19:59Z",
-    "lease_hours": 12
-  },
+  "active_claim": null,
   "dependencies": [],
   "roadmap_refs": [],
   "evidence": [],
   "gates": {
-    "G0_CLAIM": "PASS",
+    "G0_CLAIM": "PENDING",
     "G1_IMPLEMENTATION": "PENDING",
     "G2_STATIC": "PENDING",
     "G3_CI": "PENDING",
@@ -604,6 +585,13 @@
       "work_item": "CP-HARDEN-02",
       "reason": "CP-HARDEN-02 merged and canonically checkpointed with exact-head and merge validation evidence.",
       "at": "2026-10-02T17:07:57Z"
+    },
+    {
+      "type": "CLAIM_RELEASED",
+      "claim_id": "a1abc6a753db99f16609",
+      "work_item": "CP-HARDEN-04",
+      "reason": "CP-HARDEN-04 merged and canonically checkpointed with exact-head and post-merge validation evidence.",
+      "at": "2026-10-02T17:21:19Z"
     }
   ]
 }
