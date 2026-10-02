@@ -1,0 +1,12 @@
+{
+  "schema_version": 1,
+  "request_id": "winlegacy-claim-post0e-convergence-20261002a",
+  "status": "APPLIED",
+  "processed_at": "2026-10-02T16:01:58Z",
+  "source_file": "winlegacy-claim-post0e-convergence-20261002a.json",
+  "lane_id": "platform-windows-legacy",
+  "operation": "claim",
+  "actor_id": "automation:windows-legacy:6abc720a44b081919bd7a8d71b45e8d2",
+  "errors": [],
+  "result_state_version": 17
+}
