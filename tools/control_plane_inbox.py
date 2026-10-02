@@ -117,6 +117,7 @@ def _apply(
             payload.get("repository"),
             payload.get("scope"),
             branch=payload.get("branch"),
+            resource_locks=payload.get("resource_locks"),
             lease_hours=payload.get("lease_hours"),
             root=root,
             now=now,
