@@ -57,6 +57,12 @@ class ChatLaneBootstrapTests(unittest.TestCase):
         self.assertIn("Never set REVIEW_REQUIRED by editing only the status field", text)
         self.assertIn("submit-review", text)
 
+    def test_bootstrap_requires_resource_lock_declaration(self):
+        text = bootstrap.build_prompt("cantiere", ROOT)
+        self.assertIn("Declare machine-readable resource_locks", text)
+        self.assertIn("overlapping lock is forbidden", text)
+        self.assertIn("resource lock owned by another lane", text)
+
     def test_bootstrap_requires_transactional_mutation_inbox(self):
         text = bootstrap.build_prompt("cantiere", ROOT)
         self.assertIn("TRANSACTIONAL MUTATION RULE", text)
