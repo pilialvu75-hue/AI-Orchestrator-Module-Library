@@ -50,6 +50,25 @@ class ControlPlaneInboxTests(unittest.TestCase):
         })
         lane_path.write_text(json.dumps(lane, indent=2) + "\n", encoding="utf-8")
 
+        reviewer_path = self.root / ".airlab/control-plane/workstreams/main-reviewer.json"
+        reviewer = json.loads(reviewer_path.read_text(encoding="utf-8"))
+        reviewer["status"] = "READY"
+        reviewer["active_claim"] = None
+        reviewer["evidence"] = []
+        reviewer.pop("review_packet", None)
+        reviewer.pop("block_reason", None)
+        reviewer["gates"].update({
+            "G0_CLAIM": "PENDING",
+            "G1_IMPLEMENTATION": "PENDING",
+            "G2_STATIC": "PENDING",
+            "G3_CI": "PENDING",
+            "G4_INTEGRATION": "PENDING",
+            "G5_TARGET_RUNTIME": "NOT_APPLICABLE_UNTIL_RUNTIME_CHANGE",
+            "G6_REVIEWER": "SELF_AUTHORITY_FOR_CROSS_LANE_REVIEW_ONLY",
+            "G7_CANONICAL_SYNC": "PENDING",
+        })
+        reviewer_path.write_text(json.dumps(reviewer, indent=2) + "\n", encoding="utf-8")
+
     def tearDown(self):
         self.temp.cleanup()
 
@@ -63,6 +82,11 @@ class ControlPlaneInboxTests(unittest.TestCase):
     def _cantiere(self):
         return json.loads(
             (self.root / ".airlab/control-plane/workstreams/cantiere.json").read_text(encoding="utf-8")
+        )
+
+    def _main_reviewer(self):
+        return json.loads(
+            (self.root / ".airlab/control-plane/workstreams/main-reviewer.json").read_text(encoding="utf-8")
         )
 
     def test_valid_claim_request_applies_atomically(self):
@@ -80,6 +104,7 @@ class ControlPlaneInboxTests(unittest.TestCase):
                 "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
                 "scope": "one bounded test",
                 "branch": "test/bounded-claim",
+                "resource_locks": ["resource:test-bounded-claim"],
             },
         }
         path = self._write_request(request)
@@ -94,6 +119,13 @@ class ControlPlaneInboxTests(unittest.TestCase):
         self.assertIn("applied", result)
         self.assertEqual(lane["status"], "CLAIMED")
         self.assertEqual(lane["active_claim"]["work_item"], "bounded-claim")
+        self.assertEqual(
+            lane["active_claim"]["resource_locks"],
+            [
+                "branch:pilialvu75-hue/Ai-orchestrator-riserva:test/bounded-claim",
+                "resource:test-bounded-claim",
+            ],
+        )
         self.assertEqual(lane["state_version"], request["expected_state_version"] + 1)
         receipt = json.loads(
             (self.root / ".airlab/control-plane/inbox/processed/claim-001.json").read_text(encoding="utf-8")
@@ -160,6 +192,61 @@ class ControlPlaneInboxTests(unittest.TestCase):
         self.assertEqual(before, json.dumps(self._cantiere(), sort_keys=True))
         self.assertTrue(
             (self.root / ".airlab/control-plane/inbox/quarantine/scope-001.json").exists()
+        )
+
+    def test_cross_lane_resource_race_quarantines_second_request(self):
+        cantiere = self._cantiere()
+        reviewer = self._main_reviewer()
+        first = {
+            "schema_version": 1,
+            "request_id": "race-cantiere",
+            "lane_id": "cantiere",
+            "operation": "claim",
+            "expected_state_version": cantiere["state_version"],
+            "payload": {
+                "work_item": "race-worker-a",
+                "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
+                "scope": "first serialized writer",
+                "resource_locks": ["contract:shared-runtime"],
+            },
+        }
+        second = {
+            "schema_version": 1,
+            "request_id": "race-reviewer",
+            "lane_id": "main-reviewer",
+            "operation": "claim",
+            "expected_state_version": reviewer["state_version"],
+            "payload": {
+                "work_item": "race-worker-b",
+                "repository": "pilialvu75-hue/AI-Orchestrator-Module-Library",
+                "scope": "different work item but same shared contract",
+                "resource_locks": ["contract:shared-runtime"],
+            },
+        }
+        first_path = self._write_request(first)
+        second_path = self._write_request(second)
+
+        first_result = inbox.process_one(
+            first_path,
+            root=self.root,
+            now=datetime(2026, 10, 1, 18, 10, tzinfo=timezone.utc),
+        )
+        second_result = inbox.process_one(
+            second_path,
+            root=self.root,
+            now=datetime(2026, 10, 1, 18, 10, tzinfo=timezone.utc),
+        )
+
+        self.assertIn("applied", first_result)
+        self.assertIn("quarantined", second_result)
+        receipt = json.loads(
+            (self.root / ".airlab/control-plane/inbox/quarantine/race-reviewer.json").read_text(encoding="utf-8")
+        )
+        self.assertIn("resource lock conflict", receipt["errors"][0])
+        self.assertIsNone(self._main_reviewer()["active_claim"])
+        self.assertEqual(
+            self._cantiere()["active_claim"]["resource_locks"],
+            ["contract:shared-runtime"],
         )
 
     def test_unreadable_unrelated_lane_does_not_blind_healthy_checkpoint(self):
