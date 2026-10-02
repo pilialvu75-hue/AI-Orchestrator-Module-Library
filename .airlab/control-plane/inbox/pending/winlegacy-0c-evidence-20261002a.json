@@ -1,0 +1,13 @@
+{
+  "schema_version": 1,
+  "request_id": "winlegacy-0c-evidence-20261002a",
+  "actor_id": "automation:windows-legacy:6abc720a44b081919bd7a8d71b45e8d2",
+  "lane_id": "platform-windows-legacy",
+  "operation": "claim",
+  "expected_state_version": 9,
+  "payload": {
+    "work_item": "win7-model-load-post-0c-isolation",
+    "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
+    "scope": "Bounded Win7-only isolation after physical evidence: 0-series probes do not crash while probes 1 and 2 crash. Isolate the first crashing model/update stage without merge or modern-Windows changes."
+  }
+}
