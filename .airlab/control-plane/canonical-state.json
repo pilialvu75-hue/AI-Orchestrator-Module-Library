@@ -7,7 +7,7 @@
     "policy": "This private repository is the single coordination authority. Chats and agents are workers, not independent sources of truth."
   },
   "updated_at": "2026-10-02",
-  "state_revision": 44,
+  "state_revision": 45,
   "lifecycle_status": "BOOTSTRAP_ACTIVE",
   "roadmap_authority": {
     "library": ".airlab/roadmap.yaml",
@@ -78,8 +78,8 @@
     "invalid_lane_behavior": "ISOLATE_AND_SURFACE_PROJECTION_INCIDENT"
   },
   "projection": {
-    "source_digest": "24bf6aa3decd9a42fefca45aa8f213cbc8b1d97ed94ea5be591d6229b7d929ae",
-    "projected_at": "2026-10-02T12:41:33Z",
+    "source_digest": "cbf6d027f8c00f1e4d0f2cbc877e88ecef4554f63b860339598d600f14d0eb50",
+    "projected_at": "2026-10-02T12:46:06Z",
     "counts": {
       "IMPLEMENTING": 1,
       "READY": 14
@@ -90,7 +90,7 @@
         "claim_id": "fe9ce6f271e730171e14",
         "work_item": "win7-model-load-post-0c-isolation",
         "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
-        "lease_until": "2026-10-03T00:41:33Z"
+        "lease_until": "2026-10-03T00:46:06Z"
       }
     ],
     "review_required": [],
@@ -304,18 +304,18 @@
         "id": "platform-windows-legacy",
         "status": "IMPLEMENTING",
         "activation": "active",
-        "state_version": 11,
+        "state_version": 12,
         "updated_at": "2026-10-02",
         "active_claim": {
           "claim_id": "fe9ce6f271e730171e14",
           "work_item": "win7-model-load-post-0c-isolation",
           "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
-          "lease_until": "2026-10-03T00:41:33Z"
+          "lease_until": "2026-10-03T00:46:06Z"
         },
         "reviewer_state": "PENDING",
         "inference_profile_status": "NEEDS_TARGET_PROFILE",
         "historical_backlog_count": 6,
-        "next_action": "Inspect PR #736 Assistente entry path and split the first Assistente/model-load initialization stages into one narrower Win7 diagnostic candidate."
+        "next_action": "Inspect the code paths for Assistente entry, Settings Models, voice download, and probes 1/2; identify the earliest shared runtime/plugin/native dependency and build one narrower Win7-only diagnostic candidate."
       },
       {
         "id": "runtime-core",

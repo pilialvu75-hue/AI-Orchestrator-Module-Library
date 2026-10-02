@@ -7,7 +7,7 @@
   "activation": "active",
   "scope": "Legacy Windows compatibility layer, installer/update and target-specific adapters with target-optimized inference while preserving shared orchestration/contracts.",
   "shared_engine_policy": "adapter_only",
-  "state_version": 11,
+  "state_version": 12,
   "updated_at": "2026-10-02",
   "active_claim": {
     "claim_id": "fe9ce6f271e730171e14",
@@ -17,8 +17,8 @@
     "scope": "Bounded Win7-only isolation after physical evidence: 0-series probes do not crash while probes 1 and 2 crash. Isolate the first crashing model/update stage without merge or modern-Windows changes.",
     "branch": null,
     "started_at": "2026-10-02T12:39:29Z",
-    "heartbeat_at": "2026-10-02T12:41:33Z",
-    "lease_until": "2026-10-03T00:41:33Z",
+    "heartbeat_at": "2026-10-02T12:46:06Z",
+    "lease_until": "2026-10-03T00:46:06Z",
     "lease_hours": 12
   },
   "dependencies": [],
@@ -42,7 +42,7 @@
     "reviewed_by": null,
     "reviewed_at": null
   },
-  "next_action": "Inspect PR #736 Assistente entry path and split the first Assistente/model-load initialization stages into one narrower Win7 diagnostic candidate.",
+  "next_action": "Inspect the code paths for Assistente entry, Settings Models, voice download, and probes 1/2; identify the earliest shared runtime/plugin/native dependency and build one narrower Win7-only diagnostic candidate.",
   "inference_profile_policy": "target_owned_benchmark_gated",
   "inference_profile": {
     "status": "NEEDS_TARGET_PROFILE",
@@ -133,26 +133,51 @@
         "physical:0-series probes no visible failure; probes 1 and 2 crash"
       ],
       "next_action": "Inspect PR #736 Assistente entry path and split the first Assistente/model-load initialization stages into one narrower Win7 diagnostic candidate."
+    },
+    {
+      "seq": 5,
+      "at": "2026-10-02T12:46:06Z",
+      "claim_id": "fe9ce6f271e730171e14",
+      "work_item": "win7-model-load-post-0c-isolation",
+      "summary": "Physical Win7 evidence further refines the boundary: the Settings shell itself opens, but runtime-backed Settings submenus are not generally safe. The Models submenu crashes, and attempting to download voices also crashes. Cantiere shell/navigation remains usable, while entering Assistente crashes.",
+      "decisions": [
+        "Do not classify Settings as globally safe; only its top-level shell/navigation is known safe.",
+        "The common failure class is now runtime/service-backed feature initialization or plugin/native work, not Assistente-specific navigation.",
+        "Correlate Assistente entry, Models submenu, voice download, and probes 1/2 to identify their first shared native/plugin/runtime dependency before creating the next candidate.",
+        "Keep Win8.1/10/11 behavior unchanged and do not merge from CI alone."
+      ],
+      "evidence_refs": [
+        "physical:Win7 build #1175 Settings top-level opens",
+        "physical:Win7 build #1175 Settings Models submenu crashes",
+        "physical:Win7 build #1175 voice download action crashes",
+        "physical:Win7 build #1175 Assistente entry crashes",
+        "physical:Win7 build #1175 Cantiere opens",
+        "physical:0-series probes no visible failure; probes 1 and 2 crash"
+      ],
+      "next_action": "Inspect the code paths for Assistente entry, Settings Models, voice download, and probes 1/2; identify the earliest shared runtime/plugin/native dependency and build one narrower Win7-only diagnostic candidate."
     }
   ],
   "last_checkpoint": {
-    "seq": 4,
-    "at": "2026-10-02T12:41:33Z",
+    "seq": 5,
+    "at": "2026-10-02T12:46:06Z",
     "claim_id": "fe9ce6f271e730171e14",
     "work_item": "win7-model-load-post-0c-isolation",
-    "summary": "New physical Win7 evidence refines the crash boundary: Settings and Cantiere can be entered and remain usable; the application crashes when entering Assistente. All diagnostic probes whose labels begin with 0 produce no visible failure, while probes 1 and 2 crash. This points to Assistente/model-load or update initialization rather than generic navigation, Flutter interaction, or whole-app shell.",
+    "summary": "Physical Win7 evidence further refines the boundary: the Settings shell itself opens, but runtime-backed Settings submenus are not generally safe. The Models submenu crashes, and attempting to download voices also crashes. Cantiere shell/navigation remains usable, while entering Assistente crashes.",
     "decisions": [
-      "Treat Settings and Cantiere navigation as physically safe in this candidate.",
-      "Focus the bounded claim on Assistente initialization and the model/update chain it starts.",
-      "Do not merge from CI alone and do not change Win8.1/10/11 behavior."
+      "Do not classify Settings as globally safe; only its top-level shell/navigation is known safe.",
+      "The common failure class is now runtime/service-backed feature initialization or plugin/native work, not Assistente-specific navigation.",
+      "Correlate Assistente entry, Models submenu, voice download, and probes 1/2 to identify their first shared native/plugin/runtime dependency before creating the next candidate.",
+      "Keep Win8.1/10/11 behavior unchanged and do not merge from CI alone."
     ],
     "evidence_refs": [
-      "physical:Win7 build #1175 Settings opens",
+      "physical:Win7 build #1175 Settings top-level opens",
+      "physical:Win7 build #1175 Settings Models submenu crashes",
+      "physical:Win7 build #1175 voice download action crashes",
+      "physical:Win7 build #1175 Assistente entry crashes",
       "physical:Win7 build #1175 Cantiere opens",
-      "physical:Win7 build #1175 Assistente crashes",
       "physical:0-series probes no visible failure; probes 1 and 2 crash"
     ],
-    "next_action": "Inspect PR #736 Assistente entry path and split the first Assistente/model-load initialization stages into one narrower Win7 diagnostic candidate."
+    "next_action": "Inspect the code paths for Assistente entry, Settings Models, voice download, and probes 1/2; identify the earliest shared runtime/plugin/native dependency and build one narrower Win7-only diagnostic candidate."
   },
   "reconciliation_events": [
     {
