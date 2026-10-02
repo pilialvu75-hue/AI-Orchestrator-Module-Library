@@ -7,7 +7,7 @@
   "activation": "active",
   "scope": "Global architecture, cross-lane review, consolidation, roadmap/state authority and hardening, including target inference profile balance and shared-contract compatibility.",
   "shared_engine_policy": "shared_or_control_plane",
-  "state_version": 26,
+  "state_version": 27,
   "updated_at": "2026-10-02",
   "active_claim": {
     "claim_id": "4b7ee936fd5c3fd06fa7",
@@ -17,8 +17,8 @@
     "scope": "Implement serialized resource/scope lock keys and overlap detection compatible with the transactional mutation inbox; cover cross-lane conflicts, safe parallelism, release/stale/rework lifecycle, and CAS race behavior.",
     "branch": null,
     "started_at": "2026-10-02T16:53:22Z",
-    "heartbeat_at": "2026-10-02T16:55:58Z",
-    "lease_until": "2026-10-03T04:55:58Z",
+    "heartbeat_at": "2026-10-02T17:07:32Z",
+    "lease_until": "2026-10-03T05:07:32Z",
     "lease_hours": 12
   },
   "dependencies": [],
@@ -40,7 +40,7 @@
     "reviewed_by": null,
     "reviewed_at": null
   },
-  "next_action": "Proceed to CP-HARDEN-04 canonical automation registry, then design/implement CP-HARDEN-07 external/owner wait states before broad AIR-10 rollout.",
+  "next_action": "Release the completed CP-HARDEN-02 claim, then acquire a bounded Main/Reviewer claim for CP-HARDEN-04 canonical automation registry.",
   "inference_review_policy": {
     "policy": ".airlab/control-plane/inference-policy.json",
     "check": [
@@ -418,24 +418,51 @@
         "claim:4b7ee936fd5c3fd06fa7"
       ],
       "next_action": "Implement resource-level conflict locks, validation and inbox race tests on a bounded branch; do not overlap Windows Legacy."
+    },
+    {
+      "seq": 10,
+      "at": "2026-10-02T17:07:32Z",
+      "claim_id": "4b7ee936fd5c3fd06fa7",
+      "work_item": "CP-HARDEN-02",
+      "summary": "CP-HARDEN-02 resource-level conflict locks implemented, reviewed, CI-validated on the exact PR head, and merged via PR #95.",
+      "decisions": [
+        "Global namespaced resource locks supplement, rather than replace, work_item uniqueness.",
+        "Distinct lock keys preserve safe cross-platform parallelism.",
+        "Expired unreconciled claims retain lock authority until reconciliation records and clears stale ownership.",
+        "Mutation inbox/CAS remains the serialized operational state authority."
+      ],
+      "evidence_refs": [
+        "AI-Orchestrator-Module-Library#95",
+        "head:cf5ff8641e7589f1ec1bcfa1618cdaf885c39327",
+        "Validate Module Library run 37038398596 PASS",
+        "merge:41133576927fa3fe5619258ff275ae1173735452",
+        "Validate Module Library merge run 37038497934 PASS",
+        "Reconcile merge run 37038498132 PASS"
+      ],
+      "next_action": "Release the completed CP-HARDEN-02 claim, then acquire a bounded Main/Reviewer claim for CP-HARDEN-04 canonical automation registry."
     }
   ],
   "last_checkpoint": {
-    "seq": 9,
-    "at": "2026-10-02T16:55:58Z",
+    "seq": 10,
+    "at": "2026-10-02T17:07:32Z",
     "claim_id": "4b7ee936fd5c3fd06fa7",
     "work_item": "CP-HARDEN-02",
-    "summary": "CP-HARDEN-02 claimed through the transactional inbox; raw lanes verified and implementation design started from current main.",
+    "summary": "CP-HARDEN-02 resource-level conflict locks implemented, reviewed, CI-validated on the exact PR head, and merged via PR #95.",
     "decisions": [
-      "Resource conflicts must be checked across lanes independently of work_item identity.",
-      "Lock ownership must survive REVIEW_REQUIRED/rework and release only when the claim is released or accepted.",
-      "Inbox processing remains the serialized operational mutation authority."
+      "Global namespaced resource locks supplement, rather than replace, work_item uniqueness.",
+      "Distinct lock keys preserve safe cross-platform parallelism.",
+      "Expired unreconciled claims retain lock authority until reconciliation records and clears stale ownership.",
+      "Mutation inbox/CAS remains the serialized operational state authority."
     ],
     "evidence_refs": [
-      "inbox receipt main-reviewer-20261002T165000Z-cp-harden-02-claim APPLIED",
-      "claim:4b7ee936fd5c3fd06fa7"
+      "AI-Orchestrator-Module-Library#95",
+      "head:cf5ff8641e7589f1ec1bcfa1618cdaf885c39327",
+      "Validate Module Library run 37038398596 PASS",
+      "merge:41133576927fa3fe5619258ff275ae1173735452",
+      "Validate Module Library merge run 37038497934 PASS",
+      "Reconcile merge run 37038498132 PASS"
     ],
-    "next_action": "Implement resource-level conflict locks, validation and inbox race tests on a bounded branch; do not overlap Windows Legacy."
+    "next_action": "Release the completed CP-HARDEN-02 claim, then acquire a bounded Main/Reviewer claim for CP-HARDEN-04 canonical automation registry."
   },
   "hardening_backlog": [
     {
