@@ -1,0 +1,96 @@
+{
+  "capabilities": [
+    "voice.stt"
+  ],
+  "connector": {
+    "adapters": [],
+    "configuration_schema": null,
+    "healthcheck": {
+      "path": null,
+      "type": "none"
+    },
+    "integration_mode": "adapter",
+    "provides": [
+      {
+        "capability_id": "voice.stt",
+        "contract_id": "voice.stt.v1",
+        "contract_version": "1.0"
+      }
+    ],
+    "requires": [],
+    "standard": "ai-orchestrator-lego",
+    "standard_version": "1.0.0"
+  },
+  "deprecation": {
+    "reason": null,
+    "replacement": null
+  },
+  "description": "Autonomously discovered first-party candidate for voice.stt.",
+  "entry_paths": [
+    "mia-voice"
+  ],
+  "frameworks": [],
+  "id": "voice.stt.firstparty.mia",
+  "integration": {
+    "adaptation_allowed": true,
+    "adapter_notes": "Researcher discovery only; certification must establish license, security and target compatibility.",
+    "estimated_effort": "medium",
+    "known_constraints": [
+      "license unresolved at discovery; fail closed until trusted evidence establishes it"
+    ]
+  },
+  "kind": "integration_bundle",
+  "languages": [],
+  "name": "Mia:mia-voice",
+  "payload": {
+    "path": null,
+    "sha256": null,
+    "type": "upstream_reference",
+    "upstream_commit": "ebeaa2884bce22e891d15da7c1f61962dde0699a",
+    "upstream_repository": "https://github.com/pilialvu75-hue/Mia"
+  },
+  "platforms": [
+    "android",
+    "desktop",
+    "raspberry_pi"
+  ],
+  "provenance": {
+    "license": "NOASSERTION",
+    "license_file": null,
+    "origin": "researcher",
+    "retrieved_at": "2026-10-02T06:59:26.104496Z",
+    "source_commit": "ebeaa2884bce22e891d15da7c1f61962dde0699a",
+    "source_project_id": "pilialvu75-hue/Mia",
+    "source_repository": "https://github.com/pilialvu75-hue/Mia",
+    "source_tag": null,
+    "source_task_id": "autonomous-first-party:voice.stt:ebeaa2884bce22e891d15da7c1f61962dde0699a"
+  },
+  "quality": {
+    "failed_integrations": 0,
+    "last_used_at": null,
+    "reuse_count": 0,
+    "successful_integrations": 0
+  },
+  "security": {
+    "known_vulnerabilities": 0,
+    "notes": "Not yet reviewed.",
+    "review_report": null,
+    "reviewed": false,
+    "reviewed_at": null,
+    "sbom": null
+  },
+  "status": "discovered",
+  "tags": [
+    "voice.stt",
+    "researcher-candidate",
+    "first-party"
+  ],
+  "validation": {
+    "score": 0.0,
+    "test_report": null,
+    "tests_passed": false,
+    "validated_at": null,
+    "validated_on": []
+  },
+  "version": "0.1.0"
+}
