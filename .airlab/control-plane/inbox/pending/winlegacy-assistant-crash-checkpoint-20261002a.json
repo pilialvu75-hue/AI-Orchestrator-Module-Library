@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "request_id": "winlegacy-assistant-crash-checkpoint-20261002a",
+  "actor_id": "automation:windows-legacy:6abc720a44b081919bd7a8d71b45e8d2",
+  "lane_id": "platform-windows-legacy",
+  "operation": "checkpoint",
+  "expected_state_version": 10,
+  "payload": {
+    "summary": "New physical Win7 evidence refines the crash boundary: Settings and Cantiere can be entered and remain usable; the application crashes when entering Assistente. All diagnostic probes whose labels begin with 0 produce no visible failure, while probes 1 and 2 crash. This points to Assistente/model-load or update initialization rather than generic navigation, Flutter interaction, or whole-app shell.",
+    "decisions": [
+      "Treat Settings and Cantiere navigation as physically safe in this candidate.",
+      "Focus the bounded claim on Assistente initialization and the model/update chain it starts.",
+      "Do not merge from CI alone and do not change Win8.1/10/11 behavior."
+    ],
+    "evidence_refs": [
+      "physical:Win7 build #1175 Settings opens",
+      "physical:Win7 build #1175 Cantiere opens",
+      "physical:Win7 build #1175 Assistente crashes",
+      "physical:0-series probes no visible failure; probes 1 and 2 crash"
+    ],
+    "next_action": "Inspect PR #736 Assistente entry path and split the first Assistente/model-load initialization stages into one narrower Win7 diagnostic candidate."
+  }
+}
