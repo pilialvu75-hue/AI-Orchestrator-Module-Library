@@ -7,7 +7,7 @@
     "policy": "This private repository is the single coordination authority. Chats and agents are workers, not independent sources of truth."
   },
   "updated_at": "2026-10-02",
-  "state_revision": 64,
+  "state_revision": 65,
   "lifecycle_status": "BOOTSTRAP_ACTIVE",
   "roadmap_authority": {
     "library": ".airlab/roadmap.yaml",
@@ -78,8 +78,8 @@
     "invalid_lane_behavior": "ISOLATE_AND_SURFACE_PROJECTION_INCIDENT"
   },
   "projection": {
-    "source_digest": "273c99e39bfd1373d623bfd9958f72a318fa8c0233f88d8f494d5b4574543c8e",
-    "projected_at": "2026-10-02T17:22:35Z",
+    "source_digest": "d4819dace138d23923f2d3521fe9eaf99eea0bdfab60240475f1a24f8f7597c4",
+    "projected_at": "2026-10-02T19:27:28Z",
     "counts": {
       "IMPLEMENTING": 2,
       "READY": 13
@@ -156,7 +156,28 @@
     ],
     "review_required": [],
     "blocked": [],
-    "checkpoint_watch": [],
+    "checkpoint_watch": [
+      {
+        "lane": "main-reviewer",
+        "claim_id": "0d04c794310516c83f8e",
+        "work_item": "CP-HARDEN-07",
+        "status": "IMPLEMENTING",
+        "reason": "CHECKPOINT_STALE",
+        "last_checkpoint_at": "2026-10-02T17:22:35Z",
+        "due_since": "2026-10-02T19:22:35Z",
+        "warning_after_minutes": 120
+      },
+      {
+        "lane": "platform-windows-legacy",
+        "claim_id": "baedabdf26f436c9e964",
+        "work_item": "win7-post-0e-main-convergence",
+        "status": "IMPLEMENTING",
+        "reason": "CHECKPOINT_STALE",
+        "last_checkpoint_at": "2026-10-02T16:37:41Z",
+        "due_since": "2026-10-02T18:37:41Z",
+        "warning_after_minutes": 120
+      }
+    ],
     "projection_incidents": [],
     "platform_inference_profiles": [
       {
