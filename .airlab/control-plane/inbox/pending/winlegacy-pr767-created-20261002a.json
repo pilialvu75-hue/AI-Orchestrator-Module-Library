@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "request_id": "winlegacy-pr767-created-20261002a",
+  "actor_id": "automation:windows-legacy:6abc720a44b081919bd7a8d71b45e8d2",
+  "lane_id": "platform-windows-legacy",
+  "operation": "checkpoint",
+  "expected_state_version": 18,
+  "payload": {
+    "summary": "Created PR #767 from current main to converge Win7 post-0E isolation with the merged Windows 7-11 compatibility/current desktop line. Added Win7-only safe startup and two remaining stored-model probes: 0F metadata parse, 0G stored-file refresh/validation.",
+    "decisions": [
+      "Use current main as the convergence base; do not continue stacking product work on PR #761.",
+      "Preserve normal startup on Windows 8.1/10/11; safe-autostart is enabled only when the runner dynamically identifies Win7 by absence of a Windows 8+ API.",
+      "Physical Win7 probe 0F is the next discriminator after CI; do not run 0G in the same acceptance step.",
+      "Do not merge PR #767 based on CI alone."
+    ],
+    "evidence_refs": [
+      "PR #767 head 794a3c761cdfbbea8b88fcb450cca1f1b285463d",
+      "physical Win7 PR #761 run #1250 probe 0E OK",
+      "PR #671 merged Windows 7-11 compatibility layer"
+    ],
+    "next_action": "Wait for PR #767 Windows build CI. If successful, install that candidate on physical Win7 and press only 0F · Leggi modelli salvati; record whether the app remains open or crashes."
+  }
+}
