@@ -7,7 +7,7 @@
     "policy": "This private repository is the single coordination authority. Chats and agents are workers, not independent sources of truth."
   },
   "updated_at": "2026-10-02",
-  "state_revision": 43,
+  "state_revision": 44,
   "lifecycle_status": "BOOTSTRAP_ACTIVE",
   "roadmap_authority": {
     "library": ".airlab/roadmap.yaml",
@@ -78,10 +78,10 @@
     "invalid_lane_behavior": "ISOLATE_AND_SURFACE_PROJECTION_INCIDENT"
   },
   "projection": {
-    "source_digest": "b87ceff6b2c577a9a0fe1b1e2cd754e366ee1f13958297ea1c3772aced11944b",
-    "projected_at": "2026-10-02T12:39:29Z",
+    "source_digest": "24bf6aa3decd9a42fefca45aa8f213cbc8b1d97ed94ea5be591d6229b7d929ae",
+    "projected_at": "2026-10-02T12:41:33Z",
     "counts": {
-      "CLAIMED": 1,
+      "IMPLEMENTING": 1,
       "READY": 14
     },
     "active_claims": [
@@ -90,7 +90,7 @@
         "claim_id": "fe9ce6f271e730171e14",
         "work_item": "win7-model-load-post-0c-isolation",
         "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
-        "lease_until": "2026-10-03T00:39:29Z"
+        "lease_until": "2026-10-03T00:41:33Z"
       }
     ],
     "review_required": [],
@@ -302,20 +302,20 @@
       },
       {
         "id": "platform-windows-legacy",
-        "status": "CLAIMED",
+        "status": "IMPLEMENTING",
         "activation": "active",
-        "state_version": 10,
+        "state_version": 11,
         "updated_at": "2026-10-02",
         "active_claim": {
           "claim_id": "fe9ce6f271e730171e14",
           "work_item": "win7-model-load-post-0c-isolation",
           "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
-          "lease_until": "2026-10-03T00:39:29Z"
+          "lease_until": "2026-10-03T00:41:33Z"
         },
         "reviewer_state": "PENDING",
         "inference_profile_status": "NEEDS_TARGET_PROFILE",
         "historical_backlog_count": 6,
-        "next_action": "Run only physical Win7 probe 0C and record open or crash."
+        "next_action": "Inspect PR #736 Assistente entry path and split the first Assistente/model-load initialization stages into one narrower Win7 diagnostic candidate."
       },
       {
         "id": "runtime-core",
