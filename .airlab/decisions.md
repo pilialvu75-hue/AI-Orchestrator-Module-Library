@@ -117,3 +117,16 @@ Decision date: 2026-10-02
 - Resource locks live on the active claim, persist through `REVIEW_REQUIRED` and reviewer rework, and are released only when the claim is released/accepted or stale ownership is reconciled.
 - An expired but unreconciled claim continues to block its resources. Reconciliation records its lock set before clearing the claim and blocking the stale lane for reviewer attention.
 - Transactional inbox compare-and-swap remains the operational mutation path; resource locks close the cross-lane race that independent lane state versions cannot detect.
+
+
+## Canonical automation ownership registry
+
+Decision date: 2026-10-02
+
+- External scheduler state is not control-plane authority. An automation may be enabled outside the repository and still have zero canonical write permission.
+- `.airlab/control-plane/automation-registry.json` is the machine-readable authorization registry for scheduled/conditional control-plane actors.
+- Every mutation-inbox request requires a non-empty `actor_id`. Any `automation:` actor must be registered exactly once, enabled canonically, hold `control_plane_mutation`, and be allowed for both the requested operation and target-lane policy.
+- Reviewer automation is constrained to worker review transitions and may not claim, implement or mutate its owner `main-reviewer` lane. This makes the prior Reviewer takeover failure structurally rejectable rather than prompt-dependent.
+- Lane-worker automations are owner-lane scoped. Read-only reporters/watchers have no control-plane mutation operations. Disabled canonical writers remain registered as disabled so stale executions fail closed.
+- The GitHub reconcile workflow is a system processor, not a work-item owner: it may apply authorized inbox requests, reconcile stale leases and rebuild projections, but cannot originate implementation work or promote worker results.
+- Authorization is enforced at mutation ingress before lane compare-and-swap/application. A rejected automation request is quarantined without mutating canonical lane state.
