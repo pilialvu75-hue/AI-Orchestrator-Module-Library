@@ -14,12 +14,13 @@ working tree for one commit.
 Every request must contain:
 - `schema_version: 1`
 - a unique `request_id`
+- a non-empty `actor_id`
 - `lane_id`
 - `operation`
 - the exact `expected_state_version` read before submission
 - an operation-specific `payload`
 
-Optional `submitted_at` and `actor_id` fields are retained in the receipt.
+Optional `submitted_at` is retained in the receipt. `actor_id` is mandatory.
 
 Supported operations:
 - `claim`
@@ -38,7 +39,7 @@ Example:
   "schema_version": 1,
   "request_id": "cantiere-20261001T180000Z-claim-001",
   "submitted_at": "2026-10-01T18:00:00Z",
-  "actor_id": "automation:cantiere",
+  "actor_id": "chatgpt:cantiere-example",
   "lane_id": "cantiere",
   "operation": "claim",
   "expected_state_version": 12,
@@ -71,6 +72,14 @@ and lanes are different. Distinct lock keys remain safe to process in parallel.
 The serialized reconcile workflow plus lane compare-and-swap protects the lane mutation;
 resource locks protect shared cross-lane resources that lane-local state versions alone
 cannot detect. Locks remain held while the claim remains active, including reviewer rework.
+
+Automation identities are additionally governed by
+`.airlab/control-plane/automation-registry.json`. Any `actor_id` beginning with
+`automation:` must have exactly one canonical registry entry. The entry must be enabled,
+hold `control_plane_mutation` write capability, allow the requested operation and allow the
+target lane. Unregistered, disabled, read-only or out-of-scope automation requests are
+quarantined before compare-and-swap/application. External scheduler enablement alone never
+grants control-plane write authority.
 
 This inbox protects API-driven state changes. Repository code changes to the control-plane
 implementation itself still use normal branches, pull requests and CI.
