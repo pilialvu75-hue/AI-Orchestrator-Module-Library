@@ -7,7 +7,7 @@
   "activation": "active",
   "scope": "Legacy Windows compatibility layer, installer/update and target-specific adapters with target-optimized inference while preserving shared orchestration/contracts.",
   "shared_engine_policy": "adapter_only",
-  "state_version": 18,
+  "state_version": 19,
   "updated_at": "2026-10-02",
   "active_claim": {
     "claim_id": "baedabdf26f436c9e964",
@@ -17,8 +17,8 @@
     "scope": "Record physical Win7 0E no-crash evidence, then identify the remaining post-validation model crash stage and prepare convergence onto current main preserving merged PR #671 Windows 7-11 improvements. No merge without physical evidence; no regression to Win8.1/10/11.",
     "branch": null,
     "started_at": "2026-10-02T16:01:58Z",
-    "heartbeat_at": "2026-10-02T16:21:58Z",
-    "lease_until": "2026-10-03T04:21:58Z",
+    "heartbeat_at": "2026-10-02T16:37:41Z",
+    "lease_until": "2026-10-03T04:37:41Z",
     "lease_hours": 12
   },
   "dependencies": [],
@@ -42,7 +42,7 @@
     "reviewed_by": null,
     "reviewed_at": null
   },
-  "next_action": "Compare PR 761 lineage with current main and PR 671, then create the smallest current-main Win7 diagnostic candidate for the first remaining post-0E model-load stage without changing Win8.1/10/11 behavior.",
+  "next_action": "Wait for PR #767 Windows build CI. If successful, install that candidate on physical Win7 and press only 0F · Leggi modelli salvati; record whether the app remains open or crashes.",
   "inference_profile_policy": "target_owned_benchmark_gated",
   "inference_profile": {
     "status": "NEEDS_TARGET_PROFILE",
@@ -234,25 +234,45 @@
         "Windows run 1250"
       ],
       "next_action": "Compare PR 761 lineage with current main and PR 671, then create the smallest current-main Win7 diagnostic candidate for the first remaining post-0E model-load stage without changing Win8.1/10/11 behavior."
+    },
+    {
+      "seq": 10,
+      "at": "2026-10-02T16:37:41Z",
+      "claim_id": "baedabdf26f436c9e964",
+      "work_item": "win7-post-0e-main-convergence",
+      "summary": "Created PR #767 from current main to converge Win7 post-0E isolation with the merged Windows 7-11 compatibility/current desktop line. Added Win7-only safe startup and two remaining stored-model probes: 0F metadata parse, 0G stored-file refresh/validation.",
+      "decisions": [
+        "Use current main as the convergence base; do not continue stacking product work on PR #761.",
+        "Preserve normal startup on Windows 8.1/10/11; safe-autostart is enabled only when the runner dynamically identifies Win7 by absence of a Windows 8+ API.",
+        "Physical Win7 probe 0F is the next discriminator after CI; do not run 0G in the same acceptance step.",
+        "Do not merge PR #767 based on CI alone."
+      ],
+      "evidence_refs": [
+        "PR #767 head 794a3c761cdfbbea8b88fcb450cca1f1b285463d",
+        "physical Win7 PR #761 run #1250 probe 0E OK",
+        "PR #671 merged Windows 7-11 compatibility layer"
+      ],
+      "next_action": "Wait for PR #767 Windows build CI. If successful, install that candidate on physical Win7 and press only 0F · Leggi modelli salvati; record whether the app remains open or crashes."
     }
   ],
   "last_checkpoint": {
-    "seq": 9,
-    "at": "2026-10-02T16:21:58Z",
+    "seq": 10,
+    "at": "2026-10-02T16:37:41Z",
     "claim_id": "baedabdf26f436c9e964",
     "work_item": "win7-post-0e-main-convergence",
-    "summary": "Physical Win7 result: PR 761 run 1250 probe 0E completed and the app remained open.",
+    "summary": "Created PR #767 from current main to converge Win7 post-0E isolation with the merged Windows 7-11 compatibility/current desktop line. Added Win7-only safe startup and two remaining stored-model probes: 0F metadata parse, 0G stored-file refresh/validation.",
     "decisions": [
-      "0E built-in model path resolution and GGUF validation did not reproduce the crash.",
-      "Continue after the 0E boundary on a current-main convergence path that preserves PR 671 Windows improvements.",
-      "Do not merge based on CI or this single probe alone."
+      "Use current main as the convergence base; do not continue stacking product work on PR #761.",
+      "Preserve normal startup on Windows 8.1/10/11; safe-autostart is enabled only when the runner dynamically identifies Win7 by absence of a Windows 8+ API.",
+      "Physical Win7 probe 0F is the next discriminator after CI; do not run 0G in the same acceptance step.",
+      "Do not merge PR #767 based on CI alone."
     ],
     "evidence_refs": [
-      "physical Win7: probe 0E OK, app remains open",
-      "PR 761",
-      "Windows run 1250"
+      "PR #767 head 794a3c761cdfbbea8b88fcb450cca1f1b285463d",
+      "physical Win7 PR #761 run #1250 probe 0E OK",
+      "PR #671 merged Windows 7-11 compatibility layer"
     ],
-    "next_action": "Compare PR 761 lineage with current main and PR 671, then create the smallest current-main Win7 diagnostic candidate for the first remaining post-0E model-load stage without changing Win8.1/10/11 behavior."
+    "next_action": "Wait for PR #767 Windows build CI. If successful, install that candidate on physical Win7 and press only 0F · Leggi modelli salvati; record whether the app remains open or crashes."
   },
   "reconciliation_events": [
     {

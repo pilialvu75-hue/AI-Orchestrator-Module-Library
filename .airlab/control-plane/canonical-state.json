@@ -7,7 +7,7 @@
     "policy": "This private repository is the single coordination authority. Chats and agents are workers, not independent sources of truth."
   },
   "updated_at": "2026-10-02",
-  "state_revision": 51,
+  "state_revision": 52,
   "lifecycle_status": "BOOTSTRAP_ACTIVE",
   "roadmap_authority": {
     "library": ".airlab/roadmap.yaml",
@@ -78,8 +78,8 @@
     "invalid_lane_behavior": "ISOLATE_AND_SURFACE_PROJECTION_INCIDENT"
   },
   "projection": {
-    "source_digest": "f47cca77fe268e419553e5fe1e4af723978526e8073e000f866dadab2ea6ca65",
-    "projected_at": "2026-10-02T16:21:58Z",
+    "source_digest": "1154c9ad13cb195f4a53ab7a7bfc7057de75b7c96041a32a650739a46b69e961",
+    "projected_at": "2026-10-02T16:37:41Z",
     "counts": {
       "IMPLEMENTING": 1,
       "READY": 14
@@ -90,7 +90,7 @@
         "claim_id": "baedabdf26f436c9e964",
         "work_item": "win7-post-0e-main-convergence",
         "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
-        "lease_until": "2026-10-03T04:21:58Z"
+        "lease_until": "2026-10-03T04:37:41Z"
       }
     ],
     "review_required": [],
@@ -304,18 +304,18 @@
         "id": "platform-windows-legacy",
         "status": "IMPLEMENTING",
         "activation": "active",
-        "state_version": 18,
+        "state_version": 19,
         "updated_at": "2026-10-02",
         "active_claim": {
           "claim_id": "baedabdf26f436c9e964",
           "work_item": "win7-post-0e-main-convergence",
           "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
-          "lease_until": "2026-10-03T04:21:58Z"
+          "lease_until": "2026-10-03T04:37:41Z"
         },
         "reviewer_state": "PENDING",
         "inference_profile_status": "NEEDS_TARGET_PROFILE",
         "historical_backlog_count": 6,
-        "next_action": "Compare PR 761 lineage with current main and PR 671, then create the smallest current-main Win7 diagnostic candidate for the first remaining post-0E model-load stage without changing Win8.1/10/11 behavior."
+        "next_action": "Wait for PR #767 Windows build CI. If successful, install that candidate on physical Win7 and press only 0F · Leggi modelli salvati; record whether the app remains open or crashes."
       },
       {
         "id": "runtime-core",
