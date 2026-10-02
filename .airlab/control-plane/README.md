@@ -38,14 +38,17 @@ Before work:
 1. inspect all active claims;
 2. declare one bounded `work_item`;
 3. record repository, issue/PR/branch when known;
-4. do not start overlapping implementation if another active lane owns the same work item.
+4. declare machine-readable `resource_locks` for shared files, contracts, PRs or logical resources;
+5. do not start overlapping implementation if another active lane owns the same work item or any requested resource lock.
+
+Resource locks are global across lanes and independent of `work_item` names. Use stable namespaced keys such as `file:<repo>:<path>`, `contract:<name>`, `resource:<name>`, `scope:<name>` or `pr:<repo>#<number>`. When a claim supplies `branch`, the manager automatically adds `branch:<repo>:<branch>`. Distinct lock keys remain parallelizable; an exact shared key is serialized. Locks remain owned through `REVIEW_REQUIRED` and reviewer rework because the active claim remains owned, and are released with the claim. An expired but unreconciled claim still owns its locks; reconciliation records the expired lock set before clearing the stale claim and blocking its lane for reviewer attention.
 
 Claims are real leases with heartbeat. Default lease: 12 hours; maximum: 24 hours. A stale claim is never silently freed: reconciliation clears the lease, marks the lane `BLOCKED`, records the expiry event and requires reviewer reconciliation before new work.
 
 Canonical commands:
 
 ```bash
-python tools/control_plane_manager.py claim --lane cantiere --work-item issue-123 --repository pilialvu75-hue/Ai-orchestrator-riserva --scope "bounded task"
+python tools/control_plane_manager.py claim --lane cantiere --work-item issue-123 --repository pilialvu75-hue/Ai-orchestrator-riserva --scope "bounded task" --resource-lock "contract:cantiere-lifecycle"
 python tools/control_plane_manager.py heartbeat --lane cantiere
 python tools/control_plane_manager.py release --lane cantiere --reason "superseded"
 python tools/control_plane_manager.py project
