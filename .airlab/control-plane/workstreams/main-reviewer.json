@@ -3,11 +3,11 @@
   "id": "main-reviewer",
   "title": "Main / Reviewer",
   "role": "reviewer",
-  "status": "CLAIMED",
+  "status": "IMPLEMENTING",
   "activation": "active",
   "scope": "Global architecture, cross-lane review, consolidation, roadmap/state authority and hardening, including target inference profile balance and shared-contract compatibility.",
   "shared_engine_policy": "shared_or_control_plane",
-  "state_version": 24,
+  "state_version": 25,
   "updated_at": "2026-10-02",
   "active_claim": {
     "claim_id": "4b7ee936fd5c3fd06fa7",
@@ -17,8 +17,8 @@
     "scope": "Implement serialized resource/scope lock keys and overlap detection compatible with the transactional mutation inbox; cover cross-lane conflicts, safe parallelism, release/stale/rework lifecycle, and CAS race behavior.",
     "branch": null,
     "started_at": "2026-10-02T16:53:22Z",
-    "heartbeat_at": "2026-10-02T16:53:22Z",
-    "lease_until": "2026-10-03T04:53:22Z",
+    "heartbeat_at": "2026-10-02T16:55:58Z",
+    "lease_until": "2026-10-03T04:55:58Z",
     "lease_hours": 12
   },
   "dependencies": [],
@@ -40,7 +40,7 @@
     "reviewed_by": null,
     "reviewed_at": null
   },
-  "next_action": "Proceed to CP-HARDEN-02 resource-level conflict locks, then CP-HARDEN-04 automation registry; design CP-HARDEN-07 before broad dispatcher rollout.",
+  "next_action": "Implement resource-level conflict locks, validation and inbox race tests on a bounded branch; do not overlap Windows Legacy.",
   "inference_review_policy": {
     "policy": ".airlab/control-plane/inference-policy.json",
     "check": [
@@ -401,25 +401,41 @@
         "Validate Module Library PR run 36903506691"
       ],
       "next_action": "Migrate mutating automation state writes to the transactional inbox, then proceed to CP-HARDEN-02 resource-level conflict locks."
+    },
+    {
+      "seq": 9,
+      "at": "2026-10-02T16:55:58Z",
+      "claim_id": "4b7ee936fd5c3fd06fa7",
+      "work_item": "CP-HARDEN-02",
+      "summary": "CP-HARDEN-02 claimed through the transactional inbox; raw lanes verified and implementation design started from current main.",
+      "decisions": [
+        "Resource conflicts must be checked across lanes independently of work_item identity.",
+        "Lock ownership must survive REVIEW_REQUIRED/rework and release only when the claim is released or accepted.",
+        "Inbox processing remains the serialized operational mutation authority."
+      ],
+      "evidence_refs": [
+        "inbox receipt main-reviewer-20261002T165000Z-cp-harden-02-claim APPLIED",
+        "claim:4b7ee936fd5c3fd06fa7"
+      ],
+      "next_action": "Implement resource-level conflict locks, validation and inbox race tests on a bounded branch; do not overlap Windows Legacy."
     }
   ],
   "last_checkpoint": {
-    "seq": 8,
-    "at": "2026-10-01T18:00:59Z",
-    "claim_id": "main-reviewer-cp-harden-01-v1-20261001",
-    "work_item": "CP-HARDEN-01",
-    "summary": "CP-HARDEN-01 implemented and merged via PR #93. Transactional compare-and-swap mutation inbox, quarantine receipts, and per-lane projection incident isolation are operational.",
+    "seq": 9,
+    "at": "2026-10-02T16:55:58Z",
+    "claim_id": "4b7ee936fd5c3fd06fa7",
+    "work_item": "CP-HARDEN-02",
+    "summary": "CP-HARDEN-02 claimed through the transactional inbox; raw lanes verified and implementation design started from current main.",
     "decisions": [
-      "Operational API writers must not edit workstream or canonical-state JSON directly on main.",
-      "Invalid or stale mutation requests are quarantined without changing lane state.",
-      "Unreadable lanes are isolated in projection_incidents instead of blinding healthy lanes."
+      "Resource conflicts must be checked across lanes independently of work_item identity.",
+      "Lock ownership must survive REVIEW_REQUIRED/rework and release only when the claim is released or accepted.",
+      "Inbox processing remains the serialized operational mutation authority."
     ],
     "evidence_refs": [
-      "AI-Orchestrator-Module-Library#93",
-      "merge:6672c94055143d4bce875938d8c3d95e36086ee3",
-      "Validate Module Library PR run 36903506691"
+      "inbox receipt main-reviewer-20261002T165000Z-cp-harden-02-claim APPLIED",
+      "claim:4b7ee936fd5c3fd06fa7"
     ],
-    "next_action": "Migrate mutating automation state writes to the transactional inbox, then proceed to CP-HARDEN-02 resource-level conflict locks."
+    "next_action": "Implement resource-level conflict locks, validation and inbox race tests on a bounded branch; do not overlap Windows Legacy."
   },
   "hardening_backlog": [
     {

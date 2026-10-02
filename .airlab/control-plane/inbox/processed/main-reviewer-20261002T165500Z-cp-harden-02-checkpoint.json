@@ -1,0 +1,12 @@
+{
+  "schema_version": 1,
+  "request_id": "main-reviewer-20261002T165500Z-cp-harden-02-checkpoint",
+  "status": "APPLIED",
+  "processed_at": "2026-10-02T16:55:58Z",
+  "source_file": "main-reviewer-20261002T165500Z-cp-harden-02-checkpoint.json",
+  "lane_id": "main-reviewer",
+  "operation": "checkpoint",
+  "actor_id": "chatgpt:main-reviewer",
+  "errors": [],
+  "result_state_version": 25
+}
