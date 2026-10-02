@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "request_id": "main-reviewer-20261002T171000Z-cp-harden-04-claim",
+  "submitted_at": "2026-10-02T17:10:00Z",
+  "actor_id": "chatgpt:main-reviewer",
+  "lane_id": "main-reviewer",
+  "operation": "claim",
+  "expected_state_version": 28,
+  "payload": {
+    "work_item": "CP-HARDEN-04",
+    "repository": "pilialvu75-hue/AI-Orchestrator-Module-Library",
+    "scope": "Create a canonical enabled-automation registry and enforce mutation ownership/capabilities/allowed transitions so unregistered or out-of-scope automations cannot mutate canonical control-plane state or take over another lane.",
+    "branch": "main-reviewer/cp-harden-04-automation-registry",
+    "resource_locks": [
+      "contract:control-plane-automation-ownership",
+      "file:pilialvu75-hue/AI-Orchestrator-Module-Library:.airlab/control-plane/automation-registry.json",
+      "file:pilialvu75-hue/AI-Orchestrator-Module-Library:tools/control_plane_inbox.py",
+      "file:pilialvu75-hue/AI-Orchestrator-Module-Library:tools/validate_control_plane.py",
+      "file:pilialvu75-hue/AI-Orchestrator-Module-Library:tools/chat_lane_bootstrap.py"
+    ]
+  }
+}
