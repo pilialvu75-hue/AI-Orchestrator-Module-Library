@@ -3,11 +3,11 @@
   "id": "main-reviewer",
   "title": "Main / Reviewer",
   "role": "reviewer",
-  "status": "CLAIMED",
+  "status": "IMPLEMENTING",
   "activation": "active",
   "scope": "Global architecture, cross-lane review, consolidation, roadmap/state authority and hardening, including target inference profile balance and shared-contract compatibility.",
   "shared_engine_policy": "shared_or_control_plane",
-  "state_version": 29,
+  "state_version": 30,
   "updated_at": "2026-10-02",
   "active_claim": {
     "claim_id": "a1abc6a753db99f16609",
@@ -25,8 +25,8 @@
       "file:pilialvu75-hue/AI-Orchestrator-Module-Library:tools/validate_control_plane.py"
     ],
     "started_at": "2026-10-02T17:09:54Z",
-    "heartbeat_at": "2026-10-02T17:09:54Z",
-    "lease_until": "2026-10-03T05:09:54Z",
+    "heartbeat_at": "2026-10-02T17:11:59Z",
+    "lease_until": "2026-10-03T05:11:59Z",
     "lease_hours": 12
   },
   "dependencies": [],
@@ -48,7 +48,7 @@
     "reviewed_by": null,
     "reviewed_at": null
   },
-  "next_action": "Release the completed CP-HARDEN-02 claim, then acquire a bounded Main/Reviewer claim for CP-HARDEN-04 canonical automation registry.",
+  "next_action": "Implement canonical automation-registry.json plus fail-closed mutation-inbox authorization and tests on the claimed branch.",
   "inference_review_policy": {
     "policy": ".airlab/control-plane/inference-policy.json",
     "check": [
@@ -448,29 +448,53 @@
         "Reconcile merge run 37038498132 PASS"
       ],
       "next_action": "Release the completed CP-HARDEN-02 claim, then acquire a bounded Main/Reviewer claim for CP-HARDEN-04 canonical automation registry."
+    },
+    {
+      "seq": 11,
+      "at": "2026-10-02T17:11:59Z",
+      "claim_id": "a1abc6a753db99f16609",
+      "work_item": "CP-HARDEN-04",
+      "summary": "CP-HARDEN-04 current automation inventory audited; registry/enforcement design fixed before implementation.",
+      "decisions": [
+        "Every mutation request will require a non-empty actor_id.",
+        "actor_id values beginning automation: must match one canonical registry entry exactly.",
+        "Registered automation mutations require enabled=true, control_plane_mutation capability, an allowed operation, and an allowed target-lane policy.",
+        "Reviewer automation may review worker lanes but may not claim, implement, or mutate the main-reviewer lane.",
+        "Disabled canonical writers remain registered as disabled so stale execution is explicitly rejected.",
+        "Read-only enabled automations are tracked but receive no control-plane mutation operations."
+      ],
+      "evidence_refs": [
+        "automation:main-reviewer:6abe4a9283b08191af4cc91bac843616 enabled reviewer",
+        "automation:windows-legacy:6abc720a44b081919bd7a8d71b45e8d2 disabled",
+        "automation:cantiere:6abe28904d38819182462df10fe4542c disabled",
+        "task:6aa541df44608191a8052bd430aca2ab enabled read-only Library Progress Updates",
+        "task:6aa251add238819181892fc49174c403 enabled read-only Cloud Point 1 Watch"
+      ],
+      "next_action": "Implement canonical automation-registry.json plus fail-closed mutation-inbox authorization and tests on the claimed branch."
     }
   ],
   "last_checkpoint": {
-    "seq": 10,
-    "at": "2026-10-02T17:07:32Z",
-    "claim_id": "4b7ee936fd5c3fd06fa7",
-    "work_item": "CP-HARDEN-02",
-    "summary": "CP-HARDEN-02 resource-level conflict locks implemented, reviewed, CI-validated on the exact PR head, and merged via PR #95.",
+    "seq": 11,
+    "at": "2026-10-02T17:11:59Z",
+    "claim_id": "a1abc6a753db99f16609",
+    "work_item": "CP-HARDEN-04",
+    "summary": "CP-HARDEN-04 current automation inventory audited; registry/enforcement design fixed before implementation.",
     "decisions": [
-      "Global namespaced resource locks supplement, rather than replace, work_item uniqueness.",
-      "Distinct lock keys preserve safe cross-platform parallelism.",
-      "Expired unreconciled claims retain lock authority until reconciliation records and clears stale ownership.",
-      "Mutation inbox/CAS remains the serialized operational state authority."
+      "Every mutation request will require a non-empty actor_id.",
+      "actor_id values beginning automation: must match one canonical registry entry exactly.",
+      "Registered automation mutations require enabled=true, control_plane_mutation capability, an allowed operation, and an allowed target-lane policy.",
+      "Reviewer automation may review worker lanes but may not claim, implement, or mutate the main-reviewer lane.",
+      "Disabled canonical writers remain registered as disabled so stale execution is explicitly rejected.",
+      "Read-only enabled automations are tracked but receive no control-plane mutation operations."
     ],
     "evidence_refs": [
-      "AI-Orchestrator-Module-Library#95",
-      "head:cf5ff8641e7589f1ec1bcfa1618cdaf885c39327",
-      "Validate Module Library run 37038398596 PASS",
-      "merge:41133576927fa3fe5619258ff275ae1173735452",
-      "Validate Module Library merge run 37038497934 PASS",
-      "Reconcile merge run 37038498132 PASS"
+      "automation:main-reviewer:6abe4a9283b08191af4cc91bac843616 enabled reviewer",
+      "automation:windows-legacy:6abc720a44b081919bd7a8d71b45e8d2 disabled",
+      "automation:cantiere:6abe28904d38819182462df10fe4542c disabled",
+      "task:6aa541df44608191a8052bd430aca2ab enabled read-only Library Progress Updates",
+      "task:6aa251add238819181892fc49174c403 enabled read-only Cloud Point 1 Watch"
     ],
-    "next_action": "Release the completed CP-HARDEN-02 claim, then acquire a bounded Main/Reviewer claim for CP-HARDEN-04 canonical automation registry."
+    "next_action": "Implement canonical automation-registry.json plus fail-closed mutation-inbox authorization and tests on the claimed branch."
   },
   "hardening_backlog": [
     {
