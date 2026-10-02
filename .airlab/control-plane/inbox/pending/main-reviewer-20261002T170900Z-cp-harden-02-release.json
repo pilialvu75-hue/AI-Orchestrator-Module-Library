@@ -1,0 +1,12 @@
+{
+  "schema_version": 1,
+  "request_id": "main-reviewer-20261002T170900Z-cp-harden-02-release",
+  "submitted_at": "2026-10-02T17:09:00Z",
+  "actor_id": "chatgpt:main-reviewer",
+  "lane_id": "main-reviewer",
+  "operation": "release",
+  "expected_state_version": 27,
+  "payload": {
+    "reason": "CP-HARDEN-02 merged and canonically checkpointed with exact-head and merge validation evidence."
+  }
+}
