@@ -582,7 +582,10 @@ audit_findings:
     apertura installer e conferma manuale dell''avvio dell''app. I fallimenti sono classificati in modelRuntime,
     parsing, review, validation, build, install e launch; Diagnostics esporta solo grammatica chiusa. PR #747 è
     mergiata con tutte le sei pipeline PR verdi. Merge su main: 18d1470ffb29ef8106345335ecbb6916c33fceca.
-    Resta obbligatoria una prova reale Android su un APK costruito da questo main con receipt status=passed.'
+    PR #749 ha poi aggiunto evidenza esplicita dei rifiuti Reviewer nel receipt. Build fisica candidata corrente:
+    v1.0.12+2933, tag sul commit d6df2a6ced87eb5bcf92a620042b8b1708b9a7e, 20 commit avanti rispetto a #747
+    e quindi comprensiva del gate e delle correzioni successive. Resta obbligatoria una prova reale Android con
+    receipt status=passed.'
   done_when: Una richiesta minima genera file, supera i controlli, produce un APK e l’APK viene aperto; il resoconto
     distingue fallimento del modello, parsing, revisione e build.
   evidence_urls:
@@ -598,6 +601,16 @@ audit_findings:
     state_at_review: merged_ci_green_physical_pending
     head_at_review: 8126f937a1533e17adff087b9941c3381e74c8c4
     merge_commit: 18d1470ffb29ef8106345335ecbb6916c33fceca
+  - number: 749
+    url: https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/749
+    state_at_review: merged_ci_green
+    head_at_review: c8afe87cf0a8694abd13e9ad9b5a22c9b92e74de
+    merge_commit: 6ba9af93c1a65da2212aadad474087b6f87a7ba7
+  physical_validation_build:
+    version: 1.0.12+2933
+    tag: v1.0.12+2933
+    source_commit: d6df2a6ced87eb5bcf92a620042b8b1708b9a7e
+    apk_sha256: a9ee6034d09ebb8a82db920a21acb1eeb71dffdf892fc63c35ceecd0bd33b96c
   physical_validation_required: true
 - id: CANT-AUDIT-07
   audit_item: 7
