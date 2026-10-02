@@ -7,7 +7,7 @@
     "policy": "This private repository is the single coordination authority. Chats and agents are workers, not independent sources of truth."
   },
   "updated_at": "2026-10-02",
-  "state_revision": 59,
+  "state_revision": 60,
   "lifecycle_status": "BOOTSTRAP_ACTIVE",
   "roadmap_authority": {
     "library": ".airlab/roadmap.yaml",
@@ -78,8 +78,8 @@
     "invalid_lane_behavior": "ISOLATE_AND_SURFACE_PROJECTION_INCIDENT"
   },
   "projection": {
-    "source_digest": "89e1434983175fc03a06e65ec2df58490051ac274226ef698fd771871f2d62f7",
-    "projected_at": "2026-10-02T17:11:59Z",
+    "source_digest": "7801376080a80c784e4f80583f837602e8c7ae43676a584cb068dc77ac9bca6a",
+    "projected_at": "2026-10-02T17:19:22Z",
     "counts": {
       "IMPLEMENTING": 2,
       "READY": 13
@@ -262,7 +262,7 @@
         "id": "main-reviewer",
         "status": "IMPLEMENTING",
         "activation": "active",
-        "state_version": 30,
+        "state_version": 31,
         "updated_at": "2026-10-02",
         "active_claim": {
           "claim_id": "a1abc6a753db99f16609",
@@ -281,7 +281,7 @@
         "reviewer_state": "AUTHORITY",
         "inference_profile_status": null,
         "historical_backlog_count": 0,
-        "next_action": "Implement canonical automation-registry.json plus fail-closed mutation-inbox authorization and tests on the claimed branch."
+        "next_action": "Design and implement CP-HARDEN-07 machine-readable WAITING_EXTERNAL / WAITING_OWNER semantics before broad AIR-10 rollout."
       },
       {
         "id": "platform-android",
