@@ -3,29 +3,18 @@
   "id": "main-reviewer",
   "title": "Main / Reviewer",
   "role": "reviewer",
-  "status": "IMPLEMENTING",
+  "status": "READY",
   "activation": "active",
   "scope": "Global architecture, cross-lane review, consolidation, roadmap/state authority and hardening, including target inference profile balance and shared-contract compatibility.",
   "shared_engine_policy": "shared_or_control_plane",
-  "state_version": 27,
+  "state_version": 28,
   "updated_at": "2026-10-02",
-  "active_claim": {
-    "claim_id": "4b7ee936fd5c3fd06fa7",
-    "owner_lane": "main-reviewer",
-    "work_item": "CP-HARDEN-02",
-    "repository": "pilialvu75-hue/AI-Orchestrator-Module-Library",
-    "scope": "Implement serialized resource/scope lock keys and overlap detection compatible with the transactional mutation inbox; cover cross-lane conflicts, safe parallelism, release/stale/rework lifecycle, and CAS race behavior.",
-    "branch": null,
-    "started_at": "2026-10-02T16:53:22Z",
-    "heartbeat_at": "2026-10-02T17:07:32Z",
-    "lease_until": "2026-10-03T05:07:32Z",
-    "lease_hours": 12
-  },
+  "active_claim": null,
   "dependencies": [],
   "roadmap_refs": [],
   "evidence": [],
   "gates": {
-    "G0_CLAIM": "PASS",
+    "G0_CLAIM": "PENDING",
     "G1_IMPLEMENTATION": "PENDING",
     "G2_STATIC": "PENDING",
     "G3_CI": "PENDING",
@@ -537,6 +526,13 @@
       "work_item": "CP-HARDEN-01",
       "reason": "CP-HARDEN-01 implementation merged and transactionally verified through a real APPLIED inbox checkpoint; release bounded implementation claim.",
       "at": "2026-10-01T18:01:35Z"
+    },
+    {
+      "type": "CLAIM_RELEASED",
+      "claim_id": "4b7ee936fd5c3fd06fa7",
+      "work_item": "CP-HARDEN-02",
+      "reason": "CP-HARDEN-02 merged and canonically checkpointed with exact-head and merge validation evidence.",
+      "at": "2026-10-02T17:07:57Z"
     }
   ]
 }
