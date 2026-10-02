@@ -114,6 +114,81 @@ class ControlPlaneManagerTests(unittest.TestCase):
                 now=now,
             )
 
+    def test_claim_prevents_same_resource_with_different_work_items(self):
+        now = datetime(2026, 10, 1, 8, 0, tzinfo=timezone.utc)
+        manager.claim(
+            "cantiere",
+            "worker-a",
+            "owner/repo",
+            "touch shared routing contract",
+            resource_locks=["contract:model-routing"],
+            root=self.root,
+            now=now,
+        )
+        with self.assertRaisesRegex(ValueError, "resource lock conflict"):
+            manager.claim(
+                "main-reviewer",
+                "reviewer-b",
+                "owner/repo",
+                "different work item, same contract",
+                resource_locks=["contract:model-routing"],
+                root=self.root,
+                now=now,
+            )
+
+    def test_distinct_resource_locks_allow_safe_parallelism_across_lanes(self):
+        now = datetime(2026, 10, 1, 8, 0, tzinfo=timezone.utc)
+        manager.claim(
+            "cantiere",
+            "android-only",
+            "owner/repo",
+            "bounded Android adapter change",
+            resource_locks=["file:owner/repo:lib/platform/android_adapter.dart"],
+            root=self.root,
+            now=now,
+        )
+        manager.claim(
+            "main-reviewer",
+            "control-plane-only",
+            "owner/repo",
+            "bounded control-plane change",
+            resource_locks=["file:owner/repo:tools/control_plane_manager.py"],
+            root=self.root,
+            now=now,
+        )
+        canonical = json.loads(
+            (self.root / ".airlab/control-plane/canonical-state.json").read_text(encoding="utf-8")
+        )
+        locks = {item["key"]: item["lane"] for item in canonical["projection"]["active_resource_locks"]}
+        self.assertEqual(locks["file:owner/repo:lib/platform/android_adapter.dart"], "cantiere")
+        self.assertEqual(locks["file:owner/repo:tools/control_plane_manager.py"], "main-reviewer")
+
+    def test_branch_is_automatically_locked(self):
+        now = datetime(2026, 10, 1, 8, 0, tzinfo=timezone.utc)
+        manager.claim(
+            "cantiere",
+            "branch-owner-a",
+            "owner/repo",
+            "first branch writer",
+            branch="feature/shared",
+            root=self.root,
+            now=now,
+        )
+        lane = json.loads(
+            (self.root / ".airlab/control-plane/workstreams/cantiere.json").read_text(encoding="utf-8")
+        )
+        self.assertIn("branch:owner/repo:feature/shared", lane["active_claim"]["resource_locks"])
+        with self.assertRaisesRegex(ValueError, "resource lock conflict"):
+            manager.claim(
+                "main-reviewer",
+                "branch-owner-b",
+                "owner/repo",
+                "second branch writer",
+                branch="feature/shared",
+                root=self.root,
+                now=now,
+            )
+
     def test_claim_resets_previous_review_state(self):
         path = self.root / ".airlab/control-plane/workstreams/cantiere.json"
         lane = json.loads(path.read_text(encoding="utf-8"))
@@ -187,6 +262,34 @@ class ControlPlaneManagerTests(unittest.TestCase):
         self.assertNotIn("review_packet", lane)
         for gate in ("G0_CLAIM","G1_IMPLEMENTATION","G2_STATIC","G3_CI","G4_INTEGRATION","G6_REVIEWER","G7_CANONICAL_SYNC"):
             self.assertEqual(lane["gates"][gate], "PENDING")
+
+    def test_resource_lock_released_with_claim(self):
+        now = datetime(2026, 10, 1, 8, 0, tzinfo=timezone.utc)
+        manager.claim(
+            "cantiere",
+            "release-lock-owner",
+            "owner/repo",
+            "temporary shared resource",
+            resource_locks=["resource:shared-generator"],
+            root=self.root,
+            now=now,
+        )
+        manager.release(
+            "cantiere",
+            reason="bounded work abandoned",
+            root=self.root,
+            now=now + timedelta(minutes=10),
+        )
+        claim_id = manager.claim(
+            "main-reviewer",
+            "new-lock-owner",
+            "owner/repo",
+            "take released shared resource",
+            resource_locks=["resource:shared-generator"],
+            root=self.root,
+            now=now + timedelta(minutes=11),
+        )
+        self.assertTrue(claim_id)
 
     def test_heartbeat_extends_lease(self):
         now = datetime(2026, 10, 1, 8, 0, tzinfo=timezone.utc)
@@ -262,6 +365,44 @@ class ControlPlaneManagerTests(unittest.TestCase):
         self.assertIsNone(lane["active_claim"])
         self.assertEqual(lane["block_reason"]["code"], "CLAIM_LEASE_EXPIRED")
         self.assertTrue(lane["block_reason"]["review_required"])
+
+    def test_stale_resource_lock_blocks_until_reconciliation(self):
+        now = datetime(2026, 10, 1, 8, 0, tzinfo=timezone.utc)
+        manager.claim(
+            "cantiere",
+            "stale-lock-owner",
+            "owner/repo",
+            "bounded stale lock test",
+            resource_locks=["resource:shared-stale"],
+            lease_hours=1,
+            root=self.root,
+            now=now,
+        )
+        with self.assertRaisesRegex(ValueError, "resource lock conflict"):
+            manager.claim(
+                "main-reviewer",
+                "stale-lock-contender",
+                "owner/repo",
+                "must not bypass expired but unreconciled owner",
+                resource_locks=["resource:shared-stale"],
+                root=self.root,
+                now=now + timedelta(hours=2),
+            )
+        manager.reconcile(root=self.root, now=now + timedelta(hours=2))
+        blocked = json.loads(
+            (self.root / ".airlab/control-plane/workstreams/cantiere.json").read_text(encoding="utf-8")
+        )
+        self.assertEqual(blocked["block_reason"]["resource_locks"], ["resource:shared-stale"])
+        claim_id = manager.claim(
+            "main-reviewer",
+            "post-reconcile-owner",
+            "owner/repo",
+            "claim resource only after stale owner is quarantined",
+            resource_locks=["resource:shared-stale"],
+            root=self.root,
+            now=now + timedelta(hours=2, minutes=1),
+        )
+        self.assertTrue(claim_id)
 
     def test_submit_review_rejects_expired_claim(self):
         now = datetime(2026, 10, 1, 8, 0, tzinfo=timezone.utc)
@@ -395,13 +536,14 @@ class ControlPlaneManagerTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "changes must be"):
             manager.submit_review("cantiere", packet_path, root=self.root, now=now + timedelta(hours=1))
 
-    def _submit_ready_review(self, work_item="issue-review"):
+    def _submit_ready_review(self, work_item="issue-review", resource_locks=None):
         now = datetime(2026, 10, 1, 8, 0, tzinfo=timezone.utc)
         claim_id = manager.claim(
             "cantiere",
             work_item,
             "owner/repo",
             "bounded fix",
+            resource_locks=resource_locks,
             root=self.root,
             now=now,
         )
@@ -583,6 +725,34 @@ class ControlPlaneManagerTests(unittest.TestCase):
         self.assertEqual(lane["reviewer"]["state"], "CHANGES_REQUESTED")
         self.assertEqual(lane["last_checkpoint"]["kind"], "REVIEW_REWORK")
         self.assertEqual(lane["next_action"], "Add the missing regression test.")
+
+    def test_review_rework_preserves_resource_lock(self):
+        claim_id, now = self._submit_ready_review(
+            "issue-rework-lock",
+            resource_locks=["contract:diagnostics-envelope"],
+        )
+        manager.review_rework(
+            "cantiere",
+            reason="Regression coverage incomplete.",
+            next_action="Add missing coverage without releasing ownership.",
+            root=self.root,
+            now=now + timedelta(hours=2),
+        )
+        lane = json.loads(
+            (self.root / ".airlab/control-plane/workstreams/cantiere.json").read_text(encoding="utf-8")
+        )
+        self.assertEqual(lane["active_claim"]["claim_id"], claim_id)
+        self.assertEqual(lane["active_claim"]["resource_locks"], ["contract:diagnostics-envelope"])
+        with self.assertRaisesRegex(ValueError, "resource lock conflict"):
+            manager.claim(
+                "main-reviewer",
+                "overlap-during-rework",
+                "owner/repo",
+                "must not take reviewer-held worker resource",
+                resource_locks=["contract:diagnostics-envelope"],
+                root=self.root,
+                now=now + timedelta(hours=2),
+            )
 
     def test_checkpoint_watch_surfaces_claim_without_recent_checkpoint(self):
         now = datetime(2026, 10, 1, 8, 0, tzinfo=timezone.utc)
