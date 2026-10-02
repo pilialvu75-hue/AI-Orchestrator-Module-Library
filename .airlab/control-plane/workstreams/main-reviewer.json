@@ -3,11 +3,11 @@
   "id": "main-reviewer",
   "title": "Main / Reviewer",
   "role": "reviewer",
-  "status": "CLAIMED",
+  "status": "IMPLEMENTING",
   "activation": "active",
   "scope": "Global architecture, cross-lane review, consolidation, roadmap/state authority and hardening, including target inference profile balance and shared-contract compatibility.",
   "shared_engine_policy": "shared_or_control_plane",
-  "state_version": 34,
+  "state_version": 35,
   "updated_at": "2026-10-02",
   "active_claim": {
     "claim_id": "0d04c794310516c83f8e",
@@ -26,8 +26,8 @@
       "file:pilialvu75-hue/AI-Orchestrator-Module-Library:tools/validate_control_plane.py"
     ],
     "started_at": "2026-10-02T17:21:54Z",
-    "heartbeat_at": "2026-10-02T17:21:54Z",
-    "lease_until": "2026-10-03T05:21:54Z",
+    "heartbeat_at": "2026-10-02T17:22:35Z",
+    "lease_until": "2026-10-03T05:22:35Z",
     "lease_hours": 12
   },
   "dependencies": [],
@@ -49,7 +49,7 @@
     "reviewed_by": null,
     "reviewed_at": null
   },
-  "next_action": "Release CP-HARDEN-04, then claim CP-HARDEN-07 and replace release-reason wait workarounds with machine-readable wait records.",
+  "next_action": "Implement WAITING_OWNER / WAITING_EXTERNAL states, enter_wait/resume_wait inbox operations, wait reservations, projection/validation and dispatcher-safe tests.",
   "inference_review_policy": {
     "policy": ".airlab/control-plane/inference-policy.json",
     "check": [
@@ -494,29 +494,51 @@
         "Reconcile merge run 37039903198 PASS"
       ],
       "next_action": "Release CP-HARDEN-04, then claim CP-HARDEN-07 and replace release-reason wait workarounds with machine-readable wait records."
+    },
+    {
+      "seq": 13,
+      "at": "2026-10-02T17:22:35Z",
+      "claim_id": "0d04c794310516c83f8e",
+      "work_item": "CP-HARDEN-07",
+      "summary": "CP-HARDEN-07 design fixed from current wait evidence: replace release-reason workaround with explicit wait lifecycle states and resume signals.",
+      "decisions": [
+        "WAITING_OWNER and WAITING_EXTERNAL are canonical lane statuses with active_claim=null.",
+        "enter_wait consumes a live implementation claim and preserves work_item, prior claim id, checkpoint/resume evidence and resource locks in wait_state.",
+        "Waiting resource locks remain reserved so a differently named claim cannot mutate the frozen candidate while physical/external evidence is pending.",
+        "Duplicate work_item claims are rejected while any lane wait_state reserves that work item.",
+        "Waiting lanes are absent from checkpoint_watch and need no heartbeat/lease.",
+        "resume_wait requires an explicit signal_id plus non-empty evidence refs before returning the lane to READY; it does not auto-claim work.",
+        "Historical WAITING_OWNER_PHYSICAL release events remain valid history but are superseded for new waits."
+      ],
+      "evidence_refs": [
+        "platform-windows-legacy historical release reason WAITING_OWNER_PHYSICAL observed twice",
+        ".airlab/state.json external_wait current_workaround checkpoint_then_release_claim_when_only_owner_physical_input_remains",
+        ".airlab/public-repositories/Ai_orchestrator-prova/roadmap.yaml AIR-10 requires persisted external waits/events"
+      ],
+      "next_action": "Implement WAITING_OWNER / WAITING_EXTERNAL states, enter_wait/resume_wait inbox operations, wait reservations, projection/validation and dispatcher-safe tests."
     }
   ],
   "last_checkpoint": {
-    "seq": 12,
-    "at": "2026-10-02T17:19:59Z",
-    "claim_id": "a1abc6a753db99f16609",
-    "work_item": "CP-HARDEN-04",
-    "summary": "CP-HARDEN-04 canonical automation ownership registry implemented, exact-head CI passed, PR #96 merged, and post-merge validation/reconciliation passed.",
+    "seq": 13,
+    "at": "2026-10-02T17:22:35Z",
+    "claim_id": "0d04c794310516c83f8e",
+    "work_item": "CP-HARDEN-07",
+    "summary": "CP-HARDEN-07 design fixed from current wait evidence: replace release-reason workaround with explicit wait lifecycle states and resume signals.",
     "decisions": [
-      "External scheduler enablement does not grant canonical mutation authority.",
-      "All mutation requests require actor_id; automation actors are fail-closed against the canonical registry.",
-      "Reviewer automation is constrained to worker review transitions and cannot mutate its owner main-reviewer lane.",
-      "Disabled canonical worker automations remain registered disabled so stale runs are rejected explicitly."
+      "WAITING_OWNER and WAITING_EXTERNAL are canonical lane statuses with active_claim=null.",
+      "enter_wait consumes a live implementation claim and preserves work_item, prior claim id, checkpoint/resume evidence and resource locks in wait_state.",
+      "Waiting resource locks remain reserved so a differently named claim cannot mutate the frozen candidate while physical/external evidence is pending.",
+      "Duplicate work_item claims are rejected while any lane wait_state reserves that work item.",
+      "Waiting lanes are absent from checkpoint_watch and need no heartbeat/lease.",
+      "resume_wait requires an explicit signal_id plus non-empty evidence refs before returning the lane to READY; it does not auto-claim work.",
+      "Historical WAITING_OWNER_PHYSICAL release events remain valid history but are superseded for new waits."
     ],
     "evidence_refs": [
-      "AI-Orchestrator-Module-Library#96",
-      "head:8db2a7dca3b5aad293c7b906353e483afbe36143",
-      "Validate Module Library run 37039763311 PASS",
-      "merge:3c34912aa5f4cc12d73bb19badcb953b80fd3f70",
-      "Validate merge run 37039903351 PASS",
-      "Reconcile merge run 37039903198 PASS"
+      "platform-windows-legacy historical release reason WAITING_OWNER_PHYSICAL observed twice",
+      ".airlab/state.json external_wait current_workaround checkpoint_then_release_claim_when_only_owner_physical_input_remains",
+      ".airlab/public-repositories/Ai_orchestrator-prova/roadmap.yaml AIR-10 requires persisted external waits/events"
     ],
-    "next_action": "Release CP-HARDEN-04, then claim CP-HARDEN-07 and replace release-reason wait workarounds with machine-readable wait records."
+    "next_action": "Implement WAITING_OWNER / WAITING_EXTERNAL states, enter_wait/resume_wait inbox operations, wait reservations, projection/validation and dispatcher-safe tests."
   },
   "hardening_backlog": [
     {

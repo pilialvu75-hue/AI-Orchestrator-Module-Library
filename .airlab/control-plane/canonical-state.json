@@ -7,7 +7,7 @@
     "policy": "This private repository is the single coordination authority. Chats and agents are workers, not independent sources of truth."
   },
   "updated_at": "2026-10-02",
-  "state_revision": 63,
+  "state_revision": 64,
   "lifecycle_status": "BOOTSTRAP_ACTIVE",
   "roadmap_authority": {
     "library": ".airlab/roadmap.yaml",
@@ -78,11 +78,10 @@
     "invalid_lane_behavior": "ISOLATE_AND_SURFACE_PROJECTION_INCIDENT"
   },
   "projection": {
-    "source_digest": "07e40e99e8bf797590c5fa1308d426f82ba5d50942eae73079d32928ae6acf14",
-    "projected_at": "2026-10-02T17:21:54Z",
+    "source_digest": "273c99e39bfd1373d623bfd9958f72a318fa8c0233f88d8f494d5b4574543c8e",
+    "projected_at": "2026-10-02T17:22:35Z",
     "counts": {
-      "CLAIMED": 1,
-      "IMPLEMENTING": 1,
+      "IMPLEMENTING": 2,
       "READY": 13
     },
     "active_claims": [
@@ -91,7 +90,7 @@
         "claim_id": "0d04c794310516c83f8e",
         "work_item": "CP-HARDEN-07",
         "repository": "pilialvu75-hue/AI-Orchestrator-Module-Library",
-        "lease_until": "2026-10-03T05:21:54Z",
+        "lease_until": "2026-10-03T05:22:35Z",
         "resource_locks": [
           "branch:pilialvu75-hue/AI-Orchestrator-Module-Library:main-reviewer/cp-harden-07-wait-states",
           "contract:control-plane-wait-lifecycle",
@@ -268,15 +267,15 @@
       },
       {
         "id": "main-reviewer",
-        "status": "CLAIMED",
+        "status": "IMPLEMENTING",
         "activation": "active",
-        "state_version": 34,
+        "state_version": 35,
         "updated_at": "2026-10-02",
         "active_claim": {
           "claim_id": "0d04c794310516c83f8e",
           "work_item": "CP-HARDEN-07",
           "repository": "pilialvu75-hue/AI-Orchestrator-Module-Library",
-          "lease_until": "2026-10-03T05:21:54Z",
+          "lease_until": "2026-10-03T05:22:35Z",
           "resource_locks": [
             "branch:pilialvu75-hue/AI-Orchestrator-Module-Library:main-reviewer/cp-harden-07-wait-states",
             "contract:control-plane-wait-lifecycle",
@@ -290,7 +289,7 @@
         "reviewer_state": "AUTHORITY",
         "inference_profile_status": null,
         "historical_backlog_count": 0,
-        "next_action": "Release CP-HARDEN-04, then claim CP-HARDEN-07 and replace release-reason wait workarounds with machine-readable wait records."
+        "next_action": "Implement WAITING_OWNER / WAITING_EXTERNAL states, enter_wait/resume_wait inbox operations, wait reservations, projection/validation and dispatcher-safe tests."
       },
       {
         "id": "platform-android",
