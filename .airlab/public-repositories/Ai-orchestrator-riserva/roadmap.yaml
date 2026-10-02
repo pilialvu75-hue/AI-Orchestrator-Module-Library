@@ -640,7 +640,7 @@ audit_findings:
 - id: CANT-AUDIT-08
   audit_item: 8
   title: Dipendenze e toolchain non fissate
-  state: active
+  state: done
   priority: P1
   source_priority: P1
   epics:
@@ -649,11 +649,13 @@ audit_findings:
   problem: pubspec.lock non è tra i file tracciati, mp_audio_stream usa any e la CI seleziona Flutter stable senza
     versione esatta. Il lock è citato anche nella chiave cache. Gli override record_linux/record_platform_interface
     esistono, ma la loro sola presenza non dimostra un bug attuale.
-  implementation: 'PR #768 genera e versiona pubspec.lock con Flutter 3.47.5 / Dart 3.13.4, fissa
-    mp_audio_stream a 0.3.0, aggiunge .flutter-version, pinna subosito/flutter-action al commit osservato nella CI
-    verde e usa flutter pub get --enforce-lockfile nelle workflow Android/Web/Linux/Windows/macOS/First App e nei
+  implementation: 'PR #768 ha generato e versionato pubspec.lock con Flutter 3.47.5 / Dart 3.13.4, fissato
+    mp_audio_stream a 0.3.0, aggiunto .flutter-version, pinnato subosito/flutter-action al commit osservato nella CI
+    verde e imposto flutter pub get --enforce-lockfile nelle workflow Android/Web/Linux/Windows/macOS/First App e nei
     publisher coordinati. Gli override record_* restano intenzionalmente finché la loro rimozione non è provata
-    multipiattaforma. CI in corso.'
+    multipiattaforma. Tutte le nove pipeline PR rilevanti sono verdi; il primo macOS packaging ha avuto il noto
+    hdiutil Resource temporarily unavailable, poi il rerun dello stesso job è passato senza modifiche al codice.
+    Merge su main: ed0cbe2477407e929157ca6b315a065d1f7278d6.'
   done_when: Una nuova risoluzione sullo stesso SHA non aggiorna dipendenze implicitamente; un aggiornamento produce
     un diff esplicito e passa i controlli delle piattaforme supportate.
   evidence_urls:
@@ -663,8 +665,9 @@ audit_findings:
   related_prs:
   - number: 768
     url: https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/768
-    state_at_review: open_ci_running
+    state_at_review: merged_ci_green
     head_at_review: e6bc9e023475ce5ec2e64137737c0d76afa3cd27
+    merge_commit: ed0cbe2477407e929157ca6b315a065d1f7278d6
 - id: CANT-AUDIT-09
   audit_item: 9
   title: Logging sincrono sul percorso operativo
