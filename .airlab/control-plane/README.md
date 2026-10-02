@@ -242,3 +242,14 @@ through `canonical-state.json#projection.projection_incidents`; healthy lanes re
 Full validation still fails closed until the malformed lane is repaired.
 
 Operational automations must not write workstream/canonical JSON directly to `main`.
+
+
+## Canonical automation registry
+
+Scheduled and conditional automations do not gain write authority merely because they exist or are enabled externally. The canonical authorization registry is `.airlab/control-plane/automation-registry.json`.
+
+Every mutation-inbox request requires a non-empty `actor_id`. Interactive actors may use a non-`automation:` identity such as `chatgpt:<lane-or-session>`. Any actor beginning with `automation:` is fail-closed: it must match exactly one registry entry whose `enabled` flag, owner lane, write capabilities, allowed operations, target-lane policy and repository scope permit the action.
+
+The automatic Main/Reviewer is deliberately constrained to worker review transitions. It cannot claim or implement the `main-reviewer` lane. Lane-worker automations use `owner_lane_only`; read-only reporters/watchers receive no mutation operations. Disabled canonical writers remain registered with `enabled=false` so stale executions are rejected explicitly rather than becoming anonymous writers.
+
+The GitHub reconcile workflow is registered separately as a system processor: it may apply already-authorized inbox requests, expire stale claims and rebuild projections, but it does not originate implementation work or promote workers to VERIFIED/DONE.
