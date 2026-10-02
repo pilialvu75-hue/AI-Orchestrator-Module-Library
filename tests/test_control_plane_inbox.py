@@ -95,7 +95,7 @@ class ControlPlaneInboxTests(unittest.TestCase):
             "schema_version": 1,
             "request_id": "claim-001",
             "submitted_at": "2026-10-01T18:00:00Z",
-            "actor_id": "automation:test-cantiere",
+            "actor_id": "chatgpt:test-cantiere",
             "lane_id": "cantiere",
             "operation": "claim",
             "expected_state_version": lane["state_version"],
@@ -139,6 +139,7 @@ class ControlPlaneInboxTests(unittest.TestCase):
         request = {
             "schema_version": 1,
             "request_id": "stale-001",
+            "actor_id": "chatgpt:test-cantiere",
             "lane_id": "cantiere",
             "operation": "claim",
             "expected_state_version": lane["state_version"] - 1,
@@ -171,6 +172,7 @@ class ControlPlaneInboxTests(unittest.TestCase):
         request = {
             "schema_version": 1,
             "request_id": "scope-001",
+            "actor_id": "chatgpt:test-cantiere",
             "lane_id": "cantiere",
             "operation": "claim",
             "expected_state_version": lane["state_version"],
@@ -200,6 +202,7 @@ class ControlPlaneInboxTests(unittest.TestCase):
         first = {
             "schema_version": 1,
             "request_id": "race-cantiere",
+            "actor_id": "chatgpt:test-cantiere",
             "lane_id": "cantiere",
             "operation": "claim",
             "expected_state_version": cantiere["state_version"],
@@ -213,6 +216,7 @@ class ControlPlaneInboxTests(unittest.TestCase):
         second = {
             "schema_version": 1,
             "request_id": "race-reviewer",
+            "actor_id": "chatgpt:test-main-reviewer",
             "lane_id": "main-reviewer",
             "operation": "claim",
             "expected_state_version": reviewer["state_version"],
@@ -249,6 +253,80 @@ class ControlPlaneInboxTests(unittest.TestCase):
             ["contract:shared-runtime"],
         )
 
+    def test_request_requires_actor_id(self):
+        lane = self._cantiere()
+        request = {
+            "schema_version": 1,
+            "request_id": "missing-actor",
+            "lane_id": "cantiere",
+            "operation": "claim",
+            "expected_state_version": lane["state_version"],
+            "payload": {
+                "work_item": "anonymous-work",
+                "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
+                "scope": "must fail closed",
+            },
+        }
+        path = self._write_request(request)
+        result = inbox.process_one(path, root=self.root, now=datetime(2026, 10, 1, 18, 11, tzinfo=timezone.utc))
+        self.assertIn("quarantined", result)
+        receipt = json.loads(
+            (self.root / ".airlab/control-plane/inbox/quarantine/missing-actor.json").read_text(encoding="utf-8")
+        )
+        self.assertIn("actor_id is required", receipt["errors"][0])
+
+    def test_unregistered_automation_is_quarantined(self):
+        lane = self._cantiere()
+        request = {
+            "schema_version": 1,
+            "request_id": "unknown-automation",
+            "actor_id": "automation:unknown:deadbeef",
+            "lane_id": "cantiere",
+            "operation": "claim",
+            "expected_state_version": lane["state_version"],
+            "payload": {
+                "work_item": "unknown-writer",
+                "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
+                "scope": "must not mutate canonical state",
+            },
+        }
+        before = json.dumps(lane, sort_keys=True)
+        path = self._write_request(request)
+        result = inbox.process_one(path, root=self.root, now=datetime(2026, 10, 1, 18, 12, tzinfo=timezone.utc))
+        self.assertIn("quarantined", result)
+        self.assertEqual(before, json.dumps(self._cantiere(), sort_keys=True))
+        receipt = json.loads(
+            (self.root / ".airlab/control-plane/inbox/quarantine/unknown-automation.json").read_text(encoding="utf-8")
+        )
+        self.assertIn("not registered", receipt["errors"][0])
+
+    def test_disabled_lane_automation_is_rejected(self):
+        with self.assertRaisesRegex(ValueError, "disabled by canonical registry"):
+            inbox._authorize_automation_actor(
+                self.root,
+                "automation:cantiere:6abe28904d38819182462df10fe4542c",
+                "cantiere",
+                "checkpoint",
+            )
+
+    def test_read_only_automation_cannot_mutate(self):
+        with self.assertRaisesRegex(ValueError, "lacks control_plane_mutation"):
+            inbox._authorize_automation_actor(
+                self.root,
+                "automation:library-progress:6aa541df44608191a8052bd430aca2ab",
+                "library-researcher",
+                "checkpoint",
+            )
+
+    def test_reviewer_automation_can_review_workers_but_not_owner_lane(self):
+        actor = "automation:main-reviewer:6abe4a9283b08191af4cc91bac843616"
+        entry = inbox._authorize_automation_actor(self.root, actor, "cantiere", "review_accept")
+        self.assertEqual(entry["owner_lane"], "main-reviewer")
+        with self.assertRaisesRegex(ValueError, "worker lanes only"):
+            inbox._authorize_automation_actor(self.root, actor, "main-reviewer", "review_accept")
+        with self.assertRaisesRegex(ValueError, "operation is not allowed"):
+            inbox._authorize_automation_actor(self.root, actor, "cantiere", "claim")
+
     def test_unreadable_unrelated_lane_does_not_blind_healthy_checkpoint(self):
         now = datetime(2026, 10, 1, 18, 0, tzinfo=timezone.utc)
         claim_id = control_plane_manager.claim(
@@ -266,6 +344,7 @@ class ControlPlaneInboxTests(unittest.TestCase):
         request = {
             "schema_version": 1,
             "request_id": "checkpoint-001",
+            "actor_id": "chatgpt:test-cantiere",
             "lane_id": "cantiere",
             "operation": "checkpoint",
             "expected_state_version": lane["state_version"],

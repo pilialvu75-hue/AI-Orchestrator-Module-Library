@@ -69,6 +69,9 @@ class ChatLaneBootstrapTests(unittest.TestCase):
         self.assertIn(".airlab/control-plane/inbox/pending/", text)
         self.assertIn("expected_state_version", text)
         self.assertIn("never edit workstream JSON or canonical-state.json directly", text)
+        self.assertIn("non-empty actor_id", text)
+        self.assertIn("automation-registry.json", text)
+        self.assertIn("fail closed", text)
 
     def test_unknown_lane_fails(self):
         with self.assertRaisesRegex(ValueError, "unknown chat lane"):

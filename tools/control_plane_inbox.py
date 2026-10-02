@@ -18,6 +18,7 @@ ROOT = Path(__file__).resolve().parents[1]
 PENDING_REL = Path(".airlab/control-plane/inbox/pending")
 PROCESSED_REL = Path(".airlab/control-plane/inbox/processed")
 QUARANTINE_REL = Path(".airlab/control-plane/inbox/quarantine")
+AUTOMATION_REGISTRY_REL = Path(".airlab/control-plane/automation-registry.json")
 REQUEST_ID_RE = re.compile(r"^[A-Za-z0-9._-]{1,128}$")
 OPERATIONS = {
     "claim",
@@ -56,6 +57,16 @@ def _canonical(root: Path) -> dict[str, Any]:
     return _load(root / ".airlab/control-plane/canonical-state.json")
 
 
+def _automation_registry(root: Path) -> dict[str, Any]:
+    path = root / AUTOMATION_REGISTRY_REL
+    if not path.exists():
+        raise ValueError("canonical automation registry is missing")
+    registry = _load(path)
+    if registry.get("schema_version") != 1:
+        raise ValueError("canonical automation registry schema_version must be 1")
+    return registry
+
+
 def _lane_rel(root: Path, lane_id: str) -> Path:
     canonical = _canonical(root)
     for rel in canonical.get("workstreams") or []:
@@ -67,6 +78,67 @@ def _lane_rel(root: Path, lane_id: str) -> Path:
         if lane.get("id") == lane_id:
             return Path(rel)
     raise ValueError(f"unknown or unreadable lane: {lane_id}")
+
+
+def _authorize_automation_actor(
+    root: Path,
+    actor_id: str,
+    lane_id: str,
+    operation: str,
+) -> dict[str, Any] | None:
+    registry = _automation_registry(root)
+    policy = registry.get("policy") or {}
+    prefix = str(policy.get("automation_actor_prefix") or "automation:")
+    if not actor_id.startswith(prefix):
+        return None
+
+    matches = [
+        entry for entry in (registry.get("automations") or [])
+        if entry.get("actor_id") == actor_id
+    ]
+    if len(matches) != 1:
+        if not matches:
+            raise ValueError(f"automation actor is not registered: {actor_id}")
+        raise ValueError(f"automation actor is registered more than once: {actor_id}")
+
+    entry = matches[0]
+    if entry.get("enabled") is not True:
+        raise ValueError(f"automation actor is disabled by canonical registry: {actor_id}")
+    if "control_plane_mutation" not in (entry.get("write_capabilities") or []):
+        raise ValueError(f"automation actor lacks control_plane_mutation capability: {actor_id}")
+    if operation not in (entry.get("allowed_operations") or []):
+        raise ValueError(f"automation actor operation is not allowed: {actor_id} -> {operation}")
+
+    owner_lane = entry.get("owner_lane")
+    if not isinstance(owner_lane, str) or not owner_lane:
+        raise ValueError(f"automation actor has no canonical owner lane: {actor_id}")
+
+    target_policy = entry.get("target_lane_policy")
+    if target_policy == "owner_lane_only":
+        if lane_id != owner_lane:
+            raise ValueError(
+                f"automation actor may mutate only owner lane {owner_lane}; target={lane_id}"
+            )
+    elif target_policy == "worker_lanes_only":
+        lane_rel = _lane_rel(root, lane_id)
+        lane = _load(root / lane_rel)
+        if lane.get("role") == "reviewer" or lane_id == owner_lane:
+            raise ValueError(
+                f"automation actor may target worker lanes only; target={lane_id}"
+            )
+    elif target_policy == "explicit":
+        allowed = entry.get("allowed_target_lanes") or []
+        if lane_id not in allowed:
+            raise ValueError(
+                f"automation actor target lane is not allowed: {actor_id} -> {lane_id}"
+            )
+    elif target_policy == "all_canonical_lanes":
+        _lane_rel(root, lane_id)
+    else:
+        raise ValueError(
+            f"automation actor target_lane_policy forbids mutation: {actor_id} -> {target_policy}"
+        )
+    return entry
 
 
 def _request_identity(request: dict[str, Any], fallback: str) -> tuple[str, str, str, int, dict[str, Any]]:
@@ -98,8 +170,8 @@ def _request_identity(request: dict[str, Any], fallback: str) -> tuple[str, str,
     if submitted_at is not None and (not isinstance(submitted_at, str) or not submitted_at.strip()):
         raise ValueError("submitted_at must be a non-empty string when provided")
     actor_id = request.get("actor_id")
-    if actor_id is not None and (not isinstance(actor_id, str) or not actor_id.strip()):
-        raise ValueError("actor_id must be a non-empty string when provided")
+    if not isinstance(actor_id, str) or not actor_id.strip():
+        raise ValueError("actor_id is required and must be a non-empty string")
     return request_id, lane_id.strip(), operation, expected, payload
 
 
@@ -247,6 +319,13 @@ def process_one(path: Path, *, root: Path = ROOT, now: datetime | None = None) -
         if processed_path.exists() or quarantine_path.exists():
             path.unlink(missing_ok=True)
             return f"{request_id}: duplicate-noop"
+
+        _authorize_automation_actor(
+            root,
+            str(request.get("actor_id")),
+            lane_id,
+            operation,
+        )
 
         lane_rel = _lane_rel(root, lane_id)
         current_lane = _load(root / lane_rel)

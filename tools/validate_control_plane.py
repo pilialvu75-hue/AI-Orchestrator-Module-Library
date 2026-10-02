@@ -7,6 +7,8 @@ ROOT = Path(__file__).resolve().parents[1]
 CP = ROOT / ".airlab" / "control-plane"
 ALLOWED = {"READY","CLAIMED","IMPLEMENTING","EVIDENCE_READY","REVIEW_REQUIRED","VERIFIED","DONE","BLOCKED","PAUSED"}
 WORKER_MAX = {"READY","CLAIMED","IMPLEMENTING","EVIDENCE_READY","REVIEW_REQUIRED","BLOCKED","PAUSED"}
+AUTOMATION_OPERATIONS = {"claim","heartbeat","checkpoint","release","submit_review","review_accept","review_rework","canonical_sync_complete"}
+AUTOMATION_TARGET_POLICIES = {"owner_lane_only","worker_lanes_only","explicit","all_canonical_lanes","read_only","system_processor_only"}
 
 def load(path):
     with path.open("r", encoding="utf-8") as f:
@@ -18,6 +20,7 @@ def validate(root=ROOT):
     gates = load(root / ".airlab/control-plane/gates.json")
     inference = load(root / ".airlab/control-plane/inference-policy.json")
     registry = load(root / ".airlab/control-plane/chat-registry.json")
+    automation_registry = load(root / ".airlab/control-plane/automation-registry.json")
     archive = load(root / ".airlab/control-plane/historical-chat-consolidation.json")
     if canonical.get("schema_version") != 1:
         errors.append("canonical-state schema_version must be 1")
@@ -99,6 +102,81 @@ def validate(root=ROOT):
             errors.append(f"{lane_id}: chat-registry missing primary_repository")
         if not entry.get("chat_title"):
             errors.append(f"{lane_id}: chat-registry missing chat_title")
+
+    if automation_registry.get("schema_version") != 1:
+        errors.append("automation-registry schema_version must be 1")
+    automation_policy = automation_registry.get("policy") or {}
+    if automation_policy.get("mutation_actor_id_required") is not True:
+        errors.append("automation-registry policy must require actor_id for mutations")
+    if automation_policy.get("automation_actor_prefix") != "automation:":
+        errors.append("automation-registry automation_actor_prefix must be automation:")
+    for key in (
+        "unregistered_automation_behavior",
+        "disabled_automation_behavior",
+        "missing_write_capability_behavior",
+        "disallowed_operation_behavior",
+        "disallowed_target_lane_behavior",
+    ):
+        if automation_policy.get(key) != "QUARANTINE":
+            errors.append(f"automation-registry policy {key} must be QUARANTINE")
+
+    automation_ids = set()
+    automation_actor_ids = set()
+    for entry in automation_registry.get("automations") or []:
+        automation_id = entry.get("automation_id")
+        actor_id = entry.get("actor_id")
+        owner_lane = entry.get("owner_lane")
+        if not isinstance(automation_id, str) or not automation_id:
+            errors.append("automation-registry entry missing automation_id")
+            continue
+        if automation_id in automation_ids:
+            errors.append(f"duplicate automation_id: {automation_id}")
+        automation_ids.add(automation_id)
+        if not isinstance(actor_id, str) or not actor_id:
+            errors.append(f"{automation_id}: automation actor_id must be a non-empty string")
+        elif actor_id in automation_actor_ids:
+            errors.append(f"duplicate automation actor_id: {actor_id}")
+        else:
+            automation_actor_ids.add(actor_id)
+        if not isinstance(entry.get("enabled"), bool):
+            errors.append(f"{automation_id}: enabled must be boolean")
+        if owner_lane not in registry_ids:
+            errors.append(f"{automation_id}: unknown owner_lane {owner_lane}")
+        if not isinstance(entry.get("scope"), str) or not entry.get("scope").strip():
+            errors.append(f"{automation_id}: scope must be a non-empty string")
+        for field in ("read_capabilities","write_capabilities","read_repositories","write_repositories","allowed_operations","allowed_target_lanes","forbidden_takeover_rules"):
+            value = entry.get(field)
+            if not isinstance(value, list) or any(not isinstance(item, str) or not item for item in value):
+                errors.append(f"{automation_id}: {field} must be a list of non-empty strings")
+        operations = entry.get("allowed_operations") or []
+        invalid_operations = sorted(set(operations) - AUTOMATION_OPERATIONS)
+        if invalid_operations:
+            errors.append(f"{automation_id}: invalid allowed_operations {invalid_operations}")
+        target_policy = entry.get("target_lane_policy")
+        if target_policy not in AUTOMATION_TARGET_POLICIES:
+            errors.append(f"{automation_id}: invalid target_lane_policy {target_policy}")
+        allowed_targets = entry.get("allowed_target_lanes") or []
+        unknown_targets = sorted(set(allowed_targets) - registry_ids)
+        if unknown_targets:
+            errors.append(f"{automation_id}: unknown allowed_target_lanes {unknown_targets}")
+        write_capabilities = entry.get("write_capabilities") or []
+        mutating = "control_plane_mutation" in write_capabilities
+        if mutating:
+            if not isinstance(actor_id, str) or not actor_id.startswith("automation:"):
+                errors.append(f"{automation_id}: mutating automation actor_id must start with automation:")
+            if not operations:
+                errors.append(f"{automation_id}: mutating automation requires allowed_operations")
+            if target_policy not in {"owner_lane_only","worker_lanes_only","explicit","all_canonical_lanes"}:
+                errors.append(f"{automation_id}: mutating automation requires a writable target_lane_policy")
+            if "pilialvu75-hue/AI-Orchestrator-Module-Library" not in (entry.get("write_repositories") or []):
+                errors.append(f"{automation_id}: control-plane mutation requires Module Library write scope")
+        elif operations:
+            errors.append(f"{automation_id}: non-mutating automation cannot declare allowed_operations")
+        if entry.get("kind") == "reviewer":
+            if target_policy != "worker_lanes_only":
+                errors.append(f"{automation_id}: reviewer automation must target worker_lanes_only")
+            if "OWNER_LANE_TAKEOVER_FORBIDDEN" not in (entry.get("forbidden_takeover_rules") or []):
+                errors.append(f"{automation_id}: reviewer automation must forbid owner lane takeover")
     projection_incidents = (canonical.get("projection") or {}).get("projection_incidents") or []
     if not isinstance(projection_incidents, list):
         errors.append("canonical projection_incidents must be a list")

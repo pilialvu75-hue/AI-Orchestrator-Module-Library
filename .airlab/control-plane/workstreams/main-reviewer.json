@@ -7,7 +7,7 @@
   "activation": "active",
   "scope": "Global architecture, cross-lane review, consolidation, roadmap/state authority and hardening, including target inference profile balance and shared-contract compatibility.",
   "shared_engine_policy": "shared_or_control_plane",
-  "state_version": 30,
+  "state_version": 31,
   "updated_at": "2026-10-02",
   "active_claim": {
     "claim_id": "a1abc6a753db99f16609",
@@ -48,7 +48,7 @@
     "reviewed_by": null,
     "reviewed_at": null
   },
-  "next_action": "Implement canonical automation-registry.json plus fail-closed mutation-inbox authorization and tests on the claimed branch.",
+  "next_action": "Design and implement CP-HARDEN-07 machine-readable WAITING_EXTERNAL / WAITING_OWNER semantics before broad AIR-10 rollout.",
   "inference_review_policy": {
     "policy": ".airlab/control-plane/inference-policy.json",
     "check": [
@@ -538,7 +538,14 @@
       "priority": "P1",
       "title": "Canonical automation registry",
       "problem": "Scheduled mutating tasks can exist outside lane ownership or overreach their role. During this audit the automatic Reviewer continued the active main-reviewer hardening claim and produced PR #89 in parallel.",
-      "target": "Register enabled mutating automations to lane ids and role capabilities; reject/flag unowned automation and forbid Reviewer takeover of active main-reviewer implementation claims."
+      "target": "Register enabled mutating automations to lane ids and role capabilities; reject/flag unowned automation and forbid Reviewer takeover of active main-reviewer implementation claims.",
+      "status": "DONE",
+      "implementation": "Canonical automation-registry.json plus fail-closed mutation ingress authorization for actor identity, enabled state, write capability, allowed operation and target-lane ownership.",
+      "evidence": [
+        "AI-Orchestrator-Module-Library#96",
+        "tests/test_control_plane_inbox.py automation authorization coverage",
+        "tests/test_control_plane.py registry invariant coverage"
+      ]
     },
     {
       "id": "CP-HARDEN-05",
