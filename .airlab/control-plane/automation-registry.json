@@ -1,0 +1,210 @@
+{
+  "schema_version": 1,
+  "updated_at": "2026-10-02",
+  "policy": {
+    "mutation_actor_id_required": true,
+    "automation_actor_prefix": "automation:",
+    "unregistered_automation_behavior": "QUARANTINE",
+    "disabled_automation_behavior": "QUARANTINE",
+    "missing_write_capability_behavior": "QUARANTINE",
+    "disallowed_operation_behavior": "QUARANTINE",
+    "disallowed_target_lane_behavior": "QUARANTINE",
+    "external_enabled_state_is_not_authority": "Canonical registry permission is required even if an external scheduler is enabled."
+  },
+  "automations": [
+    {
+      "automation_id": "github-control-plane-reconcile",
+      "title": "Reconcile Canonical Control Plane",
+      "actor_id": "system:github-actions:control-plane-reconcile",
+      "enabled": true,
+      "owner_lane": "main-reviewer",
+      "kind": "system_processor",
+      "read_capabilities": [
+        "control_plane_state",
+        "mutation_inbox"
+      ],
+      "write_capabilities": [
+        "inbox_processor",
+        "projection_reconciler"
+      ],
+      "read_repositories": [
+        "pilialvu75-hue/AI-Orchestrator-Module-Library"
+      ],
+      "write_repositories": [
+        "pilialvu75-hue/AI-Orchestrator-Module-Library"
+      ],
+      "scope": "Apply already-submitted guarded mutations, reconcile expired claims, and project canonical state. It does not originate work-item claims or promote workers.",
+      "allowed_operations": [],
+      "target_lane_policy": "system_processor_only",
+      "allowed_target_lanes": [],
+      "forbidden_takeover_rules": [
+        "NO_WORK_ITEM_ORIGINATION",
+        "NO_WORKER_VERIFIED_DONE_PROMOTION"
+      ]
+    },
+    {
+      "automation_id": "6abe4a9283b08191af4cc91bac843616",
+      "title": "AI Orchestrator Reviewer",
+      "actor_id": "automation:main-reviewer:6abe4a9283b08191af4cc91bac843616",
+      "enabled": true,
+      "owner_lane": "main-reviewer",
+      "kind": "reviewer",
+      "read_capabilities": [
+        "control_plane_state",
+        "worker_review_packets",
+        "github_pr_ci",
+        "runtime_evidence"
+      ],
+      "write_capabilities": [
+        "control_plane_mutation"
+      ],
+      "read_repositories": [
+        "*canonical_lane_repositories"
+      ],
+      "write_repositories": [
+        "pilialvu75-hue/AI-Orchestrator-Module-Library"
+      ],
+      "scope": "Review and reconcile worker handoffs only. Never claim or implement main-reviewer structural backlog and never take over the main-reviewer lane.",
+      "allowed_operations": [
+        "review_accept",
+        "review_rework",
+        "canonical_sync_complete"
+      ],
+      "target_lane_policy": "worker_lanes_only",
+      "allowed_target_lanes": [],
+      "forbidden_takeover_rules": [
+        "OWNER_LANE_TAKEOVER_FORBIDDEN",
+        "WORK_ITEM_CLAIM_FORBIDDEN",
+        "IMPLEMENTATION_FORBIDDEN",
+        "STATUS_ONLY_REVIEW_FORBIDDEN"
+      ]
+    },
+    {
+      "automation_id": "6aa541df44608191a8052bd430aca2ab",
+      "title": "Library Progress Updates",
+      "actor_id": "automation:library-progress:6aa541df44608191a8052bd430aca2ab",
+      "enabled": true,
+      "owner_lane": "library-researcher",
+      "kind": "reporter",
+      "read_capabilities": [
+        "github_status",
+        "control_plane_state"
+      ],
+      "write_capabilities": [],
+      "read_repositories": [
+        "pilialvu75-hue/AI-Orchestrator-Module-Library"
+      ],
+      "write_repositories": [],
+      "scope": "Read-only progress reporting.",
+      "allowed_operations": [],
+      "target_lane_policy": "read_only",
+      "allowed_target_lanes": [],
+      "forbidden_takeover_rules": [
+        "ALL_CONTROL_PLANE_MUTATIONS_FORBIDDEN"
+      ]
+    },
+    {
+      "automation_id": "6aa251add238819181892fc49174c403",
+      "title": "Cloud Point 1 Watch",
+      "actor_id": "automation:cloud-point-1-watch:6aa251add238819181892fc49174c403",
+      "enabled": true,
+      "owner_lane": "runtime-core",
+      "kind": "watcher",
+      "read_capabilities": [
+        "github_status",
+        "runtime_evidence"
+      ],
+      "write_capabilities": [],
+      "read_repositories": [
+        "pilialvu75-hue/Ai-orchestrator-riserva",
+        "pilialvu75-hue/Ai-orchestrator-diagnostics"
+      ],
+      "write_repositories": [],
+      "scope": "Read-only Cloud Point 1 acceptance watch.",
+      "allowed_operations": [],
+      "target_lane_policy": "read_only",
+      "allowed_target_lanes": [],
+      "forbidden_takeover_rules": [
+        "ALL_CONTROL_PLANE_MUTATIONS_FORBIDDEN"
+      ]
+    },
+    {
+      "automation_id": "6abc720a44b081919bd7a8d71b45e8d2",
+      "title": "Windows Legacy Autonomous",
+      "actor_id": "automation:windows-legacy:6abc720a44b081919bd7a8d71b45e8d2",
+      "enabled": false,
+      "owner_lane": "platform-windows-legacy",
+      "kind": "lane_worker",
+      "read_capabilities": [
+        "control_plane_state",
+        "github_pr_ci",
+        "runtime_evidence"
+      ],
+      "write_capabilities": [
+        "control_plane_mutation",
+        "repository_implementation"
+      ],
+      "read_repositories": [
+        "pilialvu75-hue/AI-Orchestrator-Module-Library",
+        "pilialvu75-hue/Ai-orchestrator-riserva"
+      ],
+      "write_repositories": [
+        "pilialvu75-hue/AI-Orchestrator-Module-Library",
+        "pilialvu75-hue/Ai-orchestrator-riserva"
+      ],
+      "scope": "Legacy Windows worker lane only. Retained disabled so stale executions fail closed.",
+      "allowed_operations": [
+        "claim",
+        "heartbeat",
+        "checkpoint",
+        "release",
+        "submit_review"
+      ],
+      "target_lane_policy": "owner_lane_only",
+      "allowed_target_lanes": [],
+      "forbidden_takeover_rules": [
+        "FOREIGN_LANE_MUTATION_FORBIDDEN",
+        "CROSS_LANE_REVIEW_FORBIDDEN"
+      ]
+    },
+    {
+      "automation_id": "6abe28904d38819182462df10fe4542c",
+      "title": "Cantiere Auto-Pilot",
+      "actor_id": "automation:cantiere:6abe28904d38819182462df10fe4542c",
+      "enabled": false,
+      "owner_lane": "cantiere",
+      "kind": "lane_worker",
+      "read_capabilities": [
+        "control_plane_state",
+        "github_pr_ci",
+        "runtime_evidence"
+      ],
+      "write_capabilities": [
+        "control_plane_mutation",
+        "repository_implementation"
+      ],
+      "read_repositories": [
+        "pilialvu75-hue/AI-Orchestrator-Module-Library",
+        "pilialvu75-hue/Ai-orchestrator-riserva"
+      ],
+      "write_repositories": [
+        "pilialvu75-hue/AI-Orchestrator-Module-Library",
+        "pilialvu75-hue/Ai-orchestrator-riserva"
+      ],
+      "scope": "Cantiere worker lane only. Retained disabled so stale executions fail closed.",
+      "allowed_operations": [
+        "claim",
+        "heartbeat",
+        "checkpoint",
+        "release",
+        "submit_review"
+      ],
+      "target_lane_policy": "owner_lane_only",
+      "allowed_target_lanes": [],
+      "forbidden_takeover_rules": [
+        "FOREIGN_LANE_MUTATION_FORBIDDEN",
+        "CROSS_LANE_REVIEW_FORBIDDEN"
+      ]
+    }
+  ]
+}
