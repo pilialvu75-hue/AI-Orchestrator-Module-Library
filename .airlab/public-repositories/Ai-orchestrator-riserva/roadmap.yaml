@@ -640,7 +640,7 @@ audit_findings:
 - id: CANT-AUDIT-08
   audit_item: 8
   title: Dipendenze e toolchain non fissate
-  state: planned
+  state: active
   priority: P1
   source_priority: P1
   epics:
@@ -649,15 +649,22 @@ audit_findings:
   problem: pubspec.lock non è tra i file tracciati, mp_audio_stream usa any e la CI seleziona Flutter stable senza
     versione esatta. Il lock è citato anche nella chiave cache. Gli override record_linux/record_platform_interface
     esistono, ma la loro sola presenza non dimostra un bug attuale.
-  implementation: Generare e versionare il lock con la toolchain scelta, fissare Flutter, sostituire any con un
-    vincolo verificato e far rispettare il lock in CI. Rimuovere gli override soltanto dopo una prova multipiattaforma.
-    Completare .gitignore con esclusioni Flutter mirate.
+  implementation: 'PR #768 genera e versiona pubspec.lock con Flutter 3.47.5 / Dart 3.13.4, fissa
+    mp_audio_stream a 0.3.0, aggiunge .flutter-version, pinna subosito/flutter-action al commit osservato nella CI
+    verde e usa flutter pub get --enforce-lockfile nelle workflow Android/Web/Linux/Windows/macOS/First App e nei
+    publisher coordinati. Gli override record_* restano intenzionalmente finché la loro rimozione non è provata
+    multipiattaforma. CI in corso.'
   done_when: Una nuova risoluzione sullo stesso SHA non aggiorna dipendenze implicitamente; un aggiornamento produce
     un diff esplicito e passa i controlli delle piattaforme supportate.
   evidence_urls:
   - https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/blob/0c1fa14c154308a03a62a6ad730d639d7ace3e65/pubspec.yaml#L51
   - https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/blob/0c1fa14c154308a03a62a6ad730d639d7ace3e65/.github/workflows/build.yml#L60
   - https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/blob/0c1fa14c154308a03a62a6ad730d639d7ace3e65/.gitignore
+  related_prs:
+  - number: 768
+    url: https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/768
+    state_at_review: open_ci_running
+    head_at_review: e6bc9e023475ce5ec2e64137737c0d76afa3cd27
 - id: CANT-AUDIT-09
   audit_item: 9
   title: Logging sincrono sul percorso operativo
