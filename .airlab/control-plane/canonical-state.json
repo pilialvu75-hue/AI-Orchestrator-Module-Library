@@ -6,8 +6,8 @@
     "owner_lane": "main-reviewer",
     "policy": "This private repository is the single coordination authority. Chats and agents are workers, not independent sources of truth."
   },
-  "updated_at": "2026-10-01",
-  "state_revision": 42,
+  "updated_at": "2026-10-02",
+  "state_revision": 43,
   "lifecycle_status": "BOOTSTRAP_ACTIVE",
   "roadmap_authority": {
     "library": ".airlab/roadmap.yaml",
@@ -78,12 +78,21 @@
     "invalid_lane_behavior": "ISOLATE_AND_SURFACE_PROJECTION_INCIDENT"
   },
   "projection": {
-    "source_digest": "aad98be4c70e695887e230877af9eba17ec0d5dffedef2af21f56286c965dc28",
-    "projected_at": "2026-10-01T20:21:39Z",
+    "source_digest": "b87ceff6b2c577a9a0fe1b1e2cd754e366ee1f13958297ea1c3772aced11944b",
+    "projected_at": "2026-10-02T12:39:29Z",
     "counts": {
-      "READY": 15
+      "CLAIMED": 1,
+      "READY": 14
     },
-    "active_claims": [],
+    "active_claims": [
+      {
+        "lane": "platform-windows-legacy",
+        "claim_id": "fe9ce6f271e730171e14",
+        "work_item": "win7-model-load-post-0c-isolation",
+        "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
+        "lease_until": "2026-10-03T00:39:29Z"
+      }
+    ],
     "review_required": [],
     "blocked": [],
     "checkpoint_watch": [],
@@ -293,11 +302,16 @@
       },
       {
         "id": "platform-windows-legacy",
-        "status": "READY",
+        "status": "CLAIMED",
         "activation": "active",
-        "state_version": 9,
-        "updated_at": "2026-10-01",
-        "active_claim": null,
+        "state_version": 10,
+        "updated_at": "2026-10-02",
+        "active_claim": {
+          "claim_id": "fe9ce6f271e730171e14",
+          "work_item": "win7-model-load-post-0c-isolation",
+          "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
+          "lease_until": "2026-10-03T00:39:29Z"
+        },
         "reviewer_state": "PENDING",
         "inference_profile_status": "NEEDS_TARGET_PROFILE",
         "historical_backlog_count": 6,

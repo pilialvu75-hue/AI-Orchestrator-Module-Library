@@ -1,0 +1,12 @@
+{
+  "schema_version": 1,
+  "request_id": "winlegacy-0c-evidence-20261002a",
+  "status": "APPLIED",
+  "processed_at": "2026-10-02T12:39:29Z",
+  "source_file": "winlegacy-0c-evidence-20261002a.json",
+  "lane_id": "platform-windows-legacy",
+  "operation": "claim",
+  "actor_id": "automation:windows-legacy:6abc720a44b081919bd7a8d71b45e8d2",
+  "errors": [],
+  "result_state_version": 10
+}
