@@ -1,0 +1,14 @@
+{
+  "schema_version": 1,
+  "request_id": "main-reviewer-20261002T165000Z-cp-harden-02-claim",
+  "submitted_at": "2026-10-02T16:50:00Z",
+  "actor_id": "chatgpt:main-reviewer",
+  "lane_id": "main-reviewer",
+  "operation": "claim",
+  "expected_state_version": 23,
+  "payload": {
+    "work_item": "CP-HARDEN-02",
+    "repository": "pilialvu75-hue/AI-Orchestrator-Module-Library",
+    "scope": "Implement serialized resource/scope lock keys and overlap detection compatible with the transactional mutation inbox; cover cross-lane conflicts, safe parallelism, release/stale/rework lifecycle, and CAS race behavior."
+  }
+}
