@@ -3,11 +3,11 @@
   "id": "platform-windows-legacy",
   "title": "Windows 7/8.1",
   "role": "worker",
-  "status": "CLAIMED",
+  "status": "IMPLEMENTING",
   "activation": "active",
   "scope": "Legacy Windows compatibility layer, installer/update and target-specific adapters with target-optimized inference while preserving shared orchestration/contracts.",
   "shared_engine_policy": "adapter_only",
-  "state_version": 17,
+  "state_version": 18,
   "updated_at": "2026-10-02",
   "active_claim": {
     "claim_id": "baedabdf26f436c9e964",
@@ -17,8 +17,8 @@
     "scope": "Record physical Win7 0E no-crash evidence, then identify the remaining post-validation model crash stage and prepare convergence onto current main preserving merged PR #671 Windows 7-11 improvements. No merge without physical evidence; no regression to Win8.1/10/11.",
     "branch": null,
     "started_at": "2026-10-02T16:01:58Z",
-    "heartbeat_at": "2026-10-02T16:01:58Z",
-    "lease_until": "2026-10-03T04:01:58Z",
+    "heartbeat_at": "2026-10-02T16:21:58Z",
+    "lease_until": "2026-10-03T04:21:58Z",
     "lease_hours": 12
   },
   "dependencies": [],
@@ -42,7 +42,7 @@
     "reviewed_by": null,
     "reviewed_at": null
   },
-  "next_action": "On physical Windows 7, install the PR #761 / Windows run #1250 candidate and press only 0E · Test validazione GGUF. Record whether the app remains open or crashes.",
+  "next_action": "Compare PR 761 lineage with current main and PR 671, then create the smallest current-main Win7 diagnostic candidate for the first remaining post-0E model-load stage without changing Win8.1/10/11 behavior.",
   "inference_profile_policy": "target_owned_benchmark_gated",
   "inference_profile": {
     "status": "NEEDS_TARGET_PROFILE",
@@ -216,27 +216,43 @@
         "PR #671 merged universal Windows 7-11 compatibility layer"
       ],
       "next_action": "On physical Windows 7, install the PR #761 / Windows run #1250 candidate and press only 0E · Test validazione GGUF. Record whether the app remains open or crashes."
+    },
+    {
+      "seq": 9,
+      "at": "2026-10-02T16:21:58Z",
+      "claim_id": "baedabdf26f436c9e964",
+      "work_item": "win7-post-0e-main-convergence",
+      "summary": "Physical Win7 result: PR 761 run 1250 probe 0E completed and the app remained open.",
+      "decisions": [
+        "0E built-in model path resolution and GGUF validation did not reproduce the crash.",
+        "Continue after the 0E boundary on a current-main convergence path that preserves PR 671 Windows improvements.",
+        "Do not merge based on CI or this single probe alone."
+      ],
+      "evidence_refs": [
+        "physical Win7: probe 0E OK, app remains open",
+        "PR 761",
+        "Windows run 1250"
+      ],
+      "next_action": "Compare PR 761 lineage with current main and PR 671, then create the smallest current-main Win7 diagnostic candidate for the first remaining post-0E model-load stage without changing Win8.1/10/11 behavior."
     }
   ],
   "last_checkpoint": {
-    "seq": 8,
-    "at": "2026-10-02T13:10:33Z",
-    "claim_id": "fe9ce6f271e730171e14",
-    "work_item": "win7-model-load-post-0c-isolation",
-    "summary": "PR #761 Win7 validation-only candidate has completed Windows CI successfully and produced a fresh installer artifact. Autonomous software work for this bounded claim is complete; the next discriminator is a single physical Win7 0E GGUF-validation probe.",
+    "seq": 9,
+    "at": "2026-10-02T16:21:58Z",
+    "claim_id": "baedabdf26f436c9e964",
+    "work_item": "win7-post-0e-main-convergence",
+    "summary": "Physical Win7 result: PR 761 run 1250 probe 0E completed and the app remained open.",
     "decisions": [
-      "Treat Windows CI success only as build evidence, not runtime success.",
-      "Use only physical probe 0E next; do not run additional probes in the same acceptance step.",
-      "Do not merge #761 before physical Win7 evidence.",
-      "After this physical discriminator, converge the Win7 line back onto current main so the merged #671 Windows 8.1/10/11 improvements are preserved."
+      "0E built-in model path resolution and GGUF validation did not reproduce the crash.",
+      "Continue after the 0E boundary on a current-main convergence path that preserves PR 671 Windows improvements.",
+      "Do not merge based on CI or this single probe alone."
     ],
     "evidence_refs": [
-      "PR #761 head f69da9dcde1b5aa3abf39ec3537c7aac8c6d5240",
-      "Windows workflow run 37009360684 (#1250) SUCCESS",
-      "installer artifact 11226439935 sha256:b89e33b5ae1b1f4fe64f661f0992848ddd50987754b922938c5e45722c863e57",
-      "PR #671 merged universal Windows 7-11 compatibility layer"
+      "physical Win7: probe 0E OK, app remains open",
+      "PR 761",
+      "Windows run 1250"
     ],
-    "next_action": "On physical Windows 7, install the PR #761 / Windows run #1250 candidate and press only 0E · Test validazione GGUF. Record whether the app remains open or crashes."
+    "next_action": "Compare PR 761 lineage with current main and PR 671, then create the smallest current-main Win7 diagnostic candidate for the first remaining post-0E model-load stage without changing Win8.1/10/11 behavior."
   },
   "reconciliation_events": [
     {
