@@ -1,0 +1,24 @@
+{
+  "schema_version": 1,
+  "request_id": "winlegacy-pr761-checkpoint-20261002a",
+  "actor_id": "automation:windows-legacy:6abc720a44b081919bd7a8d71b45e8d2",
+  "lane_id": "platform-windows-legacy",
+  "operation": "checkpoint",
+  "expected_state_version": 13,
+  "payload": {
+    "summary": "Created bounded Win7 child diagnostic PR #761 from #736. It adds only probe 0E: built-in model path resolution followed by GGUF header validation via the existing _validateModelFileDetailed path. This isolates File.length/open/readInto/close before SharedPreferences or any network work. No production autostart or modern-Windows behavior changed.",
+    "decisions": [
+      "Use 0E as the next single physical discriminator.",
+      "If 0E crashes, split RandomAccessFile validation primitives before investigating network.",
+      "If 0E stays open, the full model crash lies after built-in validation; then isolate stored-model refresh/selection separately while keeping the broader network crash evidence in scope.",
+      "Do not merge PR #761 from CI alone."
+    ],
+    "evidence_refs": [
+      "PR #761",
+      "branch test/windows7-model-validation-probe",
+      "head f69da9dcde1b5aa3abf39ec3537c7aac8c6d5240",
+      "physical evidence: Assistente/Models/voice download/Diagnostics upload crash on Win7"
+    ],
+    "next_action": "Wait for PR #761 Windows CI/build artifact. If successful, run only physical Win7 probe 0E and record whether the app remains open or crashes."
+  }
+}
