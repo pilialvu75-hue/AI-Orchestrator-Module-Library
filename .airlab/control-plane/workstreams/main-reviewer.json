@@ -3,38 +3,18 @@
   "id": "main-reviewer",
   "title": "Main / Reviewer",
   "role": "reviewer",
-  "status": "CLAIMED",
+  "status": "READY",
   "activation": "active",
   "scope": "Global architecture, cross-lane review, consolidation, roadmap/state authority and hardening, including target inference profile balance and shared-contract compatibility.",
   "shared_engine_policy": "shared_or_control_plane",
-  "state_version": 47,
+  "state_version": 48,
   "updated_at": "2026-10-03",
-  "active_claim": {
-    "claim_id": "a6d6060eb87e3a1bde0e",
-    "owner_lane": "main-reviewer",
-    "work_item": "CP-HARDEN-06",
-    "repository": "pilialvu75-hue/AI-Orchestrator-Module-Library",
-    "scope": "Require evidence-backed before/after canonical roadmap sync receipts before G7_CANONICAL_SYNC can pass for material roadmap impact.",
-    "branch": "main-reviewer/cp-harden-06-sync-receipts",
-    "resource_locks": [
-      "branch:pilialvu75-hue/AI-Orchestrator-Module-Library:main-reviewer/cp-harden-06-sync-receipts",
-      "contract:canonical-sync-receipts",
-      "file:pilialvu75-hue/AI-Orchestrator-Module-Library:tests/test_control_plane_inbox.py",
-      "file:pilialvu75-hue/AI-Orchestrator-Module-Library:tests/test_control_plane_manager.py",
-      "file:pilialvu75-hue/AI-Orchestrator-Module-Library:tools/control_plane_inbox.py",
-      "file:pilialvu75-hue/AI-Orchestrator-Module-Library:tools/control_plane_manager.py",
-      "file:pilialvu75-hue/AI-Orchestrator-Module-Library:tools/validate_control_plane.py"
-    ],
-    "started_at": "2026-10-03T16:31:17Z",
-    "heartbeat_at": "2026-10-03T16:31:17Z",
-    "lease_until": "2026-10-04T04:31:17Z",
-    "lease_hours": 12
-  },
+  "active_claim": null,
   "dependencies": [],
   "roadmap_refs": [],
   "evidence": [],
   "gates": {
-    "G0_CLAIM": "PASS",
+    "G0_CLAIM": "PENDING",
     "G1_IMPLEMENTATION": "PENDING",
     "G2_STATIC": "PENDING",
     "G3_CI": "PENDING",
@@ -759,6 +739,13 @@
       "work_item": "CP-HARDEN-03-state-sync",
       "reason": "CP-HARDEN-03 implementation and authoritative state synchronization are complete via PRs #100 and #101. Release before acquiring the separate CP-HARDEN-06 evidence-backed canonical sync receipts work item.",
       "at": "2026-10-03T16:29:54Z"
+    },
+    {
+      "type": "CLAIM_RELEASED",
+      "claim_id": "a6d6060eb87e3a1bde0e",
+      "work_item": "CP-HARDEN-06",
+      "reason": "Pre-implementation design review found a smaller CP-HARDEN-06 boundary: enforce evidence receipts as a serialized inbox guard plus post-state validator, rather than invasive manager changes. No implementation files were modified under this claim. Release and reacquire exact resource locks before writing.",
+      "at": "2026-10-03T16:32:32Z"
     }
   ],
   "stale_block_history": [
