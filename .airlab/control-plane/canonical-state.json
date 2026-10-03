@@ -7,7 +7,7 @@
     "policy": "This private repository is the single coordination authority. Chats and agents are workers, not independent sources of truth."
   },
   "updated_at": "2026-10-03",
-  "state_revision": 83,
+  "state_revision": 84,
   "lifecycle_status": "BOOTSTRAP_ACTIVE",
   "roadmap_authority": {
     "library": ".airlab/roadmap.yaml",
@@ -78,13 +78,13 @@
     "invalid_lane_behavior": "ISOLATE_AND_SURFACE_PROJECTION_INCIDENT"
   },
   "projection": {
-    "source_digest": "554691d11ea8bfa012521248c550e3b03ef23348d117254cd53bf0270b0123cd",
-    "projected_at": "2026-10-03T18:20:48Z",
+    "source_digest": "51bf2a6eac7060049490aa6c3640e8775ce8a0fc77a8b008b487277f81d0724a",
+    "projected_at": "2026-10-03T18:34:45Z",
     "counts": {
       "BLOCKED": 1,
       "CLAIMED": 1,
-      "IMPLEMENTING": 1,
-      "READY": 12
+      "READY": 12,
+      "REVIEW_REQUIRED": 1
     },
     "active_claims": [
       {
@@ -192,7 +192,9 @@
         "work_item": "CANT-11-2964-prompt-budget-planner-recovery"
       }
     ],
-    "review_required": [],
+    "review_required": [
+      "cantiere"
+    ],
     "blocked": [
       {
         "lane": "platform-windows-legacy",
@@ -207,7 +209,18 @@
         }
       }
     ],
-    "checkpoint_watch": [],
+    "checkpoint_watch": [
+      {
+        "lane": "main-reviewer",
+        "claim_id": "b876f0b7e7da3c3fad04",
+        "work_item": "CP-HARDEN-06",
+        "status": "CLAIMED",
+        "reason": "NO_CHECKPOINT_YET",
+        "last_checkpoint_at": null,
+        "due_since": "2026-10-03T18:32:56Z",
+        "warning_after_minutes": 120
+      }
+    ],
     "projection_incidents": [],
     "platform_inference_profiles": [
       {
@@ -282,9 +295,9 @@
       },
       {
         "id": "cantiere",
-        "status": "IMPLEMENTING",
+        "status": "REVIEW_REQUIRED",
         "activation": "active",
-        "state_version": 16,
+        "state_version": 17,
         "updated_at": "2026-10-03",
         "active_claim": {
           "claim_id": "817e5b54f6185a148751",
@@ -302,7 +315,7 @@
         "reviewer_state": "PENDING",
         "inference_profile_status": null,
         "historical_backlog_count": 3,
-        "next_action": "Verify post-merge CI and the signed Android 1.0.12+2975 release asset/tag SHA. Record exact build, commit and one-button persistent-project physical handoff; do not claim generated-app installation or Phase 1 acceptance."
+        "next_action": "Main/Reviewer must inspect the review_packet, linked evidence and required gates before promotion or rework."
       },
       {
         "id": "diagnostics",

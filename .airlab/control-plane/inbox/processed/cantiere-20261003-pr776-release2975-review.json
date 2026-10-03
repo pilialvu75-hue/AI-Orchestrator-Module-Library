@@ -1,0 +1,12 @@
+{
+  "schema_version": 1,
+  "request_id": "cantiere-20261003-pr776-release2975-review",
+  "status": "APPLIED",
+  "processed_at": "2026-10-03T18:34:45Z",
+  "source_file": "cantiere-20261003-pr776-release2975-review.json",
+  "lane_id": "cantiere",
+  "operation": "submit_review",
+  "actor_id": "chatgpt:cantiere-work-20261003",
+  "errors": [],
+  "result_state_version": 17
+}
