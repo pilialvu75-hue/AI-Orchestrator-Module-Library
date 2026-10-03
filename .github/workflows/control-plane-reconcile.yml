@@ -46,6 +46,10 @@ jobs:
             git fetch origin main
             git reset --hard origin/main
 
+            # Extension operations fail closed at ingress. Malformed parseable requests
+            # are quarantined before a specialized processor can abort the serialized run.
+            python tools/control_plane_extension_ingress.py guard
+
             # Reviewer-only stale-block recovery must run before any new claim can be accepted.
             python tools/control_plane_reviewer_reconcile.py process
 
