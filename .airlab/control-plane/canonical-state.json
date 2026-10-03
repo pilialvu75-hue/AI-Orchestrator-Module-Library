@@ -7,7 +7,7 @@
     "policy": "This private repository is the single coordination authority. Chats and agents are workers, not independent sources of truth."
   },
   "updated_at": "2026-10-03",
-  "state_revision": 66,
+  "state_revision": 67,
   "lifecycle_status": "BOOTSTRAP_ACTIVE",
   "roadmap_authority": {
     "library": ".airlab/roadmap.yaml",
@@ -78,36 +78,16 @@
     "invalid_lane_behavior": "ISOLATE_AND_SURFACE_PROJECTION_INCIDENT"
   },
   "projection": {
-    "source_digest": "8bb1162163dc1fd76a6d2ff150dfd79eaf6bb9906113981154c822b4fa625a98",
-    "projected_at": "2026-10-03T05:37:44Z",
+    "source_digest": "201e3c1c594f1b46455b4a78a696f56aabd055b01cc30923fcb1d752799ed7dc",
+    "projected_at": "2026-10-03T16:12:28Z",
     "counts": {
-      "BLOCKED": 2,
-      "READY": 13
+      "BLOCKED": 1,
+      "READY": 14
     },
     "active_claims": [],
     "active_resource_locks": [],
     "review_required": [],
     "blocked": [
-      {
-        "lane": "main-reviewer",
-        "reason": {
-          "code": "CLAIM_LEASE_EXPIRED",
-          "work_item": "CP-HARDEN-07",
-          "claim_id": "0d04c794310516c83f8e",
-          "resource_locks": [
-            "branch:pilialvu75-hue/AI-Orchestrator-Module-Library:main-reviewer/cp-harden-07-wait-states",
-            "contract:control-plane-wait-lifecycle",
-            "file:pilialvu75-hue/AI-Orchestrator-Module-Library:.airlab/control-plane/automation-registry.json",
-            "file:pilialvu75-hue/AI-Orchestrator-Module-Library:tools/chat_lane_bootstrap.py",
-            "file:pilialvu75-hue/AI-Orchestrator-Module-Library:tools/control_plane_inbox.py",
-            "file:pilialvu75-hue/AI-Orchestrator-Module-Library:tools/control_plane_manager.py",
-            "file:pilialvu75-hue/AI-Orchestrator-Module-Library:tools/validate_control_plane.py"
-          ],
-          "lease_until": "2026-10-03T05:22:35Z",
-          "detected_at": "2026-10-03T05:37:44Z",
-          "review_required": true
-        }
-      },
       {
         "lane": "platform-windows-legacy",
         "reason": {
@@ -232,15 +212,15 @@
       },
       {
         "id": "main-reviewer",
-        "status": "BLOCKED",
+        "status": "READY",
         "activation": "active",
-        "state_version": 36,
+        "state_version": 37,
         "updated_at": "2026-10-03",
         "active_claim": null,
         "reviewer_state": "AUTHORITY",
         "inference_profile_status": null,
         "historical_backlog_count": 0,
-        "next_action": "Implement WAITING_OWNER / WAITING_EXTERNAL states, enter_wait/resume_wait inbox operations, wait reservations, projection/validation and dispatcher-safe tests."
+        "next_action": "Record CP-HARDEN-07 completion in canonical roadmap/state, then select the next bounded hardening item without broad AIR-10 rollout."
       },
       {
         "id": "platform-android",
