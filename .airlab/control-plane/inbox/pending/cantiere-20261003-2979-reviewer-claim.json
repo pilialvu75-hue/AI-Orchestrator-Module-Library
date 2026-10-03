@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "request_id": "cantiere-20261003-2979-reviewer-claim",
+  "actor_id": "chatgpt:cantiere-work-20261003",
+  "lane_id": "cantiere",
+  "operation": "claim",
+  "expected_state_version": 23,
+  "payload": {
+    "work_item": "CANT-11-2979-reviewer-json-recovery",
+    "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
+    "branch": "cantiere/reviewer-json-recovery-2979-20261003",
+    "scope": "Contain +2979 task parsing failure after Engineer recovery: one Reviewer JSON/runtime recovery budget, genuinely compact retry preserving authoritative scope and explicit negative verdicts, regression tests and closed batch-aware diagnostic projection. Keep all persistent projects and Phase 1 physical gate open.",
+    "resource_locks": [
+      "contract:cantiere-reviewer-json-recovery",
+      "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/core/diagnostics/public_log_projection.dart"
+    ]
+  }
+}
