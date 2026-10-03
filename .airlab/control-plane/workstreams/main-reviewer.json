@@ -3,36 +3,18 @@
   "id": "main-reviewer",
   "title": "Main / Reviewer",
   "role": "reviewer",
-  "status": "IMPLEMENTING",
+  "status": "READY",
   "activation": "active",
   "scope": "Global architecture, cross-lane review, consolidation, roadmap/state authority and hardening, including target inference profile balance and shared-contract compatibility.",
   "shared_engine_policy": "shared_or_control_plane",
-  "state_version": 42,
+  "state_version": 43,
   "updated_at": "2026-10-03",
-  "active_claim": {
-    "claim_id": "998e3078b7dade1b0d10",
-    "owner_lane": "main-reviewer",
-    "work_item": "CP-HARDEN-03",
-    "repository": "pilialvu75-hue/AI-Orchestrator-Module-Library",
-    "scope": "Detect relevant merged repository changes that lack matching canonical claim/checkpoint evidence and surface them for reconciliation before canonical progress attribution.",
-    "branch": "main-reviewer/cp-harden-03-external-ingress",
-    "resource_locks": [
-      "branch:pilialvu75-hue/AI-Orchestrator-Module-Library:main-reviewer/cp-harden-03-external-ingress",
-      "contract:control-plane-external-change-ingress",
-      "file:pilialvu75-hue/AI-Orchestrator-Module-Library:.airlab/control-plane/external-change-registry.json",
-      "file:pilialvu75-hue/AI-Orchestrator-Module-Library:.github/workflows/control-plane-external-ingress.yml",
-      "file:pilialvu75-hue/AI-Orchestrator-Module-Library:tools/external_change_ingress.py"
-    ],
-    "started_at": "2026-10-03T16:19:16Z",
-    "heartbeat_at": "2026-10-03T16:25:47Z",
-    "lease_until": "2026-10-04T04:25:47Z",
-    "lease_hours": 12
-  },
+  "active_claim": null,
   "dependencies": [],
   "roadmap_refs": [],
   "evidence": [],
   "gates": {
-    "G0_CLAIM": "PASS",
+    "G0_CLAIM": "PENDING",
     "G1_IMPLEMENTATION": "PENDING",
     "G2_STATIC": "PENDING",
     "G3_CI": "PENDING",
@@ -724,6 +706,13 @@
       "work_item": "CP-HARDEN-07-canonical-sync",
       "reason": "CP-HARDEN-07 implementation, real stale-block recovery and authoritative hardening-state synchronization are complete through merged PRs #97, #98 and #99. Next bounded priority is CP-HARDEN-03 after a fresh conflict/incident check; AIR-10 remains constrained.",
       "at": "2026-10-03T16:18:21Z"
+    },
+    {
+      "type": "CLAIM_RELEASED",
+      "claim_id": "998e3078b7dade1b0d10",
+      "work_item": "CP-HARDEN-03",
+      "reason": "CP-HARDEN-03 implementation is merged via PR #100 and completion evidence is checkpointed. Release implementation locks before taking a separate bounded authoritative-state synchronization claim.",
+      "at": "2026-10-03T16:26:11Z"
     }
   ],
   "stale_block_history": [
