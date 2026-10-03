@@ -7,7 +7,7 @@
     "policy": "This private repository is the single coordination authority. Chats and agents are workers, not independent sources of truth."
   },
   "updated_at": "2026-10-03",
-  "state_revision": 78,
+  "state_revision": 79,
   "lifecycle_status": "BOOTSTRAP_ACTIVE",
   "roadmap_authority": {
     "library": ".airlab/roadmap.yaml",
@@ -78,14 +78,75 @@
     "invalid_lane_behavior": "ISOLATE_AND_SURFACE_PROJECTION_INCIDENT"
   },
   "projection": {
-    "source_digest": "5f6a52b1515ed483dd1f7e5fb8265e3582a5eccd635e5a765d4784bc29d8f707",
-    "projected_at": "2026-10-03T16:32:32Z",
+    "source_digest": "18f460a6a3be539d2b83e0701907b191a4efb9a1096084834f963f593ba30e3e",
+    "projected_at": "2026-10-03T16:32:56Z",
     "counts": {
       "BLOCKED": 1,
-      "READY": 14
+      "CLAIMED": 1,
+      "READY": 13
     },
-    "active_claims": [],
-    "active_resource_locks": [],
+    "active_claims": [
+      {
+        "lane": "main-reviewer",
+        "claim_id": "b876f0b7e7da3c3fad04",
+        "work_item": "CP-HARDEN-06",
+        "repository": "pilialvu75-hue/AI-Orchestrator-Module-Library",
+        "lease_until": "2026-10-04T04:32:56Z",
+        "resource_locks": [
+          "branch:pilialvu75-hue/AI-Orchestrator-Module-Library:main-reviewer/cp-harden-06-sync-receipts",
+          "contract:canonical-sync-receipts",
+          "file:pilialvu75-hue/AI-Orchestrator-Module-Library:.airlab/control-plane/canonical-sync-receipts.json",
+          "file:pilialvu75-hue/AI-Orchestrator-Module-Library:.github/workflows/control-plane-reconcile.yml",
+          "file:pilialvu75-hue/AI-Orchestrator-Module-Library:.github/workflows/validate-library.yml",
+          "file:pilialvu75-hue/AI-Orchestrator-Module-Library:tests/test_canonical_sync_receipts.py",
+          "file:pilialvu75-hue/AI-Orchestrator-Module-Library:tools/canonical_sync_receipts.py"
+        ]
+      }
+    ],
+    "active_resource_locks": [
+      {
+        "key": "branch:pilialvu75-hue/AI-Orchestrator-Module-Library:main-reviewer/cp-harden-06-sync-receipts",
+        "lane": "main-reviewer",
+        "claim_id": "b876f0b7e7da3c3fad04",
+        "work_item": "CP-HARDEN-06"
+      },
+      {
+        "key": "contract:canonical-sync-receipts",
+        "lane": "main-reviewer",
+        "claim_id": "b876f0b7e7da3c3fad04",
+        "work_item": "CP-HARDEN-06"
+      },
+      {
+        "key": "file:pilialvu75-hue/AI-Orchestrator-Module-Library:.airlab/control-plane/canonical-sync-receipts.json",
+        "lane": "main-reviewer",
+        "claim_id": "b876f0b7e7da3c3fad04",
+        "work_item": "CP-HARDEN-06"
+      },
+      {
+        "key": "file:pilialvu75-hue/AI-Orchestrator-Module-Library:.github/workflows/control-plane-reconcile.yml",
+        "lane": "main-reviewer",
+        "claim_id": "b876f0b7e7da3c3fad04",
+        "work_item": "CP-HARDEN-06"
+      },
+      {
+        "key": "file:pilialvu75-hue/AI-Orchestrator-Module-Library:.github/workflows/validate-library.yml",
+        "lane": "main-reviewer",
+        "claim_id": "b876f0b7e7da3c3fad04",
+        "work_item": "CP-HARDEN-06"
+      },
+      {
+        "key": "file:pilialvu75-hue/AI-Orchestrator-Module-Library:tests/test_canonical_sync_receipts.py",
+        "lane": "main-reviewer",
+        "claim_id": "b876f0b7e7da3c3fad04",
+        "work_item": "CP-HARDEN-06"
+      },
+      {
+        "key": "file:pilialvu75-hue/AI-Orchestrator-Module-Library:tools/canonical_sync_receipts.py",
+        "lane": "main-reviewer",
+        "claim_id": "b876f0b7e7da3c3fad04",
+        "work_item": "CP-HARDEN-06"
+      }
+    ],
     "review_required": [],
     "blocked": [
       {
@@ -212,11 +273,25 @@
       },
       {
         "id": "main-reviewer",
-        "status": "READY",
+        "status": "CLAIMED",
         "activation": "active",
-        "state_version": 48,
+        "state_version": 49,
         "updated_at": "2026-10-03",
-        "active_claim": null,
+        "active_claim": {
+          "claim_id": "b876f0b7e7da3c3fad04",
+          "work_item": "CP-HARDEN-06",
+          "repository": "pilialvu75-hue/AI-Orchestrator-Module-Library",
+          "lease_until": "2026-10-04T04:32:56Z",
+          "resource_locks": [
+            "branch:pilialvu75-hue/AI-Orchestrator-Module-Library:main-reviewer/cp-harden-06-sync-receipts",
+            "contract:canonical-sync-receipts",
+            "file:pilialvu75-hue/AI-Orchestrator-Module-Library:.airlab/control-plane/canonical-sync-receipts.json",
+            "file:pilialvu75-hue/AI-Orchestrator-Module-Library:.github/workflows/control-plane-reconcile.yml",
+            "file:pilialvu75-hue/AI-Orchestrator-Module-Library:.github/workflows/validate-library.yml",
+            "file:pilialvu75-hue/AI-Orchestrator-Module-Library:tests/test_canonical_sync_receipts.py",
+            "file:pilialvu75-hue/AI-Orchestrator-Module-Library:tools/canonical_sync_receipts.py"
+          ]
+        },
         "reviewer_state": "AUTHORITY",
         "inference_profile_status": null,
         "historical_backlog_count": 0,
