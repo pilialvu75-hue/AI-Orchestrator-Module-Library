@@ -7,7 +7,7 @@
     "policy": "This private repository is the single coordination authority. Chats and agents are workers, not independent sources of truth."
   },
   "updated_at": "2026-10-03",
-  "state_revision": 86,
+  "state_revision": 87,
   "lifecycle_status": "BOOTSTRAP_ACTIVE",
   "roadmap_authority": {
     "library": ".airlab/roadmap.yaml",
@@ -78,11 +78,12 @@
     "invalid_lane_behavior": "ISOLATE_AND_SURFACE_PROJECTION_INCIDENT"
   },
   "projection": {
-    "source_digest": "ab307dda132e9820a70877f50d0fc2aff6cedb12ae9ff73d6328d7fc5e3f76fb",
-    "projected_at": "2026-10-03T19:12:37Z",
+    "source_digest": "36c479ea7afd78d516ac7ce258f8ab469f4d6cc1b434c470cf63a25dc620853c",
+    "projected_at": "2026-10-03T19:30:19Z",
     "counts": {
       "BLOCKED": 1,
-      "CLAIMED": 2,
+      "CLAIMED": 1,
+      "IMPLEMENTING": 1,
       "READY": 12
     },
     "active_claims": [
@@ -91,7 +92,7 @@
         "claim_id": "2582374b5524b1b7c29d",
         "work_item": "CANT-11-2975-planner-and-managed-restart",
         "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
-        "lease_until": "2026-10-04T07:12:37Z",
+        "lease_until": "2026-10-04T07:30:19Z",
         "resource_locks": [
           "branch:pilialvu75-hue/Ai-orchestrator-riserva:cantiere/planner-native-recovery-2975-20261003",
           "contract:android-workshop-project-notifications",
@@ -278,15 +279,15 @@
       },
       {
         "id": "cantiere",
-        "status": "CLAIMED",
+        "status": "IMPLEMENTING",
         "activation": "active",
-        "state_version": 19,
+        "state_version": 20,
         "updated_at": "2026-10-03",
         "active_claim": {
           "claim_id": "2582374b5524b1b7c29d",
           "work_item": "CANT-11-2975-planner-and-managed-restart",
           "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
-          "lease_until": "2026-10-04T07:12:37Z",
+          "lease_until": "2026-10-04T07:30:19Z",
           "resource_locks": [
             "branch:pilialvu75-hue/Ai-orchestrator-riserva:cantiere/planner-native-recovery-2975-20261003",
             "contract:android-workshop-project-notifications",
@@ -296,7 +297,7 @@
         "reviewer_state": "PENDING",
         "inference_profile_status": null,
         "historical_backlog_count": 3,
-        "next_action": "Main/Reviewer must inspect the review_packet, linked evidence and required gates before promotion or rework."
+        "next_action": "Review all PR CI and substantive findings; merge under explicit owner mandate when green; identify signed Android release. Phase 1 remains physically unverified."
       },
       {
         "id": "diagnostics",

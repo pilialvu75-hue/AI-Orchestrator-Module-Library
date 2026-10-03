@@ -3,11 +3,11 @@
   "id": "cantiere",
   "title": "Cantiere",
   "role": "worker",
-  "status": "CLAIMED",
+  "status": "IMPLEMENTING",
   "activation": "active",
   "scope": "Exclusive Cantiere/App Factory execution, durability, build/review/validation/apply and first-real-app reliability.",
   "shared_engine_policy": "shared_or_control_plane",
-  "state_version": 19,
+  "state_version": 20,
   "updated_at": "2026-10-03",
   "active_claim": {
     "claim_id": "2582374b5524b1b7c29d",
@@ -22,8 +22,8 @@
       "contract:cantiere-planner-generation-settings"
     ],
     "started_at": "2026-10-03T19:12:37Z",
-    "heartbeat_at": "2026-10-03T19:12:37Z",
-    "lease_until": "2026-10-04T07:12:37Z",
+    "heartbeat_at": "2026-10-03T19:30:19Z",
+    "lease_until": "2026-10-04T07:30:19Z",
     "lease_hours": 12
   },
   "dependencies": [],
@@ -47,7 +47,7 @@
     "reviewed_by": null,
     "reviewed_at": null
   },
-  "next_action": "Main/Reviewer must inspect the review_packet, linked evidence and required gates before promotion or rework.",
+  "next_action": "Review all PR CI and substantive findings; merge under explicit owner mandate when green; identify signed Android release. Phase 1 remains physically unverified.",
   "historical_backlog": [
     "Stay in Phase 1 ONLINE until a real generated Android app is physically accepted.",
     "Reproduce the recent manga-drawing app failure from current main with Diagnostics; do not restart generic audits.",
@@ -288,36 +288,43 @@
       ],
       "next_action": "Main/Reviewer must inspect the review_packet, linked evidence and required gates before promotion or rework.",
       "kind": "REVIEW_HANDOFF"
+    },
+    {
+      "seq": 12,
+      "at": "2026-10-03T19:30:19Z",
+      "claim_id": "2582374b5524b1b7c29d",
+      "work_item": "CANT-11-2975-planner-and-managed-restart",
+      "summary": "Physical +2975 evidence preserved. Implemented explicit minimal build-repair scope contract with fixed validated graph, retained project criteria/workspace, genuinely compact retry; Workshop generation settings preserved through real local boundary; serialized terminal notifications and Android promotion containment plus closed managed crash classification. 169 focused tests pass, analyze no errors. New main #778 integrated without overlap.",
+      "decisions": [
+        "No native llama/Vulkan or toolchain changes.",
+        "Managed crash observed, exact Java cause unproven; fix verified notification defects without claiming physical acceptance.",
+        "Both persistent Manga Kids projects preserved; no retest before merged signed build."
+      ],
+      "evidence_refs": [
+        ".airlab/control-plane/evidence/cantiere/20261003-2975-physical-rework.json",
+        "commit:aee931a13515f7c2a4fda069ba213dafb7d89a66",
+        "test:169-focused-PASS"
+      ],
+      "next_action": "Review all PR CI and substantive findings; merge under explicit owner mandate when green; identify signed Android release. Phase 1 remains physically unverified."
     }
   ],
   "last_checkpoint": {
-    "seq": 11,
-    "at": "2026-10-03T18:34:45Z",
-    "claim_id": "817e5b54f6185a148751",
-    "work_item": "CANT-11-2964-prompt-budget-planner-recovery",
-    "summary": "Both Android +2964 Cantiere blockers contained in PR #776, merged at f0d1d62878d094aed162aaceadb370946c47a612 under explicit owner mandate after six green workflows and resolved review findings. Physical Phase 1 acceptance remains pending. Android 1.0.12+2975 is published with an uploaded signed APK; tag and main both point to merge f0d1d62878d094aed162aaceadb370946c47a612. First physical action is existing Manga Kids 2/2 project:dashboard:1790801560854814 -> Riprova solo build.",
-    "decisions": [],
-    "evidence_refs": [
-      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/776",
-      "f0d1d62878d094aed162aaceadb370946c47a612",
-      "PR #776: 105 focused Flutter tests",
-      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/37142504348",
-      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/37142504329",
-      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/37142504459",
-      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/37142504413",
-      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/37142504555",
-      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/37142504412",
-      "Android +2964: project:dashboard:1791001220504803 and project:dashboard:1790801560854814",
-      "Phase 1 ONLINE: generated Manga Kids APK build/install/open",
-      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/37143551790",
-      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/releases/tag/v1.0.12%2B2975",
-      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/releases/download/v1.0.12%2B2975/app-release.apk",
-      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/37143551756",
-      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/37143551843",
-      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/37143551776"
+    "seq": 12,
+    "at": "2026-10-03T19:30:19Z",
+    "claim_id": "2582374b5524b1b7c29d",
+    "work_item": "CANT-11-2975-planner-and-managed-restart",
+    "summary": "Physical +2975 evidence preserved. Implemented explicit minimal build-repair scope contract with fixed validated graph, retained project criteria/workspace, genuinely compact retry; Workshop generation settings preserved through real local boundary; serialized terminal notifications and Android promotion containment plus closed managed crash classification. 169 focused tests pass, analyze no errors. New main #778 integrated without overlap.",
+    "decisions": [
+      "No native llama/Vulkan or toolchain changes.",
+      "Managed crash observed, exact Java cause unproven; fix verified notification defects without claiming physical acceptance.",
+      "Both persistent Manga Kids projects preserved; no retest before merged signed build."
     ],
-    "next_action": "Main/Reviewer must inspect the review_packet, linked evidence and required gates before promotion or rework.",
-    "kind": "REVIEW_HANDOFF"
+    "evidence_refs": [
+      ".airlab/control-plane/evidence/cantiere/20261003-2975-physical-rework.json",
+      "commit:aee931a13515f7c2a4fda069ba213dafb7d89a66",
+      "test:169-focused-PASS"
+    ],
+    "next_action": "Review all PR CI and substantive findings; merge under explicit owner mandate when green; identify signed Android release. Phase 1 remains physically unverified."
   },
   "review_history": [
     {
