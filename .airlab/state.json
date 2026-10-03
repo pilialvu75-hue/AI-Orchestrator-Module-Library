@@ -3,7 +3,7 @@
   "repository": "pilialvu75-hue/AI-Orchestrator-Module-Library",
   "updated_at": "2026-10-03",
   "lifecycle_status": "ACTIVE",
-  "current_phase": "CP-HARDEN-03",
+  "current_phase": "CP-HARDEN-06",
   "completed": [
     "L1",
     "L13",
@@ -15,11 +15,11 @@
     "L22",
     "CP-HARDEN-01",
     "CP-HARDEN-02",
+    "CP-HARDEN-03",
     "CP-HARDEN-04",
     "CP-HARDEN-07"
   ],
   "next_actions": [
-    "CP-HARDEN-03",
     "CP-HARDEN-06",
     "CP-HARDEN-05",
     "L19",
@@ -31,7 +31,7 @@
     "L8",
     "L12"
   ],
-  "current_main_before_roadmap_update": "4881ee752ffa9b604081a693088ccbc2bb5b5132",
+  "current_main_before_roadmap_update": "6d2d1bdcbe37c25cedf03518049d90cfbeda0d01",
   "security_boundary": {
     "untrusted_upstream_execution": "isolated_no_repository_permissions",
     "trusted_promotion": "separate_fresh_writer_runner",
@@ -159,6 +159,17 @@
       "backlog_id": "CP-HARDEN-02",
       "rule": "Namespaced resource/scope/branch locks supplement work_item uniqueness and preserve safe parallelism for disjoint resources.",
       "validation": "PR95_CI_PASS"
+    },
+    "external_change_ingress": {
+      "status": "ACTIVE",
+      "runtime_status": "PENDING_FIRST_SCHEDULED_OR_MANUAL_RUN",
+      "backlog_id": "CP-HARDEN-03",
+      "registry": ".airlab/control-plane/external-change-registry.json",
+      "watchdog": ".github/workflows/control-plane-external-ingress.yml",
+      "mode": "incremental_after_baseline",
+      "historical_backfill": false,
+      "unreconciled_action": "FAIL_CLOSED_REQUIRES_MAIN_REVIEWER",
+      "validation": "PR100_CI_PASS_HEAD_FA487764; dedicated watchdog runtime pending first scheduled or manual run"
     },
     "automation_registry": {
       "status": "ACTIVE",
