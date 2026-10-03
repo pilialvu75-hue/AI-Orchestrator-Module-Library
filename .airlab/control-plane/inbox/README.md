@@ -22,7 +22,7 @@ Every request must contain:
 
 Optional `submitted_at` is retained in the receipt. `actor_id` is mandatory.
 
-Supported operations:
+Supported ordinary operations:
 - `claim`
 - `heartbeat`
 - `checkpoint`
@@ -32,7 +32,40 @@ Supported operations:
 - `review_rework`
 - `canonical_sync_complete`
 
-Example:
+CP-HARDEN-07 extends the same serialized inbox with two wait lifecycle operations processed
+before ordinary claims by `tools/control_plane_wait_inbox.py`:
+- `enter_wait`
+- `resume_wait`
+
+`enter_wait` consumes a live `CLAIMED` / `IMPLEMENTING` / `EVIDENCE_READY` claim and stores
+a machine-readable `wait_state` while setting the lane to `BLOCKED`. This is an equivalent
+representation of `WAITING_OWNER` / `WAITING_EXTERNAL` that remains compatible with the
+existing canonical status validator. The lane has `active_claim: null`, so it needs no
+heartbeat and never appears in `checkpoint_watch`, but its `work_item`, branch and resource
+locks remain reserved inside `wait_state`.
+
+Required `enter_wait` payload fields:
+- `wait_type`: `WAITING_OWNER` or `WAITING_EXTERNAL`
+- `resume_condition`
+- `summary`
+- `next_action`
+- optional `evidence_refs`
+
+`resume_wait` requires an explicit non-empty `signal_id` plus non-empty `evidence_refs`.
+It archives the wait record, clears the wait/block, and returns the lane to `READY` with no
+new claim. Resuming therefore never silently restarts implementation; a later bounded claim
+is still required.
+
+Before the ordinary inbox processes pending `claim` requests, wait reservations are checked.
+A claim is quarantined when its `work_item` or any normalized resource/branch lock overlaps a
+machine-readable wait reservation. Distinct resources remain parallelizable.
+
+For automation actors, wait operations inherit the nearest existing CP-HARDEN-04 authority
+until the registry schema is versioned again: `enter_wait` requires canonical `release`
+authority, while `resume_wait` requires canonical `claim` authority. Owner/target-lane rules
+continue to be enforced by the automation registry.
+
+Example ordinary claim:
 
 ```json
 {
@@ -55,6 +88,26 @@ Example:
 }
 ```
 
+Example wait entry:
+
+```json
+{
+  "schema_version": 1,
+  "request_id": "cantiere-20261003T180000Z-enter-wait-001",
+  "actor_id": "chatgpt:cantiere-example",
+  "lane_id": "cantiere",
+  "operation": "enter_wait",
+  "expected_state_version": 15,
+  "payload": {
+    "wait_type": "WAITING_OWNER",
+    "resume_condition": "physical Manga Kids validation is completed",
+    "summary": "Implementation is ready; only physical acceptance remains.",
+    "next_action": "Resume after device evidence arrives.",
+    "evidence_refs": ["Ai-orchestrator-riserva#745"]
+  }
+}
+```
+
 Accepted requests are removed from `pending/` and receive a receipt under
 `processed/`. Invalid, stale, conflicting or schema-breaking requests are removed from
 `pending/` and receive a receipt under `quarantine/` without changing the lane.
@@ -66,17 +119,19 @@ Claim requests may declare `payload.resource_locks` as namespaced strings such a
 `file:<repo>:<path>`, `contract:<name>`, `resource:<name>`, `scope:<name>` or
 `pr:<repo>#<number>`. If `payload.branch` is present, the claim manager adds the
 corresponding `branch:<repo>:<branch>` lock automatically. A request is quarantined if
-any requested lock is already owned by another active claim, even when the two work items
-and lanes are different. Distinct lock keys remain safe to process in parallel.
+any requested lock is already owned by another active claim or reserved by a machine-readable
+wait, even when the two work items and lanes are different. Distinct lock keys remain safe
+to process in parallel.
 
 The serialized reconcile workflow plus lane compare-and-swap protects the lane mutation;
 resource locks protect shared cross-lane resources that lane-local state versions alone
-cannot detect. Locks remain held while the claim remains active, including reviewer rework.
+cannot detect. Active locks remain held while the claim remains active, including reviewer
+rework. Wait reservations preserve the same exclusion boundary without preserving a lease.
 
 Automation identities are additionally governed by
 `.airlab/control-plane/automation-registry.json`. Any `actor_id` beginning with
 `automation:` must have exactly one canonical registry entry. The entry must be enabled,
-hold `control_plane_mutation` write capability, allow the requested operation and allow the
+hold `control_plane_mutation` write capability, allow the mapped operation and allow the
 target lane. Unregistered, disabled, read-only or out-of-scope automation requests are
 quarantined before compare-and-swap/application. External scheduler enablement alone never
 grants control-plane write authority.
