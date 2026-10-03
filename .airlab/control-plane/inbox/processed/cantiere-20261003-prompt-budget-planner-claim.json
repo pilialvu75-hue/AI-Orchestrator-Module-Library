@@ -1,0 +1,12 @@
+{
+  "schema_version": 1,
+  "request_id": "cantiere-20261003-prompt-budget-planner-claim",
+  "status": "APPLIED",
+  "processed_at": "2026-10-03T17:30:00Z",
+  "source_file": "cantiere-20261003-prompt-budget-planner-claim.json",
+  "lane_id": "cantiere",
+  "operation": "claim",
+  "actor_id": "chatgpt:cantiere-work-20261003",
+  "errors": [],
+  "result_state_version": 13
+}

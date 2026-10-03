@@ -3,13 +3,31 @@
   "id": "cantiere",
   "title": "Cantiere",
   "role": "worker",
-  "status": "READY",
+  "status": "CLAIMED",
   "activation": "active",
   "scope": "Exclusive Cantiere/App Factory execution, durability, build/review/validation/apply and first-real-app reliability.",
   "shared_engine_policy": "shared_or_control_plane",
-  "state_version": 12,
-  "updated_at": "2026-10-01",
-  "active_claim": null,
+  "state_version": 13,
+  "updated_at": "2026-10-03",
+  "active_claim": {
+    "claim_id": "817e5b54f6185a148751",
+    "owner_lane": "cantiere",
+    "work_item": "CANT-11-2964-prompt-budget-planner-recovery",
+    "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
+    "scope": "Contain Android +2964 Engineer prompt_budget in normal/resume paths and final-build repair planner JSON failures; add regression tests, verify CI/merge and identify host Android build. Phase 1 remains physically unverified.",
+    "branch": "cantiere/prompt-budget-planner-recovery-20261003",
+    "resource_locks": [
+      "branch:pilialvu75-hue/Ai-orchestrator-riserva:cantiere/prompt-budget-planner-recovery-20261003",
+      "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/app_factory/workshop/workshop_dynamic_project_planner.dart",
+      "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/app_factory/workshop/workshop_proposal_implementation_runner.dart",
+      "file:pilialvu75-hue/Ai-orchestrator-riserva:test/app_factory/workshop/workshop_dynamic_project_planner_test.dart",
+      "file:pilialvu75-hue/Ai-orchestrator-riserva:test/app_factory/workshop/workshop_proposal_implementation_runner_test.dart"
+    ],
+    "started_at": "2026-10-03T17:30:00Z",
+    "heartbeat_at": "2026-10-03T17:30:00Z",
+    "lease_until": "2026-10-04T05:30:00Z",
+    "lease_hours": 12
+  },
   "dependencies": [],
   "roadmap_refs": [
     ".airlab/public-repositories/Ai-orchestrator-riserva/roadmap.yaml#CANT-11"
@@ -17,19 +35,19 @@
   "evidence": [],
   "gates": {
     "G0_CLAIM": "PASS",
-    "G1_IMPLEMENTATION": "PASS",
-    "G2_STATIC": "PASS_REVIEW_FINDINGS_ADDRESSED",
-    "G3_CI": "PASS",
-    "G4_INTEGRATION": "PASS_CI_ONLY",
+    "G1_IMPLEMENTATION": "PENDING",
+    "G2_STATIC": "PENDING",
+    "G3_CI": "PENDING",
+    "G4_INTEGRATION": "PENDING",
     "G5_TARGET_RUNTIME": "NOT_APPLICABLE_UNTIL_RUNTIME_CHANGE",
-    "G6_REVIEWER": "PASS",
+    "G6_REVIEWER": "PENDING",
     "G7_CANONICAL_SYNC": "PENDING"
   },
   "reviewer": {
     "required": true,
-    "state": "APPROVED",
-    "reviewed_by": "main-reviewer",
-    "reviewed_at": "2026-10-01T14:07:00Z"
+    "state": "PENDING",
+    "reviewed_by": null,
+    "reviewed_at": null
   },
   "next_action": "Claim one bounded physical Manga Kids retest on the first Android release that contains merge b7abc54; preserve Diagnostics and keep Phase 1 ONLINE open until real-device acceptance.",
   "historical_backlog": [
