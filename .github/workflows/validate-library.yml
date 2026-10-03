@@ -23,7 +23,9 @@ jobs:
           python-version: "3.12"
 
       - name: Validate canonical control plane
-        run: python tools/validate_control_plane.py
+        run: |
+          python tools/validate_control_plane.py
+          python tools/canonical_sync_receipts.py check
 
       - name: Validate catalog, needs and module contracts
         run: python tools/validate_library.py
