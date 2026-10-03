@@ -1,0 +1,11 @@
+{
+  "schema_version": 1,
+  "policy": {
+    "mode": "evidence_backed_before_after_digest",
+    "material_sync_only": true,
+    "require_content_change": true,
+    "require_evidence_ref": true,
+    "enforcement_started_at": null
+  },
+  "records": []
+}
