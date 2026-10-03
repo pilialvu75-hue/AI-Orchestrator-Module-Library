@@ -3,11 +3,11 @@
   "id": "main-reviewer",
   "title": "Main / Reviewer",
   "role": "reviewer",
-  "status": "CLAIMED",
+  "status": "IMPLEMENTING",
   "activation": "active",
   "scope": "Global architecture, cross-lane review, consolidation, roadmap/state authority and hardening, including target inference profile balance and shared-contract compatibility.",
   "shared_engine_policy": "shared_or_control_plane",
-  "state_version": 44,
+  "state_version": 45,
   "updated_at": "2026-10-03",
   "active_claim": {
     "claim_id": "0b82001bb777a69c7d59",
@@ -22,8 +22,8 @@
       "file:pilialvu75-hue/AI-Orchestrator-Module-Library:.airlab/state.json"
     ],
     "started_at": "2026-10-03T16:26:34Z",
-    "heartbeat_at": "2026-10-03T16:26:34Z",
-    "lease_until": "2026-10-04T04:26:34Z",
+    "heartbeat_at": "2026-10-03T16:29:34Z",
+    "lease_until": "2026-10-04T04:29:34Z",
     "lease_hours": 12
   },
   "dependencies": [],
@@ -45,7 +45,7 @@
     "reviewed_by": null,
     "reviewed_at": null
   },
-  "next_action": "Synchronize authoritative hardening state to mark CP-HARDEN-03 complete and make CP-HARDEN-06 the next bounded phase. Keep AIR-10 broad rollout constrained.",
+  "next_action": "Release this state-sync claim, verify current canonical conflicts/incidents, then acquire bounded CP-HARDEN-06 evidence-backed canonical sync receipts work if still free.",
   "inference_review_policy": {
     "policy": ".airlab/control-plane/inference-policy.json",
     "check": [
@@ -565,30 +565,49 @@
         "head:fa48776463d6bd504b5e33a3ddc3629a16c71ee6"
       ],
       "next_action": "Synchronize authoritative hardening state to mark CP-HARDEN-03 complete and make CP-HARDEN-06 the next bounded phase. Keep AIR-10 broad rollout constrained."
+    },
+    {
+      "seq": 16,
+      "at": "2026-10-03T16:29:34Z",
+      "claim_id": "0b82001bb777a69c7d59",
+      "work_item": "CP-HARDEN-03-state-sync",
+      "summary": "Authoritative hardening summary is synchronized after CP-HARDEN-03. CP-HARDEN-03 is marked complete, CP-HARDEN-06 is current, and the external-change watchdog remains explicitly pending its first scheduled/manual runtime execution rather than being inferred successful from CI.",
+      "decisions": [
+        "Advance the hardening phase to CP-HARDEN-06 before AIR-10 broad rollout.",
+        "Keep external-change ingress implementation ACTIVE while recording runtime_status as PENDING_FIRST_SCHEDULED_OR_MANUAL_RUN until a real watchdog run exists.",
+        "Pin the pre-sync main reference to 6d2d1bdcbe37c25cedf03518049d90cfbeda0d01."
+      ],
+      "evidence_refs": [
+        "AI-Orchestrator-Module-Library#100",
+        "merge:e9bdcbe6a19cf395dcecd163e82f617b1ddefe1a",
+        "Validate Module Library run 37136725492",
+        "AI-Orchestrator-Module-Library#101",
+        "merge:73fcff29b5d8b0772af5920c3939e2dc995743a6",
+        "Validate Module Library run 37137000660"
+      ],
+      "next_action": "Release this state-sync claim, verify current canonical conflicts/incidents, then acquire bounded CP-HARDEN-06 evidence-backed canonical sync receipts work if still free."
     }
   ],
   "last_checkpoint": {
-    "seq": 15,
-    "at": "2026-10-03T16:25:47Z",
-    "claim_id": "998e3078b7dade1b0d10",
-    "work_item": "CP-HARDEN-03",
-    "summary": "CP-HARDEN-03 unclaimed external-change ingress detection is implemented and merged. The incremental ledger watches relevant repository PR merges and direct commits after an explicit baseline, matches canonical claim/checkpoint evidence, and persists fail-closed UNRECONCILED incidents for Main/Reviewer reconciliation.",
+    "seq": 16,
+    "at": "2026-10-03T16:29:34Z",
+    "claim_id": "0b82001bb777a69c7d59",
+    "work_item": "CP-HARDEN-03-state-sync",
+    "summary": "Authoritative hardening summary is synchronized after CP-HARDEN-03. CP-HARDEN-03 is marked complete, CP-HARDEN-06 is current, and the external-change watchdog remains explicitly pending its first scheduled/manual runtime execution rather than being inferred successful from CI.",
     "decisions": [
-      "Use an explicit deployment baseline and incremental cursors; do not retroactively flood the control plane with historical merges.",
-      "Treat PR #747 as a historical motivating example already reconciled before the baseline rather than reopening it without new evidence.",
-      "A merged PR is matched by an active canonical claim on the same repository and branch or by explicit repository-qualified PR/merge-SHA evidence in raw workstreams.",
-      "Direct default-branch commits are watched on external project repositories; Module Library direct control-plane reconcile commits are excluded while its PR merges remain watched.",
-      "Unmatched changes persist as UNRECONCILED incidents and the watchdog fails closed until Main/Reviewer records reconciliation evidence.",
-      "RECONCILED incidents require reviewed_by=main-reviewer and non-empty evidence_refs.",
-      "The external ingress watchdog shares the canonical-control-plane-reconcile concurrency group and does not directly mutate workstreams or canonical-state."
+      "Advance the hardening phase to CP-HARDEN-06 before AIR-10 broad rollout.",
+      "Keep external-change ingress implementation ACTIVE while recording runtime_status as PENDING_FIRST_SCHEDULED_OR_MANUAL_RUN until a real watchdog run exists.",
+      "Pin the pre-sync main reference to 6d2d1bdcbe37c25cedf03518049d90cfbeda0d01."
     ],
     "evidence_refs": [
       "AI-Orchestrator-Module-Library#100",
       "merge:e9bdcbe6a19cf395dcecd163e82f617b1ddefe1a",
       "Validate Module Library run 37136725492",
-      "head:fa48776463d6bd504b5e33a3ddc3629a16c71ee6"
+      "AI-Orchestrator-Module-Library#101",
+      "merge:73fcff29b5d8b0772af5920c3939e2dc995743a6",
+      "Validate Module Library run 37137000660"
     ],
-    "next_action": "Synchronize authoritative hardening state to mark CP-HARDEN-03 complete and make CP-HARDEN-06 the next bounded phase. Keep AIR-10 broad rollout constrained."
+    "next_action": "Release this state-sync claim, verify current canonical conflicts/incidents, then acquire bounded CP-HARDEN-06 evidence-backed canonical sync receipts work if still free."
   },
   "hardening_backlog": [
     {
