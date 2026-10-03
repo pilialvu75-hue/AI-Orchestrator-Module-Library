@@ -104,8 +104,6 @@ def _direct_commit_changes(
         if not committed_at or committed_at <= cursor:
             continue
         parents = item.get("parents") or []
-        # A merge commit should normally have been represented by a merged PR. Keep an
-        # unmatched merge visible rather than silently classifying it as a direct push.
         kind = "unmatched_merge_commit" if len(parents) > 1 else "direct_commit"
         changes.append({
             "kind": kind,
@@ -235,7 +233,7 @@ def scan_registry(
                 "title": change.get("title") or change.get("message") or "",
                 "url": change.get("html_url"),
                 "match_ref": match_ref,
-                "reconciliation": null,
+                "reconciliation": None,
             }
             incidents.append(incident)
             existing[incident_id] = incident
