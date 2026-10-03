@@ -1,0 +1,29 @@
+{
+  "schema_version": 1,
+  "request_id": "cantiere-20261003-782-merged",
+  "actor_id": "chatgpt:cantiere-work-20261003",
+  "lane_id": "cantiere",
+  "operation": "checkpoint",
+  "expected_state_version": 21,
+  "payload": {
+    "claim_id": "2582374b5524b1b7c29d",
+    "summary": "PR #782 merged at c6133b15f4be44b4e648c91aa312427edfb1f919 under explicit owner mandate. Exact final head 39cd461 passed all six workflows and twelve check runs; both substantive automated review findings addressed and resolved. Merge verified on main. Android release run 37150164395 / build 2983 is running.",
+    "decisions": [
+      "Phase 1 ONLINE remains physically unverified.",
+      "Preserve both existing Manga Kids projects; first physical retry remains project:dashboard:1790801560854814 (2/2) with Riprova solo build.",
+      "No new manual test until signed +2983 APK containing merge is published."
+    ],
+    "evidence_refs": [
+      "Ai-orchestrator-riserva#782",
+      "merge:c6133b15f4be44b4e648c91aa312427edfb1f919",
+      "CI:37148684404",
+      "CI:37148684368",
+      "CI:37148684413",
+      "CI:37148684395",
+      "CI:37148684347",
+      "CI:37148684348",
+      "Android-release-pending:37150164395"
+    ],
+    "next_action": "Verify the post-merge Android release and all post-merge workflows; provide exact version, commit and one-button physical handoff. Keep managed-crash diagnosis and generated-app acceptance explicitly unverified."
+  }
+}
