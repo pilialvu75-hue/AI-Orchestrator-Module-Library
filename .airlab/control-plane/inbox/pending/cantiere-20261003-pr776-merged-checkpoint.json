@@ -1,0 +1,24 @@
+{
+  "schema_version": 1,
+  "request_id": "cantiere-20261003-pr776-merged-checkpoint",
+  "actor_id": "chatgpt:cantiere-work-20261003",
+  "lane_id": "cantiere",
+  "operation": "checkpoint",
+  "expected_state_version": 15,
+  "payload": {
+    "summary": "PR #776 merged by explicit owner mandate after all six workflows and twelve check runs on final head f0f58eb passed, with both review findings resolved. Merge f0d1d62878d094aed162aaceadb370946c47a612 verified on main. Post-merge Android release run 37143551790 (build 2975) is running; APK not yet published.",
+    "decisions": [
+      "Preserve unrelated main advancement adding a separate legacy macOS workflow.",
+      "Keep Phase 1 ONLINE physically unverified. No physical retest before the signed release containing both fixes is available.",
+      "First physical retry must use existing Manga Kids project:dashboard:1790801560854814, already 2/2 and review/validation approved, with Riprova solo build."
+    ],
+    "evidence_refs": [
+      "Ai-orchestrator-riserva#776",
+      "merge:f0d1d62878d094aed162aaceadb370946c47a612",
+      "test:105-focused-PASS",
+      "CI:37142504348,37142504329,37142504459,37142504413,37142504555,37142504412",
+      "Android-release-pending:37143551790"
+    ],
+    "next_action": "Verify post-merge CI and the signed Android 1.0.12+2975 release asset/tag SHA. Record exact build, commit and one-button persistent-project physical handoff; do not claim generated-app installation or Phase 1 acceptance."
+  }
+}
