@@ -7,7 +7,7 @@
     "policy": "This private repository is the single coordination authority. Chats and agents are workers, not independent sources of truth."
   },
   "updated_at": "2026-10-03",
-  "state_revision": 73,
+  "state_revision": 74,
   "lifecycle_status": "BOOTSTRAP_ACTIVE",
   "roadmap_authority": {
     "library": ".airlab/roadmap.yaml",
@@ -78,14 +78,47 @@
     "invalid_lane_behavior": "ISOLATE_AND_SURFACE_PROJECTION_INCIDENT"
   },
   "projection": {
-    "source_digest": "cf9a12d0fdb8fb447eaa73c8b900854486ea41fb849ed93f4984f08a0bb0702c",
-    "projected_at": "2026-10-03T16:26:11Z",
+    "source_digest": "5c46bc3129e11c4186d8be273d0d7b47ade9accfb4619678c63682c209409bb7",
+    "projected_at": "2026-10-03T16:26:34Z",
     "counts": {
       "BLOCKED": 1,
-      "READY": 14
+      "CLAIMED": 1,
+      "READY": 13
     },
-    "active_claims": [],
-    "active_resource_locks": [],
+    "active_claims": [
+      {
+        "lane": "main-reviewer",
+        "claim_id": "0b82001bb777a69c7d59",
+        "work_item": "CP-HARDEN-03-state-sync",
+        "repository": "pilialvu75-hue/AI-Orchestrator-Module-Library",
+        "lease_until": "2026-10-04T04:26:34Z",
+        "resource_locks": [
+          "branch:pilialvu75-hue/AI-Orchestrator-Module-Library:main-reviewer/cp-harden-03-state-sync",
+          "contract:control-plane-hardening-state",
+          "file:pilialvu75-hue/AI-Orchestrator-Module-Library:.airlab/state.json"
+        ]
+      }
+    ],
+    "active_resource_locks": [
+      {
+        "key": "branch:pilialvu75-hue/AI-Orchestrator-Module-Library:main-reviewer/cp-harden-03-state-sync",
+        "lane": "main-reviewer",
+        "claim_id": "0b82001bb777a69c7d59",
+        "work_item": "CP-HARDEN-03-state-sync"
+      },
+      {
+        "key": "contract:control-plane-hardening-state",
+        "lane": "main-reviewer",
+        "claim_id": "0b82001bb777a69c7d59",
+        "work_item": "CP-HARDEN-03-state-sync"
+      },
+      {
+        "key": "file:pilialvu75-hue/AI-Orchestrator-Module-Library:.airlab/state.json",
+        "lane": "main-reviewer",
+        "claim_id": "0b82001bb777a69c7d59",
+        "work_item": "CP-HARDEN-03-state-sync"
+      }
+    ],
     "review_required": [],
     "blocked": [
       {
@@ -212,11 +245,21 @@
       },
       {
         "id": "main-reviewer",
-        "status": "READY",
+        "status": "CLAIMED",
         "activation": "active",
-        "state_version": 43,
+        "state_version": 44,
         "updated_at": "2026-10-03",
-        "active_claim": null,
+        "active_claim": {
+          "claim_id": "0b82001bb777a69c7d59",
+          "work_item": "CP-HARDEN-03-state-sync",
+          "repository": "pilialvu75-hue/AI-Orchestrator-Module-Library",
+          "lease_until": "2026-10-04T04:26:34Z",
+          "resource_locks": [
+            "branch:pilialvu75-hue/AI-Orchestrator-Module-Library:main-reviewer/cp-harden-03-state-sync",
+            "contract:control-plane-hardening-state",
+            "file:pilialvu75-hue/AI-Orchestrator-Module-Library:.airlab/state.json"
+          ]
+        },
         "reviewer_state": "AUTHORITY",
         "inference_profile_status": null,
         "historical_backlog_count": 0,
