@@ -1,0 +1,12 @@
+{
+  "schema_version": 1,
+  "request_id": "cantiere-20261003-2975-physical-failure-release",
+  "status": "APPLIED",
+  "processed_at": "2026-10-03T19:06:08Z",
+  "source_file": "cantiere-20261003-2975-physical-failure-release.json",
+  "lane_id": "cantiere",
+  "operation": "release",
+  "actor_id": "chatgpt:cantiere-work-20261003",
+  "errors": [],
+  "result_state_version": 18
+}
