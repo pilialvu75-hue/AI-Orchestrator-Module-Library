@@ -3,24 +3,13 @@
   "id": "platform-windows-legacy",
   "title": "Windows 7/8.1",
   "role": "worker",
-  "status": "IMPLEMENTING",
+  "status": "BLOCKED",
   "activation": "active",
   "scope": "Legacy Windows compatibility layer, installer/update and target-specific adapters with target-optimized inference while preserving shared orchestration/contracts.",
   "shared_engine_policy": "adapter_only",
-  "state_version": 19,
-  "updated_at": "2026-10-02",
-  "active_claim": {
-    "claim_id": "baedabdf26f436c9e964",
-    "owner_lane": "platform-windows-legacy",
-    "work_item": "win7-post-0e-main-convergence",
-    "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
-    "scope": "Record physical Win7 0E no-crash evidence, then identify the remaining post-validation model crash stage and prepare convergence onto current main preserving merged PR #671 Windows 7-11 improvements. No merge without physical evidence; no regression to Win8.1/10/11.",
-    "branch": null,
-    "started_at": "2026-10-02T16:01:58Z",
-    "heartbeat_at": "2026-10-02T16:37:41Z",
-    "lease_until": "2026-10-03T04:37:41Z",
-    "lease_hours": 12
-  },
+  "state_version": 20,
+  "updated_at": "2026-10-03",
+  "active_claim": null,
   "dependencies": [],
   "roadmap_refs": [
     ".airlab/public-repositories/Ai-orchestrator-riserva/roadmap.yaml#CANT-15"
@@ -288,6 +277,23 @@
       "work_item": "win7-model-load-post-0c-isolation",
       "reason": "WAITING_OWNER_PHYSICAL",
       "at": "2026-10-02T13:10:58Z"
+    },
+    {
+      "type": "CLAIM_LEASE_EXPIRED",
+      "claim_id": "baedabdf26f436c9e964",
+      "work_item": "win7-post-0e-main-convergence",
+      "resource_locks": [],
+      "lease_until": "2026-10-03T04:37:41Z",
+      "detected_at": "2026-10-03T05:37:44Z"
     }
-  ]
+  ],
+  "block_reason": {
+    "code": "CLAIM_LEASE_EXPIRED",
+    "work_item": "win7-post-0e-main-convergence",
+    "claim_id": "baedabdf26f436c9e964",
+    "resource_locks": [],
+    "lease_until": "2026-10-03T04:37:41Z",
+    "detected_at": "2026-10-03T05:37:44Z",
+    "review_required": true
+  }
 }

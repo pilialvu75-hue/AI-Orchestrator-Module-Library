@@ -3,33 +3,13 @@
   "id": "main-reviewer",
   "title": "Main / Reviewer",
   "role": "reviewer",
-  "status": "IMPLEMENTING",
+  "status": "BLOCKED",
   "activation": "active",
   "scope": "Global architecture, cross-lane review, consolidation, roadmap/state authority and hardening, including target inference profile balance and shared-contract compatibility.",
   "shared_engine_policy": "shared_or_control_plane",
-  "state_version": 35,
-  "updated_at": "2026-10-02",
-  "active_claim": {
-    "claim_id": "0d04c794310516c83f8e",
-    "owner_lane": "main-reviewer",
-    "work_item": "CP-HARDEN-07",
-    "repository": "pilialvu75-hue/AI-Orchestrator-Module-Library",
-    "scope": "Implement machine-readable WAITING_OWNER / WAITING_EXTERNAL lifecycle without live implementation leases, preserving resume evidence/work item/resource reservations and blocking dispatcher reacquisition until explicit resume evidence arrives.",
-    "branch": "main-reviewer/cp-harden-07-wait-states",
-    "resource_locks": [
-      "branch:pilialvu75-hue/AI-Orchestrator-Module-Library:main-reviewer/cp-harden-07-wait-states",
-      "contract:control-plane-wait-lifecycle",
-      "file:pilialvu75-hue/AI-Orchestrator-Module-Library:.airlab/control-plane/automation-registry.json",
-      "file:pilialvu75-hue/AI-Orchestrator-Module-Library:tools/chat_lane_bootstrap.py",
-      "file:pilialvu75-hue/AI-Orchestrator-Module-Library:tools/control_plane_inbox.py",
-      "file:pilialvu75-hue/AI-Orchestrator-Module-Library:tools/control_plane_manager.py",
-      "file:pilialvu75-hue/AI-Orchestrator-Module-Library:tools/validate_control_plane.py"
-    ],
-    "started_at": "2026-10-02T17:21:54Z",
-    "heartbeat_at": "2026-10-02T17:22:35Z",
-    "lease_until": "2026-10-03T05:22:35Z",
-    "lease_hours": 12
-  },
+  "state_version": 36,
+  "updated_at": "2026-10-03",
+  "active_claim": null,
   "dependencies": [],
   "roadmap_refs": [],
   "evidence": [],
@@ -634,6 +614,39 @@
       "work_item": "CP-HARDEN-04",
       "reason": "CP-HARDEN-04 merged and canonically checkpointed with exact-head and post-merge validation evidence.",
       "at": "2026-10-02T17:21:19Z"
+    },
+    {
+      "type": "CLAIM_LEASE_EXPIRED",
+      "claim_id": "0d04c794310516c83f8e",
+      "work_item": "CP-HARDEN-07",
+      "resource_locks": [
+        "branch:pilialvu75-hue/AI-Orchestrator-Module-Library:main-reviewer/cp-harden-07-wait-states",
+        "contract:control-plane-wait-lifecycle",
+        "file:pilialvu75-hue/AI-Orchestrator-Module-Library:.airlab/control-plane/automation-registry.json",
+        "file:pilialvu75-hue/AI-Orchestrator-Module-Library:tools/chat_lane_bootstrap.py",
+        "file:pilialvu75-hue/AI-Orchestrator-Module-Library:tools/control_plane_inbox.py",
+        "file:pilialvu75-hue/AI-Orchestrator-Module-Library:tools/control_plane_manager.py",
+        "file:pilialvu75-hue/AI-Orchestrator-Module-Library:tools/validate_control_plane.py"
+      ],
+      "lease_until": "2026-10-03T05:22:35Z",
+      "detected_at": "2026-10-03T05:37:44Z"
     }
-  ]
+  ],
+  "block_reason": {
+    "code": "CLAIM_LEASE_EXPIRED",
+    "work_item": "CP-HARDEN-07",
+    "claim_id": "0d04c794310516c83f8e",
+    "resource_locks": [
+      "branch:pilialvu75-hue/AI-Orchestrator-Module-Library:main-reviewer/cp-harden-07-wait-states",
+      "contract:control-plane-wait-lifecycle",
+      "file:pilialvu75-hue/AI-Orchestrator-Module-Library:.airlab/control-plane/automation-registry.json",
+      "file:pilialvu75-hue/AI-Orchestrator-Module-Library:tools/chat_lane_bootstrap.py",
+      "file:pilialvu75-hue/AI-Orchestrator-Module-Library:tools/control_plane_inbox.py",
+      "file:pilialvu75-hue/AI-Orchestrator-Module-Library:tools/control_plane_manager.py",
+      "file:pilialvu75-hue/AI-Orchestrator-Module-Library:tools/validate_control_plane.py"
+    ],
+    "lease_until": "2026-10-03T05:22:35Z",
+    "detected_at": "2026-10-03T05:37:44Z",
+    "review_required": true
+  }
 }
