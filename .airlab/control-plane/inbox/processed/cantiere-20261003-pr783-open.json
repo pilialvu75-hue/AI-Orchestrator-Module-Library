@@ -1,0 +1,12 @@
+{
+  "schema_version": 1,
+  "request_id": "cantiere-20261003-pr783-open",
+  "status": "APPLIED",
+  "processed_at": "2026-10-03T20:43:58Z",
+  "source_file": "cantiere-20261003-pr783-open.json",
+  "lane_id": "cantiere",
+  "operation": "checkpoint",
+  "actor_id": "chatgpt:cantiere-work-20261003",
+  "errors": [],
+  "result_state_version": 26
+}

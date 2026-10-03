@@ -7,7 +7,7 @@
     "policy": "This private repository is the single coordination authority. Chats and agents are workers, not independent sources of truth."
   },
   "updated_at": "2026-10-03",
-  "state_revision": 92,
+  "state_revision": 93,
   "lifecycle_status": "BOOTSTRAP_ACTIVE",
   "roadmap_authority": {
     "library": ".airlab/roadmap.yaml",
@@ -78,8 +78,8 @@
     "invalid_lane_behavior": "ISOLATE_AND_SURFACE_PROJECTION_INCIDENT"
   },
   "projection": {
-    "source_digest": "b279d4c220fc301fdcaea51882e3f557dc8afd33aef1da2c76b4a6da475538f0",
-    "projected_at": "2026-10-03T20:35:57Z",
+    "source_digest": "e00c3a47858e2d510d2714eb265f8abad018970fd4d8fe476f968b890064b12c",
+    "projected_at": "2026-10-03T20:43:58Z",
     "counts": {
       "BLOCKED": 1,
       "CLAIMED": 1,
@@ -92,7 +92,7 @@
         "claim_id": "146b5421aff70e95307a",
         "work_item": "CANT-11-2979-reviewer-json-recovery",
         "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
-        "lease_until": "2026-10-04T08:35:57Z",
+        "lease_until": "2026-10-04T08:43:58Z",
         "resource_locks": [
           "branch:pilialvu75-hue/Ai-orchestrator-riserva:cantiere/reviewer-json-recovery-2979-20261003",
           "contract:cantiere-reviewer-json-recovery",
@@ -281,13 +281,13 @@
         "id": "cantiere",
         "status": "IMPLEMENTING",
         "activation": "active",
-        "state_version": 25,
+        "state_version": 26,
         "updated_at": "2026-10-03",
         "active_claim": {
           "claim_id": "146b5421aff70e95307a",
           "work_item": "CANT-11-2979-reviewer-json-recovery",
           "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
-          "lease_until": "2026-10-04T08:35:57Z",
+          "lease_until": "2026-10-04T08:43:58Z",
           "resource_locks": [
             "branch:pilialvu75-hue/Ai-orchestrator-riserva:cantiere/reviewer-json-recovery-2979-20261003",
             "contract:cantiere-reviewer-json-recovery",
@@ -297,7 +297,7 @@
         "reviewer_state": "PENDING",
         "inference_profile_status": null,
         "historical_backlog_count": 3,
-        "next_action": "Open focused Reviewer recovery PR based on c6133b1, check all CI/review findings, merge under explicit owner mandate and verify signed Android release."
+        "next_action": "Finish all CI/review checks, merge under owner mandate if no substantive findings, verify main and signed release. Phase 1 physical APK install/open remains pending."
       },
       {
         "id": "diagnostics",

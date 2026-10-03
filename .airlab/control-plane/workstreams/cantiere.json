@@ -7,7 +7,7 @@
   "activation": "active",
   "scope": "Exclusive Cantiere/App Factory execution, durability, build/review/validation/apply and first-real-app reliability.",
   "shared_engine_policy": "shared_or_control_plane",
-  "state_version": 25,
+  "state_version": 26,
   "updated_at": "2026-10-03",
   "active_claim": {
     "claim_id": "146b5421aff70e95307a",
@@ -22,8 +22,8 @@
       "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/core/diagnostics/public_log_projection.dart"
     ],
     "started_at": "2026-10-03T20:28:18Z",
-    "heartbeat_at": "2026-10-03T20:35:57Z",
-    "lease_until": "2026-10-04T08:35:57Z",
+    "heartbeat_at": "2026-10-03T20:43:58Z",
+    "lease_until": "2026-10-04T08:43:58Z",
     "lease_hours": 12
   },
   "dependencies": [],
@@ -47,7 +47,7 @@
     "reviewed_by": null,
     "reviewed_at": null
   },
-  "next_action": "Open focused Reviewer recovery PR based on c6133b1, check all CI/review findings, merge under explicit owner mandate and verify signed Android release.",
+  "next_action": "Finish all CI/review checks, merge under owner mandate if no substantive findings, verify main and signed release. Phase 1 physical APK install/open remains pending.",
   "historical_backlog": [
     "Stay in Phase 1 ONLINE until a real generated Android app is physically accepted.",
     "Reproduce the recent manga-drawing app failure from current main with Diagnostics; do not restart generic audits.",
@@ -367,25 +367,43 @@
         "v1.0.12+2983"
       ],
       "next_action": "Open focused Reviewer recovery PR based on c6133b1, check all CI/review findings, merge under explicit owner mandate and verify signed Android release."
+    },
+    {
+      "seq": 16,
+      "at": "2026-10-03T20:43:58Z",
+      "claim_id": "146b5421aff70e95307a",
+      "work_item": "CANT-11-2979-reviewer-json-recovery",
+      "summary": "PR #783 opened at 40fefffb07c57eb6203cb37801fbf94b8f502d2c on c6133b1 main. Local 55 tests pass; Web, Cantiere first-app APK and Linux workflows green; Windows/macOS tests green, platform builds still running. No review findings currently open.",
+      "decisions": [
+        "No physical test on intermediate +2983: next signed build must include #783 and #782.",
+        "Resume persistent build-repair project:dashboard:1791058417410553 via Riprova task to avoid repeating completed planning; preserve original root and other projects."
+      ],
+      "evidence_refs": [
+        "Ai-orchestrator-riserva#783",
+        "commit:40fefffb07c57eb6203cb37801fbf94b8f502d2c",
+        "CI:37152170721,37152170737,37152170753,37152170784,37152170715,37152170709",
+        ".airlab/control-plane/evidence/cantiere/20261003-2979-reviewer-parsing.json"
+      ],
+      "next_action": "Finish all CI/review checks, merge under owner mandate if no substantive findings, verify main and signed release. Phase 1 physical APK install/open remains pending."
     }
   ],
   "last_checkpoint": {
-    "seq": 15,
-    "at": "2026-10-03T20:35:57Z",
+    "seq": 16,
+    "at": "2026-10-03T20:43:58Z",
     "claim_id": "146b5421aff70e95307a",
     "work_item": "CANT-11-2979-reviewer-json-recovery",
-    "summary": "Implemented one shared runtime/format retry budget per Reviewer batch, genuinely shorter compact retry, explicit 0.1 recovery temperature and closed batch-aware telemetry. 55 focused tests pass including Engineer recovery -> truncated Reviewer -> review/validation and strict failure/cancellation/rejection cases. Analyze: no errors, one pre-existing info. Raw physical output unavailable; Reviewer attribution follows sequential timing and confirmed code gap.",
+    "summary": "PR #783 opened at 40fefffb07c57eb6203cb37801fbf94b8f502d2c on c6133b1 main. Local 55 tests pass; Web, Cantiere first-app APK and Linux workflows green; Windows/macOS tests green, platform builds still running. No review findings currently open.",
     "decisions": [
-      "Preserve all Manga Kids projects; no new physical test before signed release containing this follow-up.",
-      "No native runtime, toolchain or WebSearch changes. Phase 1 remains physically unverified."
+      "No physical test on intermediate +2983: next signed build must include #783 and #782.",
+      "Resume persistent build-repair project:dashboard:1791058417410553 via Riprova task to avoid repeating completed planning; preserve original root and other projects."
     ],
     "evidence_refs": [
-      ".airlab/control-plane/evidence/cantiere/20261003-2979-reviewer-parsing.json",
-      "test:55-focused-PASS",
-      "Ai-orchestrator-riserva#782",
-      "v1.0.12+2983"
+      "Ai-orchestrator-riserva#783",
+      "commit:40fefffb07c57eb6203cb37801fbf94b8f502d2c",
+      "CI:37152170721,37152170737,37152170753,37152170784,37152170715,37152170709",
+      ".airlab/control-plane/evidence/cantiere/20261003-2979-reviewer-parsing.json"
     ],
-    "next_action": "Open focused Reviewer recovery PR based on c6133b1, check all CI/review findings, merge under explicit owner mandate and verify signed Android release."
+    "next_action": "Finish all CI/review checks, merge under owner mandate if no substantive findings, verify main and signed release. Phase 1 physical APK install/open remains pending."
   },
   "review_history": [
     {
