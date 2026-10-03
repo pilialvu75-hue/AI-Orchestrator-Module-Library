@@ -1,0 +1,12 @@
+{
+  "schema_version": 1,
+  "request_id": "cantiere-20261003-pr776-merged-checkpoint",
+  "status": "APPLIED",
+  "processed_at": "2026-10-03T18:20:48Z",
+  "source_file": "cantiere-20261003-pr776-merged-checkpoint.json",
+  "lane_id": "cantiere",
+  "operation": "checkpoint",
+  "actor_id": "chatgpt:cantiere-work-20261003",
+  "errors": [],
+  "result_state_version": 16
+}
