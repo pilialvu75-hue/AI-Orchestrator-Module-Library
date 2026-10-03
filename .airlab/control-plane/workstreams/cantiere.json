@@ -7,7 +7,7 @@
   "activation": "active",
   "scope": "Exclusive Cantiere/App Factory execution, durability, build/review/validation/apply and first-real-app reliability.",
   "shared_engine_policy": "shared_or_control_plane",
-  "state_version": 14,
+  "state_version": 15,
   "updated_at": "2026-10-03",
   "active_claim": {
     "claim_id": "817e5b54f6185a148751",
@@ -24,8 +24,8 @@
       "file:pilialvu75-hue/Ai-orchestrator-riserva:test/app_factory/workshop/workshop_proposal_implementation_runner_test.dart"
     ],
     "started_at": "2026-10-03T17:30:00Z",
-    "heartbeat_at": "2026-10-03T17:45:28Z",
-    "lease_until": "2026-10-04T05:45:28Z",
+    "heartbeat_at": "2026-10-03T18:01:07Z",
+    "lease_until": "2026-10-04T06:01:07Z",
     "lease_hours": 12
   },
   "dependencies": [],
@@ -49,7 +49,7 @@
     "reviewed_by": null,
     "reviewed_at": null
   },
-  "next_action": "Complete local format/analyze/focused tests, open one scoped PR, verify all CI before merge and Android build. No physical retest before both fixes ship.",
+  "next_action": "Wait for all six workflows on f0f58eb, correct real failures, verify no unresolved findings, merge per explicit owner mandate, then identify Android release containing merge. Physical gate remains open.",
   "historical_backlog": [
     "Stay in Phase 1 ONLINE until a real generated Android app is physically accepted.",
     "Reproduce the recent manga-drawing app failure from current main with Diagnostics; do not restart generic audits.",
@@ -222,23 +222,45 @@
         "physical:Android:+2964:prompt_budget-and-build-planner-invalid-JSON"
       ],
       "next_action": "Complete local format/analyze/focused tests, open one scoped PR, verify all CI before merge and Android build. No physical retest before both fixes ship."
+    },
+    {
+      "seq": 9,
+      "at": "2026-10-03T18:01:07Z",
+      "claim_id": "817e5b54f6185a148751",
+      "work_item": "CANT-11-2964-prompt-budget-planner-recovery",
+      "summary": "PR #776 opened on existing recovery branch, final head f0f58eb. Both Engineer prompt-budget paths, bounded build-repair planner and conservative JSON recovery implemented. Two Codex P2 findings fixed and resolved: mandatory scope preserved or explicitly rejected, and request path budget independent of per-task maxPaths. Diagnostics closed projection exports recovery events without private text. 105 focused tests pass; all six CI workflows running.",
+      "decisions": [
+        "No new Manga Kids project or physical retest requested.",
+        "Scope includes public_log_projection.dart and its regression test so recovery telemetry is remotely visible; no active Diagnostics claim or conflicting resource lock found."
+      ],
+      "evidence_refs": [
+        "Ai-orchestrator-riserva#776",
+        "commit:f0f58ebaae1dc7ebf39a53f6888f6ba11eb75319",
+        "test:105-focused-PASS",
+        "review:4174199308-addressed",
+        "review:4174199310-addressed"
+      ],
+      "next_action": "Wait for all six workflows on f0f58eb, correct real failures, verify no unresolved findings, merge per explicit owner mandate, then identify Android release containing merge. Physical gate remains open."
     }
   ],
   "last_checkpoint": {
-    "seq": 8,
-    "at": "2026-10-03T17:45:28Z",
+    "seq": 9,
+    "at": "2026-10-03T18:01:07Z",
     "claim_id": "817e5b54f6185a148751",
     "work_item": "CANT-11-2964-prompt-budget-planner-recovery",
-    "summary": "Main and recovery branch are identical at 153c367. Engineer does not classify prompt_budget; compact resume fields are unbounded. Final build repair reaches dynamic planner with full repeated payload and up to 12 tasks in 768 output tokens. Implementing both bounded fixes and strict single-object/trailing-comma JSON recovery, with preservation/terminal/identity regression tests.",
+    "summary": "PR #776 opened on existing recovery branch, final head f0f58eb. Both Engineer prompt-budget paths, bounded build-repair planner and conservative JSON recovery implemented. Two Codex P2 findings fixed and resolved: mandatory scope preserved or explicitly rejected, and request path budget independent of per-task maxPaths. Diagnostics closed projection exports recovery events without private text. 105 focused tests pass; all six CI workflows running.",
     "decisions": [
-      "Keep Phase 1 ONLINE physically unverified; preserve both persistent Manga Kids projects.",
-      "No raw second planner output is available in the supplied receipt; regressions cover established payload weakness and conservative structural recovery without inventing truncated content."
+      "No new Manga Kids project or physical retest requested.",
+      "Scope includes public_log_projection.dart and its regression test so recovery telemetry is remotely visible; no active Diagnostics claim or conflicting resource lock found."
     ],
     "evidence_refs": [
-      "Ai-orchestrator-riserva@153c367437b356ea433a4b5fc64d8d1f565b1656",
-      "physical:Android:+2964:prompt_budget-and-build-planner-invalid-JSON"
+      "Ai-orchestrator-riserva#776",
+      "commit:f0f58ebaae1dc7ebf39a53f6888f6ba11eb75319",
+      "test:105-focused-PASS",
+      "review:4174199308-addressed",
+      "review:4174199310-addressed"
     ],
-    "next_action": "Complete local format/analyze/focused tests, open one scoped PR, verify all CI before merge and Android build. No physical retest before both fixes ship."
+    "next_action": "Wait for all six workflows on f0f58eb, correct real failures, verify no unresolved findings, merge per explicit owner mandate, then identify Android release containing merge. Physical gate remains open."
   },
   "review_history": [
     {

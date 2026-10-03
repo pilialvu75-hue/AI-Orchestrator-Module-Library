@@ -7,7 +7,7 @@
     "policy": "This private repository is the single coordination authority. Chats and agents are workers, not independent sources of truth."
   },
   "updated_at": "2026-10-03",
-  "state_revision": 81,
+  "state_revision": 82,
   "lifecycle_status": "BOOTSTRAP_ACTIVE",
   "roadmap_authority": {
     "library": ".airlab/roadmap.yaml",
@@ -78,8 +78,8 @@
     "invalid_lane_behavior": "ISOLATE_AND_SURFACE_PROJECTION_INCIDENT"
   },
   "projection": {
-    "source_digest": "04a21dea5c06fe077bd6b4145f1d991a0d62a47c8239bebf3ef8d6731ddd46cc",
-    "projected_at": "2026-10-03T17:45:28Z",
+    "source_digest": "d5b69f58f77aa4a89799f24a8830b0cbeccf7b1af43333d8328cc4eb4b8b52bb",
+    "projected_at": "2026-10-03T18:01:07Z",
     "counts": {
       "BLOCKED": 1,
       "CLAIMED": 1,
@@ -92,7 +92,7 @@
         "claim_id": "817e5b54f6185a148751",
         "work_item": "CANT-11-2964-prompt-budget-planner-recovery",
         "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
-        "lease_until": "2026-10-04T05:45:28Z",
+        "lease_until": "2026-10-04T06:01:07Z",
         "resource_locks": [
           "branch:pilialvu75-hue/Ai-orchestrator-riserva:cantiere/prompt-budget-planner-recovery-20261003",
           "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/app_factory/workshop/workshop_dynamic_project_planner.dart",
@@ -284,13 +284,13 @@
         "id": "cantiere",
         "status": "IMPLEMENTING",
         "activation": "active",
-        "state_version": 14,
+        "state_version": 15,
         "updated_at": "2026-10-03",
         "active_claim": {
           "claim_id": "817e5b54f6185a148751",
           "work_item": "CANT-11-2964-prompt-budget-planner-recovery",
           "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
-          "lease_until": "2026-10-04T05:45:28Z",
+          "lease_until": "2026-10-04T06:01:07Z",
           "resource_locks": [
             "branch:pilialvu75-hue/Ai-orchestrator-riserva:cantiere/prompt-budget-planner-recovery-20261003",
             "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/app_factory/workshop/workshop_dynamic_project_planner.dart",
@@ -302,7 +302,7 @@
         "reviewer_state": "PENDING",
         "inference_profile_status": null,
         "historical_backlog_count": 3,
-        "next_action": "Complete local format/analyze/focused tests, open one scoped PR, verify all CI before merge and Android build. No physical retest before both fixes ship."
+        "next_action": "Wait for all six workflows on f0f58eb, correct real failures, verify no unresolved findings, merge per explicit owner mandate, then identify Android release containing merge. Physical gate remains open."
       },
       {
         "id": "diagnostics",
