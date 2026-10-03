@@ -1,0 +1,12 @@
+{
+  "schema_version": 1,
+  "request_id": "cantiere-20261003-2979-release-predecessor",
+  "status": "APPLIED",
+  "processed_at": "2026-10-03T20:27:25Z",
+  "source_file": "cantiere-20261003-2979-release-predecessor.json",
+  "lane_id": "cantiere",
+  "operation": "release",
+  "actor_id": "chatgpt:cantiere-work-20261003",
+  "errors": [],
+  "result_state_version": 23
+}
