@@ -1,0 +1,65 @@
+name: Control Plane External Ingress Watch
+
+on:
+  schedule:
+    - cron: "37 * * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: canonical-control-plane-reconcile
+  cancel-in-progress: false
+
+jobs:
+  scan:
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Checkout main
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Scan and persist external ingress ledger
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "ai-orchestrator-control-plane"
+          git config user.email "actions@users.noreply.github.com"
+
+          for attempt in 1 2 3; do
+            git fetch origin main
+            git reset --hard origin/main
+            python tools/external_change_ingress.py scan
+
+            if git diff --quiet -- .airlab/control-plane/external-change-registry.json; then
+              break
+            fi
+
+            git add .airlab/control-plane/external-change-registry.json
+            git commit -m "control-plane: record external ingress scan"
+            if git push origin HEAD:main; then
+              break
+            fi
+
+            if [ "$attempt" -eq 3 ]; then
+              echo "Unable to persist external ingress ledger after three main races." >&2
+              exit 1
+            fi
+            echo "External ingress ledger push raced with main; rescanning latest main."
+          done
+
+      - name: Require Main/Reviewer reconciliation for unclaimed changes
+        shell: bash
+        run: |
+          set -euo pipefail
+          python tools/external_change_ingress.py check

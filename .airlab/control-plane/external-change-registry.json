@@ -1,0 +1,47 @@
+{
+  "schema_version": 1,
+  "policy": {
+    "mode": "incremental_after_baseline",
+    "canonical_progress_requires_reconciliation": true,
+    "unreconciled_incident_status": "UNRECONCILED",
+    "resolved_incident_status": "RECONCILED",
+    "historical_backfill": false
+  },
+  "tracked_repositories": [
+    {
+      "repository": "pilialvu75-hue/AI-Orchestrator-Module-Library",
+      "baseline_at": "2026-10-03T16:20:00Z",
+      "cursor_merged_at": "2026-10-03T16:20:00Z"
+    },
+    {
+      "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
+      "baseline_at": "2026-10-03T16:20:00Z",
+      "cursor_merged_at": "2026-10-03T16:20:00Z"
+    },
+    {
+      "repository": "pilialvu75-hue/Ai-orchestrator-diagnostics",
+      "baseline_at": "2026-10-03T16:20:00Z",
+      "cursor_merged_at": "2026-10-03T16:20:00Z"
+    },
+    {
+      "repository": "pilialvu75-hue/AI-Orchestrator-Module-Researcher",
+      "baseline_at": "2026-10-03T16:20:00Z",
+      "cursor_merged_at": "2026-10-03T16:20:00Z"
+    },
+    {
+      "repository": "pilialvu75-hue/Ai_orchestrator-prova",
+      "baseline_at": "2026-10-03T16:20:00Z",
+      "cursor_merged_at": "2026-10-03T16:20:00Z"
+    }
+  ],
+  "incidents": [],
+  "reconciliation_history": [
+    {
+      "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
+      "pull_request": 747,
+      "status": "HISTORICAL_RECONCILED_BEFORE_BASELINE",
+      "note": "Known motivating example for CP-HARDEN-03. It predates this incremental detector and is not retroactively reopened."
+    }
+  ],
+  "last_scan_at": null
+}
