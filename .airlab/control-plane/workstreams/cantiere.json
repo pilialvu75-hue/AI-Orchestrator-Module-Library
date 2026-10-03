@@ -7,7 +7,7 @@
   "activation": "active",
   "scope": "Exclusive Cantiere/App Factory execution, durability, build/review/validation/apply and first-real-app reliability.",
   "shared_engine_policy": "shared_or_control_plane",
-  "state_version": 21,
+  "state_version": 22,
   "updated_at": "2026-10-03",
   "active_claim": {
     "claim_id": "2582374b5524b1b7c29d",
@@ -22,8 +22,8 @@
       "contract:cantiere-planner-generation-settings"
     ],
     "started_at": "2026-10-03T19:12:37Z",
-    "heartbeat_at": "2026-10-03T19:40:23Z",
-    "lease_until": "2026-10-04T07:40:23Z",
+    "heartbeat_at": "2026-10-03T20:04:31Z",
+    "lease_until": "2026-10-04T08:04:31Z",
     "lease_hours": 12
   },
   "dependencies": [],
@@ -47,7 +47,7 @@
     "reviewed_by": null,
     "reviewed_at": null
   },
-  "next_action": "Wait for exact-head CI and additional review findings, then merge and verify signed Android release; physical acceptance remains open.",
+  "next_action": "Verify the post-merge Android release and all post-merge workflows; provide exact version, commit and one-button physical handoff. Keep managed-crash diagnosis and generated-app acceptance explicitly unverified.",
   "historical_backlog": [
     "Stay in Phase 1 ONLINE until a real generated Android app is physically accepted.",
     "Reproduce the recent manga-drawing app failure from current main with Diagnostics; do not restart generic audits.",
@@ -325,26 +325,55 @@
         "test:80-affected-PASS"
       ],
       "next_action": "Wait for exact-head CI and additional review findings, then merge and verify signed Android release; physical acceptance remains open."
+    },
+    {
+      "seq": 14,
+      "at": "2026-10-03T20:04:31Z",
+      "claim_id": "2582374b5524b1b7c29d",
+      "work_item": "CANT-11-2975-planner-and-managed-restart",
+      "summary": "PR #782 merged at c6133b15f4be44b4e648c91aa312427edfb1f919 under explicit owner mandate. Exact final head 39cd461 passed all six workflows and twelve check runs; both substantive automated review findings addressed and resolved. Merge verified on main. Android release run 37150164395 / build 2983 is running.",
+      "decisions": [
+        "Phase 1 ONLINE remains physically unverified.",
+        "Preserve both existing Manga Kids projects; first physical retry remains project:dashboard:1790801560854814 (2/2) with Riprova solo build.",
+        "No new manual test until signed +2983 APK containing merge is published."
+      ],
+      "evidence_refs": [
+        "Ai-orchestrator-riserva#782",
+        "merge:c6133b15f4be44b4e648c91aa312427edfb1f919",
+        "CI:37148684404",
+        "CI:37148684368",
+        "CI:37148684413",
+        "CI:37148684395",
+        "CI:37148684347",
+        "CI:37148684348",
+        "Android-release-pending:37150164395"
+      ],
+      "next_action": "Verify the post-merge Android release and all post-merge workflows; provide exact version, commit and one-button physical handoff. Keep managed-crash diagnosis and generated-app acceptance explicitly unverified."
     }
   ],
   "last_checkpoint": {
-    "seq": 13,
-    "at": "2026-10-03T19:40:23Z",
+    "seq": 14,
+    "at": "2026-10-03T20:04:31Z",
     "claim_id": "2582374b5524b1b7c29d",
     "work_item": "CANT-11-2975-planner-and-managed-restart",
-    "summary": "PR #782 review found two substantive issues; both addressed in head 39cd461: preserve only explicit per-field Workshop generation settings, and bound task-level criteria while carrying all original project acceptance constraints through normal/resumed execution. 80 affected tests pass, two review threads resolved; all six workflows rerunning on final head.",
+    "summary": "PR #782 merged at c6133b15f4be44b4e648c91aa312427edfb1f919 under explicit owner mandate. Exact final head 39cd461 passed all six workflows and twelve check runs; both substantive automated review findings addressed and resolved. Merge verified on main. Android release run 37150164395 / build 2983 is running.",
     "decisions": [
-      "No physical retest requested.",
-      "Full original project acceptance is authoritative; task summaries do not replace it."
+      "Phase 1 ONLINE remains physically unverified.",
+      "Preserve both existing Manga Kids projects; first physical retry remains project:dashboard:1790801560854814 (2/2) with Riprova solo build.",
+      "No new manual test until signed +2983 APK containing merge is published."
     ],
     "evidence_refs": [
       "Ai-orchestrator-riserva#782",
-      "commit:39cd46120552cbb8d75918f2e35ae0503cf76351",
-      "review:4174543698-addressed",
-      "review:4174543700-addressed",
-      "test:80-affected-PASS"
+      "merge:c6133b15f4be44b4e648c91aa312427edfb1f919",
+      "CI:37148684404",
+      "CI:37148684368",
+      "CI:37148684413",
+      "CI:37148684395",
+      "CI:37148684347",
+      "CI:37148684348",
+      "Android-release-pending:37150164395"
     ],
-    "next_action": "Wait for exact-head CI and additional review findings, then merge and verify signed Android release; physical acceptance remains open."
+    "next_action": "Verify the post-merge Android release and all post-merge workflows; provide exact version, commit and one-button physical handoff. Keep managed-crash diagnosis and generated-app acceptance explicitly unverified."
   },
   "review_history": [
     {
