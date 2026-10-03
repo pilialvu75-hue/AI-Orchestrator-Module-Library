@@ -7,7 +7,7 @@
   "activation": "active",
   "scope": "Exclusive Cantiere/App Factory execution, durability, build/review/validation/apply and first-real-app reliability.",
   "shared_engine_policy": "shared_or_control_plane",
-  "state_version": 20,
+  "state_version": 21,
   "updated_at": "2026-10-03",
   "active_claim": {
     "claim_id": "2582374b5524b1b7c29d",
@@ -22,8 +22,8 @@
       "contract:cantiere-planner-generation-settings"
     ],
     "started_at": "2026-10-03T19:12:37Z",
-    "heartbeat_at": "2026-10-03T19:30:19Z",
-    "lease_until": "2026-10-04T07:30:19Z",
+    "heartbeat_at": "2026-10-03T19:40:23Z",
+    "lease_until": "2026-10-04T07:40:23Z",
     "lease_hours": 12
   },
   "dependencies": [],
@@ -47,7 +47,7 @@
     "reviewed_by": null,
     "reviewed_at": null
   },
-  "next_action": "Review all PR CI and substantive findings; merge under explicit owner mandate when green; identify signed Android release. Phase 1 remains physically unverified.",
+  "next_action": "Wait for exact-head CI and additional review findings, then merge and verify signed Android release; physical acceptance remains open.",
   "historical_backlog": [
     "Stay in Phase 1 ONLINE until a real generated Android app is physically accepted.",
     "Reproduce the recent manga-drawing app failure from current main with Diagnostics; do not restart generic audits.",
@@ -306,25 +306,45 @@
         "test:169-focused-PASS"
       ],
       "next_action": "Review all PR CI and substantive findings; merge under explicit owner mandate when green; identify signed Android release. Phase 1 remains physically unverified."
+    },
+    {
+      "seq": 13,
+      "at": "2026-10-03T19:40:23Z",
+      "claim_id": "2582374b5524b1b7c29d",
+      "work_item": "CANT-11-2975-planner-and-managed-restart",
+      "summary": "PR #782 review found two substantive issues; both addressed in head 39cd461: preserve only explicit per-field Workshop generation settings, and bound task-level criteria while carrying all original project acceptance constraints through normal/resumed execution. 80 affected tests pass, two review threads resolved; all six workflows rerunning on final head.",
+      "decisions": [
+        "No physical retest requested.",
+        "Full original project acceptance is authoritative; task summaries do not replace it."
+      ],
+      "evidence_refs": [
+        "Ai-orchestrator-riserva#782",
+        "commit:39cd46120552cbb8d75918f2e35ae0503cf76351",
+        "review:4174543698-addressed",
+        "review:4174543700-addressed",
+        "test:80-affected-PASS"
+      ],
+      "next_action": "Wait for exact-head CI and additional review findings, then merge and verify signed Android release; physical acceptance remains open."
     }
   ],
   "last_checkpoint": {
-    "seq": 12,
-    "at": "2026-10-03T19:30:19Z",
+    "seq": 13,
+    "at": "2026-10-03T19:40:23Z",
     "claim_id": "2582374b5524b1b7c29d",
     "work_item": "CANT-11-2975-planner-and-managed-restart",
-    "summary": "Physical +2975 evidence preserved. Implemented explicit minimal build-repair scope contract with fixed validated graph, retained project criteria/workspace, genuinely compact retry; Workshop generation settings preserved through real local boundary; serialized terminal notifications and Android promotion containment plus closed managed crash classification. 169 focused tests pass, analyze no errors. New main #778 integrated without overlap.",
+    "summary": "PR #782 review found two substantive issues; both addressed in head 39cd461: preserve only explicit per-field Workshop generation settings, and bound task-level criteria while carrying all original project acceptance constraints through normal/resumed execution. 80 affected tests pass, two review threads resolved; all six workflows rerunning on final head.",
     "decisions": [
-      "No native llama/Vulkan or toolchain changes.",
-      "Managed crash observed, exact Java cause unproven; fix verified notification defects without claiming physical acceptance.",
-      "Both persistent Manga Kids projects preserved; no retest before merged signed build."
+      "No physical retest requested.",
+      "Full original project acceptance is authoritative; task summaries do not replace it."
     ],
     "evidence_refs": [
-      ".airlab/control-plane/evidence/cantiere/20261003-2975-physical-rework.json",
-      "commit:aee931a13515f7c2a4fda069ba213dafb7d89a66",
-      "test:169-focused-PASS"
+      "Ai-orchestrator-riserva#782",
+      "commit:39cd46120552cbb8d75918f2e35ae0503cf76351",
+      "review:4174543698-addressed",
+      "review:4174543700-addressed",
+      "test:80-affected-PASS"
     ],
-    "next_action": "Review all PR CI and substantive findings; merge under explicit owner mandate when green; identify signed Android release. Phase 1 remains physically unverified."
+    "next_action": "Wait for exact-head CI and additional review findings, then merge and verify signed Android release; physical acceptance remains open."
   },
   "review_history": [
     {

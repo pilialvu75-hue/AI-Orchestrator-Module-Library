@@ -1,0 +1,12 @@
+{
+  "schema_version": 1,
+  "request_id": "cantiere-20261003-2975-review-fixes",
+  "status": "APPLIED",
+  "processed_at": "2026-10-03T19:40:23Z",
+  "source_file": "cantiere-20261003-2975-review-fixes.json",
+  "lane_id": "cantiere",
+  "operation": "checkpoint",
+  "actor_id": "chatgpt:cantiere-work-20261003",
+  "errors": [],
+  "result_state_version": 21
+}

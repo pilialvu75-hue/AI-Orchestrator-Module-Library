@@ -7,7 +7,7 @@
     "policy": "This private repository is the single coordination authority. Chats and agents are workers, not independent sources of truth."
   },
   "updated_at": "2026-10-03",
-  "state_revision": 87,
+  "state_revision": 88,
   "lifecycle_status": "BOOTSTRAP_ACTIVE",
   "roadmap_authority": {
     "library": ".airlab/roadmap.yaml",
@@ -78,8 +78,8 @@
     "invalid_lane_behavior": "ISOLATE_AND_SURFACE_PROJECTION_INCIDENT"
   },
   "projection": {
-    "source_digest": "36c479ea7afd78d516ac7ce258f8ab469f4d6cc1b434c470cf63a25dc620853c",
-    "projected_at": "2026-10-03T19:30:19Z",
+    "source_digest": "4bdbb275f38681f23f5378dab0cfbfa27cfcad27ed8e26cf2b18fb500b67f100",
+    "projected_at": "2026-10-03T19:40:23Z",
     "counts": {
       "BLOCKED": 1,
       "CLAIMED": 1,
@@ -92,7 +92,7 @@
         "claim_id": "2582374b5524b1b7c29d",
         "work_item": "CANT-11-2975-planner-and-managed-restart",
         "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
-        "lease_until": "2026-10-04T07:30:19Z",
+        "lease_until": "2026-10-04T07:40:23Z",
         "resource_locks": [
           "branch:pilialvu75-hue/Ai-orchestrator-riserva:cantiere/planner-native-recovery-2975-20261003",
           "contract:android-workshop-project-notifications",
@@ -281,13 +281,13 @@
         "id": "cantiere",
         "status": "IMPLEMENTING",
         "activation": "active",
-        "state_version": 20,
+        "state_version": 21,
         "updated_at": "2026-10-03",
         "active_claim": {
           "claim_id": "2582374b5524b1b7c29d",
           "work_item": "CANT-11-2975-planner-and-managed-restart",
           "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
-          "lease_until": "2026-10-04T07:30:19Z",
+          "lease_until": "2026-10-04T07:40:23Z",
           "resource_locks": [
             "branch:pilialvu75-hue/Ai-orchestrator-riserva:cantiere/planner-native-recovery-2975-20261003",
             "contract:android-workshop-project-notifications",
@@ -297,7 +297,7 @@
         "reviewer_state": "PENDING",
         "inference_profile_status": null,
         "historical_backlog_count": 3,
-        "next_action": "Review all PR CI and substantive findings; merge under explicit owner mandate when green; identify signed Android release. Phase 1 remains physically unverified."
+        "next_action": "Wait for exact-head CI and additional review findings, then merge and verify signed Android release; physical acceptance remains open."
       },
       {
         "id": "diagnostics",
