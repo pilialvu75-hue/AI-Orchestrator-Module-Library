@@ -3,11 +3,11 @@
   "id": "cantiere",
   "title": "Cantiere",
   "role": "worker",
-  "status": "CLAIMED",
+  "status": "IMPLEMENTING",
   "activation": "active",
   "scope": "Exclusive Cantiere/App Factory execution, durability, build/review/validation/apply and first-real-app reliability.",
   "shared_engine_policy": "shared_or_control_plane",
-  "state_version": 24,
+  "state_version": 25,
   "updated_at": "2026-10-03",
   "active_claim": {
     "claim_id": "146b5421aff70e95307a",
@@ -22,8 +22,8 @@
       "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/core/diagnostics/public_log_projection.dart"
     ],
     "started_at": "2026-10-03T20:28:18Z",
-    "heartbeat_at": "2026-10-03T20:28:18Z",
-    "lease_until": "2026-10-04T08:28:18Z",
+    "heartbeat_at": "2026-10-03T20:35:57Z",
+    "lease_until": "2026-10-04T08:35:57Z",
     "lease_hours": 12
   },
   "dependencies": [],
@@ -47,7 +47,7 @@
     "reviewed_by": null,
     "reviewed_at": null
   },
-  "next_action": "Verify the post-merge Android release and all post-merge workflows; provide exact version, commit and one-button physical handoff. Keep managed-crash diagnosis and generated-app acceptance explicitly unverified.",
+  "next_action": "Open focused Reviewer recovery PR based on c6133b1, check all CI/review findings, merge under explicit owner mandate and verify signed Android release.",
   "historical_backlog": [
     "Stay in Phase 1 ONLINE until a real generated Android app is physically accepted.",
     "Reproduce the recent manga-drawing app failure from current main with Diagnostics; do not restart generic audits.",
@@ -349,31 +349,43 @@
         "Android-release-pending:37150164395"
       ],
       "next_action": "Verify the post-merge Android release and all post-merge workflows; provide exact version, commit and one-button physical handoff. Keep managed-crash diagnosis and generated-app acceptance explicitly unverified."
+    },
+    {
+      "seq": 15,
+      "at": "2026-10-03T20:35:57Z",
+      "claim_id": "146b5421aff70e95307a",
+      "work_item": "CANT-11-2979-reviewer-json-recovery",
+      "summary": "Implemented one shared runtime/format retry budget per Reviewer batch, genuinely shorter compact retry, explicit 0.1 recovery temperature and closed batch-aware telemetry. 55 focused tests pass including Engineer recovery -> truncated Reviewer -> review/validation and strict failure/cancellation/rejection cases. Analyze: no errors, one pre-existing info. Raw physical output unavailable; Reviewer attribution follows sequential timing and confirmed code gap.",
+      "decisions": [
+        "Preserve all Manga Kids projects; no new physical test before signed release containing this follow-up.",
+        "No native runtime, toolchain or WebSearch changes. Phase 1 remains physically unverified."
+      ],
+      "evidence_refs": [
+        ".airlab/control-plane/evidence/cantiere/20261003-2979-reviewer-parsing.json",
+        "test:55-focused-PASS",
+        "Ai-orchestrator-riserva#782",
+        "v1.0.12+2983"
+      ],
+      "next_action": "Open focused Reviewer recovery PR based on c6133b1, check all CI/review findings, merge under explicit owner mandate and verify signed Android release."
     }
   ],
   "last_checkpoint": {
-    "seq": 14,
-    "at": "2026-10-03T20:04:31Z",
-    "claim_id": "2582374b5524b1b7c29d",
-    "work_item": "CANT-11-2975-planner-and-managed-restart",
-    "summary": "PR #782 merged at c6133b15f4be44b4e648c91aa312427edfb1f919 under explicit owner mandate. Exact final head 39cd461 passed all six workflows and twelve check runs; both substantive automated review findings addressed and resolved. Merge verified on main. Android release run 37150164395 / build 2983 is running.",
+    "seq": 15,
+    "at": "2026-10-03T20:35:57Z",
+    "claim_id": "146b5421aff70e95307a",
+    "work_item": "CANT-11-2979-reviewer-json-recovery",
+    "summary": "Implemented one shared runtime/format retry budget per Reviewer batch, genuinely shorter compact retry, explicit 0.1 recovery temperature and closed batch-aware telemetry. 55 focused tests pass including Engineer recovery -> truncated Reviewer -> review/validation and strict failure/cancellation/rejection cases. Analyze: no errors, one pre-existing info. Raw physical output unavailable; Reviewer attribution follows sequential timing and confirmed code gap.",
     "decisions": [
-      "Phase 1 ONLINE remains physically unverified.",
-      "Preserve both existing Manga Kids projects; first physical retry remains project:dashboard:1790801560854814 (2/2) with Riprova solo build.",
-      "No new manual test until signed +2983 APK containing merge is published."
+      "Preserve all Manga Kids projects; no new physical test before signed release containing this follow-up.",
+      "No native runtime, toolchain or WebSearch changes. Phase 1 remains physically unverified."
     ],
     "evidence_refs": [
+      ".airlab/control-plane/evidence/cantiere/20261003-2979-reviewer-parsing.json",
+      "test:55-focused-PASS",
       "Ai-orchestrator-riserva#782",
-      "merge:c6133b15f4be44b4e648c91aa312427edfb1f919",
-      "CI:37148684404",
-      "CI:37148684368",
-      "CI:37148684413",
-      "CI:37148684395",
-      "CI:37148684347",
-      "CI:37148684348",
-      "Android-release-pending:37150164395"
+      "v1.0.12+2983"
     ],
-    "next_action": "Verify the post-merge Android release and all post-merge workflows; provide exact version, commit and one-button physical handoff. Keep managed-crash diagnosis and generated-app acceptance explicitly unverified."
+    "next_action": "Open focused Reviewer recovery PR based on c6133b1, check all CI/review findings, merge under explicit owner mandate and verify signed Android release."
   },
   "review_history": [
     {
