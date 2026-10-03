@@ -3,11 +3,11 @@
   "id": "main-reviewer",
   "title": "Main / Reviewer",
   "role": "reviewer",
-  "status": "CLAIMED",
+  "status": "IMPLEMENTING",
   "activation": "active",
   "scope": "Global architecture, cross-lane review, consolidation, roadmap/state authority and hardening, including target inference profile balance and shared-contract compatibility.",
   "shared_engine_policy": "shared_or_control_plane",
-  "state_version": 41,
+  "state_version": 42,
   "updated_at": "2026-10-03",
   "active_claim": {
     "claim_id": "998e3078b7dade1b0d10",
@@ -24,8 +24,8 @@
       "file:pilialvu75-hue/AI-Orchestrator-Module-Library:tools/external_change_ingress.py"
     ],
     "started_at": "2026-10-03T16:19:16Z",
-    "heartbeat_at": "2026-10-03T16:19:16Z",
-    "lease_until": "2026-10-04T04:19:16Z",
+    "heartbeat_at": "2026-10-03T16:25:47Z",
+    "lease_until": "2026-10-04T04:25:47Z",
     "lease_hours": 12
   },
   "dependencies": [],
@@ -47,7 +47,7 @@
     "reviewed_by": null,
     "reviewed_at": null
   },
-  "next_action": "Release the CP-HARDEN-07 canonical-sync claim, then verify current claims/incidents and acquire a bounded CP-HARDEN-03 claim if still free. Do not broaden AIR-10 yet.",
+  "next_action": "Synchronize authoritative hardening state to mark CP-HARDEN-03 complete and make CP-HARDEN-06 the next bounded phase. Keep AIR-10 broad rollout constrained.",
   "inference_review_policy": {
     "policy": ".airlab/control-plane/inference-policy.json",
     "check": [
@@ -544,37 +544,53 @@
         "Validate Module Library run 37136185391"
       ],
       "next_action": "Release the CP-HARDEN-07 canonical-sync claim, then verify current claims/incidents and acquire a bounded CP-HARDEN-03 claim if still free. Do not broaden AIR-10 yet."
+    },
+    {
+      "seq": 15,
+      "at": "2026-10-03T16:25:47Z",
+      "claim_id": "998e3078b7dade1b0d10",
+      "work_item": "CP-HARDEN-03",
+      "summary": "CP-HARDEN-03 unclaimed external-change ingress detection is implemented and merged. The incremental ledger watches relevant repository PR merges and direct commits after an explicit baseline, matches canonical claim/checkpoint evidence, and persists fail-closed UNRECONCILED incidents for Main/Reviewer reconciliation.",
+      "decisions": [
+        "Use an explicit deployment baseline and incremental cursors; do not retroactively flood the control plane with historical merges.",
+        "Treat PR #747 as a historical motivating example already reconciled before the baseline rather than reopening it without new evidence.",
+        "A merged PR is matched by an active canonical claim on the same repository and branch or by explicit repository-qualified PR/merge-SHA evidence in raw workstreams.",
+        "Direct default-branch commits are watched on external project repositories; Module Library direct control-plane reconcile commits are excluded while its PR merges remain watched.",
+        "Unmatched changes persist as UNRECONCILED incidents and the watchdog fails closed until Main/Reviewer records reconciliation evidence.",
+        "RECONCILED incidents require reviewed_by=main-reviewer and non-empty evidence_refs.",
+        "The external ingress watchdog shares the canonical-control-plane-reconcile concurrency group and does not directly mutate workstreams or canonical-state."
+      ],
+      "evidence_refs": [
+        "AI-Orchestrator-Module-Library#100",
+        "merge:e9bdcbe6a19cf395dcecd163e82f617b1ddefe1a",
+        "Validate Module Library run 37136725492",
+        "head:fa48776463d6bd504b5e33a3ddc3629a16c71ee6"
+      ],
+      "next_action": "Synchronize authoritative hardening state to mark CP-HARDEN-03 complete and make CP-HARDEN-06 the next bounded phase. Keep AIR-10 broad rollout constrained."
     }
   ],
   "last_checkpoint": {
-    "seq": 14,
-    "at": "2026-10-03T16:17:59Z",
-    "claim_id": "9843c03194dd90cee085",
-    "work_item": "CP-HARDEN-07-canonical-sync",
-    "summary": "CP-HARDEN-07 machine-readable owner/external wait lifecycle is implemented, CI-validated, merged, exercised through a real stale-claim reviewer recovery, and synchronized into authoritative hardening state.",
+    "seq": 15,
+    "at": "2026-10-03T16:25:47Z",
+    "claim_id": "998e3078b7dade1b0d10",
+    "work_item": "CP-HARDEN-03",
+    "summary": "CP-HARDEN-03 unclaimed external-change ingress detection is implemented and merged. The incremental ledger watches relevant repository PR merges and direct commits after an explicit baseline, matches canonical claim/checkpoint evidence, and persists fail-closed UNRECONCILED incidents for Main/Reviewer reconciliation.",
     "decisions": [
-      "Represent WAITING_OWNER and WAITING_EXTERNAL as BLOCKED plus a machine-readable wait_state to remain backward-compatible with the canonical status validator.",
-      "A waiting lane has active_claim=null and therefore no lease heartbeat or checkpoint-watch pressure.",
-      "The waiting work_item, branch and resource locks remain reserved so another lane cannot take the same logical resource under a different work-item name.",
-      "resume_wait requires an explicit signal_id and evidence_refs and returns the lane to READY without silently auto-claiming implementation work.",
-      "Parseable malformed extension requests are quarantined fail-closed before specialized processors can abort the serialized reconcile run.",
-      "A CLAIM_LEASE_EXPIRED block may be cleared only through explicit Main/Reviewer stale-block reconciliation matching the exact canonical work_item and claim_id with evidence.",
-      "CP-HARDEN-03 and CP-HARDEN-06 remain bounded hardening work before any broad AIR-10 rollout."
+      "Use an explicit deployment baseline and incremental cursors; do not retroactively flood the control plane with historical merges.",
+      "Treat PR #747 as a historical motivating example already reconciled before the baseline rather than reopening it without new evidence.",
+      "A merged PR is matched by an active canonical claim on the same repository and branch or by explicit repository-qualified PR/merge-SHA evidence in raw workstreams.",
+      "Direct default-branch commits are watched on external project repositories; Module Library direct control-plane reconcile commits are excluded while its PR merges remain watched.",
+      "Unmatched changes persist as UNRECONCILED incidents and the watchdog fails closed until Main/Reviewer records reconciliation evidence.",
+      "RECONCILED incidents require reviewed_by=main-reviewer and non-empty evidence_refs.",
+      "The external ingress watchdog shares the canonical-control-plane-reconcile concurrency group and does not directly mutate workstreams or canonical-state."
     ],
     "evidence_refs": [
-      "AI-Orchestrator-Module-Library#97",
-      "merge:dcd6154b46418f6f807313a1899172b100e575bb",
-      "Validate Module Library run 37135541904",
-      "AI-Orchestrator-Module-Library#98",
-      "merge:6989ee1b01301be0afaeabc82735b559873593e9",
-      "Validate Module Library run 37135938369",
-      ".airlab/control-plane/inbox/processed/main-reviewer-20261003T161500Z-resolve-cp-harden-07-stale.json",
-      "reconcile:a6e97874f2d39a73934617ef9a80f137cc1b338e",
-      "AI-Orchestrator-Module-Library#99",
-      "merge:e23c7d43d462528429a11f54138c0b91fd446541",
-      "Validate Module Library run 37136185391"
+      "AI-Orchestrator-Module-Library#100",
+      "merge:e9bdcbe6a19cf395dcecd163e82f617b1ddefe1a",
+      "Validate Module Library run 37136725492",
+      "head:fa48776463d6bd504b5e33a3ddc3629a16c71ee6"
     ],
-    "next_action": "Release the CP-HARDEN-07 canonical-sync claim, then verify current claims/incidents and acquire a bounded CP-HARDEN-03 claim if still free. Do not broaden AIR-10 yet."
+    "next_action": "Synchronize authoritative hardening state to mark CP-HARDEN-03 complete and make CP-HARDEN-06 the next bounded phase. Keep AIR-10 broad rollout constrained."
   },
   "hardening_backlog": [
     {
