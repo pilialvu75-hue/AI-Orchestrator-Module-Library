@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "request_id": "cantiere-20261003-2975-rework-implementation",
+  "actor_id": "chatgpt:cantiere-work-20261003",
+  "lane_id": "cantiere",
+  "operation": "checkpoint",
+  "expected_state_version": 19,
+  "payload": {
+    "claim_id": "2582374b5524b1b7c29d",
+    "summary": "Physical +2975 evidence preserved. Implemented explicit minimal build-repair scope contract with fixed validated graph, retained project criteria/workspace, genuinely compact retry; Workshop generation settings preserved through real local boundary; serialized terminal notifications and Android promotion containment plus closed managed crash classification. 169 focused tests pass, analyze no errors. New main #778 integrated without overlap.",
+    "decisions": [
+      "No native llama/Vulkan or toolchain changes.",
+      "Managed crash observed, exact Java cause unproven; fix verified notification defects without claiming physical acceptance.",
+      "Both persistent Manga Kids projects preserved; no retest before merged signed build."
+    ],
+    "evidence_refs": [
+      ".airlab/control-plane/evidence/cantiere/20261003-2975-physical-rework.json",
+      "commit:aee931a13515f7c2a4fda069ba213dafb7d89a66",
+      "test:169-focused-PASS"
+    ],
+    "next_action": "Review all PR CI and substantive findings; merge under explicit owner mandate when green; identify signed Android release. Phase 1 remains physically unverified."
+  }
+}
