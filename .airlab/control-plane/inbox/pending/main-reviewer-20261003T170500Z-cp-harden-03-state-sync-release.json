@@ -1,0 +1,12 @@
+{
+  "schema_version": 1,
+  "request_id": "main-reviewer-20261003T170500Z-cp-harden-03-state-sync-release",
+  "submitted_at": "2026-10-03T17:05:00Z",
+  "actor_id": "chatgpt:main-reviewer",
+  "lane_id": "main-reviewer",
+  "operation": "release",
+  "expected_state_version": 45,
+  "payload": {
+    "reason": "CP-HARDEN-03 implementation and authoritative state synchronization are complete via PRs #100 and #101. Release before acquiring the separate CP-HARDEN-06 evidence-backed canonical sync receipts work item."
+  }
+}
