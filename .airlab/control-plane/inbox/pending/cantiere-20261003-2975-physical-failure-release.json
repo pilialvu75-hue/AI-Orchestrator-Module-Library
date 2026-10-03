@@ -1,0 +1,11 @@
+{
+  "schema_version": 1,
+  "request_id": "cantiere-20261003-2975-physical-failure-release",
+  "actor_id": "chatgpt:cantiere-work-20261003",
+  "lane_id": "cantiere",
+  "operation": "release",
+  "expected_state_version": 17,
+  "payload": {
+    "reason": "Withdraw worker review submission after owner-provided physical failure on Android +2975, not an acceptance or reviewer promotion. Diagnostics proves build_repair planner attempt 1 and 2 both use 2722-character prompts and both reject incomplete_json (468/475 output characters; terminal success). Android exit at 2026-10-03T18:49:02.778Z has reason_code=4 (managed crash), followed by cold start. Continue under a new bounded physical-rework claim; preserve PR #776 release history and both persistent Manga Kids projects. Evidence: https://github.com/pilialvu75-hue/Ai-orchestrator-diagnostics/releases/download/diagnostics-v1-6bd1447f-5fda-4171-84b4-c1ff56b154cf/diag-crash-91dfbdcf75fdef5568add863b6330f0bc266391edf39387a7b4e41134236c075.txt"
+  }
+}
