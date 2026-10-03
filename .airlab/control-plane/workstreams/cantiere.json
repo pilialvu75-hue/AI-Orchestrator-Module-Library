@@ -3,11 +3,11 @@
   "id": "cantiere",
   "title": "Cantiere",
   "role": "worker",
-  "status": "CLAIMED",
+  "status": "IMPLEMENTING",
   "activation": "active",
   "scope": "Exclusive Cantiere/App Factory execution, durability, build/review/validation/apply and first-real-app reliability.",
   "shared_engine_policy": "shared_or_control_plane",
-  "state_version": 13,
+  "state_version": 14,
   "updated_at": "2026-10-03",
   "active_claim": {
     "claim_id": "817e5b54f6185a148751",
@@ -24,8 +24,8 @@
       "file:pilialvu75-hue/Ai-orchestrator-riserva:test/app_factory/workshop/workshop_proposal_implementation_runner_test.dart"
     ],
     "started_at": "2026-10-03T17:30:00Z",
-    "heartbeat_at": "2026-10-03T17:30:00Z",
-    "lease_until": "2026-10-04T05:30:00Z",
+    "heartbeat_at": "2026-10-03T17:45:28Z",
+    "lease_until": "2026-10-04T05:45:28Z",
     "lease_hours": 12
   },
   "dependencies": [],
@@ -49,7 +49,7 @@
     "reviewed_by": null,
     "reviewed_at": null
   },
-  "next_action": "Claim one bounded physical Manga Kids retest on the first Android release that contains merge b7abc54; preserve Diagnostics and keep Phase 1 ONLINE open until real-device acceptance.",
+  "next_action": "Complete local format/analyze/focused tests, open one scoped PR, verify all CI before merge and Android build. No physical retest before both fixes ship.",
   "historical_backlog": [
     "Stay in Phase 1 ONLINE until a real generated Android app is physically accepted.",
     "Reproduce the recent manga-drawing app failure from current main with Diagnostics; do not restart generic audits.",
@@ -206,26 +206,39 @@
       ],
       "next_action": "Claim one bounded physical Manga Kids retest on the first Android release that contains merge b7abc54; preserve Diagnostics and keep Phase 1 ONLINE open until real-device acceptance.",
       "kind": "REVIEW_ACCEPTED"
+    },
+    {
+      "seq": 8,
+      "at": "2026-10-03T17:45:28Z",
+      "claim_id": "817e5b54f6185a148751",
+      "work_item": "CANT-11-2964-prompt-budget-planner-recovery",
+      "summary": "Main and recovery branch are identical at 153c367. Engineer does not classify prompt_budget; compact resume fields are unbounded. Final build repair reaches dynamic planner with full repeated payload and up to 12 tasks in 768 output tokens. Implementing both bounded fixes and strict single-object/trailing-comma JSON recovery, with preservation/terminal/identity regression tests.",
+      "decisions": [
+        "Keep Phase 1 ONLINE physically unverified; preserve both persistent Manga Kids projects.",
+        "No raw second planner output is available in the supplied receipt; regressions cover established payload weakness and conservative structural recovery without inventing truncated content."
+      ],
+      "evidence_refs": [
+        "Ai-orchestrator-riserva@153c367437b356ea433a4b5fc64d8d1f565b1656",
+        "physical:Android:+2964:prompt_budget-and-build-planner-invalid-JSON"
+      ],
+      "next_action": "Complete local format/analyze/focused tests, open one scoped PR, verify all CI before merge and Android build. No physical retest before both fixes ship."
     }
   ],
   "last_checkpoint": {
-    "seq": 7,
-    "at": "2026-10-01T14:07:00Z",
-    "claim_id": "cantiere-manga-online-failure-repro-v1-20261001",
-    "work_item": "phase1-online-generated-app-repro-v1",
-    "summary": "Main/Reviewer reviewed merged PR #745. The implementation is bounded to Engineer retry/recovery, both Copilot findings are present in the final diff, and the exact head passed all six relevant CI workflows. Code/review gate accepted; physical Manga Kids acceptance remains outstanding.",
+    "seq": 8,
+    "at": "2026-10-03T17:45:28Z",
+    "claim_id": "817e5b54f6185a148751",
+    "work_item": "CANT-11-2964-prompt-budget-planner-recovery",
+    "summary": "Main and recovery branch are identical at 153c367. Engineer does not classify prompt_budget; compact resume fields are unbounded. Final build repair reaches dynamic planner with full repeated payload and up to 12 tasks in 768 output tokens. Implementing both bounded fixes and strict single-object/trailing-comma JSON recovery, with preservation/terminal/identity regression tests.",
     "decisions": [
-      "Approve PR #745 implementation/review gate.",
-      "Do not mark Cantiere Phase 1 ONLINE complete.",
-      "Release the implementation claim and return Cantiere to READY for a separate physical retest claim."
+      "Keep Phase 1 ONLINE physically unverified; preserve both persistent Manga Kids projects.",
+      "No raw second planner output is available in the supplied receipt; regressions cover established payload weakness and conservative structural recovery without inventing truncated content."
     ],
     "evidence_refs": [
-      "Ai-orchestrator-riserva#745",
-      "merge:b7abc54c02c8d65e8a67532afe6f873674e2c4ed",
-      "CI:36850241169,36850241270,36850241272,36850241205,36850241189,36850241326"
+      "Ai-orchestrator-riserva@153c367437b356ea433a4b5fc64d8d1f565b1656",
+      "physical:Android:+2964:prompt_budget-and-build-planner-invalid-JSON"
     ],
-    "next_action": "Claim one bounded physical Manga Kids retest on the first Android release that contains merge b7abc54; preserve Diagnostics and keep Phase 1 ONLINE open until real-device acceptance.",
-    "kind": "REVIEW_ACCEPTED"
+    "next_action": "Complete local format/analyze/focused tests, open one scoped PR, verify all CI before merge and Android build. No physical retest before both fixes ship."
   },
   "review_history": [
     {

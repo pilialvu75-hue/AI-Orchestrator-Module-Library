@@ -7,7 +7,7 @@
     "policy": "This private repository is the single coordination authority. Chats and agents are workers, not independent sources of truth."
   },
   "updated_at": "2026-10-03",
-  "state_revision": 80,
+  "state_revision": 81,
   "lifecycle_status": "BOOTSTRAP_ACTIVE",
   "roadmap_authority": {
     "library": ".airlab/roadmap.yaml",
@@ -78,11 +78,12 @@
     "invalid_lane_behavior": "ISOLATE_AND_SURFACE_PROJECTION_INCIDENT"
   },
   "projection": {
-    "source_digest": "4af01e26eb9ec30de292e7762cfecb3dc3ba9b7ec606f0e9a6defaf0c4129ab4",
-    "projected_at": "2026-10-03T17:30:00Z",
+    "source_digest": "04a21dea5c06fe077bd6b4145f1d991a0d62a47c8239bebf3ef8d6731ddd46cc",
+    "projected_at": "2026-10-03T17:45:28Z",
     "counts": {
       "BLOCKED": 1,
-      "CLAIMED": 2,
+      "CLAIMED": 1,
+      "IMPLEMENTING": 1,
       "READY": 12
     },
     "active_claims": [
@@ -91,7 +92,7 @@
         "claim_id": "817e5b54f6185a148751",
         "work_item": "CANT-11-2964-prompt-budget-planner-recovery",
         "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
-        "lease_until": "2026-10-04T05:30:00Z",
+        "lease_until": "2026-10-04T05:45:28Z",
         "resource_locks": [
           "branch:pilialvu75-hue/Ai-orchestrator-riserva:cantiere/prompt-budget-planner-recovery-20261003",
           "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/app_factory/workshop/workshop_dynamic_project_planner.dart",
@@ -281,15 +282,15 @@
       },
       {
         "id": "cantiere",
-        "status": "CLAIMED",
+        "status": "IMPLEMENTING",
         "activation": "active",
-        "state_version": 13,
+        "state_version": 14,
         "updated_at": "2026-10-03",
         "active_claim": {
           "claim_id": "817e5b54f6185a148751",
           "work_item": "CANT-11-2964-prompt-budget-planner-recovery",
           "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
-          "lease_until": "2026-10-04T05:30:00Z",
+          "lease_until": "2026-10-04T05:45:28Z",
           "resource_locks": [
             "branch:pilialvu75-hue/Ai-orchestrator-riserva:cantiere/prompt-budget-planner-recovery-20261003",
             "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/app_factory/workshop/workshop_dynamic_project_planner.dart",
@@ -301,7 +302,7 @@
         "reviewer_state": "PENDING",
         "inference_profile_status": null,
         "historical_backlog_count": 3,
-        "next_action": "Claim one bounded physical Manga Kids retest on the first Android release that contains merge b7abc54; preserve Diagnostics and keep Phase 1 ONLINE open until real-device acceptance."
+        "next_action": "Complete local format/analyze/focused tests, open one scoped PR, verify all CI before merge and Android build. No physical retest before both fixes ship."
       },
       {
         "id": "diagnostics",
