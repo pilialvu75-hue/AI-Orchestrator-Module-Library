@@ -1,9 +1,9 @@
 {
   "schema_version": 3,
   "repository": "pilialvu75-hue/AI-Orchestrator-Module-Library",
-  "updated_at": "2026-10-01",
+  "updated_at": "2026-10-03",
   "lifecycle_status": "ACTIVE",
-  "current_phase": "CP-HARDEN-02",
+  "current_phase": "CP-HARDEN-03",
   "completed": [
     "L1",
     "L13",
@@ -12,12 +12,16 @@
     "L18",
     "L20",
     "L21",
-    "L22"
-  ],
-  "next_actions": [
+    "L22",
+    "CP-HARDEN-01",
     "CP-HARDEN-02",
     "CP-HARDEN-04",
-    "CP-HARDEN-07",
+    "CP-HARDEN-07"
+  ],
+  "next_actions": [
+    "CP-HARDEN-03",
+    "CP-HARDEN-06",
+    "CP-HARDEN-05",
     "L19",
     "L14",
     "L16",
@@ -27,7 +31,7 @@
     "L8",
     "L12"
   ],
-  "current_main_before_roadmap_update": "02482cc734385654a26947ab77435ba22ab10581",
+  "current_main_before_roadmap_update": "4881ee752ffa9b604081a693088ccbc2bb5b5132",
   "security_boundary": {
     "untrusted_upstream_execution": "isolated_no_repository_permissions",
     "trusted_promotion": "separate_fresh_writer_runner",
@@ -142,6 +146,7 @@
     },
     "mutation_guard": {
       "status": "ACTIVE",
+      "backlog_id": "CP-HARDEN-01",
       "mode": "TRANSACTIONAL_INBOX",
       "compare_and_swap": true,
       "invalid_request": "QUARANTINE",
@@ -149,10 +154,34 @@
       "projection_incidents": "ISOLATED_PER_LANE",
       "validation": "PR93_CI_PASS_AND_REAL_INBOX_CHECKPOINT_RELEASE_APPLIED"
     },
+    "resource_conflict_locks": {
+      "status": "ACTIVE",
+      "backlog_id": "CP-HARDEN-02",
+      "rule": "Namespaced resource/scope/branch locks supplement work_item uniqueness and preserve safe parallelism for disjoint resources.",
+      "validation": "PR95_CI_PASS"
+    },
+    "automation_registry": {
+      "status": "ACTIVE",
+      "backlog_id": "CP-HARDEN-04",
+      "registry": ".airlab/control-plane/automation-registry.json",
+      "rule": "Mutating automations require canonical owner lane, capability, target-lane and allowed-transition authority; takeover is forbidden.",
+      "validation": "PR96_CI_PASS"
+    },
     "external_wait": {
-      "status": "GAP_REGISTERED",
+      "status": "ACTIVE",
       "backlog_id": "CP-HARDEN-07",
-      "current_workaround": "checkpoint_then_release_claim_when_only_owner_physical_input_remains"
+      "representation": "BLOCKED plus machine-readable wait_state.type WAITING_OWNER or WAITING_EXTERNAL",
+      "enter_operation": "enter_wait",
+      "resume_operation": "resume_wait",
+      "lease_while_waiting": false,
+      "resource_reservations_while_waiting": true,
+      "resume_requires": [
+        "signal_id",
+        "evidence_refs"
+      ],
+      "resume_target": "READY_WITHOUT_AUTO_CLAIM",
+      "stale_reviewer_recovery": "resolve_stale_block restricted to chatgpt:main-reviewer",
+      "validation": "PR97_AND_PR98_CI_PASS_PLUS_REAL_STALE_BLOCK_RECEIPT_APPLIED"
     }
   }
 }
