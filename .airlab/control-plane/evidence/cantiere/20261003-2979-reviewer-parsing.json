@@ -1,0 +1,86 @@
+{
+  "schema_version": 1,
+  "recorded_at": "2026-10-03T20:16:27.246940Z",
+  "host_version": "1.0.12+2979",
+  "host_commit": "99a3a124ab9855aba268c5b19cd330e2dd49b000",
+  "project_id": "project:dashboard:1791058417410553",
+  "request_id": "dashboard:1791058417410553",
+  "physical_result": {
+    "status": "failed",
+    "failure_stage": "parsing",
+    "completed_tasks": 0,
+    "total_tasks": 1,
+    "review_approved": null,
+    "validation_valid": null,
+    "build_status": null,
+    "install_attempted": false,
+    "screenshot_error": "FormatException: Unterminated string (at line 2, character 3)",
+    "screen": "Manga Kids — build repair 1, 75%, Riprova task"
+  },
+  "diagnostic_events": [
+    {
+      "time": "2026-10-03T22:15:31.168049",
+      "event": "INFERENCE_TIMING",
+      "model": "qwen2_5_3b_instruct",
+      "mode": "local",
+      "attempt": 1,
+      "first_content_ms": 18852,
+      "total_ms": 36527,
+      "reported_tokens": 286,
+      "text_chunks": 286,
+      "outcome": "success"
+    },
+    {
+      "time": "2026-10-03T22:15:31.179677",
+      "event": "WORKSHOP_ENGINEER_RETRY",
+      "attempt": 2,
+      "reason": "malformed_output",
+      "terminal": "success",
+      "chars": 1183
+    },
+    {
+      "time": "2026-10-03T22:15:31.180907",
+      "event": "WORKSHOP_ENGINEER_PROMPT",
+      "compact": true,
+      "chars": 3460,
+      "workspace_files": 0,
+      "replaceable_targets": 1,
+      "architect_chars": 900
+    },
+    {
+      "time": "2026-10-03T22:15:53.456915",
+      "event": "INFERENCE_TIMING",
+      "model": "qwen2_5_3b_instruct",
+      "mode": "local",
+      "attempt": 1,
+      "first_content_ms": 11197,
+      "total_ms": 22231,
+      "reported_tokens": 160,
+      "text_chunks": 160,
+      "outcome": "success"
+    },
+    {
+      "time": "2026-10-03T22:16:16.646436",
+      "event": "INFERENCE_TIMING",
+      "model": "qwen2_5_3b_instruct",
+      "mode": "local",
+      "attempt": 1,
+      "first_content_ms": 22982,
+      "total_ms": 23131,
+      "reported_tokens": 2,
+      "text_chunks": 2,
+      "outcome": "success"
+    }
+  ],
+  "findings": [
+    "Engineer structural retry fired at 22:15:31 after 1183 response chars, then successful 160-token inference. Subsequent 2-token inference is consistent with the next Reviewer stage; raw response and stage identity are absent, so attribution is an inference from sequential pipeline ordering, not a captured raw verdict.",
+    "Reviewer _gate.decode FormatException bypasses existing runtime recovery. Review prompt and retry emit batch metadata rejected by stale public projection regex; their absence cannot prove no Reviewer ran.",
+    "+2983 release contains #782 but not this follow-up. Delay physical request until bounded Reviewer recovery is merged and released."
+  ],
+  "preservation": [
+    "project:dashboard:1790801560854814",
+    "project:dashboard:1791001220504803",
+    "project:dashboard:1791058417410553"
+  ],
+  "physical_acceptance": "NOT_VERIFIED"
+}
