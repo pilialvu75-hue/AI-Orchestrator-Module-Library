@@ -1,0 +1,152 @@
+{
+  "schema_version": 1,
+  "request_id": "cantiere-20261003-pr776-release2975-review",
+  "actor_id": "chatgpt:cantiere-work-20261003",
+  "lane_id": "cantiere",
+  "operation": "submit_review",
+  "expected_state_version": 16,
+  "payload": {
+    "packet": {
+      "schema_version": 1,
+      "lane_id": "cantiere",
+      "claim_id": "817e5b54f6185a148751",
+      "work_item": "CANT-11-2964-prompt-budget-planner-recovery",
+      "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
+      "branch": "cantiere/prompt-budget-planner-recovery-20261003",
+      "pull_request": 776,
+      "summary": "Both Android +2964 Cantiere blockers contained in PR #776, merged at f0d1d62878d094aed162aaceadb370946c47a612 under explicit owner mandate after six green workflows and resolved review findings. Physical Phase 1 acceptance remains pending. Android 1.0.12+2975 is published with an uploaded signed APK; tag and main both point to merge f0d1d62878d094aed162aaceadb370946c47a612. First physical action is existing Manga Kids 2/2 project:dashboard:1790801560854814 -> Riprova solo build.",
+      "changes": [
+        "Engineer prompt_budget/context-capacity failures now use one existing compact runtime retry in both normal and resume paths; cancelled/modelUnavailable remain terminal and resume identity is preserved.",
+        "Compact Engineer prompt and resume summaries are bounded; Architect projection remains at 900 characters with head/tail context and workspace limits remain unchanged.",
+        "Production final-build repair planner requests one task from the first inference, bounds repeated diagnostic payload and title, preserves mandatory requirement lists and explicitly rejects oversized scope rather than silently dropping requirements or target paths.",
+        "Planner deterministically recovers only a single unambiguous complete plan object and safe trailing commas. Competing plans, truncated objects and semantically invalid plans remain fail-closed; no retry loop or invented closing content.",
+        "Closed public diagnostic projection exposes bounded planner sizes/recovery reasons and prompt_budget retry reasons without exporting raw model output or private prompt content.",
+        "105 focused regression tests pass, including normal/resume Engineer terminal/failure behavior, production build-repair-to-planner path, strict JSON rejection/recovery, target-scope preservation and public log projection. Two automatic P2 findings fixed and threads resolved."
+      ],
+      "evidence": [
+        {
+          "type": "pull_request",
+          "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/776",
+          "result": "PASS",
+          "note": "Merged; final PR head f0f58ebaae1dc7ebf39a53f6888f6ba11eb75319; both technical review threads resolved before merge."
+        },
+        {
+          "type": "commit",
+          "ref": "f0d1d62878d094aed162aaceadb370946c47a612",
+          "result": "PASS",
+          "note": "Squash merge verified directly on main."
+        },
+        {
+          "type": "test",
+          "ref": "PR #776: 105 focused Flutter tests",
+          "result": "PASS",
+          "note": "29 Engineer normal/resume, 39 planner, 8 existing build repair and 29 diagnostic projection tests; format clean and no analyze errors/warnings."
+        },
+        {
+          "type": "ci",
+          "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/37142504348",
+          "result": "PASS",
+          "note": "Web Cantiere Build on final PR head f0f58eb"
+        },
+        {
+          "type": "ci",
+          "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/37142504329",
+          "result": "PASS",
+          "note": "Cantiere First App APK on final PR head f0f58eb"
+        },
+        {
+          "type": "ci",
+          "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/37142504459",
+          "result": "PASS",
+          "note": "Build Linux Desktop on final PR head f0f58eb"
+        },
+        {
+          "type": "ci",
+          "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/37142504413",
+          "result": "PASS",
+          "note": "Build Windows Desktop on final PR head f0f58eb"
+        },
+        {
+          "type": "ci",
+          "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/37142504555",
+          "result": "PASS",
+          "note": "Build macOS Desktop on final PR head f0f58eb"
+        },
+        {
+          "type": "ci",
+          "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/37142504412",
+          "result": "PASS",
+          "note": "Build & Release APK on final PR head f0f58eb"
+        },
+        {
+          "type": "physical_device",
+          "ref": "Android +2964: project:dashboard:1791001220504803 and project:dashboard:1790801560854814",
+          "result": "INFO",
+          "note": "Owner-supplied physical failure receipts establish the Engineer prompt_budget and final-build invalid-JSON blockers. Raw second planner output was not included."
+        },
+        {
+          "type": "physical_device",
+          "ref": "Phase 1 ONLINE: generated Manga Kids APK build/install/open",
+          "result": "PENDING",
+          "note": "First retry: keep existing 2/2 project:dashboard:1790801560854814; press Riprova solo build once after installing the merged host update. Do not recreate persistent projects."
+        },
+        {
+          "type": "ci",
+          "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/37143551790",
+          "result": "PASS",
+          "note": "Post-merge Build & Release APK #2975 passed, including analyzer/tests, signed APK/AAB, CodeQL, packaged bridge ABI and release publication."
+        },
+        {
+          "type": "other",
+          "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/releases/tag/v1.0.12%2B2975",
+          "result": "PASS",
+          "note": "Published Android 1.0.12+2975; release tag verified as commit f0d1d62878d094aed162aaceadb370946c47a612."
+        },
+        {
+          "type": "other",
+          "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/releases/download/v1.0.12%2B2975/app-release.apk",
+          "result": "PASS",
+          "note": "Uploaded APK 167811598 bytes; GitHub-reported digest sha256:8e2b58a894367cad3041ae9ae36c33a1646e04c0d026725de7cca34a352ecb8e. Workflow embeds GITHUB_SHA as AI_ORCHESTRATOR_COMMIT_SHA. Physical installation/opening remains pending."
+        },
+        {
+          "type": "ci",
+          "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/37143551756",
+          "result": "PASS",
+          "note": "Build Linux Desktop on merged main f0d1d62"
+        },
+        {
+          "type": "ci",
+          "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/37143551843",
+          "result": "PASS",
+          "note": "Build Windows Desktop on merged main f0d1d62"
+        },
+        {
+          "type": "ci",
+          "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/37143551776",
+          "result": "PASS",
+          "note": "Build macOS Desktop on merged main f0d1d62"
+        }
+      ],
+      "known_risks": [
+        "No physical device run has yet verified the merged fixes or produced/installed/opened the generated Manga Kids APK. CI and host APK release are not Phase 1 acceptance.",
+        "The supplied +2964 failure receipt lacks the raw second planner output. Tests cover the verified excessive build-repair payload/task demand and conservative deterministic JSON recovery; no byte-for-byte reproduction claim is made.",
+        "Oversized mandatory planner scope now fails explicitly before inference instead of losing constraints. Truncated, ambiguous or semantically invalid JSON still fails closed after the existing single retry."
+      ],
+      "reviewer_checks": [
+        "Record implementation/release evidence separately from pending physical target acceptance; do not mark CANT-11 or Phase 1 ONLINE complete.",
+        "Verify one compact runtime retry and terminal cancellation/modelUnavailable behavior in both Engineer paths, with stable resume identity.",
+        "Verify mandatory scope and target paths are preserved or explicitly rejected, build repair remains one bounded task, and JSON recovery never completes truncated or competing plans.",
+        "Sync canonical/roadmap continuity to PR #776 and the exact published Android version/merge SHA; retire stale physical-build guidance only for this work item.",
+        "Keep the first physical action confined to existing Manga Kids project:dashboard:1790801560854814 and Riprova solo build; use the 1-task prompt_budget project only if necessary.",
+        "Physical handoff: install host 1.0.12+2975 as an update preserving app data; expected hostCommitSha f0d1d62878d094aed162aaceadb370946c47a612. Open project:dashboard:1790801560854814 (request dashboard:1790801560854814), already 2/2, and press only Riprova solo build. Phase 1 stays open until the generated APK is installed and opened."
+      ],
+      "roadmap_impact": {
+        "material": true,
+        "refs": [
+          ".airlab/public-repositories/Ai-orchestrator-riserva/roadmap.yaml#CANT-11"
+        ]
+      },
+      "submitted_at": "2026-10-03T18:34:36.538Z"
+    }
+  }
+}
