@@ -7,7 +7,7 @@
     "policy": "This private repository is the single coordination authority. Chats and agents are workers, not independent sources of truth."
   },
   "updated_at": "2026-10-03",
-  "state_revision": 90,
+  "state_revision": 91,
   "lifecycle_status": "BOOTSTRAP_ACTIVE",
   "roadmap_authority": {
     "library": ".airlab/roadmap.yaml",
@@ -78,14 +78,26 @@
     "invalid_lane_behavior": "ISOLATE_AND_SURFACE_PROJECTION_INCIDENT"
   },
   "projection": {
-    "source_digest": "c7f5ed8f56c97ec5946672e9a93f27ce462b1d10844ad465930440da16ffbfa9",
-    "projected_at": "2026-10-03T20:27:25Z",
+    "source_digest": "e20ca0008a675f88f6012fdd8e0aa22943fdb2bb7bf734e7fe8c4a0fbf80e25d",
+    "projected_at": "2026-10-03T20:28:18Z",
     "counts": {
       "BLOCKED": 1,
-      "CLAIMED": 1,
-      "READY": 13
+      "CLAIMED": 2,
+      "READY": 12
     },
     "active_claims": [
+      {
+        "lane": "cantiere",
+        "claim_id": "146b5421aff70e95307a",
+        "work_item": "CANT-11-2979-reviewer-json-recovery",
+        "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
+        "lease_until": "2026-10-04T08:28:18Z",
+        "resource_locks": [
+          "branch:pilialvu75-hue/Ai-orchestrator-riserva:cantiere/reviewer-json-recovery-2979-20261003",
+          "contract:cantiere-reviewer-json-recovery",
+          "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/core/diagnostics/public_log_projection.dart"
+        ]
+      },
       {
         "lane": "main-reviewer",
         "claim_id": "b876f0b7e7da3c3fad04",
@@ -111,10 +123,22 @@
         "work_item": "CP-HARDEN-06"
       },
       {
+        "key": "branch:pilialvu75-hue/Ai-orchestrator-riserva:cantiere/reviewer-json-recovery-2979-20261003",
+        "lane": "cantiere",
+        "claim_id": "146b5421aff70e95307a",
+        "work_item": "CANT-11-2979-reviewer-json-recovery"
+      },
+      {
         "key": "contract:canonical-sync-receipts",
         "lane": "main-reviewer",
         "claim_id": "b876f0b7e7da3c3fad04",
         "work_item": "CP-HARDEN-06"
+      },
+      {
+        "key": "contract:cantiere-reviewer-json-recovery",
+        "lane": "cantiere",
+        "claim_id": "146b5421aff70e95307a",
+        "work_item": "CANT-11-2979-reviewer-json-recovery"
       },
       {
         "key": "file:pilialvu75-hue/AI-Orchestrator-Module-Library:.airlab/control-plane/canonical-sync-receipts.json",
@@ -145,6 +169,12 @@
         "lane": "main-reviewer",
         "claim_id": "b876f0b7e7da3c3fad04",
         "work_item": "CP-HARDEN-06"
+      },
+      {
+        "key": "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/core/diagnostics/public_log_projection.dart",
+        "lane": "cantiere",
+        "claim_id": "146b5421aff70e95307a",
+        "work_item": "CANT-11-2979-reviewer-json-recovery"
       }
     ],
     "review_required": [],
@@ -248,11 +278,21 @@
       },
       {
         "id": "cantiere",
-        "status": "READY",
+        "status": "CLAIMED",
         "activation": "active",
-        "state_version": 23,
+        "state_version": 24,
         "updated_at": "2026-10-03",
-        "active_claim": null,
+        "active_claim": {
+          "claim_id": "146b5421aff70e95307a",
+          "work_item": "CANT-11-2979-reviewer-json-recovery",
+          "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
+          "lease_until": "2026-10-04T08:28:18Z",
+          "resource_locks": [
+            "branch:pilialvu75-hue/Ai-orchestrator-riserva:cantiere/reviewer-json-recovery-2979-20261003",
+            "contract:cantiere-reviewer-json-recovery",
+            "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/core/diagnostics/public_log_projection.dart"
+          ]
+        },
         "reviewer_state": "PENDING",
         "inference_profile_status": null,
         "historical_backlog_count": 3,

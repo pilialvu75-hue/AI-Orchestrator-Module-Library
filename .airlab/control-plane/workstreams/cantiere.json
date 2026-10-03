@@ -3,20 +3,36 @@
   "id": "cantiere",
   "title": "Cantiere",
   "role": "worker",
-  "status": "READY",
+  "status": "CLAIMED",
   "activation": "active",
   "scope": "Exclusive Cantiere/App Factory execution, durability, build/review/validation/apply and first-real-app reliability.",
   "shared_engine_policy": "shared_or_control_plane",
-  "state_version": 23,
+  "state_version": 24,
   "updated_at": "2026-10-03",
-  "active_claim": null,
+  "active_claim": {
+    "claim_id": "146b5421aff70e95307a",
+    "owner_lane": "cantiere",
+    "work_item": "CANT-11-2979-reviewer-json-recovery",
+    "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
+    "scope": "Contain +2979 task parsing failure after Engineer recovery: one Reviewer JSON/runtime recovery budget, genuinely compact retry preserving authoritative scope and explicit negative verdicts, regression tests and closed batch-aware diagnostic projection. Keep all persistent projects and Phase 1 physical gate open.",
+    "branch": "cantiere/reviewer-json-recovery-2979-20261003",
+    "resource_locks": [
+      "branch:pilialvu75-hue/Ai-orchestrator-riserva:cantiere/reviewer-json-recovery-2979-20261003",
+      "contract:cantiere-reviewer-json-recovery",
+      "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/core/diagnostics/public_log_projection.dart"
+    ],
+    "started_at": "2026-10-03T20:28:18Z",
+    "heartbeat_at": "2026-10-03T20:28:18Z",
+    "lease_until": "2026-10-04T08:28:18Z",
+    "lease_hours": 12
+  },
   "dependencies": [],
   "roadmap_refs": [
     ".airlab/public-repositories/Ai-orchestrator-riserva/roadmap.yaml#CANT-11"
   ],
   "evidence": [],
   "gates": {
-    "G0_CLAIM": "PENDING",
+    "G0_CLAIM": "PASS",
     "G1_IMPLEMENTATION": "PENDING",
     "G2_STATIC": "PENDING",
     "G3_CI": "PENDING",
