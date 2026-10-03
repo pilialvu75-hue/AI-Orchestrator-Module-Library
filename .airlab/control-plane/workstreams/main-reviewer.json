@@ -3,11 +3,11 @@
   "id": "main-reviewer",
   "title": "Main / Reviewer",
   "role": "reviewer",
-  "status": "CLAIMED",
+  "status": "IMPLEMENTING",
   "activation": "active",
   "scope": "Global architecture, cross-lane review, consolidation, roadmap/state authority and hardening, including target inference profile balance and shared-contract compatibility.",
   "shared_engine_policy": "shared_or_control_plane",
-  "state_version": 38,
+  "state_version": 39,
   "updated_at": "2026-10-03",
   "active_claim": {
     "claim_id": "9843c03194dd90cee085",
@@ -23,8 +23,8 @@
       "file:pilialvu75-hue/AI-Orchestrator-Module-Library:.airlab/state.json"
     ],
     "started_at": "2026-10-03T16:14:17Z",
-    "heartbeat_at": "2026-10-03T16:14:17Z",
-    "lease_until": "2026-10-04T04:14:17Z",
+    "heartbeat_at": "2026-10-03T16:17:59Z",
+    "lease_until": "2026-10-04T04:17:59Z",
     "lease_hours": 12
   },
   "dependencies": [],
@@ -46,7 +46,7 @@
     "reviewed_by": null,
     "reviewed_at": null
   },
-  "next_action": "Record CP-HARDEN-07 completion in canonical roadmap/state, then select the next bounded hardening item without broad AIR-10 rollout.",
+  "next_action": "Release the CP-HARDEN-07 canonical-sync claim, then verify current claims/incidents and acquire a bounded CP-HARDEN-03 claim if still free. Do not broaden AIR-10 yet.",
   "inference_review_policy": {
     "policy": ".airlab/control-plane/inference-policy.json",
     "check": [
@@ -513,29 +513,67 @@
         ".airlab/public-repositories/Ai_orchestrator-prova/roadmap.yaml AIR-10 requires persisted external waits/events"
       ],
       "next_action": "Implement WAITING_OWNER / WAITING_EXTERNAL states, enter_wait/resume_wait inbox operations, wait reservations, projection/validation and dispatcher-safe tests."
+    },
+    {
+      "seq": 14,
+      "at": "2026-10-03T16:17:59Z",
+      "claim_id": "9843c03194dd90cee085",
+      "work_item": "CP-HARDEN-07-canonical-sync",
+      "summary": "CP-HARDEN-07 machine-readable owner/external wait lifecycle is implemented, CI-validated, merged, exercised through a real stale-claim reviewer recovery, and synchronized into authoritative hardening state.",
+      "decisions": [
+        "Represent WAITING_OWNER and WAITING_EXTERNAL as BLOCKED plus a machine-readable wait_state to remain backward-compatible with the canonical status validator.",
+        "A waiting lane has active_claim=null and therefore no lease heartbeat or checkpoint-watch pressure.",
+        "The waiting work_item, branch and resource locks remain reserved so another lane cannot take the same logical resource under a different work-item name.",
+        "resume_wait requires an explicit signal_id and evidence_refs and returns the lane to READY without silently auto-claiming implementation work.",
+        "Parseable malformed extension requests are quarantined fail-closed before specialized processors can abort the serialized reconcile run.",
+        "A CLAIM_LEASE_EXPIRED block may be cleared only through explicit Main/Reviewer stale-block reconciliation matching the exact canonical work_item and claim_id with evidence.",
+        "CP-HARDEN-03 and CP-HARDEN-06 remain bounded hardening work before any broad AIR-10 rollout."
+      ],
+      "evidence_refs": [
+        "AI-Orchestrator-Module-Library#97",
+        "merge:dcd6154b46418f6f807313a1899172b100e575bb",
+        "Validate Module Library run 37135541904",
+        "AI-Orchestrator-Module-Library#98",
+        "merge:6989ee1b01301be0afaeabc82735b559873593e9",
+        "Validate Module Library run 37135938369",
+        ".airlab/control-plane/inbox/processed/main-reviewer-20261003T161500Z-resolve-cp-harden-07-stale.json",
+        "reconcile:a6e97874f2d39a73934617ef9a80f137cc1b338e",
+        "AI-Orchestrator-Module-Library#99",
+        "merge:e23c7d43d462528429a11f54138c0b91fd446541",
+        "Validate Module Library run 37136185391"
+      ],
+      "next_action": "Release the CP-HARDEN-07 canonical-sync claim, then verify current claims/incidents and acquire a bounded CP-HARDEN-03 claim if still free. Do not broaden AIR-10 yet."
     }
   ],
   "last_checkpoint": {
-    "seq": 13,
-    "at": "2026-10-02T17:22:35Z",
-    "claim_id": "0d04c794310516c83f8e",
-    "work_item": "CP-HARDEN-07",
-    "summary": "CP-HARDEN-07 design fixed from current wait evidence: replace release-reason workaround with explicit wait lifecycle states and resume signals.",
+    "seq": 14,
+    "at": "2026-10-03T16:17:59Z",
+    "claim_id": "9843c03194dd90cee085",
+    "work_item": "CP-HARDEN-07-canonical-sync",
+    "summary": "CP-HARDEN-07 machine-readable owner/external wait lifecycle is implemented, CI-validated, merged, exercised through a real stale-claim reviewer recovery, and synchronized into authoritative hardening state.",
     "decisions": [
-      "WAITING_OWNER and WAITING_EXTERNAL are canonical lane statuses with active_claim=null.",
-      "enter_wait consumes a live implementation claim and preserves work_item, prior claim id, checkpoint/resume evidence and resource locks in wait_state.",
-      "Waiting resource locks remain reserved so a differently named claim cannot mutate the frozen candidate while physical/external evidence is pending.",
-      "Duplicate work_item claims are rejected while any lane wait_state reserves that work item.",
-      "Waiting lanes are absent from checkpoint_watch and need no heartbeat/lease.",
-      "resume_wait requires an explicit signal_id plus non-empty evidence refs before returning the lane to READY; it does not auto-claim work.",
-      "Historical WAITING_OWNER_PHYSICAL release events remain valid history but are superseded for new waits."
+      "Represent WAITING_OWNER and WAITING_EXTERNAL as BLOCKED plus a machine-readable wait_state to remain backward-compatible with the canonical status validator.",
+      "A waiting lane has active_claim=null and therefore no lease heartbeat or checkpoint-watch pressure.",
+      "The waiting work_item, branch and resource locks remain reserved so another lane cannot take the same logical resource under a different work-item name.",
+      "resume_wait requires an explicit signal_id and evidence_refs and returns the lane to READY without silently auto-claiming implementation work.",
+      "Parseable malformed extension requests are quarantined fail-closed before specialized processors can abort the serialized reconcile run.",
+      "A CLAIM_LEASE_EXPIRED block may be cleared only through explicit Main/Reviewer stale-block reconciliation matching the exact canonical work_item and claim_id with evidence.",
+      "CP-HARDEN-03 and CP-HARDEN-06 remain bounded hardening work before any broad AIR-10 rollout."
     ],
     "evidence_refs": [
-      "platform-windows-legacy historical release reason WAITING_OWNER_PHYSICAL observed twice",
-      ".airlab/state.json external_wait current_workaround checkpoint_then_release_claim_when_only_owner_physical_input_remains",
-      ".airlab/public-repositories/Ai_orchestrator-prova/roadmap.yaml AIR-10 requires persisted external waits/events"
+      "AI-Orchestrator-Module-Library#97",
+      "merge:dcd6154b46418f6f807313a1899172b100e575bb",
+      "Validate Module Library run 37135541904",
+      "AI-Orchestrator-Module-Library#98",
+      "merge:6989ee1b01301be0afaeabc82735b559873593e9",
+      "Validate Module Library run 37135938369",
+      ".airlab/control-plane/inbox/processed/main-reviewer-20261003T161500Z-resolve-cp-harden-07-stale.json",
+      "reconcile:a6e97874f2d39a73934617ef9a80f137cc1b338e",
+      "AI-Orchestrator-Module-Library#99",
+      "merge:e23c7d43d462528429a11f54138c0b91fd446541",
+      "Validate Module Library run 37136185391"
     ],
-    "next_action": "Implement WAITING_OWNER / WAITING_EXTERNAL states, enter_wait/resume_wait inbox operations, wait reservations, projection/validation and dispatcher-safe tests."
+    "next_action": "Release the CP-HARDEN-07 canonical-sync claim, then verify current claims/incidents and acquire a bounded CP-HARDEN-03 claim if still free. Do not broaden AIR-10 yet."
   },
   "hardening_backlog": [
     {
