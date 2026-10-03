@@ -1,0 +1,19 @@
+{
+  "schema_version": 1,
+  "request_id": "cantiere-20261003-2975-managed-rework-claim",
+  "actor_id": "chatgpt:cantiere-work-20261003",
+  "lane_id": "cantiere",
+  "operation": "claim",
+  "expected_state_version": 18,
+  "payload": {
+    "work_item": "CANT-11-2975-planner-and-managed-restart",
+    "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
+    "scope": "Physical +2975 rework: preserve explicit Workshop generation settings, genuinely compact planner recovery, prevent terminal-project foreground service churn and contain managed promotion failures; regression tests and closed diagnostics. No native llama/Vulkan changes or physical acceptance.",
+    "branch": "cantiere/planner-native-recovery-2975-20261003",
+    "resource_locks": [
+      "contract:cantiere-planner-generation-settings",
+      "contract:android-workshop-project-notifications"
+    ],
+    "lease_hours": 12
+  }
+}
