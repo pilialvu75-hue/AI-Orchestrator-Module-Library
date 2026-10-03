@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "request_id": "cantiere-20261003-2979-reviewer-tests",
+  "actor_id": "chatgpt:cantiere-work-20261003",
+  "lane_id": "cantiere",
+  "operation": "checkpoint",
+  "expected_state_version": 24,
+  "payload": {
+    "claim_id": "146b5421aff70e95307a",
+    "summary": "Implemented one shared runtime/format retry budget per Reviewer batch, genuinely shorter compact retry, explicit 0.1 recovery temperature and closed batch-aware telemetry. 55 focused tests pass including Engineer recovery -> truncated Reviewer -> review/validation and strict failure/cancellation/rejection cases. Analyze: no errors, one pre-existing info. Raw physical output unavailable; Reviewer attribution follows sequential timing and confirmed code gap.",
+    "decisions": [
+      "Preserve all Manga Kids projects; no new physical test before signed release containing this follow-up.",
+      "No native runtime, toolchain or WebSearch changes. Phase 1 remains physically unverified."
+    ],
+    "evidence_refs": [
+      ".airlab/control-plane/evidence/cantiere/20261003-2979-reviewer-parsing.json",
+      "test:55-focused-PASS",
+      "Ai-orchestrator-riserva#782",
+      "v1.0.12+2983"
+    ],
+    "next_action": "Open focused Reviewer recovery PR based on c6133b1, check all CI/review findings, merge under explicit owner mandate and verify signed Android release."
+  }
+}
