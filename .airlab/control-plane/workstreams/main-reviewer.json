@@ -3,35 +3,18 @@
   "id": "main-reviewer",
   "title": "Main / Reviewer",
   "role": "reviewer",
-  "status": "IMPLEMENTING",
+  "status": "READY",
   "activation": "active",
   "scope": "Global architecture, cross-lane review, consolidation, roadmap/state authority and hardening, including target inference profile balance and shared-contract compatibility.",
   "shared_engine_policy": "shared_or_control_plane",
-  "state_version": 39,
+  "state_version": 40,
   "updated_at": "2026-10-03",
-  "active_claim": {
-    "claim_id": "9843c03194dd90cee085",
-    "owner_lane": "main-reviewer",
-    "work_item": "CP-HARDEN-07-canonical-sync",
-    "repository": "pilialvu75-hue/AI-Orchestrator-Module-Library",
-    "scope": "Synchronize authoritative hardening state after CP-HARDEN-07 and record exact merged evidence; do not broaden AIR-10.",
-    "branch": "main-reviewer/cp-harden-07-canonical-sync",
-    "resource_locks": [
-      "branch:pilialvu75-hue/AI-Orchestrator-Module-Library:main-reviewer/cp-harden-07-canonical-sync",
-      "contract:control-plane-hardening-state",
-      "file:pilialvu75-hue/AI-Orchestrator-Module-Library:.airlab/decisions.md",
-      "file:pilialvu75-hue/AI-Orchestrator-Module-Library:.airlab/state.json"
-    ],
-    "started_at": "2026-10-03T16:14:17Z",
-    "heartbeat_at": "2026-10-03T16:17:59Z",
-    "lease_until": "2026-10-04T04:17:59Z",
-    "lease_hours": 12
-  },
+  "active_claim": null,
   "dependencies": [],
   "roadmap_refs": [],
   "evidence": [],
   "gates": {
-    "G0_CLAIM": "PASS",
+    "G0_CLAIM": "PENDING",
     "G1_IMPLEMENTATION": "PENDING",
     "G2_STATIC": "PENDING",
     "G3_CI": "PENDING",
@@ -700,6 +683,13 @@
         "Validate Module Library run 37135938369"
       ],
       "at": "2026-10-03T16:12:28Z"
+    },
+    {
+      "type": "CLAIM_RELEASED",
+      "claim_id": "9843c03194dd90cee085",
+      "work_item": "CP-HARDEN-07-canonical-sync",
+      "reason": "CP-HARDEN-07 implementation, real stale-block recovery and authoritative hardening-state synchronization are complete through merged PRs #97, #98 and #99. Next bounded priority is CP-HARDEN-03 after a fresh conflict/incident check; AIR-10 remains constrained.",
+      "at": "2026-10-03T16:18:21Z"
     }
   ],
   "stale_block_history": [
