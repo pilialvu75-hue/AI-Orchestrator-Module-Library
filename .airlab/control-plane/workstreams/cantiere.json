@@ -3,20 +3,36 @@
   "id": "cantiere",
   "title": "Cantiere",
   "role": "worker",
-  "status": "READY",
+  "status": "CLAIMED",
   "activation": "active",
   "scope": "Exclusive Cantiere/App Factory execution, durability, build/review/validation/apply and first-real-app reliability.",
   "shared_engine_policy": "shared_or_control_plane",
-  "state_version": 18,
+  "state_version": 19,
   "updated_at": "2026-10-03",
-  "active_claim": null,
+  "active_claim": {
+    "claim_id": "2582374b5524b1b7c29d",
+    "owner_lane": "cantiere",
+    "work_item": "CANT-11-2975-planner-and-managed-restart",
+    "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
+    "scope": "Physical +2975 rework: preserve explicit Workshop generation settings, genuinely compact planner recovery, prevent terminal-project foreground service churn and contain managed promotion failures; regression tests and closed diagnostics. No native llama/Vulkan changes or physical acceptance.",
+    "branch": "cantiere/planner-native-recovery-2975-20261003",
+    "resource_locks": [
+      "branch:pilialvu75-hue/Ai-orchestrator-riserva:cantiere/planner-native-recovery-2975-20261003",
+      "contract:android-workshop-project-notifications",
+      "contract:cantiere-planner-generation-settings"
+    ],
+    "started_at": "2026-10-03T19:12:37Z",
+    "heartbeat_at": "2026-10-03T19:12:37Z",
+    "lease_until": "2026-10-04T07:12:37Z",
+    "lease_hours": 12
+  },
   "dependencies": [],
   "roadmap_refs": [
     ".airlab/public-repositories/Ai-orchestrator-riserva/roadmap.yaml#CANT-11"
   ],
   "evidence": [],
   "gates": {
-    "G0_CLAIM": "PENDING",
+    "G0_CLAIM": "PASS",
     "G1_IMPLEMENTATION": "PENDING",
     "G2_STATIC": "PENDING",
     "G3_CI": "PENDING",
