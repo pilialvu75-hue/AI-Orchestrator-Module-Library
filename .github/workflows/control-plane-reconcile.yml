@@ -7,6 +7,7 @@ on:
       - ".airlab/control-plane/workstreams/**"
       - ".airlab/control-plane/inbox/pending/**"
       - ".airlab/control-plane/inference-policy.json"
+      - ".airlab/control-plane/canonical-sync-receipts.json"
       - ".airlab/roadmap.yaml"
       - ".airlab/public-repositories/**/roadmap.yaml"
   schedule:
@@ -54,12 +55,22 @@ jobs:
             python tools/control_plane_reviewer_reconcile.py process
 
             # CP-HARDEN-07: consume enter_wait/resume_wait first, then quarantine
-            # ordinary claim requests that collide with wait reservations. This keeps
-            # the existing inbox/manager stable while extending the same serialized CAS path.
+            # ordinary claim requests that collide with wait reservations.
             python tools/control_plane_wait_inbox.py process
+
+            # CP-HARDEN-06: capture authoritative pre-sync roadmap digests at material
+            # review acceptance and validate evidence-backed before/after receipts before
+            # canonical_sync_complete can reach the ordinary mutation processor.
+            python tools/canonical_sync_receipts.py prepare
+
             python tools/control_plane_inbox.py process
+
+            # Finalize a receipt only after the ordinary inbox proves the matching request
+            # was APPLIED and the lane actually reached G7_CANONICAL_SYNC=PASS.
+            python tools/canonical_sync_receipts.py finalize
             python tools/control_plane_manager.py reconcile
             python tools/control_plane_wait_inbox.py validate
+            python tools/canonical_sync_receipts.py check
 
             if git diff --quiet; then
               echo "Canonical state already current."
@@ -70,7 +81,8 @@ jobs:
             git add \
               .airlab/control-plane/canonical-state.json \
               .airlab/control-plane/workstreams/ \
-              .airlab/control-plane/inbox/
+              .airlab/control-plane/inbox/ \
+              .airlab/control-plane/canonical-sync-receipts.json
             git commit -m "control-plane: apply guarded mutations and reconcile"
 
             if git push origin HEAD:main; then
@@ -79,6 +91,7 @@ jobs:
               # and the workflow still fails closed instead of hiding all healthy lanes.
               python tools/validate_control_plane.py
               python tools/control_plane_wait_inbox.py validate
+              python tools/canonical_sync_receipts.py check
               exit 0
             fi
 
