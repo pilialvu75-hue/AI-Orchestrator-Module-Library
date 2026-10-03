@@ -1,0 +1,49 @@
+{
+  "schema_version": 1,
+  "build": "1.0.12+2975",
+  "host_commit": "f0d1d62878d094aed162aaceadb370946c47a612",
+  "physical_acceptance": false,
+  "source": "https://github.com/pilialvu75-hue/Ai-orchestrator-diagnostics/releases/download/diagnostics-v1-6bd1447f-5fda-4171-84b4-c1ff56b154cf/diag-crash-91dfbdcf75fdef5568add863b6330f0bc266391edf39387a7b4e41134236c075.txt",
+  "observations": [
+    {
+      "local_time": "2026-10-03T20:48:23",
+      "attempt": 1,
+      "build_repair": true,
+      "prompt_chars": 2722,
+      "output_chars": 468,
+      "reported_tokens": 91,
+      "terminal": "success",
+      "rejection": "incomplete_json"
+    },
+    {
+      "local_time": "2026-10-03T20:48:48",
+      "attempt": 2,
+      "build_repair": true,
+      "prompt_chars": 2722,
+      "output_chars": 475,
+      "reported_tokens": 98,
+      "terminal": "success",
+      "rejection": "incomplete_json"
+    },
+    {
+      "utc_time": "2026-10-03T18:49:02.778Z",
+      "android_reason_code": 4,
+      "meaning": "managed_crash",
+      "rss_kb": 2587693
+    },
+    {
+      "local_time": "2026-10-03T20:49:24",
+      "event": "new_process_boot"
+    }
+  ],
+  "limits": [
+    "Public diagnostics do not include raw planner text or the Java exception; byte-exact truncation cause and managed crash stack remain unknown.",
+    "Two incomplete planner outputs and a subsequent managed crash are physical failures, not acceptance.",
+    "No evidence justifies llama.cpp/Vulkan changes. Preserve persistent Manga Kids projects."
+  ],
+  "verified_code_findings": [
+    "InferenceService replaces Workshop maxTokens/temperature with model defaults.",
+    "Build-repair first and retry prompt are identical in +2975.",
+    "Restored terminal notifications begin then finish foreground lease; concurrent sync calls are not serialized."
+  ]
+}
