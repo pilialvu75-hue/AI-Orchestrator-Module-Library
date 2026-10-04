@@ -3,29 +3,13 @@
   "id": "cantiere",
   "title": "Cantiere",
   "role": "worker",
-  "status": "IMPLEMENTING",
+  "status": "BLOCKED",
   "activation": "active",
   "scope": "Exclusive Cantiere/App Factory execution, durability, build/review/validation/apply and first-real-app reliability.",
   "shared_engine_policy": "shared_or_control_plane",
-  "state_version": 26,
-  "updated_at": "2026-10-03",
-  "active_claim": {
-    "claim_id": "146b5421aff70e95307a",
-    "owner_lane": "cantiere",
-    "work_item": "CANT-11-2979-reviewer-json-recovery",
-    "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
-    "scope": "Contain +2979 task parsing failure after Engineer recovery: one Reviewer JSON/runtime recovery budget, genuinely compact retry preserving authoritative scope and explicit negative verdicts, regression tests and closed batch-aware diagnostic projection. Keep all persistent projects and Phase 1 physical gate open.",
-    "branch": "cantiere/reviewer-json-recovery-2979-20261003",
-    "resource_locks": [
-      "branch:pilialvu75-hue/Ai-orchestrator-riserva:cantiere/reviewer-json-recovery-2979-20261003",
-      "contract:cantiere-reviewer-json-recovery",
-      "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/core/diagnostics/public_log_projection.dart"
-    ],
-    "started_at": "2026-10-03T20:28:18Z",
-    "heartbeat_at": "2026-10-03T20:43:58Z",
-    "lease_until": "2026-10-04T08:43:58Z",
-    "lease_hours": 12
-  },
+  "state_version": 27,
+  "updated_at": "2026-10-04",
+  "active_claim": null,
   "dependencies": [],
   "roadmap_refs": [
     ".airlab/public-repositories/Ai-orchestrator-riserva/roadmap.yaml#CANT-11"
@@ -452,6 +436,18 @@
       "work_item": "CANT-11-2975-planner-and-managed-restart",
       "reason": "PR #782 merged c6133b15f4be44b4e648c91aa312427edfb1f919 and signed Android +2983 published; all six PR workflows and all post-merge workflows passed. New physical +2979 receipt (project:dashboard:1791058417410553) shows parsing failure after Engineer malformed-output retry; read-only investigation identifies Reviewer malformed JSON bypassing compact retry and dropped review telemetry. Supersede implementation claim with a bounded Reviewer recovery claim; Phase 1 remains physically unverified.",
       "at": "2026-10-03T20:27:25Z"
+    },
+    {
+      "type": "CLAIM_LEASE_EXPIRED",
+      "claim_id": "146b5421aff70e95307a",
+      "work_item": "CANT-11-2979-reviewer-json-recovery",
+      "resource_locks": [
+        "branch:pilialvu75-hue/Ai-orchestrator-riserva:cantiere/reviewer-json-recovery-2979-20261003",
+        "contract:cantiere-reviewer-json-recovery",
+        "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/core/diagnostics/public_log_projection.dart"
+      ],
+      "lease_until": "2026-10-04T08:43:58Z",
+      "detected_at": "2026-10-04T09:28:51Z"
     }
   ],
   "review_packet_history": [
@@ -540,5 +536,18 @@
       "archived_at": "2026-10-01T15:20:00Z",
       "archive_reason": "Legacy malformed packet from pilot incident; superseded by reviewer repair PR #88 and schema hardening PR #89."
     }
-  ]
+  ],
+  "block_reason": {
+    "code": "CLAIM_LEASE_EXPIRED",
+    "work_item": "CANT-11-2979-reviewer-json-recovery",
+    "claim_id": "146b5421aff70e95307a",
+    "resource_locks": [
+      "branch:pilialvu75-hue/Ai-orchestrator-riserva:cantiere/reviewer-json-recovery-2979-20261003",
+      "contract:cantiere-reviewer-json-recovery",
+      "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/core/diagnostics/public_log_projection.dart"
+    ],
+    "lease_until": "2026-10-04T08:43:58Z",
+    "detected_at": "2026-10-04T09:28:51Z",
+    "review_required": true
+  }
 }
