@@ -3,33 +3,13 @@
   "id": "main-reviewer",
   "title": "Main / Reviewer",
   "role": "reviewer",
-  "status": "CLAIMED",
+  "status": "BLOCKED",
   "activation": "active",
   "scope": "Global architecture, cross-lane review, consolidation, roadmap/state authority and hardening, including target inference profile balance and shared-contract compatibility.",
   "shared_engine_policy": "shared_or_control_plane",
-  "state_version": 49,
-  "updated_at": "2026-10-03",
-  "active_claim": {
-    "claim_id": "b876f0b7e7da3c3fad04",
-    "owner_lane": "main-reviewer",
-    "work_item": "CP-HARDEN-06",
-    "repository": "pilialvu75-hue/AI-Orchestrator-Module-Library",
-    "scope": "Enforce evidence-backed before/after roadmap sync receipts around the transactional inbox and fail validation if material G7 PASS lacks a finalized receipt.",
-    "branch": "main-reviewer/cp-harden-06-sync-receipts",
-    "resource_locks": [
-      "branch:pilialvu75-hue/AI-Orchestrator-Module-Library:main-reviewer/cp-harden-06-sync-receipts",
-      "contract:canonical-sync-receipts",
-      "file:pilialvu75-hue/AI-Orchestrator-Module-Library:.airlab/control-plane/canonical-sync-receipts.json",
-      "file:pilialvu75-hue/AI-Orchestrator-Module-Library:.github/workflows/control-plane-reconcile.yml",
-      "file:pilialvu75-hue/AI-Orchestrator-Module-Library:.github/workflows/validate-library.yml",
-      "file:pilialvu75-hue/AI-Orchestrator-Module-Library:tests/test_canonical_sync_receipts.py",
-      "file:pilialvu75-hue/AI-Orchestrator-Module-Library:tools/canonical_sync_receipts.py"
-    ],
-    "started_at": "2026-10-03T16:32:56Z",
-    "heartbeat_at": "2026-10-03T16:32:56Z",
-    "lease_until": "2026-10-04T04:32:56Z",
-    "lease_hours": 12
-  },
+  "state_version": 50,
+  "updated_at": "2026-10-04",
+  "active_claim": null,
   "dependencies": [],
   "roadmap_refs": [],
   "evidence": [],
@@ -766,6 +746,22 @@
       "work_item": "CP-HARDEN-06",
       "reason": "Pre-implementation design review found a smaller CP-HARDEN-06 boundary: enforce evidence receipts as a serialized inbox guard plus post-state validator, rather than invasive manager changes. No implementation files were modified under this claim. Release and reacquire exact resource locks before writing.",
       "at": "2026-10-03T16:32:32Z"
+    },
+    {
+      "type": "CLAIM_LEASE_EXPIRED",
+      "claim_id": "b876f0b7e7da3c3fad04",
+      "work_item": "CP-HARDEN-06",
+      "resource_locks": [
+        "branch:pilialvu75-hue/AI-Orchestrator-Module-Library:main-reviewer/cp-harden-06-sync-receipts",
+        "contract:canonical-sync-receipts",
+        "file:pilialvu75-hue/AI-Orchestrator-Module-Library:.airlab/control-plane/canonical-sync-receipts.json",
+        "file:pilialvu75-hue/AI-Orchestrator-Module-Library:.github/workflows/control-plane-reconcile.yml",
+        "file:pilialvu75-hue/AI-Orchestrator-Module-Library:.github/workflows/validate-library.yml",
+        "file:pilialvu75-hue/AI-Orchestrator-Module-Library:tests/test_canonical_sync_receipts.py",
+        "file:pilialvu75-hue/AI-Orchestrator-Module-Library:tools/canonical_sync_receipts.py"
+      ],
+      "lease_until": "2026-10-04T04:32:56Z",
+      "detected_at": "2026-10-04T04:39:54Z"
     }
   ],
   "stale_block_history": [
@@ -802,5 +798,22 @@
         "at": "2026-10-03T16:12:28Z"
       }
     }
-  ]
+  ],
+  "block_reason": {
+    "code": "CLAIM_LEASE_EXPIRED",
+    "work_item": "CP-HARDEN-06",
+    "claim_id": "b876f0b7e7da3c3fad04",
+    "resource_locks": [
+      "branch:pilialvu75-hue/AI-Orchestrator-Module-Library:main-reviewer/cp-harden-06-sync-receipts",
+      "contract:canonical-sync-receipts",
+      "file:pilialvu75-hue/AI-Orchestrator-Module-Library:.airlab/control-plane/canonical-sync-receipts.json",
+      "file:pilialvu75-hue/AI-Orchestrator-Module-Library:.github/workflows/control-plane-reconcile.yml",
+      "file:pilialvu75-hue/AI-Orchestrator-Module-Library:.github/workflows/validate-library.yml",
+      "file:pilialvu75-hue/AI-Orchestrator-Module-Library:tests/test_canonical_sync_receipts.py",
+      "file:pilialvu75-hue/AI-Orchestrator-Module-Library:tools/canonical_sync_receipts.py"
+    ],
+    "lease_until": "2026-10-04T04:32:56Z",
+    "detected_at": "2026-10-04T04:39:54Z",
+    "review_required": true
+  }
 }
