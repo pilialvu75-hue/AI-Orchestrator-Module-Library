@@ -3,12 +3,12 @@
   "id": "cantiere",
   "title": "Cantiere",
   "role": "worker",
-  "status": "BLOCKED",
+  "status": "READY",
   "activation": "active",
   "scope": "Exclusive Cantiere/App Factory execution, durability, build/review/validation/apply and first-real-app reliability.",
   "shared_engine_policy": "shared_or_control_plane",
-  "state_version": 27,
-  "updated_at": "2026-10-04",
+  "state_version": 28,
+  "updated_at": "2026-10-07",
   "active_claim": null,
   "dependencies": [],
   "roadmap_refs": [
@@ -31,7 +31,7 @@
     "reviewed_by": null,
     "reviewed_at": null
   },
-  "next_action": "Finish all CI/review checks, merge under owner mandate if no substantive findings, verify main and signed release. Phase 1 physical APK install/open remains pending.",
+  "next_action": "Return Cantiere to READY so its worker can create a new bounded claim and submit a valid review handoff for PR #783. Keep Phase 1 device acceptance unverified.",
   "historical_backlog": [
     "Stay in Phase 1 ONLINE until a real generated Android app is physically accepted.",
     "Reproduce the recent manga-drawing app failure from current main with Diagnostics; do not restart generic audits.",
@@ -448,6 +448,23 @@
       ],
       "lease_until": "2026-10-04T08:43:58Z",
       "detected_at": "2026-10-04T09:28:51Z"
+    },
+    {
+      "type": "STALE_BLOCK_RESOLVED_BY_REVIEWER",
+      "claim_id": "146b5421aff70e95307a",
+      "work_item": "CANT-11-2979-reviewer-json-recovery",
+      "summary": "Resolve the expired Cantiere claim block after PR #783 merged without a completed canonical review handoff.",
+      "evidence_refs": [
+        "Ai-orchestrator-riserva#783",
+        "merge:72a8a255bc1ffd43d7b6538a3018e3426794cdaa",
+        "CI:37152170715",
+        "CI:37152170737",
+        "CI:37152170721",
+        "CI:37152170753",
+        "CI:37152170784",
+        "CI:37152170709"
+      ],
+      "at": "2026-10-07T20:06:04Z"
     }
   ],
   "review_packet_history": [
@@ -537,17 +554,37 @@
       "archive_reason": "Legacy malformed packet from pilot incident; superseded by reviewer repair PR #88 and schema hardening PR #89."
     }
   ],
-  "block_reason": {
-    "code": "CLAIM_LEASE_EXPIRED",
-    "work_item": "CANT-11-2979-reviewer-json-recovery",
-    "claim_id": "146b5421aff70e95307a",
-    "resource_locks": [
-      "branch:pilialvu75-hue/Ai-orchestrator-riserva:cantiere/reviewer-json-recovery-2979-20261003",
-      "contract:cantiere-reviewer-json-recovery",
-      "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/core/diagnostics/public_log_projection.dart"
-    ],
-    "lease_until": "2026-10-04T08:43:58Z",
-    "detected_at": "2026-10-04T09:28:51Z",
-    "review_required": true
-  }
+  "stale_block_history": [
+    {
+      "code": "CLAIM_LEASE_EXPIRED",
+      "work_item": "CANT-11-2979-reviewer-json-recovery",
+      "claim_id": "146b5421aff70e95307a",
+      "resource_locks": [
+        "branch:pilialvu75-hue/Ai-orchestrator-riserva:cantiere/reviewer-json-recovery-2979-20261003",
+        "contract:cantiere-reviewer-json-recovery",
+        "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/core/diagnostics/public_log_projection.dart"
+      ],
+      "lease_until": "2026-10-04T08:43:58Z",
+      "detected_at": "2026-10-04T09:28:51Z",
+      "review_required": true,
+      "resolved_at": "2026-10-07T20:06:04Z",
+      "resolution": {
+        "type": "STALE_BLOCK_RESOLVED_BY_REVIEWER",
+        "claim_id": "146b5421aff70e95307a",
+        "work_item": "CANT-11-2979-reviewer-json-recovery",
+        "summary": "Resolve the expired Cantiere claim block after PR #783 merged without a completed canonical review handoff.",
+        "evidence_refs": [
+          "Ai-orchestrator-riserva#783",
+          "merge:72a8a255bc1ffd43d7b6538a3018e3426794cdaa",
+          "CI:37152170715",
+          "CI:37152170737",
+          "CI:37152170721",
+          "CI:37152170753",
+          "CI:37152170784",
+          "CI:37152170709"
+        ],
+        "at": "2026-10-07T20:06:04Z"
+      }
+    }
+  ]
 }

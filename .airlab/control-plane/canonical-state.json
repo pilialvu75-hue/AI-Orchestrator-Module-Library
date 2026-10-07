@@ -6,8 +6,8 @@
     "owner_lane": "main-reviewer",
     "policy": "This private repository is the single coordination authority. Chats and agents are workers, not independent sources of truth."
   },
-  "updated_at": "2026-10-04",
-  "state_revision": 96,
+  "updated_at": "2026-10-07",
+  "state_revision": 97,
   "lifecycle_status": "BOOTSTRAP_ACTIVE",
   "roadmap_authority": {
     "library": ".airlab/roadmap.yaml",
@@ -78,32 +78,16 @@
     "invalid_lane_behavior": "ISOLATE_AND_SURFACE_PROJECTION_INCIDENT"
   },
   "projection": {
-    "source_digest": "d7261854c85d2407f5390c149aa9cf9bed842cf92847a90d93ce8dc4e235d915",
-    "projected_at": "2026-10-04T09:28:51Z",
+    "source_digest": "88a6fcfb878e0fd8b6dc87a10c82181c03a35edf8597f0da18733f0e1556e7f8",
+    "projected_at": "2026-10-07T20:06:04Z",
     "counts": {
-      "BLOCKED": 3,
-      "READY": 12
+      "BLOCKED": 2,
+      "READY": 13
     },
     "active_claims": [],
     "active_resource_locks": [],
     "review_required": [],
     "blocked": [
-      {
-        "lane": "cantiere",
-        "reason": {
-          "code": "CLAIM_LEASE_EXPIRED",
-          "work_item": "CANT-11-2979-reviewer-json-recovery",
-          "claim_id": "146b5421aff70e95307a",
-          "resource_locks": [
-            "branch:pilialvu75-hue/Ai-orchestrator-riserva:cantiere/reviewer-json-recovery-2979-20261003",
-            "contract:cantiere-reviewer-json-recovery",
-            "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/core/diagnostics/public_log_projection.dart"
-          ],
-          "lease_until": "2026-10-04T08:43:58Z",
-          "detected_at": "2026-10-04T09:28:51Z",
-          "review_required": true
-        }
-      },
       {
         "lane": "main-reviewer",
         "reason": {
@@ -212,15 +196,15 @@
       },
       {
         "id": "cantiere",
-        "status": "BLOCKED",
+        "status": "READY",
         "activation": "active",
-        "state_version": 27,
-        "updated_at": "2026-10-04",
+        "state_version": 28,
+        "updated_at": "2026-10-07",
         "active_claim": null,
         "reviewer_state": "PENDING",
         "inference_profile_status": null,
         "historical_backlog_count": 3,
-        "next_action": "Finish all CI/review checks, merge under owner mandate if no substantive findings, verify main and signed release. Phase 1 physical APK install/open remains pending."
+        "next_action": "Return Cantiere to READY so its worker can create a new bounded claim and submit a valid review handoff for PR #783. Keep Phase 1 device acceptance unverified."
       },
       {
         "id": "diagnostics",

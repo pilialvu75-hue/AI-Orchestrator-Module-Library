@@ -1,0 +1,12 @@
+{
+  "schema_version": 1,
+  "request_id": "cantiere-20261007T200500Z-resolve-stale-block-2979",
+  "status": "APPLIED",
+  "processed_at": "2026-10-07T20:06:04Z",
+  "source_file": "cantiere-20261007T200500Z-resolve-stale-block-2979.json",
+  "lane_id": "cantiere",
+  "operation": "resolve_stale_block",
+  "actor_id": "chatgpt:main-reviewer",
+  "errors": [],
+  "result_state_version": 28
+}
