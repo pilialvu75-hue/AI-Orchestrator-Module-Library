@@ -610,6 +610,19 @@ def review_inbox(root: Path = ROOT) -> list[dict[str, Any]]:
     return sorted(items, key=lambda item: str(item.get("lane_id") or ""))
 
 
+def _review_packet_digest(packet: dict[str, Any]) -> str:
+    """Stable fingerprint of the entire claim-bound review packet."""
+    canonical = json.dumps(packet, sort_keys=True, ensure_ascii=False, separators=(",", ":"))
+    return hashlib.sha256(canonical.encode("utf-8")).hexdigest()
+
+
+def _reset_review_gate_attestation(lane: dict[str, Any]) -> None:
+    # Review evidence belongs to one exact packet, never to a claim forever.
+    for gate in ("G1_IMPLEMENTATION", "G2_STATIC", "G3_CI", "G4_INTEGRATION"):
+        lane.setdefault("gates", {})[gate] = "PENDING"
+    lane.pop("current_gate_attestation", None)
+
+
 def _review_gate_passed(value: Any) -> bool:
     return isinstance(value, str) and value.startswith("PASS")
 
@@ -644,6 +657,14 @@ def review_accept(
         raise ValueError(
             "cannot accept review while required gates are not PASS: " + ", ".join(missing_gates)
         )
+    # A new evidence attestation must apply to the exact packet being accepted.
+    # Do not accept prior-iteration passes after rework or packet replacement.
+    history = lane.get("gate_evidence_history") or []
+    if history:
+        current = lane.get("current_gate_attestation") or {}
+        if (current.get("claim_id") != claim_data.get("claim_id")
+                or current.get("packet_sha256") != _review_packet_digest(packet)):
+            raise ValueError("review gate evidence is stale for current review packet")
     if not summary.strip():
         raise ValueError("review summary is required")
     if not next_action.strip():
@@ -802,6 +823,7 @@ def review_rework(
         "summary": reason.strip(),
     })
     lane["review_history"] = lane["review_history"][-20:]
+    _reset_review_gate_attestation(lane)
     lane["status"] = "IMPLEMENTING"
     lane["updated_at"] = _date(now)
     lane["state_version"] = int(lane.get("state_version", 0)) + 1
@@ -838,6 +860,7 @@ def submit_review(
 
     packet = _load(packet_path)
     _validate_review_packet(lane_id, claim_data, packet)
+    _reset_review_gate_attestation(lane)
 
     final_next_action = "Main/Reviewer must inspect the review_packet, linked evidence and required gates before promotion or rework."
     checkpoints = lane.setdefault("checkpoints", [])
