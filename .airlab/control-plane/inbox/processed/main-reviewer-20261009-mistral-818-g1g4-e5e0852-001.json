@@ -1,0 +1,12 @@
+{
+  "schema_version": 1,
+  "request_id": "main-reviewer-20261009-mistral-818-g1g4-e5e0852-001",
+  "status": "APPLIED",
+  "processed_at": "2026-10-09T13:39:38Z",
+  "source_file": "main-reviewer-20261009-mistral-818-g1g4-e5e0852-001.json",
+  "lane_id": "runtime-core",
+  "operation": "record_review_gates",
+  "actor_id": "chatgpt:main-reviewer",
+  "errors": [],
+  "result_state_version": 14
+}
