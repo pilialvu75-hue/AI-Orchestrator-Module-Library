@@ -1,0 +1,20 @@
+{
+  "schema_version": 1,
+  "request_id": "runtime-core-20261009T064500Z-mistral-429-001",
+  "submitted_at": "2026-10-09T06:45:00Z",
+  "actor_id": "chatgpt:runtime-core-mistral-429",
+  "lane_id": "runtime-core",
+  "operation": "claim",
+  "expected_state_version": 3,
+  "payload": {
+    "work_item": "cloud-mistral-429-structured-backoff",
+    "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
+    "scope": "Fix Cloud runtime preservation of structured Mistral HTTP 429/quota/Retry-After and add safe regression tests; no billing/credential changes",
+    "branch": "runtime-core/mistral-429-structured-backoff",
+    "resource_locks": [
+      "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/core/runtime/inference/cloud_runtime_provider.dart",
+      "file:pilialvu75-hue/Ai-orchestrator-riserva:test/core/runtime/inference/cloud_runtime_provider_test.dart",
+      "contract:cloud-provider-error-backoff"
+    ]
+  }
+}
