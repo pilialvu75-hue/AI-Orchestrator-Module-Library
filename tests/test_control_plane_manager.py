@@ -571,6 +571,10 @@ class ControlPlaneManagerTests(unittest.TestCase):
         reviewed_lane = json.loads(lane_path.read_text(encoding="utf-8"))
         for gate in ("G1_IMPLEMENTATION", "G2_STATIC", "G3_CI", "G4_INTEGRATION"):
             reviewed_lane["gates"][gate] = "PASS"
+        reviewed_lane["current_gate_attestation"] = {
+            "claim_id": claim_id,
+            "packet_sha256": manager._review_packet_digest(reviewed_lane["review_packet"]),
+        }
         lane_path.write_text(json.dumps(reviewed_lane, indent=2) + "\n", encoding="utf-8")
         return claim_id, now
 
@@ -625,6 +629,19 @@ class ControlPlaneManagerTests(unittest.TestCase):
                 now=now + timedelta(hours=2),
             )
 
+    def test_review_accept_rejects_unattested_g1_g4_pass_values(self):
+        _, now = self._submit_ready_review("issue-no-attestation")
+        lane_path = self.root / ".airlab/control-plane/workstreams/cantiere.json"
+        lane = json.loads(lane_path.read_text(encoding="utf-8"))
+        lane.pop("current_gate_attestation", None)
+        lane_path.write_text(json.dumps(lane, indent=2) + "\n", encoding="utf-8")
+        with self.assertRaisesRegex(ValueError, "missing or stale"):
+            manager.review_accept(
+                "cantiere", summary="must reject orphan gate PASS",
+                next_action="require fresh attestation", root=self.root,
+                now=now + timedelta(hours=2),
+            )
+
     def test_review_accept_releases_claim_and_returns_ready(self):
         claim_id, now = self._submit_ready_review("issue-accept")
         manager.review_accept(
@@ -655,6 +672,7 @@ class ControlPlaneManagerTests(unittest.TestCase):
             "material": True,
             "refs": [".airlab/roadmap.yaml#L1"],
         }
+        lane["current_gate_attestation"]["packet_sha256"] = manager._review_packet_digest(lane["review_packet"])
         path.write_text(json.dumps(lane, indent=2) + "\n", encoding="utf-8")
         manager.review_accept(
             "cantiere",
@@ -685,6 +703,7 @@ class ControlPlaneManagerTests(unittest.TestCase):
             "material": True,
             "refs": [".airlab/roadmap.yaml#L1"],
         }
+        lane["current_gate_attestation"]["packet_sha256"] = manager._review_packet_digest(lane["review_packet"])
         path.write_text(json.dumps(lane, indent=2) + "\n", encoding="utf-8")
         manager.review_accept(
             "cantiere",
