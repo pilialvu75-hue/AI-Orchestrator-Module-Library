@@ -3,11 +3,11 @@
   "id": "platform-android",
   "title": "Android",
   "role": "worker",
-  "status": "CLAIMED",
+  "status": "IMPLEMENTING",
   "activation": "active",
   "scope": "Android packaging, permissions, hardware/runtime adapters, UI integration and releases using shared orchestration/contracts with target-optimized inference.",
   "shared_engine_policy": "adapter_only",
-  "state_version": 4,
+  "state_version": 5,
   "updated_at": "2026-10-09",
   "active_claim": {
     "claim_id": "9e07c5e78988b4d33ee9",
@@ -22,8 +22,8 @@
       "scope:android-phi-memory-chat-recovery"
     ],
     "started_at": "2026-10-09T23:15:16Z",
-    "heartbeat_at": "2026-10-09T23:15:16Z",
-    "lease_until": "2026-10-10T11:15:16Z",
+    "heartbeat_at": "2026-10-09T23:16:55Z",
+    "lease_until": "2026-10-10T11:16:55Z",
     "lease_hours": 12
   },
   "dependencies": [],
@@ -48,7 +48,7 @@
     "reviewed_by": null,
     "reviewed_at": null
   },
-  "next_action": "After the relevant runtime change is on main, perform target-runtime evidence on Galaxy S24 FE and update the Android inference profile.",
+  "next_action": "Validate UI regression tests, publish focused PR, preserve critical guard and collect further evidence before GPU policy changes.",
   "inference_profile_policy": "target_owned_benchmark_gated",
   "inference_profile": {
     "status": "ACTIVE_BENCHMARKING",
@@ -66,5 +66,35 @@
     "Galaxy S24 FE is the current physical inference/thermal benchmark target.",
     "Heavy 6.7B/7B models must remain safely skipped when RAM headroom is insufficient.",
     "Repeat Vulkan 0/10/99 only with the thermal-gate fix present and capture end receipt/Diagnostics."
-  ]
+  ],
+  "checkpoints": [
+    {
+      "seq": 1,
+      "at": "2026-10-09T23:16:55Z",
+      "claim_id": "9e07c5e78988b4d33ee9",
+      "work_item": "phi-critical-memory-chat-recovery",
+      "summary": "Confirmed S24 FE build3069 critical-memory cancellation at 2026-10-09 23:36:58: 33 GPU layers,1536/64/16,trim15 despite 1.17GB available. UI repeats runtime snackbar on every state and lacks close control; implementing bounded deduplicated notices. Memory safety remains open.",
+      "decisions": [
+        "Do not suppress Android trim15 or infer GPU memory use from host RSS. No memory-stability claim."
+      ],
+      "evidence_refs": [
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-diagnostics/releases/tag/diagnostics-v1-6bd1447f-5fda-4171-84b4-c1ff56b154cf"
+      ],
+      "next_action": "Validate UI regression tests, publish focused PR, preserve critical guard and collect further evidence before GPU policy changes."
+    }
+  ],
+  "last_checkpoint": {
+    "seq": 1,
+    "at": "2026-10-09T23:16:55Z",
+    "claim_id": "9e07c5e78988b4d33ee9",
+    "work_item": "phi-critical-memory-chat-recovery",
+    "summary": "Confirmed S24 FE build3069 critical-memory cancellation at 2026-10-09 23:36:58: 33 GPU layers,1536/64/16,trim15 despite 1.17GB available. UI repeats runtime snackbar on every state and lacks close control; implementing bounded deduplicated notices. Memory safety remains open.",
+    "decisions": [
+      "Do not suppress Android trim15 or infer GPU memory use from host RSS. No memory-stability claim."
+    ],
+    "evidence_refs": [
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-diagnostics/releases/tag/diagnostics-v1-6bd1447f-5fda-4171-84b4-c1ff56b154cf"
+    ],
+    "next_action": "Validate UI regression tests, publish focused PR, preserve critical guard and collect further evidence before GPU policy changes."
+  }
 }
