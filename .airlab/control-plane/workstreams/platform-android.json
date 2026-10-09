@@ -7,7 +7,7 @@
   "activation": "active",
   "scope": "Android packaging, permissions, hardware/runtime adapters, UI integration and releases using shared orchestration/contracts with target-optimized inference.",
   "shared_engine_policy": "adapter_only",
-  "state_version": 5,
+  "state_version": 6,
   "updated_at": "2026-10-09",
   "active_claim": {
     "claim_id": "9e07c5e78988b4d33ee9",
@@ -22,8 +22,8 @@
       "scope:android-phi-memory-chat-recovery"
     ],
     "started_at": "2026-10-09T23:15:16Z",
-    "heartbeat_at": "2026-10-09T23:16:55Z",
-    "lease_until": "2026-10-10T11:16:55Z",
+    "heartbeat_at": "2026-10-09T23:19:26Z",
+    "lease_until": "2026-10-10T11:19:26Z",
     "lease_hours": 12
   },
   "dependencies": [],
@@ -48,7 +48,7 @@
     "reviewed_by": null,
     "reviewed_at": null
   },
-  "next_action": "Validate UI regression tests, publish focused PR, preserve critical guard and collect further evidence before GPU policy changes.",
+  "next_action": "Read PR823 CI, fix any failures, submit claim-bound review packet. Keep physical S24 FE UI and memory acceptance open; do not suppress critical-memory guard.",
   "inference_profile_policy": "target_owned_benchmark_gated",
   "inference_profile": {
     "status": "ACTIVE_BENCHMARKING",
@@ -81,20 +81,36 @@
         "https://github.com/pilialvu75-hue/Ai-orchestrator-diagnostics/releases/tag/diagnostics-v1-6bd1447f-5fda-4171-84b4-c1ff56b154cf"
       ],
       "next_action": "Validate UI regression tests, publish focused PR, preserve critical guard and collect further evidence before GPU policy changes."
+    },
+    {
+      "seq": 2,
+      "at": "2026-10-09T23:19:26Z",
+      "claim_id": "9e07c5e78988b4d33ee9",
+      "work_item": "phi-critical-memory-chat-recovery",
+      "summary": "Draft PR823 implements bounded deduplicated dismissible runtime notices with three widget regressions. Dart formatting/parser and diff whitespace checks passed. Local Flutter bootstrap blocked by automatic security review due to attempted cloud metadata access; no test PASS claim. CI is the safe validation path. Memory cancellation at trim15 remains unresolved.",
+      "decisions": [
+        "No change to Vulkan/llama or resource guard. UI fix is not a memory stability fix."
+      ],
+      "evidence_refs": [
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/823",
+        "commit:0310505583593bc0659638af815fdbe2715ee5c4"
+      ],
+      "next_action": "Read PR823 CI, fix any failures, submit claim-bound review packet. Keep physical S24 FE UI and memory acceptance open; do not suppress critical-memory guard."
     }
   ],
   "last_checkpoint": {
-    "seq": 1,
-    "at": "2026-10-09T23:16:55Z",
+    "seq": 2,
+    "at": "2026-10-09T23:19:26Z",
     "claim_id": "9e07c5e78988b4d33ee9",
     "work_item": "phi-critical-memory-chat-recovery",
-    "summary": "Confirmed S24 FE build3069 critical-memory cancellation at 2026-10-09 23:36:58: 33 GPU layers,1536/64/16,trim15 despite 1.17GB available. UI repeats runtime snackbar on every state and lacks close control; implementing bounded deduplicated notices. Memory safety remains open.",
+    "summary": "Draft PR823 implements bounded deduplicated dismissible runtime notices with three widget regressions. Dart formatting/parser and diff whitespace checks passed. Local Flutter bootstrap blocked by automatic security review due to attempted cloud metadata access; no test PASS claim. CI is the safe validation path. Memory cancellation at trim15 remains unresolved.",
     "decisions": [
-      "Do not suppress Android trim15 or infer GPU memory use from host RSS. No memory-stability claim."
+      "No change to Vulkan/llama or resource guard. UI fix is not a memory stability fix."
     ],
     "evidence_refs": [
-      "https://github.com/pilialvu75-hue/Ai-orchestrator-diagnostics/releases/tag/diagnostics-v1-6bd1447f-5fda-4171-84b4-c1ff56b154cf"
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/823",
+      "commit:0310505583593bc0659638af815fdbe2715ee5c4"
     ],
-    "next_action": "Validate UI regression tests, publish focused PR, preserve critical guard and collect further evidence before GPU policy changes."
+    "next_action": "Read PR823 CI, fix any failures, submit claim-bound review packet. Keep physical S24 FE UI and memory acceptance open; do not suppress critical-memory guard."
   }
 }

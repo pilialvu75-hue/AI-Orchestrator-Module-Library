@@ -1,0 +1,12 @@
+{
+  "schema_version": 1,
+  "request_id": "android-20261009-phi-recovery-pr823",
+  "status": "APPLIED",
+  "processed_at": "2026-10-09T23:19:26Z",
+  "source_file": "android-20261009-phi-recovery-pr823.json",
+  "lane_id": "platform-android",
+  "operation": "checkpoint",
+  "actor_id": "chatgpt:platform-android",
+  "errors": [],
+  "result_state_version": 6
+}

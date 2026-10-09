@@ -7,7 +7,7 @@
     "policy": "This private repository is the single coordination authority. Chats and agents are workers, not independent sources of truth."
   },
   "updated_at": "2026-10-09",
-  "state_revision": 118,
+  "state_revision": 119,
   "lifecycle_status": "BOOTSTRAP_ACTIVE",
   "roadmap_authority": {
     "library": ".airlab/roadmap.yaml",
@@ -78,8 +78,8 @@
     "invalid_lane_behavior": "ISOLATE_AND_SURFACE_PROJECTION_INCIDENT"
   },
   "projection": {
-    "source_digest": "e5aa492d7dec6a8e67af7e06ebb2c6cae68fedf96eb8ef3cad17a7401346d239",
-    "projected_at": "2026-10-09T23:16:55Z",
+    "source_digest": "ec6244322b3a7ea4fc1f09fc3ea57f92768373787a10be5b54fddf94fc8e204e",
+    "projected_at": "2026-10-09T23:19:26Z",
     "counts": {
       "BLOCKED": 1,
       "IMPLEMENTING": 1,
@@ -92,7 +92,7 @@
         "claim_id": "9e07c5e78988b4d33ee9",
         "work_item": "phi-critical-memory-chat-recovery",
         "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
-        "lease_until": "2026-10-10T11:16:55Z",
+        "lease_until": "2026-10-10T11:19:26Z",
         "resource_locks": [
           "branch:pilialvu75-hue/Ai-orchestrator-riserva:fix/android-phi-memory-chat-recovery",
           "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/features/chat/presentation/pages/chat_page.dart",
@@ -310,13 +310,13 @@
         "id": "platform-android",
         "status": "IMPLEMENTING",
         "activation": "active",
-        "state_version": 5,
+        "state_version": 6,
         "updated_at": "2026-10-09",
         "active_claim": {
           "claim_id": "9e07c5e78988b4d33ee9",
           "work_item": "phi-critical-memory-chat-recovery",
           "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
-          "lease_until": "2026-10-10T11:16:55Z",
+          "lease_until": "2026-10-10T11:19:26Z",
           "resource_locks": [
             "branch:pilialvu75-hue/Ai-orchestrator-riserva:fix/android-phi-memory-chat-recovery",
             "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/features/chat/presentation/pages/chat_page.dart",
@@ -326,7 +326,7 @@
         "reviewer_state": "PENDING",
         "inference_profile_status": "ACTIVE_BENCHMARKING",
         "historical_backlog_count": 3,
-        "next_action": "Validate UI regression tests, publish focused PR, preserve critical guard and collect further evidence before GPU policy changes."
+        "next_action": "Read PR823 CI, fix any failures, submit claim-bound review packet. Keep physical S24 FE UI and memory acceptance open; do not suppress critical-memory guard."
       },
       {
         "id": "platform-ios",
