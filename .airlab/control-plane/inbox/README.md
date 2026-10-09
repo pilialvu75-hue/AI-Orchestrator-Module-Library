@@ -48,6 +48,8 @@ records exact evidence refs per gate, hashes the complete claim-bound review
 packet and upgrades **only** G1–G4 to PASS. Any `review_rework` or subsequent
 `submit_review` resets the four passes and invalidates the current attestation.
 `review_accept` rejects a stale packet fingerprint before approval.
+`review_accept` requires a fresh claim- and packet-bound gate attestation even
+when G1–G4 happen to contain PASS; bare historical PASS values are insufficient.
 G5 physical/runtime acceptance, G6 independent review and G7 canonical sync
 are never modified by this operation. Automated actors and worker chats
 cannot use it. Invalid actor, missing evidence, wrong indices, or stale version
