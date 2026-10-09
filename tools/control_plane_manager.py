@@ -657,14 +657,12 @@ def review_accept(
         raise ValueError(
             "cannot accept review while required gates are not PASS: " + ", ".join(missing_gates)
         )
-    # A new evidence attestation must apply to the exact packet being accepted.
-    # Do not accept prior-iteration passes after rework or packet replacement.
-    history = lane.get("gate_evidence_history") or []
-    if history:
-        current = lane.get("current_gate_attestation") or {}
-        if (current.get("claim_id") != claim_data.get("claim_id")
-                or current.get("packet_sha256") != _review_packet_digest(packet)):
-            raise ValueError("review gate evidence is stale for current review packet")
+    # Every gate pass must have an evidence attestation for this exact packet.
+    # Old gate values alone are not an acceptable substitute for new evidence.
+    current = lane.get("current_gate_attestation") or {}
+    if (current.get("claim_id") != claim_data.get("claim_id")
+            or current.get("packet_sha256") != _review_packet_digest(packet)):
+        raise ValueError("review gate evidence is missing or stale for current review packet")
     if not summary.strip():
         raise ValueError("review summary is required")
     if not next_action.strip():
