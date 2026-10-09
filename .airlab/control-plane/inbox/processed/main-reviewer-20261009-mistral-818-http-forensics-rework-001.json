@@ -1,0 +1,12 @@
+{
+  "schema_version": 1,
+  "request_id": "main-reviewer-20261009-mistral-818-http-forensics-rework-001",
+  "status": "APPLIED",
+  "processed_at": "2026-10-09T12:15:38Z",
+  "source_file": "main-reviewer-20261009-mistral-818-http-forensics-rework-001.json",
+  "lane_id": "runtime-core",
+  "operation": "review_rework",
+  "actor_id": "chatgpt:main-reviewer",
+  "errors": [],
+  "result_state_version": 10
+}

@@ -3,11 +3,11 @@
   "id": "runtime-core",
   "title": "Runtime Core",
   "role": "worker",
-  "status": "REVIEW_REQUIRED",
+  "status": "IMPLEMENTING",
   "activation": "active",
   "scope": "Shared inference contract, capability/model routing semantics, context, streaming, cancellation, errors, model-profile schema and lifecycle. Target platforms own their benchmark-gated LLM/backend/runtime profiles.",
   "shared_engine_policy": "shared_or_control_plane",
-  "state_version": 9,
+  "state_version": 10,
   "updated_at": "2026-10-09",
   "active_claim": {
     "claim_id": "5615786649acca3a5846",
@@ -96,21 +96,21 @@
   ],
   "gates": {
     "G0_CLAIM": "PASS",
-    "G1_IMPLEMENTATION": "PASS",
-    "G2_STATIC": "PASS",
-    "G3_CI": "PASS",
-    "G4_INTEGRATION": "PASS",
+    "G1_IMPLEMENTATION": "PENDING",
+    "G2_STATIC": "PENDING",
+    "G3_CI": "PENDING",
+    "G4_INTEGRATION": "PENDING",
     "G5_TARGET_RUNTIME": "NOT_APPLICABLE_UNTIL_RUNTIME_CHANGE",
     "G6_REVIEWER": "PENDING",
     "G7_CANONICAL_SYNC": "PENDING"
   },
   "reviewer": {
     "required": true,
-    "state": "PENDING",
+    "state": "CHANGES_REQUESTED",
     "reviewed_by": "main-reviewer",
-    "reviewed_at": "2026-10-09T11:20:03Z"
+    "reviewed_at": "2026-10-09T12:15:38Z"
   },
-  "next_action": "Main/Reviewer must inspect the review_packet, linked evidence and required gates before promotion or rework.",
+  "next_action": "Within existing cloud-mistral-429 claim add bounded no-secret HTTP 429 receipt to cloud routing + strict public projection + regression tests; rerun CI and Codex review; resubmit updated claim-bound packet, no paid fallback, no key change.",
   "inference_ownership": {
     "owns": [
       "shared inference API",
@@ -206,29 +206,33 @@
       ],
       "next_action": "Main/Reviewer must inspect the review_packet, linked evidence and required gates before promotion or rework.",
       "kind": "REVIEW_HANDOFF"
+    },
+    {
+      "seq": 5,
+      "at": "2026-10-09T12:15:38Z",
+      "claim_id": "5615786649acca3a5846",
+      "work_item": "cloud-mistral-429-structured-backoff",
+      "summary": "Physical S24 FE Mistral Cloud request still fails as rate_limit at 2026-10-09T14:09 local, 0 generated tokens, 319 ms. Existing G1-G4 CI proves error handling but not original 429 root cause; CLOSED Cloud routing logs hide upstream HTTP status, selected model class and Retry-After. Review requires bounded privacy-safe HTTP error metadata with explicit allowlist and public export projection tests before resubmission.",
+      "decisions": [
+        "Main/Reviewer requested bounded rework."
+      ],
+      "evidence_refs": [],
+      "next_action": "Within existing cloud-mistral-429 claim add bounded no-secret HTTP 429 receipt to cloud routing + strict public projection + regression tests; rerun CI and Codex review; resubmit updated claim-bound packet, no paid fallback, no key change.",
+      "kind": "REVIEW_REWORK"
     }
   ],
   "last_checkpoint": {
-    "seq": 4,
-    "at": "2026-10-09T11:41:14Z",
+    "seq": 5,
+    "at": "2026-10-09T12:15:38Z",
     "claim_id": "5615786649acca3a5846",
     "work_item": "cloud-mistral-429-structured-backoff",
-    "summary": "Bounded Mistral Cloud error-handling fix implemented on PR #818: structured quota/rate-limit differentiation, HTTP status-safe errors and provider Retry-After cooldown. All 6 CI workflows green; CodeQL/Flutter analyze/Flutter tests passed; Codex review completed without findings visible. No live API-key response or physical app test yet; ready for Main/Reviewer assessment, not VERIFIED or DONE.",
-    "decisions": [],
-    "evidence_refs": [
-      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/818",
-      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/37895917143",
-      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/37895917030",
-      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/37895917410",
-      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/37895917193",
-      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/37895917291",
-      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/37895917243",
-      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/818#issuecomment-6075995146",
-      "Mistral Studio Playground screenshot, user supplied 2026-10-09",
-      "Ai Orchestrator Mistral API key direct smoke test"
+    "summary": "Physical S24 FE Mistral Cloud request still fails as rate_limit at 2026-10-09T14:09 local, 0 generated tokens, 319 ms. Existing G1-G4 CI proves error handling but not original 429 root cause; CLOSED Cloud routing logs hide upstream HTTP status, selected model class and Retry-After. Review requires bounded privacy-safe HTTP error metadata with explicit allowlist and public export projection tests before resubmission.",
+    "decisions": [
+      "Main/Reviewer requested bounded rework."
     ],
-    "next_action": "Main/Reviewer must inspect the review_packet, linked evidence and required gates before promotion or rework.",
-    "kind": "REVIEW_HANDOFF"
+    "evidence_refs": [],
+    "next_action": "Within existing cloud-mistral-429 claim add bounded no-secret HTTP 429 receipt to cloud routing + strict public projection + regression tests; rerun CI and Codex review; resubmit updated claim-bound packet, no paid fallback, no key change.",
+    "kind": "REVIEW_REWORK"
   },
   "review_packet": {
     "schema_version": 1,
@@ -335,34 +339,16 @@
       "work_item": "cloud-mistral-429-structured-backoff",
       "decision": "CHANGES_REQUESTED",
       "summary": "G1-G4 remain PENDING, so review acceptance is not permitted for PR 818."
+    },
+    {
+      "reviewed_at": "2026-10-09T12:15:38Z",
+      "reviewed_by": "main-reviewer",
+      "claim_id": "5615786649acca3a5846",
+      "work_item": "cloud-mistral-429-structured-backoff",
+      "decision": "CHANGES_REQUESTED",
+      "summary": "Physical S24 FE Mistral Cloud request still fails as rate_limit at 2026-10-09T14:09 local, 0 generated tokens, 319 ms. Existing G1-G4 CI proves error handling but not original 429 root cause; CLOSED Cloud routing logs hide upstream HTTP status, selected model class and Retry-After. Review requires bounded privacy-safe HTTP error metadata with explicit allowlist and public export projection tests before resubmission."
     }
   ],
-  "current_gate_attestation": {
-    "at": "2026-10-09T11:42:01Z",
-    "claim_id": "5615786649acca3a5846",
-    "packet_sha256": "5d3b8c451ddcfc3fcbae59ed674509ef0a393e49555339dbe82abb8f9adaba98",
-    "reviewed_by": "main-reviewer",
-    "summary": "Reviewed Mistral runtime diff PR #818 at afc69b5; bounded implementation and clean Codex review. Exact-head CI confirms Flutter analyze/tests, Android signed APK/AAB, first-app acceptance smoke, web contract and Windows/Linux/macOS builds. G4 passes for CI integration/smoke only; live Mistral BYOK API call and target physical validation are explicitly pending and must not be inferred.",
-    "evidence_refs_by_gate": {
-      "G1_IMPLEMENTATION": [
-        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/818"
-      ],
-      "G2_STATIC": [
-        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/37895917143"
-      ],
-      "G3_CI": [
-        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/37895917143"
-      ],
-      "G4_INTEGRATION": [
-        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/37895917143",
-        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/37895917030",
-        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/37895917410",
-        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/37895917193",
-        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/37895917291",
-        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/37895917243"
-      ]
-    }
-  },
   "gate_evidence_history": [
     {
       "at": "2026-10-09T11:42:01Z",
