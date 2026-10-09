@@ -3,12 +3,12 @@
   "id": "main-reviewer",
   "title": "Main / Reviewer",
   "role": "reviewer",
-  "status": "BLOCKED",
+  "status": "READY",
   "activation": "active",
   "scope": "Global architecture, cross-lane review, consolidation, roadmap/state authority and hardening, including target inference profile balance and shared-contract compatibility.",
   "shared_engine_policy": "shared_or_control_plane",
-  "state_version": 50,
-  "updated_at": "2026-10-04",
+  "state_version": 51,
+  "updated_at": "2026-10-09",
   "active_claim": null,
   "dependencies": [],
   "roadmap_refs": [],
@@ -29,7 +29,7 @@
     "reviewed_by": null,
     "reviewed_at": null
   },
-  "next_action": "Release this state-sync claim, verify current canonical conflicts/incidents, then acquire bounded CP-HARDEN-06 evidence-backed canonical sync receipts work if still free.",
+  "next_action": "Review runtime-core PR #818 handoff and reconcile required evidence gates. Do not merge before canonical reviewer gate and preserve distinction between CI success and live Mistral BYOK validation.",
   "inference_review_policy": {
     "policy": ".airlab/control-plane/inference-policy.json",
     "check": [
@@ -762,6 +762,19 @@
       ],
       "lease_until": "2026-10-04T04:32:56Z",
       "detected_at": "2026-10-04T04:39:54Z"
+    },
+    {
+      "type": "STALE_BLOCK_RESOLVED_BY_REVIEWER",
+      "claim_id": "b876f0b7e7da3c3fad04",
+      "work_item": "CP-HARDEN-06",
+      "summary": "Stale CP-HARDEN-06 claim is reconciled against merged evidence: canonical sync receipts were implemented and merged in Library PR #102 on Oct 3 before the claim expired Oct 4. No outstanding CP-HARDEN-06 implementation is reclaimed; preserve stale-block history and return reviewer lane to READY to process bounded worker review queue.",
+      "evidence_refs": [
+        "https://github.com/pilialvu75-hue/AI-Orchestrator-Module-Library/pull/102",
+        "merge:6c0e093580e63e5fa3331d8e8983ce9e17b677b1",
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/818",
+        "canonical-state.json state_revision:101"
+      ],
+      "at": "2026-10-09T11:17:53Z"
     }
   ],
   "stale_block_history": [
@@ -797,23 +810,37 @@
         ],
         "at": "2026-10-03T16:12:28Z"
       }
+    },
+    {
+      "code": "CLAIM_LEASE_EXPIRED",
+      "work_item": "CP-HARDEN-06",
+      "claim_id": "b876f0b7e7da3c3fad04",
+      "resource_locks": [
+        "branch:pilialvu75-hue/AI-Orchestrator-Module-Library:main-reviewer/cp-harden-06-sync-receipts",
+        "contract:canonical-sync-receipts",
+        "file:pilialvu75-hue/AI-Orchestrator-Module-Library:.airlab/control-plane/canonical-sync-receipts.json",
+        "file:pilialvu75-hue/AI-Orchestrator-Module-Library:.github/workflows/control-plane-reconcile.yml",
+        "file:pilialvu75-hue/AI-Orchestrator-Module-Library:.github/workflows/validate-library.yml",
+        "file:pilialvu75-hue/AI-Orchestrator-Module-Library:tests/test_canonical_sync_receipts.py",
+        "file:pilialvu75-hue/AI-Orchestrator-Module-Library:tools/canonical_sync_receipts.py"
+      ],
+      "lease_until": "2026-10-04T04:32:56Z",
+      "detected_at": "2026-10-04T04:39:54Z",
+      "review_required": true,
+      "resolved_at": "2026-10-09T11:17:53Z",
+      "resolution": {
+        "type": "STALE_BLOCK_RESOLVED_BY_REVIEWER",
+        "claim_id": "b876f0b7e7da3c3fad04",
+        "work_item": "CP-HARDEN-06",
+        "summary": "Stale CP-HARDEN-06 claim is reconciled against merged evidence: canonical sync receipts were implemented and merged in Library PR #102 on Oct 3 before the claim expired Oct 4. No outstanding CP-HARDEN-06 implementation is reclaimed; preserve stale-block history and return reviewer lane to READY to process bounded worker review queue.",
+        "evidence_refs": [
+          "https://github.com/pilialvu75-hue/AI-Orchestrator-Module-Library/pull/102",
+          "merge:6c0e093580e63e5fa3331d8e8983ce9e17b677b1",
+          "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/818",
+          "canonical-state.json state_revision:101"
+        ],
+        "at": "2026-10-09T11:17:53Z"
+      }
     }
-  ],
-  "block_reason": {
-    "code": "CLAIM_LEASE_EXPIRED",
-    "work_item": "CP-HARDEN-06",
-    "claim_id": "b876f0b7e7da3c3fad04",
-    "resource_locks": [
-      "branch:pilialvu75-hue/AI-Orchestrator-Module-Library:main-reviewer/cp-harden-06-sync-receipts",
-      "contract:canonical-sync-receipts",
-      "file:pilialvu75-hue/AI-Orchestrator-Module-Library:.airlab/control-plane/canonical-sync-receipts.json",
-      "file:pilialvu75-hue/AI-Orchestrator-Module-Library:.github/workflows/control-plane-reconcile.yml",
-      "file:pilialvu75-hue/AI-Orchestrator-Module-Library:.github/workflows/validate-library.yml",
-      "file:pilialvu75-hue/AI-Orchestrator-Module-Library:tests/test_canonical_sync_receipts.py",
-      "file:pilialvu75-hue/AI-Orchestrator-Module-Library:tools/canonical_sync_receipts.py"
-    ],
-    "lease_until": "2026-10-04T04:32:56Z",
-    "detected_at": "2026-10-04T04:39:54Z",
-    "review_required": true
-  }
+  ]
 }

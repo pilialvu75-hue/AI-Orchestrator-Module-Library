@@ -7,7 +7,7 @@
     "policy": "This private repository is the single coordination authority. Chats and agents are workers, not independent sources of truth."
   },
   "updated_at": "2026-10-09",
-  "state_revision": 101,
+  "state_revision": 102,
   "lifecycle_status": "BOOTSTRAP_ACTIVE",
   "roadmap_authority": {
     "library": ".airlab/roadmap.yaml",
@@ -78,11 +78,11 @@
     "invalid_lane_behavior": "ISOLATE_AND_SURFACE_PROJECTION_INCIDENT"
   },
   "projection": {
-    "source_digest": "4b6e8e4d1407c290580bb62cf087c43e8e0a215c29d0c5c5970cf94e54766c56",
-    "projected_at": "2026-10-09T11:12:04Z",
+    "source_digest": "8cdfe2859ca29e477df81099a80e556a33f1af5f85df047a488bdaf2c1fdc95b",
+    "projected_at": "2026-10-09T11:17:53Z",
     "counts": {
-      "BLOCKED": 2,
-      "READY": 12,
+      "BLOCKED": 1,
+      "READY": 13,
       "REVIEW_REQUIRED": 1
     },
     "active_claims": [
@@ -130,26 +130,6 @@
       "runtime-core"
     ],
     "blocked": [
-      {
-        "lane": "main-reviewer",
-        "reason": {
-          "code": "CLAIM_LEASE_EXPIRED",
-          "work_item": "CP-HARDEN-06",
-          "claim_id": "b876f0b7e7da3c3fad04",
-          "resource_locks": [
-            "branch:pilialvu75-hue/AI-Orchestrator-Module-Library:main-reviewer/cp-harden-06-sync-receipts",
-            "contract:canonical-sync-receipts",
-            "file:pilialvu75-hue/AI-Orchestrator-Module-Library:.airlab/control-plane/canonical-sync-receipts.json",
-            "file:pilialvu75-hue/AI-Orchestrator-Module-Library:.github/workflows/control-plane-reconcile.yml",
-            "file:pilialvu75-hue/AI-Orchestrator-Module-Library:.github/workflows/validate-library.yml",
-            "file:pilialvu75-hue/AI-Orchestrator-Module-Library:tests/test_canonical_sync_receipts.py",
-            "file:pilialvu75-hue/AI-Orchestrator-Module-Library:tools/canonical_sync_receipts.py"
-          ],
-          "lease_until": "2026-10-04T04:32:56Z",
-          "detected_at": "2026-10-04T04:39:54Z",
-          "review_required": true
-        }
-      },
       {
         "lane": "platform-windows-legacy",
         "reason": {
@@ -274,15 +254,15 @@
       },
       {
         "id": "main-reviewer",
-        "status": "BLOCKED",
+        "status": "READY",
         "activation": "active",
-        "state_version": 50,
-        "updated_at": "2026-10-04",
+        "state_version": 51,
+        "updated_at": "2026-10-09",
         "active_claim": null,
         "reviewer_state": "AUTHORITY",
         "inference_profile_status": null,
         "historical_backlog_count": 0,
-        "next_action": "Release this state-sync claim, verify current canonical conflicts/incidents, then acquire bounded CP-HARDEN-06 evidence-backed canonical sync receipts work if still free."
+        "next_action": "Review runtime-core PR #818 handoff and reconcile required evidence gates. Do not merge before canonical reviewer gate and preserve distinction between CI success and live Mistral BYOK validation."
       },
       {
         "id": "platform-android",
