@@ -3,11 +3,11 @@
   "id": "runtime-core",
   "title": "Runtime Core",
   "role": "worker",
-  "status": "REVIEW_REQUIRED",
+  "status": "IMPLEMENTING",
   "activation": "active",
   "scope": "Shared inference contract, capability/model routing semantics, context, streaming, cancellation, errors, model-profile schema and lifecycle. Target platforms own their benchmark-gated LLM/backend/runtime profiles.",
   "shared_engine_policy": "shared_or_control_plane",
-  "state_version": 6,
+  "state_version": 7,
   "updated_at": "2026-10-09",
   "active_claim": {
     "claim_id": "5615786649acca3a5846",
@@ -106,11 +106,11 @@
   },
   "reviewer": {
     "required": true,
-    "state": "PENDING",
-    "reviewed_by": null,
-    "reviewed_at": null
+    "state": "CHANGES_REQUESTED",
+    "reviewed_by": "main-reviewer",
+    "reviewed_at": "2026-10-09T11:20:03Z"
   },
-  "next_action": "Main/Reviewer must inspect the review_packet, linked evidence and required gates before promotion or rework.",
+  "next_action": "Record evidence-backed G1-G4 PASS through the authorized process and resubmit the review handoff. Keep runtime validation pending.",
   "inference_ownership": {
     "owns": [
       "shared inference API",
@@ -171,29 +171,33 @@
       ],
       "next_action": "Main/Reviewer must inspect the review_packet, linked evidence and required gates before promotion or rework.",
       "kind": "REVIEW_HANDOFF"
+    },
+    {
+      "seq": 3,
+      "at": "2026-10-09T11:20:03Z",
+      "claim_id": "5615786649acca3a5846",
+      "work_item": "cloud-mistral-429-structured-backoff",
+      "summary": "G1-G4 remain PENDING, so review acceptance is not permitted for PR 818.",
+      "decisions": [
+        "Main/Reviewer requested bounded rework."
+      ],
+      "evidence_refs": [],
+      "next_action": "Record evidence-backed G1-G4 PASS through the authorized process and resubmit the review handoff. Keep runtime validation pending.",
+      "kind": "REVIEW_REWORK"
     }
   ],
   "last_checkpoint": {
-    "seq": 2,
-    "at": "2026-10-09T11:12:04Z",
+    "seq": 3,
+    "at": "2026-10-09T11:20:03Z",
     "claim_id": "5615786649acca3a5846",
     "work_item": "cloud-mistral-429-structured-backoff",
-    "summary": "Bounded Mistral Cloud error-handling fix implemented on PR #818: structured quota/rate-limit differentiation, HTTP status-safe errors and provider Retry-After cooldown. All 6 CI workflows green; CodeQL/Flutter analyze/Flutter tests passed; Codex review completed without findings visible. No live API-key response or physical app test yet; ready for Main/Reviewer assessment, not VERIFIED or DONE.",
-    "decisions": [],
-    "evidence_refs": [
-      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/818",
-      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/37895917143",
-      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/37895917030",
-      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/37895917410",
-      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/37895917193",
-      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/37895917291",
-      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/37895917243",
-      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/818#issuecomment-6075995146",
-      "Mistral Studio Playground screenshot, user supplied 2026-10-09",
-      "Ai Orchestrator Mistral API key direct smoke test"
+    "summary": "G1-G4 remain PENDING, so review acceptance is not permitted for PR 818.",
+    "decisions": [
+      "Main/Reviewer requested bounded rework."
     ],
-    "next_action": "Main/Reviewer must inspect the review_packet, linked evidence and required gates before promotion or rework.",
-    "kind": "REVIEW_HANDOFF"
+    "evidence_refs": [],
+    "next_action": "Record evidence-backed G1-G4 PASS through the authorized process and resubmit the review handoff. Keep runtime validation pending.",
+    "kind": "REVIEW_REWORK"
   },
   "review_packet": {
     "schema_version": 1,
@@ -291,5 +295,15 @@
         ".airlab/public-repositories/Ai-orchestrator-riserva/roadmap.yaml#CANT-9"
       ]
     }
-  }
+  },
+  "review_history": [
+    {
+      "reviewed_at": "2026-10-09T11:20:03Z",
+      "reviewed_by": "main-reviewer",
+      "claim_id": "5615786649acca3a5846",
+      "work_item": "cloud-mistral-429-structured-backoff",
+      "decision": "CHANGES_REQUESTED",
+      "summary": "G1-G4 remain PENDING, so review acceptance is not permitted for PR 818."
+    }
+  ]
 }

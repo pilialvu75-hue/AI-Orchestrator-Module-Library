@@ -7,7 +7,7 @@
     "policy": "This private repository is the single coordination authority. Chats and agents are workers, not independent sources of truth."
   },
   "updated_at": "2026-10-09",
-  "state_revision": 103,
+  "state_revision": 104,
   "lifecycle_status": "BOOTSTRAP_ACTIVE",
   "roadmap_authority": {
     "library": ".airlab/roadmap.yaml",
@@ -78,13 +78,13 @@
     "invalid_lane_behavior": "ISOLATE_AND_SURFACE_PROJECTION_INCIDENT"
   },
   "projection": {
-    "source_digest": "054bbce5164e38f377475340d9db5f2d3bf830c4f7e0c0c9e05c65425f21d3d5",
-    "projected_at": "2026-10-09T11:19:33Z",
+    "source_digest": "c5db11d98d63e0eccb4684f01b8c19c02ec51ed4314792564c9ce5c70f35533e",
+    "projected_at": "2026-10-09T11:20:03Z",
     "counts": {
       "BLOCKED": 1,
       "CLAIMED": 1,
-      "READY": 12,
-      "REVIEW_REQUIRED": 1
+      "IMPLEMENTING": 1,
+      "READY": 12
     },
     "active_claims": [
       {
@@ -178,9 +178,7 @@
         "work_item": "cloud-mistral-429-structured-backoff"
       }
     ],
-    "review_required": [
-      "runtime-core"
-    ],
+    "review_required": [],
     "blocked": [
       {
         "lane": "platform-windows-legacy",
@@ -427,9 +425,9 @@
       },
       {
         "id": "runtime-core",
-        "status": "REVIEW_REQUIRED",
+        "status": "IMPLEMENTING",
         "activation": "active",
-        "state_version": 6,
+        "state_version": 7,
         "updated_at": "2026-10-09",
         "active_claim": {
           "claim_id": "5615786649acca3a5846",
@@ -443,10 +441,10 @@
             "file:pilialvu75-hue/Ai-orchestrator-riserva:test/core/runtime/inference/cloud_runtime_provider_test.dart"
           ]
         },
-        "reviewer_state": "PENDING",
+        "reviewer_state": "CHANGES_REQUESTED",
         "inference_profile_status": null,
         "historical_backlog_count": 4,
-        "next_action": "Main/Reviewer must inspect the review_packet, linked evidence and required gates before promotion or rework."
+        "next_action": "Record evidence-backed G1-G4 PASS through the authorized process and resubmit the review handoff. Keep runtime validation pending."
       },
       {
         "id": "voice-live",

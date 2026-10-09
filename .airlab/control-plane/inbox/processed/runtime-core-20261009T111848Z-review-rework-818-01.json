@@ -1,0 +1,12 @@
+{
+  "schema_version": 1,
+  "request_id": "runtime-core-20261009T111848Z-review-rework-818-01",
+  "status": "APPLIED",
+  "processed_at": "2026-10-09T11:20:03Z",
+  "source_file": "runtime-core-20261009T111848Z-review-rework-818-01.json",
+  "lane_id": "runtime-core",
+  "operation": "review_rework",
+  "actor_id": "automation:main-reviewer:6abe4a9283b08191af4cc91bac843616",
+  "errors": [],
+  "result_state_version": 7
+}
