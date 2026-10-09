@@ -7,7 +7,7 @@
     "policy": "This private repository is the single coordination authority. Chats and agents are workers, not independent sources of truth."
   },
   "updated_at": "2026-10-09",
-  "state_revision": 115,
+  "state_revision": 116,
   "lifecycle_status": "BOOTSTRAP_ACTIVE",
   "roadmap_authority": {
     "library": ".airlab/roadmap.yaml",
@@ -78,8 +78,8 @@
     "invalid_lane_behavior": "ISOLATE_AND_SURFACE_PROJECTION_INCIDENT"
   },
   "projection": {
-    "source_digest": "2691fb945572cb11f026634ff1918065e52b3f0848ff8828fcc9eba356fe4fa2",
-    "projected_at": "2026-10-09T13:39:38Z",
+    "source_digest": "d8f8e277bdbec5717337ce22824dffd69374af852eff2b51ce16578dd7a2cc02",
+    "projected_at": "2026-10-09T16:32:14Z",
     "counts": {
       "BLOCKED": 1,
       "READY": 13,
@@ -143,7 +143,18 @@
         }
       }
     ],
-    "checkpoint_watch": [],
+    "checkpoint_watch": [
+      {
+        "lane": "runtime-core",
+        "claim_id": "5615786649acca3a5846",
+        "work_item": "cloud-mistral-429-structured-backoff",
+        "status": "REVIEW_REQUIRED",
+        "reason": "CHECKPOINT_STALE",
+        "last_checkpoint_at": "2026-10-09T13:39:09Z",
+        "due_since": "2026-10-09T15:39:09Z",
+        "warning_after_minutes": 120
+      }
+    ],
     "projection_incidents": [],
     "platform_inference_profiles": [
       {
