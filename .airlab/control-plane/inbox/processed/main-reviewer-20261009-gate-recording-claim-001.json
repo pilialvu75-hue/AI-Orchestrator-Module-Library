@@ -1,0 +1,12 @@
+{
+  "schema_version": 1,
+  "request_id": "main-reviewer-20261009-gate-recording-claim-001",
+  "status": "APPLIED",
+  "processed_at": "2026-10-09T11:19:33Z",
+  "source_file": "main-reviewer-20261009-gate-recording-claim-001.json",
+  "lane_id": "main-reviewer",
+  "operation": "claim",
+  "actor_id": "chatgpt:main-reviewer",
+  "errors": [],
+  "result_state_version": 52
+}

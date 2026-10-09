@@ -7,7 +7,7 @@
     "policy": "This private repository is the single coordination authority. Chats and agents are workers, not independent sources of truth."
   },
   "updated_at": "2026-10-09",
-  "state_revision": 102,
+  "state_revision": 103,
   "lifecycle_status": "BOOTSTRAP_ACTIVE",
   "roadmap_authority": {
     "library": ".airlab/roadmap.yaml",
@@ -78,14 +78,30 @@
     "invalid_lane_behavior": "ISOLATE_AND_SURFACE_PROJECTION_INCIDENT"
   },
   "projection": {
-    "source_digest": "8cdfe2859ca29e477df81099a80e556a33f1af5f85df047a488bdaf2c1fdc95b",
-    "projected_at": "2026-10-09T11:17:53Z",
+    "source_digest": "054bbce5164e38f377475340d9db5f2d3bf830c4f7e0c0c9e05c65425f21d3d5",
+    "projected_at": "2026-10-09T11:19:33Z",
     "counts": {
       "BLOCKED": 1,
-      "READY": 13,
+      "CLAIMED": 1,
+      "READY": 12,
       "REVIEW_REQUIRED": 1
     },
     "active_claims": [
+      {
+        "lane": "main-reviewer",
+        "claim_id": "65b1c4dc30752d4d55cb",
+        "work_item": "CP-REVIEW-GATES-01",
+        "repository": "pilialvu75-hue/AI-Orchestrator-Module-Library",
+        "lease_until": "2026-10-09T23:19:33Z",
+        "resource_locks": [
+          "branch:pilialvu75-hue/AI-Orchestrator-Module-Library:main-reviewer/cp-review-gates-evidence-01",
+          "contract:review-gate-evidence-recording",
+          "file:pilialvu75-hue/AI-Orchestrator-Module-Library:.airlab/control-plane/inbox/README.md",
+          "file:pilialvu75-hue/AI-Orchestrator-Module-Library:tests/test_control_plane_inbox.py",
+          "file:pilialvu75-hue/AI-Orchestrator-Module-Library:tools/control_plane_inbox.py",
+          "file:pilialvu75-hue/AI-Orchestrator-Module-Library:tools/validate_control_plane.py"
+        ]
+      },
       {
         "lane": "runtime-core",
         "claim_id": "5615786649acca3a5846",
@@ -102,6 +118,12 @@
     ],
     "active_resource_locks": [
       {
+        "key": "branch:pilialvu75-hue/AI-Orchestrator-Module-Library:main-reviewer/cp-review-gates-evidence-01",
+        "lane": "main-reviewer",
+        "claim_id": "65b1c4dc30752d4d55cb",
+        "work_item": "CP-REVIEW-GATES-01"
+      },
+      {
         "key": "branch:pilialvu75-hue/Ai-orchestrator-riserva:runtime-core/mistral-429-structured-backoff",
         "lane": "runtime-core",
         "claim_id": "5615786649acca3a5846",
@@ -112,6 +134,36 @@
         "lane": "runtime-core",
         "claim_id": "5615786649acca3a5846",
         "work_item": "cloud-mistral-429-structured-backoff"
+      },
+      {
+        "key": "contract:review-gate-evidence-recording",
+        "lane": "main-reviewer",
+        "claim_id": "65b1c4dc30752d4d55cb",
+        "work_item": "CP-REVIEW-GATES-01"
+      },
+      {
+        "key": "file:pilialvu75-hue/AI-Orchestrator-Module-Library:.airlab/control-plane/inbox/README.md",
+        "lane": "main-reviewer",
+        "claim_id": "65b1c4dc30752d4d55cb",
+        "work_item": "CP-REVIEW-GATES-01"
+      },
+      {
+        "key": "file:pilialvu75-hue/AI-Orchestrator-Module-Library:tests/test_control_plane_inbox.py",
+        "lane": "main-reviewer",
+        "claim_id": "65b1c4dc30752d4d55cb",
+        "work_item": "CP-REVIEW-GATES-01"
+      },
+      {
+        "key": "file:pilialvu75-hue/AI-Orchestrator-Module-Library:tools/control_plane_inbox.py",
+        "lane": "main-reviewer",
+        "claim_id": "65b1c4dc30752d4d55cb",
+        "work_item": "CP-REVIEW-GATES-01"
+      },
+      {
+        "key": "file:pilialvu75-hue/AI-Orchestrator-Module-Library:tools/validate_control_plane.py",
+        "lane": "main-reviewer",
+        "claim_id": "65b1c4dc30752d4d55cb",
+        "work_item": "CP-REVIEW-GATES-01"
       },
       {
         "key": "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/core/runtime/inference/cloud_runtime_provider.dart",
@@ -254,11 +306,24 @@
       },
       {
         "id": "main-reviewer",
-        "status": "READY",
+        "status": "CLAIMED",
         "activation": "active",
-        "state_version": 51,
+        "state_version": 52,
         "updated_at": "2026-10-09",
-        "active_claim": null,
+        "active_claim": {
+          "claim_id": "65b1c4dc30752d4d55cb",
+          "work_item": "CP-REVIEW-GATES-01",
+          "repository": "pilialvu75-hue/AI-Orchestrator-Module-Library",
+          "lease_until": "2026-10-09T23:19:33Z",
+          "resource_locks": [
+            "branch:pilialvu75-hue/AI-Orchestrator-Module-Library:main-reviewer/cp-review-gates-evidence-01",
+            "contract:review-gate-evidence-recording",
+            "file:pilialvu75-hue/AI-Orchestrator-Module-Library:.airlab/control-plane/inbox/README.md",
+            "file:pilialvu75-hue/AI-Orchestrator-Module-Library:tests/test_control_plane_inbox.py",
+            "file:pilialvu75-hue/AI-Orchestrator-Module-Library:tools/control_plane_inbox.py",
+            "file:pilialvu75-hue/AI-Orchestrator-Module-Library:tools/validate_control_plane.py"
+          ]
+        },
         "reviewer_state": "AUTHORITY",
         "inference_profile_status": null,
         "historical_backlog_count": 0,
