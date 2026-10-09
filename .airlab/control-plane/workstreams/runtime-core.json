@@ -7,7 +7,7 @@
   "activation": "active",
   "scope": "Shared inference contract, capability/model routing semantics, context, streaming, cancellation, errors, model-profile schema and lifecycle. Target platforms own their benchmark-gated LLM/backend/runtime profiles.",
   "shared_engine_policy": "shared_or_control_plane",
-  "state_version": 10,
+  "state_version": 11,
   "updated_at": "2026-10-09",
   "active_claim": {
     "claim_id": "5615786649acca3a5846",
@@ -23,8 +23,8 @@
       "file:pilialvu75-hue/Ai-orchestrator-riserva:test/core/runtime/inference/cloud_runtime_provider_test.dart"
     ],
     "started_at": "2026-10-09T06:50:57Z",
-    "heartbeat_at": "2026-10-09T06:54:17Z",
-    "lease_until": "2026-10-09T18:54:17Z",
+    "heartbeat_at": "2026-10-09T12:19:09Z",
+    "lease_until": "2026-10-10T00:19:09Z",
     "lease_hours": 12
   },
   "dependencies": [],
@@ -110,7 +110,7 @@
     "reviewed_by": "main-reviewer",
     "reviewed_at": "2026-10-09T12:15:38Z"
   },
-  "next_action": "Within existing cloud-mistral-429 claim add bounded no-secret HTTP 429 receipt to cloud routing + strict public projection + regression tests; rerun CI and Codex review; resubmit updated claim-bound packet, no paid fallback, no key change.",
+  "next_action": "Inspect exact-head CI and review for PR #818. Address blockers, then resubmit amended claim-bound review packet with new head and evidence. Do not merge or claim user key success before physical test. User has manually produced a fresh failed 429 result; do not request repetition until new build including HTTP receipt exists.",
   "inference_ownership": {
     "owns": [
       "shared inference API",
@@ -219,20 +219,45 @@
       "evidence_refs": [],
       "next_action": "Within existing cloud-mistral-429 claim add bounded no-secret HTTP 429 receipt to cloud routing + strict public projection + regression tests; rerun CI and Codex review; resubmit updated claim-bound packet, no paid fallback, no key change.",
       "kind": "REVIEW_REWORK"
+    },
+    {
+      "seq": 6,
+      "at": "2026-10-09T12:19:09Z",
+      "claim_id": "5615786649acca3a5846",
+      "work_item": "cloud-mistral-429-structured-backoff",
+      "summary": "S24FE supplied 2026-10-09T14:09 logs confirm manually selected mistral Cloud and 429 mapped as rate_limit in 319 ms (0 tokens). Existing #818 behavior handles backoff but fails to show upstream 429 detail. Reviewer rework accepted, old G1-G4 reset. PR #818 updated at 7894cc4 with new privacy-closed CLOUD_HTTP_FAILURE event (HTTP status, allowlisted model class, bounded retry-after, sanitized limit hint) and public projection tests; six workflows and new Codex review in progress.",
+      "decisions": [
+        "No edits to private Diagnostics repository; failed diagnostics lane claim was QUARANTINED for scope mismatch.",
+        "No raw HTTP body, key, prompt or custom-model identifier in exported logs.",
+        "No pay-as-you-go, quota bypass, or fallback to paid provider."
+      ],
+      "evidence_refs": [
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/818",
+        "head:7894cc453aedf4ad800d677411976124cfa23e43",
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/37929049989",
+        "https://help.mistral.ai/en/articles/698531-why-am-i-hitting-api-rate-limits-and-how-do-i-increase-them"
+      ],
+      "next_action": "Inspect exact-head CI and review for PR #818. Address blockers, then resubmit amended claim-bound review packet with new head and evidence. Do not merge or claim user key success before physical test. User has manually produced a fresh failed 429 result; do not request repetition until new build including HTTP receipt exists."
     }
   ],
   "last_checkpoint": {
-    "seq": 5,
-    "at": "2026-10-09T12:15:38Z",
+    "seq": 6,
+    "at": "2026-10-09T12:19:09Z",
     "claim_id": "5615786649acca3a5846",
     "work_item": "cloud-mistral-429-structured-backoff",
-    "summary": "Physical S24 FE Mistral Cloud request still fails as rate_limit at 2026-10-09T14:09 local, 0 generated tokens, 319 ms. Existing G1-G4 CI proves error handling but not original 429 root cause; CLOSED Cloud routing logs hide upstream HTTP status, selected model class and Retry-After. Review requires bounded privacy-safe HTTP error metadata with explicit allowlist and public export projection tests before resubmission.",
+    "summary": "S24FE supplied 2026-10-09T14:09 logs confirm manually selected mistral Cloud and 429 mapped as rate_limit in 319 ms (0 tokens). Existing #818 behavior handles backoff but fails to show upstream 429 detail. Reviewer rework accepted, old G1-G4 reset. PR #818 updated at 7894cc4 with new privacy-closed CLOUD_HTTP_FAILURE event (HTTP status, allowlisted model class, bounded retry-after, sanitized limit hint) and public projection tests; six workflows and new Codex review in progress.",
     "decisions": [
-      "Main/Reviewer requested bounded rework."
+      "No edits to private Diagnostics repository; failed diagnostics lane claim was QUARANTINED for scope mismatch.",
+      "No raw HTTP body, key, prompt or custom-model identifier in exported logs.",
+      "No pay-as-you-go, quota bypass, or fallback to paid provider."
     ],
-    "evidence_refs": [],
-    "next_action": "Within existing cloud-mistral-429 claim add bounded no-secret HTTP 429 receipt to cloud routing + strict public projection + regression tests; rerun CI and Codex review; resubmit updated claim-bound packet, no paid fallback, no key change.",
-    "kind": "REVIEW_REWORK"
+    "evidence_refs": [
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/818",
+      "head:7894cc453aedf4ad800d677411976124cfa23e43",
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/37929049989",
+      "https://help.mistral.ai/en/articles/698531-why-am-i-hitting-api-rate-limits-and-how-do-i-increase-them"
+    ],
+    "next_action": "Inspect exact-head CI and review for PR #818. Address blockers, then resubmit amended claim-bound review packet with new head and evidence. Do not merge or claim user key success before physical test. User has manually produced a fresh failed 429 result; do not request repetition until new build including HTTP receipt exists."
   },
   "review_packet": {
     "schema_version": 1,

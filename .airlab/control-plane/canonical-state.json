@@ -7,7 +7,7 @@
     "policy": "This private repository is the single coordination authority. Chats and agents are workers, not independent sources of truth."
   },
   "updated_at": "2026-10-09",
-  "state_revision": 111,
+  "state_revision": 112,
   "lifecycle_status": "BOOTSTRAP_ACTIVE",
   "roadmap_authority": {
     "library": ".airlab/roadmap.yaml",
@@ -78,8 +78,8 @@
     "invalid_lane_behavior": "ISOLATE_AND_SURFACE_PROJECTION_INCIDENT"
   },
   "projection": {
-    "source_digest": "3c3f54971f6a7b9f9345c269bac2a2baf659813327897a9102486a5cbeb68ce3",
-    "projected_at": "2026-10-09T12:15:38Z",
+    "source_digest": "222512c3ca6bbb904c05a2eb21cba5b5dd9758d3c1db31c15f36f727d7c50e31",
+    "projected_at": "2026-10-09T12:19:09Z",
     "counts": {
       "BLOCKED": 1,
       "IMPLEMENTING": 1,
@@ -91,7 +91,7 @@
         "claim_id": "5615786649acca3a5846",
         "work_item": "cloud-mistral-429-structured-backoff",
         "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
-        "lease_until": "2026-10-09T18:54:17Z",
+        "lease_until": "2026-10-10T00:19:09Z",
         "resource_locks": [
           "branch:pilialvu75-hue/Ai-orchestrator-riserva:runtime-core/mistral-429-structured-backoff",
           "contract:cloud-provider-error-backoff",
@@ -362,13 +362,13 @@
         "id": "runtime-core",
         "status": "IMPLEMENTING",
         "activation": "active",
-        "state_version": 10,
+        "state_version": 11,
         "updated_at": "2026-10-09",
         "active_claim": {
           "claim_id": "5615786649acca3a5846",
           "work_item": "cloud-mistral-429-structured-backoff",
           "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
-          "lease_until": "2026-10-09T18:54:17Z",
+          "lease_until": "2026-10-10T00:19:09Z",
           "resource_locks": [
             "branch:pilialvu75-hue/Ai-orchestrator-riserva:runtime-core/mistral-429-structured-backoff",
             "contract:cloud-provider-error-backoff",
@@ -379,7 +379,7 @@
         "reviewer_state": "CHANGES_REQUESTED",
         "inference_profile_status": null,
         "historical_backlog_count": 4,
-        "next_action": "Within existing cloud-mistral-429 claim add bounded no-secret HTTP 429 receipt to cloud routing + strict public projection + regression tests; rerun CI and Codex review; resubmit updated claim-bound packet, no paid fallback, no key change."
+        "next_action": "Inspect exact-head CI and review for PR #818. Address blockers, then resubmit amended claim-bound review packet with new head and evidence. Do not merge or claim user key success before physical test. User has manually produced a fresh failed 429 result; do not request repetition until new build including HTTP receipt exists."
       },
       {
         "id": "voice-live",
