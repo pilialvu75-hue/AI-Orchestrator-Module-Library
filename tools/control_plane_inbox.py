@@ -231,14 +231,17 @@ def _record_review_gates(
     # The control-plane inbox applies this change on an isolated tree and
     # validates it before atomically copying lane and canonical projection.
     lane.setdefault("gates", {}).update({gate: "PASS" for gate in required})
-    history = lane.setdefault("gate_evidence_history", [])
-    history.append({
+    attestation = {
         "at": _iso(now),
         "claim_id": claim["claim_id"],
+        "packet_sha256": control_plane_manager._review_packet_digest(packet),
         "reviewed_by": "main-reviewer",
         "summary": summary.strip(),
         "evidence_refs_by_gate": checked,
-    })
+    }
+    lane["current_gate_attestation"] = attestation
+    history = lane.setdefault("gate_evidence_history", [])
+    history.append(attestation)
     lane["gate_evidence_history"] = history[-20:]
     lane["state_version"] = int(lane.get("state_version", 0)) + 1
     lane["updated_at"] = now.date().isoformat()
