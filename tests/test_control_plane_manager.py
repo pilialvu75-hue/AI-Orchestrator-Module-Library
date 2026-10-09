@@ -549,8 +549,6 @@ class ControlPlaneManagerTests(unittest.TestCase):
         )
         lane_path = self.root / ".airlab/control-plane/workstreams/cantiere.json"
         lane = json.loads(lane_path.read_text(encoding="utf-8"))
-        for gate in ("G1_IMPLEMENTATION", "G2_STATIC", "G3_CI", "G4_INTEGRATION"):
-            lane["gates"][gate] = "PASS"
         lane_path.write_text(json.dumps(lane, indent=2) + "\n", encoding="utf-8")
         packet = {
             "schema_version": 1,
@@ -569,6 +567,11 @@ class ControlPlaneManagerTests(unittest.TestCase):
         packet_path = self.root / f"{work_item}.json"
         packet_path.write_text(json.dumps(packet), encoding="utf-8")
         manager.submit_review("cantiere", packet_path, root=self.root, now=now + timedelta(hours=1))
+        # Legacy tests model an independent reviewer gate attestation before acceptance.
+        reviewed_lane = json.loads(lane_path.read_text(encoding="utf-8"))
+        for gate in ("G1_IMPLEMENTATION", "G2_STATIC", "G3_CI", "G4_INTEGRATION"):
+            reviewed_lane["gates"][gate] = "PASS"
+        lane_path.write_text(json.dumps(reviewed_lane, indent=2) + "\n", encoding="utf-8")
         return claim_id, now
 
     def test_expired_review_wait_preserves_valid_handoff(self):
