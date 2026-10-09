@@ -3,11 +3,11 @@
   "id": "runtime-core",
   "title": "Runtime Core",
   "role": "worker",
-  "status": "CLAIMED",
+  "status": "IMPLEMENTING",
   "activation": "active",
   "scope": "Shared inference contract, capability/model routing semantics, context, streaming, cancellation, errors, model-profile schema and lifecycle. Target platforms own their benchmark-gated LLM/backend/runtime profiles.",
   "shared_engine_policy": "shared_or_control_plane",
-  "state_version": 4,
+  "state_version": 5,
   "updated_at": "2026-10-09",
   "active_claim": {
     "claim_id": "5615786649acca3a5846",
@@ -23,8 +23,8 @@
       "file:pilialvu75-hue/Ai-orchestrator-riserva:test/core/runtime/inference/cloud_runtime_provider_test.dart"
     ],
     "started_at": "2026-10-09T06:50:57Z",
-    "heartbeat_at": "2026-10-09T06:50:57Z",
-    "lease_until": "2026-10-09T18:50:57Z",
+    "heartbeat_at": "2026-10-09T06:54:17Z",
+    "lease_until": "2026-10-09T18:54:17Z",
     "lease_hours": 12
   },
   "dependencies": [],
@@ -49,7 +49,7 @@
     "reviewed_by": null,
     "reviewed_at": null
   },
-  "next_action": "Claim one bounded benchmark/runtime item; prefer closing the physical Vulkan evidence gap before unrelated runtime expansion.",
+  "next_action": "Inspect PR #818 CI and code review; fix any regressions. Submit claim-bound REVIEW_REQUIRED packet only after verification evidence; owner must separately verify existing Mistral API key.",
   "inference_ownership": {
     "owns": [
       "shared inference API",
@@ -71,5 +71,39 @@
     "PR #743 is open for thermal-gate handling after 45.0C sweep termination without LOCAL_VULKAN_SWEEP_END.",
     "PR #744 is open to add Spark-X2.5 4B Q4_K_M to the downloadable catalog.",
     "Complete Benchmark Lab suites for installed models while keeping General Score and Orchestrator Score separate."
-  ]
+  ],
+  "checkpoints": [
+    {
+      "seq": 1,
+      "at": "2026-10-09T06:54:17Z",
+      "claim_id": "5615786649acca3a5846",
+      "work_item": "cloud-mistral-429-structured-backoff",
+      "summary": "PR #818 opened on reserved runtime-core branch; structured Mistral 429 quota/rate-limit and Retry-After handling implemented with 3 regression tests; CI started but runtime API key remains unvalidated.",
+      "decisions": [
+        "No billing or key changes; no change to default Mistral model.",
+        "Do not treat Playground success as API-key success; preserve no-secret diagnostics and fail-closed spend policy."
+      ],
+      "evidence_refs": [
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/818",
+        "afc69b5eb4538513083e6b741a6cc7029c9d684b"
+      ],
+      "next_action": "Inspect PR #818 CI and code review; fix any regressions. Submit claim-bound REVIEW_REQUIRED packet only after verification evidence; owner must separately verify existing Mistral API key."
+    }
+  ],
+  "last_checkpoint": {
+    "seq": 1,
+    "at": "2026-10-09T06:54:17Z",
+    "claim_id": "5615786649acca3a5846",
+    "work_item": "cloud-mistral-429-structured-backoff",
+    "summary": "PR #818 opened on reserved runtime-core branch; structured Mistral 429 quota/rate-limit and Retry-After handling implemented with 3 regression tests; CI started but runtime API key remains unvalidated.",
+    "decisions": [
+      "No billing or key changes; no change to default Mistral model.",
+      "Do not treat Playground success as API-key success; preserve no-secret diagnostics and fail-closed spend policy."
+    ],
+    "evidence_refs": [
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/818",
+      "afc69b5eb4538513083e6b741a6cc7029c9d684b"
+    ],
+    "next_action": "Inspect PR #818 CI and code review; fix any regressions. Submit claim-bound REVIEW_REQUIRED packet only after verification evidence; owner must separately verify existing Mistral API key."
+  }
 }

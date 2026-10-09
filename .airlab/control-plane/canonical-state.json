@@ -7,7 +7,7 @@
     "policy": "This private repository is the single coordination authority. Chats and agents are workers, not independent sources of truth."
   },
   "updated_at": "2026-10-09",
-  "state_revision": 98,
+  "state_revision": 99,
   "lifecycle_status": "BOOTSTRAP_ACTIVE",
   "roadmap_authority": {
     "library": ".airlab/roadmap.yaml",
@@ -78,11 +78,11 @@
     "invalid_lane_behavior": "ISOLATE_AND_SURFACE_PROJECTION_INCIDENT"
   },
   "projection": {
-    "source_digest": "c062a4ed1add19f239501f6dafdb3a48fb3a27620cced689c714ec2c2738bc8c",
-    "projected_at": "2026-10-09T06:50:57Z",
+    "source_digest": "feb2cd98c4bb0954ab06082475fb4bd3fabbeb9d4d55146555f324823a6e485b",
+    "projected_at": "2026-10-09T06:54:17Z",
     "counts": {
       "BLOCKED": 2,
-      "CLAIMED": 1,
+      "IMPLEMENTING": 1,
       "READY": 12
     },
     "active_claims": [
@@ -91,7 +91,7 @@
         "claim_id": "5615786649acca3a5846",
         "work_item": "cloud-mistral-429-structured-backoff",
         "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
-        "lease_until": "2026-10-09T18:50:57Z",
+        "lease_until": "2026-10-09T18:54:17Z",
         "resource_locks": [
           "branch:pilialvu75-hue/Ai-orchestrator-riserva:runtime-core/mistral-429-structured-backoff",
           "contract:cloud-provider-error-backoff",
@@ -380,15 +380,15 @@
       },
       {
         "id": "runtime-core",
-        "status": "CLAIMED",
+        "status": "IMPLEMENTING",
         "activation": "active",
-        "state_version": 4,
+        "state_version": 5,
         "updated_at": "2026-10-09",
         "active_claim": {
           "claim_id": "5615786649acca3a5846",
           "work_item": "cloud-mistral-429-structured-backoff",
           "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
-          "lease_until": "2026-10-09T18:50:57Z",
+          "lease_until": "2026-10-09T18:54:17Z",
           "resource_locks": [
             "branch:pilialvu75-hue/Ai-orchestrator-riserva:runtime-core/mistral-429-structured-backoff",
             "contract:cloud-provider-error-backoff",
@@ -399,7 +399,7 @@
         "reviewer_state": "PENDING",
         "inference_profile_status": null,
         "historical_backlog_count": 4,
-        "next_action": "Claim one bounded benchmark/runtime item; prefer closing the physical Vulkan evidence gap before unrelated runtime expansion."
+        "next_action": "Inspect PR #818 CI and code review; fix any regressions. Submit claim-bound REVIEW_REQUIRED packet only after verification evidence; owner must separately verify existing Mistral API key."
       },
       {
         "id": "voice-live",
