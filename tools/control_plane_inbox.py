@@ -26,6 +26,7 @@ OPERATIONS = {
     "checkpoint",
     "release",
     "submit_review",
+    "record_review_gates",
     "review_accept",
     "review_rework",
     "canonical_sync_complete",
@@ -175,6 +176,79 @@ def _request_identity(request: dict[str, Any], fallback: str) -> tuple[str, str,
     return request_id, lane_id.strip(), operation, expected, payload
 
 
+def _record_review_gates(
+    root: Path,
+    lane_id: str,
+    payload: dict[str, Any],
+    now: datetime,
+) -> None:
+    """Reviewer-only evidence attestation for pre-approval worker gates.
+
+    This operation never promotes a lane or touches G5/G6/G7. The reviewer
+    independently checks the referenced source artifacts before attesting.
+    """
+    lane_path = root / _lane_rel(root, lane_id)
+    lane = _load(lane_path)
+    if lane.get("role") == "reviewer" or lane.get("status") != "REVIEW_REQUIRED":
+        raise ValueError("record_review_gates requires a worker REVIEW_REQUIRED lane")
+    claim = lane.get("active_claim") or {}
+    packet = lane.get("review_packet") or {}
+    if not claim or packet.get("claim_id") != claim.get("claim_id"):
+        raise ValueError("record_review_gates requires a claim-bound review packet")
+    if set(payload) != {"summary", "evidence_indices"}:
+        raise ValueError("record_review_gates payload requires exactly summary and evidence_indices")
+    summary = payload["summary"]
+    if not isinstance(summary, str) or not summary.strip():
+        raise ValueError("record_review_gates summary is required")
+    mapping = payload["evidence_indices"]
+    required = {
+        "G1_IMPLEMENTATION": {"pull_request", "commit"},
+        "G2_STATIC": {"ci", "test"},
+        "G3_CI": {"ci"},
+        "G4_INTEGRATION": {"ci", "test", "analysis"},
+    }
+    if not isinstance(mapping, dict) or set(mapping) != set(required):
+        raise ValueError("record_review_gates requires exactly G1-G4")
+    evidence = packet.get("evidence") or []
+    checked = {}
+    for gate, allowed_types in required.items():
+        indices = mapping[gate]
+        if not isinstance(indices, list) or not indices:
+            raise ValueError(f"{gate} requires non-empty evidence indices")
+        refs = []
+        for index in indices:
+            if type(index) is not int or index < 0 or index >= len(evidence):
+                raise ValueError(f"{gate} evidence index is out of range")
+            item = evidence[index]
+            if item.get("result") != "PASS" or item.get("type") not in allowed_types:
+                raise ValueError(f"{gate} evidence must have PASS and a compatible type")
+            ref = item.get("ref")
+            if not isinstance(ref, str) or not ref.strip():
+                raise ValueError(f"{gate} evidence ref must not be empty")
+            refs.append(ref.strip())
+        checked[gate] = list(dict.fromkeys(refs))
+
+    # The control-plane inbox applies this change on an isolated tree and
+    # validates it before atomically copying lane and canonical projection.
+    lane.setdefault("gates", {}).update({gate: "PASS" for gate in required})
+    attestation = {
+        "at": _iso(now),
+        "claim_id": claim["claim_id"],
+        "packet_sha256": control_plane_manager._review_packet_digest(packet),
+        "reviewed_by": "main-reviewer",
+        "summary": summary.strip(),
+        "evidence_refs_by_gate": checked,
+    }
+    lane["current_gate_attestation"] = attestation
+    history = lane.setdefault("gate_evidence_history", [])
+    history.append(attestation)
+    lane["gate_evidence_history"] = history[-20:]
+    lane["state_version"] = int(lane.get("state_version", 0)) + 1
+    lane["updated_at"] = now.date().isoformat()
+    _write(lane_path, lane)
+    control_plane_manager.project(root=root, now=now)
+
+
 def _apply(
     root: Path,
     lane_id: str,
@@ -239,6 +313,8 @@ def _apply(
             )
         finally:
             packet_path.unlink(missing_ok=True)
+    elif operation == "record_review_gates":
+        _record_review_gates(root, lane_id, payload, now)
     elif operation == "review_accept":
         evidence_refs = payload.get("evidence_refs") or []
         if not isinstance(evidence_refs, list) or not all(isinstance(item, str) for item in evidence_refs):
@@ -326,6 +402,8 @@ def process_one(path: Path, *, root: Path = ROOT, now: datetime | None = None) -
             lane_id,
             operation,
         )
+        if operation == "record_review_gates" and request.get("actor_id") != "chatgpt:main-reviewer":
+            raise ValueError("record_review_gates requires interactive main-reviewer authority")
 
         lane_rel = _lane_rel(root, lane_id)
         current_lane = _load(root / lane_rel)

@@ -373,6 +373,178 @@ class ControlPlaneInboxTests(unittest.TestCase):
         incidents = canonical["projection"]["projection_incidents"]
         self.assertTrue(any(item["path"].endswith("voice-live.json") for item in incidents))
 
+    def _claimed_review_packet(self):
+        now = datetime(2026, 10, 9, 10, 0, tzinfo=timezone.utc)
+        claim_id = control_plane_manager.claim(
+            "cantiere",
+            "test-review-gate-recording",
+            "pilialvu75-hue/Ai-orchestrator-riserva",
+            "bounded review gate recording test",
+            root=self.root,
+            now=now,
+        )
+        packet = {
+            "schema_version": 1,
+            "submitted_at": "2026-10-09T10:01:00Z",
+            "lane_id": "cantiere",
+            "claim_id": claim_id,
+            "work_item": "test-review-gate-recording",
+            "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
+            "summary": "Evidence backed gate test",
+            "changes": ["bounded production change"],
+            "evidence": [
+                {"type": "pull_request", "ref": "https://example.test/pr/1", "result": "PASS"},
+                {"type": "ci", "ref": "https://example.test/actions/1", "result": "PASS"},
+                {"type": "ci", "ref": "https://example.test/actions/2", "result": "PASS"},
+            ],
+            "known_risks": ["target runtime not yet validated"],
+            "reviewer_checks": ["review actual PR diff before approving"],
+            "roadmap_impact": {"material": False, "refs": []},
+        }
+        packet_path = self.root / "review-packet.json"
+        packet_path.write_text(json.dumps(packet), encoding="utf-8")
+        control_plane_manager.submit_review(
+            "cantiere", packet_path, root=self.root,
+            now=datetime(2026, 10, 9, 10, 2, tzinfo=timezone.utc),
+        )
+        return self._cantiere()
+
+    def _gate_request(self, lane, actor="chatgpt:main-reviewer"):
+        return {
+            "schema_version": 1,
+            "request_id": "review-gates-001",
+            "actor_id": actor,
+            "lane_id": "cantiere",
+            "operation": "record_review_gates",
+            "expected_state_version": lane["state_version"],
+            "payload": {
+                "summary": "Reviewer examined PR, analyzer, tests and integration",
+                "evidence_indices": {
+                    "G1_IMPLEMENTATION": [0],
+                    "G2_STATIC": [1],
+                    "G3_CI": [1],
+                    "G4_INTEGRATION": [2],
+                },
+            },
+        }
+
+    def test_review_gate_evidence_records_g1_g4_without_promoting(self):
+        lane = self._claimed_review_packet()
+        request = self._gate_request(lane)
+        result = inbox.process_one(
+            self._write_request(request), root=self.root,
+            now=datetime(2026, 10, 9, 10, 3, tzinfo=timezone.utc),
+        )
+        self.assertIn("applied", result)
+        changed = self._cantiere()
+        self.assertEqual(changed["status"], "REVIEW_REQUIRED")
+        self.assertEqual(changed["state_version"], lane["state_version"] + 1)
+        for gate in ("G1_IMPLEMENTATION", "G2_STATIC", "G3_CI", "G4_INTEGRATION"):
+            self.assertEqual(changed["gates"][gate], "PASS")
+        self.assertEqual(changed["gates"]["G6_REVIEWER"], "PENDING")
+        self.assertEqual(changed["gates"]["G7_CANONICAL_SYNC"], "PENDING")
+        attestation = changed["gate_evidence_history"][-1]
+        self.assertEqual(attestation["reviewed_by"], "main-reviewer")
+        self.assertEqual(attestation["evidence_refs_by_gate"]["G3_CI"], ["https://example.test/actions/1"])
+        self.assertEqual(attestation["packet_sha256"], control_plane_manager._review_packet_digest(changed["review_packet"]))
+        self.assertEqual(changed["current_gate_attestation"]["packet_sha256"], attestation["packet_sha256"])
+        receipt = json.loads((self.root / ".airlab/control-plane/inbox/processed/review-gates-001.json").read_text())
+        self.assertEqual(receipt["status"], "APPLIED")
+
+    def test_review_gate_evidence_rejects_non_reviewer_without_mutation(self):
+        lane = self._claimed_review_packet()
+        request = self._gate_request(lane, actor="chatgpt:cantiere")
+        result = inbox.process_one(
+            self._write_request(request), root=self.root,
+            now=datetime(2026, 10, 9, 10, 3, tzinfo=timezone.utc),
+        )
+        self.assertIn("quarantined", result)
+        self.assertEqual(self._cantiere()["gates"]["G1_IMPLEMENTATION"], "PENDING")
+
+    def test_review_gate_evidence_rejects_wrong_type_without_mutation(self):
+        lane = self._claimed_review_packet()
+        request = self._gate_request(lane)
+        request["payload"]["evidence_indices"]["G3_CI"] = [0]
+        result = inbox.process_one(
+            self._write_request(request), root=self.root,
+            now=datetime(2026, 10, 9, 10, 3, tzinfo=timezone.utc),
+        )
+        self.assertIn("quarantined", result)
+        self.assertEqual(self._cantiere()["gates"]["G1_IMPLEMENTATION"], "PENDING")
+
+    def test_review_gate_evidence_rejects_stale_version(self):
+        lane = self._claimed_review_packet()
+        request = self._gate_request(lane)
+        request["expected_state_version"] -= 1
+        result = inbox.process_one(
+            self._write_request(request), root=self.root,
+            now=datetime(2026, 10, 9, 10, 3, tzinfo=timezone.utc),
+        )
+        self.assertIn("quarantined", result)
+        self.assertEqual(self._cantiere()["gates"]["G1_IMPLEMENTATION"], "PENDING")
+
+
+    def test_rework_clears_gates_and_requires_new_packet_attestation(self):
+        first = self._claimed_review_packet()
+        request = self._gate_request(first)
+        self.assertIn("applied", inbox.process_one(
+            self._write_request(request), root=self.root,
+            now=datetime(2026, 10, 9, 10, 3, tzinfo=timezone.utc),
+        ))
+        control_plane_manager.review_rework(
+            "cantiere", reason="Add follow-up test", next_action="Re-review changed patch.",
+            root=self.root, now=datetime(2026, 10, 9, 10, 4, tzinfo=timezone.utc),
+        )
+        reworked = self._cantiere()
+        self.assertEqual(reworked["status"], "IMPLEMENTING")
+        self.assertNotIn("current_gate_attestation", reworked)
+        for gate in ("G1_IMPLEMENTATION", "G2_STATIC", "G3_CI", "G4_INTEGRATION"):
+            self.assertEqual(reworked["gates"][gate], "PENDING")
+
+        new_packet = dict(reworked["review_packet"])
+        new_packet["changes"] = ["materially different replacement patch"]
+        new_packet["submitted_at"] = "2026-10-09T10:05:00Z"
+        packet_file = self.root / "new-review-packet.json"
+        packet_file.write_text(json.dumps(new_packet), encoding="utf-8")
+        control_plane_manager.submit_review(
+            "cantiere", packet_file, root=self.root,
+            now=datetime(2026, 10, 9, 10, 5, tzinfo=timezone.utc),
+        )
+        replaced = self._cantiere()
+        self.assertEqual(replaced["status"], "REVIEW_REQUIRED")
+        self.assertEqual(replaced["review_packet"]["changes"], new_packet["changes"])
+        self.assertNotIn("current_gate_attestation", replaced)
+        for gate in ("G1_IMPLEMENTATION", "G2_STATIC", "G3_CI", "G4_INTEGRATION"):
+            self.assertEqual(replaced["gates"][gate], "PENDING")
+        with self.assertRaisesRegex(ValueError, "G1_IMPLEMENTATION"):
+            control_plane_manager.review_accept(
+                "cantiere", summary="must fail", next_action="re-review",
+                root=self.root, now=datetime(2026, 10, 9, 10, 6, tzinfo=timezone.utc),
+            )
+        refreshed = self._gate_request(replaced)
+        refreshed["request_id"] = "review-gates-after-rework"
+        self.assertIn("applied", inbox.process_one(
+            self._write_request(refreshed), root=self.root,
+            now=datetime(2026, 10, 9, 10, 7, tzinfo=timezone.utc),
+        ))
+        self.assertEqual(self._cantiere()["current_gate_attestation"]["packet_sha256"],
+                         control_plane_manager._review_packet_digest(new_packet))
+
+    def test_packet_tampering_invalidates_prior_gate_attestation(self):
+        first = self._claimed_review_packet()
+        self.assertIn("applied", inbox.process_one(
+            self._write_request(self._gate_request(first)), root=self.root,
+            now=datetime(2026, 10, 9, 10, 3, tzinfo=timezone.utc),
+        ))
+        lane_path = self.root / ".airlab/control-plane/workstreams/cantiere.json"
+        modified = self._cantiere()
+        modified["review_packet"]["changes"] = ["different changes under same claim"]
+        lane_path.write_text(json.dumps(modified, indent=2) + "\n", encoding="utf-8")
+        with self.assertRaisesRegex(ValueError, "stale for current review packet"):
+            control_plane_manager.review_accept(
+                "cantiere", summary="must not pass", next_action="needs recheck",
+                root=self.root, now=datetime(2026, 10, 9, 10, 4, tzinfo=timezone.utc),
+            )
 
 if __name__ == "__main__":
     unittest.main()

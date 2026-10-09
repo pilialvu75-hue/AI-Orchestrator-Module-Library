@@ -7,7 +7,7 @@ ROOT = Path(__file__).resolve().parents[1]
 CP = ROOT / ".airlab" / "control-plane"
 ALLOWED = {"READY","CLAIMED","IMPLEMENTING","EVIDENCE_READY","REVIEW_REQUIRED","VERIFIED","DONE","BLOCKED","PAUSED"}
 WORKER_MAX = {"READY","CLAIMED","IMPLEMENTING","EVIDENCE_READY","REVIEW_REQUIRED","BLOCKED","PAUSED"}
-AUTOMATION_OPERATIONS = {"claim","heartbeat","checkpoint","release","submit_review","review_accept","review_rework","canonical_sync_complete"}
+AUTOMATION_OPERATIONS = {"claim","heartbeat","checkpoint","release","submit_review","record_review_gates","review_accept","review_rework","canonical_sync_complete"}
 AUTOMATION_TARGET_POLICIES = {"owner_lane_only","worker_lanes_only","explicit","all_canonical_lanes","read_only","system_processor_only"}
 
 def load(path):

@@ -28,9 +28,35 @@ Supported ordinary operations:
 - `checkpoint`
 - `release`
 - `submit_review`
+- `record_review_gates`
 - `review_accept`
 - `review_rework`
 - `canonical_sync_complete`
+
+### Evidence-backed reviewer gate recording
+
+After a worker submits a claim-bound `REVIEW_REQUIRED` packet, interactive
+`chatgpt:main-reviewer` may submit `record_review_gates` against the exact
+worker lane `expected_state_version`. The payload requires a non-empty
+`summary` and `evidence_indices` containing **exactly** G1_IMPLEMENTATION,
+G2_STATIC, G3_CI and G4_INTEGRATION, each mapped to a non-empty list of
+zero-based indices into the immutable review packet's `evidence` array.
+
+Only `PASS` evidence of an appropriate type is accepted (implementation:
+commit/PR; static: test/CI; CI: CI; integration: test/CI/analysis). The operation
+records exact evidence refs per gate, hashes the complete claim-bound review
+packet and upgrades **only** G1–G4 to PASS. Any `review_rework` or subsequent
+`submit_review` resets the four passes and invalidates the current attestation.
+`review_accept` rejects a stale packet fingerprint before approval.
+`review_accept` requires a fresh claim- and packet-bound gate attestation even
+when G1–G4 happen to contain PASS; bare historical PASS values are insufficient.
+G5 physical/runtime acceptance, G6 independent review and G7 canonical sync
+are never modified by this operation. Automated actors and worker chats
+cannot use it. Invalid actor, missing evidence, wrong indices, or stale version
+are quarantined transactionally. Passing G1–G4 does **not** approve the PR;
+`review_accept` remains separate and Main/Reviewer must inspect the diff,
+testing scope, risks, and actual target runtime evidence before declaring
+any runtime success.
 
 CP-HARDEN-07 extends the same serialized inbox with two wait lifecycle operations processed
 before ordinary claims by `tools/control_plane_wait_inbox.py`:
