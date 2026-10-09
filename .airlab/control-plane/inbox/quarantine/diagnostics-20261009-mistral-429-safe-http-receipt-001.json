@@ -1,0 +1,14 @@
+{
+  "schema_version": 1,
+  "request_id": "diagnostics-20261009-mistral-429-safe-http-receipt-001",
+  "status": "QUARANTINED",
+  "processed_at": "2026-10-09T12:14:31Z",
+  "source_file": "diagnostics-20261009-mistral-429-safe-http-receipt-001.json",
+  "lane_id": "diagnostics",
+  "operation": "claim",
+  "actor_id": "chatgpt:diagnostics-mistral-429",
+  "errors": [
+    "ValueError: repository pilialvu75-hue/Ai-orchestrator-riserva is outside lane diagnostics scope; allowed=['pilialvu75-hue/Ai-orchestrator-diagnostics']"
+  ],
+  "result_state_version": null
+}
