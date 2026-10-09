@@ -7,7 +7,7 @@
   "activation": "active",
   "scope": "Shared inference contract, capability/model routing semantics, context, streaming, cancellation, errors, model-profile schema and lifecycle. Target platforms own their benchmark-gated LLM/backend/runtime profiles.",
   "shared_engine_policy": "shared_or_control_plane",
-  "state_version": 8,
+  "state_version": 9,
   "updated_at": "2026-10-09",
   "active_claim": {
     "claim_id": "5615786649acca3a5846",
@@ -96,10 +96,10 @@
   ],
   "gates": {
     "G0_CLAIM": "PASS",
-    "G1_IMPLEMENTATION": "PENDING",
-    "G2_STATIC": "PENDING",
-    "G3_CI": "PENDING",
-    "G4_INTEGRATION": "PENDING",
+    "G1_IMPLEMENTATION": "PASS",
+    "G2_STATIC": "PASS",
+    "G3_CI": "PASS",
+    "G4_INTEGRATION": "PASS",
     "G5_TARGET_RUNTIME": "NOT_APPLICABLE_UNTIL_RUNTIME_CHANGE",
     "G6_REVIEWER": "PENDING",
     "G7_CANONICAL_SYNC": "PENDING"
@@ -335,6 +335,60 @@
       "work_item": "cloud-mistral-429-structured-backoff",
       "decision": "CHANGES_REQUESTED",
       "summary": "G1-G4 remain PENDING, so review acceptance is not permitted for PR 818."
+    }
+  ],
+  "current_gate_attestation": {
+    "at": "2026-10-09T11:42:01Z",
+    "claim_id": "5615786649acca3a5846",
+    "packet_sha256": "5d3b8c451ddcfc3fcbae59ed674509ef0a393e49555339dbe82abb8f9adaba98",
+    "reviewed_by": "main-reviewer",
+    "summary": "Reviewed Mistral runtime diff PR #818 at afc69b5; bounded implementation and clean Codex review. Exact-head CI confirms Flutter analyze/tests, Android signed APK/AAB, first-app acceptance smoke, web contract and Windows/Linux/macOS builds. G4 passes for CI integration/smoke only; live Mistral BYOK API call and target physical validation are explicitly pending and must not be inferred.",
+    "evidence_refs_by_gate": {
+      "G1_IMPLEMENTATION": [
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/818"
+      ],
+      "G2_STATIC": [
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/37895917143"
+      ],
+      "G3_CI": [
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/37895917143"
+      ],
+      "G4_INTEGRATION": [
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/37895917143",
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/37895917030",
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/37895917410",
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/37895917193",
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/37895917291",
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/37895917243"
+      ]
+    }
+  },
+  "gate_evidence_history": [
+    {
+      "at": "2026-10-09T11:42:01Z",
+      "claim_id": "5615786649acca3a5846",
+      "packet_sha256": "5d3b8c451ddcfc3fcbae59ed674509ef0a393e49555339dbe82abb8f9adaba98",
+      "reviewed_by": "main-reviewer",
+      "summary": "Reviewed Mistral runtime diff PR #818 at afc69b5; bounded implementation and clean Codex review. Exact-head CI confirms Flutter analyze/tests, Android signed APK/AAB, first-app acceptance smoke, web contract and Windows/Linux/macOS builds. G4 passes for CI integration/smoke only; live Mistral BYOK API call and target physical validation are explicitly pending and must not be inferred.",
+      "evidence_refs_by_gate": {
+        "G1_IMPLEMENTATION": [
+          "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/818"
+        ],
+        "G2_STATIC": [
+          "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/37895917143"
+        ],
+        "G3_CI": [
+          "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/37895917143"
+        ],
+        "G4_INTEGRATION": [
+          "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/37895917143",
+          "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/37895917030",
+          "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/37895917410",
+          "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/37895917193",
+          "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/37895917291",
+          "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/37895917243"
+        ]
+      }
     }
   ]
 }
