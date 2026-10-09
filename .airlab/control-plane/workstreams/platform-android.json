@@ -3,13 +3,29 @@
   "id": "platform-android",
   "title": "Android",
   "role": "worker",
-  "status": "READY",
+  "status": "CLAIMED",
   "activation": "active",
   "scope": "Android packaging, permissions, hardware/runtime adapters, UI integration and releases using shared orchestration/contracts with target-optimized inference.",
   "shared_engine_policy": "adapter_only",
-  "state_version": 3,
-  "updated_at": "2026-10-01",
-  "active_claim": null,
+  "state_version": 4,
+  "updated_at": "2026-10-09",
+  "active_claim": {
+    "claim_id": "9e07c5e78988b4d33ee9",
+    "owner_lane": "platform-android",
+    "work_item": "phi-critical-memory-chat-recovery",
+    "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
+    "scope": "S24 FE build3069 critical-memory failure: bounded dismissible chat notices and recovery; investigate resource telemetry without weakening critical guard or changing shared inference semantics.",
+    "branch": "fix/android-phi-memory-chat-recovery",
+    "resource_locks": [
+      "branch:pilialvu75-hue/Ai-orchestrator-riserva:fix/android-phi-memory-chat-recovery",
+      "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/features/chat/presentation/pages/chat_page.dart",
+      "scope:android-phi-memory-chat-recovery"
+    ],
+    "started_at": "2026-10-09T23:15:16Z",
+    "heartbeat_at": "2026-10-09T23:15:16Z",
+    "lease_until": "2026-10-10T11:15:16Z",
+    "lease_hours": 12
+  },
   "dependencies": [],
   "roadmap_refs": [
     ".airlab/public-repositories/Ai-orchestrator-riserva/roadmap.yaml#CANT-14",
@@ -17,7 +33,7 @@
   ],
   "evidence": [],
   "gates": {
-    "G0_CLAIM": "PENDING",
+    "G0_CLAIM": "PASS",
     "G1_IMPLEMENTATION": "PENDING",
     "G2_STATIC": "PENDING",
     "G3_CI": "PENDING",

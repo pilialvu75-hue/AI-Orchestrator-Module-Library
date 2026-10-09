@@ -1,0 +1,12 @@
+{
+  "schema_version": 1,
+  "request_id": "android-20261009-phi-memory-chat-recovery",
+  "status": "APPLIED",
+  "processed_at": "2026-10-09T23:15:16Z",
+  "source_file": "android-20261009-phi-memory-chat-recovery.json",
+  "lane_id": "platform-android",
+  "operation": "claim",
+  "actor_id": "chatgpt:platform-android",
+  "errors": [],
+  "result_state_version": 4
+}

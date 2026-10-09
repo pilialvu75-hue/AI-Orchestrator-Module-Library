@@ -7,7 +7,7 @@
     "policy": "This private repository is the single coordination authority. Chats and agents are workers, not independent sources of truth."
   },
   "updated_at": "2026-10-09",
-  "state_revision": 116,
+  "state_revision": 117,
   "lifecycle_status": "BOOTSTRAP_ACTIVE",
   "roadmap_authority": {
     "library": ".airlab/roadmap.yaml",
@@ -78,14 +78,27 @@
     "invalid_lane_behavior": "ISOLATE_AND_SURFACE_PROJECTION_INCIDENT"
   },
   "projection": {
-    "source_digest": "d8f8e277bdbec5717337ce22824dffd69374af852eff2b51ce16578dd7a2cc02",
-    "projected_at": "2026-10-09T16:32:14Z",
+    "source_digest": "61530ffe08e6d04fe386ecad57ee838105a78931272392fabdbba3a89617e67b",
+    "projected_at": "2026-10-09T23:15:16Z",
     "counts": {
       "BLOCKED": 1,
-      "READY": 13,
+      "CLAIMED": 1,
+      "READY": 12,
       "REVIEW_REQUIRED": 1
     },
     "active_claims": [
+      {
+        "lane": "platform-android",
+        "claim_id": "9e07c5e78988b4d33ee9",
+        "work_item": "phi-critical-memory-chat-recovery",
+        "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
+        "lease_until": "2026-10-10T11:15:16Z",
+        "resource_locks": [
+          "branch:pilialvu75-hue/Ai-orchestrator-riserva:fix/android-phi-memory-chat-recovery",
+          "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/features/chat/presentation/pages/chat_page.dart",
+          "scope:android-phi-memory-chat-recovery"
+        ]
+      },
       {
         "lane": "runtime-core",
         "claim_id": "5615786649acca3a5846",
@@ -101,6 +114,12 @@
       }
     ],
     "active_resource_locks": [
+      {
+        "key": "branch:pilialvu75-hue/Ai-orchestrator-riserva:fix/android-phi-memory-chat-recovery",
+        "lane": "platform-android",
+        "claim_id": "9e07c5e78988b4d33ee9",
+        "work_item": "phi-critical-memory-chat-recovery"
+      },
       {
         "key": "branch:pilialvu75-hue/Ai-orchestrator-riserva:runtime-core/mistral-429-structured-backoff",
         "lane": "runtime-core",
@@ -120,10 +139,22 @@
         "work_item": "cloud-mistral-429-structured-backoff"
       },
       {
+        "key": "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/features/chat/presentation/pages/chat_page.dart",
+        "lane": "platform-android",
+        "claim_id": "9e07c5e78988b4d33ee9",
+        "work_item": "phi-critical-memory-chat-recovery"
+      },
+      {
         "key": "file:pilialvu75-hue/Ai-orchestrator-riserva:test/core/runtime/inference/cloud_runtime_provider_test.dart",
         "lane": "runtime-core",
         "claim_id": "5615786649acca3a5846",
         "work_item": "cloud-mistral-429-structured-backoff"
+      },
+      {
+        "key": "scope:android-phi-memory-chat-recovery",
+        "lane": "platform-android",
+        "claim_id": "9e07c5e78988b4d33ee9",
+        "work_item": "phi-critical-memory-chat-recovery"
       }
     ],
     "review_required": [
@@ -277,11 +308,21 @@
       },
       {
         "id": "platform-android",
-        "status": "READY",
+        "status": "CLAIMED",
         "activation": "active",
-        "state_version": 3,
-        "updated_at": "2026-10-01",
-        "active_claim": null,
+        "state_version": 4,
+        "updated_at": "2026-10-09",
+        "active_claim": {
+          "claim_id": "9e07c5e78988b4d33ee9",
+          "work_item": "phi-critical-memory-chat-recovery",
+          "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
+          "lease_until": "2026-10-10T11:15:16Z",
+          "resource_locks": [
+            "branch:pilialvu75-hue/Ai-orchestrator-riserva:fix/android-phi-memory-chat-recovery",
+            "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/features/chat/presentation/pages/chat_page.dart",
+            "scope:android-phi-memory-chat-recovery"
+          ]
+        },
         "reviewer_state": "PENDING",
         "inference_profile_status": "ACTIVE_BENCHMARKING",
         "historical_backlog_count": 3,
