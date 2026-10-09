@@ -1,0 +1,30 @@
+{
+  "schema_version": 1,
+  "request_id": "main-reviewer-20261009-mistral-818-g1g4-e5e0852-001",
+  "actor_id": "chatgpt:main-reviewer",
+  "lane_id": "runtime-core",
+  "operation": "record_review_gates",
+  "expected_state_version": 13,
+  "payload": {
+    "summary": "Main/Reviewer inspected current PR #818 exact head e5e0852 and independent CI runs: Android Flutter analyze/tests and APK/AAB signed 1.0.12+3063, Cantiere smoke/regressions, web and Win/Linux/macOS pass; Codex re-review on same SHA no major issues. G1-G4 attested for implementation, static, CI and CI integration only. G5 new Android S24 FE diagnostic test pending; no Mistral BYOK success or root cause confirmed.",
+    "evidence_indices": {
+      "G1_IMPLEMENTATION": [
+        0
+      ],
+      "G2_STATIC": [
+        1
+      ],
+      "G3_CI": [
+        1
+      ],
+      "G4_INTEGRATION": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ]
+    }
+  }
+}
