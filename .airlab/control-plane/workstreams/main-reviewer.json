@@ -3,37 +3,18 @@
   "id": "main-reviewer",
   "title": "Main / Reviewer",
   "role": "reviewer",
-  "status": "IMPLEMENTING",
+  "status": "READY",
   "activation": "active",
   "scope": "Global architecture, cross-lane review, consolidation, roadmap/state authority and hardening, including target inference profile balance and shared-contract compatibility.",
   "shared_engine_policy": "shared_or_control_plane",
-  "state_version": 55,
+  "state_version": 56,
   "updated_at": "2026-10-09",
-  "active_claim": {
-    "claim_id": "65b1c4dc30752d4d55cb",
-    "owner_lane": "main-reviewer",
-    "work_item": "CP-REVIEW-GATES-01",
-    "repository": "pilialvu75-hue/AI-Orchestrator-Module-Library",
-    "scope": "Add atomic, evidence-indexed G1-G4 gate recording for worker REVIEW_REQUIRED handoffs via transactional inbox, with independent reviewer identity and regression tests; unblock PR #818 review without direct canonical JSON edits.",
-    "branch": "main-reviewer/cp-review-gates-evidence-01",
-    "resource_locks": [
-      "branch:pilialvu75-hue/AI-Orchestrator-Module-Library:main-reviewer/cp-review-gates-evidence-01",
-      "contract:review-gate-evidence-recording",
-      "file:pilialvu75-hue/AI-Orchestrator-Module-Library:.airlab/control-plane/inbox/README.md",
-      "file:pilialvu75-hue/AI-Orchestrator-Module-Library:tests/test_control_plane_inbox.py",
-      "file:pilialvu75-hue/AI-Orchestrator-Module-Library:tools/control_plane_inbox.py",
-      "file:pilialvu75-hue/AI-Orchestrator-Module-Library:tools/validate_control_plane.py"
-    ],
-    "started_at": "2026-10-09T11:19:33Z",
-    "heartbeat_at": "2026-10-09T11:40:18Z",
-    "lease_until": "2026-10-09T23:40:18Z",
-    "lease_hours": 12
-  },
+  "active_claim": null,
   "dependencies": [],
   "roadmap_refs": [],
   "evidence": [],
   "gates": {
-    "G0_CLAIM": "PASS",
+    "G0_CLAIM": "PENDING",
     "G1_IMPLEMENTATION": "PENDING",
     "G2_STATIC": "PENDING",
     "G3_CI": "PENDING",
@@ -842,6 +823,13 @@
         "canonical-state.json state_revision:101"
       ],
       "at": "2026-10-09T11:17:53Z"
+    },
+    {
+      "type": "CLAIM_RELEASED",
+      "claim_id": "65b1c4dc30752d4d55cb",
+      "work_item": "CP-REVIEW-GATES-01",
+      "reason": "CP-REVIEW-GATES-01 is merged and verified by exact-head and post-merge Library CI; PR #103 and canonical checkpoint saved. Releasing bounded implementation claim without claiming Mistral runtime validation.",
+      "at": "2026-10-09T11:40:45Z"
     }
   ],
   "stale_block_history": [
