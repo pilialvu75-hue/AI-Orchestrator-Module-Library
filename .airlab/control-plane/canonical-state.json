@@ -7,7 +7,7 @@
     "policy": "This private repository is the single coordination authority. Chats and agents are workers, not independent sources of truth."
   },
   "updated_at": "2026-10-09",
-  "state_revision": 100,
+  "state_revision": 101,
   "lifecycle_status": "BOOTSTRAP_ACTIVE",
   "roadmap_authority": {
     "library": ".airlab/roadmap.yaml",
@@ -78,12 +78,12 @@
     "invalid_lane_behavior": "ISOLATE_AND_SURFACE_PROJECTION_INCIDENT"
   },
   "projection": {
-    "source_digest": "714d3b7c7bfa492ed59b30b5ab72f048083a3892fd9670d43afcbc03f11633cd",
-    "projected_at": "2026-10-09T09:36:35Z",
+    "source_digest": "4b6e8e4d1407c290580bb62cf087c43e8e0a215c29d0c5c5970cf94e54766c56",
+    "projected_at": "2026-10-09T11:12:04Z",
     "counts": {
       "BLOCKED": 2,
-      "IMPLEMENTING": 1,
-      "READY": 12
+      "READY": 12,
+      "REVIEW_REQUIRED": 1
     },
     "active_claims": [
       {
@@ -126,7 +126,9 @@
         "work_item": "cloud-mistral-429-structured-backoff"
       }
     ],
-    "review_required": [],
+    "review_required": [
+      "runtime-core"
+    ],
     "blocked": [
       {
         "lane": "main-reviewer",
@@ -161,18 +163,7 @@
         }
       }
     ],
-    "checkpoint_watch": [
-      {
-        "lane": "runtime-core",
-        "claim_id": "5615786649acca3a5846",
-        "work_item": "cloud-mistral-429-structured-backoff",
-        "status": "IMPLEMENTING",
-        "reason": "CHECKPOINT_STALE",
-        "last_checkpoint_at": "2026-10-09T06:54:17Z",
-        "due_since": "2026-10-09T08:54:17Z",
-        "warning_after_minutes": 120
-      }
-    ],
+    "checkpoint_watch": [],
     "projection_incidents": [],
     "platform_inference_profiles": [
       {
@@ -391,9 +382,9 @@
       },
       {
         "id": "runtime-core",
-        "status": "IMPLEMENTING",
+        "status": "REVIEW_REQUIRED",
         "activation": "active",
-        "state_version": 5,
+        "state_version": 6,
         "updated_at": "2026-10-09",
         "active_claim": {
           "claim_id": "5615786649acca3a5846",
@@ -410,7 +401,7 @@
         "reviewer_state": "PENDING",
         "inference_profile_status": null,
         "historical_backlog_count": 4,
-        "next_action": "Inspect PR #818 CI and code review; fix any regressions. Submit claim-bound REVIEW_REQUIRED packet only after verification evidence; owner must separately verify existing Mistral API key."
+        "next_action": "Main/Reviewer must inspect the review_packet, linked evidence and required gates before promotion or rework."
       },
       {
         "id": "voice-live",
