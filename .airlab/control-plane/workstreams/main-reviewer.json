@@ -7,7 +7,7 @@
   "activation": "active",
   "scope": "Global architecture, cross-lane review, consolidation, roadmap/state authority and hardening, including target inference profile balance and shared-contract compatibility.",
   "shared_engine_policy": "shared_or_control_plane",
-  "state_version": 54,
+  "state_version": 55,
   "updated_at": "2026-10-09",
   "active_claim": {
     "claim_id": "65b1c4dc30752d4d55cb",
@@ -25,8 +25,8 @@
       "file:pilialvu75-hue/AI-Orchestrator-Module-Library:tools/validate_control_plane.py"
     ],
     "started_at": "2026-10-09T11:19:33Z",
-    "heartbeat_at": "2026-10-09T11:32:46Z",
-    "lease_until": "2026-10-09T23:32:46Z",
+    "heartbeat_at": "2026-10-09T11:40:18Z",
+    "lease_until": "2026-10-09T23:40:18Z",
     "lease_hours": 12
   },
   "dependencies": [],
@@ -48,7 +48,7 @@
     "reviewed_by": null,
     "reviewed_at": null
   },
-  "next_action": "Check CI on exact head 5e63a1e420e9916c9fb8a30dfc874885232dc653 and new Codex review; only merge PR #103 if green and security finding addressed. Then use G1–G4 evidence-index attestation for runtime-core PR #818 after claim-bound packet is resubmitted, retaining API-key target runtime validation as pending.",
+  "next_action": "Release CP-REVIEW-GATES-01 claim. Resume runtime-core Mistral 429 PR #818 review via claim-bound resubmission and evidence-indexed G1-G4 attestation. Do not mark API-key runtime successful without live BYOK validation.",
   "inference_review_policy": {
     "policy": ".airlab/control-plane/inference-policy.json",
     "check": [
@@ -622,24 +622,43 @@
         "https://github.com/pilialvu75-hue/AI-Orchestrator-Module-Library/actions/runs/37924324868"
       ],
       "next_action": "Check CI on exact head 5e63a1e420e9916c9fb8a30dfc874885232dc653 and new Codex review; only merge PR #103 if green and security finding addressed. Then use G1–G4 evidence-index attestation for runtime-core PR #818 after claim-bound packet is resubmitted, retaining API-key target runtime validation as pending."
+    },
+    {
+      "seq": 19,
+      "at": "2026-10-09T11:40:18Z",
+      "claim_id": "65b1c4dc30752d4d55cb",
+      "work_item": "CP-REVIEW-GATES-01",
+      "summary": "CP-REVIEW-GATES-01 merged via Library PR #103 (merge 0a7e5a7e). Exact head 5e63a1e passed Validate Module Library CI and Codex review completed with no major issues after remediation of both P1 stale-attestation paths; post-merge main Validate Module Library run 37925075312 PASS.",
+      "decisions": [
+        "No gate bypass or unverified runtime success; the claim-bound review packet digest is mandatory at acceptance.",
+        "Main/Reviewer reviewer-gate infrastructure is now on main; follow up on Mistral PR #818 bounded code review."
+      ],
+      "evidence_refs": [
+        "https://github.com/pilialvu75-hue/AI-Orchestrator-Module-Library/pull/103",
+        "merge:0a7e5a7ec852ab73fad8e356b7c7c744ff7402eb",
+        "https://github.com/pilialvu75-hue/AI-Orchestrator-Module-Library/actions/runs/37925075312",
+        "https://github.com/pilialvu75-hue/AI-Orchestrator-Module-Library/actions/runs/37924324868"
+      ],
+      "next_action": "Release CP-REVIEW-GATES-01 claim. Resume runtime-core Mistral 429 PR #818 review via claim-bound resubmission and evidence-indexed G1-G4 attestation. Do not mark API-key runtime successful without live BYOK validation."
     }
   ],
   "last_checkpoint": {
-    "seq": 18,
-    "at": "2026-10-09T11:32:46Z",
+    "seq": 19,
+    "at": "2026-10-09T11:40:18Z",
     "claim_id": "65b1c4dc30752d4d55cb",
     "work_item": "CP-REVIEW-GATES-01",
-    "summary": "PR #103 P1 stale-review-gate finding remediated on branch: reset G1–G4 and clear current attestation on review_rework and submit_review; record exact review_packet SHA-256; review_accept requires current matching claim+packet even for legacy PASS; added tests for rework, packet mutation, orphan PASS, and refreshed manager fixtures.",
+    "summary": "CP-REVIEW-GATES-01 merged via Library PR #103 (merge 0a7e5a7e). Exact head 5e63a1e passed Validate Module Library CI and Codex review completed with no major issues after remediation of both P1 stale-attestation paths; post-merge main Validate Module Library run 37925075312 PASS.",
     "decisions": [
-      "No direct canonical JSON edits. Reject all detached PASS gate values.",
-      "No claim that Mistral API key now works; Playground proof is separate from BYOK HTTP success."
+      "No gate bypass or unverified runtime success; the claim-bound review packet digest is mandatory at acceptance.",
+      "Main/Reviewer reviewer-gate infrastructure is now on main; follow up on Mistral PR #818 bounded code review."
     ],
     "evidence_refs": [
       "https://github.com/pilialvu75-hue/AI-Orchestrator-Module-Library/pull/103",
-      "head:5e63a1e420e9916c9fb8a30dfc874885232dc653",
+      "merge:0a7e5a7ec852ab73fad8e356b7c7c744ff7402eb",
+      "https://github.com/pilialvu75-hue/AI-Orchestrator-Module-Library/actions/runs/37925075312",
       "https://github.com/pilialvu75-hue/AI-Orchestrator-Module-Library/actions/runs/37924324868"
     ],
-    "next_action": "Check CI on exact head 5e63a1e420e9916c9fb8a30dfc874885232dc653 and new Codex review; only merge PR #103 if green and security finding addressed. Then use G1–G4 evidence-index attestation for runtime-core PR #818 after claim-bound packet is resubmitted, retaining API-key target runtime validation as pending."
+    "next_action": "Release CP-REVIEW-GATES-01 claim. Resume runtime-core Mistral 429 PR #818 review via claim-bound resubmission and evidence-indexed G1-G4 attestation. Do not mark API-key runtime successful without live BYOK validation."
   },
   "hardening_backlog": [
     {
