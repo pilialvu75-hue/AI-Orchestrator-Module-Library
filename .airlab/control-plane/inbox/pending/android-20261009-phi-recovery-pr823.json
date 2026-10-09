@@ -1,0 +1,19 @@
+{
+  "schema_version": 1,
+  "request_id": "android-20261009-phi-recovery-pr823",
+  "actor_id": "chatgpt:platform-android",
+  "lane_id": "platform-android",
+  "operation": "checkpoint",
+  "expected_state_version": 5,
+  "payload": {
+    "summary": "Draft PR823 implements bounded deduplicated dismissible runtime notices with three widget regressions. Dart formatting/parser and diff whitespace checks passed. Local Flutter bootstrap blocked by automatic security review due to attempted cloud metadata access; no test PASS claim. CI is the safe validation path. Memory cancellation at trim15 remains unresolved.",
+    "next_action": "Read PR823 CI, fix any failures, submit claim-bound review packet. Keep physical S24 FE UI and memory acceptance open; do not suppress critical-memory guard.",
+    "evidence_refs": [
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/823",
+      "commit:0310505583593bc0659638af815fdbe2715ee5c4"
+    ],
+    "decisions": [
+      "No change to Vulkan/llama or resource guard. UI fix is not a memory stability fix."
+    ]
+  }
+}
