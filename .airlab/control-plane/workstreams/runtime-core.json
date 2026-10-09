@@ -7,7 +7,7 @@
   "activation": "active",
   "scope": "Shared inference contract, capability/model routing semantics, context, streaming, cancellation, errors, model-profile schema and lifecycle. Target platforms own their benchmark-gated LLM/backend/runtime profiles.",
   "shared_engine_policy": "shared_or_control_plane",
-  "state_version": 11,
+  "state_version": 12,
   "updated_at": "2026-10-09",
   "active_claim": {
     "claim_id": "5615786649acca3a5846",
@@ -23,8 +23,8 @@
       "file:pilialvu75-hue/Ai-orchestrator-riserva:test/core/runtime/inference/cloud_runtime_provider_test.dart"
     ],
     "started_at": "2026-10-09T06:50:57Z",
-    "heartbeat_at": "2026-10-09T12:19:09Z",
-    "lease_until": "2026-10-10T00:19:09Z",
+    "heartbeat_at": "2026-10-09T12:24:08Z",
+    "lease_until": "2026-10-10T00:24:08Z",
     "lease_hours": 12
   },
   "dependencies": [],
@@ -110,7 +110,7 @@
     "reviewed_by": "main-reviewer",
     "reviewed_at": "2026-10-09T12:15:38Z"
   },
-  "next_action": "Inspect exact-head CI and review for PR #818. Address blockers, then resubmit amended claim-bound review packet with new head and evidence. Do not merge or claim user key success before physical test. User has manually produced a fresh failed 429 result; do not request repetition until new build including HTTP receipt exists.",
+  "next_action": "Check exact-head PR #818 CI and Codex review on e5e0852. If green, resubmit review packet with new commit and CI refs; Main/Reviewer attest G1-G4 and keep G5 runtime pending. Obtain one physical BYOK Mistral test only on new signed APK; no install needed before that.",
   "inference_ownership": {
     "owns": [
       "shared inference API",
@@ -238,26 +238,47 @@
         "https://help.mistral.ai/en/articles/698531-why-am-i-hitting-api-rate-limits-and-how-do-i-increase-them"
       ],
       "next_action": "Inspect exact-head CI and review for PR #818. Address blockers, then resubmit amended claim-bound review packet with new head and evidence. Do not merge or claim user key success before physical test. User has manually produced a fresh failed 429 result; do not request repetition until new build including HTTP receipt exists."
+    },
+    {
+      "seq": 7,
+      "at": "2026-10-09T12:24:08Z",
+      "claim_id": "5615786649acca3a5846",
+      "work_item": "cloud-mistral-429-structured-backoff",
+      "summary": "S24FE user log proves Mistral Cloud 429 on Oct9 (319ms, 0 tokens); runtime backoff fix #818 alone did not fix upstream provider. Review rework authorized. Added CLOSED CLOUD_HTTP_FAILURE telemetry. Initial PR head 7894cc4 CI failed due malformed regex in public_log_projection; fixed from intact main as head e5e08527d0068845bfa9e643d1a3e514a2e8c356. On new CI, Web Cantiere Build PASS and Cantiere regression tests PASS; full Android/desktop CI and exact-head Codex review still underway. Old Code Review P1 refers only to 7894cc4. No merge or APK release.",
+      "decisions": [
+        "Do not infer Mistral API works; 429 remains upstream (RPS/TPM/monthly per Mistral documentation) and direct account permission/root reason unknown.",
+        "Do not print raw HTTP response, secrets, prompt or arbitrary model IDs. Use categorical HTTP receipt.",
+        "No paid fallback or billing activation.",
+        "Do not use the abandoned Diagnostics claim; it was quarantine-rejected for repository scope mismatch."
+      ],
+      "evidence_refs": [
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/818",
+        "head:e5e08527d0068845bfa9e643d1a3e514a2e8c356",
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/37929379772",
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/37929379747"
+      ],
+      "next_action": "Check exact-head PR #818 CI and Codex review on e5e0852. If green, resubmit review packet with new commit and CI refs; Main/Reviewer attest G1-G4 and keep G5 runtime pending. Obtain one physical BYOK Mistral test only on new signed APK; no install needed before that."
     }
   ],
   "last_checkpoint": {
-    "seq": 6,
-    "at": "2026-10-09T12:19:09Z",
+    "seq": 7,
+    "at": "2026-10-09T12:24:08Z",
     "claim_id": "5615786649acca3a5846",
     "work_item": "cloud-mistral-429-structured-backoff",
-    "summary": "S24FE supplied 2026-10-09T14:09 logs confirm manually selected mistral Cloud and 429 mapped as rate_limit in 319 ms (0 tokens). Existing #818 behavior handles backoff but fails to show upstream 429 detail. Reviewer rework accepted, old G1-G4 reset. PR #818 updated at 7894cc4 with new privacy-closed CLOUD_HTTP_FAILURE event (HTTP status, allowlisted model class, bounded retry-after, sanitized limit hint) and public projection tests; six workflows and new Codex review in progress.",
+    "summary": "S24FE user log proves Mistral Cloud 429 on Oct9 (319ms, 0 tokens); runtime backoff fix #818 alone did not fix upstream provider. Review rework authorized. Added CLOSED CLOUD_HTTP_FAILURE telemetry. Initial PR head 7894cc4 CI failed due malformed regex in public_log_projection; fixed from intact main as head e5e08527d0068845bfa9e643d1a3e514a2e8c356. On new CI, Web Cantiere Build PASS and Cantiere regression tests PASS; full Android/desktop CI and exact-head Codex review still underway. Old Code Review P1 refers only to 7894cc4. No merge or APK release.",
     "decisions": [
-      "No edits to private Diagnostics repository; failed diagnostics lane claim was QUARANTINED for scope mismatch.",
-      "No raw HTTP body, key, prompt or custom-model identifier in exported logs.",
-      "No pay-as-you-go, quota bypass, or fallback to paid provider."
+      "Do not infer Mistral API works; 429 remains upstream (RPS/TPM/monthly per Mistral documentation) and direct account permission/root reason unknown.",
+      "Do not print raw HTTP response, secrets, prompt or arbitrary model IDs. Use categorical HTTP receipt.",
+      "No paid fallback or billing activation.",
+      "Do not use the abandoned Diagnostics claim; it was quarantine-rejected for repository scope mismatch."
     ],
     "evidence_refs": [
       "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/818",
-      "head:7894cc453aedf4ad800d677411976124cfa23e43",
-      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/37929049989",
-      "https://help.mistral.ai/en/articles/698531-why-am-i-hitting-api-rate-limits-and-how-do-i-increase-them"
+      "head:e5e08527d0068845bfa9e643d1a3e514a2e8c356",
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/37929379772",
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/37929379747"
     ],
-    "next_action": "Inspect exact-head CI and review for PR #818. Address blockers, then resubmit amended claim-bound review packet with new head and evidence. Do not merge or claim user key success before physical test. User has manually produced a fresh failed 429 result; do not request repetition until new build including HTTP receipt exists."
+    "next_action": "Check exact-head PR #818 CI and Codex review on e5e0852. If green, resubmit review packet with new commit and CI refs; Main/Reviewer attest G1-G4 and keep G5 runtime pending. Obtain one physical BYOK Mistral test only on new signed APK; no install needed before that."
   },
   "review_packet": {
     "schema_version": 1,

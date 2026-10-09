@@ -1,0 +1,12 @@
+{
+  "schema_version": 1,
+  "request_id": "runtime-core-20261009-mistral-safe429-corrected-head-checkpoint-001",
+  "status": "APPLIED",
+  "processed_at": "2026-10-09T12:24:08Z",
+  "source_file": "runtime-core-20261009-mistral-safe429-corrected-head-checkpoint-001.json",
+  "lane_id": "runtime-core",
+  "operation": "checkpoint",
+  "actor_id": "chatgpt:runtime-core-mistral-429",
+  "errors": [],
+  "result_state_version": 12
+}
