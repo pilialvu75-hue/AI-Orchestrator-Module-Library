@@ -1,0 +1,21 @@
+{
+  "schema_version": 1,
+  "request_id": "main-reviewer-20261009-review-gates-p1-remediation-checkpoint-001",
+  "actor_id": "chatgpt:main-reviewer",
+  "lane_id": "main-reviewer",
+  "operation": "checkpoint",
+  "expected_state_version": 53,
+  "payload": {
+    "summary": "PR #103 P1 stale-review-gate finding remediated on branch: reset G1–G4 and clear current attestation on review_rework and submit_review; record exact review_packet SHA-256; review_accept requires current matching claim+packet even for legacy PASS; added tests for rework, packet mutation, orphan PASS, and refreshed manager fixtures.",
+    "next_action": "Check CI on exact head 5e63a1e420e9916c9fb8a30dfc874885232dc653 and new Codex review; only merge PR #103 if green and security finding addressed. Then use G1–G4 evidence-index attestation for runtime-core PR #818 after claim-bound packet is resubmitted, retaining API-key target runtime validation as pending.",
+    "decisions": [
+      "No direct canonical JSON edits. Reject all detached PASS gate values.",
+      "No claim that Mistral API key now works; Playground proof is separate from BYOK HTTP success."
+    ],
+    "evidence_refs": [
+      "https://github.com/pilialvu75-hue/AI-Orchestrator-Module-Library/pull/103",
+      "head:5e63a1e420e9916c9fb8a30dfc874885232dc653",
+      "https://github.com/pilialvu75-hue/AI-Orchestrator-Module-Library/actions/runs/37924324868"
+    ]
+  }
+}
