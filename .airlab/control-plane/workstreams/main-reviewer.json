@@ -3,11 +3,11 @@
   "id": "main-reviewer",
   "title": "Main / Reviewer",
   "role": "reviewer",
-  "status": "CLAIMED",
+  "status": "IMPLEMENTING",
   "activation": "active",
   "scope": "Global architecture, cross-lane review, consolidation, roadmap/state authority and hardening, including target inference profile balance and shared-contract compatibility.",
   "shared_engine_policy": "shared_or_control_plane",
-  "state_version": 52,
+  "state_version": 53,
   "updated_at": "2026-10-09",
   "active_claim": {
     "claim_id": "65b1c4dc30752d4d55cb",
@@ -25,8 +25,8 @@
       "file:pilialvu75-hue/AI-Orchestrator-Module-Library:tools/validate_control_plane.py"
     ],
     "started_at": "2026-10-09T11:19:33Z",
-    "heartbeat_at": "2026-10-09T11:19:33Z",
-    "lease_until": "2026-10-09T23:19:33Z",
+    "heartbeat_at": "2026-10-09T11:22:28Z",
+    "lease_until": "2026-10-09T23:22:28Z",
     "lease_hours": 12
   },
   "dependencies": [],
@@ -48,7 +48,7 @@
     "reviewed_by": null,
     "reviewed_at": null
   },
-  "next_action": "Review runtime-core PR #818 handoff and reconcile required evidence gates. Do not merge before canonical reviewer gate and preserve distinction between CI success and live Mistral BYOK validation.",
+  "next_action": "Check Codex review and exact-head CI for Library PR #103; merge only if clean. Then use new transaction to attest G1–G4 for Runtime Core PR #818, respecting independent G5 target/runtime validation and G6 reviewer gate.",
   "inference_review_policy": {
     "policy": ".airlab/control-plane/inference-policy.json",
     "check": [
@@ -589,28 +589,39 @@
         "Validate Module Library run 37137000660"
       ],
       "next_action": "Release this state-sync claim, verify current canonical conflicts/incidents, then acquire bounded CP-HARDEN-06 evidence-backed canonical sync receipts work if still free."
+    },
+    {
+      "seq": 17,
+      "at": "2026-10-09T11:22:28Z",
+      "claim_id": "65b1c4dc30752d4d55cb",
+      "work_item": "CP-REVIEW-GATES-01",
+      "summary": "CP-REVIEW-GATES-01 implemented in Library PR #103. Adds restricted transactional record_review_gates operation for four pre-review gates G1–G4, evidence-indexed to claim-bound review packets, with four failure-closed regression tests. Validate Module Library CI green; Codex review pending.",
+      "decisions": [
+        "Keep G5/G6/G7 independent; do not infer runtime Mistral success from CI or Playground.",
+        "Do not directly edit canonical lane JSON; record gate proofs only via CAS transactional inbox."
+      ],
+      "evidence_refs": [
+        "https://github.com/pilialvu75-hue/AI-Orchestrator-Module-Library/pull/103",
+        "https://github.com/pilialvu75-hue/AI-Orchestrator-Module-Library/actions/runs/37923246086"
+      ],
+      "next_action": "Check Codex review and exact-head CI for Library PR #103; merge only if clean. Then use new transaction to attest G1–G4 for Runtime Core PR #818, respecting independent G5 target/runtime validation and G6 reviewer gate."
     }
   ],
   "last_checkpoint": {
-    "seq": 16,
-    "at": "2026-10-03T16:29:34Z",
-    "claim_id": "0b82001bb777a69c7d59",
-    "work_item": "CP-HARDEN-03-state-sync",
-    "summary": "Authoritative hardening summary is synchronized after CP-HARDEN-03. CP-HARDEN-03 is marked complete, CP-HARDEN-06 is current, and the external-change watchdog remains explicitly pending its first scheduled/manual runtime execution rather than being inferred successful from CI.",
+    "seq": 17,
+    "at": "2026-10-09T11:22:28Z",
+    "claim_id": "65b1c4dc30752d4d55cb",
+    "work_item": "CP-REVIEW-GATES-01",
+    "summary": "CP-REVIEW-GATES-01 implemented in Library PR #103. Adds restricted transactional record_review_gates operation for four pre-review gates G1–G4, evidence-indexed to claim-bound review packets, with four failure-closed regression tests. Validate Module Library CI green; Codex review pending.",
     "decisions": [
-      "Advance the hardening phase to CP-HARDEN-06 before AIR-10 broad rollout.",
-      "Keep external-change ingress implementation ACTIVE while recording runtime_status as PENDING_FIRST_SCHEDULED_OR_MANUAL_RUN until a real watchdog run exists.",
-      "Pin the pre-sync main reference to 6d2d1bdcbe37c25cedf03518049d90cfbeda0d01."
+      "Keep G5/G6/G7 independent; do not infer runtime Mistral success from CI or Playground.",
+      "Do not directly edit canonical lane JSON; record gate proofs only via CAS transactional inbox."
     ],
     "evidence_refs": [
-      "AI-Orchestrator-Module-Library#100",
-      "merge:e9bdcbe6a19cf395dcecd163e82f617b1ddefe1a",
-      "Validate Module Library run 37136725492",
-      "AI-Orchestrator-Module-Library#101",
-      "merge:73fcff29b5d8b0772af5920c3939e2dc995743a6",
-      "Validate Module Library run 37137000660"
+      "https://github.com/pilialvu75-hue/AI-Orchestrator-Module-Library/pull/103",
+      "https://github.com/pilialvu75-hue/AI-Orchestrator-Module-Library/actions/runs/37923246086"
     ],
-    "next_action": "Release this state-sync claim, verify current canonical conflicts/incidents, then acquire bounded CP-HARDEN-06 evidence-backed canonical sync receipts work if still free."
+    "next_action": "Check Codex review and exact-head CI for Library PR #103; merge only if clean. Then use new transaction to attest G1–G4 for Runtime Core PR #818, respecting independent G5 target/runtime validation and G6 reviewer gate."
   },
   "hardening_backlog": [
     {

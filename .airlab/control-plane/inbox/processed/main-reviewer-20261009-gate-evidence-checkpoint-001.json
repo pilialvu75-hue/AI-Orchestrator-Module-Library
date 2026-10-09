@@ -1,0 +1,12 @@
+{
+  "schema_version": 1,
+  "request_id": "main-reviewer-20261009-gate-evidence-checkpoint-001",
+  "status": "APPLIED",
+  "processed_at": "2026-10-09T11:22:28Z",
+  "source_file": "main-reviewer-20261009-gate-evidence-checkpoint-001.json",
+  "lane_id": "main-reviewer",
+  "operation": "checkpoint",
+  "actor_id": "chatgpt:main-reviewer",
+  "errors": [],
+  "result_state_version": 53
+}
