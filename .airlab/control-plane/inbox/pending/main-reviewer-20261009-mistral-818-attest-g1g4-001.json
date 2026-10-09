@@ -1,0 +1,30 @@
+{
+  "schema_version": 1,
+  "request_id": "main-reviewer-20261009-mistral-818-attest-g1g4-001",
+  "actor_id": "chatgpt:main-reviewer",
+  "lane_id": "runtime-core",
+  "operation": "record_review_gates",
+  "expected_state_version": 8,
+  "payload": {
+    "summary": "Reviewed Mistral runtime diff PR #818 at afc69b5; bounded implementation and clean Codex review. Exact-head CI confirms Flutter analyze/tests, Android signed APK/AAB, first-app acceptance smoke, web contract and Windows/Linux/macOS builds. G4 passes for CI integration/smoke only; live Mistral BYOK API call and target physical validation are explicitly pending and must not be inferred.",
+    "evidence_indices": {
+      "G1_IMPLEMENTATION": [
+        0
+      ],
+      "G2_STATIC": [
+        1
+      ],
+      "G3_CI": [
+        1
+      ],
+      "G4_INTEGRATION": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ]
+    }
+  }
+}
