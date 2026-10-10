@@ -1,0 +1,35 @@
+{
+  "schema_version": 1,
+  "request_id": "android-20261010-pr823-record-review-gates",
+  "actor_id": "chatgpt:main-reviewer",
+  "lane_id": "platform-android",
+  "operation": "record_review_gates",
+  "expected_state_version": 10,
+  "payload": {
+    "summary": "Main/Reviewer inspected PR #823 exact head 0310505583593bc0659638af815fdbe2715ee5c4 and its bounded UI-only diff. Five exact-head workflows pass and the three focused RuntimeNoticePresenter widget regressions pass. G1-G4 apply only to the runtime-notice UI recovery. No RAM/Vulkan/trim15 or physical S24 FE acceptance is inferred.",
+    "evidence_indices": {
+      "G1_IMPLEMENTATION": [
+        0,
+        1
+      ],
+      "G2_STATIC": [
+        7
+      ],
+      "G3_CI": [
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "G4_INTEGRATION": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ]
+    }
+  }
+}
