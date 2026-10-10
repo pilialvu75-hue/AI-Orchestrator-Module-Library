@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "request_id": "main-reviewer-20261010-hardening-state-sync-claim",
+  "actor_id": "chatgpt:main-reviewer",
+  "lane_id": "main-reviewer",
+  "operation": "claim",
+  "expected_state_version": 56,
+  "payload": {
+    "work_item": "canonical-hardening-state-sync-20261010",
+    "repository": "pilialvu75-hue/AI-Orchestrator-Module-Library",
+    "scope": "Synchronize .airlab/state.json with already-merged CP-HARDEN-06 and CP-REVIEW-GATES-01 evidence; set CP-HARDEN-05 as next bounded phase. Do not implement AIR-10 and do not touch other lanes.",
+    "branch": "main-reviewer/canonical-hardening-state-sync-20261010",
+    "resource_locks": [
+      "file:pilialvu75-hue/AI-Orchestrator-Module-Library:.airlab/state.json",
+      "scope:canonical-hardening-state-sync"
+    ]
+  }
+}
