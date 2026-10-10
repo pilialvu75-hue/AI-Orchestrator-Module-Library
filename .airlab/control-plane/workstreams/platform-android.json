@@ -3,13 +3,29 @@
   "id": "platform-android",
   "title": "Android",
   "role": "worker",
-  "status": "READY",
+  "status": "CLAIMED",
   "activation": "active",
   "scope": "Android packaging, permissions, hardware/runtime adapters, UI integration and releases using shared orchestration/contracts with target-optimized inference.",
   "shared_engine_policy": "adapter_only",
-  "state_version": 8,
+  "state_version": 9,
   "updated_at": "2026-10-10",
-  "active_claim": null,
+  "active_claim": {
+    "claim_id": "263aa06406ed3e44d37e",
+    "owner_lane": "platform-android",
+    "work_item": "phi-critical-memory-chat-recovery",
+    "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
+    "scope": "Reacquire existing PR823 UI-only recovery work and submit claim-bound review packet; RAM stability and physical S24 FE acceptance remain open. Preserve trim15 guard.",
+    "branch": "fix/android-phi-memory-chat-recovery",
+    "resource_locks": [
+      "branch:pilialvu75-hue/Ai-orchestrator-riserva:fix/android-phi-memory-chat-recovery",
+      "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/features/chat/presentation/pages/chat_page.dart",
+      "scope:android-phi-memory-chat-recovery"
+    ],
+    "started_at": "2026-10-10T13:36:17Z",
+    "heartbeat_at": "2026-10-10T13:36:17Z",
+    "lease_until": "2026-10-11T01:36:17Z",
+    "lease_hours": 12
+  },
   "dependencies": [],
   "roadmap_refs": [
     ".airlab/public-repositories/Ai-orchestrator-riserva/roadmap.yaml#CANT-14",
