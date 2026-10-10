@@ -3,29 +3,13 @@
   "id": "platform-android",
   "title": "Android",
   "role": "worker",
-  "status": "REVIEW_REQUIRED",
+  "status": "READY",
   "activation": "active",
   "scope": "Android packaging, permissions, hardware/runtime adapters, UI integration and releases using shared orchestration/contracts with target-optimized inference.",
   "shared_engine_policy": "adapter_only",
-  "state_version": 11,
+  "state_version": 12,
   "updated_at": "2026-10-10",
-  "active_claim": {
-    "claim_id": "263aa06406ed3e44d37e",
-    "owner_lane": "platform-android",
-    "work_item": "phi-critical-memory-chat-recovery",
-    "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
-    "scope": "Reacquire existing PR823 UI-only recovery work and submit claim-bound review packet; RAM stability and physical S24 FE acceptance remain open. Preserve trim15 guard.",
-    "branch": "fix/android-phi-memory-chat-recovery",
-    "resource_locks": [
-      "branch:pilialvu75-hue/Ai-orchestrator-riserva:fix/android-phi-memory-chat-recovery",
-      "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/features/chat/presentation/pages/chat_page.dart",
-      "scope:android-phi-memory-chat-recovery"
-    ],
-    "started_at": "2026-10-10T13:36:17Z",
-    "heartbeat_at": "2026-10-10T13:36:17Z",
-    "lease_until": "2026-10-11T01:36:17Z",
-    "lease_hours": 12
-  },
+  "active_claim": null,
   "dependencies": [],
   "roadmap_refs": [
     ".airlab/public-repositories/Ai-orchestrator-riserva/roadmap.yaml#CANT-14",
@@ -99,16 +83,16 @@
     "G3_CI": "PASS",
     "G4_INTEGRATION": "PASS",
     "G5_TARGET_RUNTIME": "NOT_APPLICABLE_UNTIL_RUNTIME_CHANGE",
-    "G6_REVIEWER": "PENDING",
-    "G7_CANONICAL_SYNC": "PENDING"
+    "G6_REVIEWER": "PASS",
+    "G7_CANONICAL_SYNC": "PASS"
   },
   "reviewer": {
     "required": true,
-    "state": "PENDING",
-    "reviewed_by": null,
-    "reviewed_at": null
+    "state": "APPROVED",
+    "reviewed_by": "main-reviewer",
+    "reviewed_at": "2026-10-10T13:50:24Z"
   },
-  "next_action": "Main/Reviewer must inspect the review_packet, linked evidence and required gates before promotion or rework.",
+  "next_action": "Deploy a reviewed build containing PR #823 and perform a bounded S24 FE UI check that notices expire/dismiss without blocking input. Keep the critical-memory/RAM investigation open independently; preserve trim15 and do not claim runtime stability from this UI approval.",
   "inference_profile_policy": "target_owned_benchmark_gated",
   "inference_profile": {
     "status": "ACTIVE_BENCHMARKING",
@@ -178,29 +162,43 @@
       ],
       "next_action": "Main/Reviewer must inspect the review_packet, linked evidence and required gates before promotion or rework.",
       "kind": "REVIEW_HANDOFF"
+    },
+    {
+      "seq": 4,
+      "at": "2026-10-10T13:50:24Z",
+      "claim_id": "263aa06406ed3e44d37e",
+      "work_item": "phi-critical-memory-chat-recovery",
+      "summary": "Main/Reviewer accepts PR #823 only as a bounded UI recovery for persistent runtime notices. Exact head 0310505583593bc0659638af815fdbe2715ee5c4 has passing cross-platform CI and focused widget regressions. This approval does not accept the underlying critical-memory failure, Vulkan behavior, trim15 suppression, or physical S24 FE runtime stability.",
+      "decisions": [
+        "Main/Reviewer accepted the implementation/review gate."
+      ],
+      "evidence_refs": [
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/823",
+        "head:0310505583593bc0659638af815fdbe2715ee5c4",
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38003787134",
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38003787134/job/114068102558"
+      ],
+      "next_action": "Deploy a reviewed build containing PR #823 and perform a bounded S24 FE UI check that notices expire/dismiss without blocking input. Keep the critical-memory/RAM investigation open independently; preserve trim15 and do not claim runtime stability from this UI approval.",
+      "kind": "REVIEW_ACCEPTED"
     }
   ],
   "last_checkpoint": {
-    "seq": 3,
-    "at": "2026-10-10T13:37:07Z",
+    "seq": 4,
+    "at": "2026-10-10T13:50:24Z",
     "claim_id": "263aa06406ed3e44d37e",
     "work_item": "phi-critical-memory-chat-recovery",
-    "summary": "PR823 UI-only recovery after runtime errors: deduplicated, dismissible notices expire within six seconds and clear on a new request. Five workflows and three focused widget tests pass on 0310505583593bc0659638af815fdbe2715ee5c4. Physical S24 FE UI acceptance and RAM stability remain OPEN; no runtime acceptance or merge asserted.",
-    "decisions": [],
+    "summary": "Main/Reviewer accepts PR #823 only as a bounded UI recovery for persistent runtime notices. Exact head 0310505583593bc0659638af815fdbe2715ee5c4 has passing cross-platform CI and focused widget regressions. This approval does not accept the underlying critical-memory failure, Vulkan behavior, trim15 suppression, or physical S24 FE runtime stability.",
+    "decisions": [
+      "Main/Reviewer accepted the implementation/review gate."
+    ],
     "evidence_refs": [
       "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/823",
-      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/0310505583593bc0659638af815fdbe2715ee5c4",
-      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38003787165",
-      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38003787234",
-      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38003787104",
-      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38003787163",
+      "head:0310505583593bc0659638af815fdbe2715ee5c4",
       "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38003787134",
-      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38003787134/job/114068102558",
-      "https://github.com/pilialvu75-hue/Ai-orchestrator-diagnostics/releases/tag/diagnostics-v1-6bd1447f-5fda-4171-84b4-c1ff56b154cf",
-      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/823"
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38003787134/job/114068102558"
     ],
-    "next_action": "Main/Reviewer must inspect the review_packet, linked evidence and required gates before promotion or rework.",
-    "kind": "REVIEW_HANDOFF"
+    "next_action": "Deploy a reviewed build containing PR #823 and perform a bounded S24 FE UI check that notices expire/dismiss without blocking input. Keep the critical-memory/RAM investigation open independently; preserve trim15 and do not claim runtime stability from this UI approval.",
+    "kind": "REVIEW_ACCEPTED"
   },
   "reconciliation_events": [
     {
@@ -230,6 +228,13 @@
         "CI:38003787134"
       ],
       "at": "2026-10-10T13:34:00Z"
+    },
+    {
+      "type": "CLAIM_RELEASED_AFTER_REVIEW",
+      "claim_id": "263aa06406ed3e44d37e",
+      "work_item": "phi-critical-memory-chat-recovery",
+      "reason": "Main/Reviewer accepted the bounded implementation/review gate.",
+      "at": "2026-10-10T13:50:24Z"
     }
   ],
   "stale_block_history": [
@@ -419,6 +424,22 @@
           "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38003787134/job/114068102558"
         ]
       }
+    }
+  ],
+  "review_history": [
+    {
+      "reviewed_at": "2026-10-10T13:50:24Z",
+      "reviewed_by": "main-reviewer",
+      "claim_id": "263aa06406ed3e44d37e",
+      "work_item": "phi-critical-memory-chat-recovery",
+      "decision": "APPROVED",
+      "summary": "Main/Reviewer accepts PR #823 only as a bounded UI recovery for persistent runtime notices. Exact head 0310505583593bc0659638af815fdbe2715ee5c4 has passing cross-platform CI and focused widget regressions. This approval does not accept the underlying critical-memory failure, Vulkan behavior, trim15 suppression, or physical S24 FE runtime stability.",
+      "evidence_refs": [
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/823",
+        "head:0310505583593bc0659638af815fdbe2715ee5c4",
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38003787134",
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38003787134/job/114068102558"
+      ]
     }
   ]
 }

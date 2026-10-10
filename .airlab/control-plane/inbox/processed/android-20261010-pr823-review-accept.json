@@ -1,0 +1,12 @@
+{
+  "schema_version": 1,
+  "request_id": "android-20261010-pr823-review-accept",
+  "status": "APPLIED",
+  "processed_at": "2026-10-10T13:50:24Z",
+  "source_file": "android-20261010-pr823-review-accept.json",
+  "lane_id": "platform-android",
+  "operation": "review_accept",
+  "actor_id": "chatgpt:main-reviewer",
+  "errors": [],
+  "result_state_version": 12
+}
