@@ -1,0 +1,11 @@
+{
+  "schema_version": 1,
+  "request_id": "main-reviewer-20261010-aivexus-base0-release-state-lock",
+  "actor_id": "chatgpt:main-reviewer",
+  "lane_id": "main-reviewer",
+  "operation": "release",
+  "expected_state_version": 63,
+  "payload": {
+    "reason": "Checkpointed lane-registration progress. Releasing before adding .airlab/state.json to the exact resource lock set required by canonical roadmap/state synchronization. Existing BASE-0 branch changes are preserved for continuation."
+  }
+}
