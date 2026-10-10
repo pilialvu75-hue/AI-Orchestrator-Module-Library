@@ -7,7 +7,7 @@
     "policy": "This private repository is the single coordination authority. Chats and agents are workers, not independent sources of truth."
   },
   "updated_at": "2026-10-10",
-  "state_revision": 134,
+  "state_revision": 135,
   "lifecycle_status": "BOOTSTRAP_ACTIVE",
   "roadmap_authority": {
     "library": ".airlab/roadmap.yaml",
@@ -78,11 +78,11 @@
     "invalid_lane_behavior": "ISOLATE_AND_SURFACE_PROJECTION_INCIDENT"
   },
   "projection": {
-    "source_digest": "4a3cc454f3185ec5e4d78b673e423be84547a71217105ac05b5cabeb56235d1a",
-    "projected_at": "2026-10-10T16:58:54Z",
+    "source_digest": "836bdc0d874142b7973c6cbeb38e18d8a311e734d13ab486996247bf20801d5d",
+    "projected_at": "2026-10-10T17:00:54Z",
     "counts": {
       "BLOCKED": 1,
-      "CLAIMED": 1,
+      "IMPLEMENTING": 1,
       "READY": 13
     },
     "active_claims": [
@@ -91,7 +91,7 @@
         "claim_id": "90bdb7ae1c7849605a9a",
         "work_item": "AIVEXUS-BASE-0",
         "repository": "pilialvu75-hue/AI-Orchestrator-Module-Library",
-        "lease_until": "2026-10-11T04:58:54Z",
+        "lease_until": "2026-10-11T05:00:54Z",
         "resource_locks": [
           "branch:pilialvu75-hue/AI-Orchestrator-Module-Library:main-reviewer/aivexus-base0-bootstrap",
           "contract:aivexus-project-extension-v1",
@@ -329,15 +329,15 @@
       },
       {
         "id": "main-reviewer",
-        "status": "CLAIMED",
+        "status": "IMPLEMENTING",
         "activation": "active",
-        "state_version": 62,
+        "state_version": 63,
         "updated_at": "2026-10-10",
         "active_claim": {
           "claim_id": "90bdb7ae1c7849605a9a",
           "work_item": "AIVEXUS-BASE-0",
           "repository": "pilialvu75-hue/AI-Orchestrator-Module-Library",
-          "lease_until": "2026-10-11T04:58:54Z",
+          "lease_until": "2026-10-11T05:00:54Z",
           "resource_locks": [
             "branch:pilialvu75-hue/AI-Orchestrator-Module-Library:main-reviewer/aivexus-base0-bootstrap",
             "contract:aivexus-project-extension-v1",
@@ -359,7 +359,7 @@
         "reviewer_state": "AUTHORITY",
         "inference_profile_status": null,
         "historical_backlog_count": 0,
-        "next_action": "Run or observe the first real CP-HARDEN-03 external-ingress watchdog execution. If it completes cleanly and no P0/P1 incident appears, design CP-HARDEN-05/AIR-10 as a bounded dispatcher with no second execution authority."
+        "next_action": "Release and reacquire BASE-0 with .airlab/state.json lock added, then persist contracts/roadmaps/decision/state and validate the full registration PR."
       },
       {
         "id": "platform-android",

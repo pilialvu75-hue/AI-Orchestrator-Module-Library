@@ -3,11 +3,11 @@
   "id": "main-reviewer",
   "title": "Main / Reviewer",
   "role": "reviewer",
-  "status": "CLAIMED",
+  "status": "IMPLEMENTING",
   "activation": "active",
   "scope": "Global architecture, cross-lane review, consolidation, roadmap/state authority and hardening, including target inference profile balance and shared-contract compatibility.",
   "shared_engine_policy": "shared_or_control_plane",
-  "state_version": 62,
+  "state_version": 63,
   "updated_at": "2026-10-10",
   "active_claim": {
     "claim_id": "90bdb7ae1c7849605a9a",
@@ -34,8 +34,8 @@
       "scope:aivexus:base0"
     ],
     "started_at": "2026-10-10T16:58:54Z",
-    "heartbeat_at": "2026-10-10T16:58:54Z",
-    "lease_until": "2026-10-11T04:58:54Z",
+    "heartbeat_at": "2026-10-10T17:00:54Z",
+    "lease_until": "2026-10-11T05:00:54Z",
     "lease_hours": 12
   },
   "dependencies": [],
@@ -57,7 +57,7 @@
     "reviewed_by": null,
     "reviewed_at": null
   },
-  "next_action": "Run or observe the first real CP-HARDEN-03 external-ingress watchdog execution. If it completes cleanly and no P0/P1 incident appears, design CP-HARDEN-05/AIR-10 as a bounded dispatcher with no second execution authority.",
+  "next_action": "Release and reacquire BASE-0 with .airlab/state.json lock added, then persist contracts/roadmaps/decision/state and validate the full registration PR.",
   "inference_review_policy": {
     "policy": ".airlab/control-plane/inference-policy.json",
     "check": [
@@ -670,28 +670,43 @@
         ".airlab/control-plane/external-change-registry.json last_scan_at:null"
       ],
       "next_action": "Run or observe the first real CP-HARDEN-03 external-ingress watchdog execution. If it completes cleanly and no P0/P1 incident appears, design CP-HARDEN-05/AIR-10 as a bounded dispatcher with no second execution authority."
+    },
+    {
+      "seq": 21,
+      "at": "2026-10-10T17:00:54Z",
+      "claim_id": "90bdb7ae1c7849605a9a",
+      "work_item": "AIVEXUS-BASE-0",
+      "summary": "AIVEXUS-BASE-0 branch created. Chat registry and canonical workstream list updated; platform-web scoped to Prova primary plus Riserva secondary; Cantiere assigned sole shared-base ownership; new aivexus-3d and aivexus-games READY workstreams created. Games lane explicitly records GAME-1 independent of CAD-1/3D assets. Before roadmap edits, canonical rule requires .airlab/state.json to be included and locked.",
+      "decisions": [
+        "Cantiere is sole owner of ProjectExtension/persistence/attachments/selector/navigation.",
+        "platform-web retains Ai_orchestrator-prova primary and gains Riserva secondary only for explicitly claimed Aivexus/browser adapter work.",
+        "AIVEXUS-GAME-1 depends on shared BASE-1/BASE-2 but not on CAD-1 or 3D asset availability."
+      ],
+      "evidence_refs": [
+        "branch:main-reviewer/aivexus-base0-bootstrap",
+        ".airlab/control-plane/workstreams/aivexus-3d.json",
+        ".airlab/control-plane/workstreams/aivexus-games.json"
+      ],
+      "next_action": "Release and reacquire BASE-0 with .airlab/state.json lock added, then persist contracts/roadmaps/decision/state and validate the full registration PR."
     }
   ],
   "last_checkpoint": {
-    "seq": 20,
-    "at": "2026-10-10T13:53:10Z",
-    "claim_id": "c999a3870419f8fe8288",
-    "work_item": "canonical-hardening-state-sync-20261010",
-    "summary": "Authoritative hardening summary synchronized on 2026-10-10. PR #104 merged after exact-head Validate Module Library run #379 passed. .airlab/state.json now marks CP-HARDEN-06 and CP-REVIEW-GATES-01 complete, makes CP-HARDEN-05 the current bounded phase, and preserves CP-HARDEN-03 runtime watchdog as pending because external-change-registry last_scan_at remains null.",
+    "seq": 21,
+    "at": "2026-10-10T17:00:54Z",
+    "claim_id": "90bdb7ae1c7849605a9a",
+    "work_item": "AIVEXUS-BASE-0",
+    "summary": "AIVEXUS-BASE-0 branch created. Chat registry and canonical workstream list updated; platform-web scoped to Prova primary plus Riserva secondary; Cantiere assigned sole shared-base ownership; new aivexus-3d and aivexus-games READY workstreams created. Games lane explicitly records GAME-1 independent of CAD-1/3D assets. Before roadmap edits, canonical rule requires .airlab/state.json to be included and locked.",
     "decisions": [
-      "Do not start broad AIR-10 dispatch before first real external-ingress watchdog execution is observed.",
-      "Treat CP-HARDEN-06 as complete from merged PR #102 and reconciled stale-claim evidence.",
-      "Treat CP-REVIEW-GATES-01 as complete from merged PR #103 and real APPLIED reviewer-gate transactions."
+      "Cantiere is sole owner of ProjectExtension/persistence/attachments/selector/navigation.",
+      "platform-web retains Ai_orchestrator-prova primary and gains Riserva secondary only for explicitly claimed Aivexus/browser adapter work.",
+      "AIVEXUS-GAME-1 depends on shared BASE-1/BASE-2 but not on CAD-1 or 3D asset availability."
     ],
     "evidence_refs": [
-      "AI-Orchestrator-Module-Library#104",
-      "merge:8bbbe4babadeaaf2658055c79a09c9a0fc452386",
-      "Validate Module Library run 38057399364 PASS",
-      "AI-Orchestrator-Module-Library#102",
-      "AI-Orchestrator-Module-Library#103",
-      ".airlab/control-plane/external-change-registry.json last_scan_at:null"
+      "branch:main-reviewer/aivexus-base0-bootstrap",
+      ".airlab/control-plane/workstreams/aivexus-3d.json",
+      ".airlab/control-plane/workstreams/aivexus-games.json"
     ],
-    "next_action": "Run or observe the first real CP-HARDEN-03 external-ingress watchdog execution. If it completes cleanly and no P0/P1 incident appears, design CP-HARDEN-05/AIR-10 as a bounded dispatcher with no second execution authority."
+    "next_action": "Release and reacquire BASE-0 with .airlab/state.json lock added, then persist contracts/roadmaps/decision/state and validate the full registration PR."
   },
   "hardening_backlog": [
     {
