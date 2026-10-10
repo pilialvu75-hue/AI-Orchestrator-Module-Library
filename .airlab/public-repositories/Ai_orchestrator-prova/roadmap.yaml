@@ -87,3 +87,13 @@ roadmap:
       Turn canonical roadmap items into bounded claimed work for authorized workers, persist external waits/events,
       avoid duplicate execution, and return structured review packets to Main/Reviewer without making physical-device
       gates or owner policy decisions automatically.
+
+- id: AIR-AIVEXUS-WEB-SCOPE
+    title: Reconcile Aivexus Web scope between Prova and Riserva
+    state: done
+    priority: P0
+    outcome: >-
+      Keep Ai_orchestrator-prova as the primary platform-web/AIrLab repository while authorizing
+      Ai-orchestrator-riserva as the secondary repository for explicitly claimed Aivexus browser
+      adapter work. Cantiere remains owner of project lifecycle, ProjectExtension persistence,
+      attachments, selector and shared navigation.
