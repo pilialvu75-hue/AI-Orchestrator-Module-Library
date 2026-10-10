@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "request_id": "android-20261010-pr823-review-accept",
+  "actor_id": "chatgpt:main-reviewer",
+  "lane_id": "platform-android",
+  "operation": "review_accept",
+  "expected_state_version": 11,
+  "payload": {
+    "summary": "Main/Reviewer accepts PR #823 only as a bounded UI recovery for persistent runtime notices. Exact head 0310505583593bc0659638af815fdbe2715ee5c4 has passing cross-platform CI and focused widget regressions. This approval does not accept the underlying critical-memory failure, Vulkan behavior, trim15 suppression, or physical S24 FE runtime stability.",
+    "next_action": "Deploy a reviewed build containing PR #823 and perform a bounded S24 FE UI check that notices expire/dismiss without blocking input. Keep the critical-memory/RAM investigation open independently; preserve trim15 and do not claim runtime stability from this UI approval.",
+    "evidence_refs": [
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/823",
+      "head:0310505583593bc0659638af815fdbe2715ee5c4",
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38003787134",
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38003787134/job/114068102558"
+    ]
+  }
+}
