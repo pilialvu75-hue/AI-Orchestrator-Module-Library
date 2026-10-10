@@ -7,7 +7,7 @@
     "policy": "This private repository is the single coordination authority. Chats and agents are workers, not independent sources of truth."
   },
   "updated_at": "2026-10-10",
-  "state_revision": 140,
+  "state_revision": 141,
   "lifecycle_status": "BOOTSTRAP_ACTIVE",
   "roadmap_authority": {
     "library": ".airlab/roadmap.yaml",
@@ -44,6 +44,8 @@
   "workstreams": [
     ".airlab/control-plane/workstreams/main-reviewer.json",
     ".airlab/control-plane/workstreams/cantiere.json",
+    ".airlab/control-plane/workstreams/aivexus-3d.json",
+    ".airlab/control-plane/workstreams/aivexus-games.json",
     ".airlab/control-plane/workstreams/voice-live.json",
     ".airlab/control-plane/workstreams/runtime-core.json",
     ".airlab/control-plane/workstreams/diagnostics.json",
