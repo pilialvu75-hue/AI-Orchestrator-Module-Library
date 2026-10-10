@@ -1,0 +1,64 @@
+{
+  "schema_version": 1,
+  "id": "aivexus-games",
+  "title": "Aivexus Studio Videogiochi",
+  "role": "worker",
+  "status": "READY",
+  "activation": "active",
+  "scope": "Game domain only: GameSpec, deterministic game templates, gameplay/resources, isolated preview, build/export and game verification. Must consume the Cantiere-owned shared ProjectExtension/persistence/navigation base instead of modifying or duplicating it.",
+  "shared_engine_policy": "domain_extension_only",
+  "state_version": 1,
+  "updated_at": "2026-10-10",
+  "active_claim": null,
+  "dependencies": [
+    "cantiere:AIVEXUS-BASE-1",
+    "cantiere:AIVEXUS-BASE-2"
+  ],
+  "roadmap_refs": [
+    ".airlab/public-repositories/Ai-orchestrator-riserva/roadmap.yaml#AIVEXUS-GAME-1",
+    ".airlab/public-repositories/Ai-orchestrator-riserva/roadmap.yaml#AIVEXUS-BASE-1",
+    ".airlab/public-repositories/Ai-orchestrator-riserva/roadmap.yaml#AIVEXUS-BASE-2"
+  ],
+  "evidence": [],
+  "gates": {
+    "G0_CLAIM": "PENDING",
+    "G1_IMPLEMENTATION": "PENDING",
+    "G2_STATIC": "PENDING",
+    "G3_CI": "PENDING",
+    "G4_INTEGRATION": "PENDING",
+    "G5_TARGET_RUNTIME": "NOT_APPLICABLE_UNTIL_RUNTIME_CHANGE",
+    "G6_REVIEWER": "PENDING",
+    "G7_CANONICAL_SYNC": "PENDING"
+  },
+  "reviewer": {
+    "required": true,
+    "state": "PENDING",
+    "reviewed_by": null,
+    "reviewed_at": null
+  },
+  "next_action": "Wait for Cantiere AIVEXUS-BASE-1/BASE-2 integration. Then claim AIVEXUS-GAME-1 with scope:aivexus:game and domain-only file locks. The first 2D game must use original/licensed 2D resources and must not wait for Aivexus 3D assets.",
+  "coordination": {
+    "domain_lock": "scope:aivexus:game",
+    "shared_contract_owner": "cantiere",
+    "shared_contracts": [
+      "contract:aivexus-project-extension-v1",
+      "contract:aivexus-resource-exchange-v1"
+    ],
+    "resource_exchange": "3D assets are optional future inputs delivered through persisted ResourceExchange v1; absence of 3D assets cannot block AIVEXUS-GAME-1.",
+    "diagnostics": "Record build/browser/target receipts separately; CI or a screenshot is not playable-game acceptance.",
+    "library": "Reuse certified Library capabilities before generating equivalents."
+  },
+  "first_work": {
+    "id": "AIVEXUS-GAME-1",
+    "title": "Deterministic 2D browser game Raccogli 10 stelle",
+    "blocked_by": [
+      "AIVEXUS-BASE-1",
+      "AIVEXUS-BASE-2"
+    ],
+    "explicitly_not_blocked_by": [
+      "AIVEXUS-CAD-1",
+      "3D asset availability"
+    ],
+    "acceptance": "Reopenable source project plus real Web export and playable browser verification; S24 FE physical validation remains a separate target gate."
+  }
+}

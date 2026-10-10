@@ -7,12 +7,14 @@
   "activation": "active",
   "scope": "Exclusive Cantiere/App Factory execution, durability, build/review/validation/apply and first-real-app reliability.",
   "shared_engine_policy": "shared_or_control_plane",
-  "state_version": 28,
-  "updated_at": "2026-10-07",
+  "state_version": 29,
+  "updated_at": "2026-10-10",
   "active_claim": null,
   "dependencies": [],
   "roadmap_refs": [
-    ".airlab/public-repositories/Ai-orchestrator-riserva/roadmap.yaml#CANT-11"
+    ".airlab/public-repositories/Ai-orchestrator-riserva/roadmap.yaml#CANT-11",
+    ".airlab/public-repositories/Ai-orchestrator-riserva/roadmap.yaml#AIVEXUS-BASE-1",
+    ".airlab/public-repositories/Ai-orchestrator-riserva/roadmap.yaml#AIVEXUS-BASE-2"
   ],
   "evidence": [],
   "gates": {
@@ -586,5 +588,34 @@
         "at": "2026-10-07T20:06:04Z"
       }
     }
-  ]
+  ],
+  "aivexus_shared_base": {
+    "owner": "cantiere",
+    "status": "PLANNED_CLAIM_REQUIRED",
+    "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
+    "work_items": [
+      "AIVEXUS-BASE-1",
+      "AIVEXUS-BASE-2"
+    ],
+    "owns": [
+      "Aivexus ProjectExtension v1 contract",
+      "project persistence and conservative migration",
+      "attachment store interface and immutable attachment references",
+      "project-type selector",
+      "shared project navigation/router integration",
+      "resource-exchange persistence hooks"
+    ],
+    "required_locks": [
+      "contract:aivexus-project-extension-v1",
+      "contract:aivexus-resource-exchange-v1",
+      "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/app_factory/workshop/web/workshop_web_project_storage.dart",
+      "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/app_factory/workshop/web/workshop_web_projects_page.dart"
+    ],
+    "consumer_lanes": [
+      "aivexus-3d",
+      "aivexus-games",
+      "platform-web"
+    ],
+    "rule": "One owner at a time for shared files. Domain workers request shared changes and do not duplicate the shared base."
+  }
 }

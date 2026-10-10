@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-10-01",
+  "updated_at": "2026-10-10",
   "authority": ".airlab/control-plane/canonical-state.json",
   "bootstrap_generator": "tools/chat_lane_bootstrap.py",
   "lanes": [
@@ -86,7 +86,10 @@
       "chat_title": "AI ORCHESTRATOR — WEB / PWA",
       "mode": "worker",
       "primary_repository": "pilialvu75-hue/Ai_orchestrator-prova",
-      "purpose": "Web/PWA shell, browser adapters, web inference profile and AIrLab-aligned provider execution."
+      "purpose": "Web/PWA shell and browser adapters across AIrLab Prova plus explicitly claimed Aivexus Web surfaces in Riserva; Cantiere retains project lifecycle ownership.",
+      "secondary_repositories": [
+        "pilialvu75-hue/Ai-orchestrator-riserva"
+      ]
     },
     {
       "id": "platform-raspberry-pi",
@@ -111,6 +114,20 @@
       "mode": "worker",
       "primary_repository": "pilialvu75-hue/Ai_orchestrator-prova",
       "purpose": "Provider-neutral intelligence gateway, durable orchestration, free-resource pool and web control-plane services."
+    },
+    {
+      "id": "aivexus-3d",
+      "chat_title": "AIVEXUS — STUDIO 3D",
+      "mode": "worker",
+      "primary_repository": "pilialvu75-hue/Ai-orchestrator-riserva",
+      "purpose": "CAD/3D domain worker for CadSpec, measured/photographic inputs, editable 3D sources, CAD/print exports and domain verification. Shared ProjectExtension/persistence/navigation remain Cantiere-owned."
+    },
+    {
+      "id": "aivexus-games",
+      "chat_title": "AIVEXUS — STUDIO VIDEOGIOCHI",
+      "mode": "worker",
+      "primary_repository": "pilialvu75-hue/Ai-orchestrator-riserva",
+      "purpose": "Game domain worker for GameSpec, deterministic templates, playable preview/build/export and game verification. Shared ProjectExtension/persistence/navigation remain Cantiere-owned; first 2D game is independent of 3D asset availability."
     }
   ]
 }

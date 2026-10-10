@@ -969,3 +969,69 @@ audit_findings:
   - https://api.github.com/repos/pilialvu75-hue/Ai-orchestrator-riserva
   - https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/583
   - https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/configuring-pull-request-merges/managing-the-automatic-deletion-of-branches
+
+- id: AIVEXUS-BASE-1
+  title: Aivexus shared ProjectExtension persistence and attachment base
+  state: planned
+  priority: P0
+  owner_lane: cantiere
+  dependencies: []
+  locks:
+    - contract:aivexus-project-extension-v1
+    - contract:aivexus-resource-exchange-v1
+  outcome: >-
+    Extend the existing Cantiere project additively with ProjectExtension v1, conservative
+    persistence migration, immutable attachment references, revision/idempotency semantics and
+    resource-exchange persistence hooks. Legacy projects remain readable as software.
+  done_when: >-
+    Existing projects reopen without data loss; CAD and game draft extensions save/reload;
+    attachment refs retain hash/metadata; retries do not duplicate a project/revision/request.
+
+- id: AIVEXUS-BASE-2
+  title: Aivexus project-type selector and shared navigation
+  state: planned
+  priority: P0
+  owner_lane: cantiere
+  dependencies:
+    - AIVEXUS-BASE-1
+  outcome: >-
+    Add one shared project-type selector and navigation path for App/Software, Stampa 3D and
+    Videogiochi inside the existing Cantiere project hub without creating a second lifecycle.
+  done_when: >-
+    Phone-oriented Web flow creates/reopens each project type through the same project list;
+    missing runner capabilities remain explicit and no Generate action simulates success.
+
+- id: AIVEXUS-CAD-1
+  title: Studio 3D measured parametric sample and real exports
+  state: planned
+  priority: P0
+  owner_lane: aivexus-3d
+  dependencies:
+    - AIVEXUS-BASE-1
+    - AIVEXUS-BASE-2
+  domain_lock: scope:aivexus:cad
+  outcome: >-
+    Generate the editable 60x40x4 mm sample with two 5 mm through-holes and produce real,
+    hashed STEP/STL/3MF plus geometry verification receipts.
+  done_when: >-
+    Source and exports match the requested revision and geometry checks; Fusion opening and
+    first physical print remain separate target-evidence gates.
+
+- id: AIVEXUS-GAME-1
+  title: Studio Videogiochi deterministic 2D Web sample
+  state: planned
+  priority: P0
+  owner_lane: aivexus-games
+  dependencies:
+    - AIVEXUS-BASE-1
+    - AIVEXUS-BASE-2
+  explicitly_not_depends_on:
+    - AIVEXUS-CAD-1
+    - 3D asset availability
+  domain_lock: scope:aivexus:game
+  outcome: >-
+    Build the deterministic Raccogli 10 stelle 2D game with reopenable source, touch/keyboard
+    controls and a real Web export. Use original/licensed 2D resources so Studio 3D cannot block it.
+  done_when: >-
+    A full match is playable in the browser, a rule change creates a new reproducible revision,
+    source/export hashes and license manifest are recorded, and S24 FE validation remains separate.
