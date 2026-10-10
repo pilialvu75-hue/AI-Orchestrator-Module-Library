@@ -1,0 +1,11 @@
+{
+  "schema_version": 1,
+  "request_id": "main-reviewer-20261010-aivexus-base0-release-relock",
+  "actor_id": "chatgpt:main-reviewer",
+  "lane_id": "main-reviewer",
+  "operation": "release",
+  "expected_state_version": 60,
+  "payload": {
+    "reason": "BASE-0 design read found two additional canonical contract files are required. Release before any implementation changes so the claim can be reacquired with exact file locks for ProjectExtension schema and ResourceExchange protocol; no repository files modified under the first claim."
+  }
+}
