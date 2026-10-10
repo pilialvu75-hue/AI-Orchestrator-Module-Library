@@ -209,5 +209,39 @@
       "rule": "Only interactive chatgpt:main-reviewer may attest G1-G4 against exact immutable review-packet evidence indices; G5/G6/G7 remain independent.",
       "validation": "PR103_POST_MERGE_CI_PASS; real APPLIED attestations used for runtime-core PR818 and platform-android PR823"
     }
+  },
+  "aivexus_studios": {
+    "status": "BOOTSTRAP_REGISTERED_PENDING_SHARED_BASE",
+    "registered_lanes": [
+      "aivexus-3d",
+      "aivexus-games"
+    ],
+    "application_repository": "pilialvu75-hue/Ai-orchestrator-riserva",
+    "shared_base_owner": "cantiere",
+    "shared_base_work": [
+      "AIVEXUS-BASE-1",
+      "AIVEXUS-BASE-2"
+    ],
+    "first_domain_work": {
+      "aivexus-3d": "AIVEXUS-CAD-1",
+      "aivexus-games": "AIVEXUS-GAME-1"
+    },
+    "web_scope": {
+      "platform-web-primary": "pilialvu75-hue/Ai_orchestrator-prova",
+      "platform-web-secondary": [
+        "pilialvu75-hue/Ai-orchestrator-riserva"
+      ],
+      "rule": "Riserva requires an explicit platform-web claim for browser-adapter work; Cantiere owns project lifecycle/shared base."
+    },
+    "contracts": [
+      ".airlab/control-plane/contracts/aivexus-project-extension-v1.schema.json",
+      ".airlab/control-plane/contracts/aivexus-resource-exchange-v1.md"
+    ],
+    "integration_status": {
+      "cantiere": "CONTRACT_REGISTERED_IMPLEMENTATION_NOT_STARTED",
+      "library": "CONTRACTUAL_REUSE_BOUNDARY_ONLY_NOT_RUNTIME_PROVEN",
+      "diagnostics": "VERIFICATION_RECEIPT_CONTRACT_ONLY_NOT_RUNTIME_PROVEN"
+    },
+    "game_2d_requires_3d_assets": false
   }
 }
