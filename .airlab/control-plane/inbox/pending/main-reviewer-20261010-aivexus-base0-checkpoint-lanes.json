@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "request_id": "main-reviewer-20261010-aivexus-base0-checkpoint-lanes",
+  "actor_id": "chatgpt:main-reviewer",
+  "lane_id": "main-reviewer",
+  "operation": "checkpoint",
+  "expected_state_version": 62,
+  "payload": {
+    "summary": "AIVEXUS-BASE-0 branch created. Chat registry and canonical workstream list updated; platform-web scoped to Prova primary plus Riserva secondary; Cantiere assigned sole shared-base ownership; new aivexus-3d and aivexus-games READY workstreams created. Games lane explicitly records GAME-1 independent of CAD-1/3D assets. Before roadmap edits, canonical rule requires .airlab/state.json to be included and locked.",
+    "decisions": [
+      "Cantiere is sole owner of ProjectExtension/persistence/attachments/selector/navigation.",
+      "platform-web retains Ai_orchestrator-prova primary and gains Riserva secondary only for explicitly claimed Aivexus/browser adapter work.",
+      "AIVEXUS-GAME-1 depends on shared BASE-1/BASE-2 but not on CAD-1 or 3D asset availability."
+    ],
+    "evidence_refs": [
+      "branch:main-reviewer/aivexus-base0-bootstrap",
+      ".airlab/control-plane/workstreams/aivexus-3d.json",
+      ".airlab/control-plane/workstreams/aivexus-games.json"
+    ],
+    "next_action": "Release and reacquire BASE-0 with .airlab/state.json lock added, then persist contracts/roadmaps/decision/state and validate the full registration PR."
+  }
+}
