@@ -1,0 +1,12 @@
+{
+  "schema_version": 1,
+  "request_id": "platform-android-20261010-resolve-stale-823",
+  "status": "APPLIED",
+  "processed_at": "2026-10-10T13:34:00Z",
+  "source_file": "platform-android-20261010-resolve-stale-823.json",
+  "lane_id": "platform-android",
+  "operation": "resolve_stale_block",
+  "actor_id": "chatgpt:main-reviewer",
+  "errors": [],
+  "result_state_version": 8
+}

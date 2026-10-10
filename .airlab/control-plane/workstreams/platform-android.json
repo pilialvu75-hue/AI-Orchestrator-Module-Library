@@ -3,11 +3,11 @@
   "id": "platform-android",
   "title": "Android",
   "role": "worker",
-  "status": "BLOCKED",
+  "status": "READY",
   "activation": "active",
   "scope": "Android packaging, permissions, hardware/runtime adapters, UI integration and releases using shared orchestration/contracts with target-optimized inference.",
   "shared_engine_policy": "adapter_only",
-  "state_version": 7,
+  "state_version": 8,
   "updated_at": "2026-10-10",
   "active_claim": null,
   "dependencies": [],
@@ -32,7 +32,7 @@
     "reviewed_by": null,
     "reviewed_at": null
   },
-  "next_action": "Read PR823 CI, fix any failures, submit claim-bound review packet. Keep physical S24 FE UI and memory acceptance open; do not suppress critical-memory guard.",
+  "next_action": "Return platform-android to READY so the worker can reacquire a bounded claim and submit a valid review handoff for PR #823. Keep device validation and runtime stability open.",
   "inference_profile_policy": "target_owned_benchmark_gated",
   "inference_profile": {
     "status": "ACTIVE_BENCHMARKING",
@@ -109,19 +109,54 @@
       ],
       "lease_until": "2026-10-10T11:19:26Z",
       "detected_at": "2026-10-10T11:27:12Z"
+    },
+    {
+      "type": "STALE_BLOCK_RESOLVED_BY_REVIEWER",
+      "claim_id": "9e07c5e78988b4d33ee9",
+      "work_item": "phi-critical-memory-chat-recovery",
+      "summary": "Resolve the expired platform-android claim after PR #823 CI completed successfully.",
+      "evidence_refs": [
+        "Ai-orchestrator-riserva#823",
+        "head:0310505583593bc0659638af815fdbe2715ee5c4",
+        "CI:38003787165",
+        "CI:38003787234",
+        "CI:38003787104",
+        "CI:38003787163",
+        "CI:38003787134"
+      ],
+      "at": "2026-10-10T13:34:00Z"
     }
   ],
-  "block_reason": {
-    "code": "CLAIM_LEASE_EXPIRED",
-    "work_item": "phi-critical-memory-chat-recovery",
-    "claim_id": "9e07c5e78988b4d33ee9",
-    "resource_locks": [
-      "branch:pilialvu75-hue/Ai-orchestrator-riserva:fix/android-phi-memory-chat-recovery",
-      "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/features/chat/presentation/pages/chat_page.dart",
-      "scope:android-phi-memory-chat-recovery"
-    ],
-    "lease_until": "2026-10-10T11:19:26Z",
-    "detected_at": "2026-10-10T11:27:12Z",
-    "review_required": true
-  }
+  "stale_block_history": [
+    {
+      "code": "CLAIM_LEASE_EXPIRED",
+      "work_item": "phi-critical-memory-chat-recovery",
+      "claim_id": "9e07c5e78988b4d33ee9",
+      "resource_locks": [
+        "branch:pilialvu75-hue/Ai-orchestrator-riserva:fix/android-phi-memory-chat-recovery",
+        "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/features/chat/presentation/pages/chat_page.dart",
+        "scope:android-phi-memory-chat-recovery"
+      ],
+      "lease_until": "2026-10-10T11:19:26Z",
+      "detected_at": "2026-10-10T11:27:12Z",
+      "review_required": true,
+      "resolved_at": "2026-10-10T13:34:00Z",
+      "resolution": {
+        "type": "STALE_BLOCK_RESOLVED_BY_REVIEWER",
+        "claim_id": "9e07c5e78988b4d33ee9",
+        "work_item": "phi-critical-memory-chat-recovery",
+        "summary": "Resolve the expired platform-android claim after PR #823 CI completed successfully.",
+        "evidence_refs": [
+          "Ai-orchestrator-riserva#823",
+          "head:0310505583593bc0659638af815fdbe2715ee5c4",
+          "CI:38003787165",
+          "CI:38003787234",
+          "CI:38003787104",
+          "CI:38003787163",
+          "CI:38003787134"
+        ],
+        "at": "2026-10-10T13:34:00Z"
+      }
+    }
+  ]
 }

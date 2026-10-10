@@ -7,7 +7,7 @@
     "policy": "This private repository is the single coordination authority. Chats and agents are workers, not independent sources of truth."
   },
   "updated_at": "2026-10-10",
-  "state_revision": 122,
+  "state_revision": 123,
   "lifecycle_status": "BOOTSTRAP_ACTIVE",
   "roadmap_authority": {
     "library": ".airlab/roadmap.yaml",
@@ -78,11 +78,11 @@
     "invalid_lane_behavior": "ISOLATE_AND_SURFACE_PROJECTION_INCIDENT"
   },
   "projection": {
-    "source_digest": "1372e13cec473099738bc348eab79dc8c1a4b30ade5589935d88d1d1d239284f",
-    "projected_at": "2026-10-10T11:27:12Z",
+    "source_digest": "98817c28b3cb475568529f55c0113226f42b80889664b1bb201b03c791de916e",
+    "projected_at": "2026-10-10T13:34:00Z",
     "counts": {
-      "BLOCKED": 2,
-      "READY": 12,
+      "BLOCKED": 1,
+      "READY": 13,
       "REVIEW_REQUIRED": 1
     },
     "active_claims": [
@@ -130,22 +130,6 @@
       "runtime-core"
     ],
     "blocked": [
-      {
-        "lane": "platform-android",
-        "reason": {
-          "code": "CLAIM_LEASE_EXPIRED",
-          "work_item": "phi-critical-memory-chat-recovery",
-          "claim_id": "9e07c5e78988b4d33ee9",
-          "resource_locks": [
-            "branch:pilialvu75-hue/Ai-orchestrator-riserva:fix/android-phi-memory-chat-recovery",
-            "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/features/chat/presentation/pages/chat_page.dart",
-            "scope:android-phi-memory-chat-recovery"
-          ],
-          "lease_until": "2026-10-10T11:19:26Z",
-          "detected_at": "2026-10-10T11:27:12Z",
-          "review_required": true
-        }
-      },
       {
         "lane": "platform-windows-legacy",
         "reason": {
@@ -293,15 +277,15 @@
       },
       {
         "id": "platform-android",
-        "status": "BLOCKED",
+        "status": "READY",
         "activation": "active",
-        "state_version": 7,
+        "state_version": 8,
         "updated_at": "2026-10-10",
         "active_claim": null,
         "reviewer_state": "PENDING",
         "inference_profile_status": "ACTIVE_BENCHMARKING",
         "historical_backlog_count": 3,
-        "next_action": "Read PR823 CI, fix any failures, submit claim-bound review packet. Keep physical S24 FE UI and memory acceptance open; do not suppress critical-memory guard."
+        "next_action": "Return platform-android to READY so the worker can reacquire a bounded claim and submit a valid review handoff for PR #823. Keep device validation and runtime stability open."
       },
       {
         "id": "platform-ios",
