@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "request_id": "main-reviewer-20261010-aivexus-base0-completion-checkpoint",
+  "actor_id": "chatgpt:main-reviewer",
+  "lane_id": "main-reviewer",
+  "operation": "checkpoint",
+  "expected_state_version": 68,
+  "payload": {
+    "summary": "AIVEXUS-BASE-0 completed canonically. Conflicted PR #105 was closed without force; clean replacement PR #106 exact head d4136dd54c7c46c2b316d2cfc19ba8f7d26324de passed Validate Module Library run 38070490251 and merged as d8f614f7c909768cfb8d383f8f6739e7d760516b. Post-merge Validate run 38070516873 and Reconcile run 38070516955 passed. Projection now includes aivexus-3d and aivexus-games READY. Cantiere owns shared BASE-1/BASE-2; platform-web retains Prova primary with Riserva secondary; ResourceExchange v1 and ProjectExtension v1 are persisted. No runtime integrations are claimed.",
+    "decisions": [
+      "Cantiere is the sole shared-base owner for ProjectExtension, persistence, attachments, selector, shared navigation and exchange persistence hooks.",
+      "aivexus-3d and aivexus-games claims are scoped to Ai-orchestrator-riserva only.",
+      "platform-web remains primarily Ai_orchestrator-prova and may touch Riserva only under explicit Aivexus/browser-adapter claims.",
+      "AIVEXUS-GAME-1 depends on BASE-1/BASE-2 but not on AIVEXUS-CAD-1 or 3D asset availability.",
+      "Do not claim Library/Diagnostics/CAD/Game runtime integration from registration or CI."
+    ],
+    "evidence_refs": [
+      "AI-Orchestrator-Module-Library#106",
+      "head:d4136dd54c7c46c2b316d2cfc19ba8f7d26324de",
+      "Validate Module Library run 38070490251 PASS",
+      "merge:d8f614f7c909768cfb8d383f8f6739e7d760516b",
+      "Validate Module Library run 38070516873 PASS",
+      "Reconcile Canonical Control Plane run 38070516955 PASS",
+      ".airlab/control-plane/workstreams/aivexus-3d.json",
+      ".airlab/control-plane/workstreams/aivexus-games.json",
+      ".airlab/control-plane/contracts/aivexus-project-extension-v1.schema.json",
+      ".airlab/control-plane/contracts/aivexus-resource-exchange-v1.md"
+    ],
+    "next_action": "Release AIVEXUS-BASE-0. Generate current canonical bootstraps for aivexus-3d and aivexus-games. Cantiere may then claim AIVEXUS-BASE-1 and BASE-2 as bounded shared-base work; domain lanes wait for that integration before CAD-1/GAME-1 implementation."
+  }
+}
