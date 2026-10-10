@@ -1,9 +1,9 @@
 {
   "schema_version": 3,
   "repository": "pilialvu75-hue/AI-Orchestrator-Module-Library",
-  "updated_at": "2026-10-03",
+  "updated_at": "2026-10-10",
   "lifecycle_status": "ACTIVE",
-  "current_phase": "CP-HARDEN-06",
+  "current_phase": "CP-HARDEN-05",
   "completed": [
     "L1",
     "L13",
@@ -17,10 +17,11 @@
     "CP-HARDEN-02",
     "CP-HARDEN-03",
     "CP-HARDEN-04",
-    "CP-HARDEN-07"
+    "CP-HARDEN-07",
+    "CP-HARDEN-06",
+    "CP-REVIEW-GATES-01"
   ],
   "next_actions": [
-    "CP-HARDEN-06",
     "CP-HARDEN-05",
     "L19",
     "L14",
@@ -193,6 +194,20 @@
       "resume_target": "READY_WITHOUT_AUTO_CLAIM",
       "stale_reviewer_recovery": "resolve_stale_block restricted to chatgpt:main-reviewer",
       "validation": "PR97_AND_PR98_CI_PASS_PLUS_REAL_STALE_BLOCK_RECEIPT_APPLIED"
+    },
+    "canonical_sync_receipts": {
+      "status": "ACTIVE",
+      "backlog_id": "CP-HARDEN-06",
+      "registry": ".airlab/control-plane/canonical-sync-receipts.json",
+      "policy": "Material canonical sync requires evidence-backed before/after digests and a finalized receipt; unchanged content cannot satisfy G7.",
+      "validation": "PR102_CI_PASS_AND_REAL_RECONCILE_INITIALIZED; stale implementation claim reconciled 2026-10-09"
+    },
+    "reviewer_gate_attestation": {
+      "status": "ACTIVE",
+      "backlog_id": "CP-REVIEW-GATES-01",
+      "operation": "record_review_gates",
+      "rule": "Only interactive chatgpt:main-reviewer may attest G1-G4 against exact immutable review-packet evidence indices; G5/G6/G7 remain independent.",
+      "validation": "PR103_POST_MERGE_CI_PASS; real APPLIED attestations used for runtime-core PR818 and platform-android PR823"
     }
   }
 }
