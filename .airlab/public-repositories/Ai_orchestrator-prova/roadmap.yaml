@@ -88,7 +88,7 @@ roadmap:
       avoid duplicate execution, and return structured review packets to Main/Reviewer without making physical-device
       gates or owner policy decisions automatically.
 
-- id: AIR-AIVEXUS-WEB-SCOPE
+  - id: AIR-AIVEXUS-WEB-SCOPE
     title: Reconcile Aivexus Web scope between Prova and Riserva
     state: done
     priority: P0
