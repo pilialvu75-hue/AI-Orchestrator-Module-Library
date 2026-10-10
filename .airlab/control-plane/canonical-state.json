@@ -7,7 +7,7 @@
     "policy": "This private repository is the single coordination authority. Chats and agents are workers, not independent sources of truth."
   },
   "updated_at": "2026-10-10",
-  "state_revision": 141,
+  "state_revision": 142,
   "lifecycle_status": "BOOTSTRAP_ACTIVE",
   "roadmap_authority": {
     "library": ".airlab/roadmap.yaml",
@@ -80,12 +80,12 @@
     "invalid_lane_behavior": "ISOLATE_AND_SURFACE_PROJECTION_INCIDENT"
   },
   "projection": {
-    "source_digest": "9fff1b13996cef2edcbbb585d0a68303ec5822f9f02f4e5bc8ffeca5d191cc08",
-    "projected_at": "2026-10-10T17:06:30Z",
+    "source_digest": "dd6dc7d94db2112b5af0341f3af972d1f09299f1b63d67d9c1446d2eca73aeb0",
+    "projected_at": "2026-10-10T17:08:35Z",
     "counts": {
       "BLOCKED": 1,
       "CLAIMED": 1,
-      "READY": 13
+      "READY": 15
     },
     "active_claims": [
       {
@@ -301,11 +301,35 @@
         "next_action": "Advance AIR-10 as a bounded dispatcher/executor task without creating a second Project/Execution authority."
       },
       {
+        "id": "aivexus-3d",
+        "status": "READY",
+        "activation": "active",
+        "state_version": 1,
+        "updated_at": "2026-10-10",
+        "active_claim": null,
+        "reviewer_state": "PENDING",
+        "inference_profile_status": null,
+        "historical_backlog_count": 0,
+        "next_action": "Wait for Cantiere AIVEXUS-BASE-1/BASE-2 integration. Then claim AIVEXUS-CAD-1 with scope:aivexus:cad and only domain-specific file locks; do not take shared ProjectExtension/storage/navigation locks."
+      },
+      {
+        "id": "aivexus-games",
+        "status": "READY",
+        "activation": "active",
+        "state_version": 1,
+        "updated_at": "2026-10-10",
+        "active_claim": null,
+        "reviewer_state": "PENDING",
+        "inference_profile_status": null,
+        "historical_backlog_count": 0,
+        "next_action": "Wait for Cantiere AIVEXUS-BASE-1/BASE-2 integration. Then claim AIVEXUS-GAME-1 with scope:aivexus:game and domain-only file locks. The first 2D game must use original/licensed 2D resources and must not wait for Aivexus 3D assets."
+      },
+      {
         "id": "cantiere",
         "status": "READY",
         "activation": "active",
-        "state_version": 28,
-        "updated_at": "2026-10-07",
+        "state_version": 29,
+        "updated_at": "2026-10-10",
         "active_claim": null,
         "reviewer_state": "PENDING",
         "inference_profile_status": null,
@@ -435,8 +459,8 @@
         "id": "platform-web",
         "status": "READY",
         "activation": "active",
-        "state_version": 3,
-        "updated_at": "2026-10-01",
+        "state_version": 4,
+        "updated_at": "2026-10-10",
         "active_claim": null,
         "reviewer_state": "PENDING",
         "inference_profile_status": "NEEDS_TARGET_PROFILE",
