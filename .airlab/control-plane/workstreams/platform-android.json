@@ -3,29 +3,13 @@
   "id": "platform-android",
   "title": "Android",
   "role": "worker",
-  "status": "IMPLEMENTING",
+  "status": "BLOCKED",
   "activation": "active",
   "scope": "Android packaging, permissions, hardware/runtime adapters, UI integration and releases using shared orchestration/contracts with target-optimized inference.",
   "shared_engine_policy": "adapter_only",
-  "state_version": 6,
-  "updated_at": "2026-10-09",
-  "active_claim": {
-    "claim_id": "9e07c5e78988b4d33ee9",
-    "owner_lane": "platform-android",
-    "work_item": "phi-critical-memory-chat-recovery",
-    "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
-    "scope": "S24 FE build3069 critical-memory failure: bounded dismissible chat notices and recovery; investigate resource telemetry without weakening critical guard or changing shared inference semantics.",
-    "branch": "fix/android-phi-memory-chat-recovery",
-    "resource_locks": [
-      "branch:pilialvu75-hue/Ai-orchestrator-riserva:fix/android-phi-memory-chat-recovery",
-      "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/features/chat/presentation/pages/chat_page.dart",
-      "scope:android-phi-memory-chat-recovery"
-    ],
-    "started_at": "2026-10-09T23:15:16Z",
-    "heartbeat_at": "2026-10-09T23:19:26Z",
-    "lease_until": "2026-10-10T11:19:26Z",
-    "lease_hours": 12
-  },
+  "state_version": 7,
+  "updated_at": "2026-10-10",
+  "active_claim": null,
   "dependencies": [],
   "roadmap_refs": [
     ".airlab/public-repositories/Ai-orchestrator-riserva/roadmap.yaml#CANT-14",
@@ -112,5 +96,32 @@
       "commit:0310505583593bc0659638af815fdbe2715ee5c4"
     ],
     "next_action": "Read PR823 CI, fix any failures, submit claim-bound review packet. Keep physical S24 FE UI and memory acceptance open; do not suppress critical-memory guard."
+  },
+  "reconciliation_events": [
+    {
+      "type": "CLAIM_LEASE_EXPIRED",
+      "claim_id": "9e07c5e78988b4d33ee9",
+      "work_item": "phi-critical-memory-chat-recovery",
+      "resource_locks": [
+        "branch:pilialvu75-hue/Ai-orchestrator-riserva:fix/android-phi-memory-chat-recovery",
+        "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/features/chat/presentation/pages/chat_page.dart",
+        "scope:android-phi-memory-chat-recovery"
+      ],
+      "lease_until": "2026-10-10T11:19:26Z",
+      "detected_at": "2026-10-10T11:27:12Z"
+    }
+  ],
+  "block_reason": {
+    "code": "CLAIM_LEASE_EXPIRED",
+    "work_item": "phi-critical-memory-chat-recovery",
+    "claim_id": "9e07c5e78988b4d33ee9",
+    "resource_locks": [
+      "branch:pilialvu75-hue/Ai-orchestrator-riserva:fix/android-phi-memory-chat-recovery",
+      "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/features/chat/presentation/pages/chat_page.dart",
+      "scope:android-phi-memory-chat-recovery"
+    ],
+    "lease_until": "2026-10-10T11:19:26Z",
+    "detected_at": "2026-10-10T11:27:12Z",
+    "review_required": true
   }
 }
