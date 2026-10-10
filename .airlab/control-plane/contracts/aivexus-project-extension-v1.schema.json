@@ -1,0 +1,468 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:aivexus:project-extension:1",
+  "title": "Aivexus ProjectExtension v1 — proposta",
+  "description": "Estensione additiva del progetto Cantiere esistente. Non definisce un secondo lifecycle. La validazione di struttura non prova la correttezza geometrica o runtime.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "projectKind",
+    "specRevision",
+    "domainSpec",
+    "inputs",
+    "requestedOutputs",
+    "artifacts",
+    "validationRefs"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": 1
+    },
+    "projectKind": {
+      "enum": [
+        "software",
+        "cad",
+        "game"
+      ]
+    },
+    "specRevision": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "domainSpec": {
+      "type": "object"
+    },
+    "inputs": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/input"
+      }
+    },
+    "requestedOutputs": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "uniqueItems": true
+    },
+    "artifacts": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/artifact"
+      }
+    },
+    "validationRefs": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "uniqueItems": true
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "projectKind": {
+            "const": "cad"
+          }
+        },
+        "required": [
+          "projectKind"
+        ]
+      },
+      "then": {
+        "properties": {
+          "domainSpec": {
+            "$ref": "#/$defs/cadSpec"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "projectKind": {
+            "const": "game"
+          }
+        },
+        "required": [
+          "projectKind"
+        ]
+      },
+      "then": {
+        "properties": {
+          "domainSpec": {
+            "$ref": "#/$defs/gameSpec"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "projectKind": {
+            "const": "cad"
+          },
+          "domainSpec": {
+            "properties": {
+              "inputMode": {
+                "enum": [
+                  "photo_reference",
+                  "photo_relief",
+                  "single_photo_reconstruction",
+                  "multi_photo"
+                ]
+              }
+            },
+            "required": [
+              "inputMode"
+            ]
+          }
+        },
+        "required": [
+          "projectKind",
+          "domainSpec"
+        ]
+      },
+      "then": {
+        "properties": {
+          "inputs": {
+            "minItems": 1,
+            "contains": {
+              "properties": {
+                "role": {
+                  "const": "photo"
+                }
+              },
+              "required": [
+                "role"
+              ]
+            }
+          }
+        }
+      }
+    }
+  ],
+  "$defs": {
+    "input": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "ref",
+        "name",
+        "role",
+        "mimeType",
+        "sizeBytes",
+        "sha256"
+      ],
+      "properties": {
+        "ref": {
+          "type": "string",
+          "minLength": 1
+        },
+        "name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "role": {
+          "enum": [
+            "photo",
+            "drawing",
+            "model",
+            "texture",
+            "audio",
+            "other"
+          ]
+        },
+        "mimeType": {
+          "type": "string",
+          "minLength": 1
+        },
+        "sizeBytes": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "sha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        }
+      }
+    },
+    "artifact": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "ref",
+        "name",
+        "role",
+        "format",
+        "mimeType",
+        "sizeBytes",
+        "sha256",
+        "sourceSpecRevision",
+        "geometryType",
+        "units",
+        "generator"
+      ],
+      "properties": {
+        "ref": {
+          "type": "string",
+          "minLength": 1
+        },
+        "name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "role": {
+          "enum": [
+            "source",
+            "cad",
+            "mesh",
+            "drawing",
+            "preview",
+            "build",
+            "manifest",
+            "report",
+            "machine_code"
+          ]
+        },
+        "format": {
+          "type": "string",
+          "minLength": 1
+        },
+        "mimeType": {
+          "type": "string",
+          "minLength": 1
+        },
+        "sizeBytes": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "sha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "sourceSpecRevision": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "geometryType": {
+          "enum": [
+            "parametric_solid",
+            "brep",
+            "mesh",
+            "sketch",
+            "none"
+          ]
+        },
+        "units": {
+          "enum": [
+            "mm",
+            "cm",
+            "m",
+            "inch",
+            null
+          ]
+        },
+        "generator": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "name",
+            "version",
+            "jobRef"
+          ],
+          "properties": {
+            "name": {
+              "type": "string",
+              "minLength": 1
+            },
+            "version": {
+              "type": "string",
+              "minLength": 1
+            },
+            "jobRef": {
+              "type": "string",
+              "minLength": 1
+            }
+          }
+        }
+      }
+    },
+    "measurement": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "name",
+        "value",
+        "unit",
+        "source",
+        "confirmed"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "value": {
+          "type": "number"
+        },
+        "unit": {
+          "enum": [
+            "mm",
+            "cm",
+            "m",
+            "inch"
+          ]
+        },
+        "source": {
+          "enum": [
+            "user",
+            "derived",
+            "estimated"
+          ]
+        },
+        "confirmed": {
+          "type": "boolean"
+        }
+      }
+    },
+    "cadSpec": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "inputMode",
+        "units",
+        "representation",
+        "parameters",
+        "measurements",
+        "printerProfileRef"
+      ],
+      "properties": {
+        "inputMode": {
+          "enum": [
+            "description",
+            "photo_reference",
+            "photo_relief",
+            "single_photo_reconstruction",
+            "multi_photo",
+            "model_import"
+          ]
+        },
+        "units": {
+          "enum": [
+            "mm",
+            "cm",
+            "m",
+            "inch"
+          ]
+        },
+        "representation": {
+          "enum": [
+            "parametric_solid",
+            "mesh"
+          ]
+        },
+        "parameters": {
+          "type": "object"
+        },
+        "measurements": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/measurement"
+          }
+        },
+        "printerProfileRef": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "minLength": 1
+        }
+      }
+    },
+    "gameSpec": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "dimension",
+        "targetPlatforms",
+        "engine",
+        "templateId",
+        "rules",
+        "controls"
+      ],
+      "properties": {
+        "dimension": {
+          "enum": [
+            "2d",
+            "3d"
+          ]
+        },
+        "targetPlatforms": {
+          "type": "array",
+          "items": {
+            "enum": [
+              "web",
+              "android",
+              "windows",
+              "macos",
+              "linux",
+              "ios"
+            ]
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "engine": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "name",
+            "version"
+          ],
+          "properties": {
+            "name": {
+              "type": "string",
+              "minLength": 1
+            },
+            "version": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "minLength": 1
+            }
+          }
+        },
+        "templateId": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "minLength": 1
+        },
+        "rules": {
+          "type": "object"
+        },
+        "controls": {
+          "type": "array",
+          "items": {
+            "enum": [
+              "touch",
+              "keyboard",
+              "mouse",
+              "gamepad"
+            ]
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        }
+      }
+    }
+  }
+}
