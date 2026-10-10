@@ -1,0 +1,11 @@
+{
+  "schema_version": 1,
+  "request_id": "main-reviewer-20261010-aivexus-base0-release-complete",
+  "actor_id": "chatgpt:main-reviewer",
+  "lane_id": "main-reviewer",
+  "operation": "release",
+  "expected_state_version": 69,
+  "payload": {
+    "reason": "AIVEXUS-BASE-0 canonical bootstrap is merged and post-merge validated/reconciled through PR #106. Release Main/Reviewer locks; shared implementation remains unclaimed until Cantiere takes a real BASE-1/BASE-2 claim."
+  }
+}
