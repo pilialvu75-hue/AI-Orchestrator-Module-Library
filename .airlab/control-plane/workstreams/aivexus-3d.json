@@ -1,0 +1,60 @@
+{
+  "schema_version": 1,
+  "id": "aivexus-3d",
+  "title": "Aivexus Studio 3D",
+  "role": "worker",
+  "status": "READY",
+  "activation": "active",
+  "scope": "CAD/3D domain only: CadSpec, measured and photographic inputs, editable CAD/mesh sources, CAD/print exports and domain verification. Must consume the Cantiere-owned shared ProjectExtension/persistence/navigation base instead of modifying or duplicating it.",
+  "shared_engine_policy": "domain_extension_only",
+  "state_version": 1,
+  "updated_at": "2026-10-10",
+  "active_claim": null,
+  "dependencies": [
+    "cantiere:AIVEXUS-BASE-1",
+    "cantiere:AIVEXUS-BASE-2"
+  ],
+  "roadmap_refs": [
+    ".airlab/public-repositories/Ai-orchestrator-riserva/roadmap.yaml#AIVEXUS-CAD-1",
+    ".airlab/public-repositories/Ai-orchestrator-riserva/roadmap.yaml#AIVEXUS-BASE-1",
+    ".airlab/public-repositories/Ai-orchestrator-riserva/roadmap.yaml#AIVEXUS-BASE-2"
+  ],
+  "evidence": [],
+  "gates": {
+    "G0_CLAIM": "PENDING",
+    "G1_IMPLEMENTATION": "PENDING",
+    "G2_STATIC": "PENDING",
+    "G3_CI": "PENDING",
+    "G4_INTEGRATION": "PENDING",
+    "G5_TARGET_RUNTIME": "NOT_APPLICABLE_UNTIL_RUNTIME_CHANGE",
+    "G6_REVIEWER": "PENDING",
+    "G7_CANONICAL_SYNC": "PENDING"
+  },
+  "reviewer": {
+    "required": true,
+    "state": "PENDING",
+    "reviewed_by": null,
+    "reviewed_at": null
+  },
+  "next_action": "Wait for Cantiere AIVEXUS-BASE-1/BASE-2 integration. Then claim AIVEXUS-CAD-1 with scope:aivexus:cad and only domain-specific file locks; do not take shared ProjectExtension/storage/navigation locks.",
+  "coordination": {
+    "domain_lock": "scope:aivexus:cad",
+    "shared_contract_owner": "cantiere",
+    "shared_contracts": [
+      "contract:aivexus-project-extension-v1",
+      "contract:aivexus-resource-exchange-v1"
+    ],
+    "resource_exchange": "Use persisted Aivexus ResourceExchange v1 requests/receipts for assets crossing domain boundaries.",
+    "diagnostics": "Record build/geometry/export receipts through existing Diagnostics-compatible references; CI alone is not Fusion/print acceptance.",
+    "library": "Reuse certified Library capabilities before generating equivalents."
+  },
+  "first_work": {
+    "id": "AIVEXUS-CAD-1",
+    "title": "Measured parametric sample and real STEP/STL/3MF outputs",
+    "blocked_by": [
+      "AIVEXUS-BASE-1",
+      "AIVEXUS-BASE-2"
+    ],
+    "acceptance": "Editable source plus real hashed STEP/STL/3MF and geometry validation. Fusion opening and physical print remain separate evidence gates."
+  }
+}
