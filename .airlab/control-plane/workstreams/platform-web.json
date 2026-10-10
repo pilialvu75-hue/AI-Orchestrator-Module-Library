@@ -7,13 +7,17 @@
   "activation": "active",
   "scope": "Web/PWA shell and browser adapters around shared orchestration/contracts; provider/cloud control remains aligned with AIrLab.",
   "shared_engine_policy": "adapter_only",
-  "state_version": 3,
-  "updated_at": "2026-10-01",
+  "state_version": 4,
+  "updated_at": "2026-10-10",
   "active_claim": null,
-  "dependencies": [],
+  "dependencies": [
+    "cantiere:AIVEXUS-BASE-1",
+    "cantiere:AIVEXUS-BASE-2"
+  ],
   "roadmap_refs": [
     ".airlab/public-repositories/Ai_orchestrator-prova/roadmap.yaml#AIR-7",
-    ".airlab/public-repositories/Ai_orchestrator-prova/roadmap.yaml#AIR-10"
+    ".airlab/public-repositories/Ai_orchestrator-prova/roadmap.yaml#AIR-10",
+    ".airlab/public-repositories/Ai-orchestrator-riserva/roadmap.yaml#AIVEXUS-BASE-2"
   ],
   "evidence": [],
   "gates": {
@@ -50,5 +54,12 @@
     "Web/PWA remains a 0 EUR target and Cloudflare is an adapter, not a hard dependency.",
     "Preserve offline-first shell behavior where browser capabilities permit; cloud-provider execution still requires connectivity.",
     "Private/staging access and provider-neutral capability routing belong under AIrLab rather than duplicating Cantiere lifecycle."
-  ]
+  ],
+  "repository_scope": {
+    "primary": "pilialvu75-hue/Ai_orchestrator-prova",
+    "secondary": [
+      "pilialvu75-hue/Ai-orchestrator-riserva"
+    ],
+    "rule": "Prova remains the AIrLab/Web primary. Riserva is authorized only for explicitly claimed Aivexus/browser adapter work. Project lifecycle, ProjectExtension persistence and selector/navigation remain Cantiere-owned."
+  }
 }
