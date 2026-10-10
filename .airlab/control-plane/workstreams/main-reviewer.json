@@ -3,11 +3,11 @@
   "id": "main-reviewer",
   "title": "Main / Reviewer",
   "role": "reviewer",
-  "status": "CLAIMED",
+  "status": "IMPLEMENTING",
   "activation": "active",
   "scope": "Global architecture, cross-lane review, consolidation, roadmap/state authority and hardening, including target inference profile balance and shared-contract compatibility.",
   "shared_engine_policy": "shared_or_control_plane",
-  "state_version": 57,
+  "state_version": 58,
   "updated_at": "2026-10-10",
   "active_claim": {
     "claim_id": "c999a3870419f8fe8288",
@@ -22,8 +22,8 @@
       "scope:canonical-hardening-state-sync"
     ],
     "started_at": "2026-10-10T13:51:47Z",
-    "heartbeat_at": "2026-10-10T13:51:47Z",
-    "lease_until": "2026-10-11T01:51:47Z",
+    "heartbeat_at": "2026-10-10T13:53:10Z",
+    "lease_until": "2026-10-11T01:53:10Z",
     "lease_hours": 12
   },
   "dependencies": [],
@@ -45,7 +45,7 @@
     "reviewed_by": null,
     "reviewed_at": null
   },
-  "next_action": "Release CP-REVIEW-GATES-01 claim. Resume runtime-core Mistral 429 PR #818 review via claim-bound resubmission and evidence-indexed G1-G4 attestation. Do not mark API-key runtime successful without live BYOK validation.",
+  "next_action": "Run or observe the first real CP-HARDEN-03 external-ingress watchdog execution. If it completes cleanly and no P0/P1 incident appears, design CP-HARDEN-05/AIR-10 as a bounded dispatcher with no second execution authority.",
   "inference_review_policy": {
     "policy": ".airlab/control-plane/inference-policy.json",
     "check": [
@@ -637,25 +637,49 @@
         "https://github.com/pilialvu75-hue/AI-Orchestrator-Module-Library/actions/runs/37924324868"
       ],
       "next_action": "Release CP-REVIEW-GATES-01 claim. Resume runtime-core Mistral 429 PR #818 review via claim-bound resubmission and evidence-indexed G1-G4 attestation. Do not mark API-key runtime successful without live BYOK validation."
+    },
+    {
+      "seq": 20,
+      "at": "2026-10-10T13:53:10Z",
+      "claim_id": "c999a3870419f8fe8288",
+      "work_item": "canonical-hardening-state-sync-20261010",
+      "summary": "Authoritative hardening summary synchronized on 2026-10-10. PR #104 merged after exact-head Validate Module Library run #379 passed. .airlab/state.json now marks CP-HARDEN-06 and CP-REVIEW-GATES-01 complete, makes CP-HARDEN-05 the current bounded phase, and preserves CP-HARDEN-03 runtime watchdog as pending because external-change-registry last_scan_at remains null.",
+      "decisions": [
+        "Do not start broad AIR-10 dispatch before first real external-ingress watchdog execution is observed.",
+        "Treat CP-HARDEN-06 as complete from merged PR #102 and reconciled stale-claim evidence.",
+        "Treat CP-REVIEW-GATES-01 as complete from merged PR #103 and real APPLIED reviewer-gate transactions."
+      ],
+      "evidence_refs": [
+        "AI-Orchestrator-Module-Library#104",
+        "merge:8bbbe4babadeaaf2658055c79a09c9a0fc452386",
+        "Validate Module Library run 38057399364 PASS",
+        "AI-Orchestrator-Module-Library#102",
+        "AI-Orchestrator-Module-Library#103",
+        ".airlab/control-plane/external-change-registry.json last_scan_at:null"
+      ],
+      "next_action": "Run or observe the first real CP-HARDEN-03 external-ingress watchdog execution. If it completes cleanly and no P0/P1 incident appears, design CP-HARDEN-05/AIR-10 as a bounded dispatcher with no second execution authority."
     }
   ],
   "last_checkpoint": {
-    "seq": 19,
-    "at": "2026-10-09T11:40:18Z",
-    "claim_id": "65b1c4dc30752d4d55cb",
-    "work_item": "CP-REVIEW-GATES-01",
-    "summary": "CP-REVIEW-GATES-01 merged via Library PR #103 (merge 0a7e5a7e). Exact head 5e63a1e passed Validate Module Library CI and Codex review completed with no major issues after remediation of both P1 stale-attestation paths; post-merge main Validate Module Library run 37925075312 PASS.",
+    "seq": 20,
+    "at": "2026-10-10T13:53:10Z",
+    "claim_id": "c999a3870419f8fe8288",
+    "work_item": "canonical-hardening-state-sync-20261010",
+    "summary": "Authoritative hardening summary synchronized on 2026-10-10. PR #104 merged after exact-head Validate Module Library run #379 passed. .airlab/state.json now marks CP-HARDEN-06 and CP-REVIEW-GATES-01 complete, makes CP-HARDEN-05 the current bounded phase, and preserves CP-HARDEN-03 runtime watchdog as pending because external-change-registry last_scan_at remains null.",
     "decisions": [
-      "No gate bypass or unverified runtime success; the claim-bound review packet digest is mandatory at acceptance.",
-      "Main/Reviewer reviewer-gate infrastructure is now on main; follow up on Mistral PR #818 bounded code review."
+      "Do not start broad AIR-10 dispatch before first real external-ingress watchdog execution is observed.",
+      "Treat CP-HARDEN-06 as complete from merged PR #102 and reconciled stale-claim evidence.",
+      "Treat CP-REVIEW-GATES-01 as complete from merged PR #103 and real APPLIED reviewer-gate transactions."
     ],
     "evidence_refs": [
-      "https://github.com/pilialvu75-hue/AI-Orchestrator-Module-Library/pull/103",
-      "merge:0a7e5a7ec852ab73fad8e356b7c7c744ff7402eb",
-      "https://github.com/pilialvu75-hue/AI-Orchestrator-Module-Library/actions/runs/37925075312",
-      "https://github.com/pilialvu75-hue/AI-Orchestrator-Module-Library/actions/runs/37924324868"
+      "AI-Orchestrator-Module-Library#104",
+      "merge:8bbbe4babadeaaf2658055c79a09c9a0fc452386",
+      "Validate Module Library run 38057399364 PASS",
+      "AI-Orchestrator-Module-Library#102",
+      "AI-Orchestrator-Module-Library#103",
+      ".airlab/control-plane/external-change-registry.json last_scan_at:null"
     ],
-    "next_action": "Release CP-REVIEW-GATES-01 claim. Resume runtime-core Mistral 429 PR #818 review via claim-bound resubmission and evidence-indexed G1-G4 attestation. Do not mark API-key runtime successful without live BYOK validation."
+    "next_action": "Run or observe the first real CP-HARDEN-03 external-ingress watchdog execution. If it completes cleanly and no P0/P1 incident appears, design CP-HARDEN-05/AIR-10 as a bounded dispatcher with no second execution authority."
   },
   "hardening_backlog": [
     {

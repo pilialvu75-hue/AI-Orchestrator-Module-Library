@@ -7,7 +7,7 @@
     "policy": "This private repository is the single coordination authority. Chats and agents are workers, not independent sources of truth."
   },
   "updated_at": "2026-10-10",
-  "state_revision": 129,
+  "state_revision": 130,
   "lifecycle_status": "BOOTSTRAP_ACTIVE",
   "roadmap_authority": {
     "library": ".airlab/roadmap.yaml",
@@ -78,11 +78,11 @@
     "invalid_lane_behavior": "ISOLATE_AND_SURFACE_PROJECTION_INCIDENT"
   },
   "projection": {
-    "source_digest": "e8f8f3b74e535d032f9be5271d15b21a33b9048799504dc552093592253d9c99",
-    "projected_at": "2026-10-10T13:51:47Z",
+    "source_digest": "b90c1e49b0f45d574f1416f843d62335299878001e079a275759297826553689",
+    "projected_at": "2026-10-10T13:53:10Z",
     "counts": {
       "BLOCKED": 1,
-      "CLAIMED": 1,
+      "IMPLEMENTING": 1,
       "READY": 13
     },
     "active_claims": [
@@ -91,7 +91,7 @@
         "claim_id": "c999a3870419f8fe8288",
         "work_item": "canonical-hardening-state-sync-20261010",
         "repository": "pilialvu75-hue/AI-Orchestrator-Module-Library",
-        "lease_until": "2026-10-11T01:51:47Z",
+        "lease_until": "2026-10-11T01:53:10Z",
         "resource_locks": [
           "branch:pilialvu75-hue/AI-Orchestrator-Module-Library:main-reviewer/canonical-hardening-state-sync-20261010",
           "file:pilialvu75-hue/AI-Orchestrator-Module-Library:.airlab/state.json",
@@ -245,15 +245,15 @@
       },
       {
         "id": "main-reviewer",
-        "status": "CLAIMED",
+        "status": "IMPLEMENTING",
         "activation": "active",
-        "state_version": 57,
+        "state_version": 58,
         "updated_at": "2026-10-10",
         "active_claim": {
           "claim_id": "c999a3870419f8fe8288",
           "work_item": "canonical-hardening-state-sync-20261010",
           "repository": "pilialvu75-hue/AI-Orchestrator-Module-Library",
-          "lease_until": "2026-10-11T01:51:47Z",
+          "lease_until": "2026-10-11T01:53:10Z",
           "resource_locks": [
             "branch:pilialvu75-hue/AI-Orchestrator-Module-Library:main-reviewer/canonical-hardening-state-sync-20261010",
             "file:pilialvu75-hue/AI-Orchestrator-Module-Library:.airlab/state.json",
@@ -263,7 +263,7 @@
         "reviewer_state": "AUTHORITY",
         "inference_profile_status": null,
         "historical_backlog_count": 0,
-        "next_action": "Release CP-REVIEW-GATES-01 claim. Resume runtime-core Mistral 429 PR #818 review via claim-bound resubmission and evidence-indexed G1-G4 attestation. Do not mark API-key runtime successful without live BYOK validation."
+        "next_action": "Run or observe the first real CP-HARDEN-03 external-ingress watchdog execution. If it completes cleanly and no P0/P1 incident appears, design CP-HARDEN-05/AIR-10 as a bounded dispatcher with no second execution authority."
       },
       {
         "id": "platform-android",
