@@ -3,34 +3,18 @@
   "id": "main-reviewer",
   "title": "Main / Reviewer",
   "role": "reviewer",
-  "status": "IMPLEMENTING",
+  "status": "READY",
   "activation": "active",
   "scope": "Global architecture, cross-lane review, consolidation, roadmap/state authority and hardening, including target inference profile balance and shared-contract compatibility.",
   "shared_engine_policy": "shared_or_control_plane",
-  "state_version": 58,
+  "state_version": 59,
   "updated_at": "2026-10-10",
-  "active_claim": {
-    "claim_id": "c999a3870419f8fe8288",
-    "owner_lane": "main-reviewer",
-    "work_item": "canonical-hardening-state-sync-20261010",
-    "repository": "pilialvu75-hue/AI-Orchestrator-Module-Library",
-    "scope": "Synchronize .airlab/state.json with already-merged CP-HARDEN-06 and CP-REVIEW-GATES-01 evidence; set CP-HARDEN-05 as next bounded phase. Do not implement AIR-10 and do not touch other lanes.",
-    "branch": "main-reviewer/canonical-hardening-state-sync-20261010",
-    "resource_locks": [
-      "branch:pilialvu75-hue/AI-Orchestrator-Module-Library:main-reviewer/canonical-hardening-state-sync-20261010",
-      "file:pilialvu75-hue/AI-Orchestrator-Module-Library:.airlab/state.json",
-      "scope:canonical-hardening-state-sync"
-    ],
-    "started_at": "2026-10-10T13:51:47Z",
-    "heartbeat_at": "2026-10-10T13:53:10Z",
-    "lease_until": "2026-10-11T01:53:10Z",
-    "lease_hours": 12
-  },
+  "active_claim": null,
   "dependencies": [],
   "roadmap_refs": [],
   "evidence": [],
   "gates": {
-    "G0_CLAIM": "PASS",
+    "G0_CLAIM": "PENDING",
     "G1_IMPLEMENTATION": "PENDING",
     "G2_STATIC": "PENDING",
     "G3_CI": "PENDING",
@@ -870,6 +854,13 @@
       "work_item": "CP-REVIEW-GATES-01",
       "reason": "CP-REVIEW-GATES-01 is merged and verified by exact-head and post-merge Library CI; PR #103 and canonical checkpoint saved. Releasing bounded implementation claim without claiming Mistral runtime validation.",
       "at": "2026-10-09T11:40:45Z"
+    },
+    {
+      "type": "CLAIM_RELEASED",
+      "claim_id": "c999a3870419f8fe8288",
+      "work_item": "canonical-hardening-state-sync-20261010",
+      "reason": "Canonical hardening state synchronization completed and merged via PR #104 with exact-head Validate Module Library run #379 PASS. CP-HARDEN-05 is now the current bounded phase; external-ingress runtime proof remains pending until a real scheduled/manual watchdog scan.",
+      "at": "2026-10-10T13:53:41Z"
     }
   ],
   "stale_block_history": [
