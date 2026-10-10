@@ -120,9 +120,6 @@
       "chat_title": "AIVEXUS — STUDIO 3D",
       "mode": "worker",
       "primary_repository": "pilialvu75-hue/Ai-orchestrator-riserva",
-      "secondary_repositories": [
-        "pilialvu75-hue/AI-Orchestrator-Module-Library"
-      ],
       "purpose": "CAD/3D domain worker for CadSpec, measured/photographic inputs, editable 3D sources, CAD/print exports and domain verification. Shared ProjectExtension/persistence/navigation remain Cantiere-owned."
     },
     {
@@ -130,9 +127,6 @@
       "chat_title": "AIVEXUS — STUDIO VIDEOGIOCHI",
       "mode": "worker",
       "primary_repository": "pilialvu75-hue/Ai-orchestrator-riserva",
-      "secondary_repositories": [
-        "pilialvu75-hue/AI-Orchestrator-Module-Library"
-      ],
       "purpose": "Game domain worker for GameSpec, deterministic templates, playable preview/build/export and game verification. Shared ProjectExtension/persistence/navigation remain Cantiere-owned; first 2D game is independent of 3D asset availability."
     }
   ]
