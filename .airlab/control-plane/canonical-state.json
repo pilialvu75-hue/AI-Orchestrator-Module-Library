@@ -7,7 +7,7 @@
     "policy": "This private repository is the single coordination authority. Chats and agents are workers, not independent sources of truth."
   },
   "updated_at": "2026-10-10",
-  "state_revision": 125,
+  "state_revision": 126,
   "lifecycle_status": "BOOTSTRAP_ACTIVE",
   "roadmap_authority": {
     "library": ".airlab/roadmap.yaml",
@@ -78,8 +78,8 @@
     "invalid_lane_behavior": "ISOLATE_AND_SURFACE_PROJECTION_INCIDENT"
   },
   "projection": {
-    "source_digest": "1b7f8818e8cdd164583e649569bbdb270591591bb379d98ea2193ea8c1898d9e",
-    "projected_at": "2026-10-10T13:37:07Z",
+    "source_digest": "a7ebfa04a047c40e735a97ddcb99ed0d075af5a65355d9403c9cfbe7d3f2f3af",
+    "projected_at": "2026-10-10T13:49:38Z",
     "counts": {
       "BLOCKED": 1,
       "READY": 12,
@@ -310,7 +310,7 @@
         "id": "platform-android",
         "status": "REVIEW_REQUIRED",
         "activation": "active",
-        "state_version": 10,
+        "state_version": 11,
         "updated_at": "2026-10-10",
         "active_claim": {
           "claim_id": "263aa06406ed3e44d37e",

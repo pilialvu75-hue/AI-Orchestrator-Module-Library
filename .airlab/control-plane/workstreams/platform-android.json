@@ -7,7 +7,7 @@
   "activation": "active",
   "scope": "Android packaging, permissions, hardware/runtime adapters, UI integration and releases using shared orchestration/contracts with target-optimized inference.",
   "shared_engine_policy": "adapter_only",
-  "state_version": 10,
+  "state_version": 11,
   "updated_at": "2026-10-10",
   "active_claim": {
     "claim_id": "263aa06406ed3e44d37e",
@@ -94,10 +94,10 @@
   ],
   "gates": {
     "G0_CLAIM": "PASS",
-    "G1_IMPLEMENTATION": "PENDING",
-    "G2_STATIC": "PENDING",
-    "G3_CI": "PENDING",
-    "G4_INTEGRATION": "PENDING",
+    "G1_IMPLEMENTATION": "PASS",
+    "G2_STATIC": "PASS",
+    "G3_CI": "PASS",
+    "G4_INTEGRATION": "PASS",
     "G5_TARGET_RUNTIME": "NOT_APPLICABLE_UNTIL_RUNTIME_CHANGE",
     "G6_REVIEWER": "PENDING",
     "G7_CANONICAL_SYNC": "PENDING"
@@ -356,5 +356,69 @@
       "material": false,
       "refs": []
     }
-  }
+  },
+  "current_gate_attestation": {
+    "at": "2026-10-10T13:49:38Z",
+    "claim_id": "263aa06406ed3e44d37e",
+    "packet_sha256": "5d051809fccd6ac9a59d734267223efd2f27d2e581c5fcbb9faf750b4e091889",
+    "reviewed_by": "main-reviewer",
+    "summary": "Main/Reviewer inspected PR #823 exact head 0310505583593bc0659638af815fdbe2715ee5c4 and its bounded UI-only diff. Five exact-head workflows pass and the three focused RuntimeNoticePresenter widget regressions pass. G1-G4 apply only to the runtime-notice UI recovery. No RAM/Vulkan/trim15 or physical S24 FE acceptance is inferred.",
+    "evidence_refs_by_gate": {
+      "G1_IMPLEMENTATION": [
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/823",
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/0310505583593bc0659638af815fdbe2715ee5c4"
+      ],
+      "G2_STATIC": [
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38003787134/job/114068102558"
+      ],
+      "G3_CI": [
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38003787165",
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38003787234",
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38003787104",
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38003787163",
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38003787134"
+      ],
+      "G4_INTEGRATION": [
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38003787165",
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38003787234",
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38003787104",
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38003787163",
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38003787134",
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38003787134/job/114068102558"
+      ]
+    }
+  },
+  "gate_evidence_history": [
+    {
+      "at": "2026-10-10T13:49:38Z",
+      "claim_id": "263aa06406ed3e44d37e",
+      "packet_sha256": "5d051809fccd6ac9a59d734267223efd2f27d2e581c5fcbb9faf750b4e091889",
+      "reviewed_by": "main-reviewer",
+      "summary": "Main/Reviewer inspected PR #823 exact head 0310505583593bc0659638af815fdbe2715ee5c4 and its bounded UI-only diff. Five exact-head workflows pass and the three focused RuntimeNoticePresenter widget regressions pass. G1-G4 apply only to the runtime-notice UI recovery. No RAM/Vulkan/trim15 or physical S24 FE acceptance is inferred.",
+      "evidence_refs_by_gate": {
+        "G1_IMPLEMENTATION": [
+          "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/823",
+          "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/0310505583593bc0659638af815fdbe2715ee5c4"
+        ],
+        "G2_STATIC": [
+          "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38003787134/job/114068102558"
+        ],
+        "G3_CI": [
+          "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38003787165",
+          "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38003787234",
+          "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38003787104",
+          "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38003787163",
+          "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38003787134"
+        ],
+        "G4_INTEGRATION": [
+          "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38003787165",
+          "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38003787234",
+          "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38003787104",
+          "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38003787163",
+          "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38003787134",
+          "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38003787134/job/114068102558"
+        ]
+      }
+    }
+  ]
 }
