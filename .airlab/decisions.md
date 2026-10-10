@@ -130,3 +130,17 @@ Decision date: 2026-10-02
 - Lane-worker automations are owner-lane scoped. Read-only reporters/watchers have no control-plane mutation operations. Disabled canonical writers remain registered as disabled so stale executions fail closed.
 - The GitHub reconcile workflow is a system processor, not a work-item owner: it may apply authorized inbox requests, reconcile stale leases and rebuild projections, but cannot originate implementation work or promote worker results.
 - Authorization is enforced at mutation ingress before lane compare-and-swap/application. A rejected automation request is quarantined without mutating canonical lane state.
+
+## Aivexus Studio 3D / Videogiochi bootstrap
+
+Decision date: 2026-10-10
+
+- Canonical worker lanes are `aivexus-3d` and `aivexus-games`, both targeting `pilialvu75-hue/Ai-orchestrator-riserva`.
+- Cantiere is the **single owner** of the shared Aivexus base: ProjectExtension v1, conservative project persistence/migration, attachment-store interface, project-type selector and shared navigation/router integration.
+- Domain workers do not fork or duplicate that base. Shared changes are requested from Cantiere and serialized by `contract:aivexus-project-extension-v1`, `contract:aivexus-resource-exchange-v1` and exact shared-file locks.
+- `platform-web` keeps `Ai_orchestrator-prova` as its primary repository and gains Riserva as a secondary authorized repository only for explicitly claimed Aivexus/browser adapter work. AIrLab remains provider-neutral and does not become a second Project/Execution authority.
+- Resource exchange between 3D and games is persistent, not conversational. Requests/results record project and spec revision, requested/produced format, immutable artifact hash, license/provenance, result status and persistent verification receipts.
+- The consumer verifies SHA-256 before use. Revisions never silently overwrite older artifacts.
+- Library remains the reuse/certification boundary; Diagnostics carries closed evidence/verification references; Researcher code never executes directly in Cantiere.
+- `AIVEXUS-GAME-1` depends on the shared Cantiere base but **does not depend on `AIVEXUS-CAD-1` or any 3D asset**. The first 2D game must be buildable with original/licensed 2D resources.
+- Registration and coherent documentation do not make CAD runners, Godot export, Fusion compatibility, browser gameplay or physical print operational. Those require their own claims, implementation and runtime/target evidence.
