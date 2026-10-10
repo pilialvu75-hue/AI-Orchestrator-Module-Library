@@ -3,11 +3,11 @@
   "id": "main-reviewer",
   "title": "Main / Reviewer",
   "role": "reviewer",
-  "status": "CLAIMED",
+  "status": "IMPLEMENTING",
   "activation": "active",
   "scope": "Global architecture, cross-lane review, consolidation, roadmap/state authority and hardening, including target inference profile balance and shared-contract compatibility.",
   "shared_engine_policy": "shared_or_control_plane",
-  "state_version": 65,
+  "state_version": 66,
   "updated_at": "2026-10-10",
   "active_claim": {
     "claim_id": "94a5c4efbc04b3063599",
@@ -35,8 +35,8 @@
       "scope:aivexus:base0"
     ],
     "started_at": "2026-10-10T17:01:29Z",
-    "heartbeat_at": "2026-10-10T17:01:29Z",
-    "lease_until": "2026-10-11T05:01:29Z",
+    "heartbeat_at": "2026-10-10T17:05:50Z",
+    "lease_until": "2026-10-11T05:05:50Z",
     "lease_hours": 12
   },
   "dependencies": [],
@@ -58,7 +58,7 @@
     "reviewed_by": null,
     "reviewed_at": null
   },
-  "next_action": "Release and reacquire BASE-0 with .airlab/state.json lock added, then persist contracts/roadmaps/decision/state and validate the full registration PR.",
+  "next_action": "Release the old branch claim, reacquire AIVEXUS-BASE-0 on a fresh branch from main with the same exact file/contract locks, copy the final reviewed content, open a replacement PR, validate exact-head CI, then merge only if clean.",
   "inference_review_policy": {
     "policy": ".airlab/control-plane/inference-policy.json",
     "check": [
@@ -689,25 +689,45 @@
         ".airlab/control-plane/workstreams/aivexus-games.json"
       ],
       "next_action": "Release and reacquire BASE-0 with .airlab/state.json lock added, then persist contracts/roadmaps/decision/state and validate the full registration PR."
+    },
+    {
+      "seq": 22,
+      "at": "2026-10-10T17:05:50Z",
+      "claim_id": "94a5c4efbc04b3063599",
+      "work_item": "AIVEXUS-BASE-0",
+      "summary": "AIVEXUS-BASE-0 canonical content is complete on PR #105, but GitHub reports mergeable_state=dirty on head a9688cff. No CI run started. Do not force merge. Recreate the reviewed 12-file change on a fresh branch from current main, preserving the same contracts, ownership and lane scopes.",
+      "decisions": [
+        "Do not force or bypass a dirty PR.",
+        "Keep Cantiere sole owner of shared ProjectExtension/persistence/attachments/selector/navigation.",
+        "Keep aivexus-3d and aivexus-games write scope limited to Riserva.",
+        "Preserve GAME-1 independence from CAD-1/3D assets."
+      ],
+      "evidence_refs": [
+        "AI-Orchestrator-Module-Library#105",
+        "head:a9688cff1874091eedcd6268ad58b8556978d76f",
+        "GitHub mergeable_state=dirty"
+      ],
+      "next_action": "Release the old branch claim, reacquire AIVEXUS-BASE-0 on a fresh branch from main with the same exact file/contract locks, copy the final reviewed content, open a replacement PR, validate exact-head CI, then merge only if clean."
     }
   ],
   "last_checkpoint": {
-    "seq": 21,
-    "at": "2026-10-10T17:00:54Z",
-    "claim_id": "90bdb7ae1c7849605a9a",
+    "seq": 22,
+    "at": "2026-10-10T17:05:50Z",
+    "claim_id": "94a5c4efbc04b3063599",
     "work_item": "AIVEXUS-BASE-0",
-    "summary": "AIVEXUS-BASE-0 branch created. Chat registry and canonical workstream list updated; platform-web scoped to Prova primary plus Riserva secondary; Cantiere assigned sole shared-base ownership; new aivexus-3d and aivexus-games READY workstreams created. Games lane explicitly records GAME-1 independent of CAD-1/3D assets. Before roadmap edits, canonical rule requires .airlab/state.json to be included and locked.",
+    "summary": "AIVEXUS-BASE-0 canonical content is complete on PR #105, but GitHub reports mergeable_state=dirty on head a9688cff. No CI run started. Do not force merge. Recreate the reviewed 12-file change on a fresh branch from current main, preserving the same contracts, ownership and lane scopes.",
     "decisions": [
-      "Cantiere is sole owner of ProjectExtension/persistence/attachments/selector/navigation.",
-      "platform-web retains Ai_orchestrator-prova primary and gains Riserva secondary only for explicitly claimed Aivexus/browser adapter work.",
-      "AIVEXUS-GAME-1 depends on shared BASE-1/BASE-2 but not on CAD-1 or 3D asset availability."
+      "Do not force or bypass a dirty PR.",
+      "Keep Cantiere sole owner of shared ProjectExtension/persistence/attachments/selector/navigation.",
+      "Keep aivexus-3d and aivexus-games write scope limited to Riserva.",
+      "Preserve GAME-1 independence from CAD-1/3D assets."
     ],
     "evidence_refs": [
-      "branch:main-reviewer/aivexus-base0-bootstrap",
-      ".airlab/control-plane/workstreams/aivexus-3d.json",
-      ".airlab/control-plane/workstreams/aivexus-games.json"
+      "AI-Orchestrator-Module-Library#105",
+      "head:a9688cff1874091eedcd6268ad58b8556978d76f",
+      "GitHub mergeable_state=dirty"
     ],
-    "next_action": "Release and reacquire BASE-0 with .airlab/state.json lock added, then persist contracts/roadmaps/decision/state and validate the full registration PR."
+    "next_action": "Release the old branch claim, reacquire AIVEXUS-BASE-0 on a fresh branch from main with the same exact file/contract locks, copy the final reviewed content, open a replacement PR, validate exact-head CI, then merge only if clean."
   },
   "hardening_backlog": [
     {

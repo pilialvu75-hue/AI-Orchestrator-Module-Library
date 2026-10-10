@@ -7,7 +7,7 @@
     "policy": "This private repository is the single coordination authority. Chats and agents are workers, not independent sources of truth."
   },
   "updated_at": "2026-10-10",
-  "state_revision": 137,
+  "state_revision": 138,
   "lifecycle_status": "BOOTSTRAP_ACTIVE",
   "roadmap_authority": {
     "library": ".airlab/roadmap.yaml",
@@ -78,11 +78,11 @@
     "invalid_lane_behavior": "ISOLATE_AND_SURFACE_PROJECTION_INCIDENT"
   },
   "projection": {
-    "source_digest": "61ef19a5d02a5bdaebd9dbfc7b146dfe9c68b39355575ec64fcab41010d6d945",
-    "projected_at": "2026-10-10T17:01:29Z",
+    "source_digest": "27b022de942e3671b14dbccc00c0f7b939ba89034a309279ad5c43e2337d7b56",
+    "projected_at": "2026-10-10T17:05:50Z",
     "counts": {
       "BLOCKED": 1,
-      "CLAIMED": 1,
+      "IMPLEMENTING": 1,
       "READY": 13
     },
     "active_claims": [
@@ -91,7 +91,7 @@
         "claim_id": "94a5c4efbc04b3063599",
         "work_item": "AIVEXUS-BASE-0",
         "repository": "pilialvu75-hue/AI-Orchestrator-Module-Library",
-        "lease_until": "2026-10-11T05:01:29Z",
+        "lease_until": "2026-10-11T05:05:50Z",
         "resource_locks": [
           "branch:pilialvu75-hue/AI-Orchestrator-Module-Library:main-reviewer/aivexus-base0-bootstrap",
           "contract:aivexus-project-extension-v1",
@@ -336,15 +336,15 @@
       },
       {
         "id": "main-reviewer",
-        "status": "CLAIMED",
+        "status": "IMPLEMENTING",
         "activation": "active",
-        "state_version": 65,
+        "state_version": 66,
         "updated_at": "2026-10-10",
         "active_claim": {
           "claim_id": "94a5c4efbc04b3063599",
           "work_item": "AIVEXUS-BASE-0",
           "repository": "pilialvu75-hue/AI-Orchestrator-Module-Library",
-          "lease_until": "2026-10-11T05:01:29Z",
+          "lease_until": "2026-10-11T05:05:50Z",
           "resource_locks": [
             "branch:pilialvu75-hue/AI-Orchestrator-Module-Library:main-reviewer/aivexus-base0-bootstrap",
             "contract:aivexus-project-extension-v1",
@@ -367,7 +367,7 @@
         "reviewer_state": "AUTHORITY",
         "inference_profile_status": null,
         "historical_backlog_count": 0,
-        "next_action": "Release and reacquire BASE-0 with .airlab/state.json lock added, then persist contracts/roadmaps/decision/state and validate the full registration PR."
+        "next_action": "Release the old branch claim, reacquire AIVEXUS-BASE-0 on a fresh branch from main with the same exact file/contract locks, copy the final reviewed content, open a replacement PR, validate exact-head CI, then merge only if clean."
       },
       {
         "id": "platform-android",
