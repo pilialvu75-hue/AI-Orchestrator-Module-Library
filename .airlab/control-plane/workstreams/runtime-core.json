@@ -7,8 +7,8 @@
   "activation": "active",
   "scope": "Shared inference contract, capability/model routing semantics, context, streaming, cancellation, errors, model-profile schema and lifecycle. Target platforms own their benchmark-gated LLM/backend/runtime profiles.",
   "shared_engine_policy": "shared_or_control_plane",
-  "state_version": 14,
-  "updated_at": "2026-10-09",
+  "state_version": 15,
+  "updated_at": "2026-10-10",
   "active_claim": {
     "claim_id": "5615786649acca3a5846",
     "owner_lane": "runtime-core",
@@ -501,5 +501,15 @@
         "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/37929379883"
       ]
     }
-  }
+  },
+  "reconciliation_events": [
+    {
+      "type": "REVIEW_WAIT_OVERDUE",
+      "claim_id": "5615786649acca3a5846",
+      "work_item": "cloud-mistral-429-structured-backoff",
+      "lease_until": "2026-10-10T00:24:08Z",
+      "detected_at": "2026-10-10T01:09:03Z",
+      "review_required": true
+    }
+  ]
 }

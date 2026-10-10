@@ -6,8 +6,8 @@
     "owner_lane": "main-reviewer",
     "policy": "This private repository is the single coordination authority. Chats and agents are workers, not independent sources of truth."
   },
-  "updated_at": "2026-10-09",
-  "state_revision": 119,
+  "updated_at": "2026-10-10",
+  "state_revision": 120,
   "lifecycle_status": "BOOTSTRAP_ACTIVE",
   "roadmap_authority": {
     "library": ".airlab/roadmap.yaml",
@@ -78,8 +78,8 @@
     "invalid_lane_behavior": "ISOLATE_AND_SURFACE_PROJECTION_INCIDENT"
   },
   "projection": {
-    "source_digest": "ec6244322b3a7ea4fc1f09fc3ea57f92768373787a10be5b54fddf94fc8e204e",
-    "projected_at": "2026-10-09T23:19:26Z",
+    "source_digest": "a44de3085b9301c8b811771c42fa37ecd8865006ccbe700e31410e058d98217e",
+    "projected_at": "2026-10-10T01:09:03Z",
     "counts": {
       "BLOCKED": 1,
       "IMPLEMENTING": 1,
@@ -416,8 +416,8 @@
         "id": "runtime-core",
         "status": "REVIEW_REQUIRED",
         "activation": "active",
-        "state_version": 14,
-        "updated_at": "2026-10-09",
+        "state_version": 15,
+        "updated_at": "2026-10-10",
         "active_claim": {
           "claim_id": "5615786649acca3a5846",
           "work_item": "cloud-mistral-429-structured-backoff",
