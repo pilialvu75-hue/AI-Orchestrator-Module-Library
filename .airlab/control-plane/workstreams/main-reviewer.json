@@ -3,44 +3,18 @@
   "id": "main-reviewer",
   "title": "Main / Reviewer",
   "role": "reviewer",
-  "status": "CLAIMED",
+  "status": "READY",
   "activation": "active",
   "scope": "Global architecture, cross-lane review, consolidation, roadmap/state authority and hardening, including target inference profile balance and shared-contract compatibility.",
   "shared_engine_policy": "shared_or_control_plane",
-  "state_version": 60,
+  "state_version": 61,
   "updated_at": "2026-10-10",
-  "active_claim": {
-    "claim_id": "ee75060cd44e7c4abe67",
-    "owner_lane": "main-reviewer",
-    "work_item": "AIVEXUS-BASE-0",
-    "repository": "pilialvu75-hue/AI-Orchestrator-Module-Library",
-    "scope": "Register aivexus-3d and aivexus-games lanes; reconcile authorized Web repository scope between Riserva and Prova; canonically assign Cantiere as sole owner of ProjectExtension/persistence/attachments/selector/navigation; record resource-exchange protocol, dependencies and first separated CAD/game work. Generate canonical bootstrap capability. No application implementation.",
-    "branch": "main-reviewer/aivexus-base0-bootstrap",
-    "resource_locks": [
-      "branch:pilialvu75-hue/AI-Orchestrator-Module-Library:main-reviewer/aivexus-base0-bootstrap",
-      "contract:aivexus-project-extension-v1",
-      "contract:aivexus-resource-exchange-v1",
-      "file:pilialvu75-hue/AI-Orchestrator-Module-Library:.airlab/control-plane/canonical-state.json",
-      "file:pilialvu75-hue/AI-Orchestrator-Module-Library:.airlab/control-plane/chat-registry.json",
-      "file:pilialvu75-hue/AI-Orchestrator-Module-Library:.airlab/control-plane/workstreams/aivexus-3d.json",
-      "file:pilialvu75-hue/AI-Orchestrator-Module-Library:.airlab/control-plane/workstreams/aivexus-games.json",
-      "file:pilialvu75-hue/AI-Orchestrator-Module-Library:.airlab/control-plane/workstreams/cantiere.json",
-      "file:pilialvu75-hue/AI-Orchestrator-Module-Library:.airlab/control-plane/workstreams/platform-web.json",
-      "file:pilialvu75-hue/AI-Orchestrator-Module-Library:.airlab/decisions.md",
-      "file:pilialvu75-hue/AI-Orchestrator-Module-Library:.airlab/public-repositories/Ai-orchestrator-riserva/roadmap.yaml",
-      "file:pilialvu75-hue/AI-Orchestrator-Module-Library:.airlab/public-repositories/Ai_orchestrator-prova/roadmap.yaml",
-      "scope:aivexus:base0"
-    ],
-    "started_at": "2026-10-10T16:57:23Z",
-    "heartbeat_at": "2026-10-10T16:57:23Z",
-    "lease_until": "2026-10-11T04:57:23Z",
-    "lease_hours": 12
-  },
+  "active_claim": null,
   "dependencies": [],
   "roadmap_refs": [],
   "evidence": [],
   "gates": {
-    "G0_CLAIM": "PASS",
+    "G0_CLAIM": "PENDING",
     "G1_IMPLEMENTATION": "PENDING",
     "G2_STATIC": "PENDING",
     "G3_CI": "PENDING",
@@ -887,6 +861,13 @@
       "work_item": "canonical-hardening-state-sync-20261010",
       "reason": "Canonical hardening state synchronization completed and merged via PR #104 with exact-head Validate Module Library run #379 PASS. CP-HARDEN-05 is now the current bounded phase; external-ingress runtime proof remains pending until a real scheduled/manual watchdog scan.",
       "at": "2026-10-10T13:53:41Z"
+    },
+    {
+      "type": "CLAIM_RELEASED",
+      "claim_id": "ee75060cd44e7c4abe67",
+      "work_item": "AIVEXUS-BASE-0",
+      "reason": "BASE-0 design read found two additional canonical contract files are required. Release before any implementation changes so the claim can be reacquired with exact file locks for ProjectExtension schema and ResourceExchange protocol; no repository files modified under the first claim.",
+      "at": "2026-10-10T16:58:29Z"
     }
   ],
   "stale_block_history": [
