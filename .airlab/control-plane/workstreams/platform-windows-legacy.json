@@ -3,12 +3,12 @@
   "id": "platform-windows-legacy",
   "title": "Windows 7/8.1",
   "role": "worker",
-  "status": "BLOCKED",
+  "status": "READY",
   "activation": "active",
   "scope": "Legacy Windows compatibility layer, installer/update and target-specific adapters with target-optimized inference while preserving shared orchestration/contracts.",
   "shared_engine_policy": "adapter_only",
-  "state_version": 20,
-  "updated_at": "2026-10-03",
+  "state_version": 21,
+  "updated_at": "2026-10-11",
   "active_claim": null,
   "dependencies": [],
   "roadmap_refs": [
@@ -31,7 +31,7 @@
     "reviewed_by": null,
     "reviewed_at": null
   },
-  "next_action": "Wait for PR #767 Windows build CI. If successful, install that candidate on physical Win7 and press only 0F · Leggi modelli salvati; record whether the app remains open or crashes.",
+  "next_action": "Return to READY. The Windows Legacy worker may claim the next bounded non-overlapping task. Preserve the historical Win7 0F physical validation as open evidence rather than a lane-wide execution block.",
   "inference_profile_policy": "target_owned_benchmark_gated",
   "inference_profile": {
     "status": "NEEDS_TARGET_PROFILE",
@@ -285,15 +285,44 @@
       "resource_locks": [],
       "lease_until": "2026-10-03T04:37:41Z",
       "detected_at": "2026-10-03T05:37:44Z"
+    },
+    {
+      "type": "STALE_BLOCK_RESOLVED_BY_REVIEWER",
+      "claim_id": "baedabdf26f436c9e964",
+      "work_item": "win7-post-0e-main-convergence",
+      "summary": "Clear the administrative CLAIM_LEASE_EXPIRED block so the Windows Legacy lane can claim new bounded work again. This reconciliation does not approve PR #767, Win7 runtime behavior, stored-model parsing, or any physical result.",
+      "evidence_refs": [
+        "stale-claim:baedabdf26f436c9e964",
+        "work:win7-post-0e-main-convergence",
+        "checkpoint:platform-windows-legacy#10",
+        "owner-directive:2026-10-11-unblock-other-chats"
+      ],
+      "at": "2026-10-11T12:46:32Z"
     }
   ],
-  "block_reason": {
-    "code": "CLAIM_LEASE_EXPIRED",
-    "work_item": "win7-post-0e-main-convergence",
-    "claim_id": "baedabdf26f436c9e964",
-    "resource_locks": [],
-    "lease_until": "2026-10-03T04:37:41Z",
-    "detected_at": "2026-10-03T05:37:44Z",
-    "review_required": true
-  }
+  "stale_block_history": [
+    {
+      "code": "CLAIM_LEASE_EXPIRED",
+      "work_item": "win7-post-0e-main-convergence",
+      "claim_id": "baedabdf26f436c9e964",
+      "resource_locks": [],
+      "lease_until": "2026-10-03T04:37:41Z",
+      "detected_at": "2026-10-03T05:37:44Z",
+      "review_required": true,
+      "resolved_at": "2026-10-11T12:46:32Z",
+      "resolution": {
+        "type": "STALE_BLOCK_RESOLVED_BY_REVIEWER",
+        "claim_id": "baedabdf26f436c9e964",
+        "work_item": "win7-post-0e-main-convergence",
+        "summary": "Clear the administrative CLAIM_LEASE_EXPIRED block so the Windows Legacy lane can claim new bounded work again. This reconciliation does not approve PR #767, Win7 runtime behavior, stored-model parsing, or any physical result.",
+        "evidence_refs": [
+          "stale-claim:baedabdf26f436c9e964",
+          "work:win7-post-0e-main-convergence",
+          "checkpoint:platform-windows-legacy#10",
+          "owner-directive:2026-10-11-unblock-other-chats"
+        ],
+        "at": "2026-10-11T12:46:32Z"
+      }
+    }
+  ]
 }

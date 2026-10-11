@@ -1,0 +1,12 @@
+{
+  "schema_version": 1,
+  "request_id": "cantiere-20261011-base1-evidence-rework",
+  "status": "APPLIED",
+  "processed_at": "2026-10-11T12:46:32Z",
+  "source_file": "cantiere-20261011-base1-evidence-rework.json",
+  "lane_id": "cantiere",
+  "operation": "review_rework",
+  "actor_id": "chatgpt:main-reviewer",
+  "errors": [],
+  "result_state_version": 34
+}

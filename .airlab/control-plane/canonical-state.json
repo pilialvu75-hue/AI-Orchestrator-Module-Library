@@ -7,7 +7,7 @@
     "policy": "This private repository is the single coordination authority. Chats and agents are workers, not independent sources of truth."
   },
   "updated_at": "2026-10-11",
-  "state_revision": 157,
+  "state_revision": 159,
   "lifecycle_status": "BOOTSTRAP_ACTIVE",
   "roadmap_authority": {
     "library": ".airlab/roadmap.yaml",
@@ -80,12 +80,11 @@
     "invalid_lane_behavior": "ISOLATE_AND_SURFACE_PROJECTION_INCIDENT"
   },
   "projection": {
-    "source_digest": "1e8cfb799a345fd699584eb37b85ae0963ac54c906744ccec7f963d2f195a931",
-    "projected_at": "2026-10-11T11:40:52Z",
+    "source_digest": "8c7c46fa001eac13aabb91794e423d7e99440414b9e7dbb1cb27a10d451ea31f",
+    "projected_at": "2026-10-11T12:46:32Z",
     "counts": {
-      "BLOCKED": 1,
-      "READY": 15,
-      "REVIEW_REQUIRED": 1
+      "IMPLEMENTING": 1,
+      "READY": 16
     },
     "active_claims": [
       {
@@ -156,23 +155,8 @@
         "work_item": "AIVEXUS-BASE-1"
       }
     ],
-    "review_required": [
-      "cantiere"
-    ],
-    "blocked": [
-      {
-        "lane": "platform-windows-legacy",
-        "reason": {
-          "code": "CLAIM_LEASE_EXPIRED",
-          "work_item": "win7-post-0e-main-convergence",
-          "claim_id": "baedabdf26f436c9e964",
-          "resource_locks": [],
-          "lease_until": "2026-10-03T04:37:41Z",
-          "detected_at": "2026-10-03T05:37:44Z",
-          "review_required": true
-        }
-      }
-    ],
+    "review_required": [],
+    "blocked": [],
     "checkpoint_watch": [],
     "projection_incidents": [],
     "platform_inference_profiles": [
@@ -272,9 +256,9 @@
       },
       {
         "id": "cantiere",
-        "status": "REVIEW_REQUIRED",
+        "status": "IMPLEMENTING",
         "activation": "active",
-        "state_version": 33,
+        "state_version": 34,
         "updated_at": "2026-10-11",
         "active_claim": {
           "claim_id": "c792cfdec8aee6363eba",
@@ -292,10 +276,10 @@
             "scope:aivexus:shared-base"
           ]
         },
-        "reviewer_state": "PENDING",
+        "reviewer_state": "CHANGES_REQUESTED",
         "inference_profile_status": null,
         "historical_backlog_count": 3,
-        "next_action": "Main/Reviewer must inspect the review_packet, linked evidence and required gates before promotion or rework."
+        "next_action": "Without changing code or head SHA, refresh the existing AIVEXUS-BASE-1 packet so PR #826 and exact commit 6eaf98bfd816ff26cb23401d0351c680b8bfb90e are PASS, preserve the six PASS workflows/tests, and resubmit REVIEW_REQUIRED. Keep BASE-2, CAD/game execution, Fusion/print/gameplay and physical acceptance open."
       },
       {
         "id": "diagnostics",
@@ -419,15 +403,15 @@
       },
       {
         "id": "platform-windows-legacy",
-        "status": "BLOCKED",
+        "status": "READY",
         "activation": "active",
-        "state_version": 20,
-        "updated_at": "2026-10-03",
+        "state_version": 21,
+        "updated_at": "2026-10-11",
         "active_claim": null,
         "reviewer_state": "PENDING",
         "inference_profile_status": "NEEDS_TARGET_PROFILE",
         "historical_backlog_count": 6,
-        "next_action": "Wait for PR #767 Windows build CI. If successful, install that candidate on physical Win7 and press only 0F · Leggi modelli salvati; record whether the app remains open or crashes."
+        "next_action": "Return to READY. The Windows Legacy worker may claim the next bounded non-overlapping task. Preserve the historical Win7 0F physical validation as open evidence rather than a lane-wide execution block."
       },
       {
         "id": "runtime-core",

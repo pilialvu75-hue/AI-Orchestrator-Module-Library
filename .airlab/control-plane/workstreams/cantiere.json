@@ -3,11 +3,11 @@
   "id": "cantiere",
   "title": "Cantiere",
   "role": "worker",
-  "status": "REVIEW_REQUIRED",
+  "status": "IMPLEMENTING",
   "activation": "active",
   "scope": "Exclusive Cantiere/App Factory execution, durability, build/review/validation/apply and first-real-app reliability.",
   "shared_engine_policy": "shared_or_control_plane",
-  "state_version": 33,
+  "state_version": 34,
   "updated_at": "2026-10-11",
   "active_claim": {
     "claim_id": "c792cfdec8aee6363eba",
@@ -111,11 +111,11 @@
   },
   "reviewer": {
     "required": true,
-    "state": "PENDING",
-    "reviewed_by": null,
-    "reviewed_at": null
+    "state": "CHANGES_REQUESTED",
+    "reviewed_by": "main-reviewer",
+    "reviewed_at": "2026-10-11T12:46:32Z"
   },
-  "next_action": "Main/Reviewer must inspect the review_packet, linked evidence and required gates before promotion or rework.",
+  "next_action": "Without changing code or head SHA, refresh the existing AIVEXUS-BASE-1 packet so PR #826 and exact commit 6eaf98bfd816ff26cb23401d0351c680b8bfb90e are PASS, preserve the six PASS workflows/tests, and resubmit REVIEW_REQUIRED. Keep BASE-2, CAD/game execution, Fusion/print/gameplay and physical acceptance open.",
   "historical_backlog": [
     "Stay in Phase 1 ONLINE until a real generated Android app is physically accepted.",
     "Reproduce the recent manga-drawing app failure from current main with Diagnostics; do not restart generic audits.",
@@ -516,29 +516,33 @@
       ],
       "next_action": "Main/Reviewer must inspect the review_packet, linked evidence and required gates before promotion or rework.",
       "kind": "REVIEW_HANDOFF"
+    },
+    {
+      "seq": 20,
+      "at": "2026-10-11T12:46:32Z",
+      "claim_id": "c792cfdec8aee6363eba",
+      "work_item": "AIVEXUS-BASE-1",
+      "summary": "PR #826 exact head 6eaf98bfd816ff26cb23401d0351c680b8bfb90e is open, mergeable and has six successful exact-head workflows, but the claim-bound packet records its commit and pull_request evidence as INFO. G1 requires PASS commit/PR evidence. Rework is evidence-only: no code modification requested and no runtime/domain acceptance implied.",
+      "decisions": [
+        "Main/Reviewer requested bounded rework."
+      ],
+      "evidence_refs": [],
+      "next_action": "Without changing code or head SHA, refresh the existing AIVEXUS-BASE-1 packet so PR #826 and exact commit 6eaf98bfd816ff26cb23401d0351c680b8bfb90e are PASS, preserve the six PASS workflows/tests, and resubmit REVIEW_REQUIRED. Keep BASE-2, CAD/game execution, Fusion/print/gameplay and physical acceptance open.",
+      "kind": "REVIEW_REWORK"
     }
   ],
   "last_checkpoint": {
-    "seq": 19,
-    "at": "2026-10-11T10:54:06Z",
+    "seq": 20,
+    "at": "2026-10-11T12:46:32Z",
     "claim_id": "c792cfdec8aee6363eba",
     "work_item": "AIVEXUS-BASE-1",
-    "summary": "AIVEXUS-BASE-1 is implemented in PR #826 at 6eaf98bfd816ff26cb23401d0351c680b8bfb90e and all six exact-head workflows passed. Review is limited to additive contracts, revision-safe persistence and recovery, immutable browser attachment storage, resource-exchange hooks and existing software editing. BASE-2 and domain execution remain separate gated work; no merge, deployment, Fusion/print/gameplay or physical acceptance is claimed.",
-    "decisions": [],
-    "evidence_refs": [
-      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/6eaf98bfd816ff26cb23401d0351c680b8bfb90e",
-      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/826",
-      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38132363946",
-      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38132363946/job/114449143774",
-      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38132363946/job/114449143774",
-      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38132363928",
-      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38132363925",
-      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38132363991",
-      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38132363929",
-      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38132364000"
+    "summary": "PR #826 exact head 6eaf98bfd816ff26cb23401d0351c680b8bfb90e is open, mergeable and has six successful exact-head workflows, but the claim-bound packet records its commit and pull_request evidence as INFO. G1 requires PASS commit/PR evidence. Rework is evidence-only: no code modification requested and no runtime/domain acceptance implied.",
+    "decisions": [
+      "Main/Reviewer requested bounded rework."
     ],
-    "next_action": "Main/Reviewer must inspect the review_packet, linked evidence and required gates before promotion or rework.",
-    "kind": "REVIEW_HANDOFF"
+    "evidence_refs": [],
+    "next_action": "Without changing code or head SHA, refresh the existing AIVEXUS-BASE-1 packet so PR #826 and exact commit 6eaf98bfd816ff26cb23401d0351c680b8bfb90e are PASS, preserve the six PASS workflows/tests, and resubmit REVIEW_REQUIRED. Keep BASE-2, CAD/game execution, Fusion/print/gameplay and physical acceptance open.",
+    "kind": "REVIEW_REWORK"
   },
   "review_history": [
     {
@@ -553,6 +557,14 @@
         "merge:b7abc54c02c8d65e8a67532afe6f873674e2c4ed",
         "CI:36850241169,36850241270,36850241272,36850241205,36850241189,36850241326"
       ]
+    },
+    {
+      "reviewed_at": "2026-10-11T12:46:32Z",
+      "reviewed_by": "main-reviewer",
+      "claim_id": "c792cfdec8aee6363eba",
+      "work_item": "AIVEXUS-BASE-1",
+      "decision": "CHANGES_REQUESTED",
+      "summary": "PR #826 exact head 6eaf98bfd816ff26cb23401d0351c680b8bfb90e is open, mergeable and has six successful exact-head workflows, but the claim-bound packet records its commit and pull_request evidence as INFO. G1 requires PASS commit/PR evidence. Rework is evidence-only: no code modification requested and no runtime/domain acceptance implied."
     }
   ],
   "completed_work": [

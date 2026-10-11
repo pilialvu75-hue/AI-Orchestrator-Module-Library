@@ -1,0 +1,12 @@
+{
+  "schema_version": 1,
+  "request_id": "windows-legacy-20261011-unblock-stale",
+  "status": "APPLIED",
+  "processed_at": "2026-10-11T12:46:32Z",
+  "source_file": "windows-legacy-20261011-unblock-stale.json",
+  "lane_id": "platform-windows-legacy",
+  "operation": "resolve_stale_block",
+  "actor_id": "chatgpt:main-reviewer",
+  "errors": [],
+  "result_state_version": 21
+}
