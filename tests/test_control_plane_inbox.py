@@ -322,6 +322,10 @@ class ControlPlaneInboxTests(unittest.TestCase):
         actor = "automation:main-reviewer:6abe4a9283b08191af4cc91bac843616"
         entry = inbox._authorize_automation_actor(self.root, actor, "cantiere", "review_accept")
         self.assertEqual(entry["owner_lane"], "main-reviewer")
+        gate_entry = inbox._authorize_automation_actor(
+            self.root, actor, "cantiere", "record_review_gates"
+        )
+        self.assertEqual(gate_entry["kind"], "reviewer")
         with self.assertRaisesRegex(ValueError, "worker lanes only"):
             inbox._authorize_automation_actor(self.root, actor, "main-reviewer", "review_accept")
         with self.assertRaisesRegex(ValueError, "operation is not allowed"):
@@ -450,6 +454,23 @@ class ControlPlaneInboxTests(unittest.TestCase):
         self.assertEqual(changed["current_gate_attestation"]["packet_sha256"], attestation["packet_sha256"])
         receipt = json.loads((self.root / ".airlab/control-plane/inbox/processed/review-gates-001.json").read_text())
         self.assertEqual(receipt["status"], "APPLIED")
+
+    def test_reviewer_automation_can_record_packet_bound_g1_g4(self):
+        lane = self._claimed_review_packet()
+        actor = "automation:main-reviewer:6abe4a9283b08191af4cc91bac843616"
+        request = self._gate_request(lane, actor=actor)
+        request["request_id"] = "review-gates-automation-001"
+        result = inbox.process_one(
+            self._write_request(request), root=self.root,
+            now=datetime(2026, 10, 9, 10, 3, tzinfo=timezone.utc),
+        )
+        self.assertIn("applied", result)
+        changed = self._cantiere()
+        for gate in ("G1_IMPLEMENTATION", "G2_STATIC", "G3_CI", "G4_INTEGRATION"):
+            self.assertEqual(changed["gates"][gate], "PASS")
+        self.assertEqual(changed["gates"]["G6_REVIEWER"], "PENDING")
+        self.assertEqual(changed["gates"]["G7_CANONICAL_SYNC"], "PENDING")
+        self.assertEqual(changed["current_gate_attestation"]["reviewed_by"], "main-reviewer")
 
     def test_review_gate_evidence_rejects_non_reviewer_without_mutation(self):
         lane = self._claimed_review_packet()

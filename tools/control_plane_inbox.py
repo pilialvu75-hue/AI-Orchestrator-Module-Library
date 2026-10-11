@@ -396,14 +396,23 @@ def process_one(path: Path, *, root: Path = ROOT, now: datetime | None = None) -
             path.unlink(missing_ok=True)
             return f"{request_id}: duplicate-noop"
 
-        _authorize_automation_actor(
+        automation_entry = _authorize_automation_actor(
             root,
             str(request.get("actor_id")),
             lane_id,
             operation,
         )
-        if operation == "record_review_gates" and request.get("actor_id") != "chatgpt:main-reviewer":
-            raise ValueError("record_review_gates requires interactive main-reviewer authority")
+        if operation == "record_review_gates":
+            actor_id = str(request.get("actor_id"))
+            automation_reviewer = (
+                automation_entry is not None
+                and automation_entry.get("kind") == "reviewer"
+                and automation_entry.get("owner_lane") == "main-reviewer"
+            )
+            if actor_id != "chatgpt:main-reviewer" and not automation_reviewer:
+                raise ValueError(
+                    "record_review_gates requires main-reviewer authority"
+                )
 
         lane_rel = _lane_rel(root, lane_id)
         current_lane = _load(root / lane_rel)
