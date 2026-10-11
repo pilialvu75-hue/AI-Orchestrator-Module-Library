@@ -1,0 +1,1 @@
+{"schema_version":1,"request_id":"winlegacy-20261011-release-b","actor_id":"automation:windows-legacy:6abc720a44b081919bd7a8d71b45e8d2","lane_id":"platform-windows-legacy","operation":"release","expected_state_version":23,"payload":{"reason":"WRITE_BLOCKED"}}
