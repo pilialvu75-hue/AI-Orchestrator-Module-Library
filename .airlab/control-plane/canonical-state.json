@@ -7,7 +7,7 @@
     "policy": "This private repository is the single coordination authority. Chats and agents are workers, not independent sources of truth."
   },
   "updated_at": "2026-10-11",
-  "state_revision": 166,
+  "state_revision": 167,
   "lifecycle_status": "BOOTSTRAP_ACTIVE",
   "roadmap_authority": {
     "library": ".airlab/roadmap.yaml",
@@ -80,11 +80,10 @@
     "invalid_lane_behavior": "ISOLATE_AND_SURFACE_PROJECTION_INCIDENT"
   },
   "projection": {
-    "source_digest": "48e12eea226aaed01ccad25fb1d3bd985b610d7d5761fb9e0b8b8ecf28f46db8",
-    "projected_at": "2026-10-11T13:54:10Z",
+    "source_digest": "ad46e6cc622c58613219b0b411caa7d1cacf9d0394bf4d5bdd93a5273f20c80c",
+    "projected_at": "2026-10-11T13:55:21Z",
     "counts": {
-      "CLAIMED": 1,
-      "IMPLEMENTING": 1,
+      "IMPLEMENTING": 2,
       "READY": 15
     },
     "active_claims": [
@@ -110,7 +109,7 @@
         "claim_id": "85c250b3e7de5a82c945",
         "work_item": "winlegacy-artifact-provenance-20261011",
         "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
-        "lease_until": "2026-10-12T01:54:10Z",
+        "lease_until": "2026-10-12T01:55:21Z",
         "resource_locks": [
           "file:pilialvu75-hue/Ai-orchestrator-riserva:.github/workflows/windows-build.yml"
         ]
@@ -420,15 +419,15 @@
       },
       {
         "id": "platform-windows-legacy",
-        "status": "CLAIMED",
+        "status": "IMPLEMENTING",
         "activation": "active",
-        "state_version": 22,
+        "state_version": 23,
         "updated_at": "2026-10-11",
         "active_claim": {
           "claim_id": "85c250b3e7de5a82c945",
           "work_item": "winlegacy-artifact-provenance-20261011",
           "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
-          "lease_until": "2026-10-12T01:54:10Z",
+          "lease_until": "2026-10-12T01:55:21Z",
           "resource_locks": [
             "file:pilialvu75-hue/Ai-orchestrator-riserva:.github/workflows/windows-build.yml"
           ]
@@ -436,7 +435,7 @@
         "reviewer_state": "PENDING",
         "inference_profile_status": "NEEDS_TARGET_PROFILE",
         "historical_backlog_count": 6,
-        "next_action": "Return to READY. The Windows Legacy worker may claim the next bounded non-overlapping task. Preserve the historical Win7 0F physical validation as open evidence rather than a lane-wide execution block."
+        "next_action": "Release this blocked provenance claim without claiming implementation success. Preserve the independent Win7 0F physical test as open; resume provenance only when a permitted workflow edit is available."
       },
       {
         "id": "runtime-core",

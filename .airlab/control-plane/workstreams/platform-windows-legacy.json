@@ -3,11 +3,11 @@
   "id": "platform-windows-legacy",
   "title": "Windows 7/8.1",
   "role": "worker",
-  "status": "CLAIMED",
+  "status": "IMPLEMENTING",
   "activation": "active",
   "scope": "Legacy Windows compatibility layer, installer/update and target-specific adapters with target-optimized inference while preserving shared orchestration/contracts.",
   "shared_engine_policy": "adapter_only",
-  "state_version": 22,
+  "state_version": 23,
   "updated_at": "2026-10-11",
   "active_claim": {
     "claim_id": "85c250b3e7de5a82c945",
@@ -20,8 +20,8 @@
       "file:pilialvu75-hue/Ai-orchestrator-riserva:.github/workflows/windows-build.yml"
     ],
     "started_at": "2026-10-11T13:54:10Z",
-    "heartbeat_at": "2026-10-11T13:54:10Z",
-    "lease_until": "2026-10-12T01:54:10Z",
+    "heartbeat_at": "2026-10-11T13:55:21Z",
+    "lease_until": "2026-10-12T01:55:21Z",
     "lease_hours": 12
   },
   "dependencies": [],
@@ -45,7 +45,7 @@
     "reviewed_by": null,
     "reviewed_at": null
   },
-  "next_action": "Return to READY. The Windows Legacy worker may claim the next bounded non-overlapping task. Preserve the historical Win7 0F physical validation as open evidence rather than a lane-wide execution block.",
+  "next_action": "Release this blocked provenance claim without claiming implementation success. Preserve the independent Win7 0F physical test as open; resume provenance only when a permitted workflow edit is available.",
   "inference_profile_policy": "target_owned_benchmark_gated",
   "inference_profile": {
     "status": "NEEDS_TARGET_PROFILE",
@@ -256,26 +256,45 @@
         "PR #671 merged Windows 7-11 compatibility layer"
       ],
       "next_action": "Wait for PR #767 Windows build CI. If successful, install that candidate on physical Win7 and press only 0F · Leggi modelli salvati; record whether the app remains open or crashes."
+    },
+    {
+      "seq": 11,
+      "at": "2026-10-11T13:55:21Z",
+      "claim_id": "85c250b3e7de5a82c945",
+      "work_item": "winlegacy-artifact-provenance-20261011",
+      "summary": "Verified PR #767 Windows CI run #1268 succeeded and its installer artifact 11242566586 is available until 2026-10-16; Win7 0F physical evidence is still missing. Inspected current Windows workflow: Flutter 3.47.5, compatibility bundle gate, no per-artifact physical provenance. Created bounded provenance branch, but repository workflow update attempts were blocked by tool safety controls; no code changes were committed.",
+      "decisions": [
+        "Do not confuse successful Win7 static import/bundle checks with physically validated Win7/8.1 runtime.",
+        "Do not modify PR #767 or change the Windows 8.1/10/11 runtime behavior.",
+        "Do not hold a claim lease while repository write tooling blocks the scoped implementation."
+      ],
+      "evidence_refs": [
+        "PR #767 head 245a422d43f9c06faa7ebaa76bb1bc5e38e03f13",
+        "Windows run #1268 SUCCESS, run 37039910572",
+        "installer artifact 11242566586 expires 2026-10-16",
+        "branch test/winlegacy-artifact-provenance-20261011 (no code commits)"
+      ],
+      "next_action": "Release this blocked provenance claim without claiming implementation success. Preserve the independent Win7 0F physical test as open; resume provenance only when a permitted workflow edit is available."
     }
   ],
   "last_checkpoint": {
-    "seq": 10,
-    "at": "2026-10-02T16:37:41Z",
-    "claim_id": "baedabdf26f436c9e964",
-    "work_item": "win7-post-0e-main-convergence",
-    "summary": "Created PR #767 from current main to converge Win7 post-0E isolation with the merged Windows 7-11 compatibility/current desktop line. Added Win7-only safe startup and two remaining stored-model probes: 0F metadata parse, 0G stored-file refresh/validation.",
+    "seq": 11,
+    "at": "2026-10-11T13:55:21Z",
+    "claim_id": "85c250b3e7de5a82c945",
+    "work_item": "winlegacy-artifact-provenance-20261011",
+    "summary": "Verified PR #767 Windows CI run #1268 succeeded and its installer artifact 11242566586 is available until 2026-10-16; Win7 0F physical evidence is still missing. Inspected current Windows workflow: Flutter 3.47.5, compatibility bundle gate, no per-artifact physical provenance. Created bounded provenance branch, but repository workflow update attempts were blocked by tool safety controls; no code changes were committed.",
     "decisions": [
-      "Use current main as the convergence base; do not continue stacking product work on PR #761.",
-      "Preserve normal startup on Windows 8.1/10/11; safe-autostart is enabled only when the runner dynamically identifies Win7 by absence of a Windows 8+ API.",
-      "Physical Win7 probe 0F is the next discriminator after CI; do not run 0G in the same acceptance step.",
-      "Do not merge PR #767 based on CI alone."
+      "Do not confuse successful Win7 static import/bundle checks with physically validated Win7/8.1 runtime.",
+      "Do not modify PR #767 or change the Windows 8.1/10/11 runtime behavior.",
+      "Do not hold a claim lease while repository write tooling blocks the scoped implementation."
     ],
     "evidence_refs": [
-      "PR #767 head 794a3c761cdfbbea8b88fcb450cca1f1b285463d",
-      "physical Win7 PR #761 run #1250 probe 0E OK",
-      "PR #671 merged Windows 7-11 compatibility layer"
+      "PR #767 head 245a422d43f9c06faa7ebaa76bb1bc5e38e03f13",
+      "Windows run #1268 SUCCESS, run 37039910572",
+      "installer artifact 11242566586 expires 2026-10-16",
+      "branch test/winlegacy-artifact-provenance-20261011 (no code commits)"
     ],
-    "next_action": "Wait for PR #767 Windows build CI. If successful, install that candidate on physical Win7 and press only 0F · Leggi modelli salvati; record whether the app remains open or crashes."
+    "next_action": "Release this blocked provenance claim without claiming implementation success. Preserve the independent Win7 0F physical test as open; resume provenance only when a permitted workflow edit is available."
   },
   "reconciliation_events": [
     {
