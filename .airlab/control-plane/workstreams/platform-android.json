@@ -3,94 +3,50 @@
   "id": "platform-android",
   "title": "Android",
   "role": "worker",
-  "status": "READY",
+  "status": "CLAIMED",
   "activation": "active",
   "scope": "Android packaging, permissions, hardware/runtime adapters, UI integration and releases using shared orchestration/contracts with target-optimized inference.",
   "shared_engine_policy": "adapter_only",
-  "state_version": 12,
-  "updated_at": "2026-10-10",
-  "active_claim": null,
+  "state_version": 13,
+  "updated_at": "2026-10-11",
+  "active_claim": {
+    "claim_id": "111089b6cea735577ad4",
+    "owner_lane": "platform-android",
+    "work_item": "benchmark-switch-error-attribution",
+    "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
+    "scope": "Preserve completed stability probes when switch partner fails; report stage and catalog identities. No runtime guard, Vulkan or model policy changes.",
+    "branch": "fix/android-benchmark-switch-attribution",
+    "resource_locks": [
+      "branch:pilialvu75-hue/Ai-orchestrator-riserva:fix/android-benchmark-switch-attribution",
+      "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/features/chat/presentation/debug/local_model_benchmark.dart",
+      "scope:android-benchmark-switch-attribution"
+    ],
+    "started_at": "2026-10-11T03:04:41Z",
+    "heartbeat_at": "2026-10-11T03:04:41Z",
+    "lease_until": "2026-10-11T15:04:41Z",
+    "lease_hours": 12
+  },
   "dependencies": [],
   "roadmap_refs": [
     ".airlab/public-repositories/Ai-orchestrator-riserva/roadmap.yaml#CANT-14",
     ".airlab/public-repositories/Ai-orchestrator-riserva/roadmap.yaml#CANT-INF1"
   ],
-  "evidence": [
-    {
-      "type": "pull_request",
-      "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/823",
-      "result": "PASS",
-      "note": "Implementation present; draft, unmerged. Reviewer approval pending."
-    },
-    {
-      "type": "commit",
-      "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/0310505583593bc0659638af815fdbe2715ee5c4",
-      "result": "PASS"
-    },
-    {
-      "type": "ci",
-      "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38003787165",
-      "result": "PASS",
-      "note": "Web Cantiere Build success on PR head."
-    },
-    {
-      "type": "ci",
-      "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38003787234",
-      "result": "PASS",
-      "note": "Build macOS Desktop success on PR head."
-    },
-    {
-      "type": "ci",
-      "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38003787104",
-      "result": "PASS",
-      "note": "Build Linux Desktop success on PR head."
-    },
-    {
-      "type": "ci",
-      "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38003787163",
-      "result": "PASS",
-      "note": "Build Windows Desktop success on PR head."
-    },
-    {
-      "type": "ci",
-      "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38003787134",
-      "result": "PASS",
-      "note": "Build & Release APK success on PR head."
-    },
-    {
-      "type": "test",
-      "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38003787134/job/114068102558",
-      "result": "PASS",
-      "note": "Job logs confirm all three runtime_notice_presenter_test.dart regressions pass at 2026-10-09T23:23:02Z."
-    },
-    {
-      "type": "diagnostics",
-      "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-diagnostics/releases/tag/diagnostics-v1-6bd1447f-5fda-4171-84b4-c1ff56b154cf",
-      "result": "FAIL",
-      "note": "Build3069 S24 FE critical-memory cancellation at 2026-10-09 23:36:58: trim15, GPU33,1536/64/16. Not resolved by this UI change."
-    },
-    {
-      "type": "physical_device",
-      "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/823",
-      "result": "PENDING",
-      "note": "S24 FE validation of deployed UI fix still required; memory runtime gate remains open."
-    }
-  ],
+  "evidence": [],
   "gates": {
     "G0_CLAIM": "PASS",
-    "G1_IMPLEMENTATION": "PASS",
-    "G2_STATIC": "PASS",
-    "G3_CI": "PASS",
-    "G4_INTEGRATION": "PASS",
+    "G1_IMPLEMENTATION": "PENDING",
+    "G2_STATIC": "PENDING",
+    "G3_CI": "PENDING",
+    "G4_INTEGRATION": "PENDING",
     "G5_TARGET_RUNTIME": "NOT_APPLICABLE_UNTIL_RUNTIME_CHANGE",
-    "G6_REVIEWER": "PASS",
-    "G7_CANONICAL_SYNC": "PASS"
+    "G6_REVIEWER": "PENDING",
+    "G7_CANONICAL_SYNC": "PENDING"
   },
   "reviewer": {
     "required": true,
-    "state": "APPROVED",
-    "reviewed_by": "main-reviewer",
-    "reviewed_at": "2026-10-10T13:50:24Z"
+    "state": "PENDING",
+    "reviewed_by": null,
+    "reviewed_at": null
   },
   "next_action": "Deploy a reviewed build containing PR #823 and perform a bounded S24 FE UI check that notices expire/dismiss without blocking input. Keep the critical-memory/RAM investigation open independently; preserve trim15 and do not claim runtime stability from this UI approval.",
   "inference_profile_policy": "target_owned_benchmark_gated",
@@ -269,99 +225,6 @@
       }
     }
   ],
-  "review_packet": {
-    "schema_version": 1,
-    "submitted_at": "2026-10-10T13:36:58.790Z",
-    "lane_id": "platform-android",
-    "claim_id": "263aa06406ed3e44d37e",
-    "work_item": "phi-critical-memory-chat-recovery",
-    "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
-    "branch": "fix/android-phi-memory-chat-recovery",
-    "pull_request": 823,
-    "summary": "PR823 UI-only recovery after runtime errors: deduplicated, dismissible notices expire within six seconds and clear on a new request. Five workflows and three focused widget tests pass on 0310505583593bc0659638af815fdbe2715ee5c4. Physical S24 FE UI acceptance and RAM stability remain OPEN; no runtime acceptance or merge asserted.",
-    "changes": [
-      "Introduce RuntimeNoticePresenter with deduplication, explicit six-second expiry, manual dismissal, three-line limit and timer cleanup.",
-      "Use presenter from chat_page listener and dispose with chat body; clear obsolete notices when runtimeMessage becomes null.",
-      "Add three widget regressions for repeated notices/composer usability, accessibility with action, and clearing on a new request."
-    ],
-    "evidence": [
-      {
-        "type": "pull_request",
-        "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/823",
-        "result": "PASS",
-        "note": "Implementation present; draft, unmerged. Reviewer approval pending."
-      },
-      {
-        "type": "commit",
-        "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/0310505583593bc0659638af815fdbe2715ee5c4",
-        "result": "PASS"
-      },
-      {
-        "type": "ci",
-        "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38003787165",
-        "result": "PASS",
-        "note": "Web Cantiere Build success on PR head."
-      },
-      {
-        "type": "ci",
-        "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38003787234",
-        "result": "PASS",
-        "note": "Build macOS Desktop success on PR head."
-      },
-      {
-        "type": "ci",
-        "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38003787104",
-        "result": "PASS",
-        "note": "Build Linux Desktop success on PR head."
-      },
-      {
-        "type": "ci",
-        "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38003787163",
-        "result": "PASS",
-        "note": "Build Windows Desktop success on PR head."
-      },
-      {
-        "type": "ci",
-        "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38003787134",
-        "result": "PASS",
-        "note": "Build & Release APK success on PR head."
-      },
-      {
-        "type": "test",
-        "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38003787134/job/114068102558",
-        "result": "PASS",
-        "note": "Job logs confirm all three runtime_notice_presenter_test.dart regressions pass at 2026-10-09T23:23:02Z."
-      },
-      {
-        "type": "diagnostics",
-        "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-diagnostics/releases/tag/diagnostics-v1-6bd1447f-5fda-4171-84b4-c1ff56b154cf",
-        "result": "FAIL",
-        "note": "Build3069 S24 FE critical-memory cancellation at 2026-10-09 23:36:58: trim15, GPU33,1536/64/16. Not resolved by this UI change."
-      },
-      {
-        "type": "physical_device",
-        "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/823",
-        "result": "PENDING",
-        "note": "S24 FE validation of deployed UI fix still required; memory runtime gate remains open."
-      }
-    ],
-    "known_risks": [
-      "No fix or acceptance of RAM/Vulkan stability: trim15 cancellation still observed on build3069.",
-      "CI/widget tests cannot prove physical S24 FE recovery; device test required after reviewed release.",
-      "No changes to llama.cpp, Vulkan policy, memory profile or critical guard.",
-      "Local Flutter bootstrap was blocked by automatic security review; did not bypass it. Validation uses GitHub CI."
-    ],
-    "reviewer_checks": [
-      "Review exact PR head and CI evidence independently before recording G1-G4.",
-      "Check snackbar deduplication, six-second expiry with accessibility/actions, manual dismissal, lifecycle and clearing on a new prompt.",
-      "Keep G5 physical runtime/RAM acceptance open and preserve trim15; UI success is not memory stability.",
-      "Decide bounded UI review independently of unresolved memory work; no merge implied by this handoff."
-    ],
-    "roadmap_impact": {
-      "material": false,
-      "refs": []
-    }
-  },
   "current_gate_attestation": {
     "at": "2026-10-10T13:49:38Z",
     "claim_id": "263aa06406ed3e44d37e",
@@ -440,6 +303,101 @@
         "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38003787134",
         "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38003787134/job/114068102558"
       ]
+    }
+  ],
+  "review_packet_history": [
+    {
+      "schema_version": 1,
+      "submitted_at": "2026-10-10T13:36:58.790Z",
+      "lane_id": "platform-android",
+      "claim_id": "263aa06406ed3e44d37e",
+      "work_item": "phi-critical-memory-chat-recovery",
+      "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
+      "branch": "fix/android-phi-memory-chat-recovery",
+      "pull_request": 823,
+      "summary": "PR823 UI-only recovery after runtime errors: deduplicated, dismissible notices expire within six seconds and clear on a new request. Five workflows and three focused widget tests pass on 0310505583593bc0659638af815fdbe2715ee5c4. Physical S24 FE UI acceptance and RAM stability remain OPEN; no runtime acceptance or merge asserted.",
+      "changes": [
+        "Introduce RuntimeNoticePresenter with deduplication, explicit six-second expiry, manual dismissal, three-line limit and timer cleanup.",
+        "Use presenter from chat_page listener and dispose with chat body; clear obsolete notices when runtimeMessage becomes null.",
+        "Add three widget regressions for repeated notices/composer usability, accessibility with action, and clearing on a new request."
+      ],
+      "evidence": [
+        {
+          "type": "pull_request",
+          "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/823",
+          "result": "PASS",
+          "note": "Implementation present; draft, unmerged. Reviewer approval pending."
+        },
+        {
+          "type": "commit",
+          "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/0310505583593bc0659638af815fdbe2715ee5c4",
+          "result": "PASS"
+        },
+        {
+          "type": "ci",
+          "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38003787165",
+          "result": "PASS",
+          "note": "Web Cantiere Build success on PR head."
+        },
+        {
+          "type": "ci",
+          "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38003787234",
+          "result": "PASS",
+          "note": "Build macOS Desktop success on PR head."
+        },
+        {
+          "type": "ci",
+          "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38003787104",
+          "result": "PASS",
+          "note": "Build Linux Desktop success on PR head."
+        },
+        {
+          "type": "ci",
+          "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38003787163",
+          "result": "PASS",
+          "note": "Build Windows Desktop success on PR head."
+        },
+        {
+          "type": "ci",
+          "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38003787134",
+          "result": "PASS",
+          "note": "Build & Release APK success on PR head."
+        },
+        {
+          "type": "test",
+          "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38003787134/job/114068102558",
+          "result": "PASS",
+          "note": "Job logs confirm all three runtime_notice_presenter_test.dart regressions pass at 2026-10-09T23:23:02Z."
+        },
+        {
+          "type": "diagnostics",
+          "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-diagnostics/releases/tag/diagnostics-v1-6bd1447f-5fda-4171-84b4-c1ff56b154cf",
+          "result": "FAIL",
+          "note": "Build3069 S24 FE critical-memory cancellation at 2026-10-09 23:36:58: trim15, GPU33,1536/64/16. Not resolved by this UI change."
+        },
+        {
+          "type": "physical_device",
+          "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/823",
+          "result": "PENDING",
+          "note": "S24 FE validation of deployed UI fix still required; memory runtime gate remains open."
+        }
+      ],
+      "known_risks": [
+        "No fix or acceptance of RAM/Vulkan stability: trim15 cancellation still observed on build3069.",
+        "CI/widget tests cannot prove physical S24 FE recovery; device test required after reviewed release.",
+        "No changes to llama.cpp, Vulkan policy, memory profile or critical guard.",
+        "Local Flutter bootstrap was blocked by automatic security review; did not bypass it. Validation uses GitHub CI."
+      ],
+      "reviewer_checks": [
+        "Review exact PR head and CI evidence independently before recording G1-G4.",
+        "Check snackbar deduplication, six-second expiry with accessibility/actions, manual dismissal, lifecycle and clearing on a new prompt.",
+        "Keep G5 physical runtime/RAM acceptance open and preserve trim15; UI success is not memory stability.",
+        "Decide bounded UI review independently of unresolved memory work; no merge implied by this handoff."
+      ],
+      "roadmap_impact": {
+        "material": false,
+        "refs": []
+      }
     }
   ]
 }

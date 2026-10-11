@@ -1,0 +1,12 @@
+{
+  "schema_version": 1,
+  "request_id": "android-20261011-benchmark-switch-attribution",
+  "status": "APPLIED",
+  "processed_at": "2026-10-11T03:04:41Z",
+  "source_file": "android-20261011-benchmark-switch-attribution.json",
+  "lane_id": "platform-android",
+  "operation": "claim",
+  "actor_id": "chatgpt:platform-android",
+  "errors": [],
+  "result_state_version": 13
+}
