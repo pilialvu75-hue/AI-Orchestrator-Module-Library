@@ -7,7 +7,7 @@
     "policy": "This private repository is the single coordination authority. Chats and agents are workers, not independent sources of truth."
   },
   "updated_at": "2026-10-11",
-  "state_revision": 171,
+  "state_revision": 172,
   "lifecycle_status": "BOOTSTRAP_ACTIVE",
   "roadmap_authority": {
     "library": ".airlab/roadmap.yaml",
@@ -80,8 +80,8 @@
     "invalid_lane_behavior": "ISOLATE_AND_SURFACE_PROJECTION_INCIDENT"
   },
   "projection": {
-    "source_digest": "99b4e54e7aaeb98e1bdef0c086a63218cda1fd5edeb1505572ecaacc2dc5d651",
-    "projected_at": "2026-10-11T17:18:10Z",
+    "source_digest": "88d3e624f6a103a58a003933fea877221dd8cb6cf0af82266158aaee29b6a2ff",
+    "projected_at": "2026-10-11T19:25:59Z",
     "counts": {
       "IMPLEMENTING": 1,
       "READY": 16
@@ -157,7 +157,18 @@
     ],
     "review_required": [],
     "blocked": [],
-    "checkpoint_watch": [],
+    "checkpoint_watch": [
+      {
+        "lane": "cantiere",
+        "claim_id": "c792cfdec8aee6363eba",
+        "work_item": "AIVEXUS-BASE-1",
+        "status": "IMPLEMENTING",
+        "reason": "CHECKPOINT_STALE",
+        "last_checkpoint_at": "2026-10-11T17:18:10Z",
+        "due_since": "2026-10-11T19:18:10Z",
+        "warning_after_minutes": 120
+      }
+    ],
     "projection_incidents": [],
     "platform_inference_profiles": [
       {
