@@ -3,11 +3,11 @@
   "id": "cantiere",
   "title": "Cantiere",
   "role": "worker",
-  "status": "REVIEW_REQUIRED",
+  "status": "IMPLEMENTING",
   "activation": "active",
   "scope": "Exclusive Cantiere/App Factory execution, durability, build/review/validation/apply and first-real-app reliability.",
   "shared_engine_policy": "shared_or_control_plane",
-  "state_version": 35,
+  "state_version": 36,
   "updated_at": "2026-10-11",
   "active_claim": {
     "claim_id": "c792cfdec8aee6363eba",
@@ -111,11 +111,11 @@
   },
   "reviewer": {
     "required": true,
-    "state": "PENDING",
+    "state": "CHANGES_REQUESTED",
     "reviewed_by": "main-reviewer",
-    "reviewed_at": "2026-10-11T12:46:32Z"
+    "reviewed_at": "2026-10-11T17:18:10Z"
   },
-  "next_action": "Main/Reviewer must inspect the review_packet, linked evidence and required gates before promotion or rework.",
+  "next_action": "Update feat/aivexus-shared-project-base-v1 from current Riserva main 9f320c82073fc74c7cd4a8b974071ec0addb3772 without adding BASE-2 or domain work. Resolve only necessary integration conflicts, keep ProjectExtension/ResourceExchange semantics unchanged, run the existing six workflow gates on the new head, then resubmit the same claim-bound AIVEXUS-BASE-1 review packet with new commit/PR PASS evidence. Physical/device, Fusion/print/gameplay and BASE-2 remain open.",
   "historical_backlog": [
     "Stay in Phase 1 ONLINE until a real generated Android app is physically accepted.",
     "Reproduce the recent manga-drawing app failure from current main with Diagnostics; do not restart generic audits.",
@@ -551,29 +551,33 @@
       ],
       "next_action": "Main/Reviewer must inspect the review_packet, linked evidence and required gates before promotion or rework.",
       "kind": "REVIEW_HANDOFF"
+    },
+    {
+      "seq": 22,
+      "at": "2026-10-11T17:18:10Z",
+      "claim_id": "c792cfdec8aee6363eba",
+      "work_item": "AIVEXUS-BASE-1",
+      "summary": "PR #826 packet evidence is now complete and PASS on exact head 6eaf98bfd816ff26cb23401d0351c680b8bfb90e, but GitHub currently reports mergeable=false because Riserva main advanced to 9f320c82073fc74c7cd4a8b974071ec0addb3772. This is a merge-integration blocker, not a request to reopen BASE-1 functionality. Rework is limited to aligning the existing branch with current main, resolving only conflicts in the already claimed AIVEXUS-BASE-1 files, preserving scope and behavior, then re-running exact-head CI.",
+      "decisions": [
+        "Main/Reviewer requested bounded rework."
+      ],
+      "evidence_refs": [],
+      "next_action": "Update feat/aivexus-shared-project-base-v1 from current Riserva main 9f320c82073fc74c7cd4a8b974071ec0addb3772 without adding BASE-2 or domain work. Resolve only necessary integration conflicts, keep ProjectExtension/ResourceExchange semantics unchanged, run the existing six workflow gates on the new head, then resubmit the same claim-bound AIVEXUS-BASE-1 review packet with new commit/PR PASS evidence. Physical/device, Fusion/print/gameplay and BASE-2 remain open.",
+      "kind": "REVIEW_REWORK"
     }
   ],
   "last_checkpoint": {
-    "seq": 21,
-    "at": "2026-10-11T13:57:49Z",
+    "seq": 22,
+    "at": "2026-10-11T17:18:10Z",
     "claim_id": "c792cfdec8aee6363eba",
     "work_item": "AIVEXUS-BASE-1",
-    "summary": "Evidence-only resubmission for AIVEXUS-BASE-1 at exact PR #826 head 6eaf98bfd816ff26cb23401d0351c680b8bfb90e: commit and pull_request evidence now PASS after verification. All six existing CI workflow PASS receipts and test/analysis PASS receipts unchanged. No code/head modification, reviewer approval, merge, deployment or physical/domain acceptance claimed.",
-    "decisions": [],
-    "evidence_refs": [
-      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/6eaf98bfd816ff26cb23401d0351c680b8bfb90e",
-      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/826",
-      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38132363946",
-      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38132363946/job/114449143774",
-      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38132363946/job/114449143774",
-      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38132363928",
-      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38132363925",
-      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38132363991",
-      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38132363929",
-      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38132364000"
+    "summary": "PR #826 packet evidence is now complete and PASS on exact head 6eaf98bfd816ff26cb23401d0351c680b8bfb90e, but GitHub currently reports mergeable=false because Riserva main advanced to 9f320c82073fc74c7cd4a8b974071ec0addb3772. This is a merge-integration blocker, not a request to reopen BASE-1 functionality. Rework is limited to aligning the existing branch with current main, resolving only conflicts in the already claimed AIVEXUS-BASE-1 files, preserving scope and behavior, then re-running exact-head CI.",
+    "decisions": [
+      "Main/Reviewer requested bounded rework."
     ],
-    "next_action": "Main/Reviewer must inspect the review_packet, linked evidence and required gates before promotion or rework.",
-    "kind": "REVIEW_HANDOFF"
+    "evidence_refs": [],
+    "next_action": "Update feat/aivexus-shared-project-base-v1 from current Riserva main 9f320c82073fc74c7cd4a8b974071ec0addb3772 without adding BASE-2 or domain work. Resolve only necessary integration conflicts, keep ProjectExtension/ResourceExchange semantics unchanged, run the existing six workflow gates on the new head, then resubmit the same claim-bound AIVEXUS-BASE-1 review packet with new commit/PR PASS evidence. Physical/device, Fusion/print/gameplay and BASE-2 remain open.",
+    "kind": "REVIEW_REWORK"
   },
   "review_history": [
     {
@@ -596,6 +600,14 @@
       "work_item": "AIVEXUS-BASE-1",
       "decision": "CHANGES_REQUESTED",
       "summary": "PR #826 exact head 6eaf98bfd816ff26cb23401d0351c680b8bfb90e is open, mergeable and has six successful exact-head workflows, but the claim-bound packet records its commit and pull_request evidence as INFO. G1 requires PASS commit/PR evidence. Rework is evidence-only: no code modification requested and no runtime/domain acceptance implied."
+    },
+    {
+      "reviewed_at": "2026-10-11T17:18:10Z",
+      "reviewed_by": "main-reviewer",
+      "claim_id": "c792cfdec8aee6363eba",
+      "work_item": "AIVEXUS-BASE-1",
+      "decision": "CHANGES_REQUESTED",
+      "summary": "PR #826 packet evidence is now complete and PASS on exact head 6eaf98bfd816ff26cb23401d0351c680b8bfb90e, but GitHub currently reports mergeable=false because Riserva main advanced to 9f320c82073fc74c7cd4a8b974071ec0addb3772. This is a merge-integration blocker, not a request to reopen BASE-1 functionality. Rework is limited to aligning the existing branch with current main, resolving only conflicts in the already claimed AIVEXUS-BASE-1 files, preserving scope and behavior, then re-running exact-head CI."
     }
   ],
   "completed_work": [

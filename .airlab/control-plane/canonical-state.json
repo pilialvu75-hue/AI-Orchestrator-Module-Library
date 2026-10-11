@@ -7,7 +7,7 @@
     "policy": "This private repository is the single coordination authority. Chats and agents are workers, not independent sources of truth."
   },
   "updated_at": "2026-10-11",
-  "state_revision": 170,
+  "state_revision": 171,
   "lifecycle_status": "BOOTSTRAP_ACTIVE",
   "roadmap_authority": {
     "library": ".airlab/roadmap.yaml",
@@ -80,11 +80,11 @@
     "invalid_lane_behavior": "ISOLATE_AND_SURFACE_PROJECTION_INCIDENT"
   },
   "projection": {
-    "source_digest": "98d6477d63bf05499a20fdb4804f912c115e777f447fe78a07e56f6e7fc3045a",
-    "projected_at": "2026-10-11T16:31:38Z",
+    "source_digest": "99b4e54e7aaeb98e1bdef0c086a63218cda1fd5edeb1505572ecaacc2dc5d651",
+    "projected_at": "2026-10-11T17:18:10Z",
     "counts": {
-      "READY": 16,
-      "REVIEW_REQUIRED": 1
+      "IMPLEMENTING": 1,
+      "READY": 16
     },
     "active_claims": [
       {
@@ -155,22 +155,9 @@
         "work_item": "AIVEXUS-BASE-1"
       }
     ],
-    "review_required": [
-      "cantiere"
-    ],
+    "review_required": [],
     "blocked": [],
-    "checkpoint_watch": [
-      {
-        "lane": "cantiere",
-        "claim_id": "c792cfdec8aee6363eba",
-        "work_item": "AIVEXUS-BASE-1",
-        "status": "REVIEW_REQUIRED",
-        "reason": "CHECKPOINT_STALE",
-        "last_checkpoint_at": "2026-10-11T13:57:49Z",
-        "due_since": "2026-10-11T15:57:49Z",
-        "warning_after_minutes": 120
-      }
-    ],
+    "checkpoint_watch": [],
     "projection_incidents": [],
     "platform_inference_profiles": [
       {
@@ -269,9 +256,9 @@
       },
       {
         "id": "cantiere",
-        "status": "REVIEW_REQUIRED",
+        "status": "IMPLEMENTING",
         "activation": "active",
-        "state_version": 35,
+        "state_version": 36,
         "updated_at": "2026-10-11",
         "active_claim": {
           "claim_id": "c792cfdec8aee6363eba",
@@ -289,10 +276,10 @@
             "scope:aivexus:shared-base"
           ]
         },
-        "reviewer_state": "PENDING",
+        "reviewer_state": "CHANGES_REQUESTED",
         "inference_profile_status": null,
         "historical_backlog_count": 3,
-        "next_action": "Main/Reviewer must inspect the review_packet, linked evidence and required gates before promotion or rework."
+        "next_action": "Update feat/aivexus-shared-project-base-v1 from current Riserva main 9f320c82073fc74c7cd4a8b974071ec0addb3772 without adding BASE-2 or domain work. Resolve only necessary integration conflicts, keep ProjectExtension/ResourceExchange semantics unchanged, run the existing six workflow gates on the new head, then resubmit the same claim-bound AIVEXUS-BASE-1 review packet with new commit/PR PASS evidence. Physical/device, Fusion/print/gameplay and BASE-2 remain open."
       },
       {
         "id": "diagnostics",
