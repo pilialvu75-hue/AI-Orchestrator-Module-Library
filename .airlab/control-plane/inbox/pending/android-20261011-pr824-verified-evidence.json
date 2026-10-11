@@ -1,0 +1,116 @@
+{
+  "schema_version": 1,
+  "request_id": "android-20261011-pr824-verified-evidence",
+  "actor_id": "chatgpt:platform-android",
+  "lane_id": "platform-android",
+  "operation": "submit_review",
+  "expected_state_version": 16,
+  "payload": {
+    "packet": {
+      "schema_version": 1,
+      "submitted_at": "2026-10-11T09:24:02.371Z",
+      "lane_id": "platform-android",
+      "claim_id": "111089b6cea735577ad4",
+      "work_item": "benchmark-switch-error-attribution",
+      "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
+      "branch": "fix/android-benchmark-switch-attribution",
+      "pull_request": 824,
+      "summary": "PR824 preserves completed stability probes when switch partner/return throws and reports stage/catalog identities. Evidence-only resubmission on unchanged head e29c2bb15e1175635e5b578f4dc7fab5819360c0: five workflows and four focused regressions verified PASS. RAM, trim15 guard and physical S24 FE acceptance remain open.",
+      "changes": [
+        "Separate partner and return outcomes; keep completed original-model probes on ordinary switch errors.",
+        "Incomplete switching remains null and existing scoring returns n/a; copied UI and plain text expose catalog identities and stage/error.",
+        "Add four regressions for partner guard, return failure, wrong answer and critical-resource propagation."
+      ],
+      "evidence": [
+        {
+          "type": "pull_request",
+          "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/824",
+          "result": "PASS",
+          "note": "Implementation exists at unchanged reviewed head; no merge or reviewer approval implied."
+        },
+        {
+          "type": "commit",
+          "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/e29c2bb15e1175635e5b578f4dc7fab5819360c0",
+          "result": "PASS",
+          "note": "Implementation exists at unchanged reviewed head; no merge or reviewer approval implied."
+        },
+        {
+          "type": "analysis",
+          "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/824/files",
+          "result": "PASS",
+          "note": "Inspected original outer catch and diff; git diff --check passes. ConsecutivePassed counts exact-answer success, not absence of runtime crashes."
+        },
+        {
+          "type": "ci",
+          "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38107361707",
+          "result": "PASS",
+          "note": "Build & Release APK completed successfully on unchanged PR head e29c2bb15e1175635e5b578f4dc7fab5819360c0."
+        },
+        {
+          "type": "ci",
+          "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38107361691",
+          "result": "PASS",
+          "note": "Web Cantiere Build completed successfully on unchanged PR head e29c2bb15e1175635e5b578f4dc7fab5819360c0."
+        },
+        {
+          "type": "ci",
+          "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38107361706",
+          "result": "PASS",
+          "note": "Build Linux Desktop completed successfully on unchanged PR head e29c2bb15e1175635e5b578f4dc7fab5819360c0."
+        },
+        {
+          "type": "ci",
+          "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38107361716",
+          "result": "PASS",
+          "note": "Build Windows Desktop completed successfully on unchanged PR head e29c2bb15e1175635e5b578f4dc7fab5819360c0."
+        },
+        {
+          "type": "ci",
+          "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38107361719",
+          "result": "PASS",
+          "note": "Build macOS Desktop completed successfully on unchanged PR head e29c2bb15e1175635e5b578f4dc7fab5819360c0."
+        },
+        {
+          "type": "test",
+          "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38107361707/job/114375580450",
+          "result": "PASS",
+          "note": "CI job log explicitly confirms: partner guard failure is attributed without running return probe"
+        },
+        {
+          "type": "test",
+          "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38107361707/job/114375580450",
+          "result": "PASS",
+          "note": "CI job log explicitly confirms: return failure retains successful partner outcome"
+        },
+        {
+          "type": "test",
+          "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38107361707/job/114375580450",
+          "result": "PASS",
+          "note": "CI job log explicitly confirms: wrong partner answer still runs return and records both outcomes"
+        },
+        {
+          "type": "test",
+          "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38107361707/job/114375580450",
+          "result": "PASS",
+          "note": "CI job log explicitly confirms: critical memory abort propagates at either switch stage"
+        }
+      ],
+      "known_risks": [
+        "No repair of runtime cancellation, cache/file identity binding, memory or Vulkan; only benchmark attribution/reporting.",
+        "Earlier 0/5 exact-answer scores must not be interpreted as five runtime crashes.",
+        "Physical S24 FE validation pending; reported build3080 trim15 error remains unresolved.",
+        "Tests verified through CI only; local Flutter bootstrap security restriction was not bypassed."
+      ],
+      "reviewer_checks": [
+        "Verify final CI and focused regression results for the exact head before recording G1-G4.",
+        "Verify errors in partner/return do not discard original results and incomplete score remains n/a.",
+        "Verify critical resource exceptions still propagate.",
+        "Keep RAM and physical runtime acceptance open; no claim of GGUF cache fix."
+      ],
+      "roadmap_impact": {
+        "material": false,
+        "refs": []
+      }
+    }
+  }
+}
