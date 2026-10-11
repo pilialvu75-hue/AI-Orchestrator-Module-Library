@@ -7,7 +7,7 @@
     "policy": "This private repository is the single coordination authority. Chats and agents are workers, not independent sources of truth."
   },
   "updated_at": "2026-10-11",
-  "state_revision": 146,
+  "state_revision": 147,
   "lifecycle_status": "BOOTSTRAP_ACTIVE",
   "roadmap_authority": {
     "library": ".airlab/roadmap.yaml",
@@ -80,12 +80,12 @@
     "invalid_lane_behavior": "ISOLATE_AND_SURFACE_PROJECTION_INCIDENT"
   },
   "projection": {
-    "source_digest": "eec28d1eb4bb9713f890f4f80f6a40724d815c4e10c36932bbbaa07f31205248",
-    "projected_at": "2026-10-11T03:06:37Z",
+    "source_digest": "0464448c8a1829340fc61d0ce4eec49ec04b5545d19567d0002cf473193796c8",
+    "projected_at": "2026-10-11T03:08:04Z",
     "counts": {
       "BLOCKED": 1,
-      "IMPLEMENTING": 1,
-      "READY": 15
+      "READY": 15,
+      "REVIEW_REQUIRED": 1
     },
     "active_claims": [
       {
@@ -121,7 +121,9 @@
         "work_item": "benchmark-switch-error-attribution"
       }
     ],
-    "review_required": [],
+    "review_required": [
+      "platform-android"
+    ],
     "blocked": [
       {
         "lane": "platform-windows-legacy",
@@ -283,9 +285,9 @@
       },
       {
         "id": "platform-android",
-        "status": "IMPLEMENTING",
+        "status": "REVIEW_REQUIRED",
         "activation": "active",
-        "state_version": 14,
+        "state_version": 15,
         "updated_at": "2026-10-11",
         "active_claim": {
           "claim_id": "111089b6cea735577ad4",
@@ -301,7 +303,7 @@
         "reviewer_state": "PENDING",
         "inference_profile_status": "ACTIVE_BENCHMARKING",
         "historical_backlog_count": 3,
-        "next_action": "Open focused PR, inspect CI, submit claim-bound review evidence. Keep physical model stability and RAM/trim15 unresolved."
+        "next_action": "Main/Reviewer must inspect the review_packet, linked evidence and required gates before promotion or rework."
       },
       {
         "id": "platform-ios",

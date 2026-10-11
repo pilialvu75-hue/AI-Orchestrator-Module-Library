@@ -3,11 +3,11 @@
   "id": "platform-android",
   "title": "Android",
   "role": "worker",
-  "status": "IMPLEMENTING",
+  "status": "REVIEW_REQUIRED",
   "activation": "active",
   "scope": "Android packaging, permissions, hardware/runtime adapters, UI integration and releases using shared orchestration/contracts with target-optimized inference.",
   "shared_engine_policy": "adapter_only",
-  "state_version": 14,
+  "state_version": 15,
   "updated_at": "2026-10-11",
   "active_claim": {
     "claim_id": "111089b6cea735577ad4",
@@ -31,7 +31,60 @@
     ".airlab/public-repositories/Ai-orchestrator-riserva/roadmap.yaml#CANT-14",
     ".airlab/public-repositories/Ai-orchestrator-riserva/roadmap.yaml#CANT-INF1"
   ],
-  "evidence": [],
+  "evidence": [
+    {
+      "type": "pull_request",
+      "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/824",
+      "result": "INFO"
+    },
+    {
+      "type": "commit",
+      "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/e29c2bb15e1175635e5b578f4dc7fab5819360c0",
+      "result": "INFO"
+    },
+    {
+      "type": "analysis",
+      "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/824/files",
+      "result": "PASS",
+      "note": "Inspected original outer catch and diff; git diff --check passes. ConsecutivePassed counts exact-answer success, not absence of runtime crashes."
+    },
+    {
+      "type": "ci",
+      "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38107361707",
+      "result": "PENDING",
+      "note": "Started on e29c2bb15e1175635e5b578f4dc7fab5819360c0; must verify final result before approval."
+    },
+    {
+      "type": "ci",
+      "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38107361691",
+      "result": "PENDING",
+      "note": "Started on e29c2bb15e1175635e5b578f4dc7fab5819360c0; must verify final result before approval."
+    },
+    {
+      "type": "ci",
+      "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38107361706",
+      "result": "PENDING",
+      "note": "Started on e29c2bb15e1175635e5b578f4dc7fab5819360c0; must verify final result before approval."
+    },
+    {
+      "type": "ci",
+      "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38107361716",
+      "result": "PENDING",
+      "note": "Started on e29c2bb15e1175635e5b578f4dc7fab5819360c0; must verify final result before approval."
+    },
+    {
+      "type": "ci",
+      "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38107361719",
+      "result": "PENDING",
+      "note": "Started on e29c2bb15e1175635e5b578f4dc7fab5819360c0; must verify final result before approval."
+    },
+    {
+      "type": "test",
+      "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/blob/e29c2bb15e1175635e5b578f4dc7fab5819360c0/test/features/chat/presentation/debug/local_model_benchmark_test.dart",
+      "result": "PENDING",
+      "note": "Four regressions added; not run locally due to earlier Flutter bootstrap security block. CI validation pending."
+    }
+  ],
   "gates": {
     "G0_CLAIM": "PASS",
     "G1_IMPLEMENTATION": "PENDING",
@@ -48,7 +101,7 @@
     "reviewed_by": null,
     "reviewed_at": null
   },
-  "next_action": "Open focused PR, inspect CI, submit claim-bound review evidence. Keep physical model stability and RAM/trim15 unresolved.",
+  "next_action": "Main/Reviewer must inspect the review_packet, linked evidence and required gates before promotion or rework.",
   "inference_profile_policy": "target_owned_benchmark_gated",
   "inference_profile": {
     "status": "ACTIVE_BENCHMARKING",
@@ -150,21 +203,49 @@
         "commit:56bf2be9"
       ],
       "next_action": "Open focused PR, inspect CI, submit claim-bound review evidence. Keep physical model stability and RAM/trim15 unresolved."
+    },
+    {
+      "seq": 6,
+      "at": "2026-10-11T03:08:04Z",
+      "claim_id": "111089b6cea735577ad4",
+      "work_item": "benchmark-switch-error-attribution",
+      "summary": "PR824 preserves completed stability probes when the switch partner or return throws; reports stage and catalog identities. Implementation submitted for review with CI PENDING, no test-pass or physical stability claim.",
+      "decisions": [],
+      "evidence_refs": [
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/824",
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/e29c2bb15e1175635e5b578f4dc7fab5819360c0",
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/824/files",
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38107361707",
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38107361691",
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38107361706",
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38107361716",
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38107361719",
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/blob/e29c2bb15e1175635e5b578f4dc7fab5819360c0/test/features/chat/presentation/debug/local_model_benchmark_test.dart"
+      ],
+      "next_action": "Main/Reviewer must inspect the review_packet, linked evidence and required gates before promotion or rework.",
+      "kind": "REVIEW_HANDOFF"
     }
   ],
   "last_checkpoint": {
-    "seq": 5,
-    "at": "2026-10-11T03:06:37Z",
+    "seq": 6,
+    "at": "2026-10-11T03:08:04Z",
     "claim_id": "111089b6cea735577ad4",
     "work_item": "benchmark-switch-error-attribution",
-    "summary": "Confirmed stability benchmark outer catch discards original model results when switch partner throws. Implemented stage-specific switch result preserving earlier probes, nullable incomplete score, partner catalog identities and four regressions. Local diff whitespace check passed; Flutter tests deferred to CI due to prior bootstrap security block.",
-    "decisions": [
-      "No runtime/Vulkan/memory guard changes. Shared runtime IDs do not alone prove cache collision; report catalog identities without asserting file binding fixed."
-    ],
+    "summary": "PR824 preserves completed stability probes when the switch partner or return throws; reports stage and catalog identities. Implementation submitted for review with CI PENDING, no test-pass or physical stability claim.",
+    "decisions": [],
     "evidence_refs": [
-      "commit:56bf2be9"
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/824",
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/e29c2bb15e1175635e5b578f4dc7fab5819360c0",
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/824/files",
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38107361707",
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38107361691",
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38107361706",
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38107361716",
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38107361719",
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/blob/e29c2bb15e1175635e5b578f4dc7fab5819360c0/test/features/chat/presentation/debug/local_model_benchmark_test.dart"
     ],
-    "next_action": "Open focused PR, inspect CI, submit claim-bound review evidence. Keep physical model stability and RAM/trim15 unresolved."
+    "next_action": "Main/Reviewer must inspect the review_packet, linked evidence and required gates before promotion or rework.",
+    "kind": "REVIEW_HANDOFF"
   },
   "reconciliation_events": [
     {
@@ -235,37 +316,6 @@
       }
     }
   ],
-  "current_gate_attestation": {
-    "at": "2026-10-10T13:49:38Z",
-    "claim_id": "263aa06406ed3e44d37e",
-    "packet_sha256": "5d051809fccd6ac9a59d734267223efd2f27d2e581c5fcbb9faf750b4e091889",
-    "reviewed_by": "main-reviewer",
-    "summary": "Main/Reviewer inspected PR #823 exact head 0310505583593bc0659638af815fdbe2715ee5c4 and its bounded UI-only diff. Five exact-head workflows pass and the three focused RuntimeNoticePresenter widget regressions pass. G1-G4 apply only to the runtime-notice UI recovery. No RAM/Vulkan/trim15 or physical S24 FE acceptance is inferred.",
-    "evidence_refs_by_gate": {
-      "G1_IMPLEMENTATION": [
-        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/823",
-        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/0310505583593bc0659638af815fdbe2715ee5c4"
-      ],
-      "G2_STATIC": [
-        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38003787134/job/114068102558"
-      ],
-      "G3_CI": [
-        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38003787165",
-        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38003787234",
-        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38003787104",
-        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38003787163",
-        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38003787134"
-      ],
-      "G4_INTEGRATION": [
-        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38003787165",
-        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38003787234",
-        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38003787104",
-        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38003787163",
-        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38003787134",
-        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38003787134/job/114068102558"
-      ]
-    }
-  },
   "gate_evidence_history": [
     {
       "at": "2026-10-10T13:49:38Z",
@@ -409,5 +459,91 @@
         "refs": []
       }
     }
-  ]
+  ],
+  "review_packet": {
+    "schema_version": 1,
+    "submitted_at": "2026-10-11T03:07:56.245Z",
+    "lane_id": "platform-android",
+    "claim_id": "111089b6cea735577ad4",
+    "work_item": "benchmark-switch-error-attribution",
+    "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
+    "branch": "fix/android-benchmark-switch-attribution",
+    "pull_request": 824,
+    "summary": "PR824 preserves completed stability probes when the switch partner or return throws; reports stage and catalog identities. Implementation submitted for review with CI PENDING, no test-pass or physical stability claim.",
+    "changes": [
+      "Separate partner and return outcomes; keep completed original-model probes on ordinary switch errors.",
+      "Incomplete switching remains null and existing scoring returns n/a; copied UI and plain text expose catalog identities and stage/error.",
+      "Add four regressions for partner guard, return failure, wrong answer and critical-resource propagation."
+    ],
+    "evidence": [
+      {
+        "type": "pull_request",
+        "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/824",
+        "result": "INFO"
+      },
+      {
+        "type": "commit",
+        "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/e29c2bb15e1175635e5b578f4dc7fab5819360c0",
+        "result": "INFO"
+      },
+      {
+        "type": "analysis",
+        "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/824/files",
+        "result": "PASS",
+        "note": "Inspected original outer catch and diff; git diff --check passes. ConsecutivePassed counts exact-answer success, not absence of runtime crashes."
+      },
+      {
+        "type": "ci",
+        "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38107361707",
+        "result": "PENDING",
+        "note": "Started on e29c2bb15e1175635e5b578f4dc7fab5819360c0; must verify final result before approval."
+      },
+      {
+        "type": "ci",
+        "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38107361691",
+        "result": "PENDING",
+        "note": "Started on e29c2bb15e1175635e5b578f4dc7fab5819360c0; must verify final result before approval."
+      },
+      {
+        "type": "ci",
+        "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38107361706",
+        "result": "PENDING",
+        "note": "Started on e29c2bb15e1175635e5b578f4dc7fab5819360c0; must verify final result before approval."
+      },
+      {
+        "type": "ci",
+        "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38107361716",
+        "result": "PENDING",
+        "note": "Started on e29c2bb15e1175635e5b578f4dc7fab5819360c0; must verify final result before approval."
+      },
+      {
+        "type": "ci",
+        "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38107361719",
+        "result": "PENDING",
+        "note": "Started on e29c2bb15e1175635e5b578f4dc7fab5819360c0; must verify final result before approval."
+      },
+      {
+        "type": "test",
+        "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/blob/e29c2bb15e1175635e5b578f4dc7fab5819360c0/test/features/chat/presentation/debug/local_model_benchmark_test.dart",
+        "result": "PENDING",
+        "note": "Four regressions added; not run locally due to earlier Flutter bootstrap security block. CI validation pending."
+      }
+    ],
+    "known_risks": [
+      "CI pending: do not attest passing gates or merge before results are inspected.",
+      "No repair of runtime cancellation, cache/file identity binding, memory or Vulkan; only benchmark attribution/reporting.",
+      "Earlier 0/5 exact-answer scores must not be interpreted as five runtime crashes.",
+      "Physical S24 FE validation pending; reported build3080 trim15 error remains unresolved."
+    ],
+    "reviewer_checks": [
+      "Verify final CI and focused regression results for the exact head before recording G1-G4.",
+      "Verify errors in partner/return do not discard original results and incomplete score remains n/a.",
+      "Verify critical resource exceptions still propagate.",
+      "Keep RAM and physical runtime acceptance open; no claim of GGUF cache fix."
+    ],
+    "roadmap_impact": {
+      "material": false,
+      "refs": []
+    }
+  }
 }

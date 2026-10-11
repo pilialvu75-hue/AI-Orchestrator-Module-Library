@@ -1,0 +1,12 @@
+{
+  "schema_version": 1,
+  "request_id": "android-20261011-pr824-review",
+  "status": "APPLIED",
+  "processed_at": "2026-10-11T03:08:04Z",
+  "source_file": "android-20261011-pr824-review.json",
+  "lane_id": "platform-android",
+  "operation": "submit_review",
+  "actor_id": "chatgpt:platform-android",
+  "errors": [],
+  "result_state_version": 15
+}
