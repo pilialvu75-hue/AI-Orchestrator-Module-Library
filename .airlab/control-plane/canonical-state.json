@@ -7,7 +7,7 @@
     "policy": "This private repository is the single coordination authority. Chats and agents are workers, not independent sources of truth."
   },
   "updated_at": "2026-10-11",
-  "state_revision": 160,
+  "state_revision": 161,
   "lifecycle_status": "BOOTSTRAP_ACTIVE",
   "roadmap_authority": {
     "library": ".airlab/roadmap.yaml",
@@ -80,12 +80,11 @@
     "invalid_lane_behavior": "ISOLATE_AND_SURFACE_PROJECTION_INCIDENT"
   },
   "projection": {
-    "source_digest": "731f7f98d3674bcbdb7459debdac615191d9c89368753d6632da576c1d9d9a6d",
-    "projected_at": "2026-10-11T12:46:42Z",
+    "source_digest": "4a91423d06d8d3d2356b1a49604af4bde1d32cb23fcd422bd5883ceaa1e69502",
+    "projected_at": "2026-10-11T12:49:22Z",
     "counts": {
-      "CLAIMED": 1,
       "IMPLEMENTING": 1,
-      "READY": 15
+      "READY": 16
     },
     "active_claims": [
       {
@@ -104,30 +103,9 @@
           "file:pilialvu75-hue/Ai-orchestrator-riserva:test/app_factory/workshop/web/workshop_web_project_storage_test.dart",
           "scope:aivexus:shared-base"
         ]
-      },
-      {
-        "lane": "main-reviewer",
-        "claim_id": "45fed9968d060a262fd2",
-        "work_item": "CP-REVIEW-AUTO-GATES-01",
-        "repository": "pilialvu75-hue/AI-Orchestrator-Module-Library",
-        "lease_until": "2026-10-12T00:46:42Z",
-        "resource_locks": [
-          "branch:pilialvu75-hue/AI-Orchestrator-Module-Library:main-reviewer/cp-review-auto-gates-01",
-          "file:pilialvu75-hue/AI-Orchestrator-Module-Library:.airlab/control-plane/automation-registry.json",
-          "file:pilialvu75-hue/AI-Orchestrator-Module-Library:.airlab/control-plane/inbox/README.md",
-          "file:pilialvu75-hue/AI-Orchestrator-Module-Library:tests/test_control_plane_inbox.py",
-          "file:pilialvu75-hue/AI-Orchestrator-Module-Library:tools/control_plane_inbox.py",
-          "scope:control-plane:automated-review-gates"
-        ]
       }
     ],
     "active_resource_locks": [
-      {
-        "key": "branch:pilialvu75-hue/AI-Orchestrator-Module-Library:main-reviewer/cp-review-auto-gates-01",
-        "lane": "main-reviewer",
-        "claim_id": "45fed9968d060a262fd2",
-        "work_item": "CP-REVIEW-AUTO-GATES-01"
-      },
       {
         "key": "branch:pilialvu75-hue/Ai-orchestrator-riserva:feat/aivexus-shared-project-base-v1",
         "lane": "cantiere",
@@ -145,30 +123,6 @@
         "lane": "cantiere",
         "claim_id": "c792cfdec8aee6363eba",
         "work_item": "AIVEXUS-BASE-1"
-      },
-      {
-        "key": "file:pilialvu75-hue/AI-Orchestrator-Module-Library:.airlab/control-plane/automation-registry.json",
-        "lane": "main-reviewer",
-        "claim_id": "45fed9968d060a262fd2",
-        "work_item": "CP-REVIEW-AUTO-GATES-01"
-      },
-      {
-        "key": "file:pilialvu75-hue/AI-Orchestrator-Module-Library:.airlab/control-plane/inbox/README.md",
-        "lane": "main-reviewer",
-        "claim_id": "45fed9968d060a262fd2",
-        "work_item": "CP-REVIEW-AUTO-GATES-01"
-      },
-      {
-        "key": "file:pilialvu75-hue/AI-Orchestrator-Module-Library:tests/test_control_plane_inbox.py",
-        "lane": "main-reviewer",
-        "claim_id": "45fed9968d060a262fd2",
-        "work_item": "CP-REVIEW-AUTO-GATES-01"
-      },
-      {
-        "key": "file:pilialvu75-hue/AI-Orchestrator-Module-Library:tools/control_plane_inbox.py",
-        "lane": "main-reviewer",
-        "claim_id": "45fed9968d060a262fd2",
-        "work_item": "CP-REVIEW-AUTO-GATES-01"
       },
       {
         "key": "file:pilialvu75-hue/Ai-orchestrator-riserva:.github/workflows/web-build.yml",
@@ -199,12 +153,6 @@
         "lane": "cantiere",
         "claim_id": "c792cfdec8aee6363eba",
         "work_item": "AIVEXUS-BASE-1"
-      },
-      {
-        "key": "scope:control-plane:automated-review-gates",
-        "lane": "main-reviewer",
-        "claim_id": "45fed9968d060a262fd2",
-        "work_item": "CP-REVIEW-AUTO-GATES-01"
       }
     ],
     "review_required": [],
@@ -359,24 +307,11 @@
       },
       {
         "id": "main-reviewer",
-        "status": "CLAIMED",
+        "status": "READY",
         "activation": "active",
-        "state_version": 71,
+        "state_version": 72,
         "updated_at": "2026-10-11",
-        "active_claim": {
-          "claim_id": "45fed9968d060a262fd2",
-          "work_item": "CP-REVIEW-AUTO-GATES-01",
-          "repository": "pilialvu75-hue/AI-Orchestrator-Module-Library",
-          "lease_until": "2026-10-12T00:46:42Z",
-          "resource_locks": [
-            "branch:pilialvu75-hue/AI-Orchestrator-Module-Library:main-reviewer/cp-review-auto-gates-01",
-            "file:pilialvu75-hue/AI-Orchestrator-Module-Library:.airlab/control-plane/automation-registry.json",
-            "file:pilialvu75-hue/AI-Orchestrator-Module-Library:.airlab/control-plane/inbox/README.md",
-            "file:pilialvu75-hue/AI-Orchestrator-Module-Library:tests/test_control_plane_inbox.py",
-            "file:pilialvu75-hue/AI-Orchestrator-Module-Library:tools/control_plane_inbox.py",
-            "scope:control-plane:automated-review-gates"
-          ]
-        },
+        "active_claim": null,
         "reviewer_state": "AUTHORITY",
         "inference_profile_status": null,
         "historical_backlog_count": 0,

@@ -3,37 +3,18 @@
   "id": "main-reviewer",
   "title": "Main / Reviewer",
   "role": "reviewer",
-  "status": "CLAIMED",
+  "status": "READY",
   "activation": "active",
   "scope": "Global architecture, cross-lane review, consolidation, roadmap/state authority and hardening, including target inference profile balance and shared-contract compatibility.",
   "shared_engine_policy": "shared_or_control_plane",
-  "state_version": 71,
+  "state_version": 72,
   "updated_at": "2026-10-11",
-  "active_claim": {
-    "claim_id": "45fed9968d060a262fd2",
-    "owner_lane": "main-reviewer",
-    "work_item": "CP-REVIEW-AUTO-GATES-01",
-    "repository": "pilialvu75-hue/AI-Orchestrator-Module-Library",
-    "scope": "Allow only the canonical enabled Main/Reviewer automation to record packet-bound G1-G4 evidence for worker REVIEW_REQUIRED lanes, preserving immutable packet hash, PASS-only evidence typing, worker-only targets, and keeping G5/runtime/physical promotion outside automation authority.",
-    "branch": "main-reviewer/cp-review-auto-gates-01",
-    "resource_locks": [
-      "branch:pilialvu75-hue/AI-Orchestrator-Module-Library:main-reviewer/cp-review-auto-gates-01",
-      "file:pilialvu75-hue/AI-Orchestrator-Module-Library:.airlab/control-plane/automation-registry.json",
-      "file:pilialvu75-hue/AI-Orchestrator-Module-Library:.airlab/control-plane/inbox/README.md",
-      "file:pilialvu75-hue/AI-Orchestrator-Module-Library:tests/test_control_plane_inbox.py",
-      "file:pilialvu75-hue/AI-Orchestrator-Module-Library:tools/control_plane_inbox.py",
-      "scope:control-plane:automated-review-gates"
-    ],
-    "started_at": "2026-10-11T12:46:42Z",
-    "heartbeat_at": "2026-10-11T12:46:42Z",
-    "lease_until": "2026-10-12T00:46:42Z",
-    "lease_hours": 12
-  },
+  "active_claim": null,
   "dependencies": [],
   "roadmap_refs": [],
   "evidence": [],
   "gates": {
-    "G0_CLAIM": "PASS",
+    "G0_CLAIM": "PENDING",
     "G1_IMPLEMENTATION": "PENDING",
     "G2_STATIC": "PENDING",
     "G3_CI": "PENDING",
@@ -978,6 +959,13 @@
       "work_item": "AIVEXUS-BASE-0",
       "reason": "AIVEXUS-BASE-0 canonical bootstrap is merged and post-merge validated/reconciled through PR #106. Release Main/Reviewer locks; shared implementation remains unclaimed until Cantiere takes a real BASE-1/BASE-2 claim.",
       "at": "2026-10-10T17:09:37Z"
+    },
+    {
+      "type": "CLAIM_RELEASED",
+      "claim_id": "45fed9968d060a262fd2",
+      "work_item": "CP-REVIEW-AUTO-GATES-01",
+      "reason": "CP-REVIEW-AUTO-GATES-01 completed via merged PR #108 at eaae5a06fed388b492b856f26e16e7cd7b4385e5. Validate Module Library passed on exact PR head 5f3cf2d154f607805b9ffcc2b455e34d564f1941. Canonical reviewer automation is now authorized for bounded packet-bound G1-G4 attestation only.",
+      "at": "2026-10-11T12:49:22Z"
     }
   ],
   "stale_block_history": [
