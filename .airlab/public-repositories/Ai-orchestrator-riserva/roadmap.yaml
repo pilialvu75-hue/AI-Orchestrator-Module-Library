@@ -1035,3 +1035,75 @@ audit_findings:
   done_when: >-
     A full match is playable in the browser, a rule change creates a new reproducible revision,
     source/export hashes and license manifest are recorded, and S24 FE validation remains separate.
+
+# Aivexus evolutionary modular application factory
+- id: AIVEXUS-EVO-01
+  title: Deterministic offline capability planner and certified reuse lookup
+  state: planned
+  priority: P0
+  owner_lane: cantiere
+  dependencies:
+    - AIVEXUS-BASE-1
+  outcome: >-
+    Resolve project requirements into bounded capabilities, query certified Library assets before
+    generation, and persist capability gaps on first detection without blocking unrelated work.
+  done_when: >-
+    A project revision records its required capabilities, certified matches and unresolved gaps;
+    an available certified pinned module is selected without AI regeneration.
+
+- id: AIVEXUS-EVO-02
+  title: First validated reusable Cantiere capability captured and certified
+  state: planned
+  priority: P0
+  owner_lane: library-researcher
+  dependencies:
+    - AIVEXUS-EVO-01
+  outcome: >-
+    Capture the first reusable capability produced by Cantiere into Library intake with manifest,
+    semantic version, provenance, immutable hashes, dependencies, tests and platform compatibility.
+  done_when: >-
+    The capability passes Library certification and is consumable by exact version/hash through the
+    guarded reuse path; Researcher candidates cannot bypass intake/certification.
+
+- id: AIVEXUS-EVO-03
+  title: Project capability bill and reproducible module lockfile
+  state: planned
+  priority: P0
+  owner_lane: cantiere
+  dependencies:
+    - AIVEXUS-EVO-02
+  outcome: >-
+    Persist capability identities, certified module versions/hashes, source artifact revision and
+    compatibility metadata per project without breaking existing project restoration.
+  done_when: >-
+    Reopening the same project revision reproduces the same capability/module selection and preserves
+    older projects and artifacts without silent upgrades.
+
+- id: AIVEXUS-EVO-04
+  title: Cross-application offline reuse proof
+  state: planned
+  priority: P0
+  owner_lane: cantiere
+  dependencies:
+    - AIVEXUS-EVO-03
+  outcome: >-
+    Prove application A creates a validated reusable capability and application B reuses the certified
+    pinned capability offline without AI regeneration.
+  done_when: >-
+    App B consumes the exact certified artifact by version/hash, produces reproducible Diagnostics
+    receipts, and no network/AI generation path is required for that reused capability.
+
+- id: AIVEXUS-EVO-05
+  title: Impact-driven guarded application evolution
+  state: planned
+  priority: P1
+  owner_lane: library-researcher
+  dependencies:
+    - AIVEXUS-EVO-04
+  outcome: >-
+    Use the Library dependency graph to create durable upgrade candidates for affected applications,
+    run bounded regression/target validation and preserve rollback/release policy.
+  done_when: >-
+    A certified capability update identifies impacted apps, produces evidence-backed upgrade candidates,
+    and no stable release occurs without the required reviewer and physical-target gates.
+
