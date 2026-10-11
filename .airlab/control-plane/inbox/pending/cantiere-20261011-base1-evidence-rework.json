@@ -1,0 +1,12 @@
+{
+  "schema_version": 1,
+  "request_id": "cantiere-20261011-base1-evidence-rework",
+  "actor_id": "chatgpt:main-reviewer",
+  "lane_id": "cantiere",
+  "operation": "review_rework",
+  "expected_state_version": 33,
+  "payload": {
+    "reason": "PR #826 exact head 6eaf98bfd816ff26cb23401d0351c680b8bfb90e is open, mergeable and has six successful exact-head workflows, but the claim-bound packet records its commit and pull_request evidence as INFO. G1 requires PASS commit/PR evidence. Rework is evidence-only: no code modification requested and no runtime/domain acceptance implied.",
+    "next_action": "Without changing code or head SHA, refresh the existing AIVEXUS-BASE-1 packet so PR #826 and exact commit 6eaf98bfd816ff26cb23401d0351c680b8bfb90e are PASS, preserve the six PASS workflows/tests, and resubmit REVIEW_REQUIRED. Keep BASE-2, CAD/game execution, Fusion/print/gameplay and physical acceptance open."
+  }
+}
