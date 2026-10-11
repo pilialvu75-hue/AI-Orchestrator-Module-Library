@@ -1,7 +1,7 @@
 schema_version: 2
 repository: pilialvu75-hue/AI-Orchestrator-Module-Library
 visibility_policy: private_only
-updated_at: 2026-10-01
+updated_at: 2026-10-11
 authority: repository_local
 reconstructed_from:
   - historical_project_chats
@@ -275,3 +275,28 @@ roadmap:
       Make Main/Reviewer consume REVIEW_REQUIRED work directly from raw workstream state rather than
       relying on a potentially stale projection, enforce complete atomic worker handoffs, and provide
       explicit accept/rework transitions that preserve claim and evidence semantics.
+
+# AIVEXUS evolutionary modular app factory — vision and evidence baseline (2026-10-11)
+# This is an additive direction, not proof of end-to-end readiness.
+evolution_vision:
+  goal: "Offline-first modular app factory: plan -> certified reuse -> targeted generation -> isolated validation -> capture -> assemble -> deploy -> feedback -> guarded evolution."
+  cost_policy: "Prefer deterministic local assembly and existing modules; use local/cloud AI only for missing capabilities, repair or quality improvements. No zero-cost guarantee."
+  boundaries:
+    - "One Cantiere owns project lifecycle, assembly and releases; one Library owns quarantine, certification, versioning, provenance and dependency graph."
+    - "Researcher submits candidates to Library intake only; Diagnostics stores reproducible evidence and target validation receipts."
+    - "Generated or downloaded code never executes with trusted writer credentials; fail closed on invalid provenance, hashes or tests."
+    - "No automatic stable release without physical target validation and required reviewer gates."
+    - "Preserve Flutter/shared contracts and platform-optimized adapters; do not replace the existing stack with a toy JavaScript-only builder."
+  snapshot_2026_10_11:
+    aivexus_base_1: "Cantiere REVIEW_REQUIRED state_version 33; PR #826 open, not merged; exact-head Web regression and platform build CI PASS, physical generated-app acceptance NOT PROVEN."
+    canonical_state: "revision 157; BOOTSTRAP_ACTIVE; reviewer approval and merge not inferred."
+    library: "Certification pipeline and guarded hash-pinned consumption declared active; end-to-end generated-once reused-next-app demonstration NOT PROVEN."
+    researcher: "READY lane; existing discovered intake candidates require maturation and certification, not duplicate rediscovery."
+    target_runtime: "S24 FE Vulkan/RAM and first-real-app runtime gates remain open; CI green is not device acceptance."
+  milestones:
+    - {id: EVO-01, state: planned, priority: P0, owner: cantiere, dependency: AIVEXUS-BASE-1, outcome: "Deterministic offline capability planner and certified-module lookup before generation; persist capability gaps on first detection (L2)."}
+    - {id: EVO-02, state: planned, priority: P0, owner: library-researcher, dependency: EVO-01, outcome: "Capture first validated Cantiere module into quarantined intake with manifest, semantic version, provenance, hashes, dependencies, tests and platform compatibility; certify only via Library (L3)."}
+    - {id: EVO-03, state: planned, priority: P0, owner: cantiere, dependency: EVO-02, outcome: "Persist project capability bill/lockfile, module versions, revision and reproducible source artifacts (L5); protect existing project restoration."}
+    - {id: EVO-04, state: planned, priority: P0, owner: cantiere, dependency: EVO-03, outcome: "Prove app A creates validated module, app B reuses the certified pinned module offline without AI generation; assert deterministic hashes and diagnostics receipts."}
+    - {id: EVO-05, state: planned, priority: P1, owner: library-researcher, dependency: EVO-04, outcome: "Impact graph, durable upgrade candidates, target regression tests, guarded release policy, rollback and integration feedback (L6/L7/L8/L9/L10)."}
+  acceptance: "Do not claim evolutionary loop operational until EVO-04 is proven; preserve physical-device and reviewer gates for stable artifacts."
