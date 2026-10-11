@@ -3,11 +3,11 @@
   "id": "cantiere",
   "title": "Cantiere",
   "role": "worker",
-  "status": "CLAIMED",
+  "status": "IMPLEMENTING",
   "activation": "active",
   "scope": "Exclusive Cantiere/App Factory execution, durability, build/review/validation/apply and first-real-app reliability.",
   "shared_engine_policy": "shared_or_control_plane",
-  "state_version": 30,
+  "state_version": 31,
   "updated_at": "2026-10-11",
   "active_claim": {
     "claim_id": "c792cfdec8aee6363eba",
@@ -27,8 +27,8 @@
       "scope:aivexus:shared-base"
     ],
     "started_at": "2026-10-11T09:57:29Z",
-    "heartbeat_at": "2026-10-11T09:57:29Z",
-    "lease_until": "2026-10-11T21:57:29Z",
+    "heartbeat_at": "2026-10-11T10:14:41Z",
+    "lease_until": "2026-10-11T22:14:41Z",
     "lease_hours": 12
   },
   "dependencies": [],
@@ -54,7 +54,7 @@
     "reviewed_by": null,
     "reviewed_at": null
   },
-  "next_action": "Return Cantiere to READY so its worker can create a new bounded claim and submit a valid review handoff for PR #783. Keep Phase 1 device acceptance unverified.",
+  "next_action": "Inspect exact-head Web analysis, VM tests, real Chrome persistence/lock tests and build; fix concrete failures then submit a structured review packet. BASE-2 and domain workers remain gated on integration.",
   "historical_backlog": [
     "Stay in Phase 1 ONLINE until a real generated Android app is physically accepted.",
     "Reproduce the recent manga-drawing app failure from current main with Diagnostics; do not restart generic audits.",
@@ -392,25 +392,49 @@
         ".airlab/control-plane/evidence/cantiere/20261003-2979-reviewer-parsing.json"
       ],
       "next_action": "Finish all CI/review checks, merge under owner mandate if no substantive findings, verify main and signed release. Phase 1 physical APK install/open remains pending."
+    },
+    {
+      "seq": 17,
+      "at": "2026-10-11T10:14:41Z",
+      "claim_id": "c792cfdec8aee6363eba",
+      "work_item": "AIVEXUS-BASE-1",
+      "summary": "AIVEXUS-BASE-1 implemented in draft PR #826 at 7665f90b9fde5a167ec874f867f27f33e6c69bec: additive project contract, revision-safe saves/recovery copy, binary attachment adapter, persisted resource exchange hooks and regression coverage. Exact-head CI running; no pass or runtime acceptance claimed.",
+      "decisions": [
+        "Preserve workshop.web.projects.v1 and original data; no silent 100-project truncation.",
+        "Existing software editing now retains project id and consumes committed storage revisions.",
+        "Local Flutter dependency setup was automatically rejected after an instance-metadata access attempt; do not rerun it. Use the existing repository CI for Flutter validation.",
+        "No CAD/game runner, domain page selector, deployment or physical/runtime integration claim."
+      ],
+      "evidence_refs": [
+        "Ai-orchestrator-riserva#826",
+        "commit:7665f90b9fde5a167ec874f867f27f33e6c69bec",
+        "Web Cantiere Build run 38131208043 IN_PROGRESS",
+        "local:dart-format-parser PASS",
+        "local:git-diff-check PASS"
+      ],
+      "next_action": "Inspect exact-head Web analysis, VM tests, real Chrome persistence/lock tests and build; fix concrete failures then submit a structured review packet. BASE-2 and domain workers remain gated on integration."
     }
   ],
   "last_checkpoint": {
-    "seq": 16,
-    "at": "2026-10-03T20:43:58Z",
-    "claim_id": "146b5421aff70e95307a",
-    "work_item": "CANT-11-2979-reviewer-json-recovery",
-    "summary": "PR #783 opened at 40fefffb07c57eb6203cb37801fbf94b8f502d2c on c6133b1 main. Local 55 tests pass; Web, Cantiere first-app APK and Linux workflows green; Windows/macOS tests green, platform builds still running. No review findings currently open.",
+    "seq": 17,
+    "at": "2026-10-11T10:14:41Z",
+    "claim_id": "c792cfdec8aee6363eba",
+    "work_item": "AIVEXUS-BASE-1",
+    "summary": "AIVEXUS-BASE-1 implemented in draft PR #826 at 7665f90b9fde5a167ec874f867f27f33e6c69bec: additive project contract, revision-safe saves/recovery copy, binary attachment adapter, persisted resource exchange hooks and regression coverage. Exact-head CI running; no pass or runtime acceptance claimed.",
     "decisions": [
-      "No physical test on intermediate +2983: next signed build must include #783 and #782.",
-      "Resume persistent build-repair project:dashboard:1791058417410553 via Riprova task to avoid repeating completed planning; preserve original root and other projects."
+      "Preserve workshop.web.projects.v1 and original data; no silent 100-project truncation.",
+      "Existing software editing now retains project id and consumes committed storage revisions.",
+      "Local Flutter dependency setup was automatically rejected after an instance-metadata access attempt; do not rerun it. Use the existing repository CI for Flutter validation.",
+      "No CAD/game runner, domain page selector, deployment or physical/runtime integration claim."
     ],
     "evidence_refs": [
-      "Ai-orchestrator-riserva#783",
-      "commit:40fefffb07c57eb6203cb37801fbf94b8f502d2c",
-      "CI:37152170721,37152170737,37152170753,37152170784,37152170715,37152170709",
-      ".airlab/control-plane/evidence/cantiere/20261003-2979-reviewer-parsing.json"
+      "Ai-orchestrator-riserva#826",
+      "commit:7665f90b9fde5a167ec874f867f27f33e6c69bec",
+      "Web Cantiere Build run 38131208043 IN_PROGRESS",
+      "local:dart-format-parser PASS",
+      "local:git-diff-check PASS"
     ],
-    "next_action": "Finish all CI/review checks, merge under owner mandate if no substantive findings, verify main and signed release. Phase 1 physical APK install/open remains pending."
+    "next_action": "Inspect exact-head Web analysis, VM tests, real Chrome persistence/lock tests and build; fix concrete failures then submit a structured review packet. BASE-2 and domain workers remain gated on integration."
   },
   "review_history": [
     {

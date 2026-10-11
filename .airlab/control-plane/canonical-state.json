@@ -7,7 +7,7 @@
     "policy": "This private repository is the single coordination authority. Chats and agents are workers, not independent sources of truth."
   },
   "updated_at": "2026-10-11",
-  "state_revision": 151,
+  "state_revision": 152,
   "lifecycle_status": "BOOTSTRAP_ACTIVE",
   "roadmap_authority": {
     "library": ".airlab/roadmap.yaml",
@@ -80,11 +80,11 @@
     "invalid_lane_behavior": "ISOLATE_AND_SURFACE_PROJECTION_INCIDENT"
   },
   "projection": {
-    "source_digest": "aa4b2289c50ce5f12cf1e14f463df22eb59ca2b8fa2ff070c253871028fdbff4",
-    "projected_at": "2026-10-11T09:57:29Z",
+    "source_digest": "837f7004fbf2c0ebbf1a5742aa7f49e0cbeb95ea59510146f1837d73db2b516a",
+    "projected_at": "2026-10-11T10:14:41Z",
     "counts": {
       "BLOCKED": 1,
-      "CLAIMED": 1,
+      "IMPLEMENTING": 1,
       "READY": 14,
       "REVIEW_REQUIRED": 1
     },
@@ -94,7 +94,7 @@
         "claim_id": "c792cfdec8aee6363eba",
         "work_item": "AIVEXUS-BASE-1",
         "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
-        "lease_until": "2026-10-11T21:57:29Z",
+        "lease_until": "2026-10-11T22:14:41Z",
         "resource_locks": [
           "branch:pilialvu75-hue/Ai-orchestrator-riserva:feat/aivexus-shared-project-base-v1",
           "contract:aivexus-project-extension-v1",
@@ -303,15 +303,15 @@
       },
       {
         "id": "cantiere",
-        "status": "CLAIMED",
+        "status": "IMPLEMENTING",
         "activation": "active",
-        "state_version": 30,
+        "state_version": 31,
         "updated_at": "2026-10-11",
         "active_claim": {
           "claim_id": "c792cfdec8aee6363eba",
           "work_item": "AIVEXUS-BASE-1",
           "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
-          "lease_until": "2026-10-11T21:57:29Z",
+          "lease_until": "2026-10-11T22:14:41Z",
           "resource_locks": [
             "branch:pilialvu75-hue/Ai-orchestrator-riserva:feat/aivexus-shared-project-base-v1",
             "contract:aivexus-project-extension-v1",
@@ -326,7 +326,7 @@
         "reviewer_state": "PENDING",
         "inference_profile_status": null,
         "historical_backlog_count": 3,
-        "next_action": "Return Cantiere to READY so its worker can create a new bounded claim and submit a valid review handoff for PR #783. Keep Phase 1 device acceptance unverified."
+        "next_action": "Inspect exact-head Web analysis, VM tests, real Chrome persistence/lock tests and build; fix concrete failures then submit a structured review packet. BASE-2 and domain workers remain gated on integration."
       },
       {
         "id": "diagnostics",
