@@ -300,12 +300,20 @@ class ControlPlaneInboxTests(unittest.TestCase):
         )
         self.assertIn("not registered", receipt["errors"][0])
 
-    def test_disabled_lane_automation_is_rejected(self):
-        with self.assertRaisesRegex(ValueError, "disabled by canonical registry"):
+    def test_enabled_cantiere_lane_automation_is_owner_scoped(self):
+        actor = "automation:cantiere:6abe28904d38819182462df10fe4542c"
+        entry = inbox._authorize_automation_actor(
+            self.root,
+            actor,
+            "cantiere",
+            "checkpoint",
+        )
+        self.assertEqual(entry["owner_lane"], "cantiere")
+        with self.assertRaisesRegex(ValueError, "only owner lane"):
             inbox._authorize_automation_actor(
                 self.root,
-                "automation:cantiere:6abe28904d38819182462df10fe4542c",
-                "cantiere",
+                actor,
+                "platform-android",
                 "checkpoint",
             )
 
