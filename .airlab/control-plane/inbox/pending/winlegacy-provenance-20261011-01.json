@@ -1,0 +1,16 @@
+{
+  "schema_version": 1,
+  "request_id": "winlegacy-provenance-20261011-01",
+  "actor_id": "automation:windows-legacy:6abc720a44b081919bd7a8d71b45e8d2",
+  "lane_id": "platform-windows-legacy",
+  "operation": "claim",
+  "expected_state_version": 21,
+  "payload": {
+    "work_item": "winlegacy-artifact-provenance-20261011",
+    "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
+    "scope": "Add Win7 and Win8.1 build provenance metadata to the Windows CI artifact without changing runtime behavior.",
+    "resource_locks": [
+      "file:pilialvu75-hue/Ai-orchestrator-riserva:.github/workflows/windows-build.yml"
+    ]
+  }
+}
