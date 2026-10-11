@@ -1,0 +1,116 @@
+{
+  "schema_version": 1,
+  "request_id": "cantiere-aivexus-base1-review-20261011T105357Z",
+  "submitted_at": "2026-10-11T10:53:57Z",
+  "actor_id": "chatgpt:cantiere-aivexus-base",
+  "lane_id": "cantiere",
+  "operation": "submit_review",
+  "expected_state_version": 32,
+  "payload": {
+    "packet": {
+      "schema_version": 1,
+      "submitted_at": "2026-10-11T10:53:57Z",
+      "lane_id": "cantiere",
+      "claim_id": "c792cfdec8aee6363eba",
+      "work_item": "AIVEXUS-BASE-1",
+      "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
+      "branch": "feat/aivexus-shared-project-base-v1",
+      "pull_request": 826,
+      "summary": "AIVEXUS-BASE-1 is implemented in PR #826 at 6eaf98bfd816ff26cb23401d0351c680b8bfb90e and all six exact-head workflows passed. Review is limited to additive contracts, revision-safe persistence and recovery, immutable browser attachment storage, resource-exchange hooks and existing software editing. BASE-2 and domain execution remain separate gated work; no merge, deployment, Fusion/print/gameplay or physical acceptance is claimed.",
+      "changes": [
+        "ProjectExtension v1 validates software/CAD/game metadata, preserves unknown extension versions read-only, and retains immutable artifacts against source specification revisions.",
+        "Existing project key and unknown fields are preserved, with a recoverable original copy. Origin-wide Web Locks serialize updated browser clients; per-project revisions reject stale edits; partial saves never truncate or delete other projects.",
+        "IndexedDB stores binary attachments outside project JSON with size and SHA-256 verification. Unsupported browser adapters fail explicitly instead of falling back to volatile production storage.",
+        "ResourceExchange persists idempotent requests and explicit transitions; produced results must match existing producer artifacts including revision, hash, size, format, MIME type and generator.",
+        "Existing software editing keeps project identity and creation date, consumes committed storage revisions and advances specification revision when requirements change.",
+        "Existing Web CI includes focused persistence/contract/widget regressions and real Chrome cross-context locking, localStorage and IndexedDB checks."
+      ],
+      "evidence": [
+        {
+          "type": "commit",
+          "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/6eaf98bfd816ff26cb23401d0351c680b8bfb90e",
+          "result": "INFO",
+          "note": "Exact implementation head; local workspace content matches this saved commit."
+        },
+        {
+          "type": "pull_request",
+          "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/826",
+          "result": "INFO",
+          "note": "Open and ready for review; not merged or deployed."
+        },
+        {
+          "type": "ci",
+          "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38132363946",
+          "result": "PASS",
+          "note": "Exact-head Web analysis, 32 VM tests, 9 Chrome test executions across three suites, JavaScript module syntax and release Web build."
+        },
+        {
+          "type": "analysis",
+          "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38132363946/job/114449143774",
+          "result": "PASS",
+          "note": "flutter analyze passed with the repository's no-fatal-warning/info flags: zero errors, 11 brace-style infos, one pre-existing unused-field warning in web_main.dart. Local Dart formatter and git diff --check also passed."
+        },
+        {
+          "type": "test",
+          "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38132363946/job/114449143774",
+          "result": "PASS",
+          "note": "Real Chrome regression verifies origin-wide lock contention from a same-origin iframe, persisted localStorage data, stale-write rejection, IndexedDB reopening and attachment integrity. This does not prove CAD generation, Fusion compatibility, print success or a playable game."
+        },
+        {
+          "type": "ci",
+          "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38132363928",
+          "result": "PASS",
+          "note": "Exact-head Cantiere First App APK workflow; build evidence only, no physical device acceptance."
+        },
+        {
+          "type": "ci",
+          "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38132363925",
+          "result": "PASS",
+          "note": "Exact-head Build Linux Desktop; build/test evidence only, not physical target acceptance."
+        },
+        {
+          "type": "ci",
+          "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38132363991",
+          "result": "PASS",
+          "note": "Exact-head Build Windows Desktop; build/test evidence only, not physical target acceptance."
+        },
+        {
+          "type": "ci",
+          "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38132363929",
+          "result": "PASS",
+          "note": "Exact-head Build macOS Desktop; build/test evidence only, not physical target acceptance."
+        },
+        {
+          "type": "ci",
+          "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38132364000",
+          "result": "PASS",
+          "note": "Exact-head Android workflow including full Flutter tests, signed APK/AAB builds and CodeQL analysis. Build evidence only; no generated-app or physical device acceptance."
+        }
+      ],
+      "known_risks": [
+        "BASE-2 selector/navigation and the specialized Studio 3D/Videogiochi pages are not implemented by this increment.",
+        "Browser data remains local to an origin/profile. This is not server synchronization or communication between independent ChatGPT sessions.",
+        "Already-open legacy tabs must refresh before editing: old code does not participate in Web Locks. Browsers without Web Locks cannot save through this adapter.",
+        "CAD/photo reconstruction, Fusion opening, valid mesh generation, Godot builds/playable games, Library lookup/certification and Diagnostics receipt resolution remain unimplemented downstream integrations.",
+        "License, provenance and validation references are persisted contract metadata. Producers/consumers still need real resolvers and verification receipts; metadata-only test fixtures do not prove a usable GLB.",
+        "Local dependency setup was automatically rejected after an instance-metadata access attempt and was not retried. Flutter validation uses the repository's existing GitHub CI."
+      ],
+      "reviewer_checks": [
+        "Review PR #826 at the exact final head and verify required workflow results, including real Chrome storage tests.",
+        "Confirm compatibility with canonical ProjectExtension v1 and ResourceExchange v1, conservative legacy preservation and rejection of stale revisions.",
+        "Review recovery behavior, browser-origin storage limits and the migration requirement for legacy open tabs.",
+        "Accept only BASE-1 implementation if warranted; do not infer BASE-2, domain runtime, Fusion, print or gameplay acceptance.",
+        "After approved integration, reconcile Cantiere/roadmap canonical state and enable a separate bounded BASE-2 claim. Keep domain shared-file ownership with Cantiere."
+      ],
+      "roadmap_impact": {
+        "material": true,
+        "refs": [
+          ".airlab/public-repositories/Ai-orchestrator-riserva/roadmap.yaml#AIVEXUS-BASE-1",
+          ".airlab/public-repositories/Ai-orchestrator-riserva/roadmap.yaml#AIVEXUS-BASE-2",
+          ".airlab/control-plane/contracts/aivexus-project-extension-v1.schema.json",
+          ".airlab/control-plane/contracts/aivexus-resource-exchange-v1.md"
+        ]
+      }
+    }
+  }
+}
