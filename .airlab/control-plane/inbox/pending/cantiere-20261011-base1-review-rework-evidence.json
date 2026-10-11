@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "request_id": "cantiere-20261011-base1-review-rework-evidence",
+  "actor_id": "chatgpt:main-reviewer",
+  "lane_id": "cantiere",
+  "operation": "review_rework",
+  "expected_state_version": 33,
+  "payload": {
+    "summary": "AIVEXUS-BASE-1 PR #826 exact head 6eaf98bfd816ff26cb23401d0351c680b8bfb90e has passing exact-head CI, static analysis, focused persistence tests and real Chrome integration evidence, and Main/Reviewer inspection found the implementation bounded to BASE-1. The current packet cannot receive G1 only because its immutable commit and pull_request evidence entries are marked INFO instead of PASS. Rework is evidence-only: no code modification requested and no scope expansion.",
+    "next_action": "Without changing code or head, update the same claim-bound review packet so the exact commit 6eaf98bfd816ff26cb23401d0351c680b8bfb90e and PR #826 evidence entries are PASS, preserve all existing PASS CI/analysis/test evidence, then resubmit REVIEW_REQUIRED. BASE-2, CAD/game runners, Fusion/print/gameplay and physical/runtime acceptance remain separate.",
+    "evidence_refs": [
+      "Ai-orchestrator-riserva#826",
+      "head:6eaf98bfd816ff26cb23401d0351c680b8bfb90e",
+      "CI:38132363946",
+      "CI:38132363928",
+      "CI:38132363925",
+      "CI:38132363991",
+      "CI:38132363929",
+      "CI:38132364000"
+    ]
+  }
+}
