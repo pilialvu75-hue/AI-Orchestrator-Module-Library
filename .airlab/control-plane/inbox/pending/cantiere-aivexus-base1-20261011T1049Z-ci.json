@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "request_id": "cantiere-aivexus-base1-20261011T1049Z-ci",
+  "submitted_at": "2026-10-11T10:49:04Z",
+  "actor_id": "chatgpt:cantiere-aivexus-base",
+  "lane_id": "cantiere",
+  "operation": "checkpoint",
+  "expected_state_version": 31,
+  "payload": {
+    "summary": "PR #826 is ready for review at 6eaf98bfd816ff26cb23401d0351c680b8bfb90e. Exact-head Web, Cantiere First App APK, Linux, Windows and macOS workflows passed. Web evidence includes 32 VM tests, 9 real Chrome test executions and release build. The final Android Build & Release APK workflow is still running; no all-CI or physical/runtime acceptance claim is made.",
+    "decisions": [
+      "Use the real Web preferences plugin in the Chrome harness; cross-context Web Locks and reopened IndexedDB attachments now pass.",
+      "Retain BASE-1 scope and Main/Reviewer boundary; BASE-2 and domain runtime integrations remain separate.",
+      "Local dependency setup remains un-retried after auto-review rejection; all Flutter evidence comes from repository CI."
+    ],
+    "evidence_refs": [
+      "Ai-orchestrator-riserva#826",
+      "commit:6eaf98bfd816ff26cb23401d0351c680b8bfb90e",
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38132363946",
+      "CI:38132363928,38132363925,38132363991,38132363929:PASS",
+      "CI:38132364000:IN_PROGRESS"
+    ],
+    "next_action": "Finish exact-head Android run 38132364000, inspect any concrete failure/review finding, then submit the prepared structured BASE-1 review packet. Do not merge, deploy, self-promote or start BASE-2 before Main/Reviewer integration."
+  }
+}
