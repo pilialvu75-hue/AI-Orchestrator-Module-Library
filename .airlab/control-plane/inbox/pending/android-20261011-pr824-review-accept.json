@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "request_id": "android-20261011-pr824-review-accept",
+  "actor_id": "chatgpt:main-reviewer",
+  "lane_id": "platform-android",
+  "operation": "review_accept",
+  "expected_state_version": 18,
+  "payload": {
+    "summary": "Main/Reviewer accepts PR #824 only as the bounded benchmark-switch attribution/reporting correction on exact head e29c2bb15e1175635e5b578f4dc7fab5819360c0. The diff preserves completed original-model probes across ordinary partner/return failures, reports catalog/stage identities, leaves incomplete switching as n/a, and continues to rethrow critical resource exceptions. Exact-head cross-platform CI and four focused regressions pass. This approval does not accept or resolve RAM stability, trim15/resource-guard behavior, Vulkan behavior, GGUF/cache binding, model policy, or physical S24 FE runtime stability.",
+    "next_action": "PR #824 may be made ready and merged at exact reviewed head e29c2bb15e1175635e5b578f4dc7fab5819360c0. After merge, publish a build containing the correction before using benchmark attribution results. Keep RAM stability, trim15/resource guard and physical S24 FE validation open as separate work; do not repeat benchmarks solely for this review.",
+    "evidence_refs": [
+      "Ai-orchestrator-riserva#824",
+      "head:e29c2bb15e1175635e5b578f4dc7fab5819360c0",
+      "CI:38107361707",
+      "CI:38107361691",
+      "CI:38107361706",
+      "CI:38107361716",
+      "CI:38107361719",
+      "job:114375580450"
+    ]
+  }
+}
