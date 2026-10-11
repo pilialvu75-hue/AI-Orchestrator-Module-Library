@@ -7,7 +7,7 @@
     "policy": "This private repository is the single coordination authority. Chats and agents are workers, not independent sources of truth."
   },
   "updated_at": "2026-10-11",
-  "state_revision": 168,
+  "state_revision": 169,
   "lifecycle_status": "BOOTSTRAP_ACTIVE",
   "roadmap_authority": {
     "library": ".airlab/roadmap.yaml",
@@ -80,11 +80,11 @@
     "invalid_lane_behavior": "ISOLATE_AND_SURFACE_PROJECTION_INCIDENT"
   },
   "projection": {
-    "source_digest": "2a2383049c00b57cc1f762e94e005430f7aeb60427ff420a8a2cc54f2a1278b5",
-    "projected_at": "2026-10-11T13:55:54Z",
+    "source_digest": "559a581a8ea2bfa2abe4ec38f947f237736b52e6b7e6bb2d8a53b984b1e4255e",
+    "projected_at": "2026-10-11T13:57:49Z",
     "counts": {
-      "IMPLEMENTING": 1,
-      "READY": 16
+      "READY": 16,
+      "REVIEW_REQUIRED": 1
     },
     "active_claims": [
       {
@@ -155,7 +155,9 @@
         "work_item": "AIVEXUS-BASE-1"
       }
     ],
-    "review_required": [],
+    "review_required": [
+      "cantiere"
+    ],
     "blocked": [],
     "checkpoint_watch": [],
     "projection_incidents": [],
@@ -256,9 +258,9 @@
       },
       {
         "id": "cantiere",
-        "status": "IMPLEMENTING",
+        "status": "REVIEW_REQUIRED",
         "activation": "active",
-        "state_version": 34,
+        "state_version": 35,
         "updated_at": "2026-10-11",
         "active_claim": {
           "claim_id": "c792cfdec8aee6363eba",
@@ -276,10 +278,10 @@
             "scope:aivexus:shared-base"
           ]
         },
-        "reviewer_state": "CHANGES_REQUESTED",
+        "reviewer_state": "PENDING",
         "inference_profile_status": null,
         "historical_backlog_count": 3,
-        "next_action": "Without changing code or head SHA, refresh the existing AIVEXUS-BASE-1 packet so PR #826 and exact commit 6eaf98bfd816ff26cb23401d0351c680b8bfb90e are PASS, preserve the six PASS workflows/tests, and resubmit REVIEW_REQUIRED. Keep BASE-2, CAD/game execution, Fusion/print/gameplay and physical acceptance open."
+        "next_action": "Main/Reviewer must inspect the review_packet, linked evidence and required gates before promotion or rework."
       },
       {
         "id": "diagnostics",

@@ -1,0 +1,12 @@
+{
+  "schema_version": 1,
+  "request_id": "cantiere-20261011T135700Z-base1-evidence-resubmit-01",
+  "status": "APPLIED",
+  "processed_at": "2026-10-11T13:57:49Z",
+  "source_file": "cantiere-20261011T135700Z-base1-evidence-resubmit-01.json",
+  "lane_id": "cantiere",
+  "operation": "submit_review",
+  "actor_id": "automation:cantiere:6abe28904d38819182462df10fe4542c",
+  "errors": [],
+  "result_state_version": 35
+}
