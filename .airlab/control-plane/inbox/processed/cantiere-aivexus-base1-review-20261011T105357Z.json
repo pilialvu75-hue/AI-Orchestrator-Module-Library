@@ -1,0 +1,12 @@
+{
+  "schema_version": 1,
+  "request_id": "cantiere-aivexus-base1-review-20261011T105357Z",
+  "status": "APPLIED",
+  "processed_at": "2026-10-11T10:54:06Z",
+  "source_file": "cantiere-aivexus-base1-review-20261011T105357Z.json",
+  "lane_id": "cantiere",
+  "operation": "submit_review",
+  "actor_id": "chatgpt:cantiere-aivexus-base",
+  "errors": [],
+  "result_state_version": 33
+}

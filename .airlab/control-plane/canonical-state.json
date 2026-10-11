@@ -7,7 +7,7 @@
     "policy": "This private repository is the single coordination authority. Chats and agents are workers, not independent sources of truth."
   },
   "updated_at": "2026-10-11",
-  "state_revision": 153,
+  "state_revision": 154,
   "lifecycle_status": "BOOTSTRAP_ACTIVE",
   "roadmap_authority": {
     "library": ".airlab/roadmap.yaml",
@@ -80,13 +80,12 @@
     "invalid_lane_behavior": "ISOLATE_AND_SURFACE_PROJECTION_INCIDENT"
   },
   "projection": {
-    "source_digest": "ad3d081e876d6596dbf28bae70fe726e7e69cdc9f2d60d6913c041fde4816d12",
-    "projected_at": "2026-10-11T10:49:13Z",
+    "source_digest": "4475e833e414f8e8eae48ccb0e82f6ccf75c8b3c2531c080127f052c3f153a08",
+    "projected_at": "2026-10-11T10:54:06Z",
     "counts": {
       "BLOCKED": 1,
-      "IMPLEMENTING": 1,
       "READY": 14,
-      "REVIEW_REQUIRED": 1
+      "REVIEW_REQUIRED": 2
     },
     "active_claims": [
       {
@@ -188,6 +187,7 @@
       }
     ],
     "review_required": [
+      "cantiere",
       "platform-android"
     ],
     "blocked": [
@@ -303,9 +303,9 @@
       },
       {
         "id": "cantiere",
-        "status": "IMPLEMENTING",
+        "status": "REVIEW_REQUIRED",
         "activation": "active",
-        "state_version": 32,
+        "state_version": 33,
         "updated_at": "2026-10-11",
         "active_claim": {
           "claim_id": "c792cfdec8aee6363eba",
@@ -326,7 +326,7 @@
         "reviewer_state": "PENDING",
         "inference_profile_status": null,
         "historical_backlog_count": 3,
-        "next_action": "Finish exact-head Android run 38132364000, inspect any concrete failure/review finding, then submit the prepared structured BASE-1 review packet. Do not merge, deploy, self-promote or start BASE-2 before Main/Reviewer integration."
+        "next_action": "Main/Reviewer must inspect the review_packet, linked evidence and required gates before promotion or rework."
       },
       {
         "id": "diagnostics",
