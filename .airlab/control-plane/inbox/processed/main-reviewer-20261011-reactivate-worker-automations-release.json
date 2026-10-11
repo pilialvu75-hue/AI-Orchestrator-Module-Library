@@ -1,0 +1,12 @@
+{
+  "schema_version": 1,
+  "request_id": "main-reviewer-20261011-reactivate-worker-automations-release",
+  "status": "APPLIED",
+  "processed_at": "2026-10-11T12:52:57Z",
+  "source_file": "main-reviewer-20261011-reactivate-worker-automations-release.json",
+  "lane_id": "main-reviewer",
+  "operation": "release",
+  "actor_id": "chatgpt:main-reviewer",
+  "errors": [],
+  "result_state_version": 76
+}

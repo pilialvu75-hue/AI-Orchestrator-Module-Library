@@ -3,35 +3,18 @@
   "id": "main-reviewer",
   "title": "Main / Reviewer",
   "role": "reviewer",
-  "status": "CLAIMED",
+  "status": "READY",
   "activation": "active",
   "scope": "Global architecture, cross-lane review, consolidation, roadmap/state authority and hardening, including target inference profile balance and shared-contract compatibility.",
   "shared_engine_policy": "shared_or_control_plane",
-  "state_version": 75,
+  "state_version": 76,
   "updated_at": "2026-10-11",
-  "active_claim": {
-    "claim_id": "e81deda19ea5f6602499",
-    "owner_lane": "main-reviewer",
-    "work_item": "CP-WORKER-AUTOMATION-REACTIVATE-01",
-    "repository": "pilialvu75-hue/AI-Orchestrator-Module-Library",
-    "scope": "Re-enable existing canonical Cantiere and Windows Legacy lane-worker automations with current canonical control-plane rules and update the stale test that expected Cantiere to remain disabled. Do not broaden target lanes or physical/runtime authority.",
-    "branch": "main-reviewer/reactivate-worker-automations",
-    "resource_locks": [
-      "branch:pilialvu75-hue/AI-Orchestrator-Module-Library:main-reviewer/reactivate-worker-automations",
-      "file:pilialvu75-hue/AI-Orchestrator-Module-Library:.airlab/control-plane/automation-registry.json",
-      "file:pilialvu75-hue/AI-Orchestrator-Module-Library:tests/test_control_plane_inbox.py",
-      "scope:control-plane:worker-automation-reactivation"
-    ],
-    "started_at": "2026-10-11T12:51:27Z",
-    "heartbeat_at": "2026-10-11T12:51:27Z",
-    "lease_until": "2026-10-12T00:51:27Z",
-    "lease_hours": 12
-  },
+  "active_claim": null,
   "dependencies": [],
   "roadmap_refs": [],
   "evidence": [],
   "gates": {
-    "G0_CLAIM": "PASS",
+    "G0_CLAIM": "PENDING",
     "G1_IMPLEMENTATION": "PENDING",
     "G2_STATIC": "PENDING",
     "G3_CI": "PENDING",
@@ -990,6 +973,13 @@
       "work_item": "CP-WORKER-AUTOMATION-REACTIVATE-01",
       "reason": "Re-lock CP-WORKER-AUTOMATION-REACTIVATE-01 to include tests/test_control_plane_inbox.py after PR #109 correctly exposed a stale test that assumes Cantiere Auto-Pilot remains disabled.",
       "at": "2026-10-11T12:51:07Z"
+    },
+    {
+      "type": "CLAIM_RELEASED",
+      "claim_id": "e81deda19ea5f6602499",
+      "work_item": "CP-WORKER-AUTOMATION-REACTIVATE-01",
+      "reason": "CP-WORKER-AUTOMATION-REACTIVATE-01 completed. PR #109 merged at a2f5166c467a1efb265b10900c70f8d9ca4fb7b7 after Validate Module Library passed on exact head 5af5000890885dab53cd8dc95a50f6dca332e873. Cantiere Auto-Pilot and Windows Legacy Autonomous are enabled canonically and in the scheduler with current-state prompts.",
+      "at": "2026-10-11T12:52:57Z"
     }
   ],
   "stale_block_history": [
