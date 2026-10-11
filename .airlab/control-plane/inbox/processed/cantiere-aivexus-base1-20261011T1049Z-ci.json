@@ -1,0 +1,12 @@
+{
+  "schema_version": 1,
+  "request_id": "cantiere-aivexus-base1-20261011T1049Z-ci",
+  "status": "APPLIED",
+  "processed_at": "2026-10-11T10:49:13Z",
+  "source_file": "cantiere-aivexus-base1-20261011T1049Z-ci.json",
+  "lane_id": "cantiere",
+  "operation": "checkpoint",
+  "actor_id": "chatgpt:cantiere-aivexus-base",
+  "errors": [],
+  "result_state_version": 32
+}

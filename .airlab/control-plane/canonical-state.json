@@ -7,7 +7,7 @@
     "policy": "This private repository is the single coordination authority. Chats and agents are workers, not independent sources of truth."
   },
   "updated_at": "2026-10-11",
-  "state_revision": 152,
+  "state_revision": 153,
   "lifecycle_status": "BOOTSTRAP_ACTIVE",
   "roadmap_authority": {
     "library": ".airlab/roadmap.yaml",
@@ -80,8 +80,8 @@
     "invalid_lane_behavior": "ISOLATE_AND_SURFACE_PROJECTION_INCIDENT"
   },
   "projection": {
-    "source_digest": "837f7004fbf2c0ebbf1a5742aa7f49e0cbeb95ea59510146f1837d73db2b516a",
-    "projected_at": "2026-10-11T10:14:41Z",
+    "source_digest": "ad3d081e876d6596dbf28bae70fe726e7e69cdc9f2d60d6913c041fde4816d12",
+    "projected_at": "2026-10-11T10:49:13Z",
     "counts": {
       "BLOCKED": 1,
       "IMPLEMENTING": 1,
@@ -94,7 +94,7 @@
         "claim_id": "c792cfdec8aee6363eba",
         "work_item": "AIVEXUS-BASE-1",
         "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
-        "lease_until": "2026-10-11T22:14:41Z",
+        "lease_until": "2026-10-11T22:49:13Z",
         "resource_locks": [
           "branch:pilialvu75-hue/Ai-orchestrator-riserva:feat/aivexus-shared-project-base-v1",
           "contract:aivexus-project-extension-v1",
@@ -305,13 +305,13 @@
         "id": "cantiere",
         "status": "IMPLEMENTING",
         "activation": "active",
-        "state_version": 31,
+        "state_version": 32,
         "updated_at": "2026-10-11",
         "active_claim": {
           "claim_id": "c792cfdec8aee6363eba",
           "work_item": "AIVEXUS-BASE-1",
           "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
-          "lease_until": "2026-10-11T22:14:41Z",
+          "lease_until": "2026-10-11T22:49:13Z",
           "resource_locks": [
             "branch:pilialvu75-hue/Ai-orchestrator-riserva:feat/aivexus-shared-project-base-v1",
             "contract:aivexus-project-extension-v1",
@@ -326,7 +326,7 @@
         "reviewer_state": "PENDING",
         "inference_profile_status": null,
         "historical_backlog_count": 3,
-        "next_action": "Inspect exact-head Web analysis, VM tests, real Chrome persistence/lock tests and build; fix concrete failures then submit a structured review packet. BASE-2 and domain workers remain gated on integration."
+        "next_action": "Finish exact-head Android run 38132364000, inspect any concrete failure/review finding, then submit the prepared structured BASE-1 review packet. Do not merge, deploy, self-promote or start BASE-2 before Main/Reviewer integration."
       },
       {
         "id": "diagnostics",
