@@ -3,34 +3,13 @@
   "id": "cantiere",
   "title": "Cantiere",
   "role": "worker",
-  "status": "IMPLEMENTING",
+  "status": "BLOCKED",
   "activation": "active",
   "scope": "Exclusive Cantiere/App Factory execution, durability, build/review/validation/apply and first-real-app reliability.",
   "shared_engine_policy": "shared_or_control_plane",
-  "state_version": 36,
+  "state_version": 37,
   "updated_at": "2026-10-11",
-  "active_claim": {
-    "claim_id": "c792cfdec8aee6363eba",
-    "owner_lane": "cantiere",
-    "work_item": "AIVEXUS-BASE-1",
-    "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
-    "scope": "AIVEXUS-BASE-1 only: additive ProjectExtension, conservative revision-guarded project persistence, attachment store interface and resource-exchange persistence hooks. Preserve software behavior and existing projects; no CAD/game runners, domain pages, deploy, CANT-11 changes or runtime claims.",
-    "branch": "feat/aivexus-shared-project-base-v1",
-    "resource_locks": [
-      "branch:pilialvu75-hue/Ai-orchestrator-riserva:feat/aivexus-shared-project-base-v1",
-      "contract:aivexus-project-extension-v1",
-      "contract:aivexus-resource-exchange-v1",
-      "file:pilialvu75-hue/Ai-orchestrator-riserva:.github/workflows/web-build.yml",
-      "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/app_factory/workshop/web/workshop_web_project_storage.dart",
-      "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/app_factory/workshop/web/workshop_web_projects_page.dart",
-      "file:pilialvu75-hue/Ai-orchestrator-riserva:test/app_factory/workshop/web/workshop_web_project_storage_test.dart",
-      "scope:aivexus:shared-base"
-    ],
-    "started_at": "2026-10-11T09:57:29Z",
-    "heartbeat_at": "2026-10-11T10:49:13Z",
-    "lease_until": "2026-10-11T22:49:13Z",
-    "lease_hours": 12
-  },
+  "active_claim": null,
   "dependencies": [],
   "roadmap_refs": [
     ".airlab/public-repositories/Ai-orchestrator-riserva/roadmap.yaml#CANT-11",
@@ -111,7 +90,7 @@
   },
   "reviewer": {
     "required": true,
-    "state": "CHANGES_REQUESTED",
+    "state": "PENDING",
     "reviewed_by": "main-reviewer",
     "reviewed_at": "2026-10-11T17:18:10Z"
   },
@@ -671,6 +650,23 @@
         "CI:37152170709"
       ],
       "at": "2026-10-07T20:06:04Z"
+    },
+    {
+      "type": "CLAIM_LEASE_EXPIRED",
+      "claim_id": "c792cfdec8aee6363eba",
+      "work_item": "AIVEXUS-BASE-1",
+      "resource_locks": [
+        "branch:pilialvu75-hue/Ai-orchestrator-riserva:feat/aivexus-shared-project-base-v1",
+        "contract:aivexus-project-extension-v1",
+        "contract:aivexus-resource-exchange-v1",
+        "file:pilialvu75-hue/Ai-orchestrator-riserva:.github/workflows/web-build.yml",
+        "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/app_factory/workshop/web/workshop_web_project_storage.dart",
+        "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/app_factory/workshop/web/workshop_web_projects_page.dart",
+        "file:pilialvu75-hue/Ai-orchestrator-riserva:test/app_factory/workshop/web/workshop_web_project_storage_test.dart",
+        "scope:aivexus:shared-base"
+      ],
+      "lease_until": "2026-10-11T22:49:13Z",
+      "detected_at": "2026-10-11T23:28:30Z"
     }
   ],
   "review_packet_history": [
@@ -926,5 +922,23 @@
         ".airlab/control-plane/contracts/aivexus-resource-exchange-v1.md"
       ]
     }
+  },
+  "block_reason": {
+    "code": "CLAIM_LEASE_EXPIRED",
+    "work_item": "AIVEXUS-BASE-1",
+    "claim_id": "c792cfdec8aee6363eba",
+    "resource_locks": [
+      "branch:pilialvu75-hue/Ai-orchestrator-riserva:feat/aivexus-shared-project-base-v1",
+      "contract:aivexus-project-extension-v1",
+      "contract:aivexus-resource-exchange-v1",
+      "file:pilialvu75-hue/Ai-orchestrator-riserva:.github/workflows/web-build.yml",
+      "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/app_factory/workshop/web/workshop_web_project_storage.dart",
+      "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/app_factory/workshop/web/workshop_web_projects_page.dart",
+      "file:pilialvu75-hue/Ai-orchestrator-riserva:test/app_factory/workshop/web/workshop_web_project_storage_test.dart",
+      "scope:aivexus:shared-base"
+    ],
+    "lease_until": "2026-10-11T22:49:13Z",
+    "detected_at": "2026-10-11T23:28:30Z",
+    "review_required": true
   }
 }
