@@ -7,7 +7,7 @@
     "policy": "This private repository is the single coordination authority. Chats and agents are workers, not independent sources of truth."
   },
   "updated_at": "2026-10-11",
-  "state_revision": 156,
+  "state_revision": 157,
   "lifecycle_status": "BOOTSTRAP_ACTIVE",
   "roadmap_authority": {
     "library": ".airlab/roadmap.yaml",
@@ -80,12 +80,12 @@
     "invalid_lane_behavior": "ISOLATE_AND_SURFACE_PROJECTION_INCIDENT"
   },
   "projection": {
-    "source_digest": "18118e4464d0760cdf6821f35bd95da4c361987107954a880569a438dc242706",
-    "projected_at": "2026-10-11T11:39:49Z",
+    "source_digest": "1e8cfb799a345fd699584eb37b85ae0963ac54c906744ccec7f963d2f195a931",
+    "projected_at": "2026-10-11T11:40:52Z",
     "counts": {
       "BLOCKED": 1,
-      "READY": 14,
-      "REVIEW_REQUIRED": 2
+      "READY": 15,
+      "REVIEW_REQUIRED": 1
     },
     "active_claims": [
       {
@@ -104,18 +104,6 @@
           "file:pilialvu75-hue/Ai-orchestrator-riserva:test/app_factory/workshop/web/workshop_web_project_storage_test.dart",
           "scope:aivexus:shared-base"
         ]
-      },
-      {
-        "lane": "platform-android",
-        "claim_id": "111089b6cea735577ad4",
-        "work_item": "benchmark-switch-error-attribution",
-        "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
-        "lease_until": "2026-10-11T15:06:37Z",
-        "resource_locks": [
-          "branch:pilialvu75-hue/Ai-orchestrator-riserva:fix/android-benchmark-switch-attribution",
-          "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/features/chat/presentation/debug/local_model_benchmark.dart",
-          "scope:android-benchmark-switch-attribution"
-        ]
       }
     ],
     "active_resource_locks": [
@@ -124,12 +112,6 @@
         "lane": "cantiere",
         "claim_id": "c792cfdec8aee6363eba",
         "work_item": "AIVEXUS-BASE-1"
-      },
-      {
-        "key": "branch:pilialvu75-hue/Ai-orchestrator-riserva:fix/android-benchmark-switch-attribution",
-        "lane": "platform-android",
-        "claim_id": "111089b6cea735577ad4",
-        "work_item": "benchmark-switch-error-attribution"
       },
       {
         "key": "contract:aivexus-project-extension-v1",
@@ -162,12 +144,6 @@
         "work_item": "AIVEXUS-BASE-1"
       },
       {
-        "key": "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/features/chat/presentation/debug/local_model_benchmark.dart",
-        "lane": "platform-android",
-        "claim_id": "111089b6cea735577ad4",
-        "work_item": "benchmark-switch-error-attribution"
-      },
-      {
         "key": "file:pilialvu75-hue/Ai-orchestrator-riserva:test/app_factory/workshop/web/workshop_web_project_storage_test.dart",
         "lane": "cantiere",
         "claim_id": "c792cfdec8aee6363eba",
@@ -178,17 +154,10 @@
         "lane": "cantiere",
         "claim_id": "c792cfdec8aee6363eba",
         "work_item": "AIVEXUS-BASE-1"
-      },
-      {
-        "key": "scope:android-benchmark-switch-attribution",
-        "lane": "platform-android",
-        "claim_id": "111089b6cea735577ad4",
-        "work_item": "benchmark-switch-error-attribution"
       }
     ],
     "review_required": [
-      "cantiere",
-      "platform-android"
+      "cantiere"
     ],
     "blocked": [
       {
@@ -204,18 +173,7 @@
         }
       }
     ],
-    "checkpoint_watch": [
-      {
-        "lane": "platform-android",
-        "claim_id": "111089b6cea735577ad4",
-        "work_item": "benchmark-switch-error-attribution",
-        "status": "REVIEW_REQUIRED",
-        "reason": "CHECKPOINT_STALE",
-        "last_checkpoint_at": "2026-10-11T09:24:11Z",
-        "due_since": "2026-10-11T11:24:11Z",
-        "warning_after_minutes": 120
-      }
-    ],
+    "checkpoint_watch": [],
     "projection_incidents": [],
     "platform_inference_profiles": [
       {
@@ -377,25 +335,15 @@
       },
       {
         "id": "platform-android",
-        "status": "REVIEW_REQUIRED",
+        "status": "READY",
         "activation": "active",
-        "state_version": 18,
+        "state_version": 19,
         "updated_at": "2026-10-11",
-        "active_claim": {
-          "claim_id": "111089b6cea735577ad4",
-          "work_item": "benchmark-switch-error-attribution",
-          "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
-          "lease_until": "2026-10-11T15:06:37Z",
-          "resource_locks": [
-            "branch:pilialvu75-hue/Ai-orchestrator-riserva:fix/android-benchmark-switch-attribution",
-            "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/features/chat/presentation/debug/local_model_benchmark.dart",
-            "scope:android-benchmark-switch-attribution"
-          ]
-        },
-        "reviewer_state": "PENDING",
+        "active_claim": null,
+        "reviewer_state": "APPROVED",
         "inference_profile_status": "ACTIVE_BENCHMARKING",
         "historical_backlog_count": 3,
-        "next_action": "Main/Reviewer must inspect the review_packet, linked evidence and required gates before promotion or rework."
+        "next_action": "PR #824 may be made ready and merged at exact reviewed head e29c2bb15e1175635e5b578f4dc7fab5819360c0. After merge, publish a build containing the correction before using benchmark attribution results. Keep RAM stability, trim15/resource guard and physical S24 FE validation open as separate work; do not repeat benchmarks solely for this review."
       },
       {
         "id": "platform-ios",

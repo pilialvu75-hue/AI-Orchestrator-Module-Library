@@ -3,29 +3,13 @@
   "id": "platform-android",
   "title": "Android",
   "role": "worker",
-  "status": "REVIEW_REQUIRED",
+  "status": "READY",
   "activation": "active",
   "scope": "Android packaging, permissions, hardware/runtime adapters, UI integration and releases using shared orchestration/contracts with target-optimized inference.",
   "shared_engine_policy": "adapter_only",
-  "state_version": 18,
+  "state_version": 19,
   "updated_at": "2026-10-11",
-  "active_claim": {
-    "claim_id": "111089b6cea735577ad4",
-    "owner_lane": "platform-android",
-    "work_item": "benchmark-switch-error-attribution",
-    "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
-    "scope": "Preserve completed stability probes when switch partner fails; report stage and catalog identities. No runtime guard, Vulkan or model policy changes.",
-    "branch": "fix/android-benchmark-switch-attribution",
-    "resource_locks": [
-      "branch:pilialvu75-hue/Ai-orchestrator-riserva:fix/android-benchmark-switch-attribution",
-      "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/features/chat/presentation/debug/local_model_benchmark.dart",
-      "scope:android-benchmark-switch-attribution"
-    ],
-    "started_at": "2026-10-11T03:04:41Z",
-    "heartbeat_at": "2026-10-11T03:06:37Z",
-    "lease_until": "2026-10-11T15:06:37Z",
-    "lease_hours": 12
-  },
+  "active_claim": null,
   "dependencies": [],
   "roadmap_refs": [
     ".airlab/public-repositories/Ai-orchestrator-riserva/roadmap.yaml#CANT-14",
@@ -112,16 +96,16 @@
     "G3_CI": "PASS",
     "G4_INTEGRATION": "PASS",
     "G5_TARGET_RUNTIME": "NOT_APPLICABLE_UNTIL_RUNTIME_CHANGE",
-    "G6_REVIEWER": "PENDING",
-    "G7_CANONICAL_SYNC": "PENDING"
+    "G6_REVIEWER": "PASS",
+    "G7_CANONICAL_SYNC": "PASS"
   },
   "reviewer": {
     "required": true,
-    "state": "PENDING",
+    "state": "APPROVED",
     "reviewed_by": "main-reviewer",
-    "reviewed_at": "2026-10-11T09:21:38Z"
+    "reviewed_at": "2026-10-11T11:40:52Z"
   },
-  "next_action": "Main/Reviewer must inspect the review_packet, linked evidence and required gates before promotion or rework.",
+  "next_action": "PR #824 may be made ready and merged at exact reviewed head e29c2bb15e1175635e5b578f4dc7fab5819360c0. After merge, publish a build containing the correction before using benchmark attribution results. Keep RAM stability, trim15/resource guard and physical S24 FE validation open as separate work; do not repeat benchmarks solely for this review.",
   "inference_profile_policy": "target_owned_benchmark_gated",
   "inference_profile": {
     "status": "ACTIVE_BENCHMARKING",
@@ -281,31 +265,51 @@
       ],
       "next_action": "Main/Reviewer must inspect the review_packet, linked evidence and required gates before promotion or rework.",
       "kind": "REVIEW_HANDOFF"
+    },
+    {
+      "seq": 9,
+      "at": "2026-10-11T11:40:52Z",
+      "claim_id": "111089b6cea735577ad4",
+      "work_item": "benchmark-switch-error-attribution",
+      "summary": "Main/Reviewer accepts PR #824 only as the bounded benchmark-switch attribution/reporting correction on exact head e29c2bb15e1175635e5b578f4dc7fab5819360c0. The diff preserves completed original-model probes across ordinary partner/return failures, reports catalog/stage identities, leaves incomplete switching as n/a, and continues to rethrow critical resource exceptions. Exact-head cross-platform CI and four focused regressions pass. This approval does not accept or resolve RAM stability, trim15/resource-guard behavior, Vulkan behavior, GGUF/cache binding, model policy, or physical S24 FE runtime stability.",
+      "decisions": [
+        "Main/Reviewer accepted the implementation/review gate."
+      ],
+      "evidence_refs": [
+        "Ai-orchestrator-riserva#824",
+        "head:e29c2bb15e1175635e5b578f4dc7fab5819360c0",
+        "CI:38107361707",
+        "CI:38107361691",
+        "CI:38107361706",
+        "CI:38107361716",
+        "CI:38107361719",
+        "job:114375580450"
+      ],
+      "next_action": "PR #824 may be made ready and merged at exact reviewed head e29c2bb15e1175635e5b578f4dc7fab5819360c0. After merge, publish a build containing the correction before using benchmark attribution results. Keep RAM stability, trim15/resource guard and physical S24 FE validation open as separate work; do not repeat benchmarks solely for this review.",
+      "kind": "REVIEW_ACCEPTED"
     }
   ],
   "last_checkpoint": {
-    "seq": 8,
-    "at": "2026-10-11T09:24:11Z",
+    "seq": 9,
+    "at": "2026-10-11T11:40:52Z",
     "claim_id": "111089b6cea735577ad4",
     "work_item": "benchmark-switch-error-attribution",
-    "summary": "PR824 preserves completed stability probes when switch partner/return throws and reports stage/catalog identities. Evidence-only resubmission on unchanged head e29c2bb15e1175635e5b578f4dc7fab5819360c0: five workflows and four focused regressions verified PASS. RAM, trim15 guard and physical S24 FE acceptance remain open.",
-    "decisions": [],
-    "evidence_refs": [
-      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/824",
-      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/e29c2bb15e1175635e5b578f4dc7fab5819360c0",
-      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/824/files",
-      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38107361707",
-      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38107361691",
-      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38107361706",
-      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38107361716",
-      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38107361719",
-      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38107361707/job/114375580450",
-      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38107361707/job/114375580450",
-      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38107361707/job/114375580450",
-      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38107361707/job/114375580450"
+    "summary": "Main/Reviewer accepts PR #824 only as the bounded benchmark-switch attribution/reporting correction on exact head e29c2bb15e1175635e5b578f4dc7fab5819360c0. The diff preserves completed original-model probes across ordinary partner/return failures, reports catalog/stage identities, leaves incomplete switching as n/a, and continues to rethrow critical resource exceptions. Exact-head cross-platform CI and four focused regressions pass. This approval does not accept or resolve RAM stability, trim15/resource-guard behavior, Vulkan behavior, GGUF/cache binding, model policy, or physical S24 FE runtime stability.",
+    "decisions": [
+      "Main/Reviewer accepted the implementation/review gate."
     ],
-    "next_action": "Main/Reviewer must inspect the review_packet, linked evidence and required gates before promotion or rework.",
-    "kind": "REVIEW_HANDOFF"
+    "evidence_refs": [
+      "Ai-orchestrator-riserva#824",
+      "head:e29c2bb15e1175635e5b578f4dc7fab5819360c0",
+      "CI:38107361707",
+      "CI:38107361691",
+      "CI:38107361706",
+      "CI:38107361716",
+      "CI:38107361719",
+      "job:114375580450"
+    ],
+    "next_action": "PR #824 may be made ready and merged at exact reviewed head e29c2bb15e1175635e5b578f4dc7fab5819360c0. After merge, publish a build containing the correction before using benchmark attribution results. Keep RAM stability, trim15/resource guard and physical S24 FE validation open as separate work; do not repeat benchmarks solely for this review.",
+    "kind": "REVIEW_ACCEPTED"
   },
   "reconciliation_events": [
     {
@@ -342,6 +346,13 @@
       "work_item": "phi-critical-memory-chat-recovery",
       "reason": "Main/Reviewer accepted the bounded implementation/review gate.",
       "at": "2026-10-10T13:50:24Z"
+    },
+    {
+      "type": "CLAIM_RELEASED_AFTER_REVIEW",
+      "claim_id": "111089b6cea735577ad4",
+      "work_item": "benchmark-switch-error-attribution",
+      "reason": "Main/Reviewer accepted the bounded implementation/review gate.",
+      "at": "2026-10-11T11:40:52Z"
     }
   ],
   "stale_block_history": [
@@ -458,6 +469,24 @@
       "work_item": "benchmark-switch-error-attribution",
       "decision": "CHANGES_REQUESTED",
       "summary": "PR #824 exact head e29c2bb15e1175635e5b578f4dc7fab5819360c0 now has verified green CI and four focused regressions, while the current review packet still records those evidence items as PENDING. Rework is requested only to refresh the claim-bound packet evidence from PENDING to PASS. No code modification is requested. RAM stability, trim15/resource-guard behavior and physical S24 FE validation remain open and must not be promoted by this evidence refresh."
+    },
+    {
+      "reviewed_at": "2026-10-11T11:40:52Z",
+      "reviewed_by": "main-reviewer",
+      "claim_id": "111089b6cea735577ad4",
+      "work_item": "benchmark-switch-error-attribution",
+      "decision": "APPROVED",
+      "summary": "Main/Reviewer accepts PR #824 only as the bounded benchmark-switch attribution/reporting correction on exact head e29c2bb15e1175635e5b578f4dc7fab5819360c0. The diff preserves completed original-model probes across ordinary partner/return failures, reports catalog/stage identities, leaves incomplete switching as n/a, and continues to rethrow critical resource exceptions. Exact-head cross-platform CI and four focused regressions pass. This approval does not accept or resolve RAM stability, trim15/resource-guard behavior, Vulkan behavior, GGUF/cache binding, model policy, or physical S24 FE runtime stability.",
+      "evidence_refs": [
+        "Ai-orchestrator-riserva#824",
+        "head:e29c2bb15e1175635e5b578f4dc7fab5819360c0",
+        "CI:38107361707",
+        "CI:38107361691",
+        "CI:38107361706",
+        "CI:38107361716",
+        "CI:38107361719",
+        "job:114375580450"
+      ]
     }
   ],
   "review_packet_history": [
