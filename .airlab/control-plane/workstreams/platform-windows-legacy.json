@@ -3,13 +3,27 @@
   "id": "platform-windows-legacy",
   "title": "Windows 7/8.1",
   "role": "worker",
-  "status": "READY",
+  "status": "CLAIMED",
   "activation": "active",
   "scope": "Legacy Windows compatibility layer, installer/update and target-specific adapters with target-optimized inference while preserving shared orchestration/contracts.",
   "shared_engine_policy": "adapter_only",
-  "state_version": 21,
+  "state_version": 22,
   "updated_at": "2026-10-11",
-  "active_claim": null,
+  "active_claim": {
+    "claim_id": "85c250b3e7de5a82c945",
+    "owner_lane": "platform-windows-legacy",
+    "work_item": "winlegacy-artifact-provenance-20261011",
+    "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
+    "scope": "Add Win7 and Win8.1 build provenance metadata to the Windows CI artifact without changing runtime behavior.",
+    "branch": null,
+    "resource_locks": [
+      "file:pilialvu75-hue/Ai-orchestrator-riserva:.github/workflows/windows-build.yml"
+    ],
+    "started_at": "2026-10-11T13:54:10Z",
+    "heartbeat_at": "2026-10-11T13:54:10Z",
+    "lease_until": "2026-10-12T01:54:10Z",
+    "lease_hours": 12
+  },
   "dependencies": [],
   "roadmap_refs": [
     ".airlab/public-repositories/Ai-orchestrator-riserva/roadmap.yaml#CANT-15"

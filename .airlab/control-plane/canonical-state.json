@@ -7,7 +7,7 @@
     "policy": "This private repository is the single coordination authority. Chats and agents are workers, not independent sources of truth."
   },
   "updated_at": "2026-10-11",
-  "state_revision": 165,
+  "state_revision": 166,
   "lifecycle_status": "BOOTSTRAP_ACTIVE",
   "roadmap_authority": {
     "library": ".airlab/roadmap.yaml",
@@ -80,11 +80,12 @@
     "invalid_lane_behavior": "ISOLATE_AND_SURFACE_PROJECTION_INCIDENT"
   },
   "projection": {
-    "source_digest": "c81ee7cbf390c88351907bee224a44b14b194a0d5a65d764c8ed1540fc52581c",
-    "projected_at": "2026-10-11T12:52:57Z",
+    "source_digest": "48e12eea226aaed01ccad25fb1d3bd985b610d7d5761fb9e0b8b8ecf28f46db8",
+    "projected_at": "2026-10-11T13:54:10Z",
     "counts": {
+      "CLAIMED": 1,
       "IMPLEMENTING": 1,
-      "READY": 16
+      "READY": 15
     },
     "active_claims": [
       {
@@ -102,6 +103,16 @@
           "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/app_factory/workshop/web/workshop_web_projects_page.dart",
           "file:pilialvu75-hue/Ai-orchestrator-riserva:test/app_factory/workshop/web/workshop_web_project_storage_test.dart",
           "scope:aivexus:shared-base"
+        ]
+      },
+      {
+        "lane": "platform-windows-legacy",
+        "claim_id": "85c250b3e7de5a82c945",
+        "work_item": "winlegacy-artifact-provenance-20261011",
+        "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
+        "lease_until": "2026-10-12T01:54:10Z",
+        "resource_locks": [
+          "file:pilialvu75-hue/Ai-orchestrator-riserva:.github/workflows/windows-build.yml"
         ]
       }
     ],
@@ -129,6 +140,12 @@
         "lane": "cantiere",
         "claim_id": "c792cfdec8aee6363eba",
         "work_item": "AIVEXUS-BASE-1"
+      },
+      {
+        "key": "file:pilialvu75-hue/Ai-orchestrator-riserva:.github/workflows/windows-build.yml",
+        "lane": "platform-windows-legacy",
+        "claim_id": "85c250b3e7de5a82c945",
+        "work_item": "winlegacy-artifact-provenance-20261011"
       },
       {
         "key": "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/app_factory/workshop/web/workshop_web_project_storage.dart",
@@ -403,11 +420,19 @@
       },
       {
         "id": "platform-windows-legacy",
-        "status": "READY",
+        "status": "CLAIMED",
         "activation": "active",
-        "state_version": 21,
+        "state_version": 22,
         "updated_at": "2026-10-11",
-        "active_claim": null,
+        "active_claim": {
+          "claim_id": "85c250b3e7de5a82c945",
+          "work_item": "winlegacy-artifact-provenance-20261011",
+          "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
+          "lease_until": "2026-10-12T01:54:10Z",
+          "resource_locks": [
+            "file:pilialvu75-hue/Ai-orchestrator-riserva:.github/workflows/windows-build.yml"
+          ]
+        },
         "reviewer_state": "PENDING",
         "inference_profile_status": "NEEDS_TARGET_PROFILE",
         "historical_backlog_count": 6,
