@@ -7,7 +7,7 @@
   "activation": "active",
   "scope": "Android packaging, permissions, hardware/runtime adapters, UI integration and releases using shared orchestration/contracts with target-optimized inference.",
   "shared_engine_policy": "adapter_only",
-  "state_version": 17,
+  "state_version": 18,
   "updated_at": "2026-10-11",
   "active_claim": {
     "claim_id": "111089b6cea735577ad4",
@@ -107,10 +107,10 @@
   ],
   "gates": {
     "G0_CLAIM": "PASS",
-    "G1_IMPLEMENTATION": "PENDING",
-    "G2_STATIC": "PENDING",
-    "G3_CI": "PENDING",
-    "G4_INTEGRATION": "PENDING",
+    "G1_IMPLEMENTATION": "PASS",
+    "G2_STATIC": "PASS",
+    "G3_CI": "PASS",
+    "G4_INTEGRATION": "PASS",
     "G5_TARGET_RUNTIME": "NOT_APPLICABLE_UNTIL_RUNTIME_CHANGE",
     "G6_REVIEWER": "PENDING",
     "G7_CANONICAL_SYNC": "PENDING"
@@ -407,6 +407,33 @@
           "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38003787134/job/114068102558"
         ]
       }
+    },
+    {
+      "at": "2026-10-11T11:39:49Z",
+      "claim_id": "111089b6cea735577ad4",
+      "packet_sha256": "5ae638beac30441a9d612e1eb7b86837de637afbce0bed655b50cf3cf36c642a",
+      "reviewed_by": "main-reviewer",
+      "summary": "Main/Reviewer independently inspected PR #824 exact head e29c2bb15e1175635e5b578f4dc7fab5819360c0 and the claim-bound review packet. The change is bounded to benchmark switch-error attribution/reporting: completed original probes are preserved across ordinary partner/return failures, incomplete switching remains n/a, and critical resource errors still propagate. Five exact-head workflows and four focused regressions are PASS. G1-G4 apply only to this benchmark attribution change; RAM stability, trim15/resource-guard behavior, GGUF/cache binding and physical S24 FE runtime acceptance remain open and are not inferred.",
+      "evidence_refs_by_gate": {
+        "G1_IMPLEMENTATION": [
+          "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/824",
+          "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/e29c2bb15e1175635e5b578f4dc7fab5819360c0"
+        ],
+        "G2_STATIC": [
+          "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38107361707/job/114375580450"
+        ],
+        "G3_CI": [
+          "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38107361707",
+          "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38107361691",
+          "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38107361706",
+          "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38107361716",
+          "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38107361719"
+        ],
+        "G4_INTEGRATION": [
+          "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/824/files",
+          "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38107361707/job/114375580450"
+        ]
+      }
     }
   ],
   "review_history": [
@@ -632,6 +659,33 @@
     "roadmap_impact": {
       "material": false,
       "refs": []
+    }
+  },
+  "current_gate_attestation": {
+    "at": "2026-10-11T11:39:49Z",
+    "claim_id": "111089b6cea735577ad4",
+    "packet_sha256": "5ae638beac30441a9d612e1eb7b86837de637afbce0bed655b50cf3cf36c642a",
+    "reviewed_by": "main-reviewer",
+    "summary": "Main/Reviewer independently inspected PR #824 exact head e29c2bb15e1175635e5b578f4dc7fab5819360c0 and the claim-bound review packet. The change is bounded to benchmark switch-error attribution/reporting: completed original probes are preserved across ordinary partner/return failures, incomplete switching remains n/a, and critical resource errors still propagate. Five exact-head workflows and four focused regressions are PASS. G1-G4 apply only to this benchmark attribution change; RAM stability, trim15/resource-guard behavior, GGUF/cache binding and physical S24 FE runtime acceptance remain open and are not inferred.",
+    "evidence_refs_by_gate": {
+      "G1_IMPLEMENTATION": [
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/824",
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/e29c2bb15e1175635e5b578f4dc7fab5819360c0"
+      ],
+      "G2_STATIC": [
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38107361707/job/114375580450"
+      ],
+      "G3_CI": [
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38107361707",
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38107361691",
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38107361706",
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38107361716",
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38107361719"
+      ],
+      "G4_INTEGRATION": [
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/824/files",
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38107361707/job/114375580450"
+      ]
     }
   }
 }
