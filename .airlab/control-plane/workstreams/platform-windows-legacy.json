@@ -3,34 +3,20 @@
   "id": "platform-windows-legacy",
   "title": "Windows 7/8.1",
   "role": "worker",
-  "status": "IMPLEMENTING",
+  "status": "READY",
   "activation": "active",
   "scope": "Legacy Windows compatibility layer, installer/update and target-specific adapters with target-optimized inference while preserving shared orchestration/contracts.",
   "shared_engine_policy": "adapter_only",
-  "state_version": 23,
+  "state_version": 24,
   "updated_at": "2026-10-11",
-  "active_claim": {
-    "claim_id": "85c250b3e7de5a82c945",
-    "owner_lane": "platform-windows-legacy",
-    "work_item": "winlegacy-artifact-provenance-20261011",
-    "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
-    "scope": "Add Win7 and Win8.1 build provenance metadata to the Windows CI artifact without changing runtime behavior.",
-    "branch": null,
-    "resource_locks": [
-      "file:pilialvu75-hue/Ai-orchestrator-riserva:.github/workflows/windows-build.yml"
-    ],
-    "started_at": "2026-10-11T13:54:10Z",
-    "heartbeat_at": "2026-10-11T13:55:21Z",
-    "lease_until": "2026-10-12T01:55:21Z",
-    "lease_hours": 12
-  },
+  "active_claim": null,
   "dependencies": [],
   "roadmap_refs": [
     ".airlab/public-repositories/Ai-orchestrator-riserva/roadmap.yaml#CANT-15"
   ],
   "evidence": [],
   "gates": {
-    "G0_CLAIM": "PASS",
+    "G0_CLAIM": "PENDING",
     "G1_IMPLEMENTATION": "PENDING",
     "G2_STATIC": "PENDING",
     "G3_CI": "PENDING",
@@ -331,6 +317,13 @@
         "owner-directive:2026-10-11-unblock-other-chats"
       ],
       "at": "2026-10-11T12:46:32Z"
+    },
+    {
+      "type": "CLAIM_RELEASED",
+      "claim_id": "85c250b3e7de5a82c945",
+      "work_item": "winlegacy-artifact-provenance-20261011",
+      "reason": "WRITE_BLOCKED",
+      "at": "2026-10-11T13:55:54Z"
     }
   ],
   "stale_block_history": [
