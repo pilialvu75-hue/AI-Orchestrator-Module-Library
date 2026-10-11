@@ -1,0 +1,37 @@
+{
+  "schema_version": 1,
+  "request_id": "android-20261011-pr824-record-review-gates",
+  "actor_id": "chatgpt:main-reviewer",
+  "lane_id": "platform-android",
+  "operation": "record_review_gates",
+  "expected_state_version": 17,
+  "payload": {
+    "summary": "Main/Reviewer independently inspected PR #824 exact head e29c2bb15e1175635e5b578f4dc7fab5819360c0 and the claim-bound review packet. The change is bounded to benchmark switch-error attribution/reporting: completed original probes are preserved across ordinary partner/return failures, incomplete switching remains n/a, and critical resource errors still propagate. Five exact-head workflows and four focused regressions are PASS. G1-G4 apply only to this benchmark attribution change; RAM stability, trim15/resource-guard behavior, GGUF/cache binding and physical S24 FE runtime acceptance remain open and are not inferred.",
+    "evidence_indices": {
+      "G1_IMPLEMENTATION": [
+        0,
+        1
+      ],
+      "G2_STATIC": [
+        8,
+        9,
+        10,
+        11
+      ],
+      "G3_CI": [
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "G4_INTEGRATION": [
+        2,
+        8,
+        9,
+        10,
+        11
+      ]
+    }
+  }
+}
