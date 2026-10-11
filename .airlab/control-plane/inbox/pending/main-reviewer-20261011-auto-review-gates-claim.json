@@ -1,0 +1,21 @@
+{
+  "schema_version": 1,
+  "request_id": "main-reviewer-20261011-auto-review-gates-claim",
+  "actor_id": "chatgpt:main-reviewer",
+  "lane_id": "main-reviewer",
+  "operation": "claim",
+  "expected_state_version": 70,
+  "payload": {
+    "work_item": "CP-REVIEW-AUTO-GATES-01",
+    "repository": "pilialvu75-hue/AI-Orchestrator-Module-Library",
+    "scope": "Allow only the canonical enabled Main/Reviewer automation to record packet-bound G1-G4 evidence for worker REVIEW_REQUIRED lanes, preserving immutable packet hash, PASS-only evidence typing, worker-only targets, and keeping G5/runtime/physical promotion outside automation authority.",
+    "branch": "main-reviewer/cp-review-auto-gates-01",
+    "resource_locks": [
+      "file:pilialvu75-hue/AI-Orchestrator-Module-Library:tools/control_plane_inbox.py",
+      "file:pilialvu75-hue/AI-Orchestrator-Module-Library:tests/test_control_plane_inbox.py",
+      "file:pilialvu75-hue/AI-Orchestrator-Module-Library:.airlab/control-plane/automation-registry.json",
+      "file:pilialvu75-hue/AI-Orchestrator-Module-Library:.airlab/control-plane/inbox/README.md",
+      "scope:control-plane:automated-review-gates"
+    ]
+  }
+}
