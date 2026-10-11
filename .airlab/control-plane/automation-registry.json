@@ -133,7 +133,7 @@
       "automation_id": "6abc720a44b081919bd7a8d71b45e8d2",
       "title": "Windows Legacy Autonomous",
       "actor_id": "automation:windows-legacy:6abc720a44b081919bd7a8d71b45e8d2",
-      "enabled": false,
+      "enabled": true,
       "owner_lane": "platform-windows-legacy",
       "kind": "lane_worker",
       "read_capabilities": [
@@ -153,7 +153,7 @@
         "pilialvu75-hue/AI-Orchestrator-Module-Library",
         "pilialvu75-hue/Ai-orchestrator-riserva"
       ],
-      "scope": "Legacy Windows worker lane only. Retained disabled so stale executions fail closed.",
+      "scope": "Legacy Windows lane worker only. Enabled to advance bounded software work from current canonical state; stop at REVIEW_REQUIRED or physical-owner gates.",
       "allowed_operations": [
         "claim",
         "heartbeat",
@@ -172,7 +172,7 @@
       "automation_id": "6abe28904d38819182462df10fe4542c",
       "title": "Cantiere Auto-Pilot",
       "actor_id": "automation:cantiere:6abe28904d38819182462df10fe4542c",
-      "enabled": false,
+      "enabled": true,
       "owner_lane": "cantiere",
       "kind": "lane_worker",
       "read_capabilities": [
@@ -192,7 +192,7 @@
         "pilialvu75-hue/AI-Orchestrator-Module-Library",
         "pilialvu75-hue/Ai-orchestrator-riserva"
       ],
-      "scope": "Cantiere worker lane only. Retained disabled so stale executions fail closed.",
+      "scope": "Cantiere lane worker only. Enabled to advance one bounded non-overlapping software item from current canonical state; stop at REVIEW_REQUIRED or physical-owner gates.",
       "allowed_operations": [
         "claim",
         "heartbeat",
