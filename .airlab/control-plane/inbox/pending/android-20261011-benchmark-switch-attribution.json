@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "request_id": "android-20261011-benchmark-switch-attribution",
+  "actor_id": "chatgpt:platform-android",
+  "lane_id": "platform-android",
+  "operation": "claim",
+  "expected_state_version": 12,
+  "payload": {
+    "work_item": "benchmark-switch-error-attribution",
+    "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
+    "scope": "Preserve completed stability probes when switch partner fails; report stage and catalog identities. No runtime guard, Vulkan or model policy changes.",
+    "branch": "fix/android-benchmark-switch-attribution",
+    "resource_locks": [
+      "scope:android-benchmark-switch-attribution",
+      "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/features/chat/presentation/debug/local_model_benchmark.dart"
+    ]
+  }
+}
