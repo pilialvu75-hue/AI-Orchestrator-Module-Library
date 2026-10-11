@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-10-02",
+  "updated_at": "2026-10-11",
   "policy": {
     "mutation_actor_id_required": true,
     "automation_actor_prefix": "automation:",
@@ -64,8 +64,9 @@
       "write_repositories": [
         "pilialvu75-hue/AI-Orchestrator-Module-Library"
       ],
-      "scope": "Review and reconcile worker handoffs only. Never claim or implement main-reviewer structural backlog and never take over the main-reviewer lane.",
+      "scope": "Review and reconcile worker handoffs only. May record immutable packet-bound G1-G4 evidence using PASS-only typed references; never records G5 or physical/runtime acceptance. Never claim or implement main-reviewer structural backlog and never take over the main-reviewer lane.",
       "allowed_operations": [
+        "record_review_gates",
         "review_accept",
         "review_rework",
         "canonical_sync_complete"
