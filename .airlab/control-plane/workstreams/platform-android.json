@@ -3,11 +3,11 @@
   "id": "platform-android",
   "title": "Android",
   "role": "worker",
-  "status": "CLAIMED",
+  "status": "IMPLEMENTING",
   "activation": "active",
   "scope": "Android packaging, permissions, hardware/runtime adapters, UI integration and releases using shared orchestration/contracts with target-optimized inference.",
   "shared_engine_policy": "adapter_only",
-  "state_version": 13,
+  "state_version": 14,
   "updated_at": "2026-10-11",
   "active_claim": {
     "claim_id": "111089b6cea735577ad4",
@@ -22,8 +22,8 @@
       "scope:android-benchmark-switch-attribution"
     ],
     "started_at": "2026-10-11T03:04:41Z",
-    "heartbeat_at": "2026-10-11T03:04:41Z",
-    "lease_until": "2026-10-11T15:04:41Z",
+    "heartbeat_at": "2026-10-11T03:06:37Z",
+    "lease_until": "2026-10-11T15:06:37Z",
     "lease_hours": 12
   },
   "dependencies": [],
@@ -48,7 +48,7 @@
     "reviewed_by": null,
     "reviewed_at": null
   },
-  "next_action": "Deploy a reviewed build containing PR #823 and perform a bounded S24 FE UI check that notices expire/dismiss without blocking input. Keep the critical-memory/RAM investigation open independently; preserve trim15 and do not claim runtime stability from this UI approval.",
+  "next_action": "Open focused PR, inspect CI, submit claim-bound review evidence. Keep physical model stability and RAM/trim15 unresolved.",
   "inference_profile_policy": "target_owned_benchmark_gated",
   "inference_profile": {
     "status": "ACTIVE_BENCHMARKING",
@@ -136,25 +136,35 @@
       ],
       "next_action": "Deploy a reviewed build containing PR #823 and perform a bounded S24 FE UI check that notices expire/dismiss without blocking input. Keep the critical-memory/RAM investigation open independently; preserve trim15 and do not claim runtime stability from this UI approval.",
       "kind": "REVIEW_ACCEPTED"
+    },
+    {
+      "seq": 5,
+      "at": "2026-10-11T03:06:37Z",
+      "claim_id": "111089b6cea735577ad4",
+      "work_item": "benchmark-switch-error-attribution",
+      "summary": "Confirmed stability benchmark outer catch discards original model results when switch partner throws. Implemented stage-specific switch result preserving earlier probes, nullable incomplete score, partner catalog identities and four regressions. Local diff whitespace check passed; Flutter tests deferred to CI due to prior bootstrap security block.",
+      "decisions": [
+        "No runtime/Vulkan/memory guard changes. Shared runtime IDs do not alone prove cache collision; report catalog identities without asserting file binding fixed."
+      ],
+      "evidence_refs": [
+        "commit:56bf2be9"
+      ],
+      "next_action": "Open focused PR, inspect CI, submit claim-bound review evidence. Keep physical model stability and RAM/trim15 unresolved."
     }
   ],
   "last_checkpoint": {
-    "seq": 4,
-    "at": "2026-10-10T13:50:24Z",
-    "claim_id": "263aa06406ed3e44d37e",
-    "work_item": "phi-critical-memory-chat-recovery",
-    "summary": "Main/Reviewer accepts PR #823 only as a bounded UI recovery for persistent runtime notices. Exact head 0310505583593bc0659638af815fdbe2715ee5c4 has passing cross-platform CI and focused widget regressions. This approval does not accept the underlying critical-memory failure, Vulkan behavior, trim15 suppression, or physical S24 FE runtime stability.",
+    "seq": 5,
+    "at": "2026-10-11T03:06:37Z",
+    "claim_id": "111089b6cea735577ad4",
+    "work_item": "benchmark-switch-error-attribution",
+    "summary": "Confirmed stability benchmark outer catch discards original model results when switch partner throws. Implemented stage-specific switch result preserving earlier probes, nullable incomplete score, partner catalog identities and four regressions. Local diff whitespace check passed; Flutter tests deferred to CI due to prior bootstrap security block.",
     "decisions": [
-      "Main/Reviewer accepted the implementation/review gate."
+      "No runtime/Vulkan/memory guard changes. Shared runtime IDs do not alone prove cache collision; report catalog identities without asserting file binding fixed."
     ],
     "evidence_refs": [
-      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/823",
-      "head:0310505583593bc0659638af815fdbe2715ee5c4",
-      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38003787134",
-      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38003787134/job/114068102558"
+      "commit:56bf2be9"
     ],
-    "next_action": "Deploy a reviewed build containing PR #823 and perform a bounded S24 FE UI check that notices expire/dismiss without blocking input. Keep the critical-memory/RAM investigation open independently; preserve trim15 and do not claim runtime stability from this UI approval.",
-    "kind": "REVIEW_ACCEPTED"
+    "next_action": "Open focused PR, inspect CI, submit claim-bound review evidence. Keep physical model stability and RAM/trim15 unresolved."
   },
   "reconciliation_events": [
     {

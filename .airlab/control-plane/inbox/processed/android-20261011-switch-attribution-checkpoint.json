@@ -1,0 +1,12 @@
+{
+  "schema_version": 1,
+  "request_id": "android-20261011-switch-attribution-checkpoint",
+  "status": "APPLIED",
+  "processed_at": "2026-10-11T03:06:37Z",
+  "source_file": "android-20261011-switch-attribution-checkpoint.json",
+  "lane_id": "platform-android",
+  "operation": "checkpoint",
+  "actor_id": "chatgpt:platform-android",
+  "errors": [],
+  "result_state_version": 14
+}
