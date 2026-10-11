@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "request_id": "main-reviewer-20261011-reactivate-worker-automations-claim",
+  "actor_id": "chatgpt:main-reviewer",
+  "lane_id": "main-reviewer",
+  "operation": "claim",
+  "expected_state_version": 72,
+  "payload": {
+    "work_item": "CP-WORKER-AUTOMATION-REACTIVATE-01",
+    "repository": "pilialvu75-hue/AI-Orchestrator-Module-Library",
+    "scope": "Re-enable existing canonical Cantiere and Windows Legacy lane-worker automations with current canonical control-plane rules. Do not broaden target lanes or physical/runtime authority.",
+    "branch": "main-reviewer/reactivate-worker-automations",
+    "resource_locks": [
+      "file:pilialvu75-hue/AI-Orchestrator-Module-Library:.airlab/control-plane/automation-registry.json",
+      "scope:control-plane:worker-automation-reactivation"
+    ]
+  }
+}
