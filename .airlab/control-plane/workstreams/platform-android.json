@@ -3,11 +3,11 @@
   "id": "platform-android",
   "title": "Android",
   "role": "worker",
-  "status": "REVIEW_REQUIRED",
+  "status": "IMPLEMENTING",
   "activation": "active",
   "scope": "Android packaging, permissions, hardware/runtime adapters, UI integration and releases using shared orchestration/contracts with target-optimized inference.",
   "shared_engine_policy": "adapter_only",
-  "state_version": 15,
+  "state_version": 16,
   "updated_at": "2026-10-11",
   "active_claim": {
     "claim_id": "111089b6cea735577ad4",
@@ -97,11 +97,11 @@
   },
   "reviewer": {
     "required": true,
-    "state": "PENDING",
-    "reviewed_by": null,
-    "reviewed_at": null
+    "state": "CHANGES_REQUESTED",
+    "reviewed_by": "main-reviewer",
+    "reviewed_at": "2026-10-11T09:21:38Z"
   },
-  "next_action": "Main/Reviewer must inspect the review_packet, linked evidence and required gates before promotion or rework.",
+  "next_action": "Without changing code, update the existing claim-bound review packet so the five verified workflow runs and the four focused regression tests are recorded as PASS, then resubmit REVIEW_REQUIRED. Preserve the same claim/work item/PR head. Keep RAM stability and physical S24 FE acceptance unresolved.",
   "inference_profile_policy": "target_owned_benchmark_gated",
   "inference_profile": {
     "status": "ACTIVE_BENCHMARKING",
@@ -224,28 +224,33 @@
       ],
       "next_action": "Main/Reviewer must inspect the review_packet, linked evidence and required gates before promotion or rework.",
       "kind": "REVIEW_HANDOFF"
+    },
+    {
+      "seq": 7,
+      "at": "2026-10-11T09:21:38Z",
+      "claim_id": "111089b6cea735577ad4",
+      "work_item": "benchmark-switch-error-attribution",
+      "summary": "PR #824 exact head e29c2bb15e1175635e5b578f4dc7fab5819360c0 now has verified green CI and four focused regressions, while the current review packet still records those evidence items as PENDING. Rework is requested only to refresh the claim-bound packet evidence from PENDING to PASS. No code modification is requested. RAM stability, trim15/resource-guard behavior and physical S24 FE validation remain open and must not be promoted by this evidence refresh.",
+      "decisions": [
+        "Main/Reviewer requested bounded rework."
+      ],
+      "evidence_refs": [],
+      "next_action": "Without changing code, update the existing claim-bound review packet so the five verified workflow runs and the four focused regression tests are recorded as PASS, then resubmit REVIEW_REQUIRED. Preserve the same claim/work item/PR head. Keep RAM stability and physical S24 FE acceptance unresolved.",
+      "kind": "REVIEW_REWORK"
     }
   ],
   "last_checkpoint": {
-    "seq": 6,
-    "at": "2026-10-11T03:08:04Z",
+    "seq": 7,
+    "at": "2026-10-11T09:21:38Z",
     "claim_id": "111089b6cea735577ad4",
     "work_item": "benchmark-switch-error-attribution",
-    "summary": "PR824 preserves completed stability probes when the switch partner or return throws; reports stage and catalog identities. Implementation submitted for review with CI PENDING, no test-pass or physical stability claim.",
-    "decisions": [],
-    "evidence_refs": [
-      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/824",
-      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/e29c2bb15e1175635e5b578f4dc7fab5819360c0",
-      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/824/files",
-      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38107361707",
-      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38107361691",
-      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38107361706",
-      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38107361716",
-      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38107361719",
-      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/blob/e29c2bb15e1175635e5b578f4dc7fab5819360c0/test/features/chat/presentation/debug/local_model_benchmark_test.dart"
+    "summary": "PR #824 exact head e29c2bb15e1175635e5b578f4dc7fab5819360c0 now has verified green CI and four focused regressions, while the current review packet still records those evidence items as PENDING. Rework is requested only to refresh the claim-bound packet evidence from PENDING to PASS. No code modification is requested. RAM stability, trim15/resource-guard behavior and physical S24 FE validation remain open and must not be promoted by this evidence refresh.",
+    "decisions": [
+      "Main/Reviewer requested bounded rework."
     ],
-    "next_action": "Main/Reviewer must inspect the review_packet, linked evidence and required gates before promotion or rework.",
-    "kind": "REVIEW_HANDOFF"
+    "evidence_refs": [],
+    "next_action": "Without changing code, update the existing claim-bound review packet so the five verified workflow runs and the four focused regression tests are recorded as PASS, then resubmit REVIEW_REQUIRED. Preserve the same claim/work item/PR head. Keep RAM stability and physical S24 FE acceptance unresolved.",
+    "kind": "REVIEW_REWORK"
   },
   "reconciliation_events": [
     {
@@ -363,6 +368,14 @@
         "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38003787134",
         "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38003787134/job/114068102558"
       ]
+    },
+    {
+      "reviewed_at": "2026-10-11T09:21:38Z",
+      "reviewed_by": "main-reviewer",
+      "claim_id": "111089b6cea735577ad4",
+      "work_item": "benchmark-switch-error-attribution",
+      "decision": "CHANGES_REQUESTED",
+      "summary": "PR #824 exact head e29c2bb15e1175635e5b578f4dc7fab5819360c0 now has verified green CI and four focused regressions, while the current review packet still records those evidence items as PENDING. Rework is requested only to refresh the claim-bound packet evidence from PENDING to PASS. No code modification is requested. RAM stability, trim15/resource-guard behavior and physical S24 FE validation remain open and must not be promoted by this evidence refresh."
     }
   ],
   "review_packet_history": [

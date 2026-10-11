@@ -1,0 +1,12 @@
+{
+  "schema_version": 1,
+  "request_id": "android-20261011-pr824-review-rework-evidence-refresh",
+  "status": "APPLIED",
+  "processed_at": "2026-10-11T09:21:38Z",
+  "source_file": "android-20261011-pr824-review-rework-evidence-refresh.json",
+  "lane_id": "platform-android",
+  "operation": "review_rework",
+  "actor_id": "chatgpt:main-reviewer",
+  "errors": [],
+  "result_state_version": 16
+}
