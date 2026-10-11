@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "request_id": "android-20261011-switch-attribution-checkpoint",
+  "actor_id": "chatgpt:platform-android",
+  "lane_id": "platform-android",
+  "operation": "checkpoint",
+  "expected_state_version": 13,
+  "payload": {
+    "summary": "Confirmed stability benchmark outer catch discards original model results when switch partner throws. Implemented stage-specific switch result preserving earlier probes, nullable incomplete score, partner catalog identities and four regressions. Local diff whitespace check passed; Flutter tests deferred to CI due to prior bootstrap security block.",
+    "next_action": "Open focused PR, inspect CI, submit claim-bound review evidence. Keep physical model stability and RAM/trim15 unresolved.",
+    "decisions": [
+      "No runtime/Vulkan/memory guard changes. Shared runtime IDs do not alone prove cache collision; report catalog identities without asserting file binding fixed."
+    ],
+    "evidence_refs": [
+      "commit:56bf2be9"
+    ]
+  }
+}
