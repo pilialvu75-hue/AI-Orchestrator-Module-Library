@@ -1,0 +1,12 @@
+{
+  "schema_version": 1,
+  "request_id": "cantiere-20261012-base1-roadmap-ref-rework",
+  "actor_id": "chatgpt:main-reviewer",
+  "lane_id": "cantiere",
+  "operation": "review_rework",
+  "expected_state_version": 41,
+  "payload": {
+    "reason": "Review metadata correction only: AIVEXUS-BASE-1 implementation and exact-head evidence are accepted, but review_accept was quarantined because review_packet.roadmap_impact.refs contained contract files/anchors instead of authoritative roadmap file paths. No code/head/CI rework is required.",
+    "next_action": "Resubmit the unchanged BASE-1 packet for PR #826 head a63b8cf14c07e6aeba361a1ee4e6e832e6ce1df1 with roadmap_impact.refs limited to the authoritative file .airlab/public-repositories/Ai-orchestrator-riserva/roadmap.yaml, then re-attest the same G1-G4 evidence and accept."
+  }
+}
