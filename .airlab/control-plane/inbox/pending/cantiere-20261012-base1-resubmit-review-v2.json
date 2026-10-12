@@ -1,0 +1,108 @@
+{
+  "schema_version": 1,
+  "request_id": "cantiere-20261012-base1-resubmit-review-v2",
+  "actor_id": "automation:cantiere:6abe28904d38819182462df10fe4542c",
+  "lane_id": "cantiere",
+  "operation": "submit_review",
+  "expected_state_version": 42,
+  "payload": {
+    "packet": {
+      "schema_version": 1,
+      "submitted_at": "2026-10-12T10:22:00Z",
+      "lane_id": "cantiere",
+      "claim_id": "3d39dee487b98eb463b1",
+      "work_item": "AIVEXUS-BASE-1",
+      "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
+      "branch": "feat/aivexus-shared-project-base-v1",
+      "pull_request": 826,
+      "summary": "Metadata-corrected current-main resubmission for AIVEXUS-BASE-1 at exact PR #826 head a63b8cf14c07e6aeba361a1ee4e6e832e6ce1df1. Branch is aligned to Riserva main 9f320c82073fc74c7cd4a8b974071ec0addb3772, PR is open/not draft/mergeable, and all six exact-head workflows are successful. No code/head/CI change from the previously reviewed packet; roadmap sync metadata now references only the authoritative private roadmap file.",
+      "changes": [
+        "ProjectExtension v1 validates software/CAD/game metadata, preserves unknown extension versions read-only, and retains immutable artifacts against source specification revisions.",
+        "Existing project identity and unknown fields are preserved with conservative revision-guarded persistence; stale edits are rejected and partial saves do not truncate unrelated projects.",
+        "IndexedDB stores binary attachments outside project JSON with size and SHA-256 verification; unsupported browser adapters fail explicitly.",
+        "ResourceExchange persists idempotent requests and explicit transitions; produced results must match producer artifacts including revision, hash, size, format, MIME type and generator.",
+        "Existing software editing preserves project identity and creation date while advancing specification revision only when requirements change.",
+        "Web CI includes focused persistence/contract/widget regressions and real Chrome cross-context locking, localStorage and IndexedDB checks."
+      ],
+      "evidence": [
+        {
+          "type": "commit",
+          "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/a63b8cf14c07e6aeba361a1ee4e6e832e6ce1df1",
+          "result": "PASS",
+          "note": "Verified exact PR #826 head after integration with current main; implementation identity only."
+        },
+        {
+          "type": "pull_request",
+          "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/826",
+          "result": "PASS",
+          "note": "Verified PR #826 open, not draft, mergeable, exact head a63b8cf14c07e6aeba361a1ee4e6e832e6ce1df1 and base 9f320c82073fc74c7cd4a8b974071ec0addb3772."
+        },
+        {
+          "type": "ci",
+          "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38161301515",
+          "result": "PASS",
+          "note": "Exact-head Web Cantiere Build completed successfully."
+        },
+        {
+          "type": "analysis",
+          "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38161301515/job/114534601604",
+          "result": "PASS",
+          "note": "Web workflow analysis/static validation completed successfully on exact head."
+        },
+        {
+          "type": "test",
+          "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38161301515/job/114534601604",
+          "result": "PASS",
+          "note": "Exact-head Web regression job including browser storage/integration checks completed successfully; not physical target evidence."
+        },
+        {
+          "type": "ci",
+          "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38161301477",
+          "result": "PASS",
+          "note": "Exact-head Cantiere First App APK workflow; build evidence only."
+        },
+        {
+          "type": "ci",
+          "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38161301505",
+          "result": "PASS",
+          "note": "Exact-head Linux desktop workflow; build/test evidence only."
+        },
+        {
+          "type": "ci",
+          "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38161301503",
+          "result": "PASS",
+          "note": "Exact-head Windows desktop workflow; build/test evidence only."
+        },
+        {
+          "type": "ci",
+          "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38161301487",
+          "result": "PASS",
+          "note": "Exact-head macOS desktop workflow; build/test evidence only."
+        },
+        {
+          "type": "ci",
+          "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38161301491",
+          "result": "PASS",
+          "note": "Exact-head Android build/release workflow; build evidence only, no physical acceptance."
+        }
+      ],
+      "known_risks": [
+        "BASE-2 selector/navigation and Studio 3D/Videogiochi domain pages are not part of BASE-1.",
+        "Browser data remains local to an origin/profile and is not cross-session synchronization.",
+        "CAD/photo reconstruction, Fusion opening, mesh generation, Godot gameplay/export and physical print remain downstream gates.",
+        "Physical target validation remains open and CI green must not be treated as runtime acceptance."
+      ],
+      "reviewer_checks": [
+        "Review PR #826 at exact head a63b8cf14c07e6aeba361a1ee4e6e832e6ce1df1 and the six successful exact-head workflows.",
+        "Accept only AIVEXUS-BASE-1 if warranted; do not infer BASE-2 or CAD/Game/runtime acceptance.",
+        "After approved merge/canonical sync, make AIVEXUS-BASE-2 the next bounded Cantiere item."
+      ],
+      "roadmap_impact": {
+        "material": true,
+        "refs": [
+          ".airlab/public-repositories/Ai-orchestrator-riserva/roadmap.yaml"
+        ]
+      }
+    }
+  }
+}
