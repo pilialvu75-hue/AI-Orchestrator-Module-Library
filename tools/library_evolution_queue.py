@@ -83,6 +83,7 @@ class EvolutionWorkQueue:
         target: str,
         *,
         receipt: dict[str, Any] | None = None,
+        claim_evidence: dict[str, Any] | None = None,
     ) -> dict[str, Any]:
         current = self.load(work_id)
         _require(current is not None, "unknown work_id")
@@ -90,6 +91,13 @@ class EvolutionWorkQueue:
         if source == target:
             return {"result": "already_transitioned", "work_id": work_id, "state": target}
         _require(target in TRANSITIONS[source], f"invalid transition {source} -> {target}")
+        if target == "claimed":
+            _require(isinstance(claim_evidence, dict), "claim transition requires evidence")
+            _require(isinstance(claim_evidence.get("claimed_envelope"), dict), "missing claimed envelope")
+            _require(isinstance(claim_evidence.get("claimed_envelope_sha256"), str), "missing claimed digest")
+            current.update(claim_evidence)
+        else:
+            _require(claim_evidence is None, "claim evidence only valid on claim transition")
         if target in {"returned", "failed"}:
             _require(isinstance(receipt, dict) and bool(receipt), "terminal transition requires receipt")
             current["receipt"] = receipt
