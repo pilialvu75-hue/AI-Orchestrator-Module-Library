@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "request_id": "cantiere-20261012-base1-review-accept",
+  "actor_id": "chatgpt:main-reviewer",
+  "lane_id": "cantiere",
+  "operation": "review_accept",
+  "expected_state_version": 41,
+  "payload": {
+    "summary": "AIVEXUS-BASE-1 accepted at exact PR #826 head a63b8cf14c07e6aeba361a1ee4e6e832e6ce1df1. Packet-bound G1-G4 are PASS with exact-head implementation, static/browser, CI and integration evidence. Approval is limited to BASE-1 shared persistence/attachment/resource-exchange foundations; no BASE-2, CAD/Game or physical/runtime acceptance is implied.",
+    "next_action": "Merge PR #826 at exact reviewed head, synchronize AIVEXUS-BASE-1 roadmap/canonical state, then make AIVEXUS-BASE-2 the next bounded Cantiere work item. Keep CAD-1/GAME-1 and physical/runtime gates separate.",
+    "evidence_refs": [
+      "Ai-orchestrator-riserva#826",
+      "commit:a63b8cf14c07e6aeba361a1ee4e6e832e6ce1df1",
+      "CI:38161301515",
+      "CI:38161301477",
+      "CI:38161301505",
+      "CI:38161301503",
+      "CI:38161301487",
+      "CI:38161301491"
+    ]
+  }
+}
