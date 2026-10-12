@@ -1,0 +1,20 @@
+{
+  "schema_version": 1,
+  "request_id": "diagnostics-114-20261012-claim-v1",
+  "submitted_at": "2026-10-12T20:15:00Z",
+  "actor_id": "chatgpt:diagnostics-issue114",
+  "lane_id": "diagnostics",
+  "operation": "claim",
+  "expected_state_version": 2,
+  "payload": {
+    "work_item": "diagnostics-issue-114-public-stall-projection",
+    "repository": "pilialvu75-hue/Ai-orchestrator-diagnostics",
+    "scope": "Issue #114 privacy-safe exported STALL and TERMINAL_STATE contract; implementation source in Riserva with explicit cross-repository file locks. No watchdog, Vulkan, memory or runtime changes.",
+    "resource_locks": [
+      "contract:diagnostics-public-stall-projection",
+      "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/core/diagnostics/public_log_projection.dart",
+      "file:pilialvu75-hue/Ai-orchestrator-riserva:test/core/diagnostics/public_log_projection_test.dart",
+      "resource:diagnostics-issue-114"
+    ]
+  }
+}
