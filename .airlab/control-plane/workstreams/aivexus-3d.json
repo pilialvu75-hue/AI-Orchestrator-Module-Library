@@ -3,11 +3,11 @@
   "id": "aivexus-3d",
   "title": "Aivexus Studio 3D",
   "role": "worker",
-  "status": "BLOCKED",
+  "status": "READY",
   "activation": "active",
   "scope": "CAD/3D domain only: CadSpec, measured and photographic inputs, editable CAD/mesh sources, CAD/print exports and domain verification. Must consume the Cantiere-owned shared ProjectExtension/persistence/navigation base instead of modifying or duplicating it.",
   "shared_engine_policy": "domain_extension_only",
-  "state_version": 8,
+  "state_version": 9,
   "updated_at": "2026-10-12",
   "active_claim": null,
   "dependencies": [
@@ -161,6 +161,18 @@
         "scope:aivexus:cad"
       ],
       "at": "2026-10-12T12:21:56Z"
+    },
+    {
+      "type": "WAIT_RESUMED",
+      "wait_id": "aivexus-3d:95ab09f3f0d83a790c79:WAITING_EXTERNAL",
+      "work_item": "AIVEXUS-CAD-1",
+      "signal_id": "github-run-38245285666-macos-success-at-pr833-head-7ec1165",
+      "evidence_refs": [
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38245285666",
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/833",
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/7ec116531a94eef36900ad9567a4f1dd492e0064"
+      ],
+      "at": "2026-10-12T16:49:43Z"
     }
   ],
   "wait_history": [
@@ -199,55 +211,43 @@
         "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38245285267",
         "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38245285666/job/114797505379"
       ]
+    },
+    {
+      "schema_version": 1,
+      "wait_id": "aivexus-3d:95ab09f3f0d83a790c79:WAITING_EXTERNAL",
+      "type": "WAITING_EXTERNAL",
+      "work_item": "AIVEXUS-CAD-1",
+      "prior_claim_id": "95ab09f3f0d83a790c79",
+      "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
+      "branch": "feat/aivexus-cad1-parametric-sample",
+      "scope": "CAD-1 bounded follow-up on PR #833: inspect exact-head CI, validate and correct isolated CAD-only generator, export receipt and Dart domain adapter/tests. No shared persistence/navigation, no sqlite3 macOS toolchain changes and no false Fusion/print/runtime claims.",
+      "resource_locks": [
+        "branch:pilialvu75-hue/Ai-orchestrator-riserva:feat/aivexus-cad1-parametric-sample",
+        "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/app_factory/workshop/domains/cad/cad1_domain_adapter.dart",
+        "file:pilialvu75-hue/Ai-orchestrator-riserva:test/app_factory/workshop/domains/cad/cad1_domain_adapter_test.dart",
+        "file:pilialvu75-hue/Ai-orchestrator-riserva:tools/aivexus/cad/README.md",
+        "file:pilialvu75-hue/Ai-orchestrator-riserva:tools/aivexus/cad/fixtures/plate_spec.json",
+        "file:pilialvu75-hue/Ai-orchestrator-riserva:tools/aivexus/cad/parametric_plate.py",
+        "file:pilialvu75-hue/Ai-orchestrator-riserva:tools/aivexus/cad/test_cad1.py",
+        "file:pilialvu75-hue/Ai-orchestrator-riserva:tools/aivexus/cad/validate_plate.py",
+        "scope:aivexus:cad"
+      ],
+      "entered_at": "2026-10-12T12:21:56Z",
+      "resume_condition": "Failed macOS job re-run in workflow 38245285666 reaches completed state, and its verified conclusion/log evidence is available; alternatively an authorized owner provides an accepted CAD runner integration signal.",
+      "summary": "CAD-1 PR #833 exact head had 5/6 workflows PASS; macOS build failure isolated to sqlite3 native asset SHA-256 mismatch, unrelated to CAD domain based on current logs. Failed macOS job rerun successfully requested and was still in_progress. CAD local preflight and repaired standalone tests pass; capability intake Library issue #113 opened. CI G3, CAD runner integration, Fusion, print and remote Diagnostics still unverified.",
+      "evidence_refs": [
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/833",
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38245285666",
+        "https://github.com/pilialvu75-hue/AI-Orchestrator-Module-Library/issues/113"
+      ],
+      "resume_next_action": "On CI signal, transactional resume_wait followed by bounded claim for AIVEXUS-CAD-1; inspect full macOS rerun outcome. If hash mismatch persists, refer separate macOS owner; do not weaken checksum or silently mark CI PASS. Continue only bounded domain scope under unique claim; keep PR #833 draft and G5 runtime/physical UNKNOWN.",
+      "resumed_at": "2026-10-12T16:49:43Z",
+      "signal_id": "github-run-38245285666-macos-success-at-pr833-head-7ec1165",
+      "resume_evidence_refs": [
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38245285666",
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/833",
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/7ec116531a94eef36900ad9567a4f1dd492e0064"
+      ]
     }
-  ],
-  "wait_state": {
-    "schema_version": 1,
-    "wait_id": "aivexus-3d:95ab09f3f0d83a790c79:WAITING_EXTERNAL",
-    "type": "WAITING_EXTERNAL",
-    "work_item": "AIVEXUS-CAD-1",
-    "prior_claim_id": "95ab09f3f0d83a790c79",
-    "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
-    "branch": "feat/aivexus-cad1-parametric-sample",
-    "scope": "CAD-1 bounded follow-up on PR #833: inspect exact-head CI, validate and correct isolated CAD-only generator, export receipt and Dart domain adapter/tests. No shared persistence/navigation, no sqlite3 macOS toolchain changes and no false Fusion/print/runtime claims.",
-    "resource_locks": [
-      "branch:pilialvu75-hue/Ai-orchestrator-riserva:feat/aivexus-cad1-parametric-sample",
-      "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/app_factory/workshop/domains/cad/cad1_domain_adapter.dart",
-      "file:pilialvu75-hue/Ai-orchestrator-riserva:test/app_factory/workshop/domains/cad/cad1_domain_adapter_test.dart",
-      "file:pilialvu75-hue/Ai-orchestrator-riserva:tools/aivexus/cad/README.md",
-      "file:pilialvu75-hue/Ai-orchestrator-riserva:tools/aivexus/cad/fixtures/plate_spec.json",
-      "file:pilialvu75-hue/Ai-orchestrator-riserva:tools/aivexus/cad/parametric_plate.py",
-      "file:pilialvu75-hue/Ai-orchestrator-riserva:tools/aivexus/cad/test_cad1.py",
-      "file:pilialvu75-hue/Ai-orchestrator-riserva:tools/aivexus/cad/validate_plate.py",
-      "scope:aivexus:cad"
-    ],
-    "entered_at": "2026-10-12T12:21:56Z",
-    "resume_condition": "Failed macOS job re-run in workflow 38245285666 reaches completed state, and its verified conclusion/log evidence is available; alternatively an authorized owner provides an accepted CAD runner integration signal.",
-    "summary": "CAD-1 PR #833 exact head had 5/6 workflows PASS; macOS build failure isolated to sqlite3 native asset SHA-256 mismatch, unrelated to CAD domain based on current logs. Failed macOS job rerun successfully requested and was still in_progress. CAD local preflight and repaired standalone tests pass; capability intake Library issue #113 opened. CI G3, CAD runner integration, Fusion, print and remote Diagnostics still unverified.",
-    "evidence_refs": [
-      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/833",
-      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38245285666",
-      "https://github.com/pilialvu75-hue/AI-Orchestrator-Module-Library/issues/113"
-    ],
-    "resume_next_action": "On CI signal, transactional resume_wait followed by bounded claim for AIVEXUS-CAD-1; inspect full macOS rerun outcome. If hash mismatch persists, refer separate macOS owner; do not weaken checksum or silently mark CI PASS. Continue only bounded domain scope under unique claim; keep PR #833 draft and G5 runtime/physical UNKNOWN."
-  },
-  "block_reason": {
-    "code": "WAITING_EXTERNAL",
-    "wait_id": "aivexus-3d:95ab09f3f0d83a790c79:WAITING_EXTERNAL",
-    "work_item": "AIVEXUS-CAD-1",
-    "resource_locks": [
-      "branch:pilialvu75-hue/Ai-orchestrator-riserva:feat/aivexus-cad1-parametric-sample",
-      "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/app_factory/workshop/domains/cad/cad1_domain_adapter.dart",
-      "file:pilialvu75-hue/Ai-orchestrator-riserva:test/app_factory/workshop/domains/cad/cad1_domain_adapter_test.dart",
-      "file:pilialvu75-hue/Ai-orchestrator-riserva:tools/aivexus/cad/README.md",
-      "file:pilialvu75-hue/Ai-orchestrator-riserva:tools/aivexus/cad/fixtures/plate_spec.json",
-      "file:pilialvu75-hue/Ai-orchestrator-riserva:tools/aivexus/cad/parametric_plate.py",
-      "file:pilialvu75-hue/Ai-orchestrator-riserva:tools/aivexus/cad/test_cad1.py",
-      "file:pilialvu75-hue/Ai-orchestrator-riserva:tools/aivexus/cad/validate_plate.py",
-      "scope:aivexus:cad"
-    ],
-    "resume_condition": "Failed macOS job re-run in workflow 38245285666 reaches completed state, and its verified conclusion/log evidence is available; alternatively an authorized owner provides an accepted CAD runner integration signal.",
-    "detected_at": "2026-10-12T12:21:56Z",
-    "review_required": false
-  }
+  ]
 }
