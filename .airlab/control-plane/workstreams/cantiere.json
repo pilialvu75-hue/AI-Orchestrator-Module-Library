@@ -3,11 +3,11 @@
   "id": "cantiere",
   "title": "Cantiere",
   "role": "worker",
-  "status": "CLAIMED",
+  "status": "IMPLEMENTING",
   "activation": "active",
   "scope": "Exclusive Cantiere/App Factory execution, durability, build/review/validation/apply and first-real-app reliability.",
   "shared_engine_policy": "shared_or_control_plane",
-  "state_version": 47,
+  "state_version": 48,
   "updated_at": "2026-10-12",
   "active_claim": {
     "claim_id": "7c6ae34131e828ee79a1",
@@ -24,8 +24,8 @@
       "scope:aivexus:shared-base"
     ],
     "started_at": "2026-10-12T10:26:51Z",
-    "heartbeat_at": "2026-10-12T10:26:51Z",
-    "lease_until": "2026-10-12T22:26:51Z",
+    "heartbeat_at": "2026-10-12T11:29:06Z",
+    "lease_until": "2026-10-12T23:29:06Z",
     "lease_hours": 12
   },
   "dependencies": [],
@@ -51,7 +51,7 @@
     "reviewed_by": null,
     "reviewed_at": null
   },
-  "next_action": "Synchronize the material roadmap refs, then record canonical sync completion before new work can be claimed.",
+  "next_action": "When Build & Release APK run 38241204451 completes successfully on head 82b5ac57f9132775fd0695eebb4d2de834c860ed, submit the claim-bound AIVEXUS-BASE-2 review packet with exact-head PASS evidence for all six workflows and the resolved P2 regression. If it fails, correct only the concrete failure before handoff.",
   "historical_backlog": [
     "Stay in Phase 1 ONLINE until a real generated Android app is physically accepted.",
     "Reproduce the recent manga-drawing app failure from current main with Diagnostics; do not restart generic audits.",
@@ -579,29 +579,57 @@
       ],
       "next_action": "Merge PR #826 at exact reviewed head, synchronize .airlab/public-repositories/Ai-orchestrator-riserva/roadmap.yaml to record BASE-1 integration, complete canonical sync, then claim AIVEXUS-BASE-2.",
       "kind": "REVIEW_ACCEPTED"
+    },
+    {
+      "seq": 27,
+      "at": "2026-10-12T11:29:06Z",
+      "claim_id": "7c6ae34131e828ee79a1",
+      "work_item": "AIVEXUS-BASE-2",
+      "summary": "AIVEXUS-BASE-2 implementation is open as Riserva PR #832 at exact head 82b5ac57f9132775fd0695eebb4d2de834c860ed. Shared App/3D/Game selector/navigation and BASE-1-backed persistent CAD/Game drafts are implemented without simulated runners. Codex P2 about changing kind while editing software was fixed by forcing/locking software kind and covered by regression; review thread resolved. Web, Linux, Windows, macOS and Cantiere First App APK workflows are successful on the exact head. Build & Release APK is still in progress after Flutter analyze/tests and signed APK build succeeded; AAB packaging is currently running.",
+      "decisions": [
+        "Do not submit REVIEW_REQUIRED until all six exact-head workflows complete successfully.",
+        "Do not reopen BASE-1.",
+        "Do not start CAD-1 or GAME-1 from Cantiere.",
+        "Do not infer physical/runtime acceptance from CI."
+      ],
+      "evidence_refs": [
+        "Ai-orchestrator-riserva#832",
+        "commit:82b5ac57f9132775fd0695eebb4d2de834c860ed",
+        "CI:38241204190",
+        "CI:38241204385",
+        "CI:38241204381",
+        "CI:38241204453",
+        "CI:38241204290",
+        "CI:38241204451",
+        "review-thread:PRRT_kwDOSZzJMs6raznt"
+      ],
+      "next_action": "When Build & Release APK run 38241204451 completes successfully on head 82b5ac57f9132775fd0695eebb4d2de834c860ed, submit the claim-bound AIVEXUS-BASE-2 review packet with exact-head PASS evidence for all six workflows and the resolved P2 regression. If it fails, correct only the concrete failure before handoff."
     }
   ],
   "last_checkpoint": {
-    "seq": 26,
-    "at": "2026-10-12T10:22:50Z",
-    "claim_id": "3d39dee487b98eb463b1",
-    "work_item": "AIVEXUS-BASE-1",
-    "summary": "AIVEXUS-BASE-1 accepted at exact PR #826 head a63b8cf14c07e6aeba361a1ee4e6e832e6ce1df1 after metadata-only roadmap ref correction. Packet-bound G1-G4 are PASS. Approval is limited to BASE-1 shared foundations and does not imply BASE-2, CAD/Game or physical/runtime acceptance.",
+    "seq": 27,
+    "at": "2026-10-12T11:29:06Z",
+    "claim_id": "7c6ae34131e828ee79a1",
+    "work_item": "AIVEXUS-BASE-2",
+    "summary": "AIVEXUS-BASE-2 implementation is open as Riserva PR #832 at exact head 82b5ac57f9132775fd0695eebb4d2de834c860ed. Shared App/3D/Game selector/navigation and BASE-1-backed persistent CAD/Game drafts are implemented without simulated runners. Codex P2 about changing kind while editing software was fixed by forcing/locking software kind and covered by regression; review thread resolved. Web, Linux, Windows, macOS and Cantiere First App APK workflows are successful on the exact head. Build & Release APK is still in progress after Flutter analyze/tests and signed APK build succeeded; AAB packaging is currently running.",
     "decisions": [
-      "Main/Reviewer accepted the implementation/review gate."
+      "Do not submit REVIEW_REQUIRED until all six exact-head workflows complete successfully.",
+      "Do not reopen BASE-1.",
+      "Do not start CAD-1 or GAME-1 from Cantiere.",
+      "Do not infer physical/runtime acceptance from CI."
     ],
     "evidence_refs": [
-      "Ai-orchestrator-riserva#826",
-      "commit:a63b8cf14c07e6aeba361a1ee4e6e832e6ce1df1",
-      "CI:38161301515",
-      "CI:38161301477",
-      "CI:38161301505",
-      "CI:38161301503",
-      "CI:38161301487",
-      "CI:38161301491"
+      "Ai-orchestrator-riserva#832",
+      "commit:82b5ac57f9132775fd0695eebb4d2de834c860ed",
+      "CI:38241204190",
+      "CI:38241204385",
+      "CI:38241204381",
+      "CI:38241204453",
+      "CI:38241204290",
+      "CI:38241204451",
+      "review-thread:PRRT_kwDOSZzJMs6raznt"
     ],
-    "next_action": "Merge PR #826 at exact reviewed head, synchronize .airlab/public-repositories/Ai-orchestrator-riserva/roadmap.yaml to record BASE-1 integration, complete canonical sync, then claim AIVEXUS-BASE-2.",
-    "kind": "REVIEW_ACCEPTED"
+    "next_action": "When Build & Release APK run 38241204451 completes successfully on head 82b5ac57f9132775fd0695eebb4d2de834c860ed, submit the claim-bound AIVEXUS-BASE-2 review packet with exact-head PASS evidence for all six workflows and the resolved P2 regression. If it fails, correct only the concrete failure before handoff."
   },
   "review_history": [
     {

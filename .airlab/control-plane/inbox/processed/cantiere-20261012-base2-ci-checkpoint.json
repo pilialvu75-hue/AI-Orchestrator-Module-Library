@@ -1,0 +1,12 @@
+{
+  "schema_version": 1,
+  "request_id": "cantiere-20261012-base2-ci-checkpoint",
+  "status": "APPLIED",
+  "processed_at": "2026-10-12T11:29:06Z",
+  "source_file": "cantiere-20261012-base2-ci-checkpoint.json",
+  "lane_id": "cantiere",
+  "operation": "checkpoint",
+  "actor_id": "automation:cantiere:6abe28904d38819182462df10fe4542c",
+  "errors": [],
+  "result_state_version": 48
+}
