@@ -7,7 +7,7 @@
     "policy": "This private repository is the single coordination authority. Chats and agents are workers, not independent sources of truth."
   },
   "updated_at": "2026-10-12",
-  "state_revision": 224,
+  "state_revision": 225,
   "lifecycle_status": "BOOTSTRAP_ACTIVE",
   "roadmap_authority": {
     "library": ".airlab/roadmap.yaml",
@@ -80,11 +80,10 @@
     "invalid_lane_behavior": "ISOLATE_AND_SURFACE_PROJECTION_INCIDENT"
   },
   "projection": {
-    "source_digest": "b8d96925fd9e3a6cde8b4abf71f457981e9d1a36ad6f9463e1e4e2186081960f",
-    "projected_at": "2026-10-12T21:32:57Z",
+    "source_digest": "7a6da672b40f59b418007249a52f1305b0fc8274707d676c8237654684f9efc8",
+    "projected_at": "2026-10-12T21:37:43Z",
     "counts": {
-      "BLOCKED": 1,
-      "READY": 15,
+      "READY": 16,
       "REVIEW_REQUIRED": 1
     },
     "active_claims": [
@@ -166,30 +165,7 @@
     "review_required": [
       "cantiere"
     ],
-    "blocked": [
-      {
-        "lane": "aivexus-3d",
-        "reason": {
-          "code": "WAITING_EXTERNAL",
-          "wait_id": "aivexus-3d:5f4b2c7954f107eb0946:WAITING_EXTERNAL",
-          "work_item": "AIVEXUS-CAD-1",
-          "resource_locks": [
-            "branch:pilialvu75-hue/Ai-orchestrator-riserva:feat/aivexus-cad1-parametric-sample",
-            "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/app_factory/workshop/domains/cad/cad1_domain_adapter.dart",
-            "file:pilialvu75-hue/Ai-orchestrator-riserva:test/app_factory/workshop/domains/cad/cad1_domain_adapter_test.dart",
-            "file:pilialvu75-hue/Ai-orchestrator-riserva:tools/aivexus/cad/README.md",
-            "file:pilialvu75-hue/Ai-orchestrator-riserva:tools/aivexus/cad/fixtures/plate_spec.json",
-            "file:pilialvu75-hue/Ai-orchestrator-riserva:tools/aivexus/cad/parametric_plate.py",
-            "file:pilialvu75-hue/Ai-orchestrator-riserva:tools/aivexus/cad/test_cad1.py",
-            "file:pilialvu75-hue/Ai-orchestrator-riserva:tools/aivexus/cad/validate_plate.py",
-            "scope:aivexus:cad"
-          ],
-          "resume_condition": "All six exact-head CI workflows on PR #833 commit 65711a685795bc79874681558bfdeb7319cca660 complete, and each result is inspected; additionally track domain-specific Python/CadQuery tests separately.",
-          "detected_at": "2026-10-12T19:17:28Z",
-          "review_required": false
-        }
-      }
-    ],
+    "blocked": [],
     "checkpoint_watch": [],
     "projection_incidents": [],
     "platform_inference_profiles": [
@@ -265,15 +241,15 @@
       },
       {
         "id": "aivexus-3d",
-        "status": "BLOCKED",
+        "status": "READY",
         "activation": "active",
-        "state_version": 16,
+        "state_version": 17,
         "updated_at": "2026-10-12",
         "active_claim": null,
         "reviewer_state": "PENDING",
         "inference_profile_status": null,
         "historical_backlog_count": 0,
-        "next_action": "After GitHub CI for head 65711a6 completes, use transactional resume_wait then new bounded CAD-1 claim; inspect failing checks and exact Python test results, fix domain-only issues. Keep PR draft and do not modify shared Cantiere files or promote before authorized runner/artifact persistence and Main/Reviewer review. G5 Fusion/print remain UNKNOWN."
+        "next_action": "AIVEXUS-CAD-1 is dependency-unblocked and CI wait is satisfied. Lane may take a new bounded CAD-1 claim against PR #833 head 65711a685795bc79874681558bfdeb7319cca660 to inspect domain-specific Python/CadQuery evidence and continue only domain-owned runner/artifact integration. Keep PR draft until required integration/reviewer gates; Fusion opening, physical print and S24 FE acceptance remain separate and UNKNOWN."
       },
       {
         "id": "aivexus-games",
