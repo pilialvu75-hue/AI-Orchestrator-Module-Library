@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "request_id": "cantiere-20261012-base1-reclaim",
+  "actor_id": "automation:cantiere:6abe28904d38819182462df10fe4542c",
+  "lane_id": "cantiere",
+  "operation": "claim",
+  "expected_state_version": 38,
+  "payload": {
+    "work_item": "AIVEXUS-BASE-1",
+    "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
+    "scope": "AIVEXUS-BASE-1 only: claim the already implemented and re-aligned shared ProjectExtension/persistence/attachment/resource-exchange base at PR #826 head a63b8cf14c07e6aeba361a1ee4e6e832e6ce1df1 solely to submit current exact-head evidence for review. No BASE-2, CAD/Game runners, domain pages, deploy, CANT-11 expansion or runtime claims.",
+    "branch": "feat/aivexus-shared-project-base-v1",
+    "resource_locks": [
+      "branch:pilialvu75-hue/Ai-orchestrator-riserva:feat/aivexus-shared-project-base-v1",
+      "contract:aivexus-project-extension-v1",
+      "contract:aivexus-resource-exchange-v1",
+      "file:pilialvu75-hue/Ai-orchestrator-riserva:.github/workflows/web-build.yml",
+      "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/app_factory/workshop/web/workshop_web_project_storage.dart",
+      "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/app_factory/workshop/web/workshop_web_projects_page.dart",
+      "file:pilialvu75-hue/Ai-orchestrator-riserva:test/app_factory/workshop/web/workshop_web_project_storage_test.dart",
+      "scope:aivexus:shared-base"
+    ],
+    "lease_hours": 12
+  }
+}
