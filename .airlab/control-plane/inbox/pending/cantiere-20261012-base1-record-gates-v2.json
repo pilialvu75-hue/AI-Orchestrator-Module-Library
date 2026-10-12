@@ -1,0 +1,33 @@
+{
+  "schema_version": 1,
+  "request_id": "cantiere-20261012-base1-record-gates-v2",
+  "actor_id": "chatgpt:main-reviewer",
+  "lane_id": "cantiere",
+  "operation": "record_review_gates",
+  "expected_state_version": 43,
+  "payload": {
+    "summary": "Re-attested unchanged AIVEXUS-BASE-1 evidence after metadata-only roadmap ref correction. Exact PR #826 head a63b8cf14c07e6aeba361a1ee4e6e832e6ce1df1 and the same exact-head CI/static/browser evidence remain PASS. This covers G1-G4 only.",
+    "evidence_indices": {
+      "G1_IMPLEMENTATION": [
+        0,
+        1
+      ],
+      "G2_STATIC": [
+        2,
+        4
+      ],
+      "G3_CI": [
+        2,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "G4_INTEGRATION": [
+        2,
+        4
+      ]
+    }
+  }
+}
