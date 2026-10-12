@@ -7,7 +7,7 @@
     "policy": "This private repository is the single coordination authority. Chats and agents are workers, not independent sources of truth."
   },
   "updated_at": "2026-10-12",
-  "state_revision": 223,
+  "state_revision": 224,
   "lifecycle_status": "BOOTSTRAP_ACTIVE",
   "roadmap_authority": {
     "library": ".airlab/roadmap.yaml",
@@ -80,12 +80,12 @@
     "invalid_lane_behavior": "ISOLATE_AND_SURFACE_PROJECTION_INCIDENT"
   },
   "projection": {
-    "source_digest": "71801c2556feb27cde1ebf90bd8d074574a300e59b975be4d7fe50b29d21c049",
-    "projected_at": "2026-10-12T21:32:17Z",
+    "source_digest": "b8d96925fd9e3a6cde8b4abf71f457981e9d1a36ad6f9463e1e4e2186081960f",
+    "projected_at": "2026-10-12T21:32:57Z",
     "counts": {
       "BLOCKED": 1,
-      "READY": 14,
-      "REVIEW_REQUIRED": 2
+      "READY": 15,
+      "REVIEW_REQUIRED": 1
     },
     "active_claims": [
       {
@@ -105,29 +105,9 @@
           "file:pilialvu75-hue/Ai-orchestrator-riserva:test/app_factory/workshop/workshop_proposal_review_runner_test.dart",
           "file:pilialvu75-hue/Ai-orchestrator-riserva:test/app_factory/workshop/workshop_task_inference_pipeline_test.dart"
         ]
-      },
-      {
-        "lane": "diagnostics",
-        "claim_id": "141bd9a1731636791e19",
-        "work_item": "diagnostics-issue-114-public-stall-projection",
-        "repository": "pilialvu75-hue/Ai-orchestrator-diagnostics",
-        "lease_until": "2026-10-13T09:10:04Z",
-        "resource_locks": [
-          "branch:pilialvu75-hue/Ai-orchestrator-diagnostics:fix/diagnostics-114-stall-public-projection",
-          "contract:diagnostics-public-stall-projection",
-          "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/core/diagnostics/public_log_projection.dart",
-          "file:pilialvu75-hue/Ai-orchestrator-riserva:test/core/diagnostics/public_log_projection_test.dart",
-          "resource:diagnostics-issue-114"
-        ]
       }
     ],
     "active_resource_locks": [
-      {
-        "key": "branch:pilialvu75-hue/Ai-orchestrator-diagnostics:fix/diagnostics-114-stall-public-projection",
-        "lane": "diagnostics",
-        "claim_id": "141bd9a1731636791e19",
-        "work_item": "diagnostics-issue-114-public-stall-projection"
-      },
       {
         "key": "branch:pilialvu75-hue/Ai-orchestrator-riserva:fix/cantiere-gate-evidence-reviewer-3117",
         "lane": "cantiere",
@@ -139,12 +119,6 @@
         "lane": "cantiere",
         "claim_id": "94876ef45cb7b6e77d9c",
         "work_item": "cantiere-gate-evidence-reviewer-3117"
-      },
-      {
-        "key": "contract:diagnostics-public-stall-projection",
-        "lane": "diagnostics",
-        "claim_id": "141bd9a1731636791e19",
-        "work_item": "diagnostics-issue-114-public-stall-projection"
       },
       {
         "key": "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/app_factory/workshop/workshop_gate_evidence_export.dart",
@@ -171,12 +145,6 @@
         "work_item": "cantiere-gate-evidence-reviewer-3117"
       },
       {
-        "key": "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/core/diagnostics/public_log_projection.dart",
-        "lane": "diagnostics",
-        "claim_id": "141bd9a1731636791e19",
-        "work_item": "diagnostics-issue-114-public-stall-projection"
-      },
-      {
         "key": "file:pilialvu75-hue/Ai-orchestrator-riserva:test/app_factory/workshop/workshop_gate_evidence_export_test.dart",
         "lane": "cantiere",
         "claim_id": "94876ef45cb7b6e77d9c",
@@ -193,23 +161,10 @@
         "lane": "cantiere",
         "claim_id": "94876ef45cb7b6e77d9c",
         "work_item": "cantiere-gate-evidence-reviewer-3117"
-      },
-      {
-        "key": "file:pilialvu75-hue/Ai-orchestrator-riserva:test/core/diagnostics/public_log_projection_test.dart",
-        "lane": "diagnostics",
-        "claim_id": "141bd9a1731636791e19",
-        "work_item": "diagnostics-issue-114-public-stall-projection"
-      },
-      {
-        "key": "resource:diagnostics-issue-114",
-        "lane": "diagnostics",
-        "claim_id": "141bd9a1731636791e19",
-        "work_item": "diagnostics-issue-114-public-stall-projection"
       }
     ],
     "review_required": [
-      "cantiere",
-      "diagnostics"
+      "cantiere"
     ],
     "blocked": [
       {
@@ -362,27 +317,15 @@
       },
       {
         "id": "diagnostics",
-        "status": "REVIEW_REQUIRED",
+        "status": "READY",
         "activation": "active",
-        "state_version": 12,
+        "state_version": 13,
         "updated_at": "2026-10-12",
-        "active_claim": {
-          "claim_id": "141bd9a1731636791e19",
-          "work_item": "diagnostics-issue-114-public-stall-projection",
-          "repository": "pilialvu75-hue/Ai-orchestrator-diagnostics",
-          "lease_until": "2026-10-13T09:10:04Z",
-          "resource_locks": [
-            "branch:pilialvu75-hue/Ai-orchestrator-diagnostics:fix/diagnostics-114-stall-public-projection",
-            "contract:diagnostics-public-stall-projection",
-            "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/core/diagnostics/public_log_projection.dart",
-            "file:pilialvu75-hue/Ai-orchestrator-riserva:test/core/diagnostics/public_log_projection_test.dart",
-            "resource:diagnostics-issue-114"
-          ]
-        },
-        "reviewer_state": "PENDING",
+        "active_claim": null,
+        "reviewer_state": "APPROVED",
         "inference_profile_status": null,
         "historical_backlog_count": 3,
-        "next_action": "Main/Reviewer must inspect the review_packet, linked evidence and required gates before promotion or rework."
+        "next_action": "Merge PR #835 only at exact reviewed head 54a278b126b4ccc62eb5f4028e9bb0934bc406be. Keep issue #114 available for post-fix S24 FE export evidence; RAM stability, Vulkan validation and physical device acceptance remain open. No timeout/watchdog policy change is implied."
       },
       {
         "id": "library-researcher",

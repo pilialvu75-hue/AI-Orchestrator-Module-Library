@@ -1,0 +1,12 @@
+{
+  "schema_version": 1,
+  "request_id": "diagnostics-20261012-114-final-review-accept",
+  "status": "APPLIED",
+  "processed_at": "2026-10-12T21:32:57Z",
+  "source_file": "diagnostics-20261012-114-final-review-accept.json",
+  "lane_id": "diagnostics",
+  "operation": "review_accept",
+  "actor_id": "chatgpt:main-reviewer",
+  "errors": [],
+  "result_state_version": 13
+}

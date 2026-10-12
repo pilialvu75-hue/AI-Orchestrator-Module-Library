@@ -3,31 +3,13 @@
   "id": "diagnostics",
   "title": "Diagnostics",
   "role": "worker",
-  "status": "REVIEW_REQUIRED",
+  "status": "READY",
   "activation": "active",
   "scope": "Shared observability contract, logs, evidence receipts and comparable telemetry across all platforms.",
   "shared_engine_policy": "shared_or_control_plane",
-  "state_version": 12,
+  "state_version": 13,
   "updated_at": "2026-10-12",
-  "active_claim": {
-    "claim_id": "141bd9a1731636791e19",
-    "owner_lane": "diagnostics",
-    "work_item": "diagnostics-issue-114-public-stall-projection",
-    "repository": "pilialvu75-hue/Ai-orchestrator-diagnostics",
-    "scope": "Follow-up bounded rework for PR #835 after post-approval P2: preserve privacy-safe event-only fallback for existing unhandled STALL/TERMINAL_STATE producers while retaining closed enriched grammars for supported stall/terminal fields. No timeout, Vulkan, llama.cpp, trim15, memory, watchdog or physical-runtime changes.",
-    "branch": "fix/diagnostics-114-stall-public-projection",
-    "resource_locks": [
-      "branch:pilialvu75-hue/Ai-orchestrator-diagnostics:fix/diagnostics-114-stall-public-projection",
-      "contract:diagnostics-public-stall-projection",
-      "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/core/diagnostics/public_log_projection.dart",
-      "file:pilialvu75-hue/Ai-orchestrator-riserva:test/core/diagnostics/public_log_projection_test.dart",
-      "resource:diagnostics-issue-114"
-    ],
-    "started_at": "2026-10-12T21:10:04Z",
-    "heartbeat_at": "2026-10-12T21:10:04Z",
-    "lease_until": "2026-10-13T09:10:04Z",
-    "lease_hours": 12
-  },
+  "active_claim": null,
   "dependencies": [],
   "roadmap_refs": [
     ".airlab/public-repositories/Ai-orchestrator-diagnostics/roadmap.yaml#D7",
@@ -108,16 +90,16 @@
     "G3_CI": "PASS",
     "G4_INTEGRATION": "PASS",
     "G5_TARGET_RUNTIME": "NOT_APPLICABLE_UNTIL_RUNTIME_CHANGE",
-    "G6_REVIEWER": "PENDING",
-    "G7_CANONICAL_SYNC": "PENDING"
+    "G6_REVIEWER": "PASS",
+    "G7_CANONICAL_SYNC": "PASS"
   },
   "reviewer": {
     "required": true,
-    "state": "PENDING",
-    "reviewed_by": null,
-    "reviewed_at": null
+    "state": "APPROVED",
+    "reviewed_by": "main-reviewer",
+    "reviewed_at": "2026-10-12T21:32:57Z"
   },
-  "next_action": "Main/Reviewer must inspect the review_packet, linked evidence and required gates before promotion or rework.",
+  "next_action": "Merge PR #835 only at exact reviewed head 54a278b126b4ccc62eb5f4028e9bb0934bc406be. Keep issue #114 available for post-fix S24 FE export evidence; RAM stability, Vulkan validation and physical device acceptance remain open. No timeout/watchdog policy change is implied.",
   "historical_backlog": [
     "PR #711 cross-platform remote runtime parity is merged and is the baseline.",
     "PR #543 privacy-filtered PostHog bridge is merged; raw prompts/text/paths/credentials remain excluded.",
@@ -243,30 +225,55 @@
       ],
       "next_action": "Main/Reviewer must inspect the review_packet, linked evidence and required gates before promotion or rework.",
       "kind": "REVIEW_HANDOFF"
+    },
+    {
+      "seq": 7,
+      "at": "2026-10-12T21:32:57Z",
+      "claim_id": "141bd9a1731636791e19",
+      "work_item": "diagnostics-issue-114-public-stall-projection",
+      "summary": "Diagnostics #114 / Riserva PR #835 accepted at exact final head 54a278b126b4ccc62eb5f4028e9bb0934bc406be. The post-approval P2 was confirmed and fixed: unsupported existing terminal producers retain privacy-safe event identity only, while supported stall/terminal producers export only closed allowlisted state/reason/numeric fields. Sensitive and free-form payload is discarded. Live and persisted Diagnostics paths both apply publicLogProjection. Cross-repository scope is covered by the Diagnostics claim and explicit Riserva file locks. All five exact-head workflows PASS. No physical S24 FE, RAM or Vulkan success is claimed.",
+      "decisions": [
+        "Main/Reviewer accepted the implementation/review gate."
+      ],
+      "evidence_refs": [
+        "Ai-orchestrator-riserva#835",
+        "commit:54a278b126b4ccc62eb5f4028e9bb0934bc406be",
+        "CI:38308978780",
+        "CI:38308978823",
+        "CI:38308978820",
+        "CI:38308979156",
+        "CI:38308978841",
+        "P2:discussion_r4252333761:resolved",
+        "integration:github_diagnostics:_capture->publicLogProjection",
+        "AI-Orchestrator-Module-Library#114"
+      ],
+      "next_action": "Merge PR #835 only at exact reviewed head 54a278b126b4ccc62eb5f4028e9bb0934bc406be. Keep issue #114 available for post-fix S24 FE export evidence; RAM stability, Vulkan validation and physical device acceptance remain open. No timeout/watchdog policy change is implied.",
+      "kind": "REVIEW_ACCEPTED"
     }
   ],
   "last_checkpoint": {
-    "seq": 6,
-    "at": "2026-10-12T21:31:26Z",
+    "seq": 7,
+    "at": "2026-10-12T21:32:57Z",
     "claim_id": "141bd9a1731636791e19",
     "work_item": "diagnostics-issue-114-public-stall-projection",
-    "summary": "Diagnostics #114 final review packet for Riserva PR #835 at exact head 54a278b126b4ccc62eb5f4028e9bb0934bc406be. The post-approval P2 is fixed: enriched STALL/TERMINAL_STATE grammars preserve only closed allowlisted fields, while existing unmatched producer variants preserve the historical privacy-safe event-only {time,event} signal instead of being dropped. Sensitive/unknown payload is discarded. All five exact-head workflows are successful. Cross-repository ownership is explicit through the Diagnostics claim and locked Riserva projection/test files. No timeout, Vulkan, llama.cpp, trim15, RAM guard, watchdog or physical-runtime behavior is changed or approved.",
-    "decisions": [],
-    "evidence_refs": [
-      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/835",
-      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/54a278b126b4ccc62eb5f4028e9bb0934bc406be",
-      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38308978823",
-      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/blob/54a278b126b4ccc62eb5f4028e9bb0934bc406be/lib/core/diagnostics/github_diagnostics.dart",
-      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/835#discussion_r4252333761",
-      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38308978780",
-      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38308978823",
-      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38308978820",
-      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38308979156",
-      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38308978841",
-      "https://github.com/pilialvu75-hue/AI-Orchestrator-Module-Library/issues/114"
+    "summary": "Diagnostics #114 / Riserva PR #835 accepted at exact final head 54a278b126b4ccc62eb5f4028e9bb0934bc406be. The post-approval P2 was confirmed and fixed: unsupported existing terminal producers retain privacy-safe event identity only, while supported stall/terminal producers export only closed allowlisted state/reason/numeric fields. Sensitive and free-form payload is discarded. Live and persisted Diagnostics paths both apply publicLogProjection. Cross-repository scope is covered by the Diagnostics claim and explicit Riserva file locks. All five exact-head workflows PASS. No physical S24 FE, RAM or Vulkan success is claimed.",
+    "decisions": [
+      "Main/Reviewer accepted the implementation/review gate."
     ],
-    "next_action": "Main/Reviewer must inspect the review_packet, linked evidence and required gates before promotion or rework.",
-    "kind": "REVIEW_HANDOFF"
+    "evidence_refs": [
+      "Ai-orchestrator-riserva#835",
+      "commit:54a278b126b4ccc62eb5f4028e9bb0934bc406be",
+      "CI:38308978780",
+      "CI:38308978823",
+      "CI:38308978820",
+      "CI:38308979156",
+      "CI:38308978841",
+      "P2:discussion_r4252333761:resolved",
+      "integration:github_diagnostics:_capture->publicLogProjection",
+      "AI-Orchestrator-Module-Library#114"
+    ],
+    "next_action": "Merge PR #835 only at exact reviewed head 54a278b126b4ccc62eb5f4028e9bb0934bc406be. Keep issue #114 available for post-fix S24 FE export evidence; RAM stability, Vulkan validation and physical device acceptance remain open. No timeout/watchdog policy change is implied.",
+    "kind": "REVIEW_ACCEPTED"
   },
   "review_history": [
     {
@@ -292,6 +299,26 @@
         "CI:38303448786",
         "CI:38303448823",
         "CI:38303448811",
+        "integration:github_diagnostics:_capture->publicLogProjection",
+        "AI-Orchestrator-Module-Library#114"
+      ]
+    },
+    {
+      "reviewed_at": "2026-10-12T21:32:57Z",
+      "reviewed_by": "main-reviewer",
+      "claim_id": "141bd9a1731636791e19",
+      "work_item": "diagnostics-issue-114-public-stall-projection",
+      "decision": "APPROVED",
+      "summary": "Diagnostics #114 / Riserva PR #835 accepted at exact final head 54a278b126b4ccc62eb5f4028e9bb0934bc406be. The post-approval P2 was confirmed and fixed: unsupported existing terminal producers retain privacy-safe event identity only, while supported stall/terminal producers export only closed allowlisted state/reason/numeric fields. Sensitive and free-form payload is discarded. Live and persisted Diagnostics paths both apply publicLogProjection. Cross-repository scope is covered by the Diagnostics claim and explicit Riserva file locks. All five exact-head workflows PASS. No physical S24 FE, RAM or Vulkan success is claimed.",
+      "evidence_refs": [
+        "Ai-orchestrator-riserva#835",
+        "commit:54a278b126b4ccc62eb5f4028e9bb0934bc406be",
+        "CI:38308978780",
+        "CI:38308978823",
+        "CI:38308978820",
+        "CI:38308979156",
+        "CI:38308978841",
+        "P2:discussion_r4252333761:resolved",
         "integration:github_diagnostics:_capture->publicLogProjection",
         "AI-Orchestrator-Module-Library#114"
       ]
@@ -362,6 +389,13 @@
       "work_item": "diagnostics-issue-114-public-stall-projection",
       "reason": "Main/Reviewer accepted the bounded implementation/review gate.",
       "at": "2026-10-12T21:07:41Z"
+    },
+    {
+      "type": "CLAIM_RELEASED_AFTER_REVIEW",
+      "claim_id": "141bd9a1731636791e19",
+      "work_item": "diagnostics-issue-114-public-stall-projection",
+      "reason": "Main/Reviewer accepted the bounded implementation/review gate.",
+      "at": "2026-10-12T21:32:57Z"
     }
   ],
   "review_packet_history": [
