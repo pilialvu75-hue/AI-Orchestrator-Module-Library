@@ -19,6 +19,24 @@ def prepare_claim(root: Path, work_id: str) -> dict[str, Any]:
         raise EvolutionDispatchError("unknown work_id")
     if work.get("state") != "staged":
         raise EvolutionDispatchError("only staged work may be prepared")
+    return _claim_envelope(work_id, work)
+
+
+def resume_claim(root: Path, work_id: str) -> dict[str, Any]:
+    """Reconstruct an existing claimed envelope without another transition.
+
+    This is a read-only recovery operation, not a new claim or an apply gate.
+    """
+    queue = EvolutionWorkQueue(root)
+    work = queue.load(work_id)
+    if work is None:
+        raise EvolutionDispatchError("unknown work_id")
+    if work.get("state") != "claimed":
+        raise EvolutionDispatchError("only claimed work may be resumed")
+    return _claim_envelope(work_id, work)
+
+
+def _claim_envelope(work_id: str, work: dict[str, Any]) -> dict[str, Any]:
     return {
         "schema": "ai-orchestrator.evolution-cantiere-claim.v1",
         "work_id": work_id,
