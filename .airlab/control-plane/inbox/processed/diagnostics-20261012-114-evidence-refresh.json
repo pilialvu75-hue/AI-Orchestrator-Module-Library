@@ -1,0 +1,12 @@
+{
+  "schema_version": 1,
+  "request_id": "diagnostics-20261012-114-evidence-refresh",
+  "status": "APPLIED",
+  "processed_at": "2026-10-12T21:05:40Z",
+  "source_file": "diagnostics-20261012-114-evidence-refresh.json",
+  "lane_id": "diagnostics",
+  "operation": "review_rework",
+  "actor_id": "chatgpt:main-reviewer",
+  "errors": [],
+  "result_state_version": 6
+}
