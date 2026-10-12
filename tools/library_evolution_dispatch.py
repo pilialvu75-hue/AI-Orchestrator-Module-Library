@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import hashlib
 import json
 from pathlib import Path
 from typing import Any
@@ -19,6 +20,32 @@ def prepare_claim(root: Path, work_id: str) -> dict[str, Any]:
         raise EvolutionDispatchError("unknown work_id")
     if work.get("state") != "staged":
         raise EvolutionDispatchError("only staged work may be prepared")
+    return _claim_envelope(work_id, work)
+
+
+def resume_claim(root: Path, work_id: str) -> dict[str, Any]:
+    """Reconstruct an existing claimed envelope without another transition.
+
+    This is a read-only recovery operation, not a new claim or an apply gate.
+    """
+    queue = EvolutionWorkQueue(root)
+    work = queue.load(work_id)
+    if work is None:
+        raise EvolutionDispatchError("unknown work_id")
+    if work.get("state") != "claimed":
+        raise EvolutionDispatchError("only claimed work may be resumed")
+    envelope = work.get("claimed_envelope")
+    if not isinstance(envelope, dict) or not isinstance(work.get("claimed_envelope_sha256"), str):
+        raise EvolutionDispatchError("legacy claim lacks immutable envelope evidence; reviewer reconciliation required")
+    canonical = json.dumps(envelope, sort_keys=True, separators=(",", ":")).encode("utf-8")
+    if hashlib.sha256(canonical).hexdigest() != work["claimed_envelope_sha256"]:
+        raise EvolutionDispatchError("claimed envelope digest mismatch")
+    if envelope.get("work_id") != work_id or envelope != _claim_envelope(work_id, work):
+        raise EvolutionDispatchError("claimed envelope differs from queued work")
+    return envelope
+
+
+def _claim_envelope(work_id: str, work: dict[str, Any]) -> dict[str, Any]:
     return {
         "schema": "ai-orchestrator.evolution-cantiere-claim.v1",
         "work_id": work_id,
@@ -37,7 +64,11 @@ def claim(root: Path, work_id: str) -> dict[str, Any]:
     """Persist the claim only after the caller has accepted the prepared envelope."""
     queue = EvolutionWorkQueue(root)
     envelope = prepare_claim(root, work_id)
-    result = queue.transition(work_id, "claimed")
+    digest = hashlib.sha256(json.dumps(envelope, sort_keys=True, separators=(",", ":")).encode("utf-8")).hexdigest()
+    result = queue.transition(work_id, "claimed", claim_evidence={
+        "claimed_envelope": envelope,
+        "claimed_envelope_sha256": digest,
+    })
     return {"claim": envelope, "transition": result}
 
 
