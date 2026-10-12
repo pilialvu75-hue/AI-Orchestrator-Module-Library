@@ -1,0 +1,12 @@
+{
+  "schema_version": 1,
+  "request_id": "aivexus-3d-20261012-enter-wait-pr833-ci-v1",
+  "status": "APPLIED",
+  "processed_at": "2026-10-12T11:52:57Z",
+  "source_file": "aivexus-3d-20261012-enter-wait-pr833-ci-v1.json",
+  "lane_id": "aivexus-3d",
+  "operation": "enter_wait",
+  "actor_id": "chatgpt:aivexus-3d",
+  "errors": [],
+  "result_state_version": 4
+}
