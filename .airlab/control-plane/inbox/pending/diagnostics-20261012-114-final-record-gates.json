@@ -1,0 +1,32 @@
+{
+  "schema_version": 1,
+  "request_id": "diagnostics-20261012-114-final-record-gates",
+  "actor_id": "chatgpt:main-reviewer",
+  "lane_id": "diagnostics",
+  "operation": "record_review_gates",
+  "expected_state_version": 11,
+  "payload": {
+    "summary": "Final review of Diagnostics #114 / Riserva PR #835 at exact head 54a278b126b4ccc62eb5f4028e9bb0934bc406be. Post-approval P2 is resolved: unknown existing STALL/TERMINAL_STATE producers preserve event-only telemetry while all payload is discarded; supported producers expose only closed allowlisted reason/state/numeric fields. Live and persisted ingestion share publicLogProjection. Cross-repository scope is explicitly claimed and file-locked. Web/Linux/Windows/macOS/Android exact-head workflows are all PASS. G1-G4 only; no physical S24 FE, RAM or Vulkan approval.",
+    "evidence_indices": {
+      "G1_IMPLEMENTATION": [
+        0,
+        1
+      ],
+      "G2_STATIC": [
+        2
+      ],
+      "G3_CI": [
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "G4_INTEGRATION": [
+        2,
+        3,
+        4
+      ]
+    }
+  }
+}
