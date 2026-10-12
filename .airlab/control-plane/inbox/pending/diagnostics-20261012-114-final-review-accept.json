@@ -1,0 +1,24 @@
+{
+  "schema_version": 1,
+  "request_id": "diagnostics-20261012-114-final-review-accept",
+  "actor_id": "chatgpt:main-reviewer",
+  "lane_id": "diagnostics",
+  "operation": "review_accept",
+  "expected_state_version": 12,
+  "payload": {
+    "summary": "Diagnostics #114 / Riserva PR #835 accepted at exact final head 54a278b126b4ccc62eb5f4028e9bb0934bc406be. The post-approval P2 was confirmed and fixed: unsupported existing terminal producers retain privacy-safe event identity only, while supported stall/terminal producers export only closed allowlisted state/reason/numeric fields. Sensitive and free-form payload is discarded. Live and persisted Diagnostics paths both apply publicLogProjection. Cross-repository scope is covered by the Diagnostics claim and explicit Riserva file locks. All five exact-head workflows PASS. No physical S24 FE, RAM or Vulkan success is claimed.",
+    "next_action": "Merge PR #835 only at exact reviewed head 54a278b126b4ccc62eb5f4028e9bb0934bc406be. Keep issue #114 available for post-fix S24 FE export evidence; RAM stability, Vulkan validation and physical device acceptance remain open. No timeout/watchdog policy change is implied.",
+    "evidence_refs": [
+      "Ai-orchestrator-riserva#835",
+      "commit:54a278b126b4ccc62eb5f4028e9bb0934bc406be",
+      "CI:38308978780",
+      "CI:38308978823",
+      "CI:38308978820",
+      "CI:38308979156",
+      "CI:38308978841",
+      "P2:discussion_r4252333761:resolved",
+      "integration:github_diagnostics:_capture->publicLogProjection",
+      "AI-Orchestrator-Module-Library#114"
+    ]
+  }
+}
