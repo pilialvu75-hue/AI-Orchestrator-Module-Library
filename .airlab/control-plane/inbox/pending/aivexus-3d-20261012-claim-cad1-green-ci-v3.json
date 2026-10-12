@@ -1,0 +1,24 @@
+{
+  "schema_version": 1,
+  "request_id": "aivexus-3d-20261012-claim-cad1-green-ci-v3",
+  "actor_id": "chatgpt:aivexus-3d",
+  "lane_id": "aivexus-3d",
+  "operation": "claim",
+  "expected_state_version": 9,
+  "payload": {
+    "work_item": "AIVEXUS-CAD-1",
+    "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
+    "scope": "Follow up domain-only CAD-1 PR #833: verify actual Python CAD generator/tests & STEP/STL/3MF receipt implementation after exact-head six CI PASS; fix bounded domain-only defects; prepare immutable artifacts and evidence. Shared Cantiere storage/navigation/runner contracts and macOS platform files remain outside scope.",
+    "branch": "feat/aivexus-cad1-parametric-sample",
+    "resource_locks": [
+      "scope:aivexus:cad",
+      "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/app_factory/workshop/domains/cad/cad1_domain_adapter.dart",
+      "file:pilialvu75-hue/Ai-orchestrator-riserva:test/app_factory/workshop/domains/cad/cad1_domain_adapter_test.dart",
+      "file:pilialvu75-hue/Ai-orchestrator-riserva:tools/aivexus/cad/README.md",
+      "file:pilialvu75-hue/Ai-orchestrator-riserva:tools/aivexus/cad/fixtures/plate_spec.json",
+      "file:pilialvu75-hue/Ai-orchestrator-riserva:tools/aivexus/cad/parametric_plate.py",
+      "file:pilialvu75-hue/Ai-orchestrator-riserva:tools/aivexus/cad/test_cad1.py",
+      "file:pilialvu75-hue/Ai-orchestrator-riserva:tools/aivexus/cad/validate_plate.py"
+    ]
+  }
+}
