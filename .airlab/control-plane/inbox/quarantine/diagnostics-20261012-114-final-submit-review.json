@@ -1,0 +1,14 @@
+{
+  "schema_version": 1,
+  "request_id": "diagnostics-20261012-114-final-submit-review",
+  "status": "QUARANTINED",
+  "processed_at": "2026-10-12T21:30:36Z",
+  "source_file": "diagnostics-20261012-114-final-submit-review.json",
+  "lane_id": "diagnostics",
+  "operation": "submit_review",
+  "actor_id": "chatgpt:diagnostics",
+  "errors": [
+    "ValueError: review packet pull_request must be a positive integer or null"
+  ],
+  "result_state_version": null
+}
