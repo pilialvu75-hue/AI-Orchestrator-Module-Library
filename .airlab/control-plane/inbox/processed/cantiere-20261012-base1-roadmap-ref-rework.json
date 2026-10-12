@@ -1,0 +1,12 @@
+{
+  "schema_version": 1,
+  "request_id": "cantiere-20261012-base1-roadmap-ref-rework",
+  "status": "APPLIED",
+  "processed_at": "2026-10-12T10:21:35Z",
+  "source_file": "cantiere-20261012-base1-roadmap-ref-rework.json",
+  "lane_id": "cantiere",
+  "operation": "review_rework",
+  "actor_id": "chatgpt:main-reviewer",
+  "errors": [],
+  "result_state_version": 42
+}

@@ -7,7 +7,7 @@
     "policy": "This private repository is the single coordination authority. Chats and agents are workers, not independent sources of truth."
   },
   "updated_at": "2026-10-12",
-  "state_revision": 177,
+  "state_revision": 178,
   "lifecycle_status": "BOOTSTRAP_ACTIVE",
   "roadmap_authority": {
     "library": ".airlab/roadmap.yaml",
@@ -80,11 +80,11 @@
     "invalid_lane_behavior": "ISOLATE_AND_SURFACE_PROJECTION_INCIDENT"
   },
   "projection": {
-    "source_digest": "6c5f8060b7fd2a95fac57a240a5a8ca06a5151de9d865822aa20db04c9ba855e",
-    "projected_at": "2026-10-12T10:20:30Z",
+    "source_digest": "5fc0e1d84700100243b3b2a47640f376598c9a1bc27f096214033e19611a7332",
+    "projected_at": "2026-10-12T10:21:35Z",
     "counts": {
-      "READY": 16,
-      "REVIEW_REQUIRED": 1
+      "IMPLEMENTING": 1,
+      "READY": 16
     },
     "active_claims": [
       {
@@ -155,9 +155,7 @@
         "work_item": "AIVEXUS-BASE-1"
       }
     ],
-    "review_required": [
-      "cantiere"
-    ],
+    "review_required": [],
     "blocked": [],
     "checkpoint_watch": [],
     "projection_incidents": [],
@@ -258,9 +256,9 @@
       },
       {
         "id": "cantiere",
-        "status": "REVIEW_REQUIRED",
+        "status": "IMPLEMENTING",
         "activation": "active",
-        "state_version": 41,
+        "state_version": 42,
         "updated_at": "2026-10-12",
         "active_claim": {
           "claim_id": "3d39dee487b98eb463b1",
@@ -278,10 +276,10 @@
             "scope:aivexus:shared-base"
           ]
         },
-        "reviewer_state": "PENDING",
+        "reviewer_state": "CHANGES_REQUESTED",
         "inference_profile_status": null,
         "historical_backlog_count": 3,
-        "next_action": "Main/Reviewer must inspect the review_packet, linked evidence and required gates before promotion or rework."
+        "next_action": "Resubmit the unchanged BASE-1 packet for PR #826 head a63b8cf14c07e6aeba361a1ee4e6e832e6ce1df1 with roadmap_impact.refs limited to the authoritative file .airlab/public-repositories/Ai-orchestrator-riserva/roadmap.yaml, then re-attest the same G1-G4 evidence and accept."
       },
       {
         "id": "diagnostics",
