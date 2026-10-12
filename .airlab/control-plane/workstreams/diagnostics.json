@@ -7,7 +7,7 @@
   "activation": "active",
   "scope": "Shared observability contract, logs, evidence receipts and comparable telemetry across all platforms.",
   "shared_engine_policy": "shared_or_control_plane",
-  "state_version": 11,
+  "state_version": 12,
   "updated_at": "2026-10-12",
   "active_claim": {
     "claim_id": "141bd9a1731636791e19",
@@ -103,10 +103,10 @@
   ],
   "gates": {
     "G0_CLAIM": "PASS",
-    "G1_IMPLEMENTATION": "PENDING",
-    "G2_STATIC": "PENDING",
-    "G3_CI": "PENDING",
-    "G4_INTEGRATION": "PENDING",
+    "G1_IMPLEMENTATION": "PASS",
+    "G2_STATIC": "PASS",
+    "G3_CI": "PASS",
+    "G4_INTEGRATION": "PASS",
     "G5_TARGET_RUNTIME": "NOT_APPLICABLE_UNTIL_RUNTIME_CHANGE",
     "G6_REVIEWER": "PENDING",
     "G7_CANONICAL_SYNC": "PENDING"
@@ -325,6 +325,34 @@
           "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/blob/c1bcfca31e2f658e5c0bb4a000c9447e4f6c55b2/lib/core/diagnostics/github_diagnostics.dart"
         ]
       }
+    },
+    {
+      "at": "2026-10-12T21:32:17Z",
+      "claim_id": "141bd9a1731636791e19",
+      "packet_sha256": "b5805a848358f8e2962fd73788999cb8544a36e5bc2027145f9801c88d053461",
+      "reviewed_by": "main-reviewer",
+      "summary": "Final review of Diagnostics #114 / Riserva PR #835 at exact head 54a278b126b4ccc62eb5f4028e9bb0934bc406be. Post-approval P2 is resolved: unknown existing STALL/TERMINAL_STATE producers preserve event-only telemetry while all payload is discarded; supported producers expose only closed allowlisted reason/state/numeric fields. Live and persisted ingestion share publicLogProjection. Cross-repository scope is explicitly claimed and file-locked. Web/Linux/Windows/macOS/Android exact-head workflows are all PASS. G1-G4 only; no physical S24 FE, RAM or Vulkan approval.",
+      "evidence_refs_by_gate": {
+        "G1_IMPLEMENTATION": [
+          "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/835",
+          "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/54a278b126b4ccc62eb5f4028e9bb0934bc406be"
+        ],
+        "G2_STATIC": [
+          "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38308978823"
+        ],
+        "G3_CI": [
+          "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38308978780",
+          "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38308978823",
+          "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38308978820",
+          "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38308979156",
+          "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38308978841"
+        ],
+        "G4_INTEGRATION": [
+          "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38308978823",
+          "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/blob/54a278b126b4ccc62eb5f4028e9bb0934bc406be/lib/core/diagnostics/github_diagnostics.dart",
+          "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/835#discussion_r4252333761"
+        ]
+      }
     }
   ],
   "reconciliation_events": [
@@ -535,6 +563,34 @@
       "refs": [
         ".airlab/public-repositories/Ai-orchestrator-diagnostics/roadmap.yaml#D7",
         ".airlab/public-repositories/Ai-orchestrator-diagnostics/roadmap.yaml#D8"
+      ]
+    }
+  },
+  "current_gate_attestation": {
+    "at": "2026-10-12T21:32:17Z",
+    "claim_id": "141bd9a1731636791e19",
+    "packet_sha256": "b5805a848358f8e2962fd73788999cb8544a36e5bc2027145f9801c88d053461",
+    "reviewed_by": "main-reviewer",
+    "summary": "Final review of Diagnostics #114 / Riserva PR #835 at exact head 54a278b126b4ccc62eb5f4028e9bb0934bc406be. Post-approval P2 is resolved: unknown existing STALL/TERMINAL_STATE producers preserve event-only telemetry while all payload is discarded; supported producers expose only closed allowlisted reason/state/numeric fields. Live and persisted ingestion share publicLogProjection. Cross-repository scope is explicitly claimed and file-locked. Web/Linux/Windows/macOS/Android exact-head workflows are all PASS. G1-G4 only; no physical S24 FE, RAM or Vulkan approval.",
+    "evidence_refs_by_gate": {
+      "G1_IMPLEMENTATION": [
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/835",
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/54a278b126b4ccc62eb5f4028e9bb0934bc406be"
+      ],
+      "G2_STATIC": [
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38308978823"
+      ],
+      "G3_CI": [
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38308978780",
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38308978823",
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38308978820",
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38308979156",
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38308978841"
+      ],
+      "G4_INTEGRATION": [
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38308978823",
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/blob/54a278b126b4ccc62eb5f4028e9bb0934bc406be/lib/core/diagnostics/github_diagnostics.dart",
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/835#discussion_r4252333761"
       ]
     }
   }
