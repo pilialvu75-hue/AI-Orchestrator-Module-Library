@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "request_id": "aivexus-3d-20261012-checkpoint-pr833-ci-macos-v2",
+  "actor_id": "chatgpt:aivexus-3d",
+  "lane_id": "aivexus-3d",
+  "operation": "checkpoint",
+  "expected_state_version": 6,
+  "payload": {
+    "summary": "CAD-1 PR #833 exact head 7ec116531a94eef36900ad9567a4f1dd492e0064: five workflow suites PASS; macOS release FAIL at sqlite3 3.7.0 downloaded native lib hash mismatch, after successful Flutter/macOS tests and GGUF smoke. Reran only failed macOS job 114797505379; new attempt job 114805681230 was in_progress at last check. No CAD-specific errors shown. Local CAD-1 plate and STEP/STL/3MF verified 5/5 for two spec revisions, standalone ZIP test fixture path corrected, all 5 Python tests now pass. Library capability-gap issue #113 created for authorized sandbox CadQuery runner and persistent artifact integration. PR remains draft with 7 scoped files; no edits to shared code or macOS toolchain.",
+    "next_action": "Read exact-head macOS retry result before G3 assessment. If it fails again for sqlite3 asset hash, refer to platform-macos/runtime owner without changing hash checks; keep PR #833 draft. Independently, obtain certified CadQuery capability and coordinate Cantiere-owned runner/attachment integration; keep Fusion/physical print/Diagnostics UNKNOWN until actual receipts. Resume from canonical wait on new CI evidence.",
+    "decisions": [
+      "No checksum bypass or macOS code changes from CAD lane.",
+      "Do not mark CAD-1 complete or hand off as operational solely on 5/6 CI and standalone geometry.",
+      "Preserve single Cantiere project lifecycle and resource exchange; Library #113 is a capability intake request, not a new claim."
+    ],
+    "evidence_refs": [
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/833",
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38245285666",
+      "https://github.com/pilialvu75-hue/AI-Orchestrator-Module-Library/issues/113"
+    ]
+  }
+}
