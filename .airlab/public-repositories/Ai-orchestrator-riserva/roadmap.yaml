@@ -972,7 +972,7 @@ audit_findings:
 
 - id: AIVEXUS-BASE-1
   title: Aivexus shared ProjectExtension persistence and attachment base
-  state: planned
+  state: done
   priority: P0
   owner_lane: cantiere
   dependencies: []
@@ -986,6 +986,11 @@ audit_findings:
   done_when: >-
     Existing projects reopen without data loss; CAD and game draft extensions save/reload;
     attachment refs retain hash/metadata; retries do not duplicate a project/revision/request.
+  current_evidence:
+    - PR #826 merged after Main/Reviewer packet-bound G1-G4 and G6 approval.
+    - reviewed_head: a63b8cf14c07e6aeba361a1ee4e6e832e6ce1df1
+    - merge_commit: b5840bc680d7831d2df191d2cc8e39a9e45c08cd
+    - six exact-head workflows passed before merge; this does not establish physical/runtime acceptance.
 
 - id: AIVEXUS-BASE-2
   title: Aivexus project-type selector and shared navigation
