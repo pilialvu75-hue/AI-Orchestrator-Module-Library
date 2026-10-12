@@ -7,7 +7,7 @@
     "policy": "This private repository is the single coordination authority. Chats and agents are workers, not independent sources of truth."
   },
   "updated_at": "2026-10-12",
-  "state_revision": 221,
+  "state_revision": 222,
   "lifecycle_status": "BOOTSTRAP_ACTIVE",
   "roadmap_authority": {
     "library": ".airlab/roadmap.yaml",
@@ -80,13 +80,12 @@
     "invalid_lane_behavior": "ISOLATE_AND_SURFACE_PROJECTION_INCIDENT"
   },
   "projection": {
-    "source_digest": "52e5e2772729bfc8e54fa1d520bd726d2bc3f7daaddf38064e45a3afb15c5d95",
-    "projected_at": "2026-10-12T21:21:05Z",
+    "source_digest": "bf164784bce7a4da3b78d8827432fe2237e4f60373a8b1183ae8b5eeeeed03d3",
+    "projected_at": "2026-10-12T21:31:26Z",
     "counts": {
       "BLOCKED": 1,
-      "CLAIMED": 1,
       "READY": 14,
-      "REVIEW_REQUIRED": 1
+      "REVIEW_REQUIRED": 2
     },
     "active_claims": [
       {
@@ -209,7 +208,8 @@
       }
     ],
     "review_required": [
-      "cantiere"
+      "cantiere",
+      "diagnostics"
     ],
     "blocked": [
       {
@@ -362,9 +362,9 @@
       },
       {
         "id": "diagnostics",
-        "status": "CLAIMED",
+        "status": "REVIEW_REQUIRED",
         "activation": "active",
-        "state_version": 10,
+        "state_version": 11,
         "updated_at": "2026-10-12",
         "active_claim": {
           "claim_id": "141bd9a1731636791e19",
@@ -382,7 +382,7 @@
         "reviewer_state": "PENDING",
         "inference_profile_status": null,
         "historical_backlog_count": 3,
-        "next_action": "Merge PR #835 at exact reviewed head. Keep S24 FE post-fix Diagnostics export validation, RAM stability and Vulkan validation open. Complete non-material canonical sync and return Diagnostics lane to READY for follow-up evidence only after a reviewed release."
+        "next_action": "Main/Reviewer must inspect the review_packet, linked evidence and required gates before promotion or rework."
       },
       {
         "id": "library-researcher",
