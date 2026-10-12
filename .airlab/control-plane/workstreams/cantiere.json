@@ -3,11 +3,11 @@
   "id": "cantiere",
   "title": "Cantiere",
   "role": "worker",
-  "status": "IMPLEMENTING",
+  "status": "REVIEW_REQUIRED",
   "activation": "active",
   "scope": "Exclusive Cantiere/App Factory execution, durability, build/review/validation/apply and first-real-app reliability.",
   "shared_engine_policy": "shared_or_control_plane",
-  "state_version": 56,
+  "state_version": 57,
   "updated_at": "2026-10-12",
   "active_claim": {
     "claim_id": "94876ef45cb7b6e77d9c",
@@ -36,14 +36,69 @@
     ".airlab/public-repositories/Ai-orchestrator-riserva/roadmap.yaml#AIVEXUS-BASE-1",
     ".airlab/public-repositories/Ai-orchestrator-riserva/roadmap.yaml#AIVEXUS-BASE-2"
   ],
-  "evidence": [],
+  "evidence": [
+    {
+      "type": "physical_device",
+      "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-diagnostics/releases/tag/diagnostics-v1-6bd1447f-5fda-4171-84b4-c1ff56b154cf",
+      "result": "FAIL",
+      "note": "Original +3117 Galaxy S24 FE gate failure. Reviewer primary compact=false chars=9385 failed before tokens, retry compact=true chars=6601 ran; final batch approved=false; normal RAM/trim=0; not validation of #834."
+    },
+    {
+      "type": "pull_request",
+      "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/834",
+      "result": "PASS",
+      "note": "Open and ready for review; mergeable clean, main base 22aa7484, exact head 507e35d; no merge or approval."
+    },
+    {
+      "type": "commit",
+      "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/507e35d7478515d17afe86a88b4b5d3de9c87f45",
+      "result": "PASS",
+      "note": "Five scoped files including two targeted regression suites."
+    },
+    {
+      "type": "ci",
+      "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38294152094",
+      "result": "PASS",
+      "note": "Exact-head Android signed APK/AAB CI; flutter analyze + full flutter test + packaging green; create release step skipped on PR."
+    },
+    {
+      "type": "ci",
+      "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38294152005",
+      "result": "PASS",
+      "note": "Exact-head Cantiere First App CI, directed regression suite and deterministic local build-lab smoke."
+    },
+    {
+      "type": "ci",
+      "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38294152187",
+      "result": "PASS",
+      "note": "Exact-head Web compile and contract tests."
+    },
+    {
+      "type": "ci",
+      "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38294152083",
+      "result": "PASS",
+      "note": "Exact-head Windows analyze, Flutter tests, setup build."
+    },
+    {
+      "type": "ci",
+      "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38294152218",
+      "result": "PASS",
+      "note": "Exact-head Linux analyze, Flutter tests, deb build and validation."
+    },
+    {
+      "type": "ci",
+      "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38294152199",
+      "result": "PASS",
+      "note": "Exact-head macOS analyze, Flutter tests and release build."
+    }
+  ],
   "gates": {
     "G0_CLAIM": "PASS",
     "G1_IMPLEMENTATION": "PENDING",
     "G2_STATIC": "PENDING",
     "G3_CI": "PENDING",
     "G4_INTEGRATION": "PENDING",
-    "G5_TARGET_RUNTIME": "NOT_APPLICABLE_UNTIL_RUNTIME_CHANGE",
+    "G5_TARGET_RUNTIME": "PENDING_PHYSICAL_S24_FE",
     "G6_REVIEWER": "PENDING",
     "G7_CANONICAL_SYNC": "PENDING"
   },
@@ -53,7 +108,7 @@
     "reviewed_by": null,
     "reviewed_at": null
   },
-  "next_action": "Await CI on exact PR #834 head 507e35d; then Main/Reviewer structured packet, no auto-merge.",
+  "next_action": "Main/Reviewer must inspect PR #834 exact head 507e35d, the review_packet, source privacy and required G1–G4 attestations; G5 physical S24 FE remains open, no auto-merge/auto-approve.",
   "historical_backlog": [
     "Stay in Phase 1 ONLINE until a real generated Android app is physically accepted.",
     "Reproduce the recent manga-drawing app failure from current main with Diagnostics; do not restart generic audits.",
@@ -699,22 +754,49 @@
         "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/834"
       ],
       "next_action": "Await CI on exact PR #834 head 507e35d; then Main/Reviewer structured packet, no auto-merge."
+    },
+    {
+      "seq": 33,
+      "at": "2026-10-12T20:20:06Z",
+      "claim_id": "94876ef45cb7b6e77d9c",
+      "work_item": "cantiere-gate-evidence-reviewer-3117",
+      "summary": "+3117 S24 FE physical failure: a separate saved project ('ciao fai un app Android con sfondo nero...') produced a real Engineer diff but Reviewer rejected a purported star.dart import. Diagnostics showed a 9385-character full Reviewer prompt failing before tokens, followed by a 6601-character compact fallback that returned approved=false. PR #834 at exact head 507e35d7478515d17afe86a88b4b5d3de9c87f45 adds explicit opt-in clipboard export of the actual rejected staged virtual workspace before/after source and starts Reviewer compact on the primary attempt only when the full representation exceeds 7000 characters. The existing Reviewer/Validation gates, models, token budgets, retry budgets, memory protections and Local WebSearch remain unchanged. All six exact-head CI workflows pass. No generated-app success or physical fix is claimed.",
+      "decisions": [],
+      "evidence_refs": [
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-diagnostics/releases/tag/diagnostics-v1-6bd1447f-5fda-4171-84b4-c1ff56b154cf",
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/834",
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/507e35d7478515d17afe86a88b4b5d3de9c87f45",
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38294152094",
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38294152005",
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38294152187",
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38294152083",
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38294152218",
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38294152199"
+      ],
+      "next_action": "Main/Reviewer must inspect PR #834 exact head 507e35d, the review_packet, source privacy and required G1–G4 attestations; G5 physical S24 FE remains open, no auto-merge/auto-approve.",
+      "kind": "REVIEW_HANDOFF"
     }
   ],
   "last_checkpoint": {
-    "seq": 32,
-    "at": "2026-10-12T18:56:06Z",
+    "seq": 33,
+    "at": "2026-10-12T20:20:06Z",
     "claim_id": "94876ef45cb7b6e77d9c",
     "work_item": "cantiere-gate-evidence-reviewer-3117",
-    "summary": "Reviewer source evidence now exports actual staged virtual workspace snapshots, not untrusted Engineer proposal contents. Regression includes tampered transport mismatch and no staged diff; PR #834 exact head 507e35d has six fresh CI pending.",
-    "decisions": [
-      "Preserve owner-only opt-in clipboard and no Diagnostics code upload.",
-      "Hold reviewer/validation gates; no merge or physical retest before exact-head evidence."
-    ],
+    "summary": "+3117 S24 FE physical failure: a separate saved project ('ciao fai un app Android con sfondo nero...') produced a real Engineer diff but Reviewer rejected a purported star.dart import. Diagnostics showed a 9385-character full Reviewer prompt failing before tokens, followed by a 6601-character compact fallback that returned approved=false. PR #834 at exact head 507e35d7478515d17afe86a88b4b5d3de9c87f45 adds explicit opt-in clipboard export of the actual rejected staged virtual workspace before/after source and starts Reviewer compact on the primary attempt only when the full representation exceeds 7000 characters. The existing Reviewer/Validation gates, models, token budgets, retry budgets, memory protections and Local WebSearch remain unchanged. All six exact-head CI workflows pass. No generated-app success or physical fix is claimed.",
+    "decisions": [],
     "evidence_refs": [
-      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/834"
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-diagnostics/releases/tag/diagnostics-v1-6bd1447f-5fda-4171-84b4-c1ff56b154cf",
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/834",
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/507e35d7478515d17afe86a88b4b5d3de9c87f45",
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38294152094",
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38294152005",
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38294152187",
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38294152083",
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38294152218",
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38294152199"
     ],
-    "next_action": "Await CI on exact PR #834 head 507e35d; then Main/Reviewer structured packet, no auto-merge."
+    "next_action": "Main/Reviewer must inspect PR #834 exact head 507e35d, the review_packet, source privacy and required G1–G4 attestations; G5 physical S24 FE remains open, no auto-merge/auto-approve.",
+    "kind": "REVIEW_HANDOFF"
   },
   "review_history": [
     {
@@ -1206,6 +1288,113 @@
           ".airlab/public-repositories/Ai-orchestrator-riserva/roadmap.yaml"
         ]
       }
+    },
+    {
+      "schema_version": 1,
+      "submitted_at": "2026-10-12T11:32:30Z",
+      "lane_id": "cantiere",
+      "claim_id": "7c6ae34131e828ee79a1",
+      "work_item": "AIVEXUS-BASE-2",
+      "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
+      "branch": "feat/aivexus-project-type-selector-navigation-v1",
+      "pull_request": 832,
+      "summary": "AIVEXUS-BASE-2 exact-head review handoff for PR #832 at 82b5ac57f9132775fd0695eebb4d2de834c860ed, based on merged BASE-1 main b5840bc680d7831d2df191d2cc8e39a9e45c08cd. Adds one shared phone-oriented project-type selector/navigation path for App/Software, Stampa 3D and Videogiochi. CAD/Game create persistent BASE-1-backed drafts and reopen from the same project list without invoking inference or simulating generation. The Codex P2 about changing kind while editing software was fixed and regression-tested. All six exact-head workflows are successful; Codex re-review of the final head reports no major issues. No CAD-1, GAME-1, domain runner, deploy or physical/runtime acceptance is claimed.",
+      "changes": [
+        "Adds a shared project-type selector for App/Software, Stampa 3D and Videogiochi in the existing Cantiere project creation flow.",
+        "New software projects persist an explicit ProjectExtension software kind while preserving the existing proposal/approval lifecycle.",
+        "Stampa 3D and Videogiochi create persistent domain drafts through the same BASE-1 WorkshopWebProject storage; game drafts declare Web while CAD drafts leave platform selection to the future domain runner.",
+        "Project cards and detail navigation expose the persisted project kind and reopen all supported kinds from the same shared project list.",
+        "CAD/Game detail explicitly states that the specialized runner is not connected and no generation is simulated.",
+        "Software editing forces and locks the project kind to software, preventing a stale CAD/Game selection from silently creating a second project.",
+        "Focused widget regression verifies CAD/Game draft persistence without inference plus software edit identity preservation; Web CI includes the new selector suite."
+      ],
+      "evidence": [
+        {
+          "type": "commit",
+          "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/82b5ac57f9132775fd0695eebb4d2de834c860ed",
+          "result": "PASS",
+          "note": "Verified exact final PR #832 head after the P2 edit-kind fix and regression test."
+        },
+        {
+          "type": "pull_request",
+          "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/832",
+          "result": "PASS",
+          "note": "Verified PR #832 open, not draft, mergeable, exact head 82b5ac57f9132775fd0695eebb4d2de834c860ed and base b5840bc680d7831d2df191d2cc8e39a9e45c08cd."
+        },
+        {
+          "type": "ci",
+          "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38241204190",
+          "result": "PASS",
+          "note": "Exact-head Web Cantiere Build completed successfully."
+        },
+        {
+          "type": "analysis",
+          "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38241204190/job/114783973052",
+          "result": "PASS",
+          "note": "Exact-head Web analyze completed successfully before contract tests/build."
+        },
+        {
+          "type": "test",
+          "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38241204190/job/114783973052",
+          "result": "PASS",
+          "note": "Exact-head Web job passed 35 VM tests including 3D/Game draft persistence and software edit kind-lock identity regression, plus Chrome browser suites (2/5/2 tests)."
+        },
+        {
+          "type": "ci",
+          "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38241204381",
+          "result": "PASS",
+          "note": "Exact-head Cantiere First App APK workflow completed successfully; build evidence only."
+        },
+        {
+          "type": "ci",
+          "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38241204385",
+          "result": "PASS",
+          "note": "Exact-head Linux desktop workflow completed successfully."
+        },
+        {
+          "type": "ci",
+          "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38241204453",
+          "result": "PASS",
+          "note": "Exact-head Windows desktop workflow completed successfully."
+        },
+        {
+          "type": "ci",
+          "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38241204290",
+          "result": "PASS",
+          "note": "Exact-head macOS desktop workflow completed successfully."
+        },
+        {
+          "type": "ci",
+          "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38241204451",
+          "result": "PASS",
+          "note": "Exact-head Android signed APK/AAB, test and CodeQL workflow completed successfully; no physical acceptance is implied."
+        },
+        {
+          "type": "analysis",
+          "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/832#issuecomment-6123358247",
+          "result": "PASS",
+          "note": "Codex re-reviewed final head 82b5ac57f9 and reported no major issues after the P2 fix."
+        }
+      ],
+      "known_risks": [
+        "BASE-2 provides shared selection/navigation and persistent drafts only; CAD-1 and GAME-1 specialized runners are intentionally not implemented.",
+        "CAD/Game drafts must continue to show runner unavailable and must never simulate generated files, playable builds, meshes or completion.",
+        "Fusion compatibility, physical print, playable game export and S24 FE target validation remain downstream domain/physical gates.",
+        "The shared Web project list remains browser-origin/profile local; BASE-2 does not add cross-device synchronization."
+      ],
+      "reviewer_checks": [
+        "Review PR #832 at exact final head 82b5ac57f9132775fd0695eebb4d2de834c860ed against BASE-2 only.",
+        "Verify CAD/Game drafts reuse BASE-1 ProjectExtension persistence, reopen from the same list and do not call inference or claim runner success.",
+        "Verify the resolved P2: editing software forces AivexusProjectKind.software, disables the kind selector and preserves the existing project identity.",
+        "Verify all six exact-head workflows and final-head Codex re-review.",
+        "If accepted, merge BASE-2, synchronize the private Riserva roadmap and only then release CAD-1/GAME-1 dependency gates. Do not infer physical/runtime acceptance."
+      ],
+      "roadmap_impact": {
+        "material": true,
+        "refs": [
+          ".airlab/public-repositories/Ai-orchestrator-riserva/roadmap.yaml"
+        ]
+      }
     }
   ],
   "stale_block_history": [
@@ -1399,138 +1588,98 @@
   ],
   "review_packet": {
     "schema_version": 1,
-    "submitted_at": "2026-10-12T11:32:30Z",
+    "submitted_at": "2026-10-12T20:20:06Z",
     "lane_id": "cantiere",
-    "claim_id": "7c6ae34131e828ee79a1",
-    "work_item": "AIVEXUS-BASE-2",
+    "claim_id": "94876ef45cb7b6e77d9c",
+    "work_item": "cantiere-gate-evidence-reviewer-3117",
     "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
-    "branch": "feat/aivexus-project-type-selector-navigation-v1",
-    "pull_request": 832,
-    "summary": "AIVEXUS-BASE-2 exact-head review handoff for PR #832 at 82b5ac57f9132775fd0695eebb4d2de834c860ed, based on merged BASE-1 main b5840bc680d7831d2df191d2cc8e39a9e45c08cd. Adds one shared phone-oriented project-type selector/navigation path for App/Software, Stampa 3D and Videogiochi. CAD/Game create persistent BASE-1-backed drafts and reopen from the same project list without invoking inference or simulating generation. The Codex P2 about changing kind while editing software was fixed and regression-tested. All six exact-head workflows are successful; Codex re-review of the final head reports no major issues. No CAD-1, GAME-1, domain runner, deploy or physical/runtime acceptance is claimed.",
+    "branch": "fix/cantiere-gate-evidence-reviewer-3117",
+    "pull_request": 834,
+    "summary": "+3117 S24 FE physical failure: a separate saved project ('ciao fai un app Android con sfondo nero...') produced a real Engineer diff but Reviewer rejected a purported star.dart import. Diagnostics showed a 9385-character full Reviewer prompt failing before tokens, followed by a 6601-character compact fallback that returned approved=false. PR #834 at exact head 507e35d7478515d17afe86a88b4b5d3de9c87f45 adds explicit opt-in clipboard export of the actual rejected staged virtual workspace before/after source and starts Reviewer compact on the primary attempt only when the full representation exceeds 7000 characters. The existing Reviewer/Validation gates, models, token budgets, retry budgets, memory protections and Local WebSearch remain unchanged. All six exact-head CI workflows pass. No generated-app success or physical fix is claimed.",
     "changes": [
-      "Adds a shared project-type selector for App/Software, Stampa 3D and Videogiochi in the existing Cantiere project creation flow.",
-      "New software projects persist an explicit ProjectExtension software kind while preserving the existing proposal/approval lifecycle.",
-      "Stampa 3D and Videogiochi create persistent domain drafts through the same BASE-1 WorkshopWebProject storage; game drafts declare Web while CAD drafts leave platform selection to the future domain runner.",
-      "Project cards and detail navigation expose the persisted project kind and reopen all supported kinds from the same shared project list.",
-      "CAD/Game detail explicitly states that the specialized runner is not connected and no generation is simulated.",
-      "Software editing forces and locks the project kind to software, preventing a stale CAD/Game selection from silently creating a second project.",
-      "Focused widget regression verifies CAD/Game draft persistence without inference plus software edit identity preservation; Web CI includes the new selector suite."
+      "lib/app_factory/workshop/workshop_gate_evidence_export.dart: new explicit local-only rejected-gate export, sourced from authoritative original/staged virtual workspace snapshots rather than untrusted Engineer transport.",
+      "lib/app_factory/workshop/workshop_production_dashboard_page.dart: show Copia evidenze del gate (codice) for rejected active task, guard busy state and task identity, copy only on user interaction; normal acceptance report unchanged.",
+      "lib/app_factory/workshop/workshop_proposal_review_runner.dart: inspect full prompt length without synthetic metrics; select compact at first Reviewer attempt for >7000 characters and for existing build repair; retain original maxTokens/timeout/retry/allowlist and fail-closed behavior.",
+      "test/app_factory/workshop/workshop_gate_evidence_export_test.dart: staged source fidelity, untrusted proposal mismatch, identity scoping, review/validation rejection, clipboard size/no-diff fail-closed.",
+      "test/app_factory/workshop/workshop_proposal_review_runner_test.dart: overlength Reviewer prompts start compact with only one invocation; genuine rejection still blocks."
     ],
     "evidence": [
       {
-        "type": "commit",
-        "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/82b5ac57f9132775fd0695eebb4d2de834c860ed",
-        "result": "PASS",
-        "note": "Verified exact final PR #832 head after the P2 edit-kind fix and regression test."
+        "type": "physical_device",
+        "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-diagnostics/releases/tag/diagnostics-v1-6bd1447f-5fda-4171-84b4-c1ff56b154cf",
+        "result": "FAIL",
+        "note": "Original +3117 Galaxy S24 FE gate failure. Reviewer primary compact=false chars=9385 failed before tokens, retry compact=true chars=6601 ran; final batch approved=false; normal RAM/trim=0; not validation of #834."
       },
       {
         "type": "pull_request",
-        "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/832",
+        "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/834",
         "result": "PASS",
-        "note": "Verified PR #832 open, not draft, mergeable, exact head 82b5ac57f9132775fd0695eebb4d2de834c860ed and base b5840bc680d7831d2df191d2cc8e39a9e45c08cd."
+        "note": "Open and ready for review; mergeable clean, main base 22aa7484, exact head 507e35d; no merge or approval."
+      },
+      {
+        "type": "commit",
+        "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/507e35d7478515d17afe86a88b4b5d3de9c87f45",
+        "result": "PASS",
+        "note": "Five scoped files including two targeted regression suites."
       },
       {
         "type": "ci",
-        "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38241204190",
+        "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38294152094",
         "result": "PASS",
-        "note": "Exact-head Web Cantiere Build completed successfully."
-      },
-      {
-        "type": "analysis",
-        "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38241204190/job/114783973052",
-        "result": "PASS",
-        "note": "Exact-head Web analyze completed successfully before contract tests/build."
-      },
-      {
-        "type": "test",
-        "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38241204190/job/114783973052",
-        "result": "PASS",
-        "note": "Exact-head Web job passed 35 VM tests including 3D/Game draft persistence and software edit kind-lock identity regression, plus Chrome browser suites (2/5/2 tests)."
+        "note": "Exact-head Android signed APK/AAB CI; flutter analyze + full flutter test + packaging green; create release step skipped on PR."
       },
       {
         "type": "ci",
-        "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38241204381",
+        "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38294152005",
         "result": "PASS",
-        "note": "Exact-head Cantiere First App APK workflow completed successfully; build evidence only."
+        "note": "Exact-head Cantiere First App CI, directed regression suite and deterministic local build-lab smoke."
       },
       {
         "type": "ci",
-        "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38241204385",
+        "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38294152187",
         "result": "PASS",
-        "note": "Exact-head Linux desktop workflow completed successfully."
+        "note": "Exact-head Web compile and contract tests."
       },
       {
         "type": "ci",
-        "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38241204453",
+        "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38294152083",
         "result": "PASS",
-        "note": "Exact-head Windows desktop workflow completed successfully."
+        "note": "Exact-head Windows analyze, Flutter tests, setup build."
       },
       {
         "type": "ci",
-        "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38241204290",
+        "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38294152218",
         "result": "PASS",
-        "note": "Exact-head macOS desktop workflow completed successfully."
+        "note": "Exact-head Linux analyze, Flutter tests, deb build and validation."
       },
       {
         "type": "ci",
-        "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38241204451",
+        "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38294152199",
         "result": "PASS",
-        "note": "Exact-head Android signed APK/AAB, test and CodeQL workflow completed successfully; no physical acceptance is implied."
-      },
-      {
-        "type": "analysis",
-        "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/832#issuecomment-6123358247",
-        "result": "PASS",
-        "note": "Codex re-reviewed final head 82b5ac57f9 and reported no major issues after the P2 fix."
+        "note": "Exact-head macOS analyze, Flutter tests and release build."
       }
     ],
     "known_risks": [
-      "BASE-2 provides shared selection/navigation and persistent drafts only; CAD-1 and GAME-1 specialized runners are intentionally not implemented.",
-      "CAD/Game drafts must continue to show runner unavailable and must never simulate generated files, playable builds, meshes or completion.",
-      "Fusion compatibility, physical print, playable game export and S24 FE target validation remain downstream domain/physical gates.",
-      "The shared Web project list remains browser-origin/profile local; BASE-2 does not add cross-device synchronization."
+      "G5 physical target proof for the #834 changed Reviewer selection/clipboard UI is PENDING. Green CI and deterministic smoke are not S24 FE real Qwen generation, gate success, installation or launch.",
+      "The failed +3117 project's rejected in-memory diff may be unrecoverable after restart because unapproved VirtualWorkspace changes are not persisted; this fix exposes future live rejected diffs and does not reconstruct old ones.",
+      "The source clipboard contains potentially private project text and is visible to device clipboard history/accessibility after explicit owner tap; it is never auto-uploaded to public Diagnostics. Review UX/privacy implications.",
+      "7000-character threshold is observed heuristic based on +3117 evidence, not a guaranteed token/context estimator for other devices or prompts; preserve fail-closed behavior.",
+      "Original star.dart finding remains unclassified (real Engineer error versus false Reviewer rejection) until the actual staged source can be inspected in a future physical attempt.",
+      "Evidence is for a saved dark-background app, not Lista Spesa Lite. Keep these projects and physical acceptance receipts distinct."
     ],
     "reviewer_checks": [
-      "Review PR #832 at exact final head 82b5ac57f9132775fd0695eebb4d2de834c860ed against BASE-2 only.",
-      "Verify CAD/Game drafts reuse BASE-1 ProjectExtension persistence, reopen from the same list and do not call inference or claim runner success.",
-      "Verify the resolved P2: editing software forces AivexusProjectKind.software, disables the kind selector and preserves the existing project identity.",
-      "Verify all six exact-head workflows and final-head Codex re-review.",
-      "If accepted, merge BASE-2, synchronize the private Riserva roadmap and only then release CAD-1/GAME-1 dependency gates. Do not infer physical/runtime acceptance."
+      "Check every PR #834 source diff at exact head 507e35d and ensure staged snapshot extraction matches what the Reviewer actually inspected, even across gate revisions.",
+      "Verify no silent truncation, stale-project cross-copy, private Diagnostics source export or accidental approval/apply mutation.",
+      "Verify oversized first Reviewer attempt is compact without extra retry, prompt char threshold does not alter token budgets/model/timeout or bypass real findings and source/transport protections.",
+      "Check CI G1-G4 and applicable downstream Android, Windows, Linux, macOS and Web impact, with no extrapolation from CI to physical success.",
+      "Keep CANT-11 Phase 1 ONLINE and CANT-AUDIT-06 open until real physical generated APK installation and launch. Physical #834 S24 FE receipt remains pending.",
+      "Do not auto-approve Reviewer or merge based on green CI. If accepted, ensure a new numbered signed release contains exact reviewed merge head before requesting one bounded physical retest."
     ],
     "roadmap_impact": {
-      "material": true,
+      "material": false,
       "refs": [
-        ".airlab/public-repositories/Ai-orchestrator-riserva/roadmap.yaml"
-      ]
-    }
-  },
-  "current_gate_attestation": {
-    "at": "2026-10-12T11:34:03Z",
-    "claim_id": "7c6ae34131e828ee79a1",
-    "packet_sha256": "e3f64d685215a14bbb1f8bb4ce1082b772446ee28e40b0f4ecef74c01f3ac246",
-    "reviewed_by": "main-reviewer",
-    "summary": "Reviewed AIVEXUS-BASE-2 packet at exact PR #832 head 82b5ac57f9132775fd0695eebb4d2de834c860ed. Implementation identity, selector/edit regression, Web/browser integration and all six exact-head CI workflows are PASS. The final-head Codex re-review reports no major issues. This attestation covers G1-G4 only and does not prove CAD/Game runners, deployment or physical/runtime acceptance.",
-    "evidence_refs_by_gate": {
-      "G1_IMPLEMENTATION": [
-        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/82b5ac57f9132775fd0695eebb4d2de834c860ed",
-        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/832"
-      ],
-      "G2_STATIC": [
-        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38241204190",
-        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38241204190/job/114783973052"
-      ],
-      "G3_CI": [
-        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38241204190",
-        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38241204381",
-        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38241204385",
-        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38241204453",
-        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38241204290",
-        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38241204451"
-      ],
-      "G4_INTEGRATION": [
-        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38241204190",
-        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38241204190/job/114783973052",
-        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/832#issuecomment-6123358247"
+        ".airlab/public-repositories/Ai-orchestrator-riserva/roadmap.yaml#CANT-11",
+        ".airlab/public-repositories/Ai-orchestrator-riserva/roadmap.yaml#CANT-AUDIT-06"
       ]
     }
   }
