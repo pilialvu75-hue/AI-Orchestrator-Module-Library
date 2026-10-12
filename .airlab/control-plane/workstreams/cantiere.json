@@ -7,7 +7,7 @@
   "activation": "active",
   "scope": "Exclusive Cantiere/App Factory execution, durability, build/review/validation/apply and first-real-app reliability.",
   "shared_engine_policy": "shared_or_control_plane",
-  "state_version": 58,
+  "state_version": 59,
   "updated_at": "2026-10-12",
   "active_claim": {
     "claim_id": "94876ef45cb7b6e77d9c",
@@ -28,8 +28,8 @@
       "file:pilialvu75-hue/Ai-orchestrator-riserva:test/app_factory/workshop/workshop_task_inference_pipeline_test.dart"
     ],
     "started_at": "2026-10-12T18:41:47Z",
-    "heartbeat_at": "2026-10-12T18:56:06Z",
-    "lease_until": "2026-10-13T06:56:06Z",
+    "heartbeat_at": "2026-10-12T20:40:58Z",
+    "lease_until": "2026-10-13T08:40:58Z",
     "lease_hours": 12
   },
   "dependencies": [],
@@ -110,7 +110,7 @@
     "reviewed_by": "main-reviewer",
     "reviewed_at": "2026-10-12T20:32:50Z"
   },
-  "next_action": "Cantiere: keep the same claim/work item and make a bounded rework on PR #834 only. (1) Capture/carry the authoritative pre-Engineer baseline used for the rejected proposal/revision into the task result or equivalent scoped evidence object, and export only proposal-owned affected paths; preserve staged workspace as source of after-content, reject stale task/project identity, no silent truncation, no automatic Diagnostics upload. Add regression where reusable/library source is staged before Engineer and prove it is excluded while the rejected proposal diff is exact. (2) Construct and measure the compact Reviewer prompt before inference. If compact is still above the safe bound, split/reduce only through existing evidence-preserving batching/coverage or fail closed before runtime; do not change model, maxTokens, timeout, retry count, Reviewer/Validation authority, Local WebSearch, Vulkan or RAM protections. Add a regression with long mandatory instruction/constraints/target paths proving no >7000-char prompt is submitted and genuine rejection remains authoritative. Re-run all six workflows on the new exact head, resolve/reply to both PR review threads, then submit a new claim-bound review packet. Keep G5 S24 FE pending and keep the dark-background project distinct from Lista Spesa Lite.",
+  "next_action": "Complete six exact-head CI checks for 68a2ae62; repair only observed failures; then resolve two review threads, submit new claim-bound packet to Main/Reviewer.",
   "historical_backlog": [
     "Stay in Phase 1 ONLINE until a real generated Android app is physically accepted.",
     "Reproduce the recent manga-drawing app failure from current main with Diagnostics; do not restart generic audits.",
@@ -790,20 +790,39 @@
       "evidence_refs": [],
       "next_action": "Cantiere: keep the same claim/work item and make a bounded rework on PR #834 only. (1) Capture/carry the authoritative pre-Engineer baseline used for the rejected proposal/revision into the task result or equivalent scoped evidence object, and export only proposal-owned affected paths; preserve staged workspace as source of after-content, reject stale task/project identity, no silent truncation, no automatic Diagnostics upload. Add regression where reusable/library source is staged before Engineer and prove it is excluded while the rejected proposal diff is exact. (2) Construct and measure the compact Reviewer prompt before inference. If compact is still above the safe bound, split/reduce only through existing evidence-preserving batching/coverage or fail closed before runtime; do not change model, maxTokens, timeout, retry count, Reviewer/Validation authority, Local WebSearch, Vulkan or RAM protections. Add a regression with long mandatory instruction/constraints/target paths proving no >7000-char prompt is submitted and genuine rejection remains authoritative. Re-run all six workflows on the new exact head, resolve/reply to both PR review threads, then submit a new claim-bound review packet. Keep G5 S24 FE pending and keep the dark-background project distinct from Lista Spesa Lite.",
       "kind": "REVIEW_REWORK"
+    },
+    {
+      "seq": 35,
+      "at": "2026-10-12T20:40:58Z",
+      "claim_id": "94876ef45cb7b6e77d9c",
+      "work_item": "cantiere-gate-evidence-reviewer-3117",
+      "summary": "PR #834 bounded Main/Reviewer P2 rework implemented at 68a2ae62f9be20294000c0b6076e7917d391f477. Rejected-gate source snapshots now capture only final Engineer paths against pre-Engineer/post-Library baseline, fail closed for unrelated or incomplete evidence; Reviewer measures actual compact prompt before all model calls and fails closed above 7000 characters. Both review threads replied; all six exact-head CI workflows were started, pending completion.",
+      "decisions": [
+        "G5 physical S24 FE stays pending; no merge, no build claim or device retry.",
+        "Do not change model, timeout, token budget, Local WebSearch, Vulkan, RAM, gate authority."
+      ],
+      "evidence_refs": [
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/834",
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/68a2ae62f9be20294000c0b6076e7917d391f477"
+      ],
+      "next_action": "Complete six exact-head CI checks for 68a2ae62; repair only observed failures; then resolve two review threads, submit new claim-bound packet to Main/Reviewer."
     }
   ],
   "last_checkpoint": {
-    "seq": 34,
-    "at": "2026-10-12T20:32:50Z",
+    "seq": 35,
+    "at": "2026-10-12T20:40:58Z",
     "claim_id": "94876ef45cb7b6e77d9c",
     "work_item": "cantiere-gate-evidence-reviewer-3117",
-    "summary": "PR #834 exact head 507e35d7478515d17afe86a88b4b5d3de9c87f45 has two confirmed P2 review defects despite 6/6 green CI. P2-1: WorkshopGateEvidenceExport is fed workspace.originalSnapshot versus final staged snapshot, but originalSnapshot predates any certified/local reuse staged before Engineer. The export can therefore include unrelated pre-Engineer reuse, misstate its repository content as the rejected proposal baseline, contaminate evidence across phases, and consume the clipboard limit before the actual rejected Engineer diff. The evidence must use the exact pre-Engineer/revision baseline and restrict paths to the rejected proposal actually judged. P2-2: Reviewer compact-first selects compact when the full prompt exceeds 7000 chars but never measures the resulting compact prompt before inference. Long instruction/constraints/targetFiles/coverage can leave compact above the same threshold and reproduce the zero-token failure. Build and measure compact before submission, then reduce/split within existing batch/coverage semantics or fail closed; do not add retry/token/timeout/model budget. No evidence classifies the historical star.dart finding yet.",
+    "summary": "PR #834 bounded Main/Reviewer P2 rework implemented at 68a2ae62f9be20294000c0b6076e7917d391f477. Rejected-gate source snapshots now capture only final Engineer paths against pre-Engineer/post-Library baseline, fail closed for unrelated or incomplete evidence; Reviewer measures actual compact prompt before all model calls and fails closed above 7000 characters. Both review threads replied; all six exact-head CI workflows were started, pending completion.",
     "decisions": [
-      "Main/Reviewer requested bounded rework."
+      "G5 physical S24 FE stays pending; no merge, no build claim or device retry.",
+      "Do not change model, timeout, token budget, Local WebSearch, Vulkan, RAM, gate authority."
     ],
-    "evidence_refs": [],
-    "next_action": "Cantiere: keep the same claim/work item and make a bounded rework on PR #834 only. (1) Capture/carry the authoritative pre-Engineer baseline used for the rejected proposal/revision into the task result or equivalent scoped evidence object, and export only proposal-owned affected paths; preserve staged workspace as source of after-content, reject stale task/project identity, no silent truncation, no automatic Diagnostics upload. Add regression where reusable/library source is staged before Engineer and prove it is excluded while the rejected proposal diff is exact. (2) Construct and measure the compact Reviewer prompt before inference. If compact is still above the safe bound, split/reduce only through existing evidence-preserving batching/coverage or fail closed before runtime; do not change model, maxTokens, timeout, retry count, Reviewer/Validation authority, Local WebSearch, Vulkan or RAM protections. Add a regression with long mandatory instruction/constraints/target paths proving no >7000-char prompt is submitted and genuine rejection remains authoritative. Re-run all six workflows on the new exact head, resolve/reply to both PR review threads, then submit a new claim-bound review packet. Keep G5 S24 FE pending and keep the dark-background project distinct from Lista Spesa Lite.",
-    "kind": "REVIEW_REWORK"
+    "evidence_refs": [
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/834",
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/68a2ae62f9be20294000c0b6076e7917d391f477"
+    ],
+    "next_action": "Complete six exact-head CI checks for 68a2ae62; repair only observed failures; then resolve two review threads, submit new claim-bound packet to Main/Reviewer."
   },
   "review_history": [
     {
