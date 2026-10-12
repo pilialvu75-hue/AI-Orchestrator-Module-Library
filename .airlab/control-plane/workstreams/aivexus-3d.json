@@ -3,11 +3,11 @@
   "id": "aivexus-3d",
   "title": "Aivexus Studio 3D",
   "role": "worker",
-  "status": "CLAIMED",
+  "status": "IMPLEMENTING",
   "activation": "active",
   "scope": "CAD/3D domain only: CadSpec, measured and photographic inputs, editable CAD/mesh sources, CAD/print exports and domain verification. Must consume the Cantiere-owned shared ProjectExtension/persistence/navigation base instead of modifying or duplicating it.",
   "shared_engine_policy": "domain_extension_only",
-  "state_version": 10,
+  "state_version": 11,
   "updated_at": "2026-10-12",
   "active_claim": {
     "claim_id": "127239b71ee8f7c3f913",
@@ -28,8 +28,8 @@
       "scope:aivexus:cad"
     ],
     "started_at": "2026-10-12T16:50:53Z",
-    "heartbeat_at": "2026-10-12T16:50:53Z",
-    "lease_until": "2026-10-13T04:50:53Z",
+    "heartbeat_at": "2026-10-12T16:56:13Z",
+    "lease_until": "2026-10-13T04:56:13Z",
     "lease_hours": 12
   },
   "dependencies": [
@@ -58,7 +58,7 @@
     "reviewed_by": null,
     "reviewed_at": null
   },
-  "next_action": "On CI signal, transactional resume_wait followed by bounded claim for AIVEXUS-CAD-1; inspect full macOS rerun outcome. If hash mismatch persists, refer separate macOS owner; do not weaken checksum or silently mark CI PASS. Continue only bounded domain scope under unique claim; keep PR #833 draft and G5 runtime/physical UNKNOWN.",
+  "next_action": "Review all six GitHub workflows on exact new head a7e037f and the CAD domain tests. If any fail, fix only files in this CAD claim. Seek Library #113 certification and a separately authorized Cantiere runner/attachment integration; keep PR #833 draft until required code/test/integration and reviewer gates, do not touch Cantiere shared code.",
   "coordination": {
     "domain_lock": "scope:aivexus:cad",
     "shared_contract_owner": "cantiere",
@@ -113,25 +113,45 @@
         "https://github.com/pilialvu75-hue/AI-Orchestrator-Module-Library/issues/113"
       ],
       "next_action": "Read exact-head macOS retry result before G3 assessment. If it fails again for sqlite3 asset hash, refer to platform-macos/runtime owner without changing hash checks; keep PR #833 draft. Independently, obtain certified CadQuery capability and coordinate Cantiere-owned runner/attachment integration; keep Fusion/physical print/Diagnostics UNKNOWN until actual receipts. Resume from canonical wait on new CI evidence."
+    },
+    {
+      "seq": 3,
+      "at": "2026-10-12T16:56:13Z",
+      "claim_id": "127239b71ee8f7c3f913",
+      "work_item": "AIVEXUS-CAD-1",
+      "summary": "CAD-1 PR #833: macOS retry resolved sqlite3 native asset downloaded hash mismatch without weakening integrity checks; all six workflows PASS on original head 7ec116531a94eef36900ad9567a4f1dd492e0064. New CAD-only commits db18eec8b7ba8f4baefc3dff473a085d15b3c854 and a7e037f48f033ec7b70abfdede3a9e6dede0c5b5 extend Python test_cad1.py to nine tests (incl. real STEP/STL/3MF for revisions 1 and 2 and corrupt-STL rejection) and README to explicitly distinguish platform CI from Python/CadQuery verification. Standalone package local equivalent 8/8 tests PASS in installed CadQuery 2.8.0 environment, not exact repo Python suite. Latest PR head a7e037f now has six new CI runs pending/in_progress; no claim that G3 on new head passed. Library #113 tracks need for certified isolated runner and persistent output integration. Fusion/physical print/remote Diagnostics remain UNKNOWN.",
+      "decisions": [
+        "Preserve original successful macOS rerun as evidence only for the earlier head, never substitute it for a changed head.",
+        "Store SHA-256 from actual exported bytes, never infer a static hash from geometric specification.",
+        "Do not declare Studio 3D operational from domain-only code or local Python tests."
+      ],
+      "evidence_refs": [
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/833",
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/a7e037f48f033ec7b70abfdede3a9e6dede0c5b5",
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38245285666",
+        "https://github.com/pilialvu75-hue/AI-Orchestrator-Module-Library/issues/113"
+      ],
+      "next_action": "Review all six GitHub workflows on exact new head a7e037f and the CAD domain tests. If any fail, fix only files in this CAD claim. Seek Library #113 certification and a separately authorized Cantiere runner/attachment integration; keep PR #833 draft until required code/test/integration and reviewer gates, do not touch Cantiere shared code."
     }
   ],
   "last_checkpoint": {
-    "seq": 2,
-    "at": "2026-10-12T12:21:18Z",
-    "claim_id": "95ab09f3f0d83a790c79",
+    "seq": 3,
+    "at": "2026-10-12T16:56:13Z",
+    "claim_id": "127239b71ee8f7c3f913",
     "work_item": "AIVEXUS-CAD-1",
-    "summary": "CAD-1 PR #833 exact head 7ec116531a94eef36900ad9567a4f1dd492e0064: five workflow suites PASS; macOS release FAIL at sqlite3 3.7.0 downloaded native lib hash mismatch, after successful Flutter/macOS tests and GGUF smoke. Reran only failed macOS job 114797505379; new attempt job 114805681230 was in_progress at last check. No CAD-specific errors shown. Local CAD-1 plate and STEP/STL/3MF verified 5/5 for two spec revisions, standalone ZIP test fixture path corrected, all 5 Python tests now pass. Library capability-gap issue #113 created for authorized sandbox CadQuery runner and persistent artifact integration. PR remains draft with 7 scoped files; no edits to shared code or macOS toolchain.",
+    "summary": "CAD-1 PR #833: macOS retry resolved sqlite3 native asset downloaded hash mismatch without weakening integrity checks; all six workflows PASS on original head 7ec116531a94eef36900ad9567a4f1dd492e0064. New CAD-only commits db18eec8b7ba8f4baefc3dff473a085d15b3c854 and a7e037f48f033ec7b70abfdede3a9e6dede0c5b5 extend Python test_cad1.py to nine tests (incl. real STEP/STL/3MF for revisions 1 and 2 and corrupt-STL rejection) and README to explicitly distinguish platform CI from Python/CadQuery verification. Standalone package local equivalent 8/8 tests PASS in installed CadQuery 2.8.0 environment, not exact repo Python suite. Latest PR head a7e037f now has six new CI runs pending/in_progress; no claim that G3 on new head passed. Library #113 tracks need for certified isolated runner and persistent output integration. Fusion/physical print/remote Diagnostics remain UNKNOWN.",
     "decisions": [
-      "No checksum bypass or macOS code changes from CAD lane.",
-      "Do not mark CAD-1 complete or hand off as operational solely on 5/6 CI and standalone geometry.",
-      "Preserve single Cantiere project lifecycle and resource exchange; Library #113 is a capability intake request, not a new claim."
+      "Preserve original successful macOS rerun as evidence only for the earlier head, never substitute it for a changed head.",
+      "Store SHA-256 from actual exported bytes, never infer a static hash from geometric specification.",
+      "Do not declare Studio 3D operational from domain-only code or local Python tests."
     ],
     "evidence_refs": [
       "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/833",
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/a7e037f48f033ec7b70abfdede3a9e6dede0c5b5",
       "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38245285666",
       "https://github.com/pilialvu75-hue/AI-Orchestrator-Module-Library/issues/113"
     ],
-    "next_action": "Read exact-head macOS retry result before G3 assessment. If it fails again for sqlite3 asset hash, refer to platform-macos/runtime owner without changing hash checks; keep PR #833 draft. Independently, obtain certified CadQuery capability and coordinate Cantiere-owned runner/attachment integration; keep Fusion/physical print/Diagnostics UNKNOWN until actual receipts. Resume from canonical wait on new CI evidence."
+    "next_action": "Review all six GitHub workflows on exact new head a7e037f and the CAD domain tests. If any fail, fix only files in this CAD claim. Seek Library #113 certification and a separately authorized Cantiere runner/attachment integration; keep PR #833 draft until required code/test/integration and reviewer gates, do not touch Cantiere shared code."
   },
   "reconciliation_events": [
     {
