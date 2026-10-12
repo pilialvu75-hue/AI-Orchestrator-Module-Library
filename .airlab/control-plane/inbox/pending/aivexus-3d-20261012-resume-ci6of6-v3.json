@@ -1,0 +1,16 @@
+{
+  "schema_version": 1,
+  "request_id": "aivexus-3d-20261012-resume-ci6of6-v3",
+  "actor_id": "chatgpt:aivexus-3d",
+  "lane_id": "aivexus-3d",
+  "operation": "resume_wait",
+  "expected_state_version": 8,
+  "payload": {
+    "signal_id": "github-run-38245285666-macos-success-at-pr833-head-7ec1165",
+    "evidence_refs": [
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38245285666",
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/833",
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/7ec116531a94eef36900ad9567a4f1dd492e0064"
+    ]
+  }
+}
