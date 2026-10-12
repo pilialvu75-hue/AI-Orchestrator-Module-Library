@@ -1,0 +1,20 @@
+{
+  "schema_version": 1,
+  "request_id": "aivexus-3d-20261012-resume-ci-green-a7e037f-v5",
+  "actor_id": "chatgpt:aivexus-3d",
+  "lane_id": "aivexus-3d",
+  "operation": "resume_wait",
+  "expected_state_version": 12,
+  "payload": {
+    "signal_id": "github-pr833-head-a7e037f-six-workflows-pass",
+    "evidence_refs": [
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/833",
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38280766681",
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38280766664",
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38280766592",
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38280766744",
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38280766589",
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38280766645"
+    ]
+  }
+}
