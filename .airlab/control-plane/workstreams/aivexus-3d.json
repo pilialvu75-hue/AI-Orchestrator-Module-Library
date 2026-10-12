@@ -3,11 +3,11 @@
   "id": "aivexus-3d",
   "title": "Aivexus Studio 3D",
   "role": "worker",
-  "status": "CLAIMED",
+  "status": "IMPLEMENTING",
   "activation": "active",
   "scope": "CAD/3D domain only: CadSpec, measured and photographic inputs, editable CAD/mesh sources, CAD/print exports and domain verification. Must consume the Cantiere-owned shared ProjectExtension/persistence/navigation base instead of modifying or duplicating it.",
   "shared_engine_policy": "domain_extension_only",
-  "state_version": 2,
+  "state_version": 3,
   "updated_at": "2026-10-12",
   "active_claim": {
     "claim_id": "d98f37ac2a3e9a58d00d",
@@ -28,8 +28,8 @@
       "scope:aivexus:cad"
     ],
     "started_at": "2026-10-12T11:46:01Z",
-    "heartbeat_at": "2026-10-12T11:46:01Z",
-    "lease_until": "2026-10-12T23:46:01Z",
+    "heartbeat_at": "2026-10-12T11:52:00Z",
+    "lease_until": "2026-10-12T23:52:00Z",
     "lease_hours": 12
   },
   "dependencies": [
@@ -58,7 +58,7 @@
     "reviewed_by": null,
     "reviewed_at": null
   },
-  "next_action": "Wait for Cantiere AIVEXUS-BASE-1/BASE-2 integration. Then claim AIVEXUS-CAD-1 with scope:aivexus:cad and only domain-specific file locks; do not take shared ProjectExtension/storage/navigation locks.",
+  "next_action": "Review exact-head CI and static analysis for PR #833, fix failures solely in locked CAD domain files. Connect a separately authorized/sandboxed CAD runner and Cantiere project artifact persistence before claiming Studio 3D end-to-end. Do not self-promote beyond REVIEW_REQUIRED; Fusion and physical-print gates remain UNKNOWN.",
   "coordination": {
     "domain_lock": "scope:aivexus:cad",
     "shared_contract_owner": "cantiere",
@@ -78,5 +78,39 @@
       "AIVEXUS-BASE-2"
     ],
     "acceptance": "Editable source plus real hashed STEP/STL/3MF and geometry validation. Fusion opening and physical print remain separate evidence gates."
+  },
+  "checkpoints": [
+    {
+      "seq": 1,
+      "at": "2026-10-12T11:52:00Z",
+      "claim_id": "d98f37ac2a3e9a58d00d",
+      "work_item": "AIVEXUS-CAD-1",
+      "summary": "CAD-1 domain-only draft PR #833 opened on head 7ec116531a94eef36900ad9567a4f1dd492e0064. Seven new files: measured parametric CAD/CadQuery generator, STEP/STL/3MF geometry validator, fixture/tests/README, and Dart adapter consuming Cantiere-owned ProjectExtension v1. Local standalone two-revision preflight passed 5/5 geometry checks per revision; exact-head CI for PR #833 not yet complete. No shared files, runner integration, Fusion/print or remote Diagnostics claims.",
+      "decisions": [
+        "Keep PR #833 draft while runner/storage integration and exact-head checks are incomplete.",
+        "Preserve distinct physical Fusion and print gates; SHA-256 must hash exported bytes, not predicted geometry."
+      ],
+      "evidence_refs": [
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/833",
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/7ec116531a94eef36900ad9567a4f1dd492e0064"
+      ],
+      "next_action": "Review exact-head CI and static analysis for PR #833, fix failures solely in locked CAD domain files. Connect a separately authorized/sandboxed CAD runner and Cantiere project artifact persistence before claiming Studio 3D end-to-end. Do not self-promote beyond REVIEW_REQUIRED; Fusion and physical-print gates remain UNKNOWN."
+    }
+  ],
+  "last_checkpoint": {
+    "seq": 1,
+    "at": "2026-10-12T11:52:00Z",
+    "claim_id": "d98f37ac2a3e9a58d00d",
+    "work_item": "AIVEXUS-CAD-1",
+    "summary": "CAD-1 domain-only draft PR #833 opened on head 7ec116531a94eef36900ad9567a4f1dd492e0064. Seven new files: measured parametric CAD/CadQuery generator, STEP/STL/3MF geometry validator, fixture/tests/README, and Dart adapter consuming Cantiere-owned ProjectExtension v1. Local standalone two-revision preflight passed 5/5 geometry checks per revision; exact-head CI for PR #833 not yet complete. No shared files, runner integration, Fusion/print or remote Diagnostics claims.",
+    "decisions": [
+      "Keep PR #833 draft while runner/storage integration and exact-head checks are incomplete.",
+      "Preserve distinct physical Fusion and print gates; SHA-256 must hash exported bytes, not predicted geometry."
+    ],
+    "evidence_refs": [
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/833",
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/7ec116531a94eef36900ad9567a4f1dd492e0064"
+    ],
+    "next_action": "Review exact-head CI and static analysis for PR #833, fix failures solely in locked CAD domain files. Connect a separately authorized/sandboxed CAD runner and Cantiere project artifact persistence before claiming Studio 3D end-to-end. Do not self-promote beyond REVIEW_REQUIRED; Fusion and physical-print gates remain UNKNOWN."
   }
 }
