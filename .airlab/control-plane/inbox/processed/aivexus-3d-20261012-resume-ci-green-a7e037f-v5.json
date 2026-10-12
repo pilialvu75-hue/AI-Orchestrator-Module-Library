@@ -1,0 +1,12 @@
+{
+  "schema_version": 1,
+  "request_id": "aivexus-3d-20261012-resume-ci-green-a7e037f-v5",
+  "status": "APPLIED",
+  "processed_at": "2026-10-12T19:13:22Z",
+  "source_file": "aivexus-3d-20261012-resume-ci-green-a7e037f-v5.json",
+  "lane_id": "aivexus-3d",
+  "operation": "resume_wait",
+  "actor_id": "chatgpt:aivexus-3d",
+  "errors": [],
+  "result_state_version": 13
+}
