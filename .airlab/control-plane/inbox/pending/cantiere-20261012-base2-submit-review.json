@@ -1,0 +1,117 @@
+{
+  "schema_version": 1,
+  "request_id": "cantiere-20261012-base2-submit-review",
+  "actor_id": "automation:cantiere:6abe28904d38819182462df10fe4542c",
+  "lane_id": "cantiere",
+  "operation": "submit_review",
+  "expected_state_version": 48,
+  "payload": {
+    "packet": {
+      "schema_version": 1,
+      "submitted_at": "2026-10-12T11:32:30Z",
+      "lane_id": "cantiere",
+      "claim_id": "7c6ae34131e828ee79a1",
+      "work_item": "AIVEXUS-BASE-2",
+      "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
+      "branch": "feat/aivexus-project-type-selector-navigation-v1",
+      "pull_request": 832,
+      "summary": "AIVEXUS-BASE-2 exact-head review handoff for PR #832 at 82b5ac57f9132775fd0695eebb4d2de834c860ed, based on merged BASE-1 main b5840bc680d7831d2df191d2cc8e39a9e45c08cd. Adds one shared phone-oriented project-type selector/navigation path for App/Software, Stampa 3D and Videogiochi. CAD/Game create persistent BASE-1-backed drafts and reopen from the same project list without invoking inference or simulating generation. The Codex P2 about changing kind while editing software was fixed and regression-tested. All six exact-head workflows are successful; Codex re-review of the final head reports no major issues. No CAD-1, GAME-1, domain runner, deploy or physical/runtime acceptance is claimed.",
+      "changes": [
+        "Adds a shared project-type selector for App/Software, Stampa 3D and Videogiochi in the existing Cantiere project creation flow.",
+        "New software projects persist an explicit ProjectExtension software kind while preserving the existing proposal/approval lifecycle.",
+        "Stampa 3D and Videogiochi create persistent domain drafts through the same BASE-1 WorkshopWebProject storage; game drafts declare Web while CAD drafts leave platform selection to the future domain runner.",
+        "Project cards and detail navigation expose the persisted project kind and reopen all supported kinds from the same shared project list.",
+        "CAD/Game detail explicitly states that the specialized runner is not connected and no generation is simulated.",
+        "Software editing forces and locks the project kind to software, preventing a stale CAD/Game selection from silently creating a second project.",
+        "Focused widget regression verifies CAD/Game draft persistence without inference plus software edit identity preservation; Web CI includes the new selector suite."
+      ],
+      "evidence": [
+        {
+          "type": "commit",
+          "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/82b5ac57f9132775fd0695eebb4d2de834c860ed",
+          "result": "PASS",
+          "note": "Verified exact final PR #832 head after the P2 edit-kind fix and regression test."
+        },
+        {
+          "type": "pull_request",
+          "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/832",
+          "result": "PASS",
+          "note": "Verified PR #832 open, not draft, mergeable, exact head 82b5ac57f9132775fd0695eebb4d2de834c860ed and base b5840bc680d7831d2df191d2cc8e39a9e45c08cd."
+        },
+        {
+          "type": "ci",
+          "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38241204190",
+          "result": "PASS",
+          "note": "Exact-head Web Cantiere Build completed successfully."
+        },
+        {
+          "type": "analysis",
+          "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38241204190/job/114783973052",
+          "result": "PASS",
+          "note": "Exact-head Web analyze completed successfully before contract tests/build."
+        },
+        {
+          "type": "test",
+          "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38241204190/job/114783973052",
+          "result": "PASS",
+          "note": "Exact-head Web job passed 35 VM tests including 3D/Game draft persistence and software edit kind-lock identity regression, plus Chrome browser suites (2/5/2 tests)."
+        },
+        {
+          "type": "ci",
+          "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38241204381",
+          "result": "PASS",
+          "note": "Exact-head Cantiere First App APK workflow completed successfully; build evidence only."
+        },
+        {
+          "type": "ci",
+          "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38241204385",
+          "result": "PASS",
+          "note": "Exact-head Linux desktop workflow completed successfully."
+        },
+        {
+          "type": "ci",
+          "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38241204453",
+          "result": "PASS",
+          "note": "Exact-head Windows desktop workflow completed successfully."
+        },
+        {
+          "type": "ci",
+          "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38241204290",
+          "result": "PASS",
+          "note": "Exact-head macOS desktop workflow completed successfully."
+        },
+        {
+          "type": "ci",
+          "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38241204451",
+          "result": "PASS",
+          "note": "Exact-head Android signed APK/AAB, test and CodeQL workflow completed successfully; no physical acceptance is implied."
+        },
+        {
+          "type": "analysis",
+          "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/832#issuecomment-6123358247",
+          "result": "PASS",
+          "note": "Codex re-reviewed final head 82b5ac57f9 and reported no major issues after the P2 fix."
+        }
+      ],
+      "known_risks": [
+        "BASE-2 provides shared selection/navigation and persistent drafts only; CAD-1 and GAME-1 specialized runners are intentionally not implemented.",
+        "CAD/Game drafts must continue to show runner unavailable and must never simulate generated files, playable builds, meshes or completion.",
+        "Fusion compatibility, physical print, playable game export and S24 FE target validation remain downstream domain/physical gates.",
+        "The shared Web project list remains browser-origin/profile local; BASE-2 does not add cross-device synchronization."
+      ],
+      "reviewer_checks": [
+        "Review PR #832 at exact final head 82b5ac57f9132775fd0695eebb4d2de834c860ed against BASE-2 only.",
+        "Verify CAD/Game drafts reuse BASE-1 ProjectExtension persistence, reopen from the same list and do not call inference or claim runner success.",
+        "Verify the resolved P2: editing software forces AivexusProjectKind.software, disables the kind selector and preserves the existing project identity.",
+        "Verify all six exact-head workflows and final-head Codex re-review.",
+        "If accepted, merge BASE-2, synchronize the private Riserva roadmap and only then release CAD-1/GAME-1 dependency gates. Do not infer physical/runtime acceptance."
+      ],
+      "roadmap_impact": {
+        "material": true,
+        "refs": [
+          ".airlab/public-repositories/Ai-orchestrator-riserva/roadmap.yaml"
+        ]
+      }
+    }
+  }
+}
