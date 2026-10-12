@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "request_id": "diagnostics-20261012-114-review-accept",
+  "actor_id": "chatgpt:main-reviewer",
+  "lane_id": "diagnostics",
+  "operation": "review_accept",
+  "expected_state_version": 8,
+  "payload": {
+    "summary": "Diagnostics #114 / Riserva PR #835 accepted at exact head c1bcfca31e2f658e5c0bb4a000c9447e4f6c55b2. Closed producer-matched projection preserves only allowlisted stall/terminal reason and bounded numeric timing/token fields; sensitive session/prompt/response/path/free-form errors fail closed. Live and persisted Diagnostics ingestion both apply publicLogProjection. Cross-repository scope is authorized by the Diagnostics claim and explicit Riserva file locks. Five exact-head CI workflows PASS. No timeout, RAM, Vulkan or physical-runtime success is claimed.",
+    "next_action": "Merge PR #835 at exact reviewed head. Keep S24 FE post-fix Diagnostics export validation, RAM stability and Vulkan validation open. Complete non-material canonical sync and return Diagnostics lane to READY for follow-up evidence only after a reviewed release.",
+    "evidence_refs": [
+      "Ai-orchestrator-riserva#835",
+      "commit:c1bcfca31e2f658e5c0bb4a000c9447e4f6c55b2",
+      "CI:38303448979",
+      "CI:38303448867",
+      "CI:38303448786",
+      "CI:38303448823",
+      "CI:38303448811",
+      "integration:github_diagnostics:_capture->publicLogProjection",
+      "AI-Orchestrator-Module-Library#114"
+    ]
+  }
+}
