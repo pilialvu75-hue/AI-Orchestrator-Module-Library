@@ -3,34 +3,13 @@
   "id": "cantiere",
   "title": "Cantiere",
   "role": "worker",
-  "status": "REVIEW_REQUIRED",
+  "status": "BLOCKED",
   "activation": "active",
   "scope": "Exclusive Cantiere/App Factory execution, durability, build/review/validation/apply and first-real-app reliability.",
   "shared_engine_policy": "shared_or_control_plane",
-  "state_version": 44,
+  "state_version": 45,
   "updated_at": "2026-10-12",
-  "active_claim": {
-    "claim_id": "3d39dee487b98eb463b1",
-    "owner_lane": "cantiere",
-    "work_item": "AIVEXUS-BASE-1",
-    "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
-    "scope": "AIVEXUS-BASE-1 only: claim the already implemented and re-aligned shared ProjectExtension/persistence/attachment/resource-exchange base at PR #826 head a63b8cf14c07e6aeba361a1ee4e6e832e6ce1df1 solely to submit current exact-head evidence for review. No BASE-2, CAD/Game runners, domain pages, deploy, CANT-11 expansion or runtime claims.",
-    "branch": "feat/aivexus-shared-project-base-v1",
-    "resource_locks": [
-      "branch:pilialvu75-hue/Ai-orchestrator-riserva:feat/aivexus-shared-project-base-v1",
-      "contract:aivexus-project-extension-v1",
-      "contract:aivexus-resource-exchange-v1",
-      "file:pilialvu75-hue/Ai-orchestrator-riserva:.github/workflows/web-build.yml",
-      "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/app_factory/workshop/web/workshop_web_project_storage.dart",
-      "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/app_factory/workshop/web/workshop_web_projects_page.dart",
-      "file:pilialvu75-hue/Ai-orchestrator-riserva:test/app_factory/workshop/web/workshop_web_project_storage_test.dart",
-      "scope:aivexus:shared-base"
-    ],
-    "started_at": "2026-10-12T10:11:30Z",
-    "heartbeat_at": "2026-10-12T10:11:30Z",
-    "lease_until": "2026-10-12T22:11:30Z",
-    "lease_hours": 12
-  },
+  "active_claim": null,
   "dependencies": [],
   "roadmap_refs": [
     ".airlab/public-repositories/Ai-orchestrator-riserva/roadmap.yaml#CANT-11",
@@ -106,16 +85,16 @@
     "G3_CI": "PASS",
     "G4_INTEGRATION": "PASS",
     "G5_TARGET_RUNTIME": "NOT_APPLICABLE_UNTIL_RUNTIME_CHANGE",
-    "G6_REVIEWER": "PENDING",
-    "G7_CANONICAL_SYNC": "PENDING"
+    "G6_REVIEWER": "PASS",
+    "G7_CANONICAL_SYNC": "PENDING_ROADMAP_SYNC"
   },
   "reviewer": {
     "required": true,
-    "state": "PENDING",
+    "state": "APPROVED",
     "reviewed_by": "main-reviewer",
-    "reviewed_at": "2026-10-12T10:21:35Z"
+    "reviewed_at": "2026-10-12T10:22:50Z"
   },
-  "next_action": "Main/Reviewer must inspect the review_packet, linked evidence and required gates before promotion or rework.",
+  "next_action": "Synchronize the material roadmap refs, then record canonical sync completion before new work can be claimed.",
   "historical_backlog": [
     "Stay in Phase 1 ONLINE until a real generated Android app is physically accepted.",
     "Reproduce the recent manga-drawing app failure from current main with Diagnostics; do not restart generic audits.",
@@ -621,29 +600,51 @@
       ],
       "next_action": "Main/Reviewer must inspect the review_packet, linked evidence and required gates before promotion or rework.",
       "kind": "REVIEW_HANDOFF"
+    },
+    {
+      "seq": 26,
+      "at": "2026-10-12T10:22:50Z",
+      "claim_id": "3d39dee487b98eb463b1",
+      "work_item": "AIVEXUS-BASE-1",
+      "summary": "AIVEXUS-BASE-1 accepted at exact PR #826 head a63b8cf14c07e6aeba361a1ee4e6e832e6ce1df1 after metadata-only roadmap ref correction. Packet-bound G1-G4 are PASS. Approval is limited to BASE-1 shared foundations and does not imply BASE-2, CAD/Game or physical/runtime acceptance.",
+      "decisions": [
+        "Main/Reviewer accepted the implementation/review gate."
+      ],
+      "evidence_refs": [
+        "Ai-orchestrator-riserva#826",
+        "commit:a63b8cf14c07e6aeba361a1ee4e6e832e6ce1df1",
+        "CI:38161301515",
+        "CI:38161301477",
+        "CI:38161301505",
+        "CI:38161301503",
+        "CI:38161301487",
+        "CI:38161301491"
+      ],
+      "next_action": "Merge PR #826 at exact reviewed head, synchronize .airlab/public-repositories/Ai-orchestrator-riserva/roadmap.yaml to record BASE-1 integration, complete canonical sync, then claim AIVEXUS-BASE-2.",
+      "kind": "REVIEW_ACCEPTED"
     }
   ],
   "last_checkpoint": {
-    "seq": 25,
-    "at": "2026-10-12T10:22:10Z",
+    "seq": 26,
+    "at": "2026-10-12T10:22:50Z",
     "claim_id": "3d39dee487b98eb463b1",
     "work_item": "AIVEXUS-BASE-1",
-    "summary": "Metadata-corrected current-main resubmission for AIVEXUS-BASE-1 at exact PR #826 head a63b8cf14c07e6aeba361a1ee4e6e832e6ce1df1. Branch is aligned to Riserva main 9f320c82073fc74c7cd4a8b974071ec0addb3772, PR is open/not draft/mergeable, and all six exact-head workflows are successful. No code/head/CI change from the previously reviewed packet; roadmap sync metadata now references only the authoritative private roadmap file.",
-    "decisions": [],
-    "evidence_refs": [
-      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/a63b8cf14c07e6aeba361a1ee4e6e832e6ce1df1",
-      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/826",
-      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38161301515",
-      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38161301515/job/114534601604",
-      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38161301515/job/114534601604",
-      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38161301477",
-      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38161301505",
-      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38161301503",
-      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38161301487",
-      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38161301491"
+    "summary": "AIVEXUS-BASE-1 accepted at exact PR #826 head a63b8cf14c07e6aeba361a1ee4e6e832e6ce1df1 after metadata-only roadmap ref correction. Packet-bound G1-G4 are PASS. Approval is limited to BASE-1 shared foundations and does not imply BASE-2, CAD/Game or physical/runtime acceptance.",
+    "decisions": [
+      "Main/Reviewer accepted the implementation/review gate."
     ],
-    "next_action": "Main/Reviewer must inspect the review_packet, linked evidence and required gates before promotion or rework.",
-    "kind": "REVIEW_HANDOFF"
+    "evidence_refs": [
+      "Ai-orchestrator-riserva#826",
+      "commit:a63b8cf14c07e6aeba361a1ee4e6e832e6ce1df1",
+      "CI:38161301515",
+      "CI:38161301477",
+      "CI:38161301505",
+      "CI:38161301503",
+      "CI:38161301487",
+      "CI:38161301491"
+    ],
+    "next_action": "Merge PR #826 at exact reviewed head, synchronize .airlab/public-repositories/Ai-orchestrator-riserva/roadmap.yaml to record BASE-1 integration, complete canonical sync, then claim AIVEXUS-BASE-2.",
+    "kind": "REVIEW_ACCEPTED"
   },
   "review_history": [
     {
@@ -682,6 +683,24 @@
       "work_item": "AIVEXUS-BASE-1",
       "decision": "CHANGES_REQUESTED",
       "summary": "Review metadata correction only: AIVEXUS-BASE-1 implementation and exact-head evidence are accepted, but review_accept was quarantined because review_packet.roadmap_impact.refs contained contract files/anchors instead of authoritative roadmap file paths. No code/head/CI rework is required."
+    },
+    {
+      "reviewed_at": "2026-10-12T10:22:50Z",
+      "reviewed_by": "main-reviewer",
+      "claim_id": "3d39dee487b98eb463b1",
+      "work_item": "AIVEXUS-BASE-1",
+      "decision": "APPROVED",
+      "summary": "AIVEXUS-BASE-1 accepted at exact PR #826 head a63b8cf14c07e6aeba361a1ee4e6e832e6ce1df1 after metadata-only roadmap ref correction. Packet-bound G1-G4 are PASS. Approval is limited to BASE-1 shared foundations and does not imply BASE-2, CAD/Game or physical/runtime acceptance.",
+      "evidence_refs": [
+        "Ai-orchestrator-riserva#826",
+        "commit:a63b8cf14c07e6aeba361a1ee4e6e832e6ce1df1",
+        "CI:38161301515",
+        "CI:38161301477",
+        "CI:38161301505",
+        "CI:38161301503",
+        "CI:38161301487",
+        "CI:38161301491"
+      ]
     }
   ],
   "completed_work": [
@@ -780,6 +799,13 @@
         "CI:38161301487"
       ],
       "at": "2026-10-12T10:08:06Z"
+    },
+    {
+      "type": "CLAIM_RELEASED_AFTER_REVIEW",
+      "claim_id": "3d39dee487b98eb463b1",
+      "work_item": "AIVEXUS-BASE-1",
+      "reason": "Main/Reviewer accepted the bounded implementation/review gate.",
+      "at": "2026-10-12T10:22:50Z"
     }
   ],
   "review_packet_history": [
@@ -1259,5 +1285,14 @@
         "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38161301515/job/114534601604"
       ]
     }
+  },
+  "block_reason": {
+    "code": "CANONICAL_SYNC_REQUIRED",
+    "roadmap_refs": [
+      ".airlab/public-repositories/Ai-orchestrator-riserva/roadmap.yaml"
+    ],
+    "reviewed_claim_id": "3d39dee487b98eb463b1",
+    "work_item": "AIVEXUS-BASE-1",
+    "detected_at": "2026-10-12T10:22:50Z"
   }
 }

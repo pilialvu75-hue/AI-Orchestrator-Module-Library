@@ -7,5 +7,24 @@
     "require_evidence_ref": true,
     "enforcement_started_at": "2026-10-03T16:37:12Z"
   },
-  "records": []
+  "records": [
+    {
+      "key": "cantiere:3d39dee487b98eb463b1",
+      "lane_id": "cantiere",
+      "claim_id": "3d39dee487b98eb463b1",
+      "work_item": "AIVEXUS-BASE-1",
+      "status": "BASELINE_CAPTURED",
+      "review_accept_request_id": "cantiere-20261012-base1-review-accept-v2",
+      "captured_at": "2026-10-12T10:22:50Z",
+      "roadmap_refs": [
+        {
+          "ref": ".airlab/public-repositories/Ai-orchestrator-riserva/roadmap.yaml",
+          "path": ".airlab/public-repositories/Ai-orchestrator-riserva/roadmap.yaml",
+          "before_sha256": "93b1eabaed7fcbb8862db58c90c2b2e14de5b912fc8235339cf44974d0ac55cb"
+        }
+      ],
+      "validated_completion": null,
+      "completion": null
+    }
+  ]
 }
