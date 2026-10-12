@@ -7,7 +7,7 @@
     "policy": "This private repository is the single coordination authority. Chats and agents are workers, not independent sources of truth."
   },
   "updated_at": "2026-10-12",
-  "state_revision": 193,
+  "state_revision": 194,
   "lifecycle_status": "BOOTSTRAP_ACTIVE",
   "roadmap_authority": {
     "library": ".airlab/roadmap.yaml",
@@ -80,10 +80,10 @@
     "invalid_lane_behavior": "ISOLATE_AND_SURFACE_PROJECTION_INCIDENT"
   },
   "projection": {
-    "source_digest": "9c1af936b9ddaa453e68bbbf4575d59eb8f2b8236a87b89ba5906466464bd7af",
-    "projected_at": "2026-10-12T12:12:18Z",
+    "source_digest": "d4bdec04d47378ebe0e7a1cdd901aaf54421adb1572bcff7d7084d4147ce53d3",
+    "projected_at": "2026-10-12T12:21:18Z",
     "counts": {
-      "CLAIMED": 1,
+      "IMPLEMENTING": 1,
       "READY": 16
     },
     "active_claims": [
@@ -92,7 +92,7 @@
         "claim_id": "95ab09f3f0d83a790c79",
         "work_item": "AIVEXUS-CAD-1",
         "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
-        "lease_until": "2026-10-13T00:12:18Z",
+        "lease_until": "2026-10-13T00:21:18Z",
         "resource_locks": [
           "branch:pilialvu75-hue/Ai-orchestrator-riserva:feat/aivexus-cad1-parametric-sample",
           "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/app_factory/workshop/domains/cad/cad1_domain_adapter.dart",
@@ -239,15 +239,15 @@
       },
       {
         "id": "aivexus-3d",
-        "status": "CLAIMED",
+        "status": "IMPLEMENTING",
         "activation": "active",
-        "state_version": 6,
+        "state_version": 7,
         "updated_at": "2026-10-12",
         "active_claim": {
           "claim_id": "95ab09f3f0d83a790c79",
           "work_item": "AIVEXUS-CAD-1",
           "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
-          "lease_until": "2026-10-13T00:12:18Z",
+          "lease_until": "2026-10-13T00:21:18Z",
           "resource_locks": [
             "branch:pilialvu75-hue/Ai-orchestrator-riserva:feat/aivexus-cad1-parametric-sample",
             "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/app_factory/workshop/domains/cad/cad1_domain_adapter.dart",
@@ -263,7 +263,7 @@
         "reviewer_state": "PENDING",
         "inference_profile_status": null,
         "historical_backlog_count": 0,
-        "next_action": "On CI evidence signal, resume wait through authorized transactional inbox, then claim AIVEXUS-CAD-1 anew and implement bounded follow-up against current main. Keep Cantiere shared files untouched; integrate CAD runner and real persisted artifact receipts before REVIEW_REQUIRED."
+        "next_action": "Read exact-head macOS retry result before G3 assessment. If it fails again for sqlite3 asset hash, refer to platform-macos/runtime owner without changing hash checks; keep PR #833 draft. Independently, obtain certified CadQuery capability and coordinate Cantiere-owned runner/attachment integration; keep Fusion/physical print/Diagnostics UNKNOWN until actual receipts. Resume from canonical wait on new CI evidence."
       },
       {
         "id": "aivexus-games",
