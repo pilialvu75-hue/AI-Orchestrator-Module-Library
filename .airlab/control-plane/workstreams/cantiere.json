@@ -7,7 +7,7 @@
   "activation": "active",
   "scope": "Exclusive Cantiere/App Factory execution, durability, build/review/validation/apply and first-real-app reliability.",
   "shared_engine_policy": "shared_or_control_plane",
-  "state_version": 49,
+  "state_version": 50,
   "updated_at": "2026-10-12",
   "active_claim": {
     "claim_id": "7c6ae34131e828ee79a1",
@@ -104,10 +104,10 @@
   ],
   "gates": {
     "G0_CLAIM": "PASS",
-    "G1_IMPLEMENTATION": "PENDING",
-    "G2_STATIC": "PENDING",
-    "G3_CI": "PENDING",
-    "G4_INTEGRATION": "PENDING",
+    "G1_IMPLEMENTATION": "PASS",
+    "G2_STATIC": "PASS",
+    "G3_CI": "PASS",
+    "G4_INTEGRATION": "PASS",
     "G5_TARGET_RUNTIME": "NOT_APPLICABLE_UNTIL_RUNTIME_CHANGE",
     "G6_REVIEWER": "PENDING",
     "G7_CANONICAL_SYNC": "PENDING"
@@ -1335,6 +1335,36 @@
           "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38161301515/job/114534601604"
         ]
       }
+    },
+    {
+      "at": "2026-10-12T11:34:03Z",
+      "claim_id": "7c6ae34131e828ee79a1",
+      "packet_sha256": "e3f64d685215a14bbb1f8bb4ce1082b772446ee28e40b0f4ecef74c01f3ac246",
+      "reviewed_by": "main-reviewer",
+      "summary": "Reviewed AIVEXUS-BASE-2 packet at exact PR #832 head 82b5ac57f9132775fd0695eebb4d2de834c860ed. Implementation identity, selector/edit regression, Web/browser integration and all six exact-head CI workflows are PASS. The final-head Codex re-review reports no major issues. This attestation covers G1-G4 only and does not prove CAD/Game runners, deployment or physical/runtime acceptance.",
+      "evidence_refs_by_gate": {
+        "G1_IMPLEMENTATION": [
+          "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/82b5ac57f9132775fd0695eebb4d2de834c860ed",
+          "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/832"
+        ],
+        "G2_STATIC": [
+          "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38241204190",
+          "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38241204190/job/114783973052"
+        ],
+        "G3_CI": [
+          "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38241204190",
+          "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38241204381",
+          "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38241204385",
+          "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38241204453",
+          "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38241204290",
+          "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38241204451"
+        ],
+        "G4_INTEGRATION": [
+          "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38241204190",
+          "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38241204190/job/114783973052",
+          "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/832#issuecomment-6123358247"
+        ]
+      }
     }
   ],
   "review_packet": {
@@ -1441,6 +1471,36 @@
       "material": true,
       "refs": [
         ".airlab/public-repositories/Ai-orchestrator-riserva/roadmap.yaml"
+      ]
+    }
+  },
+  "current_gate_attestation": {
+    "at": "2026-10-12T11:34:03Z",
+    "claim_id": "7c6ae34131e828ee79a1",
+    "packet_sha256": "e3f64d685215a14bbb1f8bb4ce1082b772446ee28e40b0f4ecef74c01f3ac246",
+    "reviewed_by": "main-reviewer",
+    "summary": "Reviewed AIVEXUS-BASE-2 packet at exact PR #832 head 82b5ac57f9132775fd0695eebb4d2de834c860ed. Implementation identity, selector/edit regression, Web/browser integration and all six exact-head CI workflows are PASS. The final-head Codex re-review reports no major issues. This attestation covers G1-G4 only and does not prove CAD/Game runners, deployment or physical/runtime acceptance.",
+    "evidence_refs_by_gate": {
+      "G1_IMPLEMENTATION": [
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/82b5ac57f9132775fd0695eebb4d2de834c860ed",
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/832"
+      ],
+      "G2_STATIC": [
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38241204190",
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38241204190/job/114783973052"
+      ],
+      "G3_CI": [
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38241204190",
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38241204381",
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38241204385",
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38241204453",
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38241204290",
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38241204451"
+      ],
+      "G4_INTEGRATION": [
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38241204190",
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38241204190/job/114783973052",
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/832#issuecomment-6123358247"
       ]
     }
   }
