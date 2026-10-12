@@ -7,7 +7,7 @@
     "policy": "This private repository is the single coordination authority. Chats and agents are workers, not independent sources of truth."
   },
   "updated_at": "2026-10-12",
-  "state_revision": 199,
+  "state_revision": 200,
   "lifecycle_status": "BOOTSTRAP_ACTIVE",
   "roadmap_authority": {
     "library": ".airlab/roadmap.yaml",
@@ -80,14 +80,61 @@
     "invalid_lane_behavior": "ISOLATE_AND_SURFACE_PROJECTION_INCIDENT"
   },
   "projection": {
-    "source_digest": "01ae8d48459ec4e8418fba1363f4ec3762f6b6207877bd45402e59c0f496b111",
-    "projected_at": "2026-10-12T16:56:52Z",
+    "source_digest": "cc15f8ad2e7332e742f9ab2147990996b3c1708bfde85dbc888db41100c92737",
+    "projected_at": "2026-10-12T18:42:22Z",
     "counts": {
       "BLOCKED": 1,
-      "READY": 16
+      "CLAIMED": 1,
+      "READY": 15
     },
-    "active_claims": [],
-    "active_resource_locks": [],
+    "active_claims": [
+      {
+        "lane": "cantiere",
+        "claim_id": "94876ef45cb7b6e77d9c",
+        "work_item": "cantiere-gate-evidence-reviewer-3117",
+        "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
+        "lease_until": "2026-10-13T06:41:47Z",
+        "resource_locks": [
+          "branch:pilialvu75-hue/Ai-orchestrator-riserva:fix/cantiere-gate-evidence-reviewer-3117",
+          "contract:cantiere-gate-evidence",
+          "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/app_factory/workshop/workshop_production_dashboard_page.dart",
+          "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/app_factory/workshop/workshop_proposal_review_runner.dart",
+          "file:pilialvu75-hue/Ai-orchestrator-riserva:test/app_factory/workshop/workshop_proposal_review_runner_test.dart"
+        ]
+      }
+    ],
+    "active_resource_locks": [
+      {
+        "key": "branch:pilialvu75-hue/Ai-orchestrator-riserva:fix/cantiere-gate-evidence-reviewer-3117",
+        "lane": "cantiere",
+        "claim_id": "94876ef45cb7b6e77d9c",
+        "work_item": "cantiere-gate-evidence-reviewer-3117"
+      },
+      {
+        "key": "contract:cantiere-gate-evidence",
+        "lane": "cantiere",
+        "claim_id": "94876ef45cb7b6e77d9c",
+        "work_item": "cantiere-gate-evidence-reviewer-3117"
+      },
+      {
+        "key": "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/app_factory/workshop/workshop_production_dashboard_page.dart",
+        "lane": "cantiere",
+        "claim_id": "94876ef45cb7b6e77d9c",
+        "work_item": "cantiere-gate-evidence-reviewer-3117"
+      },
+      {
+        "key": "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/app_factory/workshop/workshop_proposal_review_runner.dart",
+        "lane": "cantiere",
+        "claim_id": "94876ef45cb7b6e77d9c",
+        "work_item": "cantiere-gate-evidence-reviewer-3117"
+      },
+      {
+        "key": "file:pilialvu75-hue/Ai-orchestrator-riserva:test/app_factory/workshop/workshop_proposal_review_runner_test.dart",
+        "lane": "cantiere",
+        "claim_id": "94876ef45cb7b6e77d9c",
+        "work_item": "cantiere-gate-evidence-reviewer-3117"
+      }
+    ],
     "review_required": [],
     "blocked": [
       {
@@ -212,12 +259,24 @@
       },
       {
         "id": "cantiere",
-        "status": "READY",
+        "status": "CLAIMED",
         "activation": "active",
-        "state_version": 52,
+        "state_version": 53,
         "updated_at": "2026-10-12",
-        "active_claim": null,
-        "reviewer_state": "APPROVED",
+        "active_claim": {
+          "claim_id": "94876ef45cb7b6e77d9c",
+          "work_item": "cantiere-gate-evidence-reviewer-3117",
+          "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
+          "lease_until": "2026-10-13T06:41:47Z",
+          "resource_locks": [
+            "branch:pilialvu75-hue/Ai-orchestrator-riserva:fix/cantiere-gate-evidence-reviewer-3117",
+            "contract:cantiere-gate-evidence",
+            "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/app_factory/workshop/workshop_production_dashboard_page.dart",
+            "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/app_factory/workshop/workshop_proposal_review_runner.dart",
+            "file:pilialvu75-hue/Ai-orchestrator-riserva:test/app_factory/workshop/workshop_proposal_review_runner_test.dart"
+          ]
+        },
+        "reviewer_state": "PENDING",
         "inference_profile_status": null,
         "historical_backlog_count": 3,
         "next_action": "Synchronize the material roadmap refs, then record canonical sync completion before new work can be claimed."
