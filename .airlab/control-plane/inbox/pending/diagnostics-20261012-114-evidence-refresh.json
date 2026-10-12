@@ -1,0 +1,12 @@
+{
+  "schema_version": 1,
+  "request_id": "diagnostics-20261012-114-evidence-refresh",
+  "actor_id": "chatgpt:main-reviewer",
+  "lane_id": "diagnostics",
+  "operation": "review_rework",
+  "expected_state_version": 5,
+  "payload": {
+    "reason": "Evidence-only refresh for Diagnostics #114 / Riserva PR #835. Code review at exact head c1bcfca31e2f658e5c0bb4a000c9447e4f6c55b2 found no implementation rework. All five exact-head workflows have now completed successfully; packet evidence still marks Android, Windows and macOS PENDING and marks the independently verified live/persisted integration path as INFO. Refresh only those evidence results. Keep physical S24 FE receipt pending; no RAM, Vulkan, watchdog or runtime-stability claim.",
+    "next_action": "Resubmit the unchanged claim-bound review packet for PR #835 exact head c1bcfca31e2f658e5c0bb4a000c9447e4f6c55b2 with Linux/Web/Android/Windows/macOS CI all PASS and the github_diagnostics live+persisted _capture -> publicLogProjection integration analysis PASS. Leave physical S24 FE evidence PENDING. No code changes."
+  }
+}
