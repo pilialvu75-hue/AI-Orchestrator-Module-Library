@@ -3,13 +3,35 @@
   "id": "aivexus-3d",
   "title": "Aivexus Studio 3D",
   "role": "worker",
-  "status": "READY",
+  "status": "CLAIMED",
   "activation": "active",
   "scope": "CAD/3D domain only: CadSpec, measured and photographic inputs, editable CAD/mesh sources, CAD/print exports and domain verification. Must consume the Cantiere-owned shared ProjectExtension/persistence/navigation base instead of modifying or duplicating it.",
   "shared_engine_policy": "domain_extension_only",
-  "state_version": 5,
+  "state_version": 6,
   "updated_at": "2026-10-12",
-  "active_claim": null,
+  "active_claim": {
+    "claim_id": "95ab09f3f0d83a790c79",
+    "owner_lane": "aivexus-3d",
+    "work_item": "AIVEXUS-CAD-1",
+    "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
+    "scope": "CAD-1 bounded follow-up on PR #833: inspect exact-head CI, validate and correct isolated CAD-only generator, export receipt and Dart domain adapter/tests. No shared persistence/navigation, no sqlite3 macOS toolchain changes and no false Fusion/print/runtime claims.",
+    "branch": "feat/aivexus-cad1-parametric-sample",
+    "resource_locks": [
+      "branch:pilialvu75-hue/Ai-orchestrator-riserva:feat/aivexus-cad1-parametric-sample",
+      "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/app_factory/workshop/domains/cad/cad1_domain_adapter.dart",
+      "file:pilialvu75-hue/Ai-orchestrator-riserva:test/app_factory/workshop/domains/cad/cad1_domain_adapter_test.dart",
+      "file:pilialvu75-hue/Ai-orchestrator-riserva:tools/aivexus/cad/README.md",
+      "file:pilialvu75-hue/Ai-orchestrator-riserva:tools/aivexus/cad/fixtures/plate_spec.json",
+      "file:pilialvu75-hue/Ai-orchestrator-riserva:tools/aivexus/cad/parametric_plate.py",
+      "file:pilialvu75-hue/Ai-orchestrator-riserva:tools/aivexus/cad/test_cad1.py",
+      "file:pilialvu75-hue/Ai-orchestrator-riserva:tools/aivexus/cad/validate_plate.py",
+      "scope:aivexus:cad"
+    ],
+    "started_at": "2026-10-12T12:12:18Z",
+    "heartbeat_at": "2026-10-12T12:12:18Z",
+    "lease_until": "2026-10-13T00:12:18Z",
+    "lease_hours": 12
+  },
   "dependencies": [
     "cantiere:AIVEXUS-BASE-1",
     "cantiere:AIVEXUS-BASE-2"
