@@ -7,7 +7,7 @@
   "activation": "active",
   "scope": "Exclusive Cantiere/App Factory execution, durability, build/review/validation/apply and first-real-app reliability.",
   "shared_engine_policy": "shared_or_control_plane",
-  "state_version": 55,
+  "state_version": 56,
   "updated_at": "2026-10-12",
   "active_claim": {
     "claim_id": "94876ef45cb7b6e77d9c",
@@ -19,13 +19,15 @@
     "resource_locks": [
       "branch:pilialvu75-hue/Ai-orchestrator-riserva:fix/cantiere-gate-evidence-reviewer-3117",
       "contract:cantiere-gate-evidence",
+      "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/app_factory/workshop/workshop_gate_evidence_export.dart",
       "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/app_factory/workshop/workshop_production_dashboard_page.dart",
       "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/app_factory/workshop/workshop_proposal_review_runner.dart",
+      "file:pilialvu75-hue/Ai-orchestrator-riserva:test/app_factory/workshop/workshop_gate_evidence_export_test.dart",
       "file:pilialvu75-hue/Ai-orchestrator-riserva:test/app_factory/workshop/workshop_proposal_review_runner_test.dart"
     ],
     "started_at": "2026-10-12T18:41:47Z",
-    "heartbeat_at": "2026-10-12T18:53:09Z",
-    "lease_until": "2026-10-13T06:53:09Z",
+    "heartbeat_at": "2026-10-12T18:56:06Z",
+    "lease_until": "2026-10-13T06:56:06Z",
     "lease_hours": 12
   },
   "dependencies": [],
@@ -51,7 +53,7 @@
     "reviewed_by": null,
     "reviewed_at": null
   },
-  "next_action": "Review six exact-head CI runs for PR #834 at 65fe53a and repair only evidenced failures before review handoff.",
+  "next_action": "Await CI on exact PR #834 head 507e35d; then Main/Reviewer structured packet, no auto-merge.",
   "historical_backlog": [
     "Stay in Phase 1 ONLINE until a real generated Android app is physically accepted.",
     "Reproduce the recent manga-drawing app failure from current main with Diagnostics; do not restart generic audits.",
@@ -682,23 +684,37 @@
         "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38293677733"
       ],
       "next_action": "Review six exact-head CI runs for PR #834 at 65fe53a and repair only evidenced failures before review handoff."
+    },
+    {
+      "seq": 32,
+      "at": "2026-10-12T18:56:06Z",
+      "claim_id": "94876ef45cb7b6e77d9c",
+      "work_item": "cantiere-gate-evidence-reviewer-3117",
+      "summary": "Reviewer source evidence now exports actual staged virtual workspace snapshots, not untrusted Engineer proposal contents. Regression includes tampered transport mismatch and no staged diff; PR #834 exact head 507e35d has six fresh CI pending.",
+      "decisions": [
+        "Preserve owner-only opt-in clipboard and no Diagnostics code upload.",
+        "Hold reviewer/validation gates; no merge or physical retest before exact-head evidence."
+      ],
+      "evidence_refs": [
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/834"
+      ],
+      "next_action": "Await CI on exact PR #834 head 507e35d; then Main/Reviewer structured packet, no auto-merge."
     }
   ],
   "last_checkpoint": {
-    "seq": 31,
-    "at": "2026-10-12T18:53:09Z",
+    "seq": 32,
+    "at": "2026-10-12T18:56:06Z",
     "claim_id": "94876ef45cb7b6e77d9c",
     "work_item": "cantiere-gate-evidence-reviewer-3117",
-    "summary": "PR #834 initial Android analyze failed only with undefined productionBusy in button; fixed scope to _mutationBusy || execution.isRunning. New exact head 65fe53a starts six CI; no runtime success claimed.",
+    "summary": "Reviewer source evidence now exports actual staged virtual workspace snapshots, not untrusted Engineer proposal contents. Regression includes tampered transport mismatch and no staged diff; PR #834 exact head 507e35d has six fresh CI pending.",
     "decisions": [
-      "Keep PR draft until exact-head Android/test CI and Main Reviewer.",
-      "Do not repeat +3117 test; preserve existing project."
+      "Preserve owner-only opt-in clipboard and no Diagnostics code upload.",
+      "Hold reviewer/validation gates; no merge or physical retest before exact-head evidence."
     ],
     "evidence_refs": [
-      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/834",
-      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38293677733"
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/834"
     ],
-    "next_action": "Review six exact-head CI runs for PR #834 at 65fe53a and repair only evidenced failures before review handoff."
+    "next_action": "Await CI on exact PR #834 head 507e35d; then Main/Reviewer structured packet, no auto-merge."
   },
   "review_history": [
     {
