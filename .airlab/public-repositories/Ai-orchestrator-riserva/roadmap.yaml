@@ -994,7 +994,7 @@ audit_findings:
 
 - id: AIVEXUS-BASE-2
   title: Aivexus project-type selector and shared navigation
-  state: planned
+  state: done
   priority: P0
   owner_lane: cantiere
   dependencies:
@@ -1005,6 +1005,11 @@ audit_findings:
   done_when: >-
     Phone-oriented Web flow creates/reopens each project type through the same project list;
     missing runner capabilities remain explicit and no Generate action simulates success.
+  current_evidence:
+    - PR #832 merged after Main/Reviewer packet-bound G1-G4 and G6 approval.
+    - reviewed_head: 82b5ac57f9132775fd0695eebb4d2de834c860ed
+    - merge_commit: 22aa74841a467268c72081627a333e5852fd1581
+    - six exact-head workflows passed and final-head review found no major issue; this does not establish CAD/Game runner or physical/runtime acceptance.
 
 - id: AIVEXUS-CAD-1
   title: Studio 3D measured parametric sample and real exports
