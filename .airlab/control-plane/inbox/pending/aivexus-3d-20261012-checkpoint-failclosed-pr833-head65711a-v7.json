@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "request_id": "aivexus-3d-20261012-checkpoint-failclosed-pr833-head65711a-v7",
+  "actor_id": "chatgpt:aivexus-3d",
+  "lane_id": "aivexus-3d",
+  "operation": "checkpoint",
+  "expected_state_version": 14,
+  "payload": {
+    "summary": "CAD-1 PR #833 previous exact head a7e037f48f033ec7b70abfdede3a9e6dede0c5b5 passed six GitHub workflows. Canonical wait resumed APPLIED at v13, new claim 5f4b2c7954f107eb0946 APPLIED at v14. Inspected domain-only validation and fixed fail-open artifact manifests: validate_plate.py now emits status=FAIL and artifacts=[] whenever any of five actual STEP/STL/3MF format/geometry checks fails, while preserving per-check errors; successful local receipts report status=PASS. Added two Python regression tests asserting receipt SHA-256 of real exports and rejection/no publication of corrupt STL, increasing defined Python methods to 11. Updated CAD-only README to distinguish local receipt from Cantiere persisted artifact refs. Current PR draft head 65711a685795bc79874681558bfdeb7319cca660, six new CI workflow runs queued/pending; exact current-head PASS not yet claimed. No changes to Cantiere shared files, runner, macOS or project store; Fusion/print/remote Diagnostics still UNKNOWN.",
+    "next_action": "Inspect six CI workflows on exact head 65711a685795bc79874681558bfdeb7319cca660 and verify Python/CadQuery regression execution separately. Keep PR #833 draft until certified sandbox runner and Cantiere immutable artifact persistence exist (Library #113). After external CI completion, resume canonical wait and reacquire claim for bounded follow-up. Do not self-promote or equate CI PASS with Fusion/print acceptance.",
+    "decisions": [
+      "Fail-closed artifact receipt prevents promoting invalid or corrupted file as a valid export.",
+      "Do not claim the 11 Python tests executed by existing Flutter/platform CI; they are defined but remain independently gated.",
+      "Keep all new changes within CAD domain claim resource locks."
+    ],
+    "evidence_refs": [
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/833",
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/65711a685795bc79874681558bfdeb7319cca660",
+      "https://github.com/pilialvu75-hue/AI-Orchestrator-Module-Library/issues/113"
+    ]
+  }
+}
