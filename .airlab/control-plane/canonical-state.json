@@ -7,7 +7,7 @@
     "policy": "This private repository is the single coordination authority. Chats and agents are workers, not independent sources of truth."
   },
   "updated_at": "2026-10-12",
-  "state_revision": 210,
+  "state_revision": 211,
   "lifecycle_status": "BOOTSTRAP_ACTIVE",
   "roadmap_authority": {
     "library": ".airlab/roadmap.yaml",
@@ -80,13 +80,12 @@
     "invalid_lane_behavior": "ISOLATE_AND_SURFACE_PROJECTION_INCIDENT"
   },
   "projection": {
-    "source_digest": "9e26b4f9e7e9d7257a0be14a5ba4af8eee2b56af82a447dba2f3dc673a288cc4",
-    "projected_at": "2026-10-12T20:20:17Z",
+    "source_digest": "2f68158b7c6a6789a0c17e90c753f4d189065fc35b22d3a65105516cec881e90",
+    "projected_at": "2026-10-12T20:25:17Z",
     "counts": {
       "BLOCKED": 1,
-      "IMPLEMENTING": 1,
       "READY": 14,
-      "REVIEW_REQUIRED": 1
+      "REVIEW_REQUIRED": 2
     },
     "active_claims": [
       {
@@ -188,7 +187,8 @@
       }
     ],
     "review_required": [
-      "cantiere"
+      "cantiere",
+      "diagnostics"
     ],
     "blocked": [
       {
@@ -339,9 +339,9 @@
       },
       {
         "id": "diagnostics",
-        "status": "IMPLEMENTING",
+        "status": "REVIEW_REQUIRED",
         "activation": "active",
-        "state_version": 4,
+        "state_version": 5,
         "updated_at": "2026-10-12",
         "active_claim": {
           "claim_id": "dacf7f678beefb358fc5",
@@ -358,7 +358,7 @@
         "reviewer_state": "PENDING",
         "inference_profile_status": null,
         "historical_backlog_count": 3,
-        "next_action": "Inspect exact-head PR #835 CI; correct static or regression failures; then submit claim-bound review packet for Main/Reviewer without claiming device runtime acceptance."
+        "next_action": "Main/Reviewer must inspect the review_packet, linked evidence and required gates before promotion or rework."
       },
       {
         "id": "library-researcher",
