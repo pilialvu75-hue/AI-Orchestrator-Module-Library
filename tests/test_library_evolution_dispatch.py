@@ -57,6 +57,27 @@ class EvolutionDispatchTest(unittest.TestCase):
             self.assertEqual(second, first)
             self.assertEqual(EvolutionWorkQueue(root).load(work.work_id)["state"], "claimed")
 
+    def test_resume_rejects_tampered_claim(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            work = _stage(root)
+            claim(root, work.work_id)
+            queue = EvolutionWorkQueue(root)
+            record = queue.load(work.work_id)
+            record["objective"] = "Changed after claim"
+            queue._write(record)
+            with self.assertRaisesRegex(EvolutionDispatchError, "differs"):
+                resume_claim(root, work.work_id)
+
+    def test_resume_rejects_legacy_claim_without_evidence(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            work = _stage(root)
+            queue = EvolutionWorkQueue(root)
+            queue.transition(work.work_id, "claimed")
+            with self.assertRaisesRegex(EvolutionDispatchError, "legacy claim"):
+                resume_claim(root, work.work_id)
+
     def test_resume_rejects_unclaimed_work(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)
