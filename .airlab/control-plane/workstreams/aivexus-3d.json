@@ -3,11 +3,11 @@
   "id": "aivexus-3d",
   "title": "Aivexus Studio 3D",
   "role": "worker",
-  "status": "BLOCKED",
+  "status": "READY",
   "activation": "active",
   "scope": "CAD/3D domain only: CadSpec, measured and photographic inputs, editable CAD/mesh sources, CAD/print exports and domain verification. Must consume the Cantiere-owned shared ProjectExtension/persistence/navigation base instead of modifying or duplicating it.",
   "shared_engine_policy": "domain_extension_only",
-  "state_version": 4,
+  "state_version": 5,
   "updated_at": "2026-10-12",
   "active_claim": null,
   "dependencies": [
@@ -91,54 +91,6 @@
     ],
     "next_action": "Review exact-head CI and static analysis for PR #833, fix failures solely in locked CAD domain files. Connect a separately authorized/sandboxed CAD runner and Cantiere project artifact persistence before claiming Studio 3D end-to-end. Do not self-promote beyond REVIEW_REQUIRED; Fusion and physical-print gates remain UNKNOWN."
   },
-  "wait_state": {
-    "schema_version": 1,
-    "wait_id": "aivexus-3d:d98f37ac2a3e9a58d00d:WAITING_EXTERNAL",
-    "type": "WAITING_EXTERNAL",
-    "work_item": "AIVEXUS-CAD-1",
-    "prior_claim_id": "d98f37ac2a3e9a58d00d",
-    "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
-    "branch": "feat/aivexus-cad1-parametric-sample",
-    "scope": "CAD-1 only: measured parametric solid template, domain-specific CAD adapter, real STEP/STL/3MF generation and geometry verification. Consume existing Cantiere ProjectExtension/ResourceExchange; do not mutate shared storage/navigation/contracts. Fusion, physical print and remote Diagnostics are independent gates.",
-    "resource_locks": [
-      "branch:pilialvu75-hue/Ai-orchestrator-riserva:feat/aivexus-cad1-parametric-sample",
-      "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/app_factory/workshop/domains/cad/cad1_domain_adapter.dart",
-      "file:pilialvu75-hue/Ai-orchestrator-riserva:test/app_factory/workshop/domains/cad/cad1_domain_adapter_test.dart",
-      "file:pilialvu75-hue/Ai-orchestrator-riserva:tools/aivexus/cad/README.md",
-      "file:pilialvu75-hue/Ai-orchestrator-riserva:tools/aivexus/cad/fixtures/plate_spec.json",
-      "file:pilialvu75-hue/Ai-orchestrator-riserva:tools/aivexus/cad/parametric_plate.py",
-      "file:pilialvu75-hue/Ai-orchestrator-riserva:tools/aivexus/cad/test_cad1.py",
-      "file:pilialvu75-hue/Ai-orchestrator-riserva:tools/aivexus/cad/validate_plate.py",
-      "scope:aivexus:cad"
-    ],
-    "entered_at": "2026-10-12T11:52:57Z",
-    "resume_condition": "PR #833 exact-head six required GitHub CI runs complete; inspect outcomes before resuming CAD-1 implementation, without assuming runtime/Fusion/print acceptance.",
-    "summary": "CAD-1 draft PR #833 has seven scoped domain-only files and an accepted claim checkpoint; CI workflows are in progress. Wait rather than let the 12-hour lease expire. No reviewer packet or runtime acceptance yet.",
-    "evidence_refs": [
-      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/833",
-      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/7ec116531a94eef36900ad9567a4f1dd492e0064"
-    ],
-    "resume_next_action": "On CI evidence signal, resume wait through authorized transactional inbox, then claim AIVEXUS-CAD-1 anew and implement bounded follow-up against current main. Keep Cantiere shared files untouched; integrate CAD runner and real persisted artifact receipts before REVIEW_REQUIRED."
-  },
-  "block_reason": {
-    "code": "WAITING_EXTERNAL",
-    "wait_id": "aivexus-3d:d98f37ac2a3e9a58d00d:WAITING_EXTERNAL",
-    "work_item": "AIVEXUS-CAD-1",
-    "resource_locks": [
-      "branch:pilialvu75-hue/Ai-orchestrator-riserva:feat/aivexus-cad1-parametric-sample",
-      "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/app_factory/workshop/domains/cad/cad1_domain_adapter.dart",
-      "file:pilialvu75-hue/Ai-orchestrator-riserva:test/app_factory/workshop/domains/cad/cad1_domain_adapter_test.dart",
-      "file:pilialvu75-hue/Ai-orchestrator-riserva:tools/aivexus/cad/README.md",
-      "file:pilialvu75-hue/Ai-orchestrator-riserva:tools/aivexus/cad/fixtures/plate_spec.json",
-      "file:pilialvu75-hue/Ai-orchestrator-riserva:tools/aivexus/cad/parametric_plate.py",
-      "file:pilialvu75-hue/Ai-orchestrator-riserva:tools/aivexus/cad/test_cad1.py",
-      "file:pilialvu75-hue/Ai-orchestrator-riserva:tools/aivexus/cad/validate_plate.py",
-      "scope:aivexus:cad"
-    ],
-    "resume_condition": "PR #833 exact-head six required GitHub CI runs complete; inspect outcomes before resuming CAD-1 implementation, without assuming runtime/Fusion/print acceptance.",
-    "detected_at": "2026-10-12T11:52:57Z",
-    "review_required": false
-  },
   "reconciliation_events": [
     {
       "type": "WAIT_ENTERED",
@@ -158,6 +110,56 @@
         "scope:aivexus:cad"
       ],
       "at": "2026-10-12T11:52:57Z"
+    },
+    {
+      "type": "WAIT_RESUMED",
+      "wait_id": "aivexus-3d:d98f37ac2a3e9a58d00d:WAITING_EXTERNAL",
+      "work_item": "AIVEXUS-CAD-1",
+      "signal_id": "gh-pr833-six-workflows-completed-sha7ec1165",
+      "evidence_refs": [
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/833",
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38245285267",
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38245285666/job/114797505379"
+      ],
+      "at": "2026-10-12T12:11:27Z"
+    }
+  ],
+  "wait_history": [
+    {
+      "schema_version": 1,
+      "wait_id": "aivexus-3d:d98f37ac2a3e9a58d00d:WAITING_EXTERNAL",
+      "type": "WAITING_EXTERNAL",
+      "work_item": "AIVEXUS-CAD-1",
+      "prior_claim_id": "d98f37ac2a3e9a58d00d",
+      "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
+      "branch": "feat/aivexus-cad1-parametric-sample",
+      "scope": "CAD-1 only: measured parametric solid template, domain-specific CAD adapter, real STEP/STL/3MF generation and geometry verification. Consume existing Cantiere ProjectExtension/ResourceExchange; do not mutate shared storage/navigation/contracts. Fusion, physical print and remote Diagnostics are independent gates.",
+      "resource_locks": [
+        "branch:pilialvu75-hue/Ai-orchestrator-riserva:feat/aivexus-cad1-parametric-sample",
+        "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/app_factory/workshop/domains/cad/cad1_domain_adapter.dart",
+        "file:pilialvu75-hue/Ai-orchestrator-riserva:test/app_factory/workshop/domains/cad/cad1_domain_adapter_test.dart",
+        "file:pilialvu75-hue/Ai-orchestrator-riserva:tools/aivexus/cad/README.md",
+        "file:pilialvu75-hue/Ai-orchestrator-riserva:tools/aivexus/cad/fixtures/plate_spec.json",
+        "file:pilialvu75-hue/Ai-orchestrator-riserva:tools/aivexus/cad/parametric_plate.py",
+        "file:pilialvu75-hue/Ai-orchestrator-riserva:tools/aivexus/cad/test_cad1.py",
+        "file:pilialvu75-hue/Ai-orchestrator-riserva:tools/aivexus/cad/validate_plate.py",
+        "scope:aivexus:cad"
+      ],
+      "entered_at": "2026-10-12T11:52:57Z",
+      "resume_condition": "PR #833 exact-head six required GitHub CI runs complete; inspect outcomes before resuming CAD-1 implementation, without assuming runtime/Fusion/print acceptance.",
+      "summary": "CAD-1 draft PR #833 has seven scoped domain-only files and an accepted claim checkpoint; CI workflows are in progress. Wait rather than let the 12-hour lease expire. No reviewer packet or runtime acceptance yet.",
+      "evidence_refs": [
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/833",
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/7ec116531a94eef36900ad9567a4f1dd492e0064"
+      ],
+      "resume_next_action": "On CI evidence signal, resume wait through authorized transactional inbox, then claim AIVEXUS-CAD-1 anew and implement bounded follow-up against current main. Keep Cantiere shared files untouched; integrate CAD runner and real persisted artifact receipts before REVIEW_REQUIRED.",
+      "resumed_at": "2026-10-12T12:11:27Z",
+      "signal_id": "gh-pr833-six-workflows-completed-sha7ec1165",
+      "resume_evidence_refs": [
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/833",
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38245285267",
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38245285666/job/114797505379"
+      ]
     }
   ]
 }
