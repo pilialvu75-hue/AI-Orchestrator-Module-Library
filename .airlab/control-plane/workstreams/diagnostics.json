@@ -3,13 +3,30 @@
   "id": "diagnostics",
   "title": "Diagnostics",
   "role": "worker",
-  "status": "READY",
+  "status": "CLAIMED",
   "activation": "active",
   "scope": "Shared observability contract, logs, evidence receipts and comparable telemetry across all platforms.",
   "shared_engine_policy": "shared_or_control_plane",
-  "state_version": 2,
-  "updated_at": "2026-10-01",
-  "active_claim": null,
+  "state_version": 3,
+  "updated_at": "2026-10-12",
+  "active_claim": {
+    "claim_id": "dacf7f678beefb358fc5",
+    "owner_lane": "diagnostics",
+    "work_item": "diagnostics-issue-114-public-stall-projection",
+    "repository": "pilialvu75-hue/Ai-orchestrator-diagnostics",
+    "scope": "Issue #114 privacy-safe exported STALL and TERMINAL_STATE contract; implementation source in Riserva with explicit cross-repository file locks. No watchdog, Vulkan, memory or runtime changes.",
+    "branch": null,
+    "resource_locks": [
+      "contract:diagnostics-public-stall-projection",
+      "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/core/diagnostics/public_log_projection.dart",
+      "file:pilialvu75-hue/Ai-orchestrator-riserva:test/core/diagnostics/public_log_projection_test.dart",
+      "resource:diagnostics-issue-114"
+    ],
+    "started_at": "2026-10-12T20:15:38Z",
+    "heartbeat_at": "2026-10-12T20:15:38Z",
+    "lease_until": "2026-10-13T08:15:38Z",
+    "lease_hours": 12
+  },
   "dependencies": [],
   "roadmap_refs": [
     ".airlab/public-repositories/Ai-orchestrator-diagnostics/roadmap.yaml#D7",
@@ -17,7 +34,7 @@
   ],
   "evidence": [],
   "gates": {
-    "G0_CLAIM": "PENDING",
+    "G0_CLAIM": "PASS",
     "G1_IMPLEMENTATION": "PENDING",
     "G2_STATIC": "PENDING",
     "G3_CI": "PENDING",
