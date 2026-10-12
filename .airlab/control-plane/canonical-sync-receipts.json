@@ -43,7 +43,7 @@
       "lane_id": "cantiere",
       "claim_id": "7c6ae34131e828ee79a1",
       "work_item": "AIVEXUS-BASE-2",
-      "status": "BASELINE_CAPTURED",
+      "status": "RECONCILED",
       "review_accept_request_id": "cantiere-20261012-base2-review-accept",
       "captured_at": "2026-10-12T11:35:41Z",
       "roadmap_refs": [
@@ -54,7 +54,19 @@
         }
       ],
       "validated_completion": null,
-      "completion": null
+      "completion": {
+        "request_id": "cantiere-20261012-base2-canonical-sync",
+        "finalized_at": "2026-10-12T11:39:08Z",
+        "result_state_version": 52,
+        "receipts": [
+          {
+            "ref": ".airlab/public-repositories/Ai-orchestrator-riserva/roadmap.yaml",
+            "before_sha256": "fbcac943ae90d2be74c30154496457c594725d75ef4985b95918dbade86c166c",
+            "after_sha256": "0da68b3dc2929f02f3f331a2333a5e75b41ba91faac4fc58a55b097519431c58",
+            "evidence_ref": "https://github.com/pilialvu75-hue/AI-Orchestrator-Module-Library/pull/112"
+          }
+        ]
+      }
     }
   ]
 }
