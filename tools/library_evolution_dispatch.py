@@ -65,13 +65,10 @@ def claim(root: Path, work_id: str) -> dict[str, Any]:
     queue = EvolutionWorkQueue(root)
     envelope = prepare_claim(root, work_id)
     digest = hashlib.sha256(json.dumps(envelope, sort_keys=True, separators=(",", ":")).encode("utf-8")).hexdigest()
-    current = queue.load(work_id)
-    if current is None or current.get("state") != "staged":
-        raise EvolutionDispatchError("work is no longer staged")
-    current["claimed_envelope"] = envelope
-    current["claimed_envelope_sha256"] = digest
-    queue._write(current)
-    result = queue.transition(work_id, "claimed")
+    result = queue.transition(work_id, "claimed", claim_evidence={
+        "claimed_envelope": envelope,
+        "claimed_envelope_sha256": digest,
+    })
     return {"claim": envelope, "transition": result}
 
 
