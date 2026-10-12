@@ -3,11 +3,11 @@
   "id": "cantiere",
   "title": "Cantiere",
   "role": "worker",
-  "status": "CLAIMED",
+  "status": "REVIEW_REQUIRED",
   "activation": "active",
   "scope": "Exclusive Cantiere/App Factory execution, durability, build/review/validation/apply and first-real-app reliability.",
   "shared_engine_policy": "shared_or_control_plane",
-  "state_version": 39,
+  "state_version": 40,
   "updated_at": "2026-10-12",
   "active_claim": {
     "claim_id": "3d39dee487b98eb463b1",
@@ -37,7 +37,68 @@
     ".airlab/public-repositories/Ai-orchestrator-riserva/roadmap.yaml#AIVEXUS-BASE-1",
     ".airlab/public-repositories/Ai-orchestrator-riserva/roadmap.yaml#AIVEXUS-BASE-2"
   ],
-  "evidence": [],
+  "evidence": [
+    {
+      "type": "commit",
+      "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/a63b8cf14c07e6aeba361a1ee4e6e832e6ce1df1",
+      "result": "PASS",
+      "note": "Verified exact PR #826 head after integration with current main; implementation identity only."
+    },
+    {
+      "type": "pull_request",
+      "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/826",
+      "result": "PASS",
+      "note": "Verified PR #826 open, not draft, mergeable, exact head a63b8cf14c07e6aeba361a1ee4e6e832e6ce1df1 and base 9f320c82073fc74c7cd4a8b974071ec0addb3772."
+    },
+    {
+      "type": "ci",
+      "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38161301515",
+      "result": "PASS",
+      "note": "Exact-head Web Cantiere Build completed successfully."
+    },
+    {
+      "type": "analysis",
+      "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38161301515/job/114534601604",
+      "result": "PASS",
+      "note": "Web workflow analysis/static validation completed successfully on exact head."
+    },
+    {
+      "type": "test",
+      "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38161301515/job/114534601604",
+      "result": "PASS",
+      "note": "Exact-head Web regression job including browser storage/integration checks completed successfully; not physical target evidence."
+    },
+    {
+      "type": "ci",
+      "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38161301477",
+      "result": "PASS",
+      "note": "Exact-head Cantiere First App APK workflow; build evidence only."
+    },
+    {
+      "type": "ci",
+      "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38161301505",
+      "result": "PASS",
+      "note": "Exact-head Linux desktop workflow; build/test evidence only."
+    },
+    {
+      "type": "ci",
+      "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38161301503",
+      "result": "PASS",
+      "note": "Exact-head Windows desktop workflow; build/test evidence only."
+    },
+    {
+      "type": "ci",
+      "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38161301487",
+      "result": "PASS",
+      "note": "Exact-head macOS desktop workflow; build/test evidence only."
+    },
+    {
+      "type": "ci",
+      "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38161301491",
+      "result": "PASS",
+      "note": "Exact-head Android build/release workflow; build evidence only, no physical acceptance."
+    }
+  ],
   "gates": {
     "G0_CLAIM": "PASS",
     "G1_IMPLEMENTATION": "PENDING",
@@ -54,7 +115,7 @@
     "reviewed_by": null,
     "reviewed_at": null
   },
-  "next_action": "Return Cantiere to READY so it can immediately reclaim AIVEXUS-BASE-1 only, submit an updated claim-bound review packet for PR #826 head a63b8cf14c07e6aeba361a1ee4e6e832e6ce1df1 using the six successful exact-head workflows, and hand it to Main/Reviewer. Do not start BASE-2, CAD or Games until BASE-1 review/merge is complete.",
+  "next_action": "Main/Reviewer must inspect the review_packet, linked evidence and required gates before promotion or rework.",
   "historical_backlog": [
     "Stay in Phase 1 ONLINE until a real generated Android app is physically accepted.",
     "Reproduce the recent manga-drawing app failure from current main with Diagnostics; do not restart generic audits.",
@@ -503,20 +564,51 @@
       "evidence_refs": [],
       "next_action": "Update feat/aivexus-shared-project-base-v1 from current Riserva main 9f320c82073fc74c7cd4a8b974071ec0addb3772 without adding BASE-2 or domain work. Resolve only necessary integration conflicts, keep ProjectExtension/ResourceExchange semantics unchanged, run the existing six workflow gates on the new head, then resubmit the same claim-bound AIVEXUS-BASE-1 review packet with new commit/PR PASS evidence. Physical/device, Fusion/print/gameplay and BASE-2 remain open.",
       "kind": "REVIEW_REWORK"
+    },
+    {
+      "seq": 23,
+      "at": "2026-10-12T10:12:18Z",
+      "claim_id": "3d39dee487b98eb463b1",
+      "work_item": "AIVEXUS-BASE-1",
+      "summary": "Current-main resubmission for AIVEXUS-BASE-1 at exact PR #826 head a63b8cf14c07e6aeba361a1ee4e6e832e6ce1df1. Branch is aligned to Riserva main 9f320c82073fc74c7cd4a8b974071ec0addb3772, PR is open/not draft/mergeable, and all six exact-head workflows are successful. No BASE-2, CAD/Game, deploy or physical/runtime acceptance is claimed.",
+      "decisions": [],
+      "evidence_refs": [
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/a63b8cf14c07e6aeba361a1ee4e6e832e6ce1df1",
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/826",
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38161301515",
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38161301515/job/114534601604",
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38161301515/job/114534601604",
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38161301477",
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38161301505",
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38161301503",
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38161301487",
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38161301491"
+      ],
+      "next_action": "Main/Reviewer must inspect the review_packet, linked evidence and required gates before promotion or rework.",
+      "kind": "REVIEW_HANDOFF"
     }
   ],
   "last_checkpoint": {
-    "seq": 22,
-    "at": "2026-10-11T17:18:10Z",
-    "claim_id": "c792cfdec8aee6363eba",
+    "seq": 23,
+    "at": "2026-10-12T10:12:18Z",
+    "claim_id": "3d39dee487b98eb463b1",
     "work_item": "AIVEXUS-BASE-1",
-    "summary": "PR #826 packet evidence is now complete and PASS on exact head 6eaf98bfd816ff26cb23401d0351c680b8bfb90e, but GitHub currently reports mergeable=false because Riserva main advanced to 9f320c82073fc74c7cd4a8b974071ec0addb3772. This is a merge-integration blocker, not a request to reopen BASE-1 functionality. Rework is limited to aligning the existing branch with current main, resolving only conflicts in the already claimed AIVEXUS-BASE-1 files, preserving scope and behavior, then re-running exact-head CI.",
-    "decisions": [
-      "Main/Reviewer requested bounded rework."
+    "summary": "Current-main resubmission for AIVEXUS-BASE-1 at exact PR #826 head a63b8cf14c07e6aeba361a1ee4e6e832e6ce1df1. Branch is aligned to Riserva main 9f320c82073fc74c7cd4a8b974071ec0addb3772, PR is open/not draft/mergeable, and all six exact-head workflows are successful. No BASE-2, CAD/Game, deploy or physical/runtime acceptance is claimed.",
+    "decisions": [],
+    "evidence_refs": [
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/a63b8cf14c07e6aeba361a1ee4e6e832e6ce1df1",
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/826",
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38161301515",
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38161301515/job/114534601604",
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38161301515/job/114534601604",
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38161301477",
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38161301505",
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38161301503",
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38161301487",
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38161301491"
     ],
-    "evidence_refs": [],
-    "next_action": "Update feat/aivexus-shared-project-base-v1 from current Riserva main 9f320c82073fc74c7cd4a8b974071ec0addb3772 without adding BASE-2 or domain work. Resolve only necessary integration conflicts, keep ProjectExtension/ResourceExchange semantics unchanged, run the existing six workflow gates on the new head, then resubmit the same claim-bound AIVEXUS-BASE-1 review packet with new commit/PR PASS evidence. Physical/device, Fusion/print/gameplay and BASE-2 remain open.",
-    "kind": "REVIEW_REWORK"
+    "next_action": "Main/Reviewer must inspect the review_packet, linked evidence and required gates before promotion or rework.",
+    "kind": "REVIEW_HANDOFF"
   },
   "review_history": [
     {
@@ -937,5 +1029,108 @@
       "platform-web"
     ],
     "rule": "One owner at a time for shared files. Domain workers request shared changes and do not duplicate the shared base."
+  },
+  "review_packet": {
+    "schema_version": 1,
+    "submitted_at": "2026-10-12T10:12:00Z",
+    "lane_id": "cantiere",
+    "claim_id": "3d39dee487b98eb463b1",
+    "work_item": "AIVEXUS-BASE-1",
+    "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
+    "branch": "feat/aivexus-shared-project-base-v1",
+    "pull_request": 826,
+    "summary": "Current-main resubmission for AIVEXUS-BASE-1 at exact PR #826 head a63b8cf14c07e6aeba361a1ee4e6e832e6ce1df1. Branch is aligned to Riserva main 9f320c82073fc74c7cd4a8b974071ec0addb3772, PR is open/not draft/mergeable, and all six exact-head workflows are successful. No BASE-2, CAD/Game, deploy or physical/runtime acceptance is claimed.",
+    "changes": [
+      "ProjectExtension v1 validates software/CAD/game metadata, preserves unknown extension versions read-only, and retains immutable artifacts against source specification revisions.",
+      "Existing project identity and unknown fields are preserved with conservative revision-guarded persistence; stale edits are rejected and partial saves do not truncate unrelated projects.",
+      "IndexedDB stores binary attachments outside project JSON with size and SHA-256 verification; unsupported browser adapters fail explicitly.",
+      "ResourceExchange persists idempotent requests and explicit transitions; produced results must match producer artifacts including revision, hash, size, format, MIME type and generator.",
+      "Existing software editing preserves project identity and creation date while advancing specification revision only when requirements change.",
+      "Web CI includes focused persistence/contract/widget regressions and real Chrome cross-context locking, localStorage and IndexedDB checks."
+    ],
+    "evidence": [
+      {
+        "type": "commit",
+        "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/a63b8cf14c07e6aeba361a1ee4e6e832e6ce1df1",
+        "result": "PASS",
+        "note": "Verified exact PR #826 head after integration with current main; implementation identity only."
+      },
+      {
+        "type": "pull_request",
+        "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/826",
+        "result": "PASS",
+        "note": "Verified PR #826 open, not draft, mergeable, exact head a63b8cf14c07e6aeba361a1ee4e6e832e6ce1df1 and base 9f320c82073fc74c7cd4a8b974071ec0addb3772."
+      },
+      {
+        "type": "ci",
+        "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38161301515",
+        "result": "PASS",
+        "note": "Exact-head Web Cantiere Build completed successfully."
+      },
+      {
+        "type": "analysis",
+        "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38161301515/job/114534601604",
+        "result": "PASS",
+        "note": "Web workflow analysis/static validation completed successfully on exact head."
+      },
+      {
+        "type": "test",
+        "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38161301515/job/114534601604",
+        "result": "PASS",
+        "note": "Exact-head Web regression job including browser storage/integration checks completed successfully; not physical target evidence."
+      },
+      {
+        "type": "ci",
+        "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38161301477",
+        "result": "PASS",
+        "note": "Exact-head Cantiere First App APK workflow; build evidence only."
+      },
+      {
+        "type": "ci",
+        "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38161301505",
+        "result": "PASS",
+        "note": "Exact-head Linux desktop workflow; build/test evidence only."
+      },
+      {
+        "type": "ci",
+        "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38161301503",
+        "result": "PASS",
+        "note": "Exact-head Windows desktop workflow; build/test evidence only."
+      },
+      {
+        "type": "ci",
+        "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38161301487",
+        "result": "PASS",
+        "note": "Exact-head macOS desktop workflow; build/test evidence only."
+      },
+      {
+        "type": "ci",
+        "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38161301491",
+        "result": "PASS",
+        "note": "Exact-head Android build/release workflow; build evidence only, no physical acceptance."
+      }
+    ],
+    "known_risks": [
+      "BASE-2 selector/navigation and Studio 3D/Videogiochi domain pages are not part of BASE-1.",
+      "Browser data remains local to an origin/profile and is not cross-session synchronization.",
+      "CAD/photo reconstruction, Fusion opening, mesh generation, Godot gameplay/export and physical print remain downstream gates.",
+      "License/provenance/validation references are contract metadata until real producers/consumers provide resolvable evidence.",
+      "Physical target validation remains open and CI green must not be treated as runtime acceptance."
+    ],
+    "reviewer_checks": [
+      "Review PR #826 at exact head a63b8cf14c07e6aeba361a1ee4e6e832e6ce1df1 and the six successful exact-head workflows.",
+      "Confirm compatibility with canonical ProjectExtension v1 and ResourceExchange v1 and conservative legacy preservation.",
+      "Accept only AIVEXUS-BASE-1 if warranted; do not infer BASE-2 or CAD/Game/runtime acceptance.",
+      "After approved merge/canonical sync, release BASE-1 claim and make AIVEXUS-BASE-2 the next bounded Cantiere item."
+    ],
+    "roadmap_impact": {
+      "material": true,
+      "refs": [
+        ".airlab/public-repositories/Ai-orchestrator-riserva/roadmap.yaml#AIVEXUS-BASE-1",
+        ".airlab/public-repositories/Ai-orchestrator-riserva/roadmap.yaml#AIVEXUS-BASE-2",
+        ".airlab/control-plane/contracts/aivexus-project-extension-v1.schema.json",
+        ".airlab/control-plane/contracts/aivexus-resource-exchange-v1.md"
+      ]
+    }
   }
 }
