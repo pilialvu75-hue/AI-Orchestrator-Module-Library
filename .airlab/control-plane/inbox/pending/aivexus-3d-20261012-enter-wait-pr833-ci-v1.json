@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "request_id": "aivexus-3d-20261012-enter-wait-pr833-ci-v1",
+  "actor_id": "chatgpt:aivexus-3d",
+  "lane_id": "aivexus-3d",
+  "operation": "enter_wait",
+  "expected_state_version": 3,
+  "payload": {
+    "wait_type": "WAITING_EXTERNAL",
+    "resume_condition": "PR #833 exact-head six required GitHub CI runs complete; inspect outcomes before resuming CAD-1 implementation, without assuming runtime/Fusion/print acceptance.",
+    "summary": "CAD-1 draft PR #833 has seven scoped domain-only files and an accepted claim checkpoint; CI workflows are in progress. Wait rather than let the 12-hour lease expire. No reviewer packet or runtime acceptance yet.",
+    "next_action": "On CI evidence signal, resume wait through authorized transactional inbox, then claim AIVEXUS-CAD-1 anew and implement bounded follow-up against current main. Keep Cantiere shared files untouched; integrate CAD runner and real persisted artifact receipts before REVIEW_REQUIRED.",
+    "evidence_refs": [
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/833",
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/7ec116531a94eef36900ad9567a4f1dd492e0064"
+    ]
+  }
+}
