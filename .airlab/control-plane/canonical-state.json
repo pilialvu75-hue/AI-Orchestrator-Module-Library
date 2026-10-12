@@ -7,7 +7,7 @@
     "policy": "This private repository is the single coordination authority. Chats and agents are workers, not independent sources of truth."
   },
   "updated_at": "2026-10-12",
-  "state_revision": 214,
+  "state_revision": 215,
   "lifecycle_status": "BOOTSTRAP_ACTIVE",
   "roadmap_authority": {
     "library": ".airlab/roadmap.yaml",
@@ -80,8 +80,8 @@
     "invalid_lane_behavior": "ISOLATE_AND_SURFACE_PROJECTION_INCIDENT"
   },
   "projection": {
-    "source_digest": "b0e5a9b18cd9801555b8cef46a226ba6dd29686762b065f92e9b6c7dbe0b7700",
-    "projected_at": "2026-10-12T20:41:10Z",
+    "source_digest": "c7707f8271ca123986695ff1aa2e90d55880343909dada38056effdb428dc8b4",
+    "projected_at": "2026-10-12T20:47:23Z",
     "counts": {
       "BLOCKED": 1,
       "IMPLEMENTING": 1,
@@ -94,7 +94,7 @@
         "claim_id": "94876ef45cb7b6e77d9c",
         "work_item": "cantiere-gate-evidence-reviewer-3117",
         "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
-        "lease_until": "2026-10-13T08:40:58Z",
+        "lease_until": "2026-10-13T08:47:12Z",
         "resource_locks": [
           "branch:pilialvu75-hue/Ai-orchestrator-riserva:fix/cantiere-gate-evidence-reviewer-3117",
           "contract:cantiere-gate-evidence",
@@ -329,13 +329,13 @@
         "id": "cantiere",
         "status": "IMPLEMENTING",
         "activation": "active",
-        "state_version": 59,
+        "state_version": 60,
         "updated_at": "2026-10-12",
         "active_claim": {
           "claim_id": "94876ef45cb7b6e77d9c",
           "work_item": "cantiere-gate-evidence-reviewer-3117",
           "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
-          "lease_until": "2026-10-13T08:40:58Z",
+          "lease_until": "2026-10-13T08:47:12Z",
           "resource_locks": [
             "branch:pilialvu75-hue/Ai-orchestrator-riserva:fix/cantiere-gate-evidence-reviewer-3117",
             "contract:cantiere-gate-evidence",
@@ -351,7 +351,7 @@
         "reviewer_state": "CHANGES_REQUESTED",
         "inference_profile_status": null,
         "historical_backlog_count": 3,
-        "next_action": "Complete six exact-head CI checks for 68a2ae62; repair only observed failures; then resolve two review threads, submit new claim-bound packet to Main/Reviewer."
+        "next_action": "Check exact-head Android run 38305557300, Windows run 38305557324 and macOS run 38305557283; if all pass submit new claim-bound Cantiere review packet to Main/Reviewer, no merge."
       },
       {
         "id": "diagnostics",
