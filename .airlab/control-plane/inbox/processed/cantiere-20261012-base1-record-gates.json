@@ -1,0 +1,12 @@
+{
+  "schema_version": 1,
+  "request_id": "cantiere-20261012-base1-record-gates",
+  "status": "APPLIED",
+  "processed_at": "2026-10-12T10:20:30Z",
+  "source_file": "cantiere-20261012-base1-record-gates.json",
+  "lane_id": "cantiere",
+  "operation": "record_review_gates",
+  "actor_id": "chatgpt:main-reviewer",
+  "errors": [],
+  "result_state_version": 41
+}

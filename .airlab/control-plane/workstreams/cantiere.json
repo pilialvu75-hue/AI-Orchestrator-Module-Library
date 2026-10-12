@@ -7,7 +7,7 @@
   "activation": "active",
   "scope": "Exclusive Cantiere/App Factory execution, durability, build/review/validation/apply and first-real-app reliability.",
   "shared_engine_policy": "shared_or_control_plane",
-  "state_version": 40,
+  "state_version": 41,
   "updated_at": "2026-10-12",
   "active_claim": {
     "claim_id": "3d39dee487b98eb463b1",
@@ -101,10 +101,10 @@
   ],
   "gates": {
     "G0_CLAIM": "PASS",
-    "G1_IMPLEMENTATION": "PENDING",
-    "G2_STATIC": "PENDING",
-    "G3_CI": "PENDING",
-    "G4_INTEGRATION": "PENDING",
+    "G1_IMPLEMENTATION": "PASS",
+    "G2_STATIC": "PASS",
+    "G3_CI": "PASS",
+    "G4_INTEGRATION": "PASS",
     "G5_TARGET_RUNTIME": "NOT_APPLICABLE_UNTIL_RUNTIME_CHANGE",
     "G6_REVIEWER": "PENDING",
     "G7_CANONICAL_SYNC": "PENDING"
@@ -1132,5 +1132,65 @@
         ".airlab/control-plane/contracts/aivexus-resource-exchange-v1.md"
       ]
     }
-  }
+  },
+  "current_gate_attestation": {
+    "at": "2026-10-12T10:20:30Z",
+    "claim_id": "3d39dee487b98eb463b1",
+    "packet_sha256": "f30518c6ee76873fdeb4f8a0b04e02864c23440378bd44873cfa816180d44fd6",
+    "reviewed_by": "main-reviewer",
+    "summary": "Reviewed AIVEXUS-BASE-1 packet at exact PR #826 head a63b8cf14c07e6aeba361a1ee4e6e832e6ce1df1. Commit/PR identity, exact-head CI, static/browser tests and integration evidence are PASS. This attestation covers G1-G4 only and does not prove physical/runtime, BASE-2, CAD, Fusion, print or gameplay.",
+    "evidence_refs_by_gate": {
+      "G1_IMPLEMENTATION": [
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/a63b8cf14c07e6aeba361a1ee4e6e832e6ce1df1",
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/826"
+      ],
+      "G2_STATIC": [
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38161301515",
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38161301515/job/114534601604"
+      ],
+      "G3_CI": [
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38161301515",
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38161301477",
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38161301505",
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38161301503",
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38161301487",
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38161301491"
+      ],
+      "G4_INTEGRATION": [
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38161301515",
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38161301515/job/114534601604"
+      ]
+    }
+  },
+  "gate_evidence_history": [
+    {
+      "at": "2026-10-12T10:20:30Z",
+      "claim_id": "3d39dee487b98eb463b1",
+      "packet_sha256": "f30518c6ee76873fdeb4f8a0b04e02864c23440378bd44873cfa816180d44fd6",
+      "reviewed_by": "main-reviewer",
+      "summary": "Reviewed AIVEXUS-BASE-1 packet at exact PR #826 head a63b8cf14c07e6aeba361a1ee4e6e832e6ce1df1. Commit/PR identity, exact-head CI, static/browser tests and integration evidence are PASS. This attestation covers G1-G4 only and does not prove physical/runtime, BASE-2, CAD, Fusion, print or gameplay.",
+      "evidence_refs_by_gate": {
+        "G1_IMPLEMENTATION": [
+          "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/a63b8cf14c07e6aeba361a1ee4e6e832e6ce1df1",
+          "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/826"
+        ],
+        "G2_STATIC": [
+          "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38161301515",
+          "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38161301515/job/114534601604"
+        ],
+        "G3_CI": [
+          "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38161301515",
+          "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38161301477",
+          "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38161301505",
+          "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38161301503",
+          "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38161301487",
+          "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38161301491"
+        ],
+        "G4_INTEGRATION": [
+          "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38161301515",
+          "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38161301515/job/114534601604"
+        ]
+      }
+    }
+  ]
 }
