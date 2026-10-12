@@ -1,0 +1,12 @@
+{
+  "schema_version": 1,
+  "request_id": "cantiere-20261012-base1-canonical-sync-v2",
+  "status": "APPLIED",
+  "processed_at": "2026-10-12T10:25:55Z",
+  "source_file": "cantiere-20261012-base1-canonical-sync-v2.json",
+  "lane_id": "cantiere",
+  "operation": "canonical_sync_complete",
+  "actor_id": "chatgpt:main-reviewer",
+  "errors": [],
+  "result_state_version": 46
+}

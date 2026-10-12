@@ -3,11 +3,11 @@
   "id": "cantiere",
   "title": "Cantiere",
   "role": "worker",
-  "status": "BLOCKED",
+  "status": "READY",
   "activation": "active",
   "scope": "Exclusive Cantiere/App Factory execution, durability, build/review/validation/apply and first-real-app reliability.",
   "shared_engine_policy": "shared_or_control_plane",
-  "state_version": 45,
+  "state_version": 46,
   "updated_at": "2026-10-12",
   "active_claim": null,
   "dependencies": [],
@@ -86,7 +86,7 @@
     "G4_INTEGRATION": "PASS",
     "G5_TARGET_RUNTIME": "NOT_APPLICABLE_UNTIL_RUNTIME_CHANGE",
     "G6_REVIEWER": "PASS",
-    "G7_CANONICAL_SYNC": "PENDING_ROADMAP_SYNC"
+    "G7_CANONICAL_SYNC": "PASS"
   },
   "reviewer": {
     "required": true,
@@ -806,6 +806,13 @@
       "work_item": "AIVEXUS-BASE-1",
       "reason": "Main/Reviewer accepted the bounded implementation/review gate.",
       "at": "2026-10-12T10:22:50Z"
+    },
+    {
+      "type": "CANONICAL_SYNC_COMPLETED",
+      "refs": [
+        ".airlab/public-repositories/Ai-orchestrator-riserva/roadmap.yaml"
+      ],
+      "at": "2026-10-12T10:25:55Z"
     }
   ],
   "review_packet_history": [
@@ -1285,14 +1292,5 @@
         "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38161301515/job/114534601604"
       ]
     }
-  },
-  "block_reason": {
-    "code": "CANONICAL_SYNC_REQUIRED",
-    "roadmap_refs": [
-      ".airlab/public-repositories/Ai-orchestrator-riserva/roadmap.yaml"
-    ],
-    "reviewed_claim_id": "3d39dee487b98eb463b1",
-    "work_item": "AIVEXUS-BASE-1",
-    "detected_at": "2026-10-12T10:22:50Z"
   }
 }
