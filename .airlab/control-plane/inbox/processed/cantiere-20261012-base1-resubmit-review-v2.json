@@ -1,0 +1,12 @@
+{
+  "schema_version": 1,
+  "request_id": "cantiere-20261012-base1-resubmit-review-v2",
+  "status": "APPLIED",
+  "processed_at": "2026-10-12T10:22:10Z",
+  "source_file": "cantiere-20261012-base1-resubmit-review-v2.json",
+  "lane_id": "cantiere",
+  "operation": "submit_review",
+  "actor_id": "automation:cantiere:6abe28904d38819182462df10fe4542c",
+  "errors": [],
+  "result_state_version": 43
+}
