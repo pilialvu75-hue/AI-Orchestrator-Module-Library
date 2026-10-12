@@ -7,7 +7,7 @@
     "policy": "This private repository is the single coordination authority. Chats and agents are workers, not independent sources of truth."
   },
   "updated_at": "2026-10-12",
-  "state_revision": 202,
+  "state_revision": 203,
   "lifecycle_status": "BOOTSTRAP_ACTIVE",
   "roadmap_authority": {
     "library": ".airlab/roadmap.yaml",
@@ -80,8 +80,8 @@
     "invalid_lane_behavior": "ISOLATE_AND_SURFACE_PROJECTION_INCIDENT"
   },
   "projection": {
-    "source_digest": "682ad22c8fe3d21d1553066c61537e156d1230e07624bca221d152573bf53e09",
-    "projected_at": "2026-10-12T18:53:21Z",
+    "source_digest": "7a3e29357c4ef1969503c5da1314e5424f7f69598948e9f4dc9085bbe1983723",
+    "projected_at": "2026-10-12T18:56:20Z",
     "counts": {
       "BLOCKED": 1,
       "IMPLEMENTING": 1,
@@ -93,12 +93,14 @@
         "claim_id": "94876ef45cb7b6e77d9c",
         "work_item": "cantiere-gate-evidence-reviewer-3117",
         "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
-        "lease_until": "2026-10-13T06:53:09Z",
+        "lease_until": "2026-10-13T06:56:06Z",
         "resource_locks": [
           "branch:pilialvu75-hue/Ai-orchestrator-riserva:fix/cantiere-gate-evidence-reviewer-3117",
           "contract:cantiere-gate-evidence",
+          "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/app_factory/workshop/workshop_gate_evidence_export.dart",
           "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/app_factory/workshop/workshop_production_dashboard_page.dart",
           "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/app_factory/workshop/workshop_proposal_review_runner.dart",
+          "file:pilialvu75-hue/Ai-orchestrator-riserva:test/app_factory/workshop/workshop_gate_evidence_export_test.dart",
           "file:pilialvu75-hue/Ai-orchestrator-riserva:test/app_factory/workshop/workshop_proposal_review_runner_test.dart"
         ]
       }
@@ -117,6 +119,12 @@
         "work_item": "cantiere-gate-evidence-reviewer-3117"
       },
       {
+        "key": "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/app_factory/workshop/workshop_gate_evidence_export.dart",
+        "lane": "cantiere",
+        "claim_id": "94876ef45cb7b6e77d9c",
+        "work_item": "cantiere-gate-evidence-reviewer-3117"
+      },
+      {
         "key": "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/app_factory/workshop/workshop_production_dashboard_page.dart",
         "lane": "cantiere",
         "claim_id": "94876ef45cb7b6e77d9c",
@@ -124,6 +132,12 @@
       },
       {
         "key": "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/app_factory/workshop/workshop_proposal_review_runner.dart",
+        "lane": "cantiere",
+        "claim_id": "94876ef45cb7b6e77d9c",
+        "work_item": "cantiere-gate-evidence-reviewer-3117"
+      },
+      {
+        "key": "file:pilialvu75-hue/Ai-orchestrator-riserva:test/app_factory/workshop/workshop_gate_evidence_export_test.dart",
         "lane": "cantiere",
         "claim_id": "94876ef45cb7b6e77d9c",
         "work_item": "cantiere-gate-evidence-reviewer-3117"
@@ -261,25 +275,27 @@
         "id": "cantiere",
         "status": "IMPLEMENTING",
         "activation": "active",
-        "state_version": 55,
+        "state_version": 56,
         "updated_at": "2026-10-12",
         "active_claim": {
           "claim_id": "94876ef45cb7b6e77d9c",
           "work_item": "cantiere-gate-evidence-reviewer-3117",
           "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
-          "lease_until": "2026-10-13T06:53:09Z",
+          "lease_until": "2026-10-13T06:56:06Z",
           "resource_locks": [
             "branch:pilialvu75-hue/Ai-orchestrator-riserva:fix/cantiere-gate-evidence-reviewer-3117",
             "contract:cantiere-gate-evidence",
+            "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/app_factory/workshop/workshop_gate_evidence_export.dart",
             "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/app_factory/workshop/workshop_production_dashboard_page.dart",
             "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/app_factory/workshop/workshop_proposal_review_runner.dart",
+            "file:pilialvu75-hue/Ai-orchestrator-riserva:test/app_factory/workshop/workshop_gate_evidence_export_test.dart",
             "file:pilialvu75-hue/Ai-orchestrator-riserva:test/app_factory/workshop/workshop_proposal_review_runner_test.dart"
           ]
         },
         "reviewer_state": "PENDING",
         "inference_profile_status": null,
         "historical_backlog_count": 3,
-        "next_action": "Review six exact-head CI runs for PR #834 at 65fe53a and repair only evidenced failures before review handoff."
+        "next_action": "Await CI on exact PR #834 head 507e35d; then Main/Reviewer structured packet, no auto-merge."
       },
       {
         "id": "diagnostics",
