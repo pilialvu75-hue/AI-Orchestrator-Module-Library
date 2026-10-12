@@ -1,0 +1,12 @@
+{
+  "schema_version": 1,
+  "request_id": "cantiere-20261012-base2-review-accept",
+  "status": "APPLIED",
+  "processed_at": "2026-10-12T11:35:41Z",
+  "source_file": "cantiere-20261012-base2-review-accept.json",
+  "lane_id": "cantiere",
+  "operation": "review_accept",
+  "actor_id": "chatgpt:main-reviewer",
+  "errors": [],
+  "result_state_version": 51
+}

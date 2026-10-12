@@ -7,7 +7,7 @@
     "policy": "This private repository is the single coordination authority. Chats and agents are workers, not independent sources of truth."
   },
   "updated_at": "2026-10-12",
-  "state_revision": 186,
+  "state_revision": 187,
   "lifecycle_status": "BOOTSTRAP_ACTIVE",
   "roadmap_authority": {
     "library": ".airlab/roadmap.yaml",
@@ -80,64 +80,29 @@
     "invalid_lane_behavior": "ISOLATE_AND_SURFACE_PROJECTION_INCIDENT"
   },
   "projection": {
-    "source_digest": "4787ef0d98c8df447a2e0545bf43453acf0ae6dd3cd84615af22fb364bea7c92",
-    "projected_at": "2026-10-12T11:34:03Z",
+    "source_digest": "023dc1fb23e5e001c33f625d44f59d3cd55f4c55237cf3ac05c50a254bf91084",
+    "projected_at": "2026-10-12T11:35:41Z",
     "counts": {
-      "READY": 16,
-      "REVIEW_REQUIRED": 1
+      "BLOCKED": 1,
+      "READY": 16
     },
-    "active_claims": [
+    "active_claims": [],
+    "active_resource_locks": [],
+    "review_required": [],
+    "blocked": [
       {
         "lane": "cantiere",
-        "claim_id": "7c6ae34131e828ee79a1",
-        "work_item": "AIVEXUS-BASE-2",
-        "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
-        "lease_until": "2026-10-12T23:29:06Z",
-        "resource_locks": [
-          "branch:pilialvu75-hue/Ai-orchestrator-riserva:feat/aivexus-project-type-selector-navigation-v1",
-          "file:pilialvu75-hue/Ai-orchestrator-riserva:.github/workflows/web-build.yml",
-          "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/app_factory/workshop/web/workshop_web_projects_page.dart",
-          "file:pilialvu75-hue/Ai-orchestrator-riserva:test/app_factory/workshop/web/aivexus_project_type_selector_test.dart",
-          "scope:aivexus:shared-base"
-        ]
+        "reason": {
+          "code": "CANONICAL_SYNC_REQUIRED",
+          "roadmap_refs": [
+            ".airlab/public-repositories/Ai-orchestrator-riserva/roadmap.yaml"
+          ],
+          "reviewed_claim_id": "7c6ae34131e828ee79a1",
+          "work_item": "AIVEXUS-BASE-2",
+          "detected_at": "2026-10-12T11:35:41Z"
+        }
       }
     ],
-    "active_resource_locks": [
-      {
-        "key": "branch:pilialvu75-hue/Ai-orchestrator-riserva:feat/aivexus-project-type-selector-navigation-v1",
-        "lane": "cantiere",
-        "claim_id": "7c6ae34131e828ee79a1",
-        "work_item": "AIVEXUS-BASE-2"
-      },
-      {
-        "key": "file:pilialvu75-hue/Ai-orchestrator-riserva:.github/workflows/web-build.yml",
-        "lane": "cantiere",
-        "claim_id": "7c6ae34131e828ee79a1",
-        "work_item": "AIVEXUS-BASE-2"
-      },
-      {
-        "key": "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/app_factory/workshop/web/workshop_web_projects_page.dart",
-        "lane": "cantiere",
-        "claim_id": "7c6ae34131e828ee79a1",
-        "work_item": "AIVEXUS-BASE-2"
-      },
-      {
-        "key": "file:pilialvu75-hue/Ai-orchestrator-riserva:test/app_factory/workshop/web/aivexus_project_type_selector_test.dart",
-        "lane": "cantiere",
-        "claim_id": "7c6ae34131e828ee79a1",
-        "work_item": "AIVEXUS-BASE-2"
-      },
-      {
-        "key": "scope:aivexus:shared-base",
-        "lane": "cantiere",
-        "claim_id": "7c6ae34131e828ee79a1",
-        "work_item": "AIVEXUS-BASE-2"
-      }
-    ],
-    "review_required": [
-      "cantiere"
-    ],
-    "blocked": [],
     "checkpoint_watch": [],
     "projection_incidents": [],
     "platform_inference_profiles": [
@@ -237,27 +202,15 @@
       },
       {
         "id": "cantiere",
-        "status": "REVIEW_REQUIRED",
+        "status": "BLOCKED",
         "activation": "active",
-        "state_version": 50,
+        "state_version": 51,
         "updated_at": "2026-10-12",
-        "active_claim": {
-          "claim_id": "7c6ae34131e828ee79a1",
-          "work_item": "AIVEXUS-BASE-2",
-          "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
-          "lease_until": "2026-10-12T23:29:06Z",
-          "resource_locks": [
-            "branch:pilialvu75-hue/Ai-orchestrator-riserva:feat/aivexus-project-type-selector-navigation-v1",
-            "file:pilialvu75-hue/Ai-orchestrator-riserva:.github/workflows/web-build.yml",
-            "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/app_factory/workshop/web/workshop_web_projects_page.dart",
-            "file:pilialvu75-hue/Ai-orchestrator-riserva:test/app_factory/workshop/web/aivexus_project_type_selector_test.dart",
-            "scope:aivexus:shared-base"
-          ]
-        },
-        "reviewer_state": "PENDING",
+        "active_claim": null,
+        "reviewer_state": "APPROVED",
         "inference_profile_status": null,
         "historical_backlog_count": 3,
-        "next_action": "Main/Reviewer must inspect the review_packet, linked evidence and required gates before promotion or rework."
+        "next_action": "Synchronize the material roadmap refs, then record canonical sync completion before new work can be claimed."
       },
       {
         "id": "diagnostics",

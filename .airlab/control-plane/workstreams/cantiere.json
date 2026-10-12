@@ -3,31 +3,13 @@
   "id": "cantiere",
   "title": "Cantiere",
   "role": "worker",
-  "status": "REVIEW_REQUIRED",
+  "status": "BLOCKED",
   "activation": "active",
   "scope": "Exclusive Cantiere/App Factory execution, durability, build/review/validation/apply and first-real-app reliability.",
   "shared_engine_policy": "shared_or_control_plane",
-  "state_version": 50,
+  "state_version": 51,
   "updated_at": "2026-10-12",
-  "active_claim": {
-    "claim_id": "7c6ae34131e828ee79a1",
-    "owner_lane": "cantiere",
-    "work_item": "AIVEXUS-BASE-2",
-    "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
-    "scope": "AIVEXUS-BASE-2 only: add one shared phone-oriented project-type selector and navigation path for App/Software, Stampa 3D and Videogiochi inside the existing Cantiere project hub. Reuse the merged BASE-1 ProjectExtension/persistence contracts; create/reopen all project types from the same project list. Missing CAD/Game runners must remain explicit and no Generate action may simulate success. No CAD-1, GAME-1, deploy or physical/runtime acceptance.",
-    "branch": "feat/aivexus-project-type-selector-navigation-v1",
-    "resource_locks": [
-      "branch:pilialvu75-hue/Ai-orchestrator-riserva:feat/aivexus-project-type-selector-navigation-v1",
-      "file:pilialvu75-hue/Ai-orchestrator-riserva:.github/workflows/web-build.yml",
-      "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/app_factory/workshop/web/workshop_web_projects_page.dart",
-      "file:pilialvu75-hue/Ai-orchestrator-riserva:test/app_factory/workshop/web/aivexus_project_type_selector_test.dart",
-      "scope:aivexus:shared-base"
-    ],
-    "started_at": "2026-10-12T10:26:51Z",
-    "heartbeat_at": "2026-10-12T11:29:06Z",
-    "lease_until": "2026-10-12T23:29:06Z",
-    "lease_hours": 12
-  },
+  "active_claim": null,
   "dependencies": [],
   "roadmap_refs": [
     ".airlab/public-repositories/Ai-orchestrator-riserva/roadmap.yaml#CANT-11",
@@ -109,16 +91,16 @@
     "G3_CI": "PASS",
     "G4_INTEGRATION": "PASS",
     "G5_TARGET_RUNTIME": "NOT_APPLICABLE_UNTIL_RUNTIME_CHANGE",
-    "G6_REVIEWER": "PENDING",
-    "G7_CANONICAL_SYNC": "PENDING"
+    "G6_REVIEWER": "PASS",
+    "G7_CANONICAL_SYNC": "PENDING_ROADMAP_SYNC"
   },
   "reviewer": {
     "required": true,
-    "state": "PENDING",
-    "reviewed_by": null,
-    "reviewed_at": null
+    "state": "APPROVED",
+    "reviewed_by": "main-reviewer",
+    "reviewed_at": "2026-10-12T11:35:41Z"
   },
-  "next_action": "Main/Reviewer must inspect the review_packet, linked evidence and required gates before promotion or rework.",
+  "next_action": "Synchronize the material roadmap refs, then record canonical sync completion before new work can be claimed.",
   "historical_backlog": [
     "Stay in Phase 1 ONLINE until a real generated Android app is physically accepted.",
     "Reproduce the recent manga-drawing app failure from current main with Diagnostics; do not restart generic audits.",
@@ -694,30 +676,53 @@
       ],
       "next_action": "Main/Reviewer must inspect the review_packet, linked evidence and required gates before promotion or rework.",
       "kind": "REVIEW_HANDOFF"
+    },
+    {
+      "seq": 29,
+      "at": "2026-10-12T11:35:41Z",
+      "claim_id": "7c6ae34131e828ee79a1",
+      "work_item": "AIVEXUS-BASE-2",
+      "summary": "AIVEXUS-BASE-2 accepted at exact PR #832 head 82b5ac57f9132775fd0695eebb4d2de834c860ed. Shared App/Software, Stampa 3D and Videogiochi selector/navigation meets BASE-2 scope; CAD/Game drafts persist and reopen through the same BASE-1-backed list without inference or simulated generation. The software edit kind-switch P2 is fixed and regression-tested. All six exact-head workflows and final-head Codex re-review are PASS. No CAD-1, GAME-1, deployment or physical/runtime acceptance is implied.",
+      "decisions": [
+        "Main/Reviewer accepted the implementation/review gate."
+      ],
+      "evidence_refs": [
+        "Ai-orchestrator-riserva#832",
+        "commit:82b5ac57f9132775fd0695eebb4d2de834c860ed",
+        "CI:38241204190",
+        "CI:38241204381",
+        "CI:38241204385",
+        "CI:38241204453",
+        "CI:38241204290",
+        "CI:38241204451",
+        "review:6123358247"
+      ],
+      "next_action": "Merge PR #832 at exact reviewed head, synchronize the private Riserva roadmap marking AIVEXUS-BASE-2 integrated, complete evidence-backed G7, then allow aivexus-3d and aivexus-games to independently proceed with CAD-1 and GAME-1 according to their canonical lanes.",
+      "kind": "REVIEW_ACCEPTED"
     }
   ],
   "last_checkpoint": {
-    "seq": 28,
-    "at": "2026-10-12T11:33:05Z",
+    "seq": 29,
+    "at": "2026-10-12T11:35:41Z",
     "claim_id": "7c6ae34131e828ee79a1",
     "work_item": "AIVEXUS-BASE-2",
-    "summary": "AIVEXUS-BASE-2 exact-head review handoff for PR #832 at 82b5ac57f9132775fd0695eebb4d2de834c860ed, based on merged BASE-1 main b5840bc680d7831d2df191d2cc8e39a9e45c08cd. Adds one shared phone-oriented project-type selector/navigation path for App/Software, Stampa 3D and Videogiochi. CAD/Game create persistent BASE-1-backed drafts and reopen from the same project list without invoking inference or simulating generation. The Codex P2 about changing kind while editing software was fixed and regression-tested. All six exact-head workflows are successful; Codex re-review of the final head reports no major issues. No CAD-1, GAME-1, domain runner, deploy or physical/runtime acceptance is claimed.",
-    "decisions": [],
-    "evidence_refs": [
-      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/82b5ac57f9132775fd0695eebb4d2de834c860ed",
-      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/832",
-      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38241204190",
-      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38241204190/job/114783973052",
-      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38241204190/job/114783973052",
-      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38241204381",
-      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38241204385",
-      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38241204453",
-      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38241204290",
-      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38241204451",
-      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/832#issuecomment-6123358247"
+    "summary": "AIVEXUS-BASE-2 accepted at exact PR #832 head 82b5ac57f9132775fd0695eebb4d2de834c860ed. Shared App/Software, Stampa 3D and Videogiochi selector/navigation meets BASE-2 scope; CAD/Game drafts persist and reopen through the same BASE-1-backed list without inference or simulated generation. The software edit kind-switch P2 is fixed and regression-tested. All six exact-head workflows and final-head Codex re-review are PASS. No CAD-1, GAME-1, deployment or physical/runtime acceptance is implied.",
+    "decisions": [
+      "Main/Reviewer accepted the implementation/review gate."
     ],
-    "next_action": "Main/Reviewer must inspect the review_packet, linked evidence and required gates before promotion or rework.",
-    "kind": "REVIEW_HANDOFF"
+    "evidence_refs": [
+      "Ai-orchestrator-riserva#832",
+      "commit:82b5ac57f9132775fd0695eebb4d2de834c860ed",
+      "CI:38241204190",
+      "CI:38241204381",
+      "CI:38241204385",
+      "CI:38241204453",
+      "CI:38241204290",
+      "CI:38241204451",
+      "review:6123358247"
+    ],
+    "next_action": "Merge PR #832 at exact reviewed head, synchronize the private Riserva roadmap marking AIVEXUS-BASE-2 integrated, complete evidence-backed G7, then allow aivexus-3d and aivexus-games to independently proceed with CAD-1 and GAME-1 according to their canonical lanes.",
+    "kind": "REVIEW_ACCEPTED"
   },
   "review_history": [
     {
@@ -773,6 +778,25 @@
         "CI:38161301503",
         "CI:38161301487",
         "CI:38161301491"
+      ]
+    },
+    {
+      "reviewed_at": "2026-10-12T11:35:41Z",
+      "reviewed_by": "main-reviewer",
+      "claim_id": "7c6ae34131e828ee79a1",
+      "work_item": "AIVEXUS-BASE-2",
+      "decision": "APPROVED",
+      "summary": "AIVEXUS-BASE-2 accepted at exact PR #832 head 82b5ac57f9132775fd0695eebb4d2de834c860ed. Shared App/Software, Stampa 3D and Videogiochi selector/navigation meets BASE-2 scope; CAD/Game drafts persist and reopen through the same BASE-1-backed list without inference or simulated generation. The software edit kind-switch P2 is fixed and regression-tested. All six exact-head workflows and final-head Codex re-review are PASS. No CAD-1, GAME-1, deployment or physical/runtime acceptance is implied.",
+      "evidence_refs": [
+        "Ai-orchestrator-riserva#832",
+        "commit:82b5ac57f9132775fd0695eebb4d2de834c860ed",
+        "CI:38241204190",
+        "CI:38241204381",
+        "CI:38241204385",
+        "CI:38241204453",
+        "CI:38241204290",
+        "CI:38241204451",
+        "review:6123358247"
       ]
     }
   ],
@@ -886,6 +910,13 @@
         ".airlab/public-repositories/Ai-orchestrator-riserva/roadmap.yaml"
       ],
       "at": "2026-10-12T10:25:55Z"
+    },
+    {
+      "type": "CLAIM_RELEASED_AFTER_REVIEW",
+      "claim_id": "7c6ae34131e828ee79a1",
+      "work_item": "AIVEXUS-BASE-2",
+      "reason": "Main/Reviewer accepted the bounded implementation/review gate.",
+      "at": "2026-10-12T11:35:41Z"
     }
   ],
   "review_packet_history": [
@@ -1503,5 +1534,14 @@
         "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/832#issuecomment-6123358247"
       ]
     }
+  },
+  "block_reason": {
+    "code": "CANONICAL_SYNC_REQUIRED",
+    "roadmap_refs": [
+      ".airlab/public-repositories/Ai-orchestrator-riserva/roadmap.yaml"
+    ],
+    "reviewed_claim_id": "7c6ae34131e828ee79a1",
+    "work_item": "AIVEXUS-BASE-2",
+    "detected_at": "2026-10-12T11:35:41Z"
   }
 }
