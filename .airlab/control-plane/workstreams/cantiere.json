@@ -3,102 +3,53 @@
   "id": "cantiere",
   "title": "Cantiere",
   "role": "worker",
-  "status": "READY",
+  "status": "CLAIMED",
   "activation": "active",
   "scope": "Exclusive Cantiere/App Factory execution, durability, build/review/validation/apply and first-real-app reliability.",
   "shared_engine_policy": "shared_or_control_plane",
-  "state_version": 52,
+  "state_version": 53,
   "updated_at": "2026-10-12",
-  "active_claim": null,
+  "active_claim": {
+    "claim_id": "94876ef45cb7b6e77d9c",
+    "owner_lane": "cantiere",
+    "work_item": "cantiere-gate-evidence-reviewer-3117",
+    "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
+    "scope": "Bounded +3117 physical review failure: local copy of existing rejected gate source/diff evidence, and prompt-size-based compact-first Reviewer with regression tests; no bypass or model changes",
+    "branch": "fix/cantiere-gate-evidence-reviewer-3117",
+    "resource_locks": [
+      "branch:pilialvu75-hue/Ai-orchestrator-riserva:fix/cantiere-gate-evidence-reviewer-3117",
+      "contract:cantiere-gate-evidence",
+      "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/app_factory/workshop/workshop_production_dashboard_page.dart",
+      "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/app_factory/workshop/workshop_proposal_review_runner.dart",
+      "file:pilialvu75-hue/Ai-orchestrator-riserva:test/app_factory/workshop/workshop_proposal_review_runner_test.dart"
+    ],
+    "started_at": "2026-10-12T18:41:47Z",
+    "heartbeat_at": "2026-10-12T18:41:47Z",
+    "lease_until": "2026-10-13T06:41:47Z",
+    "lease_hours": 12
+  },
   "dependencies": [],
   "roadmap_refs": [
     ".airlab/public-repositories/Ai-orchestrator-riserva/roadmap.yaml#CANT-11",
     ".airlab/public-repositories/Ai-orchestrator-riserva/roadmap.yaml#AIVEXUS-BASE-1",
     ".airlab/public-repositories/Ai-orchestrator-riserva/roadmap.yaml#AIVEXUS-BASE-2"
   ],
-  "evidence": [
-    {
-      "type": "commit",
-      "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/82b5ac57f9132775fd0695eebb4d2de834c860ed",
-      "result": "PASS",
-      "note": "Verified exact final PR #832 head after the P2 edit-kind fix and regression test."
-    },
-    {
-      "type": "pull_request",
-      "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/832",
-      "result": "PASS",
-      "note": "Verified PR #832 open, not draft, mergeable, exact head 82b5ac57f9132775fd0695eebb4d2de834c860ed and base b5840bc680d7831d2df191d2cc8e39a9e45c08cd."
-    },
-    {
-      "type": "ci",
-      "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38241204190",
-      "result": "PASS",
-      "note": "Exact-head Web Cantiere Build completed successfully."
-    },
-    {
-      "type": "analysis",
-      "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38241204190/job/114783973052",
-      "result": "PASS",
-      "note": "Exact-head Web analyze completed successfully before contract tests/build."
-    },
-    {
-      "type": "test",
-      "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38241204190/job/114783973052",
-      "result": "PASS",
-      "note": "Exact-head Web job passed 35 VM tests including 3D/Game draft persistence and software edit kind-lock identity regression, plus Chrome browser suites (2/5/2 tests)."
-    },
-    {
-      "type": "ci",
-      "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38241204381",
-      "result": "PASS",
-      "note": "Exact-head Cantiere First App APK workflow completed successfully; build evidence only."
-    },
-    {
-      "type": "ci",
-      "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38241204385",
-      "result": "PASS",
-      "note": "Exact-head Linux desktop workflow completed successfully."
-    },
-    {
-      "type": "ci",
-      "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38241204453",
-      "result": "PASS",
-      "note": "Exact-head Windows desktop workflow completed successfully."
-    },
-    {
-      "type": "ci",
-      "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38241204290",
-      "result": "PASS",
-      "note": "Exact-head macOS desktop workflow completed successfully."
-    },
-    {
-      "type": "ci",
-      "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38241204451",
-      "result": "PASS",
-      "note": "Exact-head Android signed APK/AAB, test and CodeQL workflow completed successfully; no physical acceptance is implied."
-    },
-    {
-      "type": "analysis",
-      "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/832#issuecomment-6123358247",
-      "result": "PASS",
-      "note": "Codex re-reviewed final head 82b5ac57f9 and reported no major issues after the P2 fix."
-    }
-  ],
+  "evidence": [],
   "gates": {
     "G0_CLAIM": "PASS",
-    "G1_IMPLEMENTATION": "PASS",
-    "G2_STATIC": "PASS",
-    "G3_CI": "PASS",
-    "G4_INTEGRATION": "PASS",
+    "G1_IMPLEMENTATION": "PENDING",
+    "G2_STATIC": "PENDING",
+    "G3_CI": "PENDING",
+    "G4_INTEGRATION": "PENDING",
     "G5_TARGET_RUNTIME": "NOT_APPLICABLE_UNTIL_RUNTIME_CHANGE",
-    "G6_REVIEWER": "PASS",
-    "G7_CANONICAL_SYNC": "PASS"
+    "G6_REVIEWER": "PENDING",
+    "G7_CANONICAL_SYNC": "PENDING"
   },
   "reviewer": {
     "required": true,
-    "state": "APPROVED",
-    "reviewed_by": "main-reviewer",
-    "reviewed_at": "2026-10-12T11:35:41Z"
+    "state": "PENDING",
+    "reviewed_by": null,
+    "reviewed_at": null
   },
   "next_action": "Synchronize the material roadmap refs, then record canonical sync completion before new work can be claimed.",
   "historical_backlog": [
