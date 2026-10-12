@@ -1,0 +1,12 @@
+{
+  "schema_version": 1,
+  "request_id": "diagnostics-20261012-114-submit-review-v2",
+  "status": "APPLIED",
+  "processed_at": "2026-10-12T21:06:31Z",
+  "source_file": "diagnostics-20261012-114-submit-review-v2.json",
+  "lane_id": "diagnostics",
+  "operation": "submit_review",
+  "actor_id": "chatgpt:diagnostics",
+  "errors": [],
+  "result_state_version": 7
+}

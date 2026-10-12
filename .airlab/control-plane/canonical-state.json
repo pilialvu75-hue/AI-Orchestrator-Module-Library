@@ -7,7 +7,7 @@
     "policy": "This private repository is the single coordination authority. Chats and agents are workers, not independent sources of truth."
   },
   "updated_at": "2026-10-12",
-  "state_revision": 216,
+  "state_revision": 217,
   "lifecycle_status": "BOOTSTRAP_ACTIVE",
   "roadmap_authority": {
     "library": ".airlab/roadmap.yaml",
@@ -80,12 +80,13 @@
     "invalid_lane_behavior": "ISOLATE_AND_SURFACE_PROJECTION_INCIDENT"
   },
   "projection": {
-    "source_digest": "8786264437f1251ff268b4b9f728a175661e2737c24bbb6023d848c098f9c7b9",
-    "projected_at": "2026-10-12T21:05:40Z",
+    "source_digest": "10a70f1a9841505740b7c41b1fa77b3082515b82920d8170baaa1d6cd9700d11",
+    "projected_at": "2026-10-12T21:06:31Z",
     "counts": {
       "BLOCKED": 1,
-      "IMPLEMENTING": 2,
-      "READY": 14
+      "IMPLEMENTING": 1,
+      "READY": 14,
+      "REVIEW_REQUIRED": 1
     },
     "active_claims": [
       {
@@ -200,7 +201,9 @@
         "work_item": "diagnostics-issue-114-public-stall-projection"
       }
     ],
-    "review_required": [],
+    "review_required": [
+      "diagnostics"
+    ],
     "blocked": [
       {
         "lane": "aivexus-3d",
@@ -352,9 +355,9 @@
       },
       {
         "id": "diagnostics",
-        "status": "IMPLEMENTING",
+        "status": "REVIEW_REQUIRED",
         "activation": "active",
-        "state_version": 6,
+        "state_version": 7,
         "updated_at": "2026-10-12",
         "active_claim": {
           "claim_id": "dacf7f678beefb358fc5",
@@ -368,10 +371,10 @@
             "resource:diagnostics-issue-114"
           ]
         },
-        "reviewer_state": "CHANGES_REQUESTED",
+        "reviewer_state": "PENDING",
         "inference_profile_status": null,
         "historical_backlog_count": 3,
-        "next_action": "Resubmit the unchanged claim-bound review packet for PR #835 exact head c1bcfca31e2f658e5c0bb4a000c9447e4f6c55b2 with Linux/Web/Android/Windows/macOS CI all PASS and the github_diagnostics live+persisted _capture -> publicLogProjection integration analysis PASS. Leave physical S24 FE evidence PENDING. No code changes."
+        "next_action": "Main/Reviewer must inspect the review_packet, linked evidence and required gates before promotion or rework."
       },
       {
         "id": "library-researcher",
