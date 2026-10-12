@@ -7,7 +7,7 @@
     "policy": "This private repository is the single coordination authority. Chats and agents are workers, not independent sources of truth."
   },
   "updated_at": "2026-10-12",
-  "state_revision": 206,
+  "state_revision": 207,
   "lifecycle_status": "BOOTSTRAP_ACTIVE",
   "roadmap_authority": {
     "library": ".airlab/roadmap.yaml",
@@ -80,31 +80,14 @@
     "invalid_lane_behavior": "ISOLATE_AND_SURFACE_PROJECTION_INCIDENT"
   },
   "projection": {
-    "source_digest": "69a82f25538f581bb20a4da1590cb2334c4c546a8dbc06edc39557cd3537cec1",
-    "projected_at": "2026-10-12T19:16:57Z",
+    "source_digest": "b0d2728b4fee1e7059f6e7033372d06231b20bbd75a97d59b59cd84e4306ead4",
+    "projected_at": "2026-10-12T19:17:28Z",
     "counts": {
-      "IMPLEMENTING": 2,
+      "BLOCKED": 1,
+      "IMPLEMENTING": 1,
       "READY": 15
     },
     "active_claims": [
-      {
-        "lane": "aivexus-3d",
-        "claim_id": "5f4b2c7954f107eb0946",
-        "work_item": "AIVEXUS-CAD-1",
-        "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
-        "lease_until": "2026-10-13T07:16:57Z",
-        "resource_locks": [
-          "branch:pilialvu75-hue/Ai-orchestrator-riserva:feat/aivexus-cad1-parametric-sample",
-          "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/app_factory/workshop/domains/cad/cad1_domain_adapter.dart",
-          "file:pilialvu75-hue/Ai-orchestrator-riserva:test/app_factory/workshop/domains/cad/cad1_domain_adapter_test.dart",
-          "file:pilialvu75-hue/Ai-orchestrator-riserva:tools/aivexus/cad/README.md",
-          "file:pilialvu75-hue/Ai-orchestrator-riserva:tools/aivexus/cad/fixtures/plate_spec.json",
-          "file:pilialvu75-hue/Ai-orchestrator-riserva:tools/aivexus/cad/parametric_plate.py",
-          "file:pilialvu75-hue/Ai-orchestrator-riserva:tools/aivexus/cad/test_cad1.py",
-          "file:pilialvu75-hue/Ai-orchestrator-riserva:tools/aivexus/cad/validate_plate.py",
-          "scope:aivexus:cad"
-        ]
-      },
       {
         "lane": "cantiere",
         "claim_id": "94876ef45cb7b6e77d9c",
@@ -124,12 +107,6 @@
     ],
     "active_resource_locks": [
       {
-        "key": "branch:pilialvu75-hue/Ai-orchestrator-riserva:feat/aivexus-cad1-parametric-sample",
-        "lane": "aivexus-3d",
-        "claim_id": "5f4b2c7954f107eb0946",
-        "work_item": "AIVEXUS-CAD-1"
-      },
-      {
         "key": "branch:pilialvu75-hue/Ai-orchestrator-riserva:fix/cantiere-gate-evidence-reviewer-3117",
         "lane": "cantiere",
         "claim_id": "94876ef45cb7b6e77d9c",
@@ -140,12 +117,6 @@
         "lane": "cantiere",
         "claim_id": "94876ef45cb7b6e77d9c",
         "work_item": "cantiere-gate-evidence-reviewer-3117"
-      },
-      {
-        "key": "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/app_factory/workshop/domains/cad/cad1_domain_adapter.dart",
-        "lane": "aivexus-3d",
-        "claim_id": "5f4b2c7954f107eb0946",
-        "work_item": "AIVEXUS-CAD-1"
       },
       {
         "key": "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/app_factory/workshop/workshop_gate_evidence_export.dart",
@@ -166,12 +137,6 @@
         "work_item": "cantiere-gate-evidence-reviewer-3117"
       },
       {
-        "key": "file:pilialvu75-hue/Ai-orchestrator-riserva:test/app_factory/workshop/domains/cad/cad1_domain_adapter_test.dart",
-        "lane": "aivexus-3d",
-        "claim_id": "5f4b2c7954f107eb0946",
-        "work_item": "AIVEXUS-CAD-1"
-      },
-      {
         "key": "file:pilialvu75-hue/Ai-orchestrator-riserva:test/app_factory/workshop/workshop_gate_evidence_export_test.dart",
         "lane": "cantiere",
         "claim_id": "94876ef45cb7b6e77d9c",
@@ -182,46 +147,33 @@
         "lane": "cantiere",
         "claim_id": "94876ef45cb7b6e77d9c",
         "work_item": "cantiere-gate-evidence-reviewer-3117"
-      },
-      {
-        "key": "file:pilialvu75-hue/Ai-orchestrator-riserva:tools/aivexus/cad/README.md",
-        "lane": "aivexus-3d",
-        "claim_id": "5f4b2c7954f107eb0946",
-        "work_item": "AIVEXUS-CAD-1"
-      },
-      {
-        "key": "file:pilialvu75-hue/Ai-orchestrator-riserva:tools/aivexus/cad/fixtures/plate_spec.json",
-        "lane": "aivexus-3d",
-        "claim_id": "5f4b2c7954f107eb0946",
-        "work_item": "AIVEXUS-CAD-1"
-      },
-      {
-        "key": "file:pilialvu75-hue/Ai-orchestrator-riserva:tools/aivexus/cad/parametric_plate.py",
-        "lane": "aivexus-3d",
-        "claim_id": "5f4b2c7954f107eb0946",
-        "work_item": "AIVEXUS-CAD-1"
-      },
-      {
-        "key": "file:pilialvu75-hue/Ai-orchestrator-riserva:tools/aivexus/cad/test_cad1.py",
-        "lane": "aivexus-3d",
-        "claim_id": "5f4b2c7954f107eb0946",
-        "work_item": "AIVEXUS-CAD-1"
-      },
-      {
-        "key": "file:pilialvu75-hue/Ai-orchestrator-riserva:tools/aivexus/cad/validate_plate.py",
-        "lane": "aivexus-3d",
-        "claim_id": "5f4b2c7954f107eb0946",
-        "work_item": "AIVEXUS-CAD-1"
-      },
-      {
-        "key": "scope:aivexus:cad",
-        "lane": "aivexus-3d",
-        "claim_id": "5f4b2c7954f107eb0946",
-        "work_item": "AIVEXUS-CAD-1"
       }
     ],
     "review_required": [],
-    "blocked": [],
+    "blocked": [
+      {
+        "lane": "aivexus-3d",
+        "reason": {
+          "code": "WAITING_EXTERNAL",
+          "wait_id": "aivexus-3d:5f4b2c7954f107eb0946:WAITING_EXTERNAL",
+          "work_item": "AIVEXUS-CAD-1",
+          "resource_locks": [
+            "branch:pilialvu75-hue/Ai-orchestrator-riserva:feat/aivexus-cad1-parametric-sample",
+            "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/app_factory/workshop/domains/cad/cad1_domain_adapter.dart",
+            "file:pilialvu75-hue/Ai-orchestrator-riserva:test/app_factory/workshop/domains/cad/cad1_domain_adapter_test.dart",
+            "file:pilialvu75-hue/Ai-orchestrator-riserva:tools/aivexus/cad/README.md",
+            "file:pilialvu75-hue/Ai-orchestrator-riserva:tools/aivexus/cad/fixtures/plate_spec.json",
+            "file:pilialvu75-hue/Ai-orchestrator-riserva:tools/aivexus/cad/parametric_plate.py",
+            "file:pilialvu75-hue/Ai-orchestrator-riserva:tools/aivexus/cad/test_cad1.py",
+            "file:pilialvu75-hue/Ai-orchestrator-riserva:tools/aivexus/cad/validate_plate.py",
+            "scope:aivexus:cad"
+          ],
+          "resume_condition": "All six exact-head CI workflows on PR #833 commit 65711a685795bc79874681558bfdeb7319cca660 complete, and each result is inspected; additionally track domain-specific Python/CadQuery tests separately.",
+          "detected_at": "2026-10-12T19:17:28Z",
+          "review_required": false
+        }
+      }
+    ],
     "checkpoint_watch": [],
     "projection_incidents": [],
     "platform_inference_profiles": [
@@ -297,31 +249,15 @@
       },
       {
         "id": "aivexus-3d",
-        "status": "IMPLEMENTING",
+        "status": "BLOCKED",
         "activation": "active",
-        "state_version": 15,
+        "state_version": 16,
         "updated_at": "2026-10-12",
-        "active_claim": {
-          "claim_id": "5f4b2c7954f107eb0946",
-          "work_item": "AIVEXUS-CAD-1",
-          "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
-          "lease_until": "2026-10-13T07:16:57Z",
-          "resource_locks": [
-            "branch:pilialvu75-hue/Ai-orchestrator-riserva:feat/aivexus-cad1-parametric-sample",
-            "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/app_factory/workshop/domains/cad/cad1_domain_adapter.dart",
-            "file:pilialvu75-hue/Ai-orchestrator-riserva:test/app_factory/workshop/domains/cad/cad1_domain_adapter_test.dart",
-            "file:pilialvu75-hue/Ai-orchestrator-riserva:tools/aivexus/cad/README.md",
-            "file:pilialvu75-hue/Ai-orchestrator-riserva:tools/aivexus/cad/fixtures/plate_spec.json",
-            "file:pilialvu75-hue/Ai-orchestrator-riserva:tools/aivexus/cad/parametric_plate.py",
-            "file:pilialvu75-hue/Ai-orchestrator-riserva:tools/aivexus/cad/test_cad1.py",
-            "file:pilialvu75-hue/Ai-orchestrator-riserva:tools/aivexus/cad/validate_plate.py",
-            "scope:aivexus:cad"
-          ]
-        },
+        "active_claim": null,
         "reviewer_state": "PENDING",
         "inference_profile_status": null,
         "historical_backlog_count": 0,
-        "next_action": "Inspect six CI workflows on exact head 65711a685795bc79874681558bfdeb7319cca660 and verify Python/CadQuery regression execution separately. Keep PR #833 draft until certified sandbox runner and Cantiere immutable artifact persistence exist (Library #113). After external CI completion, resume canonical wait and reacquire claim for bounded follow-up. Do not self-promote or equate CI PASS with Fusion/print acceptance."
+        "next_action": "After GitHub CI for head 65711a6 completes, use transactional resume_wait then new bounded CAD-1 claim; inspect failing checks and exact Python test results, fix domain-only issues. Keep PR draft and do not modify shared Cantiere files or promote before authorized runner/artifact persistence and Main/Reviewer review. G5 Fusion/print remain UNKNOWN."
       },
       {
         "id": "aivexus-games",
