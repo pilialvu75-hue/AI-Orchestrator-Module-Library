@@ -7,7 +7,7 @@
   "activation": "active",
   "scope": "Exclusive Cantiere/App Factory execution, durability, build/review/validation/apply and first-real-app reliability.",
   "shared_engine_policy": "shared_or_control_plane",
-  "state_version": 59,
+  "state_version": 60,
   "updated_at": "2026-10-12",
   "active_claim": {
     "claim_id": "94876ef45cb7b6e77d9c",
@@ -28,8 +28,8 @@
       "file:pilialvu75-hue/Ai-orchestrator-riserva:test/app_factory/workshop/workshop_task_inference_pipeline_test.dart"
     ],
     "started_at": "2026-10-12T18:41:47Z",
-    "heartbeat_at": "2026-10-12T20:40:58Z",
-    "lease_until": "2026-10-13T08:40:58Z",
+    "heartbeat_at": "2026-10-12T20:47:12Z",
+    "lease_until": "2026-10-13T08:47:12Z",
     "lease_hours": 12
   },
   "dependencies": [],
@@ -110,7 +110,7 @@
     "reviewed_by": "main-reviewer",
     "reviewed_at": "2026-10-12T20:32:50Z"
   },
-  "next_action": "Complete six exact-head CI checks for 68a2ae62; repair only observed failures; then resolve two review threads, submit new claim-bound packet to Main/Reviewer.",
+  "next_action": "Check exact-head Android run 38305557300, Windows run 38305557324 and macOS run 38305557283; if all pass submit new claim-bound Cantiere review packet to Main/Reviewer, no merge.",
   "historical_backlog": [
     "Stay in Phase 1 ONLINE until a real generated Android app is physically accepted.",
     "Reproduce the recent manga-drawing app failure from current main with Diagnostics; do not restart generic audits.",
@@ -806,23 +806,43 @@
         "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/68a2ae62f9be20294000c0b6076e7917d391f477"
       ],
       "next_action": "Complete six exact-head CI checks for 68a2ae62; repair only observed failures; then resolve two review threads, submit new claim-bound packet to Main/Reviewer."
+    },
+    {
+      "seq": 36,
+      "at": "2026-10-12T20:47:12Z",
+      "claim_id": "94876ef45cb7b6e77d9c",
+      "work_item": "cantiere-gate-evidence-reviewer-3117",
+      "summary": "PR #834 bounded P2 rework head 68a2ae62; both review threads replied and resolved. Exact-head CI Web, First App APK and Linux green. Android, macOS and Windows still in progress. No merge or physical validation.",
+      "decisions": [
+        "Do not submit a new Main review packet until all six exact-head CI complete; keep reviewer authority and G5 S24 FE open.",
+        "No new source edits unless CI reveals a concrete defect."
+      ],
+      "evidence_refs": [
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/834",
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38305557271",
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38305557277",
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38305557289"
+      ],
+      "next_action": "Check exact-head Android run 38305557300, Windows run 38305557324 and macOS run 38305557283; if all pass submit new claim-bound Cantiere review packet to Main/Reviewer, no merge."
     }
   ],
   "last_checkpoint": {
-    "seq": 35,
-    "at": "2026-10-12T20:40:58Z",
+    "seq": 36,
+    "at": "2026-10-12T20:47:12Z",
     "claim_id": "94876ef45cb7b6e77d9c",
     "work_item": "cantiere-gate-evidence-reviewer-3117",
-    "summary": "PR #834 bounded Main/Reviewer P2 rework implemented at 68a2ae62f9be20294000c0b6076e7917d391f477. Rejected-gate source snapshots now capture only final Engineer paths against pre-Engineer/post-Library baseline, fail closed for unrelated or incomplete evidence; Reviewer measures actual compact prompt before all model calls and fails closed above 7000 characters. Both review threads replied; all six exact-head CI workflows were started, pending completion.",
+    "summary": "PR #834 bounded P2 rework head 68a2ae62; both review threads replied and resolved. Exact-head CI Web, First App APK and Linux green. Android, macOS and Windows still in progress. No merge or physical validation.",
     "decisions": [
-      "G5 physical S24 FE stays pending; no merge, no build claim or device retry.",
-      "Do not change model, timeout, token budget, Local WebSearch, Vulkan, RAM, gate authority."
+      "Do not submit a new Main review packet until all six exact-head CI complete; keep reviewer authority and G5 S24 FE open.",
+      "No new source edits unless CI reveals a concrete defect."
     ],
     "evidence_refs": [
       "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/834",
-      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/68a2ae62f9be20294000c0b6076e7917d391f477"
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38305557271",
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38305557277",
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38305557289"
     ],
-    "next_action": "Complete six exact-head CI checks for 68a2ae62; repair only observed failures; then resolve two review threads, submit new claim-bound packet to Main/Reviewer."
+    "next_action": "Check exact-head Android run 38305557300, Windows run 38305557324 and macOS run 38305557283; if all pass submit new claim-bound Cantiere review packet to Main/Reviewer, no merge."
   },
   "review_history": [
     {
