@@ -7,7 +7,7 @@
     "policy": "This private repository is the single coordination authority. Chats and agents are workers, not independent sources of truth."
   },
   "updated_at": "2026-10-12",
-  "state_revision": 205,
+  "state_revision": 206,
   "lifecycle_status": "BOOTSTRAP_ACTIVE",
   "roadmap_authority": {
     "library": ".airlab/roadmap.yaml",
@@ -80,11 +80,10 @@
     "invalid_lane_behavior": "ISOLATE_AND_SURFACE_PROJECTION_INCIDENT"
   },
   "projection": {
-    "source_digest": "fc5704df34a44a310d1469d1661b4224363a2bfd8b08035a8c601f9a929ea5f3",
-    "projected_at": "2026-10-12T19:14:39Z",
+    "source_digest": "69a82f25538f581bb20a4da1590cb2334c4c546a8dbc06edc39557cd3537cec1",
+    "projected_at": "2026-10-12T19:16:57Z",
     "counts": {
-      "CLAIMED": 1,
-      "IMPLEMENTING": 1,
+      "IMPLEMENTING": 2,
       "READY": 15
     },
     "active_claims": [
@@ -93,7 +92,7 @@
         "claim_id": "5f4b2c7954f107eb0946",
         "work_item": "AIVEXUS-CAD-1",
         "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
-        "lease_until": "2026-10-13T07:14:39Z",
+        "lease_until": "2026-10-13T07:16:57Z",
         "resource_locks": [
           "branch:pilialvu75-hue/Ai-orchestrator-riserva:feat/aivexus-cad1-parametric-sample",
           "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/app_factory/workshop/domains/cad/cad1_domain_adapter.dart",
@@ -298,15 +297,15 @@
       },
       {
         "id": "aivexus-3d",
-        "status": "CLAIMED",
+        "status": "IMPLEMENTING",
         "activation": "active",
-        "state_version": 14,
+        "state_version": 15,
         "updated_at": "2026-10-12",
         "active_claim": {
           "claim_id": "5f4b2c7954f107eb0946",
           "work_item": "AIVEXUS-CAD-1",
           "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
-          "lease_until": "2026-10-13T07:14:39Z",
+          "lease_until": "2026-10-13T07:16:57Z",
           "resource_locks": [
             "branch:pilialvu75-hue/Ai-orchestrator-riserva:feat/aivexus-cad1-parametric-sample",
             "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/app_factory/workshop/domains/cad/cad1_domain_adapter.dart",
@@ -322,7 +321,7 @@
         "reviewer_state": "PENDING",
         "inference_profile_status": null,
         "historical_backlog_count": 0,
-        "next_action": "Once exact-head CI is complete, resume via authorized control-plane inbox and reacquire bounded CAD-1 claim. Check test failures on exact head; do not self-promote on CI green. Continue coordination on certified CAD runner/attachment storage via Library issue #113 and Cantiere; leave PR draft if end-to-end unproven."
+        "next_action": "Inspect six CI workflows on exact head 65711a685795bc79874681558bfdeb7319cca660 and verify Python/CadQuery regression execution separately. Keep PR #833 draft until certified sandbox runner and Cantiere immutable artifact persistence exist (Library #113). After external CI completion, resume canonical wait and reacquire claim for bounded follow-up. Do not self-promote or equate CI PASS with Fusion/print acceptance."
       },
       {
         "id": "aivexus-games",
