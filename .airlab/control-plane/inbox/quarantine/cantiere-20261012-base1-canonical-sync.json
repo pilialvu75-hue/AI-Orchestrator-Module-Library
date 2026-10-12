@@ -1,0 +1,14 @@
+{
+  "schema_version": 1,
+  "request_id": "cantiere-20261012-base1-canonical-sync",
+  "status": "QUARANTINED",
+  "processed_at": "2026-10-12T10:24:33Z",
+  "source_file": "cantiere-20261012-base1-canonical-sync.json",
+  "lane_id": "cantiere",
+  "operation": "canonical_sync_complete",
+  "actor_id": "chatgpt:main-reviewer",
+  "errors": [
+    "canonical sync completion requires evidence-backed receipts"
+  ],
+  "result_state_version": null
+}
