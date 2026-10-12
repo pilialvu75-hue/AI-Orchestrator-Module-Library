@@ -9,6 +9,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "tools"))
 
 from library_evolution_bridge import REQUIRED_GATES, stage_evolution_work
 from library_evolution_queue import EvolutionQueueError, EvolutionWorkQueue
+from library_evolution_dispatch import claim
 
 
 def _work():
@@ -38,7 +39,7 @@ class EvolutionWorkQueueTest(unittest.TestCase):
             queue = EvolutionWorkQueue(Path(tmp))
             work = _work()
             queue.stage(work)
-            self.assertEqual(queue.transition(work.work_id, "claimed")["state"], "claimed")
+            self.assertEqual(claim(Path(tmp), work.work_id)["transition"]["state"], "claimed")
             with self.assertRaisesRegex(EvolutionQueueError, "requires receipt"):
                 queue.transition(work.work_id, "returned")
             receipt = {"bundle_sha256": "a" * 64, "result": "library_intake_bundle"}
