@@ -3,12 +3,12 @@
   "id": "cantiere",
   "title": "Cantiere",
   "role": "worker",
-  "status": "BLOCKED",
+  "status": "READY",
   "activation": "active",
   "scope": "Exclusive Cantiere/App Factory execution, durability, build/review/validation/apply and first-real-app reliability.",
   "shared_engine_policy": "shared_or_control_plane",
-  "state_version": 37,
-  "updated_at": "2026-10-11",
+  "state_version": 38,
+  "updated_at": "2026-10-12",
   "active_claim": null,
   "dependencies": [],
   "roadmap_refs": [
@@ -94,7 +94,7 @@
     "reviewed_by": "main-reviewer",
     "reviewed_at": "2026-10-11T17:18:10Z"
   },
-  "next_action": "Update feat/aivexus-shared-project-base-v1 from current Riserva main 9f320c82073fc74c7cd4a8b974071ec0addb3772 without adding BASE-2 or domain work. Resolve only necessary integration conflicts, keep ProjectExtension/ResourceExchange semantics unchanged, run the existing six workflow gates on the new head, then resubmit the same claim-bound AIVEXUS-BASE-1 review packet with new commit/PR PASS evidence. Physical/device, Fusion/print/gameplay and BASE-2 remain open.",
+  "next_action": "Return Cantiere to READY so it can immediately reclaim AIVEXUS-BASE-1 only, submit an updated claim-bound review packet for PR #826 head a63b8cf14c07e6aeba361a1ee4e6e832e6ce1df1 using the six successful exact-head workflows, and hand it to Main/Reviewer. Do not start BASE-2, CAD or Games until BASE-1 review/merge is complete.",
   "historical_backlog": [
     "Stay in Phase 1 ONLINE until a real generated Android app is physically accepted.",
     "Reproduce the recent manga-drawing app failure from current main with Diagnostics; do not restart generic audits.",
@@ -667,6 +667,24 @@
       ],
       "lease_until": "2026-10-11T22:49:13Z",
       "detected_at": "2026-10-11T23:28:30Z"
+    },
+    {
+      "type": "STALE_BLOCK_RESOLVED_BY_REVIEWER",
+      "claim_id": "c792cfdec8aee6363eba",
+      "work_item": "AIVEXUS-BASE-1",
+      "summary": "Clear the expired BASE-1 claim after verifying that PR #826 has already been realigned to current Riserva main and is mergeable at head a63b8cf14c07e6aeba361a1ee4e6e832e6ce1df1 with all six exact-head workflows successful. This only removes the stale administrative block; it does not approve or merge BASE-1 and does not close any physical/domain gate.",
+      "evidence_refs": [
+        "Ai-orchestrator-riserva#826",
+        "commit:a63b8cf14c07e6aeba361a1ee4e6e832e6ce1df1",
+        "main:9f320c82073fc74c7cd4a8b974071ec0addb3772",
+        "CI:38161301491",
+        "CI:38161301515",
+        "CI:38161301477",
+        "CI:38161301505",
+        "CI:38161301503",
+        "CI:38161301487"
+      ],
+      "at": "2026-10-12T10:08:06Z"
     }
   ],
   "review_packet_history": [
@@ -786,6 +804,43 @@
           "CI:37152170709"
         ],
         "at": "2026-10-07T20:06:04Z"
+      }
+    },
+    {
+      "code": "CLAIM_LEASE_EXPIRED",
+      "work_item": "AIVEXUS-BASE-1",
+      "claim_id": "c792cfdec8aee6363eba",
+      "resource_locks": [
+        "branch:pilialvu75-hue/Ai-orchestrator-riserva:feat/aivexus-shared-project-base-v1",
+        "contract:aivexus-project-extension-v1",
+        "contract:aivexus-resource-exchange-v1",
+        "file:pilialvu75-hue/Ai-orchestrator-riserva:.github/workflows/web-build.yml",
+        "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/app_factory/workshop/web/workshop_web_project_storage.dart",
+        "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/app_factory/workshop/web/workshop_web_projects_page.dart",
+        "file:pilialvu75-hue/Ai-orchestrator-riserva:test/app_factory/workshop/web/workshop_web_project_storage_test.dart",
+        "scope:aivexus:shared-base"
+      ],
+      "lease_until": "2026-10-11T22:49:13Z",
+      "detected_at": "2026-10-11T23:28:30Z",
+      "review_required": true,
+      "resolved_at": "2026-10-12T10:08:06Z",
+      "resolution": {
+        "type": "STALE_BLOCK_RESOLVED_BY_REVIEWER",
+        "claim_id": "c792cfdec8aee6363eba",
+        "work_item": "AIVEXUS-BASE-1",
+        "summary": "Clear the expired BASE-1 claim after verifying that PR #826 has already been realigned to current Riserva main and is mergeable at head a63b8cf14c07e6aeba361a1ee4e6e832e6ce1df1 with all six exact-head workflows successful. This only removes the stale administrative block; it does not approve or merge BASE-1 and does not close any physical/domain gate.",
+        "evidence_refs": [
+          "Ai-orchestrator-riserva#826",
+          "commit:a63b8cf14c07e6aeba361a1ee4e6e832e6ce1df1",
+          "main:9f320c82073fc74c7cd4a8b974071ec0addb3772",
+          "CI:38161301491",
+          "CI:38161301515",
+          "CI:38161301477",
+          "CI:38161301505",
+          "CI:38161301503",
+          "CI:38161301487"
+        ],
+        "at": "2026-10-12T10:08:06Z"
       }
     }
   ],
@@ -922,23 +977,5 @@
         ".airlab/control-plane/contracts/aivexus-resource-exchange-v1.md"
       ]
     }
-  },
-  "block_reason": {
-    "code": "CLAIM_LEASE_EXPIRED",
-    "work_item": "AIVEXUS-BASE-1",
-    "claim_id": "c792cfdec8aee6363eba",
-    "resource_locks": [
-      "branch:pilialvu75-hue/Ai-orchestrator-riserva:feat/aivexus-shared-project-base-v1",
-      "contract:aivexus-project-extension-v1",
-      "contract:aivexus-resource-exchange-v1",
-      "file:pilialvu75-hue/Ai-orchestrator-riserva:.github/workflows/web-build.yml",
-      "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/app_factory/workshop/web/workshop_web_project_storage.dart",
-      "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/app_factory/workshop/web/workshop_web_projects_page.dart",
-      "file:pilialvu75-hue/Ai-orchestrator-riserva:test/app_factory/workshop/web/workshop_web_project_storage_test.dart",
-      "scope:aivexus:shared-base"
-    ],
-    "lease_until": "2026-10-11T22:49:13Z",
-    "detected_at": "2026-10-11T23:28:30Z",
-    "review_required": true
   }
 }
