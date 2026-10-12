@@ -1,0 +1,14 @@
+{
+  "schema_version": 1,
+  "request_id": "cantiere-20261012-base1-review-accept",
+  "status": "QUARANTINED",
+  "processed_at": "2026-10-12T10:20:58Z",
+  "source_file": "cantiere-20261012-base1-review-accept.json",
+  "lane_id": "cantiere",
+  "operation": "review_accept",
+  "actor_id": "chatgpt:main-reviewer",
+  "errors": [
+    "canonical sync ref is not an authoritative roadmap path: .airlab/control-plane/contracts/aivexus-project-extension-v1.schema.json"
+  ],
+  "result_state_version": null
+}
