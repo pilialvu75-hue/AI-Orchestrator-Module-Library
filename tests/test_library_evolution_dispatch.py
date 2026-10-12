@@ -74,7 +74,9 @@ class EvolutionDispatchTest(unittest.TestCase):
             root = Path(tmp)
             work = _stage(root)
             queue = EvolutionWorkQueue(root)
-            queue.transition(work.work_id, "claimed")
+            legacy = queue.load(work.work_id)
+            legacy["state"] = "claimed"
+            queue._write(legacy)
             with self.assertRaisesRegex(EvolutionDispatchError, "legacy claim"):
                 resume_claim(root, work.work_id)
 
