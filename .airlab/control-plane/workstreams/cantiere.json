@@ -7,7 +7,7 @@
   "activation": "active",
   "scope": "Exclusive Cantiere/App Factory execution, durability, build/review/validation/apply and first-real-app reliability.",
   "shared_engine_policy": "shared_or_control_plane",
-  "state_version": 54,
+  "state_version": 55,
   "updated_at": "2026-10-12",
   "active_claim": {
     "claim_id": "94876ef45cb7b6e77d9c",
@@ -24,8 +24,8 @@
       "file:pilialvu75-hue/Ai-orchestrator-riserva:test/app_factory/workshop/workshop_proposal_review_runner_test.dart"
     ],
     "started_at": "2026-10-12T18:41:47Z",
-    "heartbeat_at": "2026-10-12T18:48:03Z",
-    "lease_until": "2026-10-13T06:48:03Z",
+    "heartbeat_at": "2026-10-12T18:53:09Z",
+    "lease_until": "2026-10-13T06:53:09Z",
     "lease_hours": 12
   },
   "dependencies": [],
@@ -51,7 +51,7 @@
     "reviewed_by": null,
     "reviewed_at": null
   },
-  "next_action": "Inspect six CI on exact PR #834 head 476a7bc; repair only concrete failures; submit review packet to Main/Reviewer after evidence is sufficient.",
+  "next_action": "Review six exact-head CI runs for PR #834 at 65fe53a and repair only evidenced failures before review handoff.",
   "historical_backlog": [
     "Stay in Phase 1 ONLINE until a real generated Android app is physically accepted.",
     "Reproduce the recent manga-drawing app failure from current main with Diagnostics; do not restart generic audits.",
@@ -666,23 +666,39 @@
         "https://github.com/pilialvu75-hue/Ai-orchestrator-diagnostics/releases/tag/diagnostics-v1-6bd1447f-5fda-4171-84b4-c1ff56b154cf"
       ],
       "next_action": "Inspect six CI on exact PR #834 head 476a7bc; repair only concrete failures; submit review packet to Main/Reviewer after evidence is sufficient."
+    },
+    {
+      "seq": 31,
+      "at": "2026-10-12T18:53:09Z",
+      "claim_id": "94876ef45cb7b6e77d9c",
+      "work_item": "cantiere-gate-evidence-reviewer-3117",
+      "summary": "PR #834 initial Android analyze failed only with undefined productionBusy in button; fixed scope to _mutationBusy || execution.isRunning. New exact head 65fe53a starts six CI; no runtime success claimed.",
+      "decisions": [
+        "Keep PR draft until exact-head Android/test CI and Main Reviewer.",
+        "Do not repeat +3117 test; preserve existing project."
+      ],
+      "evidence_refs": [
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/834",
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38293677733"
+      ],
+      "next_action": "Review six exact-head CI runs for PR #834 at 65fe53a and repair only evidenced failures before review handoff."
     }
   ],
   "last_checkpoint": {
-    "seq": 30,
-    "at": "2026-10-12T18:48:03Z",
+    "seq": 31,
+    "at": "2026-10-12T18:53:09Z",
     "claim_id": "94876ef45cb7b6e77d9c",
     "work_item": "cantiere-gate-evidence-reviewer-3117",
-    "summary": "PR #834 draft: explicit rejected gate source evidence clipboard export, Reviewer compact-first for oversized primary inputs, and regression tests. Six exact-head CI workflows started; no physical acceptance.",
+    "summary": "PR #834 initial Android analyze failed only with undefined productionBusy in button; fixed scope to _mutationBusy || execution.isRunning. New exact head 65fe53a starts six CI; no runtime success claimed.",
     "decisions": [
-      "No auto-approve, provider switch, token increase or shared Diagnostics raw-source publishing.",
-      "No new physical retry until CI and Main/Reviewer acceptance."
+      "Keep PR draft until exact-head Android/test CI and Main Reviewer.",
+      "Do not repeat +3117 test; preserve existing project."
     ],
     "evidence_refs": [
       "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/834",
-      "https://github.com/pilialvu75-hue/Ai-orchestrator-diagnostics/releases/tag/diagnostics-v1-6bd1447f-5fda-4171-84b4-c1ff56b154cf"
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38293677733"
     ],
-    "next_action": "Inspect six CI on exact PR #834 head 476a7bc; repair only concrete failures; submit review packet to Main/Reviewer after evidence is sufficient."
+    "next_action": "Review six exact-head CI runs for PR #834 at 65fe53a and repair only evidenced failures before review handoff."
   },
   "review_history": [
     {
