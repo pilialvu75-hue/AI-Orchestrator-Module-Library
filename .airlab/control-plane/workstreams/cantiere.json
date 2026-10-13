@@ -3,92 +3,56 @@
   "id": "cantiere",
   "title": "Cantiere",
   "role": "worker",
-  "status": "READY",
+  "status": "CLAIMED",
   "activation": "active",
   "scope": "Exclusive Cantiere/App Factory execution, durability, build/review/validation/apply and first-real-app reliability.",
   "shared_engine_policy": "shared_or_control_plane",
-  "state_version": 63,
+  "state_version": 64,
   "updated_at": "2026-10-13",
-  "active_claim": null,
+  "active_claim": {
+    "claim_id": "c0d7e9a1f346b8d5021a",
+    "owner_lane": "cantiere",
+    "work_item": "cantiere-engineer-flutter-native-import-3140",
+    "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
+    "scope": "Physical +3140 S24 FE Reviewer correctly rejected mixed Dart/Kotlin/XML star tap implementation. Add bounded Engineer Flutter-first guidance plus fail-closed impossible Java/Kotlin class imports in Dart before staging with existing retry, targeted tests only. Preserve Reviewer/Validation, models, memory and Vulkan.",
+    "branch": "fix/cantiere-engineer-flutter-native-import-3140",
+    "resource_locks": [
+      "branch:pilialvu75-hue/Ai-orchestrator-riserva:fix/cantiere-engineer-flutter-native-import-3140",
+      "contract:cantiere-engineer-flutter-source",
+      "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/app_factory/workshop/workshop_proposal_implementation_runner.dart",
+      "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/app_factory/workshop/workshop_proposal_workspace_stager.dart",
+      "file:pilialvu75-hue/Ai-orchestrator-riserva:test/app_factory/workshop/workshop_proposal_implementation_runner_test.dart",
+      "file:pilialvu75-hue/Ai-orchestrator-riserva:test/app_factory/workshop/workshop_proposal_workspace_stager_test.dart"
+    ],
+    "started_at": "2026-10-13T02:32:23Z",
+    "heartbeat_at": "2026-10-13T02:32:23Z",
+    "lease_until": "2026-10-13T14:32:23Z",
+    "lease_hours": 12
+  },
   "dependencies": [],
   "roadmap_refs": [
     ".airlab/public-repositories/Ai-orchestrator-riserva/roadmap.yaml#CANT-11",
     ".airlab/public-repositories/Ai-orchestrator-riserva/roadmap.yaml#AIVEXUS-BASE-1",
     ".airlab/public-repositories/Ai-orchestrator-riserva/roadmap.yaml#AIVEXUS-BASE-2"
   ],
-  "evidence": [
-    {
-      "type": "commit",
-      "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/68a2ae62f9be20294000c0b6076e7917d391f477",
-      "result": "PASS",
-      "note": "Exact reviewed head with both bounded P2 rework changes and regression coverage."
-    },
-    {
-      "type": "pull_request",
-      "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/834",
-      "result": "PASS",
-      "note": "Open, ready for review, mergeable. Two original P2 GitHub review threads replied and resolved on the exact rework head; no merge."
-    },
-    {
-      "type": "ci",
-      "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38305557300",
-      "result": "PASS",
-      "note": "Exact-head Android Build & Release APK: Flutter analyze + Flutter tests + signed APK/AAB CI green (no GitHub release published on PR)."
-    },
-    {
-      "type": "ci",
-      "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38305557277",
-      "result": "PASS",
-      "note": "Exact-head Cantiere First App APK regression and deterministic smoke CI green."
-    },
-    {
-      "type": "ci",
-      "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38305557271",
-      "result": "PASS",
-      "note": "Exact-head Web Cantiere build and contract CI green."
-    },
-    {
-      "type": "ci",
-      "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38305557324",
-      "result": "PASS",
-      "note": "Exact-head Windows desktop build/tests green."
-    },
-    {
-      "type": "ci",
-      "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38305557289",
-      "result": "PASS",
-      "note": "Exact-head Linux desktop build/tests green."
-    },
-    {
-      "type": "ci",
-      "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38305557283",
-      "result": "PASS",
-      "note": "Exact-head macOS desktop build/tests green."
-    },
-    {
-      "type": "physical_device",
-      "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-diagnostics/releases/tag/diagnostics-v1-6bd1447f-5fda-4171-84b4-c1ff56b154cf",
-      "result": "FAIL",
-      "note": "Original pre-fix +3117 Galaxy S24 FE Reviewer failure: full prompt 9385 chars zero token, compact fallback 6601 ran and rejected star.dart. This does not prove #834 on device."
-    }
-  ],
+  "evidence": [],
   "gates": {
     "G0_CLAIM": "PASS",
-    "G1_IMPLEMENTATION": "PASS",
-    "G2_STATIC": "PASS",
-    "G3_CI": "PASS",
-    "G4_INTEGRATION": "PASS",
+    "G1_IMPLEMENTATION": "PENDING",
+    "G2_STATIC": "PENDING",
+    "G3_CI": "PENDING",
+    "G4_INTEGRATION": "PENDING",
     "G5_TARGET_RUNTIME": "PENDING_PHYSICAL_S24_FE",
-    "G6_REVIEWER": "PASS",
-    "G7_CANONICAL_SYNC": "PASS"
+    "G6_REVIEWER": "PENDING",
+    "G7_CANONICAL_SYNC": "PENDING"
   },
   "reviewer": {
     "required": true,
-    "state": "APPROVED",
-    "reviewed_by": "main-reviewer",
-    "reviewed_at": "2026-10-13T01:52:42Z"
+    "state": "PENDING",
+    "reviewed_by": null,
+    "reviewed_at": null
   },
-  "next_action": "Merge PR #834 only at exact reviewed head 68a2ae62f9be20294000c0b6076e7917d391f477. Then produce the next signed Android release containing the merge. Permit one S24 FE retest of the existing black-background project with all four roles qwen2_5_3b_instruct; if it fails, export acceptance report plus gate source evidence and do not perform additional retry. Keep Lista Spesa Lite separate and Phase 1 ONLINE open until generated APK install/open is physically accepted.",
+  "next_action": "Implement minimal Flutter-first Engineer guard after physical +3140 mixed-stack rejected source; run exact-head CI; submit new canonical review packet. No physical retest until new reviewed release.",
   "historical_backlog": [
     "Stay in Phase 1 ONLINE until a real generated Android app is physically accepted.",
     "Reproduce the recent manga-drawing app failure from current main with Diagnostics; do not restart generic audits.",
@@ -1608,6 +1572,104 @@
           ".airlab/public-repositories/Ai-orchestrator-riserva/roadmap.yaml#CANT-AUDIT-06"
         ]
       }
+    },
+    {
+      "schema_version": 1,
+      "submitted_at": "2026-10-12T21:20:54Z",
+      "lane_id": "cantiere",
+      "claim_id": "94876ef45cb7b6e77d9c",
+      "work_item": "cantiere-gate-evidence-reviewer-3117",
+      "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
+      "branch": "fix/cantiere-gate-evidence-reviewer-3117",
+      "pull_request": 834,
+      "summary": "Bounded Cantiere P2 rework for +3117 Reviewer failure, PR #834 exact head 68a2ae62f9be20294000c0b6076e7917d391f477. Two Main/Reviewer P2 findings from old head 507e35d are addressed: (1) rejected-gate source export now uses immutable baseline captured after Library reuse and before Engineer, scoped to final rejected proposal affected paths, with staged actual source, preventing unrelated reuse/incorrect before source from clipboard; (2) every initial/compact-retry Reviewer prompt is measured before inference and fails closed if above the 7000-char threshold. New regressions cover preceding Library reuse, proposal transport/staged truth, task identity, invalid paths, oversized mandatory constraints (zero inference), no bypass and retained Reviewer rejection. Both inline review threads were replied to and resolved. All six GitHub CI workflows completed successfully on the exact final head. Not merged. No S24 FE physical validation or recovery of the old star.dart source is claimed.",
+      "changes": [
+        "lib/app_factory/workshop/workshop_task_inference_pipeline.dart: carry immutable rejected-gate baseline/staged snapshots only for final proposal-owned affected paths; reuse pre-Engineer baseline captured after Library reuse; preserve revision, Reviewer, Validation and apply boundaries.",
+        "lib/app_factory/workshop/workshop_gate_evidence_export.dart: require current claim-scoped snapshots from inference result and reject unrelated/partial/no-change path evidence before local opt-in clipboard copy.",
+        "lib/app_factory/workshop/workshop_production_dashboard_page.dart: invoke existing local-only gate copy without reading repository originalSnapshot or uploading raw source; keep explicit user action.",
+        "lib/app_factory/workshop/workshop_proposal_review_runner.dart: build+measure actual Reviewer primary and retry prompt, refuse any >7000 characters before model inference without dropping coverage/mandatory constraints; original model/maxTokens/timeouts/retry unchanged.",
+        "test/app_factory/workshop/workshop_task_inference_pipeline_test.dart: final multi-revision rejection preserves exact pre-Engineer file baseline while excluding preceding staged Library reuse.",
+        "test/app_factory/workshop/workshop_gate_evidence_export_test.dart: fidelity/identity/extra paths/no-change/oversize fail-closed regression.",
+        "test/app_factory/workshop/workshop_proposal_review_runner_test.dart: long mandatory constraints produce zero model calls, no approval, staged Review unchanged; normal Reviewer rejection remains authoritative."
+      ],
+      "evidence": [
+        {
+          "type": "commit",
+          "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/68a2ae62f9be20294000c0b6076e7917d391f477",
+          "result": "PASS",
+          "note": "Exact reviewed head with both bounded P2 rework changes and regression coverage."
+        },
+        {
+          "type": "pull_request",
+          "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/834",
+          "result": "PASS",
+          "note": "Open, ready for review, mergeable. Two original P2 GitHub review threads replied and resolved on the exact rework head; no merge."
+        },
+        {
+          "type": "ci",
+          "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38305557300",
+          "result": "PASS",
+          "note": "Exact-head Android Build & Release APK: Flutter analyze + Flutter tests + signed APK/AAB CI green (no GitHub release published on PR)."
+        },
+        {
+          "type": "ci",
+          "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38305557277",
+          "result": "PASS",
+          "note": "Exact-head Cantiere First App APK regression and deterministic smoke CI green."
+        },
+        {
+          "type": "ci",
+          "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38305557271",
+          "result": "PASS",
+          "note": "Exact-head Web Cantiere build and contract CI green."
+        },
+        {
+          "type": "ci",
+          "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38305557324",
+          "result": "PASS",
+          "note": "Exact-head Windows desktop build/tests green."
+        },
+        {
+          "type": "ci",
+          "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38305557289",
+          "result": "PASS",
+          "note": "Exact-head Linux desktop build/tests green."
+        },
+        {
+          "type": "ci",
+          "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38305557283",
+          "result": "PASS",
+          "note": "Exact-head macOS desktop build/tests green."
+        },
+        {
+          "type": "physical_device",
+          "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-diagnostics/releases/tag/diagnostics-v1-6bd1447f-5fda-4171-84b4-c1ff56b154cf",
+          "result": "FAIL",
+          "note": "Original pre-fix +3117 Galaxy S24 FE Reviewer failure: full prompt 9385 chars zero token, compact fallback 6601 ran and rejected star.dart. This does not prove #834 on device."
+        }
+      ],
+      "known_risks": [
+        "G5 physical S24 FE acceptance is pending; CI does not demonstrate physical Qwen review, source export, generated APK install or launch.",
+        "Original +3117 rejected source was not durably stored; star.dart remains unclassified until next on-device failure evidence. The failed black-background project is separate from Lista Spesa Lite.",
+        "Clipboard is explicit local opt-in but can include private project source visible in device clipboard history; no automatic source transmission to Diagnostics.",
+        "Conservative >7000 compact prompt cap fails closed rather than silently dropping mandatory constraints. It can block some valid very long requests; later batching/coverage enhancements require separate evidence.",
+        "Do not change Local WebSearch, Vulkan, RAM protections, models, tokens, timeouts, retry counts or Review/Validation authority."
+      ],
+      "reviewer_checks": [
+        "Re-review PR #834 exact head 68a2ae62; verify P2-1 immutable post-Library pre-Engineer baseline and final proposal path scope, including multiple Engineer gate revisions, no unrelated clipboard source or stale task identity.",
+        "Re-review P2-2 bounded initial and retry compact prompts with >7000 mandatory-constraints fail-closed, preserving every required coverage path and no inference on oversized input.",
+        "Confirm both GitHub review threads are replied/resolved, and validate new regression tests actually exercise both P2 cases.",
+        "Validate six exact-head CI and scope across shared Android/Web/desktop contracts; complete G1–G4 attestations for this exact *new* packet before G6 acceptance.",
+        "Preserve G5 PENDING_PHYSICAL_S24_FE and CANT-11 Phase 1 ONLINE; no claim of successful app generation, install/launch or GPU/RAM validation from CI.",
+        "Approve/merge only under Main/Reviewer authority. If accepted, ensure next signed Android release contains exact merged head; one S24 FE retest with Qwen four roles, same saved black-background project; export report+gate evidence on failure, no extra retry."
+      ],
+      "roadmap_impact": {
+        "material": false,
+        "refs": [
+          ".airlab/public-repositories/Ai-orchestrator-riserva/roadmap.yaml#CANT-11",
+          ".airlab/public-repositories/Ai-orchestrator-riserva/roadmap.yaml#CANT-AUDIT-06"
+        ]
+      }
     }
   ],
   "stale_block_history": [
@@ -1835,104 +1897,6 @@
       }
     }
   ],
-  "review_packet": {
-    "schema_version": 1,
-    "submitted_at": "2026-10-12T21:20:54Z",
-    "lane_id": "cantiere",
-    "claim_id": "94876ef45cb7b6e77d9c",
-    "work_item": "cantiere-gate-evidence-reviewer-3117",
-    "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
-    "branch": "fix/cantiere-gate-evidence-reviewer-3117",
-    "pull_request": 834,
-    "summary": "Bounded Cantiere P2 rework for +3117 Reviewer failure, PR #834 exact head 68a2ae62f9be20294000c0b6076e7917d391f477. Two Main/Reviewer P2 findings from old head 507e35d are addressed: (1) rejected-gate source export now uses immutable baseline captured after Library reuse and before Engineer, scoped to final rejected proposal affected paths, with staged actual source, preventing unrelated reuse/incorrect before source from clipboard; (2) every initial/compact-retry Reviewer prompt is measured before inference and fails closed if above the 7000-char threshold. New regressions cover preceding Library reuse, proposal transport/staged truth, task identity, invalid paths, oversized mandatory constraints (zero inference), no bypass and retained Reviewer rejection. Both inline review threads were replied to and resolved. All six GitHub CI workflows completed successfully on the exact final head. Not merged. No S24 FE physical validation or recovery of the old star.dart source is claimed.",
-    "changes": [
-      "lib/app_factory/workshop/workshop_task_inference_pipeline.dart: carry immutable rejected-gate baseline/staged snapshots only for final proposal-owned affected paths; reuse pre-Engineer baseline captured after Library reuse; preserve revision, Reviewer, Validation and apply boundaries.",
-      "lib/app_factory/workshop/workshop_gate_evidence_export.dart: require current claim-scoped snapshots from inference result and reject unrelated/partial/no-change path evidence before local opt-in clipboard copy.",
-      "lib/app_factory/workshop/workshop_production_dashboard_page.dart: invoke existing local-only gate copy without reading repository originalSnapshot or uploading raw source; keep explicit user action.",
-      "lib/app_factory/workshop/workshop_proposal_review_runner.dart: build+measure actual Reviewer primary and retry prompt, refuse any >7000 characters before model inference without dropping coverage/mandatory constraints; original model/maxTokens/timeouts/retry unchanged.",
-      "test/app_factory/workshop/workshop_task_inference_pipeline_test.dart: final multi-revision rejection preserves exact pre-Engineer file baseline while excluding preceding staged Library reuse.",
-      "test/app_factory/workshop/workshop_gate_evidence_export_test.dart: fidelity/identity/extra paths/no-change/oversize fail-closed regression.",
-      "test/app_factory/workshop/workshop_proposal_review_runner_test.dart: long mandatory constraints produce zero model calls, no approval, staged Review unchanged; normal Reviewer rejection remains authoritative."
-    ],
-    "evidence": [
-      {
-        "type": "commit",
-        "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/68a2ae62f9be20294000c0b6076e7917d391f477",
-        "result": "PASS",
-        "note": "Exact reviewed head with both bounded P2 rework changes and regression coverage."
-      },
-      {
-        "type": "pull_request",
-        "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/834",
-        "result": "PASS",
-        "note": "Open, ready for review, mergeable. Two original P2 GitHub review threads replied and resolved on the exact rework head; no merge."
-      },
-      {
-        "type": "ci",
-        "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38305557300",
-        "result": "PASS",
-        "note": "Exact-head Android Build & Release APK: Flutter analyze + Flutter tests + signed APK/AAB CI green (no GitHub release published on PR)."
-      },
-      {
-        "type": "ci",
-        "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38305557277",
-        "result": "PASS",
-        "note": "Exact-head Cantiere First App APK regression and deterministic smoke CI green."
-      },
-      {
-        "type": "ci",
-        "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38305557271",
-        "result": "PASS",
-        "note": "Exact-head Web Cantiere build and contract CI green."
-      },
-      {
-        "type": "ci",
-        "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38305557324",
-        "result": "PASS",
-        "note": "Exact-head Windows desktop build/tests green."
-      },
-      {
-        "type": "ci",
-        "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38305557289",
-        "result": "PASS",
-        "note": "Exact-head Linux desktop build/tests green."
-      },
-      {
-        "type": "ci",
-        "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38305557283",
-        "result": "PASS",
-        "note": "Exact-head macOS desktop build/tests green."
-      },
-      {
-        "type": "physical_device",
-        "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-diagnostics/releases/tag/diagnostics-v1-6bd1447f-5fda-4171-84b4-c1ff56b154cf",
-        "result": "FAIL",
-        "note": "Original pre-fix +3117 Galaxy S24 FE Reviewer failure: full prompt 9385 chars zero token, compact fallback 6601 ran and rejected star.dart. This does not prove #834 on device."
-      }
-    ],
-    "known_risks": [
-      "G5 physical S24 FE acceptance is pending; CI does not demonstrate physical Qwen review, source export, generated APK install or launch.",
-      "Original +3117 rejected source was not durably stored; star.dart remains unclassified until next on-device failure evidence. The failed black-background project is separate from Lista Spesa Lite.",
-      "Clipboard is explicit local opt-in but can include private project source visible in device clipboard history; no automatic source transmission to Diagnostics.",
-      "Conservative >7000 compact prompt cap fails closed rather than silently dropping mandatory constraints. It can block some valid very long requests; later batching/coverage enhancements require separate evidence.",
-      "Do not change Local WebSearch, Vulkan, RAM protections, models, tokens, timeouts, retry counts or Review/Validation authority."
-    ],
-    "reviewer_checks": [
-      "Re-review PR #834 exact head 68a2ae62; verify P2-1 immutable post-Library pre-Engineer baseline and final proposal path scope, including multiple Engineer gate revisions, no unrelated clipboard source or stale task identity.",
-      "Re-review P2-2 bounded initial and retry compact prompts with >7000 mandatory-constraints fail-closed, preserving every required coverage path and no inference on oversized input.",
-      "Confirm both GitHub review threads are replied/resolved, and validate new regression tests actually exercise both P2 cases.",
-      "Validate six exact-head CI and scope across shared Android/Web/desktop contracts; complete G1–G4 attestations for this exact *new* packet before G6 acceptance.",
-      "Preserve G5 PENDING_PHYSICAL_S24_FE and CANT-11 Phase 1 ONLINE; no claim of successful app generation, install/launch or GPU/RAM validation from CI.",
-      "Approve/merge only under Main/Reviewer authority. If accepted, ensure next signed Android release contains exact merged head; one S24 FE retest with Qwen four roles, same saved black-background project; export report+gate evidence on failure, no extra retry."
-    ],
-    "roadmap_impact": {
-      "material": false,
-      "refs": [
-        ".airlab/public-repositories/Ai-orchestrator-riserva/roadmap.yaml#CANT-11",
-        ".airlab/public-repositories/Ai-orchestrator-riserva/roadmap.yaml#CANT-AUDIT-06"
-      ]
-    }
-  },
   "current_gate_attestation": {
     "at": "2026-10-13T01:52:09Z",
     "claim_id": "94876ef45cb7b6e77d9c",
