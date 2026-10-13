@@ -7,7 +7,7 @@
     "policy": "This private repository is the single coordination authority. Chats and agents are workers, not independent sources of truth."
   },
   "updated_at": "2026-10-13",
-  "state_revision": 234,
+  "state_revision": 235,
   "lifecycle_status": "BOOTSTRAP_ACTIVE",
   "roadmap_authority": {
     "library": ".airlab/roadmap.yaml",
@@ -80,8 +80,8 @@
     "invalid_lane_behavior": "ISOLATE_AND_SURFACE_PROJECTION_INCIDENT"
   },
   "projection": {
-    "source_digest": "8397eb3b6a84c9e464932d2bbab4b2840bb17f118948422bc0afab3a82d493c6",
-    "projected_at": "2026-10-13T02:36:44Z",
+    "source_digest": "1744f89938c52a7ca7fcbc75d3cc5cc0e8e88dda48670eee8a3b1c23cf9a35ab",
+    "projected_at": "2026-10-13T02:40:26Z",
     "counts": {
       "BLOCKED": 1,
       "IMPLEMENTING": 1,
@@ -93,7 +93,7 @@
         "claim_id": "c0d7e9a1f346b8d5021a",
         "work_item": "cantiere-engineer-flutter-native-import-3140",
         "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
-        "lease_until": "2026-10-13T14:36:32Z",
+        "lease_until": "2026-10-13T14:40:13Z",
         "resource_locks": [
           "branch:pilialvu75-hue/Ai-orchestrator-riserva:fix/cantiere-engineer-flutter-native-import-3140",
           "contract:cantiere-engineer-flutter-source",
@@ -269,13 +269,13 @@
         "id": "cantiere",
         "status": "IMPLEMENTING",
         "activation": "active",
-        "state_version": 65,
+        "state_version": 66,
         "updated_at": "2026-10-13",
         "active_claim": {
           "claim_id": "c0d7e9a1f346b8d5021a",
           "work_item": "cantiere-engineer-flutter-native-import-3140",
           "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
-          "lease_until": "2026-10-13T14:36:32Z",
+          "lease_until": "2026-10-13T14:40:13Z",
           "resource_locks": [
             "branch:pilialvu75-hue/Ai-orchestrator-riserva:fix/cantiere-engineer-flutter-native-import-3140",
             "contract:cantiere-engineer-flutter-source",
@@ -288,7 +288,7 @@
         "reviewer_state": "PENDING",
         "inference_profile_status": null,
         "historical_backlog_count": 3,
-        "next_action": "Inspect exact-head PR #836 CI; repair scoped failures; request Main/Reviewer code review on new packet; only then merge, sign Android release and authorize next S24 FE test."
+        "next_action": "Await exact-head PR #836 CI at 7cb4bd36. If all six pass, submit claim-bound review packet to Main/Reviewer; no merge/self-approval."
       },
       {
         "id": "diagnostics",
