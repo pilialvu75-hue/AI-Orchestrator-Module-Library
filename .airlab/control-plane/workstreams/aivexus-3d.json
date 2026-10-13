@@ -3,11 +3,11 @@
   "id": "aivexus-3d",
   "title": "Aivexus Studio 3D",
   "role": "worker",
-  "status": "CLAIMED",
+  "status": "IMPLEMENTING",
   "activation": "active",
   "scope": "CAD/3D domain only: CadSpec, measured and photographic inputs, editable CAD/mesh sources, CAD/print exports and domain verification. Must consume the Cantiere-owned shared ProjectExtension/persistence/navigation base instead of modifying or duplicating it.",
   "shared_engine_policy": "domain_extension_only",
-  "state_version": 18,
+  "state_version": 19,
   "updated_at": "2026-10-13",
   "active_claim": {
     "claim_id": "1ba06be39028c252f14a",
@@ -29,8 +29,8 @@
       "scope:aivexus:cad"
     ],
     "started_at": "2026-10-13T01:56:05Z",
-    "heartbeat_at": "2026-10-13T01:56:05Z",
-    "lease_until": "2026-10-13T13:56:05Z",
+    "heartbeat_at": "2026-10-13T02:01:24Z",
+    "lease_until": "2026-10-13T14:01:24Z",
     "lease_hours": 12
   },
   "dependencies": [
@@ -59,7 +59,7 @@
     "reviewed_by": null,
     "reviewed_at": null
   },
-  "next_action": "AIVEXUS-CAD-1 is dependency-unblocked and CI wait is satisfied. Lane may take a new bounded CAD-1 claim against PR #833 head 65711a685795bc79874681558bfdeb7319cca660 to inspect domain-specific Python/CadQuery evidence and continue only domain-owned runner/artifact integration. Keep PR draft until required integration/reviewer gates; Fusion opening, physical print and S24 FE acceptance remain separate and UNKNOWN.",
+  "next_action": "Read exact latest CI head ebdc4b1; inspect dedicated CAD job logs. If CAD tests fail, correct only explicitly locked CAD workflow/domain files; otherwise capture run evidence, check six platform workflows and prepare bounded handoff for Main/Reviewer. Do not self-promote to DONE; Cantiere runner/storage and Fusion/print remain separate, and no merge until reviewed and mergeable.",
   "coordination": {
     "domain_lock": "scope:aivexus:cad",
     "shared_contract_owner": "cantiere",
@@ -151,25 +151,49 @@
         "https://github.com/pilialvu75-hue/AI-Orchestrator-Module-Library/issues/113"
       ],
       "next_action": "Inspect six CI workflows on exact head 65711a685795bc79874681558bfdeb7319cca660 and verify Python/CadQuery regression execution separately. Keep PR #833 draft until certified sandbox runner and Cantiere immutable artifact persistence exist (Library #113). After external CI completion, resume canonical wait and reacquire claim for bounded follow-up. Do not self-promote or equate CI PASS with Fusion/print acceptance."
+    },
+    {
+      "seq": 5,
+      "at": "2026-10-13T02:01:24Z",
+      "claim_id": "1ba06be39028c252f14a",
+      "work_item": "AIVEXUS-CAD-1",
+      "summary": "On canonical claim 1ba06be39028c252f14a, added dedicated isolated Python/CadQuery CI workflow for CAD-1 PR #833, file .github/workflows/aivexus-cad1-tests.yml; it runs 11 actual domain tests and CLI STEP/STL/3MF generation and verification for plate revisions 1 and 2. First actual run 38334592115 exposed missing optional trimesh networkx; second run 38334701656 exposed missing optional lxml; both caused 8 passing tests and errors in 3MF-related tests. Pinned networkx==3.6.1 and lxml==6.1.1 alongside cadquery==2.8.0 and trimesh==4.11.1, without modifying geometry, checksum logic or shared Cantiere code. Current draft PR #833 head ebdc4b128a9aaeb683222d5dda4da516e5d4be79, seven checks triggered incl dedicated Aivexus CAD-1 Domain Tests run 38334817392 currently executing; no success claimed on this head. Previous head 65711a6 six Flutter/platform CI PASS. Fusion 360, physical print, integrated runner/storage and remote Diagnostics still UNKNOWN. Library #113 remains capability intake.",
+      "decisions": [
+        "Dedicated CAD test workflow produces independent evidence beyond Flutter build success.",
+        "Keep CAD dependencies binary-only and version pinned; no checksum weakening.",
+        "No changes outside declared CAD claim file locks."
+      ],
+      "evidence_refs": [
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/833",
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/ebdc4b128a9aaeb683222d5dda4da516e5d4be79",
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38334592115",
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38334701656",
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38334817392",
+        "https://github.com/pilialvu75-hue/AI-Orchestrator-Module-Library/issues/113"
+      ],
+      "next_action": "Read exact latest CI head ebdc4b1; inspect dedicated CAD job logs. If CAD tests fail, correct only explicitly locked CAD workflow/domain files; otherwise capture run evidence, check six platform workflows and prepare bounded handoff for Main/Reviewer. Do not self-promote to DONE; Cantiere runner/storage and Fusion/print remain separate, and no merge until reviewed and mergeable."
     }
   ],
   "last_checkpoint": {
-    "seq": 4,
-    "at": "2026-10-12T19:16:57Z",
-    "claim_id": "5f4b2c7954f107eb0946",
+    "seq": 5,
+    "at": "2026-10-13T02:01:24Z",
+    "claim_id": "1ba06be39028c252f14a",
     "work_item": "AIVEXUS-CAD-1",
-    "summary": "CAD-1 PR #833 previous exact head a7e037f48f033ec7b70abfdede3a9e6dede0c5b5 passed six GitHub workflows. Canonical wait resumed APPLIED at v13, new claim 5f4b2c7954f107eb0946 APPLIED at v14. Inspected domain-only validation and fixed fail-open artifact manifests: validate_plate.py now emits status=FAIL and artifacts=[] whenever any of five actual STEP/STL/3MF format/geometry checks fails, while preserving per-check errors; successful local receipts report status=PASS. Added two Python regression tests asserting receipt SHA-256 of real exports and rejection/no publication of corrupt STL, increasing defined Python methods to 11. Updated CAD-only README to distinguish local receipt from Cantiere persisted artifact refs. Current PR draft head 65711a685795bc79874681558bfdeb7319cca660, six new CI workflow runs queued/pending; exact current-head PASS not yet claimed. No changes to Cantiere shared files, runner, macOS or project store; Fusion/print/remote Diagnostics still UNKNOWN.",
+    "summary": "On canonical claim 1ba06be39028c252f14a, added dedicated isolated Python/CadQuery CI workflow for CAD-1 PR #833, file .github/workflows/aivexus-cad1-tests.yml; it runs 11 actual domain tests and CLI STEP/STL/3MF generation and verification for plate revisions 1 and 2. First actual run 38334592115 exposed missing optional trimesh networkx; second run 38334701656 exposed missing optional lxml; both caused 8 passing tests and errors in 3MF-related tests. Pinned networkx==3.6.1 and lxml==6.1.1 alongside cadquery==2.8.0 and trimesh==4.11.1, without modifying geometry, checksum logic or shared Cantiere code. Current draft PR #833 head ebdc4b128a9aaeb683222d5dda4da516e5d4be79, seven checks triggered incl dedicated Aivexus CAD-1 Domain Tests run 38334817392 currently executing; no success claimed on this head. Previous head 65711a6 six Flutter/platform CI PASS. Fusion 360, physical print, integrated runner/storage and remote Diagnostics still UNKNOWN. Library #113 remains capability intake.",
     "decisions": [
-      "Fail-closed artifact receipt prevents promoting invalid or corrupted file as a valid export.",
-      "Do not claim the 11 Python tests executed by existing Flutter/platform CI; they are defined but remain independently gated.",
-      "Keep all new changes within CAD domain claim resource locks."
+      "Dedicated CAD test workflow produces independent evidence beyond Flutter build success.",
+      "Keep CAD dependencies binary-only and version pinned; no checksum weakening.",
+      "No changes outside declared CAD claim file locks."
     ],
     "evidence_refs": [
       "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/833",
-      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/65711a685795bc79874681558bfdeb7319cca660",
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/ebdc4b128a9aaeb683222d5dda4da516e5d4be79",
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38334592115",
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38334701656",
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38334817392",
       "https://github.com/pilialvu75-hue/AI-Orchestrator-Module-Library/issues/113"
     ],
-    "next_action": "Inspect six CI workflows on exact head 65711a685795bc79874681558bfdeb7319cca660 and verify Python/CadQuery regression execution separately. Keep PR #833 draft until certified sandbox runner and Cantiere immutable artifact persistence exist (Library #113). After external CI completion, resume canonical wait and reacquire claim for bounded follow-up. Do not self-promote or equate CI PASS with Fusion/print acceptance."
+    "next_action": "Read exact latest CI head ebdc4b1; inspect dedicated CAD job logs. If CAD tests fail, correct only explicitly locked CAD workflow/domain files; otherwise capture run evidence, check six platform workflows and prepare bounded handoff for Main/Reviewer. Do not self-promote to DONE; Cantiere runner/storage and Fusion/print remain separate, and no merge until reviewed and mergeable."
   },
   "reconciliation_events": [
     {

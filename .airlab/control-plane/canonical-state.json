@@ -7,7 +7,7 @@
     "policy": "This private repository is the single coordination authority. Chats and agents are workers, not independent sources of truth."
   },
   "updated_at": "2026-10-13",
-  "state_revision": 229,
+  "state_revision": 230,
   "lifecycle_status": "BOOTSTRAP_ACTIVE",
   "roadmap_authority": {
     "library": ".airlab/roadmap.yaml",
@@ -80,10 +80,10 @@
     "invalid_lane_behavior": "ISOLATE_AND_SURFACE_PROJECTION_INCIDENT"
   },
   "projection": {
-    "source_digest": "377b81943ff503f212867e242172f2fef201efafac40b74bc31fc5f2012eee94",
-    "projected_at": "2026-10-13T01:56:05Z",
+    "source_digest": "04627d1da5d4a1475ef022abde3d298cbd0506545673df3fc39e3aaf0e1c7837",
+    "projected_at": "2026-10-13T02:01:24Z",
     "counts": {
-      "CLAIMED": 1,
+      "IMPLEMENTING": 1,
       "READY": 16
     },
     "active_claims": [
@@ -92,7 +92,7 @@
         "claim_id": "1ba06be39028c252f14a",
         "work_item": "AIVEXUS-CAD-1",
         "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
-        "lease_until": "2026-10-13T13:56:05Z",
+        "lease_until": "2026-10-13T14:01:24Z",
         "resource_locks": [
           "branch:pilialvu75-hue/Ai-orchestrator-riserva:feat/aivexus-cad1-parametric-sample",
           "file:pilialvu75-hue/Ai-orchestrator-riserva:.github/workflows/aivexus-cad1-tests.yml",
@@ -246,15 +246,15 @@
       },
       {
         "id": "aivexus-3d",
-        "status": "CLAIMED",
+        "status": "IMPLEMENTING",
         "activation": "active",
-        "state_version": 18,
+        "state_version": 19,
         "updated_at": "2026-10-13",
         "active_claim": {
           "claim_id": "1ba06be39028c252f14a",
           "work_item": "AIVEXUS-CAD-1",
           "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
-          "lease_until": "2026-10-13T13:56:05Z",
+          "lease_until": "2026-10-13T14:01:24Z",
           "resource_locks": [
             "branch:pilialvu75-hue/Ai-orchestrator-riserva:feat/aivexus-cad1-parametric-sample",
             "file:pilialvu75-hue/Ai-orchestrator-riserva:.github/workflows/aivexus-cad1-tests.yml",
@@ -271,7 +271,7 @@
         "reviewer_state": "PENDING",
         "inference_profile_status": null,
         "historical_backlog_count": 0,
-        "next_action": "AIVEXUS-CAD-1 is dependency-unblocked and CI wait is satisfied. Lane may take a new bounded CAD-1 claim against PR #833 head 65711a685795bc79874681558bfdeb7319cca660 to inspect domain-specific Python/CadQuery evidence and continue only domain-owned runner/artifact integration. Keep PR draft until required integration/reviewer gates; Fusion opening, physical print and S24 FE acceptance remain separate and UNKNOWN."
+        "next_action": "Read exact latest CI head ebdc4b1; inspect dedicated CAD job logs. If CAD tests fail, correct only explicitly locked CAD workflow/domain files; otherwise capture run evidence, check six platform workflows and prepare bounded handoff for Main/Reviewer. Do not self-promote to DONE; Cantiere runner/storage and Fusion/print remain separate, and no merge until reviewed and mergeable."
       },
       {
         "id": "aivexus-games",
