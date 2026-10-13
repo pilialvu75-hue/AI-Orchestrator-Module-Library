@@ -1,0 +1,12 @@
+{
+  "schema_version": 1,
+  "request_id": "cantiere-20261013-pr836-review-rework-import-guard",
+  "status": "APPLIED",
+  "processed_at": "2026-10-13T03:45:04Z",
+  "source_file": "cantiere-20261013-pr836-review-rework-import-guard.json",
+  "lane_id": "cantiere",
+  "operation": "review_rework",
+  "actor_id": "chatgpt:main-reviewer",
+  "errors": [],
+  "result_state_version": 68
+}

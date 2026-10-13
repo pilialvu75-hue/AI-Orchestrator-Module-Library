@@ -7,7 +7,7 @@
     "policy": "This private repository is the single coordination authority. Chats and agents are workers, not independent sources of truth."
   },
   "updated_at": "2026-10-13",
-  "state_revision": 236,
+  "state_revision": 237,
   "lifecycle_status": "BOOTSTRAP_ACTIVE",
   "roadmap_authority": {
     "library": ".airlab/roadmap.yaml",
@@ -80,12 +80,12 @@
     "invalid_lane_behavior": "ISOLATE_AND_SURFACE_PROJECTION_INCIDENT"
   },
   "projection": {
-    "source_digest": "4998d30056f03a6fbe274e1edd9f2c680672efcd6f45ccdd25d119d5e0c57ba4",
-    "projected_at": "2026-10-13T03:34:49Z",
+    "source_digest": "3d4e03bf76a9d277ccb3ccdff266c1fd4f389be75bc590f334160590e805a335",
+    "projected_at": "2026-10-13T03:45:04Z",
     "counts": {
       "BLOCKED": 1,
-      "READY": 15,
-      "REVIEW_REQUIRED": 1
+      "IMPLEMENTING": 1,
+      "READY": 15
     },
     "active_claims": [
       {
@@ -142,9 +142,7 @@
         "work_item": "cantiere-engineer-flutter-native-import-3140"
       }
     ],
-    "review_required": [
-      "cantiere"
-    ],
+    "review_required": [],
     "blocked": [
       {
         "lane": "aivexus-3d",
@@ -269,9 +267,9 @@
       },
       {
         "id": "cantiere",
-        "status": "REVIEW_REQUIRED",
+        "status": "IMPLEMENTING",
         "activation": "active",
-        "state_version": 67,
+        "state_version": 68,
         "updated_at": "2026-10-13",
         "active_claim": {
           "claim_id": "c0d7e9a1f346b8d5021a",
@@ -287,10 +285,10 @@
             "file:pilialvu75-hue/Ai-orchestrator-riserva:test/app_factory/workshop/workshop_proposal_workspace_stager_test.dart"
           ]
         },
-        "reviewer_state": "PENDING",
+        "reviewer_state": "CHANGES_REQUESTED",
         "inference_profile_status": null,
         "historical_backlog_count": 3,
-        "next_action": "Main/Reviewer: inspect PR #836 exact head 7cb4bd36, claim-bound packet and six green CI; attest G1–G4, then independently decide G6/merge. G5 stays open until a future signed Android release + S24 FE proof."
+        "next_action": "Cantiere: keep the same claim/work item and rework PR #836 only. Replace the raw-text import scan with directive-aware parsing or an equivalently safe lexical scan that evaluates actual Dart import directives while ignoring comments and string literals. Extend the blocked native/JVM namespaces to include at least java and kotlin alongside com/org/android/androidx without rejecting legal package:/dart:/relative Dart imports or declared MethodChannel/native .kt/.xml files. Add regressions for java.util.Date and kotlin.collections.List rejection plus block-comment/triple-quoted-string false-positive cases, and preserve the existing one structural FormatException retry with Reviewer/Validation still authoritative. Re-run all six exact-head workflows on the new head, reply to and resolve both Codex P2 threads, then submit a new claim-bound review packet. G5 S24 FE stays open; do not retest +3140 and do not publish a physical-success claim."
       },
       {
         "id": "diagnostics",
