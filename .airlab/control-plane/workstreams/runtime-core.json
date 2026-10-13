@@ -7,7 +7,7 @@
   "activation": "active",
   "scope": "Shared inference contract, capability/model routing semantics, context, streaming, cancellation, errors, model-profile schema and lifecycle. Target platforms own their benchmark-gated LLM/backend/runtime profiles.",
   "shared_engine_policy": "shared_or_control_plane",
-  "state_version": 24,
+  "state_version": 25,
   "updated_at": "2026-10-13",
   "active_claim": {
     "claim_id": "403f04c8b0a530f93e77",
@@ -25,8 +25,8 @@
       "file:pilialvu75-hue/Ai-orchestrator-riserva:test/features/chat/data/repositories/chat_repository_impl_test.dart"
     ],
     "started_at": "2026-10-13T21:28:42Z",
-    "heartbeat_at": "2026-10-13T22:14:30Z",
-    "lease_until": "2026-10-14T10:14:30Z",
+    "heartbeat_at": "2026-10-13T22:22:35Z",
+    "lease_until": "2026-10-14T10:22:35Z",
     "lease_hours": 12
   },
   "dependencies": [],
@@ -51,7 +51,7 @@
     "reviewed_by": null,
     "reviewed_at": null
   },
-  "next_action": "Collect final-head CI and completed code review, then submit the immutable claim-bound Main/Reviewer packet.",
+  "next_action": "Verify current-head CI and completed re-review; submit immutable claim-bound packet to Main/Reviewer. Do not merge or claim physical acceptance.",
   "inference_ownership": {
     "owns": [
       "shared inference API",
@@ -368,25 +368,45 @@
         "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/838#discussion_r4264583234"
       ],
       "next_action": "Collect final-head CI and completed code review, then submit the immutable claim-bound Main/Reviewer packet."
+    },
+    {
+      "seq": 17,
+      "at": "2026-10-13T22:22:35Z",
+      "claim_id": "403f04c8b0a530f93e77",
+      "work_item": "issue-837-preserve-persisted-prompt-after-inference-error",
+      "summary": "PR #838 head daa516280bcd46377425963badfba91f8c6ed12a addresses P1/P2 edit findings: edits now share the owned send lifecycle, preserving replacement persistence after destructive truncation across refresh/navigation; no preview read delays saving; clear-time edits retain immutable input rather than returning. Seven edit regressions added, 33 state-engine tests total (30 new). All reviewer threads answered/resolved; new CI/re-review requested.",
+      "decisions": [
+        "State engine and tests only; no repository persistence contract, Vulkan, timeout/deadline or RAM changes.",
+        "View revision changes suppress UI emissions but no longer abandon post-truncation work; explicit clear still invalidates the prior send.",
+        "G5 physical S24 FE acceptance remains pending."
+      ],
+      "evidence_refs": [
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/838",
+        "head:daa516280bcd46377425963badfba91f8c6ed12a",
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/838#discussion_r4264628647",
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/838#discussion_r4264628655"
+      ],
+      "next_action": "Verify current-head CI and completed re-review; submit immutable claim-bound packet to Main/Reviewer. Do not merge or claim physical acceptance."
     }
   ],
   "last_checkpoint": {
-    "seq": 16,
-    "at": "2026-10-13T22:14:30Z",
+    "seq": 17,
+    "at": "2026-10-13T22:22:35Z",
     "claim_id": "403f04c8b0a530f93e77",
     "work_item": "issue-837-preserve-persisted-prompt-after-inference-error",
-    "summary": "PR #838 head fdd08af824f62f9239c9981747812533c5a972c7 addresses clear-time navigation P2. Resume the queued active send before waiting for clear; ordinary loads select the view and defer the database read until clear settles with revision validation. Regressions cover both A to B to A cases, 26 state-engine tests total (23 new). All previous reviewer threads addressed; final-head CI/re-review requested.",
+    "summary": "PR #838 head daa516280bcd46377425963badfba91f8c6ed12a addresses P1/P2 edit findings: edits now share the owned send lifecycle, preserving replacement persistence after destructive truncation across refresh/navigation; no preview read delays saving; clear-time edits retain immutable input rather than returning. Seven edit regressions added, 33 state-engine tests total (30 new). All reviewer threads answered/resolved; new CI/re-review requested.",
     "decisions": [
-      "Repository cancellation/deadlines and Vulkan/RAM/trim15 remain untouched.",
-      "Only state engine and its test file change.",
-      "Physical S24 FE remains pending."
+      "State engine and tests only; no repository persistence contract, Vulkan, timeout/deadline or RAM changes.",
+      "View revision changes suppress UI emissions but no longer abandon post-truncation work; explicit clear still invalidates the prior send.",
+      "G5 physical S24 FE acceptance remains pending."
     ],
     "evidence_refs": [
       "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/838",
-      "head:fdd08af824f62f9239c9981747812533c5a972c7",
-      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/838#discussion_r4264583234"
+      "head:daa516280bcd46377425963badfba91f8c6ed12a",
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/838#discussion_r4264628647",
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/838#discussion_r4264628655"
     ],
-    "next_action": "Collect final-head CI and completed code review, then submit the immutable claim-bound Main/Reviewer packet."
+    "next_action": "Verify current-head CI and completed re-review; submit immutable claim-bound packet to Main/Reviewer. Do not merge or claim physical acceptance."
   },
   "review_history": [
     {
