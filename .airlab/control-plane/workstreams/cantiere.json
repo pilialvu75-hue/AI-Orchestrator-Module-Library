@@ -7,7 +7,7 @@
   "activation": "active",
   "scope": "Exclusive Cantiere/App Factory execution, durability, build/review/validation/apply and first-real-app reliability.",
   "shared_engine_policy": "shared_or_control_plane",
-  "state_version": 68,
+  "state_version": 69,
   "updated_at": "2026-10-13",
   "active_claim": {
     "claim_id": "c0d7e9a1f346b8d5021a",
@@ -25,8 +25,8 @@
       "file:pilialvu75-hue/Ai-orchestrator-riserva:test/app_factory/workshop/workshop_proposal_workspace_stager_test.dart"
     ],
     "started_at": "2026-10-13T02:32:23Z",
-    "heartbeat_at": "2026-10-13T02:40:13Z",
-    "lease_until": "2026-10-13T14:40:13Z",
+    "heartbeat_at": "2026-10-13T04:05:32Z",
+    "lease_until": "2026-10-13T16:05:32Z",
     "lease_hours": 12
   },
   "dependencies": [],
@@ -107,7 +107,7 @@
     "reviewed_by": "main-reviewer",
     "reviewed_at": "2026-10-13T03:45:04Z"
   },
-  "next_action": "Cantiere: keep the same claim/work item and rework PR #836 only. Replace the raw-text import scan with directive-aware parsing or an equivalently safe lexical scan that evaluates actual Dart import directives while ignoring comments and string literals. Extend the blocked native/JVM namespaces to include at least java and kotlin alongside com/org/android/androidx without rejecting legal package:/dart:/relative Dart imports or declared MethodChannel/native .kt/.xml files. Add regressions for java.util.Date and kotlin.collections.List rejection plus block-comment/triple-quoted-string false-positive cases, and preserve the existing one structural FormatException retry with Reviewer/Validation still authoritative. Re-run all six exact-head workflows on the new head, reply to and resolve both Codex P2 threads, then submit a new claim-bound review packet. G5 S24 FE stays open; do not retest +3140 and do not publish a physical-success claim.",
+  "next_action": "Check four remaining exact-head workflows for PR #836, address only concrete failures; then resolve two P2 threads, submit claim-bound review packet and verify canonical projection.",
   "historical_backlog": [
     "Stay in Phase 1 ONLINE until a real generated Android app is physically accepted.",
     "Reproduce the recent manga-drawing app failure from current main with Diagnostics; do not restart generic audits.",
@@ -940,20 +940,41 @@
       "evidence_refs": [],
       "next_action": "Cantiere: keep the same claim/work item and rework PR #836 only. Replace the raw-text import scan with directive-aware parsing or an equivalently safe lexical scan that evaluates actual Dart import directives while ignoring comments and string literals. Extend the blocked native/JVM namespaces to include at least java and kotlin alongside com/org/android/androidx without rejecting legal package:/dart:/relative Dart imports or declared MethodChannel/native .kt/.xml files. Add regressions for java.util.Date and kotlin.collections.List rejection plus block-comment/triple-quoted-string false-positive cases, and preserve the existing one structural FormatException retry with Reviewer/Validation still authoritative. Re-run all six exact-head workflows on the new head, reply to and resolve both Codex P2 threads, then submit a new claim-bound review packet. G5 S24 FE stays open; do not retest +3140 and do not publish a physical-success claim.",
       "kind": "REVIEW_REWORK"
+    },
+    {
+      "seq": 43,
+      "at": "2026-10-13T04:05:32Z",
+      "claim_id": "c0d7e9a1f346b8d5021a",
+      "work_item": "cantiere-engineer-flutter-native-import-3140",
+      "summary": "Bounded PR #836 rework applied on exact head 391e26356199ed3d94e95e8024c08bdc08c6e25c: scanner now recognizes actual Dart import directives while skipping line/block/nested comments, raw/normal/triple-quoted string literals, and rejects java/javax/kotlin native class imports as well as existing namespaces. Added focused positive and false-positive regressions. Main/Reviewer two original P2 threads have written replies. Web CI and Cantiere First App CI green on exact head; Android/Windows/Linux/macOS complete workflows pending. No merge or physical G5.",
+      "decisions": [
+        "Do not resolve review threads/mark reviewed or submit packet until all six exact-head workflows are complete.",
+        "Keep existing Engineer one structural retry; Reviewer/Validation and RAM/Vulkan/local models unchanged."
+      ],
+      "evidence_refs": [
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/836",
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38344413690",
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38344413711"
+      ],
+      "next_action": "Check four remaining exact-head workflows for PR #836, address only concrete failures; then resolve two P2 threads, submit claim-bound review packet and verify canonical projection."
     }
   ],
   "last_checkpoint": {
-    "seq": 42,
-    "at": "2026-10-13T03:45:04Z",
+    "seq": 43,
+    "at": "2026-10-13T04:05:32Z",
     "claim_id": "c0d7e9a1f346b8d5021a",
     "work_item": "cantiere-engineer-flutter-native-import-3140",
-    "summary": "PR #836 exact head 7cb4bd36f67ed5957485bade5f43028a3e0af4c9 has two confirmed P2 defects in the new Dart/JVM import guard despite 6/6 green CI. P2-1: the namespace allowlist covers com/org/android/androidx but misses canonical JVM prefixes java.* and kotlin.*, so cross-language imports such as java.util.Date or kotlin.collections.List are staged instead of entering the existing structural FormatException retry. P2-2: the multiline RegExp scans raw Dart source text and can classify import-looking text inside block comments or multiline/triple-quoted strings as real directives, causing false rejection before staging. These defects are limited to the new guard; the existing Engineer structural retry, Reviewer/Validation gates, model/token/timeout budgets, Local WebSearch, Vulkan and RAM protections must remain unchanged.",
+    "summary": "Bounded PR #836 rework applied on exact head 391e26356199ed3d94e95e8024c08bdc08c6e25c: scanner now recognizes actual Dart import directives while skipping line/block/nested comments, raw/normal/triple-quoted string literals, and rejects java/javax/kotlin native class imports as well as existing namespaces. Added focused positive and false-positive regressions. Main/Reviewer two original P2 threads have written replies. Web CI and Cantiere First App CI green on exact head; Android/Windows/Linux/macOS complete workflows pending. No merge or physical G5.",
     "decisions": [
-      "Main/Reviewer requested bounded rework."
+      "Do not resolve review threads/mark reviewed or submit packet until all six exact-head workflows are complete.",
+      "Keep existing Engineer one structural retry; Reviewer/Validation and RAM/Vulkan/local models unchanged."
     ],
-    "evidence_refs": [],
-    "next_action": "Cantiere: keep the same claim/work item and rework PR #836 only. Replace the raw-text import scan with directive-aware parsing or an equivalently safe lexical scan that evaluates actual Dart import directives while ignoring comments and string literals. Extend the blocked native/JVM namespaces to include at least java and kotlin alongside com/org/android/androidx without rejecting legal package:/dart:/relative Dart imports or declared MethodChannel/native .kt/.xml files. Add regressions for java.util.Date and kotlin.collections.List rejection plus block-comment/triple-quoted-string false-positive cases, and preserve the existing one structural FormatException retry with Reviewer/Validation still authoritative. Re-run all six exact-head workflows on the new head, reply to and resolve both Codex P2 threads, then submit a new claim-bound review packet. G5 S24 FE stays open; do not retest +3140 and do not publish a physical-success claim.",
-    "kind": "REVIEW_REWORK"
+    "evidence_refs": [
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/836",
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38344413690",
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38344413711"
+    ],
+    "next_action": "Check four remaining exact-head workflows for PR #836, address only concrete failures; then resolve two P2 threads, submit claim-bound review packet and verify canonical projection."
   },
   "review_history": [
     {
