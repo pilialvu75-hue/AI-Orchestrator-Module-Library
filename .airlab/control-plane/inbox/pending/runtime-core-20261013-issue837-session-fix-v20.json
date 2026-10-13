@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "request_id": "runtime-core-20261013-issue837-session-fix-v20",
+  "actor_id": "chatgpt:runtime-core-issue837",
+  "lane_id": "runtime-core",
+  "operation": "checkpoint",
+  "expected_state_version": 20,
+  "payload": {
+    "summary": "PR #838 updated to c803322c879c7e44bafafda1bfe118017c451f7d. Addressed second Codex P2 by tracking the active send session and resuming its view/reconciliation across A to B to A; clear invalidates resumption and releases only its own send. Added two deterministic cases: 20 state-engine tests total (17 new). Both review threads answered/resolved and exact-head re-review/CI requested.",
+    "decisions": [
+      "No Vulkan, deadline/timeout, RAM/trim15 changes.",
+      "Only state-engine implementation and test files modified.",
+      "Physical S24 FE acceptance remains pending."
+    ],
+    "evidence_refs": [
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/838",
+      "head:c803322c879c7e44bafafda1bfe118017c451f7d",
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/838#discussion_r4264364427"
+    ],
+    "next_action": "Verify final-head tests/analyze/platform CI and code re-review; then submit immutable claim-bound packet for Main/Reviewer assessment, retaining physical G5 pending."
+  }
+}
