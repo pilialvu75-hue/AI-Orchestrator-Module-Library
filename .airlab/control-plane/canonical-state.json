@@ -7,7 +7,7 @@
     "policy": "This private repository is the single coordination authority. Chats and agents are workers, not independent sources of truth."
   },
   "updated_at": "2026-10-13",
-  "state_revision": 239,
+  "state_revision": 240,
   "lifecycle_status": "BOOTSTRAP_ACTIVE",
   "roadmap_authority": {
     "library": ".airlab/roadmap.yaml",
@@ -80,8 +80,8 @@
     "invalid_lane_behavior": "ISOLATE_AND_SURFACE_PROJECTION_INCIDENT"
   },
   "projection": {
-    "source_digest": "2dc7b1aeed26e9e2aec95df376c66237aace5f1b356690c53ab8586d2a1c7961",
-    "projected_at": "2026-10-13T05:19:44Z",
+    "source_digest": "481dba7a40b40cf6e1d58898ff2c663a382b865d163d8159619fa9aac27b387b",
+    "projected_at": "2026-10-13T07:32:04Z",
     "counts": {
       "BLOCKED": 1,
       "IMPLEMENTING": 1,
@@ -269,7 +269,7 @@
         "id": "cantiere",
         "status": "IMPLEMENTING",
         "activation": "active",
-        "state_version": 70,
+        "state_version": 71,
         "updated_at": "2026-10-13",
         "active_claim": {
           "claim_id": "c0d7e9a1f346b8d5021a",
@@ -288,7 +288,7 @@
         "reviewer_state": "CHANGES_REQUESTED",
         "inference_profile_status": null,
         "historical_backlog_count": 3,
-        "next_action": "Wait six final PR #836 exact-head CI on 79ac6bbf and Codex re-review. Repair only concrete failed checks; resolve four P2 threads and resubmit claim-bound packet for Main/Reviewer. Physical S24 FE G5 stays pending."
+        "next_action": "Finish all six CI checks on 5d63a05f; resolve fixed Codex P2 threads, request independent re-review and submit exact-head Cantiere claim-bound packet to Main/Reviewer."
       },
       {
         "id": "diagnostics",
