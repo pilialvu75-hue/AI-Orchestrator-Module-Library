@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "request_id": "aivexus-3d-20261013-claim-mesh-hole-positions-v12",
+  "actor_id": "chatgpt:aivexus-3d",
+  "lane_id": "aivexus-3d",
+  "operation": "claim",
+  "expected_state_version": 22,
+  "payload": {
+    "work_item": "AIVEXUS-CAD-1",
+    "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
+    "scope": "Fix P2 domain-only exact STL/3MF hole-position geometry validation discovered on PR #833 and add reproducible shifted-hole and contour regression tests. Keep Cantiere shared contract/storage/runner/navigation untouched, no physical Fusion/print or Diagnostics claims.",
+    "branch": "feat/aivexus-cad1-parametric-sample",
+    "resource_locks": [
+      "scope:aivexus:cad",
+      "file:pilialvu75-hue/Ai-orchestrator-riserva:tools/aivexus/cad/validate_plate.py",
+      "file:pilialvu75-hue/Ai-orchestrator-riserva:tools/aivexus/cad/test_cad1.py",
+      "file:pilialvu75-hue/Ai-orchestrator-riserva:tools/aivexus/cad/README.md",
+      "file:pilialvu75-hue/Ai-orchestrator-riserva:tools/aivexus/cad/parametric_plate.py",
+      "file:pilialvu75-hue/Ai-orchestrator-riserva:.github/workflows/aivexus-cad1-tests.yml"
+    ]
+  }
+}
