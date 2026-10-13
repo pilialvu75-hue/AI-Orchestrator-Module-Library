@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "request_id": "aivexus-3d-20261013-checkpoint-bore-section-exact-ci-v13",
+  "actor_id": "chatgpt:aivexus-3d",
+  "lane_id": "aivexus-3d",
+  "operation": "checkpoint",
+  "expected_state_version": 23,
+  "payload": {
+    "summary": "AIVEXUS-CAD-1 PR #833 exact head 831015d149f2cbae6928683e8deb1aeafa3832b5: corrected STL/3MF P2 hole-position false acceptance by validating rectangular outer profile and 2 bore contours at 10%,50%,90% plate height with center/radius/area checks. Added 3 focused Python tests, now 14/14 PASS in GitHub dedicated Aivexus CAD-1 Domain Tests run 38364393744; new deliberately shifted-hole STL and 3MF tests reject with expected ValueError; both original project revisions (4mm,5mm) pass 5/5 real BREP/STEP/STL/3MF verification each. Receipt artifact GitHub ID 11795978290, SHA-256 uploaded zip dbe263bdf7bd4128bd4a63cf52b0a8d7ead96362d824326f37830fdba46d122f; PR comment 6140813613 records exact proof. Remaining six CI platforms on new head still running. Only CAD domain files modified, shared Cantiere untouched. Fusion target opening, physical print, secure CAD runner/persistence, ResourceExchange, remote Diagnostics UNKNOWN; PR draft.",
+    "next_action": "After six platform workflows complete on PR #833 head 831015d, inspect exact results; resume canonical wait then claim a bounded follow-up. If all checks pass, coordinate with Library issue #113 for certified runner and Cantiere ownership of attachment storage before any operational integration/reviewer packet. Keep PR draft, do not self-promote DONE or merge or claim physical Fusion/print.",
+    "decisions": [
+      "Mesh volume and envelope alone do not verify measured bore positions; bounded three-section contour gate now enforces both positions and approximate roundness.",
+      "New 14/14 CadQuery CI PASS is distinct from pending six platform checks and is not Cantiere runtime evidence.",
+      "Retain independent Fusion/physical print acceptance gates and per-byte receipt hashes."
+    ],
+    "evidence_refs": [
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/833",
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38364393744",
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/831015d149f2cbae6928683e8deb1aeafa3832b5",
+      "https://github.com/pilialvu75-hue/AI-Orchestrator-Module-Library/issues/113"
+    ]
+  }
+}
