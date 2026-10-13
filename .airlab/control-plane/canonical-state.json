@@ -7,7 +7,7 @@
     "policy": "This private repository is the single coordination authority. Chats and agents are workers, not independent sources of truth."
   },
   "updated_at": "2026-10-13",
-  "state_revision": 242,
+  "state_revision": 243,
   "lifecycle_status": "BOOTSTRAP_ACTIVE",
   "roadmap_authority": {
     "library": ".airlab/roadmap.yaml",
@@ -80,8 +80,8 @@
     "invalid_lane_behavior": "ISOLATE_AND_SURFACE_PROJECTION_INCIDENT"
   },
   "projection": {
-    "source_digest": "76a84efd91c915f18332ba4ab673ee8c2bccfcd778088c51974f91a7ca9c3833",
-    "projected_at": "2026-10-13T07:38:56Z",
+    "source_digest": "cb93ab1579da7f857072ebdecead9f0d33449d884ee532a2c0ee44d5f077578c",
+    "projected_at": "2026-10-13T07:43:27Z",
     "counts": {
       "CLAIMED": 1,
       "IMPLEMENTING": 1,
@@ -317,7 +317,7 @@
         "id": "cantiere",
         "status": "IMPLEMENTING",
         "activation": "active",
-        "state_version": 71,
+        "state_version": 72,
         "updated_at": "2026-10-13",
         "active_claim": {
           "claim_id": "c0d7e9a1f346b8d5021a",
@@ -336,7 +336,7 @@
         "reviewer_state": "CHANGES_REQUESTED",
         "inference_profile_status": null,
         "historical_backlog_count": 3,
-        "next_action": "Finish all six CI checks on 5d63a05f; resolve fixed Codex P2 threads, request independent re-review and submit exact-head Cantiere claim-bound packet to Main/Reviewer."
+        "next_action": "Complete all six exact-head CI and new Codex review; reconcile any actionable finding, resolve remaining threads, then submit new claim-bound packet to Main/Reviewer."
       },
       {
         "id": "diagnostics",
