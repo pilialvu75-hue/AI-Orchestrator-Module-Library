@@ -1,0 +1,12 @@
+{
+  "schema_version": 1,
+  "request_id": "cantiere-20261013-pr836-review-rework-import-guard",
+  "actor_id": "chatgpt:main-reviewer",
+  "lane_id": "cantiere",
+  "operation": "review_rework",
+  "expected_state_version": 67,
+  "payload": {
+    "reason": "PR #836 exact head 7cb4bd36f67ed5957485bade5f43028a3e0af4c9 has two confirmed P2 defects in the new Dart/JVM import guard despite 6/6 green CI. P2-1: the namespace allowlist covers com/org/android/androidx but misses canonical JVM prefixes java.* and kotlin.*, so cross-language imports such as java.util.Date or kotlin.collections.List are staged instead of entering the existing structural FormatException retry. P2-2: the multiline RegExp scans raw Dart source text and can classify import-looking text inside block comments or multiline/triple-quoted strings as real directives, causing false rejection before staging. These defects are limited to the new guard; the existing Engineer structural retry, Reviewer/Validation gates, model/token/timeout budgets, Local WebSearch, Vulkan and RAM protections must remain unchanged.",
+    "next_action": "Cantiere: keep the same claim/work item and rework PR #836 only. Replace the raw-text import scan with directive-aware parsing or an equivalently safe lexical scan that evaluates actual Dart import directives while ignoring comments and string literals. Extend the blocked native/JVM namespaces to include at least java and kotlin alongside com/org/android/androidx without rejecting legal package:/dart:/relative Dart imports or declared MethodChannel/native .kt/.xml files. Add regressions for java.util.Date and kotlin.collections.List rejection plus block-comment/triple-quoted-string false-positive cases, and preserve the existing one structural FormatException retry with Reviewer/Validation still authoritative. Re-run all six exact-head workflows on the new head, reply to and resolve both Codex P2 threads, then submit a new claim-bound review packet. G5 S24 FE stays open; do not retest +3140 and do not publish a physical-success claim."
+  }
+}
