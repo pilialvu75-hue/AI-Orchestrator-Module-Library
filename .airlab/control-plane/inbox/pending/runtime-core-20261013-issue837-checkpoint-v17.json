@@ -1,0 +1,21 @@
+{
+  "schema_version": 1,
+  "request_id": "runtime-core-20261013-issue837-checkpoint-v17",
+  "actor_id": "chatgpt:runtime-core-issue837",
+  "lane_id": "runtime-core",
+  "operation": "checkpoint",
+  "expected_state_version": 17,
+  "payload": {
+    "summary": "Claim held; issue #837 confirmed on main ef75701e. Repository saves user before inference; state-engine failure renders old _messages. Implement authoritative saved-history replacement, fallback previous turns plus immutable current question on reload failure, and generation guards for clear/session/load races.",
+    "decisions": [
+      "Keep repository identity and persistence semantics unchanged; successful reload replaces fallback rather than appending.",
+      "Discard unpersisted partial assistant text on terminal failure; never promote it to a completed reply.",
+      "No Vulkan, timeout, trim15/RAM or platform-profile changes. Physical S24 FE acceptance remains open."
+    ],
+    "evidence_refs": [
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/issues/837",
+      "head:ef75701ef2cbe9ba20fed30200a1fa046d36812d"
+    ],
+    "next_action": "Implement scoped state-engine fix with deterministic persisted-error, reload-failure, retry/restart, attachment and stale-callback regressions; run Flutter validation and open PR."
+  }
+}
