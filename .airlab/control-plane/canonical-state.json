@@ -7,7 +7,7 @@
     "policy": "This private repository is the single coordination authority. Chats and agents are workers, not independent sources of truth."
   },
   "updated_at": "2026-10-13",
-  "state_revision": 230,
+  "state_revision": 231,
   "lifecycle_status": "BOOTSTRAP_ACTIVE",
   "roadmap_authority": {
     "library": ".airlab/roadmap.yaml",
@@ -80,8 +80,8 @@
     "invalid_lane_behavior": "ISOLATE_AND_SURFACE_PROJECTION_INCIDENT"
   },
   "projection": {
-    "source_digest": "04627d1da5d4a1475ef022abde3d298cbd0506545673df3fc39e3aaf0e1c7837",
-    "projected_at": "2026-10-13T02:01:24Z",
+    "source_digest": "77e55481e4a9857669bef4745b241220ababd5bf9d2a22ca5e49e6c724fe3db1",
+    "projected_at": "2026-10-13T02:02:28Z",
     "counts": {
       "IMPLEMENTING": 1,
       "READY": 16
@@ -92,7 +92,7 @@
         "claim_id": "1ba06be39028c252f14a",
         "work_item": "AIVEXUS-CAD-1",
         "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
-        "lease_until": "2026-10-13T14:01:24Z",
+        "lease_until": "2026-10-13T14:02:28Z",
         "resource_locks": [
           "branch:pilialvu75-hue/Ai-orchestrator-riserva:feat/aivexus-cad1-parametric-sample",
           "file:pilialvu75-hue/Ai-orchestrator-riserva:.github/workflows/aivexus-cad1-tests.yml",
@@ -248,13 +248,13 @@
         "id": "aivexus-3d",
         "status": "IMPLEMENTING",
         "activation": "active",
-        "state_version": 19,
+        "state_version": 20,
         "updated_at": "2026-10-13",
         "active_claim": {
           "claim_id": "1ba06be39028c252f14a",
           "work_item": "AIVEXUS-CAD-1",
           "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
-          "lease_until": "2026-10-13T14:01:24Z",
+          "lease_until": "2026-10-13T14:02:28Z",
           "resource_locks": [
             "branch:pilialvu75-hue/Ai-orchestrator-riserva:feat/aivexus-cad1-parametric-sample",
             "file:pilialvu75-hue/Ai-orchestrator-riserva:.github/workflows/aivexus-cad1-tests.yml",
@@ -271,7 +271,7 @@
         "reviewer_state": "PENDING",
         "inference_profile_status": null,
         "historical_backlog_count": 0,
-        "next_action": "Read exact latest CI head ebdc4b1; inspect dedicated CAD job logs. If CAD tests fail, correct only explicitly locked CAD workflow/domain files; otherwise capture run evidence, check six platform workflows and prepare bounded handoff for Main/Reviewer. Do not self-promote to DONE; Cantiere runner/storage and Fusion/print remain separate, and no merge until reviewed and mergeable."
+        "next_action": "Verify six platform workflow conclusions on exact PR #833 head ebdc4b1. If green, prepare bounded Main/Reviewer code/evidence review of CAD domain while keeping end-to-end runner/persistence and Fusion/print UNKNOWN; do not merge or self-promote. If fail, inspect exact failing jobs. Library #113/Cantiere must own certified runner and shared persistence integration."
       },
       {
         "id": "aivexus-games",
