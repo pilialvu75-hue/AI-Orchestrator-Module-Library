@@ -7,7 +7,7 @@
     "policy": "This private repository is the single coordination authority. Chats and agents are workers, not independent sources of truth."
   },
   "updated_at": "2026-10-13",
-  "state_revision": 246,
+  "state_revision": 247,
   "lifecycle_status": "BOOTSTRAP_ACTIVE",
   "roadmap_authority": {
     "library": ".airlab/roadmap.yaml",
@@ -80,12 +80,12 @@
     "invalid_lane_behavior": "ISOLATE_AND_SURFACE_PROJECTION_INCIDENT"
   },
   "projection": {
-    "source_digest": "b697f322232fb6efaf4f026c42814284a512cd21c09e7478dce03e5b2857ba9e",
-    "projected_at": "2026-10-13T07:49:18Z",
+    "source_digest": "9d896991ddd8615ab989f434ef31a7800987bc99d8355ea9617c82aca651759e",
+    "projected_at": "2026-10-13T09:36:30Z",
     "counts": {
       "BLOCKED": 1,
-      "IMPLEMENTING": 1,
-      "READY": 15
+      "READY": 15,
+      "REVIEW_REQUIRED": 1
     },
     "active_claims": [
       {
@@ -142,7 +142,9 @@
         "work_item": "cantiere-engineer-flutter-native-import-3140"
       }
     ],
-    "review_required": [],
+    "review_required": [
+      "cantiere"
+    ],
     "blocked": [
       {
         "lane": "aivexus-3d",
@@ -264,9 +266,9 @@
       },
       {
         "id": "cantiere",
-        "status": "IMPLEMENTING",
+        "status": "REVIEW_REQUIRED",
         "activation": "active",
-        "state_version": 73,
+        "state_version": 74,
         "updated_at": "2026-10-13",
         "active_claim": {
           "claim_id": "c0d7e9a1f346b8d5021a",
@@ -282,10 +284,10 @@
             "file:pilialvu75-hue/Ai-orchestrator-riserva:test/app_factory/workshop/workshop_proposal_workspace_stager_test.dart"
           ]
         },
-        "reviewer_state": "CHANGES_REQUESTED",
+        "reviewer_state": "PENDING",
         "inference_profile_status": null,
         "historical_backlog_count": 3,
-        "next_action": "Await 6 exact-head CI + Codex re-review. If green and no actionable findings, close fixed review discussions and submit new claim-bound packet to Main/Reviewer; G5 pending."
+        "next_action": "Main/Reviewer: verify PR #836 exact head 0e89bd67 and 12 resolved P2 Codex threads, attest G1–G4 from the updated claim-bound packet with six green CI, independently decide G6/merge. G5 S24 FE remains open."
       },
       {
         "id": "diagnostics",
