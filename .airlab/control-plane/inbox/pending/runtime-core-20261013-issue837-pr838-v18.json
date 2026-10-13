@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "request_id": "runtime-core-20261013-issue837-pr838-v18",
+  "actor_id": "chatgpt:runtime-core-issue837",
+  "lane_id": "runtime-core",
+  "operation": "checkpoint",
+  "expected_state_version": 18,
+  "payload": {
+    "summary": "PR #838 opened at exact head 819bd7927b3dafb628d15f774d679a661d29fcb7. Two-file state-engine fix and 14 additional regression cases plus strengthened timeout regression implemented. Dart parser and git diff --check passed; five platform CI workflows running; Codex independent review requested. Local Flutter bootstrap blocked by approval auto-review due instance-metadata access, so no local Flutter test pass claimed.",
+    "decisions": [
+      "Persisted reload replaces fallback identities, preserving repeated identical user prompts as distinct turns.",
+      "Discard unpersisted partial assistant output on failure; preserve original runtime notice and attachments.",
+      "Do not merge, close #837, or claim S24 FE/RAM/runtime acceptance from CI."
+    ],
+    "evidence_refs": [
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/838",
+      "head:819bd7927b3dafb628d15f774d679a661d29fcb7",
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/838#issuecomment-6155726038"
+    ],
+    "next_action": "Inspect exact-head CI/test results and Codex review, fix concrete failures if any, then submit a claim-bound review_packet through the transactional inbox for Main/Reviewer."
+  }
+}
