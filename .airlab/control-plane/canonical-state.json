@@ -7,7 +7,7 @@
     "policy": "This private repository is the single coordination authority. Chats and agents are workers, not independent sources of truth."
   },
   "updated_at": "2026-10-13",
-  "state_revision": 247,
+  "state_revision": 248,
   "lifecycle_status": "BOOTSTRAP_ACTIVE",
   "roadmap_authority": {
     "library": ".airlab/roadmap.yaml",
@@ -80,8 +80,8 @@
     "invalid_lane_behavior": "ISOLATE_AND_SURFACE_PROJECTION_INCIDENT"
   },
   "projection": {
-    "source_digest": "9d896991ddd8615ab989f434ef31a7800987bc99d8355ea9617c82aca651759e",
-    "projected_at": "2026-10-13T09:36:30Z",
+    "source_digest": "39bf9a5e6ed8fea82e7b1c9c9c3d35f0103fb509d731fd23ad829fbaf4973b87",
+    "projected_at": "2026-10-13T12:46:32Z",
     "counts": {
       "BLOCKED": 1,
       "READY": 15,
@@ -167,7 +167,18 @@
         }
       }
     ],
-    "checkpoint_watch": [],
+    "checkpoint_watch": [
+      {
+        "lane": "cantiere",
+        "claim_id": "c0d7e9a1f346b8d5021a",
+        "work_item": "cantiere-engineer-flutter-native-import-3140",
+        "status": "REVIEW_REQUIRED",
+        "reason": "CHECKPOINT_STALE",
+        "last_checkpoint_at": "2026-10-13T09:36:16Z",
+        "due_since": "2026-10-13T11:36:16Z",
+        "warning_after_minutes": 120
+      }
+    ],
     "projection_incidents": [],
     "platform_inference_profiles": [
       {
