@@ -1,0 +1,12 @@
+{
+  "schema_version": 1,
+  "request_id": "aivexus-3d-20261013-claim-mesh-hole-positions-v12",
+  "status": "APPLIED",
+  "processed_at": "2026-10-13T07:38:56Z",
+  "source_file": "aivexus-3d-20261013-claim-mesh-hole-positions-v12.json",
+  "lane_id": "aivexus-3d",
+  "operation": "claim",
+  "actor_id": "chatgpt:aivexus-3d",
+  "errors": [],
+  "result_state_version": 23
+}

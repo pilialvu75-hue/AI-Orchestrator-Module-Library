@@ -3,13 +3,33 @@
   "id": "aivexus-3d",
   "title": "Aivexus Studio 3D",
   "role": "worker",
-  "status": "READY",
+  "status": "CLAIMED",
   "activation": "active",
   "scope": "CAD/3D domain only: CadSpec, measured and photographic inputs, editable CAD/mesh sources, CAD/print exports and domain verification. Must consume the Cantiere-owned shared ProjectExtension/persistence/navigation base instead of modifying or duplicating it.",
   "shared_engine_policy": "domain_extension_only",
-  "state_version": 22,
+  "state_version": 23,
   "updated_at": "2026-10-13",
-  "active_claim": null,
+  "active_claim": {
+    "claim_id": "89a3d6132f1d52ce3198",
+    "owner_lane": "aivexus-3d",
+    "work_item": "AIVEXUS-CAD-1",
+    "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
+    "scope": "Fix P2 domain-only exact STL/3MF hole-position geometry validation discovered on PR #833 and add reproducible shifted-hole and contour regression tests. Keep Cantiere shared contract/storage/runner/navigation untouched, no physical Fusion/print or Diagnostics claims.",
+    "branch": "feat/aivexus-cad1-parametric-sample",
+    "resource_locks": [
+      "branch:pilialvu75-hue/Ai-orchestrator-riserva:feat/aivexus-cad1-parametric-sample",
+      "file:pilialvu75-hue/Ai-orchestrator-riserva:.github/workflows/aivexus-cad1-tests.yml",
+      "file:pilialvu75-hue/Ai-orchestrator-riserva:tools/aivexus/cad/README.md",
+      "file:pilialvu75-hue/Ai-orchestrator-riserva:tools/aivexus/cad/parametric_plate.py",
+      "file:pilialvu75-hue/Ai-orchestrator-riserva:tools/aivexus/cad/test_cad1.py",
+      "file:pilialvu75-hue/Ai-orchestrator-riserva:tools/aivexus/cad/validate_plate.py",
+      "scope:aivexus:cad"
+    ],
+    "started_at": "2026-10-13T07:38:56Z",
+    "heartbeat_at": "2026-10-13T07:38:56Z",
+    "lease_until": "2026-10-13T19:38:56Z",
+    "lease_hours": 12
+  },
   "dependencies": [
     "cantiere:AIVEXUS-BASE-1",
     "cantiere:AIVEXUS-BASE-2"
