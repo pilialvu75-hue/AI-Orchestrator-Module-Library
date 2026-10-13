@@ -3,95 +3,53 @@
   "id": "runtime-core",
   "title": "Runtime Core",
   "role": "worker",
-  "status": "READY",
+  "status": "CLAIMED",
   "activation": "active",
   "scope": "Shared inference contract, capability/model routing semantics, context, streaming, cancellation, errors, model-profile schema and lifecycle. Target platforms own their benchmark-gated LLM/backend/runtime profiles.",
   "shared_engine_policy": "shared_or_control_plane",
-  "state_version": 16,
-  "updated_at": "2026-10-10",
-  "active_claim": null,
+  "state_version": 17,
+  "updated_at": "2026-10-13",
+  "active_claim": {
+    "claim_id": "403f04c8b0a530f93e77",
+    "owner_lane": "runtime-core",
+    "work_item": "issue-837-preserve-persisted-prompt-after-inference-error",
+    "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
+    "scope": "Issue #837 only: reconcile saved chat history after failed inference, bounded user-turn fallback with attachment identity, duplicate-free subsequent reload/send, invalidate stale callbacks after clear/session changes; focused regressions. No Vulkan, timeout or RAM/trim15 policy changes; physical S24 FE acceptance remains open.",
+    "branch": "fix/runtime-core-837-preserve-failed-question",
+    "resource_locks": [
+      "branch:pilialvu75-hue/Ai-orchestrator-riserva:fix/runtime-core-837-preserve-failed-question",
+      "contract:assistant-chat-history-reconciliation",
+      "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/core/orchestrator/state_engine/orchestrator_state_engine.dart",
+      "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/features/chat/data/repositories/chat_repository_impl.dart",
+      "file:pilialvu75-hue/Ai-orchestrator-riserva:test/core/orchestrator/state_engine/orchestrator_state_engine_test.dart",
+      "file:pilialvu75-hue/Ai-orchestrator-riserva:test/features/chat/data/repositories/chat_repository_impl_test.dart"
+    ],
+    "started_at": "2026-10-13T21:28:42Z",
+    "heartbeat_at": "2026-10-13T21:28:42Z",
+    "lease_until": "2026-10-14T09:28:42Z",
+    "lease_hours": 12
+  },
   "dependencies": [],
   "roadmap_refs": [
     ".airlab/public-repositories/Ai-orchestrator-riserva/roadmap.yaml#CANT-14",
     ".airlab/public-repositories/Ai-orchestrator-riserva/roadmap.yaml#CANT-INF1"
   ],
-  "evidence": [
-    {
-      "type": "pull_request",
-      "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/818",
-      "result": "PASS",
-      "note": "PR open/mergeable; head e5e08527d0068845bfa9e643d1a3e514a2e8c356; six workflow checks pass."
-    },
-    {
-      "type": "ci",
-      "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/37929379747",
-      "result": "PASS",
-      "note": "Exact-head Build & Release APK: Flutter analyze, Flutter tests, CodeQL, signed arm64 APK 1.0.12+3063 and AAB, bridge ABI packaging verified."
-    },
-    {
-      "type": "ci",
-      "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/37929379876",
-      "result": "PASS",
-      "note": "Cantiere first-app Android pipeline including previously failing physical-failure regressions passed."
-    },
-    {
-      "type": "ci",
-      "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/37929379772",
-      "result": "PASS",
-      "note": "Web Cantiere Build passed."
-    },
-    {
-      "type": "ci",
-      "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/37929379804",
-      "result": "PASS",
-      "note": "Windows Desktop Build passed."
-    },
-    {
-      "type": "ci",
-      "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/37929379722",
-      "result": "PASS",
-      "note": "Linux Desktop Build passed."
-    },
-    {
-      "type": "ci",
-      "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/37929379883",
-      "result": "PASS",
-      "note": "macOS Desktop Build passed."
-    },
-    {
-      "type": "analysis",
-      "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/818",
-      "result": "PASS",
-      "note": "Codex re-reviewed e5e0852, completed 2026-10-09T12:26:31Z with no new major issues; P1 on earlier malformed regex head addressed."
-    },
-    {
-      "type": "runtime",
-      "ref": "S24FE Mistral cloud user logs 2026-10-09T14:09 local",
-      "result": "FAIL",
-      "note": "Mistral Cloud request 319ms, 0 tokens; classified 429/rate_limit; this is from older build before new HTTP receipt."
-    },
-    {
-      "type": "physical_device",
-      "ref": "Signed GitHub artifact AI-Orchestrator-android-release-1.0.12-3063 run 37929379747",
-      "result": "PENDING",
-      "note": "No physical run of build +3063 yet; new diagnostic fields and live API key outcome are not verified."
-    }
-  ],
+  "evidence": [],
   "gates": {
     "G0_CLAIM": "PASS",
-    "G1_IMPLEMENTATION": "PASS",
-    "G2_STATIC": "PASS",
-    "G3_CI": "PASS",
-    "G4_INTEGRATION": "PASS",
+    "G1_IMPLEMENTATION": "PENDING",
+    "G2_STATIC": "PENDING",
+    "G3_CI": "PENDING",
+    "G4_INTEGRATION": "PENDING",
     "G5_TARGET_RUNTIME": "NOT_APPLICABLE_UNTIL_RUNTIME_CHANGE",
-    "G6_REVIEWER": "PASS",
-    "G7_CANONICAL_SYNC": "PASS"
+    "G6_REVIEWER": "PENDING",
+    "G7_CANONICAL_SYNC": "PENDING"
   },
   "reviewer": {
     "required": true,
-    "state": "APPROVED",
-    "reviewed_by": "main-reviewer",
-    "reviewed_at": "2026-10-10T13:50:11Z"
+    "state": "PENDING",
+    "reviewed_by": null,
+    "reviewed_at": null
   },
   "next_action": "Use the signed +3063 artifact for one bounded S24 FE BYOK Mistral validation of the new CLOSED CLOUD_HTTP_FAILURE receipt before any user-facing success claim. Keep paid fallback disabled and do not infer service recovery from CI.",
   "inference_ownership": {
@@ -309,106 +267,6 @@
     "next_action": "Use the signed +3063 artifact for one bounded S24 FE BYOK Mistral validation of the new CLOSED CLOUD_HTTP_FAILURE receipt before any user-facing success claim. Keep paid fallback disabled and do not infer service recovery from CI.",
     "kind": "REVIEW_ACCEPTED"
   },
-  "review_packet": {
-    "schema_version": 1,
-    "submitted_at": "2026-10-09T13:36:00Z",
-    "lane_id": "runtime-core",
-    "claim_id": "5615786649acca3a5846",
-    "work_item": "cloud-mistral-429-structured-backoff",
-    "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
-    "branch": "runtime-core/mistral-429-structured-backoff",
-    "pull_request": 818,
-    "summary": "PR #818 exact-head e5e08527d0068845bfa9e643d1a3e514a2e8c356: structured rate-limit vs quota response handling and Retry-After in Cloud runtime, plus privacy-safe CLOSED CLOUD_HTTP_FAILURE receipt (HTTP status, whitelisted Mistral model class, bounded Retry-After seconds and fixed rate-limit hint). After correcting first diagnostics regex regression, six GitHub Actions workflows pass including Android analyze, Flutter tests and signed APK. Codex review completed without new major issues on exact head. BYOK user request still reports HTTP429; physical test of new telemetry not yet performed. Evidence is implementation/CI success only, not live Mistral service recovery.",
-    "changes": [
-      "lib/core/runtime/inference/cloud_runtime_provider.dart: preserve typed CloudFailure kind/status and server Retry-After for rate limit/quota health and error mapping; prevent repeated calls during cooldown.",
-      "lib/core/diagnostics/cloud_routing_diagnostics.dart: emit closed CLOUD_HTTP_FAILURE code/status/model class and rate dimension without raw error bodies or secrets.",
-      "lib/core/diagnostics/public_log_projection.dart: strict grammar and bounded-only exported fields for new HTTP receipt, fixing earlier malformed regex.",
-      "lib/features/cloud_ai/data/repositories/ai_repository_impl.dart: generate HTTP receipt when CloudHttpException is caught.",
-      "test/core/runtime/inference/cloud_runtime_provider_test.dart and two diagnostics test files: regression tests for quota/429/cooldown and privacy-safe closed export."
-    ],
-    "evidence": [
-      {
-        "type": "pull_request",
-        "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/818",
-        "result": "PASS",
-        "note": "PR open/mergeable; head e5e08527d0068845bfa9e643d1a3e514a2e8c356; six workflow checks pass."
-      },
-      {
-        "type": "ci",
-        "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/37929379747",
-        "result": "PASS",
-        "note": "Exact-head Build & Release APK: Flutter analyze, Flutter tests, CodeQL, signed arm64 APK 1.0.12+3063 and AAB, bridge ABI packaging verified."
-      },
-      {
-        "type": "ci",
-        "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/37929379876",
-        "result": "PASS",
-        "note": "Cantiere first-app Android pipeline including previously failing physical-failure regressions passed."
-      },
-      {
-        "type": "ci",
-        "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/37929379772",
-        "result": "PASS",
-        "note": "Web Cantiere Build passed."
-      },
-      {
-        "type": "ci",
-        "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/37929379804",
-        "result": "PASS",
-        "note": "Windows Desktop Build passed."
-      },
-      {
-        "type": "ci",
-        "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/37929379722",
-        "result": "PASS",
-        "note": "Linux Desktop Build passed."
-      },
-      {
-        "type": "ci",
-        "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/37929379883",
-        "result": "PASS",
-        "note": "macOS Desktop Build passed."
-      },
-      {
-        "type": "analysis",
-        "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/818",
-        "result": "PASS",
-        "note": "Codex re-reviewed e5e0852, completed 2026-10-09T12:26:31Z with no new major issues; P1 on earlier malformed regex head addressed."
-      },
-      {
-        "type": "runtime",
-        "ref": "S24FE Mistral cloud user logs 2026-10-09T14:09 local",
-        "result": "FAIL",
-        "note": "Mistral Cloud request 319ms, 0 tokens; classified 429/rate_limit; this is from older build before new HTTP receipt."
-      },
-      {
-        "type": "physical_device",
-        "ref": "Signed GitHub artifact AI-Orchestrator-android-release-1.0.12-3063 run 37929379747",
-        "result": "PENDING",
-        "note": "No physical run of build +3063 yet; new diagnostic fields and live API key outcome are not verified."
-      }
-    ],
-    "known_risks": [
-      "Root cause of remote HTTP 429 is unconfirmed (RPS, TPM, monthly allocation, model eligibility or provider-side control). Mistral Playground success does not prove API key traffic.",
-      "Physical S24 FE still shows rejected cloud calls; a new +3063 APK must be tested once to obtain CLOSED HTTP receipt; no live API success claim.",
-      "Request max tokens and selected model ID are not exported; model class reported only on explicit allowlisted IDs; default class 'other' limits interpretation for non-listed models.",
-      "G5 target runtime remains unverified; separate physical evidence mandatory before declaring user-facing Mistral fixed. Avoid paid fallback/Pay-As-You-Go.",
-      "Earlier CI head 7894cc4 failed compilation; exact-head e5e0852 is green and Codex has reviewed it."
-    ],
-    "reviewer_checks": [
-      "Confirm exact-head six runs (not old green CI), Flutter tests and Cantiere physical-failure regressions.",
-      "Review code for privacy safe bounded categorization of HTTP response, no raw body/credentials/prompt/model identifier in exported diagnostics.",
-      "Record G1–G4 evidence-indexed attestation only for this exact packet via authorized Main/Reviewer operation.",
-      "Keep G5 target runtime physically unverified; do not claim Mistral API key works until +3063 tested.",
-      "Approve branch for bounded test deployment if criteria pass, but do not misrepresent 429 root cause or enable paid usage."
-    ],
-    "roadmap_impact": {
-      "material": false,
-      "refs": [
-        ".airlab/public-repositories/Ai-orchestrator-riserva/roadmap.yaml#CANT-9"
-      ]
-    }
-  },
   "review_history": [
     {
       "reviewed_at": "2026-10-09T11:20:03Z",
@@ -540,6 +398,108 @@
       "work_item": "cloud-mistral-429-structured-backoff",
       "reason": "Main/Reviewer accepted the bounded implementation/review gate.",
       "at": "2026-10-10T13:50:11Z"
+    }
+  ],
+  "review_packet_history": [
+    {
+      "schema_version": 1,
+      "submitted_at": "2026-10-09T13:36:00Z",
+      "lane_id": "runtime-core",
+      "claim_id": "5615786649acca3a5846",
+      "work_item": "cloud-mistral-429-structured-backoff",
+      "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
+      "branch": "runtime-core/mistral-429-structured-backoff",
+      "pull_request": 818,
+      "summary": "PR #818 exact-head e5e08527d0068845bfa9e643d1a3e514a2e8c356: structured rate-limit vs quota response handling and Retry-After in Cloud runtime, plus privacy-safe CLOSED CLOUD_HTTP_FAILURE receipt (HTTP status, whitelisted Mistral model class, bounded Retry-After seconds and fixed rate-limit hint). After correcting first diagnostics regex regression, six GitHub Actions workflows pass including Android analyze, Flutter tests and signed APK. Codex review completed without new major issues on exact head. BYOK user request still reports HTTP429; physical test of new telemetry not yet performed. Evidence is implementation/CI success only, not live Mistral service recovery.",
+      "changes": [
+        "lib/core/runtime/inference/cloud_runtime_provider.dart: preserve typed CloudFailure kind/status and server Retry-After for rate limit/quota health and error mapping; prevent repeated calls during cooldown.",
+        "lib/core/diagnostics/cloud_routing_diagnostics.dart: emit closed CLOUD_HTTP_FAILURE code/status/model class and rate dimension without raw error bodies or secrets.",
+        "lib/core/diagnostics/public_log_projection.dart: strict grammar and bounded-only exported fields for new HTTP receipt, fixing earlier malformed regex.",
+        "lib/features/cloud_ai/data/repositories/ai_repository_impl.dart: generate HTTP receipt when CloudHttpException is caught.",
+        "test/core/runtime/inference/cloud_runtime_provider_test.dart and two diagnostics test files: regression tests for quota/429/cooldown and privacy-safe closed export."
+      ],
+      "evidence": [
+        {
+          "type": "pull_request",
+          "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/818",
+          "result": "PASS",
+          "note": "PR open/mergeable; head e5e08527d0068845bfa9e643d1a3e514a2e8c356; six workflow checks pass."
+        },
+        {
+          "type": "ci",
+          "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/37929379747",
+          "result": "PASS",
+          "note": "Exact-head Build & Release APK: Flutter analyze, Flutter tests, CodeQL, signed arm64 APK 1.0.12+3063 and AAB, bridge ABI packaging verified."
+        },
+        {
+          "type": "ci",
+          "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/37929379876",
+          "result": "PASS",
+          "note": "Cantiere first-app Android pipeline including previously failing physical-failure regressions passed."
+        },
+        {
+          "type": "ci",
+          "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/37929379772",
+          "result": "PASS",
+          "note": "Web Cantiere Build passed."
+        },
+        {
+          "type": "ci",
+          "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/37929379804",
+          "result": "PASS",
+          "note": "Windows Desktop Build passed."
+        },
+        {
+          "type": "ci",
+          "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/37929379722",
+          "result": "PASS",
+          "note": "Linux Desktop Build passed."
+        },
+        {
+          "type": "ci",
+          "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/37929379883",
+          "result": "PASS",
+          "note": "macOS Desktop Build passed."
+        },
+        {
+          "type": "analysis",
+          "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/818",
+          "result": "PASS",
+          "note": "Codex re-reviewed e5e0852, completed 2026-10-09T12:26:31Z with no new major issues; P1 on earlier malformed regex head addressed."
+        },
+        {
+          "type": "runtime",
+          "ref": "S24FE Mistral cloud user logs 2026-10-09T14:09 local",
+          "result": "FAIL",
+          "note": "Mistral Cloud request 319ms, 0 tokens; classified 429/rate_limit; this is from older build before new HTTP receipt."
+        },
+        {
+          "type": "physical_device",
+          "ref": "Signed GitHub artifact AI-Orchestrator-android-release-1.0.12-3063 run 37929379747",
+          "result": "PENDING",
+          "note": "No physical run of build +3063 yet; new diagnostic fields and live API key outcome are not verified."
+        }
+      ],
+      "known_risks": [
+        "Root cause of remote HTTP 429 is unconfirmed (RPS, TPM, monthly allocation, model eligibility or provider-side control). Mistral Playground success does not prove API key traffic.",
+        "Physical S24 FE still shows rejected cloud calls; a new +3063 APK must be tested once to obtain CLOSED HTTP receipt; no live API success claim.",
+        "Request max tokens and selected model ID are not exported; model class reported only on explicit allowlisted IDs; default class 'other' limits interpretation for non-listed models.",
+        "G5 target runtime remains unverified; separate physical evidence mandatory before declaring user-facing Mistral fixed. Avoid paid fallback/Pay-As-You-Go.",
+        "Earlier CI head 7894cc4 failed compilation; exact-head e5e0852 is green and Codex has reviewed it."
+      ],
+      "reviewer_checks": [
+        "Confirm exact-head six runs (not old green CI), Flutter tests and Cantiere physical-failure regressions.",
+        "Review code for privacy safe bounded categorization of HTTP response, no raw body/credentials/prompt/model identifier in exported diagnostics.",
+        "Record G1–G4 evidence-indexed attestation only for this exact packet via authorized Main/Reviewer operation.",
+        "Keep G5 target runtime physically unverified; do not claim Mistral API key works until +3063 tested.",
+        "Approve branch for bounded test deployment if criteria pass, but do not misrepresent 429 root cause or enable paid usage."
+      ],
+      "roadmap_impact": {
+        "material": false,
+        "refs": [
+          ".airlab/public-repositories/Ai-orchestrator-riserva/roadmap.yaml#CANT-9"
+        ]
+      }
     }
   ]
 }
