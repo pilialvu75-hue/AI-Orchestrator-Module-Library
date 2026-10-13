@@ -3,35 +3,13 @@
   "id": "cantiere",
   "title": "Cantiere",
   "role": "worker",
-  "status": "REVIEW_REQUIRED",
+  "status": "READY",
   "activation": "active",
   "scope": "Exclusive Cantiere/App Factory execution, durability, build/review/validation/apply and first-real-app reliability.",
   "shared_engine_policy": "shared_or_control_plane",
-  "state_version": 62,
+  "state_version": 63,
   "updated_at": "2026-10-13",
-  "active_claim": {
-    "claim_id": "94876ef45cb7b6e77d9c",
-    "owner_lane": "cantiere",
-    "work_item": "cantiere-gate-evidence-reviewer-3117",
-    "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
-    "scope": "Bounded +3117 physical review failure: local copy of existing rejected gate source/diff evidence, and prompt-size-based compact-first Reviewer with regression tests; no bypass or model changes",
-    "branch": "fix/cantiere-gate-evidence-reviewer-3117",
-    "resource_locks": [
-      "branch:pilialvu75-hue/Ai-orchestrator-riserva:fix/cantiere-gate-evidence-reviewer-3117",
-      "contract:cantiere-gate-evidence",
-      "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/app_factory/workshop/workshop_gate_evidence_export.dart",
-      "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/app_factory/workshop/workshop_production_dashboard_page.dart",
-      "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/app_factory/workshop/workshop_proposal_review_runner.dart",
-      "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/app_factory/workshop/workshop_task_inference_pipeline.dart",
-      "file:pilialvu75-hue/Ai-orchestrator-riserva:test/app_factory/workshop/workshop_gate_evidence_export_test.dart",
-      "file:pilialvu75-hue/Ai-orchestrator-riserva:test/app_factory/workshop/workshop_proposal_review_runner_test.dart",
-      "file:pilialvu75-hue/Ai-orchestrator-riserva:test/app_factory/workshop/workshop_task_inference_pipeline_test.dart"
-    ],
-    "started_at": "2026-10-12T18:41:47Z",
-    "heartbeat_at": "2026-10-12T20:47:12Z",
-    "lease_until": "2026-10-13T08:47:12Z",
-    "lease_hours": 12
-  },
+  "active_claim": null,
   "dependencies": [],
   "roadmap_refs": [
     ".airlab/public-repositories/Ai-orchestrator-riserva/roadmap.yaml#CANT-11",
@@ -101,16 +79,16 @@
     "G3_CI": "PASS",
     "G4_INTEGRATION": "PASS",
     "G5_TARGET_RUNTIME": "PENDING_PHYSICAL_S24_FE",
-    "G6_REVIEWER": "PENDING",
-    "G7_CANONICAL_SYNC": "PENDING"
+    "G6_REVIEWER": "PASS",
+    "G7_CANONICAL_SYNC": "PASS"
   },
   "reviewer": {
     "required": true,
-    "state": "PENDING",
-    "reviewed_by": null,
-    "reviewed_at": null
+    "state": "APPROVED",
+    "reviewed_by": "main-reviewer",
+    "reviewed_at": "2026-10-13T01:52:42Z"
   },
-  "next_action": "Main/Reviewer: inspect the new PR #834 packet exact head 68a2ae62, resolve previously reported P2 and attest G1–G4 on this packet; G5 S24 FE remains pending; then G6, merge only by reviewer authority.",
+  "next_action": "Merge PR #834 only at exact reviewed head 68a2ae62f9be20294000c0b6076e7917d391f477. Then produce the next signed Android release containing the merge. Permit one S24 FE retest of the existing black-background project with all four roles qwen2_5_3b_instruct; if it fails, export acceptance report plus gate source evidence and do not perform additional retry. Keep Lista Spesa Lite separate and Phase 1 ONLINE open until generated APK install/open is physically accepted.",
   "historical_backlog": [
     "Stay in Phase 1 ONLINE until a real generated Android app is physically accepted.",
     "Reproduce the recent manga-drawing app failure from current main with Diagnostics; do not restart generic audits.",
@@ -848,31 +826,57 @@
       ],
       "next_action": "Main/Reviewer: inspect the new PR #834 packet exact head 68a2ae62, resolve previously reported P2 and attest G1–G4 on this packet; G5 S24 FE remains pending; then G6, merge only by reviewer authority.",
       "kind": "REVIEW_HANDOFF"
+    },
+    {
+      "seq": 38,
+      "at": "2026-10-13T01:52:42Z",
+      "claim_id": "94876ef45cb7b6e77d9c",
+      "work_item": "cantiere-gate-evidence-reviewer-3117",
+      "summary": "PR #834 accepted at exact head 68a2ae62f9be20294000c0b6076e7917d391f477. The two prior P2 findings are resolved: gate evidence now uses immutable post-Library/pre-Engineer baseline limited to rejected proposal-owned paths, and every actual Reviewer prompt is bounded before inference with fail-closed behavior above 7000 chars. Six exact-head workflows pass and supplemental Codex re-review found no major issues. G5 physical S24 FE remains pending; historical star.dart remains unclassified until new on-device source evidence.",
+      "decisions": [
+        "Main/Reviewer accepted the implementation/review gate."
+      ],
+      "evidence_refs": [
+        "Ai-orchestrator-riserva#834",
+        "commit:68a2ae62f9be20294000c0b6076e7917d391f477",
+        "CI:38305557300",
+        "CI:38305557277",
+        "CI:38305557271",
+        "CI:38305557324",
+        "CI:38305557289",
+        "CI:38305557283",
+        "review:P2-baseline-resolved",
+        "review:P2-compact-bound-resolved",
+        "codex:68a2ae62:no-major-issues"
+      ],
+      "next_action": "Merge PR #834 only at exact reviewed head 68a2ae62f9be20294000c0b6076e7917d391f477. Then produce the next signed Android release containing the merge. Permit one S24 FE retest of the existing black-background project with all four roles qwen2_5_3b_instruct; if it fails, export acceptance report plus gate source evidence and do not perform additional retry. Keep Lista Spesa Lite separate and Phase 1 ONLINE open until generated APK install/open is physically accepted.",
+      "kind": "REVIEW_ACCEPTED"
     }
   ],
   "last_checkpoint": {
-    "seq": 37,
-    "at": "2026-10-12T21:20:54Z",
+    "seq": 38,
+    "at": "2026-10-13T01:52:42Z",
     "claim_id": "94876ef45cb7b6e77d9c",
     "work_item": "cantiere-gate-evidence-reviewer-3117",
-    "summary": "Bounded Cantiere P2 rework for +3117 Reviewer failure, PR #834 exact head 68a2ae62f9be20294000c0b6076e7917d391f477. Two Main/Reviewer P2 findings from old head 507e35d are addressed: (1) rejected-gate source export now uses immutable baseline captured after Library reuse and before Engineer, scoped to final rejected proposal affected paths, with staged actual source, preventing unrelated reuse/incorrect before source from clipboard; (2) every initial/compact-retry Reviewer prompt is measured before inference and fails closed if above the 7000-char threshold. New regressions cover preceding Library reuse, proposal transport/staged truth, task identity, invalid paths, oversized mandatory constraints (zero inference), no bypass and retained Reviewer rejection. Both inline review threads were replied to and resolved. All six GitHub CI workflows completed successfully on the exact final head. Not merged. No S24 FE physical validation or recovery of the old star.dart source is claimed.",
+    "summary": "PR #834 accepted at exact head 68a2ae62f9be20294000c0b6076e7917d391f477. The two prior P2 findings are resolved: gate evidence now uses immutable post-Library/pre-Engineer baseline limited to rejected proposal-owned paths, and every actual Reviewer prompt is bounded before inference with fail-closed behavior above 7000 chars. Six exact-head workflows pass and supplemental Codex re-review found no major issues. G5 physical S24 FE remains pending; historical star.dart remains unclassified until new on-device source evidence.",
     "decisions": [
-      "Bounded P2 rework submitted on exact final green head, no self-approval.",
-      "Old +3117 device acceptance and star.dart classification still open."
+      "Main/Reviewer accepted the implementation/review gate."
     ],
     "evidence_refs": [
-      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/68a2ae62f9be20294000c0b6076e7917d391f477",
-      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/834",
-      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38305557300",
-      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38305557277",
-      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38305557271",
-      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38305557324",
-      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38305557289",
-      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38305557283",
-      "https://github.com/pilialvu75-hue/Ai-orchestrator-diagnostics/releases/tag/diagnostics-v1-6bd1447f-5fda-4171-84b4-c1ff56b154cf"
+      "Ai-orchestrator-riserva#834",
+      "commit:68a2ae62f9be20294000c0b6076e7917d391f477",
+      "CI:38305557300",
+      "CI:38305557277",
+      "CI:38305557271",
+      "CI:38305557324",
+      "CI:38305557289",
+      "CI:38305557283",
+      "review:P2-baseline-resolved",
+      "review:P2-compact-bound-resolved",
+      "codex:68a2ae62:no-major-issues"
     ],
-    "next_action": "Main/Reviewer: inspect the new PR #834 packet exact head 68a2ae62, resolve previously reported P2 and attest G1–G4 on this packet; G5 S24 FE remains pending; then G6, merge only by reviewer authority.",
-    "kind": "REVIEW_HANDOFF"
+    "next_action": "Merge PR #834 only at exact reviewed head 68a2ae62f9be20294000c0b6076e7917d391f477. Then produce the next signed Android release containing the merge. Permit one S24 FE retest of the existing black-background project with all four roles qwen2_5_3b_instruct; if it fails, export acceptance report plus gate source evidence and do not perform additional retry. Keep Lista Spesa Lite separate and Phase 1 ONLINE open until generated APK install/open is physically accepted.",
+    "kind": "REVIEW_ACCEPTED"
   },
   "review_history": [
     {
@@ -956,6 +960,27 @@
       "work_item": "cantiere-gate-evidence-reviewer-3117",
       "decision": "CHANGES_REQUESTED",
       "summary": "PR #834 exact head 507e35d7478515d17afe86a88b4b5d3de9c87f45 has two confirmed P2 review defects despite 6/6 green CI. P2-1: WorkshopGateEvidenceExport is fed workspace.originalSnapshot versus final staged snapshot, but originalSnapshot predates any certified/local reuse staged before Engineer. The export can therefore include unrelated pre-Engineer reuse, misstate its repository content as the rejected proposal baseline, contaminate evidence across phases, and consume the clipboard limit before the actual rejected Engineer diff. The evidence must use the exact pre-Engineer/revision baseline and restrict paths to the rejected proposal actually judged. P2-2: Reviewer compact-first selects compact when the full prompt exceeds 7000 chars but never measures the resulting compact prompt before inference. Long instruction/constraints/targetFiles/coverage can leave compact above the same threshold and reproduce the zero-token failure. Build and measure compact before submission, then reduce/split within existing batch/coverage semantics or fail closed; do not add retry/token/timeout/model budget. No evidence classifies the historical star.dart finding yet."
+    },
+    {
+      "reviewed_at": "2026-10-13T01:52:42Z",
+      "reviewed_by": "main-reviewer",
+      "claim_id": "94876ef45cb7b6e77d9c",
+      "work_item": "cantiere-gate-evidence-reviewer-3117",
+      "decision": "APPROVED",
+      "summary": "PR #834 accepted at exact head 68a2ae62f9be20294000c0b6076e7917d391f477. The two prior P2 findings are resolved: gate evidence now uses immutable post-Library/pre-Engineer baseline limited to rejected proposal-owned paths, and every actual Reviewer prompt is bounded before inference with fail-closed behavior above 7000 chars. Six exact-head workflows pass and supplemental Codex re-review found no major issues. G5 physical S24 FE remains pending; historical star.dart remains unclassified until new on-device source evidence.",
+      "evidence_refs": [
+        "Ai-orchestrator-riserva#834",
+        "commit:68a2ae62f9be20294000c0b6076e7917d391f477",
+        "CI:38305557300",
+        "CI:38305557277",
+        "CI:38305557271",
+        "CI:38305557324",
+        "CI:38305557289",
+        "CI:38305557283",
+        "review:P2-baseline-resolved",
+        "review:P2-compact-bound-resolved",
+        "codex:68a2ae62:no-major-issues"
+      ]
     }
   ],
   "completed_work": [
@@ -1082,6 +1107,13 @@
         ".airlab/public-repositories/Ai-orchestrator-riserva/roadmap.yaml"
       ],
       "at": "2026-10-12T11:39:08Z"
+    },
+    {
+      "type": "CLAIM_RELEASED_AFTER_REVIEW",
+      "claim_id": "94876ef45cb7b6e77d9c",
+      "work_item": "cantiere-gate-evidence-reviewer-3117",
+      "reason": "Main/Reviewer accepted the bounded implementation/review gate.",
+      "at": "2026-10-13T01:52:42Z"
     }
   ],
   "review_packet_history": [

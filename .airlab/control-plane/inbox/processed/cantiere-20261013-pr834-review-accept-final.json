@@ -1,0 +1,12 @@
+{
+  "schema_version": 1,
+  "request_id": "cantiere-20261013-pr834-review-accept-final",
+  "status": "APPLIED",
+  "processed_at": "2026-10-13T01:52:42Z",
+  "source_file": "cantiere-20261013-pr834-review-accept-final.json",
+  "lane_id": "cantiere",
+  "operation": "review_accept",
+  "actor_id": "chatgpt:main-reviewer",
+  "errors": [],
+  "result_state_version": 63
+}
