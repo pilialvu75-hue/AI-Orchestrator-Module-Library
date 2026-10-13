@@ -7,7 +7,7 @@
     "policy": "This private repository is the single coordination authority. Chats and agents are workers, not independent sources of truth."
   },
   "updated_at": "2026-10-13",
-  "state_revision": 258,
+  "state_revision": 259,
   "lifecycle_status": "BOOTSTRAP_ACTIVE",
   "roadmap_authority": {
     "library": ".airlab/roadmap.yaml",
@@ -80,8 +80,8 @@
     "invalid_lane_behavior": "ISOLATE_AND_SURFACE_PROJECTION_INCIDENT"
   },
   "projection": {
-    "source_digest": "2270cd9a6e5b414ad26f7b3099dd6034be914e11862dcf3f11e50582ad220ccf",
-    "projected_at": "2026-10-13T22:22:35Z",
+    "source_digest": "57c292f87a2061f7ed780047cc7def3353dfa13c6fe019e6df9d8aed63844afa",
+    "projected_at": "2026-10-13T22:29:46Z",
     "counts": {
       "BLOCKED": 1,
       "IMPLEMENTING": 1,
@@ -109,7 +109,7 @@
         "claim_id": "403f04c8b0a530f93e77",
         "work_item": "issue-837-preserve-persisted-prompt-after-inference-error",
         "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
-        "lease_until": "2026-10-14T10:22:35Z",
+        "lease_until": "2026-10-14T10:29:46Z",
         "resource_locks": [
           "branch:pilialvu75-hue/Ai-orchestrator-riserva:fix/runtime-core-837-preserve-failed-question",
           "contract:assistant-chat-history-reconciliation",
@@ -488,13 +488,13 @@
         "id": "runtime-core",
         "status": "IMPLEMENTING",
         "activation": "active",
-        "state_version": 25,
+        "state_version": 26,
         "updated_at": "2026-10-13",
         "active_claim": {
           "claim_id": "403f04c8b0a530f93e77",
           "work_item": "issue-837-preserve-persisted-prompt-after-inference-error",
           "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
-          "lease_until": "2026-10-14T10:22:35Z",
+          "lease_until": "2026-10-14T10:29:46Z",
           "resource_locks": [
             "branch:pilialvu75-hue/Ai-orchestrator-riserva:fix/runtime-core-837-preserve-failed-question",
             "contract:assistant-chat-history-reconciliation",
@@ -507,7 +507,7 @@
         "reviewer_state": "PENDING",
         "inference_profile_status": null,
         "historical_backlog_count": 4,
-        "next_action": "Verify current-head CI and completed re-review; submit immutable claim-bound packet to Main/Reviewer. Do not merge or claim physical acceptance."
+        "next_action": "Collect exact-head tests/CI and completed code review; submit immutable Main/Reviewer packet."
       },
       {
         "id": "voice-live",

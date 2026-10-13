@@ -7,7 +7,7 @@
   "activation": "active",
   "scope": "Shared inference contract, capability/model routing semantics, context, streaming, cancellation, errors, model-profile schema and lifecycle. Target platforms own their benchmark-gated LLM/backend/runtime profiles.",
   "shared_engine_policy": "shared_or_control_plane",
-  "state_version": 25,
+  "state_version": 26,
   "updated_at": "2026-10-13",
   "active_claim": {
     "claim_id": "403f04c8b0a530f93e77",
@@ -25,8 +25,8 @@
       "file:pilialvu75-hue/Ai-orchestrator-riserva:test/features/chat/data/repositories/chat_repository_impl_test.dart"
     ],
     "started_at": "2026-10-13T21:28:42Z",
-    "heartbeat_at": "2026-10-13T22:22:35Z",
-    "lease_until": "2026-10-14T10:22:35Z",
+    "heartbeat_at": "2026-10-13T22:29:46Z",
+    "lease_until": "2026-10-14T10:29:46Z",
     "lease_hours": 12
   },
   "dependencies": [],
@@ -51,7 +51,7 @@
     "reviewed_by": null,
     "reviewed_at": null
   },
-  "next_action": "Verify current-head CI and completed re-review; submit immutable claim-bound packet to Main/Reviewer. Do not merge or claim physical acceptance.",
+  "next_action": "Collect exact-head tests/CI and completed code review; submit immutable Main/Reviewer packet.",
   "inference_ownership": {
     "owns": [
       "shared inference API",
@@ -387,26 +387,43 @@
         "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/838#discussion_r4264628655"
       ],
       "next_action": "Verify current-head CI and completed re-review; submit immutable claim-bound packet to Main/Reviewer. Do not merge or claim physical acceptance."
+    },
+    {
+      "seq": 18,
+      "at": "2026-10-13T22:29:46Z",
+      "claim_id": "403f04c8b0a530f93e77",
+      "work_item": "issue-837-preserve-persisted-prompt-after-inference-error",
+      "summary": "PR #838 head 2e6a143f658d7714a6f19438b48b3b2e80581ff9 addresses pending-ID edit duplication: reject synthetic/missing targets with retained input and a reload notice; allow an empty replacement target only after confirmed successful clear. Three regressions verify unchanged DB on rejection and valid edit after canonical reload. 36 state-engine tests total (33 new). Previous reviewer threads addressed; final-head CI/re-review requested.",
+      "decisions": [
+        "No heuristic text-to-ID matching; authoritative persisted identity is required for editing an existing turn.",
+        "Only state engine/tests change; Vulkan, timeout/deadline and RAM protections untouched.",
+        "Physical S24 FE acceptance remains pending."
+      ],
+      "evidence_refs": [
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/838",
+        "head:2e6a143f658d7714a6f19438b48b3b2e80581ff9",
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/838#discussion_r4264709144"
+      ],
+      "next_action": "Collect exact-head tests/CI and completed code review; submit immutable Main/Reviewer packet."
     }
   ],
   "last_checkpoint": {
-    "seq": 17,
-    "at": "2026-10-13T22:22:35Z",
+    "seq": 18,
+    "at": "2026-10-13T22:29:46Z",
     "claim_id": "403f04c8b0a530f93e77",
     "work_item": "issue-837-preserve-persisted-prompt-after-inference-error",
-    "summary": "PR #838 head daa516280bcd46377425963badfba91f8c6ed12a addresses P1/P2 edit findings: edits now share the owned send lifecycle, preserving replacement persistence after destructive truncation across refresh/navigation; no preview read delays saving; clear-time edits retain immutable input rather than returning. Seven edit regressions added, 33 state-engine tests total (30 new). All reviewer threads answered/resolved; new CI/re-review requested.",
+    "summary": "PR #838 head 2e6a143f658d7714a6f19438b48b3b2e80581ff9 addresses pending-ID edit duplication: reject synthetic/missing targets with retained input and a reload notice; allow an empty replacement target only after confirmed successful clear. Three regressions verify unchanged DB on rejection and valid edit after canonical reload. 36 state-engine tests total (33 new). Previous reviewer threads addressed; final-head CI/re-review requested.",
     "decisions": [
-      "State engine and tests only; no repository persistence contract, Vulkan, timeout/deadline or RAM changes.",
-      "View revision changes suppress UI emissions but no longer abandon post-truncation work; explicit clear still invalidates the prior send.",
-      "G5 physical S24 FE acceptance remains pending."
+      "No heuristic text-to-ID matching; authoritative persisted identity is required for editing an existing turn.",
+      "Only state engine/tests change; Vulkan, timeout/deadline and RAM protections untouched.",
+      "Physical S24 FE acceptance remains pending."
     ],
     "evidence_refs": [
       "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/838",
-      "head:daa516280bcd46377425963badfba91f8c6ed12a",
-      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/838#discussion_r4264628647",
-      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/838#discussion_r4264628655"
+      "head:2e6a143f658d7714a6f19438b48b3b2e80581ff9",
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/838#discussion_r4264709144"
     ],
-    "next_action": "Verify current-head CI and completed re-review; submit immutable claim-bound packet to Main/Reviewer. Do not merge or claim physical acceptance."
+    "next_action": "Collect exact-head tests/CI and completed code review; submit immutable Main/Reviewer packet."
   },
   "review_history": [
     {
