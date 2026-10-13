@@ -7,7 +7,7 @@
     "policy": "This private repository is the single coordination authority. Chats and agents are workers, not independent sources of truth."
   },
   "updated_at": "2026-10-13",
-  "state_revision": 243,
+  "state_revision": 244,
   "lifecycle_status": "BOOTSTRAP_ACTIVE",
   "roadmap_authority": {
     "library": ".airlab/roadmap.yaml",
@@ -80,11 +80,10 @@
     "invalid_lane_behavior": "ISOLATE_AND_SURFACE_PROJECTION_INCIDENT"
   },
   "projection": {
-    "source_digest": "cb93ab1579da7f857072ebdecead9f0d33449d884ee532a2c0ee44d5f077578c",
-    "projected_at": "2026-10-13T07:43:27Z",
+    "source_digest": "f32d5d105a9bd8723e68ca595e79e3be2a5d08d67cd2c5fd882884223ec50b04",
+    "projected_at": "2026-10-13T07:44:57Z",
     "counts": {
-      "CLAIMED": 1,
-      "IMPLEMENTING": 1,
+      "IMPLEMENTING": 2,
       "READY": 15
     },
     "active_claims": [
@@ -93,7 +92,7 @@
         "claim_id": "89a3d6132f1d52ce3198",
         "work_item": "AIVEXUS-CAD-1",
         "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
-        "lease_until": "2026-10-13T19:38:56Z",
+        "lease_until": "2026-10-13T19:44:57Z",
         "resource_locks": [
           "branch:pilialvu75-hue/Ai-orchestrator-riserva:feat/aivexus-cad1-parametric-sample",
           "file:pilialvu75-hue/Ai-orchestrator-riserva:.github/workflows/aivexus-cad1-tests.yml",
@@ -277,15 +276,15 @@
       },
       {
         "id": "aivexus-3d",
-        "status": "CLAIMED",
+        "status": "IMPLEMENTING",
         "activation": "active",
-        "state_version": 23,
+        "state_version": 24,
         "updated_at": "2026-10-13",
         "active_claim": {
           "claim_id": "89a3d6132f1d52ce3198",
           "work_item": "AIVEXUS-CAD-1",
           "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
-          "lease_until": "2026-10-13T19:38:56Z",
+          "lease_until": "2026-10-13T19:44:57Z",
           "resource_locks": [
             "branch:pilialvu75-hue/Ai-orchestrator-riserva:feat/aivexus-cad1-parametric-sample",
             "file:pilialvu75-hue/Ai-orchestrator-riserva:.github/workflows/aivexus-cad1-tests.yml",
@@ -299,7 +298,7 @@
         "reviewer_state": "PENDING",
         "inference_profile_status": null,
         "historical_backlog_count": 0,
-        "next_action": "Resume this wait with an evidence-backed signal when six platform runs on ebdc4b1 complete; reacquire a bounded claim only then. If checks fail, fix only claim-authorized domain CI files, not Cantiere shared code. If green, prepare Main/Reviewer review evidence but do not merge/declare Studio 3D operational without authorized runner/attachment integration; keep physical gates UNKNOWN."
+        "next_action": "After six platform workflows complete on PR #833 head 831015d, inspect exact results; resume canonical wait then claim a bounded follow-up. If all checks pass, coordinate with Library issue #113 for certified runner and Cantiere ownership of attachment storage before any operational integration/reviewer packet. Keep PR draft, do not self-promote DONE or merge or claim physical Fusion/print."
       },
       {
         "id": "aivexus-games",

@@ -3,11 +3,11 @@
   "id": "aivexus-3d",
   "title": "Aivexus Studio 3D",
   "role": "worker",
-  "status": "CLAIMED",
+  "status": "IMPLEMENTING",
   "activation": "active",
   "scope": "CAD/3D domain only: CadSpec, measured and photographic inputs, editable CAD/mesh sources, CAD/print exports and domain verification. Must consume the Cantiere-owned shared ProjectExtension/persistence/navigation base instead of modifying or duplicating it.",
   "shared_engine_policy": "domain_extension_only",
-  "state_version": 23,
+  "state_version": 24,
   "updated_at": "2026-10-13",
   "active_claim": {
     "claim_id": "89a3d6132f1d52ce3198",
@@ -26,8 +26,8 @@
       "scope:aivexus:cad"
     ],
     "started_at": "2026-10-13T07:38:56Z",
-    "heartbeat_at": "2026-10-13T07:38:56Z",
-    "lease_until": "2026-10-13T19:38:56Z",
+    "heartbeat_at": "2026-10-13T07:44:57Z",
+    "lease_until": "2026-10-13T19:44:57Z",
     "lease_hours": 12
   },
   "dependencies": [
@@ -56,7 +56,7 @@
     "reviewed_by": null,
     "reviewed_at": null
   },
-  "next_action": "Resume this wait with an evidence-backed signal when six platform runs on ebdc4b1 complete; reacquire a bounded claim only then. If checks fail, fix only claim-authorized domain CI files, not Cantiere shared code. If green, prepare Main/Reviewer review evidence but do not merge/declare Studio 3D operational without authorized runner/attachment integration; keep physical gates UNKNOWN.",
+  "next_action": "After six platform workflows complete on PR #833 head 831015d, inspect exact results; resume canonical wait then claim a bounded follow-up. If all checks pass, coordinate with Library issue #113 for certified runner and Cantiere ownership of attachment storage before any operational integration/reviewer packet. Keep PR draft, do not self-promote DONE or merge or claim physical Fusion/print.",
   "coordination": {
     "domain_lock": "scope:aivexus:cad",
     "shared_contract_owner": "cantiere",
@@ -188,26 +188,45 @@
         "https://github.com/pilialvu75-hue/AI-Orchestrator-Module-Library/issues/113"
       ],
       "next_action": "Verify six platform workflow conclusions on exact PR #833 head ebdc4b1. If green, prepare bounded Main/Reviewer code/evidence review of CAD domain while keeping end-to-end runner/persistence and Fusion/print UNKNOWN; do not merge or self-promote. If fail, inspect exact failing jobs. Library #113/Cantiere must own certified runner and shared persistence integration."
+    },
+    {
+      "seq": 7,
+      "at": "2026-10-13T07:44:57Z",
+      "claim_id": "89a3d6132f1d52ce3198",
+      "work_item": "AIVEXUS-CAD-1",
+      "summary": "AIVEXUS-CAD-1 PR #833 exact head 831015d149f2cbae6928683e8deb1aeafa3832b5: corrected STL/3MF P2 hole-position false acceptance by validating rectangular outer profile and 2 bore contours at 10%,50%,90% plate height with center/radius/area checks. Added 3 focused Python tests, now 14/14 PASS in GitHub dedicated Aivexus CAD-1 Domain Tests run 38364393744; new deliberately shifted-hole STL and 3MF tests reject with expected ValueError; both original project revisions (4mm,5mm) pass 5/5 real BREP/STEP/STL/3MF verification each. Receipt artifact GitHub ID 11795978290, SHA-256 uploaded zip dbe263bdf7bd4128bd4a63cf52b0a8d7ead96362d824326f37830fdba46d122f; PR comment 6140813613 records exact proof. Remaining six CI platforms on new head still running. Only CAD domain files modified, shared Cantiere untouched. Fusion target opening, physical print, secure CAD runner/persistence, ResourceExchange, remote Diagnostics UNKNOWN; PR draft.",
+      "decisions": [
+        "Mesh volume and envelope alone do not verify measured bore positions; bounded three-section contour gate now enforces both positions and approximate roundness.",
+        "New 14/14 CadQuery CI PASS is distinct from pending six platform checks and is not Cantiere runtime evidence.",
+        "Retain independent Fusion/physical print acceptance gates and per-byte receipt hashes."
+      ],
+      "evidence_refs": [
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/833",
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38364393744",
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/831015d149f2cbae6928683e8deb1aeafa3832b5",
+        "https://github.com/pilialvu75-hue/AI-Orchestrator-Module-Library/issues/113"
+      ],
+      "next_action": "After six platform workflows complete on PR #833 head 831015d, inspect exact results; resume canonical wait then claim a bounded follow-up. If all checks pass, coordinate with Library issue #113 for certified runner and Cantiere ownership of attachment storage before any operational integration/reviewer packet. Keep PR draft, do not self-promote DONE or merge or claim physical Fusion/print."
     }
   ],
   "last_checkpoint": {
-    "seq": 6,
-    "at": "2026-10-13T02:02:28Z",
-    "claim_id": "1ba06be39028c252f14a",
+    "seq": 7,
+    "at": "2026-10-13T07:44:57Z",
+    "claim_id": "89a3d6132f1d52ce3198",
     "work_item": "AIVEXUS-CAD-1",
-    "summary": "CAD-1 PR #833 exact head ebdc4b128a9aaeb683222d5dda4da516e5d4be79: dedicated Aivexus CAD-1 Domain Tests run 38334817392/job 115092416682 SUCCESS, with 11/11 actual Python/CadQuery tests PASS and both revisions 60x40x4 mm and 60x40x5 mm exported real STEP, STL and 3MF with 5/5 geometric/format checks per revision PASS. SHA-256 artifact receipts uploaded to GitHub artifact ID 11784545624, ZIP hash 4c50d7b71863f555065a439612a872675d0e96b604e8e5ae14792c674abc684d. Fixes in new isolated workflow pinned optional trimesh 3MF dependencies networkx 3.6.1 and lxml 6.1.1; no geometry/validation or shared Cantiere changes. Comment 6136485527 placed on PR with run evidence. Six existing platform workflows still executing/pending on same new head, not yet claimed passed. PR draft; no user-facing Cantiere runner, persistent attachment integration, Fusion/physical print or remote Diagnostics verified; Library #113 tracks certified runner.",
+    "summary": "AIVEXUS-CAD-1 PR #833 exact head 831015d149f2cbae6928683e8deb1aeafa3832b5: corrected STL/3MF P2 hole-position false acceptance by validating rectangular outer profile and 2 bore contours at 10%,50%,90% plate height with center/radius/area checks. Added 3 focused Python tests, now 14/14 PASS in GitHub dedicated Aivexus CAD-1 Domain Tests run 38364393744; new deliberately shifted-hole STL and 3MF tests reject with expected ValueError; both original project revisions (4mm,5mm) pass 5/5 real BREP/STEP/STL/3MF verification each. Receipt artifact GitHub ID 11795978290, SHA-256 uploaded zip dbe263bdf7bd4128bd4a63cf52b0a8d7ead96362d824326f37830fdba46d122f; PR comment 6140813613 records exact proof. Remaining six CI platforms on new head still running. Only CAD domain files modified, shared Cantiere untouched. Fusion target opening, physical print, secure CAD runner/persistence, ResourceExchange, remote Diagnostics UNKNOWN; PR draft.",
     "decisions": [
-      "Actual Python domain CI now independently passes and has immutable GitHub run/artifact receipts.",
-      "A passing standalone CLI plus GitHub artifact is not Cantiere-runner/persistence integration.",
-      "Do not modify shared Cantiere contracts, navigation, storage or model runtime from CAD lane."
+      "Mesh volume and envelope alone do not verify measured bore positions; bounded three-section contour gate now enforces both positions and approximate roundness.",
+      "New 14/14 CadQuery CI PASS is distinct from pending six platform checks and is not Cantiere runtime evidence.",
+      "Retain independent Fusion/physical print acceptance gates and per-byte receipt hashes."
     ],
     "evidence_refs": [
       "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/833",
-      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38334817392",
-      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/ebdc4b128a9aaeb683222d5dda4da516e5d4be79",
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38364393744",
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/831015d149f2cbae6928683e8deb1aeafa3832b5",
       "https://github.com/pilialvu75-hue/AI-Orchestrator-Module-Library/issues/113"
     ],
-    "next_action": "Verify six platform workflow conclusions on exact PR #833 head ebdc4b1. If green, prepare bounded Main/Reviewer code/evidence review of CAD domain while keeping end-to-end runner/persistence and Fusion/print UNKNOWN; do not merge or self-promote. If fail, inspect exact failing jobs. Library #113/Cantiere must own certified runner and shared persistence integration."
+    "next_action": "After six platform workflows complete on PR #833 head 831015d, inspect exact results; resume canonical wait then claim a bounded follow-up. If all checks pass, coordinate with Library issue #113 for certified runner and Cantiere ownership of attachment storage before any operational integration/reviewer packet. Keep PR draft, do not self-promote DONE or merge or claim physical Fusion/print."
   },
   "reconciliation_events": [
     {
