@@ -1,0 +1,21 @@
+{
+  "schema_version": 1,
+  "request_id": "runtime-core-20261013-issue837-claim-v16",
+  "actor_id": "chatgpt:runtime-core-issue837",
+  "lane_id": "runtime-core",
+  "operation": "claim",
+  "expected_state_version": 16,
+  "payload": {
+    "work_item": "issue-837-preserve-persisted-prompt-after-inference-error",
+    "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
+    "branch": "fix/runtime-core-837-preserve-failed-question",
+    "scope": "Issue #837 only: reconcile saved chat history after failed inference, bounded user-turn fallback with attachment identity, duplicate-free subsequent reload/send, invalidate stale callbacks after clear/session changes; focused regressions. No Vulkan, timeout or RAM/trim15 policy changes; physical S24 FE acceptance remains open.",
+    "resource_locks": [
+      "contract:assistant-chat-history-reconciliation",
+      "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/core/orchestrator/state_engine/orchestrator_state_engine.dart",
+      "file:pilialvu75-hue/Ai-orchestrator-riserva:test/core/orchestrator/state_engine/orchestrator_state_engine_test.dart",
+      "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/features/chat/data/repositories/chat_repository_impl.dart",
+      "file:pilialvu75-hue/Ai-orchestrator-riserva:test/features/chat/data/repositories/chat_repository_impl_test.dart"
+    ]
+  }
+}
