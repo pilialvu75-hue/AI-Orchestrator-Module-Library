@@ -7,7 +7,7 @@
   "activation": "active",
   "scope": "Exclusive Cantiere/App Factory execution, durability, build/review/validation/apply and first-real-app reliability.",
   "shared_engine_policy": "shared_or_control_plane",
-  "state_version": 65,
+  "state_version": 66,
   "updated_at": "2026-10-13",
   "active_claim": {
     "claim_id": "c0d7e9a1f346b8d5021a",
@@ -25,8 +25,8 @@
       "file:pilialvu75-hue/Ai-orchestrator-riserva:test/app_factory/workshop/workshop_proposal_workspace_stager_test.dart"
     ],
     "started_at": "2026-10-13T02:32:23Z",
-    "heartbeat_at": "2026-10-13T02:36:32Z",
-    "lease_until": "2026-10-13T14:36:32Z",
+    "heartbeat_at": "2026-10-13T02:40:13Z",
+    "lease_until": "2026-10-13T14:40:13Z",
     "lease_hours": 12
   },
   "dependencies": [],
@@ -52,7 +52,7 @@
     "reviewed_by": null,
     "reviewed_at": null
   },
-  "next_action": "Inspect exact-head PR #836 CI; repair scoped failures; request Main/Reviewer code review on new packet; only then merge, sign Android release and authorize next S24 FE test.",
+  "next_action": "Await exact-head PR #836 CI at 7cb4bd36. If all six pass, submit claim-bound review packet to Main/Reviewer; no merge/self-approval.",
   "historical_backlog": [
     "Stay in Phase 1 ONLINE until a real generated Android app is physically accepted.",
     "Reproduce the recent manga-drawing app failure from current main with Diagnostics; do not restart generic audits.",
@@ -832,24 +832,39 @@
         "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38337651948"
       ],
       "next_action": "Inspect exact-head PR #836 CI; repair scoped failures; request Main/Reviewer code review on new packet; only then merge, sign Android release and authorize next S24 FE test."
+    },
+    {
+      "seq": 40,
+      "at": "2026-10-13T02:40:13Z",
+      "claim_id": "c0d7e9a1f346b8d5021a",
+      "work_item": "cantiere-engineer-flutter-native-import-3140",
+      "summary": "PR #836 exact head 7cb4bd36: Dart JVM-import guard in stager plus Flutter Android Engineer prompt and regression for bounded structural retry. Initial CI failure was invalid Dart RegExp inline flag, fixed at 899ba596; second CI failure was test expecting compact wording from full prompt, fixed at 7cb4bd36. Six exact-head workflows now running, no new physical evidence.",
+      "decisions": [
+        "Keep code changes bounded to Engineer/stager and regression tests. No Reviewer or runtime changes.",
+        "Do not permit new +3140 retry; G5 physical remains open until reviewed merged release."
+      ],
+      "evidence_refs": [
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/836",
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38337924436"
+      ],
+      "next_action": "Await exact-head PR #836 CI at 7cb4bd36. If all six pass, submit claim-bound review packet to Main/Reviewer; no merge/self-approval."
     }
   ],
   "last_checkpoint": {
-    "seq": 39,
-    "at": "2026-10-13T02:36:32Z",
+    "seq": 40,
+    "at": "2026-10-13T02:40:13Z",
     "claim_id": "c0d7e9a1f346b8d5021a",
     "work_item": "cantiere-engineer-flutter-native-import-3140",
-    "summary": "Physical +3140 source evidence proves generated code mixed Flutter Dart with undeclared Java/Kotlin native classes; Reviewer correctly rejected. PR #836 draft exact head 71c8abeee introduces early JVM-in-Dart structural rejection and existing bounded Engineer retry, focused tests and Flutter Android prompt guidance; six exact-head workflows queued. No device re-test or source uploaded.",
+    "summary": "PR #836 exact head 7cb4bd36: Dart JVM-import guard in stager plus Flutter Android Engineer prompt and regression for bounded structural retry. Initial CI failure was invalid Dart RegExp inline flag, fixed at 899ba596; second CI failure was test expecting compact wording from full prompt, fixed at 7cb4bd36. Six exact-head workflows now running, no new physical evidence.",
     "decisions": [
-      "Reviewer/Validation remain authoritative and unchanged.",
-      "Do not reset saved black-background project, or confuse with Lista Spesa Lite.",
-      "Do not claim general compilation validation from narrow import guard; Flutter analyze and physical acceptance still required."
+      "Keep code changes bounded to Engineer/stager and regression tests. No Reviewer or runtime changes.",
+      "Do not permit new +3140 retry; G5 physical remains open until reviewed merged release."
     ],
     "evidence_refs": [
       "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/836",
-      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38337651948"
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38337924436"
     ],
-    "next_action": "Inspect exact-head PR #836 CI; repair scoped failures; request Main/Reviewer code review on new packet; only then merge, sign Android release and authorize next S24 FE test."
+    "next_action": "Await exact-head PR #836 CI at 7cb4bd36. If all six pass, submit claim-bound review packet to Main/Reviewer; no merge/self-approval."
   },
   "review_history": [
     {
