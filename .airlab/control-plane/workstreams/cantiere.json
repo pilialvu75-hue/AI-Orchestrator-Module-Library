@@ -7,7 +7,7 @@
   "activation": "active",
   "scope": "Exclusive Cantiere/App Factory execution, durability, build/review/validation/apply and first-real-app reliability.",
   "shared_engine_policy": "shared_or_control_plane",
-  "state_version": 74,
+  "state_version": 75,
   "updated_at": "2026-10-13",
   "active_claim": {
     "claim_id": "c0d7e9a1f346b8d5021a",
@@ -1319,6 +1319,14 @@
       "work_item": "cantiere-gate-evidence-reviewer-3117",
       "reason": "Main/Reviewer accepted the bounded implementation/review gate.",
       "at": "2026-10-13T01:52:42Z"
+    },
+    {
+      "type": "REVIEW_WAIT_OVERDUE",
+      "claim_id": "c0d7e9a1f346b8d5021a",
+      "work_item": "cantiere-engineer-flutter-native-import-3140",
+      "lease_until": "2026-10-13T17:19:32Z",
+      "detected_at": "2026-10-13T17:29:48Z",
+      "review_required": true
     }
   ],
   "review_packet_history": [
