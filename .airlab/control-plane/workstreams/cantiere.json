@@ -7,7 +7,7 @@
   "activation": "active",
   "scope": "Exclusive Cantiere/App Factory execution, durability, build/review/validation/apply and first-real-app reliability.",
   "shared_engine_policy": "shared_or_control_plane",
-  "state_version": 69,
+  "state_version": 70,
   "updated_at": "2026-10-13",
   "active_claim": {
     "claim_id": "c0d7e9a1f346b8d5021a",
@@ -25,8 +25,8 @@
       "file:pilialvu75-hue/Ai-orchestrator-riserva:test/app_factory/workshop/workshop_proposal_workspace_stager_test.dart"
     ],
     "started_at": "2026-10-13T02:32:23Z",
-    "heartbeat_at": "2026-10-13T04:05:32Z",
-    "lease_until": "2026-10-13T16:05:32Z",
+    "heartbeat_at": "2026-10-13T05:19:32Z",
+    "lease_until": "2026-10-13T17:19:32Z",
     "lease_hours": 12
   },
   "dependencies": [],
@@ -107,7 +107,7 @@
     "reviewed_by": "main-reviewer",
     "reviewed_at": "2026-10-13T03:45:04Z"
   },
-  "next_action": "Check four remaining exact-head workflows for PR #836, address only concrete failures; then resolve two P2 threads, submit claim-bound review packet and verify canonical projection.",
+  "next_action": "Wait six final PR #836 exact-head CI on 79ac6bbf and Codex re-review. Repair only concrete failed checks; resolve four P2 threads and resubmit claim-bound packet for Main/Reviewer. Physical S24 FE G5 stays pending.",
   "historical_backlog": [
     "Stay in Phase 1 ONLINE until a real generated Android app is physically accepted.",
     "Reproduce the recent manga-drawing app failure from current main with Diagnostics; do not restart generic audits.",
@@ -957,24 +957,41 @@
         "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38344413711"
       ],
       "next_action": "Check four remaining exact-head workflows for PR #836, address only concrete failures; then resolve two P2 threads, submit claim-bound review packet and verify canonical projection."
+    },
+    {
+      "seq": 44,
+      "at": "2026-10-13T05:19:32Z",
+      "claim_id": "c0d7e9a1f346b8d5021a",
+      "work_item": "cantiere-engineer-flutter-native-import-3140",
+      "summary": "Bounded PR #836 follow-up: exact head 79ac6bbf now handles canonical two-segment JVM import classes and @metadata before top-level Dart import; preceding head 6825d0e addressed nested interpolation and all conditional import alternatives. Added fail-before-stage + false-positive regression cases for all four findings. Replied to all four new Codex thread findings; new exact-head six CI workflows and supplemental Codex review pending. No merge or S24 FE retest.",
+      "decisions": [
+        "No auto-approve, no Reviewer/Validation loosening, no model/timeout/token changes.",
+        "Keep black-background saved project and separate Lista Spesa Lite intact."
+      ],
+      "evidence_refs": [
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/836",
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/79ac6bbf0e79ea947d6cc46fd2b0fdc56abfe97e",
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38350720846"
+      ],
+      "next_action": "Wait six final PR #836 exact-head CI on 79ac6bbf and Codex re-review. Repair only concrete failed checks; resolve four P2 threads and resubmit claim-bound packet for Main/Reviewer. Physical S24 FE G5 stays pending."
     }
   ],
   "last_checkpoint": {
-    "seq": 43,
-    "at": "2026-10-13T04:05:32Z",
+    "seq": 44,
+    "at": "2026-10-13T05:19:32Z",
     "claim_id": "c0d7e9a1f346b8d5021a",
     "work_item": "cantiere-engineer-flutter-native-import-3140",
-    "summary": "Bounded PR #836 rework applied on exact head 391e26356199ed3d94e95e8024c08bdc08c6e25c: scanner now recognizes actual Dart import directives while skipping line/block/nested comments, raw/normal/triple-quoted string literals, and rejects java/javax/kotlin native class imports as well as existing namespaces. Added focused positive and false-positive regressions. Main/Reviewer two original P2 threads have written replies. Web CI and Cantiere First App CI green on exact head; Android/Windows/Linux/macOS complete workflows pending. No merge or physical G5.",
+    "summary": "Bounded PR #836 follow-up: exact head 79ac6bbf now handles canonical two-segment JVM import classes and @metadata before top-level Dart import; preceding head 6825d0e addressed nested interpolation and all conditional import alternatives. Added fail-before-stage + false-positive regression cases for all four findings. Replied to all four new Codex thread findings; new exact-head six CI workflows and supplemental Codex review pending. No merge or S24 FE retest.",
     "decisions": [
-      "Do not resolve review threads/mark reviewed or submit packet until all six exact-head workflows are complete.",
-      "Keep existing Engineer one structural retry; Reviewer/Validation and RAM/Vulkan/local models unchanged."
+      "No auto-approve, no Reviewer/Validation loosening, no model/timeout/token changes.",
+      "Keep black-background saved project and separate Lista Spesa Lite intact."
     ],
     "evidence_refs": [
       "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/836",
-      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38344413690",
-      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38344413711"
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/79ac6bbf0e79ea947d6cc46fd2b0fdc56abfe97e",
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38350720846"
     ],
-    "next_action": "Check four remaining exact-head workflows for PR #836, address only concrete failures; then resolve two P2 threads, submit claim-bound review packet and verify canonical projection."
+    "next_action": "Wait six final PR #836 exact-head CI on 79ac6bbf and Codex re-review. Repair only concrete failed checks; resolve four P2 threads and resubmit claim-bound packet for Main/Reviewer. Physical S24 FE G5 stays pending."
   },
   "review_history": [
     {
