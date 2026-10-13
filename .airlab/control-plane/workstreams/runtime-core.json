@@ -7,7 +7,7 @@
   "activation": "active",
   "scope": "Shared inference contract, capability/model routing semantics, context, streaming, cancellation, errors, model-profile schema and lifecycle. Target platforms own their benchmark-gated LLM/backend/runtime profiles.",
   "shared_engine_policy": "shared_or_control_plane",
-  "state_version": 19,
+  "state_version": 20,
   "updated_at": "2026-10-13",
   "active_claim": {
     "claim_id": "403f04c8b0a530f93e77",
@@ -25,8 +25,8 @@
       "file:pilialvu75-hue/Ai-orchestrator-riserva:test/features/chat/data/repositories/chat_repository_impl_test.dart"
     ],
     "started_at": "2026-10-13T21:28:42Z",
-    "heartbeat_at": "2026-10-13T21:37:46Z",
-    "lease_until": "2026-10-14T09:37:46Z",
+    "heartbeat_at": "2026-10-13T21:42:58Z",
+    "lease_until": "2026-10-14T09:42:58Z",
     "lease_hours": 12
   },
   "dependencies": [],
@@ -51,7 +51,7 @@
     "reviewed_by": null,
     "reviewed_at": null
   },
-  "next_action": "Inspect exact-head CI/test results and Codex review, fix concrete failures if any, then submit a claim-bound review_packet through the transactional inbox for Main/Reviewer.",
+  "next_action": "Inspect final-head CI and re-review; address any concrete failures; submit immutable claim-bound review packet to Main/Reviewer with G5 still pending.",
   "inference_ownership": {
     "owns": [
       "shared inference API",
@@ -278,25 +278,43 @@
         "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/838#issuecomment-6155726038"
       ],
       "next_action": "Inspect exact-head CI/test results and Codex review, fix concrete failures if any, then submit a claim-bound review_packet through the transactional inbox for Main/Reviewer."
+    },
+    {
+      "seq": 12,
+      "at": "2026-10-13T21:42:58Z",
+      "claim_id": "403f04c8b0a530f93e77",
+      "work_item": "issue-837-preserve-persisted-prompt-after-inference-error",
+      "summary": "Codex review found a P2: awaiting slow/unbounded history recovery kept the failed send in ChatSending and blocked retries. Addressed in PR #838 head bbc9ef5ebdb04dc5243775a9053625293172ec31 by immediately emitting the fallback/original error and releasing only the failed send's gate before reconciliation. Added delayed-read/retry regression (15 new cases, 18 total state-engine tests). Reviewer thread answered/resolved; new exact-head CI/re-review requested.",
+      "decisions": [
+        "No timeout introduced: inference error is terminal immediately; later history reads are guarded by revision and cannot overwrite a newer retry.",
+        "Old-head Web PASS is not final-head evidence.",
+        "Physical S24 FE, RAM stability and #837 closure remain reviewer/platform-owned."
+      ],
+      "evidence_refs": [
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/838",
+        "head:bbc9ef5ebdb04dc5243775a9053625293172ec31",
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/838#discussion_r4264323862"
+      ],
+      "next_action": "Inspect final-head CI and re-review; address any concrete failures; submit immutable claim-bound review packet to Main/Reviewer with G5 still pending."
     }
   ],
   "last_checkpoint": {
-    "seq": 11,
-    "at": "2026-10-13T21:37:46Z",
+    "seq": 12,
+    "at": "2026-10-13T21:42:58Z",
     "claim_id": "403f04c8b0a530f93e77",
     "work_item": "issue-837-preserve-persisted-prompt-after-inference-error",
-    "summary": "PR #838 opened at exact head 819bd7927b3dafb628d15f774d679a661d29fcb7. Two-file state-engine fix and 14 additional regression cases plus strengthened timeout regression implemented. Dart parser and git diff --check passed; five platform CI workflows running; Codex independent review requested. Local Flutter bootstrap blocked by approval auto-review due instance-metadata access, so no local Flutter test pass claimed.",
+    "summary": "Codex review found a P2: awaiting slow/unbounded history recovery kept the failed send in ChatSending and blocked retries. Addressed in PR #838 head bbc9ef5ebdb04dc5243775a9053625293172ec31 by immediately emitting the fallback/original error and releasing only the failed send's gate before reconciliation. Added delayed-read/retry regression (15 new cases, 18 total state-engine tests). Reviewer thread answered/resolved; new exact-head CI/re-review requested.",
     "decisions": [
-      "Persisted reload replaces fallback identities, preserving repeated identical user prompts as distinct turns.",
-      "Discard unpersisted partial assistant output on failure; preserve original runtime notice and attachments.",
-      "Do not merge, close #837, or claim S24 FE/RAM/runtime acceptance from CI."
+      "No timeout introduced: inference error is terminal immediately; later history reads are guarded by revision and cannot overwrite a newer retry.",
+      "Old-head Web PASS is not final-head evidence.",
+      "Physical S24 FE, RAM stability and #837 closure remain reviewer/platform-owned."
     ],
     "evidence_refs": [
       "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/838",
-      "head:819bd7927b3dafb628d15f774d679a661d29fcb7",
-      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/838#issuecomment-6155726038"
+      "head:bbc9ef5ebdb04dc5243775a9053625293172ec31",
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/838#discussion_r4264323862"
     ],
-    "next_action": "Inspect exact-head CI/test results and Codex review, fix concrete failures if any, then submit a claim-bound review_packet through the transactional inbox for Main/Reviewer."
+    "next_action": "Inspect final-head CI and re-review; address any concrete failures; submit immutable claim-bound review packet to Main/Reviewer with G5 still pending."
   },
   "review_history": [
     {
