@@ -1,0 +1,12 @@
+{
+  "schema_version": 1,
+  "request_id": "cantiere-20261013-pr834-record-gates-final",
+  "status": "APPLIED",
+  "processed_at": "2026-10-13T01:52:09Z",
+  "source_file": "cantiere-20261013-pr834-record-gates-final.json",
+  "lane_id": "cantiere",
+  "operation": "record_review_gates",
+  "actor_id": "chatgpt:main-reviewer",
+  "errors": [],
+  "result_state_version": 62
+}

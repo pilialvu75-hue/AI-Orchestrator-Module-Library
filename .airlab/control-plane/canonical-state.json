@@ -6,8 +6,8 @@
     "owner_lane": "main-reviewer",
     "policy": "This private repository is the single coordination authority. Chats and agents are workers, not independent sources of truth."
   },
-  "updated_at": "2026-10-12",
-  "state_revision": 226,
+  "updated_at": "2026-10-13",
+  "state_revision": 227,
   "lifecycle_status": "BOOTSTRAP_ACTIVE",
   "roadmap_authority": {
     "library": ".airlab/roadmap.yaml",
@@ -80,8 +80,8 @@
     "invalid_lane_behavior": "ISOLATE_AND_SURFACE_PROJECTION_INCIDENT"
   },
   "projection": {
-    "source_digest": "f0ab44e362e5d1a36bf8774f9bb4aa5bcc91440ebcf1b0737ba09ad02fe1e8b6",
-    "projected_at": "2026-10-12T23:29:24Z",
+    "source_digest": "fd1ed7576a60ded5ca6ca092773d692428075716ab39042163208d27d09ef90e",
+    "projected_at": "2026-10-13T01:52:09Z",
     "counts": {
       "READY": 16,
       "REVIEW_REQUIRED": 1
@@ -278,8 +278,8 @@
         "id": "cantiere",
         "status": "REVIEW_REQUIRED",
         "activation": "active",
-        "state_version": 61,
-        "updated_at": "2026-10-12",
+        "state_version": 62,
+        "updated_at": "2026-10-13",
         "active_claim": {
           "claim_id": "94876ef45cb7b6e77d9c",
           "work_item": "cantiere-gate-evidence-reviewer-3117",
