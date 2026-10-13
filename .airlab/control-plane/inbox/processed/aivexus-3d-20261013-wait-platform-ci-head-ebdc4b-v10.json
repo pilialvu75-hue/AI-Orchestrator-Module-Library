@@ -1,0 +1,12 @@
+{
+  "schema_version": 1,
+  "request_id": "aivexus-3d-20261013-wait-platform-ci-head-ebdc4b-v10",
+  "status": "APPLIED",
+  "processed_at": "2026-10-13T02:02:58Z",
+  "source_file": "aivexus-3d-20261013-wait-platform-ci-head-ebdc4b-v10.json",
+  "lane_id": "aivexus-3d",
+  "operation": "enter_wait",
+  "actor_id": "chatgpt:aivexus-3d",
+  "errors": [],
+  "result_state_version": 21
+}
