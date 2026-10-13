@@ -7,7 +7,7 @@
     "policy": "This private repository is the single coordination authority. Chats and agents are workers, not independent sources of truth."
   },
   "updated_at": "2026-10-13",
-  "state_revision": 240,
+  "state_revision": 241,
   "lifecycle_status": "BOOTSTRAP_ACTIVE",
   "roadmap_authority": {
     "library": ".airlab/roadmap.yaml",
@@ -80,12 +80,11 @@
     "invalid_lane_behavior": "ISOLATE_AND_SURFACE_PROJECTION_INCIDENT"
   },
   "projection": {
-    "source_digest": "481dba7a40b40cf6e1d58898ff2c663a382b865d163d8159619fa9aac27b387b",
-    "projected_at": "2026-10-13T07:32:04Z",
+    "source_digest": "adadd86db4f04880f310bfb080e6aeacc6ac2246bb3bf02e9315ea741b44f365",
+    "projected_at": "2026-10-13T07:38:00Z",
     "counts": {
-      "BLOCKED": 1,
       "IMPLEMENTING": 1,
-      "READY": 15
+      "READY": 16
     },
     "active_claims": [
       {
@@ -143,31 +142,7 @@
       }
     ],
     "review_required": [],
-    "blocked": [
-      {
-        "lane": "aivexus-3d",
-        "reason": {
-          "code": "WAITING_EXTERNAL",
-          "wait_id": "aivexus-3d:1ba06be39028c252f14a:WAITING_EXTERNAL",
-          "work_item": "AIVEXUS-CAD-1",
-          "resource_locks": [
-            "branch:pilialvu75-hue/Ai-orchestrator-riserva:feat/aivexus-cad1-parametric-sample",
-            "file:pilialvu75-hue/Ai-orchestrator-riserva:.github/workflows/aivexus-cad1-tests.yml",
-            "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/app_factory/workshop/domains/cad/cad1_domain_adapter.dart",
-            "file:pilialvu75-hue/Ai-orchestrator-riserva:test/app_factory/workshop/domains/cad/cad1_domain_adapter_test.dart",
-            "file:pilialvu75-hue/Ai-orchestrator-riserva:tools/aivexus/cad/README.md",
-            "file:pilialvu75-hue/Ai-orchestrator-riserva:tools/aivexus/cad/fixtures/plate_spec.json",
-            "file:pilialvu75-hue/Ai-orchestrator-riserva:tools/aivexus/cad/parametric_plate.py",
-            "file:pilialvu75-hue/Ai-orchestrator-riserva:tools/aivexus/cad/test_cad1.py",
-            "file:pilialvu75-hue/Ai-orchestrator-riserva:tools/aivexus/cad/validate_plate.py",
-            "scope:aivexus:cad"
-          ],
-          "resume_condition": "The six platform GitHub workflows associated with PR #833 exact commit ebdc4b128a9aaeb683222d5dda4da516e5d4be79 have all reached completed status with verifiable conclusions; dedicated Aivexus CAD-1 Domain Tests 38334817392 is already PASS.",
-          "detected_at": "2026-10-13T02:02:58Z",
-          "review_required": false
-        }
-      }
-    ],
+    "blocked": [],
     "checkpoint_watch": [],
     "projection_incidents": [],
     "platform_inference_profiles": [
@@ -243,9 +218,9 @@
       },
       {
         "id": "aivexus-3d",
-        "status": "BLOCKED",
+        "status": "READY",
         "activation": "active",
-        "state_version": 21,
+        "state_version": 22,
         "updated_at": "2026-10-13",
         "active_claim": null,
         "reviewer_state": "PENDING",
