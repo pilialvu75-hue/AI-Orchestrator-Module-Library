@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "request_id": "runtime-core-20261013-issue837-edit-ownership-v24",
+  "actor_id": "chatgpt:runtime-core-issue837",
+  "lane_id": "runtime-core",
+  "operation": "checkpoint",
+  "expected_state_version": 24,
+  "payload": {
+    "summary": "PR #838 head daa516280bcd46377425963badfba91f8c6ed12a addresses P1/P2 edit findings: edits now share the owned send lifecycle, preserving replacement persistence after destructive truncation across refresh/navigation; no preview read delays saving; clear-time edits retain immutable input rather than returning. Seven edit regressions added, 33 state-engine tests total (30 new). All reviewer threads answered/resolved; new CI/re-review requested.",
+    "decisions": [
+      "State engine and tests only; no repository persistence contract, Vulkan, timeout/deadline or RAM changes.",
+      "View revision changes suppress UI emissions but no longer abandon post-truncation work; explicit clear still invalidates the prior send.",
+      "G5 physical S24 FE acceptance remains pending."
+    ],
+    "evidence_refs": [
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/838",
+      "head:daa516280bcd46377425963badfba91f8c6ed12a",
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/838#discussion_r4264628647",
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/838#discussion_r4264628655"
+    ],
+    "next_action": "Verify current-head CI and completed re-review; submit immutable claim-bound packet to Main/Reviewer. Do not merge or claim physical acceptance."
+  }
+}
