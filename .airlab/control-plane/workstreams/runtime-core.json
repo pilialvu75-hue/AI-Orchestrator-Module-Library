@@ -7,7 +7,7 @@
   "activation": "active",
   "scope": "Shared inference contract, capability/model routing semantics, context, streaming, cancellation, errors, model-profile schema and lifecycle. Target platforms own their benchmark-gated LLM/backend/runtime profiles.",
   "shared_engine_policy": "shared_or_control_plane",
-  "state_version": 23,
+  "state_version": 24,
   "updated_at": "2026-10-13",
   "active_claim": {
     "claim_id": "403f04c8b0a530f93e77",
@@ -25,8 +25,8 @@
       "file:pilialvu75-hue/Ai-orchestrator-riserva:test/features/chat/data/repositories/chat_repository_impl_test.dart"
     ],
     "started_at": "2026-10-13T21:28:42Z",
-    "heartbeat_at": "2026-10-13T22:08:30Z",
-    "lease_until": "2026-10-14T10:08:30Z",
+    "heartbeat_at": "2026-10-13T22:14:30Z",
+    "lease_until": "2026-10-14T10:14:30Z",
     "lease_hours": 12
   },
   "dependencies": [],
@@ -51,7 +51,7 @@
     "reviewed_by": null,
     "reviewed_at": null
   },
-  "next_action": "Verify final-head CI and re-review; submit immutable claim-bound packet to Main/Reviewer.",
+  "next_action": "Collect final-head CI and completed code review, then submit the immutable claim-bound Main/Reviewer packet.",
   "inference_ownership": {
     "owns": [
       "shared inference API",
@@ -350,25 +350,43 @@
         "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/838#discussion_r4264509174"
       ],
       "next_action": "Verify final-head CI and re-review; submit immutable claim-bound packet to Main/Reviewer."
+    },
+    {
+      "seq": 16,
+      "at": "2026-10-13T22:14:30Z",
+      "claim_id": "403f04c8b0a530f93e77",
+      "work_item": "issue-837-preserve-persisted-prompt-after-inference-error",
+      "summary": "PR #838 head fdd08af824f62f9239c9981747812533c5a972c7 addresses clear-time navigation P2. Resume the queued active send before waiting for clear; ordinary loads select the view and defer the database read until clear settles with revision validation. Regressions cover both A to B to A cases, 26 state-engine tests total (23 new). All previous reviewer threads addressed; final-head CI/re-review requested.",
+      "decisions": [
+        "Repository cancellation/deadlines and Vulkan/RAM/trim15 remain untouched.",
+        "Only state engine and its test file change.",
+        "Physical S24 FE remains pending."
+      ],
+      "evidence_refs": [
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/838",
+        "head:fdd08af824f62f9239c9981747812533c5a972c7",
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/838#discussion_r4264583234"
+      ],
+      "next_action": "Collect final-head CI and completed code review, then submit the immutable claim-bound Main/Reviewer packet."
     }
   ],
   "last_checkpoint": {
-    "seq": 15,
-    "at": "2026-10-13T22:08:30Z",
+    "seq": 16,
+    "at": "2026-10-13T22:14:30Z",
     "claim_id": "403f04c8b0a530f93e77",
     "work_item": "issue-837-preserve-persisted-prompt-after-inference-error",
-    "summary": "PR #838 head 1db12574cc9ad4a6d194af565b0bf6482c5bb7b1 fixes Codex P2 where a submitted prompt was discarded during pending clear. Retain immutable prompt/attachments and an owned ChatSending snapshot, await per-session clear completion before repository send, preserve the queued gate through old cancellation/navigation. Existing pending-clear regression now proves eventual delivery; 2 more cases bring state-engine suite to 24 (21 new).",
+    "summary": "PR #838 head fdd08af824f62f9239c9981747812533c5a972c7 addresses clear-time navigation P2. Resume the queued active send before waiting for clear; ordinary loads select the view and defer the database read until clear settles with revision validation. Regressions cover both A to B to A cases, 26 state-engine tests total (23 new). All previous reviewer threads addressed; final-head CI/re-review requested.",
     "decisions": [
-      "The repository still owns cancellation/deadlines; no Vulkan, timeout or RAM/trim15 modifications.",
-      "No final-head CI pass claimed yet; re-review and CI requested.",
-      "Physical S24 FE acceptance remains pending."
+      "Repository cancellation/deadlines and Vulkan/RAM/trim15 remain untouched.",
+      "Only state engine and its test file change.",
+      "Physical S24 FE remains pending."
     ],
     "evidence_refs": [
       "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/838",
-      "head:1db12574cc9ad4a6d194af565b0bf6482c5bb7b1",
-      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/838#discussion_r4264509174"
+      "head:fdd08af824f62f9239c9981747812533c5a972c7",
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/838#discussion_r4264583234"
     ],
-    "next_action": "Verify final-head CI and re-review; submit immutable claim-bound packet to Main/Reviewer."
+    "next_action": "Collect final-head CI and completed code review, then submit the immutable claim-bound Main/Reviewer packet."
   },
   "review_history": [
     {
