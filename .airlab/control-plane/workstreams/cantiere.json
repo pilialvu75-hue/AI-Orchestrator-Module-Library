@@ -3,11 +3,11 @@
   "id": "cantiere",
   "title": "Cantiere",
   "role": "worker",
-  "status": "CLAIMED",
+  "status": "IMPLEMENTING",
   "activation": "active",
   "scope": "Exclusive Cantiere/App Factory execution, durability, build/review/validation/apply and first-real-app reliability.",
   "shared_engine_policy": "shared_or_control_plane",
-  "state_version": 64,
+  "state_version": 65,
   "updated_at": "2026-10-13",
   "active_claim": {
     "claim_id": "c0d7e9a1f346b8d5021a",
@@ -25,8 +25,8 @@
       "file:pilialvu75-hue/Ai-orchestrator-riserva:test/app_factory/workshop/workshop_proposal_workspace_stager_test.dart"
     ],
     "started_at": "2026-10-13T02:32:23Z",
-    "heartbeat_at": "2026-10-13T02:32:23Z",
-    "lease_until": "2026-10-13T14:32:23Z",
+    "heartbeat_at": "2026-10-13T02:36:32Z",
+    "lease_until": "2026-10-13T14:36:32Z",
     "lease_hours": 12
   },
   "dependencies": [],
@@ -52,7 +52,7 @@
     "reviewed_by": null,
     "reviewed_at": null
   },
-  "next_action": "Implement minimal Flutter-first Engineer guard after physical +3140 mixed-stack rejected source; run exact-head CI; submit new canonical review packet. No physical retest until new reviewed release.",
+  "next_action": "Inspect exact-head PR #836 CI; repair scoped failures; request Main/Reviewer code review on new packet; only then merge, sign Android release and authorize next S24 FE test.",
   "historical_backlog": [
     "Stay in Phase 1 ONLINE until a real generated Android app is physically accepted.",
     "Reproduce the recent manga-drawing app failure from current main with Diagnostics; do not restart generic audits.",
@@ -815,32 +815,41 @@
       ],
       "next_action": "Merge PR #834 only at exact reviewed head 68a2ae62f9be20294000c0b6076e7917d391f477. Then produce the next signed Android release containing the merge. Permit one S24 FE retest of the existing black-background project with all four roles qwen2_5_3b_instruct; if it fails, export acceptance report plus gate source evidence and do not perform additional retry. Keep Lista Spesa Lite separate and Phase 1 ONLINE open until generated APK install/open is physically accepted.",
       "kind": "REVIEW_ACCEPTED"
+    },
+    {
+      "seq": 39,
+      "at": "2026-10-13T02:36:32Z",
+      "claim_id": "c0d7e9a1f346b8d5021a",
+      "work_item": "cantiere-engineer-flutter-native-import-3140",
+      "summary": "Physical +3140 source evidence proves generated code mixed Flutter Dart with undeclared Java/Kotlin native classes; Reviewer correctly rejected. PR #836 draft exact head 71c8abeee introduces early JVM-in-Dart structural rejection and existing bounded Engineer retry, focused tests and Flutter Android prompt guidance; six exact-head workflows queued. No device re-test or source uploaded.",
+      "decisions": [
+        "Reviewer/Validation remain authoritative and unchanged.",
+        "Do not reset saved black-background project, or confuse with Lista Spesa Lite.",
+        "Do not claim general compilation validation from narrow import guard; Flutter analyze and physical acceptance still required."
+      ],
+      "evidence_refs": [
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/836",
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38337651948"
+      ],
+      "next_action": "Inspect exact-head PR #836 CI; repair scoped failures; request Main/Reviewer code review on new packet; only then merge, sign Android release and authorize next S24 FE test."
     }
   ],
   "last_checkpoint": {
-    "seq": 38,
-    "at": "2026-10-13T01:52:42Z",
-    "claim_id": "94876ef45cb7b6e77d9c",
-    "work_item": "cantiere-gate-evidence-reviewer-3117",
-    "summary": "PR #834 accepted at exact head 68a2ae62f9be20294000c0b6076e7917d391f477. The two prior P2 findings are resolved: gate evidence now uses immutable post-Library/pre-Engineer baseline limited to rejected proposal-owned paths, and every actual Reviewer prompt is bounded before inference with fail-closed behavior above 7000 chars. Six exact-head workflows pass and supplemental Codex re-review found no major issues. G5 physical S24 FE remains pending; historical star.dart remains unclassified until new on-device source evidence.",
+    "seq": 39,
+    "at": "2026-10-13T02:36:32Z",
+    "claim_id": "c0d7e9a1f346b8d5021a",
+    "work_item": "cantiere-engineer-flutter-native-import-3140",
+    "summary": "Physical +3140 source evidence proves generated code mixed Flutter Dart with undeclared Java/Kotlin native classes; Reviewer correctly rejected. PR #836 draft exact head 71c8abeee introduces early JVM-in-Dart structural rejection and existing bounded Engineer retry, focused tests and Flutter Android prompt guidance; six exact-head workflows queued. No device re-test or source uploaded.",
     "decisions": [
-      "Main/Reviewer accepted the implementation/review gate."
+      "Reviewer/Validation remain authoritative and unchanged.",
+      "Do not reset saved black-background project, or confuse with Lista Spesa Lite.",
+      "Do not claim general compilation validation from narrow import guard; Flutter analyze and physical acceptance still required."
     ],
     "evidence_refs": [
-      "Ai-orchestrator-riserva#834",
-      "commit:68a2ae62f9be20294000c0b6076e7917d391f477",
-      "CI:38305557300",
-      "CI:38305557277",
-      "CI:38305557271",
-      "CI:38305557324",
-      "CI:38305557289",
-      "CI:38305557283",
-      "review:P2-baseline-resolved",
-      "review:P2-compact-bound-resolved",
-      "codex:68a2ae62:no-major-issues"
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/836",
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38337651948"
     ],
-    "next_action": "Merge PR #834 only at exact reviewed head 68a2ae62f9be20294000c0b6076e7917d391f477. Then produce the next signed Android release containing the merge. Permit one S24 FE retest of the existing black-background project with all four roles qwen2_5_3b_instruct; if it fails, export acceptance report plus gate source evidence and do not perform additional retry. Keep Lista Spesa Lite separate and Phase 1 ONLINE open until generated APK install/open is physically accepted.",
-    "kind": "REVIEW_ACCEPTED"
+    "next_action": "Inspect exact-head PR #836 CI; repair scoped failures; request Main/Reviewer code review on new packet; only then merge, sign Android release and authorize next S24 FE test."
   },
   "review_history": [
     {
