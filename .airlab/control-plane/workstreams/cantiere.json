@@ -7,7 +7,7 @@
   "activation": "active",
   "scope": "Exclusive Cantiere/App Factory execution, durability, build/review/validation/apply and first-real-app reliability.",
   "shared_engine_policy": "shared_or_control_plane",
-  "state_version": 71,
+  "state_version": 72,
   "updated_at": "2026-10-13",
   "active_claim": {
     "claim_id": "c0d7e9a1f346b8d5021a",
@@ -107,7 +107,7 @@
     "reviewed_by": "main-reviewer",
     "reviewed_at": "2026-10-13T03:45:04Z"
   },
-  "next_action": "Finish all six CI checks on 5d63a05f; resolve fixed Codex P2 threads, request independent re-review and submit exact-head Cantiere claim-bound packet to Main/Reviewer.",
+  "next_action": "Complete all six exact-head CI and new Codex review; reconcile any actionable finding, resolve remaining threads, then submit new claim-bound packet to Main/Reviewer.",
   "historical_backlog": [
     "Stay in Phase 1 ONLINE until a real generated Android app is physically accepted.",
     "Reproduce the recent manga-drawing app failure from current main with Diagnostics; do not restart generic audits.",
@@ -991,24 +991,41 @@
         "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38363036507"
       ],
       "next_action": "Finish all six CI checks on 5d63a05f; resolve fixed Codex P2 threads, request independent re-review and submit exact-head Cantiere claim-bound packet to Main/Reviewer."
+    },
+    {
+      "seq": 46,
+      "at": "2026-10-13T07:43:14Z",
+      "claim_id": "c0d7e9a1f346b8d5021a",
+      "work_item": "cantiere-engineer-flutter-native-import-3140",
+      "summary": "PR #836 bounded follow-up on three Codex P2s from 5d63a05f: optional BOM before script tag, conditional import test-value literals must not be treated as imported URIs, and adjacent Dart URI literal segments must be concatenated before JVM classifier. Head b3c35a53388b32c49e5ffe5e82bd31cdc5765a3c; regression fixtures corrected to use interpreted BOM and newline escapes. Six exact-head CI runs started; Codex independent review requested. Replied to three inline P2 threads. No model/gate/runtime change.",
+      "decisions": [
+        "Do not mark G1–G4 or approve while current CI/review pending.",
+        "Keep same claim, no merge, G5 S24 FE open; no repeat +3140."
+      ],
+      "evidence_refs": [
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/836",
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/b3c35a53388b32c49e5ffe5e82bd31cdc5765a3c",
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38364211438"
+      ],
+      "next_action": "Complete all six exact-head CI and new Codex review; reconcile any actionable finding, resolve remaining threads, then submit new claim-bound packet to Main/Reviewer."
     }
   ],
   "last_checkpoint": {
-    "seq": 45,
-    "at": "2026-10-13T07:31:54Z",
+    "seq": 46,
+    "at": "2026-10-13T07:43:14Z",
     "claim_id": "c0d7e9a1f346b8d5021a",
     "work_item": "cantiere-engineer-flutter-native-import-3140",
-    "summary": "PR #836 bounded follow-up on two fresh Codex P2s after 79ac6bbf: triple-quoted JVM import URI delimiter-width decoding (including conditional alternatives) and initial Dart shebang trivia before imports. Added reject-before-stage and legal-Dart regressions. New head 5d63a05f; six exact-head CI runs started, not yet confirmed. Replied to the two fresh GitHub review threads; Reviewer/Validation, structural retry, models and Android G5 unchanged.",
+    "summary": "PR #836 bounded follow-up on three Codex P2s from 5d63a05f: optional BOM before script tag, conditional import test-value literals must not be treated as imported URIs, and adjacent Dart URI literal segments must be concatenated before JVM classifier. Head b3c35a53388b32c49e5ffe5e82bd31cdc5765a3c; regression fixtures corrected to use interpreted BOM and newline escapes. Six exact-head CI runs started; Codex independent review requested. Replied to three inline P2 threads. No model/gate/runtime change.",
     "decisions": [
-      "No self-approval or merge; review packet remains pending fresh CI and re-review.",
-      "No new S24 FE retry of +3140; keep black-background project saved."
+      "Do not mark G1–G4 or approve while current CI/review pending.",
+      "Keep same claim, no merge, G5 S24 FE open; no repeat +3140."
     ],
     "evidence_refs": [
       "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/836",
-      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/5d63a05fda6a3b13fdbe1aae68e33d6c0af9a0a9",
-      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38363036507"
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/b3c35a53388b32c49e5ffe5e82bd31cdc5765a3c",
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38364211438"
     ],
-    "next_action": "Finish all six CI checks on 5d63a05f; resolve fixed Codex P2 threads, request independent re-review and submit exact-head Cantiere claim-bound packet to Main/Reviewer."
+    "next_action": "Complete all six exact-head CI and new Codex review; reconcile any actionable finding, resolve remaining threads, then submit new claim-bound packet to Main/Reviewer."
   },
   "review_history": [
     {
