@@ -7,7 +7,7 @@
     "policy": "This private repository is the single coordination authority. Chats and agents are workers, not independent sources of truth."
   },
   "updated_at": "2026-10-13",
-  "state_revision": 250,
+  "state_revision": 251,
   "lifecycle_status": "BOOTSTRAP_ACTIVE",
   "roadmap_authority": {
     "library": ".airlab/roadmap.yaml",
@@ -80,11 +80,11 @@
     "invalid_lane_behavior": "ISOLATE_AND_SURFACE_PROJECTION_INCIDENT"
   },
   "projection": {
-    "source_digest": "555d620bc57312d6cc64a7e0ac1801f8cc27d94f3d233d855f66338936076b99",
-    "projected_at": "2026-10-13T21:28:42Z",
+    "source_digest": "d23fa986d32aaae52ab4ee42ba2ad789e3921107d52faf36187780bb429a6a6c",
+    "projected_at": "2026-10-13T21:30:08Z",
     "counts": {
       "BLOCKED": 1,
-      "CLAIMED": 1,
+      "IMPLEMENTING": 1,
       "READY": 14,
       "REVIEW_REQUIRED": 1
     },
@@ -109,7 +109,7 @@
         "claim_id": "403f04c8b0a530f93e77",
         "work_item": "issue-837-preserve-persisted-prompt-after-inference-error",
         "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
-        "lease_until": "2026-10-14T09:28:42Z",
+        "lease_until": "2026-10-14T09:30:08Z",
         "resource_locks": [
           "branch:pilialvu75-hue/Ai-orchestrator-riserva:fix/runtime-core-837-preserve-failed-question",
           "contract:assistant-chat-history-reconciliation",
@@ -486,15 +486,15 @@
       },
       {
         "id": "runtime-core",
-        "status": "CLAIMED",
+        "status": "IMPLEMENTING",
         "activation": "active",
-        "state_version": 17,
+        "state_version": 18,
         "updated_at": "2026-10-13",
         "active_claim": {
           "claim_id": "403f04c8b0a530f93e77",
           "work_item": "issue-837-preserve-persisted-prompt-after-inference-error",
           "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
-          "lease_until": "2026-10-14T09:28:42Z",
+          "lease_until": "2026-10-14T09:30:08Z",
           "resource_locks": [
             "branch:pilialvu75-hue/Ai-orchestrator-riserva:fix/runtime-core-837-preserve-failed-question",
             "contract:assistant-chat-history-reconciliation",
@@ -507,7 +507,7 @@
         "reviewer_state": "PENDING",
         "inference_profile_status": null,
         "historical_backlog_count": 4,
-        "next_action": "Use the signed +3063 artifact for one bounded S24 FE BYOK Mistral validation of the new CLOSED CLOUD_HTTP_FAILURE receipt before any user-facing success claim. Keep paid fallback disabled and do not infer service recovery from CI."
+        "next_action": "Implement scoped state-engine fix with deterministic persisted-error, reload-failure, retry/restart, attachment and stale-callback regressions; run Flutter validation and open PR."
       },
       {
         "id": "voice-live",

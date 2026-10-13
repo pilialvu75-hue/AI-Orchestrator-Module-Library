@@ -3,11 +3,11 @@
   "id": "runtime-core",
   "title": "Runtime Core",
   "role": "worker",
-  "status": "CLAIMED",
+  "status": "IMPLEMENTING",
   "activation": "active",
   "scope": "Shared inference contract, capability/model routing semantics, context, streaming, cancellation, errors, model-profile schema and lifecycle. Target platforms own their benchmark-gated LLM/backend/runtime profiles.",
   "shared_engine_policy": "shared_or_control_plane",
-  "state_version": 17,
+  "state_version": 18,
   "updated_at": "2026-10-13",
   "active_claim": {
     "claim_id": "403f04c8b0a530f93e77",
@@ -25,8 +25,8 @@
       "file:pilialvu75-hue/Ai-orchestrator-riserva:test/features/chat/data/repositories/chat_repository_impl_test.dart"
     ],
     "started_at": "2026-10-13T21:28:42Z",
-    "heartbeat_at": "2026-10-13T21:28:42Z",
-    "lease_until": "2026-10-14T09:28:42Z",
+    "heartbeat_at": "2026-10-13T21:30:08Z",
+    "lease_until": "2026-10-14T09:30:08Z",
     "lease_hours": 12
   },
   "dependencies": [],
@@ -51,7 +51,7 @@
     "reviewed_by": null,
     "reviewed_at": null
   },
-  "next_action": "Use the signed +3063 artifact for one bounded S24 FE BYOK Mistral validation of the new CLOSED CLOUD_HTTP_FAILURE receipt before any user-facing success claim. Keep paid fallback disabled and do not infer service recovery from CI.",
+  "next_action": "Implement scoped state-engine fix with deterministic persisted-error, reload-failure, retry/restart, attachment and stale-callback regressions; run Flutter validation and open PR.",
   "inference_ownership": {
     "owns": [
       "shared inference API",
@@ -243,29 +243,41 @@
       ],
       "next_action": "Use the signed +3063 artifact for one bounded S24 FE BYOK Mistral validation of the new CLOSED CLOUD_HTTP_FAILURE receipt before any user-facing success claim. Keep paid fallback disabled and do not infer service recovery from CI.",
       "kind": "REVIEW_ACCEPTED"
+    },
+    {
+      "seq": 10,
+      "at": "2026-10-13T21:30:08Z",
+      "claim_id": "403f04c8b0a530f93e77",
+      "work_item": "issue-837-preserve-persisted-prompt-after-inference-error",
+      "summary": "Claim held; issue #837 confirmed on main ef75701e. Repository saves user before inference; state-engine failure renders old _messages. Implement authoritative saved-history replacement, fallback previous turns plus immutable current question on reload failure, and generation guards for clear/session/load races.",
+      "decisions": [
+        "Keep repository identity and persistence semantics unchanged; successful reload replaces fallback rather than appending.",
+        "Discard unpersisted partial assistant text on terminal failure; never promote it to a completed reply.",
+        "No Vulkan, timeout, trim15/RAM or platform-profile changes. Physical S24 FE acceptance remains open."
+      ],
+      "evidence_refs": [
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/issues/837",
+        "head:ef75701ef2cbe9ba20fed30200a1fa046d36812d"
+      ],
+      "next_action": "Implement scoped state-engine fix with deterministic persisted-error, reload-failure, retry/restart, attachment and stale-callback regressions; run Flutter validation and open PR."
     }
   ],
   "last_checkpoint": {
-    "seq": 9,
-    "at": "2026-10-10T13:50:11Z",
-    "claim_id": "5615786649acca3a5846",
-    "work_item": "cloud-mistral-429-structured-backoff",
-    "summary": "Main/Reviewer accepts the bounded implementation/review gate for PR #818 exact head e5e08527d0068845bfa9e643d1a3e514a2e8c356. The diff preserves structured Mistral quota/rate-limit semantics, Retry-After cooldown and privacy-closed HTTP telemetry; exact-head cross-platform CI and focused regressions pass. This is not target-runtime acceptance and does not prove the owner's Mistral BYOK key succeeds or establish the upstream 429 root cause.",
+    "seq": 10,
+    "at": "2026-10-13T21:30:08Z",
+    "claim_id": "403f04c8b0a530f93e77",
+    "work_item": "issue-837-preserve-persisted-prompt-after-inference-error",
+    "summary": "Claim held; issue #837 confirmed on main ef75701e. Repository saves user before inference; state-engine failure renders old _messages. Implement authoritative saved-history replacement, fallback previous turns plus immutable current question on reload failure, and generation guards for clear/session/load races.",
     "decisions": [
-      "Main/Reviewer accepted the implementation/review gate."
+      "Keep repository identity and persistence semantics unchanged; successful reload replaces fallback rather than appending.",
+      "Discard unpersisted partial assistant text on terminal failure; never promote it to a completed reply.",
+      "No Vulkan, timeout, trim15/RAM or platform-profile changes. Physical S24 FE acceptance remains open."
     ],
     "evidence_refs": [
-      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/818",
-      "head:e5e08527d0068845bfa9e643d1a3e514a2e8c356",
-      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/37929379747",
-      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/37929379876",
-      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/37929379772",
-      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/37929379804",
-      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/37929379722",
-      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/37929379883"
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/issues/837",
+      "head:ef75701ef2cbe9ba20fed30200a1fa046d36812d"
     ],
-    "next_action": "Use the signed +3063 artifact for one bounded S24 FE BYOK Mistral validation of the new CLOSED CLOUD_HTTP_FAILURE receipt before any user-facing success claim. Keep paid fallback disabled and do not infer service recovery from CI.",
-    "kind": "REVIEW_ACCEPTED"
+    "next_action": "Implement scoped state-engine fix with deterministic persisted-error, reload-failure, retry/restart, attachment and stale-callback regressions; run Flutter validation and open PR."
   },
   "review_history": [
     {

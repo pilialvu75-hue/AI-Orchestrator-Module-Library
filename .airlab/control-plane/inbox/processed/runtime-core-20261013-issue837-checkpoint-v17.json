@@ -1,0 +1,12 @@
+{
+  "schema_version": 1,
+  "request_id": "runtime-core-20261013-issue837-checkpoint-v17",
+  "status": "APPLIED",
+  "processed_at": "2026-10-13T21:30:08Z",
+  "source_file": "runtime-core-20261013-issue837-checkpoint-v17.json",
+  "lane_id": "runtime-core",
+  "operation": "checkpoint",
+  "actor_id": "chatgpt:runtime-core-issue837",
+  "errors": [],
+  "result_state_version": 18
+}
