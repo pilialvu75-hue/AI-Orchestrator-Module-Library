@@ -7,7 +7,7 @@
     "policy": "This private repository is the single coordination authority. Chats and agents are workers, not independent sources of truth."
   },
   "updated_at": "2026-10-14",
-  "state_revision": 283,
+  "state_revision": 284,
   "lifecycle_status": "BOOTSTRAP_ACTIVE",
   "roadmap_authority": {
     "library": ".airlab/roadmap.yaml",
@@ -80,13 +80,12 @@
     "invalid_lane_behavior": "ISOLATE_AND_SURFACE_PROJECTION_INCIDENT"
   },
   "projection": {
-    "source_digest": "5d15a5df0ea80becb5e3e79a0db0c007ab387e713fd37ea057450268c3e5cf20",
-    "projected_at": "2026-10-14T22:11:03Z",
+    "source_digest": "bbfba12ace4fd613b0fdcf621bbe5f6330e1db611f956939dcb15ba4ab3cf7e1",
+    "projected_at": "2026-10-14T22:29:01Z",
     "counts": {
       "BLOCKED": 1,
-      "IMPLEMENTING": 1,
-      "READY": 14,
-      "REVIEW_REQUIRED": 1
+      "IMPLEMENTING": 2,
+      "READY": 14
     },
     "active_claims": [
       {
@@ -271,9 +270,7 @@
         "work_item": "issue-839-same-conversation-recall-context"
       }
     ],
-    "review_required": [
-      "cantiere"
-    ],
+    "review_required": [],
     "blocked": [
       {
         "lane": "aivexus-3d",
@@ -406,9 +403,9 @@
       },
       {
         "id": "cantiere",
-        "status": "REVIEW_REQUIRED",
+        "status": "IMPLEMENTING",
         "activation": "active",
-        "state_version": 86,
+        "state_version": 87,
         "updated_at": "2026-10-14",
         "active_claim": {
           "claim_id": "5f0b20632bafab7b6960",
@@ -428,10 +425,10 @@
             "file:pilialvu75-hue/Ai-orchestrator-riserva:test/app_factory/workshop/workshop_task_inference_pipeline_test.dart"
           ]
         },
-        "reviewer_state": "PENDING",
+        "reviewer_state": "CHANGES_REQUESTED",
         "inference_profile_status": null,
         "historical_backlog_count": 3,
-        "next_action": "Main/Reviewer must inspect the review_packet, linked evidence and required gates before promotion or rework."
+        "next_action": "Same Cantiere worker under issue #845 and existing claim: fix only provenance/trust of retained staged paths. Separate temporal prior staged delta from certified/explicitly authorized immutable content-scoped Library reuse; reject/isolate arbitrary previous out-of-task paths fail-closed while preserving source, and maintain Reviewer coverage and existing one bounded retry. Add tests for forged/arbitrary retained path denied, actually provenance-verified certified reuse allowed, stale/modified provenance denied and resumed retry; add executed negative fixture evidence using existing gates for representative malformed +3184 Flutter/Dart and native XML/Kotlin, not prompt-only. No unrelated models/providers/RAM/Vulkan/Local WebSearch/token/timeout changes; do not retest +3184. Renew lease through canonical heartbeat before further worker coding. Re-run exact-head relevant tests and six CI, resolve any real findings, submit new claim-bound REVIEW_REQUIRED packet. Main/Reviewer will independently reevaluate; do not merge/approve or claim G5."
       },
       {
         "id": "diagnostics",

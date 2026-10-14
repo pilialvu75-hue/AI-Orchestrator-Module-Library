@@ -1,0 +1,12 @@
+{
+  "schema_version": 1,
+  "request_id": "main-reviewer-20261015-cantiere846-review-rework-v86",
+  "status": "APPLIED",
+  "processed_at": "2026-10-14T22:29:01Z",
+  "source_file": "main-reviewer-20261015-cantiere846-review-rework-v86.json",
+  "lane_id": "cantiere",
+  "operation": "review_rework",
+  "actor_id": "chatgpt:main-reviewer",
+  "errors": [],
+  "result_state_version": 87
+}
