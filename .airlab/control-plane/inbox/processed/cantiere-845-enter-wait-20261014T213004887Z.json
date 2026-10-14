@@ -1,0 +1,12 @@
+{
+  "schema_version": 1,
+  "request_id": "cantiere-845-enter-wait-20261014T213004887Z",
+  "status": "APPLIED",
+  "processed_at": "2026-10-14T21:30:16Z",
+  "source_file": "cantiere-845-enter-wait-20261014T213004887Z.json",
+  "lane_id": "cantiere",
+  "operation": "enter_wait",
+  "actor_id": "chatgpt:cantiere",
+  "errors": [],
+  "result_state_version": 83
+}
