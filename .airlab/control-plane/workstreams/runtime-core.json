@@ -3,37 +3,13 @@
   "id": "runtime-core",
   "title": "Runtime Core",
   "role": "worker",
-  "status": "IMPLEMENTING",
+  "status": "READY",
   "activation": "active",
   "scope": "Shared inference contract, capability/model routing semantics, context, streaming, cancellation, errors, model-profile schema and lifecycle. Target platforms own their benchmark-gated LLM/backend/runtime profiles.",
   "shared_engine_policy": "shared_or_control_plane",
-  "state_version": 32,
+  "state_version": 33,
   "updated_at": "2026-10-14",
-  "active_claim": {
-    "claim_id": "88f663ec2edf8685e90d",
-    "owner_lane": "runtime-core",
-    "work_item": "issue-839-same-conversation-recall-context",
-    "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
-    "scope": "Reproduce and correct bounded chronological context omissions for same-conversation reread/retry; preserve runtime-owned history and existing token/resource limits. Add private-content-free context receipts and strict public projection regression coverage in Riserva, with Diagnostics contract impact explicitly reviewable by Main/Reviewer. No physical recall claim without new S24 FE evidence; no Vulkan, timeout, RAM/trim15, context capacity or WebSearch changes.",
-    "branch": "fix/runtime-core-839-conversation-recall",
-    "resource_locks": [
-      "branch:pilialvu75-hue/Ai-orchestrator-riserva:fix/runtime-core-839-conversation-recall",
-      "contract:conversation-context-recall",
-      "contract:diagnostics-context-receipts",
-      "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/core/diagnostics/public_log_projection.dart",
-      "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/features/chat_memory/chronological_recall_policy.dart",
-      "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/features/chat_memory/conversation_memory_service.dart",
-      "file:pilialvu75-hue/Ai-orchestrator-riserva:test/core/diagnostics/public_log_projection_test.dart",
-      "file:pilialvu75-hue/Ai-orchestrator-riserva:test/features/chat/data/repositories/chat_repository_impl_context_test.dart",
-      "file:pilialvu75-hue/Ai-orchestrator-riserva:test/features/chat_memory/chronological_recall_policy_test.dart",
-      "file:pilialvu75-hue/Ai-orchestrator-riserva:test/features/chat_memory/conversation_memory_hotpath_test.dart",
-      "file:pilialvu75-hue/Ai-orchestrator-riserva:test/features/chat_memory/conversation_recall_prompt_test.dart"
-    ],
-    "started_at": "2026-10-14T10:10:31Z",
-    "heartbeat_at": "2026-10-14T10:20:00Z",
-    "lease_until": "2026-10-14T22:20:00Z",
-    "lease_hours": 12
-  },
+  "active_claim": null,
   "dependencies": [],
   "roadmap_refs": [
     ".airlab/public-repositories/Ai-orchestrator-riserva/roadmap.yaml#CANT-14",
@@ -41,7 +17,7 @@
   ],
   "evidence": [],
   "gates": {
-    "G0_CLAIM": "PASS",
+    "G0_CLAIM": "PENDING",
     "G1_IMPLEMENTATION": "PENDING",
     "G2_STATIC": "PENDING",
     "G3_CI": "PENDING",
@@ -656,6 +632,13 @@
       "work_item": "issue-837-preserve-persisted-prompt-after-inference-error",
       "reason": "Main/Reviewer accepted the bounded implementation/review gate.",
       "at": "2026-10-14T08:29:08Z"
+    },
+    {
+      "type": "CLAIM_RELEASED",
+      "claim_id": "88f663ec2edf8685e90d",
+      "work_item": "issue-839-same-conversation-recall-context",
+      "reason": "Supersede with an immediately reacquired bounded issue-839 claim including exact ChatRepositoryImpl file lock. Cross-platform inspection shows Cloud/Hybrid still truncate at 24 turns; keep their portable recall contract unchanged and select full retained history only for explicit LOCAL mode. PR 840 f3bc1d35 remains unapproved; no success/closure implied.",
+      "at": "2026-10-14T10:23:04Z"
     }
   ],
   "review_packet_history": [

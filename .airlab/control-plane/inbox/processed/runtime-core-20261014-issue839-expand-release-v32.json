@@ -1,0 +1,12 @@
+{
+  "schema_version": 1,
+  "request_id": "runtime-core-20261014-issue839-expand-release-v32",
+  "status": "APPLIED",
+  "processed_at": "2026-10-14T10:23:04Z",
+  "source_file": "runtime-core-20261014-issue839-expand-release-v32.json",
+  "lane_id": "runtime-core",
+  "operation": "release",
+  "actor_id": "chatgpt:runtime-core-issue839",
+  "errors": [],
+  "result_state_version": 33
+}
