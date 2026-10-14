@@ -7,7 +7,7 @@
     "policy": "This private repository is the single coordination authority. Chats and agents are workers, not independent sources of truth."
   },
   "updated_at": "2026-10-14",
-  "state_revision": 270,
+  "state_revision": 271,
   "lifecycle_status": "BOOTSTRAP_ACTIVE",
   "roadmap_authority": {
     "library": ".airlab/roadmap.yaml",
@@ -80,8 +80,8 @@
     "invalid_lane_behavior": "ISOLATE_AND_SURFACE_PROJECTION_INCIDENT"
   },
   "projection": {
-    "source_digest": "f9e10b82a78200c4fc1894ca4375bfc7ed9a8e77964b92ad74fdbb13cd7501c9",
-    "projected_at": "2026-10-14T10:30:21Z",
+    "source_digest": "bf4dd48b1963b7baa136e9c990156220f14a17ead7f7f5209280d7cb18bc5024",
+    "projected_at": "2026-10-14T10:36:39Z",
     "counts": {
       "BLOCKED": 1,
       "IMPLEMENTING": 1,
@@ -109,7 +109,7 @@
         "claim_id": "95be453817ace65c0fd8",
         "work_item": "issue-839-same-conversation-recall-context",
         "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
-        "lease_until": "2026-10-14T22:30:21Z",
+        "lease_until": "2026-10-14T22:36:39Z",
         "resource_locks": [
           "branch:pilialvu75-hue/Ai-orchestrator-riserva:fix/runtime-core-839-conversation-recall",
           "contract:conversation-context-recall",
@@ -537,13 +537,13 @@
         "id": "runtime-core",
         "status": "IMPLEMENTING",
         "activation": "active",
-        "state_version": 36,
+        "state_version": 37,
         "updated_at": "2026-10-14",
         "active_claim": {
           "claim_id": "95be453817ace65c0fd8",
           "work_item": "issue-839-same-conversation-recall-context",
           "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
-          "lease_until": "2026-10-14T22:30:21Z",
+          "lease_until": "2026-10-14T22:36:39Z",
           "resource_locks": [
             "branch:pilialvu75-hue/Ai-orchestrator-riserva:fix/runtime-core-839-conversation-recall",
             "contract:conversation-context-recall",
@@ -563,7 +563,7 @@
         "reviewer_state": "PENDING",
         "inference_profile_status": null,
         "historical_backlog_count": 4,
-        "next_action": "Collect CI/test/analyzer and Codex outcome for cf33c9f5, resolve the addressed thread after validation, then submit REVIEW_REQUIRED packet. Preserve G5 physical S24 FE pending and issue 839 open."
+        "next_action": "Verify final-head 6589d989 full CI and Codex re-review, then resolve validated threads and submit REVIEW_REQUIRED packet under claim 95be453817ace65c0fd8. Keep physical S24 FE and issue 839 open."
       },
       {
         "id": "voice-live",

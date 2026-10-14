@@ -1,0 +1,12 @@
+{
+  "schema_version": 1,
+  "request_id": "runtime-core-20261014-issue839-retry-boundaries-v36",
+  "status": "APPLIED",
+  "processed_at": "2026-10-14T10:36:39Z",
+  "source_file": "runtime-core-20261014-issue839-retry-boundaries-v36.json",
+  "lane_id": "runtime-core",
+  "operation": "checkpoint",
+  "actor_id": "chatgpt:runtime-core-issue839",
+  "errors": [],
+  "result_state_version": 37
+}
