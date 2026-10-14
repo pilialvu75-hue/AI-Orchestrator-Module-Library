@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "request_id": "main-reviewer-20261014-cantiere836-review-accept-v76",
+  "actor_id": "chatgpt:main-reviewer",
+  "lane_id": "cantiere",
+  "operation": "review_accept",
+  "expected_state_version": 76,
+  "payload": {
+    "summary": "Main/Reviewer APPROVED source-code integration of PR #836 at reviewed head 0e89bd67160fe3807e3e316d28956ea1274009b0. Independent four-file diff review and regressions confirm P2 lexical parsing/JVM namespaces including java, kotlin, javax, Android/io.flutter, conditional URI segments, strings/comments/interpolation, BOM/shebang, metadata; legitimate Flutter Dart/MethodChannel/native bridge retained. One existing structural Engineer retry only, Reviewer and Validation remain authoritative. All 6 exact-head CI PASS; all 12 Codex P2 threads resolved; claim lease was overdue but REVIEW_WAIT_OVERDUE kept valid packet reviewer-owned. G1–G4 attested bound to packet and claim. APPROVED CODE ONLY. G5 PENDING_PHYSICAL_S24_FE; do not mark Phase 1 online/real generated app successful.",
+    "next_action": "Merge PR #836 using expected reviewed head 0e89bd67160fe3807e3e316d28956ea1274009b0, verify merged commit actually reachable from main, then check signed Android release tag and APK asset containing the merge. Only that signed release can authorize one physical S24 FE retest on existing black-background project with four qwen2_5_3b_instruct roles; keep G5 physical open and do not substitute Lista Spesa Lite.",
+    "evidence_refs": [
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/836",
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/0e89bd67160fe3807e3e316d28956ea1274009b0",
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38364967940",
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38364967938"
+    ]
+  }
+}
