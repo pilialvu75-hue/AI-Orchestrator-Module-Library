@@ -3,11 +3,11 @@
   "id": "cantiere",
   "title": "Cantiere",
   "role": "worker",
-  "status": "CLAIMED",
+  "status": "REVIEW_REQUIRED",
   "activation": "active",
   "scope": "Exclusive Cantiere/App Factory execution, durability, build/review/validation/apply and first-real-app reliability.",
   "shared_engine_policy": "shared_or_control_plane",
-  "state_version": 85,
+  "state_version": 86,
   "updated_at": "2026-10-14",
   "active_claim": {
     "claim_id": "5f0b20632bafab7b6960",
@@ -39,7 +39,68 @@
     ".airlab/public-repositories/Ai-orchestrator-riserva/roadmap.yaml#AIVEXUS-BASE-1",
     ".airlab/public-repositories/Ai-orchestrator-riserva/roadmap.yaml#AIVEXUS-BASE-2"
   ],
-  "evidence": [],
+  "evidence": [
+    {
+      "type": "pull_request",
+      "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/846",
+      "result": "PASS",
+      "note": "PR #846 open, exact head 69632414411a3a2eb74a5ab42c2fd13d55d5e935; 7 modified files, pending Main/Reviewer independent review, not merged."
+    },
+    {
+      "type": "commit",
+      "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/69632414411a3a2eb74a5ab42c2fd13d55d5e935",
+      "result": "PASS",
+      "note": "Final worker head after revisions and source regressions, without reviewer bypass."
+    },
+    {
+      "type": "test",
+      "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38638917305",
+      "result": "PASS",
+      "note": "Cantiere First App APK workflow: physical-failure regressions, guarded lifecycle, Build Lab and Android sample packaging passed; NOT physical star app installation."
+    },
+    {
+      "type": "ci",
+      "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38638917445",
+      "result": "PASS",
+      "note": "Build & Release APK, success on exact PR head."
+    },
+    {
+      "type": "ci",
+      "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38638917312",
+      "result": "PASS",
+      "note": "Web Cantiere Build success on exact head."
+    },
+    {
+      "type": "ci",
+      "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38638917676",
+      "result": "PASS",
+      "note": "Windows build/test workflow success."
+    },
+    {
+      "type": "ci",
+      "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38638917456",
+      "result": "PASS",
+      "note": "Linux build/test workflow success."
+    },
+    {
+      "type": "ci",
+      "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38638917350",
+      "result": "PASS",
+      "note": "macOS build/test workflow success."
+    },
+    {
+      "type": "physical_device",
+      "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/issues/845",
+      "result": "FAIL",
+      "note": "Historical physical failure on S24 FE host +3184; review explicit_scope, incomplete malformed emitted Flutter/native code. NOT proof of the new PR fix."
+    },
+    {
+      "type": "analysis",
+      "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/846",
+      "result": "INFO",
+      "note": "Risk: retainedStagedPaths derives from pre-Engineer staged snapshot; it does not independently attest certified Library origin. Require Main/Reviewer to inspect whether arbitrary retained paths could bypass hard targetFiles policy. No automatic approval allowed."
+    }
+  ],
   "gates": {
     "G0_CLAIM": "PASS",
     "G1_IMPLEMENTATION": "PENDING",
@@ -56,7 +117,7 @@
     "reviewed_by": null,
     "reviewed_at": null
   },
-  "next_action": "Re-claim Cantiere #845, submit exact-head PR #846 review packet to Main/Reviewer; no merge or physical test before independent gates.",
+  "next_action": "Main/Reviewer must inspect the review_packet, linked evidence and required gates before promotion or rework.",
   "historical_backlog": [
     "Stay in Phase 1 ONLINE until a real generated Android app is physically accepted.",
     "Reproduce the recent manga-drawing app failure from current main with Diagnostics; do not restart generic audits.",
@@ -86,23 +147,6 @@
     "continuation": "Do not re-enable broad Cantiere autopilot until the remaining control-plane concurrency/resource-lock weakness is addressed or explicitly accepted for the next pilot."
   },
   "checkpoints": [
-    {
-      "seq": 2,
-      "at": "2026-10-01T09:57:00Z",
-      "claim_id": "cantiere-manga-online-failure-repro-v1-20261001",
-      "work_item": "phase1-online-generated-app-repro-v1",
-      "summary": "Physical Android +2860 retry reproduced the Manga Kids failure at 28%: FormatException: Workshop proposal must contain at least one file change. PR #739 recovery is present on main but did not recover this production path.",
-      "decisions": [
-        "Keep Phase 1 ONLINE.",
-        "Do not ask for another physical retry until the production retry path is corrected."
-      ],
-      "evidence_refs": [
-        "physical:Android:+2860:Manga Kids:28%",
-        "Ai-orchestrator-riserva#739"
-      ],
-      "next_action": "Trace why the empty-change recovery is bypassed after the Engineer runtime retry and implement one bounded regression fix.",
-      "kind": "PHYSICAL_RESULT"
-    },
     {
       "seq": 3,
       "at": "2026-10-01T10:02:00Z",
@@ -1036,25 +1080,51 @@
         "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/6b90e81b4fd6a08ac684adc37b2af0d756783e96"
       ],
       "next_action": "Wait for six exact-head CI on 6b90e81; fix any failures and verify source scope tests, then submit review packet to Main/Reviewer without self-approval. Physical S24 FE G5 stays pending."
+    },
+    {
+      "seq": 52,
+      "at": "2026-10-14T22:11:03Z",
+      "claim_id": "5f0b20632bafab7b6960",
+      "work_item": "issue-845-first-star-app-review-scope-3184",
+      "summary": "Cantiere #845: bounded +3184 first-star-app scope-path fix submitted on PR #846 exact head 69632414. Scope proposal and pre-Engineer staged paths are recorded separately; the Reviewer deterministically gates newly staged out-of-task diff while still examining prior retained workspace; Engineer Flutter guidance tightened. Previously discovered certified-Library reuse and Reviewer prompt-bound regressions addressed. Six exact-head workflows PASS; G5 physical generated-star APK remains unproven.",
+      "decisions": [],
+      "evidence_refs": [
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/846",
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/69632414411a3a2eb74a5ab42c2fd13d55d5e935",
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38638917305",
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38638917445",
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38638917312",
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38638917676",
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38638917456",
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38638917350",
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/issues/845",
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/846"
+      ],
+      "next_action": "Main/Reviewer must inspect the review_packet, linked evidence and required gates before promotion or rework.",
+      "kind": "REVIEW_HANDOFF"
     }
   ],
   "last_checkpoint": {
-    "seq": 51,
-    "at": "2026-10-14T21:13:19Z",
-    "claim_id": "026e0790f36a8e294ae1",
+    "seq": 52,
+    "at": "2026-10-14T22:11:03Z",
+    "claim_id": "5f0b20632bafab7b6960",
     "work_item": "issue-845-first-star-app-review-scope-3184",
-    "summary": "CI of early PR #846 found three regressions: certified Library reuse file outside per-task Engineer allowlist caused extra repair calls and contaminated rejected-gate findings. Reacquired claim 026e0790f36a8e294ae1 including task pipeline lock. New head 6b90e81 passes retained pre-Engineer changed path provenance to deterministic Reviewer full-diff gate and prompts; added test for retained file review.",
-    "decisions": [
-      "Never blanket-reject certified retained Library workspace paths for missing per-task Engineer targetFiles.",
-      "Never silently drop prior staged source; include it in Review and validate correctness.",
-      "No +3184 retest, no merge without independent Main/Reviewer."
-    ],
+    "summary": "Cantiere #845: bounded +3184 first-star-app scope-path fix submitted on PR #846 exact head 69632414. Scope proposal and pre-Engineer staged paths are recorded separately; the Reviewer deterministically gates newly staged out-of-task diff while still examining prior retained workspace; Engineer Flutter guidance tightened. Previously discovered certified-Library reuse and Reviewer prompt-bound regressions addressed. Six exact-head workflows PASS; G5 physical generated-star APK remains unproven.",
+    "decisions": [],
     "evidence_refs": [
-      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/issues/845",
       "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/846",
-      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/6b90e81b4fd6a08ac684adc37b2af0d756783e96"
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/69632414411a3a2eb74a5ab42c2fd13d55d5e935",
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38638917305",
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38638917445",
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38638917312",
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38638917676",
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38638917456",
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38638917350",
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/issues/845",
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/846"
     ],
-    "next_action": "Wait for six exact-head CI on 6b90e81; fix any failures and verify source scope tests, then submit review packet to Main/Reviewer without self-approval. Physical S24 FE G5 stays pending."
+    "next_action": "Main/Reviewer must inspect the review_packet, linked evidence and required gates before promotion or rework.",
+    "kind": "REVIEW_HANDOFF"
   },
   "review_history": [
     {
@@ -2417,39 +2487,6 @@
       }
     }
   ],
-  "current_gate_attestation": {
-    "at": "2026-10-14T13:38:57Z",
-    "claim_id": "c0d7e9a1f346b8d5021a",
-    "packet_sha256": "93da2a3122aa9db7a2625fc984f41b220f15c5784843daeb0b24612d4a072022",
-    "reviewed_by": "main-reviewer",
-    "summary": "Independent Main/Reviewer review of Cantiere PR #836 exact head 0e89bd67160fe3807e3e316d28956ea1274009b0: four scoped Flutter/Dart files; directive-aware JVM import rejection before VirtualWorkspace staging including java/kotlin/io.flutter, conditional and adjacent URI literals, nested strings/comments/interpolation, qualified metadata and shebang+BOM; positive Dart import and .kt/.xml/MethodChannel cases. Existing bounded Engineer FormatException structural retry and Reviewer/Validation remain authoritative; no models, tokens, timeout, Local WebSearch, Vulkan or RAM guard changes. All six exact-head CI runs passed; 12/12 Codex P2 threads resolved. Expired claim is already REVIEW_WAIT_OVERDUE; valid claim-bound REVIEW_REQUIRED packet remains reviewer-owned. G1–G4 code/test/integration only; G5 physical S24 FE pending.",
-    "evidence_refs_by_gate": {
-      "G1_IMPLEMENTATION": [
-        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/836",
-        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/0e89bd67160fe3807e3e316d28956ea1274009b0"
-      ],
-      "G2_STATIC": [
-        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38364967940",
-        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38364967938"
-      ],
-      "G3_CI": [
-        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38364967940",
-        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38364967938",
-        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38364967933",
-        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38364967962",
-        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38364968070",
-        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38364967971"
-      ],
-      "G4_INTEGRATION": [
-        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38364967938",
-        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38364967940",
-        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38364967933",
-        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38364967962",
-        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38364968070",
-        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38364967971"
-      ]
-    }
-  },
   "wait_history": [
     {
       "schema_version": 1,
@@ -2496,5 +2533,105 @@
         "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38638917445"
       ]
     }
-  ]
+  ],
+  "review_packet": {
+    "schema_version": 1,
+    "submitted_at": "2026-10-14T22:10:49.949Z",
+    "lane_id": "cantiere",
+    "claim_id": "5f0b20632bafab7b6960",
+    "work_item": "issue-845-first-star-app-review-scope-3184",
+    "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
+    "branch": "fix/cantiere-845-first-star-review-scope",
+    "pull_request": 846,
+    "summary": "Cantiere #845: bounded +3184 first-star-app scope-path fix submitted on PR #846 exact head 69632414. Scope proposal and pre-Engineer staged paths are recorded separately; the Reviewer deterministically gates newly staged out-of-task diff while still examining prior retained workspace; Engineer Flutter guidance tightened. Previously discovered certified-Library reuse and Reviewer prompt-bound regressions addressed. Six exact-head workflows PASS; G5 physical generated-star APK remains unproven.",
+    "changes": [
+      "Add count-only staged Engineer proposal vs pre-existing virtual diff scope receipts.",
+      "Gate entire Reviewer staged diff against current task targetFiles plus explicitly conveyed pre-Engineer retained staged paths; preserve all diff files for substantive review and retain fail-closed verdict semantics.",
+      "Add scope provenance to Reviewer prompt and preserve full/compact 7k-character prompt bounds.",
+      "Clarify minimal Flutter CREATE Engineer guidance for complete main entry point, widget imports, Color/Random and malformed string escaping.",
+      "Add regression tests for retained outside-task paths, genuine outside-task violations, false scope findings, certified Library reuse, and prompt bounds."
+    ],
+    "evidence": [
+      {
+        "type": "pull_request",
+        "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/846",
+        "result": "PASS",
+        "note": "PR #846 open, exact head 69632414411a3a2eb74a5ab42c2fd13d55d5e935; 7 modified files, pending Main/Reviewer independent review, not merged."
+      },
+      {
+        "type": "commit",
+        "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/69632414411a3a2eb74a5ab42c2fd13d55d5e935",
+        "result": "PASS",
+        "note": "Final worker head after revisions and source regressions, without reviewer bypass."
+      },
+      {
+        "type": "test",
+        "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38638917305",
+        "result": "PASS",
+        "note": "Cantiere First App APK workflow: physical-failure regressions, guarded lifecycle, Build Lab and Android sample packaging passed; NOT physical star app installation."
+      },
+      {
+        "type": "ci",
+        "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38638917445",
+        "result": "PASS",
+        "note": "Build & Release APK, success on exact PR head."
+      },
+      {
+        "type": "ci",
+        "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38638917312",
+        "result": "PASS",
+        "note": "Web Cantiere Build success on exact head."
+      },
+      {
+        "type": "ci",
+        "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38638917676",
+        "result": "PASS",
+        "note": "Windows build/test workflow success."
+      },
+      {
+        "type": "ci",
+        "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38638917456",
+        "result": "PASS",
+        "note": "Linux build/test workflow success."
+      },
+      {
+        "type": "ci",
+        "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38638917350",
+        "result": "PASS",
+        "note": "macOS build/test workflow success."
+      },
+      {
+        "type": "physical_device",
+        "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/issues/845",
+        "result": "FAIL",
+        "note": "Historical physical failure on S24 FE host +3184; review explicit_scope, incomplete malformed emitted Flutter/native code. NOT proof of the new PR fix."
+      },
+      {
+        "type": "analysis",
+        "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/846",
+        "result": "INFO",
+        "note": "Risk: retainedStagedPaths derives from pre-Engineer staged snapshot; it does not independently attest certified Library origin. Require Main/Reviewer to inspect whether arbitrary retained paths could bypass hard targetFiles policy. No automatic approval allowed."
+      }
+    ],
+    "known_risks": [
+      "Critical independent check: the provenance set denotes already-staged paths, not a certified ownership proof. Determine whether arbitrary or malicious pre-Engineer staged paths may bypass explicit targetFiles, and require rework if unacceptable.",
+      "Full Flutter analyzer/source-level fixture for the malformed 3184 star Dart/Kotlin/XML is not proven by a physical generated application; guidance is preventive and not formal validation of generated star code.",
+      "Six successful CI are host/canned first-app acceptance, not actual S24 FE star app install/launch/tap. G5 remains PENDING_PHYSICAL_S24_FE.",
+      "PR head exact 69632414 was mergeable at handoff; independently verify base drift and review threads at decision time."
+    ],
+    "reviewer_checks": [
+      "Check 7-file exact diff, current main merge-base, active claim and path-lock ownership; confirm pre-Engineer retained provenance cannot silently expand authorized task edits or conceal unexpected files.",
+      "Review deterministic scope set comparison and path-only privacy receipts, including revised resumed/task repair flow and actual current Reviewer batch.",
+      "Review actual compilation/analyzer negative coverage for observed +3184 malformed Dart/Kotlin/XML; request focused rework if missing proof is required for G2/G4.",
+      "Verify all 6 exact-head GitHub CI and any current Codex findings/review threads, and independently attest G1-G4 from packet evidence indices before G6.",
+      "Do not equate Cantiere sample APK with physical generated star app; release, physical S24 FE install/launch/tap remain open G5.",
+      "Do not auto-approve or merge, do not retest host +3184; preserve Local WebSearch, runtime memory, Vulkan and Qwen role assignments."
+    ],
+    "roadmap_impact": {
+      "material": false,
+      "refs": [
+        ".airlab/public-repositories/Ai-orchestrator-riserva/roadmap.yaml#CANT-11"
+      ]
+    }
+  }
 }
