@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "request_id": "cantiere-845-checkpoint-reuse-20261014T211308387Z",
+  "submitted_at": "2026-10-14T21:13:08.387Z",
+  "actor_id": "chatgpt:cantiere",
+  "lane_id": "cantiere",
+  "operation": "checkpoint",
+  "expected_state_version": 81,
+  "payload": {
+    "summary": "CI of early PR #846 found three regressions: certified Library reuse file outside per-task Engineer allowlist caused extra repair calls and contaminated rejected-gate findings. Reacquired claim 026e0790f36a8e294ae1 including task pipeline lock. New head 6b90e81 passes retained pre-Engineer changed path provenance to deterministic Reviewer full-diff gate and prompts; added test for retained file review.",
+    "next_action": "Wait for six exact-head CI on 6b90e81; fix any failures and verify source scope tests, then submit review packet to Main/Reviewer without self-approval. Physical S24 FE G5 stays pending.",
+    "decisions": [
+      "Never blanket-reject certified retained Library workspace paths for missing per-task Engineer targetFiles.",
+      "Never silently drop prior staged source; include it in Review and validate correctness.",
+      "No +3184 retest, no merge without independent Main/Reviewer."
+    ],
+    "evidence_refs": [
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/issues/845",
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/846",
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/6b90e81b4fd6a08ac684adc37b2af0d756783e96"
+    ]
+  }
+}
