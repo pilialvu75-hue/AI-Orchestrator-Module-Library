@@ -3,11 +3,11 @@
   "id": "cantiere",
   "title": "Cantiere",
   "role": "worker",
-  "status": "CLAIMED",
+  "status": "IMPLEMENTING",
   "activation": "active",
   "scope": "Exclusive Cantiere/App Factory execution, durability, build/review/validation/apply and first-real-app reliability.",
   "shared_engine_policy": "shared_or_control_plane",
-  "state_version": 81,
+  "state_version": 82,
   "updated_at": "2026-10-14",
   "active_claim": {
     "claim_id": "026e0790f36a8e294ae1",
@@ -29,8 +29,8 @@
       "file:pilialvu75-hue/Ai-orchestrator-riserva:test/app_factory/workshop/workshop_task_inference_pipeline_test.dart"
     ],
     "started_at": "2026-10-14T21:11:09Z",
-    "heartbeat_at": "2026-10-14T21:11:09Z",
-    "lease_until": "2026-10-15T09:11:09Z",
+    "heartbeat_at": "2026-10-14T21:13:19Z",
+    "lease_until": "2026-10-15T09:13:19Z",
     "lease_hours": 12
   },
   "dependencies": [],
@@ -56,7 +56,7 @@
     "reviewed_by": null,
     "reviewed_at": null
   },
-  "next_action": "Verify exact-head PR #846 CI, correct real test/format/analyzer failures, add necessary negative compiler fixtures if safe, then submit claim-bound REVIEW_REQUIRED to Main/Reviewer. G5 physical remains open.",
+  "next_action": "Wait for six exact-head CI on 6b90e81; fix any failures and verify source scope tests, then submit review packet to Main/Reviewer without self-approval. Physical S24 FE G5 stays pending.",
   "historical_backlog": [
     "Stay in Phase 1 ONLINE until a real generated Android app is physically accepted.",
     "Reproduce the recent manga-drawing app failure from current main with Diagnostics; do not restart generic audits.",
@@ -86,22 +86,6 @@
     "continuation": "Do not re-enable broad Cantiere autopilot until the remaining control-plane concurrency/resource-lock weakness is addressed or explicitly accepted for the next pilot."
   },
   "checkpoints": [
-    {
-      "seq": 1,
-      "at": "2026-10-01T09:38:00Z",
-      "claim_id": "cantiere-manga-online-failure-repro-v1-20261001",
-      "work_item": "phase1-online-generated-app-repro-v1",
-      "summary": "Current main already includes #739 Engineer empty-change recovery. Release +2860 includes it. Current-build Android evidence is now required.",
-      "decisions": [
-        "Keep Phase 1 ONLINE."
-      ],
-      "evidence_refs": [
-        "Ai-orchestrator-riserva#739",
-        "v1.0.12+2860"
-      ],
-      "next_action": "Run the same generated-app request on Android release +2860 and preserve Diagnostics evidence.",
-      "kind": "PHYSICAL_GATE"
-    },
     {
       "seq": 2,
       "at": "2026-10-01T09:57:00Z",
@@ -1034,25 +1018,43 @@
         "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/73c62ba228a8efb38dbc4a4a25ce871963e8b9dd"
       ],
       "next_action": "Verify exact-head PR #846 CI, correct real test/format/analyzer failures, add necessary negative compiler fixtures if safe, then submit claim-bound REVIEW_REQUIRED to Main/Reviewer. G5 physical remains open."
+    },
+    {
+      "seq": 51,
+      "at": "2026-10-14T21:13:19Z",
+      "claim_id": "026e0790f36a8e294ae1",
+      "work_item": "issue-845-first-star-app-review-scope-3184",
+      "summary": "CI of early PR #846 found three regressions: certified Library reuse file outside per-task Engineer allowlist caused extra repair calls and contaminated rejected-gate findings. Reacquired claim 026e0790f36a8e294ae1 including task pipeline lock. New head 6b90e81 passes retained pre-Engineer changed path provenance to deterministic Reviewer full-diff gate and prompts; added test for retained file review.",
+      "decisions": [
+        "Never blanket-reject certified retained Library workspace paths for missing per-task Engineer targetFiles.",
+        "Never silently drop prior staged source; include it in Review and validate correctness.",
+        "No +3184 retest, no merge without independent Main/Reviewer."
+      ],
+      "evidence_refs": [
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/issues/845",
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/846",
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/6b90e81b4fd6a08ac684adc37b2af0d756783e96"
+      ],
+      "next_action": "Wait for six exact-head CI on 6b90e81; fix any failures and verify source scope tests, then submit review packet to Main/Reviewer without self-approval. Physical S24 FE G5 stays pending."
     }
   ],
   "last_checkpoint": {
-    "seq": 50,
-    "at": "2026-10-14T21:07:06Z",
-    "claim_id": "2e5e9291924d5c3f141c",
+    "seq": 51,
+    "at": "2026-10-14T21:13:19Z",
+    "claim_id": "026e0790f36a8e294ae1",
     "work_item": "issue-845-first-star-app-review-scope-3184",
-    "summary": "Physical Android +3184 black-star app review scope ambiguity (#845) isolated. Draft PR #846 head 73c62ba contains deterministic full-staged-diff scope preflight, count-only receipt, Reviewer scope evidence, compact/full Flutter Engineer source-integrity guidance and focused retained-diff/false-LLM-finding tests. No CI attestation yet.",
+    "summary": "CI of early PR #846 found three regressions: certified Library reuse file outside per-task Engineer allowlist caused extra repair calls and contaminated rejected-gate findings. Reacquired claim 026e0790f36a8e294ae1 including task pipeline lock. New head 6b90e81 passes retained pre-Engineer changed path provenance to deterministic Reviewer full-diff gate and prompts; added test for retained file review.",
     "decisions": [
-      "Never auto-approve Reviewer or erase retained out-of-task staged edits.",
-      "No physical retest of host +3184; preserve existing star project.",
-      "Keep PR draft until exact-head source/CI checks pass."
+      "Never blanket-reject certified retained Library workspace paths for missing per-task Engineer targetFiles.",
+      "Never silently drop prior staged source; include it in Review and validate correctness.",
+      "No +3184 retest, no merge without independent Main/Reviewer."
     ],
     "evidence_refs": [
       "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/issues/845",
       "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/846",
-      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/73c62ba228a8efb38dbc4a4a25ce871963e8b9dd"
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/6b90e81b4fd6a08ac684adc37b2af0d756783e96"
     ],
-    "next_action": "Verify exact-head PR #846 CI, correct real test/format/analyzer failures, add necessary negative compiler fixtures if safe, then submit claim-bound REVIEW_REQUIRED to Main/Reviewer. G5 physical remains open."
+    "next_action": "Wait for six exact-head CI on 6b90e81; fix any failures and verify source scope tests, then submit review packet to Main/Reviewer without self-approval. Physical S24 FE G5 stays pending."
   },
   "review_history": [
     {

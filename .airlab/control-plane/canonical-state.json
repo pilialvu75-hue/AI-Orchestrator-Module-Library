@@ -7,7 +7,7 @@
     "policy": "This private repository is the single coordination authority. Chats and agents are workers, not independent sources of truth."
   },
   "updated_at": "2026-10-14",
-  "state_revision": 278,
+  "state_revision": 279,
   "lifecycle_status": "BOOTSTRAP_ACTIVE",
   "roadmap_authority": {
     "library": ".airlab/roadmap.yaml",
@@ -80,12 +80,11 @@
     "invalid_lane_behavior": "ISOLATE_AND_SURFACE_PROJECTION_INCIDENT"
   },
   "projection": {
-    "source_digest": "b11ab4755ea36713a20948e450579eb75e865d6a50f233edd438c8bfa04656e1",
-    "projected_at": "2026-10-14T21:11:09Z",
+    "source_digest": "bffa98bdba0fcf8668b61d9f4ac8dd41caedd4cb8acbf4b1a1d1b117e258565a",
+    "projected_at": "2026-10-14T21:13:19Z",
     "counts": {
       "BLOCKED": 1,
-      "CLAIMED": 1,
-      "IMPLEMENTING": 1,
+      "IMPLEMENTING": 2,
       "READY": 14
     },
     "active_claims": [
@@ -94,7 +93,7 @@
         "claim_id": "026e0790f36a8e294ae1",
         "work_item": "issue-845-first-star-app-review-scope-3184",
         "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
-        "lease_until": "2026-10-15T09:11:09Z",
+        "lease_until": "2026-10-15T09:13:19Z",
         "resource_locks": [
           "branch:pilialvu75-hue/Ai-orchestrator-riserva:fix/cantiere-845-first-star-review-scope",
           "contract:cantiere-review-stage-scope",
@@ -404,15 +403,15 @@
       },
       {
         "id": "cantiere",
-        "status": "CLAIMED",
+        "status": "IMPLEMENTING",
         "activation": "active",
-        "state_version": 81,
+        "state_version": 82,
         "updated_at": "2026-10-14",
         "active_claim": {
           "claim_id": "026e0790f36a8e294ae1",
           "work_item": "issue-845-first-star-app-review-scope-3184",
           "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
-          "lease_until": "2026-10-15T09:11:09Z",
+          "lease_until": "2026-10-15T09:13:19Z",
           "resource_locks": [
             "branch:pilialvu75-hue/Ai-orchestrator-riserva:fix/cantiere-845-first-star-review-scope",
             "contract:cantiere-review-stage-scope",
@@ -429,7 +428,7 @@
         "reviewer_state": "PENDING",
         "inference_profile_status": null,
         "historical_backlog_count": 3,
-        "next_action": "Verify exact-head PR #846 CI, correct real test/format/analyzer failures, add necessary negative compiler fixtures if safe, then submit claim-bound REVIEW_REQUIRED to Main/Reviewer. G5 physical remains open."
+        "next_action": "Wait for six exact-head CI on 6b90e81; fix any failures and verify source scope tests, then submit review packet to Main/Reviewer without self-approval. Physical S24 FE G5 stays pending."
       },
       {
         "id": "diagnostics",
