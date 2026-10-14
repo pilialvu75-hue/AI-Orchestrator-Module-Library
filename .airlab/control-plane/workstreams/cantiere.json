@@ -3,11 +3,11 @@
   "id": "cantiere",
   "title": "Cantiere",
   "role": "worker",
-  "status": "CLAIMED",
+  "status": "IMPLEMENTING",
   "activation": "active",
   "scope": "Exclusive Cantiere/App Factory execution, durability, build/review/validation/apply and first-real-app reliability.",
   "shared_engine_policy": "shared_or_control_plane",
-  "state_version": 78,
+  "state_version": 79,
   "updated_at": "2026-10-14",
   "active_claim": {
     "claim_id": "2e5e9291924d5c3f141c",
@@ -27,8 +27,8 @@
       "file:pilialvu75-hue/Ai-orchestrator-riserva:test/app_factory/workshop/workshop_proposal_workspace_stager_test.dart"
     ],
     "started_at": "2026-10-14T21:02:52Z",
-    "heartbeat_at": "2026-10-14T21:02:52Z",
-    "lease_until": "2026-10-15T09:02:52Z",
+    "heartbeat_at": "2026-10-14T21:07:06Z",
+    "lease_until": "2026-10-15T09:07:06Z",
     "lease_hours": 12
   },
   "dependencies": [],
@@ -54,7 +54,7 @@
     "reviewed_by": null,
     "reviewed_at": null
   },
-  "next_action": "Merge PR #836 using expected reviewed head 0e89bd67160fe3807e3e316d28956ea1274009b0, verify merged commit actually reachable from main, then check signed Android release tag and APK asset containing the merge. Only that signed release can authorize one physical S24 FE retest on existing black-background project with four qwen2_5_3b_instruct roles; keep G5 physical open and do not substitute Lista Spesa Lite.",
+  "next_action": "Verify exact-head PR #846 CI, correct real test/format/analyzer failures, add necessary negative compiler fixtures if safe, then submit claim-bound REVIEW_REQUIRED to Main/Reviewer. G5 physical remains open.",
   "historical_backlog": [
     "Stay in Phase 1 ONLINE until a real generated Android app is physically accepted.",
     "Reproduce the recent manga-drawing app failure from current main with Diagnostics; do not restart generic audits.",
@@ -1014,25 +1014,43 @@
       ],
       "next_action": "Merge PR #836 using expected reviewed head 0e89bd67160fe3807e3e316d28956ea1274009b0, verify merged commit actually reachable from main, then check signed Android release tag and APK asset containing the merge. Only that signed release can authorize one physical S24 FE retest on existing black-background project with four qwen2_5_3b_instruct roles; keep G5 physical open and do not substitute Lista Spesa Lite.",
       "kind": "REVIEW_ACCEPTED"
+    },
+    {
+      "seq": 50,
+      "at": "2026-10-14T21:07:06Z",
+      "claim_id": "2e5e9291924d5c3f141c",
+      "work_item": "issue-845-first-star-app-review-scope-3184",
+      "summary": "Physical Android +3184 black-star app review scope ambiguity (#845) isolated. Draft PR #846 head 73c62ba contains deterministic full-staged-diff scope preflight, count-only receipt, Reviewer scope evidence, compact/full Flutter Engineer source-integrity guidance and focused retained-diff/false-LLM-finding tests. No CI attestation yet.",
+      "decisions": [
+        "Never auto-approve Reviewer or erase retained out-of-task staged edits.",
+        "No physical retest of host +3184; preserve existing star project.",
+        "Keep PR draft until exact-head source/CI checks pass."
+      ],
+      "evidence_refs": [
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/issues/845",
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/846",
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/73c62ba228a8efb38dbc4a4a25ce871963e8b9dd"
+      ],
+      "next_action": "Verify exact-head PR #846 CI, correct real test/format/analyzer failures, add necessary negative compiler fixtures if safe, then submit claim-bound REVIEW_REQUIRED to Main/Reviewer. G5 physical remains open."
     }
   ],
   "last_checkpoint": {
-    "seq": 49,
-    "at": "2026-10-14T13:39:46Z",
-    "claim_id": "c0d7e9a1f346b8d5021a",
-    "work_item": "cantiere-engineer-flutter-native-import-3140",
-    "summary": "Main/Reviewer APPROVED source-code integration of PR #836 at reviewed head 0e89bd67160fe3807e3e316d28956ea1274009b0. Independent four-file diff review and regressions confirm P2 lexical parsing/JVM namespaces including java, kotlin, javax, Android/io.flutter, conditional URI segments, strings/comments/interpolation, BOM/shebang, metadata; legitimate Flutter Dart/MethodChannel/native bridge retained. One existing structural Engineer retry only, Reviewer and Validation remain authoritative. All 6 exact-head CI PASS; all 12 Codex P2 threads resolved; claim lease was overdue but REVIEW_WAIT_OVERDUE kept valid packet reviewer-owned. G1–G4 attested bound to packet and claim. APPROVED CODE ONLY. G5 PENDING_PHYSICAL_S24_FE; do not mark Phase 1 online/real generated app successful.",
+    "seq": 50,
+    "at": "2026-10-14T21:07:06Z",
+    "claim_id": "2e5e9291924d5c3f141c",
+    "work_item": "issue-845-first-star-app-review-scope-3184",
+    "summary": "Physical Android +3184 black-star app review scope ambiguity (#845) isolated. Draft PR #846 head 73c62ba contains deterministic full-staged-diff scope preflight, count-only receipt, Reviewer scope evidence, compact/full Flutter Engineer source-integrity guidance and focused retained-diff/false-LLM-finding tests. No CI attestation yet.",
     "decisions": [
-      "Main/Reviewer accepted the implementation/review gate."
+      "Never auto-approve Reviewer or erase retained out-of-task staged edits.",
+      "No physical retest of host +3184; preserve existing star project.",
+      "Keep PR draft until exact-head source/CI checks pass."
     ],
     "evidence_refs": [
-      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/836",
-      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/0e89bd67160fe3807e3e316d28956ea1274009b0",
-      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38364967940",
-      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38364967938"
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/issues/845",
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/846",
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/73c62ba228a8efb38dbc4a4a25ce871963e8b9dd"
     ],
-    "next_action": "Merge PR #836 using expected reviewed head 0e89bd67160fe3807e3e316d28956ea1274009b0, verify merged commit actually reachable from main, then check signed Android release tag and APK asset containing the merge. Only that signed release can authorize one physical S24 FE retest on existing black-background project with four qwen2_5_3b_instruct roles; keep G5 physical open and do not substitute Lista Spesa Lite.",
-    "kind": "REVIEW_ACCEPTED"
+    "next_action": "Verify exact-head PR #846 CI, correct real test/format/analyzer failures, add necessary negative compiler fixtures if safe, then submit claim-bound REVIEW_REQUIRED to Main/Reviewer. G5 physical remains open."
   },
   "review_history": [
     {
