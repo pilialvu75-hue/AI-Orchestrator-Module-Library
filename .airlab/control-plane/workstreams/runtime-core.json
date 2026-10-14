@@ -3,11 +3,11 @@
   "id": "runtime-core",
   "title": "Runtime Core",
   "role": "worker",
-  "status": "CLAIMED",
+  "status": "IMPLEMENTING",
   "activation": "active",
   "scope": "Shared inference contract, capability/model routing semantics, context, streaming, cancellation, errors, model-profile schema and lifecycle. Target platforms own their benchmark-gated LLM/backend/runtime profiles.",
   "shared_engine_policy": "shared_or_control_plane",
-  "state_version": 34,
+  "state_version": 35,
   "updated_at": "2026-10-14",
   "active_claim": {
     "claim_id": "95be453817ace65c0fd8",
@@ -32,8 +32,8 @@
       "pr:pilialvu75-hue/Ai-orchestrator-riserva#840"
     ],
     "started_at": "2026-10-14T10:23:39Z",
-    "heartbeat_at": "2026-10-14T10:23:39Z",
-    "lease_until": "2026-10-14T22:23:39Z",
+    "heartbeat_at": "2026-10-14T10:26:12Z",
+    "lease_until": "2026-10-14T22:26:12Z",
     "lease_hours": 12
   },
   "dependencies": [],
@@ -58,7 +58,7 @@
     "reviewed_by": null,
     "reviewed_at": null
   },
-  "next_action": "Inspect CI/analyzer/test results and Codex review on f3bc1d35; address concrete failures, revalidate final head and submit claim-bound REVIEW_REQUIRED packet. No merge/self-approval or physical success assertion.",
+  "next_action": "Verify final-head 84ed8a59 CI and Codex review; address concrete findings, then submit REVIEW_REQUIRED packet with G5 S24 FE pending. Do not merge or close issue 839.",
   "inference_ownership": {
     "owns": [
       "shared inference API",
@@ -485,23 +485,43 @@
         "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/f3bc1d35fd590804c9437f92bd4de953a6247758"
       ],
       "next_action": "Inspect CI/analyzer/test results and Codex review on f3bc1d35; address concrete failures, revalidate final head and submit claim-bound REVIEW_REQUIRED packet. No merge/self-approval or physical success assertion."
+    },
+    {
+      "seq": 23,
+      "at": "2026-10-14T10:26:12Z",
+      "claim_id": "95be453817ace65c0fd8",
+      "work_item": "issue-839-same-conversation-recall-context",
+      "summary": "PR 840 updated to 84ed8a59061f025e9136997b8bafcb2882e1c78e under expanded claim 95be453817ace65c0fd8. A manual cross-platform check found CloudRuntimeProvider still bounds to 24 turns, so full retained history is now opt-in only for explicit LOCAL at ChatRepositoryImpl; Cloud/Hybrid/unknown callers keep prior portable recall. Added mode-selection regression and preserved old hotpath test unchanged. Initial-head Linux full Flutter/analyzer passed; final-head CI and Codex review requested.",
+      "decisions": [
+        "Expanded exact file locks by explicit release v33/reclaim v34; original claim 88f663ec2edf8685e90d is superseded, current claim 95be453817ace65c0fd8.",
+        "No capacity/profile changes: LOCAL keeps existing ordinary history until its runtime budget; Cloud/Hybrid retain existing portable recall envelope.",
+        "Source finding fixes a premature local omission, not proof of the physical incident's full root cause."
+      ],
+      "evidence_refs": [
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/840",
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/84ed8a59061f025e9136997b8bafcb2882e1c78e",
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38548735460/job/115801184550"
+      ],
+      "next_action": "Verify final-head 84ed8a59 CI and Codex review; address concrete findings, then submit REVIEW_REQUIRED packet with G5 S24 FE pending. Do not merge or close issue 839."
     }
   ],
   "last_checkpoint": {
-    "seq": 22,
-    "at": "2026-10-14T10:20:00Z",
-    "claim_id": "88f663ec2edf8685e90d",
+    "seq": 23,
+    "at": "2026-10-14T10:26:12Z",
+    "claim_id": "95be453817ace65c0fd8",
     "work_item": "issue-839-same-conversation-recall-context",
-    "summary": "Opened PR 840 at exact head f3bc1d35fd590804c9437f92bd4de953a6247758 (8 files) from main 45130475. Fixed premature 24-turn recall rebuilding for retained history, added explicit reread and unanswered retry intent, same-session filtering and persisted closed stage receipts/public projections. Added regression fixtures across memory/token fitting/Phi prompt/repository persistence boundaries plus adversarial projection checks. Parser and diff whitespace checks completed; full Flutter CI and exact-head Codex review requested, pending.",
+    "summary": "PR 840 updated to 84ed8a59061f025e9136997b8bafcb2882e1c78e under expanded claim 95be453817ace65c0fd8. A manual cross-platform check found CloudRuntimeProvider still bounds to 24 turns, so full retained history is now opt-in only for explicit LOCAL at ChatRepositoryImpl; Cloud/Hybrid/unknown callers keep prior portable recall. Added mode-selection regression and preserved old hotpath test unchanged. Initial-head Linux full Flutter/analyzer passed; final-head CI and Codex review requested.",
     "decisions": [
-      "Diagnostics projection scope is additive in Riserva with explicit file/contract locks and mandatory independent review; Diagnostics lane itself remains unchanged.",
-      "Physical incident remains unproven beyond owner's observation; fact may still be outside authoritative token budget or ignored by model."
+      "Expanded exact file locks by explicit release v33/reclaim v34; original claim 88f663ec2edf8685e90d is superseded, current claim 95be453817ace65c0fd8.",
+      "No capacity/profile changes: LOCAL keeps existing ordinary history until its runtime budget; Cloud/Hybrid retain existing portable recall envelope.",
+      "Source finding fixes a premature local omission, not proof of the physical incident's full root cause."
     ],
     "evidence_refs": [
       "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/840",
-      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/f3bc1d35fd590804c9437f92bd4de953a6247758"
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/84ed8a59061f025e9136997b8bafcb2882e1c78e",
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38548735460/job/115801184550"
     ],
-    "next_action": "Inspect CI/analyzer/test results and Codex review on f3bc1d35; address concrete failures, revalidate final head and submit claim-bound REVIEW_REQUIRED packet. No merge/self-approval or physical success assertion."
+    "next_action": "Verify final-head 84ed8a59 CI and Codex review; address concrete findings, then submit REVIEW_REQUIRED packet with G5 S24 FE pending. Do not merge or close issue 839."
   },
   "review_history": [
     {
