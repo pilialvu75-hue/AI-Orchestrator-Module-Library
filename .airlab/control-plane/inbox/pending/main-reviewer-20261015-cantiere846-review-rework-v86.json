@@ -1,0 +1,12 @@
+{
+  "schema_version": 1,
+  "request_id": "main-reviewer-20261015-cantiere846-review-rework-v86",
+  "actor_id": "chatgpt:main-reviewer",
+  "lane_id": "cantiere",
+  "operation": "review_rework",
+  "expected_state_version": 86,
+  "payload": {
+    "reason": "CHANGES_REQUESTED on PR #846 exact head 69632414411a3a2eb74a5ab42c2fd13d55d5e935 (claim 5f0b20632bafab7b6960), independent Main/Reviewer. P2 scope authorization defect: workshop_task_inference_pipeline.dart:231-235 derives retainedStagedPaths merely from pre-Engineer snapshot delta, and workshop_proposal_review_runner.dart:93-101 treats those arbitrary paths as authorized alongside hard explicit_scope targetFiles. Certified ownership is not proven, so pre-existing untrusted/out-of-task edits can bypass deterministic scope gate. Existing positive test only labels path 'certified' without validating provenance. P2 evidence gap: Flutter-first prompt-string assertions alone do not prove +3184 invalid Dart/widget/Color/Random/Android XML/Kotlin sources fail actual analyzer/validation/build gates. Details and exact bounded requirements recorded at https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/846#issuecomment-6179922968. Six original head CI PASS but G1-G4 not attested, G6 not approved; G5 physical remains open.",
+    "next_action": "Same Cantiere worker under issue #845 and existing claim: fix only provenance/trust of retained staged paths. Separate temporal prior staged delta from certified/explicitly authorized immutable content-scoped Library reuse; reject/isolate arbitrary previous out-of-task paths fail-closed while preserving source, and maintain Reviewer coverage and existing one bounded retry. Add tests for forged/arbitrary retained path denied, actually provenance-verified certified reuse allowed, stale/modified provenance denied and resumed retry; add executed negative fixture evidence using existing gates for representative malformed +3184 Flutter/Dart and native XML/Kotlin, not prompt-only. No unrelated models/providers/RAM/Vulkan/Local WebSearch/token/timeout changes; do not retest +3184. Renew lease through canonical heartbeat before further worker coding. Re-run exact-head relevant tests and six CI, resolve any real findings, submit new claim-bound REVIEW_REQUIRED packet. Main/Reviewer will independently reevaluate; do not merge/approve or claim G5."
+  }
+}
