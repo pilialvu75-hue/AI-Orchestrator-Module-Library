@@ -7,7 +7,7 @@
   "activation": "active",
   "scope": "Exclusive Cantiere/App Factory execution, durability, build/review/validation/apply and first-real-app reliability.",
   "shared_engine_policy": "shared_or_control_plane",
-  "state_version": 87,
+  "state_version": 88,
   "updated_at": "2026-10-14",
   "active_claim": {
     "claim_id": "5f0b20632bafab7b6960",
@@ -29,8 +29,8 @@
       "file:pilialvu75-hue/Ai-orchestrator-riserva:test/app_factory/workshop/workshop_task_inference_pipeline_test.dart"
     ],
     "started_at": "2026-10-14T22:09:36Z",
-    "heartbeat_at": "2026-10-14T22:09:36Z",
-    "lease_until": "2026-10-15T10:09:36Z",
+    "heartbeat_at": "2026-10-14T22:50:49Z",
+    "lease_until": "2026-10-15T10:50:49Z",
     "lease_hours": 12
   },
   "dependencies": [],

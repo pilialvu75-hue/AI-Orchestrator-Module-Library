@@ -7,7 +7,7 @@
     "policy": "This private repository is the single coordination authority. Chats and agents are workers, not independent sources of truth."
   },
   "updated_at": "2026-10-14",
-  "state_revision": 284,
+  "state_revision": 286,
   "lifecycle_status": "BOOTSTRAP_ACTIVE",
   "roadmap_authority": {
     "library": ".airlab/roadmap.yaml",
@@ -80,11 +80,11 @@
     "invalid_lane_behavior": "ISOLATE_AND_SURFACE_PROJECTION_INCIDENT"
   },
   "projection": {
-    "source_digest": "bbfba12ace4fd613b0fdcf621bbe5f6330e1db611f956939dcb15ba4ab3cf7e1",
-    "projected_at": "2026-10-14T22:29:01Z",
+    "source_digest": "820d1744e4b10a5412d658f6df370413689cfa1e064a056505c0599b6ef1b613",
+    "projected_at": "2026-10-14T22:50:49Z",
     "counts": {
-      "BLOCKED": 1,
-      "IMPLEMENTING": 2,
+      "BLOCKED": 2,
+      "IMPLEMENTING": 1,
       "READY": 14
     },
     "active_claims": [
@@ -93,7 +93,7 @@
         "claim_id": "5f0b20632bafab7b6960",
         "work_item": "issue-845-first-star-app-review-scope-3184",
         "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
-        "lease_until": "2026-10-15T10:09:36Z",
+        "lease_until": "2026-10-15T10:50:49Z",
         "resource_locks": [
           "branch:pilialvu75-hue/Ai-orchestrator-riserva:fix/cantiere-845-first-star-review-scope",
           "contract:cantiere-review-stage-scope",
@@ -106,28 +106,6 @@
           "file:pilialvu75-hue/Ai-orchestrator-riserva:test/app_factory/workshop/workshop_proposal_workspace_stager_test.dart",
           "file:pilialvu75-hue/Ai-orchestrator-riserva:test/app_factory/workshop/workshop_task_inference_pipeline_test.dart"
         ]
-      },
-      {
-        "lane": "runtime-core",
-        "claim_id": "95be453817ace65c0fd8",
-        "work_item": "issue-839-same-conversation-recall-context",
-        "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
-        "lease_until": "2026-10-14T22:36:39Z",
-        "resource_locks": [
-          "branch:pilialvu75-hue/Ai-orchestrator-riserva:fix/runtime-core-839-conversation-recall",
-          "contract:conversation-context-recall",
-          "contract:diagnostics-context-receipts",
-          "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/core/diagnostics/public_log_projection.dart",
-          "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/features/chat/data/repositories/chat_repository_impl.dart",
-          "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/features/chat_memory/chronological_recall_policy.dart",
-          "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/features/chat_memory/conversation_memory_service.dart",
-          "file:pilialvu75-hue/Ai-orchestrator-riserva:test/core/diagnostics/public_log_projection_test.dart",
-          "file:pilialvu75-hue/Ai-orchestrator-riserva:test/features/chat/data/repositories/chat_repository_impl_context_test.dart",
-          "file:pilialvu75-hue/Ai-orchestrator-riserva:test/features/chat_memory/chronological_recall_policy_test.dart",
-          "file:pilialvu75-hue/Ai-orchestrator-riserva:test/features/chat_memory/conversation_memory_hotpath_test.dart",
-          "file:pilialvu75-hue/Ai-orchestrator-riserva:test/features/chat_memory/conversation_recall_prompt_test.dart",
-          "pr:pilialvu75-hue/Ai-orchestrator-riserva#840"
-        ]
       }
     ],
     "active_resource_locks": [
@@ -138,28 +116,10 @@
         "work_item": "issue-845-first-star-app-review-scope-3184"
       },
       {
-        "key": "branch:pilialvu75-hue/Ai-orchestrator-riserva:fix/runtime-core-839-conversation-recall",
-        "lane": "runtime-core",
-        "claim_id": "95be453817ace65c0fd8",
-        "work_item": "issue-839-same-conversation-recall-context"
-      },
-      {
         "key": "contract:cantiere-review-stage-scope",
         "lane": "cantiere",
         "claim_id": "5f0b20632bafab7b6960",
         "work_item": "issue-845-first-star-app-review-scope-3184"
-      },
-      {
-        "key": "contract:conversation-context-recall",
-        "lane": "runtime-core",
-        "claim_id": "95be453817ace65c0fd8",
-        "work_item": "issue-839-same-conversation-recall-context"
-      },
-      {
-        "key": "contract:diagnostics-context-receipts",
-        "lane": "runtime-core",
-        "claim_id": "95be453817ace65c0fd8",
-        "work_item": "issue-839-same-conversation-recall-context"
       },
       {
         "key": "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/app_factory/workshop/workshop_proposal_implementation_runner.dart",
@@ -186,30 +146,6 @@
         "work_item": "issue-845-first-star-app-review-scope-3184"
       },
       {
-        "key": "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/core/diagnostics/public_log_projection.dart",
-        "lane": "runtime-core",
-        "claim_id": "95be453817ace65c0fd8",
-        "work_item": "issue-839-same-conversation-recall-context"
-      },
-      {
-        "key": "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/features/chat/data/repositories/chat_repository_impl.dart",
-        "lane": "runtime-core",
-        "claim_id": "95be453817ace65c0fd8",
-        "work_item": "issue-839-same-conversation-recall-context"
-      },
-      {
-        "key": "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/features/chat_memory/chronological_recall_policy.dart",
-        "lane": "runtime-core",
-        "claim_id": "95be453817ace65c0fd8",
-        "work_item": "issue-839-same-conversation-recall-context"
-      },
-      {
-        "key": "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/features/chat_memory/conversation_memory_service.dart",
-        "lane": "runtime-core",
-        "claim_id": "95be453817ace65c0fd8",
-        "work_item": "issue-839-same-conversation-recall-context"
-      },
-      {
         "key": "file:pilialvu75-hue/Ai-orchestrator-riserva:test/app_factory/workshop/workshop_proposal_implementation_runner_test.dart",
         "lane": "cantiere",
         "claim_id": "5f0b20632bafab7b6960",
@@ -232,42 +168,6 @@
         "lane": "cantiere",
         "claim_id": "5f0b20632bafab7b6960",
         "work_item": "issue-845-first-star-app-review-scope-3184"
-      },
-      {
-        "key": "file:pilialvu75-hue/Ai-orchestrator-riserva:test/core/diagnostics/public_log_projection_test.dart",
-        "lane": "runtime-core",
-        "claim_id": "95be453817ace65c0fd8",
-        "work_item": "issue-839-same-conversation-recall-context"
-      },
-      {
-        "key": "file:pilialvu75-hue/Ai-orchestrator-riserva:test/features/chat/data/repositories/chat_repository_impl_context_test.dart",
-        "lane": "runtime-core",
-        "claim_id": "95be453817ace65c0fd8",
-        "work_item": "issue-839-same-conversation-recall-context"
-      },
-      {
-        "key": "file:pilialvu75-hue/Ai-orchestrator-riserva:test/features/chat_memory/chronological_recall_policy_test.dart",
-        "lane": "runtime-core",
-        "claim_id": "95be453817ace65c0fd8",
-        "work_item": "issue-839-same-conversation-recall-context"
-      },
-      {
-        "key": "file:pilialvu75-hue/Ai-orchestrator-riserva:test/features/chat_memory/conversation_memory_hotpath_test.dart",
-        "lane": "runtime-core",
-        "claim_id": "95be453817ace65c0fd8",
-        "work_item": "issue-839-same-conversation-recall-context"
-      },
-      {
-        "key": "file:pilialvu75-hue/Ai-orchestrator-riserva:test/features/chat_memory/conversation_recall_prompt_test.dart",
-        "lane": "runtime-core",
-        "claim_id": "95be453817ace65c0fd8",
-        "work_item": "issue-839-same-conversation-recall-context"
-      },
-      {
-        "key": "pr:pilialvu75-hue/Ai-orchestrator-riserva#840",
-        "lane": "runtime-core",
-        "claim_id": "95be453817ace65c0fd8",
-        "work_item": "issue-839-same-conversation-recall-context"
       }
     ],
     "review_required": [],
@@ -291,20 +191,35 @@
           "detected_at": "2026-10-13T07:45:35Z",
           "review_required": false
         }
-      }
-    ],
-    "checkpoint_watch": [
+      },
       {
         "lane": "runtime-core",
-        "claim_id": "95be453817ace65c0fd8",
-        "work_item": "issue-839-same-conversation-recall-context",
-        "status": "IMPLEMENTING",
-        "reason": "CHECKPOINT_STALE",
-        "last_checkpoint_at": "2026-10-14T10:36:39Z",
-        "due_since": "2026-10-14T12:36:39Z",
-        "warning_after_minutes": 120
+        "reason": {
+          "code": "CLAIM_LEASE_EXPIRED",
+          "work_item": "issue-839-same-conversation-recall-context",
+          "claim_id": "95be453817ace65c0fd8",
+          "resource_locks": [
+            "branch:pilialvu75-hue/Ai-orchestrator-riserva:fix/runtime-core-839-conversation-recall",
+            "contract:conversation-context-recall",
+            "contract:diagnostics-context-receipts",
+            "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/core/diagnostics/public_log_projection.dart",
+            "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/features/chat/data/repositories/chat_repository_impl.dart",
+            "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/features/chat_memory/chronological_recall_policy.dart",
+            "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/features/chat_memory/conversation_memory_service.dart",
+            "file:pilialvu75-hue/Ai-orchestrator-riserva:test/core/diagnostics/public_log_projection_test.dart",
+            "file:pilialvu75-hue/Ai-orchestrator-riserva:test/features/chat/data/repositories/chat_repository_impl_context_test.dart",
+            "file:pilialvu75-hue/Ai-orchestrator-riserva:test/features/chat_memory/chronological_recall_policy_test.dart",
+            "file:pilialvu75-hue/Ai-orchestrator-riserva:test/features/chat_memory/conversation_memory_hotpath_test.dart",
+            "file:pilialvu75-hue/Ai-orchestrator-riserva:test/features/chat_memory/conversation_recall_prompt_test.dart",
+            "pr:pilialvu75-hue/Ai-orchestrator-riserva#840"
+          ],
+          "lease_until": "2026-10-14T22:36:39Z",
+          "detected_at": "2026-10-14T22:50:49Z",
+          "review_required": true
+        }
       }
     ],
+    "checkpoint_watch": [],
     "projection_incidents": [],
     "platform_inference_profiles": [
       {
@@ -405,13 +320,13 @@
         "id": "cantiere",
         "status": "IMPLEMENTING",
         "activation": "active",
-        "state_version": 87,
+        "state_version": 88,
         "updated_at": "2026-10-14",
         "active_claim": {
           "claim_id": "5f0b20632bafab7b6960",
           "work_item": "issue-845-first-star-app-review-scope-3184",
           "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
-          "lease_until": "2026-10-15T10:09:36Z",
+          "lease_until": "2026-10-15T10:50:49Z",
           "resource_locks": [
             "branch:pilialvu75-hue/Ai-orchestrator-riserva:fix/cantiere-845-first-star-review-scope",
             "contract:cantiere-review-stage-scope",
@@ -564,31 +479,11 @@
       },
       {
         "id": "runtime-core",
-        "status": "IMPLEMENTING",
+        "status": "BLOCKED",
         "activation": "active",
-        "state_version": 37,
+        "state_version": 38,
         "updated_at": "2026-10-14",
-        "active_claim": {
-          "claim_id": "95be453817ace65c0fd8",
-          "work_item": "issue-839-same-conversation-recall-context",
-          "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
-          "lease_until": "2026-10-14T22:36:39Z",
-          "resource_locks": [
-            "branch:pilialvu75-hue/Ai-orchestrator-riserva:fix/runtime-core-839-conversation-recall",
-            "contract:conversation-context-recall",
-            "contract:diagnostics-context-receipts",
-            "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/core/diagnostics/public_log_projection.dart",
-            "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/features/chat/data/repositories/chat_repository_impl.dart",
-            "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/features/chat_memory/chronological_recall_policy.dart",
-            "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/features/chat_memory/conversation_memory_service.dart",
-            "file:pilialvu75-hue/Ai-orchestrator-riserva:test/core/diagnostics/public_log_projection_test.dart",
-            "file:pilialvu75-hue/Ai-orchestrator-riserva:test/features/chat/data/repositories/chat_repository_impl_context_test.dart",
-            "file:pilialvu75-hue/Ai-orchestrator-riserva:test/features/chat_memory/chronological_recall_policy_test.dart",
-            "file:pilialvu75-hue/Ai-orchestrator-riserva:test/features/chat_memory/conversation_memory_hotpath_test.dart",
-            "file:pilialvu75-hue/Ai-orchestrator-riserva:test/features/chat_memory/conversation_recall_prompt_test.dart",
-            "pr:pilialvu75-hue/Ai-orchestrator-riserva#840"
-          ]
-        },
+        "active_claim": null,
         "reviewer_state": "PENDING",
         "inference_profile_status": null,
         "historical_backlog_count": 4,
