@@ -7,7 +7,7 @@
   "activation": "active",
   "scope": "Shared inference contract, capability/model routing semantics, context, streaming, cancellation, errors, model-profile schema and lifecycle. Target platforms own their benchmark-gated LLM/backend/runtime profiles.",
   "shared_engine_policy": "shared_or_control_plane",
-  "state_version": 35,
+  "state_version": 36,
   "updated_at": "2026-10-14",
   "active_claim": {
     "claim_id": "95be453817ace65c0fd8",
@@ -32,8 +32,8 @@
       "pr:pilialvu75-hue/Ai-orchestrator-riserva#840"
     ],
     "started_at": "2026-10-14T10:23:39Z",
-    "heartbeat_at": "2026-10-14T10:26:12Z",
-    "lease_until": "2026-10-14T22:26:12Z",
+    "heartbeat_at": "2026-10-14T10:30:21Z",
+    "lease_until": "2026-10-14T22:30:21Z",
     "lease_hours": 12
   },
   "dependencies": [],
@@ -58,7 +58,7 @@
     "reviewed_by": null,
     "reviewed_at": null
   },
-  "next_action": "Verify final-head 84ed8a59 CI and Codex review; address concrete findings, then submit REVIEW_REQUIRED packet with G5 S24 FE pending. Do not merge or close issue 839.",
+  "next_action": "Collect CI/test/analyzer and Codex outcome for cf33c9f5, resolve the addressed thread after validation, then submit REVIEW_REQUIRED packet. Preserve G5 physical S24 FE pending and issue 839 open.",
   "inference_ownership": {
     "owns": [
       "shared inference API",
@@ -503,25 +503,39 @@
         "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38548735460/job/115801184550"
       ],
       "next_action": "Verify final-head 84ed8a59 CI and Codex review; address concrete findings, then submit REVIEW_REQUIRED packet with G5 S24 FE pending. Do not merge or close issue 839."
+    },
+    {
+      "seq": 24,
+      "at": "2026-10-14T10:30:21Z",
+      "claim_id": "95be453817ace65c0fd8",
+      "work_item": "issue-839-same-conversation-recall-context",
+      "summary": "Codex review of 84ed8a59 raised P1: portable recall must use actual retained context on 16-turn Web/custom profiles. Addressed in cf33c9f5750c23e6d1746c45ede15fab57cc35a4: portable cap applied to recent.contextTurns, regression matrix covers 20/30 saved turns, exact selected pairs and receipt counts. Posted review reply and requested exact-head re-review; CI rerunning.",
+      "decisions": [
+        "No new capacity/runtime-profile/resource setting change; existing portable cap and native token budget remain authoritative."
+      ],
+      "evidence_refs": [
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/840",
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/cf33c9f5750c23e6d1746c45ede15fab57cc35a4",
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/840#discussion_r4269619976"
+      ],
+      "next_action": "Collect CI/test/analyzer and Codex outcome for cf33c9f5, resolve the addressed thread after validation, then submit REVIEW_REQUIRED packet. Preserve G5 physical S24 FE pending and issue 839 open."
     }
   ],
   "last_checkpoint": {
-    "seq": 23,
-    "at": "2026-10-14T10:26:12Z",
+    "seq": 24,
+    "at": "2026-10-14T10:30:21Z",
     "claim_id": "95be453817ace65c0fd8",
     "work_item": "issue-839-same-conversation-recall-context",
-    "summary": "PR 840 updated to 84ed8a59061f025e9136997b8bafcb2882e1c78e under expanded claim 95be453817ace65c0fd8. A manual cross-platform check found CloudRuntimeProvider still bounds to 24 turns, so full retained history is now opt-in only for explicit LOCAL at ChatRepositoryImpl; Cloud/Hybrid/unknown callers keep prior portable recall. Added mode-selection regression and preserved old hotpath test unchanged. Initial-head Linux full Flutter/analyzer passed; final-head CI and Codex review requested.",
+    "summary": "Codex review of 84ed8a59 raised P1: portable recall must use actual retained context on 16-turn Web/custom profiles. Addressed in cf33c9f5750c23e6d1746c45ede15fab57cc35a4: portable cap applied to recent.contextTurns, regression matrix covers 20/30 saved turns, exact selected pairs and receipt counts. Posted review reply and requested exact-head re-review; CI rerunning.",
     "decisions": [
-      "Expanded exact file locks by explicit release v33/reclaim v34; original claim 88f663ec2edf8685e90d is superseded, current claim 95be453817ace65c0fd8.",
-      "No capacity/profile changes: LOCAL keeps existing ordinary history until its runtime budget; Cloud/Hybrid retain existing portable recall envelope.",
-      "Source finding fixes a premature local omission, not proof of the physical incident's full root cause."
+      "No new capacity/runtime-profile/resource setting change; existing portable cap and native token budget remain authoritative."
     ],
     "evidence_refs": [
       "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/840",
-      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/84ed8a59061f025e9136997b8bafcb2882e1c78e",
-      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38548735460/job/115801184550"
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/cf33c9f5750c23e6d1746c45ede15fab57cc35a4",
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/840#discussion_r4269619976"
     ],
-    "next_action": "Verify final-head 84ed8a59 CI and Codex review; address concrete findings, then submit REVIEW_REQUIRED packet with G5 S24 FE pending. Do not merge or close issue 839."
+    "next_action": "Collect CI/test/analyzer and Codex outcome for cf33c9f5, resolve the addressed thread after validation, then submit REVIEW_REQUIRED packet. Preserve G5 physical S24 FE pending and issue 839 open."
   },
   "review_history": [
     {
