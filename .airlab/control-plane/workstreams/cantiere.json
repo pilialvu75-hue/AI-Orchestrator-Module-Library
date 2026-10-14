@@ -7,8 +7,8 @@
   "activation": "active",
   "scope": "Exclusive Cantiere/App Factory execution, durability, build/review/validation/apply and first-real-app reliability.",
   "shared_engine_policy": "shared_or_control_plane",
-  "state_version": 75,
-  "updated_at": "2026-10-13",
+  "state_version": 76,
+  "updated_at": "2026-10-14",
   "active_claim": {
     "claim_id": "c0d7e9a1f346b8d5021a",
     "owner_lane": "cantiere",
@@ -93,10 +93,10 @@
   ],
   "gates": {
     "G0_CLAIM": "PASS",
-    "G1_IMPLEMENTATION": "PENDING",
-    "G2_STATIC": "PENDING",
-    "G3_CI": "PENDING",
-    "G4_INTEGRATION": "PENDING",
+    "G1_IMPLEMENTATION": "PASS",
+    "G2_STATIC": "PASS",
+    "G3_CI": "PASS",
+    "G4_INTEGRATION": "PASS",
     "G5_TARGET_RUNTIME": "PENDING_PHYSICAL_S24_FE",
     "G6_REVIEWER": "PENDING",
     "G7_CANONICAL_SYNC": "PENDING"
@@ -2241,6 +2241,39 @@
           "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38305557283"
         ]
       }
+    },
+    {
+      "at": "2026-10-14T13:38:57Z",
+      "claim_id": "c0d7e9a1f346b8d5021a",
+      "packet_sha256": "93da2a3122aa9db7a2625fc984f41b220f15c5784843daeb0b24612d4a072022",
+      "reviewed_by": "main-reviewer",
+      "summary": "Independent Main/Reviewer review of Cantiere PR #836 exact head 0e89bd67160fe3807e3e316d28956ea1274009b0: four scoped Flutter/Dart files; directive-aware JVM import rejection before VirtualWorkspace staging including java/kotlin/io.flutter, conditional and adjacent URI literals, nested strings/comments/interpolation, qualified metadata and shebang+BOM; positive Dart import and .kt/.xml/MethodChannel cases. Existing bounded Engineer FormatException structural retry and Reviewer/Validation remain authoritative; no models, tokens, timeout, Local WebSearch, Vulkan or RAM guard changes. All six exact-head CI runs passed; 12/12 Codex P2 threads resolved. Expired claim is already REVIEW_WAIT_OVERDUE; valid claim-bound REVIEW_REQUIRED packet remains reviewer-owned. G1–G4 code/test/integration only; G5 physical S24 FE pending.",
+      "evidence_refs_by_gate": {
+        "G1_IMPLEMENTATION": [
+          "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/836",
+          "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/0e89bd67160fe3807e3e316d28956ea1274009b0"
+        ],
+        "G2_STATIC": [
+          "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38364967940",
+          "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38364967938"
+        ],
+        "G3_CI": [
+          "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38364967940",
+          "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38364967938",
+          "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38364967933",
+          "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38364967962",
+          "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38364968070",
+          "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38364967971"
+        ],
+        "G4_INTEGRATION": [
+          "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38364967938",
+          "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38364967940",
+          "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38364967933",
+          "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38364967962",
+          "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38364968070",
+          "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38364967971"
+        ]
+      }
     }
   ],
   "review_packet": {
@@ -2337,6 +2370,39 @@
       "refs": [
         ".airlab/public-repositories/Ai-orchestrator-riserva/roadmap.yaml#CANT-11",
         ".airlab/public-repositories/Ai-orchestrator-riserva/roadmap.yaml#CANT-AUDIT-06"
+      ]
+    }
+  },
+  "current_gate_attestation": {
+    "at": "2026-10-14T13:38:57Z",
+    "claim_id": "c0d7e9a1f346b8d5021a",
+    "packet_sha256": "93da2a3122aa9db7a2625fc984f41b220f15c5784843daeb0b24612d4a072022",
+    "reviewed_by": "main-reviewer",
+    "summary": "Independent Main/Reviewer review of Cantiere PR #836 exact head 0e89bd67160fe3807e3e316d28956ea1274009b0: four scoped Flutter/Dart files; directive-aware JVM import rejection before VirtualWorkspace staging including java/kotlin/io.flutter, conditional and adjacent URI literals, nested strings/comments/interpolation, qualified metadata and shebang+BOM; positive Dart import and .kt/.xml/MethodChannel cases. Existing bounded Engineer FormatException structural retry and Reviewer/Validation remain authoritative; no models, tokens, timeout, Local WebSearch, Vulkan or RAM guard changes. All six exact-head CI runs passed; 12/12 Codex P2 threads resolved. Expired claim is already REVIEW_WAIT_OVERDUE; valid claim-bound REVIEW_REQUIRED packet remains reviewer-owned. G1–G4 code/test/integration only; G5 physical S24 FE pending.",
+    "evidence_refs_by_gate": {
+      "G1_IMPLEMENTATION": [
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/836",
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/0e89bd67160fe3807e3e316d28956ea1274009b0"
+      ],
+      "G2_STATIC": [
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38364967940",
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38364967938"
+      ],
+      "G3_CI": [
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38364967940",
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38364967938",
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38364967933",
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38364967962",
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38364968070",
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38364967971"
+      ],
+      "G4_INTEGRATION": [
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38364967938",
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38364967940",
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38364967933",
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38364967962",
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38364968070",
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38364967971"
       ]
     }
   }
