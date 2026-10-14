@@ -1,0 +1,12 @@
+{
+  "schema_version": 1,
+  "request_id": "cantiere-845-claim-post-ci-20261014T220925006Z",
+  "status": "APPLIED",
+  "processed_at": "2026-10-14T22:09:36Z",
+  "source_file": "cantiere-845-claim-post-ci-20261014T220925006Z.json",
+  "lane_id": "cantiere",
+  "operation": "claim",
+  "actor_id": "chatgpt:cantiere",
+  "errors": [],
+  "result_state_version": 85
+}

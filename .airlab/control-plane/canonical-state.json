@@ -7,7 +7,7 @@
     "policy": "This private repository is the single coordination authority. Chats and agents are workers, not independent sources of truth."
   },
   "updated_at": "2026-10-14",
-  "state_revision": 281,
+  "state_revision": 282,
   "lifecycle_status": "BOOTSTRAP_ACTIVE",
   "roadmap_authority": {
     "library": ".airlab/roadmap.yaml",
@@ -80,14 +80,34 @@
     "invalid_lane_behavior": "ISOLATE_AND_SURFACE_PROJECTION_INCIDENT"
   },
   "projection": {
-    "source_digest": "a95eb556594ad9a64d914958a0d0d65b3c0f66c393c8aab77c49224ba0314226",
-    "projected_at": "2026-10-14T22:08:58Z",
+    "source_digest": "b9a2d72523439b09d7f4eed9132e4c1c5779ec0983bf24d0064d520c0180f1bb",
+    "projected_at": "2026-10-14T22:09:36Z",
     "counts": {
       "BLOCKED": 1,
+      "CLAIMED": 1,
       "IMPLEMENTING": 1,
-      "READY": 15
+      "READY": 14
     },
     "active_claims": [
+      {
+        "lane": "cantiere",
+        "claim_id": "5f0b20632bafab7b6960",
+        "work_item": "issue-845-first-star-app-review-scope-3184",
+        "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
+        "lease_until": "2026-10-15T10:09:36Z",
+        "resource_locks": [
+          "branch:pilialvu75-hue/Ai-orchestrator-riserva:fix/cantiere-845-first-star-review-scope",
+          "contract:cantiere-review-stage-scope",
+          "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/app_factory/workshop/workshop_proposal_implementation_runner.dart",
+          "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/app_factory/workshop/workshop_proposal_review_runner.dart",
+          "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/app_factory/workshop/workshop_proposal_workspace_stager.dart",
+          "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/app_factory/workshop/workshop_task_inference_pipeline.dart",
+          "file:pilialvu75-hue/Ai-orchestrator-riserva:test/app_factory/workshop/workshop_proposal_implementation_runner_test.dart",
+          "file:pilialvu75-hue/Ai-orchestrator-riserva:test/app_factory/workshop/workshop_proposal_review_runner_test.dart",
+          "file:pilialvu75-hue/Ai-orchestrator-riserva:test/app_factory/workshop/workshop_proposal_workspace_stager_test.dart",
+          "file:pilialvu75-hue/Ai-orchestrator-riserva:test/app_factory/workshop/workshop_task_inference_pipeline_test.dart"
+        ]
+      },
       {
         "lane": "runtime-core",
         "claim_id": "95be453817ace65c0fd8",
@@ -113,10 +133,22 @@
     ],
     "active_resource_locks": [
       {
+        "key": "branch:pilialvu75-hue/Ai-orchestrator-riserva:fix/cantiere-845-first-star-review-scope",
+        "lane": "cantiere",
+        "claim_id": "5f0b20632bafab7b6960",
+        "work_item": "issue-845-first-star-app-review-scope-3184"
+      },
+      {
         "key": "branch:pilialvu75-hue/Ai-orchestrator-riserva:fix/runtime-core-839-conversation-recall",
         "lane": "runtime-core",
         "claim_id": "95be453817ace65c0fd8",
         "work_item": "issue-839-same-conversation-recall-context"
+      },
+      {
+        "key": "contract:cantiere-review-stage-scope",
+        "lane": "cantiere",
+        "claim_id": "5f0b20632bafab7b6960",
+        "work_item": "issue-845-first-star-app-review-scope-3184"
       },
       {
         "key": "contract:conversation-context-recall",
@@ -129,6 +161,30 @@
         "lane": "runtime-core",
         "claim_id": "95be453817ace65c0fd8",
         "work_item": "issue-839-same-conversation-recall-context"
+      },
+      {
+        "key": "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/app_factory/workshop/workshop_proposal_implementation_runner.dart",
+        "lane": "cantiere",
+        "claim_id": "5f0b20632bafab7b6960",
+        "work_item": "issue-845-first-star-app-review-scope-3184"
+      },
+      {
+        "key": "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/app_factory/workshop/workshop_proposal_review_runner.dart",
+        "lane": "cantiere",
+        "claim_id": "5f0b20632bafab7b6960",
+        "work_item": "issue-845-first-star-app-review-scope-3184"
+      },
+      {
+        "key": "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/app_factory/workshop/workshop_proposal_workspace_stager.dart",
+        "lane": "cantiere",
+        "claim_id": "5f0b20632bafab7b6960",
+        "work_item": "issue-845-first-star-app-review-scope-3184"
+      },
+      {
+        "key": "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/app_factory/workshop/workshop_task_inference_pipeline.dart",
+        "lane": "cantiere",
+        "claim_id": "5f0b20632bafab7b6960",
+        "work_item": "issue-845-first-star-app-review-scope-3184"
       },
       {
         "key": "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/core/diagnostics/public_log_projection.dart",
@@ -153,6 +209,30 @@
         "lane": "runtime-core",
         "claim_id": "95be453817ace65c0fd8",
         "work_item": "issue-839-same-conversation-recall-context"
+      },
+      {
+        "key": "file:pilialvu75-hue/Ai-orchestrator-riserva:test/app_factory/workshop/workshop_proposal_implementation_runner_test.dart",
+        "lane": "cantiere",
+        "claim_id": "5f0b20632bafab7b6960",
+        "work_item": "issue-845-first-star-app-review-scope-3184"
+      },
+      {
+        "key": "file:pilialvu75-hue/Ai-orchestrator-riserva:test/app_factory/workshop/workshop_proposal_review_runner_test.dart",
+        "lane": "cantiere",
+        "claim_id": "5f0b20632bafab7b6960",
+        "work_item": "issue-845-first-star-app-review-scope-3184"
+      },
+      {
+        "key": "file:pilialvu75-hue/Ai-orchestrator-riserva:test/app_factory/workshop/workshop_proposal_workspace_stager_test.dart",
+        "lane": "cantiere",
+        "claim_id": "5f0b20632bafab7b6960",
+        "work_item": "issue-845-first-star-app-review-scope-3184"
+      },
+      {
+        "key": "file:pilialvu75-hue/Ai-orchestrator-riserva:test/app_factory/workshop/workshop_task_inference_pipeline_test.dart",
+        "lane": "cantiere",
+        "claim_id": "5f0b20632bafab7b6960",
+        "work_item": "issue-845-first-star-app-review-scope-3184"
       },
       {
         "key": "file:pilialvu75-hue/Ai-orchestrator-riserva:test/core/diagnostics/public_log_projection_test.dart",
@@ -324,11 +404,28 @@
       },
       {
         "id": "cantiere",
-        "status": "READY",
+        "status": "CLAIMED",
         "activation": "active",
-        "state_version": 84,
+        "state_version": 85,
         "updated_at": "2026-10-14",
-        "active_claim": null,
+        "active_claim": {
+          "claim_id": "5f0b20632bafab7b6960",
+          "work_item": "issue-845-first-star-app-review-scope-3184",
+          "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
+          "lease_until": "2026-10-15T10:09:36Z",
+          "resource_locks": [
+            "branch:pilialvu75-hue/Ai-orchestrator-riserva:fix/cantiere-845-first-star-review-scope",
+            "contract:cantiere-review-stage-scope",
+            "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/app_factory/workshop/workshop_proposal_implementation_runner.dart",
+            "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/app_factory/workshop/workshop_proposal_review_runner.dart",
+            "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/app_factory/workshop/workshop_proposal_workspace_stager.dart",
+            "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/app_factory/workshop/workshop_task_inference_pipeline.dart",
+            "file:pilialvu75-hue/Ai-orchestrator-riserva:test/app_factory/workshop/workshop_proposal_implementation_runner_test.dart",
+            "file:pilialvu75-hue/Ai-orchestrator-riserva:test/app_factory/workshop/workshop_proposal_review_runner_test.dart",
+            "file:pilialvu75-hue/Ai-orchestrator-riserva:test/app_factory/workshop/workshop_proposal_workspace_stager_test.dart",
+            "file:pilialvu75-hue/Ai-orchestrator-riserva:test/app_factory/workshop/workshop_task_inference_pipeline_test.dart"
+          ]
+        },
         "reviewer_state": "PENDING",
         "inference_profile_status": null,
         "historical_backlog_count": 3,
