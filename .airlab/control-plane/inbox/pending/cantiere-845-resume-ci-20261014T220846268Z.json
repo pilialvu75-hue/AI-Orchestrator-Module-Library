@@ -1,0 +1,21 @@
+{
+  "schema_version": 1,
+  "request_id": "cantiere-845-resume-ci-20261014T220846268Z",
+  "submitted_at": "2026-10-14T22:08:46.268Z",
+  "actor_id": "chatgpt:cantiere",
+  "lane_id": "cantiere",
+  "operation": "resume_wait",
+  "expected_state_version": 83,
+  "payload": {
+    "signal_id": "github-ci-pr846-69632414-all-six-success",
+    "next_action": "Re-claim Cantiere #845, submit exact-head PR #846 review packet to Main/Reviewer; no merge or physical test before independent gates.",
+    "evidence_refs": [
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38638917305",
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38638917312",
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38638917456",
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38638917676",
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38638917350",
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38638917445"
+    ]
+  }
+}
