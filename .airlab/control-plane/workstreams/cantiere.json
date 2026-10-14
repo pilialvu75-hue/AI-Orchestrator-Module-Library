@@ -3,11 +3,11 @@
   "id": "cantiere",
   "title": "Cantiere",
   "role": "worker",
-  "status": "CLAIMED",
+  "status": "IMPLEMENTING",
   "activation": "active",
   "scope": "Exclusive Cantiere/App Factory execution, durability, build/review/validation/apply and first-real-app reliability.",
   "shared_engine_policy": "shared_or_control_plane",
-  "state_version": 90,
+  "state_version": 91,
   "updated_at": "2026-10-14",
   "active_claim": {
     "claim_id": "0b384727ff120df27b3d",
@@ -32,8 +32,8 @@
       "file:pilialvu75-hue/Ai-orchestrator-riserva:test/app_factory/workshop/workshop_task_inference_pipeline_test.dart"
     ],
     "started_at": "2026-10-14T22:53:35Z",
-    "heartbeat_at": "2026-10-14T22:53:35Z",
-    "lease_until": "2026-10-15T10:53:35Z",
+    "heartbeat_at": "2026-10-14T23:04:19Z",
+    "lease_until": "2026-10-15T11:04:19Z",
     "lease_hours": 12
   },
   "dependencies": [],
@@ -59,7 +59,7 @@
     "reviewed_by": null,
     "reviewed_at": null
   },
-  "next_action": "Same Cantiere worker under issue #845 and existing claim: fix only provenance/trust of retained staged paths. Separate temporal prior staged delta from certified/explicitly authorized immutable content-scoped Library reuse; reject/isolate arbitrary previous out-of-task paths fail-closed while preserving source, and maintain Reviewer coverage and existing one bounded retry. Add tests for forged/arbitrary retained path denied, actually provenance-verified certified reuse allowed, stale/modified provenance denied and resumed retry; add executed negative fixture evidence using existing gates for representative malformed +3184 Flutter/Dart and native XML/Kotlin, not prompt-only. No unrelated models/providers/RAM/Vulkan/Local WebSearch/token/timeout changes; do not retest +3184. Renew lease through canonical heartbeat before further worker coding. Re-run exact-head relevant tests and six CI, resolve any real findings, submit new claim-bound REVIEW_REQUIRED packet. Main/Reviewer will independently reevaluate; do not merge/approve or claim G5.",
+  "next_action": "Watch six exact-head workflows for PR #846 head 2b9362bf. Fix concrete failures if any. On all PASS, submit new claim-bound review packet to Main/Reviewer with negative Dart/AAPT2 executed evidence; retain G5 open.",
   "historical_backlog": [
     "Stay in Phase 1 ONLINE until a real generated Android app is physically accepted.",
     "Reproduce the recent manga-drawing app failure from current main with Diagnostics; do not restart generic audits.",
@@ -89,26 +89,6 @@
     "continuation": "Do not re-enable broad Cantiere autopilot until the remaining control-plane concurrency/resource-lock weakness is addressed or explicitly accepted for the next pilot."
   },
   "checkpoints": [
-    {
-      "seq": 4,
-      "at": "2026-10-01T10:07:00Z",
-      "claim_id": "cantiere-manga-online-failure-repro-v1-20261001",
-      "work_item": "phase1-online-generated-app-repro-v1",
-      "summary": "PR #745 CI completed successfully across Android first-app APK/release, Web, Linux, macOS and Windows. Copilot review found two concrete gaps. The bounded telemetry gap was fixed on the PR branch: malformed recovery now records attempt 3 when preceded by runtime retry. Resume-path regression coverage remains required before reviewer handoff.",
-      "decisions": [
-        "CI green is evidence only, not Phase 1 acceptance.",
-        "Address review findings before Main/Reviewer handoff."
-      ],
-      "evidence_refs": [
-        "Ai-orchestrator-riserva#745",
-        "commit:c6541c289eebfc736750a2359ab774ea00f32f16",
-        "CI:36846473979,36846474088,36846474065,36846473818,36846474035,36846473869",
-        "Copilot:discussion_r4154183233",
-        "Copilot:discussion_r4154183332"
-      ],
-      "next_action": "Add bounded runWithResumeContext timeout -> empty proposal -> valid proposal regression coverage with identity preservation, then re-evaluate PR #745 CI/review.",
-      "kind": "REVIEW_PROGRESS"
-    },
     {
       "seq": 5,
       "at": "2026-10-01T10:12:00Z",
@@ -1038,20 +1018,43 @@
       "evidence_refs": [],
       "next_action": "Same Cantiere worker under issue #845 and existing claim: fix only provenance/trust of retained staged paths. Separate temporal prior staged delta from certified/explicitly authorized immutable content-scoped Library reuse; reject/isolate arbitrary previous out-of-task paths fail-closed while preserving source, and maintain Reviewer coverage and existing one bounded retry. Add tests for forged/arbitrary retained path denied, actually provenance-verified certified reuse allowed, stale/modified provenance denied and resumed retry; add executed negative fixture evidence using existing gates for representative malformed +3184 Flutter/Dart and native XML/Kotlin, not prompt-only. No unrelated models/providers/RAM/Vulkan/Local WebSearch/token/timeout changes; do not retest +3184. Renew lease through canonical heartbeat before further worker coding. Re-run exact-head relevant tests and six CI, resolve any real findings, submit new claim-bound REVIEW_REQUIRED packet. Main/Reviewer will independently reevaluate; do not merge/approve or claim G5.",
       "kind": "REVIEW_REWORK"
+    },
+    {
+      "seq": 54,
+      "at": "2026-10-14T23:04:19Z",
+      "claim_id": "0b384727ff120df27b3d",
+      "work_item": "issue-845-first-star-app-review-scope-3184",
+      "summary": "P2 rework PR #846 head 2b9362bfd0408f70da4b6c32a8209a7eca96ef28: certified-remote-Library-only source digest proof in WorkshopLibraryReuseService; deterministic Reviewer scope never grants arbitrary pre-Engineer paths; test for tampering and real production certified reuse. Negative +3184 Dart analyzer and Android AAPT2 malformed source fixtures wired into First-App regressions. First App regression suite and guarded lifecycle already succeeded on this head; Build Lab and final six CI still running.",
+      "decisions": [
+        "Same PR #846 and issue #845; no Reviewer/Validation bypass, no merge.",
+        "Do not repeat S24 FE +3184; G5 pending until approved new signed release.",
+        "If CI fails, inspect exact job logs and perform only bounded fix; submit new review packet only after all required CI complete."
+      ],
+      "evidence_refs": [
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/846",
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/2b9362bfd0408f70da4b6c32a8209a7eca96ef28",
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38651456810"
+      ],
+      "next_action": "Watch six exact-head workflows for PR #846 head 2b9362bf. Fix concrete failures if any. On all PASS, submit new claim-bound review packet to Main/Reviewer with negative Dart/AAPT2 executed evidence; retain G5 open."
     }
   ],
   "last_checkpoint": {
-    "seq": 53,
-    "at": "2026-10-14T22:29:01Z",
-    "claim_id": "5f0b20632bafab7b6960",
+    "seq": 54,
+    "at": "2026-10-14T23:04:19Z",
+    "claim_id": "0b384727ff120df27b3d",
     "work_item": "issue-845-first-star-app-review-scope-3184",
-    "summary": "CHANGES_REQUESTED on PR #846 exact head 69632414411a3a2eb74a5ab42c2fd13d55d5e935 (claim 5f0b20632bafab7b6960), independent Main/Reviewer. P2 scope authorization defect: workshop_task_inference_pipeline.dart:231-235 derives retainedStagedPaths merely from pre-Engineer snapshot delta, and workshop_proposal_review_runner.dart:93-101 treats those arbitrary paths as authorized alongside hard explicit_scope targetFiles. Certified ownership is not proven, so pre-existing untrusted/out-of-task edits can bypass deterministic scope gate. Existing positive test only labels path 'certified' without validating provenance. P2 evidence gap: Flutter-first prompt-string assertions alone do not prove +3184 invalid Dart/widget/Color/Random/Android XML/Kotlin sources fail actual analyzer/validation/build gates. Details and exact bounded requirements recorded at https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/846#issuecomment-6179922968. Six original head CI PASS but G1-G4 not attested, G6 not approved; G5 physical remains open.",
+    "summary": "P2 rework PR #846 head 2b9362bfd0408f70da4b6c32a8209a7eca96ef28: certified-remote-Library-only source digest proof in WorkshopLibraryReuseService; deterministic Reviewer scope never grants arbitrary pre-Engineer paths; test for tampering and real production certified reuse. Negative +3184 Dart analyzer and Android AAPT2 malformed source fixtures wired into First-App regressions. First App regression suite and guarded lifecycle already succeeded on this head; Build Lab and final six CI still running.",
     "decisions": [
-      "Main/Reviewer requested bounded rework."
+      "Same PR #846 and issue #845; no Reviewer/Validation bypass, no merge.",
+      "Do not repeat S24 FE +3184; G5 pending until approved new signed release.",
+      "If CI fails, inspect exact job logs and perform only bounded fix; submit new review packet only after all required CI complete."
     ],
-    "evidence_refs": [],
-    "next_action": "Same Cantiere worker under issue #845 and existing claim: fix only provenance/trust of retained staged paths. Separate temporal prior staged delta from certified/explicitly authorized immutable content-scoped Library reuse; reject/isolate arbitrary previous out-of-task paths fail-closed while preserving source, and maintain Reviewer coverage and existing one bounded retry. Add tests for forged/arbitrary retained path denied, actually provenance-verified certified reuse allowed, stale/modified provenance denied and resumed retry; add executed negative fixture evidence using existing gates for representative malformed +3184 Flutter/Dart and native XML/Kotlin, not prompt-only. No unrelated models/providers/RAM/Vulkan/Local WebSearch/token/timeout changes; do not retest +3184. Renew lease through canonical heartbeat before further worker coding. Re-run exact-head relevant tests and six CI, resolve any real findings, submit new claim-bound REVIEW_REQUIRED packet. Main/Reviewer will independently reevaluate; do not merge/approve or claim G5.",
-    "kind": "REVIEW_REWORK"
+    "evidence_refs": [
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/846",
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/2b9362bfd0408f70da4b6c32a8209a7eca96ef28",
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38651456810"
+    ],
+    "next_action": "Watch six exact-head workflows for PR #846 head 2b9362bf. Fix concrete failures if any. On all PASS, submit new claim-bound review packet to Main/Reviewer with negative Dart/AAPT2 executed evidence; retain G5 open."
   },
   "review_history": [
     {

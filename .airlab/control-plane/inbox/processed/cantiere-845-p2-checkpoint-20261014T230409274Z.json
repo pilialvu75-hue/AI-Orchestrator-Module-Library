@@ -1,0 +1,12 @@
+{
+  "schema_version": 1,
+  "request_id": "cantiere-845-p2-checkpoint-20261014T230409274Z",
+  "status": "APPLIED",
+  "processed_at": "2026-10-14T23:04:19Z",
+  "source_file": "cantiere-845-p2-checkpoint-20261014T230409274Z.json",
+  "lane_id": "cantiere",
+  "operation": "checkpoint",
+  "actor_id": "chatgpt:cantiere",
+  "errors": [],
+  "result_state_version": 91
+}

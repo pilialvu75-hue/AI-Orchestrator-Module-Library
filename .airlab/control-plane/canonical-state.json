@@ -7,7 +7,7 @@
     "policy": "This private repository is the single coordination authority. Chats and agents are workers, not independent sources of truth."
   },
   "updated_at": "2026-10-14",
-  "state_revision": 288,
+  "state_revision": 289,
   "lifecycle_status": "BOOTSTRAP_ACTIVE",
   "roadmap_authority": {
     "library": ".airlab/roadmap.yaml",
@@ -80,11 +80,11 @@
     "invalid_lane_behavior": "ISOLATE_AND_SURFACE_PROJECTION_INCIDENT"
   },
   "projection": {
-    "source_digest": "59b25785f9c7db8e9f8146da993ba142e8764c3b73ff4e5b1179715e6c9e8e74",
-    "projected_at": "2026-10-14T22:53:35Z",
+    "source_digest": "54f68d2ec9a5cab9fb233f41f305c295ff8eddef466308f4b708dcf3e9286748",
+    "projected_at": "2026-10-14T23:04:19Z",
     "counts": {
       "BLOCKED": 2,
-      "CLAIMED": 1,
+      "IMPLEMENTING": 1,
       "READY": 14
     },
     "active_claims": [
@@ -93,7 +93,7 @@
         "claim_id": "0b384727ff120df27b3d",
         "work_item": "issue-845-first-star-app-review-scope-3184",
         "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
-        "lease_until": "2026-10-15T10:53:35Z",
+        "lease_until": "2026-10-15T11:04:19Z",
         "resource_locks": [
           "branch:pilialvu75-hue/Ai-orchestrator-riserva:fix/cantiere-845-first-star-review-scope",
           "contract:cantiere-review-stage-scope",
@@ -339,15 +339,15 @@
       },
       {
         "id": "cantiere",
-        "status": "CLAIMED",
+        "status": "IMPLEMENTING",
         "activation": "active",
-        "state_version": 90,
+        "state_version": 91,
         "updated_at": "2026-10-14",
         "active_claim": {
           "claim_id": "0b384727ff120df27b3d",
           "work_item": "issue-845-first-star-app-review-scope-3184",
           "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
-          "lease_until": "2026-10-15T10:53:35Z",
+          "lease_until": "2026-10-15T11:04:19Z",
           "resource_locks": [
             "branch:pilialvu75-hue/Ai-orchestrator-riserva:fix/cantiere-845-first-star-review-scope",
             "contract:cantiere-review-stage-scope",
@@ -367,7 +367,7 @@
         "reviewer_state": "PENDING",
         "inference_profile_status": null,
         "historical_backlog_count": 3,
-        "next_action": "Same Cantiere worker under issue #845 and existing claim: fix only provenance/trust of retained staged paths. Separate temporal prior staged delta from certified/explicitly authorized immutable content-scoped Library reuse; reject/isolate arbitrary previous out-of-task paths fail-closed while preserving source, and maintain Reviewer coverage and existing one bounded retry. Add tests for forged/arbitrary retained path denied, actually provenance-verified certified reuse allowed, stale/modified provenance denied and resumed retry; add executed negative fixture evidence using existing gates for representative malformed +3184 Flutter/Dart and native XML/Kotlin, not prompt-only. No unrelated models/providers/RAM/Vulkan/Local WebSearch/token/timeout changes; do not retest +3184. Renew lease through canonical heartbeat before further worker coding. Re-run exact-head relevant tests and six CI, resolve any real findings, submit new claim-bound REVIEW_REQUIRED packet. Main/Reviewer will independently reevaluate; do not merge/approve or claim G5."
+        "next_action": "Watch six exact-head workflows for PR #846 head 2b9362bf. Fix concrete failures if any. On all PASS, submit new claim-bound review packet to Main/Reviewer with negative Dart/AAPT2 executed evidence; retain G5 open."
       },
       {
         "id": "diagnostics",
