@@ -7,7 +7,7 @@
     "policy": "This private repository is the single coordination authority. Chats and agents are workers, not independent sources of truth."
   },
   "updated_at": "2026-10-14",
-  "state_revision": 286,
+  "state_revision": 287,
   "lifecycle_status": "BOOTSTRAP_ACTIVE",
   "roadmap_authority": {
     "library": ".airlab/roadmap.yaml",
@@ -80,96 +80,14 @@
     "invalid_lane_behavior": "ISOLATE_AND_SURFACE_PROJECTION_INCIDENT"
   },
   "projection": {
-    "source_digest": "820d1744e4b10a5412d658f6df370413689cfa1e064a056505c0599b6ef1b613",
-    "projected_at": "2026-10-14T22:50:49Z",
+    "source_digest": "d45bce2b25cf8bd5731914bd25e28c070518d6dcbcf7b7cf2a543c486785629b",
+    "projected_at": "2026-10-14T22:52:54Z",
     "counts": {
       "BLOCKED": 2,
-      "IMPLEMENTING": 1,
-      "READY": 14
+      "READY": 15
     },
-    "active_claims": [
-      {
-        "lane": "cantiere",
-        "claim_id": "5f0b20632bafab7b6960",
-        "work_item": "issue-845-first-star-app-review-scope-3184",
-        "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
-        "lease_until": "2026-10-15T10:50:49Z",
-        "resource_locks": [
-          "branch:pilialvu75-hue/Ai-orchestrator-riserva:fix/cantiere-845-first-star-review-scope",
-          "contract:cantiere-review-stage-scope",
-          "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/app_factory/workshop/workshop_proposal_implementation_runner.dart",
-          "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/app_factory/workshop/workshop_proposal_review_runner.dart",
-          "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/app_factory/workshop/workshop_proposal_workspace_stager.dart",
-          "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/app_factory/workshop/workshop_task_inference_pipeline.dart",
-          "file:pilialvu75-hue/Ai-orchestrator-riserva:test/app_factory/workshop/workshop_proposal_implementation_runner_test.dart",
-          "file:pilialvu75-hue/Ai-orchestrator-riserva:test/app_factory/workshop/workshop_proposal_review_runner_test.dart",
-          "file:pilialvu75-hue/Ai-orchestrator-riserva:test/app_factory/workshop/workshop_proposal_workspace_stager_test.dart",
-          "file:pilialvu75-hue/Ai-orchestrator-riserva:test/app_factory/workshop/workshop_task_inference_pipeline_test.dart"
-        ]
-      }
-    ],
-    "active_resource_locks": [
-      {
-        "key": "branch:pilialvu75-hue/Ai-orchestrator-riserva:fix/cantiere-845-first-star-review-scope",
-        "lane": "cantiere",
-        "claim_id": "5f0b20632bafab7b6960",
-        "work_item": "issue-845-first-star-app-review-scope-3184"
-      },
-      {
-        "key": "contract:cantiere-review-stage-scope",
-        "lane": "cantiere",
-        "claim_id": "5f0b20632bafab7b6960",
-        "work_item": "issue-845-first-star-app-review-scope-3184"
-      },
-      {
-        "key": "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/app_factory/workshop/workshop_proposal_implementation_runner.dart",
-        "lane": "cantiere",
-        "claim_id": "5f0b20632bafab7b6960",
-        "work_item": "issue-845-first-star-app-review-scope-3184"
-      },
-      {
-        "key": "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/app_factory/workshop/workshop_proposal_review_runner.dart",
-        "lane": "cantiere",
-        "claim_id": "5f0b20632bafab7b6960",
-        "work_item": "issue-845-first-star-app-review-scope-3184"
-      },
-      {
-        "key": "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/app_factory/workshop/workshop_proposal_workspace_stager.dart",
-        "lane": "cantiere",
-        "claim_id": "5f0b20632bafab7b6960",
-        "work_item": "issue-845-first-star-app-review-scope-3184"
-      },
-      {
-        "key": "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/app_factory/workshop/workshop_task_inference_pipeline.dart",
-        "lane": "cantiere",
-        "claim_id": "5f0b20632bafab7b6960",
-        "work_item": "issue-845-first-star-app-review-scope-3184"
-      },
-      {
-        "key": "file:pilialvu75-hue/Ai-orchestrator-riserva:test/app_factory/workshop/workshop_proposal_implementation_runner_test.dart",
-        "lane": "cantiere",
-        "claim_id": "5f0b20632bafab7b6960",
-        "work_item": "issue-845-first-star-app-review-scope-3184"
-      },
-      {
-        "key": "file:pilialvu75-hue/Ai-orchestrator-riserva:test/app_factory/workshop/workshop_proposal_review_runner_test.dart",
-        "lane": "cantiere",
-        "claim_id": "5f0b20632bafab7b6960",
-        "work_item": "issue-845-first-star-app-review-scope-3184"
-      },
-      {
-        "key": "file:pilialvu75-hue/Ai-orchestrator-riserva:test/app_factory/workshop/workshop_proposal_workspace_stager_test.dart",
-        "lane": "cantiere",
-        "claim_id": "5f0b20632bafab7b6960",
-        "work_item": "issue-845-first-star-app-review-scope-3184"
-      },
-      {
-        "key": "file:pilialvu75-hue/Ai-orchestrator-riserva:test/app_factory/workshop/workshop_task_inference_pipeline_test.dart",
-        "lane": "cantiere",
-        "claim_id": "5f0b20632bafab7b6960",
-        "work_item": "issue-845-first-star-app-review-scope-3184"
-      }
-    ],
+    "active_claims": [],
+    "active_resource_locks": [],
     "review_required": [],
     "blocked": [
       {
@@ -318,29 +236,12 @@
       },
       {
         "id": "cantiere",
-        "status": "IMPLEMENTING",
+        "status": "READY",
         "activation": "active",
-        "state_version": 88,
+        "state_version": 89,
         "updated_at": "2026-10-14",
-        "active_claim": {
-          "claim_id": "5f0b20632bafab7b6960",
-          "work_item": "issue-845-first-star-app-review-scope-3184",
-          "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
-          "lease_until": "2026-10-15T10:50:49Z",
-          "resource_locks": [
-            "branch:pilialvu75-hue/Ai-orchestrator-riserva:fix/cantiere-845-first-star-review-scope",
-            "contract:cantiere-review-stage-scope",
-            "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/app_factory/workshop/workshop_proposal_implementation_runner.dart",
-            "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/app_factory/workshop/workshop_proposal_review_runner.dart",
-            "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/app_factory/workshop/workshop_proposal_workspace_stager.dart",
-            "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/app_factory/workshop/workshop_task_inference_pipeline.dart",
-            "file:pilialvu75-hue/Ai-orchestrator-riserva:test/app_factory/workshop/workshop_proposal_implementation_runner_test.dart",
-            "file:pilialvu75-hue/Ai-orchestrator-riserva:test/app_factory/workshop/workshop_proposal_review_runner_test.dart",
-            "file:pilialvu75-hue/Ai-orchestrator-riserva:test/app_factory/workshop/workshop_proposal_workspace_stager_test.dart",
-            "file:pilialvu75-hue/Ai-orchestrator-riserva:test/app_factory/workshop/workshop_task_inference_pipeline_test.dart"
-          ]
-        },
-        "reviewer_state": "CHANGES_REQUESTED",
+        "active_claim": null,
+        "reviewer_state": "PENDING",
         "inference_profile_status": null,
         "historical_backlog_count": 3,
         "next_action": "Same Cantiere worker under issue #845 and existing claim: fix only provenance/trust of retained staged paths. Separate temporal prior staged delta from certified/explicitly authorized immutable content-scoped Library reuse; reject/isolate arbitrary previous out-of-task paths fail-closed while preserving source, and maintain Reviewer coverage and existing one bounded retry. Add tests for forged/arbitrary retained path denied, actually provenance-verified certified reuse allowed, stale/modified provenance denied and resumed retry; add executed negative fixture evidence using existing gates for representative malformed +3184 Flutter/Dart and native XML/Kotlin, not prompt-only. No unrelated models/providers/RAM/Vulkan/Local WebSearch/token/timeout changes; do not retest +3184. Renew lease through canonical heartbeat before further worker coding. Re-run exact-head relevant tests and six CI, resolve any real findings, submit new claim-bound REVIEW_REQUIRED packet. Main/Reviewer will independently reevaluate; do not merge/approve or claim G5."
