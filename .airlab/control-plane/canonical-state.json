@@ -7,7 +7,7 @@
     "policy": "This private repository is the single coordination authority. Chats and agents are workers, not independent sources of truth."
   },
   "updated_at": "2026-10-14",
-  "state_revision": 280,
+  "state_revision": 281,
   "lifecycle_status": "BOOTSTRAP_ACTIVE",
   "roadmap_authority": {
     "library": ".airlab/roadmap.yaml",
@@ -80,12 +80,12 @@
     "invalid_lane_behavior": "ISOLATE_AND_SURFACE_PROJECTION_INCIDENT"
   },
   "projection": {
-    "source_digest": "778a21af973b31bb197b74a44bffa24d70ae057bbc6492eafe620836c831f977",
-    "projected_at": "2026-10-14T21:30:16Z",
+    "source_digest": "a95eb556594ad9a64d914958a0d0d65b3c0f66c393c8aab77c49224ba0314226",
+    "projected_at": "2026-10-14T22:08:58Z",
     "counts": {
-      "BLOCKED": 2,
+      "BLOCKED": 1,
       "IMPLEMENTING": 1,
-      "READY": 14
+      "READY": 15
     },
     "active_claims": [
       {
@@ -212,29 +212,6 @@
           "detected_at": "2026-10-13T07:45:35Z",
           "review_required": false
         }
-      },
-      {
-        "lane": "cantiere",
-        "reason": {
-          "code": "WAITING_EXTERNAL",
-          "wait_id": "cantiere:026e0790f36a8e294ae1:WAITING_EXTERNAL",
-          "work_item": "issue-845-first-star-app-review-scope-3184",
-          "resource_locks": [
-            "branch:pilialvu75-hue/Ai-orchestrator-riserva:fix/cantiere-845-first-star-review-scope",
-            "contract:cantiere-review-stage-scope",
-            "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/app_factory/workshop/workshop_proposal_implementation_runner.dart",
-            "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/app_factory/workshop/workshop_proposal_review_runner.dart",
-            "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/app_factory/workshop/workshop_proposal_workspace_stager.dart",
-            "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/app_factory/workshop/workshop_task_inference_pipeline.dart",
-            "file:pilialvu75-hue/Ai-orchestrator-riserva:test/app_factory/workshop/workshop_proposal_implementation_runner_test.dart",
-            "file:pilialvu75-hue/Ai-orchestrator-riserva:test/app_factory/workshop/workshop_proposal_review_runner_test.dart",
-            "file:pilialvu75-hue/Ai-orchestrator-riserva:test/app_factory/workshop/workshop_proposal_workspace_stager_test.dart",
-            "file:pilialvu75-hue/Ai-orchestrator-riserva:test/app_factory/workshop/workshop_task_inference_pipeline_test.dart"
-          ],
-          "resume_condition": "All six PR #846 exact-head 69632414411a3a2eb74a5ab42c2fd13d55d5e935 platform GitHub workflows finish with inspectable results. Cantiere First App APK 38638917305, Web 38638917312, Linux 38638917456, Windows 38638917676 already PASS. Build & Release APK 38638917445 and macOS 38638917350 were still in progress at latest check.",
-          "detected_at": "2026-10-14T21:30:16Z",
-          "review_required": false
-        }
       }
     ],
     "checkpoint_watch": [
@@ -347,15 +324,15 @@
       },
       {
         "id": "cantiere",
-        "status": "BLOCKED",
+        "status": "READY",
         "activation": "active",
-        "state_version": 83,
+        "state_version": 84,
         "updated_at": "2026-10-14",
         "active_claim": null,
         "reviewer_state": "PENDING",
         "inference_profile_status": null,
         "historical_backlog_count": 3,
-        "next_action": "Re-check six PR #846 exact-head workflows. Resume WAITING_EXTERNAL through transactional authorized inbox with completion evidence, reacquire claim and submit complete review packet once all required tests/CI pass. Correct any exact failures on PR branch; no auto-merge or physical re-test on +3184."
+        "next_action": "Re-claim Cantiere #845, submit exact-head PR #846 review packet to Main/Reviewer; no merge or physical test before independent gates."
       },
       {
         "id": "diagnostics",

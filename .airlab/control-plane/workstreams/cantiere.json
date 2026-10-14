@@ -3,11 +3,11 @@
   "id": "cantiere",
   "title": "Cantiere",
   "role": "worker",
-  "status": "BLOCKED",
+  "status": "READY",
   "activation": "active",
   "scope": "Exclusive Cantiere/App Factory execution, durability, build/review/validation/apply and first-real-app reliability.",
   "shared_engine_policy": "shared_or_control_plane",
-  "state_version": 83,
+  "state_version": 84,
   "updated_at": "2026-10-14",
   "active_claim": null,
   "dependencies": [],
@@ -33,7 +33,7 @@
     "reviewed_by": null,
     "reviewed_at": null
   },
-  "next_action": "Re-check six PR #846 exact-head workflows. Resume WAITING_EXTERNAL through transactional authorized inbox with completion evidence, reacquire claim and submit complete review packet once all required tests/CI pass. Correct any exact failures on PR branch; no auto-merge or physical re-test on +3184.",
+  "next_action": "Re-claim Cantiere #845, submit exact-head PR #846 review packet to Main/Reviewer; no merge or physical test before independent gates.",
   "historical_backlog": [
     "Stay in Phase 1 ONLINE until a real generated Android app is physically accepted.",
     "Reproduce the recent manga-drawing app failure from current main with Diagnostics; do not restart generic audits.",
@@ -1333,6 +1333,21 @@
         "file:pilialvu75-hue/Ai-orchestrator-riserva:test/app_factory/workshop/workshop_task_inference_pipeline_test.dart"
       ],
       "at": "2026-10-14T21:30:16Z"
+    },
+    {
+      "type": "WAIT_RESUMED",
+      "wait_id": "cantiere:026e0790f36a8e294ae1:WAITING_EXTERNAL",
+      "work_item": "issue-845-first-star-app-review-scope-3184",
+      "signal_id": "github-ci-pr846-69632414-all-six-success",
+      "evidence_refs": [
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38638917305",
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38638917312",
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38638917456",
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38638917676",
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38638917350",
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38638917445"
+      ],
+      "at": "2026-10-14T22:08:58Z"
     }
   ],
   "review_packet_history": [
@@ -2412,59 +2427,51 @@
       ]
     }
   },
-  "wait_state": {
-    "schema_version": 1,
-    "wait_id": "cantiere:026e0790f36a8e294ae1:WAITING_EXTERNAL",
-    "type": "WAITING_EXTERNAL",
-    "work_item": "issue-845-first-star-app-review-scope-3184",
-    "prior_claim_id": "026e0790f36a8e294ae1",
-    "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
-    "branch": "fix/cantiere-845-first-star-review-scope",
-    "scope": "Repair +3184 staged scope ambiguity with preserved certified Library reuse: compare strict proposal scope with pre-existing staged provenance before Reviewer; correct regression PR #846",
-    "resource_locks": [
-      "branch:pilialvu75-hue/Ai-orchestrator-riserva:fix/cantiere-845-first-star-review-scope",
-      "contract:cantiere-review-stage-scope",
-      "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/app_factory/workshop/workshop_proposal_implementation_runner.dart",
-      "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/app_factory/workshop/workshop_proposal_review_runner.dart",
-      "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/app_factory/workshop/workshop_proposal_workspace_stager.dart",
-      "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/app_factory/workshop/workshop_task_inference_pipeline.dart",
-      "file:pilialvu75-hue/Ai-orchestrator-riserva:test/app_factory/workshop/workshop_proposal_implementation_runner_test.dart",
-      "file:pilialvu75-hue/Ai-orchestrator-riserva:test/app_factory/workshop/workshop_proposal_review_runner_test.dart",
-      "file:pilialvu75-hue/Ai-orchestrator-riserva:test/app_factory/workshop/workshop_proposal_workspace_stager_test.dart",
-      "file:pilialvu75-hue/Ai-orchestrator-riserva:test/app_factory/workshop/workshop_task_inference_pipeline_test.dart"
-    ],
-    "entered_at": "2026-10-14T21:30:16Z",
-    "resume_condition": "All six PR #846 exact-head 69632414411a3a2eb74a5ab42c2fd13d55d5e935 platform GitHub workflows finish with inspectable results. Cantiere First App APK 38638917305, Web 38638917312, Linux 38638917456, Windows 38638917676 already PASS. Build & Release APK 38638917445 and macOS 38638917350 were still in progress at latest check.",
-    "summary": "Issue #845 implementation and focused regressions on draft PR #846 exact head 69632414. Confirmed 4/6 CI PASS after fixing certified-reuse scope regression and compact reviewer prompt oversize. Await remaining external CI before Main/Reviewer review packet.",
-    "evidence_refs": [
-      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/846",
-      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38638917305",
-      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38638917312",
-      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38638917456",
-      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38638917676",
-      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38638917445",
-      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38638917350"
-    ],
-    "resume_next_action": "Re-check six PR #846 exact-head workflows. Resume WAITING_EXTERNAL through transactional authorized inbox with completion evidence, reacquire claim and submit complete review packet once all required tests/CI pass. Correct any exact failures on PR branch; no auto-merge or physical re-test on +3184."
-  },
-  "block_reason": {
-    "code": "WAITING_EXTERNAL",
-    "wait_id": "cantiere:026e0790f36a8e294ae1:WAITING_EXTERNAL",
-    "work_item": "issue-845-first-star-app-review-scope-3184",
-    "resource_locks": [
-      "branch:pilialvu75-hue/Ai-orchestrator-riserva:fix/cantiere-845-first-star-review-scope",
-      "contract:cantiere-review-stage-scope",
-      "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/app_factory/workshop/workshop_proposal_implementation_runner.dart",
-      "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/app_factory/workshop/workshop_proposal_review_runner.dart",
-      "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/app_factory/workshop/workshop_proposal_workspace_stager.dart",
-      "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/app_factory/workshop/workshop_task_inference_pipeline.dart",
-      "file:pilialvu75-hue/Ai-orchestrator-riserva:test/app_factory/workshop/workshop_proposal_implementation_runner_test.dart",
-      "file:pilialvu75-hue/Ai-orchestrator-riserva:test/app_factory/workshop/workshop_proposal_review_runner_test.dart",
-      "file:pilialvu75-hue/Ai-orchestrator-riserva:test/app_factory/workshop/workshop_proposal_workspace_stager_test.dart",
-      "file:pilialvu75-hue/Ai-orchestrator-riserva:test/app_factory/workshop/workshop_task_inference_pipeline_test.dart"
-    ],
-    "resume_condition": "All six PR #846 exact-head 69632414411a3a2eb74a5ab42c2fd13d55d5e935 platform GitHub workflows finish with inspectable results. Cantiere First App APK 38638917305, Web 38638917312, Linux 38638917456, Windows 38638917676 already PASS. Build & Release APK 38638917445 and macOS 38638917350 were still in progress at latest check.",
-    "detected_at": "2026-10-14T21:30:16Z",
-    "review_required": false
-  }
+  "wait_history": [
+    {
+      "schema_version": 1,
+      "wait_id": "cantiere:026e0790f36a8e294ae1:WAITING_EXTERNAL",
+      "type": "WAITING_EXTERNAL",
+      "work_item": "issue-845-first-star-app-review-scope-3184",
+      "prior_claim_id": "026e0790f36a8e294ae1",
+      "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
+      "branch": "fix/cantiere-845-first-star-review-scope",
+      "scope": "Repair +3184 staged scope ambiguity with preserved certified Library reuse: compare strict proposal scope with pre-existing staged provenance before Reviewer; correct regression PR #846",
+      "resource_locks": [
+        "branch:pilialvu75-hue/Ai-orchestrator-riserva:fix/cantiere-845-first-star-review-scope",
+        "contract:cantiere-review-stage-scope",
+        "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/app_factory/workshop/workshop_proposal_implementation_runner.dart",
+        "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/app_factory/workshop/workshop_proposal_review_runner.dart",
+        "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/app_factory/workshop/workshop_proposal_workspace_stager.dart",
+        "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/app_factory/workshop/workshop_task_inference_pipeline.dart",
+        "file:pilialvu75-hue/Ai-orchestrator-riserva:test/app_factory/workshop/workshop_proposal_implementation_runner_test.dart",
+        "file:pilialvu75-hue/Ai-orchestrator-riserva:test/app_factory/workshop/workshop_proposal_review_runner_test.dart",
+        "file:pilialvu75-hue/Ai-orchestrator-riserva:test/app_factory/workshop/workshop_proposal_workspace_stager_test.dart",
+        "file:pilialvu75-hue/Ai-orchestrator-riserva:test/app_factory/workshop/workshop_task_inference_pipeline_test.dart"
+      ],
+      "entered_at": "2026-10-14T21:30:16Z",
+      "resume_condition": "All six PR #846 exact-head 69632414411a3a2eb74a5ab42c2fd13d55d5e935 platform GitHub workflows finish with inspectable results. Cantiere First App APK 38638917305, Web 38638917312, Linux 38638917456, Windows 38638917676 already PASS. Build & Release APK 38638917445 and macOS 38638917350 were still in progress at latest check.",
+      "summary": "Issue #845 implementation and focused regressions on draft PR #846 exact head 69632414. Confirmed 4/6 CI PASS after fixing certified-reuse scope regression and compact reviewer prompt oversize. Await remaining external CI before Main/Reviewer review packet.",
+      "evidence_refs": [
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/846",
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38638917305",
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38638917312",
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38638917456",
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38638917676",
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38638917445",
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38638917350"
+      ],
+      "resume_next_action": "Re-check six PR #846 exact-head workflows. Resume WAITING_EXTERNAL through transactional authorized inbox with completion evidence, reacquire claim and submit complete review packet once all required tests/CI pass. Correct any exact failures on PR branch; no auto-merge or physical re-test on +3184.",
+      "resumed_at": "2026-10-14T22:08:58Z",
+      "signal_id": "github-ci-pr846-69632414-all-six-success",
+      "resume_evidence_refs": [
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38638917305",
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38638917312",
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38638917456",
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38638917676",
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38638917350",
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38638917445"
+      ]
+    }
+  ]
 }
