@@ -1,0 +1,10 @@
+{
+  "schema_version": 1,
+  "request_id": "cantiere-845-review-rework-heartbeat-20261014T225039099Z",
+  "submitted_at": "2026-10-14T22:50:39.099Z",
+  "actor_id": "chatgpt:cantiere",
+  "lane_id": "cantiere",
+  "operation": "heartbeat",
+  "expected_state_version": 87,
+  "payload": {}
+}
