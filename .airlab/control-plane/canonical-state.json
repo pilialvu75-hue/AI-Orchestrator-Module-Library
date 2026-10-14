@@ -7,7 +7,7 @@
     "policy": "This private repository is the single coordination authority. Chats and agents are workers, not independent sources of truth."
   },
   "updated_at": "2026-10-14",
-  "state_revision": 271,
+  "state_revision": 272,
   "lifecycle_status": "BOOTSTRAP_ACTIVE",
   "roadmap_authority": {
     "library": ".airlab/roadmap.yaml",
@@ -80,8 +80,8 @@
     "invalid_lane_behavior": "ISOLATE_AND_SURFACE_PROJECTION_INCIDENT"
   },
   "projection": {
-    "source_digest": "bf4dd48b1963b7baa136e9c990156220f14a17ead7f7f5209280d7cb18bc5024",
-    "projected_at": "2026-10-14T10:36:39Z",
+    "source_digest": "954e1f8ed1cd850f5a71eda9018f0be29f1c775800cfab3111815965401a9257",
+    "projected_at": "2026-10-14T12:39:38Z",
     "counts": {
       "BLOCKED": 1,
       "IMPLEMENTING": 1,
@@ -277,6 +277,16 @@
         "reason": "CHECKPOINT_STALE",
         "last_checkpoint_at": "2026-10-13T09:36:16Z",
         "due_since": "2026-10-13T11:36:16Z",
+        "warning_after_minutes": 120
+      },
+      {
+        "lane": "runtime-core",
+        "claim_id": "95be453817ace65c0fd8",
+        "work_item": "issue-839-same-conversation-recall-context",
+        "status": "IMPLEMENTING",
+        "reason": "CHECKPOINT_STALE",
+        "last_checkpoint_at": "2026-10-14T10:36:39Z",
+        "due_since": "2026-10-14T12:36:39Z",
         "warning_after_minutes": 120
       }
     ],
