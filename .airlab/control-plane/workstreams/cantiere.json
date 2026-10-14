@@ -3,32 +3,13 @@
   "id": "cantiere",
   "title": "Cantiere",
   "role": "worker",
-  "status": "REVIEW_REQUIRED",
+  "status": "READY",
   "activation": "active",
   "scope": "Exclusive Cantiere/App Factory execution, durability, build/review/validation/apply and first-real-app reliability.",
   "shared_engine_policy": "shared_or_control_plane",
-  "state_version": 76,
+  "state_version": 77,
   "updated_at": "2026-10-14",
-  "active_claim": {
-    "claim_id": "c0d7e9a1f346b8d5021a",
-    "owner_lane": "cantiere",
-    "work_item": "cantiere-engineer-flutter-native-import-3140",
-    "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
-    "scope": "Physical +3140 S24 FE Reviewer correctly rejected mixed Dart/Kotlin/XML star tap implementation. Add bounded Engineer Flutter-first guidance plus fail-closed impossible Java/Kotlin class imports in Dart before staging with existing retry, targeted tests only. Preserve Reviewer/Validation, models, memory and Vulkan.",
-    "branch": "fix/cantiere-engineer-flutter-native-import-3140",
-    "resource_locks": [
-      "branch:pilialvu75-hue/Ai-orchestrator-riserva:fix/cantiere-engineer-flutter-native-import-3140",
-      "contract:cantiere-engineer-flutter-source",
-      "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/app_factory/workshop/workshop_proposal_implementation_runner.dart",
-      "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/app_factory/workshop/workshop_proposal_workspace_stager.dart",
-      "file:pilialvu75-hue/Ai-orchestrator-riserva:test/app_factory/workshop/workshop_proposal_implementation_runner_test.dart",
-      "file:pilialvu75-hue/Ai-orchestrator-riserva:test/app_factory/workshop/workshop_proposal_workspace_stager_test.dart"
-    ],
-    "started_at": "2026-10-13T02:32:23Z",
-    "heartbeat_at": "2026-10-13T05:19:32Z",
-    "lease_until": "2026-10-13T17:19:32Z",
-    "lease_hours": 12
-  },
+  "active_claim": null,
   "dependencies": [],
   "roadmap_refs": [
     ".airlab/public-repositories/Ai-orchestrator-riserva/roadmap.yaml#CANT-11",
@@ -98,16 +79,16 @@
     "G3_CI": "PASS",
     "G4_INTEGRATION": "PASS",
     "G5_TARGET_RUNTIME": "PENDING_PHYSICAL_S24_FE",
-    "G6_REVIEWER": "PENDING",
-    "G7_CANONICAL_SYNC": "PENDING"
+    "G6_REVIEWER": "PASS",
+    "G7_CANONICAL_SYNC": "PASS"
   },
   "reviewer": {
     "required": true,
-    "state": "PENDING",
-    "reviewed_by": null,
-    "reviewed_at": null
+    "state": "APPROVED",
+    "reviewed_by": "main-reviewer",
+    "reviewed_at": "2026-10-14T13:39:46Z"
   },
-  "next_action": "Main/Reviewer: verify PR #836 exact head 0e89bd67 and 12 resolved P2 Codex threads, attest G1–G4 from the updated claim-bound packet with six green CI, independently decide G6/merge. G5 S24 FE remains open.",
+  "next_action": "Merge PR #836 using expected reviewed head 0e89bd67160fe3807e3e316d28956ea1274009b0, verify merged commit actually reachable from main, then check signed Android release tag and APK asset containing the merge. Only that signed release can authorize one physical S24 FE retest on existing black-background project with four qwen2_5_3b_instruct roles; keep G5 physical open and do not substitute Lista Spesa Lite.",
   "historical_backlog": [
     "Stay in Phase 1 ONLINE until a real generated Android app is physically accepted.",
     "Reproduce the recent manga-drawing app failure from current main with Diagnostics; do not restart generic audits.",
@@ -1049,31 +1030,43 @@
       ],
       "next_action": "Main/Reviewer: verify PR #836 exact head 0e89bd67 and 12 resolved P2 Codex threads, attest G1–G4 from the updated claim-bound packet with six green CI, independently decide G6/merge. G5 S24 FE remains open.",
       "kind": "REVIEW_HANDOFF"
+    },
+    {
+      "seq": 49,
+      "at": "2026-10-14T13:39:46Z",
+      "claim_id": "c0d7e9a1f346b8d5021a",
+      "work_item": "cantiere-engineer-flutter-native-import-3140",
+      "summary": "Main/Reviewer APPROVED source-code integration of PR #836 at reviewed head 0e89bd67160fe3807e3e316d28956ea1274009b0. Independent four-file diff review and regressions confirm P2 lexical parsing/JVM namespaces including java, kotlin, javax, Android/io.flutter, conditional URI segments, strings/comments/interpolation, BOM/shebang, metadata; legitimate Flutter Dart/MethodChannel/native bridge retained. One existing structural Engineer retry only, Reviewer and Validation remain authoritative. All 6 exact-head CI PASS; all 12 Codex P2 threads resolved; claim lease was overdue but REVIEW_WAIT_OVERDUE kept valid packet reviewer-owned. G1–G4 attested bound to packet and claim. APPROVED CODE ONLY. G5 PENDING_PHYSICAL_S24_FE; do not mark Phase 1 online/real generated app successful.",
+      "decisions": [
+        "Main/Reviewer accepted the implementation/review gate."
+      ],
+      "evidence_refs": [
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/836",
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/0e89bd67160fe3807e3e316d28956ea1274009b0",
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38364967940",
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38364967938"
+      ],
+      "next_action": "Merge PR #836 using expected reviewed head 0e89bd67160fe3807e3e316d28956ea1274009b0, verify merged commit actually reachable from main, then check signed Android release tag and APK asset containing the merge. Only that signed release can authorize one physical S24 FE retest on existing black-background project with four qwen2_5_3b_instruct roles; keep G5 physical open and do not substitute Lista Spesa Lite.",
+      "kind": "REVIEW_ACCEPTED"
     }
   ],
   "last_checkpoint": {
-    "seq": 48,
-    "at": "2026-10-13T09:36:16Z",
+    "seq": 49,
+    "at": "2026-10-14T13:39:46Z",
     "claim_id": "c0d7e9a1f346b8d5021a",
     "work_item": "cantiere-engineer-flutter-native-import-3140",
-    "summary": "Bounded PR #836 S24 FE +3140 source-guard rework submitted at exact head 0e89bd67160fe3807e3e316d28956ea1274009b0. Engineer Flutter-first guidance and narrow pre-staging fail-closed rejection of Java/Kotlin/Android/JVM class import URIs in Dart, with existing one structural FormatException retry only. Follow-up Codex P2 regressions addressed for java/kotlin namespaces, lexer skipping comment/triple string/nested interpolation, conditional import branches, qualified metadata, JVM two-segment names, raw/triple-quoted imported URIs, Dart shebang+BOM, adjacent literal URI segments, conditional test string exclusions, and io.flutter.* class namespace while preserving legitimate Dart imports and MethodChannel. Exact-head 6 CI success and 12/12 Codex review threads resolved, including all later follow-up P2. PR still open and mergeable; no Main/Reviewer approval or physical S24 FE success is claimed.",
+    "summary": "Main/Reviewer APPROVED source-code integration of PR #836 at reviewed head 0e89bd67160fe3807e3e316d28956ea1274009b0. Independent four-file diff review and regressions confirm P2 lexical parsing/JVM namespaces including java, kotlin, javax, Android/io.flutter, conditional URI segments, strings/comments/interpolation, BOM/shebang, metadata; legitimate Flutter Dart/MethodChannel/native bridge retained. One existing structural Engineer retry only, Reviewer and Validation remain authoritative. All 6 exact-head CI PASS; all 12 Codex P2 threads resolved; claim lease was overdue but REVIEW_WAIT_OVERDUE kept valid packet reviewer-owned. G1–G4 attested bound to packet and claim. APPROVED CODE ONLY. G5 PENDING_PHYSICAL_S24_FE; do not mark Phase 1 online/real generated app successful.",
     "decisions": [
-      "No self-approval or merge. All reviewed findings addressed on the exact final head.",
-      "No test on +3140 or new device runtime claim before signed reviewed release."
+      "Main/Reviewer accepted the implementation/review gate."
     ],
     "evidence_refs": [
-      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/releases/tag/v1.0.12%2B3140",
       "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/836",
       "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/0e89bd67160fe3807e3e316d28956ea1274009b0",
       "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38364967940",
-      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38364967938",
-      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38364967933",
-      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38364967962",
-      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38364968070",
-      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38364967971"
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38364967938"
     ],
-    "next_action": "Main/Reviewer: verify PR #836 exact head 0e89bd67 and 12 resolved P2 Codex threads, attest G1–G4 from the updated claim-bound packet with six green CI, independently decide G6/merge. G5 S24 FE remains open.",
-    "kind": "REVIEW_HANDOFF"
+    "next_action": "Merge PR #836 using expected reviewed head 0e89bd67160fe3807e3e316d28956ea1274009b0, verify merged commit actually reachable from main, then check signed Android release tag and APK asset containing the merge. Only that signed release can authorize one physical S24 FE retest on existing black-background project with four qwen2_5_3b_instruct roles; keep G5 physical open and do not substitute Lista Spesa Lite.",
+    "kind": "REVIEW_ACCEPTED"
   },
   "review_history": [
     {
@@ -1186,6 +1179,20 @@
       "work_item": "cantiere-engineer-flutter-native-import-3140",
       "decision": "CHANGES_REQUESTED",
       "summary": "PR #836 exact head 7cb4bd36f67ed5957485bade5f43028a3e0af4c9 has two confirmed P2 defects in the new Dart/JVM import guard despite 6/6 green CI. P2-1: the namespace allowlist covers com/org/android/androidx but misses canonical JVM prefixes java.* and kotlin.*, so cross-language imports such as java.util.Date or kotlin.collections.List are staged instead of entering the existing structural FormatException retry. P2-2: the multiline RegExp scans raw Dart source text and can classify import-looking text inside block comments or multiline/triple-quoted strings as real directives, causing false rejection before staging. These defects are limited to the new guard; the existing Engineer structural retry, Reviewer/Validation gates, model/token/timeout budgets, Local WebSearch, Vulkan and RAM protections must remain unchanged."
+    },
+    {
+      "reviewed_at": "2026-10-14T13:39:46Z",
+      "reviewed_by": "main-reviewer",
+      "claim_id": "c0d7e9a1f346b8d5021a",
+      "work_item": "cantiere-engineer-flutter-native-import-3140",
+      "decision": "APPROVED",
+      "summary": "Main/Reviewer APPROVED source-code integration of PR #836 at reviewed head 0e89bd67160fe3807e3e316d28956ea1274009b0. Independent four-file diff review and regressions confirm P2 lexical parsing/JVM namespaces including java, kotlin, javax, Android/io.flutter, conditional URI segments, strings/comments/interpolation, BOM/shebang, metadata; legitimate Flutter Dart/MethodChannel/native bridge retained. One existing structural Engineer retry only, Reviewer and Validation remain authoritative. All 6 exact-head CI PASS; all 12 Codex P2 threads resolved; claim lease was overdue but REVIEW_WAIT_OVERDUE kept valid packet reviewer-owned. G1–G4 attested bound to packet and claim. APPROVED CODE ONLY. G5 PENDING_PHYSICAL_S24_FE; do not mark Phase 1 online/real generated app successful.",
+      "evidence_refs": [
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/836",
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/0e89bd67160fe3807e3e316d28956ea1274009b0",
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38364967940",
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38364967938"
+      ]
     }
   ],
   "completed_work": [
@@ -1327,6 +1334,13 @@
       "lease_until": "2026-10-13T17:19:32Z",
       "detected_at": "2026-10-13T17:29:48Z",
       "review_required": true
+    },
+    {
+      "type": "CLAIM_RELEASED_AFTER_REVIEW",
+      "claim_id": "c0d7e9a1f346b8d5021a",
+      "work_item": "cantiere-engineer-flutter-native-import-3140",
+      "reason": "Main/Reviewer accepted the bounded implementation/review gate.",
+      "at": "2026-10-14T13:39:46Z"
     }
   ],
   "review_packet_history": [
