@@ -1,0 +1,33 @@
+{
+  "schema_version": 1,
+  "request_id": "main-reviewer-20261014-issue837-838-record-gates-v27",
+  "actor_id": "chatgpt:main-reviewer",
+  "lane_id": "runtime-core",
+  "operation": "record_review_gates",
+  "expected_state_version": 27,
+  "payload": {
+    "summary": "Main/Reviewer independently examined PR #838 exact head 2e6a143f658d7714a6f19438b48b3b2e80581ff9 and issue #837: bounded state-engine implementation; persisted user/attachment snapshot and original error retained after inference failure; IDs reconciled, duplicate and stale callback/read risks guarded; active send navigation/clear/edit regressions included. 36 focused tests, full Flutter suite/analyzer and 5 exact-head platform CI PASS. Eight old Codex threads resolved; final Codex review no major issues. G1-G4 are code/static/CI integration gates only; S24 FE physical and #830 remain open. No Vulkan, deadline/timeout, RAM/trim15 changes.",
+    "evidence_indices": {
+      "G1_IMPLEMENTATION": [
+        0,
+        1
+      ],
+      "G2_STATIC": [
+        2,
+        7
+      ],
+      "G3_CI": [
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "G4_INTEGRATION": [
+        2,
+        7,
+        8
+      ]
+    }
+  }
+}
