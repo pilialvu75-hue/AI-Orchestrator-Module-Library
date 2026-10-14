@@ -1,0 +1,12 @@
+{
+  "schema_version": 1,
+  "request_id": "runtime-core-20261014-issue839-expanded-claim-v33",
+  "status": "APPLIED",
+  "processed_at": "2026-10-14T10:23:39Z",
+  "source_file": "runtime-core-20261014-issue839-expanded-claim-v33.json",
+  "lane_id": "runtime-core",
+  "operation": "claim",
+  "actor_id": "chatgpt:runtime-core-issue839",
+  "errors": [],
+  "result_state_version": 34
+}

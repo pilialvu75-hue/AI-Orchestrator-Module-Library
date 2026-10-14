@@ -7,7 +7,7 @@
     "policy": "This private repository is the single coordination authority. Chats and agents are workers, not independent sources of truth."
   },
   "updated_at": "2026-10-14",
-  "state_revision": 267,
+  "state_revision": 268,
   "lifecycle_status": "BOOTSTRAP_ACTIVE",
   "roadmap_authority": {
     "library": ".airlab/roadmap.yaml",
@@ -80,11 +80,12 @@
     "invalid_lane_behavior": "ISOLATE_AND_SURFACE_PROJECTION_INCIDENT"
   },
   "projection": {
-    "source_digest": "9ed672319d72129049c5eb99988b28b321fdc4b69c64216f0ade811a5b906789",
-    "projected_at": "2026-10-14T10:23:04Z",
+    "source_digest": "70dc99ad8651d1ddd8ffabc9b1a0f4d09d051f182c437420f5f78be0181ca91e",
+    "projected_at": "2026-10-14T10:23:39Z",
     "counts": {
       "BLOCKED": 1,
-      "READY": 15,
+      "CLAIMED": 1,
+      "READY": 14,
       "REVIEW_REQUIRED": 1
     },
     "active_claims": [
@@ -102,6 +103,28 @@
           "file:pilialvu75-hue/Ai-orchestrator-riserva:test/app_factory/workshop/workshop_proposal_implementation_runner_test.dart",
           "file:pilialvu75-hue/Ai-orchestrator-riserva:test/app_factory/workshop/workshop_proposal_workspace_stager_test.dart"
         ]
+      },
+      {
+        "lane": "runtime-core",
+        "claim_id": "95be453817ace65c0fd8",
+        "work_item": "issue-839-same-conversation-recall-context",
+        "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
+        "lease_until": "2026-10-14T22:23:39Z",
+        "resource_locks": [
+          "branch:pilialvu75-hue/Ai-orchestrator-riserva:fix/runtime-core-839-conversation-recall",
+          "contract:conversation-context-recall",
+          "contract:diagnostics-context-receipts",
+          "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/core/diagnostics/public_log_projection.dart",
+          "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/features/chat/data/repositories/chat_repository_impl.dart",
+          "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/features/chat_memory/chronological_recall_policy.dart",
+          "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/features/chat_memory/conversation_memory_service.dart",
+          "file:pilialvu75-hue/Ai-orchestrator-riserva:test/core/diagnostics/public_log_projection_test.dart",
+          "file:pilialvu75-hue/Ai-orchestrator-riserva:test/features/chat/data/repositories/chat_repository_impl_context_test.dart",
+          "file:pilialvu75-hue/Ai-orchestrator-riserva:test/features/chat_memory/chronological_recall_policy_test.dart",
+          "file:pilialvu75-hue/Ai-orchestrator-riserva:test/features/chat_memory/conversation_memory_hotpath_test.dart",
+          "file:pilialvu75-hue/Ai-orchestrator-riserva:test/features/chat_memory/conversation_recall_prompt_test.dart",
+          "pr:pilialvu75-hue/Ai-orchestrator-riserva#840"
+        ]
       }
     ],
     "active_resource_locks": [
@@ -112,10 +135,28 @@
         "work_item": "cantiere-engineer-flutter-native-import-3140"
       },
       {
+        "key": "branch:pilialvu75-hue/Ai-orchestrator-riserva:fix/runtime-core-839-conversation-recall",
+        "lane": "runtime-core",
+        "claim_id": "95be453817ace65c0fd8",
+        "work_item": "issue-839-same-conversation-recall-context"
+      },
+      {
         "key": "contract:cantiere-engineer-flutter-source",
         "lane": "cantiere",
         "claim_id": "c0d7e9a1f346b8d5021a",
         "work_item": "cantiere-engineer-flutter-native-import-3140"
+      },
+      {
+        "key": "contract:conversation-context-recall",
+        "lane": "runtime-core",
+        "claim_id": "95be453817ace65c0fd8",
+        "work_item": "issue-839-same-conversation-recall-context"
+      },
+      {
+        "key": "contract:diagnostics-context-receipts",
+        "lane": "runtime-core",
+        "claim_id": "95be453817ace65c0fd8",
+        "work_item": "issue-839-same-conversation-recall-context"
       },
       {
         "key": "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/app_factory/workshop/workshop_proposal_implementation_runner.dart",
@@ -130,6 +171,30 @@
         "work_item": "cantiere-engineer-flutter-native-import-3140"
       },
       {
+        "key": "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/core/diagnostics/public_log_projection.dart",
+        "lane": "runtime-core",
+        "claim_id": "95be453817ace65c0fd8",
+        "work_item": "issue-839-same-conversation-recall-context"
+      },
+      {
+        "key": "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/features/chat/data/repositories/chat_repository_impl.dart",
+        "lane": "runtime-core",
+        "claim_id": "95be453817ace65c0fd8",
+        "work_item": "issue-839-same-conversation-recall-context"
+      },
+      {
+        "key": "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/features/chat_memory/chronological_recall_policy.dart",
+        "lane": "runtime-core",
+        "claim_id": "95be453817ace65c0fd8",
+        "work_item": "issue-839-same-conversation-recall-context"
+      },
+      {
+        "key": "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/features/chat_memory/conversation_memory_service.dart",
+        "lane": "runtime-core",
+        "claim_id": "95be453817ace65c0fd8",
+        "work_item": "issue-839-same-conversation-recall-context"
+      },
+      {
         "key": "file:pilialvu75-hue/Ai-orchestrator-riserva:test/app_factory/workshop/workshop_proposal_implementation_runner_test.dart",
         "lane": "cantiere",
         "claim_id": "c0d7e9a1f346b8d5021a",
@@ -140,6 +205,42 @@
         "lane": "cantiere",
         "claim_id": "c0d7e9a1f346b8d5021a",
         "work_item": "cantiere-engineer-flutter-native-import-3140"
+      },
+      {
+        "key": "file:pilialvu75-hue/Ai-orchestrator-riserva:test/core/diagnostics/public_log_projection_test.dart",
+        "lane": "runtime-core",
+        "claim_id": "95be453817ace65c0fd8",
+        "work_item": "issue-839-same-conversation-recall-context"
+      },
+      {
+        "key": "file:pilialvu75-hue/Ai-orchestrator-riserva:test/features/chat/data/repositories/chat_repository_impl_context_test.dart",
+        "lane": "runtime-core",
+        "claim_id": "95be453817ace65c0fd8",
+        "work_item": "issue-839-same-conversation-recall-context"
+      },
+      {
+        "key": "file:pilialvu75-hue/Ai-orchestrator-riserva:test/features/chat_memory/chronological_recall_policy_test.dart",
+        "lane": "runtime-core",
+        "claim_id": "95be453817ace65c0fd8",
+        "work_item": "issue-839-same-conversation-recall-context"
+      },
+      {
+        "key": "file:pilialvu75-hue/Ai-orchestrator-riserva:test/features/chat_memory/conversation_memory_hotpath_test.dart",
+        "lane": "runtime-core",
+        "claim_id": "95be453817ace65c0fd8",
+        "work_item": "issue-839-same-conversation-recall-context"
+      },
+      {
+        "key": "file:pilialvu75-hue/Ai-orchestrator-riserva:test/features/chat_memory/conversation_recall_prompt_test.dart",
+        "lane": "runtime-core",
+        "claim_id": "95be453817ace65c0fd8",
+        "work_item": "issue-839-same-conversation-recall-context"
+      },
+      {
+        "key": "pr:pilialvu75-hue/Ai-orchestrator-riserva#840",
+        "lane": "runtime-core",
+        "claim_id": "95be453817ace65c0fd8",
+        "work_item": "issue-839-same-conversation-recall-context"
       }
     ],
     "review_required": [
@@ -434,11 +535,31 @@
       },
       {
         "id": "runtime-core",
-        "status": "READY",
+        "status": "CLAIMED",
         "activation": "active",
-        "state_version": 33,
+        "state_version": 34,
         "updated_at": "2026-10-14",
-        "active_claim": null,
+        "active_claim": {
+          "claim_id": "95be453817ace65c0fd8",
+          "work_item": "issue-839-same-conversation-recall-context",
+          "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
+          "lease_until": "2026-10-14T22:23:39Z",
+          "resource_locks": [
+            "branch:pilialvu75-hue/Ai-orchestrator-riserva:fix/runtime-core-839-conversation-recall",
+            "contract:conversation-context-recall",
+            "contract:diagnostics-context-receipts",
+            "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/core/diagnostics/public_log_projection.dart",
+            "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/features/chat/data/repositories/chat_repository_impl.dart",
+            "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/features/chat_memory/chronological_recall_policy.dart",
+            "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/features/chat_memory/conversation_memory_service.dart",
+            "file:pilialvu75-hue/Ai-orchestrator-riserva:test/core/diagnostics/public_log_projection_test.dart",
+            "file:pilialvu75-hue/Ai-orchestrator-riserva:test/features/chat/data/repositories/chat_repository_impl_context_test.dart",
+            "file:pilialvu75-hue/Ai-orchestrator-riserva:test/features/chat_memory/chronological_recall_policy_test.dart",
+            "file:pilialvu75-hue/Ai-orchestrator-riserva:test/features/chat_memory/conversation_memory_hotpath_test.dart",
+            "file:pilialvu75-hue/Ai-orchestrator-riserva:test/features/chat_memory/conversation_recall_prompt_test.dart",
+            "pr:pilialvu75-hue/Ai-orchestrator-riserva#840"
+          ]
+        },
         "reviewer_state": "PENDING",
         "inference_profile_status": null,
         "historical_backlog_count": 4,
