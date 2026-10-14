@@ -7,7 +7,7 @@
     "policy": "This private repository is the single coordination authority. Chats and agents are workers, not independent sources of truth."
   },
   "updated_at": "2026-10-14",
-  "state_revision": 265,
+  "state_revision": 266,
   "lifecycle_status": "BOOTSTRAP_ACTIVE",
   "roadmap_authority": {
     "library": ".airlab/roadmap.yaml",
@@ -80,8 +80,8 @@
     "invalid_lane_behavior": "ISOLATE_AND_SURFACE_PROJECTION_INCIDENT"
   },
   "projection": {
-    "source_digest": "6c2179df798ba2258d3cc5dd16c08f055ecf072dbf5809b103ed6f89642c8e13",
-    "projected_at": "2026-10-14T10:13:47Z",
+    "source_digest": "82e3d4ccff088d9d98b59b1c2a745ae525d9e425afd50acd9718b7f3e169d0fc",
+    "projected_at": "2026-10-14T10:20:00Z",
     "counts": {
       "BLOCKED": 1,
       "IMPLEMENTING": 1,
@@ -109,7 +109,7 @@
         "claim_id": "88f663ec2edf8685e90d",
         "work_item": "issue-839-same-conversation-recall-context",
         "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
-        "lease_until": "2026-10-14T22:13:47Z",
+        "lease_until": "2026-10-14T22:20:00Z",
         "resource_locks": [
           "branch:pilialvu75-hue/Ai-orchestrator-riserva:fix/runtime-core-839-conversation-recall",
           "contract:conversation-context-recall",
@@ -523,13 +523,13 @@
         "id": "runtime-core",
         "status": "IMPLEMENTING",
         "activation": "active",
-        "state_version": 31,
+        "state_version": 32,
         "updated_at": "2026-10-14",
         "active_claim": {
           "claim_id": "88f663ec2edf8685e90d",
           "work_item": "issue-839-same-conversation-recall-context",
           "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
-          "lease_until": "2026-10-14T22:13:47Z",
+          "lease_until": "2026-10-14T22:20:00Z",
           "resource_locks": [
             "branch:pilialvu75-hue/Ai-orchestrator-riserva:fix/runtime-core-839-conversation-recall",
             "contract:conversation-context-recall",
@@ -547,7 +547,7 @@
         "reviewer_state": "PENDING",
         "inference_profile_status": null,
         "historical_backlog_count": 4,
-        "next_action": "Finish deterministic history/provider/prompt and adversarial public-projection regressions, push bounded PR and verify remote Flutter CI and Codex review. Local Flutter execution remains unavailable after prior automatic approval rejection; do not retry wrapper."
+        "next_action": "Inspect CI/analyzer/test results and Codex review on f3bc1d35; address concrete failures, revalidate final head and submit claim-bound REVIEW_REQUIRED packet. No merge/self-approval or physical success assertion."
       },
       {
         "id": "voice-live",

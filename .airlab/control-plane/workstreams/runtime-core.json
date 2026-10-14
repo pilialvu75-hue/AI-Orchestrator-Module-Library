@@ -7,7 +7,7 @@
   "activation": "active",
   "scope": "Shared inference contract, capability/model routing semantics, context, streaming, cancellation, errors, model-profile schema and lifecycle. Target platforms own their benchmark-gated LLM/backend/runtime profiles.",
   "shared_engine_policy": "shared_or_control_plane",
-  "state_version": 31,
+  "state_version": 32,
   "updated_at": "2026-10-14",
   "active_claim": {
     "claim_id": "88f663ec2edf8685e90d",
@@ -30,8 +30,8 @@
       "file:pilialvu75-hue/Ai-orchestrator-riserva:test/features/chat_memory/conversation_recall_prompt_test.dart"
     ],
     "started_at": "2026-10-14T10:10:31Z",
-    "heartbeat_at": "2026-10-14T10:13:47Z",
-    "lease_until": "2026-10-14T22:13:47Z",
+    "heartbeat_at": "2026-10-14T10:20:00Z",
+    "lease_until": "2026-10-14T22:20:00Z",
     "lease_hours": 12
   },
   "dependencies": [],
@@ -56,7 +56,7 @@
     "reviewed_by": null,
     "reviewed_at": null
   },
-  "next_action": "Finish deterministic history/provider/prompt and adversarial public-projection regressions, push bounded PR and verify remote Flutter CI and Codex review. Local Flutter execution remains unavailable after prior automatic approval rejection; do not retry wrapper.",
+  "next_action": "Inspect CI/analyzer/test results and Codex review on f3bc1d35; address concrete failures, revalidate final head and submit claim-bound REVIEW_REQUIRED packet. No merge/self-approval or physical success assertion.",
   "inference_ownership": {
     "owns": [
       "shared inference API",
@@ -467,24 +467,39 @@
         "https://github.com/pilialvu75-hue/AI-Orchestrator-Module-Library/blob/main/.airlab/control-plane/inbox/processed/runtime-core-20261014-issue839-claim-v29.json"
       ],
       "next_action": "Finish deterministic history/provider/prompt and adversarial public-projection regressions, push bounded PR and verify remote Flutter CI and Codex review. Local Flutter execution remains unavailable after prior automatic approval rejection; do not retry wrapper."
+    },
+    {
+      "seq": 22,
+      "at": "2026-10-14T10:20:00Z",
+      "claim_id": "88f663ec2edf8685e90d",
+      "work_item": "issue-839-same-conversation-recall-context",
+      "summary": "Opened PR 840 at exact head f3bc1d35fd590804c9437f92bd4de953a6247758 (8 files) from main 45130475. Fixed premature 24-turn recall rebuilding for retained history, added explicit reread and unanswered retry intent, same-session filtering and persisted closed stage receipts/public projections. Added regression fixtures across memory/token fitting/Phi prompt/repository persistence boundaries plus adversarial projection checks. Parser and diff whitespace checks completed; full Flutter CI and exact-head Codex review requested, pending.",
+      "decisions": [
+        "Diagnostics projection scope is additive in Riserva with explicit file/contract locks and mandatory independent review; Diagnostics lane itself remains unchanged.",
+        "Physical incident remains unproven beyond owner's observation; fact may still be outside authoritative token budget or ignored by model."
+      ],
+      "evidence_refs": [
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/840",
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/f3bc1d35fd590804c9437f92bd4de953a6247758"
+      ],
+      "next_action": "Inspect CI/analyzer/test results and Codex review on f3bc1d35; address concrete failures, revalidate final head and submit claim-bound REVIEW_REQUIRED packet. No merge/self-approval or physical success assertion."
     }
   ],
   "last_checkpoint": {
-    "seq": 21,
-    "at": "2026-10-14T10:13:47Z",
+    "seq": 22,
+    "at": "2026-10-14T10:20:00Z",
     "claim_id": "88f663ec2edf8685e90d",
     "work_item": "issue-839-same-conversation-recall-context",
-    "summary": "Claim 88f663ec2edf8685e90d acquired on main 45130475. Source reproduces a premature recall-only reduction: 30 retained turns under standard profile become 24 for explicit historical reference despite ordinary history fitting the line window. Implementing comparison against actual retained window, explicit reread intent and unanswered retry intent; runtime token budget remains untouched. Adding count-only RuntimeEventLog/context projection, explicitly scoped Diagnostics contract impact. Physical +3174 root cause remains unproven.",
+    "summary": "Opened PR 840 at exact head f3bc1d35fd590804c9437f92bd4de953a6247758 (8 files) from main 45130475. Fixed premature 24-turn recall rebuilding for retained history, added explicit reread and unanswered retry intent, same-session filtering and persisted closed stage receipts/public projections. Added regression fixtures across memory/token fitting/Phi prompt/repository persistence boundaries plus adversarial projection checks. Parser and diff whitespace checks completed; full Flutter CI and exact-head Codex review requested, pending.",
     "decisions": [
-      "No model-token/context capacity, Vulkan, timeout, RAM/trim15 or WebSearch change.",
-      "Do not add generic personal-fact extraction or promote ordinary chat to confirmed durable memory.",
-      "Keep issue 839 open pending physical evidence; stage counts cannot prove model comprehension."
+      "Diagnostics projection scope is additive in Riserva with explicit file/contract locks and mandatory independent review; Diagnostics lane itself remains unchanged.",
+      "Physical incident remains unproven beyond owner's observation; fact may still be outside authoritative token budget or ignored by model."
     ],
     "evidence_refs": [
-      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/issues/839",
-      "https://github.com/pilialvu75-hue/AI-Orchestrator-Module-Library/blob/main/.airlab/control-plane/inbox/processed/runtime-core-20261014-issue839-claim-v29.json"
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/840",
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/f3bc1d35fd590804c9437f92bd4de953a6247758"
     ],
-    "next_action": "Finish deterministic history/provider/prompt and adversarial public-projection regressions, push bounded PR and verify remote Flutter CI and Codex review. Local Flutter execution remains unavailable after prior automatic approval rejection; do not retry wrapper."
+    "next_action": "Inspect CI/analyzer/test results and Codex review on f3bc1d35; address concrete failures, revalidate final head and submit claim-bound REVIEW_REQUIRED packet. No merge/self-approval or physical success assertion."
   },
   "review_history": [
     {
