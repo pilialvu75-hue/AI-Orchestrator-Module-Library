@@ -1,0 +1,26 @@
+{
+  "schema_version": 1,
+  "request_id": "runtime-core-20261014-issue839-claim-v29",
+  "actor_id": "chatgpt:runtime-core-issue839",
+  "lane_id": "runtime-core",
+  "operation": "claim",
+  "expected_state_version": 29,
+  "payload": {
+    "work_item": "issue-839-same-conversation-recall-context",
+    "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
+    "branch": "fix/runtime-core-839-conversation-recall",
+    "scope": "Reproduce and correct bounded chronological context omissions for same-conversation reread/retry; preserve runtime-owned history and existing token/resource limits. Add private-content-free context receipts and strict public projection regression coverage in Riserva, with Diagnostics contract impact explicitly reviewable by Main/Reviewer. No physical recall claim without new S24 FE evidence; no Vulkan, timeout, RAM/trim15, context capacity or WebSearch changes.",
+    "resource_locks": [
+      "contract:conversation-context-recall",
+      "contract:diagnostics-context-receipts",
+      "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/features/chat_memory/conversation_memory_service.dart",
+      "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/features/chat_memory/chronological_recall_policy.dart",
+      "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/core/diagnostics/public_log_projection.dart",
+      "file:pilialvu75-hue/Ai-orchestrator-riserva:test/features/chat_memory/conversation_memory_hotpath_test.dart",
+      "file:pilialvu75-hue/Ai-orchestrator-riserva:test/features/chat_memory/chronological_recall_policy_test.dart",
+      "file:pilialvu75-hue/Ai-orchestrator-riserva:test/features/chat_memory/conversation_recall_prompt_test.dart",
+      "file:pilialvu75-hue/Ai-orchestrator-riserva:test/core/diagnostics/public_log_projection_test.dart",
+      "file:pilialvu75-hue/Ai-orchestrator-riserva:test/features/chat/data/repositories/chat_repository_impl_context_test.dart"
+    ]
+  }
+}
