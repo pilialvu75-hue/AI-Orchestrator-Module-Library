@@ -1,0 +1,24 @@
+{
+  "schema_version": 1,
+  "request_id": "cantiere-845-claim-20261014T210241903Z",
+  "submitted_at": "2026-10-14T21:02:41.903Z",
+  "actor_id": "chatgpt:cantiere",
+  "lane_id": "cantiere",
+  "operation": "claim",
+  "expected_state_version": 77,
+  "payload": {
+    "work_item": "issue-845-first-star-app-review-scope-3184",
+    "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
+    "scope": "Physical +3184 black-star app: deterministic staged scope classification and minimal malformed Flutter/native generated-source regressions; no reviewer bypass",
+    "branch": "fix/cantiere-845-first-star-review-scope",
+    "resource_locks": [
+      "contract:cantiere-review-stage-scope",
+      "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/app_factory/workshop/workshop_proposal_review_runner.dart",
+      "file:pilialvu75-hue/Ai-orchestrator-riserva:test/app_factory/workshop/workshop_proposal_review_runner_test.dart",
+      "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/app_factory/workshop/workshop_proposal_workspace_stager.dart",
+      "file:pilialvu75-hue/Ai-orchestrator-riserva:test/app_factory/workshop/workshop_proposal_workspace_stager_test.dart",
+      "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/app_factory/workshop/workshop_proposal_implementation_runner.dart",
+      "file:pilialvu75-hue/Ai-orchestrator-riserva:test/app_factory/workshop/workshop_proposal_implementation_runner_test.dart"
+    ]
+  }
+}
