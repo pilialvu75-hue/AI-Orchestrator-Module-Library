@@ -1,0 +1,21 @@
+{
+  "schema_version": 1,
+  "request_id": "runtime-core-20261014-issue839-retry-boundaries-v36",
+  "actor_id": "chatgpt:runtime-core-issue839",
+  "lane_id": "runtime-core",
+  "operation": "checkpoint",
+  "expected_state_version": 36,
+  "payload": {
+    "summary": "PR 840 candidate 6589d989450838aa60eab65cac662de5ff2ae760 addresses second Codex finding P2: content-only history skipped empty/attachment-only user actions when inheriting retry intent. Scan persisted session messages now, retaining empty/answered/attachment boundaries and rejecting current attached retry as bare. Two new regressions cover five boundary cases. P1 16-turn portable window fix remains. Exact-head CI/re-review requested.",
+    "next_action": "Verify final-head 6589d989 full CI and Codex re-review, then resolve validated threads and submit REVIEW_REQUIRED packet under claim 95be453817ace65c0fd8. Keep physical S24 FE and issue 839 open.",
+    "decisions": [
+      "No model/token budget, memory guard, Vulkan, timeout, capacity or WebSearch changes.",
+      "Retry selection remains stateless and session-local; message storage and IDs are untouched."
+    ],
+    "evidence_refs": [
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/840",
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/6589d989450838aa60eab65cac662de5ff2ae760",
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/840#discussion_r4269661866"
+    ]
+  }
+}
