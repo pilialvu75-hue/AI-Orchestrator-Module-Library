@@ -1,0 +1,12 @@
+{
+  "schema_version": 1,
+  "request_id": "main-reviewer-20261014-issue837-838-review-accept-v28",
+  "status": "APPLIED",
+  "processed_at": "2026-10-14T08:29:08Z",
+  "source_file": "main-reviewer-20261014-issue837-838-review-accept-v28.json",
+  "lane_id": "runtime-core",
+  "operation": "review_accept",
+  "actor_id": "chatgpt:main-reviewer",
+  "errors": [],
+  "result_state_version": 29
+}

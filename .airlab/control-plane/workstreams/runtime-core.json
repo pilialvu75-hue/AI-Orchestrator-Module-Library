@@ -3,32 +3,13 @@
   "id": "runtime-core",
   "title": "Runtime Core",
   "role": "worker",
-  "status": "REVIEW_REQUIRED",
+  "status": "READY",
   "activation": "active",
   "scope": "Shared inference contract, capability/model routing semantics, context, streaming, cancellation, errors, model-profile schema and lifecycle. Target platforms own their benchmark-gated LLM/backend/runtime profiles.",
   "shared_engine_policy": "shared_or_control_plane",
-  "state_version": 28,
+  "state_version": 29,
   "updated_at": "2026-10-14",
-  "active_claim": {
-    "claim_id": "403f04c8b0a530f93e77",
-    "owner_lane": "runtime-core",
-    "work_item": "issue-837-preserve-persisted-prompt-after-inference-error",
-    "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
-    "scope": "Issue #837 only: reconcile saved chat history after failed inference, bounded user-turn fallback with attachment identity, duplicate-free subsequent reload/send, invalidate stale callbacks after clear/session changes; focused regressions. No Vulkan, timeout or RAM/trim15 policy changes; physical S24 FE acceptance remains open.",
-    "branch": "fix/runtime-core-837-preserve-failed-question",
-    "resource_locks": [
-      "branch:pilialvu75-hue/Ai-orchestrator-riserva:fix/runtime-core-837-preserve-failed-question",
-      "contract:assistant-chat-history-reconciliation",
-      "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/core/orchestrator/state_engine/orchestrator_state_engine.dart",
-      "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/features/chat/data/repositories/chat_repository_impl.dart",
-      "file:pilialvu75-hue/Ai-orchestrator-riserva:test/core/orchestrator/state_engine/orchestrator_state_engine_test.dart",
-      "file:pilialvu75-hue/Ai-orchestrator-riserva:test/features/chat/data/repositories/chat_repository_impl_test.dart"
-    ],
-    "started_at": "2026-10-13T21:28:42Z",
-    "heartbeat_at": "2026-10-13T22:29:46Z",
-    "lease_until": "2026-10-14T10:29:46Z",
-    "lease_hours": 12
-  },
+  "active_claim": null,
   "dependencies": [],
   "roadmap_refs": [
     ".airlab/public-repositories/Ai-orchestrator-riserva/roadmap.yaml#CANT-14",
@@ -103,16 +84,16 @@
     "G3_CI": "PASS",
     "G4_INTEGRATION": "PASS",
     "G5_TARGET_RUNTIME": "NOT_APPLICABLE_UNTIL_RUNTIME_CHANGE",
-    "G6_REVIEWER": "PENDING",
-    "G7_CANONICAL_SYNC": "PENDING"
+    "G6_REVIEWER": "PASS",
+    "G7_CANONICAL_SYNC": "PASS"
   },
   "reviewer": {
     "required": true,
-    "state": "PENDING",
-    "reviewed_by": null,
-    "reviewed_at": null
+    "state": "APPROVED",
+    "reviewed_by": "main-reviewer",
+    "reviewed_at": "2026-10-14T08:29:08Z"
   },
-  "next_action": "Main/Reviewer must inspect the review_packet, linked evidence and required gates before promotion or rework.",
+  "next_action": "Merge PR #838 only at reviewed exact head 2e6a143f658d7714a6f19438b48b3b2e80581ff9, verify actual merge commit on main and a subsequent signed Android release containing it; preserve S24 FE physical acceptance open, do not close #837 or #830, and do not claim RAM/device stability.",
   "inference_ownership": {
     "owns": [
       "shared inference API",
@@ -488,29 +469,43 @@
       ],
       "next_action": "Main/Reviewer must inspect the review_packet, linked evidence and required gates before promotion or rework.",
       "kind": "REVIEW_HANDOFF"
+    },
+    {
+      "seq": 20,
+      "at": "2026-10-14T08:29:08Z",
+      "claim_id": "403f04c8b0a530f93e77",
+      "work_item": "issue-837-preserve-persisted-prompt-after-inference-error",
+      "summary": "APPROVED (implementation/code only): independently reviewed PR #838 exact head 2e6a143f658d7714a6f19438b48b3b2e80581ff9 after claim-bound G1-G4 APPLIED attestation. Fixed issue #837 persisted-user question visibility on failed inference, canonical-ID reconciliation, attachment preservation, stale read/callback defense, clear/navigation/edit and no duplicate edits. 36 state-engine tests and whole Flutter suite pass with zero analyzer errors; Android, Web, Windows, Linux, macOS CI 5/5 pass; eight Codex threads resolved, final review no major findings. No VLAN/Vulkan, RAM/trim15, timeout/deadline policy changes. This approves source integration ONLY; S24 FE physical verification, #837 acceptance and separate #830 remain open.",
+      "decisions": [
+        "Main/Reviewer accepted the implementation/review gate."
+      ],
+      "evidence_refs": [
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/838",
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/2e6a143f658d7714a6f19438b48b3b2e80581ff9",
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38478128827/job/115573812513",
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/838#issuecomment-6156623530"
+      ],
+      "next_action": "Merge PR #838 only at reviewed exact head 2e6a143f658d7714a6f19438b48b3b2e80581ff9, verify actual merge commit on main and a subsequent signed Android release containing it; preserve S24 FE physical acceptance open, do not close #837 or #830, and do not claim RAM/device stability.",
+      "kind": "REVIEW_ACCEPTED"
     }
   ],
   "last_checkpoint": {
-    "seq": 19,
-    "at": "2026-10-13T22:49:03Z",
+    "seq": 20,
+    "at": "2026-10-14T08:29:08Z",
     "claim_id": "403f04c8b0a530f93e77",
     "work_item": "issue-837-preserve-persisted-prompt-after-inference-error",
-    "summary": "Issue #837 implementation ready for independent Main/Reviewer assessment in PR #838 at 2e6a143f658d7714a6f19438b48b3b2e80581ff9. Preserve the user question/attachments and earlier history after inference failure, reconcile persisted identities without duplicates, and reject obsolete UI updates. Exact-head validation: 36/36 state-engine tests and full Flutter suite PASS, five platform workflows PASS, Codex review completed without major issues. Physical S24 FE acceptance remains open; worker has not approved or merged.",
-    "decisions": [],
-    "evidence_refs": [
-      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/2e6a143f658d7714a6f19438b48b3b2e80581ff9",
-      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/838",
-      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38478128827/job/115573812513",
-      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38478128785",
-      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38478128964",
-      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38478128819",
-      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38478128772",
-      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38478128827",
-      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/838#issuecomment-6156623530",
-      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/issues/837"
+    "summary": "APPROVED (implementation/code only): independently reviewed PR #838 exact head 2e6a143f658d7714a6f19438b48b3b2e80581ff9 after claim-bound G1-G4 APPLIED attestation. Fixed issue #837 persisted-user question visibility on failed inference, canonical-ID reconciliation, attachment preservation, stale read/callback defense, clear/navigation/edit and no duplicate edits. 36 state-engine tests and whole Flutter suite pass with zero analyzer errors; Android, Web, Windows, Linux, macOS CI 5/5 pass; eight Codex threads resolved, final review no major findings. No VLAN/Vulkan, RAM/trim15, timeout/deadline policy changes. This approves source integration ONLY; S24 FE physical verification, #837 acceptance and separate #830 remain open.",
+    "decisions": [
+      "Main/Reviewer accepted the implementation/review gate."
     ],
-    "next_action": "Main/Reviewer must inspect the review_packet, linked evidence and required gates before promotion or rework.",
-    "kind": "REVIEW_HANDOFF"
+    "evidence_refs": [
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/838",
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/2e6a143f658d7714a6f19438b48b3b2e80581ff9",
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38478128827/job/115573812513",
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/838#issuecomment-6156623530"
+    ],
+    "next_action": "Merge PR #838 only at reviewed exact head 2e6a143f658d7714a6f19438b48b3b2e80581ff9, verify actual merge commit on main and a subsequent signed Android release containing it; preserve S24 FE physical acceptance open, do not close #837 or #830, and do not claim RAM/device stability.",
+    "kind": "REVIEW_ACCEPTED"
   },
   "review_history": [
     {
@@ -545,6 +540,20 @@
         "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/37929379804",
         "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/37929379722",
         "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/37929379883"
+      ]
+    },
+    {
+      "reviewed_at": "2026-10-14T08:29:08Z",
+      "reviewed_by": "main-reviewer",
+      "claim_id": "403f04c8b0a530f93e77",
+      "work_item": "issue-837-preserve-persisted-prompt-after-inference-error",
+      "decision": "APPROVED",
+      "summary": "APPROVED (implementation/code only): independently reviewed PR #838 exact head 2e6a143f658d7714a6f19438b48b3b2e80581ff9 after claim-bound G1-G4 APPLIED attestation. Fixed issue #837 persisted-user question visibility on failed inference, canonical-ID reconciliation, attachment preservation, stale read/callback defense, clear/navigation/edit and no duplicate edits. 36 state-engine tests and whole Flutter suite pass with zero analyzer errors; Android, Web, Windows, Linux, macOS CI 5/5 pass; eight Codex threads resolved, final review no major findings. No VLAN/Vulkan, RAM/trim15, timeout/deadline policy changes. This approves source integration ONLY; S24 FE physical verification, #837 acceptance and separate #830 remain open.",
+      "evidence_refs": [
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/838",
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/2e6a143f658d7714a6f19438b48b3b2e80581ff9",
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38478128827/job/115573812513",
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/838#issuecomment-6156623530"
       ]
     }
   ],
@@ -646,6 +655,13 @@
       "work_item": "cloud-mistral-429-structured-backoff",
       "reason": "Main/Reviewer accepted the bounded implementation/review gate.",
       "at": "2026-10-10T13:50:11Z"
+    },
+    {
+      "type": "CLAIM_RELEASED_AFTER_REVIEW",
+      "claim_id": "403f04c8b0a530f93e77",
+      "work_item": "issue-837-preserve-persisted-prompt-after-inference-error",
+      "reason": "Main/Reviewer accepted the bounded implementation/review gate.",
+      "at": "2026-10-14T08:29:08Z"
     }
   ],
   "review_packet_history": [
