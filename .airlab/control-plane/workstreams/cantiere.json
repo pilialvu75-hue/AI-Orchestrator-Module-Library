@@ -3,90 +3,56 @@
   "id": "cantiere",
   "title": "Cantiere",
   "role": "worker",
-  "status": "READY",
+  "status": "CLAIMED",
   "activation": "active",
   "scope": "Exclusive Cantiere/App Factory execution, durability, build/review/validation/apply and first-real-app reliability.",
   "shared_engine_policy": "shared_or_control_plane",
-  "state_version": 77,
+  "state_version": 78,
   "updated_at": "2026-10-14",
-  "active_claim": null,
+  "active_claim": {
+    "claim_id": "2e5e9291924d5c3f141c",
+    "owner_lane": "cantiere",
+    "work_item": "issue-845-first-star-app-review-scope-3184",
+    "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
+    "scope": "Physical +3184 black-star app: deterministic staged scope classification and minimal malformed Flutter/native generated-source regressions; no reviewer bypass",
+    "branch": "fix/cantiere-845-first-star-review-scope",
+    "resource_locks": [
+      "branch:pilialvu75-hue/Ai-orchestrator-riserva:fix/cantiere-845-first-star-review-scope",
+      "contract:cantiere-review-stage-scope",
+      "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/app_factory/workshop/workshop_proposal_implementation_runner.dart",
+      "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/app_factory/workshop/workshop_proposal_review_runner.dart",
+      "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/app_factory/workshop/workshop_proposal_workspace_stager.dart",
+      "file:pilialvu75-hue/Ai-orchestrator-riserva:test/app_factory/workshop/workshop_proposal_implementation_runner_test.dart",
+      "file:pilialvu75-hue/Ai-orchestrator-riserva:test/app_factory/workshop/workshop_proposal_review_runner_test.dart",
+      "file:pilialvu75-hue/Ai-orchestrator-riserva:test/app_factory/workshop/workshop_proposal_workspace_stager_test.dart"
+    ],
+    "started_at": "2026-10-14T21:02:52Z",
+    "heartbeat_at": "2026-10-14T21:02:52Z",
+    "lease_until": "2026-10-15T09:02:52Z",
+    "lease_hours": 12
+  },
   "dependencies": [],
   "roadmap_refs": [
     ".airlab/public-repositories/Ai-orchestrator-riserva/roadmap.yaml#CANT-11",
     ".airlab/public-repositories/Ai-orchestrator-riserva/roadmap.yaml#AIVEXUS-BASE-1",
     ".airlab/public-repositories/Ai-orchestrator-riserva/roadmap.yaml#AIVEXUS-BASE-2"
   ],
-  "evidence": [
-    {
-      "type": "physical_device",
-      "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/releases/tag/v1.0.12%2B3140",
-      "result": "FAIL",
-      "note": "User's +3140 S24 FE gate export proved mixed Flutter/Dart + missing Kotlin XML classes; Reviewer rejected correctly. This historical failure is not a physical test of PR #836. Private exported source remains in user chat only."
-    },
-    {
-      "type": "pull_request",
-      "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/836",
-      "result": "PASS",
-      "note": "Open and ready for Main/Reviewer, mergeable; 12/12 Codex P2 threads resolved after exact-head replies; no merge."
-    },
-    {
-      "type": "commit",
-      "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/0e89bd67160fe3807e3e316d28956ea1274009b0",
-      "result": "PASS",
-      "note": "Exact-head scope of four changed files with added lexer regressions; no runtime or Reviewer bypass."
-    },
-    {
-      "type": "ci",
-      "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38364967940",
-      "result": "PASS",
-      "note": "Exact-head Build & Release APK completed successfully on 0e89bd67160fe3807e3e316d28956ea1274009b0; CI does not prove physical generated app success."
-    },
-    {
-      "type": "ci",
-      "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38364967938",
-      "result": "PASS",
-      "note": "Exact-head Cantiere First App APK completed successfully on 0e89bd67160fe3807e3e316d28956ea1274009b0; CI does not prove physical generated app success."
-    },
-    {
-      "type": "ci",
-      "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38364967933",
-      "result": "PASS",
-      "note": "Exact-head Web Cantiere Build completed successfully on 0e89bd67160fe3807e3e316d28956ea1274009b0; CI does not prove physical generated app success."
-    },
-    {
-      "type": "ci",
-      "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38364967962",
-      "result": "PASS",
-      "note": "Exact-head Build Windows Desktop completed successfully on 0e89bd67160fe3807e3e316d28956ea1274009b0; CI does not prove physical generated app success."
-    },
-    {
-      "type": "ci",
-      "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38364968070",
-      "result": "PASS",
-      "note": "Exact-head Build Linux Desktop completed successfully on 0e89bd67160fe3807e3e316d28956ea1274009b0; CI does not prove physical generated app success."
-    },
-    {
-      "type": "ci",
-      "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38364967971",
-      "result": "PASS",
-      "note": "Exact-head Build macOS Desktop completed successfully on 0e89bd67160fe3807e3e316d28956ea1274009b0; CI does not prove physical generated app success."
-    }
-  ],
+  "evidence": [],
   "gates": {
     "G0_CLAIM": "PASS",
-    "G1_IMPLEMENTATION": "PASS",
-    "G2_STATIC": "PASS",
-    "G3_CI": "PASS",
-    "G4_INTEGRATION": "PASS",
-    "G5_TARGET_RUNTIME": "PENDING_PHYSICAL_S24_FE",
-    "G6_REVIEWER": "PASS",
-    "G7_CANONICAL_SYNC": "PASS"
+    "G1_IMPLEMENTATION": "PENDING",
+    "G2_STATIC": "PENDING",
+    "G3_CI": "PENDING",
+    "G4_INTEGRATION": "PENDING",
+    "G5_TARGET_RUNTIME": "NOT_APPLICABLE_UNTIL_RUNTIME_CHANGE",
+    "G6_REVIEWER": "PENDING",
+    "G7_CANONICAL_SYNC": "PENDING"
   },
   "reviewer": {
     "required": true,
-    "state": "APPROVED",
-    "reviewed_by": "main-reviewer",
-    "reviewed_at": "2026-10-14T13:39:46Z"
+    "state": "PENDING",
+    "reviewed_by": null,
+    "reviewed_at": null
   },
   "next_action": "Merge PR #836 using expected reviewed head 0e89bd67160fe3807e3e316d28956ea1274009b0, verify merged commit actually reachable from main, then check signed Android release tag and APK asset containing the merge. Only that signed release can authorize one physical S24 FE retest on existing black-background project with four qwen2_5_3b_instruct roles; keep G5 physical open and do not substitute Lista Spesa Lite.",
   "historical_backlog": [
@@ -2030,6 +1996,103 @@
           ".airlab/public-repositories/Ai-orchestrator-riserva/roadmap.yaml#CANT-AUDIT-06"
         ]
       }
+    },
+    {
+      "schema_version": 1,
+      "submitted_at": "2026-10-13T09:36:16Z",
+      "lane_id": "cantiere",
+      "claim_id": "c0d7e9a1f346b8d5021a",
+      "work_item": "cantiere-engineer-flutter-native-import-3140",
+      "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
+      "branch": "fix/cantiere-engineer-flutter-native-import-3140",
+      "pull_request": 836,
+      "summary": "Bounded PR #836 S24 FE +3140 source-guard rework submitted at exact head 0e89bd67160fe3807e3e316d28956ea1274009b0. Engineer Flutter-first guidance and narrow pre-staging fail-closed rejection of Java/Kotlin/Android/JVM class import URIs in Dart, with existing one structural FormatException retry only. Follow-up Codex P2 regressions addressed for java/kotlin namespaces, lexer skipping comment/triple string/nested interpolation, conditional import branches, qualified metadata, JVM two-segment names, raw/triple-quoted imported URIs, Dart shebang+BOM, adjacent literal URI segments, conditional test string exclusions, and io.flutter.* class namespace while preserving legitimate Dart imports and MethodChannel. Exact-head 6 CI success and 12/12 Codex review threads resolved, including all later follow-up P2. PR still open and mergeable; no Main/Reviewer approval or physical S24 FE success is claimed.",
+      "changes": [
+        "lib/app_factory/workshop/workshop_proposal_implementation_runner.dart: Flutter/Android Engineer primary, compact and structural retry guidance, preserving all inference settings and retry count.",
+        "lib/app_factory/workshop/workshop_proposal_workspace_stager.dart: reject actual native JVM class import directives in Dart before virtual staging; safe lexical handling of comments, string/interpolation, metadata, optional BOM/shebang, conditional URI branches, adjacent and triple-quoted segments, and scoped io.flutter namespace; no Kotlin/XML ban.",
+        "test/app_factory/workshop/workshop_proposal_implementation_runner_test.dart: one Engineer structural FormatException retry for +3140 invalid import, no early approval.",
+        "test/app_factory/workshop/workshop_proposal_workspace_stager_test.dart: failure before staging on direct/conditional JVM imports and all reviewed boundary cases, preserved acceptance of legal import-looking comments/strings, valid Dart package/dart/relative imports, legal MethodChannel and native bridge files."
+      ],
+      "evidence": [
+        {
+          "type": "physical_device",
+          "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/releases/tag/v1.0.12%2B3140",
+          "result": "FAIL",
+          "note": "User's +3140 S24 FE gate export proved mixed Flutter/Dart + missing Kotlin XML classes; Reviewer rejected correctly. This historical failure is not a physical test of PR #836. Private exported source remains in user chat only."
+        },
+        {
+          "type": "pull_request",
+          "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/836",
+          "result": "PASS",
+          "note": "Open and ready for Main/Reviewer, mergeable; 12/12 Codex P2 threads resolved after exact-head replies; no merge."
+        },
+        {
+          "type": "commit",
+          "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/0e89bd67160fe3807e3e316d28956ea1274009b0",
+          "result": "PASS",
+          "note": "Exact-head scope of four changed files with added lexer regressions; no runtime or Reviewer bypass."
+        },
+        {
+          "type": "ci",
+          "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38364967940",
+          "result": "PASS",
+          "note": "Exact-head Build & Release APK completed successfully on 0e89bd67160fe3807e3e316d28956ea1274009b0; CI does not prove physical generated app success."
+        },
+        {
+          "type": "ci",
+          "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38364967938",
+          "result": "PASS",
+          "note": "Exact-head Cantiere First App APK completed successfully on 0e89bd67160fe3807e3e316d28956ea1274009b0; CI does not prove physical generated app success."
+        },
+        {
+          "type": "ci",
+          "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38364967933",
+          "result": "PASS",
+          "note": "Exact-head Web Cantiere Build completed successfully on 0e89bd67160fe3807e3e316d28956ea1274009b0; CI does not prove physical generated app success."
+        },
+        {
+          "type": "ci",
+          "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38364967962",
+          "result": "PASS",
+          "note": "Exact-head Build Windows Desktop completed successfully on 0e89bd67160fe3807e3e316d28956ea1274009b0; CI does not prove physical generated app success."
+        },
+        {
+          "type": "ci",
+          "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38364968070",
+          "result": "PASS",
+          "note": "Exact-head Build Linux Desktop completed successfully on 0e89bd67160fe3807e3e316d28956ea1274009b0; CI does not prove physical generated app success."
+        },
+        {
+          "type": "ci",
+          "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38364967971",
+          "result": "PASS",
+          "note": "Exact-head Build macOS Desktop completed successfully on 0e89bd67160fe3807e3e316d28956ea1274009b0; CI does not prove physical generated app success."
+        }
+      ],
+      "known_risks": [
+        "The custom Dart lexical scanner remains a narrow guard rather than an authoritative Dart analyzer/compiler; uncommon grammar can still lead to false positives/negatives, and all generated source must still pass Reviewer/Validation/build.",
+        "All 12 Codex review threads have been replied to and resolved on GitHub, but this is not equivalent to an independent Main/Reviewer G6 acceptance. Re-review must target exact head, not old heads.",
+        "Green CI and deterministic First App smoke do not show Qwen on-device generation, APK installation, or launch. G5 physical Galaxy S24 FE remains PENDING.",
+        "The original +3140 app code was demonstrably incorrect; PR #836 only adds pre-staging invalid-import repair and prompt guidance, not a guarantee that a complete tappable star app will be generated.",
+        "Do not modify Local WebSearch, Vulkan, RAM, local Qwen assignments, tokens, timeouts, Reviewer/Validation, privacy or stored black-background project.",
+        "The black-background star app is distinct from Lista Spesa Lite; preserve both. Clipboard gate-source sharing remains explicit, not a Diagnostics auto-upload."
+      ],
+      "reviewer_checks": [
+        "Inspect exact head 0e89bd67, four-file scope, and the 12 inline resolved Codex findings. Independently assess custom lexer correctness for directive boundaries including interpolation, comments, annotations, shebang+BOM, conditional/adjacent/triple URI and io.flutter JVM edge cases.",
+        "Verify the narrow guard runs before VirtualWorkspace staging and throws FormatException into exactly the existing bounded Engineer structural retry; no extra inference/approval bypass.",
+        "Verify legitimate package:/dart:/relative Flutter imports and .kt/.xml/MethodChannel integration remain permitted. Confirm Reviewer/Validation and runtime/model settings remain unchanged.",
+        "Verify exact-head six CI links and applicable G1–G4, then decide G6 under Main/Reviewer authority; request narrow rework if additional issues.",
+        "Do not close G5: physical S24 FE validation remains separate. Do not merge/claim physical success based on CI or thread resolution.",
+        "If approved and merged, require a new signed Android release containing exact reviewed merge head before one bounded retry of existing black-background project with all four Qwen 2.5 3B roles; collect acceptance JSON + gate code evidence on fail, with no further retries.",
+        "Preserve Phase 1 ONLINE; the original +3140 review failed, no generated app installation occurred."
+      ],
+      "roadmap_impact": {
+        "material": false,
+        "refs": [
+          ".airlab/public-repositories/Ai-orchestrator-riserva/roadmap.yaml#CANT-11",
+          ".airlab/public-repositories/Ai-orchestrator-riserva/roadmap.yaml#CANT-AUDIT-06"
+        ]
+      }
     }
   ],
   "stale_block_history": [
@@ -2290,103 +2353,6 @@
       }
     }
   ],
-  "review_packet": {
-    "schema_version": 1,
-    "submitted_at": "2026-10-13T09:36:16Z",
-    "lane_id": "cantiere",
-    "claim_id": "c0d7e9a1f346b8d5021a",
-    "work_item": "cantiere-engineer-flutter-native-import-3140",
-    "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
-    "branch": "fix/cantiere-engineer-flutter-native-import-3140",
-    "pull_request": 836,
-    "summary": "Bounded PR #836 S24 FE +3140 source-guard rework submitted at exact head 0e89bd67160fe3807e3e316d28956ea1274009b0. Engineer Flutter-first guidance and narrow pre-staging fail-closed rejection of Java/Kotlin/Android/JVM class import URIs in Dart, with existing one structural FormatException retry only. Follow-up Codex P2 regressions addressed for java/kotlin namespaces, lexer skipping comment/triple string/nested interpolation, conditional import branches, qualified metadata, JVM two-segment names, raw/triple-quoted imported URIs, Dart shebang+BOM, adjacent literal URI segments, conditional test string exclusions, and io.flutter.* class namespace while preserving legitimate Dart imports and MethodChannel. Exact-head 6 CI success and 12/12 Codex review threads resolved, including all later follow-up P2. PR still open and mergeable; no Main/Reviewer approval or physical S24 FE success is claimed.",
-    "changes": [
-      "lib/app_factory/workshop/workshop_proposal_implementation_runner.dart: Flutter/Android Engineer primary, compact and structural retry guidance, preserving all inference settings and retry count.",
-      "lib/app_factory/workshop/workshop_proposal_workspace_stager.dart: reject actual native JVM class import directives in Dart before virtual staging; safe lexical handling of comments, string/interpolation, metadata, optional BOM/shebang, conditional URI branches, adjacent and triple-quoted segments, and scoped io.flutter namespace; no Kotlin/XML ban.",
-      "test/app_factory/workshop/workshop_proposal_implementation_runner_test.dart: one Engineer structural FormatException retry for +3140 invalid import, no early approval.",
-      "test/app_factory/workshop/workshop_proposal_workspace_stager_test.dart: failure before staging on direct/conditional JVM imports and all reviewed boundary cases, preserved acceptance of legal import-looking comments/strings, valid Dart package/dart/relative imports, legal MethodChannel and native bridge files."
-    ],
-    "evidence": [
-      {
-        "type": "physical_device",
-        "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/releases/tag/v1.0.12%2B3140",
-        "result": "FAIL",
-        "note": "User's +3140 S24 FE gate export proved mixed Flutter/Dart + missing Kotlin XML classes; Reviewer rejected correctly. This historical failure is not a physical test of PR #836. Private exported source remains in user chat only."
-      },
-      {
-        "type": "pull_request",
-        "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/836",
-        "result": "PASS",
-        "note": "Open and ready for Main/Reviewer, mergeable; 12/12 Codex P2 threads resolved after exact-head replies; no merge."
-      },
-      {
-        "type": "commit",
-        "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/0e89bd67160fe3807e3e316d28956ea1274009b0",
-        "result": "PASS",
-        "note": "Exact-head scope of four changed files with added lexer regressions; no runtime or Reviewer bypass."
-      },
-      {
-        "type": "ci",
-        "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38364967940",
-        "result": "PASS",
-        "note": "Exact-head Build & Release APK completed successfully on 0e89bd67160fe3807e3e316d28956ea1274009b0; CI does not prove physical generated app success."
-      },
-      {
-        "type": "ci",
-        "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38364967938",
-        "result": "PASS",
-        "note": "Exact-head Cantiere First App APK completed successfully on 0e89bd67160fe3807e3e316d28956ea1274009b0; CI does not prove physical generated app success."
-      },
-      {
-        "type": "ci",
-        "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38364967933",
-        "result": "PASS",
-        "note": "Exact-head Web Cantiere Build completed successfully on 0e89bd67160fe3807e3e316d28956ea1274009b0; CI does not prove physical generated app success."
-      },
-      {
-        "type": "ci",
-        "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38364967962",
-        "result": "PASS",
-        "note": "Exact-head Build Windows Desktop completed successfully on 0e89bd67160fe3807e3e316d28956ea1274009b0; CI does not prove physical generated app success."
-      },
-      {
-        "type": "ci",
-        "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38364968070",
-        "result": "PASS",
-        "note": "Exact-head Build Linux Desktop completed successfully on 0e89bd67160fe3807e3e316d28956ea1274009b0; CI does not prove physical generated app success."
-      },
-      {
-        "type": "ci",
-        "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38364967971",
-        "result": "PASS",
-        "note": "Exact-head Build macOS Desktop completed successfully on 0e89bd67160fe3807e3e316d28956ea1274009b0; CI does not prove physical generated app success."
-      }
-    ],
-    "known_risks": [
-      "The custom Dart lexical scanner remains a narrow guard rather than an authoritative Dart analyzer/compiler; uncommon grammar can still lead to false positives/negatives, and all generated source must still pass Reviewer/Validation/build.",
-      "All 12 Codex review threads have been replied to and resolved on GitHub, but this is not equivalent to an independent Main/Reviewer G6 acceptance. Re-review must target exact head, not old heads.",
-      "Green CI and deterministic First App smoke do not show Qwen on-device generation, APK installation, or launch. G5 physical Galaxy S24 FE remains PENDING.",
-      "The original +3140 app code was demonstrably incorrect; PR #836 only adds pre-staging invalid-import repair and prompt guidance, not a guarantee that a complete tappable star app will be generated.",
-      "Do not modify Local WebSearch, Vulkan, RAM, local Qwen assignments, tokens, timeouts, Reviewer/Validation, privacy or stored black-background project.",
-      "The black-background star app is distinct from Lista Spesa Lite; preserve both. Clipboard gate-source sharing remains explicit, not a Diagnostics auto-upload."
-    ],
-    "reviewer_checks": [
-      "Inspect exact head 0e89bd67, four-file scope, and the 12 inline resolved Codex findings. Independently assess custom lexer correctness for directive boundaries including interpolation, comments, annotations, shebang+BOM, conditional/adjacent/triple URI and io.flutter JVM edge cases.",
-      "Verify the narrow guard runs before VirtualWorkspace staging and throws FormatException into exactly the existing bounded Engineer structural retry; no extra inference/approval bypass.",
-      "Verify legitimate package:/dart:/relative Flutter imports and .kt/.xml/MethodChannel integration remain permitted. Confirm Reviewer/Validation and runtime/model settings remain unchanged.",
-      "Verify exact-head six CI links and applicable G1–G4, then decide G6 under Main/Reviewer authority; request narrow rework if additional issues.",
-      "Do not close G5: physical S24 FE validation remains separate. Do not merge/claim physical success based on CI or thread resolution.",
-      "If approved and merged, require a new signed Android release containing exact reviewed merge head before one bounded retry of existing black-background project with all four Qwen 2.5 3B roles; collect acceptance JSON + gate code evidence on fail, with no further retries.",
-      "Preserve Phase 1 ONLINE; the original +3140 review failed, no generated app installation occurred."
-    ],
-    "roadmap_impact": {
-      "material": false,
-      "refs": [
-        ".airlab/public-repositories/Ai-orchestrator-riserva/roadmap.yaml#CANT-11",
-        ".airlab/public-repositories/Ai-orchestrator-riserva/roadmap.yaml#CANT-AUDIT-06"
-      ]
-    }
-  },
   "current_gate_attestation": {
     "at": "2026-10-14T13:38:57Z",
     "claim_id": "c0d7e9a1f346b8d5021a",
