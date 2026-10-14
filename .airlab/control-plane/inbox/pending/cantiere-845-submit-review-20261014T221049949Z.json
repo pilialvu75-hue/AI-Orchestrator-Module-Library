@@ -1,0 +1,111 @@
+{
+  "schema_version": 1,
+  "request_id": "cantiere-845-submit-review-20261014T221049949Z",
+  "submitted_at": "2026-10-14T22:10:49.949Z",
+  "actor_id": "chatgpt:cantiere",
+  "lane_id": "cantiere",
+  "operation": "submit_review",
+  "expected_state_version": 85,
+  "payload": {
+    "packet": {
+      "schema_version": 1,
+      "submitted_at": "2026-10-14T22:10:49.949Z",
+      "lane_id": "cantiere",
+      "claim_id": "5f0b20632bafab7b6960",
+      "work_item": "issue-845-first-star-app-review-scope-3184",
+      "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
+      "branch": "fix/cantiere-845-first-star-review-scope",
+      "pull_request": 846,
+      "summary": "Cantiere #845: bounded +3184 first-star-app scope-path fix submitted on PR #846 exact head 69632414. Scope proposal and pre-Engineer staged paths are recorded separately; the Reviewer deterministically gates newly staged out-of-task diff while still examining prior retained workspace; Engineer Flutter guidance tightened. Previously discovered certified-Library reuse and Reviewer prompt-bound regressions addressed. Six exact-head workflows PASS; G5 physical generated-star APK remains unproven.",
+      "changes": [
+        "Add count-only staged Engineer proposal vs pre-existing virtual diff scope receipts.",
+        "Gate entire Reviewer staged diff against current task targetFiles plus explicitly conveyed pre-Engineer retained staged paths; preserve all diff files for substantive review and retain fail-closed verdict semantics.",
+        "Add scope provenance to Reviewer prompt and preserve full/compact 7k-character prompt bounds.",
+        "Clarify minimal Flutter CREATE Engineer guidance for complete main entry point, widget imports, Color/Random and malformed string escaping.",
+        "Add regression tests for retained outside-task paths, genuine outside-task violations, false scope findings, certified Library reuse, and prompt bounds."
+      ],
+      "evidence": [
+        {
+          "type": "pull_request",
+          "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/846",
+          "result": "PASS",
+          "note": "PR #846 open, exact head 69632414411a3a2eb74a5ab42c2fd13d55d5e935; 7 modified files, pending Main/Reviewer independent review, not merged."
+        },
+        {
+          "type": "commit",
+          "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/69632414411a3a2eb74a5ab42c2fd13d55d5e935",
+          "result": "PASS",
+          "note": "Final worker head after revisions and source regressions, without reviewer bypass."
+        },
+        {
+          "type": "test",
+          "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38638917305",
+          "result": "PASS",
+          "note": "Cantiere First App APK workflow: physical-failure regressions, guarded lifecycle, Build Lab and Android sample packaging passed; NOT physical star app installation."
+        },
+        {
+          "type": "ci",
+          "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38638917445",
+          "result": "PASS",
+          "note": "Build & Release APK, success on exact PR head."
+        },
+        {
+          "type": "ci",
+          "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38638917312",
+          "result": "PASS",
+          "note": "Web Cantiere Build success on exact head."
+        },
+        {
+          "type": "ci",
+          "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38638917676",
+          "result": "PASS",
+          "note": "Windows build/test workflow success."
+        },
+        {
+          "type": "ci",
+          "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38638917456",
+          "result": "PASS",
+          "note": "Linux build/test workflow success."
+        },
+        {
+          "type": "ci",
+          "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38638917350",
+          "result": "PASS",
+          "note": "macOS build/test workflow success."
+        },
+        {
+          "type": "physical_device",
+          "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/issues/845",
+          "result": "FAIL",
+          "note": "Historical physical failure on S24 FE host +3184; review explicit_scope, incomplete malformed emitted Flutter/native code. NOT proof of the new PR fix."
+        },
+        {
+          "type": "analysis",
+          "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/846",
+          "result": "INFO",
+          "note": "Risk: retainedStagedPaths derives from pre-Engineer staged snapshot; it does not independently attest certified Library origin. Require Main/Reviewer to inspect whether arbitrary retained paths could bypass hard targetFiles policy. No automatic approval allowed."
+        }
+      ],
+      "known_risks": [
+        "Critical independent check: the provenance set denotes already-staged paths, not a certified ownership proof. Determine whether arbitrary or malicious pre-Engineer staged paths may bypass explicit targetFiles, and require rework if unacceptable.",
+        "Full Flutter analyzer/source-level fixture for the malformed 3184 star Dart/Kotlin/XML is not proven by a physical generated application; guidance is preventive and not formal validation of generated star code.",
+        "Six successful CI are host/canned first-app acceptance, not actual S24 FE star app install/launch/tap. G5 remains PENDING_PHYSICAL_S24_FE.",
+        "PR head exact 69632414 was mergeable at handoff; independently verify base drift and review threads at decision time."
+      ],
+      "reviewer_checks": [
+        "Check 7-file exact diff, current main merge-base, active claim and path-lock ownership; confirm pre-Engineer retained provenance cannot silently expand authorized task edits or conceal unexpected files.",
+        "Review deterministic scope set comparison and path-only privacy receipts, including revised resumed/task repair flow and actual current Reviewer batch.",
+        "Review actual compilation/analyzer negative coverage for observed +3184 malformed Dart/Kotlin/XML; request focused rework if missing proof is required for G2/G4.",
+        "Verify all 6 exact-head GitHub CI and any current Codex findings/review threads, and independently attest G1-G4 from packet evidence indices before G6.",
+        "Do not equate Cantiere sample APK with physical generated star app; release, physical S24 FE install/launch/tap remain open G5.",
+        "Do not auto-approve or merge, do not retest host +3184; preserve Local WebSearch, runtime memory, Vulkan and Qwen role assignments."
+      ],
+      "roadmap_impact": {
+        "material": false,
+        "refs": [
+          ".airlab/public-repositories/Ai-orchestrator-riserva/roadmap.yaml#CANT-11"
+        ]
+      }
+    }
+  }
+}
