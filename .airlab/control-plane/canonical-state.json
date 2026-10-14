@@ -7,7 +7,7 @@
     "policy": "This private repository is the single coordination authority. Chats and agents are workers, not independent sources of truth."
   },
   "updated_at": "2026-10-14",
-  "state_revision": 261,
+  "state_revision": 262,
   "lifecycle_status": "BOOTSTRAP_ACTIVE",
   "roadmap_authority": {
     "library": ".airlab/roadmap.yaml",
@@ -80,8 +80,8 @@
     "invalid_lane_behavior": "ISOLATE_AND_SURFACE_PROJECTION_INCIDENT"
   },
   "projection": {
-    "source_digest": "d709e610d768ea85d9fb1c30967705833654a22fa7f951d3cd3d7f0e2f98dd58",
-    "projected_at": "2026-10-14T00:58:23Z",
+    "source_digest": "c7fd1caf6f3903701ccbde04988edbe33612db015a29ceef16468e32d11ef0a6",
+    "projected_at": "2026-10-14T08:28:12Z",
     "counts": {
       "BLOCKED": 1,
       "READY": 14,
@@ -498,8 +498,8 @@
         "id": "runtime-core",
         "status": "REVIEW_REQUIRED",
         "activation": "active",
-        "state_version": 27,
-        "updated_at": "2026-10-13",
+        "state_version": 28,
+        "updated_at": "2026-10-14",
         "active_claim": {
           "claim_id": "403f04c8b0a530f93e77",
           "work_item": "issue-837-preserve-persisted-prompt-after-inference-error",

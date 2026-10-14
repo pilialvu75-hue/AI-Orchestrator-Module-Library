@@ -7,8 +7,8 @@
   "activation": "active",
   "scope": "Shared inference contract, capability/model routing semantics, context, streaming, cancellation, errors, model-profile schema and lifecycle. Target platforms own their benchmark-gated LLM/backend/runtime profiles.",
   "shared_engine_policy": "shared_or_control_plane",
-  "state_version": 27,
-  "updated_at": "2026-10-13",
+  "state_version": 28,
+  "updated_at": "2026-10-14",
   "active_claim": {
     "claim_id": "403f04c8b0a530f93e77",
     "owner_lane": "runtime-core",
@@ -98,10 +98,10 @@
   ],
   "gates": {
     "G0_CLAIM": "PASS",
-    "G1_IMPLEMENTATION": "PENDING",
-    "G2_STATIC": "PENDING",
-    "G3_CI": "PENDING",
-    "G4_INTEGRATION": "PENDING",
+    "G1_IMPLEMENTATION": "PASS",
+    "G2_STATIC": "PASS",
+    "G3_CI": "PASS",
+    "G4_INTEGRATION": "PASS",
     "G5_TARGET_RUNTIME": "NOT_APPLICABLE_UNTIL_RUNTIME_CHANGE",
     "G6_REVIEWER": "PENDING",
     "G7_CANONICAL_SYNC": "PENDING"
@@ -600,6 +600,35 @@
           "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/37929379883"
         ]
       }
+    },
+    {
+      "at": "2026-10-14T08:28:12Z",
+      "claim_id": "403f04c8b0a530f93e77",
+      "packet_sha256": "ee0d415bc8aff61f65dd1cde688b5faf06d41774c8a07c312995ede213befdf4",
+      "reviewed_by": "main-reviewer",
+      "summary": "Main/Reviewer independently examined PR #838 exact head 2e6a143f658d7714a6f19438b48b3b2e80581ff9 and issue #837: bounded state-engine implementation; persisted user/attachment snapshot and original error retained after inference failure; IDs reconciled, duplicate and stale callback/read risks guarded; active send navigation/clear/edit regressions included. 36 focused tests, full Flutter suite/analyzer and 5 exact-head platform CI PASS. Eight old Codex threads resolved; final Codex review no major issues. G1-G4 are code/static/CI integration gates only; S24 FE physical and #830 remain open. No Vulkan, deadline/timeout, RAM/trim15 changes.",
+      "evidence_refs_by_gate": {
+        "G1_IMPLEMENTATION": [
+          "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/2e6a143f658d7714a6f19438b48b3b2e80581ff9",
+          "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/838"
+        ],
+        "G2_STATIC": [
+          "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38478128827/job/115573812513",
+          "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38478128827"
+        ],
+        "G3_CI": [
+          "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38478128785",
+          "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38478128964",
+          "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38478128819",
+          "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38478128772",
+          "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38478128827"
+        ],
+        "G4_INTEGRATION": [
+          "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38478128827/job/115573812513",
+          "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38478128827",
+          "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/838#issuecomment-6156623530"
+        ]
+      }
     }
   ],
   "reconciliation_events": [
@@ -817,6 +846,35 @@
       "material": false,
       "refs": [
         ".airlab/public-repositories/Ai-orchestrator-riserva/roadmap.yaml#CANT-2"
+      ]
+    }
+  },
+  "current_gate_attestation": {
+    "at": "2026-10-14T08:28:12Z",
+    "claim_id": "403f04c8b0a530f93e77",
+    "packet_sha256": "ee0d415bc8aff61f65dd1cde688b5faf06d41774c8a07c312995ede213befdf4",
+    "reviewed_by": "main-reviewer",
+    "summary": "Main/Reviewer independently examined PR #838 exact head 2e6a143f658d7714a6f19438b48b3b2e80581ff9 and issue #837: bounded state-engine implementation; persisted user/attachment snapshot and original error retained after inference failure; IDs reconciled, duplicate and stale callback/read risks guarded; active send navigation/clear/edit regressions included. 36 focused tests, full Flutter suite/analyzer and 5 exact-head platform CI PASS. Eight old Codex threads resolved; final Codex review no major issues. G1-G4 are code/static/CI integration gates only; S24 FE physical and #830 remain open. No Vulkan, deadline/timeout, RAM/trim15 changes.",
+    "evidence_refs_by_gate": {
+      "G1_IMPLEMENTATION": [
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/2e6a143f658d7714a6f19438b48b3b2e80581ff9",
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/838"
+      ],
+      "G2_STATIC": [
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38478128827/job/115573812513",
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38478128827"
+      ],
+      "G3_CI": [
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38478128785",
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38478128964",
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38478128819",
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38478128772",
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38478128827"
+      ],
+      "G4_INTEGRATION": [
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38478128827/job/115573812513",
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38478128827",
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/838#issuecomment-6156623530"
       ]
     }
   }

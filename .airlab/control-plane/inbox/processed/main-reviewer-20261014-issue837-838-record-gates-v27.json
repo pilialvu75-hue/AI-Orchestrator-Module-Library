@@ -1,0 +1,12 @@
+{
+  "schema_version": 1,
+  "request_id": "main-reviewer-20261014-issue837-838-record-gates-v27",
+  "status": "APPLIED",
+  "processed_at": "2026-10-14T08:28:12Z",
+  "source_file": "main-reviewer-20261014-issue837-838-record-gates-v27.json",
+  "lane_id": "runtime-core",
+  "operation": "record_review_gates",
+  "actor_id": "chatgpt:main-reviewer",
+  "errors": [],
+  "result_state_version": 28
+}
