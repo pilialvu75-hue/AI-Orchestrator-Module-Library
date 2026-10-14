@@ -1,0 +1,12 @@
+{
+  "schema_version": 1,
+  "request_id": "cantiere-845-expand-claim-release-20261014T225242938Z",
+  "submitted_at": "2026-10-14T22:52:42.938Z",
+  "actor_id": "chatgpt:cantiere",
+  "lane_id": "cantiere",
+  "operation": "release",
+  "expected_state_version": 88,
+  "payload": {
+    "reason": "Independent reviewer P2 requires actual certified Module Library staging receipt in workshop_library_reuse_service.dart, beyond old file locks; release then re-claim exact expanded scope before modifying these files."
+  }
+}
