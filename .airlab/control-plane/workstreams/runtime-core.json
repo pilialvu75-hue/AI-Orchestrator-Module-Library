@@ -3,11 +3,11 @@
   "id": "runtime-core",
   "title": "Runtime Core",
   "role": "worker",
-  "status": "CLAIMED",
+  "status": "IMPLEMENTING",
   "activation": "active",
   "scope": "Shared inference contract, capability/model routing semantics, context, streaming, cancellation, errors, model-profile schema and lifecycle. Target platforms own their benchmark-gated LLM/backend/runtime profiles.",
   "shared_engine_policy": "shared_or_control_plane",
-  "state_version": 30,
+  "state_version": 31,
   "updated_at": "2026-10-14",
   "active_claim": {
     "claim_id": "88f663ec2edf8685e90d",
@@ -30,8 +30,8 @@
       "file:pilialvu75-hue/Ai-orchestrator-riserva:test/features/chat_memory/conversation_recall_prompt_test.dart"
     ],
     "started_at": "2026-10-14T10:10:31Z",
-    "heartbeat_at": "2026-10-14T10:10:31Z",
-    "lease_until": "2026-10-14T22:10:31Z",
+    "heartbeat_at": "2026-10-14T10:13:47Z",
+    "lease_until": "2026-10-14T22:13:47Z",
     "lease_hours": 12
   },
   "dependencies": [],
@@ -56,7 +56,7 @@
     "reviewed_by": null,
     "reviewed_at": null
   },
-  "next_action": "Merge PR #838 only at reviewed exact head 2e6a143f658d7714a6f19438b48b3b2e80581ff9, verify actual merge commit on main and a subsequent signed Android release containing it; preserve S24 FE physical acceptance open, do not close #837 or #830, and do not claim RAM/device stability.",
+  "next_action": "Finish deterministic history/provider/prompt and adversarial public-projection regressions, push bounded PR and verify remote Flutter CI and Codex review. Local Flutter execution remains unavailable after prior automatic approval rejection; do not retry wrapper.",
   "inference_ownership": {
     "owns": [
       "shared inference API",
@@ -450,25 +450,41 @@
       ],
       "next_action": "Merge PR #838 only at reviewed exact head 2e6a143f658d7714a6f19438b48b3b2e80581ff9, verify actual merge commit on main and a subsequent signed Android release containing it; preserve S24 FE physical acceptance open, do not close #837 or #830, and do not claim RAM/device stability.",
       "kind": "REVIEW_ACCEPTED"
+    },
+    {
+      "seq": 21,
+      "at": "2026-10-14T10:13:47Z",
+      "claim_id": "88f663ec2edf8685e90d",
+      "work_item": "issue-839-same-conversation-recall-context",
+      "summary": "Claim 88f663ec2edf8685e90d acquired on main 45130475. Source reproduces a premature recall-only reduction: 30 retained turns under standard profile become 24 for explicit historical reference despite ordinary history fitting the line window. Implementing comparison against actual retained window, explicit reread intent and unanswered retry intent; runtime token budget remains untouched. Adding count-only RuntimeEventLog/context projection, explicitly scoped Diagnostics contract impact. Physical +3174 root cause remains unproven.",
+      "decisions": [
+        "No model-token/context capacity, Vulkan, timeout, RAM/trim15 or WebSearch change.",
+        "Do not add generic personal-fact extraction or promote ordinary chat to confirmed durable memory.",
+        "Keep issue 839 open pending physical evidence; stage counts cannot prove model comprehension."
+      ],
+      "evidence_refs": [
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/issues/839",
+        "https://github.com/pilialvu75-hue/AI-Orchestrator-Module-Library/blob/main/.airlab/control-plane/inbox/processed/runtime-core-20261014-issue839-claim-v29.json"
+      ],
+      "next_action": "Finish deterministic history/provider/prompt and adversarial public-projection regressions, push bounded PR and verify remote Flutter CI and Codex review. Local Flutter execution remains unavailable after prior automatic approval rejection; do not retry wrapper."
     }
   ],
   "last_checkpoint": {
-    "seq": 20,
-    "at": "2026-10-14T08:29:08Z",
-    "claim_id": "403f04c8b0a530f93e77",
-    "work_item": "issue-837-preserve-persisted-prompt-after-inference-error",
-    "summary": "APPROVED (implementation/code only): independently reviewed PR #838 exact head 2e6a143f658d7714a6f19438b48b3b2e80581ff9 after claim-bound G1-G4 APPLIED attestation. Fixed issue #837 persisted-user question visibility on failed inference, canonical-ID reconciliation, attachment preservation, stale read/callback defense, clear/navigation/edit and no duplicate edits. 36 state-engine tests and whole Flutter suite pass with zero analyzer errors; Android, Web, Windows, Linux, macOS CI 5/5 pass; eight Codex threads resolved, final review no major findings. No VLAN/Vulkan, RAM/trim15, timeout/deadline policy changes. This approves source integration ONLY; S24 FE physical verification, #837 acceptance and separate #830 remain open.",
+    "seq": 21,
+    "at": "2026-10-14T10:13:47Z",
+    "claim_id": "88f663ec2edf8685e90d",
+    "work_item": "issue-839-same-conversation-recall-context",
+    "summary": "Claim 88f663ec2edf8685e90d acquired on main 45130475. Source reproduces a premature recall-only reduction: 30 retained turns under standard profile become 24 for explicit historical reference despite ordinary history fitting the line window. Implementing comparison against actual retained window, explicit reread intent and unanswered retry intent; runtime token budget remains untouched. Adding count-only RuntimeEventLog/context projection, explicitly scoped Diagnostics contract impact. Physical +3174 root cause remains unproven.",
     "decisions": [
-      "Main/Reviewer accepted the implementation/review gate."
+      "No model-token/context capacity, Vulkan, timeout, RAM/trim15 or WebSearch change.",
+      "Do not add generic personal-fact extraction or promote ordinary chat to confirmed durable memory.",
+      "Keep issue 839 open pending physical evidence; stage counts cannot prove model comprehension."
     ],
     "evidence_refs": [
-      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/838",
-      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/2e6a143f658d7714a6f19438b48b3b2e80581ff9",
-      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38478128827/job/115573812513",
-      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/838#issuecomment-6156623530"
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/issues/839",
+      "https://github.com/pilialvu75-hue/AI-Orchestrator-Module-Library/blob/main/.airlab/control-plane/inbox/processed/runtime-core-20261014-issue839-claim-v29.json"
     ],
-    "next_action": "Merge PR #838 only at reviewed exact head 2e6a143f658d7714a6f19438b48b3b2e80581ff9, verify actual merge commit on main and a subsequent signed Android release containing it; preserve S24 FE physical acceptance open, do not close #837 or #830, and do not claim RAM/device stability.",
-    "kind": "REVIEW_ACCEPTED"
+    "next_action": "Finish deterministic history/provider/prompt and adversarial public-projection regressions, push bounded PR and verify remote Flutter CI and Codex review. Local Flutter execution remains unavailable after prior automatic approval rejection; do not retry wrapper."
   },
   "review_history": [
     {

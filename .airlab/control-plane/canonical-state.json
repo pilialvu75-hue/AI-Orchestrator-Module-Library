@@ -7,7 +7,7 @@
     "policy": "This private repository is the single coordination authority. Chats and agents are workers, not independent sources of truth."
   },
   "updated_at": "2026-10-14",
-  "state_revision": 264,
+  "state_revision": 265,
   "lifecycle_status": "BOOTSTRAP_ACTIVE",
   "roadmap_authority": {
     "library": ".airlab/roadmap.yaml",
@@ -80,11 +80,11 @@
     "invalid_lane_behavior": "ISOLATE_AND_SURFACE_PROJECTION_INCIDENT"
   },
   "projection": {
-    "source_digest": "d08bafcd6bfdd8a4855437e91e858af8504b9e246b7e6c21ed6b7dd69411d8f1",
-    "projected_at": "2026-10-14T10:10:31Z",
+    "source_digest": "6c2179df798ba2258d3cc5dd16c08f055ecf072dbf5809b103ed6f89642c8e13",
+    "projected_at": "2026-10-14T10:13:47Z",
     "counts": {
       "BLOCKED": 1,
-      "CLAIMED": 1,
+      "IMPLEMENTING": 1,
       "READY": 14,
       "REVIEW_REQUIRED": 1
     },
@@ -109,7 +109,7 @@
         "claim_id": "88f663ec2edf8685e90d",
         "work_item": "issue-839-same-conversation-recall-context",
         "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
-        "lease_until": "2026-10-14T22:10:31Z",
+        "lease_until": "2026-10-14T22:13:47Z",
         "resource_locks": [
           "branch:pilialvu75-hue/Ai-orchestrator-riserva:fix/runtime-core-839-conversation-recall",
           "contract:conversation-context-recall",
@@ -521,15 +521,15 @@
       },
       {
         "id": "runtime-core",
-        "status": "CLAIMED",
+        "status": "IMPLEMENTING",
         "activation": "active",
-        "state_version": 30,
+        "state_version": 31,
         "updated_at": "2026-10-14",
         "active_claim": {
           "claim_id": "88f663ec2edf8685e90d",
           "work_item": "issue-839-same-conversation-recall-context",
           "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
-          "lease_until": "2026-10-14T22:10:31Z",
+          "lease_until": "2026-10-14T22:13:47Z",
           "resource_locks": [
             "branch:pilialvu75-hue/Ai-orchestrator-riserva:fix/runtime-core-839-conversation-recall",
             "contract:conversation-context-recall",
@@ -547,7 +547,7 @@
         "reviewer_state": "PENDING",
         "inference_profile_status": null,
         "historical_backlog_count": 4,
-        "next_action": "Merge PR #838 only at reviewed exact head 2e6a143f658d7714a6f19438b48b3b2e80581ff9, verify actual merge commit on main and a subsequent signed Android release containing it; preserve S24 FE physical acceptance open, do not close #837 or #830, and do not claim RAM/device stability."
+        "next_action": "Finish deterministic history/provider/prompt and adversarial public-projection regressions, push bounded PR and verify remote Flutter CI and Codex review. Local Flutter execution remains unavailable after prior automatic approval rejection; do not retry wrapper."
       },
       {
         "id": "voice-live",
