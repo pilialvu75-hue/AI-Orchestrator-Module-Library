@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "request_id": "cantiere-845-p2-checkpoint-20261014T230409274Z",
+  "submitted_at": "2026-10-14T23:04:09.274Z",
+  "actor_id": "chatgpt:cantiere",
+  "lane_id": "cantiere",
+  "operation": "checkpoint",
+  "expected_state_version": 90,
+  "payload": {
+    "summary": "P2 rework PR #846 head 2b9362bfd0408f70da4b6c32a8209a7eca96ef28: certified-remote-Library-only source digest proof in WorkshopLibraryReuseService; deterministic Reviewer scope never grants arbitrary pre-Engineer paths; test for tampering and real production certified reuse. Negative +3184 Dart analyzer and Android AAPT2 malformed source fixtures wired into First-App regressions. First App regression suite and guarded lifecycle already succeeded on this head; Build Lab and final six CI still running.",
+    "decisions": [
+      "Same PR #846 and issue #845; no Reviewer/Validation bypass, no merge.",
+      "Do not repeat S24 FE +3184; G5 pending until approved new signed release.",
+      "If CI fails, inspect exact job logs and perform only bounded fix; submit new review packet only after all required CI complete."
+    ],
+    "evidence_refs": [
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/846",
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/2b9362bfd0408f70da4b6c32a8209a7eca96ef28",
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38651456810"
+    ],
+    "next_action": "Watch six exact-head workflows for PR #846 head 2b9362bf. Fix concrete failures if any. On all PASS, submit new claim-bound review packet to Main/Reviewer with negative Dart/AAPT2 executed evidence; retain G5 open."
+  }
+}
