@@ -6,8 +6,8 @@
     "owner_lane": "main-reviewer",
     "policy": "This private repository is the single coordination authority. Chats and agents are workers, not independent sources of truth."
   },
-  "updated_at": "2026-10-13",
-  "state_revision": 260,
+  "updated_at": "2026-10-14",
+  "state_revision": 261,
   "lifecycle_status": "BOOTSTRAP_ACTIVE",
   "roadmap_authority": {
     "library": ".airlab/roadmap.yaml",
@@ -80,8 +80,8 @@
     "invalid_lane_behavior": "ISOLATE_AND_SURFACE_PROJECTION_INCIDENT"
   },
   "projection": {
-    "source_digest": "4e2137620ef4e4f17744b3cf67b762c8dd1e92f62e1684b8fbceaa737c8e4adf",
-    "projected_at": "2026-10-13T22:49:03Z",
+    "source_digest": "d709e610d768ea85d9fb1c30967705833654a22fa7f951d3cd3d7f0e2f98dd58",
+    "projected_at": "2026-10-14T00:58:23Z",
     "counts": {
       "BLOCKED": 1,
       "READY": 14,
@@ -228,6 +228,16 @@
         "reason": "CHECKPOINT_STALE",
         "last_checkpoint_at": "2026-10-13T09:36:16Z",
         "due_since": "2026-10-13T11:36:16Z",
+        "warning_after_minutes": 120
+      },
+      {
+        "lane": "runtime-core",
+        "claim_id": "403f04c8b0a530f93e77",
+        "work_item": "issue-837-preserve-persisted-prompt-after-inference-error",
+        "status": "REVIEW_REQUIRED",
+        "reason": "CHECKPOINT_STALE",
+        "last_checkpoint_at": "2026-10-13T22:49:03Z",
+        "due_since": "2026-10-14T00:49:03Z",
         "warning_after_minutes": 120
       }
     ],
