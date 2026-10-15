@@ -1,0 +1,38 @@
+{
+  "schema_version": 1,
+  "request_id": "main-reviewer-20261015-pr846-gates-v101",
+  "actor_id": "chatgpt:main-reviewer",
+  "lane_id": "cantiere",
+  "operation": "record_review_gates",
+  "expected_state_version": 101,
+  "payload": {
+    "summary": "Independent Main/Reviewer third review PR #846 exact head a4e12bff88f5ad5665c92bfd66cfe6378545b0e7 claim 51667ecdb11f7463ca75. Ten-file full diff inspected in prior review; only one narrow test-file change since reviewed head 2b9362bf. Certified Module Library provenance and per-session SHA256 content-bound authorization fail-closed; old local reuse without proof not implicitly trusted; no caller-supplied allowlist. Executable negative Dart analyzer fixture passed; Android First App exact job 116383726521 logs AAPT2 actual compile at line 848 [CANTIERE_AAPT2_NEGATIVE] executable=aapt2 command=compile exit_code=1 rejection=PASS, marker emitted only after Process.run and nonzero check; Android SDK missing fails closed in target workflow. Six exact-head required CI PASS, PR clean and review threads 0. Gate evidence bound to current immutable claim packet. G5 physical generated-star app NOT proven.",
+    "evidence_indices": {
+      "G1_IMPLEMENTATION": [
+        0,
+        1
+      ],
+      "G2_STATIC": [
+        2,
+        3,
+        4
+      ],
+      "G3_CI": [
+        4,
+        5,
+        6,
+        7,
+        8
+      ],
+      "G4_INTEGRATION": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8
+      ]
+    }
+  }
+}
