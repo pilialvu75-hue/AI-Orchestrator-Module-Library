@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "request_id": "main-reviewer-20261015-pr846-review-accept-v102",
+  "actor_id": "chatgpt:main-reviewer",
+  "lane_id": "cantiere",
+  "operation": "review_accept",
+  "expected_state_version": 102,
+  "payload": {
+    "summary": "APPROVED CODE ONLY: Main/Reviewer third independent PR #846 exact head a4e12bff88f5ad5665c92bfd66cfe6378545b0e7. Certified Library reuse provenance SHA-256 bound to session and current content; all staged changes covered by Reviewer and explicit_scope; unknown/local historic reuse remains fail-closed; no weakening gate, model, timeout or memory settings. Mandatory AAPT2 negative XML test executed in Android First App CI job 116383726521, exact marker at log line 848 exit_code=1; Dart analyzer negative fixture executed. 6/6 PR-head CI success, PR clean with 0 review threads. Current gate attestation bound to claim 51667ecdb11f7463ca75 review packet. G5 PENDING_PHYSICAL_S24_FE; host sample CI APK is NOT generated user-star APK and Phase 1 is NOT DONE.",
+    "next_action": "Merge PR #846 at exact independently reviewed head a4e12bff88f5ad5665c92bfd66cfe6378545b0e7 with guarded expected-head SHA, verify merge commit reachable from main. Check Android Build & Release success and NEW signed host release whose tag commit includes merge; supply real asset link only after verified publication. Authorize exactly ONE new S24 FE test on saved black-background star app with four Qwen 2.5 3B roles. Require generated project Reviewer+Validation PASS, actual generated APK build/install/launch/touch and diagnostics; G5 physical remains open until evidence. No retest +3184. Plan control-plane event-driven reviewer dispatch improvement separately without self-approving worker changes.",
+    "evidence_refs": [
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/846",
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/a4e12bff88f5ad5665c92bfd66cfe6378545b0e7",
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38723542828/job/116383726521",
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38723542725"
+    ]
+  }
+}
