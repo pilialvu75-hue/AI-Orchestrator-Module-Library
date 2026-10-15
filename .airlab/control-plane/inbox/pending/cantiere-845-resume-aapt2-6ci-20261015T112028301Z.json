@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "request_id": "cantiere-845-resume-aapt2-6ci-20261015T112028301Z",
+  "submitted_at": "2026-10-15T11:20:28.301Z",
+  "actor_id": "chatgpt:cantiere",
+  "lane_id": "cantiere",
+  "operation": "resume_wait",
+  "expected_state_version": 98,
+  "payload": {
+    "signal_id": "github-ci-pr846-a4e12bff-six-success-aapt2-verified",
+    "next_action": "Reclaim same #845 with reserved branch and locks, submit new exact-head 6/6 CI + verified AAPT2 negative fixture evidence to independent Main/Reviewer; no merge or phone test.",
+    "evidence_refs": [
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38723542828",
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38723542899",
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38723542812",
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38723542896",
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38723542792",
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38723542725",
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38723542828/job/116383726521",
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/846#issuecomment-6190476746"
+    ]
+  }
+}
