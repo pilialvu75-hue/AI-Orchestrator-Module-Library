@@ -7,7 +7,7 @@
     "policy": "This private repository is the single coordination authority. Chats and agents are workers, not independent sources of truth."
   },
   "updated_at": "2026-10-15",
-  "state_revision": 295,
+  "state_revision": 296,
   "lifecycle_status": "BOOTSTRAP_ACTIVE",
   "roadmap_authority": {
     "library": ".airlab/roadmap.yaml",
@@ -80,117 +80,14 @@
     "invalid_lane_behavior": "ISOLATE_AND_SURFACE_PROJECTION_INCIDENT"
   },
   "projection": {
-    "source_digest": "44bf9b259a8d149fa1202c60da76b661052144a7137187eda093b2e723dc47a7",
-    "projected_at": "2026-10-15T10:53:38Z",
+    "source_digest": "6916442967ea3fae03454970e66e35bdb400509abccab12954bce4353a4b59fa",
+    "projected_at": "2026-10-15T11:02:15Z",
     "counts": {
-      "BLOCKED": 2,
-      "IMPLEMENTING": 1,
+      "BLOCKED": 3,
       "READY": 14
     },
-    "active_claims": [
-      {
-        "lane": "cantiere",
-        "claim_id": "8151fb713b2dd86a9c3f",
-        "work_item": "issue-845-first-star-app-review-scope-3184",
-        "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
-        "lease_until": "2026-10-15T22:53:38Z",
-        "resource_locks": [
-          "branch:pilialvu75-hue/Ai-orchestrator-riserva:fix/cantiere-845-first-star-review-scope",
-          "contract:cantiere-review-stage-scope",
-          "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/app_factory/workshop/workshop_library_reuse_service.dart",
-          "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/app_factory/workshop/workshop_proposal_implementation_runner.dart",
-          "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/app_factory/workshop/workshop_proposal_review_runner.dart",
-          "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/app_factory/workshop/workshop_proposal_workspace_stager.dart",
-          "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/app_factory/workshop/workshop_task_inference_pipeline.dart",
-          "file:pilialvu75-hue/Ai-orchestrator-riserva:test/app_factory/workshop/workshop_generated_star_negative_gate_test.dart",
-          "file:pilialvu75-hue/Ai-orchestrator-riserva:test/app_factory/workshop/workshop_production_task_handle_test.dart",
-          "file:pilialvu75-hue/Ai-orchestrator-riserva:test/app_factory/workshop/workshop_proposal_implementation_runner_test.dart",
-          "file:pilialvu75-hue/Ai-orchestrator-riserva:test/app_factory/workshop/workshop_proposal_review_runner_test.dart",
-          "file:pilialvu75-hue/Ai-orchestrator-riserva:test/app_factory/workshop/workshop_proposal_workspace_stager_test.dart",
-          "file:pilialvu75-hue/Ai-orchestrator-riserva:test/app_factory/workshop/workshop_task_inference_pipeline_test.dart"
-        ]
-      }
-    ],
-    "active_resource_locks": [
-      {
-        "key": "branch:pilialvu75-hue/Ai-orchestrator-riserva:fix/cantiere-845-first-star-review-scope",
-        "lane": "cantiere",
-        "claim_id": "8151fb713b2dd86a9c3f",
-        "work_item": "issue-845-first-star-app-review-scope-3184"
-      },
-      {
-        "key": "contract:cantiere-review-stage-scope",
-        "lane": "cantiere",
-        "claim_id": "8151fb713b2dd86a9c3f",
-        "work_item": "issue-845-first-star-app-review-scope-3184"
-      },
-      {
-        "key": "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/app_factory/workshop/workshop_library_reuse_service.dart",
-        "lane": "cantiere",
-        "claim_id": "8151fb713b2dd86a9c3f",
-        "work_item": "issue-845-first-star-app-review-scope-3184"
-      },
-      {
-        "key": "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/app_factory/workshop/workshop_proposal_implementation_runner.dart",
-        "lane": "cantiere",
-        "claim_id": "8151fb713b2dd86a9c3f",
-        "work_item": "issue-845-first-star-app-review-scope-3184"
-      },
-      {
-        "key": "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/app_factory/workshop/workshop_proposal_review_runner.dart",
-        "lane": "cantiere",
-        "claim_id": "8151fb713b2dd86a9c3f",
-        "work_item": "issue-845-first-star-app-review-scope-3184"
-      },
-      {
-        "key": "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/app_factory/workshop/workshop_proposal_workspace_stager.dart",
-        "lane": "cantiere",
-        "claim_id": "8151fb713b2dd86a9c3f",
-        "work_item": "issue-845-first-star-app-review-scope-3184"
-      },
-      {
-        "key": "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/app_factory/workshop/workshop_task_inference_pipeline.dart",
-        "lane": "cantiere",
-        "claim_id": "8151fb713b2dd86a9c3f",
-        "work_item": "issue-845-first-star-app-review-scope-3184"
-      },
-      {
-        "key": "file:pilialvu75-hue/Ai-orchestrator-riserva:test/app_factory/workshop/workshop_generated_star_negative_gate_test.dart",
-        "lane": "cantiere",
-        "claim_id": "8151fb713b2dd86a9c3f",
-        "work_item": "issue-845-first-star-app-review-scope-3184"
-      },
-      {
-        "key": "file:pilialvu75-hue/Ai-orchestrator-riserva:test/app_factory/workshop/workshop_production_task_handle_test.dart",
-        "lane": "cantiere",
-        "claim_id": "8151fb713b2dd86a9c3f",
-        "work_item": "issue-845-first-star-app-review-scope-3184"
-      },
-      {
-        "key": "file:pilialvu75-hue/Ai-orchestrator-riserva:test/app_factory/workshop/workshop_proposal_implementation_runner_test.dart",
-        "lane": "cantiere",
-        "claim_id": "8151fb713b2dd86a9c3f",
-        "work_item": "issue-845-first-star-app-review-scope-3184"
-      },
-      {
-        "key": "file:pilialvu75-hue/Ai-orchestrator-riserva:test/app_factory/workshop/workshop_proposal_review_runner_test.dart",
-        "lane": "cantiere",
-        "claim_id": "8151fb713b2dd86a9c3f",
-        "work_item": "issue-845-first-star-app-review-scope-3184"
-      },
-      {
-        "key": "file:pilialvu75-hue/Ai-orchestrator-riserva:test/app_factory/workshop/workshop_proposal_workspace_stager_test.dart",
-        "lane": "cantiere",
-        "claim_id": "8151fb713b2dd86a9c3f",
-        "work_item": "issue-845-first-star-app-review-scope-3184"
-      },
-      {
-        "key": "file:pilialvu75-hue/Ai-orchestrator-riserva:test/app_factory/workshop/workshop_task_inference_pipeline_test.dart",
-        "lane": "cantiere",
-        "claim_id": "8151fb713b2dd86a9c3f",
-        "work_item": "issue-845-first-star-app-review-scope-3184"
-      }
-    ],
+    "active_claims": [],
+    "active_resource_locks": [],
     "review_required": [],
     "blocked": [
       {
@@ -210,6 +107,32 @@
           ],
           "resume_condition": "All six platform GitHub workflow runs of PR #833 exact head 831015d149f2cbae6928683e8deb1aeafa3832b5 have completed, with outcomes available for inspection. Dedicated Aivexus CAD-1 Domain Tests run 38364393744 already succeeded.",
           "detected_at": "2026-10-13T07:45:35Z",
+          "review_required": false
+        }
+      },
+      {
+        "lane": "cantiere",
+        "reason": {
+          "code": "WAITING_EXTERNAL",
+          "wait_id": "cantiere:8151fb713b2dd86a9c3f:WAITING_EXTERNAL",
+          "work_item": "issue-845-first-star-app-review-scope-3184",
+          "resource_locks": [
+            "branch:pilialvu75-hue/Ai-orchestrator-riserva:fix/cantiere-845-first-star-review-scope",
+            "contract:cantiere-review-stage-scope",
+            "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/app_factory/workshop/workshop_library_reuse_service.dart",
+            "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/app_factory/workshop/workshop_proposal_implementation_runner.dart",
+            "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/app_factory/workshop/workshop_proposal_review_runner.dart",
+            "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/app_factory/workshop/workshop_proposal_workspace_stager.dart",
+            "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/app_factory/workshop/workshop_task_inference_pipeline.dart",
+            "file:pilialvu75-hue/Ai-orchestrator-riserva:test/app_factory/workshop/workshop_generated_star_negative_gate_test.dart",
+            "file:pilialvu75-hue/Ai-orchestrator-riserva:test/app_factory/workshop/workshop_production_task_handle_test.dart",
+            "file:pilialvu75-hue/Ai-orchestrator-riserva:test/app_factory/workshop/workshop_proposal_implementation_runner_test.dart",
+            "file:pilialvu75-hue/Ai-orchestrator-riserva:test/app_factory/workshop/workshop_proposal_review_runner_test.dart",
+            "file:pilialvu75-hue/Ai-orchestrator-riserva:test/app_factory/workshop/workshop_proposal_workspace_stager_test.dart",
+            "file:pilialvu75-hue/Ai-orchestrator-riserva:test/app_factory/workshop/workshop_task_inference_pipeline_test.dart"
+          ],
+          "resume_condition": "All six GitHub Actions workflows on PR #846 exact head a4e12bff88f5ad5665c92bfd66cfe6378545b0e7 have completed with inspectable outcomes; Android First App run 38723542828 must include actual AAPT2 compile negative gate marker in job 116383726521.",
+          "detected_at": "2026-10-15T11:02:15Z",
           "review_required": false
         }
       },
@@ -339,35 +262,15 @@
       },
       {
         "id": "cantiere",
-        "status": "IMPLEMENTING",
+        "status": "BLOCKED",
         "activation": "active",
-        "state_version": 97,
+        "state_version": 98,
         "updated_at": "2026-10-15",
-        "active_claim": {
-          "claim_id": "8151fb713b2dd86a9c3f",
-          "work_item": "issue-845-first-star-app-review-scope-3184",
-          "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
-          "lease_until": "2026-10-15T22:53:38Z",
-          "resource_locks": [
-            "branch:pilialvu75-hue/Ai-orchestrator-riserva:fix/cantiere-845-first-star-review-scope",
-            "contract:cantiere-review-stage-scope",
-            "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/app_factory/workshop/workshop_library_reuse_service.dart",
-            "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/app_factory/workshop/workshop_proposal_implementation_runner.dart",
-            "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/app_factory/workshop/workshop_proposal_review_runner.dart",
-            "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/app_factory/workshop/workshop_proposal_workspace_stager.dart",
-            "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/app_factory/workshop/workshop_task_inference_pipeline.dart",
-            "file:pilialvu75-hue/Ai-orchestrator-riserva:test/app_factory/workshop/workshop_generated_star_negative_gate_test.dart",
-            "file:pilialvu75-hue/Ai-orchestrator-riserva:test/app_factory/workshop/workshop_production_task_handle_test.dart",
-            "file:pilialvu75-hue/Ai-orchestrator-riserva:test/app_factory/workshop/workshop_proposal_implementation_runner_test.dart",
-            "file:pilialvu75-hue/Ai-orchestrator-riserva:test/app_factory/workshop/workshop_proposal_review_runner_test.dart",
-            "file:pilialvu75-hue/Ai-orchestrator-riserva:test/app_factory/workshop/workshop_proposal_workspace_stager_test.dart",
-            "file:pilialvu75-hue/Ai-orchestrator-riserva:test/app_factory/workshop/workshop_task_inference_pipeline_test.dart"
-          ]
-        },
+        "active_claim": null,
         "reviewer_state": "CHANGES_REQUESTED",
         "inference_profile_status": null,
         "historical_backlog_count": 3,
-        "next_action": "Cantiere worker resume same issue #845 / branch PR #846, same scope and claim, after canonical heartbeat. Minimal rework only: make malformed Android XML negative test mandatory and fail-closed on Android First App CI when Android SDK/AAPT2 absent, keep optional skip on other host targets; emit privacy-safe marker after verified Process.run(aapt2 compile) nonzero result and demonstrate its exact-head Android job log output. Preserve certified Library provenance solution, Reviewer fail-closed, bounded prompts/retries, local reuse fail-closed, Vulkan/RAM/trim15/Local WebSearch/Qwen roles. Re-run six CI, submit exact new head claim-bound REVIEW_REQUIRED packet. Main/Reviewer re-reviews no phone test +3184; G5 remains open."
+        "next_action": "Recheck all six exact-head PR #846 CI. If all pass, resume_wait via authorized inbox, fresh claim on reserved branch and locks, submit new claim-bound review packet including Android AAPT2 exact job-log evidence; if failed, resume and repair only reported issue. Do not merge or retest +3184 on phone."
       },
       {
         "id": "diagnostics",

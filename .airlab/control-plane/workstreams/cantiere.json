@@ -3,39 +3,13 @@
   "id": "cantiere",
   "title": "Cantiere",
   "role": "worker",
-  "status": "IMPLEMENTING",
+  "status": "BLOCKED",
   "activation": "active",
   "scope": "Exclusive Cantiere/App Factory execution, durability, build/review/validation/apply and first-real-app reliability.",
   "shared_engine_policy": "shared_or_control_plane",
-  "state_version": 97,
+  "state_version": 98,
   "updated_at": "2026-10-15",
-  "active_claim": {
-    "claim_id": "8151fb713b2dd86a9c3f",
-    "owner_lane": "cantiere",
-    "work_item": "issue-845-first-star-app-review-scope-3184",
-    "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
-    "scope": "Finalize P2 #845 PR #846 rework evidence and submit new exact-head review packet for independent Main/Reviewer; no code merge or physical tests",
-    "branch": "fix/cantiere-845-first-star-review-scope",
-    "resource_locks": [
-      "branch:pilialvu75-hue/Ai-orchestrator-riserva:fix/cantiere-845-first-star-review-scope",
-      "contract:cantiere-review-stage-scope",
-      "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/app_factory/workshop/workshop_library_reuse_service.dart",
-      "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/app_factory/workshop/workshop_proposal_implementation_runner.dart",
-      "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/app_factory/workshop/workshop_proposal_review_runner.dart",
-      "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/app_factory/workshop/workshop_proposal_workspace_stager.dart",
-      "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/app_factory/workshop/workshop_task_inference_pipeline.dart",
-      "file:pilialvu75-hue/Ai-orchestrator-riserva:test/app_factory/workshop/workshop_generated_star_negative_gate_test.dart",
-      "file:pilialvu75-hue/Ai-orchestrator-riserva:test/app_factory/workshop/workshop_production_task_handle_test.dart",
-      "file:pilialvu75-hue/Ai-orchestrator-riserva:test/app_factory/workshop/workshop_proposal_implementation_runner_test.dart",
-      "file:pilialvu75-hue/Ai-orchestrator-riserva:test/app_factory/workshop/workshop_proposal_review_runner_test.dart",
-      "file:pilialvu75-hue/Ai-orchestrator-riserva:test/app_factory/workshop/workshop_proposal_workspace_stager_test.dart",
-      "file:pilialvu75-hue/Ai-orchestrator-riserva:test/app_factory/workshop/workshop_task_inference_pipeline_test.dart"
-    ],
-    "started_at": "2026-10-15T09:54:57Z",
-    "heartbeat_at": "2026-10-15T10:53:38Z",
-    "lease_until": "2026-10-15T22:53:38Z",
-    "lease_hours": 12
-  },
+  "active_claim": null,
   "dependencies": [],
   "roadmap_refs": [
     ".airlab/public-repositories/Ai-orchestrator-riserva/roadmap.yaml#CANT-11",
@@ -120,7 +94,7 @@
     "reviewed_by": "main-reviewer",
     "reviewed_at": "2026-10-15T10:08:27Z"
   },
-  "next_action": "Cantiere worker resume same issue #845 / branch PR #846, same scope and claim, after canonical heartbeat. Minimal rework only: make malformed Android XML negative test mandatory and fail-closed on Android First App CI when Android SDK/AAPT2 absent, keep optional skip on other host targets; emit privacy-safe marker after verified Process.run(aapt2 compile) nonzero result and demonstrate its exact-head Android job log output. Preserve certified Library provenance solution, Reviewer fail-closed, bounded prompts/retries, local reuse fail-closed, Vulkan/RAM/trim15/Local WebSearch/Qwen roles. Re-run six CI, submit exact new head claim-bound REVIEW_REQUIRED packet. Main/Reviewer re-reviews no phone test +3184; G5 remains open.",
+  "next_action": "Recheck all six exact-head PR #846 CI. If all pass, resume_wait via authorized inbox, fresh claim on reserved branch and locks, submit new claim-bound review packet including Android AAPT2 exact job-log evidence; if failed, resume and repair only reported issue. Do not merge or retest +3184 on phone.",
   "historical_backlog": [
     "Stay in Phase 1 ONLINE until a real generated Android app is physically accepted.",
     "Reproduce the recent manga-drawing app failure from current main with Diagnostics; do not restart generic audits.",
@@ -1266,13 +1240,6 @@
   ],
   "reconciliation_events": [
     {
-      "type": "CLAIM_RELEASED_AFTER_REVIEW",
-      "claim_id": "cantiere-manga-online-failure-repro-v1-20261001",
-      "work_item": "phase1-online-generated-app-repro-v1",
-      "reason": "Implementation reviewed and merged; physical acceptance is a separate bounded next step.",
-      "at": "2026-10-01T14:07:00Z"
-    },
-    {
       "type": "CLAIM_RELEASED",
       "claim_id": "817e5b54f6185a148751",
       "work_item": "CANT-11-2964-prompt-budget-planner-recovery",
@@ -1486,6 +1453,29 @@
         "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38651456695"
       ],
       "at": "2026-10-15T09:54:34Z"
+    },
+    {
+      "type": "WAIT_ENTERED",
+      "wait_id": "cantiere:8151fb713b2dd86a9c3f:WAITING_EXTERNAL",
+      "wait_type": "WAITING_EXTERNAL",
+      "prior_claim_id": "8151fb713b2dd86a9c3f",
+      "work_item": "issue-845-first-star-app-review-scope-3184",
+      "resource_locks": [
+        "branch:pilialvu75-hue/Ai-orchestrator-riserva:fix/cantiere-845-first-star-review-scope",
+        "contract:cantiere-review-stage-scope",
+        "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/app_factory/workshop/workshop_library_reuse_service.dart",
+        "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/app_factory/workshop/workshop_proposal_implementation_runner.dart",
+        "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/app_factory/workshop/workshop_proposal_review_runner.dart",
+        "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/app_factory/workshop/workshop_proposal_workspace_stager.dart",
+        "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/app_factory/workshop/workshop_task_inference_pipeline.dart",
+        "file:pilialvu75-hue/Ai-orchestrator-riserva:test/app_factory/workshop/workshop_generated_star_negative_gate_test.dart",
+        "file:pilialvu75-hue/Ai-orchestrator-riserva:test/app_factory/workshop/workshop_production_task_handle_test.dart",
+        "file:pilialvu75-hue/Ai-orchestrator-riserva:test/app_factory/workshop/workshop_proposal_implementation_runner_test.dart",
+        "file:pilialvu75-hue/Ai-orchestrator-riserva:test/app_factory/workshop/workshop_proposal_review_runner_test.dart",
+        "file:pilialvu75-hue/Ai-orchestrator-riserva:test/app_factory/workshop/workshop_proposal_workspace_stager_test.dart",
+        "file:pilialvu75-hue/Ai-orchestrator-riserva:test/app_factory/workshop/workshop_task_inference_pipeline_test.dart"
+      ],
+      "at": "2026-10-15T11:02:15Z"
     }
   ],
   "review_packet_history": [
@@ -2727,5 +2717,69 @@
         ".airlab/public-repositories/Ai-orchestrator-riserva/roadmap.yaml#CANT-11"
       ]
     }
+  },
+  "wait_state": {
+    "schema_version": 1,
+    "wait_id": "cantiere:8151fb713b2dd86a9c3f:WAITING_EXTERNAL",
+    "type": "WAITING_EXTERNAL",
+    "work_item": "issue-845-first-star-app-review-scope-3184",
+    "prior_claim_id": "8151fb713b2dd86a9c3f",
+    "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
+    "branch": "fix/cantiere-845-first-star-review-scope",
+    "scope": "Finalize P2 #845 PR #846 rework evidence and submit new exact-head review packet for independent Main/Reviewer; no code merge or physical tests",
+    "resource_locks": [
+      "branch:pilialvu75-hue/Ai-orchestrator-riserva:fix/cantiere-845-first-star-review-scope",
+      "contract:cantiere-review-stage-scope",
+      "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/app_factory/workshop/workshop_library_reuse_service.dart",
+      "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/app_factory/workshop/workshop_proposal_implementation_runner.dart",
+      "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/app_factory/workshop/workshop_proposal_review_runner.dart",
+      "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/app_factory/workshop/workshop_proposal_workspace_stager.dart",
+      "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/app_factory/workshop/workshop_task_inference_pipeline.dart",
+      "file:pilialvu75-hue/Ai-orchestrator-riserva:test/app_factory/workshop/workshop_generated_star_negative_gate_test.dart",
+      "file:pilialvu75-hue/Ai-orchestrator-riserva:test/app_factory/workshop/workshop_production_task_handle_test.dart",
+      "file:pilialvu75-hue/Ai-orchestrator-riserva:test/app_factory/workshop/workshop_proposal_implementation_runner_test.dart",
+      "file:pilialvu75-hue/Ai-orchestrator-riserva:test/app_factory/workshop/workshop_proposal_review_runner_test.dart",
+      "file:pilialvu75-hue/Ai-orchestrator-riserva:test/app_factory/workshop/workshop_proposal_workspace_stager_test.dart",
+      "file:pilialvu75-hue/Ai-orchestrator-riserva:test/app_factory/workshop/workshop_task_inference_pipeline_test.dart"
+    ],
+    "entered_at": "2026-10-15T11:02:15Z",
+    "resume_condition": "All six GitHub Actions workflows on PR #846 exact head a4e12bff88f5ad5665c92bfd66cfe6378545b0e7 have completed with inspectable outcomes; Android First App run 38723542828 must include actual AAPT2 compile negative gate marker in job 116383726521.",
+    "summary": "AAPT2 negative test is now mandatory for Android First App CI and fail-closed on missing SDK; actual compiled resource rejection logged as [CANTIERE_AAPT2_NEGATIVE] executable=aapt2 command=compile exit_code=1 rejection=PASS. First App, Web and Linux CI passed; remaining Android Build & Release, Windows and macOS workflows still in progress. Main/Reviewer review packet not yet sent.",
+    "evidence_refs": [
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/846",
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/a4e12bff88f5ad5665c92bfd66cfe6378545b0e7",
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38723542828/job/116383726521",
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/846#issuecomment-6190476746",
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38723542828",
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38723542725",
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38723542812",
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38723542792",
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38723542899",
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38723542896"
+    ],
+    "resume_next_action": "Recheck all six exact-head PR #846 CI. If all pass, resume_wait via authorized inbox, fresh claim on reserved branch and locks, submit new claim-bound review packet including Android AAPT2 exact job-log evidence; if failed, resume and repair only reported issue. Do not merge or retest +3184 on phone."
+  },
+  "block_reason": {
+    "code": "WAITING_EXTERNAL",
+    "wait_id": "cantiere:8151fb713b2dd86a9c3f:WAITING_EXTERNAL",
+    "work_item": "issue-845-first-star-app-review-scope-3184",
+    "resource_locks": [
+      "branch:pilialvu75-hue/Ai-orchestrator-riserva:fix/cantiere-845-first-star-review-scope",
+      "contract:cantiere-review-stage-scope",
+      "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/app_factory/workshop/workshop_library_reuse_service.dart",
+      "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/app_factory/workshop/workshop_proposal_implementation_runner.dart",
+      "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/app_factory/workshop/workshop_proposal_review_runner.dart",
+      "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/app_factory/workshop/workshop_proposal_workspace_stager.dart",
+      "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/app_factory/workshop/workshop_task_inference_pipeline.dart",
+      "file:pilialvu75-hue/Ai-orchestrator-riserva:test/app_factory/workshop/workshop_generated_star_negative_gate_test.dart",
+      "file:pilialvu75-hue/Ai-orchestrator-riserva:test/app_factory/workshop/workshop_production_task_handle_test.dart",
+      "file:pilialvu75-hue/Ai-orchestrator-riserva:test/app_factory/workshop/workshop_proposal_implementation_runner_test.dart",
+      "file:pilialvu75-hue/Ai-orchestrator-riserva:test/app_factory/workshop/workshop_proposal_review_runner_test.dart",
+      "file:pilialvu75-hue/Ai-orchestrator-riserva:test/app_factory/workshop/workshop_proposal_workspace_stager_test.dart",
+      "file:pilialvu75-hue/Ai-orchestrator-riserva:test/app_factory/workshop/workshop_task_inference_pipeline_test.dart"
+    ],
+    "resume_condition": "All six GitHub Actions workflows on PR #846 exact head a4e12bff88f5ad5665c92bfd66cfe6378545b0e7 have completed with inspectable outcomes; Android First App run 38723542828 must include actual AAPT2 compile negative gate marker in job 116383726521.",
+    "detected_at": "2026-10-15T11:02:15Z",
+    "review_required": false
   }
 }
