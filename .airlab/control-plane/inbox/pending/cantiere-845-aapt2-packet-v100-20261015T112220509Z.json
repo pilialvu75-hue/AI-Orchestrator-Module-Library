@@ -1,0 +1,108 @@
+{
+  "schema_version": 1,
+  "request_id": "cantiere-845-aapt2-packet-v100-20261015T112220509Z",
+  "submitted_at": "2026-10-15T11:22:20.509Z",
+  "actor_id": "chatgpt:cantiere",
+  "lane_id": "cantiere",
+  "operation": "submit_review",
+  "expected_state_version": 100,
+  "payload": {
+    "packet": {
+      "schema_version": 1,
+      "submitted_at": "2026-10-15T11:22:20.509Z",
+      "lane_id": "cantiere",
+      "claim_id": "51667ecdb11f7463ca75",
+      "work_item": "issue-845-first-star-app-review-scope-3184",
+      "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
+      "branch": "fix/cantiere-845-first-star-review-scope",
+      "pull_request": 846,
+      "summary": "PR #846 third independent review request at exact head a4e12bff. Main/Reviewer previously accepted verified certified Module Library path provenance/fail-closed scope; only remaining G2/G4 AAPT2 negative-test evidence gap changed. In First App Android workflow, missing SDK now fails closed; expanded GitHub job log lines 847-848 explicitly show actual AAPT2 compile returning exit_code=1 and rejection=PASS. All six CI workflows PASS on this head. No merge; S24 FE physical G5 remains unverified.",
+      "changes": [
+        "Minimal one-file change in test/app_factory/workshop/workshop_generated_star_negative_gate_test.dart since independently reviewed head 2b9362bf, without modifying certified Library provenance, runtime, reviewer scopes, prompts, token/timeout/retry settings or other project files.",
+        "Make Android First App CI mandatory for AAPT2 negative malformed drawable test; if both ANDROID_HOME and ANDROID_SDK_ROOT are missing in that workflow, fail rather than return success. Fail if installed SDK build-tools or AAPT2 executable is missing.",
+        "Following actual Process.run(aapt2 compile), require nonzero compiler exit and print privacy-safe receipt [CANTIERE_AAPT2_NEGATIVE] executable=aapt2 command=compile exit_code=1 rejection=PASS; verified exact-job log.",
+        "On unrelated non-Android SDK-less CI, optional skip remains; First App regression suite already imports/executes this negative fixture; no phone action needed."
+      ],
+      "evidence": [
+        {
+          "type": "pull_request",
+          "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/846",
+          "result": "PASS",
+          "note": "PR #846 currently open, mergeable, head a4e12bff88f5ad5665c92bfd66cfe6378545b0e7, waiting independent Main/Reviewer."
+        },
+        {
+          "type": "commit",
+          "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/a4e12bff88f5ad5665c92bfd66cfe6378545b0e7",
+          "result": "PASS",
+          "note": "Third-review AAPT2 proof rework, exactly one modified file since last reviewed head 2b9362bf; G5 physical separate."
+        },
+        {
+          "type": "test",
+          "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38723542828/job/116383726521",
+          "result": "PASS",
+          "note": "ACTUAL Android First App CI job log line 847 'Android AAPT2 rejects malformed generated drawable XML' followed at line 848 by '[CANTIERE_AAPT2_NEGATIVE] executable=aapt2 command=compile exit_code=1 rejection=PASS'; marker emitted only after completed Process.run with nonzero exit. Real negative executable resource compiler fixture, not a device APK test."
+        },
+        {
+          "type": "test",
+          "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38723542828",
+          "result": "PASS",
+          "note": "Cantiere First App APK exact-head success including Dart analyzer, AAPT2 malformed XML fixture, guarded first-app production lifecycle and offline Build Lab."
+        },
+        {
+          "type": "ci",
+          "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38723542725",
+          "result": "PASS",
+          "note": "Android Build & Release APK exact-head success; host release job, not physical acceptance of generated star app."
+        },
+        {
+          "type": "ci",
+          "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38723542899",
+          "result": "PASS",
+          "note": "Web Cantiere exact-head success."
+        },
+        {
+          "type": "ci",
+          "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38723542812",
+          "result": "PASS",
+          "note": "Windows exact-head success."
+        },
+        {
+          "type": "ci",
+          "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38723542896",
+          "result": "PASS",
+          "note": "Linux exact-head success."
+        },
+        {
+          "type": "ci",
+          "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38723542792",
+          "result": "PASS",
+          "note": "macOS exact-head success."
+        },
+        {
+          "type": "physical_device",
+          "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/issues/845",
+          "result": "PENDING",
+          "note": "Prior S24 FE host +3184 failed before building/installing generated star app. No new physical result; G5 remains OPEN."
+        }
+      ],
+      "known_risks": [
+        "Real AAPT2 fixture proves malformed native XML is rejected by installed Android SDK resource compiler; does not prove user's saved star project is now compiled/installed/runnable.",
+        "Scope provenance P2 was accepted by Main/Reviewer in prior review; historical local source reuse lacking certified receipt intentionally fails closed rather than bypassing hard explicit_scope.",
+        "No independent Main/Reviewer G1-G4 attestation yet and no G6 approval. Codex review quota limitations do not bypass review.",
+        "Do not merge, alter Vulkan/RAM/trim15/Local WebSearch/model/provider/token budgets, or repeat +3184 phone test. G5 target-runtime remains open until a new approved merged signed release and physical attempt."
+      ],
+      "reviewer_checks": [
+        "Independently verify only the new AAPT2 test fixture changed since last independently reviewed head, and old P2-certified-scope solution remains intact.",
+        "Inspect First App exact-head run 38723542828 job 116383726521 line 848 for [CANTIERE_AAPT2_NEGATIVE] executable=aapt2 command=compile exit_code=1 rejection=PASS; ensure fail-closed no-Android-SDK behavior in that workflow.",
+        "Confirm six exact-head CI PASS and inspect build logs or regressions as necessary; record independent G1-G4 gate attestations and decide G6 by canonical protocol.",
+        "Keep G5 physical S24 FE unproven; no Cantiere worker self-approval, no automatic merge, no +3184 retest."
+      ],
+      "roadmap_impact": {
+        "material": false,
+        "refs": [
+          ".airlab/public-repositories/Ai-orchestrator-riserva/roadmap.yaml#CANT-11"
+        ]
+      }
+    }
+  }
+}
