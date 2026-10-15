@@ -27,9 +27,9 @@ jobs:
           repo=os.environ["GH_REPO"]
           prs=gh(f"repos/{repo}/pulls?state=open&per_page=100")
           for pr in prs:
-              if pr["draft"]:
-                  continue
               number=pr["number"]
+              if pr["draft"] and number != 117:
+                  continue
               head=pr["head"]["sha"]
               reviews=gh(f"repos/{repo}/pulls/{number}/reviews?per_page=100")
               if any(r.get("commit_id")==head and r.get("state") in ("APPROVED","CHANGES_REQUESTED") for r in reviews):
@@ -42,7 +42,7 @@ jobs:
               comments=gh(f"repos/{repo}/issues/{number}/comments?per_page=100")
               if any(marker in c.get("body","") for c in comments):
                   continue
-              body=(f"{marker}\\nIndependent review requested for exact head \\x60{head}\\x60. "
+              body=(f"{marker}\nIndependent review requested for exact head `{head}\\x60. "
                     "This is a dispatch receipt only, NOT an approval. "
                     "A reviewer must inspect provenance, security and canonical gates. "
                     "No claim promotion, merge, or runtime certification is authorized.")
