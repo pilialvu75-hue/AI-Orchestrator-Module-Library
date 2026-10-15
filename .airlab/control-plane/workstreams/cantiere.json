@@ -3,11 +3,11 @@
   "id": "cantiere",
   "title": "Cantiere",
   "role": "worker",
-  "status": "REVIEW_REQUIRED",
+  "status": "IMPLEMENTING",
   "activation": "active",
   "scope": "Exclusive Cantiere/App Factory execution, durability, build/review/validation/apply and first-real-app reliability.",
   "shared_engine_policy": "shared_or_control_plane",
-  "state_version": 95,
+  "state_version": 96,
   "updated_at": "2026-10-15",
   "active_claim": {
     "claim_id": "8151fb713b2dd86a9c3f",
@@ -116,11 +116,11 @@
   },
   "reviewer": {
     "required": true,
-    "state": "PENDING",
-    "reviewed_by": null,
-    "reviewed_at": null
+    "state": "CHANGES_REQUESTED",
+    "reviewed_by": "main-reviewer",
+    "reviewed_at": "2026-10-15T10:08:27Z"
   },
-  "next_action": "Main/Reviewer must inspect the review_packet, linked evidence and required gates before promotion or rework.",
+  "next_action": "Cantiere worker resume same issue #845 / branch PR #846, same scope and claim, after canonical heartbeat. Minimal rework only: make malformed Android XML negative test mandatory and fail-closed on Android First App CI when Android SDK/AAPT2 absent, keep optional skip on other host targets; emit privacy-safe marker after verified Process.run(aapt2 compile) nonzero result and demonstrate its exact-head Android job log output. Preserve certified Library provenance solution, Reviewer fail-closed, bounded prompts/retries, local reuse fail-closed, Vulkan/RAM/trim15/Local WebSearch/Qwen roles. Re-run six CI, submit exact new head claim-bound REVIEW_REQUIRED packet. Main/Reviewer re-reviews no phone test +3184; G5 remains open.",
   "historical_backlog": [
     "Stay in Phase 1 ONLINE until a real generated Android app is physically accepted.",
     "Reproduce the recent manga-drawing app failure from current main with Diagnostics; do not restart generic audits.",
@@ -150,25 +150,6 @@
     "continuation": "Do not re-enable broad Cantiere autopilot until the remaining control-plane concurrency/resource-lock weakness is addressed or explicitly accepted for the next pilot."
   },
   "checkpoints": [
-    {
-      "seq": 6,
-      "at": "2026-10-01T11:11:00Z",
-      "claim_id": "cantiere-manga-online-failure-repro-v1-20261001",
-      "work_item": "phase1-online-generated-app-repro-v1",
-      "summary": "Updated PR #745 head 1de46c1 completed all six CI workflows successfully after both Copilot findings were addressed. Worker implementation is complete and is handed off at the reviewer boundary; no merge or physical-success claim is made.",
-      "decisions": [
-        "Set lane REVIEW_REQUIRED.",
-        "Do not self-merge or self-promote.",
-        "Keep Phase 1 ONLINE until approved merge/release and physical Manga Kids acceptance."
-      ],
-      "evidence_refs": [
-        "Ai-orchestrator-riserva#745",
-        "commit:1de46c10346036f7add4c62cc4a359967249784d",
-        "CI:36850241272,36850241169,36850241205,36850241270,36850241189,36850241326"
-      ],
-      "next_action": "Main/Reviewer: review PR #745 and the addressed Copilot findings. If approved, merge/release; then return lane for physical Manga Kids retest.",
-      "kind": "REVIEW_HANDOFF"
-    },
     {
       "seq": 7,
       "at": "2026-10-01T14:07:00Z",
@@ -1101,29 +1082,33 @@
       ],
       "next_action": "Main/Reviewer must inspect the review_packet, linked evidence and required gates before promotion or rework.",
       "kind": "REVIEW_HANDOFF"
+    },
+    {
+      "seq": 56,
+      "at": "2026-10-15T10:08:27Z",
+      "claim_id": "8151fb713b2dd86a9c3f",
+      "work_item": "issue-845-first-star-app-review-scope-3184",
+      "summary": "Main/Reviewer independent second review CHANGES_REQUESTED on PR #846 exact head 2b9362bfd0408f70da4b6c32a8209a7eca96ef28 (claim 8151fb713b2dd86a9c3f). P2-1 provenance solved: session-scoped verified remote Library staging digest, internal Reviewer lookup, fail-closed arbitrary pre-existing files, no caller-injected allowlist. Remaining G2/G4 evidence gap: test/app_factory/workshop/workshop_generated_star_negative_gate_test.dart Android AAPT2 negative fixture returns early without failing if ANDROID_HOME and ANDROID_SDK_ROOT absent; exact-head CI 38651456810 log has test label but no proof of actual aapt2 compile invocation. Thus green CI cannot attest mandatory native negative check. See reviewer comment https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/846#issuecomment-6189596645. No G1-G4 attestation or G6 approval; G5 physical S24 FE still pending, issue #845 open.",
+      "decisions": [
+        "Main/Reviewer requested bounded rework."
+      ],
+      "evidence_refs": [],
+      "next_action": "Cantiere worker resume same issue #845 / branch PR #846, same scope and claim, after canonical heartbeat. Minimal rework only: make malformed Android XML negative test mandatory and fail-closed on Android First App CI when Android SDK/AAPT2 absent, keep optional skip on other host targets; emit privacy-safe marker after verified Process.run(aapt2 compile) nonzero result and demonstrate its exact-head Android job log output. Preserve certified Library provenance solution, Reviewer fail-closed, bounded prompts/retries, local reuse fail-closed, Vulkan/RAM/trim15/Local WebSearch/Qwen roles. Re-run six CI, submit exact new head claim-bound REVIEW_REQUIRED packet. Main/Reviewer re-reviews no phone test +3184; G5 remains open.",
+      "kind": "REVIEW_REWORK"
     }
   ],
   "last_checkpoint": {
-    "seq": 55,
-    "at": "2026-10-15T09:56:13Z",
+    "seq": 56,
+    "at": "2026-10-15T10:08:27Z",
     "claim_id": "8151fb713b2dd86a9c3f",
     "work_item": "issue-845-first-star-app-review-scope-3184",
-    "summary": "P0 Cantiere #845 second review handoff of PR #846 exact head 2b9362bf. Addresses Main/Reviewer CHANGES_REQUESTED P2: temporal pre-existing edits no longer grant explicit_scope access; only remote certified Module Library intake records per-session digests, and Reviewer internally checks current contents match those digests. Compiler-backed negative Dart/Android resource fixtures for +3184 star failure execute within First App CI. All six platform workflows PASS on exact head. Host code review only; G5 S24 FE generated star app physical acceptance remains open.",
-    "decisions": [],
-    "evidence_refs": [
-      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/846",
-      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/2b9362bfd0408f70da4b6c32a8209a7eca96ef28",
-      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38651456810",
-      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38651456942",
-      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38651456860",
-      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38651456686",
-      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38651456673",
-      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38651456695",
-      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/846#issuecomment-6179922968",
-      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/issues/845"
+    "summary": "Main/Reviewer independent second review CHANGES_REQUESTED on PR #846 exact head 2b9362bfd0408f70da4b6c32a8209a7eca96ef28 (claim 8151fb713b2dd86a9c3f). P2-1 provenance solved: session-scoped verified remote Library staging digest, internal Reviewer lookup, fail-closed arbitrary pre-existing files, no caller-injected allowlist. Remaining G2/G4 evidence gap: test/app_factory/workshop/workshop_generated_star_negative_gate_test.dart Android AAPT2 negative fixture returns early without failing if ANDROID_HOME and ANDROID_SDK_ROOT absent; exact-head CI 38651456810 log has test label but no proof of actual aapt2 compile invocation. Thus green CI cannot attest mandatory native negative check. See reviewer comment https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/846#issuecomment-6189596645. No G1-G4 attestation or G6 approval; G5 physical S24 FE still pending, issue #845 open.",
+    "decisions": [
+      "Main/Reviewer requested bounded rework."
     ],
-    "next_action": "Main/Reviewer must inspect the review_packet, linked evidence and required gates before promotion or rework.",
-    "kind": "REVIEW_HANDOFF"
+    "evidence_refs": [],
+    "next_action": "Cantiere worker resume same issue #845 / branch PR #846, same scope and claim, after canonical heartbeat. Minimal rework only: make malformed Android XML negative test mandatory and fail-closed on Android First App CI when Android SDK/AAPT2 absent, keep optional skip on other host targets; emit privacy-safe marker after verified Process.run(aapt2 compile) nonzero result and demonstrate its exact-head Android job log output. Preserve certified Library provenance solution, Reviewer fail-closed, bounded prompts/retries, local reuse fail-closed, Vulkan/RAM/trim15/Local WebSearch/Qwen roles. Re-run six CI, submit exact new head claim-bound REVIEW_REQUIRED packet. Main/Reviewer re-reviews no phone test +3184; G5 remains open.",
+    "kind": "REVIEW_REWORK"
   },
   "review_history": [
     {
@@ -1258,6 +1243,14 @@
       "work_item": "issue-845-first-star-app-review-scope-3184",
       "decision": "CHANGES_REQUESTED",
       "summary": "CHANGES_REQUESTED on PR #846 exact head 69632414411a3a2eb74a5ab42c2fd13d55d5e935 (claim 5f0b20632bafab7b6960), independent Main/Reviewer. P2 scope authorization defect: workshop_task_inference_pipeline.dart:231-235 derives retainedStagedPaths merely from pre-Engineer snapshot delta, and workshop_proposal_review_runner.dart:93-101 treats those arbitrary paths as authorized alongside hard explicit_scope targetFiles. Certified ownership is not proven, so pre-existing untrusted/out-of-task edits can bypass deterministic scope gate. Existing positive test only labels path 'certified' without validating provenance. P2 evidence gap: Flutter-first prompt-string assertions alone do not prove +3184 invalid Dart/widget/Color/Random/Android XML/Kotlin sources fail actual analyzer/validation/build gates. Details and exact bounded requirements recorded at https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/846#issuecomment-6179922968. Six original head CI PASS but G1-G4 not attested, G6 not approved; G5 physical remains open."
+    },
+    {
+      "reviewed_at": "2026-10-15T10:08:27Z",
+      "reviewed_by": "main-reviewer",
+      "claim_id": "8151fb713b2dd86a9c3f",
+      "work_item": "issue-845-first-star-app-review-scope-3184",
+      "decision": "CHANGES_REQUESTED",
+      "summary": "Main/Reviewer independent second review CHANGES_REQUESTED on PR #846 exact head 2b9362bfd0408f70da4b6c32a8209a7eca96ef28 (claim 8151fb713b2dd86a9c3f). P2-1 provenance solved: session-scoped verified remote Library staging digest, internal Reviewer lookup, fail-closed arbitrary pre-existing files, no caller-injected allowlist. Remaining G2/G4 evidence gap: test/app_factory/workshop/workshop_generated_star_negative_gate_test.dart Android AAPT2 negative fixture returns early without failing if ANDROID_HOME and ANDROID_SDK_ROOT absent; exact-head CI 38651456810 log has test label but no proof of actual aapt2 compile invocation. Thus green CI cannot attest mandatory native negative check. See reviewer comment https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/846#issuecomment-6189596645. No G1-G4 attestation or G6 approval; G5 physical S24 FE still pending, issue #845 open."
     }
   ],
   "completed_work": [
