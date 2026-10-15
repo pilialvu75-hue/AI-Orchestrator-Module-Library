@@ -7,7 +7,7 @@
     "policy": "This private repository is the single coordination authority. Chats and agents are workers, not independent sources of truth."
   },
   "updated_at": "2026-10-15",
-  "state_revision": 296,
+  "state_revision": 297,
   "lifecycle_status": "BOOTSTRAP_ACTIVE",
   "roadmap_authority": {
     "library": ".airlab/roadmap.yaml",
@@ -80,11 +80,11 @@
     "invalid_lane_behavior": "ISOLATE_AND_SURFACE_PROJECTION_INCIDENT"
   },
   "projection": {
-    "source_digest": "6916442967ea3fae03454970e66e35bdb400509abccab12954bce4353a4b59fa",
-    "projected_at": "2026-10-15T11:02:15Z",
+    "source_digest": "3e557e9e21cb75b94a057f6a90bca8c88bb1c160291947f014392f8929144140",
+    "projected_at": "2026-10-15T11:20:40Z",
     "counts": {
-      "BLOCKED": 3,
-      "READY": 14
+      "BLOCKED": 2,
+      "READY": 15
     },
     "active_claims": [],
     "active_resource_locks": [],
@@ -107,32 +107,6 @@
           ],
           "resume_condition": "All six platform GitHub workflow runs of PR #833 exact head 831015d149f2cbae6928683e8deb1aeafa3832b5 have completed, with outcomes available for inspection. Dedicated Aivexus CAD-1 Domain Tests run 38364393744 already succeeded.",
           "detected_at": "2026-10-13T07:45:35Z",
-          "review_required": false
-        }
-      },
-      {
-        "lane": "cantiere",
-        "reason": {
-          "code": "WAITING_EXTERNAL",
-          "wait_id": "cantiere:8151fb713b2dd86a9c3f:WAITING_EXTERNAL",
-          "work_item": "issue-845-first-star-app-review-scope-3184",
-          "resource_locks": [
-            "branch:pilialvu75-hue/Ai-orchestrator-riserva:fix/cantiere-845-first-star-review-scope",
-            "contract:cantiere-review-stage-scope",
-            "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/app_factory/workshop/workshop_library_reuse_service.dart",
-            "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/app_factory/workshop/workshop_proposal_implementation_runner.dart",
-            "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/app_factory/workshop/workshop_proposal_review_runner.dart",
-            "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/app_factory/workshop/workshop_proposal_workspace_stager.dart",
-            "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/app_factory/workshop/workshop_task_inference_pipeline.dart",
-            "file:pilialvu75-hue/Ai-orchestrator-riserva:test/app_factory/workshop/workshop_generated_star_negative_gate_test.dart",
-            "file:pilialvu75-hue/Ai-orchestrator-riserva:test/app_factory/workshop/workshop_production_task_handle_test.dart",
-            "file:pilialvu75-hue/Ai-orchestrator-riserva:test/app_factory/workshop/workshop_proposal_implementation_runner_test.dart",
-            "file:pilialvu75-hue/Ai-orchestrator-riserva:test/app_factory/workshop/workshop_proposal_review_runner_test.dart",
-            "file:pilialvu75-hue/Ai-orchestrator-riserva:test/app_factory/workshop/workshop_proposal_workspace_stager_test.dart",
-            "file:pilialvu75-hue/Ai-orchestrator-riserva:test/app_factory/workshop/workshop_task_inference_pipeline_test.dart"
-          ],
-          "resume_condition": "All six GitHub Actions workflows on PR #846 exact head a4e12bff88f5ad5665c92bfd66cfe6378545b0e7 have completed with inspectable outcomes; Android First App run 38723542828 must include actual AAPT2 compile negative gate marker in job 116383726521.",
-          "detected_at": "2026-10-15T11:02:15Z",
           "review_required": false
         }
       },
@@ -262,15 +236,15 @@
       },
       {
         "id": "cantiere",
-        "status": "BLOCKED",
+        "status": "READY",
         "activation": "active",
-        "state_version": 98,
+        "state_version": 99,
         "updated_at": "2026-10-15",
         "active_claim": null,
         "reviewer_state": "CHANGES_REQUESTED",
         "inference_profile_status": null,
         "historical_backlog_count": 3,
-        "next_action": "Recheck all six exact-head PR #846 CI. If all pass, resume_wait via authorized inbox, fresh claim on reserved branch and locks, submit new claim-bound review packet including Android AAPT2 exact job-log evidence; if failed, resume and repair only reported issue. Do not merge or retest +3184 on phone."
+        "next_action": "Reclaim same #845 with reserved branch and locks, submit new exact-head 6/6 CI + verified AAPT2 negative fixture evidence to independent Main/Reviewer; no merge or phone test."
       },
       {
         "id": "diagnostics",
