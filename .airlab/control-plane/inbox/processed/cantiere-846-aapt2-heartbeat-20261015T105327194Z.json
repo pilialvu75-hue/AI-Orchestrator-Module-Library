@@ -1,0 +1,12 @@
+{
+  "schema_version": 1,
+  "request_id": "cantiere-846-aapt2-heartbeat-20261015T105327194Z",
+  "status": "APPLIED",
+  "processed_at": "2026-10-15T10:53:38Z",
+  "source_file": "cantiere-846-aapt2-heartbeat-20261015T105327194Z.json",
+  "lane_id": "cantiere",
+  "operation": "heartbeat",
+  "actor_id": "chatgpt:cantiere",
+  "errors": [],
+  "result_state_version": 97
+}
