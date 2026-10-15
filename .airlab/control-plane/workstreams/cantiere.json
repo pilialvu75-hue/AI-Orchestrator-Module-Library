@@ -7,7 +7,7 @@
   "activation": "active",
   "scope": "Exclusive Cantiere/App Factory execution, durability, build/review/validation/apply and first-real-app reliability.",
   "shared_engine_policy": "shared_or_control_plane",
-  "state_version": 101,
+  "state_version": 102,
   "updated_at": "2026-10-15",
   "active_claim": {
     "claim_id": "51667ecdb11f7463ca75",
@@ -106,10 +106,10 @@
   ],
   "gates": {
     "G0_CLAIM": "PASS",
-    "G1_IMPLEMENTATION": "PENDING",
-    "G2_STATIC": "PENDING",
-    "G3_CI": "PENDING",
-    "G4_INTEGRATION": "PENDING",
+    "G1_IMPLEMENTATION": "PASS",
+    "G2_STATIC": "PASS",
+    "G3_CI": "PASS",
+    "G4_INTEGRATION": "PASS",
     "G5_TARGET_RUNTIME": "NOT_APPLICABLE_UNTIL_RUNTIME_CHANGE",
     "G6_REVIEWER": "PENDING",
     "G7_CANONICAL_SYNC": "PENDING"
@@ -2668,6 +2668,40 @@
           "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38364967971"
         ]
       }
+    },
+    {
+      "at": "2026-10-15T11:55:51Z",
+      "claim_id": "51667ecdb11f7463ca75",
+      "packet_sha256": "2ba28f29b907c6995da9eb52e5f45293b7db26c7f8aa2dd136d69aa80e49bac6",
+      "reviewed_by": "main-reviewer",
+      "summary": "Independent Main/Reviewer third review PR #846 exact head a4e12bff88f5ad5665c92bfd66cfe6378545b0e7 claim 51667ecdb11f7463ca75. Ten-file full diff inspected in prior review; only one narrow test-file change since reviewed head 2b9362bf. Certified Module Library provenance and per-session SHA256 content-bound authorization fail-closed; old local reuse without proof not implicitly trusted; no caller-supplied allowlist. Executable negative Dart analyzer fixture passed; Android First App exact job 116383726521 logs AAPT2 actual compile at line 848 [CANTIERE_AAPT2_NEGATIVE] executable=aapt2 command=compile exit_code=1 rejection=PASS, marker emitted only after Process.run and nonzero check; Android SDK missing fails closed in target workflow. Six exact-head required CI PASS, PR clean and review threads 0. Gate evidence bound to current immutable claim packet. G5 physical generated-star app NOT proven.",
+      "evidence_refs_by_gate": {
+        "G1_IMPLEMENTATION": [
+          "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/846",
+          "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/a4e12bff88f5ad5665c92bfd66cfe6378545b0e7"
+        ],
+        "G2_STATIC": [
+          "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38723542828/job/116383726521",
+          "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38723542828",
+          "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38723542725"
+        ],
+        "G3_CI": [
+          "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38723542725",
+          "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38723542899",
+          "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38723542812",
+          "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38723542896",
+          "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38723542792"
+        ],
+        "G4_INTEGRATION": [
+          "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38723542828/job/116383726521",
+          "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38723542828",
+          "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38723542725",
+          "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38723542899",
+          "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38723542812",
+          "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38723542896",
+          "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38723542792"
+        ]
+      }
     }
   ],
   "wait_history": [
@@ -2913,6 +2947,40 @@
       "material": false,
       "refs": [
         ".airlab/public-repositories/Ai-orchestrator-riserva/roadmap.yaml#CANT-11"
+      ]
+    }
+  },
+  "current_gate_attestation": {
+    "at": "2026-10-15T11:55:51Z",
+    "claim_id": "51667ecdb11f7463ca75",
+    "packet_sha256": "2ba28f29b907c6995da9eb52e5f45293b7db26c7f8aa2dd136d69aa80e49bac6",
+    "reviewed_by": "main-reviewer",
+    "summary": "Independent Main/Reviewer third review PR #846 exact head a4e12bff88f5ad5665c92bfd66cfe6378545b0e7 claim 51667ecdb11f7463ca75. Ten-file full diff inspected in prior review; only one narrow test-file change since reviewed head 2b9362bf. Certified Module Library provenance and per-session SHA256 content-bound authorization fail-closed; old local reuse without proof not implicitly trusted; no caller-supplied allowlist. Executable negative Dart analyzer fixture passed; Android First App exact job 116383726521 logs AAPT2 actual compile at line 848 [CANTIERE_AAPT2_NEGATIVE] executable=aapt2 command=compile exit_code=1 rejection=PASS, marker emitted only after Process.run and nonzero check; Android SDK missing fails closed in target workflow. Six exact-head required CI PASS, PR clean and review threads 0. Gate evidence bound to current immutable claim packet. G5 physical generated-star app NOT proven.",
+    "evidence_refs_by_gate": {
+      "G1_IMPLEMENTATION": [
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/846",
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/a4e12bff88f5ad5665c92bfd66cfe6378545b0e7"
+      ],
+      "G2_STATIC": [
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38723542828/job/116383726521",
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38723542828",
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38723542725"
+      ],
+      "G3_CI": [
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38723542725",
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38723542899",
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38723542812",
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38723542896",
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38723542792"
+      ],
+      "G4_INTEGRATION": [
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38723542828/job/116383726521",
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38723542828",
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38723542725",
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38723542899",
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38723542812",
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38723542896",
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38723542792"
       ]
     }
   }
