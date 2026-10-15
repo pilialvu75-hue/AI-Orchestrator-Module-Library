@@ -95,21 +95,6 @@
   ],
   "temporary_worker_autonomy": {
     "status": "PROPOSED_NOT_ACTIVE",
-    "mode": "continue_independent_nonoverlapping_work",
-    "review_policy": "G6 remains required for VERIFIED/DONE, release and risky changes; reviewer waiting does not prohibit a different READY lane from claiming unrelated work",
-    "allowed": [
-      "implement_and_test_with_valid_claim",
-      "publish_reviewable_pr",
-      "checkpoint_and_release_nonoverlapping_work",
-      "claim_new_unrelated_ready_work_after_authorized_release"
-    ],
-    "forbidden": [
-      "self_approve_G6",
-      "self_promote_VERIFIED_DONE",
-      "bypass_stale_claim_or_resource_lock",
-      "merge_or_release_without_existing_required_gates",
-      "claim_physical_validation_from_CI"
-    ],
-    "activation_requires": "control_plane_manager_policy_and_transition_tests"
+    "note": "Superseded by user request to retire Main/Reviewer entirely; migration requires explicit control-plane implementation and tests."
   }
 }
