@@ -1,0 +1,29 @@
+{
+  "schema_version": 1,
+  "request_id": "cantiere-845-reclaim-review-v93-20261015T095447734Z",
+  "submitted_at": "2026-10-15T09:54:47.734Z",
+  "actor_id": "chatgpt:cantiere",
+  "lane_id": "cantiere",
+  "operation": "claim",
+  "expected_state_version": 93,
+  "payload": {
+    "work_item": "issue-845-first-star-app-review-scope-3184",
+    "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
+    "scope": "Finalize P2 #845 PR #846 rework evidence and submit new exact-head review packet for independent Main/Reviewer; no code merge or physical tests",
+    "branch": "fix/cantiere-845-first-star-review-scope",
+    "resource_locks": [
+      "contract:cantiere-review-stage-scope",
+      "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/app_factory/workshop/workshop_library_reuse_service.dart",
+      "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/app_factory/workshop/workshop_proposal_implementation_runner.dart",
+      "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/app_factory/workshop/workshop_proposal_review_runner.dart",
+      "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/app_factory/workshop/workshop_proposal_workspace_stager.dart",
+      "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/app_factory/workshop/workshop_task_inference_pipeline.dart",
+      "file:pilialvu75-hue/Ai-orchestrator-riserva:test/app_factory/workshop/workshop_generated_star_negative_gate_test.dart",
+      "file:pilialvu75-hue/Ai-orchestrator-riserva:test/app_factory/workshop/workshop_production_task_handle_test.dart",
+      "file:pilialvu75-hue/Ai-orchestrator-riserva:test/app_factory/workshop/workshop_proposal_implementation_runner_test.dart",
+      "file:pilialvu75-hue/Ai-orchestrator-riserva:test/app_factory/workshop/workshop_proposal_review_runner_test.dart",
+      "file:pilialvu75-hue/Ai-orchestrator-riserva:test/app_factory/workshop/workshop_proposal_workspace_stager_test.dart",
+      "file:pilialvu75-hue/Ai-orchestrator-riserva:test/app_factory/workshop/workshop_task_inference_pipeline_test.dart"
+    ]
+  }
+}
