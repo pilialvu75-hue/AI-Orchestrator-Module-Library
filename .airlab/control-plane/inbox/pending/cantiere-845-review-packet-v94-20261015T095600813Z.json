@@ -1,0 +1,111 @@
+{
+  "schema_version": 1,
+  "request_id": "cantiere-845-review-packet-v94-20261015T095600813Z",
+  "submitted_at": "2026-10-15T09:56:00.813Z",
+  "actor_id": "chatgpt:cantiere",
+  "lane_id": "cantiere",
+  "operation": "submit_review",
+  "expected_state_version": 94,
+  "payload": {
+    "packet": {
+      "schema_version": 1,
+      "submitted_at": "2026-10-15T09:56:00.813Z",
+      "lane_id": "cantiere",
+      "claim_id": "8151fb713b2dd86a9c3f",
+      "work_item": "issue-845-first-star-app-review-scope-3184",
+      "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
+      "branch": "fix/cantiere-845-first-star-review-scope",
+      "pull_request": 846,
+      "summary": "P0 Cantiere #845 second review handoff of PR #846 exact head 2b9362bf. Addresses Main/Reviewer CHANGES_REQUESTED P2: temporal pre-existing edits no longer grant explicit_scope access; only remote certified Module Library intake records per-session digests, and Reviewer internally checks current contents match those digests. Compiler-backed negative Dart/Android resource fixtures for +3184 star failure execute within First App CI. All six platform workflows PASS on exact head. Host code review only; G5 S24 FE generated star app physical acceptance remains open.",
+      "changes": [
+        "Replace caller-supplied temporal retained paths with internal WorkshopLibraryReuseService session-owned verified source-digest receipt issued only after certified remote package intake and conflict-free staging.",
+        "Require Reviewer full-diff scope either explicit task targetFiles or exact current content matching registered certified Library source digest; untrusted earlier paths remain staged for investigation but cannot bypass deterministic rejection.",
+        "Remove pre-Engineer snapshot-based retainedStagedPaths authorization from task inference pipeline; keep finite Reviewer response/prompt bounds, fail-closed verdicts and independent Validation.",
+        "Add negative SDK Dart analyzer fixture detecting unresolved StarWidget, Random without dart:math, and invalid int-to-Color; add installed Android AAPT2 malformed star.xml negative resource compilation fixture; register tests in First App's already executed Engineer regression suite.",
+        "Test actual certified remote staging provenance, tampering revocation, and arbitrary preexisting out-of-scope rejection while retaining existing Library reuse and retry regressions."
+      ],
+      "evidence": [
+        {
+          "type": "pull_request",
+          "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/846",
+          "result": "PASS",
+          "note": "Current PR #846 open and mergeable at head 2b9362bfd0408f70da4b6c32a8209a7eca96ef28; awaiting independent Main/Reviewer. 10 changed files. Not merged."
+        },
+        {
+          "type": "commit",
+          "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/2b9362bfd0408f70da4b6c32a8209a7eca96ef28",
+          "result": "PASS",
+          "note": "Final code head following Main/Reviewer CHANGES_REQUESTED v86→v87, replacing temporal file authorization with verified intake digest proof and adding executable negative star source gate tests."
+        },
+        {
+          "type": "test",
+          "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38651456810",
+          "result": "PASS",
+          "note": "First App workflow ran Engineer regression suite including real Dart analyzer + Android AAPT2 negative fixtures, certified Module Library reuse path and tampered digest regression, then guarded production lifecycle and offline Build Lab. This is host/fixture acceptance, not user S24 FE physical test."
+        },
+        {
+          "type": "ci",
+          "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38651456942",
+          "result": "PASS",
+          "note": "Exact-head Build & Release APK completed success."
+        },
+        {
+          "type": "ci",
+          "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38651456860",
+          "result": "PASS",
+          "note": "Exact-head Web Cantiere Build completed success."
+        },
+        {
+          "type": "ci",
+          "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38651456686",
+          "result": "PASS",
+          "note": "Exact-head Windows build completed success."
+        },
+        {
+          "type": "ci",
+          "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38651456673",
+          "result": "PASS",
+          "note": "Exact-head Linux build completed success."
+        },
+        {
+          "type": "ci",
+          "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38651456695",
+          "result": "PASS",
+          "note": "Exact-head macOS build completed success."
+        },
+        {
+          "type": "analysis",
+          "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/846#issuecomment-6179922968",
+          "result": "INFO",
+          "note": "Independent previous Main/Reviewer identified two P2 blockers: temporal pre-Engineer provenance mistaken for certified authorization; no executable Dart/native negative code-validation fixture. Current head targets both, requires independent re-review."
+        },
+        {
+          "type": "physical_device",
+          "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/issues/845",
+          "result": "PENDING",
+          "note": "S24 FE +3184 failed at Reviewer and generated star app was never installed; new head not physically retested. Do not declare G5 success."
+        }
+      ],
+      "known_risks": [
+        "Verified scope authorization currently covers certified remote Module Library intake. A separate previously verified *local* reusable snapshot has no equivalent digest receipt in this change; when such files are outside explicit targetFiles they fail-closed rather than gaining silent authority. Main/Reviewer should confirm acceptable compatibility impact or request narrow rework.",
+        "Negative analyzer and AAPT2 test fixtures prove SDK tools reject representative malformed +3184 source, but do not prove every generated code defect is statically rejected before the model Reviewer; actual final Build Lab still validates generated project.",
+        "First App workflow builds deterministic CI sample, not real S24 FE generated saved star project. G5 physical remains open until a new approved merged signed host release and single distinct on-device run.",
+        "First App negative XML fixture requires Android SDK/AAPT2; runs in Ubuntu Android workflow, skips platform environments with no Android SDK.",
+        "Codex review quota exhausted; Main/Reviewer independent inspection required, no payments or automatic reviewer approval."
+      ],
+      "reviewer_checks": [
+        "Verify actual session-bound receipt is minted *only* by WorkshopLibraryReuseService after verified remote snapshot/package staging, matches exact content hash on every Reviewer call, and cannot be forged through public Reviewer runner inputs or stale resume.",
+        "Audit both P2 findings against new executable regression coverage: arbitrary pre-staged path rejected; certified staged path usable; tampered digest rejected; analyzer invalid StarWidget/Random/Color and AAPT2 malformed XML actually invoked by First App workflow.",
+        "Inspect full PR diff for false rejection of legitimate local reuse, uncovered newly staged files, coverage fingerprint stability, bounded review prompt, and retained fail-closed Reviewer & Validation semantics.",
+        "Verify six exact-head CI receipts and any new thread/review findings, record G1–G4 bound to this claim and immutable packet, then independently decide G6. No worker self-approval or merge.",
+        "Do not equate host/sample APK with the user's saved star project. G5 physical S24 FE still pending; do not retest +3184, and do not change Vulkan, RAM/trim protections, model/provider, Local WebSearch, limits or retries."
+      ],
+      "roadmap_impact": {
+        "material": false,
+        "refs": [
+          ".airlab/public-repositories/Ai-orchestrator-riserva/roadmap.yaml#CANT-11"
+        ]
+      }
+    }
+  }
+}
