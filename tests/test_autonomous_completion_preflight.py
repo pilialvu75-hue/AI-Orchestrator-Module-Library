@@ -4,7 +4,7 @@ import hashlib
 import json
 from datetime import datetime, timedelta, timezone
 
-import pytest
+import unittest
 
 from tools.control_plane_manager import validate_autonomous_completion
 
@@ -43,7 +43,9 @@ def test_preflight_does_not_mutate_lane():
     assert lane == original
 
 
-@pytest.mark.parametrize("change", [
+class AutonomousCompletionTests(unittest.TestCase):
+    def test_preflight_fails_closed(self):
+        changes = [
     lambda lane: lane.update(status="IMPLEMENTING"),
     lambda lane: lane.update(active_claim=None),
     lambda lane: lane["gates"].update(G3_CI="PENDING"),
@@ -55,16 +57,17 @@ def test_preflight_does_not_mutate_lane():
     lambda lane: lane["review_packet"]["evidence"].clear(),
     lambda lane: lane["review_packet"]["changes"].clear(),
     lambda lane: lane["review_packet"]["roadmap_impact"].pop("refs"),
-])
-def test_preflight_fails_closed(change):
-    lane = eligible_lane()
-    change(lane)
-    with pytest.raises(ValueError):
-        validate_autonomous_completion(lane)
+]
+        for change in changes:
+            with self.subTest(change=repr(change)):
+                lane = eligible_lane()
+                change(lane)
+                with self.assertRaises(ValueError):
+                    validate_autonomous_completion(lane)
 
 
 def test_preflight_rejects_expired_claim():
     lane = eligible_lane()
     lane["active_claim"]["lease_until"] = (datetime.now(timezone.utc) - timedelta(hours=1)).isoformat()
-    with pytest.raises(ValueError):
+    with unittest.TestCase().assertRaises(ValueError):
         validate_autonomous_completion(lane)
