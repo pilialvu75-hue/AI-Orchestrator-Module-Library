@@ -72,6 +72,10 @@ def probe(repository: str, pr_number: int, required_names: list[str], token: str
     latest_pr = fetch_json(f"{base}/pulls/{pr_number}", token)
     if (latest_pr.get("head") or {}).get("sha") != head_sha:
         raise ValueError("PR head changed during CI verification")
+    if ((latest_pr.get("base") or {}).get("repo") or {}).get("full_name") != repository:
+        raise ValueError("PR base repository changed during CI verification")
+    if ((latest_pr.get("head") or {}).get("repo") or {}).get("full_name") != repository:
+        raise ValueError("PR head repository changed during CI verification")
     if latest_pr.get("state") != "open":
         raise ValueError("PR is no longer open")
     return verify_pr_checks(
