@@ -1,6 +1,9 @@
 import unittest
+import json
+import tempfile
+from pathlib import Path
 
-from tools.plan_parallel_work import plan
+from tools.plan_parallel_work import plan, plan_from_canonical
 
 
 class ParallelWorkPlannerTests(unittest.TestCase):
@@ -35,6 +38,51 @@ class ParallelWorkPlannerTests(unittest.TestCase):
     def test_unknown_dependency_rejected(self):
         with self.assertRaisesRegex(ValueError, "unknown dependency"):
             plan({"tasks": [{"id": "A", "lane": "a", "depends_on": ["X"]}]})
+
+
+    def test_canonical_claim_blocks_only_its_lane(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            base = root / ".airlab/control-plane"
+            (base / "workstreams").mkdir(parents=True)
+            (base / "canonical-state.json").write_text(json.dumps({
+                "workstreams": [
+                    ".airlab/control-plane/workstreams/a.json",
+                    ".airlab/control-plane/workstreams/b.json",
+                    ".airlab/control-plane/workstreams/reviewer.json",
+                ]
+            }))
+            for name, role, claim in [
+                ("a", "worker", {"claim_id": "busy"}),
+                ("b", "worker", None),
+                ("reviewer", "reviewer", None),
+            ]:
+                (base / "workstreams" / (name + ".json")).write_text(json.dumps({
+                    "id": name, "role": role, "activation": "active",
+                    "status": "READY", "active_claim": claim,
+                }))
+            result = plan_from_canonical(root, [
+                {"id": "A", "lane": "a"}, {"id": "B", "lane": "b"},
+                {"id": "R", "lane": "reviewer"},
+            ])
+            self.assertEqual([a["task"] for a in result["assignments"]], ["B"])
+            self.assertEqual([d["reason"] for d in result["deferred"]],
+                             ["lane_unavailable", "lane_unavailable"])
+
+    def test_canonical_nonready_lane_is_not_scheduled(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            base = root / ".airlab/control-plane"
+            (base / "workstreams").mkdir(parents=True)
+            (base / "canonical-state.json").write_text(json.dumps({
+                "workstreams": [".airlab/control-plane/workstreams/a.json"]
+            }))
+            (base / "workstreams/a.json").write_text(json.dumps({
+                "id": "a", "role": "worker", "activation": "active",
+                "status": "REVIEW_REQUIRED", "active_claim": None,
+            }))
+            result = plan_from_canonical(root, [{"id": "A", "lane": "a"}])
+            self.assertEqual(result["assignments"], [])
 
 
 if __name__ == "__main__":
