@@ -684,7 +684,7 @@ def validate_autonomous_completion(
     if runtime_gate not in ("NOT_APPLICABLE_UNTIL_RUNTIME_CHANGE", "NOT_APPLICABLE"):
         if not _review_gate_passed(runtime_gate):
             raise ValueError("target runtime evidence is required or unresolved")
-    if not isinstance(lane.get("state_version"), int):
+    if type(lane.get("state_version")) is not int or lane["state_version"] < 0:
         raise ValueError("state version is required for transactional mutation")
     # A receipt flag in mutable lane JSON is NOT proof of provenance. Until
     # receipt verification is implemented against a protected external source,
