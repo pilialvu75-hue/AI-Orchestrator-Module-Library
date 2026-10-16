@@ -19,9 +19,9 @@ def eligible_lane():
         "schema_version": 1, "submitted_at": now.isoformat(),
         "lane_id": "library-researcher", "claim_id": "claim-1",
         "work_item": "item-1", "repository": "owner/repo",
-        "summary": "verified work", "changes": [], "evidence": [],
-        "known_risks": [], "reviewer_checks": [],
-        "roadmap_impact": {"material": False},
+        "summary": "verified work", "changes": ["bounded change"],\n        "evidence": [{"type": "test", "ref": "tests/test_example.py", "result": "PASS"}],
+        "known_risks": [], "reviewer_checks": ["static and CI evidence"],
+        "roadmap_impact": {"material": False, "refs": []},
     }
     digest = hashlib.sha256(json.dumps(packet, sort_keys=True, ensure_ascii=False, separators=(",", ":")).encode()).hexdigest()
     return {
