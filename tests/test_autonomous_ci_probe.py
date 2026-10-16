@@ -55,6 +55,17 @@ class ProbeTests(unittest.TestCase):
             with self.assertRaises(ValueError):
                 probe(REPO, 120, ["Validate Module Library"], "fake-token")
 
+    def test_rejects_pr_updated_while_collecting_checks(self):
+        run = {"id": 99, "head_sha": SHA, "status": "completed",
+               "conclusion": "success", "repository": {"full_name": REPO},
+               "event": "pull_request", "path": ".github/workflows/validate-library.yml"}
+        changed = dict(PR, head={"sha": "b" * 40})
+        with patch("tools.autonomous_ci_probe.fetch_json",
+                   side_effect=[PR, {"total_count": 1, "check_runs": [CHECK]},
+                                {"total_count": 1, "workflow_runs": [run]}, changed]):
+            with self.assertRaisesRegex(ValueError, "changed during"):
+                probe(REPO, 120, ["Validate Module Library"], "fake-token")
+
     def test_rejects_unapproved_workflow(self):
         run = {"id": 99, "head_sha": SHA, "status": "completed",
                "conclusion": "success", "repository": {"full_name": REPO},
