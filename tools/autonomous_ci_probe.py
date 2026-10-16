@@ -68,6 +68,10 @@ def probe(repository: str, pr_number: int, required_names: list[str], token: str
     if not valid_suite_ids:
         raise ValueError("no successful workflow run for exact PR head")
     checks = response.get("check_runs", [])
+    if response["total_count"] != len(checks):
+        raise ValueError("check count does not match returned entries")
+    if runs["total_count"] != len(runs.get("workflow_runs", [])):
+        raise ValueError("workflow run count does not match returned entries")
     if not isinstance(checks, list):
         raise ValueError("invalid check runs response")
     for check in checks:
