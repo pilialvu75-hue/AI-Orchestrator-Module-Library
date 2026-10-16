@@ -33,6 +33,17 @@ class ProbeTests(unittest.TestCase):
             with self.assertRaises(ValueError):
                 probe(REPO, 120, ["Validate Module Library"], "fake-token")
 
+    def test_rejects_wrong_pr_identity(self):
+        for bad_pr in (
+            {**PR, "number": 121},
+            {**PR, "base": {"repo": {"full_name": "other/repo"}}},
+            {key: value for key, value in PR.items() if key != "number"},
+        ):
+            with self.subTest(pr=bad_pr):
+                with patch("tools.autonomous_ci_probe.fetch_json", return_value=bad_pr):
+                    with self.assertRaises(ValueError):
+                        probe(REPO, 120, ["Validate Module Library"], "fake-token")
+
     def test_rejects_changed_head(self):
         with patch("tools.autonomous_ci_probe.fetch_json",
                    side_effect=[PR, {"total_count": 1, "check_runs": [{**CHECK, "head_sha": "b" * 40}]}]):
