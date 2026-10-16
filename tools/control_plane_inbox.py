@@ -26,6 +26,7 @@ OPERATIONS = {
     "checkpoint",
     "release",
     "submit_review",
+    "autonomous_completion_preflight",
     "record_review_gates",
     "review_accept",
     "review_rework",
@@ -313,6 +314,12 @@ def _apply(
             )
         finally:
             packet_path.unlink(missing_ok=True)
+    elif operation == "autonomous_completion_preflight":
+        if payload:
+            raise ValueError("autonomous_completion_preflight payload must be empty")
+        lane = _load(root / _lane_rel(root, lane_id))
+        control_plane_manager.validate_autonomous_completion(lane, now=now)
+        # Read-only by design: this operation does not approve G6 or release claims.
     elif operation == "record_review_gates":
         _record_review_gates(root, lane_id, payload, now)
     elif operation == "review_accept":
