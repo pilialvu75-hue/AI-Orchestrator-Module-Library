@@ -7,7 +7,7 @@
     "policy": "This private repository is the single coordination authority. Chats and agents are workers, not independent sources of truth."
   },
   "updated_at": "2026-10-16",
-  "state_revision": 305,
+  "state_revision": 306,
   "lifecycle_status": "BOOTSTRAP_ACTIVE",
   "roadmap_authority": {
     "library": ".airlab/roadmap.yaml",
@@ -80,12 +80,12 @@
     "invalid_lane_behavior": "ISOLATE_AND_SURFACE_PROJECTION_INCIDENT"
   },
   "projection": {
-    "source_digest": "63d2272badf4f41cf57a47b049ce97b1fdf9c3bd84fcd3769554c824edcb1899",
-    "projected_at": "2026-10-16T13:22:24Z",
+    "source_digest": "449ec240af9c25d0f8d41f7b6a688ab52c3458f5649c7ffa15605491ec53433c",
+    "projected_at": "2026-10-16T13:27:00Z",
     "counts": {
-      "BLOCKED": 3,
+      "BLOCKED": 2,
       "CLAIMED": 1,
-      "READY": 13
+      "READY": 14
     },
     "active_claims": [
       {
@@ -147,24 +147,6 @@
           ],
           "resume_condition": "All six platform GitHub workflow runs of PR #833 exact head 831015d149f2cbae6928683e8deb1aeafa3832b5 have completed, with outcomes available for inspection. Dedicated Aivexus CAD-1 Domain Tests run 38364393744 already succeeded.",
           "detected_at": "2026-10-13T07:45:35Z",
-          "review_required": false
-        }
-      },
-      {
-        "lane": "cantiere",
-        "reason": {
-          "code": "WAITING_EXTERNAL",
-          "wait_id": "cantiere:fd9db7ade2a91e22c15c:WAITING_EXTERNAL",
-          "work_item": "issue-845-star-functional-3204",
-          "resource_locks": [
-            "branch:pilialvu75-hue/Ai-orchestrator-riserva:fix/cantiere-845-star-functional-3204",
-            "contract:cantiere-engineer-functional-completeness",
-            "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/app_factory/workshop/workshop_proposal_implementation_runner.dart",
-            "file:pilialvu75-hue/Ai-orchestrator-riserva:test/app_factory/workshop/workshop_generated_star_negative_gate_test.dart",
-            "file:pilialvu75-hue/Ai-orchestrator-riserva:test/app_factory/workshop/workshop_proposal_implementation_runner_test.dart"
-          ],
-          "resume_condition": "All six GitHub Actions CI workflows for draft PR #847 exact head 1ec3cc3cd04c1871de841216ef1616b617239aec complete with inspectable outcomes; First App physical-failure regression included.",
-          "detected_at": "2026-10-16T11:35:42Z",
           "review_required": false
         }
       },
@@ -294,15 +276,15 @@
       },
       {
         "id": "cantiere",
-        "status": "BLOCKED",
+        "status": "READY",
         "activation": "active",
-        "state_version": 106,
+        "state_version": 107,
         "updated_at": "2026-10-16",
         "active_claim": null,
         "reviewer_state": "PENDING",
         "inference_profile_status": null,
         "historical_backlog_count": 3,
-        "next_action": "On explicit CI completion signal, resume wait, reclaim #845 PR #847 branch and existing locks, check all six exact-head CI; repair only concrete failures or submit claim-bound REVIEW_REQUIRED packet for independent Main/Reviewer. Do not merge/self-approve or retest host +3204."
+        "next_action": "Reclaim same issue #845 physical +3204 Engineer functional failure via preserved branch and locks; verify independent review evidence and submit claim-bound PR #847 packet, no merge or new device run."
       },
       {
         "id": "diagnostics",
