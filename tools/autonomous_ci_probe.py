@@ -65,7 +65,7 @@ def probe(repository: str, pr_number: int, required_names: list[str], token: str
     for check in checks:
         if check.get("name") in required_names:
             details = check.get("details_url") or ""
-            if not any(f"/runs/{run_id}/" in details for run_id in valid_run_ids):
+            if not any(details.startswith(f"https://github.com/{repository}/actions/runs/{run_id}/") for run_id in valid_run_ids):
                 raise ValueError("required check has no matching successful workflow run")
     return verify_pr_checks(
         pr=pr, checks=checks, repository=repository,
