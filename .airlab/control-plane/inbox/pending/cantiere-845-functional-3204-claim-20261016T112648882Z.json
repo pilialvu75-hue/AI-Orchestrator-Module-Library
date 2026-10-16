@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "request_id": "cantiere-845-functional-3204-claim-20261016T112648882Z",
+  "submitted_at": "2026-10-16T11:26:48.882Z",
+  "actor_id": "chatgpt:cantiere",
+  "lane_id": "cantiere",
+  "operation": "claim",
+  "expected_state_version": 103,
+  "payload": {
+    "work_item": "issue-845-star-functional-3204",
+    "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
+    "scope": "Investigate S24 FE host +3204 real Reviewer semantic rejection for same saved star app; bounded Engineer proposal-fidelity and negative source gate regression, without changing approval/scope/provenance or runtime budgets; no new phone test or merge",
+    "branch": "fix/cantiere-845-star-functional-3204",
+    "resource_locks": [
+      "branch:pilialvu75-hue/Ai-orchestrator-riserva:fix/cantiere-845-star-functional-3204",
+      "contract:cantiere-engineer-functional-completeness",
+      "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/app_factory/workshop/workshop_proposal_implementation_runner.dart",
+      "file:pilialvu75-hue/Ai-orchestrator-riserva:test/app_factory/workshop/workshop_proposal_implementation_runner_test.dart",
+      "file:pilialvu75-hue/Ai-orchestrator-riserva:test/app_factory/workshop/workshop_generated_star_negative_gate_test.dart"
+    ]
+  }
+}
