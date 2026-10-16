@@ -9,7 +9,7 @@ REPO = "owner/repo"
 
 def inputs():
     return {
-        "pr": {"state": "open", "head": {"sha": SHA, "repo": {"full_name": REPO}}},
+        "pr": {"number": 120, "state": "open", "head": {"sha": SHA, "repo": {"full_name": REPO}}},
         "checks": [
             {"name": "Validate Module Library", "head_sha": SHA,
              "status": "completed", "conclusion": "success",
@@ -33,6 +33,10 @@ class VerifierTests(unittest.TestCase):
             lambda x: x["pr"]["head"].update(sha="b" * 40),
             lambda x: x["pr"]["head"]["repo"].update(full_name="other/repo"),
             lambda x: x["pr"].update(state="closed"),
+            lambda x: x["pr"].pop("number"),
+            lambda x: x["pr"].update(number=0),
+            lambda x: x["pr"].update(number=True),
+            lambda x: x["pr"].update(number="120"),
             lambda x: x["checks"][0].update(head_sha="b" * 40),
             lambda x: x["checks"][0].update(status="in_progress"),
             lambda x: x["checks"][0].update(conclusion="failure"),
