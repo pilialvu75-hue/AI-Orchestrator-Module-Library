@@ -315,10 +315,12 @@ def _apply(
         finally:
             packet_path.unlink(missing_ok=True)
     elif operation == "autonomous_completion_preflight":
-        if payload:
-            raise ValueError("autonomous_completion_preflight payload must be empty")
+        if set(payload) != {"claim_id", "packet_sha256"}:
+            raise ValueError("autonomous preflight requires exact claim_id and packet_sha256")
         lane = _load(root / _lane_rel(root, lane_id))
-        control_plane_manager.validate_autonomous_completion(lane, now=now)
+        result = control_plane_manager.validate_autonomous_completion(lane, now=now)
+        if payload["claim_id"] != result["claim_id"] or payload["packet_sha256"] != result["packet_sha256"]:
+            raise ValueError("autonomous preflight request is stale or mismatched")
         # Read-only by design: no claim release or reviewer approval.
     elif operation == "record_review_gates":
         _record_review_gates(root, lane_id, payload, now)
