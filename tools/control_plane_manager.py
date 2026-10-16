@@ -667,6 +667,10 @@ def validate_autonomous_completion(
         raise ValueError("independent gate verifier identity is required")
     if verifier in {str(lane.get("id")), f"chatgpt:{lane.get('id')}"}:
         raise ValueError("worker cannot attest its own completion gates")
+    # Explicitly exclude reviewer attestations from the new autonomous route.
+    # A separate CI-backed verifier will eventually issue its own receipt.
+    if verifier == "main-reviewer" or verifier == "chatgpt:main-reviewer":
+        raise ValueError("manual reviewer attestation is not autonomous evidence")
     # Identity labels are user-controlled metadata, not cryptographic provenance.
     # Until an inbox-side trusted verifier writes a receipt, fail closed.
     if attestation.get("trusted_verifier_receipt") is not True:
