@@ -667,6 +667,8 @@ def validate_autonomous_completion(
         raise ValueError("independent gate verifier identity is required")
     if verifier in {str(lane.get("id")), f"chatgpt:{lane.get('id')}"}:
         raise ValueError("worker cannot attest its own completion gates")
+    # This preflight cannot authenticate arbitrary actor labels stored in lane JSON.
+    # Trusted receipts must be validated outside the worker-writable state.
     # Explicitly exclude reviewer attestations from the new autonomous route.
     # A separate CI-backed verifier will eventually issue its own receipt.
     if verifier == "main-reviewer" or verifier == "chatgpt:main-reviewer":
