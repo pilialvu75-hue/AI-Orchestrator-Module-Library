@@ -31,6 +31,7 @@ OPERATIONS = {
     "review_accept",
     "review_rework",
     "canonical_sync_complete",
+    "autonomous_completion_preflight",
 }
 
 
@@ -320,6 +321,15 @@ def _apply(
         lane = _load(root / _lane_rel(root, lane_id))
         control_plane_manager.validate_autonomous_completion(lane, now=now)
         # Read-only by design: this operation does not approve G6 or release claims.
+    elif operation == "autonomous_completion_preflight":
+        if set(payload) != {"claim_id", "packet_sha256"}:
+            raise ValueError("autonomous preflight requires claim_id and packet_sha256")
+        lane_path = root / _lane_rel(root, lane_id)
+        lane = _load(lane_path)
+        result = control_plane_manager.validate_autonomous_completion(lane, now=now)
+        if result["claim_id"] != payload["claim_id"] or result["packet_sha256"] != payload["packet_sha256"]:
+            raise ValueError("autonomous preflight claim or packet digest mismatch")
+        # Deliberately read-only: no gate promotion, claim release or reviewer approval.
     elif operation == "record_review_gates":
         _record_review_gates(root, lane_id, payload, now)
     elif operation == "review_accept":
