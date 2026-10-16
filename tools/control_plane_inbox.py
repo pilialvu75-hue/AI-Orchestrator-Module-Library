@@ -31,7 +31,6 @@ OPERATIONS = {
     "review_accept",
     "review_rework",
     "canonical_sync_complete",
-    "autonomous_completion_preflight",
 }
 
 
