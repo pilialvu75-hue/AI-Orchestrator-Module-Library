@@ -75,6 +75,17 @@ class AutonomousCompletionTests(unittest.TestCase):
                     validate_autonomous_completion(lane)
 
 
+def test_forged_trusted_receipt_is_not_authorization():
+    """Mutable lane JSON must not authorize autonomous completion."""
+    lane = eligible_lane()
+    original = copy.deepcopy(lane)
+    with unittest.TestCase().assertRaisesRegex(
+        ValueError, "trusted receipt provenance is not verified"
+    ):
+        validate_autonomous_completion(lane)
+    assert lane == original
+
+
 def test_preflight_rejects_expired_claim():
     lane = eligible_lane()
     lane["active_claim"]["lease_until"] = (datetime.now(timezone.utc) - timedelta(hours=1)).isoformat()
@@ -91,3 +102,6 @@ class AutonomousPreflightTests(unittest.TestCase):
 
     def test_expired(self):
         test_preflight_rejects_expired_claim()
+
+    def test_forged_receipt(self):
+        test_forged_trusted_receipt_is_not_authorization()
