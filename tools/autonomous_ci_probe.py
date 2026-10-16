@@ -41,6 +41,8 @@ def probe(repository: str, pr_number: int, required_names: list[str], token: str
         raise ValueError("PR number mismatch")
     if ((pr.get("base") or {}).get("repo") or {}).get("full_name") != repository:
         raise ValueError("PR base repository mismatch")
+    if (pr.get("base") or {}).get("ref") != "main":
+        raise ValueError("PR target branch must be main")
     head_sha = (pr.get("head") or {}).get("sha")
     if not isinstance(head_sha, str) or len(head_sha) != 40 or any(c not in "0123456789abcdef" for c in head_sha):
         raise ValueError("invalid PR head")
@@ -94,6 +96,8 @@ def probe(repository: str, pr_number: int, required_names: list[str], token: str
         raise ValueError("PR head changed during CI verification")
     if ((latest_pr.get("base") or {}).get("repo") or {}).get("full_name") != repository:
         raise ValueError("PR base repository changed during CI verification")
+    if (latest_pr.get("base") or {}).get("ref") != "main":
+        raise ValueError("PR target branch changed during CI verification")
     if ((latest_pr.get("head") or {}).get("repo") or {}).get("full_name") != repository:
         raise ValueError("PR head repository changed during CI verification")
     if latest_pr.get("state") != "open":
