@@ -71,3 +71,14 @@ def test_preflight_rejects_expired_claim():
     lane["active_claim"]["lease_until"] = (datetime.now(timezone.utc) - timedelta(hours=1)).isoformat()
     with unittest.TestCase().assertRaises(ValueError):
         validate_autonomous_completion(lane)
+
+
+class AutonomousPreflightTests(unittest.TestCase):
+    def test_valid(self):
+        test_preflight_does_not_mutate_lane()
+
+    def test_invalid(self):
+        test_preflight_fails_closed()
+
+    def test_expired(self):
+        test_preflight_rejects_expired_claim()
