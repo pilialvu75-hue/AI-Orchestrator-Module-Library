@@ -1,0 +1,66 @@
+"""Negative tests for read-only autonomous completion eligibility."""
+import copy
+import hashlib
+import json
+from datetime import datetime, timedelta, timezone
+
+import pytest
+
+from tools.control_plane_manager import validate_autonomous_completion
+
+
+def eligible_lane():
+    now = datetime.now(timezone.utc)
+    claim = {
+        "claim_id": "claim-1", "work_item": "item-1", "repository": "owner/repo",
+        "lease_until": (now + timedelta(hours=2)).isoformat(),
+    }
+    packet = {
+        "schema_version": 1, "submitted_at": now.isoformat(),
+        "lane_id": "library-researcher", "claim_id": "claim-1",
+        "work_item": "item-1", "repository": "owner/repo",
+        "summary": "verified work", "changes": [], "evidence": [],
+        "known_risks": [], "reviewer_checks": [],
+        "roadmap_impact": {"material": False},
+    }
+    digest = hashlib.sha256(json.dumps(packet, sort_keys=True, ensure_ascii=False, separators=(",", ":")).encode()).hexdigest()
+    return {
+        "id": "library-researcher", "role": "worker", "status": "REVIEW_REQUIRED",
+        "state_version": 7, "active_claim": claim, "review_packet": packet,
+        "gates": {**{g: "PASS" for g in ("G0_CLAIM", "G1_IMPLEMENTATION", "G2_STATIC", "G3_CI", "G4_INTEGRATION")},
+                  "G5_TARGET_RUNTIME": "NOT_APPLICABLE_UNTIL_RUNTIME_CHANGE"},
+        "current_gate_attestation": {"claim_id": "claim-1", "packet_sha256": digest},
+    }
+
+
+def test_preflight_does_not_mutate_lane():
+    lane = eligible_lane()
+    original = copy.deepcopy(lane)
+    result = validate_autonomous_completion(lane)
+    assert result["state_version"] == 7
+    assert result["eligible_for_transactional_processing"] is True
+    assert lane == original
+
+
+@pytest.mark.parametrize("change", [
+    lambda lane: lane.update(status="IMPLEMENTING"),
+    lambda lane: lane.update(active_claim=None),
+    lambda lane: lane["gates"].update(G3_CI="PENDING"),
+    lambda lane: lane["gates"].update(G5_TARGET_RUNTIME="UNKNOWN"),
+    lambda lane: lane["current_gate_attestation"].update(packet_sha256="stale"),
+    lambda lane: lane["review_packet"].update(claim_id="wrong"),
+    lambda lane: lane.update(state_version=None),
+    lambda lane: lane.update(role="reviewer"),
+])
+def test_preflight_fails_closed(change):
+    lane = eligible_lane()
+    change(lane)
+    with pytest.raises(ValueError):
+        validate_autonomous_completion(lane)
+
+
+def test_preflight_rejects_expired_claim():
+    lane = eligible_lane()
+    lane["active_claim"]["lease_until"] = (datetime.now(timezone.utc) - timedelta(hours=1)).isoformat()
+    with pytest.raises(ValueError):
+        validate_autonomous_completion(lane)
