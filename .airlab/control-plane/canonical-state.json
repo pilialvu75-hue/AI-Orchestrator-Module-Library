@@ -6,8 +6,8 @@
     "owner_lane": "main-reviewer",
     "policy": "This private repository is the single coordination authority. Chats and agents are workers, not independent sources of truth."
   },
-  "updated_at": "2026-10-15",
-  "state_revision": 301,
+  "updated_at": "2026-10-16",
+  "state_revision": 302,
   "lifecycle_status": "BOOTSTRAP_ACTIVE",
   "roadmap_authority": {
     "library": ".airlab/roadmap.yaml",
@@ -80,14 +80,61 @@
     "invalid_lane_behavior": "ISOLATE_AND_SURFACE_PROJECTION_INCIDENT"
   },
   "projection": {
-    "source_digest": "d39b7342fe8417f8914d1e2a27720f7cf7f82cb9bf8b171a3a5be748c50acf3c",
-    "projected_at": "2026-10-15T11:56:43Z",
+    "source_digest": "9afca187a3a178b00f7ded7bf1bc8774c485ad11b8b34d7b644c32135c5c517d",
+    "projected_at": "2026-10-16T11:27:01Z",
     "counts": {
       "BLOCKED": 2,
-      "READY": 15
+      "CLAIMED": 1,
+      "READY": 14
     },
-    "active_claims": [],
-    "active_resource_locks": [],
+    "active_claims": [
+      {
+        "lane": "cantiere",
+        "claim_id": "fd9db7ade2a91e22c15c",
+        "work_item": "issue-845-star-functional-3204",
+        "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
+        "lease_until": "2026-10-16T23:27:01Z",
+        "resource_locks": [
+          "branch:pilialvu75-hue/Ai-orchestrator-riserva:fix/cantiere-845-star-functional-3204",
+          "contract:cantiere-engineer-functional-completeness",
+          "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/app_factory/workshop/workshop_proposal_implementation_runner.dart",
+          "file:pilialvu75-hue/Ai-orchestrator-riserva:test/app_factory/workshop/workshop_generated_star_negative_gate_test.dart",
+          "file:pilialvu75-hue/Ai-orchestrator-riserva:test/app_factory/workshop/workshop_proposal_implementation_runner_test.dart"
+        ]
+      }
+    ],
+    "active_resource_locks": [
+      {
+        "key": "branch:pilialvu75-hue/Ai-orchestrator-riserva:fix/cantiere-845-star-functional-3204",
+        "lane": "cantiere",
+        "claim_id": "fd9db7ade2a91e22c15c",
+        "work_item": "issue-845-star-functional-3204"
+      },
+      {
+        "key": "contract:cantiere-engineer-functional-completeness",
+        "lane": "cantiere",
+        "claim_id": "fd9db7ade2a91e22c15c",
+        "work_item": "issue-845-star-functional-3204"
+      },
+      {
+        "key": "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/app_factory/workshop/workshop_proposal_implementation_runner.dart",
+        "lane": "cantiere",
+        "claim_id": "fd9db7ade2a91e22c15c",
+        "work_item": "issue-845-star-functional-3204"
+      },
+      {
+        "key": "file:pilialvu75-hue/Ai-orchestrator-riserva:test/app_factory/workshop/workshop_generated_star_negative_gate_test.dart",
+        "lane": "cantiere",
+        "claim_id": "fd9db7ade2a91e22c15c",
+        "work_item": "issue-845-star-functional-3204"
+      },
+      {
+        "key": "file:pilialvu75-hue/Ai-orchestrator-riserva:test/app_factory/workshop/workshop_proposal_implementation_runner_test.dart",
+        "lane": "cantiere",
+        "claim_id": "fd9db7ade2a91e22c15c",
+        "work_item": "issue-845-star-functional-3204"
+      }
+    ],
     "review_required": [],
     "blocked": [
       {
@@ -236,12 +283,24 @@
       },
       {
         "id": "cantiere",
-        "status": "READY",
+        "status": "CLAIMED",
         "activation": "active",
-        "state_version": 103,
-        "updated_at": "2026-10-15",
-        "active_claim": null,
-        "reviewer_state": "APPROVED",
+        "state_version": 104,
+        "updated_at": "2026-10-16",
+        "active_claim": {
+          "claim_id": "fd9db7ade2a91e22c15c",
+          "work_item": "issue-845-star-functional-3204",
+          "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
+          "lease_until": "2026-10-16T23:27:01Z",
+          "resource_locks": [
+            "branch:pilialvu75-hue/Ai-orchestrator-riserva:fix/cantiere-845-star-functional-3204",
+            "contract:cantiere-engineer-functional-completeness",
+            "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/app_factory/workshop/workshop_proposal_implementation_runner.dart",
+            "file:pilialvu75-hue/Ai-orchestrator-riserva:test/app_factory/workshop/workshop_generated_star_negative_gate_test.dart",
+            "file:pilialvu75-hue/Ai-orchestrator-riserva:test/app_factory/workshop/workshop_proposal_implementation_runner_test.dart"
+          ]
+        },
+        "reviewer_state": "PENDING",
         "inference_profile_status": null,
         "historical_backlog_count": 3,
         "next_action": "Merge PR #846 at exact independently reviewed head a4e12bff88f5ad5665c92bfd66cfe6378545b0e7 with guarded expected-head SHA, verify merge commit reachable from main. Check Android Build & Release success and NEW signed host release whose tag commit includes merge; supply real asset link only after verified publication. Authorize exactly ONE new S24 FE test on saved black-background star app with four Qwen 2.5 3B roles. Require generated project Reviewer+Validation PASS, actual generated APK build/install/launch/touch and diagnostics; G5 physical remains open until evidence. No retest +3184. Plan control-plane event-driven reviewer dispatch improvement separately without self-approving worker changes."
