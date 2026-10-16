@@ -33,6 +33,10 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
+          python tools/validate_coordinator_queue.py \
+            --root . \
+            --queue .airlab/control-plane/work-queue.json \
+            --output coordinator-queue-audit.json
           python tools/generate_coordinator_plan.py \
             --root . \
             --queue .airlab/control-plane/work-queue.json \
@@ -60,6 +64,7 @@ jobs:
           name: coordinator-plan
           path: |
             coordinator-plan.json
+            coordinator-queue-audit.json
             coordinator-claim-proposals.json
             coordinator-dispatch.json
             coordinator-dispatch-receipts.json
