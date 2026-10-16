@@ -21,6 +21,17 @@ class ProbeTests(unittest.TestCase):
         self.assertIn(f"/commits/{SHA}/check-runs?", fetch.call_args_list[1].args[0])
         self.assertFalse(result["completion_authorized"])
 
+    def test_rejects_boolean_pr_number(self):
+        with patch("tools.autonomous_ci_probe.fetch_json") as fetch:
+            with self.assertRaisesRegex(ValueError, "invalid PR number"):
+                probe(REPO, True, ["Validate Module Library"], "fake-token")
+            fetch.assert_not_called()
+
+    def test_rejects_boolean_api_pr_number(self):
+        with patch("tools.autonomous_ci_probe.fetch_json", return_value={**PR, "number": True}):
+            with self.assertRaisesRegex(ValueError, "PR number mismatch"):
+                probe(REPO, 1, ["Validate Module Library"], "fake-token")
+
     def test_rejects_missing_token_before_network(self):
         with patch("tools.autonomous_ci_probe.fetch_json") as fetch:
             with self.assertRaises(ValueError):
