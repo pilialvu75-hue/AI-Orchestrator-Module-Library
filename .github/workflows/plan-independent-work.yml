@@ -61,6 +61,7 @@ jobs:
           python -m unittest discover -s tests -p 'test_*coordinator*.py' -v
           python -m unittest discover -s tests -p test_reconcile_coordinator_dispatch.py -v
           python -m unittest discover -s tests -p test_validate_coordinator_queue.py -v
+          python -m unittest discover -s tests -p test_gate_coordinator_assignments.py -v
           python -m unittest discover -s tests -p test_resolve_coordinator_workers.py -v
           python -m unittest discover -s tests -p test_plan_parallel_work.py -v
       - name: Upload advisory plan
