@@ -43,12 +43,16 @@ def probe(repository: str, pr_number: int, required_names: list[str], token: str
     if not isinstance(head_sha, str) or len(head_sha) != 40 or any(c not in "0123456789abcdef" for c in head_sha):
         raise ValueError("invalid PR head")
     response = fetch_json(f"{base}/commits/{head_sha}/check-runs?per_page=100", token)
-    if response.get("total_count", 0) > 100:
+    if not isinstance(response.get("total_count"), int):
+        raise ValueError("missing check count")
+    if response["total_count"] > 100:
         raise ValueError("check results exceed one page; refuse incomplete evidence")
     # Verify that each required check belongs to a GitHub Actions workflow
     # run associated with the exact commit, rather than trusting its name.
     runs = fetch_json(f"{base}/actions/runs?head_sha={head_sha}&per_page=100", token)
-    if runs.get("total_count", 0) > 100:
+    if not isinstance(runs.get("total_count"), int):
+        raise ValueError("missing workflow run count")
+    if runs["total_count"] > 100:
         raise ValueError("workflow runs exceed one page; refuse incomplete evidence")
     valid_suite_ids = {
         run.get("check_suite_id") for run in runs.get("workflow_runs", [])
@@ -60,9 +64,12 @@ def probe(repository: str, pr_number: int, required_names: list[str], token: str
         and run.get("path") == ".github/workflows/validate-library.yml"
     }
     valid_suite_ids.discard(None)
+    # A successful run must also expose its trusted workflow check suite.
     if not valid_suite_ids:
         raise ValueError("no successful workflow run for exact PR head")
     checks = response.get("check_runs", [])
+    if not isinstance(checks, list):
+        raise ValueError("invalid check runs response")
     for check in checks:
         if check.get("name") in required_names:
             suite_id = (check.get("check_suite") or {}).get("id")
