@@ -17,7 +17,11 @@ def audit(root: Path = ROOT) -> dict:
     ids = {item["id"] for item in gates["gates"]}
     automations = registry.get("automations", [])
     reviewer_actors = [a["actor_id"] for a in automations if a.get("enabled") and a.get("kind") == "reviewer"]
+    inbox = (root / "tools/control_plane_inbox.py").read_text() if (root / "tools/control_plane_inbox.py").exists() else ""
+    manager = (root / "tools/control_plane_manager.py").read_text() if (root / "tools/control_plane_manager.py").exists() else ""
     findings = {
+        "inbox_reviewer_authority_binding": "main-reviewer authority" in inbox or 'owner_lane") == "main-reviewer"' in inbox,
+        "manager_reviewer_promotion_binding": '"reviewed_by": "main-reviewer"' in manager,
         "manual_reviewer_gate": "G6_REVIEWER" in ids,
         "manual_reviewer_promotion": canonical.get("promotion_policy", {}).get("verified_by") == "main-reviewer",
         "automated_reviewer_registered": bool(reviewer_actors),
@@ -29,7 +33,7 @@ def audit(root: Path = ROOT) -> dict:
         "schema_version": 1,
         "read_only": True,
         "autonomous_promotion_ready": not (
-            findings["manual_reviewer_gate"] or findings["manual_reviewer_promotion"]
+            findings["manual_reviewer_gate"] or findings["manual_reviewer_promotion"] or findings["inbox_reviewer_authority_binding"] or findings["manager_reviewer_promotion_binding"]
         ),
         "findings": findings,
         "enabled_reviewer_actor_count": len(reviewer_actors),
