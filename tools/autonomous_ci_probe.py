@@ -57,7 +57,7 @@ def probe(repository: str, pr_number: int, required_names: list[str], token: str
         and run.get("conclusion") == "success"
         and (run.get("repository") or {}).get("full_name") == repository
         and run.get("event") in ("pull_request", "push")
-        and run.get("path") == ".github/workflows/validate-module-library.yml"
+        and run.get("path") == ".github/workflows/validate-library.yml"
     }
     if not valid_run_ids:
         raise ValueError("no successful workflow run for exact PR head")
