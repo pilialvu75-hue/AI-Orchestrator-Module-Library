@@ -67,6 +67,12 @@ def probe(repository: str, pr_number: int, required_names: list[str], token: str
             details = check.get("details_url") or ""
             if not any(details.startswith(f"https://github.com/{repository}/actions/runs/{run_id}/") for run_id in valid_run_ids):
                 raise ValueError("required check has no matching successful workflow run")
+    # Reject evidence if the PR changed while its CI data was fetched.
+    latest_pr = fetch_json(f"{base}/pulls/{pr_number}", token)
+    if (latest_pr.get("head") or {}).get("sha") != head_sha:
+        raise ValueError("PR head changed during CI verification")
+    if latest_pr.get("state") != "open":
+        raise ValueError("PR is no longer open")
     return verify_pr_checks(
         pr=pr, checks=checks, repository=repository,
         expected_head_sha=head_sha, required_check_names=required_names,
