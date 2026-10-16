@@ -25,9 +25,13 @@ def plan(payload):
     if len(lane_ids) != len(set(lane_ids)):
         raise ValueError("duplicate lane id")
     ids = [task["id"] for task in tasks]
+    if any(task["id"] in completed for task in tasks):
+        raise ValueError("completed task must not be reassigned")
     if len(ids) != len(set(ids)):
         raise ValueError("duplicate task id")
     known = set(ids) | completed
+    if any(task["lane"] not in lane_ids for task in tasks):
+        raise ValueError("task refers to unknown lane")
     for task in tasks:
         if any(dep not in known for dep in task.get("depends_on", [])):
             raise ValueError("unknown dependency for " + task["id"])
