@@ -54,6 +54,16 @@ def probe(repository: str, pr_number: int, required_names: list[str], token: str
         raise ValueError("missing workflow run count")
     if runs["total_count"] > 100:
         raise ValueError("workflow runs exceed one page; refuse incomplete evidence")
+    checks = response.get("check_runs", [])
+    if not isinstance(checks, list):
+        raise ValueError("invalid check runs response")
+    workflow_entries = runs.get("workflow_runs")
+    if not isinstance(workflow_entries, list):
+        raise ValueError("invalid workflow runs response")
+    if response["total_count"] != len(checks):
+        raise ValueError("check count does not match returned entries")
+    if runs["total_count"] != len(workflow_entries):
+        raise ValueError("workflow run count does not match returned entries")
     valid_suite_ids = {
         run.get("check_suite_id") for run in runs.get("workflow_runs", [])
         if run.get("head_sha") == head_sha
@@ -67,16 +77,6 @@ def probe(repository: str, pr_number: int, required_names: list[str], token: str
     # A successful run must also expose its trusted workflow check suite.
     if not valid_suite_ids:
         raise ValueError("no successful workflow run for exact PR head")
-    checks = response.get("check_runs", [])
-    if not isinstance(checks, list):
-        raise ValueError("invalid check runs response")
-    workflow_entries = runs.get("workflow_runs")
-    if not isinstance(workflow_entries, list):
-        raise ValueError("invalid workflow runs response")
-    if response["total_count"] != len(checks):
-        raise ValueError("check count does not match returned entries")
-    if runs["total_count"] != len(workflow_entries):
-        raise ValueError("workflow run count does not match returned entries")
     for check in checks:
         if check.get("name") in required_names:
             suite_id = (check.get("check_suite") or {}).get("id")
