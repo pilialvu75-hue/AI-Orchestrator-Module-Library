@@ -41,6 +41,10 @@ jobs:
             --root . \
             --queue .airlab/control-plane/work-queue.json \
             --output coordinator-plan.json
+          python tools/gate_coordinator_assignments.py \
+            --plan coordinator-plan.json \
+            --audit coordinator-queue-audit.json \
+            --output coordinator-eligibility-gate.json
           python tools/prepare_coordinator_claims.py \
             --root . \
             --queue .airlab/control-plane/work-queue.json \
@@ -66,6 +70,7 @@ jobs:
           path: |
             coordinator-plan.json
             coordinator-queue-audit.json
+            coordinator-eligibility-gate.json
             coordinator-claim-proposals.json
             coordinator-dispatch.json
             coordinator-dispatch-receipts.json
