@@ -1,0 +1,21 @@
+{
+  "schema_version": 1,
+  "request_id": "cantiere-845-star-functional-reclaim-20261016T132751939Z",
+  "submitted_at": "2026-10-16T13:27:51.939Z",
+  "actor_id": "chatgpt:cantiere",
+  "lane_id": "cantiere",
+  "operation": "claim",
+  "expected_state_version": 107,
+  "payload": {
+    "work_item": "issue-845-star-functional-3204",
+    "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
+    "scope": "Finish post +3204 bounded Engineer functional-repair PR #847; six CI verified exact-head, deliver immutable packet for independent review without merge or physical test",
+    "branch": "fix/cantiere-845-star-functional-3204",
+    "resource_locks": [
+      "contract:cantiere-engineer-functional-completeness",
+      "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/app_factory/workshop/workshop_proposal_implementation_runner.dart",
+      "file:pilialvu75-hue/Ai-orchestrator-riserva:test/app_factory/workshop/workshop_generated_star_negative_gate_test.dart",
+      "file:pilialvu75-hue/Ai-orchestrator-riserva:test/app_factory/workshop/workshop_proposal_implementation_runner_test.dart"
+    ]
+  }
+}
