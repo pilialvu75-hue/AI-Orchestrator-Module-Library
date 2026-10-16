@@ -33,6 +33,10 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
+          python tools/validate_coordinator_queue.py \
+            --root . \
+            --queue .airlab/control-plane/work-queue.json \
+            --output coordinator-queue-audit.json
           python tools/generate_coordinator_plan.py \
             --root . \
             --queue .airlab/control-plane/work-queue.json \
@@ -52,6 +56,7 @@ jobs:
             --output coordinator-dispatch-receipts.json
           python -m unittest discover -s tests -p 'test_*coordinator*.py' -v
           python -m unittest discover -s tests -p test_reconcile_coordinator_dispatch.py -v
+          python -m unittest discover -s tests -p test_validate_coordinator_queue.py -v
           python -m unittest discover -s tests -p test_resolve_coordinator_workers.py -v
           python -m unittest discover -s tests -p test_plan_parallel_work.py -v
       - name: Upload advisory plan
@@ -60,6 +65,7 @@ jobs:
           name: coordinator-plan
           path: |
             coordinator-plan.json
+            coordinator-queue-audit.json
             coordinator-claim-proposals.json
             coordinator-dispatch.json
             coordinator-dispatch-receipts.json
