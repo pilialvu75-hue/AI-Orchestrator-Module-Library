@@ -46,6 +46,20 @@ class ProbeTests(unittest.TestCase):
             with self.assertRaisesRegex(ValueError, "missing workflow run count"):
                 probe(REPO, 120, ["Validate Module Library"], "fake-token")
 
+    def test_rejects_partial_check_page(self):
+        with patch("tools.autonomous_ci_probe.fetch_json",
+                   side_effect=[PR, {"total_count": 2, "check_runs": [CHECK]},
+                                {"total_count": 0, "workflow_runs": []}]):
+            with self.assertRaisesRegex(ValueError, "check count does not match"):
+                probe(REPO, 120, ["Validate Module Library"], "fake-token")
+
+    def test_rejects_partial_workflow_page(self):
+        with patch("tools.autonomous_ci_probe.fetch_json",
+                   side_effect=[PR, {"total_count": 1, "check_runs": [CHECK]},
+                                {"total_count": 2, "workflow_runs": []}]):
+            with self.assertRaisesRegex(ValueError, "workflow run count does not match"):
+                probe(REPO, 120, ["Validate Module Library"], "fake-token")
+
     def test_rejects_wrong_pr_identity(self):
         for bad_pr in (
             {**PR, "number": 121},
