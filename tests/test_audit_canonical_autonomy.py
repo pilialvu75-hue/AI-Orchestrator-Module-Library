@@ -38,6 +38,17 @@ class CanonicalAutonomyAuditTests(unittest.TestCase):
         after = {p: p.read_bytes() for p in self.root.rglob("*") if p.is_file()}
         self.assertEqual(before, after)
 
+    def test_detects_hidden_code_bindings(self):
+        (self.root / "tools").mkdir()
+        (self.root / "tools/control_plane_inbox.py").write_text('raise ValueError("main-reviewer authority")')
+        (self.root / "tools/control_plane_manager.py").write_text('receipt = {"reviewed_by": "main-reviewer"}')
+        self.write("gates.json", {"gates": [{"id": "G3_CI"}]})
+        self.write("canonical-state.json", {"promotion_policy": {"verified_by": "automated-verifier", "runtime_or_hardware_claims_require_target_runtime_evidence": True}})
+        result = audit(self.root)
+        self.assertFalse(result["autonomous_promotion_ready"])
+        self.assertTrue(result["findings"]["inbox_reviewer_authority_binding"])
+        self.assertTrue(result["findings"]["manager_reviewer_promotion_binding"])
+
     def test_detects_migrated_policy(self):
         self.write("gates.json", {"gates": [{"id": "G3_CI"}]})
         self.write("canonical-state.json", {"promotion_policy": {"verified_by": "automated-verifier", "runtime_or_hardware_claims_require_target_runtime_evidence": True}})
