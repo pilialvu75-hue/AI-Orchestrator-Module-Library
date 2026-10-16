@@ -62,6 +62,8 @@ class AutonomousCompletionTests(unittest.TestCase):
     lambda lane: lane["gates"].update(G4_INTEGRATION="PENDING"),
     lambda lane: lane["review_packet"].update(claim_id="wrong"),
     lambda lane: lane.update(state_version=None),
+    lambda lane: lane.update(state_version=True),
+    lambda lane: lane.update(state_version=-1),
     lambda lane: lane.update(role="reviewer"),
     lambda lane: lane["review_packet"]["evidence"].clear(),
     lambda lane: lane["review_packet"]["changes"].clear(),
