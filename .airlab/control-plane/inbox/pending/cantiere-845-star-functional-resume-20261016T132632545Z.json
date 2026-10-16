@@ -1,0 +1,21 @@
+{
+  "schema_version": 1,
+  "request_id": "cantiere-845-star-functional-resume-20261016T132632545Z",
+  "submitted_at": "2026-10-16T13:26:32.547Z",
+  "actor_id": "chatgpt:cantiere",
+  "lane_id": "cantiere",
+  "operation": "resume_wait",
+  "expected_state_version": 106,
+  "payload": {
+    "signal_id": "pr847-exact-head-six-ci-success-20261016",
+    "next_action": "Reclaim same issue #845 physical +3204 Engineer functional failure via preserved branch and locks; verify independent review evidence and submit claim-bound PR #847 packet, no merge or new device run.",
+    "evidence_refs": [
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38894509746",
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38894509681",
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38894510345",
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38894509788",
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38894509610",
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38894509669"
+    ]
+  }
+}
