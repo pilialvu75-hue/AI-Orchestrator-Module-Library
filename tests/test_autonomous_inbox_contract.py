@@ -21,6 +21,13 @@ class AutonomousInboxContractTests(unittest.TestCase):
         self.assertIn('automation_entry.get("owner_lane") == lane_id', section)
         self.assertIn("if not worker_chat and not authorized_worker_automation:", section)
 
+    def test_preflight_checks_packet_identity(self):
+        section = INBOX.split('elif operation == "autonomous_completion_preflight":', 1)[1]
+        section = section.split('elif operation == "record_review_gates":', 1)[0]
+        self.assertIn('set(payload) != {"claim_id", "packet_sha256"}', section)
+        self.assertIn('payload["claim_id"] != result["claim_id"]', section)
+        self.assertIn('payload["packet_sha256"] != result["packet_sha256"]', section)
+
     def test_preflight_is_read_only(self):
         section = INBOX.split('elif operation == "autonomous_completion_preflight":', 1)[1]
         section = section.split('elif operation == "record_review_gates":', 1)[0]
