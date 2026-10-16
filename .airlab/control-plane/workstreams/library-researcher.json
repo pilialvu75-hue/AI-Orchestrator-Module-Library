@@ -3,20 +3,37 @@
   "id": "library-researcher",
   "title": "Library + Researcher",
   "role": "worker",
-  "status": "READY",
+  "status": "CLAIMED",
   "activation": "active",
   "scope": "Capability needs, discovery, intake, certification, reuse/evolution and safe Researcher boundary.",
   "shared_engine_policy": "shared_or_control_plane",
-  "state_version": 2,
-  "updated_at": "2026-10-01",
-  "active_claim": null,
+  "state_version": 3,
+  "updated_at": "2026-10-16",
+  "active_claim": {
+    "claim_id": "a3be2c00b7d608d2df75",
+    "owner_lane": "library-researcher",
+    "work_item": "researcher-zero-discovery-reliability-20261016",
+    "repository": "pilialvu75-hue/AI-Orchestrator-Module-Researcher",
+    "scope": "Bounded Researcher discovery zero-output diagnosis, query fallback and run-level evidence without changing Library PR #120 or certification rules",
+    "branch": "fix/researcher-zero-discovery-reliability-20261016",
+    "resource_locks": [
+      "branch:pilialvu75-hue/AI-Orchestrator-Module-Researcher:fix/researcher-zero-discovery-reliability-20261016",
+      "file:pilialvu75-hue/AI-Orchestrator-Module-Researcher:.github/workflows/autonomous-seeding.yml",
+      "file:pilialvu75-hue/AI-Orchestrator-Module-Researcher:src/researcher/discovery/github.py",
+      "resource:researcher-discovery-reliability"
+    ],
+    "started_at": "2026-10-16T13:22:24Z",
+    "heartbeat_at": "2026-10-16T13:22:24Z",
+    "lease_until": "2026-10-17T01:22:24Z",
+    "lease_hours": 12
+  },
   "dependencies": [],
   "roadmap_refs": [
     ".airlab/roadmap.yaml#L19"
   ],
   "evidence": [],
   "gates": {
-    "G0_CLAIM": "PENDING",
+    "G0_CLAIM": "PASS",
     "G1_IMPLEMENTATION": "PENDING",
     "G2_STATIC": "PENDING",
     "G3_CI": "PENDING",
