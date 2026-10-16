@@ -50,8 +50,8 @@ def probe(repository: str, pr_number: int, required_names: list[str], token: str
     runs = fetch_json(f"{base}/actions/runs?head_sha={head_sha}&per_page=100", token)
     if runs.get("total_count", 0) > 100:
         raise ValueError("workflow runs exceed one page; refuse incomplete evidence")
-    valid_run_ids = {
-        run.get("id") for run in runs.get("workflow_runs", [])
+    valid_suite_ids = {
+        run.get("check_suite_id") for run in runs.get("workflow_runs", [])
         if run.get("head_sha") == head_sha
         and run.get("status") == "completed"
         and run.get("conclusion") == "success"
@@ -59,13 +59,14 @@ def probe(repository: str, pr_number: int, required_names: list[str], token: str
         and run.get("event") in ("pull_request", "push")
         and run.get("path") == ".github/workflows/validate-library.yml"
     }
-    if not valid_run_ids:
+    valid_suite_ids.discard(None)
+    if not valid_suite_ids:
         raise ValueError("no successful workflow run for exact PR head")
     checks = response.get("check_runs", [])
     for check in checks:
         if check.get("name") in required_names:
-            details = check.get("details_url") or ""
-            if not any(details.startswith(f"https://github.com/{repository}/actions/runs/{run_id}/") for run_id in valid_run_ids):
+            suite_id = (check.get("check_suite") or {}).get("id")
+            if suite_id not in valid_suite_ids:
                 raise ValueError("required check has no matching successful workflow run")
     # Reject evidence if the PR changed while its CI data was fetched.
     latest_pr = fetch_json(f"{base}/pulls/{pr_number}", token)
