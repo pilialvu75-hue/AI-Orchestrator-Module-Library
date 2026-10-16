@@ -3,11 +3,11 @@
   "id": "library-researcher",
   "title": "Library + Researcher",
   "role": "worker",
-  "status": "CLAIMED",
+  "status": "IMPLEMENTING",
   "activation": "active",
   "scope": "Capability needs, discovery, intake, certification, reuse/evolution and safe Researcher boundary.",
   "shared_engine_policy": "shared_or_control_plane",
-  "state_version": 3,
+  "state_version": 4,
   "updated_at": "2026-10-16",
   "active_claim": {
     "claim_id": "a3be2c00b7d608d2df75",
@@ -23,8 +23,8 @@
       "resource:researcher-discovery-reliability"
     ],
     "started_at": "2026-10-16T13:22:24Z",
-    "heartbeat_at": "2026-10-16T13:22:24Z",
-    "lease_until": "2026-10-17T01:22:24Z",
+    "heartbeat_at": "2026-10-16T13:27:47Z",
+    "lease_until": "2026-10-17T01:27:47Z",
     "lease_hours": 12
   },
   "dependencies": [],
@@ -48,11 +48,49 @@
     "reviewed_by": null,
     "reviewed_at": null
   },
-  "next_action": "Advance the currently claimed acceleration-backend evolution item through its acceptance gates before opening duplicate discovery work.",
+  "next_action": "Verify independent production yield post-merge and Library intake; submit review packet for Researcher PR #98, keep Android 404 permission issue separate.",
   "historical_backlog": [
     "ai.acceleration_backend.firstparty.ai-orchestrator-core/0.1.0 exists as discovered intake.",
     "ai.local_inference.firstparty.ai-orchestrator-core/0.1.0 exists as discovered intake.",
     "evo-a18f2c13c19927904ced0bbd is claimed for ai.acceleration_backend with implementation/security/regression/Library-contract gates.",
     "Do not rediscover existing candidates; mature/adapt/test/certify them and expose maturity without binary-only pass/reject."
-  ]
+  ],
+  "checkpoints": [
+    {
+      "seq": 1,
+      "at": "2026-10-16T13:27:47Z",
+      "claim_id": "a3be2c00b7d608d2df75",
+      "work_item": "researcher-zero-discovery-reliability-20261016",
+      "summary": "Investigated Researcher run #114: scheduled sweep SUCCESS with zero discovered/shortlisted/submissions; first-party source credential unavailable. Fixed stale persisted GitHub rate limit and added zero-yield health output in Researcher PR #98; CI PASS on 53148e01.",
+      "decisions": [
+        "Do not treat GitHub Actions SUCCESS as successful candidate discovery or certification.",
+        "Keep Library PR #120 and certified Library promotion unchanged.",
+        "Correct stale GitHub rate-limiter expiry without bypassing active quota backoff."
+      ],
+      "evidence_refs": [
+        "https://github.com/pilialvu75-hue/AI-Orchestrator-Module-Researcher/actions/runs/38901728066",
+        "https://github.com/pilialvu75-hue/AI-Orchestrator-Module-Researcher/pull/98",
+        "https://github.com/pilialvu75-hue/AI-Orchestrator-Module-Researcher/actions/runs/38907839718"
+      ],
+      "next_action": "Verify independent production yield post-merge and Library intake; submit review packet for Researcher PR #98, keep Android 404 permission issue separate."
+    }
+  ],
+  "last_checkpoint": {
+    "seq": 1,
+    "at": "2026-10-16T13:27:47Z",
+    "claim_id": "a3be2c00b7d608d2df75",
+    "work_item": "researcher-zero-discovery-reliability-20261016",
+    "summary": "Investigated Researcher run #114: scheduled sweep SUCCESS with zero discovered/shortlisted/submissions; first-party source credential unavailable. Fixed stale persisted GitHub rate limit and added zero-yield health output in Researcher PR #98; CI PASS on 53148e01.",
+    "decisions": [
+      "Do not treat GitHub Actions SUCCESS as successful candidate discovery or certification.",
+      "Keep Library PR #120 and certified Library promotion unchanged.",
+      "Correct stale GitHub rate-limiter expiry without bypassing active quota backoff."
+    ],
+    "evidence_refs": [
+      "https://github.com/pilialvu75-hue/AI-Orchestrator-Module-Researcher/actions/runs/38901728066",
+      "https://github.com/pilialvu75-hue/AI-Orchestrator-Module-Researcher/pull/98",
+      "https://github.com/pilialvu75-hue/AI-Orchestrator-Module-Researcher/actions/runs/38907839718"
+    ],
+    "next_action": "Verify independent production yield post-merge and Library intake; submit review packet for Researcher PR #98, keep Android 404 permission issue separate."
+  }
 }
