@@ -51,6 +51,9 @@ def test_preflight_does_not_mutate_lane():
     lambda lane: lane["review_packet"].update(claim_id="wrong"),
     lambda lane: lane.update(state_version=None),
     lambda lane: lane.update(role="reviewer"),
+    lambda lane: lane["review_packet"]["evidence"].clear(),
+    lambda lane: lane["review_packet"]["changes"].clear(),
+    lambda lane: lane["review_packet"]["roadmap_impact"].pop("refs"),
 ])
 def test_preflight_fails_closed(change):
     lane = eligible_lane()
