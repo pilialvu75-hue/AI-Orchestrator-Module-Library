@@ -31,6 +31,8 @@ def verify_pr_checks(
     head_repo = ((pr.get("head") or {}).get("repo") or {}).get("full_name")
     if head_repo != repository:
         raise ValueError("PR head repository mismatch")
+    if not isinstance(checks, list):
+        raise ValueError("checks must be a list")
     if not isinstance(required_check_names, list) or not required_check_names:
         raise ValueError("required checks must be nonempty")
     if any(not isinstance(name, str) or not name.strip() for name in required_check_names):
