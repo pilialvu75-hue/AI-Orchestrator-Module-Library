@@ -76,6 +76,18 @@ class ProbeTests(unittest.TestCase):
             with self.assertRaises(ValueError):
                 probe(REPO, 120, ["Validate Module Library"], "fake-token")
 
+    def test_rejects_pr_repository_swapped_during_probe(self):
+        run = {"id": 99, "check_suite_id": 55, "head_sha": SHA,
+               "status": "completed", "conclusion": "success",
+               "repository": {"full_name": REPO}, "event": "pull_request",
+               "path": ".github/workflows/validate-library.yml"}
+        changed = {**PR, "head": {"sha": SHA, "repo": {"full_name": "attacker/repo"}}}
+        with patch("tools.autonomous_ci_probe.fetch_json",
+                   side_effect=[PR, {"total_count": 1, "check_runs": [CHECK]},
+                                {"total_count": 1, "workflow_runs": [run]}, changed]):
+            with self.assertRaisesRegex(ValueError, "repository changed"):
+                probe(REPO, 120, ["Validate Module Library"], "fake-token")
+
     def test_rejects_changed_head(self):
         with patch("tools.autonomous_ci_probe.fetch_json",
                    side_effect=[PR, {"total_count": 1, "check_runs": [{**CHECK, "head_sha": "b" * 40}]}, {"total_count": 1, "workflow_runs": [{"id": 99, "check_suite_id": 55, "head_sha": SHA, "status": "completed", "conclusion": "success", "repository": {"full_name": REPO}, "event": "pull_request", "path": ".github/workflows/validate-library.yml"}]}, PR]):
