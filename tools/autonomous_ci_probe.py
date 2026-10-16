@@ -35,11 +35,10 @@ def probe(repository: str, pr_number: int, required_names: list[str], token: str
         raise ValueError("invalid PR number")
     base = f"https://api.github.com/repos/{repository}"
     pr = fetch_json(f"{base}/pulls/{pr_number}", token)
-    if pr.get("number") is not None and pr["number"] != pr_number:
+    if pr.get("number") != pr_number:
         raise ValueError("PR number mismatch")
-    if (pr.get("base") or {}).get("repo") is not None:
-        if ((pr["base"]["repo"] or {}).get("full_name")) != repository:
-            raise ValueError("PR base repository mismatch")
+    if ((pr.get("base") or {}).get("repo") or {}).get("full_name") != repository:
+        raise ValueError("PR base repository mismatch")
     head_sha = (pr.get("head") or {}).get("sha")
     if not isinstance(head_sha, str) or len(head_sha) != 40 or any(c not in "0123456789abcdef" for c in head_sha):
         raise ValueError("invalid PR head")
