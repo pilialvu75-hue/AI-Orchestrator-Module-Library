@@ -1,0 +1,54 @@
+name: Plan Independent AI Orchestrator Work
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "29 * * * *"
+  push:
+    branches: ["main"]
+    paths:
+      - ".airlab/control-plane/workstreams/**"
+      - ".airlab/control-plane/work-queue.json"
+      - "tools/plan_parallel_work.py"
+      - "tools/generate_coordinator_plan.py"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: nonblocking-work-plan
+  cancel-in-progress: false
+
+jobs:
+  plan:
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Checkout canonical repository
+        uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Generate independent work proposal
+        shell: bash
+        run: |
+          set -euo pipefail
+          python tools/generate_coordinator_plan.py \
+            --root . \
+            --queue .airlab/control-plane/work-queue.json \
+            --output coordinator-plan.json
+          python tools/prepare_coordinator_claims.py \
+            --root . \
+            --queue .airlab/control-plane/work-queue.json \
+            --plan coordinator-plan.json \
+            --output coordinator-claim-proposals.json
+          python -m unittest discover -s tests -p 'test_*coordinator*.py' -v
+          python -m unittest discover -s tests -p test_plan_parallel_work.py -v
+      - name: Upload advisory plan
+        uses: actions/upload-artifact@v4
+        with:
+          name: coordinator-plan
+          path: |
+            coordinator-plan.json
+            coordinator-claim-proposals.json
+          retention-days: 7
