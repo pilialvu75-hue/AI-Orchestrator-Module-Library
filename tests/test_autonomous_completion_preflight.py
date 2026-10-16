@@ -78,7 +78,7 @@ class AutonomousPreflightTests(unittest.TestCase):
         test_preflight_does_not_mutate_lane()
 
     def test_invalid(self):
-        test_preflight_fails_closed()
+        AutonomousCompletionTests().test_preflight_fails_closed()
 
     def test_expired(self):
         test_preflight_rejects_expired_claim()
