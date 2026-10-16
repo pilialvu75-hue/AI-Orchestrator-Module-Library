@@ -314,6 +314,12 @@ def _apply(
             )
         finally:
             packet_path.unlink(missing_ok=True)
+    elif operation == "autonomous_completion_preflight":
+        if payload:
+            raise ValueError("autonomous_completion_preflight payload must be empty")
+        lane = _load(root / _lane_rel(root, lane_id))
+        control_plane_manager.validate_autonomous_completion(lane, now=now)
+        # Read-only by design: no claim release or reviewer approval.
     elif operation == "record_review_gates":
         _record_review_gates(root, lane_id, payload, now)
     elif operation == "review_accept":
