@@ -660,6 +660,13 @@ def validate_autonomous_completion(
     digest = _review_packet_digest(packet)
     if attestation.get("claim_id") != claim_data.get("claim_id") or attestation.get("packet_sha256") != digest:
         raise ValueError("missing or stale packet-bound evidence attestation")
+    # A worker-authored packet is not an independent verification of its own gates.
+    # Only a separately attested verifier may authorize eventual completion.
+    verifier = attestation.get("reviewed_by") or attestation.get("verified_by")
+    if not isinstance(verifier, str) or not verifier.strip():
+        raise ValueError("independent gate verifier identity is required")
+    if verifier in {str(lane.get("id")), f"chatgpt:{lane.get('id')}"}:
+        raise ValueError("worker cannot attest its own completion gates")
     runtime_gate = gates.get("G5_TARGET_RUNTIME")
     if runtime_gate not in ("NOT_APPLICABLE_UNTIL_RUNTIME_CHANGE", "NOT_APPLICABLE"):
         if not _review_gate_passed(runtime_gate):
