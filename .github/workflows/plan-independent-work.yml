@@ -41,6 +41,10 @@ jobs:
             --root . \
             --queue .airlab/control-plane/work-queue.json \
             --output coordinator-plan.json
+          python tools/gate_coordinator_assignments.py \
+            --plan coordinator-plan.json \
+            --audit coordinator-queue-audit.json \
+            --output coordinator-eligibility-gate.json
           python tools/prepare_coordinator_claims.py \
             --root . \
             --queue .airlab/control-plane/work-queue.json \
@@ -57,6 +61,7 @@ jobs:
           python -m unittest discover -s tests -p 'test_*coordinator*.py' -v
           python -m unittest discover -s tests -p test_reconcile_coordinator_dispatch.py -v
           python -m unittest discover -s tests -p test_validate_coordinator_queue.py -v
+          python -m unittest discover -s tests -p test_gate_coordinator_assignments.py -v
           python -m unittest discover -s tests -p test_resolve_coordinator_workers.py -v
           python -m unittest discover -s tests -p test_plan_parallel_work.py -v
       - name: Upload advisory plan
@@ -66,6 +71,7 @@ jobs:
           path: |
             coordinator-plan.json
             coordinator-queue-audit.json
+            coordinator-eligibility-gate.json
             coordinator-claim-proposals.json
             coordinator-dispatch.json
             coordinator-dispatch-receipts.json
