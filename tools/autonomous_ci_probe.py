@@ -35,6 +35,8 @@ def probe(repository: str, pr_number: int, required_names: list[str], token: str
         raise ValueError("invalid PR number")
     base = f"https://api.github.com/repos/{repository}"
     pr = fetch_json(f"{base}/pulls/{pr_number}", token)
+    if not isinstance(pr, dict):
+        raise ValueError("invalid PR response")
     if pr.get("number") != pr_number:
         raise ValueError("PR number mismatch")
     if ((pr.get("base") or {}).get("repo") or {}).get("full_name") != repository:
@@ -43,14 +45,18 @@ def probe(repository: str, pr_number: int, required_names: list[str], token: str
     if not isinstance(head_sha, str) or len(head_sha) != 40 or any(c not in "0123456789abcdef" for c in head_sha):
         raise ValueError("invalid PR head")
     response = fetch_json(f"{base}/commits/{head_sha}/check-runs?per_page=100", token)
-    if not isinstance(response.get("total_count"), int):
+    if not isinstance(response, dict):
+        raise ValueError("invalid check response")
+    if type(response.get("total_count")) is not int or response["total_count"] < 0:
         raise ValueError("missing check count")
     if response["total_count"] > 100:
         raise ValueError("check results exceed one page; refuse incomplete evidence")
     # Verify that each required check belongs to a GitHub Actions workflow
     # run associated with the exact commit, rather than trusting its name.
     runs = fetch_json(f"{base}/actions/runs?head_sha={head_sha}&per_page=100", token)
-    if not isinstance(runs.get("total_count"), int):
+    if not isinstance(runs, dict):
+        raise ValueError("invalid workflow response")
+    if type(runs.get("total_count")) is not int or runs["total_count"] < 0:
         raise ValueError("missing workflow run count")
     if runs["total_count"] > 100:
         raise ValueError("workflow runs exceed one page; refuse incomplete evidence")
