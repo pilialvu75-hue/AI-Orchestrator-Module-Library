@@ -39,6 +39,9 @@ def verify_pr_checks(
         raise ValueError("duplicate required check name")
     if not isinstance(checks, list) or any(not isinstance(item, dict) for item in checks):
         raise ValueError("checks must be a list of objects")
+    # Check-run names and the github-actions app slug alone do not prove that
+    # the check came from an approved workflow. The protected runner must
+    # additionally pin workflow identity before treating this as authority.
     verified = {}
     for name in required_check_names:
         matches = [check for check in checks if check.get("name") == name]
