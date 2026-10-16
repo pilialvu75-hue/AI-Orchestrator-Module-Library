@@ -94,7 +94,14 @@
     "Inference profile promotion requires target resource headroom, quality, latency/stability and fallback evidence; CI alone is insufficient."
   ],
   "temporary_worker_autonomy": {
-    "status": "PROPOSED_NOT_ACTIVE",
-    "note": "Superseded by user request to retire Main/Reviewer entirely; migration requires explicit control-plane implementation and tests."
+    "status": "IMPLEMENTATION_IN_PROGRESS_NOT_ACTIVE",
+    "required_checks": [
+      "claim_live",
+      "packet_bound_attestation",
+      "G0_G4_pass",
+      "G5_if_applicable",
+      "canonical_sync_if_material"
+    ],
+    "policy": "No reviewer approval is inferred. No autonomous transition until manager, inbox and validator agree and tests pass."
   }
 }
