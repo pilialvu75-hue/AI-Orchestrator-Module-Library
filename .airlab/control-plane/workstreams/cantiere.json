@@ -3,31 +3,13 @@
   "id": "cantiere",
   "title": "Cantiere",
   "role": "worker",
-  "status": "IMPLEMENTING",
+  "status": "BLOCKED",
   "activation": "active",
   "scope": "Exclusive Cantiere/App Factory execution, durability, build/review/validation/apply and first-real-app reliability.",
   "shared_engine_policy": "shared_or_control_plane",
-  "state_version": 105,
+  "state_version": 106,
   "updated_at": "2026-10-16",
-  "active_claim": {
-    "claim_id": "fd9db7ade2a91e22c15c",
-    "owner_lane": "cantiere",
-    "work_item": "issue-845-star-functional-3204",
-    "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
-    "scope": "Investigate S24 FE host +3204 real Reviewer semantic rejection for same saved star app; bounded Engineer proposal-fidelity and negative source gate regression, without changing approval/scope/provenance or runtime budgets; no new phone test or merge",
-    "branch": "fix/cantiere-845-star-functional-3204",
-    "resource_locks": [
-      "branch:pilialvu75-hue/Ai-orchestrator-riserva:fix/cantiere-845-star-functional-3204",
-      "contract:cantiere-engineer-functional-completeness",
-      "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/app_factory/workshop/workshop_proposal_implementation_runner.dart",
-      "file:pilialvu75-hue/Ai-orchestrator-riserva:test/app_factory/workshop/workshop_generated_star_negative_gate_test.dart",
-      "file:pilialvu75-hue/Ai-orchestrator-riserva:test/app_factory/workshop/workshop_proposal_implementation_runner_test.dart"
-    ],
-    "started_at": "2026-10-16T11:27:01Z",
-    "heartbeat_at": "2026-10-16T11:34:34Z",
-    "lease_until": "2026-10-16T23:34:34Z",
-    "lease_hours": 12
-  },
+  "active_claim": null,
   "dependencies": [],
   "roadmap_refs": [
     ".airlab/public-repositories/Ai-orchestrator-riserva/roadmap.yaml#CANT-11",
@@ -51,7 +33,7 @@
     "reviewed_by": null,
     "reviewed_at": null
   },
-  "next_action": "Inspect First App CI run 38894509788 and other five exact-head workflow runs for PR #847; if failing, make bounded correction on same branch, no budgets/model/reviewer changes. When CI are PASS, independently Main/Reviewer review packet and G1-G4/G6; no new physical +3204 test.",
+  "next_action": "On explicit CI completion signal, resume wait, reclaim #845 PR #847 branch and existing locks, check all six exact-head CI; repair only concrete failures or submit claim-bound REVIEW_REQUIRED packet for independent Main/Reviewer. Do not merge/self-approve or retest host +3204.",
   "historical_backlog": [
     "Stay in Phase 1 ONLINE until a real generated Android app is physically accepted.",
     "Reproduce the recent manga-drawing app failure from current main with Diagnostics; do not restart generic audits.",
@@ -1222,18 +1204,6 @@
   ],
   "reconciliation_events": [
     {
-      "type": "CLAIM_LEASE_EXPIRED",
-      "claim_id": "146b5421aff70e95307a",
-      "work_item": "CANT-11-2979-reviewer-json-recovery",
-      "resource_locks": [
-        "branch:pilialvu75-hue/Ai-orchestrator-riserva:cantiere/reviewer-json-recovery-2979-20261003",
-        "contract:cantiere-reviewer-json-recovery",
-        "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/core/diagnostics/public_log_projection.dart"
-      ],
-      "lease_until": "2026-10-04T08:43:58Z",
-      "detected_at": "2026-10-04T09:28:51Z"
-    },
-    {
       "type": "STALE_BLOCK_RESOLVED_BY_REVIEWER",
       "claim_id": "146b5421aff70e95307a",
       "work_item": "CANT-11-2979-reviewer-json-recovery",
@@ -1468,6 +1438,21 @@
       "work_item": "issue-845-first-star-app-review-scope-3184",
       "reason": "Main/Reviewer accepted the bounded implementation/review gate.",
       "at": "2026-10-15T11:56:43Z"
+    },
+    {
+      "type": "WAIT_ENTERED",
+      "wait_id": "cantiere:fd9db7ade2a91e22c15c:WAITING_EXTERNAL",
+      "wait_type": "WAITING_EXTERNAL",
+      "prior_claim_id": "fd9db7ade2a91e22c15c",
+      "work_item": "issue-845-star-functional-3204",
+      "resource_locks": [
+        "branch:pilialvu75-hue/Ai-orchestrator-riserva:fix/cantiere-845-star-functional-3204",
+        "contract:cantiere-engineer-functional-completeness",
+        "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/app_factory/workshop/workshop_proposal_implementation_runner.dart",
+        "file:pilialvu75-hue/Ai-orchestrator-riserva:test/app_factory/workshop/workshop_generated_star_negative_gate_test.dart",
+        "file:pilialvu75-hue/Ai-orchestrator-riserva:test/app_factory/workshop/workshop_proposal_implementation_runner_test.dart"
+      ],
+      "at": "2026-10-16T11:35:42Z"
     }
   ],
   "review_packet_history": [
@@ -2927,5 +2912,51 @@
         "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38723542792"
       ]
     }
+  },
+  "wait_state": {
+    "schema_version": 1,
+    "wait_id": "cantiere:fd9db7ade2a91e22c15c:WAITING_EXTERNAL",
+    "type": "WAITING_EXTERNAL",
+    "work_item": "issue-845-star-functional-3204",
+    "prior_claim_id": "fd9db7ade2a91e22c15c",
+    "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
+    "branch": "fix/cantiere-845-star-functional-3204",
+    "scope": "Investigate S24 FE host +3204 real Reviewer semantic rejection for same saved star app; bounded Engineer proposal-fidelity and negative source gate regression, without changing approval/scope/provenance or runtime budgets; no new phone test or merge",
+    "resource_locks": [
+      "branch:pilialvu75-hue/Ai-orchestrator-riserva:fix/cantiere-845-star-functional-3204",
+      "contract:cantiere-engineer-functional-completeness",
+      "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/app_factory/workshop/workshop_proposal_implementation_runner.dart",
+      "file:pilialvu75-hue/Ai-orchestrator-riserva:test/app_factory/workshop/workshop_generated_star_negative_gate_test.dart",
+      "file:pilialvu75-hue/Ai-orchestrator-riserva:test/app_factory/workshop/workshop_proposal_implementation_runner_test.dart"
+    ],
+    "entered_at": "2026-10-16T11:35:42Z",
+    "resume_condition": "All six GitHub Actions CI workflows for draft PR #847 exact head 1ec3cc3cd04c1871de841216ef1616b617239aec complete with inspectable outcomes; First App physical-failure regression included.",
+    "summary": "The real +3204 saved star-app attempt failed semantic Reviewer (0/1; no generated APK). The evidence was recorded in issue #845. Draft PR #847 adds a pre-staging rejection of Flutter rootBundle loading native drawable resources, with bounded existing retry, task-specific interaction acceptance cue and regression; First App regression step success but six full workflows still in progress. No new physical test.",
+    "evidence_refs": [
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/issues/845#issuecomment-6214460833",
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/847",
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38894509610",
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38894509669",
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38894509746",
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38894510345",
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38894509788",
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38894509681"
+    ],
+    "resume_next_action": "On explicit CI completion signal, resume wait, reclaim #845 PR #847 branch and existing locks, check all six exact-head CI; repair only concrete failures or submit claim-bound REVIEW_REQUIRED packet for independent Main/Reviewer. Do not merge/self-approve or retest host +3204."
+  },
+  "block_reason": {
+    "code": "WAITING_EXTERNAL",
+    "wait_id": "cantiere:fd9db7ade2a91e22c15c:WAITING_EXTERNAL",
+    "work_item": "issue-845-star-functional-3204",
+    "resource_locks": [
+      "branch:pilialvu75-hue/Ai-orchestrator-riserva:fix/cantiere-845-star-functional-3204",
+      "contract:cantiere-engineer-functional-completeness",
+      "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/app_factory/workshop/workshop_proposal_implementation_runner.dart",
+      "file:pilialvu75-hue/Ai-orchestrator-riserva:test/app_factory/workshop/workshop_generated_star_negative_gate_test.dart",
+      "file:pilialvu75-hue/Ai-orchestrator-riserva:test/app_factory/workshop/workshop_proposal_implementation_runner_test.dart"
+    ],
+    "resume_condition": "All six GitHub Actions CI workflows for draft PR #847 exact head 1ec3cc3cd04c1871de841216ef1616b617239aec complete with inspectable outcomes; First App physical-failure regression included.",
+    "detected_at": "2026-10-16T11:35:42Z",
+    "review_required": false
   }
 }
