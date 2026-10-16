@@ -58,5 +58,5 @@ def verify_pr_checks(
         if app.get("slug") != "github-actions":
             raise ValueError(f"check {name!r} has untrusted producer")
         verified[name] = check.get("id")
-    return {"repository": repository, "head_sha": expected_head_sha, "verified_checks": verified,
+    return {"repository": repository, "pr_number": pr["number"], "head_sha": expected_head_sha, "verified_checks": verified,
             "trusted_receipt": False, "completion_authorized": False}
