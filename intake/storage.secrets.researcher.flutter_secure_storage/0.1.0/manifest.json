@@ -1,0 +1,94 @@
+{
+  "id": "storage.secrets.researcher.flutter_secure_storage",
+  "name": "Flutter Secure Storage — pinned upstream source candidate",
+  "version": "0.1.0",
+  "kind": "integration_bundle",
+  "status": "discovered",
+  "description": "Quarantined-path intake proposal for the pinned flutter_secure_storage 11.2.0 upstream plugin; adaptation and platform testing remain outstanding.",
+  "tags": [
+    "storage.secrets",
+    "researcher-candidate",
+    "upstream-source-only",
+    "not-certified"
+  ],
+  "capabilities": [
+    "storage.secrets"
+  ],
+  "platforms": [
+    "android",
+    "desktop"
+  ],
+  "languages": [
+    "dart"
+  ],
+  "frameworks": [
+    "flutter"
+  ],
+  "entry_paths": [
+    "flutter_secure_storage/lib/flutter_secure_storage.dart"
+  ],
+  "provenance": {
+    "origin": "researcher",
+    "source_repository": "https://github.com/juliansteenbakker/flutter_secure_storage",
+    "source_commit": "e8eeb449cd512b26153f0a3376dfe374dd39a999",
+    "source_tag": null,
+    "source_project_id": "juliansteenbakker/flutter_secure_storage",
+    "source_task_id": "researcher-live-discovery:library-issue-127",
+    "license": "BSD-3-Clause",
+    "license_file": "provenance/LICENSE",
+    "retrieved_at": null
+  },
+  "validation": {
+    "score": 0,
+    "tests_passed": false,
+    "test_report": null,
+    "validated_at": null,
+    "validated_on": []
+  },
+  "security": {
+    "reviewed": false,
+    "reviewed_at": null,
+    "known_vulnerabilities": 0,
+    "sbom": null,
+    "review_report": null,
+    "notes": "Researcher source-only preflight CLEAR at pinned commit (runs 38982540775 and 38982734188); Library security review, SBOM evidence and certification are NOT yet complete."
+  },
+  "integration": {
+    "estimated_effort": "medium",
+    "adaptation_allowed": true,
+    "adapter_notes": "Draft storage.secrets.v1 boundary; proposed package adapter, not implemented. Android and desktop platform assertions require tests and acceptance.",
+    "known_constraints": [
+      "Library storage.secrets.v1 contract status is draft",
+      "No integration adapter has been implemented",
+      "No Android or desktop execution evidence exists for this intake",
+      "Flutter >=3.19, Dart >=3.8, Android SDK >=23 reported in the pinned upstream source",
+      "Security preflight CLEAR does not replace Library review or target device validation"
+    ]
+  },
+  "connector": {
+    "standard": "ai-orchestrator-lego",
+    "standard_version": "1.0.0",
+    "provides": [
+      {
+        "capability_id": "storage.secrets",
+        "contract_id": "storage.secrets.v1",
+        "contract_version": "1.0"
+      }
+    ],
+    "requires": [],
+    "integration_mode": "package",
+    "adapters": [],
+    "configuration_schema": null,
+    "healthcheck": {
+      "type": "none",
+      "path": null
+    }
+  },
+  "payload": {
+    "type": "upstream_reference",
+    "upstream_repository": "https://github.com/juliansteenbakker/flutter_secure_storage",
+    "upstream_commit": "e8eeb449cd512b26153f0a3376dfe374dd39a999",
+    "path": null,
+    "sha256": null
+  }
+}
