@@ -17,7 +17,7 @@ class ProbeTests(unittest.TestCase):
         with patch("tools.autonomous_ci_probe.fetch_json",
                    side_effect=[PR, {"total_count": 1, "check_runs": [CHECK]}, {"total_count": 1, "workflow_runs": [{"id": 99, "head_sha": SHA, "status": "completed", "conclusion": "success", "repository": {"full_name": REPO}, "event": "pull_request", "path": ".github/workflows/validate-library.yml"}]} , PR]) as fetch:
             result = probe(REPO, 120, ["Validate Module Library"], "fake-token")
-        self.assertEqual(fetch.call_count, 3)
+        self.assertEqual(fetch.call_count, 4)
         self.assertIn(f"/commits/{SHA}/check-runs?", fetch.call_args_list[1].args[0])
         self.assertFalse(result["completion_authorized"])
 
