@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "request_id": "cantiere-845-3204-wait-pr847-20261016T113532138Z",
+  "submitted_at": "2026-10-16T11:35:32.138Z",
+  "actor_id": "chatgpt:cantiere",
+  "lane_id": "cantiere",
+  "operation": "enter_wait",
+  "expected_state_version": 105,
+  "payload": {
+    "wait_type": "WAITING_EXTERNAL",
+    "resume_condition": "All six GitHub Actions CI workflows for draft PR #847 exact head 1ec3cc3cd04c1871de841216ef1616b617239aec complete with inspectable outcomes; First App physical-failure regression included.",
+    "summary": "The real +3204 saved star-app attempt failed semantic Reviewer (0/1; no generated APK). The evidence was recorded in issue #845. Draft PR #847 adds a pre-staging rejection of Flutter rootBundle loading native drawable resources, with bounded existing retry, task-specific interaction acceptance cue and regression; First App regression step success but six full workflows still in progress. No new physical test.",
+    "next_action": "On explicit CI completion signal, resume wait, reclaim #845 PR #847 branch and existing locks, check all six exact-head CI; repair only concrete failures or submit claim-bound REVIEW_REQUIRED packet for independent Main/Reviewer. Do not merge/self-approve or retest host +3204.",
+    "evidence_refs": [
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/issues/845#issuecomment-6214460833",
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/847",
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38894509610",
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38894509669",
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38894509746",
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38894510345",
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38894509788",
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38894509681"
+    ]
+  }
+}
