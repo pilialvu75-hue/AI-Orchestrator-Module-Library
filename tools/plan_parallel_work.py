@@ -30,11 +30,11 @@ def plan(payload):
     if len(ids) != len(set(ids)):
         raise ValueError("duplicate task id")
     known = set(ids) | completed
-    if any(task["lane"] not in lane_ids for task in tasks):
-        raise ValueError("task refers to unknown lane")
     for task in tasks:
         if any(dep not in known for dep in task.get("depends_on", [])):
             raise ValueError("unknown dependency for " + task["id"])
+    if any(task["lane"] not in lane_ids for task in tasks):
+        raise ValueError("task refers to unknown lane")
     available = {lane["id"] for lane in lanes if not lane.get("busy", False)}
     assignments, deferred = [], []
     for task in tasks:
@@ -68,11 +68,11 @@ def plan_from_canonical(root, tasks, max_parallel=None, completed=None):
     for relative in canonical.get("workstreams", []):
         path = root / relative
         state = json.loads(path.read_text(encoding="utf-8"))
-        if state.get("role") != "worker" or state.get("activation") != "active":
-            continue
         lanes.append({
             "id": state["id"],
-            "busy": state.get("active_claim") is not None
+            "busy": state.get("role") != "worker"
+                    or state.get("activation") != "active"
+                    or state.get("active_claim") is not None
                     or state.get("status") != "READY",
         })
     payload = {
