@@ -30,7 +30,7 @@ def eligible_lane():
         "state_version": 7, "active_claim": claim, "review_packet": packet,
         "gates": {**{g: "PASS" for g in ("G0_CLAIM", "G1_IMPLEMENTATION", "G2_STATIC", "G3_CI", "G4_INTEGRATION")},
                   "G5_TARGET_RUNTIME": "NOT_APPLICABLE_UNTIL_RUNTIME_CHANGE"},
-        "current_gate_attestation": {"claim_id": "claim-1", "packet_sha256": digest},
+        "current_gate_attestation": {"claim_id": "claim-1", "packet_sha256": digest, "verified_by": "automation:independent-verifier"},
     }
 
 
@@ -52,6 +52,8 @@ class AutonomousCompletionTests(unittest.TestCase):
     lambda lane: lane["gates"].update(G5_TARGET_RUNTIME="UNKNOWN"),
     lambda lane: lane["current_gate_attestation"].update(packet_sha256="stale"),
     lambda lane: lane["current_gate_attestation"].update(claim_id="other-claim"),
+    lambda lane: lane["current_gate_attestation"].pop("verified_by"),
+    lambda lane: lane["current_gate_attestation"].update(verified_by="chatgpt:library-researcher"),
     lambda lane: lane["review_packet"].update(summary="changed after attestation"),
     lambda lane: lane["gates"].update(G2_STATIC="UNKNOWN"),
     lambda lane: lane["gates"].update(G4_INTEGRATION="PENDING"),
