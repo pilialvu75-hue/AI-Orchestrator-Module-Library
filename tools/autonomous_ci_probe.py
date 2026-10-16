@@ -45,8 +45,28 @@ def probe(repository: str, pr_number: int, required_names: list[str], token: str
     response = fetch_json(f"{base}/commits/{head_sha}/check-runs?per_page=100", token)
     if response.get("total_count", 0) > 100:
         raise ValueError("check results exceed one page; refuse incomplete evidence")
+    # Verify that each required check belongs to a GitHub Actions workflow
+    # run associated with the exact commit, rather than trusting its name.
+    runs = fetch_json(f"{base}/actions/runs?head_sha={head_sha}&per_page=100", token)
+    if runs.get("total_count", 0) > 100:
+        raise ValueError("workflow runs exceed one page; refuse incomplete evidence")
+    valid_run_ids = {
+        run.get("id") for run in runs.get("workflow_runs", [])
+        if run.get("head_sha") == head_sha
+        and run.get("status") == "completed"
+        and run.get("conclusion") == "success"
+        and run.get("repository", {}).get("full_name") == repository
+    }
+    if not valid_run_ids:
+        raise ValueError("no successful workflow run for exact PR head")
+    checks = response.get("check_runs", [])
+    for check in checks:
+        if check.get("name") in required_names:
+            details = check.get("details_url") or ""
+            if not any(f"/runs/{run_id}/" in details for run_id in valid_run_ids):
+                raise ValueError("required check has no matching successful workflow run")
     return verify_pr_checks(
-        pr=pr, checks=response.get("check_runs", []), repository=repository,
+        pr=pr, checks=checks, repository=repository,
         expected_head_sha=head_sha, required_check_names=required_names,
     )
 
