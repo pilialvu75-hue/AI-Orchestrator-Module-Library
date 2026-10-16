@@ -47,7 +47,7 @@ class ParallelWorkPlannerTests(unittest.TestCase):
 
     def test_unknown_dependency_rejected(self):
         with self.assertRaisesRegex(ValueError, "unknown dependency"):
-            plan({"tasks": [{"id": "A", "lane": "a", "depends_on": ["X"]}]})
+            plan({"tasks": [{"id": "A", "lane": "a", "depends_on": ["X"]}], "lanes": [{"id": "a"}]})
 
 
     def test_canonical_claim_blocks_only_its_lane(self):
