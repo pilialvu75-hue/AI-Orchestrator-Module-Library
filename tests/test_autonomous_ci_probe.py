@@ -44,6 +44,17 @@ class ProbeTests(unittest.TestCase):
                     with self.assertRaises(ValueError):
                         probe(REPO, 120, ["Validate Module Library"], "fake-token")
 
+    def test_rejects_check_url_from_another_repository(self):
+        bad_check = {**CHECK, "details_url": "https://github.com/attacker/repo/actions/runs/99/job/1"}
+        run = {"id": 99, "head_sha": SHA, "status": "completed",
+               "conclusion": "success", "repository": {"full_name": REPO},
+               "event": "pull_request", "path": ".github/workflows/validate-library.yml"}
+        with patch("tools.autonomous_ci_probe.fetch_json",
+                   side_effect=[PR, {"total_count": 1, "check_runs": [bad_check]},
+                                {"total_count": 1, "workflow_runs": [run]}]):
+            with self.assertRaises(ValueError):
+                probe(REPO, 120, ["Validate Module Library"], "fake-token")
+
     def test_rejects_unapproved_workflow(self):
         run = {"id": 99, "head_sha": SHA, "status": "completed",
                "conclusion": "success", "repository": {"full_name": REPO},
