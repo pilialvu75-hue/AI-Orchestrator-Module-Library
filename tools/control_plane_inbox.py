@@ -409,6 +409,10 @@ def process_one(path: Path, *, root: Path = ROOT, now: datetime | None = None) -
             lane_id,
             operation,
         )
+        if operation == "autonomous_completion_preflight":
+            actor_id = str(request.get("actor_id"))
+            if actor_id != f"chatgpt:{lane_id}":
+                raise ValueError("autonomous preflight requires the target worker identity")
         if operation == "record_review_gates":
             actor_id = str(request.get("actor_id"))
             automation_reviewer = (
