@@ -47,5 +47,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: coordinator-plan
-          path: |\n            coordinator-plan.json\n            coordinator-claim-proposals.json
+          path: |
+            coordinator-plan.json
+            coordinator-claim-proposals.json
           retention-days: 7
