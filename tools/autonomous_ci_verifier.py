@@ -37,6 +37,8 @@ def verify_pr_checks(
         raise ValueError("invalid required check name")
     if len(set(required_check_names)) != len(required_check_names):
         raise ValueError("duplicate required check name")
+    if not isinstance(pr.get("number"), int) or isinstance(pr.get("number"), bool) or pr["number"] <= 0:
+        raise ValueError("PR number must be a positive integer")
     if not isinstance(checks, list) or any(not isinstance(item, dict) for item in checks):
         raise ValueError("checks must be a list of objects")
     # Check-run names and the github-actions app slug alone do not prove that
