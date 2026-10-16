@@ -9,13 +9,13 @@ REPO = "owner/repo"
 PR = {"number": 120, "base": {"repo": {"full_name": REPO}}, "state": "open", "head": {"sha": SHA, "repo": {"full_name": REPO}}}
 CHECK = {"name": "Validate Module Library", "head_sha": SHA,
          "status": "completed", "conclusion": "success",
-         "app": {"slug": "github-actions"}, "id": 7, "details_url": "https://github.com/owner/repo/actions/runs/99/job/1"}
+         "app": {"slug": "github-actions"}, "id": 7, "check_suite": {"id": 55}, "details_url": "https://github.com/owner/repo/actions/runs/99/job/1"}
 
 
 class ProbeTests(unittest.TestCase):
     def test_reads_exact_head_and_returns_non_authoritative_result(self):
         with patch("tools.autonomous_ci_probe.fetch_json",
-                   side_effect=[PR, {"total_count": 1, "check_runs": [CHECK]}, {"total_count": 1, "workflow_runs": [{"id": 99, "head_sha": SHA, "status": "completed", "conclusion": "success", "repository": {"full_name": REPO}, "event": "pull_request", "path": ".github/workflows/validate-library.yml"}]} , PR]) as fetch:
+                   side_effect=[PR, {"total_count": 1, "check_runs": [CHECK]}, {"total_count": 1, "workflow_runs": [{"id": 99, "check_suite_id": 55, "head_sha": SHA, "status": "completed", "conclusion": "success", "repository": {"full_name": REPO}, "event": "pull_request", "path": ".github/workflows/validate-library.yml"}]} , PR]) as fetch:
             result = probe(REPO, 120, ["Validate Module Library"], "fake-token")
         self.assertEqual(fetch.call_count, 4)
         self.assertIn(f"/commits/{SHA}/check-runs?", fetch.call_args_list[1].args[0])
@@ -44,9 +44,9 @@ class ProbeTests(unittest.TestCase):
                     with self.assertRaises(ValueError):
                         probe(REPO, 120, ["Validate Module Library"], "fake-token")
 
-    def test_rejects_check_url_from_another_repository(self):
-        bad_check = {**CHECK, "details_url": "https://github.com/attacker/repo/actions/runs/99/job/1"}
-        run = {"id": 99, "head_sha": SHA, "status": "completed",
+    def test_rejects_check_from_unrelated_suite(self):
+        bad_check = {**CHECK, "check_suite": {"id": 999}}
+        run = {"id": 99, "check_suite_id": 55, "head_sha": SHA, "status": "completed",
                "conclusion": "success", "repository": {"full_name": REPO},
                "event": "pull_request", "path": ".github/workflows/validate-library.yml"}
         with patch("tools.autonomous_ci_probe.fetch_json",
@@ -56,7 +56,7 @@ class ProbeTests(unittest.TestCase):
                 probe(REPO, 120, ["Validate Module Library"], "fake-token")
 
     def test_rejects_pr_updated_while_collecting_checks(self):
-        run = {"id": 99, "head_sha": SHA, "status": "completed",
+        run = {"id": 99, "check_suite_id": 55, "head_sha": SHA, "status": "completed",
                "conclusion": "success", "repository": {"full_name": REPO},
                "event": "pull_request", "path": ".github/workflows/validate-library.yml"}
         changed = dict(PR, head={"sha": "b" * 40})
@@ -67,7 +67,7 @@ class ProbeTests(unittest.TestCase):
                 probe(REPO, 120, ["Validate Module Library"], "fake-token")
 
     def test_rejects_unapproved_workflow(self):
-        run = {"id": 99, "head_sha": SHA, "status": "completed",
+        run = {"id": 99, "check_suite_id": 55, "head_sha": SHA, "status": "completed",
                "conclusion": "success", "repository": {"full_name": REPO},
                "event": "pull_request", "path": ".github/workflows/untrusted.yml"}
         with patch("tools.autonomous_ci_probe.fetch_json",
@@ -78,7 +78,7 @@ class ProbeTests(unittest.TestCase):
 
     def test_rejects_changed_head(self):
         with patch("tools.autonomous_ci_probe.fetch_json",
-                   side_effect=[PR, {"total_count": 1, "check_runs": [{**CHECK, "head_sha": "b" * 40}]}, {"total_count": 1, "workflow_runs": [{"id": 99, "head_sha": SHA, "status": "completed", "conclusion": "success", "repository": {"full_name": REPO}, "event": "pull_request", "path": ".github/workflows/validate-library.yml"}]}, PR]):
+                   side_effect=[PR, {"total_count": 1, "check_runs": [{**CHECK, "head_sha": "b" * 40}]}, {"total_count": 1, "workflow_runs": [{"id": 99, "check_suite_id": 55, "head_sha": SHA, "status": "completed", "conclusion": "success", "repository": {"full_name": REPO}, "event": "pull_request", "path": ".github/workflows/validate-library.yml"}]}, PR]):
             with self.assertRaises(ValueError):
                 probe(REPO, 120, ["Validate Module Library"], "fake-token")
 
