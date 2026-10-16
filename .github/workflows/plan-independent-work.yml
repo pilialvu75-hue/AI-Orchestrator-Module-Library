@@ -37,10 +37,15 @@ jobs:
             --root . \
             --queue .airlab/control-plane/work-queue.json \
             --output coordinator-plan.json
+          python tools/prepare_coordinator_claims.py \
+            --root . \
+            --queue .airlab/control-plane/work-queue.json \
+            --plan coordinator-plan.json \
+            --output coordinator-claim-proposals.json
           python -m unittest discover -s tests -p test_plan_parallel_work.py -v
       - name: Upload advisory plan
         uses: actions/upload-artifact@v4
         with:
           name: coordinator-plan
-          path: coordinator-plan.json
+          path: |\n            coordinator-plan.json\n            coordinator-claim-proposals.json
           retention-days: 7
