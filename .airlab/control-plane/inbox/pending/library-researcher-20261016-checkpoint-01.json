@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "request_id": "library-researcher-20261016-checkpoint-01",
+  "submitted_at": "2026-10-16T13:32:00Z",
+  "actor_id": "chatgpt:researcher-repair-20261016",
+  "lane_id": "library-researcher",
+  "operation": "checkpoint",
+  "expected_state_version": 3,
+  "payload": {
+    "summary": "Investigated Researcher run #114: scheduled sweep SUCCESS with zero discovered/shortlisted/submissions; first-party source credential unavailable. Fixed stale persisted GitHub rate limit and added zero-yield health output in Researcher PR #98; CI PASS on 53148e01.",
+    "next_action": "Verify independent production yield post-merge and Library intake; submit review packet for Researcher PR #98, keep Android 404 permission issue separate.",
+    "decisions": [
+      "Do not treat GitHub Actions SUCCESS as successful candidate discovery or certification.",
+      "Keep Library PR #120 and certified Library promotion unchanged.",
+      "Correct stale GitHub rate-limiter expiry without bypassing active quota backoff."
+    ],
+    "evidence_refs": [
+      "https://github.com/pilialvu75-hue/AI-Orchestrator-Module-Researcher/actions/runs/38901728066",
+      "https://github.com/pilialvu75-hue/AI-Orchestrator-Module-Researcher/pull/98",
+      "https://github.com/pilialvu75-hue/AI-Orchestrator-Module-Researcher/actions/runs/38907839718"
+    ]
+  }
+}
