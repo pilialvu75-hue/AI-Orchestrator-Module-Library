@@ -51,6 +51,34 @@ def plan(payload):
     return {"assignments": assignments, "deferred": deferred, "state_mutated": False}
 
 
+
+def plan_from_canonical(root, tasks, max_parallel=None):
+    """Build lane availability from canonical workstreams, without mutating them.
+
+    A stale/active claim always occupies its lane until reconciled; this
+    planner must never decide to override a claim or lease.
+    """
+    root = Path(root)
+    canonical = json.loads((root / ".airlab/control-plane/canonical-state.json").read_text(encoding="utf-8"))
+    lanes = []
+    for relative in canonical.get("workstreams", []):
+        path = root / relative
+        state = json.loads(path.read_text(encoding="utf-8"))
+        if state.get("role") != "worker" or state.get("activation") != "active":
+            continue
+        lanes.append({
+            "id": state["id"],
+            "busy": state.get("active_claim") is not None
+                    or state.get("status") != "READY",
+        })
+    payload = {
+        "tasks": tasks,
+        "lanes": lanes,
+        "max_parallel": len(lanes) if max_parallel is None else max_parallel,
+    }
+    return plan(payload)
+
+
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("input", type=Path)
