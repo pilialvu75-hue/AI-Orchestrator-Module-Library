@@ -56,7 +56,7 @@ def plan(payload):
 
 
 
-def plan_from_canonical(root, tasks, max_parallel=None):
+def plan_from_canonical(root, tasks, max_parallel=None, completed=None):
     """Build lane availability from canonical workstreams, without mutating them.
 
     A stale/active claim always occupies its lane until reconciled; this
@@ -77,6 +77,7 @@ def plan_from_canonical(root, tasks, max_parallel=None):
         })
     payload = {
         "tasks": tasks,
+        "completed": [] if completed is None else completed,
         "lanes": lanes,
         "max_parallel": len(lanes) if max_parallel is None else max_parallel,
     }
