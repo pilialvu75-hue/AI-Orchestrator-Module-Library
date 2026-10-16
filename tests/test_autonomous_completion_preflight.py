@@ -55,6 +55,8 @@ class AutonomousCompletionTests(unittest.TestCase):
     lambda lane: lane["current_gate_attestation"].pop("trusted_verifier_receipt"),
     lambda lane: lane["current_gate_attestation"].update(trusted_verifier_receipt=False),
     lambda lane: lane["current_gate_attestation"].update(verified_by="chatgpt:library-researcher"),
+    lambda lane: lane["current_gate_attestation"].update(verified_by="main-reviewer"),
+    lambda lane: lane["current_gate_attestation"].update(verified_by="chatgpt:main-reviewer"),
     lambda lane: lane["review_packet"].update(summary="changed after attestation"),
     lambda lane: lane["gates"].update(G2_STATIC="UNKNOWN"),
     lambda lane: lane["gates"].update(G4_INTEGRATION="PENDING"),
