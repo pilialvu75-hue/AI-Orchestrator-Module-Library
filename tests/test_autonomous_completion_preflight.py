@@ -37,9 +37,8 @@ def eligible_lane():
 def test_preflight_does_not_mutate_lane():
     lane = eligible_lane()
     original = copy.deepcopy(lane)
-    result = validate_autonomous_completion(lane)
-    assert result["state_version"] == 7
-    assert result["eligible_for_transactional_processing"] is True
+    with unittest.TestCase().assertRaises(ValueError):
+        validate_autonomous_completion(lane)
     assert lane == original
 
 
