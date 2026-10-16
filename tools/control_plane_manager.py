@@ -627,6 +627,55 @@ def _review_gate_passed(value: Any) -> bool:
     return isinstance(value, str) and value.startswith("PASS")
 
 
+
+def validate_autonomous_completion(
+    lane: dict[str, Any],
+    *,
+    now: datetime | None = None,
+) -> dict[str, Any]:
+    """Read-only fail-closed eligibility check; never grants reviewer approval.
+
+    This is a prerequisite for a future transactional inbox operation, not
+    an authorization to mutate canonical state or merge a pull request.
+    """
+    now = now or _now()
+    if lane.get("role") != "worker":
+        raise ValueError("autonomous completion is limited to worker lanes")
+    if lane.get("status") != "REVIEW_REQUIRED":
+        raise ValueError("worker has not submitted its evidence packet")
+    claim_data = lane.get("active_claim")
+    if not isinstance(claim_data, dict):
+        raise ValueError("active claim is required")
+    _assert_claim_live(claim_data, now)
+    packet = lane.get("review_packet")
+    if not isinstance(packet, dict):
+        raise ValueError("claim-bound evidence packet is required")
+    _validate_review_packet(str(lane.get("id")), claim_data, packet)
+    gates = lane.get("gates") or {}
+    required = ("G0_CLAIM", "G1_IMPLEMENTATION", "G2_STATIC", "G3_CI", "G4_INTEGRATION")
+    missing = [gate for gate in required if not _review_gate_passed(gates.get(gate))]
+    if missing:
+        raise ValueError("required evidence gates are not PASS: " + ", ".join(missing))
+    attestation = lane.get("current_gate_attestation") or {}
+    digest = _review_packet_digest(packet)
+    if attestation.get("claim_id") != claim_data.get("claim_id") or attestation.get("packet_sha256") != digest:
+        raise ValueError("missing or stale packet-bound evidence attestation")
+    runtime_gate = gates.get("G5_TARGET_RUNTIME")
+    if runtime_gate not in ("NOT_APPLICABLE_UNTIL_RUNTIME_CHANGE", "NOT_APPLICABLE"):
+        if not _review_gate_passed(runtime_gate):
+            raise ValueError("target runtime evidence is required or unresolved")
+    if not isinstance(lane.get("state_version"), int):
+        raise ValueError("state version is required for transactional mutation")
+    return {
+        "lane_id": lane["id"],
+        "state_version": lane["state_version"],
+        "claim_id": claim_data["claim_id"],
+        "packet_sha256": digest,
+        "roadmap_sync_required": bool((packet.get("roadmap_impact") or {}).get("material")),
+        "eligible_for_transactional_processing": True,
+    }
+
+
 def review_accept(
     lane_id: str,
     *,
