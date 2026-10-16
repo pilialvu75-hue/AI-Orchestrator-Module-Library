@@ -1,0 +1,12 @@
+{
+  "schema_version": 1,
+  "request_id": "library-researcher-20261016-review-01",
+  "status": "APPLIED",
+  "processed_at": "2026-10-16T13:28:34Z",
+  "source_file": "library-researcher-20261016-review-01.json",
+  "lane_id": "library-researcher",
+  "operation": "submit_review",
+  "actor_id": "chatgpt:researcher-repair-20261016",
+  "errors": [],
+  "result_state_version": 5
+}

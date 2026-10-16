@@ -3,11 +3,11 @@
   "id": "library-researcher",
   "title": "Library + Researcher",
   "role": "worker",
-  "status": "IMPLEMENTING",
+  "status": "REVIEW_REQUIRED",
   "activation": "active",
   "scope": "Capability needs, discovery, intake, certification, reuse/evolution and safe Researcher boundary.",
   "shared_engine_policy": "shared_or_control_plane",
-  "state_version": 4,
+  "state_version": 5,
   "updated_at": "2026-10-16",
   "active_claim": {
     "claim_id": "a3be2c00b7d608d2df75",
@@ -31,7 +31,37 @@
   "roadmap_refs": [
     ".airlab/roadmap.yaml#L19"
   ],
-  "evidence": [],
+  "evidence": [
+    {
+      "type": "analysis",
+      "ref": "https://github.com/pilialvu75-hue/AI-Orchestrator-Module-Researcher/actions/runs/38901728066",
+      "result": "PASS",
+      "note": "Run #114 completed with four zero-discovery cycles; private first-party source credential unavailable; Library credential check passed."
+    },
+    {
+      "type": "pull_request",
+      "ref": "https://github.com/pilialvu75-hue/AI-Orchestrator-Module-Researcher/pull/98",
+      "result": "PASS",
+      "note": "Bounded implementation on head 53148e01; merge pending."
+    },
+    {
+      "type": "commit",
+      "ref": "https://github.com/pilialvu75-hue/AI-Orchestrator-Module-Researcher/commit/53148e01c4b2b59063bbe4840cefb9c491150aef",
+      "result": "PASS"
+    },
+    {
+      "type": "test",
+      "ref": "https://github.com/pilialvu75-hue/AI-Orchestrator-Module-Researcher/actions/runs/38907839718",
+      "result": "PASS",
+      "note": "New rate-window and seeding health tests passed in CI"
+    },
+    {
+      "type": "ci",
+      "ref": "https://github.com/pilialvu75-hue/AI-Orchestrator-Module-Researcher/actions/runs/38907839718",
+      "result": "PASS",
+      "note": "Ruff, MyPy, Bandit and tests PASS on exact head"
+    }
+  ],
   "gates": {
     "G0_CLAIM": "PASS",
     "G1_IMPLEMENTATION": "PENDING",
@@ -48,7 +78,7 @@
     "reviewed_by": null,
     "reviewed_at": null
   },
-  "next_action": "Verify independent production yield post-merge and Library intake; submit review packet for Researcher PR #98, keep Android 404 permission issue separate.",
+  "next_action": "Main/Reviewer must inspect the review_packet, linked evidence and required gates before promotion or rework.",
   "historical_backlog": [
     "ai.acceleration_backend.firstparty.ai-orchestrator-core/0.1.0 exists as discovered intake.",
     "ai.local_inference.firstparty.ai-orchestrator-core/0.1.0 exists as discovered intake.",
@@ -73,24 +103,105 @@
         "https://github.com/pilialvu75-hue/AI-Orchestrator-Module-Researcher/actions/runs/38907839718"
       ],
       "next_action": "Verify independent production yield post-merge and Library intake; submit review packet for Researcher PR #98, keep Android 404 permission issue separate."
+    },
+    {
+      "seq": 2,
+      "at": "2026-10-16T13:28:34Z",
+      "claim_id": "a3be2c00b7d608d2df75",
+      "work_item": "researcher-zero-discovery-reliability-20261016",
+      "summary": "Repair sticky GitHub rate-limit state across durable Researcher runs and expose zero-yield seeding health evidence. No Library certification asserted. Reviewed scope excludes Library PR #120 and Android access-token settings.",
+      "decisions": [],
+      "evidence_refs": [
+        "https://github.com/pilialvu75-hue/AI-Orchestrator-Module-Researcher/actions/runs/38901728066",
+        "https://github.com/pilialvu75-hue/AI-Orchestrator-Module-Researcher/pull/98",
+        "https://github.com/pilialvu75-hue/AI-Orchestrator-Module-Researcher/commit/53148e01c4b2b59063bbe4840cefb9c491150aef",
+        "https://github.com/pilialvu75-hue/AI-Orchestrator-Module-Researcher/actions/runs/38907839718",
+        "https://github.com/pilialvu75-hue/AI-Orchestrator-Module-Researcher/actions/runs/38907839718"
+      ],
+      "next_action": "Main/Reviewer must inspect the review_packet, linked evidence and required gates before promotion or rework.",
+      "kind": "REVIEW_HANDOFF"
     }
   ],
   "last_checkpoint": {
-    "seq": 1,
-    "at": "2026-10-16T13:27:47Z",
+    "seq": 2,
+    "at": "2026-10-16T13:28:34Z",
     "claim_id": "a3be2c00b7d608d2df75",
     "work_item": "researcher-zero-discovery-reliability-20261016",
-    "summary": "Investigated Researcher run #114: scheduled sweep SUCCESS with zero discovered/shortlisted/submissions; first-party source credential unavailable. Fixed stale persisted GitHub rate limit and added zero-yield health output in Researcher PR #98; CI PASS on 53148e01.",
-    "decisions": [
-      "Do not treat GitHub Actions SUCCESS as successful candidate discovery or certification.",
-      "Keep Library PR #120 and certified Library promotion unchanged.",
-      "Correct stale GitHub rate-limiter expiry without bypassing active quota backoff."
-    ],
+    "summary": "Repair sticky GitHub rate-limit state across durable Researcher runs and expose zero-yield seeding health evidence. No Library certification asserted. Reviewed scope excludes Library PR #120 and Android access-token settings.",
+    "decisions": [],
     "evidence_refs": [
       "https://github.com/pilialvu75-hue/AI-Orchestrator-Module-Researcher/actions/runs/38901728066",
       "https://github.com/pilialvu75-hue/AI-Orchestrator-Module-Researcher/pull/98",
+      "https://github.com/pilialvu75-hue/AI-Orchestrator-Module-Researcher/commit/53148e01c4b2b59063bbe4840cefb9c491150aef",
+      "https://github.com/pilialvu75-hue/AI-Orchestrator-Module-Researcher/actions/runs/38907839718",
       "https://github.com/pilialvu75-hue/AI-Orchestrator-Module-Researcher/actions/runs/38907839718"
     ],
-    "next_action": "Verify independent production yield post-merge and Library intake; submit review packet for Researcher PR #98, keep Android 404 permission issue separate."
+    "next_action": "Main/Reviewer must inspect the review_packet, linked evidence and required gates before promotion or rework.",
+    "kind": "REVIEW_HANDOFF"
+  },
+  "review_packet": {
+    "schema_version": 1,
+    "submitted_at": "2026-10-16T13:29:00Z",
+    "lane_id": "library-researcher",
+    "claim_id": "a3be2c00b7d608d2df75",
+    "work_item": "researcher-zero-discovery-reliability-20261016",
+    "repository": "pilialvu75-hue/AI-Orchestrator-Module-Researcher",
+    "branch": "fix/researcher-zero-discovery-reliability-20261016",
+    "pull_request": 98,
+    "summary": "Repair sticky GitHub rate-limit state across durable Researcher runs and expose zero-yield seeding health evidence. No Library certification asserted. Reviewed scope excludes Library PR #120 and Android access-token settings.",
+    "changes": [
+      "src/researcher/rate_limit.py: permit fresh GitHub discovery after persisted reset epoch expires while retaining quota blocking before reset.",
+      "tests/test_rate_limit.py: regression for expired and future rate limit windows.",
+      "tools/seeding_health_report.py and tests: expose accurate discovery/analysis/submission counts, zero-discovery outcome and explicit absent certification evidence.",
+      ".github/workflows/autonomous-seeding.yml: publish run-health.json and GitHub Actions Step Summary without weakening security or intake."
+    ],
+    "evidence": [
+      {
+        "type": "analysis",
+        "ref": "https://github.com/pilialvu75-hue/AI-Orchestrator-Module-Researcher/actions/runs/38901728066",
+        "result": "PASS",
+        "note": "Run #114 completed with four zero-discovery cycles; private first-party source credential unavailable; Library credential check passed."
+      },
+      {
+        "type": "pull_request",
+        "ref": "https://github.com/pilialvu75-hue/AI-Orchestrator-Module-Researcher/pull/98",
+        "result": "PASS",
+        "note": "Bounded implementation on head 53148e01; merge pending."
+      },
+      {
+        "type": "commit",
+        "ref": "https://github.com/pilialvu75-hue/AI-Orchestrator-Module-Researcher/commit/53148e01c4b2b59063bbe4840cefb9c491150aef",
+        "result": "PASS"
+      },
+      {
+        "type": "test",
+        "ref": "https://github.com/pilialvu75-hue/AI-Orchestrator-Module-Researcher/actions/runs/38907839718",
+        "result": "PASS",
+        "note": "New rate-window and seeding health tests passed in CI"
+      },
+      {
+        "type": "ci",
+        "ref": "https://github.com/pilialvu75-hue/AI-Orchestrator-Module-Researcher/actions/runs/38907839718",
+        "result": "PASS",
+        "note": "Ruff, MyPy, Bandit and tests PASS on exact head"
+      }
+    ],
+    "known_risks": [
+      "No post-merge Researcher production run on this code yet; no new module certified or available to Cantiere.",
+      "First-party source credential remains unavailable; public discovery must independently prove useful candidates.",
+      "Android HTTP 404 is a separate credential-scope problem that cannot be solved by this Researcher-only PR.",
+      "Rate-limit reset was a code defect; the actual rate state at start of run #114 was not independently recovered from persistent SQLite."
+    ],
+    "reviewer_checks": [
+      "Verify CI and code against PR #98 head 53148e01; confirm reset expiry fails open to refresh quota, but future resets still fail closed.",
+      "Verify zero-discovery summary does not claim certified Library modules.",
+      "Check no direct Researcher to Cantiere path and no PR #120 changes.",
+      "After merging only with appropriate approval, observe next scheduled run and independently verify Library intake and certification.",
+      "Review Android Lab access separately, without weakening private repository permissions."
+    ],
+    "roadmap_impact": {
+      "material": false,
+      "refs": []
+    }
   }
 }
