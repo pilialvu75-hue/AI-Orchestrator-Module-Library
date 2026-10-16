@@ -3,11 +3,11 @@
   "id": "cantiere",
   "title": "Cantiere",
   "role": "worker",
-  "status": "CLAIMED",
+  "status": "IMPLEMENTING",
   "activation": "active",
   "scope": "Exclusive Cantiere/App Factory execution, durability, build/review/validation/apply and first-real-app reliability.",
   "shared_engine_policy": "shared_or_control_plane",
-  "state_version": 104,
+  "state_version": 105,
   "updated_at": "2026-10-16",
   "active_claim": {
     "claim_id": "fd9db7ade2a91e22c15c",
@@ -24,8 +24,8 @@
       "file:pilialvu75-hue/Ai-orchestrator-riserva:test/app_factory/workshop/workshop_proposal_implementation_runner_test.dart"
     ],
     "started_at": "2026-10-16T11:27:01Z",
-    "heartbeat_at": "2026-10-16T11:27:01Z",
-    "lease_until": "2026-10-16T23:27:01Z",
+    "heartbeat_at": "2026-10-16T11:34:34Z",
+    "lease_until": "2026-10-16T23:34:34Z",
     "lease_hours": 12
   },
   "dependencies": [],
@@ -51,7 +51,7 @@
     "reviewed_by": null,
     "reviewed_at": null
   },
-  "next_action": "Merge PR #846 at exact independently reviewed head a4e12bff88f5ad5665c92bfd66cfe6378545b0e7 with guarded expected-head SHA, verify merge commit reachable from main. Check Android Build & Release success and NEW signed host release whose tag commit includes merge; supply real asset link only after verified publication. Authorize exactly ONE new S24 FE test on saved black-background star app with four Qwen 2.5 3B roles. Require generated project Reviewer+Validation PASS, actual generated APK build/install/launch/touch and diagnostics; G5 physical remains open until evidence. No retest +3184. Plan control-plane event-driven reviewer dispatch improvement separately without self-approving worker changes.",
+  "next_action": "Inspect First App CI run 38894509788 and other five exact-head workflow runs for PR #847; if failing, make bounded correction on same branch, no budgets/model/reviewer changes. When CI are PASS, independently Main/Reviewer review packet and G1-G4/G6; no new physical +3204 test.",
   "historical_backlog": [
     "Stay in Phase 1 ONLINE until a real generated Android app is physically accepted.",
     "Reproduce the recent manga-drawing app failure from current main with Diagnostics; do not restart generic audits.",
@@ -81,25 +81,6 @@
     "continuation": "Do not re-enable broad Cantiere autopilot until the remaining control-plane concurrency/resource-lock weakness is addressed or explicitly accepted for the next pilot."
   },
   "checkpoints": [
-    {
-      "seq": 9,
-      "at": "2026-10-03T18:01:07Z",
-      "claim_id": "817e5b54f6185a148751",
-      "work_item": "CANT-11-2964-prompt-budget-planner-recovery",
-      "summary": "PR #776 opened on existing recovery branch, final head f0f58eb. Both Engineer prompt-budget paths, bounded build-repair planner and conservative JSON recovery implemented. Two Codex P2 findings fixed and resolved: mandatory scope preserved or explicitly rejected, and request path budget independent of per-task maxPaths. Diagnostics closed projection exports recovery events without private text. 105 focused tests pass; all six CI workflows running.",
-      "decisions": [
-        "No new Manga Kids project or physical retest requested.",
-        "Scope includes public_log_projection.dart and its regression test so recovery telemetry is remotely visible; no active Diagnostics claim or conflicting resource lock found."
-      ],
-      "evidence_refs": [
-        "Ai-orchestrator-riserva#776",
-        "commit:f0f58ebaae1dc7ebf39a53f6888f6ba11eb75319",
-        "test:105-focused-PASS",
-        "review:4174199308-addressed",
-        "review:4174199310-addressed"
-      ],
-      "next_action": "Wait for all six workflows on f0f58eb, correct real failures, verify no unresolved findings, merge per explicit owner mandate, then identify Android release containing merge. Physical gate remains open."
-    },
     {
       "seq": 10,
       "at": "2026-10-03T18:20:48Z",
@@ -1031,25 +1012,45 @@
       ],
       "next_action": "Merge PR #846 at exact independently reviewed head a4e12bff88f5ad5665c92bfd66cfe6378545b0e7 with guarded expected-head SHA, verify merge commit reachable from main. Check Android Build & Release success and NEW signed host release whose tag commit includes merge; supply real asset link only after verified publication. Authorize exactly ONE new S24 FE test on saved black-background star app with four Qwen 2.5 3B roles. Require generated project Reviewer+Validation PASS, actual generated APK build/install/launch/touch and diagnostics; G5 physical remains open until evidence. No retest +3184. Plan control-plane event-driven reviewer dispatch improvement separately without self-approving worker changes.",
       "kind": "REVIEW_ACCEPTED"
+    },
+    {
+      "seq": 59,
+      "at": "2026-10-16T11:34:34Z",
+      "claim_id": "fd9db7ade2a91e22c15c",
+      "work_item": "issue-845-star-functional-3204",
+      "summary": "Physical S24 FE +3204 single saved black-star app test failed correctly at semantic Reviewer, execution succeeded 0/1, no validation/build/install. Evidence logged privacy-safe issue #845. New claim on v104; PR #847 draft at head 1ec3cc3c introduces narrow pre-stager guard for rootBundle Android drawable misuse + task-specific star acceptance reminder + bounded single retry regression. Six PR-head platform CI workflows launched and are in progress; code not independently reviewed or merged.",
+      "decisions": [
+        "Retain correct Reviewer rejection; no bypass and no star APK claims.",
+        "Keep existing saved project and G5 physical OPEN.",
+        "Use existing malformed-output repair retry; do not increase allowed retries/tokens/timeouts."
+      ],
+      "evidence_refs": [
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/issues/845#issuecomment-6214460833",
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/847",
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/1ec3cc3cd04c1871de841216ef1616b617239aec",
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38894509788"
+      ],
+      "next_action": "Inspect First App CI run 38894509788 and other five exact-head workflow runs for PR #847; if failing, make bounded correction on same branch, no budgets/model/reviewer changes. When CI are PASS, independently Main/Reviewer review packet and G1-G4/G6; no new physical +3204 test."
     }
   ],
   "last_checkpoint": {
-    "seq": 58,
-    "at": "2026-10-15T11:56:43Z",
-    "claim_id": "51667ecdb11f7463ca75",
-    "work_item": "issue-845-first-star-app-review-scope-3184",
-    "summary": "APPROVED CODE ONLY: Main/Reviewer third independent PR #846 exact head a4e12bff88f5ad5665c92bfd66cfe6378545b0e7. Certified Library reuse provenance SHA-256 bound to session and current content; all staged changes covered by Reviewer and explicit_scope; unknown/local historic reuse remains fail-closed; no weakening gate, model, timeout or memory settings. Mandatory AAPT2 negative XML test executed in Android First App CI job 116383726521, exact marker at log line 848 exit_code=1; Dart analyzer negative fixture executed. 6/6 PR-head CI success, PR clean with 0 review threads. Current gate attestation bound to claim 51667ecdb11f7463ca75 review packet. G5 PENDING_PHYSICAL_S24_FE; host sample CI APK is NOT generated user-star APK and Phase 1 is NOT DONE.",
+    "seq": 59,
+    "at": "2026-10-16T11:34:34Z",
+    "claim_id": "fd9db7ade2a91e22c15c",
+    "work_item": "issue-845-star-functional-3204",
+    "summary": "Physical S24 FE +3204 single saved black-star app test failed correctly at semantic Reviewer, execution succeeded 0/1, no validation/build/install. Evidence logged privacy-safe issue #845. New claim on v104; PR #847 draft at head 1ec3cc3c introduces narrow pre-stager guard for rootBundle Android drawable misuse + task-specific star acceptance reminder + bounded single retry regression. Six PR-head platform CI workflows launched and are in progress; code not independently reviewed or merged.",
     "decisions": [
-      "Main/Reviewer accepted the implementation/review gate."
+      "Retain correct Reviewer rejection; no bypass and no star APK claims.",
+      "Keep existing saved project and G5 physical OPEN.",
+      "Use existing malformed-output repair retry; do not increase allowed retries/tokens/timeouts."
     ],
     "evidence_refs": [
-      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/846",
-      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/a4e12bff88f5ad5665c92bfd66cfe6378545b0e7",
-      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38723542828/job/116383726521",
-      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38723542725"
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/issues/845#issuecomment-6214460833",
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/847",
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/1ec3cc3cd04c1871de841216ef1616b617239aec",
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38894509788"
     ],
-    "next_action": "Merge PR #846 at exact independently reviewed head a4e12bff88f5ad5665c92bfd66cfe6378545b0e7 with guarded expected-head SHA, verify merge commit reachable from main. Check Android Build & Release success and NEW signed host release whose tag commit includes merge; supply real asset link only after verified publication. Authorize exactly ONE new S24 FE test on saved black-background star app with four Qwen 2.5 3B roles. Require generated project Reviewer+Validation PASS, actual generated APK build/install/launch/touch and diagnostics; G5 physical remains open until evidence. No retest +3184. Plan control-plane event-driven reviewer dispatch improvement separately without self-approving worker changes.",
-    "kind": "REVIEW_ACCEPTED"
+    "next_action": "Inspect First App CI run 38894509788 and other five exact-head workflow runs for PR #847; if failing, make bounded correction on same branch, no budgets/model/reviewer changes. When CI are PASS, independently Main/Reviewer review packet and G1-G4/G6; no new physical +3204 test."
   },
   "review_history": [
     {

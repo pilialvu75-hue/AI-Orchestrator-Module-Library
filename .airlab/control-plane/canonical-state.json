@@ -7,7 +7,7 @@
     "policy": "This private repository is the single coordination authority. Chats and agents are workers, not independent sources of truth."
   },
   "updated_at": "2026-10-16",
-  "state_revision": 302,
+  "state_revision": 303,
   "lifecycle_status": "BOOTSTRAP_ACTIVE",
   "roadmap_authority": {
     "library": ".airlab/roadmap.yaml",
@@ -80,11 +80,11 @@
     "invalid_lane_behavior": "ISOLATE_AND_SURFACE_PROJECTION_INCIDENT"
   },
   "projection": {
-    "source_digest": "9afca187a3a178b00f7ded7bf1bc8774c485ad11b8b34d7b644c32135c5c517d",
-    "projected_at": "2026-10-16T11:27:01Z",
+    "source_digest": "3503a285bd4eae06f3bd27d411eb7dbf6d8bed4e6b100f85e0eab077e8105fef",
+    "projected_at": "2026-10-16T11:34:34Z",
     "counts": {
       "BLOCKED": 2,
-      "CLAIMED": 1,
+      "IMPLEMENTING": 1,
       "READY": 14
     },
     "active_claims": [
@@ -93,7 +93,7 @@
         "claim_id": "fd9db7ade2a91e22c15c",
         "work_item": "issue-845-star-functional-3204",
         "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
-        "lease_until": "2026-10-16T23:27:01Z",
+        "lease_until": "2026-10-16T23:34:34Z",
         "resource_locks": [
           "branch:pilialvu75-hue/Ai-orchestrator-riserva:fix/cantiere-845-star-functional-3204",
           "contract:cantiere-engineer-functional-completeness",
@@ -283,15 +283,15 @@
       },
       {
         "id": "cantiere",
-        "status": "CLAIMED",
+        "status": "IMPLEMENTING",
         "activation": "active",
-        "state_version": 104,
+        "state_version": 105,
         "updated_at": "2026-10-16",
         "active_claim": {
           "claim_id": "fd9db7ade2a91e22c15c",
           "work_item": "issue-845-star-functional-3204",
           "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
-          "lease_until": "2026-10-16T23:27:01Z",
+          "lease_until": "2026-10-16T23:34:34Z",
           "resource_locks": [
             "branch:pilialvu75-hue/Ai-orchestrator-riserva:fix/cantiere-845-star-functional-3204",
             "contract:cantiere-engineer-functional-completeness",
@@ -303,7 +303,7 @@
         "reviewer_state": "PENDING",
         "inference_profile_status": null,
         "historical_backlog_count": 3,
-        "next_action": "Merge PR #846 at exact independently reviewed head a4e12bff88f5ad5665c92bfd66cfe6378545b0e7 with guarded expected-head SHA, verify merge commit reachable from main. Check Android Build & Release success and NEW signed host release whose tag commit includes merge; supply real asset link only after verified publication. Authorize exactly ONE new S24 FE test on saved black-background star app with four Qwen 2.5 3B roles. Require generated project Reviewer+Validation PASS, actual generated APK build/install/launch/touch and diagnostics; G5 physical remains open until evidence. No retest +3184. Plan control-plane event-driven reviewer dispatch improvement separately without self-approving worker changes."
+        "next_action": "Inspect First App CI run 38894509788 and other five exact-head workflow runs for PR #847; if failing, make bounded correction on same branch, no budgets/model/reviewer changes. When CI are PASS, independently Main/Reviewer review packet and G1-G4/G6; no new physical +3204 test."
       },
       {
         "id": "diagnostics",
