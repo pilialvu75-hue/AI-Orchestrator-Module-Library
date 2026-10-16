@@ -37,6 +37,8 @@ def verify_pr_checks(
         raise ValueError("invalid required check name")
     if len(set(required_check_names)) != len(required_check_names):
         raise ValueError("duplicate required check name")
+    if not isinstance(checks, list) or any(not isinstance(item, dict) for item in checks):
+        raise ValueError("checks must be a list of objects")
     verified = {}
     for name in required_check_names:
         matches = [check for check in checks if check.get("name") == name]
