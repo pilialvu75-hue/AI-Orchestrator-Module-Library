@@ -671,6 +671,10 @@ def validate_autonomous_completion(
     # Until an inbox-side trusted verifier writes a receipt, fail closed.
     if attestation.get("trusted_verifier_receipt") is not True:
         raise ValueError("trusted independent verifier receipt is required")
+    # A receipt flag in mutable lane JSON is NOT proof of provenance. Until
+    # receipt verification is implemented against a protected external source,
+    # this API must never advertise eligibility for automatic state changes.
+    raise ValueError("autonomous completion disabled: trusted receipt provenance is not verified")
     runtime_gate = gates.get("G5_TARGET_RUNTIME")
     if runtime_gate not in ("NOT_APPLICABLE_UNTIL_RUNTIME_CHANGE", "NOT_APPLICABLE"):
         if not _review_gate_passed(runtime_gate):
