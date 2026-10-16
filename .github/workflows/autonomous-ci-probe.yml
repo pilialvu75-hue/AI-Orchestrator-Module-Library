@@ -1,0 +1,47 @@
+name: Autonomous CI Evidence Probe
+
+on:
+  workflow_dispatch:
+    inputs:
+      repository:
+        description: "Repository containing the PR (owner/name)"
+        required: true
+        type: string
+      pr_number:
+        description: "Pull request number"
+        required: true
+        type: number
+      required_check:
+        description: "Exact required check name"
+        required: true
+        type: string
+
+permissions:
+  contents: read
+  checks: read
+  pull-requests: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - name: Checkout protected default branch
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          persist-credentials: false
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Read and verify GitHub CI evidence
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          TARGET_REPOSITORY: ${{ inputs.repository }}
+          TARGET_PR_NUMBER: ${{ inputs.pr_number }}
+          REQUIRED_CHECK: ${{ inputs.required_check }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -m tools.autonomous_ci_probe "$TARGET_REPOSITORY" "$TARGET_PR_NUMBER" "$REQUIRED_CHECK"
