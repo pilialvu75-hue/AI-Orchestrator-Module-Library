@@ -35,6 +35,16 @@ class ParallelWorkPlannerTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "duplicate task"):
             plan({"tasks": [{"id": "A", "lane": "a"}, {"id": "A", "lane": "b"}]})
 
+    def test_completed_task_is_never_reassigned(self):
+        with self.assertRaisesRegex(ValueError, "completed task"):
+            plan({"tasks": [{"id": "A", "lane": "a"}],
+                  "lanes": [{"id": "a"}], "completed": ["A"]})
+
+    def test_unknown_lane_is_rejected(self):
+        with self.assertRaisesRegex(ValueError, "unknown lane"):
+            plan({"tasks": [{"id": "A", "lane": "missing"}],
+                  "lanes": [{"id": "a"}]})
+
     def test_unknown_dependency_rejected(self):
         with self.assertRaisesRegex(ValueError, "unknown dependency"):
             plan({"tasks": [{"id": "A", "lane": "a", "depends_on": ["X"]}]})
