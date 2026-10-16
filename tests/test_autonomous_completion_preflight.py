@@ -19,7 +19,8 @@ def eligible_lane():
         "schema_version": 1, "submitted_at": now.isoformat(),
         "lane_id": "library-researcher", "claim_id": "claim-1",
         "work_item": "item-1", "repository": "owner/repo",
-        "summary": "verified work", "changes": ["bounded change"],\n        "evidence": [{"type": "test", "ref": "tests/test_example.py", "result": "PASS"}],
+        "summary": "verified work", "changes": ["bounded change"],
+        "evidence": [{"type": "test", "ref": "tests/test_example.py", "result": "PASS"}],
         "known_risks": [], "reviewer_checks": ["static and CI evidence"],
         "roadmap_impact": {"material": False, "refs": []},
     }
