@@ -6,7 +6,7 @@ from tools.autonomous_ci_probe import probe
 
 SHA = "a" * 40
 REPO = "owner/repo"
-PR = {"state": "open", "head": {"sha": SHA, "repo": {"full_name": REPO}}}
+PR = {"number": 120, "base": {"repo": {"full_name": REPO}}, "state": "open", "head": {"sha": SHA, "repo": {"full_name": REPO}}}
 CHECK = {"name": "Validate Module Library", "head_sha": SHA,
          "status": "completed", "conclusion": "success",
          "app": {"slug": "github-actions"}, "id": 7}
