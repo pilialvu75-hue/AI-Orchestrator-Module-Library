@@ -7,7 +7,7 @@
     "policy": "This private repository is the single coordination authority. Chats and agents are workers, not independent sources of truth."
   },
   "updated_at": "2026-10-16",
-  "state_revision": 309,
+  "state_revision": 310,
   "lifecycle_status": "BOOTSTRAP_ACTIVE",
   "roadmap_authority": {
     "library": ".airlab/roadmap.yaml",
@@ -80,13 +80,12 @@
     "invalid_lane_behavior": "ISOLATE_AND_SURFACE_PROJECTION_INCIDENT"
   },
   "projection": {
-    "source_digest": "84d94f6ae1376df04b0e65e97dcdd7a4d0b0a0261edb14f6af5a7b3f37bef394",
-    "projected_at": "2026-10-16T13:28:34Z",
+    "source_digest": "af4cf63a78552699fad7e2f44db7cbb0ab8e45fa25b1da1be7b0780adc7b7ad9",
+    "projected_at": "2026-10-16T13:30:12Z",
     "counts": {
       "BLOCKED": 2,
-      "CLAIMED": 1,
       "READY": 13,
-      "REVIEW_REQUIRED": 1
+      "REVIEW_REQUIRED": 2
     },
     "active_claims": [
       {
@@ -174,6 +173,7 @@
       }
     ],
     "review_required": [
+      "cantiere",
       "library-researcher"
     ],
     "blocked": [
@@ -323,9 +323,9 @@
       },
       {
         "id": "cantiere",
-        "status": "CLAIMED",
+        "status": "REVIEW_REQUIRED",
         "activation": "active",
-        "state_version": 108,
+        "state_version": 109,
         "updated_at": "2026-10-16",
         "active_claim": {
           "claim_id": "0780c6a10b7fc5c768ff",
@@ -343,7 +343,7 @@
         "reviewer_state": "PENDING",
         "inference_profile_status": null,
         "historical_backlog_count": 3,
-        "next_action": "Reclaim same issue #845 physical +3204 Engineer functional failure via preserved branch and locks; verify independent review evidence and submit claim-bound PR #847 packet, no merge or new device run."
+        "next_action": "Main/Reviewer must inspect the review_packet, linked evidence and required gates before promotion or rework."
       },
       {
         "id": "diagnostics",

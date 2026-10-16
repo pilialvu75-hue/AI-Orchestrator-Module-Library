@@ -1,0 +1,12 @@
+{
+  "schema_version": 1,
+  "request_id": "cantiere-845-pr847-review-packet-v108-20261016T132959609Z",
+  "status": "APPLIED",
+  "processed_at": "2026-10-16T13:30:12Z",
+  "source_file": "cantiere-845-pr847-review-packet-v108-20261016T132959609Z.json",
+  "lane_id": "cantiere",
+  "operation": "submit_review",
+  "actor_id": "chatgpt:cantiere",
+  "errors": [],
+  "result_state_version": 109
+}
