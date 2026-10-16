@@ -25,6 +25,7 @@ class VerifierTests(unittest.TestCase):
     def test_valid_check_is_not_completion_authority(self):
         result = verify_pr_checks(**inputs())
         self.assertEqual(result["verified_checks"], {"Validate Module Library": 42})
+        self.assertEqual(result["pr_number"], 120)
         self.assertFalse(result["trusted_receipt"])
         self.assertFalse(result["completion_authorized"])
 
