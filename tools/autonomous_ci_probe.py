@@ -31,13 +31,13 @@ def probe(repository: str, pr_number: int, required_names: list[str], token: str
         raise ValueError("GitHub token missing")
     if repository.count("/") != 1 or any(c not in "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._/" for c in repository):
         raise ValueError("invalid repository")
-    if not isinstance(pr_number, int) or pr_number < 1:
+    if type(pr_number) is not int or pr_number < 1:
         raise ValueError("invalid PR number")
     base = f"https://api.github.com/repos/{repository}"
     pr = fetch_json(f"{base}/pulls/{pr_number}", token)
     if not isinstance(pr, dict):
         raise ValueError("invalid PR response")
-    if pr.get("number") != pr_number:
+    if type(pr.get("number")) is not int or pr["number"] != pr_number:
         raise ValueError("PR number mismatch")
     if ((pr.get("base") or {}).get("repo") or {}).get("full_name") != repository:
         raise ValueError("PR base repository mismatch")
