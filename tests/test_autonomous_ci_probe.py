@@ -6,7 +6,7 @@ from tools.autonomous_ci_probe import probe
 
 SHA = "a" * 40
 REPO = "owner/repo"
-PR = {"number": 120, "base": {"repo": {"full_name": REPO}}, "state": "open", "head": {"sha": SHA, "repo": {"full_name": REPO}}}
+PR = {"number": 120, "base": {"repo": {"full_name": REPO}, "ref": "main"}, "state": "open", "head": {"sha": SHA, "repo": {"full_name": REPO}}}
 CHECK = {"name": "Validate Module Library", "head_sha": SHA,
          "status": "completed", "conclusion": "success",
          "app": {"slug": "github-actions"}, "id": 7, "check_suite": {"id": 55}, "details_url": "https://github.com/owner/repo/actions/runs/99/job/1"}
@@ -82,6 +82,11 @@ class ProbeTests(unittest.TestCase):
                    side_effect=[PR, {"total_count": 1, "check_runs": [CHECK]},
                                 {"total_count": -1, "workflow_runs": []}]):
             with self.assertRaisesRegex(ValueError, "missing workflow run count"):
+                probe(REPO, 120, ["Validate Module Library"], "fake-token")
+
+    def test_rejects_non_main_target(self):
+        with patch("tools.autonomous_ci_probe.fetch_json", return_value={**PR, "base": {**PR["base"], "ref": "unprotected"}}):
+            with self.assertRaisesRegex(ValueError, "target branch must be main"):
                 probe(REPO, 120, ["Validate Module Library"], "fake-token")
 
     def test_rejects_wrong_pr_identity(self):
