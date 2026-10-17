@@ -66,7 +66,7 @@
       "Upstream AndroidOptions resetOnError defaults to true; avoid untested destructive error handling or automatic token loss",
       "Existing secret consumers: Cloud credential store, Workshop Library GitHub auth, Module Library GitHub config, Diagnostics",
       "App pubspec.yaml declares Dart >=3.4 and Flutter >=3.22.2; current pubspec.lock resolves Dart >=3.12 and Flutter >=3.44. Check actual CI toolchain rather than inferring incompatibility",
-      "App Android minSdk 28; upstream pinned 11.2.0 minimum Flutter 3.19, Dart 3.8, Android >=24 per upstream 11.0.0 changelog",
+      "App Android minSdk 28; upstream pinned 11.2.0 build.gradle minSdk 24, pubspec requires Flutter >=3.19 and Dart >=3.8",
       "No real target-runtime smoke tests, no existing-token migration proofs, and no rollback-tested upgrade",
       "Researcher security/vulnerability preflight CLEAR is not Library admission or certification",
       "Never update app dependency or Cantiere until a separate authorized claim and release-safe migration plan exist"
