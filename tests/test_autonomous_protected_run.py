@@ -40,6 +40,13 @@ class ProtectedRunTests(unittest.TestCase):
             validate_protected_run(RUN, repository=REPO, workflow_path=PATH,
                                    head_sha="invalid", run_id=55, run_attempt=1)
 
+    def test_rejects_malformed_expected_workflow_path(self):
+        for path in (".github/workflows/../evil.yml", ".github/workflows/evil.txt",
+                     ".github/workflows/evil name.yml", ".github/workflows/evil\\\\name.yml"):
+            with self.subTest(path=path), self.assertRaises(ValueError):
+                validate_protected_run(RUN, repository=REPO, workflow_path=path,
+                                       head_sha=SHA, run_id=55, run_attempt=1)
+
     def test_rejects_missing_fields(self):
         for key in RUN:
             with self.subTest(key=key), self.assertRaises(ValueError):
