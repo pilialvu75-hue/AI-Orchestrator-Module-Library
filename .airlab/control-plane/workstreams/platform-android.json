@@ -3,11 +3,11 @@
   "id": "platform-android",
   "title": "Android",
   "role": "worker",
-  "status": "CLAIMED",
+  "status": "IMPLEMENTING",
   "activation": "active",
   "scope": "Android packaging, permissions, hardware/runtime adapters, UI integration and releases using shared orchestration/contracts with target-optimized inference.",
   "shared_engine_policy": "adapter_only",
-  "state_version": 20,
+  "state_version": 21,
   "updated_at": "2026-10-17",
   "active_claim": {
     "claim_id": "394d8d0d738e8b921f03",
@@ -24,8 +24,8 @@
       "resource:android-issue-849-backup-policy"
     ],
     "started_at": "2026-10-17T13:21:33Z",
-    "heartbeat_at": "2026-10-17T13:21:33Z",
-    "lease_until": "2026-10-18T01:21:33Z",
+    "heartbeat_at": "2026-10-17T13:26:04Z",
+    "lease_until": "2026-10-18T01:26:04Z",
     "lease_hours": 12
   },
   "dependencies": [],
@@ -50,7 +50,7 @@
     "reviewed_by": null,
     "reviewed_at": null
   },
-  "next_action": "PR #824 may be made ready and merged at exact reviewed head e29c2bb15e1175635e5b578f4dc7fab5819360c0. After merge, publish a build containing the correction before using benchmark attribution results. Keep RAM stability, trim15/resource guard and physical S24 FE validation open as separate work; do not repeat benchmarks solely for this review.",
+  "next_action": "Inspect Android CI for exact PR #852 head; verify packaged merged manifest and compiled backup policy XML; submit reviewer packet only with verified G1-G4 evidence, keep physical S24 FE fixture restore open and plugin v10->v11 upgrade excluded.",
   "inference_profile_policy": "target_owned_benchmark_gated",
   "inference_profile": {
     "status": "ACTIVE_BENCHMARKING",
@@ -232,29 +232,43 @@
       ],
       "next_action": "PR #824 may be made ready and merged at exact reviewed head e29c2bb15e1175635e5b578f4dc7fab5819360c0. After merge, publish a build containing the correction before using benchmark attribution results. Keep RAM stability, trim15/resource guard and physical S24 FE validation open as separate work; do not repeat benchmarks solely for this review.",
       "kind": "REVIEW_ACCEPTED"
+    },
+    {
+      "seq": 10,
+      "at": "2026-10-17T13:26:04Z",
+      "claim_id": "394d8d0d738e8b921f03",
+      "work_item": "issue-849-android-selective-backup-exclusions",
+      "summary": "Claimed Android issue #849 and implemented selective FlutterSecureStorage default SharedPreferences exclusions on PR #852 head 407d1d2753edbc08d5d6484bbe3052b85388f9fe. Manifest references separate legacy/cloud/D2D policies; static fail-closed tests and aapt2 compile CI PASS. Android release build and physical restore are not yet complete.",
+      "decisions": [
+        "Only backup policy XML and regression tests; preserve other data backups and do not globally set allowBackup=false.",
+        "No flutter_secure_storage version bump, Vulkan/llama/RAM/trim15, signing or production app changes. No merge or runtime PASS inferred from CI.",
+        "Existing Library PR #120 untouched; Library intake PR #128 remains separate and draft."
+      ],
+      "evidence_refs": [
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/issues/849",
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/852",
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/39036463019"
+      ],
+      "next_action": "Inspect Android CI for exact PR #852 head; verify packaged merged manifest and compiled backup policy XML; submit reviewer packet only with verified G1-G4 evidence, keep physical S24 FE fixture restore open and plugin v10->v11 upgrade excluded."
     }
   ],
   "last_checkpoint": {
-    "seq": 9,
-    "at": "2026-10-11T11:40:52Z",
-    "claim_id": "111089b6cea735577ad4",
-    "work_item": "benchmark-switch-error-attribution",
-    "summary": "Main/Reviewer accepts PR #824 only as the bounded benchmark-switch attribution/reporting correction on exact head e29c2bb15e1175635e5b578f4dc7fab5819360c0. The diff preserves completed original-model probes across ordinary partner/return failures, reports catalog/stage identities, leaves incomplete switching as n/a, and continues to rethrow critical resource exceptions. Exact-head cross-platform CI and four focused regressions pass. This approval does not accept or resolve RAM stability, trim15/resource-guard behavior, Vulkan behavior, GGUF/cache binding, model policy, or physical S24 FE runtime stability.",
+    "seq": 10,
+    "at": "2026-10-17T13:26:04Z",
+    "claim_id": "394d8d0d738e8b921f03",
+    "work_item": "issue-849-android-selective-backup-exclusions",
+    "summary": "Claimed Android issue #849 and implemented selective FlutterSecureStorage default SharedPreferences exclusions on PR #852 head 407d1d2753edbc08d5d6484bbe3052b85388f9fe. Manifest references separate legacy/cloud/D2D policies; static fail-closed tests and aapt2 compile CI PASS. Android release build and physical restore are not yet complete.",
     "decisions": [
-      "Main/Reviewer accepted the implementation/review gate."
+      "Only backup policy XML and regression tests; preserve other data backups and do not globally set allowBackup=false.",
+      "No flutter_secure_storage version bump, Vulkan/llama/RAM/trim15, signing or production app changes. No merge or runtime PASS inferred from CI.",
+      "Existing Library PR #120 untouched; Library intake PR #128 remains separate and draft."
     ],
     "evidence_refs": [
-      "Ai-orchestrator-riserva#824",
-      "head:e29c2bb15e1175635e5b578f4dc7fab5819360c0",
-      "CI:38107361707",
-      "CI:38107361691",
-      "CI:38107361706",
-      "CI:38107361716",
-      "CI:38107361719",
-      "job:114375580450"
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/issues/849",
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/852",
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/39036463019"
     ],
-    "next_action": "PR #824 may be made ready and merged at exact reviewed head e29c2bb15e1175635e5b578f4dc7fab5819360c0. After merge, publish a build containing the correction before using benchmark attribution results. Keep RAM stability, trim15/resource guard and physical S24 FE validation open as separate work; do not repeat benchmarks solely for this review.",
-    "kind": "REVIEW_ACCEPTED"
+    "next_action": "Inspect Android CI for exact PR #852 head; verify packaged merged manifest and compiled backup policy XML; submit reviewer packet only with verified G1-G4 evidence, keep physical S24 FE fixture restore open and plugin v10->v11 upgrade excluded."
   },
   "reconciliation_events": [
     {
