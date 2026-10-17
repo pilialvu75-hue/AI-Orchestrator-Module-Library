@@ -57,6 +57,30 @@ receipt provenance, stale claim, changed PR head, or unresolved runtime gate
 must fail closed. No worker-supplied flag or local mock may set
 `completion_authorized` to true.
 
+## Canonical CI binding on PR #120 (read-only, not activated)
+
+The `autonomous-ci-probe.yml` workflow now requires `lane_id` and checks out
+the exact `github.sha` associated with its protected `workflow_dispatch` run,
+rather than following a potentially moving `main` reference. The canonical
+producer `tools/autonomous_canonical_ci_probe.py` reads the protected
+`.airlab/control-plane/canonical-state.json` workstream registry and matching
+worker lane, verifies that the claim lease is live, and derives the complete
+seven-field identity from the canonical claim/packet plus GitHub API PR data.
+The live CI probe must independently confirm the same PR head.
+
+The protected artifact must now contain `canonical_identity`; the consumer
+rejects missing, altered, or stale identities and re-fetches the required check
+runs from GitHub. Every output still carries
+`trusted_receipt=false` and `completion_authorized=false`.
+
+These changes are staged on PR #120. Passing its unit/CI checks does not
+demonstrate that the modified protected workflow has run on default-branch
+`main`; it can only be exercised there after merge. Remaining activation
+requirements include independent G1/G2/G4 and G5 evidence authentication,
+a dedicated completion-authority receipt, the inbox compare-and-swap mutation,
+and a coherent replacement for the historical G6 reviewer rule. Never treat
+`canonical_identity` or this artifact alone as approval.
+
 ## State transition
 
 Only after trusted verification may a dedicated transaction release a live
