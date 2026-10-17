@@ -41,7 +41,9 @@ class ReceiptBindingTests(unittest.TestCase):
 
     def test_rejects_invalid_expected_identity(self):
         for key, value in (("head_sha", "invalid"), ("packet_sha256", "bad"),
-                           ("state_version", -1), ("pr_number", True)):
+                           ("state_version", -1), ("pr_number", True),
+                           ("repository", "/repo"), ("repository", "owner/"),
+                           ("repository", "owner /repo"), ("repository", "owner/re po")):
             with self.subTest(key=key), self.assertRaises(ValueError):
                 validate_receipt_binding(IDENTITY, {**IDENTITY, key: value})
 
