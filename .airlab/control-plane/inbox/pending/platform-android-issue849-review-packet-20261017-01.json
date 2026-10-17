@@ -1,0 +1,96 @@
+{
+  "schema_version": 1,
+  "request_id": "platform-android-issue849-review-packet-20261017-01",
+  "actor_id": "chatgpt:platform-android-issue849",
+  "lane_id": "platform-android",
+  "operation": "submit_review",
+  "expected_state_version": 22,
+  "payload": {
+    "packet": {
+      "schema_version": 1,
+      "submitted_at": "2026-10-17T14:06:23Z",
+      "lane_id": "platform-android",
+      "claim_id": "394d8d0d738e8b921f03",
+      "work_item": "issue-849-android-selective-backup-exclusions",
+      "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
+      "branch": "fix/android-849-selective-backup-20261017",
+      "pull_request": 852,
+      "summary": "Bounded Android Secure Storage backup policy PR #852 at exact head 407d1d2753edbc08d5d6484bbe3052b85388f9fe: four pinned secure SharedPreferences excluded from legacy/cloud/D2D channels, with four static regressions, aapt2 XML compile, Web/Windows/Android CI PASS, and independently decoded exact APK +3261 manifest/resources. Physical backup/restore, installed-device checks and independent signing identity proof remain OPEN; request G1-G4 review only, not runtime acceptance or merge.",
+      "changes": [
+        "android/app/src/main/AndroidManifest.xml: add android:fullBackupContent and android:dataExtractionRules references in application",
+        "android/app/src/main/res/xml/backup_rules.xml: exclude only the four default flutter_secure_storage encrypted prefs for legacy Android backup",
+        "android/app/src/main/res/xml/data_extraction_rules.xml: identical four exclusion entries in Android 12+ cloud-backup and device-transfer",
+        "scripts/test_android_backup_policy.py: four fail-closed tests for correct manifest, exact file list, cloud/D2D parity and absence of blanket exclusions",
+        ".github/workflows/android-secure-backup-policy.yml: run static regression tests and aapt2-compile both policy XMLs"
+      ],
+      "evidence": [
+        {
+          "type": "pull_request",
+          "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/852",
+          "result": "PASS",
+          "note": "Draft PR head 407d1d2753edbc08d5d6484bbe3052b85388f9fe. No merge."
+        },
+        {
+          "type": "commit",
+          "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/407d1d2753edbc08d5d6484bbe3052b85388f9fe",
+          "result": "PASS",
+          "note": "Exact immutable implementation head tied to tests and APK artifact."
+        },
+        {
+          "type": "test",
+          "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/39036463019",
+          "result": "PASS",
+          "note": "Four backup policy tests PASS and both XML resources compiled by Android aapt2."
+        },
+        {
+          "type": "ci",
+          "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/39036462941",
+          "result": "PASS",
+          "note": "Build & Release APK SUCCESS; run artifact AI-Orchestrator-android-release-1.0.12-3261, artifact ID 12102292982. APK SHA256 b16f9d10449cf408463a8ba152af5cc9596f1c0de369e7d8a7e7f15866c54711."
+        },
+        {
+          "type": "ci",
+          "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/39036462946",
+          "result": "PASS",
+          "note": "Web Cantiere Build SUCCESS at exact head."
+        },
+        {
+          "type": "ci",
+          "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/39036463029",
+          "result": "PASS",
+          "note": "Windows Build SUCCESS at exact head."
+        },
+        {
+          "type": "analysis",
+          "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/issues/849#issuecomment-6234849327",
+          "result": "PASS",
+          "note": "G4 packaging proof: binary AXML decoded from exact APK +3261, resources.arsc maps manifest @0x7f100000->backup_rules->res/Qq.xml and @0x7f100001->data_extraction_rules->res/4j.xml; 4/4 exclusions verified in legacy, cloud and device-transfer. Structural only."
+        },
+        {
+          "type": "physical_device",
+          "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/issues/849",
+          "result": "PENDING",
+          "note": "No Galaxy S24 FE physical backup/restore, fake-secret migration, cloud or device-transfer effect has been verified."
+        }
+      ],
+      "known_risks": [
+        "G5_TARGET_RUNTIME open: no physical S24 FE restore/cloud/D2D or negative Keystore restore validation. G4 packaging is not operating-system behavior proof.",
+        "APK signing chain has not been independently verified, although release CI succeeded; do not distribute an unreviewed build.",
+        "Unknown historical app installs may have used legacy EncryptedSharedPreferences or non-default namespaces, requiring on-device inventory with disposable fixtures.",
+        "Code leaves other app preferences eligible for backup; reviewer should verify Android 12+ cloud and D2D rules' device behavior.",
+        "Flutter secure storage stays 10.3.4; major upgrade to 11.2.0 is NOT in scope, and legacy credential recovery cannot be inferred from static tests."
+      ],
+      "reviewer_checks": [
+        "Verify the five-file diff for scope, package identity, Android policy semantics and potential side effects; do not approve a plugin upgrade.",
+        "Bind G1 implementation/G2 static/G3 CI/G4 integration to provided exact-head PASS evidence; re-check compiled manifest resource ID mapping and four excludes in all three channels.",
+        "Keep G5 physical acceptance OPEN until real S24 FE backup/restore with disposable fake secrets plus ordinary settings retention; no logs of token values/hashes.",
+        "Do not claim G6 reviewer approval, G7 canonical sync or merge from worker packet alone; maintain PR #852 draft pending independent decision.",
+        "Do not modify Library PR #120 or certify Library intake PR #128 from this Android-only implementation."
+      ],
+      "roadmap_impact": {
+        "material": false,
+        "refs": []
+      }
+    }
+  }
+}
