@@ -1,0 +1,12 @@
+{
+  "schema_version": 1,
+  "request_id": "platform-android-issue849-review-packet-20261017-01",
+  "status": "APPLIED",
+  "processed_at": "2026-10-17T14:07:16Z",
+  "source_file": "platform-android-issue849-review-packet-20261017-01.json",
+  "lane_id": "platform-android",
+  "operation": "submit_review",
+  "actor_id": "chatgpt:platform-android-issue849",
+  "errors": [],
+  "result_state_version": 23
+}

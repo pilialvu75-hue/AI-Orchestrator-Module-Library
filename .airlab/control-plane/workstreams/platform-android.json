@@ -3,11 +3,11 @@
   "id": "platform-android",
   "title": "Android",
   "role": "worker",
-  "status": "IMPLEMENTING",
+  "status": "REVIEW_REQUIRED",
   "activation": "active",
   "scope": "Android packaging, permissions, hardware/runtime adapters, UI integration and releases using shared orchestration/contracts with target-optimized inference.",
   "shared_engine_policy": "adapter_only",
-  "state_version": 22,
+  "state_version": 23,
   "updated_at": "2026-10-17",
   "active_claim": {
     "claim_id": "394d8d0d738e8b921f03",
@@ -33,7 +33,56 @@
     ".airlab/public-repositories/Ai-orchestrator-riserva/roadmap.yaml#CANT-14",
     ".airlab/public-repositories/Ai-orchestrator-riserva/roadmap.yaml#CANT-INF1"
   ],
-  "evidence": [],
+  "evidence": [
+    {
+      "type": "pull_request",
+      "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/852",
+      "result": "PASS",
+      "note": "Draft PR head 407d1d2753edbc08d5d6484bbe3052b85388f9fe. No merge."
+    },
+    {
+      "type": "commit",
+      "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/407d1d2753edbc08d5d6484bbe3052b85388f9fe",
+      "result": "PASS",
+      "note": "Exact immutable implementation head tied to tests and APK artifact."
+    },
+    {
+      "type": "test",
+      "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/39036463019",
+      "result": "PASS",
+      "note": "Four backup policy tests PASS and both XML resources compiled by Android aapt2."
+    },
+    {
+      "type": "ci",
+      "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/39036462941",
+      "result": "PASS",
+      "note": "Build & Release APK SUCCESS; run artifact AI-Orchestrator-android-release-1.0.12-3261, artifact ID 12102292982. APK SHA256 b16f9d10449cf408463a8ba152af5cc9596f1c0de369e7d8a7e7f15866c54711."
+    },
+    {
+      "type": "ci",
+      "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/39036462946",
+      "result": "PASS",
+      "note": "Web Cantiere Build SUCCESS at exact head."
+    },
+    {
+      "type": "ci",
+      "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/39036463029",
+      "result": "PASS",
+      "note": "Windows Build SUCCESS at exact head."
+    },
+    {
+      "type": "analysis",
+      "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/issues/849#issuecomment-6234849327",
+      "result": "PASS",
+      "note": "G4 packaging proof: binary AXML decoded from exact APK +3261, resources.arsc maps manifest @0x7f100000->backup_rules->res/Qq.xml and @0x7f100001->data_extraction_rules->res/4j.xml; 4/4 exclusions verified in legacy, cloud and device-transfer. Structural only."
+    },
+    {
+      "type": "physical_device",
+      "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/issues/849",
+      "result": "PENDING",
+      "note": "No Galaxy S24 FE physical backup/restore, fake-secret migration, cloud or device-transfer effect has been verified."
+    }
+  ],
   "gates": {
     "G0_CLAIM": "PASS",
     "G1_IMPLEMENTATION": "PENDING",
@@ -50,7 +99,7 @@
     "reviewed_by": null,
     "reviewed_at": null
   },
-  "next_action": "When Build & Release APK 39036462941 finishes, obtain its exact-head signed APK and verify compiled merged manifest plus backup_rules/data_extraction_rules resources; record hash and G4 evidence; leave G5 physical restore and independent G6 review open. Do not initiate duplicate costly builds while this run is active.",
+  "next_action": "Main/Reviewer must inspect the review_packet, linked evidence and required gates before promotion or rework.",
   "inference_profile_policy": "target_owned_benchmark_gated",
   "inference_profile": {
     "status": "ACTIVE_BENCHMARKING",
@@ -269,26 +318,47 @@
         "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/39036462941"
       ],
       "next_action": "When Build & Release APK 39036462941 finishes, obtain its exact-head signed APK and verify compiled merged manifest plus backup_rules/data_extraction_rules resources; record hash and G4 evidence; leave G5 physical restore and independent G6 review open. Do not initiate duplicate costly builds while this run is active."
+    },
+    {
+      "seq": 12,
+      "at": "2026-10-17T14:07:16Z",
+      "claim_id": "394d8d0d738e8b921f03",
+      "work_item": "issue-849-android-selective-backup-exclusions",
+      "summary": "Bounded Android Secure Storage backup policy PR #852 at exact head 407d1d2753edbc08d5d6484bbe3052b85388f9fe: four pinned secure SharedPreferences excluded from legacy/cloud/D2D channels, with four static regressions, aapt2 XML compile, Web/Windows/Android CI PASS, and independently decoded exact APK +3261 manifest/resources. Physical backup/restore, installed-device checks and independent signing identity proof remain OPEN; request G1-G4 review only, not runtime acceptance or merge.",
+      "decisions": [],
+      "evidence_refs": [
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/852",
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/407d1d2753edbc08d5d6484bbe3052b85388f9fe",
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/39036463019",
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/39036462941",
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/39036462946",
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/39036463029",
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/issues/849#issuecomment-6234849327",
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/issues/849"
+      ],
+      "next_action": "Main/Reviewer must inspect the review_packet, linked evidence and required gates before promotion or rework.",
+      "kind": "REVIEW_HANDOFF"
     }
   ],
   "last_checkpoint": {
-    "seq": 11,
-    "at": "2026-10-17T13:38:08Z",
+    "seq": 12,
+    "at": "2026-10-17T14:07:16Z",
     "claim_id": "394d8d0d738e8b921f03",
     "work_item": "issue-849-android-selective-backup-exclusions",
-    "summary": "PR #852 head 407d1d2753edbc08d5d6484bbe3052b85388f9fe: focused policy CI 39036463019 PASS (4 regressions plus aapt2 compile); Web Cantiere 39036462946 PASS; Windows 39036463029 PASS. Build & Release APK 39036462941 still in progress during signed APK compile with no artifact yet; no fabricated build or device outcome.",
-    "decisions": [
-      "Preserve head SHA while the signed APK build remains active to avoid re-running costly Actions.",
-      "No runtime acceptance or 10.3.4 -> 11.2.0 migration from static XML tests; physical S24 FE disposable-token restore remains open."
-    ],
+    "summary": "Bounded Android Secure Storage backup policy PR #852 at exact head 407d1d2753edbc08d5d6484bbe3052b85388f9fe: four pinned secure SharedPreferences excluded from legacy/cloud/D2D channels, with four static regressions, aapt2 XML compile, Web/Windows/Android CI PASS, and independently decoded exact APK +3261 manifest/resources. Physical backup/restore, installed-device checks and independent signing identity proof remain OPEN; request G1-G4 review only, not runtime acceptance or merge.",
+    "decisions": [],
     "evidence_refs": [
       "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/852",
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/407d1d2753edbc08d5d6484bbe3052b85388f9fe",
       "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/39036463019",
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/39036462941",
       "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/39036462946",
       "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/39036463029",
-      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/39036462941"
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/issues/849#issuecomment-6234849327",
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/issues/849"
     ],
-    "next_action": "When Build & Release APK 39036462941 finishes, obtain its exact-head signed APK and verify compiled merged manifest plus backup_rules/data_extraction_rules resources; record hash and G4 evidence; leave G5 physical restore and independent G6 review open. Do not initiate duplicate costly builds while this run is active."
+    "next_action": "Main/Reviewer must inspect the review_packet, linked evidence and required gates before promotion or rework.",
+    "kind": "REVIEW_HANDOFF"
   },
   "reconciliation_events": [
     {
@@ -669,31 +739,90 @@
       }
     }
   ],
-  "current_gate_attestation": {
-    "at": "2026-10-11T11:39:49Z",
-    "claim_id": "111089b6cea735577ad4",
-    "packet_sha256": "5ae638beac30441a9d612e1eb7b86837de637afbce0bed655b50cf3cf36c642a",
-    "reviewed_by": "main-reviewer",
-    "summary": "Main/Reviewer independently inspected PR #824 exact head e29c2bb15e1175635e5b578f4dc7fab5819360c0 and the claim-bound review packet. The change is bounded to benchmark switch-error attribution/reporting: completed original probes are preserved across ordinary partner/return failures, incomplete switching remains n/a, and critical resource errors still propagate. Five exact-head workflows and four focused regressions are PASS. G1-G4 apply only to this benchmark attribution change; RAM stability, trim15/resource-guard behavior, GGUF/cache binding and physical S24 FE runtime acceptance remain open and are not inferred.",
-    "evidence_refs_by_gate": {
-      "G1_IMPLEMENTATION": [
-        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/824",
-        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/e29c2bb15e1175635e5b578f4dc7fab5819360c0"
-      ],
-      "G2_STATIC": [
-        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38107361707/job/114375580450"
-      ],
-      "G3_CI": [
-        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38107361707",
-        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38107361691",
-        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38107361706",
-        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38107361716",
-        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38107361719"
-      ],
-      "G4_INTEGRATION": [
-        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/824/files",
-        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38107361707/job/114375580450"
-      ]
+  "review_packet": {
+    "schema_version": 1,
+    "submitted_at": "2026-10-17T14:06:23Z",
+    "lane_id": "platform-android",
+    "claim_id": "394d8d0d738e8b921f03",
+    "work_item": "issue-849-android-selective-backup-exclusions",
+    "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
+    "branch": "fix/android-849-selective-backup-20261017",
+    "pull_request": 852,
+    "summary": "Bounded Android Secure Storage backup policy PR #852 at exact head 407d1d2753edbc08d5d6484bbe3052b85388f9fe: four pinned secure SharedPreferences excluded from legacy/cloud/D2D channels, with four static regressions, aapt2 XML compile, Web/Windows/Android CI PASS, and independently decoded exact APK +3261 manifest/resources. Physical backup/restore, installed-device checks and independent signing identity proof remain OPEN; request G1-G4 review only, not runtime acceptance or merge.",
+    "changes": [
+      "android/app/src/main/AndroidManifest.xml: add android:fullBackupContent and android:dataExtractionRules references in application",
+      "android/app/src/main/res/xml/backup_rules.xml: exclude only the four default flutter_secure_storage encrypted prefs for legacy Android backup",
+      "android/app/src/main/res/xml/data_extraction_rules.xml: identical four exclusion entries in Android 12+ cloud-backup and device-transfer",
+      "scripts/test_android_backup_policy.py: four fail-closed tests for correct manifest, exact file list, cloud/D2D parity and absence of blanket exclusions",
+      ".github/workflows/android-secure-backup-policy.yml: run static regression tests and aapt2-compile both policy XMLs"
+    ],
+    "evidence": [
+      {
+        "type": "pull_request",
+        "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/852",
+        "result": "PASS",
+        "note": "Draft PR head 407d1d2753edbc08d5d6484bbe3052b85388f9fe. No merge."
+      },
+      {
+        "type": "commit",
+        "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/407d1d2753edbc08d5d6484bbe3052b85388f9fe",
+        "result": "PASS",
+        "note": "Exact immutable implementation head tied to tests and APK artifact."
+      },
+      {
+        "type": "test",
+        "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/39036463019",
+        "result": "PASS",
+        "note": "Four backup policy tests PASS and both XML resources compiled by Android aapt2."
+      },
+      {
+        "type": "ci",
+        "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/39036462941",
+        "result": "PASS",
+        "note": "Build & Release APK SUCCESS; run artifact AI-Orchestrator-android-release-1.0.12-3261, artifact ID 12102292982. APK SHA256 b16f9d10449cf408463a8ba152af5cc9596f1c0de369e7d8a7e7f15866c54711."
+      },
+      {
+        "type": "ci",
+        "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/39036462946",
+        "result": "PASS",
+        "note": "Web Cantiere Build SUCCESS at exact head."
+      },
+      {
+        "type": "ci",
+        "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/39036463029",
+        "result": "PASS",
+        "note": "Windows Build SUCCESS at exact head."
+      },
+      {
+        "type": "analysis",
+        "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/issues/849#issuecomment-6234849327",
+        "result": "PASS",
+        "note": "G4 packaging proof: binary AXML decoded from exact APK +3261, resources.arsc maps manifest @0x7f100000->backup_rules->res/Qq.xml and @0x7f100001->data_extraction_rules->res/4j.xml; 4/4 exclusions verified in legacy, cloud and device-transfer. Structural only."
+      },
+      {
+        "type": "physical_device",
+        "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/issues/849",
+        "result": "PENDING",
+        "note": "No Galaxy S24 FE physical backup/restore, fake-secret migration, cloud or device-transfer effect has been verified."
+      }
+    ],
+    "known_risks": [
+      "G5_TARGET_RUNTIME open: no physical S24 FE restore/cloud/D2D or negative Keystore restore validation. G4 packaging is not operating-system behavior proof.",
+      "APK signing chain has not been independently verified, although release CI succeeded; do not distribute an unreviewed build.",
+      "Unknown historical app installs may have used legacy EncryptedSharedPreferences or non-default namespaces, requiring on-device inventory with disposable fixtures.",
+      "Code leaves other app preferences eligible for backup; reviewer should verify Android 12+ cloud and D2D rules' device behavior.",
+      "Flutter secure storage stays 10.3.4; major upgrade to 11.2.0 is NOT in scope, and legacy credential recovery cannot be inferred from static tests."
+    ],
+    "reviewer_checks": [
+      "Verify the five-file diff for scope, package identity, Android policy semantics and potential side effects; do not approve a plugin upgrade.",
+      "Bind G1 implementation/G2 static/G3 CI/G4 integration to provided exact-head PASS evidence; re-check compiled manifest resource ID mapping and four excludes in all three channels.",
+      "Keep G5 physical acceptance OPEN until real S24 FE backup/restore with disposable fake secrets plus ordinary settings retention; no logs of token values/hashes.",
+      "Do not claim G6 reviewer approval, G7 canonical sync or merge from worker packet alone; maintain PR #852 draft pending independent decision.",
+      "Do not modify Library PR #120 or certify Library intake PR #128 from this Android-only implementation."
+    ],
+    "roadmap_impact": {
+      "material": false,
+      "refs": []
     }
   }
 }
