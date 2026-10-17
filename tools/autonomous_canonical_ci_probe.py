@@ -13,6 +13,7 @@ from datetime import datetime, timezone
 from pathlib import Path
 
 from tools.autonomous_canonical_identity import derive_canonical_receipt_identity
+from tools.autonomous_independent_gates import audit_library_ci_gates
 from tools.autonomous_ci_probe import fetch_json, probe as probe_ci
 from tools.control_plane_manager import ROOT, _assert_claim_live
 
@@ -28,7 +29,7 @@ def _load_object(path: Path) -> dict:
 def probe_canonical_lane(
     lane_id: str, repository: str, pr_number: int, required_checks: list[str],
     github_token: str, *, root: Path = ROOT,
-    now: datetime | None = None,
+    now: datetime | None = None, audit_ci_pipeline: bool = False,
 ) -> dict:
     """Resolve identity ONLY from protected canonical files and GitHub's API."""
     if (not isinstance(lane_id, str) or not re.fullmatch(r"[A-Za-z0-9_-]+", lane_id)
@@ -95,7 +96,12 @@ def probe_canonical_lane(
                                  if _load_object(path).get("id") == lane_id))
     if refreshed != lane:
         raise ValueError("canonical lane changed during CI verification")
-    return {**ci, "canonical_identity": identity}
+    evidence = {**ci, "canonical_identity": identity}
+    if audit_ci_pipeline:
+        evidence["independent_gate_audit"] = audit_library_ci_gates(
+            identity, ci, github_token, trusted_root=root,
+        )
+    return evidence
 
 
 def main() -> int:
@@ -105,7 +111,7 @@ def main() -> int:
     try:
         result = probe_canonical_lane(
             sys.argv[1], sys.argv[2], int(sys.argv[3]), sys.argv[4:],
-            os.environ.get("GITHUB_TOKEN", ""),
+            os.environ.get("GITHUB_TOKEN", ""), audit_ci_pipeline=True,
         )
     except (ValueError, OSError, KeyError) as exc:
         print(f"canonical CI probe refused: {exc}", file=sys.stderr)
