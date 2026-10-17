@@ -104,6 +104,8 @@ class StorageSecretsCandidate127Tests(unittest.TestCase):
             "verify_initial_secret_presence",
             "preupgrade_cipher_migration",
             "non_destructive_restore",
+            "android_upgrade_status_pre_read",
+            "android_backup_restore_isolation",
             "biometric_and_keychain_errors",
             "upgrade_rollback",
             "android_physical_gate",
@@ -128,7 +130,7 @@ class StorageSecretsCandidate127Tests(unittest.TestCase):
         )
         report = assess(self.manifest(), evidence)
         self.assertEqual(report["state"], "BLOCKED")
-        self.assertEqual(len(report["pending_gates"]), 8)
+        self.assertEqual(len(report["pending_gates"]), 10)
         self.assertIn("MIGRATION_EVIDENCE_PENDING", report["blockers"])
         self.assertFalse(report["library_certified"])
         self.assertFalse(report["runtime_upgrade_authorized"])
@@ -145,10 +147,76 @@ class StorageSecretsCandidate127Tests(unittest.TestCase):
         )
         for gate in evidence["acceptance_gates"]:
             gate["state"] = "PASS"
+        missing_probe = assess(self.manifest(), evidence)
+        self.assertEqual(missing_probe["state"], "BLOCKED")
+        self.assertIn("ANDROID_UPGRADE_PROBE_NOT_CLEARED", missing_probe["blockers"])
+        evidence["android_upgrade_probe"] = {
+            "state": "ok",
+            "reason": "none",
+            "entry_count": 4,
+            "will_discard_on_next_access": False,
+            "performed_before_first_read": True,
+            "device_receipt": "synthetic-not-an-attestation",
+        }
         report = assess(self.manifest(), evidence)
         self.assertEqual(report["state"], "INDEPENDENT_REVIEW_REQUIRED")
         self.assertFalse(report["library_certified"])
         self.assertFalse(report["runtime_upgrade_authorized"])
+
+    def test_upgrade_probe_rejects_unreadable_discarded_and_unsupported(self) -> None:
+        import runpy
+
+        classify = runpy.run_path(
+            str(SOURCE / "tests" / "migration_readiness.py")
+        )["classify_upgrade_probe"]
+        baseline = {
+            "state": "ok",
+            "reason": "none",
+            "entry_count": 3,
+            "will_discard_on_next_access": False,
+            "performed_before_first_read": True,
+            "device_receipt": "synthetic-fixture",
+        }
+        self.assertEqual(classify(baseline), "SAFE_CANDIDATE_UNDER_REVIEW")
+        for state, reason, verdict in (
+            ("legacyDataUnreadable", "removedCipher", "LEGACY_DATA_AT_RISK"),
+            ("legacyDataDiscarded", "missingKeyMaterial", "LEGACY_DATA_AT_RISK"),
+            ("unknown", "authenticationRequired", "UNKNOWN_STATE"),
+            ("ok", "unsupportedPlatform", "UNSUPPORTED_OR_UNEXPECTED"),
+        ):
+            with self.subTest(state=state, reason=reason):
+                raw = dict(baseline, state=state, reason=reason)
+                self.assertEqual(classify(raw), verdict)
+        self.assertEqual(
+            classify(dict(baseline, will_discard_on_next_access=True)),
+            "POTENTIAL_DESTRUCTIVE_ACCESS",
+        )
+        self.assertEqual(
+            classify(dict(baseline, performed_before_first_read=False)),
+            "PRE_READ_ORDER_NOT_PROVEN",
+        )
+        self.assertEqual(
+            classify(dict(baseline, device_receipt=None)),
+            "DEVICE_RECEIPT_MISSING",
+        )
+
+    def test_backup_and_upgrade_gate_cannot_disappear_silently(self) -> None:
+        import runpy
+
+        assess = runpy.run_path(
+            str(SOURCE / "tests" / "migration_readiness.py")
+        )["assess"]
+        evidence = json.loads(
+            (SOURCE / "tests" / "migration-gates.json").read_text(encoding="utf-8")
+        )
+        evidence["acceptance_gates"] = [
+            row for row in evidence["acceptance_gates"]
+            if row["id"] != "android_backup_restore_isolation"
+        ]
+        report = assess(self.manifest(), evidence)
+        self.assertEqual(report["state"], "BLOCKED")
+        self.assertIn("MIGRATION_GATES_INCOMPLETE", report["blockers"])
+        self.assertIn("android_backup_restore_isolation", report["pending_gates"])
 
     def test_migration_assessor_rejects_pin_drift_and_fake_testing(self) -> None:
         import runpy
@@ -206,7 +274,7 @@ class StorageSecretsCandidate127Tests(unittest.TestCase):
         self.assertEqual(report["state"], "BLOCKED")
         self.assertFalse(report["runtime_upgrade_authorized"])
         self.assertFalse(report["secrets_read"])
-        self.assertEqual(len(report["pending_gates"]), 8)
+        self.assertEqual(len(report["pending_gates"]), 10)
         self.assertNotIn("token", result.stdout.lower())
         self.assertNotIn("password", result.stdout.lower())
 
