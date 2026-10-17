@@ -23,10 +23,15 @@ def probe(receipt):
 
 
 class ReceiptEvidenceProbeTests(unittest.TestCase):
+    @patch("tools.autonomous_receipt_evidence_probe.fetch_json", return_value={
+        "total_count": 1, "artifacts": [{"id": 42, "name": "autonomous-ci-evidence",
+                                         "expired": False, "workflow_run": {"id": 55}}],
+    })
     @patch("tools.autonomous_receipt_evidence_probe.fetch_protected_run", return_value=RUN)
-    def test_combines_read_only_evidence(self, fetch):
+    def test_combines_read_only_evidence(self, fetch, artifacts):
         result = probe(IDENTITY.copy())
         self.assertEqual(result["identity"], IDENTITY)
+        self.assertEqual(result["artifact_id"], 42)
         self.assertFalse(result["trusted_receipt"])
         self.assertFalse(result["completion_authorized"])
         fetch.assert_called_once()
