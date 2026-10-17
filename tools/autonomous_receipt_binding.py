@@ -21,7 +21,8 @@ def validate_receipt_binding(receipt: dict, expected: dict) -> dict:
     for name in ("lane_id", "claim_id", "repository"):
         if not isinstance(expected[name], str) or not expected[name].strip():
             raise ValueError(f"invalid {name}")
-    if expected["repository"].count("/") != 1:
+    owner, repo = expected["repository"].split("/") if expected["repository"].count("/") == 1 else ("", "")
+    if not owner or not repo or any(part != part.strip() or any(c.isspace() for c in part) for part in (owner, repo)):
         raise ValueError("invalid repository")
     for name in ("state_version", "pr_number"):
         value = expected[name]
