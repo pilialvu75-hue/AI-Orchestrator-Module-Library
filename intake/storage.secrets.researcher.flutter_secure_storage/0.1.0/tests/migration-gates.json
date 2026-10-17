@@ -1,0 +1,93 @@
+{
+  "schema": "ai-orchestrator.library-secret-storage-migration-gates.v1",
+  "source_app": {
+    "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
+    "main_commit": "40cb40fd8a0d7ca80d6656d9ee7524d57b5a16c4",
+    "resolved_package": "flutter_secure_storage",
+    "resolved_version": "10.3.4",
+    "declared_constraint": "^10.3.1",
+    "pubspec_dart_lower_bound": "3.4.0",
+    "pubspec_flutter_lower_bound": "3.22.2",
+    "lock_dart_lower_bound": "3.12.0",
+    "lock_flutter_lower_bound": "3.44.0",
+    "android_min_sdk": 28
+  },
+  "candidate": {
+    "upstream": "juliansteenbakker/flutter_secure_storage",
+    "source_commit": "e8eeb449cd512b26153f0a3376dfe374dd39a999",
+    "package_version": "11.2.0",
+    "source_preflight": "CLEAR",
+    "library_certified": false
+  },
+  "secret_consumer_inventory": [
+    {
+      "consumer": "cloud_credentials",
+      "source_path": "lib/core/runtime/inference/cloud_credential_store.dart",
+      "state": "PENDING_MIGRATION_VALIDATION"
+    },
+    {
+      "consumer": "workshop_github_auth",
+      "source_path": "lib/app_factory/workshop/workshop_library_github_auth.dart",
+      "state": "PENDING_MIGRATION_VALIDATION"
+    },
+    {
+      "consumer": "module_library_github_config",
+      "source_path": "lib/features/module_library/data/module_library_github_config.dart",
+      "state": "PENDING_MIGRATION_VALIDATION"
+    },
+    {
+      "consumer": "diagnostics_github_token",
+      "source_path": "lib/core/diagnostics/github_diagnostics.dart",
+      "state": "PENDING_MIGRATION_VALIDATION"
+    }
+  ],
+  "acceptance_gates": [
+    {
+      "id": "verify_initial_secret_presence",
+      "state": "PENDING",
+      "proof": "On a controlled test device, seed NON-PRODUCTION fixture values on v10.3.4; record only pass/fail/exists booleans. Never upload plaintext or hashes of secrets."
+    },
+    {
+      "id": "preupgrade_cipher_migration",
+      "state": "PENDING",
+      "proof": "Verify legacy v10 encrypted data has migrated before v11. Old algorithms removed in v11. Stop if unresolved."
+    },
+    {
+      "id": "non_destructive_restore",
+      "state": "PENDING",
+      "proof": "After update to v11.2.0 in a disposable fixture installation, verify all four consumers can read matching fixture values and delete/update them; no auto-reset or silent loss."
+    },
+    {
+      "id": "biometric_and_keychain_errors",
+      "state": "PENDING",
+      "proof": "Test credential lock/cancel/reboot/Keystore failure/namespace switch; errors must not erase previously valid secrets."
+    },
+    {
+      "id": "upgrade_rollback",
+      "state": "PENDING",
+      "proof": "Demonstrate rollback/recovery for non-production fixtures and document migration or incompatibility. Never downgrade live encrypted stores experimentally."
+    },
+    {
+      "id": "android_physical_gate",
+      "state": "PENDING",
+      "proof": "Verify on a physical S24 FE with disposable fixtures; APK sign/update lineage preserved. No live tokens or personal credentials."
+    },
+    {
+      "id": "desktop_platform_gates",
+      "state": "PENDING",
+      "proof": "Independently test Windows, macOS and Linux target implementations when available; do not imply all platforms pass from one Android test."
+    },
+    {
+      "id": "library_contract_and_security_review",
+      "state": "PENDING",
+      "proof": "Stable functional storage.secrets.v1 contract, Library-owned tested adapter, test report, licensed payload and independent security review before promotion."
+    }
+  ],
+  "source_control": {
+    "library_pr": "https://github.com/pilialvu75-hue/AI-Orchestrator-Module-Library/pull/128",
+    "issue": "https://github.com/pilialvu75-hue/AI-Orchestrator-Module-Library/issues/127",
+    "stage": "discovered",
+    "merge_allowed": false,
+    "certification_allowed": false
+  }
+}
