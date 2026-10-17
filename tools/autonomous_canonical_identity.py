@@ -6,6 +6,7 @@ from __future__ import annotations
 
 import re
 from tools.control_plane_manager import _review_packet_digest, _validate_review_packet
+from tools.autonomous_ci_probe import fetch_json
 
 _SHA = re.compile(r"[0-9a-f]{40}\Z")
 
@@ -54,3 +55,28 @@ def derive_canonical_receipt_identity(lane: dict, pr: dict) -> dict:
     return {"lane_id": lane_id, "state_version": version,
             "claim_id": claim["claim_id"], "packet_sha256": _review_packet_digest(packet),
             "repository": repository, "pr_number": number, "head_sha": head}
+
+
+def fetch_canonical_pr_identity(lane: dict, github_token: str) -> dict:
+    """Fetch the PR independently from GitHub, never from a worker-supplied PR body.
+
+    The lane must be loaded from the protected canonical state by the caller.
+    This function is read-only and cannot authorize completion.
+    """
+    if not isinstance(lane, dict):
+        raise ValueError("canonical lane must be an object")
+    claim = lane.get("active_claim")
+    packet = lane.get("review_packet")
+    if not isinstance(claim, dict) or not isinstance(packet, dict):
+        raise ValueError("canonical claim and packet required")
+    repository = claim.get("repository")
+    number = packet.get("pull_request")
+    if (not isinstance(repository, str)
+            or not re.fullmatch(r"[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+", repository)
+            or any(part in (".", "..") for part in repository.split("/"))
+            or type(number) is not int or number <= 0):
+        raise ValueError("invalid canonical GitHub PR locator")
+    if not isinstance(github_token, str) or not github_token.strip():
+        raise ValueError("GitHub token required")
+    pr = fetch_json(f"https://api.github.com/repos/{repository}/pulls/{number}", github_token)
+    return derive_canonical_receipt_identity(lane, pr)
