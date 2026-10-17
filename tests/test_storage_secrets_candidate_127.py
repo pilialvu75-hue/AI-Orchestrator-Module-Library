@@ -406,6 +406,52 @@ class StorageSecretsCandidate127Tests(unittest.TestCase):
             "PENDING",
         )
 
+    def test_selective_legacy_backup_policy_covers_pinned_secure_stores(self) -> None:
+        import xml.etree.ElementTree as ET
+
+        base = SOURCE / "proposal" / "android" / "res" / "xml"
+        legacy = ET.parse(base / "backup_rules.xml").getroot()
+        self.assertEqual(legacy.tag, "full-backup-content")
+        expected = {
+            "FlutterSecureStorage.xml",
+            "FlutterSecureKeyStorage.xml",
+            "FlutterSecureStorageConfiguration.xml",
+            "FlutterSecureStorageConfiguration:FlutterSecureStorage.xml",
+        }
+        self.assertEqual(
+            {(node.get("domain"), node.get("path")) for node in legacy.findall("exclude")},
+            {("sharedpref", path) for path in expected},
+        )
+        self.assertFalse(legacy.findall("include"))
+        self.assertTrue(all(path.endswith(".xml") for path in expected))
+        self.assertFalse(any(path in {".", "/", "*"} for path in expected))
+
+    def test_android12_cloud_and_transfer_have_identical_exclusions(self) -> None:
+        import xml.etree.ElementTree as ET
+
+        base = SOURCE / "proposal" / "android" / "res" / "xml"
+        old = ET.parse(base / "backup_rules.xml").getroot()
+        modern = ET.parse(base / "data_extraction_rules.xml").getroot()
+        self.assertEqual(modern.tag, "data-extraction-rules")
+        self.assertEqual(
+            {node.tag for node in modern},
+            {"cloud-backup", "device-transfer"},
+        )
+        expected = {
+            (node.get("domain"), node.get("path"))
+            for node in old.findall("exclude")
+        }
+        for channel in ("cloud-backup", "device-transfer"):
+            subtree = modern.find(channel)
+            self.assertIsNotNone(subtree)
+            self.assertFalse(subtree.findall("include"))
+            self.assertEqual(
+                {(node.get("domain"), node.get("path")) for node in subtree.findall("exclude")},
+                expected,
+            )
+        self.assertEqual(self.manifest()["status"], "discovered")
+        self.assertFalse(self.manifest()["validation"]["tests_passed"])
+
     def test_normalization_structure_is_valid_without_changing_stage(self) -> None:
         validate_normalization_gates(self.manifest(), SOURCE)
         self.assertEqual(self.manifest()["status"], "discovered")
