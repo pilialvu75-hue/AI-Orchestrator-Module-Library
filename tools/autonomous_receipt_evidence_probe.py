@@ -17,7 +17,7 @@ from tools.autonomous_receipt_binding import validate_receipt_binding
 def fetch_ci_evidence_artifact(repository: str, artifact_id: int, token: str) -> dict:
     """Read the single JSON entry in a small GitHub Actions artifact ZIP."""
     if (not isinstance(repository, str) or repository.count("/") != 1
-            or any(not part or any(c not in "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._" for c in part)
+            or any(not part or part in (".", "..") or any(c not in "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._" for c in part)
                    for part in repository.split("/"))):
         raise ValueError("invalid artifact repository")
     if type(artifact_id) is not int or artifact_id <= 0:
