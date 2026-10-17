@@ -8,6 +8,8 @@ IDENTITY = {"lane_id": "library", "state_version": 9, "claim_id": "claim",
             "packet_sha256": "b" * 64, "repository": "owner/repo",
             "pr_number": 120, "head_sha": "a" * 40}
 RUN = {"repository": "owner/repo", "head_sha": "c" * 40,
+       "run_id": 55, "run_attempt": 1,
+       "workflow_path": ".github/workflows/autonomous-ci-probe.yml",
        "authenticated": False, "completion_authorized": False}
 
 
@@ -40,6 +42,18 @@ class ReceiptEvidenceProbeTests(unittest.TestCase):
     def test_wrong_protected_run_sha_rejected(self, fetch):
         with self.assertRaises(ValueError):
             probe(IDENTITY.copy())
+
+
+    def test_rejects_wrong_run_identity(self):
+        for field, value in (("run_id", 56), ("run_attempt", 2),
+                             ("workflow_path", ".github/workflows/other.yml"),
+                             ("authenticated", True), ("completion_authorized", True)):
+            with self.subTest(field=field), patch(
+                "tools.autonomous_receipt_evidence_probe.fetch_protected_run",
+                return_value={**RUN, field: value},
+            ):
+                with self.assertRaises(ValueError):
+                    probe(IDENTITY.copy())
 
 
 if __name__ == "__main__":
