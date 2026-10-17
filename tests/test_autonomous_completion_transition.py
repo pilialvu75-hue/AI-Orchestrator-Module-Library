@@ -48,7 +48,7 @@ class AutonomousTransitionTests(unittest.TestCase):
                                   "completion_authorized": True})
 
     def test_stale_receipt_rejected(self):
-        with self.assertRaisesRegex(ValueError, "mismatch"):
+        with self.assertRaisesRegex(ValueError, "does not match canonical evidence"):
             self.invoke(receipt={**IDENTITY, "state_version": 8})
 
     def test_runtime_evidence_required(self):
