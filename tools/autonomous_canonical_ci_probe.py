@@ -47,10 +47,10 @@ def probe_canonical_lane(
     lanes = []
     base_dir = (root / ".airlab/control-plane/workstreams").resolve()
     for rel in paths:
-        if not isinstance(rel, str):
+        if not isinstance(rel, str) or not rel.startswith(".airlab/control-plane/workstreams/"):
             raise ValueError("invalid canonical workstream path")
         path = (root / rel).resolve()
-        if not path.is_relative_to(base_dir) or path.suffix != ".json":
+        if not path.is_relative_to(base_dir) or path.suffix != ".json" or path.is_symlink():
             raise ValueError("canonical workstream path escapes protected directory")
         lane = _load_object(path)
         if lane.get("id") == lane_id:
