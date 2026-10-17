@@ -369,6 +369,43 @@ class StorageSecretsCandidate127Tests(unittest.TestCase):
         self.assertNotIn("token", result.stdout.lower())
         self.assertNotIn("secret value", result.stdout.lower())
 
+    def test_real_published_apk_proof_is_pinned_but_not_device_accepted(self) -> None:
+        import re
+
+        path = SOURCE / "provenance" / "published-apk-manifest-proof.json"
+        proof = json.loads(path.read_text(encoding="utf-8"))
+        source = proof["source"]
+        observed = proof["evidence"]
+        self.assertEqual(source["release_tag"], "v1.0.12+3204")
+        self.assertEqual(source["asset_id"], 643772718)
+        self.assertEqual(source["size_bytes"], 167959098)
+        self.assertRegex(source["sha256"], r"^[0-9a-f]{64}$")
+        self.assertTrue(observed["sha256_and_size_checked"])
+        self.assertTrue(observed["merged_manifest_observed"])
+        for name in (
+            "allow_backup", "data_extraction_rules", "full_backup_content"
+        ):
+            self.assertEqual(observed[name], "NOT_DECLARED")
+        self.assertEqual(proof["restrictions"]["acceptance_state"], "EVIDENCE_INCOMPLETE")
+        for flag in (
+            "physical_backup_restore_tested",
+            "cloud_backup_policy_verified",
+            "device_to_device_transfer_policy_verified",
+            "signing_identity_verified",
+            "library_certified",
+            "apk_upgrade_authorized",
+            "secret_material_examined",
+        ):
+            self.assertFalse(proof["restrictions"][flag])
+        gates = json.loads(
+            (SOURCE / "tests" / "migration-gates.json").read_text(encoding="utf-8")
+        )
+        self.assertEqual(
+            next(item for item in gates["acceptance_gates"]
+                 if item["id"] == "android_backup_restore_isolation")["state"],
+            "PENDING",
+        )
+
     def test_normalization_structure_is_valid_without_changing_stage(self) -> None:
         validate_normalization_gates(self.manifest(), SOURCE)
         self.assertEqual(self.manifest()["status"], "discovered")
