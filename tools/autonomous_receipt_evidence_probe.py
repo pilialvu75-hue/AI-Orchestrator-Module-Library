@@ -74,6 +74,8 @@ def probe_receipt_evidence(*, receipt: dict, canonical_identity: dict,
     if (not isinstance(entries, list) or artifacts["total_count"] != len(entries)
             or artifacts["total_count"] > 100):
         raise ValueError("incomplete protected artifact listing")
+    if type(run_id) is not int or run_id <= 0 or type(run_attempt) is not int or run_attempt <= 0:
+        raise ValueError("invalid protected run identity")
     matching = [a for a in entries if isinstance(a, dict)
                 and a.get("name") == "autonomous-ci-evidence"
                 and a.get("expired") is False
