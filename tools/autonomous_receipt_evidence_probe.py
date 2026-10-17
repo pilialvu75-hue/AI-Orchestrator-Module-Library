@@ -94,7 +94,9 @@ def probe_receipt_evidence(*, receipt: dict, canonical_identity: dict,
     matching = [a for a in entries if isinstance(a, dict)
                 and a.get("name") == "autonomous-ci-evidence"
                 and a.get("expired") is False
-                and (a.get("workflow_run") or {}).get("id") == run_id]
+                and isinstance(a.get("workflow_run"), dict)
+                and type(a["workflow_run"].get("id")) is int
+                and a["workflow_run"]["id"] == run_id]
     if len(matching) != 1 or type(matching[0].get("id")) is not int or matching[0]["id"] <= 0:
         raise ValueError("missing or ambiguous protected CI artifact")
     artifact_run = matching[0]["workflow_run"]
