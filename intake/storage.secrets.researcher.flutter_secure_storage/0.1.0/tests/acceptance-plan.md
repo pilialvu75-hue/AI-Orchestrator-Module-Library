@@ -86,3 +86,19 @@ On a physically tested disposable installation, run this check **before** initia
 - `willDiscardOnNextAccess` is true, because a subsequent read/write can permanently erase data if `resetOnError` remains enabled.
 
 Even `ok/none` plus a synthetic check receipt is **not certification**; only a candidate for independent gate review. Existing app uses four persistent credential entry points, and changes must be tested under the same package identity and safe update path. Keep backup checks and migration validation separate from normal app builds until a canonical claim authorizes work.
+
+
+## Auditing an existing released APK without modifying the Android app
+
+A platform-android worker with an **authorized, separate claim** can obtain the official release APK for an exact tag/commit, install only the trusted Android SDK tools, and inspect the compiled Android manifest offline. Neither the APK nor any token needs to be uploaded to a public issue:
+
+```bash
+aapt2 dump xmltree path/to/app-release.apk AndroidManifest.xml > /tmp/aapt2-merged-manifest.txt
+python intake/storage.secrets.researcher.flutter_secure_storage/0.1.0/tests/android_backup_manifest_audit.py \
+  --aapt2-xmltree /tmp/aapt2-merged-manifest.txt \
+  --output /tmp/secrets-backup-triage.json
+```
+
+The reporter extracts only `allowBackup`, `dataExtractionRules` and `fullBackupContent` declarations and defaults to `EVIDENCE_INCOMPLETE` for **all** results, including an explicit `allowBackup=false`. A referenced extraction/backup rule **is not proof** of a correct rule: the resource contents must be inspected, including separate Android 12+ `cloud-backup` and `device-transfer` branches. Merged APK identity/signature and real restore effects are not proven by the text input. The safe report does not include secret values, tokens, or raw manifest contents.
+
+Follow [Android #849](https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/issues/849) for independent target-APK evidence. Avoid direct changes to the Android app's signing, package identity, Vulkan or secure storage code while this is a draft intake only. No acceptance status can be inferred from this static triage.
