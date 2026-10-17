@@ -37,6 +37,17 @@ class ReceiptEvidenceProbeTests(unittest.TestCase):
             probe({**IDENTITY, "claim_id": "forged"})
         fetch.assert_not_called()
 
+    @patch("tools.autonomous_receipt_evidence_probe.fetch_protected_run")
+    def test_rejects_protected_repository_mismatch_before_fetch(self, fetch):
+        with self.assertRaisesRegex(ValueError, "protected repository does not match"):
+            probe_receipt_evidence(
+                receipt=IDENTITY.copy(), canonical_identity=IDENTITY,
+                protected_repository="other/repo", run_id=55, run_attempt=1,
+                workflow_path=".github/workflows/autonomous-ci-probe.yml",
+                protected_sha="c" * 40, github_token="test-token",
+            )
+        fetch.assert_not_called()
+
     @patch("tools.autonomous_receipt_evidence_probe.fetch_protected_run",
            return_value={**RUN, "head_sha": "d" * 40})
     def test_wrong_protected_run_sha_rejected(self, fetch):
