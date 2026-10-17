@@ -57,6 +57,9 @@ def verify_pr_checks(
         app = check.get("app") or {}
         if app.get("slug") != "github-actions":
             raise ValueError(f"check {name!r} has untrusted producer")
-        verified[name] = check.get("id")
+        check_id = check.get("id")
+        if not isinstance(check_id, int) or isinstance(check_id, bool) or check_id <= 0:
+            raise ValueError(f"check {name!r} has invalid check-run ID")
+        verified[name] = check_id
     return {"repository": repository, "pr_number": pr["number"], "head_sha": expected_head_sha, "verified_checks": verified,
             "trusted_receipt": False, "completion_authorized": False}
