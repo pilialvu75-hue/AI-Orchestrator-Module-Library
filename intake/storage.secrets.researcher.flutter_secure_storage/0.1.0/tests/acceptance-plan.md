@@ -58,3 +58,17 @@ The manifest `platforms` names candidate targets for future verification, **not 
 The evidence file `tests/migration-gates.json` records the initial versions and **eight pending gates**. All test fixtures must use freshly generated disposable fake tokens, without exposing token values or hashes in logs, CI, GitHub issues or diagnostics. Do not use real credentials during exploratory migration and do not assume rollback preserves an encrypted store after a schema/cipher upgrade. 
 
 **Decision to resolve before implementation:** prefer certifying a reusable wrapper of the already operational v10.3.4 integration first, or plan a separately reviewed and physically tested 10.3.4 → 11.2.0 migration with backwards-compatible key semantics. The draft intake remains source-only and never upgrades the app on its own.
+
+## Offline migration readiness (informational fail-closed gate)
+
+The candidate includes an executable **static** gate, not a runtime test or promotion tool:
+
+```bash
+python intake/storage.secrets.researcher.flutter_secure_storage/0.1.0/tests/migration_readiness.py \
+  --manifest intake/storage.secrets.researcher.flutter_secure_storage/0.1.0/manifest.json \
+  --evidence intake/storage.secrets.researcher.flutter_secure_storage/0.1.0/tests/migration-gates.json
+```
+
+Expected current result: `BLOCKED` with eight pending migration gates. The report is safe to share because it contains only stage identifiers and version metadata, not credential contents. It does **not** fetch credentials, use network services, run Flutter, or execute untrusted upstream code.
+
+A manually edited set of all-PASS flags yields at most `INDEPENDENT_REVIEW_REQUIRED`; it cannot declare certification or authorize an APK update. The checker is bound to the pinned Researcher commit and current four-consumer baseline; any change requires refreshing upstream provenance and the application audit. This gate is specific to the draft intake proposal and **does not modify or supersede the canonical Library pipeline**.
