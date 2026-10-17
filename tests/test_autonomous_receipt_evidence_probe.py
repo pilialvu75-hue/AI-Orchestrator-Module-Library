@@ -23,6 +23,9 @@ def probe(receipt):
 
 
 class ReceiptEvidenceProbeTests(unittest.TestCase):
+    @patch("tools.autonomous_ci_probe.probe", return_value={"repository": "owner/repo", "pr_number": 120,
+        "head_sha": "a" * 40, "verified_checks": {"Validate Module Library": 7},
+        "trusted_receipt": False, "completion_authorized": False})
     @patch("tools.autonomous_receipt_evidence_probe.fetch_ci_evidence_artifact", return_value={"repository": "owner/repo", "pr_number": 120,
         "head_sha": "a" * 40, "verified_checks": {"Validate Module Library": 7},
         "protected_run_id": 55, "protected_run_attempt": 1,
@@ -33,7 +36,7 @@ class ReceiptEvidenceProbeTests(unittest.TestCase):
                                          "expired": False, "workflow_run": {"id": 55, "head_sha": "c" * 40, "head_branch": "main", "repository_id": 123, "head_repository_id": 123}}],
     })
     @patch("tools.autonomous_receipt_evidence_probe.fetch_protected_run", return_value=RUN)
-    def test_combines_read_only_evidence(self, fetch, artifacts, download):
+    def test_combines_read_only_evidence(self, fetch, artifacts, download, live_ci):
         result = probe(IDENTITY.copy())
         self.assertEqual(result["identity"], IDENTITY)
         self.assertEqual(result["artifact_id"], 42)
@@ -42,6 +45,28 @@ class ReceiptEvidenceProbeTests(unittest.TestCase):
         self.assertFalse(result["trusted_receipt"])
         self.assertFalse(result["completion_authorized"])
         fetch.assert_called_once()
+        live_ci.assert_called_once_with("owner/repo", 120, ["Validate Module Library"], "test-token")
+
+    @patch("tools.autonomous_ci_probe.probe", return_value={
+        "repository": "owner/repo", "pr_number": 120, "head_sha": "a" * 40,
+        "verified_checks": {"Validate Module Library": 999},
+        "trusted_receipt": False, "completion_authorized": False})
+    @patch("tools.autonomous_receipt_evidence_probe.fetch_ci_evidence_artifact",
+           return_value={"repository": "owner/repo", "pr_number": 120,
+                         "head_sha": "a" * 40, "verified_checks": {"Validate Module Library": 7},
+                         "protected_run_id": 55, "protected_run_attempt": 1,
+                         "protected_workflow_ref": "owner/repo/.github/workflows/autonomous-ci-probe.yml@refs/heads/main",
+                         "trusted_receipt": False, "completion_authorized": False})
+    @patch("tools.autonomous_receipt_evidence_probe.fetch_json", return_value={
+        "total_count": 1, "artifacts": [{"id": 42, "name": "autonomous-ci-evidence",
+                                       "expired": False, "workflow_run": {
+                                           "id": 55, "head_sha": "c" * 40, "head_branch": "main",
+                                           "repository_id": 123, "head_repository_id": 123}}]})
+    @patch("tools.autonomous_receipt_evidence_probe.fetch_protected_run", return_value=RUN)
+    def test_rejects_ci_artifact_check_ids_not_matching_live_github(self, run, artifacts, download, live):
+        with self.assertRaisesRegex(ValueError, "differs from independently verified live checks"):
+            probe(IDENTITY.copy())
+        live.assert_called_once_with("owner/repo", 120, ["Validate Module Library"], "test-token")
 
     @patch("tools.autonomous_receipt_evidence_probe.fetch_protected_run", return_value=RUN)
     @patch("tools.autonomous_receipt_evidence_probe.fetch_json", return_value={
