@@ -129,6 +129,19 @@ def probe_receipt_evidence(*, receipt: dict, canonical_identity: dict,
                    or type(check_id) is not int or check_id <= 0
                    for name, check_id in evidence["verified_checks"].items())):
         raise ValueError("protected CI evidence does not match canonical identity")
+    # A workflow artifact is not a completion credential. Independently
+    # re-fetch the PR/check evidence and compare its exact check-run IDs.
+    from tools.autonomous_ci_probe import probe as probe_live_ci
+    live = probe_live_ci(
+        identity["repository"], identity["pr_number"],
+        sorted(evidence["verified_checks"]), github_token,
+    )
+    if (not isinstance(live, dict)
+            or live.get("repository") != identity["repository"]
+            or live.get("pr_number") != identity["pr_number"]
+            or live.get("head_sha") != identity["head_sha"]
+            or live.get("verified_checks") != evidence["verified_checks"]):
+        raise ValueError("protected CI artifact differs from independently verified live checks")
     return {
         "ci_evidence": evidence,
         "artifact_id": matching[0]["id"],
