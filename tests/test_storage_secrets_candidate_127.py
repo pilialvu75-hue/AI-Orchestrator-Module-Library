@@ -185,6 +185,31 @@ class StorageSecretsCandidate127Tests(unittest.TestCase):
             "CREDENTIAL_CONSUMER_INVENTORY_INCOMPLETE", report["blockers"]
         )
 
+    def test_offline_checker_cli_emits_safe_machine_readable_block(self) -> None:
+        import subprocess
+
+        result = subprocess.run(
+            [
+                sys.executable,
+                str(SOURCE / "tests" / "migration_readiness.py"),
+                "--manifest",
+                str(SOURCE / "manifest.json"),
+                "--evidence",
+                str(SOURCE / "tests" / "migration-gates.json"),
+            ],
+            check=True,
+            capture_output=True,
+            text=True,
+            timeout=15,
+        )
+        report = json.loads(result.stdout)
+        self.assertEqual(report["state"], "BLOCKED")
+        self.assertFalse(report["runtime_upgrade_authorized"])
+        self.assertFalse(report["secrets_read"])
+        self.assertEqual(len(report["pending_gates"]), 8)
+        self.assertNotIn("token", result.stdout.lower())
+        self.assertNotIn("password", result.stdout.lower())
+
     def test_normalization_structure_is_valid_without_changing_stage(self) -> None:
         validate_normalization_gates(self.manifest(), SOURCE)
         self.assertEqual(self.manifest()["status"], "discovered")
