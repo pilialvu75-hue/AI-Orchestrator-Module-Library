@@ -7,8 +7,8 @@
   "activation": "active",
   "scope": "Capability needs, discovery, intake, certification, reuse/evolution and safe Researcher boundary.",
   "shared_engine_policy": "shared_or_control_plane",
-  "state_version": 5,
-  "updated_at": "2026-10-16",
+  "state_version": 6,
+  "updated_at": "2026-10-17",
   "active_claim": {
     "claim_id": "a3be2c00b7d608d2df75",
     "owner_lane": "library-researcher",
@@ -203,5 +203,15 @@
       "material": false,
       "refs": []
     }
-  }
+  },
+  "reconciliation_events": [
+    {
+      "type": "REVIEW_WAIT_OVERDUE",
+      "claim_id": "a3be2c00b7d608d2df75",
+      "work_item": "researcher-zero-discovery-reliability-20261016",
+      "lease_until": "2026-10-17T01:27:47Z",
+      "detected_at": "2026-10-17T01:33:46Z",
+      "review_required": true
+    }
+  ]
 }

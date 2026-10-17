@@ -6,8 +6,8 @@
     "owner_lane": "main-reviewer",
     "policy": "This private repository is the single coordination authority. Chats and agents are workers, not independent sources of truth."
   },
-  "updated_at": "2026-10-16",
-  "state_revision": 311,
+  "updated_at": "2026-10-17",
+  "state_revision": 312,
   "lifecycle_status": "BOOTSTRAP_ACTIVE",
   "roadmap_authority": {
     "library": ".airlab/roadmap.yaml",
@@ -80,8 +80,8 @@
     "invalid_lane_behavior": "ISOLATE_AND_SURFACE_PROJECTION_INCIDENT"
   },
   "projection": {
-    "source_digest": "1a6d8a39f71c4f0e08a37232a01b213ac6f21645caf01353348367f16c51b6b8",
-    "projected_at": "2026-10-16T16:29:53Z",
+    "source_digest": "6a1139b07c655de87a30ff748cf163bcae050d0fdcf4c6af8b63317b21d16cec",
+    "projected_at": "2026-10-17T01:33:46Z",
     "counts": {
       "BLOCKED": 2,
       "READY": 13,
@@ -346,8 +346,8 @@
         "id": "cantiere",
         "status": "REVIEW_REQUIRED",
         "activation": "active",
-        "state_version": 109,
-        "updated_at": "2026-10-16",
+        "state_version": 110,
+        "updated_at": "2026-10-17",
         "active_claim": {
           "claim_id": "0780c6a10b7fc5c768ff",
           "work_item": "issue-845-star-functional-3204",
@@ -382,8 +382,8 @@
         "id": "library-researcher",
         "status": "REVIEW_REQUIRED",
         "activation": "active",
-        "state_version": 5,
-        "updated_at": "2026-10-16",
+        "state_version": 6,
+        "updated_at": "2026-10-17",
         "active_claim": {
           "claim_id": "a3be2c00b7d608d2df75",
           "work_item": "researcher-zero-discovery-reliability-20261016",
