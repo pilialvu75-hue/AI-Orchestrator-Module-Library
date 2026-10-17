@@ -5,9 +5,6 @@ Worker-supplied JSON or a matching run ID is not authenticated evidence.
 """
 from __future__ import annotations
 
-from tools.autonomous_receipt_binding import validate_receipt_binding
-
-
 def validate_protected_run(run: dict, *, repository: str, workflow_path: str,
                            head_sha: str, run_id: int, run_attempt: int) -> dict:
     if not isinstance(run, dict):
