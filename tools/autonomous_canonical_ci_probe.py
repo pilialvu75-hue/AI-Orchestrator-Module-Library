@@ -31,7 +31,8 @@ def probe_canonical_lane(
     now: datetime | None = None,
 ) -> dict:
     """Resolve identity ONLY from protected canonical files and GitHub's API."""
-    if not isinstance(lane_id, str) or not lane_id.strip():
+    if (not isinstance(lane_id, str) or not re.fullmatch(r"[A-Za-z0-9_-]+", lane_id)
+            or len(lane_id) > 128):
         raise ValueError("canonical lane ID is required")
     if not isinstance(root, Path):
         raise ValueError("canonical snapshot root must be a Path")
