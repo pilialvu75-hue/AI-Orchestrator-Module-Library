@@ -200,7 +200,11 @@ class ReceiptEvidenceProbeTests(unittest.TestCase):
             with self.subTest(evidence=evidence), patch(
                 "tools.autonomous_receipt_evidence_probe.fetch_ci_evidence_artifact",
                 return_value=evidence,
-            ):
+            ), patch("tools.autonomous_ci_probe.probe", return_value={
+                "repository": "owner/repo", "pr_number": 120, "head_sha": "a" * 40,
+                "verified_checks": {"Validate Module Library": 7},
+                "trusted_receipt": False, "completion_authorized": False,
+            }):
                 with self.assertRaises(ValueError):
                     probe(IDENTITY.copy())
 
