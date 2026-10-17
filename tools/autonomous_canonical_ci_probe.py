@@ -89,6 +89,12 @@ def probe_canonical_lane(
             or ci.get("trusted_receipt") is not False
             or ci.get("completion_authorized") is not False):
         raise ValueError("canonical lane identity differs from live GitHub CI")
+    # Re-read the protected lane after network calls. A changed local snapshot
+    # cannot silently reuse evidence collected for an earlier claim/version.
+    refreshed = _load_object(next(path for path in ((root / rel).resolve() for rel in paths)
+                                 if _load_object(path).get("id") == lane_id))
+    if refreshed != lane:
+        raise ValueError("canonical lane changed during CI verification")
     return {**ci, "canonical_identity": identity}
 
 
