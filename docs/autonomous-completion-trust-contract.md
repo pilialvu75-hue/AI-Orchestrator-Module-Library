@@ -36,6 +36,27 @@ revalidate its bindings at the time of transaction, including unchanged PR
 head and unchanged canonical state version. A successful preflight without
 this protected handoff remains read-only and fails closed.
 
+## Receipt artifact verification requirements
+
+The protected workflow must produce a dedicated receipt artifact containing the
+canonical identity and API-verified PR/check evidence. The inbox consumer must
+retrieve the artifact through GitHub's API for the allowlisted workflow run,
+rather than accepting a worker-provided receipt body or URL. Verify the artifact
+belongs to the exact run ID and attempt, and reject expired, missing, ambiguous,
+or multiple matching artifacts. Treat an artifact name as a selector, not proof.
+
+The consumer must parse the receipt with a strict schema and size limit, compare
+all identity fields to a freshly loaded canonical lane snapshot, and independently
+re-fetch the PR head and required checks. The protected run's success alone does
+not prove that a receipt artifact was created, that its contents were validated,
+or that the canonical lane remains unchanged.
+
+Before any mutation, check the canonical state version again under the inbox
+transaction lock. A duplicate request must remain a no-op, and any missing
+receipt provenance, stale claim, changed PR head, or unresolved runtime gate
+must fail closed. No worker-supplied flag or local mock may set
+`completion_authorized` to true.
+
 ## State transition
 
 Only after trusted verification may a dedicated transaction release a live
