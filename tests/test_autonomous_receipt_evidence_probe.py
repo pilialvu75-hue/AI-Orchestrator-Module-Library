@@ -30,7 +30,7 @@ class ReceiptEvidenceProbeTests(unittest.TestCase):
         "trusted_receipt": False, "completion_authorized": False})
     @patch("tools.autonomous_receipt_evidence_probe.fetch_json", return_value={
         "total_count": 1, "artifacts": [{"id": 42, "name": "autonomous-ci-evidence",
-                                         "expired": False, "workflow_run": {"id": 55}}],
+                                         "expired": False, "workflow_run": {"id": 55, "head_sha": "c" * 40, "head_branch": "main", "repository_id": 123, "head_repository_id": 123}}],
     })
     @patch("tools.autonomous_receipt_evidence_probe.fetch_protected_run", return_value=RUN)
     def test_combines_read_only_evidence(self, fetch, artifacts, download):
@@ -70,7 +70,7 @@ class ReceiptEvidenceProbeTests(unittest.TestCase):
     @patch("tools.autonomous_receipt_evidence_probe.fetch_protected_run", return_value=RUN)
     def test_rejects_missing_expired_duplicate_or_wrong_run_artifact(self, fetch):
         valid = {"id": 42, "name": "autonomous-ci-evidence",
-                 "expired": False, "workflow_run": {"id": 55}}
+                 "expired": False, "workflow_run": {"id": 55, "head_sha": "c" * 40, "head_branch": "main", "repository_id": 123, "head_repository_id": 123}}
         cases = (
             [],
             [{**valid, "expired": True}],
@@ -89,7 +89,7 @@ class ReceiptEvidenceProbeTests(unittest.TestCase):
     @patch("tools.autonomous_receipt_evidence_probe.fetch_protected_run", return_value=RUN)
     @patch("tools.autonomous_receipt_evidence_probe.fetch_json", return_value={
         "total_count": 1, "artifacts": [{"id": 42, "name": "autonomous-ci-evidence",
-                                        "expired": False, "workflow_run": {"id": 55}}],
+                                        "expired": False, "workflow_run": {"id": 55, "head_sha": "c" * 40, "head_branch": "main", "repository_id": 123, "head_repository_id": 123}}],
     })
     def test_rejects_forged_or_incomplete_ci_evidence(self, artifacts, run):
         valid = {"repository": "owner/repo", "pr_number": 120,
@@ -120,7 +120,7 @@ class ReceiptEvidenceProbeTests(unittest.TestCase):
     @patch("tools.autonomous_receipt_evidence_probe.fetch_protected_run", return_value=RUN)
     @patch("tools.autonomous_receipt_evidence_probe.fetch_json", return_value={
         "total_count": 1, "artifacts": [{"id": 42, "name": "autonomous-ci-evidence",
-                                        "expired": False, "workflow_run": {"id": 55}}],
+                                        "expired": False, "workflow_run": {"id": 55, "head_sha": "c" * 40, "head_branch": "main", "repository_id": 123, "head_repository_id": 123}}],
     })
     def test_rejects_unexpected_evidence_fields(self, artifacts, run):
         evidence = {"repository": "owner/repo", "pr_number": 120,
@@ -137,7 +137,7 @@ class ReceiptEvidenceProbeTests(unittest.TestCase):
     @patch("tools.autonomous_receipt_evidence_probe.fetch_protected_run", return_value=RUN)
     @patch("tools.autonomous_receipt_evidence_probe.fetch_json", return_value={
         "total_count": 1, "artifacts": [{"id": 42, "name": "autonomous-ci-evidence",
-                                        "expired": False, "workflow_run": {"id": 55}}],
+                                        "expired": False, "workflow_run": {"id": 55, "head_sha": "c" * 40, "head_branch": "main", "repository_id": 123, "head_repository_id": 123}}],
     })
     def test_rejects_forged_protected_attempt_or_workflow_ref(self, artifacts, run):
         valid = {"repository": "owner/repo", "pr_number": 120,
