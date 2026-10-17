@@ -27,6 +27,7 @@ OPERATIONS = {
     "release",
     "submit_review",
     "autonomous_completion_preflight",
+    "autonomous_complete",
     "record_review_gates",
     "review_accept",
     "review_rework",
@@ -322,6 +323,8 @@ def _apply(
         if payload["claim_id"] != result["claim_id"] or payload["packet_sha256"] != result["packet_sha256"]:
             raise ValueError("autonomous preflight request is stale or mismatched")
         # Read-only by design: no claim release or reviewer approval.
+    elif operation == "autonomous_complete":
+        raise ValueError("autonomous completion requires authenticated protected receipt and is not enabled")
     elif operation == "record_review_gates":
         _record_review_gates(root, lane_id, payload, now)
     elif operation == "review_accept":
@@ -421,6 +424,8 @@ def process_one(path: Path, *, root: Path = ROOT, now: datetime | None = None) -
             )
             if not worker_chat and not authorized_worker_automation:
                 raise ValueError("autonomous preflight requires authorized target worker identity")
+        if operation == "autonomous_complete":
+            raise ValueError("autonomous completion is disabled until trusted receipt authorization is implemented")
         if operation == "record_review_gates":
             actor_id = str(request.get("actor_id"))
             automation_reviewer = (
