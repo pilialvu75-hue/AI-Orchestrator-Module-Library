@@ -17,7 +17,14 @@ def probe_receipt_evidence(*, receipt: dict, canonical_identity: dict,
         protected_repository, run_id, run_attempt, workflow_path,
         protected_sha, github_token,
     )
-    if run["repository"] != protected_repository or run["head_sha"] != protected_sha:
+    if (not isinstance(run, dict)
+            or run.get("repository") != protected_repository
+            or run.get("head_sha") != protected_sha
+            or run.get("run_id") != run_id
+            or run.get("run_attempt") != run_attempt
+            or run.get("workflow_path") != workflow_path
+            or run.get("authenticated") is not False
+            or run.get("completion_authorized") is not False):
         raise ValueError("protected run metadata mismatch")
     return {
         "identity": identity,
