@@ -33,7 +33,9 @@ def _attribute_values(xmltree: str) -> dict[str, str]:
         if not inside:
             continue
         level = len(line) - len(line.lstrip())
-        if line.lstrip().startswith("E:") and level <= app_indent:
+        # aapt2 prints direct app attributes before its nested E: children.
+        # Never confuse an activity/service attribute with app-level policy.
+        if line.lstrip().startswith("E:"):
             break
         # Only immediate app attributes are trusted; nested attrs cannot count.
         if level <= app_indent or line.lstrip().startswith("E:"):
