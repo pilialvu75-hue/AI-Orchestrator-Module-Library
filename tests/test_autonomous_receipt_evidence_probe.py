@@ -60,6 +60,25 @@ class ReceiptEvidenceProbeTests(unittest.TestCase):
             probe(IDENTITY.copy())
 
 
+    @patch("tools.autonomous_receipt_evidence_probe.fetch_protected_run", return_value=RUN)
+    def test_rejects_missing_expired_duplicate_or_wrong_run_artifact(self, fetch):
+        valid = {"id": 42, "name": "autonomous-ci-evidence",
+                 "expired": False, "workflow_run": {"id": 55}}
+        cases = (
+            [],
+            [{**valid, "expired": True}],
+            [valid, {**valid, "id": 43}],
+            [{**valid, "workflow_run": {"id": 56}}],
+            [{**valid, "id": True}],
+        )
+        for artifacts in cases:
+            with self.subTest(artifacts=artifacts), patch(
+                "tools.autonomous_receipt_evidence_probe.fetch_json",
+                return_value={"total_count": len(artifacts), "artifacts": artifacts},
+            ):
+                with self.assertRaises(ValueError):
+                    probe(IDENTITY.copy())
+
     def test_rejects_wrong_run_identity(self):
         for field, value in (("run_id", 56), ("run_attempt", 2),
                              ("workflow_path", ".github/workflows/other.yml"),
