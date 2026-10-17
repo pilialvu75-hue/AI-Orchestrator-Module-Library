@@ -53,6 +53,16 @@
       "proof": "Verify legacy v10 encrypted data has migrated before v11. Old algorithms removed in v11. Stop if unresolved."
     },
     {
+      "id": "android_upgrade_status_pre_read",
+      "state": "PENDING",
+      "proof": "Use pinned v11.2.0 checkUpgradeStatus() BEFORE initializing CloudCredentialStore/Workshop/GitHub/Diagnostics; on disposable fixture data record only state/reason/entryCount/willDiscardOnNextAccess and platform receipt (no secrets). ok+none is only a candidate for independent review; legacyDataUnreadable, legacyDataDiscarded, unknown and ok+unsupportedPlatform stop; never auto-read when willDiscardOnNextAccess is true."
+    },
+    {
+      "id": "android_backup_restore_isolation",
+      "state": "PENDING",
+      "proof": "Inspect APK merged AndroidManifest.xml and effective dataExtractionRules/fullBackupContent for cloud/device transfer, then exercise backup/restore with synthetic secrets. Ensure encrypted preferences cannot be restored without associated Android Keystore material. Track Android issue #849; no production data or app configuration modifications in this intake."
+    },
+    {
       "id": "non_destructive_restore",
       "state": "PENDING",
       "proof": "After update to v11.2.0 in a disposable fixture installation, verify all four consumers can read matching fixture values and delete/update them; no auto-reset or silent loss."
@@ -88,6 +98,16 @@
     "issue": "https://github.com/pilialvu75-hue/AI-Orchestrator-Module-Library/issues/127",
     "stage": "discovered",
     "merge_allowed": false,
-    "certification_allowed": false
+    "certification_allowed": false,
+    "android_issue": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/issues/849"
+  },
+  "android_upgrade_probe": {
+    "state": "NOT_RUN",
+    "reason": "NOT_RUN",
+    "entry_count": null,
+    "will_discard_on_next_access": null,
+    "performed_before_first_read": false,
+    "source": "NO_DEVICE_RECEIPT",
+    "device_receipt": null
   }
 }
