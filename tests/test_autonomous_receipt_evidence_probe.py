@@ -68,6 +68,30 @@ class ReceiptEvidenceProbeTests(unittest.TestCase):
 
 
     @patch("tools.autonomous_receipt_evidence_probe.fetch_protected_run", return_value=RUN)
+    def test_rejects_wrong_artifact_repository_or_branch_metadata(self, run):
+        valid = {"id": 42, "name": "autonomous-ci-evidence", "expired": False,
+                 "workflow_run": {"id": 55, "head_sha": "c" * 40,
+                                  "head_branch": "main", "repository_id": 123,
+                                  "head_repository_id": 123}}
+        cases = (
+            {"head_sha": "d" * 40},
+            {"head_branch": "feature"},
+            {"repository_id": True},
+            {"repository_id": 0},
+            {"head_repository_id": 999},
+            {"head_repository_id": True},
+        )
+        for changes in cases:
+            bad = {**valid, "workflow_run": {**valid["workflow_run"], **changes}}
+            with self.subTest(changes=changes), patch(
+                "tools.autonomous_receipt_evidence_probe.fetch_json",
+                return_value={"total_count": 1, "artifacts": [bad]},
+            ), patch("tools.autonomous_receipt_evidence_probe.fetch_ci_evidence_artifact") as download:
+                with self.assertRaises(ValueError):
+                    probe(IDENTITY.copy())
+                download.assert_not_called()
+
+    @patch("tools.autonomous_receipt_evidence_probe.fetch_protected_run", return_value=RUN)
     def test_rejects_missing_expired_duplicate_or_wrong_run_artifact(self, fetch):
         valid = {"id": 42, "name": "autonomous-ci-evidence",
                  "expired": False, "workflow_run": {"id": 55, "head_sha": "c" * 40, "head_branch": "main", "repository_id": 123, "head_repository_id": 123}}
