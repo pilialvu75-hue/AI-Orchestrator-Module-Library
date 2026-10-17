@@ -23,7 +23,9 @@ def probe(receipt):
 
 
 class ReceiptEvidenceProbeTests(unittest.TestCase):
-    @patch("tools.autonomous_receipt_evidence_probe.fetch_ci_evidence_artifact", return_value={"verified": True})
+    @patch("tools.autonomous_receipt_evidence_probe.fetch_ci_evidence_artifact", return_value={"repository": "owner/repo", "pr_number": 120,
+        "head_sha": "a" * 40, "verified_checks": {"Validate Module Library": 7},
+        "trusted_receipt": False, "completion_authorized": False})
     @patch("tools.autonomous_receipt_evidence_probe.fetch_json", return_value={
         "total_count": 1, "artifacts": [{"id": 42, "name": "autonomous-ci-evidence",
                                          "expired": False, "workflow_run": {"id": 55}}],
@@ -33,7 +35,7 @@ class ReceiptEvidenceProbeTests(unittest.TestCase):
         result = probe(IDENTITY.copy())
         self.assertEqual(result["identity"], IDENTITY)
         self.assertEqual(result["artifact_id"], 42)
-        self.assertEqual(result["ci_evidence"], {"verified": True})
+        self.assertEqual(result["ci_evidence"]["head_sha"], IDENTITY["head_sha"])
         download.assert_called_once_with("owner/repo", 42, "test-token")
         self.assertFalse(result["trusted_receipt"])
         self.assertFalse(result["completion_authorized"])
