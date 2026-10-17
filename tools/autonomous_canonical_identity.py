@@ -36,6 +36,8 @@ def derive_canonical_receipt_identity(lane: dict, pr: dict) -> dict:
     head = (pr.get("head") or {}).get("sha")
     if not isinstance(head, str) or not _SHA.fullmatch(head):
         raise ValueError("invalid API PR head SHA")
+    if (pr.get("head") or {}).get("repo", {}).get("full_name") != repository:
+        raise ValueError("PR head repository must match canonical repository")
     if pr.get("state") != "open":
         raise ValueError("PR must be open")
     return {"lane_id": lane_id, "state_version": version,
