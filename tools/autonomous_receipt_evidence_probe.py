@@ -81,6 +81,18 @@ def probe_receipt_evidence(*, receipt: dict, canonical_identity: dict,
     if len(matching) != 1 or type(matching[0].get("id")) is not int or matching[0]["id"] <= 0:
         raise ValueError("missing or ambiguous protected CI artifact")
     evidence = fetch_ci_evidence_artifact(protected_repository, matching[0]["id"], github_token)
+    if (evidence.get("repository") != identity["repository"]
+            or type(evidence.get("pr_number")) is not int
+            or evidence["pr_number"] != identity["pr_number"]
+            or evidence.get("head_sha") != identity["head_sha"]
+            or evidence.get("trusted_receipt") is not False
+            or evidence.get("completion_authorized") is not False
+            or not isinstance(evidence.get("verified_checks"), dict)
+            or not evidence["verified_checks"]
+            or any(not isinstance(name, str) or not name.strip()
+                   or type(check_id) is not int or check_id <= 0
+                   for name, check_id in evidence["verified_checks"].items())):
+        raise ValueError("protected CI evidence does not match canonical identity")
     return {
         "ci_evidence": evidence,
         "artifact_id": matching[0]["id"],
