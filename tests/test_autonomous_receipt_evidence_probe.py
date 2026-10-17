@@ -43,6 +43,18 @@ class ReceiptEvidenceProbeTests(unittest.TestCase):
         self.assertFalse(result["completion_authorized"])
         fetch.assert_called_once()
 
+    @patch("tools.autonomous_receipt_evidence_probe.fetch_protected_run", return_value=RUN)
+    @patch("tools.autonomous_receipt_evidence_probe.fetch_json", return_value={
+        "total_count": 1, "artifacts": [{"id": 42, "name": "autonomous-ci-evidence",
+                                         "expired": False, "workflow_run": {
+                                             "id": 55, "head_sha": "c" * 40,
+                                             "head_branch": "main", "repository_id": 123,
+                                             "head_repository_id": 123}}]})
+    @patch("tools.autonomous_receipt_evidence_probe.fetch_ci_evidence_artifact", return_value=[])
+    def test_rejects_non_object_artifact_json(self, download, artifacts, run):
+        with self.assertRaisesRegex(ValueError, "protected CI evidence does not match"):
+            probe(IDENTITY.copy())
+
     @patch("tools.autonomous_receipt_evidence_probe.fetch_protected_run")
     def test_forged_receipt_rejected_before_api_fetch(self, fetch):
         with self.assertRaises(ValueError):
