@@ -34,7 +34,7 @@ def derive_canonical_receipt_identity(lane: dict, pr: dict) -> dict:
     if not isinstance(base, dict) or not isinstance(base.get("repo"), dict):
         raise ValueError("invalid API PR base repository metadata")
     base_repo = base["repo"]
-    if not isinstance(repository, str) or base_repo.get("full_name") != repository:
+    if not isinstance(repository, str) or not repository.strip() or base_repo.get("full_name") != repository:
         raise ValueError("API PR repository does not match canonical claim")
     head_data = pr.get("head")
     if not isinstance(head_data, dict):
@@ -47,6 +47,8 @@ def derive_canonical_receipt_identity(lane: dict, pr: dict) -> dict:
         raise ValueError("PR head repository must match canonical repository")
     if base.get("ref") != "main":
         raise ValueError("PR must target canonical main branch")
+    if pr.get("draft") is True:
+        raise ValueError("draft PR is not eligible for canonical completion")
     if pr.get("state") != "open":
         raise ValueError("PR must be open")
     return {"lane_id": lane_id, "state_version": version,
