@@ -82,7 +82,8 @@ def probe_receipt_evidence(*, receipt: dict, canonical_identity: dict,
     if not isinstance(artifacts, dict) or type(artifacts.get("total_count")) is not int:
         raise ValueError("invalid protected artifact response")
     entries = artifacts.get("artifacts")
-    if (not isinstance(entries, list) or artifacts["total_count"] != len(entries)
+    if (not isinstance(entries, list) or artifacts["total_count"] < 0
+            or artifacts["total_count"] != len(entries)
             or artifacts["total_count"] > 100):
         raise ValueError("incomplete protected artifact listing")
     if type(run_id) is not int or run_id <= 0 or type(run_attempt) is not int or run_attempt <= 0:
