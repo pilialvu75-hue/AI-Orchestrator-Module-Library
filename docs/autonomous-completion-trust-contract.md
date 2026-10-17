@@ -81,6 +81,46 @@ a dedicated completion-authority receipt, the inbox compare-and-swap mutation,
 and a coherent replacement for the historical G6 reviewer rule. Never treat
 `canonical_identity` or this artifact alone as approval.
 
+## Independent Library CI gate audit (PR #120, inactive)
+
+The protected `workflow_dispatch` probe now has explicit read-only
+`actions: read` permission and pins the **Library** job check to
+`validate`; the caller cannot choose a weaker check. The workflow emits an
+`independent_gate_audit` alongside `canonical_identity`.
+
+`tools/autonomous_independent_gates.py` independently queries GitHub for:
+
+- The exact PR-head `validate-library.yml` blob, which must match the
+  protected default-branch checkout (any changed PR-side workflow is refused).
+- Successful `pull_request` workflow runs for that head and the exact
+  `validate` check-run URL.
+- Every required successful job step: control-plane, library contracts,
+  history, lifecycle, unit tests, offline export, and snapshot validation.
+  Skipped, missing, duplicate, failed or ambiguous job evidence is refused.
+
+The consumer re-runs the same audit from its protected checkout and compares
+the resulting report byte-for-byte at the JSON-value level with the artifact.
+An audit mismatch fails closed. A full green CI proves only the checks it ran,
+not that a generated module is correct at runtime or independently reviewed.
+
+| Gate | Read-only audit status |
+| --- | --- |
+| G0 claim | Canonical claim and lease checked by producer |
+| G1 implementation | **Pending independent implementation review** |
+| G2 static | Verified CI pipeline steps, not unrestricted code approval |
+| G3 CI | Exact-head successful validation check |
+| G4 integration | CI contract checks observed; **independent integration review pending** |
+| G5 runtime | **Applicability and target evidence unresolved** |
+| G6 / completion | **Never automatically approved** |
+
+This first gate audit is intentionally limited to
+`pilialvu75-hue/AI-Orchestrator-Module-Library`. The other worker repos have
+different workflows and must obtain separate allowlisted gate profiles.
+The audit uses the protected checkout's trusted workflow as an input; it must
+only be executed from a verified protected default-branch context. Adding
+`independent_gate_audit` does not change the existing autonomous-completion
+fail-closed policy, transactional inbox operation, or canonical G6 state rules.
+
 ## State transition
 
 Only after trusted verification may a dedicated transaction release a live
