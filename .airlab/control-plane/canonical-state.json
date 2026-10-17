@@ -7,7 +7,7 @@
     "policy": "This private repository is the single coordination authority. Chats and agents are workers, not independent sources of truth."
   },
   "updated_at": "2026-10-17",
-  "state_revision": 314,
+  "state_revision": 315,
   "lifecycle_status": "BOOTSTRAP_ACTIVE",
   "roadmap_authority": {
     "library": ".airlab/roadmap.yaml",
@@ -80,8 +80,8 @@
     "invalid_lane_behavior": "ISOLATE_AND_SURFACE_PROJECTION_INCIDENT"
   },
   "projection": {
-    "source_digest": "539132135f234eee35b2de9b3137761f1ca2bcaea61cef61a9986195140ef469",
-    "projected_at": "2026-10-17T13:26:04Z",
+    "source_digest": "7b432e9dacdc602d59f19dbbf221ae21ec4a91966a739a91de994666476dfc26",
+    "projected_at": "2026-10-17T13:38:08Z",
     "counts": {
       "BLOCKED": 2,
       "IMPLEMENTING": 1,
@@ -121,7 +121,7 @@
         "claim_id": "394d8d0d738e8b921f03",
         "work_item": "issue-849-android-selective-backup-exclusions",
         "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
-        "lease_until": "2026-10-18T01:26:04Z",
+        "lease_until": "2026-10-18T01:38:08Z",
         "resource_locks": [
           "branch:pilialvu75-hue/Ai-orchestrator-riserva:fix/android-849-selective-backup-20261017",
           "file:pilialvu75-hue/Ai-orchestrator-riserva:android/app/src/main/AndroidManifest.xml",
@@ -462,13 +462,13 @@
         "id": "platform-android",
         "status": "IMPLEMENTING",
         "activation": "active",
-        "state_version": 21,
+        "state_version": 22,
         "updated_at": "2026-10-17",
         "active_claim": {
           "claim_id": "394d8d0d738e8b921f03",
           "work_item": "issue-849-android-selective-backup-exclusions",
           "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
-          "lease_until": "2026-10-18T01:26:04Z",
+          "lease_until": "2026-10-18T01:38:08Z",
           "resource_locks": [
             "branch:pilialvu75-hue/Ai-orchestrator-riserva:fix/android-849-selective-backup-20261017",
             "file:pilialvu75-hue/Ai-orchestrator-riserva:android/app/src/main/AndroidManifest.xml",
@@ -480,7 +480,7 @@
         "reviewer_state": "PENDING",
         "inference_profile_status": "ACTIVE_BENCHMARKING",
         "historical_backlog_count": 3,
-        "next_action": "Inspect Android CI for exact PR #852 head; verify packaged merged manifest and compiled backup policy XML; submit reviewer packet only with verified G1-G4 evidence, keep physical S24 FE fixture restore open and plugin v10->v11 upgrade excluded."
+        "next_action": "When Build & Release APK 39036462941 finishes, obtain its exact-head signed APK and verify compiled merged manifest plus backup_rules/data_extraction_rules resources; record hash and G4 evidence; leave G5 physical restore and independent G6 review open. Do not initiate duplicate costly builds while this run is active."
       },
       {
         "id": "platform-ios",

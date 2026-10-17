@@ -7,7 +7,7 @@
   "activation": "active",
   "scope": "Android packaging, permissions, hardware/runtime adapters, UI integration and releases using shared orchestration/contracts with target-optimized inference.",
   "shared_engine_policy": "adapter_only",
-  "state_version": 21,
+  "state_version": 22,
   "updated_at": "2026-10-17",
   "active_claim": {
     "claim_id": "394d8d0d738e8b921f03",
@@ -24,8 +24,8 @@
       "resource:android-issue-849-backup-policy"
     ],
     "started_at": "2026-10-17T13:21:33Z",
-    "heartbeat_at": "2026-10-17T13:26:04Z",
-    "lease_until": "2026-10-18T01:26:04Z",
+    "heartbeat_at": "2026-10-17T13:38:08Z",
+    "lease_until": "2026-10-18T01:38:08Z",
     "lease_hours": 12
   },
   "dependencies": [],
@@ -50,7 +50,7 @@
     "reviewed_by": null,
     "reviewed_at": null
   },
-  "next_action": "Inspect Android CI for exact PR #852 head; verify packaged merged manifest and compiled backup policy XML; submit reviewer packet only with verified G1-G4 evidence, keep physical S24 FE fixture restore open and plugin v10->v11 upgrade excluded.",
+  "next_action": "When Build & Release APK 39036462941 finishes, obtain its exact-head signed APK and verify compiled merged manifest plus backup_rules/data_extraction_rules resources; record hash and G4 evidence; leave G5 physical restore and independent G6 review open. Do not initiate duplicate costly builds while this run is active.",
   "inference_profile_policy": "target_owned_benchmark_gated",
   "inference_profile": {
     "status": "ACTIVE_BENCHMARKING",
@@ -250,25 +250,45 @@
         "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/39036463019"
       ],
       "next_action": "Inspect Android CI for exact PR #852 head; verify packaged merged manifest and compiled backup policy XML; submit reviewer packet only with verified G1-G4 evidence, keep physical S24 FE fixture restore open and plugin v10->v11 upgrade excluded."
+    },
+    {
+      "seq": 11,
+      "at": "2026-10-17T13:38:08Z",
+      "claim_id": "394d8d0d738e8b921f03",
+      "work_item": "issue-849-android-selective-backup-exclusions",
+      "summary": "PR #852 head 407d1d2753edbc08d5d6484bbe3052b85388f9fe: focused policy CI 39036463019 PASS (4 regressions plus aapt2 compile); Web Cantiere 39036462946 PASS; Windows 39036463029 PASS. Build & Release APK 39036462941 still in progress during signed APK compile with no artifact yet; no fabricated build or device outcome.",
+      "decisions": [
+        "Preserve head SHA while the signed APK build remains active to avoid re-running costly Actions.",
+        "No runtime acceptance or 10.3.4 -> 11.2.0 migration from static XML tests; physical S24 FE disposable-token restore remains open."
+      ],
+      "evidence_refs": [
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/852",
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/39036463019",
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/39036462946",
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/39036463029",
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/39036462941"
+      ],
+      "next_action": "When Build & Release APK 39036462941 finishes, obtain its exact-head signed APK and verify compiled merged manifest plus backup_rules/data_extraction_rules resources; record hash and G4 evidence; leave G5 physical restore and independent G6 review open. Do not initiate duplicate costly builds while this run is active."
     }
   ],
   "last_checkpoint": {
-    "seq": 10,
-    "at": "2026-10-17T13:26:04Z",
+    "seq": 11,
+    "at": "2026-10-17T13:38:08Z",
     "claim_id": "394d8d0d738e8b921f03",
     "work_item": "issue-849-android-selective-backup-exclusions",
-    "summary": "Claimed Android issue #849 and implemented selective FlutterSecureStorage default SharedPreferences exclusions on PR #852 head 407d1d2753edbc08d5d6484bbe3052b85388f9fe. Manifest references separate legacy/cloud/D2D policies; static fail-closed tests and aapt2 compile CI PASS. Android release build and physical restore are not yet complete.",
+    "summary": "PR #852 head 407d1d2753edbc08d5d6484bbe3052b85388f9fe: focused policy CI 39036463019 PASS (4 regressions plus aapt2 compile); Web Cantiere 39036462946 PASS; Windows 39036463029 PASS. Build & Release APK 39036462941 still in progress during signed APK compile with no artifact yet; no fabricated build or device outcome.",
     "decisions": [
-      "Only backup policy XML and regression tests; preserve other data backups and do not globally set allowBackup=false.",
-      "No flutter_secure_storage version bump, Vulkan/llama/RAM/trim15, signing or production app changes. No merge or runtime PASS inferred from CI.",
-      "Existing Library PR #120 untouched; Library intake PR #128 remains separate and draft."
+      "Preserve head SHA while the signed APK build remains active to avoid re-running costly Actions.",
+      "No runtime acceptance or 10.3.4 -> 11.2.0 migration from static XML tests; physical S24 FE disposable-token restore remains open."
     ],
     "evidence_refs": [
-      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/issues/849",
       "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/852",
-      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/39036463019"
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/39036463019",
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/39036462946",
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/39036463029",
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/39036462941"
     ],
-    "next_action": "Inspect Android CI for exact PR #852 head; verify packaged merged manifest and compiled backup policy XML; submit reviewer packet only with verified G1-G4 evidence, keep physical S24 FE fixture restore open and plugin v10->v11 upgrade excluded."
+    "next_action": "When Build & Release APK 39036462941 finishes, obtain its exact-head signed APK and verify compiled merged manifest plus backup_rules/data_extraction_rules resources; record hash and G4 evidence; leave G5 physical restore and independent G6 review open. Do not initiate duplicate costly builds while this run is active."
   },
   "reconciliation_events": [
     {
