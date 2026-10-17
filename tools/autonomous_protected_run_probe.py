@@ -22,6 +22,8 @@ def fetch_protected_run(repository: str, run_id: int, run_attempt: int,
         raise ValueError("invalid run ID")
     if type(run_attempt) is not int or run_attempt <= 0:
         raise ValueError("invalid run attempt")
+    if workflow_path != _ALLOWED_WORKFLOW:
+        raise ValueError("protected workflow is not allowlisted")
     if not isinstance(protected_sha, str) or not _SHA.fullmatch(protected_sha):
         raise ValueError("invalid protected SHA")
     if not isinstance(token, str) or not token.strip():
