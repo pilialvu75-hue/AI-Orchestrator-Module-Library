@@ -45,7 +45,10 @@ def fetch_ci_evidence_artifact(repository: str, artifact_id: int, token: str) ->
                 raise ValueError("encrypted or directory artifact entry rejected")
             if files[0].file_size > 65536:
                 raise ValueError("protected evidence JSON exceeds size limit")
-            payload = archive.read(files[0])
+            with archive.open(files[0]) as entry:
+                payload = entry.read(65537)
+            if len(payload) > 65536:
+                raise ValueError("protected evidence decompression exceeds size limit")
         result = json.loads(payload)
     except (zipfile.BadZipFile, UnicodeError, json.JSONDecodeError, RuntimeError) as exc:
         raise ValueError("invalid protected evidence artifact") from exc
