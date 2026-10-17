@@ -1,0 +1,99 @@
+name: Inspect Released Android Backup Manifest
+
+on:
+  pull_request:
+    paths:
+      - '.github/workflows/inspect-released-android-manifest.yml'
+      - 'intake/storage.secrets.researcher.flutter_secure_storage/0.1.0/tests/android_backup_manifest_audit.py'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  inspect-pinned-apk:
+    if: github.event_name == 'workflow_dispatch' || github.event.pull_request.head.repo.full_name == github.repository
+    runs-on: ubuntu-24.04
+    timeout-minutes: 16
+    env:
+      APK_RELEASE_TAG: 'v1.0.12+3204'
+      APK_ASSET_ID: '643772718'
+      APK_SIZE: '167959098'
+      APK_SHA256: '551fa971087bbacf1848e8d17fb68599166a664a1cf0d60991038708a6b43073'
+      APK_URL: 'https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/releases/download/v1.0.12%2B3204/app-release.apk'
+      AUDIT: 'intake/storage.secrets.researcher.flutter_secure_storage/0.1.0/tests/android_backup_manifest_audit.py'
+    steps:
+      - name: Checkout only the Library proposal
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+
+      - name: Download the published APK and verify its release digest
+        run: |
+          set -euo pipefail
+          apk="${RUNNER_TEMP}/published-android.apk"
+          curl --fail --silent --show-error --location --retry 2 --max-time 360 \
+            --output "$apk" "$APK_URL"
+          test "$(stat -c '%s' "$apk")" = "$APK_SIZE"
+          printf '%s  %s\n' "$APK_SHA256" "$apk" | sha256sum --check --status
+          echo 'Exact pinned release APK digest and size verified.'
+
+      - name: Find a trusted Android SDK aapt2 binary
+        run: |
+          set -euo pipefail
+          sdk="${ANDROID_SDK_ROOT:-${ANDROID_HOME:-/usr/local/lib/android/sdk}}"
+          tool="$(find "$sdk/build-tools" -mindepth 2 -maxdepth 2 -type f -name aapt2 | sort -V | tail -n 1 || true)"
+          if [ -z "$tool" ]; then
+            echo '::error::Android SDK build-tools aapt2 missing on runner'
+            exit 1
+          fi
+          echo "AAPT2=$tool" >> "$GITHUB_ENV"
+
+      - name: Inspect compiled AndroidManifest without running APK
+        run: |
+          set -euo pipefail
+          "$AAPT2" dump xmltree "${RUNNER_TEMP}/published-android.apk" AndroidManifest.xml \
+            > "${RUNNER_TEMP}/merged-xmltree.txt"
+          python "$AUDIT" \
+            --aapt2-xmltree "${RUNNER_TEMP}/merged-xmltree.txt" \
+            --output "${RUNNER_TEMP}/backup-manifest-triage.json"
+          python - <<'PY'
+          import json
+          import os
+          from pathlib import Path
+
+          artifact = Path(os.environ['RUNNER_TEMP']) / 'backup-manifest-triage.json'
+          report = json.loads(artifact.read_text(encoding='utf-8'))
+          report.update({
+              'release_tag': os.environ['APK_RELEASE_TAG'],
+              'release_asset_id': int(os.environ['APK_ASSET_ID']),
+              'release_apk_size_bytes': int(os.environ['APK_SIZE']),
+              'release_apk_sha256': os.environ['APK_SHA256'],
+              'pinned_release_digest_checked': True,
+              'runtime_or_restore_test_performed': False,
+              'can_promote_module': False,
+          })
+          artifact.write_text(json.dumps(report, indent=2, sort_keys=True) + '\n', encoding='utf-8')
+          summary = Path(os.environ['GITHUB_STEP_SUMMARY'])
+          with summary.open('a', encoding='utf-8') as f:
+              f.write('## Read-only released Android APK backup triage\n')
+              f.write(f"- Release: `{report['release_tag']}`; SHA-256 verified\n")
+              f.write(f"- APK merged manifest observed: `{report['merged_manifest_observed']}`\n")
+              for key in ('allow_backup', 'data_extraction_rules', 'full_backup_content'):
+                  f.write(f"- {key}: `{report[key]}`\n")
+              f.write('- **EVIDENCE_INCOMPLETE**: effective XML rules, physical restore, and secret migration not tested.\n')
+          PY
+
+      - name: Publish bounded, non-sensitive metadata only
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: released-apk-backup-manifest-triage-${{ github.run_id }}
+          path: ${{ runner.temp }}/backup-manifest-triage.json
+          if-no-files-found: warn
+          retention-days: 14
+
+      - name: Remove local APK and raw manifest
+        if: always()
+        run: |
+          rm -f "${RUNNER_TEMP}/published-android.apk" "${RUNNER_TEMP}/merged-xmltree.txt"
