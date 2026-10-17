@@ -17,6 +17,25 @@ repository, PR number and head SHA. Record a trusted result through the
 protected reconciliation process, not through a worker-editable field.
 Use an idempotent request ID and enforce expected_state_version.
 
+## Protected receipt handoff (required before activation)
+
+The read-only CI probe output is **not** a trusted completion receipt. The
+protected verifier must additionally obtain the canonical lane snapshot and
+bind `lane_id`, exact `state_version`, live `claim_id`, and canonical
+`packet_sha256` to the GitHub API-verified `repository`, `pr_number`, and
+`head_sha`. The verifier must check the required gates and target-runtime
+applicability against trusted evidence rather than worker-authored PASS flags.
+
+The handoff must have a protected provenance channel (for example, a
+restricted default-branch workflow artifact identified by run ID and verified
+through the GitHub API), with an explicit allowlist of workflow identity,
+repository, branch, conclusion, and run attempt. A worker-provided receipt
+URL, JSON boolean, actor label, or run ID alone must never authorize mutation.
+The inbox consumer must independently re-fetch the protected receipt and
+revalidate its bindings at the time of transaction, including unchanged PR
+head and unchanged canonical state version. A successful preflight without
+this protected handoff remains read-only and fails closed.
+
 ## State transition
 
 Only after trusted verification may a dedicated transaction release a live
