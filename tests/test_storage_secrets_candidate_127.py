@@ -452,6 +452,74 @@ class StorageSecretsCandidate127Tests(unittest.TestCase):
         self.assertEqual(self.manifest()["status"], "discovered")
         self.assertFalse(self.manifest()["validation"]["tests_passed"])
 
+    def test_backup_exclusions_match_both_pinned_upstream_versions(self) -> None:
+        import xml.etree.ElementTree as ET
+
+        proof = json.loads(
+            (SOURCE / "provenance" / "cross-version-pref-inventory.json").read_text(
+                encoding="utf-8"
+            )
+        )
+        self.assertEqual(proof["baseline"]["release"], "v10.3.4")
+        self.assertEqual(
+            proof["baseline"]["commit"],
+            "692a374a5071c0b60939f624ede58d666b6b645c",
+        )
+        self.assertTrue(proof["baseline"]["tag_signature_verified_by_github"])
+        self.assertEqual(proof["candidate"]["commit"], COMMIT)
+        self.assertEqual(proof["acceptance"], "SOURCE_LAYOUT_MATCH_ONLY")
+        expected = set(proof["verified_common_default_preferences"])
+        self.assertEqual(len(expected), 4)
+        base = SOURCE / "proposal" / "android" / "res" / "xml"
+        legacy = ET.parse(base / "backup_rules.xml").getroot()
+        modern = ET.parse(base / "data_extraction_rules.xml").getroot()
+        for group in (
+            legacy,
+            modern.find("cloud-backup"),
+            modern.find("device-transfer"),
+        ):
+            self.assertIsNotNone(group)
+            self.assertEqual(
+                {
+                    item.attrib["path"] for item in group.findall("exclude")
+                    if item.attrib.get("domain") == "sharedpref"
+                },
+                expected,
+            )
+        self.assertFalse(proof["source_executed"])
+        self.assertFalse(proof["library_certified"])
+        self.assertFalse(self.manifest()["validation"]["tests_passed"])
+
+    def test_prior_legacy_backend_requires_explicit_migration_gate(self) -> None:
+        proof = json.loads(
+            (SOURCE / "provenance" / "cross-version-pref-inventory.json").read_text(
+                encoding="utf-8"
+            )
+        )
+        self.assertIn(
+            "EncryptedSharedPreferences",
+            proof["legacy_backend_behavior"]["baseline_10_3_4"],
+        )
+        self.assertIn(
+            "removes legacy",
+            proof["legacy_backend_behavior"]["candidate_11_2_0"],
+        )
+        self.assertTrue(proof["default_option_evidence"]["baseline_reset_on_error"])
+        self.assertTrue(proof["default_option_evidence"]["candidate_reset_on_error"])
+        gates = json.loads(
+            (SOURCE / "tests" / "migration-gates.json").read_text(encoding="utf-8")
+        )
+        self.assertEqual(
+            next(g for g in gates["acceptance_gates"]
+                 if g["id"] == "preupgrade_cipher_migration")["state"],
+            "PENDING",
+        )
+        self.assertEqual(
+            next(g for g in gates["acceptance_gates"]
+                 if g["id"] == "android_backup_restore_isolation")["state"],
+            "PENDING",
+        )
+
     def test_normalization_structure_is_valid_without_changing_stage(self) -> None:
         validate_normalization_gates(self.manifest(), SOURCE)
         self.assertEqual(self.manifest()["status"], "discovered")
