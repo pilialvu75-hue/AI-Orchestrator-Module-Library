@@ -49,6 +49,17 @@ jobs:
           fi
           echo "AAPT2=$tool" >> "$GITHUB_ENV"
 
+      - name: Compile proposed backup policy XML without installing it
+        run: |
+          set -euo pipefail
+          xml_dir="intake/storage.secrets.researcher.flutter_secure_storage/0.1.0/proposal/android/res/xml"
+          out_dir="${RUNNER_TEMP}/compiled-backup-policy"
+          mkdir -p "$out_dir"
+          "$AAPT2" compile -o "$out_dir" "$xml_dir/backup_rules.xml"
+          "$AAPT2" compile -o "$out_dir" "$xml_dir/data_extraction_rules.xml"
+          test "$(find "$out_dir" -type f -name '*.flat' | wc -l)" -eq 2
+          echo 'Both proposed XML files compile with Android SDK aapt2.'
+
       - name: Inspect compiled AndroidManifest without running APK
         run: |
           set -euo pipefail
