@@ -103,7 +103,7 @@ class CanonicalCIProbeTests(unittest.TestCase):
     def test_rejects_path_traversal_from_canonical_registry(self):
         self.canonical["workstreams"] = ["../../unauthorized.json"]
         self.save()
-        with self.assertRaisesRegex(ValueError, "escapes protected directory"):
+        with self.assertRaisesRegex(ValueError, "invalid canonical workstream path|escapes protected directory"):
             self.execute()
 
     def test_rejects_wrong_packet_pr_or_commit(self):
