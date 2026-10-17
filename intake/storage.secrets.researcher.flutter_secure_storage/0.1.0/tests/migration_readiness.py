@@ -14,6 +14,8 @@ EXPECTED_GATES = frozenset({
     "verify_initial_secret_presence",
     "preupgrade_cipher_migration",
     "non_destructive_restore",
+    "android_upgrade_status_pre_read",
+    "android_backup_restore_isolation",
     "biometric_and_keychain_errors",
     "upgrade_rollback",
     "android_physical_gate",
@@ -32,6 +34,32 @@ COMMIT = "e8eeb449cd512b26153f0a3376dfe374dd39a999"
 def _major(version: object) -> int | None:
     match = re.fullmatch(r"([0-9]+)\.[0-9]+\.[0-9]+", str(version))
     return int(match.group(1)) if match else None
+
+def classify_upgrade_probe(raw: object) -> str:
+    """The plugin may say state=ok even on unsupported platforms; fail closed."""
+    if not isinstance(raw, dict):
+        return "NO_PROBE"
+    state = raw.get("state")
+    reason = raw.get("reason")
+    if state == "NOT_RUN":
+        return "NO_PROBE"
+    if state in {"legacyDataUnreadable", "legacyDataDiscarded"}:
+        return "LEGACY_DATA_AT_RISK"
+    if state == "unknown":
+        return "UNKNOWN_STATE"
+    if state != "ok" or reason != "none":
+        return "UNSUPPORTED_OR_UNEXPECTED"
+    if raw.get("will_discard_on_next_access") is not False:
+        return "POTENTIAL_DESTRUCTIVE_ACCESS"
+    if raw.get("performed_before_first_read") is not True:
+        return "PRE_READ_ORDER_NOT_PROVEN"
+    count = raw.get("entry_count")
+    if type(count) is not int or count < 0:
+        return "INVALID_ENTRY_COUNT"
+    receipt = raw.get("device_receipt")
+    if not isinstance(receipt, str) or not receipt.strip():
+        return "DEVICE_RECEIPT_MISSING"
+    return "SAFE_CANDIDATE_UNDER_REVIEW"
 
 
 def assess(manifest: dict[str, Any], evidence: dict[str, Any]) -> dict[str, Any]:
@@ -85,6 +113,10 @@ def assess(manifest: dict[str, Any], evidence: dict[str, Any]) -> dict[str, Any]
     if pending:
         blockers.add("MIGRATION_EVIDENCE_PENDING")
 
+    upgrade_probe_state = classify_upgrade_probe(evidence.get("android_upgrade_probe"))
+    if upgrade_probe_state != "SAFE_CANDIDATE_UNDER_REVIEW":
+        blockers.add("ANDROID_UPGRADE_PROBE_NOT_CLEARED")
+
     # JSON flags alone cannot attest physical-device tests or independent review.
     # Even an all-PASS self-report MUST stop at independent verification.
     return {
@@ -92,6 +124,7 @@ def assess(manifest: dict[str, Any], evidence: dict[str, Any]) -> dict[str, Any]
         "state": "BLOCKED" if blockers else "INDEPENDENT_REVIEW_REQUIRED",
         "blockers": sorted(blockers),
         "pending_gates": pending,
+        "upgrade_probe_classification": upgrade_probe_state,
         "source_commit": COMMIT,
         "package_versions": {
             "existing": evidence.get("source_app", {}).get("resolved_version"),
