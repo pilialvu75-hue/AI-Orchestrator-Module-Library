@@ -1,5 +1,9 @@
 """Autonomous completion must never be granted by an untrusted inbox request."""
 import unittest
+import sys
+from pathlib import Path
+
+sys.path.insert(0, str(Path(__file__).resolve().parents[1] / 'tools'))
 from datetime import datetime, timezone
 from unittest.mock import patch
 
