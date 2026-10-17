@@ -21,6 +21,13 @@ class ProbeTests(unittest.TestCase):
         self.assertIn(f"/commits/{SHA}/check-runs?", fetch.call_args_list[1].args[0])
         self.assertFalse(result["completion_authorized"])
 
+    def test_rejects_invalid_required_checks_before_network(self):
+        for names in ([], [""], ["Validate Module Library"] * 2, [True], "Validate Module Library"):
+            with self.subTest(names=names), patch("tools.autonomous_ci_probe.fetch_json") as fetch:
+                with self.assertRaisesRegex(ValueError, "invalid required check names"):
+                    probe(REPO, 120, names, "fake-token")
+                fetch.assert_not_called()
+
     def test_rejects_boolean_pr_number(self):
         with patch("tools.autonomous_ci_probe.fetch_json") as fetch:
             with self.assertRaisesRegex(ValueError, "invalid PR number"):
