@@ -134,6 +134,33 @@ class ReceiptEvidenceProbeTests(unittest.TestCase):
             with self.assertRaisesRegex(ValueError, "protected CI evidence"):
                 probe(IDENTITY.copy())
 
+    @patch("tools.autonomous_receipt_evidence_probe.fetch_protected_run", return_value=RUN)
+    @patch("tools.autonomous_receipt_evidence_probe.fetch_json", return_value={
+        "total_count": 1, "artifacts": [{"id": 42, "name": "autonomous-ci-evidence",
+                                        "expired": False, "workflow_run": {"id": 55}}],
+    })
+    def test_rejects_forged_protected_attempt_or_workflow_ref(self, artifacts, run):
+        valid = {"repository": "owner/repo", "pr_number": 120,
+                 "head_sha": "a" * 40, "verified_checks": {"Validate Module Library": 7},
+                 "protected_run_id": 55, "protected_run_attempt": 1,
+                 "protected_workflow_ref": "owner/repo/.github/workflows/autonomous-ci-probe.yml@refs/heads/main",
+                 "trusted_receipt": False, "completion_authorized": False}
+        cases = (
+            {**valid, "protected_run_id": 56},
+            {**valid, "protected_run_id": True},
+            {**valid, "protected_run_attempt": 2},
+            {**valid, "protected_run_attempt": True},
+            {**valid, "protected_workflow_ref": "owner/repo/.github/workflows/autonomous-ci-probe.yml@refs/heads/feature"},
+            {**valid, "protected_workflow_ref": "other/repo/.github/workflows/autonomous-ci-probe.yml@refs/heads/main"},
+        )
+        for evidence in cases:
+            with self.subTest(evidence=evidence), patch(
+                "tools.autonomous_receipt_evidence_probe.fetch_ci_evidence_artifact",
+                return_value=evidence,
+            ):
+                with self.assertRaises(ValueError):
+                    probe(IDENTITY.copy())
+
     def test_rejects_wrong_run_identity(self):
         for field, value in (("run_id", 56), ("run_attempt", 2),
                              ("workflow_path", ".github/workflows/other.yml"),
