@@ -76,6 +76,31 @@ class CanonicalCIProbeTests(unittest.TestCase):
         fetch.assert_called_once_with("https://api.github.com/repos/owner/repo/pulls/120", "test-token")
         probe.assert_called_once()
 
+    def test_protected_workflow_attaches_independent_gate_audit(self):
+        audit_result = {
+            "canonical_identity": {
+                "lane_id": "library-researcher", "state_version": 9,
+                "claim_id": "claim", "packet_sha256": _review_packet_digest(self.packet),
+                "repository": REPO, "pr_number": 120, "head_sha": SHA,
+            },
+            "trusted_receipt": False, "completion_authorized": False,
+        }
+        with patch("tools.autonomous_canonical_ci_probe.fetch_json",
+                   return_value=PR), patch(
+                       "tools.autonomous_canonical_ci_probe.probe_ci",
+                       return_value=CI), patch(
+                       "tools.autonomous_canonical_ci_probe.audit_library_ci_gates",
+                       return_value=audit_result) as audit:
+            result = probe_canonical_lane(
+                "library-researcher", REPO, 120, ["Validate Module Library"],
+                "test-token", root=self.root, now=NOW, audit_ci_pipeline=True,
+            )
+        self.assertEqual(result["independent_gate_audit"], audit_result)
+        self.assertIs(result["completion_authorized"], False)
+        audit.assert_called_once_with(
+            result["canonical_identity"], CI, "test-token", trusted_root=self.root,
+        )
+
     def test_rejects_ci_verification_from_different_head(self):
         with self.assertRaisesRegex(ValueError, "differs from live GitHub CI"):
             self.execute(ci={**CI, "head_sha": "f" * 40})
