@@ -84,6 +84,35 @@ class ReceiptEvidenceProbeTests(unittest.TestCase):
                 with self.assertRaises(ValueError):
                     probe(IDENTITY.copy())
 
+    @patch("tools.autonomous_receipt_evidence_probe.fetch_protected_run", return_value=RUN)
+    @patch("tools.autonomous_receipt_evidence_probe.fetch_json", return_value={
+        "total_count": 1, "artifacts": [{"id": 42, "name": "autonomous-ci-evidence",
+                                        "expired": False, "workflow_run": {"id": 55}}],
+    })
+    def test_rejects_forged_or_incomplete_ci_evidence(self, artifacts, run):
+        valid = {"repository": "owner/repo", "pr_number": 120,
+                 "head_sha": "a" * 40, "verified_checks": {"Validate Module Library": 7},
+                 "trusted_receipt": False, "completion_authorized": False}
+        cases = (
+            {**valid, "repository": "other/repo"},
+            {**valid, "pr_number": 121},
+            {**valid, "head_sha": "f" * 40},
+            {**valid, "trusted_receipt": True},
+            {**valid, "completion_authorized": True},
+            {**valid, "verified_checks": {}},
+            {**valid, "verified_checks": {"Validate Module Library": True}},
+            {**valid, "verified_checks": {"Validate Module Library": -1}},
+            {**valid, "verified_checks": {"": 7}},
+            {key: value for key, value in valid.items() if key != "head_sha"},
+        )
+        for evidence in cases:
+            with self.subTest(evidence=evidence), patch(
+                "tools.autonomous_receipt_evidence_probe.fetch_ci_evidence_artifact",
+                return_value=evidence,
+            ):
+                with self.assertRaises(ValueError):
+                    probe(IDENTITY.copy())
+
     def test_rejects_wrong_run_identity(self):
         for field, value in (("run_id", 56), ("run_attempt", 2),
                              ("workflow_path", ".github/workflows/other.yml"),
