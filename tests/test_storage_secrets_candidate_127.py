@@ -278,6 +278,97 @@ class StorageSecretsCandidate127Tests(unittest.TestCase):
         self.assertNotIn("token", result.stdout.lower())
         self.assertNotIn("password", result.stdout.lower())
 
+    def test_merged_apk_manifest_triage_detects_implicit_backup_policy(self) -> None:
+        import runpy
+
+        audit = runpy.run_path(
+            str(SOURCE / "tests" / "android_backup_manifest_audit.py")
+        )["audit"]
+        output = audit(
+            "E: manifest (line=2)\n"
+            "  E: application (line=25)\n"
+            "    A: android:label(0x01010001)=\\\"Demo\\\"\n"
+            "    E: activity (line=30)\n"
+            "      A: android:allowBackup(0x01010280)=(type 0x12)0x0\n"
+        )
+        self.assertEqual(output["state"], "EVIDENCE_INCOMPLETE")
+        self.assertEqual(output["allow_backup"], "NOT_DECLARED")
+        self.assertEqual(output["data_extraction_rules"], "NOT_DECLARED")
+        self.assertIn("BACKUP_NOT_EXPLICITLY_DISABLED", output["reasons"])
+        self.assertFalse(output["apk_identity_verified"])
+        self.assertFalse(output["library_certified"])
+        self.assertFalse(output["secret_material_examined"])
+
+    def test_merged_apk_manifest_triage_never_certifies_even_with_references(self) -> None:
+        import runpy
+
+        audit = runpy.run_path(
+            str(SOURCE / "tests" / "android_backup_manifest_audit.py")
+        )["audit"]
+        output = audit(
+            "E: manifest (line=2)\n"
+            "  E: application (line=25)\n"
+            "    A: android:allowBackup(0x01010280)=(type 0x12)0x0\n"
+            "    A: android:dataExtractionRules(0x01010695)=@0x7f100002\n"
+            "    A: android:fullBackupContent(0x010104eb)=@0x7f100003\n"
+        )
+        self.assertEqual(output["allow_backup"], "EXPLICIT_FALSE")
+        self.assertEqual(output["data_extraction_rules"], "REFERENCED")
+        self.assertEqual(output["full_backup_content"], "REFERENCED")
+        self.assertEqual(output["reasons"], [])
+        self.assertEqual(output["state"], "EVIDENCE_INCOMPLETE")
+        self.assertFalse(output["cloud_transfer_effective_policy_verified"])
+        self.assertFalse(output["device_transfer_effective_policy_verified"])
+        self.assertFalse(output["keystore_restore_fixture_tested"])
+
+    def test_merged_apk_manifest_triage_flags_true_or_unreadable(self) -> None:
+        import runpy
+
+        audit = runpy.run_path(
+            str(SOURCE / "tests" / "android_backup_manifest_audit.py")
+        )["audit"]
+        for option, state in (
+            ("(type 0x12)0xffffffff", "EXPLICIT_TRUE"),
+            ("(type 0x12)0x0", "EXPLICIT_FALSE"),
+            ("@0x7f00", "UNKNOWN_VALUE"),
+        ):
+            with self.subTest(option=option):
+                report = audit(
+                    "E: manifest (line=1)\n"
+                    "  E: application (line=2)\n"
+                    f"    A: android:allowBackup(0x01010280)={option}\n"
+                )
+                self.assertEqual(report["allow_backup"], state)
+                self.assertEqual(report["state"], "EVIDENCE_INCOMPLETE")
+        with self.assertRaisesRegex(ValueError, "no application"):
+            audit("E: manifest (line=1)\n")
+
+    def test_apk_manifest_audit_cli_reports_only_backup_metadata(self) -> None:
+        import subprocess
+
+        with tempfile.TemporaryDirectory() as tmp:
+            path = Path(tmp) / "synthetic-aapt2.txt"
+            path.write_text(
+                "E: manifest (line=1)\n"
+                "  E: application (line=2)\n"
+                "    A: android:allowBackup(0x01010280)=(type 0x12)0xffffffff\n",
+                encoding="utf-8",
+            )
+            result = subprocess.run(
+                [
+                    sys.executable,
+                    str(SOURCE / "tests" / "android_backup_manifest_audit.py"),
+                    "--aapt2-xmltree",
+                    str(path),
+                ],
+                check=True, capture_output=True, text=True, timeout=15,
+            )
+        report = json.loads(result.stdout)
+        self.assertEqual(report["allow_backup"], "EXPLICIT_TRUE")
+        self.assertFalse(report["app_change_authorized"])
+        self.assertNotIn("token", result.stdout.lower())
+        self.assertNotIn("secret value", result.stdout.lower())
+
     def test_normalization_structure_is_valid_without_changing_stage(self) -> None:
         validate_normalization_gates(self.manifest(), SOURCE)
         self.assertEqual(self.manifest()["status"], "discovered")
