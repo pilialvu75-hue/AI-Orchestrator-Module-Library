@@ -68,6 +68,14 @@ class ReceiptEvidenceProbeTests(unittest.TestCase):
 
 
     @patch("tools.autonomous_receipt_evidence_probe.fetch_protected_run", return_value=RUN)
+    @patch("tools.autonomous_receipt_evidence_probe.fetch_json", return_value={"total_count": -1, "artifacts": []})
+    @patch("tools.autonomous_receipt_evidence_probe.fetch_ci_evidence_artifact")
+    def test_rejects_negative_artifact_count(self, download, artifacts, run):
+        with self.assertRaisesRegex(ValueError, "incomplete protected artifact listing"):
+            probe(IDENTITY.copy())
+        download.assert_not_called()
+
+    @patch("tools.autonomous_receipt_evidence_probe.fetch_protected_run", return_value=RUN)
     def test_rejects_wrong_artifact_repository_or_branch_metadata(self, run):
         valid = {"id": 42, "name": "autonomous-ci-evidence", "expired": False,
                  "workflow_run": {"id": 55, "head_sha": "c" * 40,
