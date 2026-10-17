@@ -13,7 +13,7 @@ import re
 from pathlib import Path
 from typing import Any
 
-APP = re.compile(r"^(?P<indent>\s*)E:\s+application(?:\s|$)")
+APP = re.compile(r"^(?P<indent>\s*)E:\s+application(?:\s|$)", re.MULTILINE)
 ATTR = re.compile(
     r"^\s*A:\s+android:(?P<name>allowBackup|dataExtractionRules|fullBackupContent)"
     r"\([^)]*\)=(?P<value>.+)$"
