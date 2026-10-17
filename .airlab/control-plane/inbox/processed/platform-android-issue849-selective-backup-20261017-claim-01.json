@@ -1,0 +1,12 @@
+{
+  "schema_version": 1,
+  "request_id": "platform-android-issue849-selective-backup-20261017-claim-01",
+  "status": "APPLIED",
+  "processed_at": "2026-10-17T13:21:33Z",
+  "source_file": "platform-android-issue849-selective-backup-20261017-claim-01.json",
+  "lane_id": "platform-android",
+  "operation": "claim",
+  "actor_id": "chatgpt:platform-android-issue849",
+  "errors": [],
+  "result_state_version": 20
+}
