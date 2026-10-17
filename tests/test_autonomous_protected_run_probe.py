@@ -24,6 +24,12 @@ class ProtectedRunProbeTests(unittest.TestCase):
         self.assertFalse(result["completion_authorized"])
         self.assertFalse(result["authenticated"])
 
+    def test_rejects_unapproved_workflow_before_network(self):
+        with patch("tools.autonomous_protected_run_probe.fetch_json") as fetch:
+            with self.assertRaises(ValueError):
+                fetch_protected_run(REPO, 55, 1, ".github/workflows/attacker.yml", SHA, "fake-token")
+            fetch.assert_not_called()
+
     def test_rejects_untrusted_run(self):
         with patch("tools.autonomous_protected_run_probe.fetch_json", return_value={**RUN, "head_branch": "feature"}):
             with self.assertRaises(ValueError):
