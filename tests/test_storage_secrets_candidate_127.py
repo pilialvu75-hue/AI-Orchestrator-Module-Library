@@ -69,6 +69,54 @@ class StorageSecretsCandidate127Tests(unittest.TestCase):
         self.assertEqual(evidence["evidence"]["vulnerability_report"], "CLEAR")
         self.assertFalse(evidence["restrictions"]["library_certified"])
 
+    def test_migration_gate_inventory_covers_existing_secret_consumers(self) -> None:
+        gates = json.loads(
+            (SOURCE / "tests" / "migration-gates.json").read_text(encoding="utf-8")
+        )
+        self.assertEqual(gates["schema"], "ai-orchestrator.library-secret-storage-migration-gates.v1")
+        self.assertEqual(gates["source_app"]["resolved_version"], "10.3.4")
+        self.assertEqual(gates["source_app"]["declared_constraint"], "^10.3.1")
+        self.assertEqual(gates["candidate"]["package_version"], "11.2.0")
+        self.assertEqual(gates["source_app"]["android_min_sdk"], 28)
+        consumers = gates["secret_consumer_inventory"]
+        self.assertEqual(
+            {item["consumer"] for item in consumers},
+            {
+                "cloud_credentials",
+                "workshop_github_auth",
+                "module_library_github_config",
+                "diagnostics_github_token",
+            },
+        )
+        self.assertTrue(all(item["state"] == "PENDING_MIGRATION_VALIDATION" for item in consumers))
+        self.assertTrue(all(item["source_path"].startswith("lib/") for item in consumers))
+
+    def test_major_upgrade_is_fail_closed_without_migration_proofs(self) -> None:
+        manifest = self.manifest()
+        gates = json.loads(
+            (SOURCE / "tests" / "migration-gates.json").read_text(encoding="utf-8")
+        )
+        self.assertFalse(gates["source_control"]["merge_allowed"])
+        self.assertFalse(gates["source_control"]["certification_allowed"])
+        self.assertFalse(gates["candidate"]["library_certified"])
+        self.assertEqual(gates["source_control"]["stage"], "discovered")
+        expected = {
+            "verify_initial_secret_presence",
+            "preupgrade_cipher_migration",
+            "non_destructive_restore",
+            "biometric_and_keychain_errors",
+            "upgrade_rollback",
+            "android_physical_gate",
+            "desktop_platform_gates",
+            "library_contract_and_security_review",
+        }
+        self.assertEqual({item["id"] for item in gates["acceptance_gates"]}, expected)
+        self.assertTrue(all(item["state"] == "PENDING" for item in gates["acceptance_gates"]))
+        self.assertFalse(manifest["validation"]["tests_passed"])
+        self.assertFalse(manifest["security"]["reviewed"])
+        self.assertEqual(manifest["integration"]["estimated_effort"], "high")
+        self.assertIn("major-version-migration", manifest["tags"])
+
     def test_normalization_structure_is_valid_without_changing_stage(self) -> None:
         validate_normalization_gates(self.manifest(), SOURCE)
         self.assertEqual(self.manifest()["status"], "discovered")
