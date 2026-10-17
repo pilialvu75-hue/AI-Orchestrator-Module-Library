@@ -44,4 +44,11 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          python -m tools.autonomous_ci_probe "$TARGET_REPOSITORY" "$TARGET_PR_NUMBER" "$REQUIRED_CHECK"
+          python -m tools.autonomous_ci_probe "$TARGET_REPOSITORY" "$TARGET_PR_NUMBER" "$REQUIRED_CHECK" | tee "$RUNNER_TEMP/ci-evidence.json"
+      - name: Upload read-only CI evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: autonomous-ci-evidence
+          path: ${{ runner.temp }}/ci-evidence.json
+          if-no-files-found: error
+          retention-days: 7
