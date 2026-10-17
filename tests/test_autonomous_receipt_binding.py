@@ -39,6 +39,11 @@ class ReceiptBindingTests(unittest.TestCase):
             with self.subTest(bad=bad), self.assertRaises(ValueError):
                 validate_receipt_binding(bad, IDENTITY)
 
+    def test_rejects_missing_identity_fields(self):
+        for key in IDENTITY:
+            with self.subTest(field=key), self.assertRaises(ValueError):
+                validate_receipt_binding({k: v for k, v in IDENTITY.items() if k != key}, IDENTITY)
+
     def test_rejects_invalid_expected_identity(self):
         for key, value in (("head_sha", "invalid"), ("packet_sha256", "bad"),
                            ("state_version", -1), ("pr_number", True),
