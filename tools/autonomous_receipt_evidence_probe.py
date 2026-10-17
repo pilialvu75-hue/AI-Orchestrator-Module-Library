@@ -8,6 +8,7 @@ import io
 import json
 import urllib.request
 import zipfile
+from pathlib import Path
 
 from tools.autonomous_protected_run_probe import fetch_protected_run
 from tools.autonomous_ci_probe import fetch_json
@@ -116,6 +117,10 @@ def probe_receipt_evidence(*, receipt: dict, canonical_identity: dict,
             or evidence["pr_number"] != identity["pr_number"]
             or evidence.get("head_sha") != identity["head_sha"]
             or evidence.get("canonical_identity") != identity
+            or not isinstance(evidence.get("independent_gate_audit"), dict)
+            or evidence["independent_gate_audit"].get("canonical_identity") != identity
+            or evidence["independent_gate_audit"].get("trusted_receipt") is not False
+            or evidence["independent_gate_audit"].get("completion_authorized") is not False
             or type(evidence.get("protected_run_id")) is not int
             or evidence["protected_run_id"] != run_id
             or type(evidence.get("protected_run_attempt")) is not int
@@ -123,7 +128,7 @@ def probe_receipt_evidence(*, receipt: dict, canonical_identity: dict,
             or evidence.get("protected_workflow_ref") != f"{protected_repository}/{workflow_path}@refs/heads/main"
             or evidence.get("trusted_receipt") is not False
             or evidence.get("completion_authorized") is not False
-            or set(evidence) != {"repository", "pr_number", "head_sha", "verified_checks", "canonical_identity",
+            or set(evidence) != {"repository", "pr_number", "head_sha", "verified_checks", "canonical_identity", "independent_gate_audit",
                                  "protected_run_id", "protected_run_attempt", "protected_workflow_ref",
                                  "trusted_receipt", "completion_authorized"}
             or not isinstance(evidence.get("verified_checks"), dict)
@@ -145,6 +150,15 @@ def probe_receipt_evidence(*, receipt: dict, canonical_identity: dict,
             or live.get("head_sha") != identity["head_sha"]
             or live.get("verified_checks") != evidence["verified_checks"]):
         raise ValueError("protected CI artifact differs from independently verified live checks")
+    # Recompute the gate assessment against freshly fetched GitHub Actions
+    # job-step evidence and the checkout's trusted validation workflow.
+    from tools.autonomous_independent_gates import audit_library_ci_gates
+    audit = audit_library_ci_gates(
+        identity, live, github_token,
+        trusted_root=Path(__file__).resolve().parents[1],
+    )
+    if audit != evidence["independent_gate_audit"]:
+        raise ValueError("protected independent gate audit differs from live verified evidence")
     return {
         "ci_evidence": evidence,
         "artifact_id": matching[0]["id"],
