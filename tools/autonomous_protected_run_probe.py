@@ -13,6 +13,8 @@ from tools.autonomous_protected_run import validate_protected_run
 _REPO = re.compile(r"[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+\Z")
 _SHA = re.compile(r"[0-9a-f]{40}\Z")
 
+_ALLOWED_WORKFLOW = ".github/workflows/autonomous-ci-probe.yml"
+
 
 def fetch_protected_run(repository: str, run_id: int, run_attempt: int,
                         workflow_path: str, protected_sha: str, token: str) -> dict:
