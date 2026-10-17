@@ -6,8 +6,8 @@ from __future__ import annotations
 
 import re
 
-_SHA = re.compile(r"[0-9a-f]{40}\\Z")
-_DIGEST = re.compile(r"[0-9a-f]{64}\\Z")
+_SHA = re.compile(r"[0-9a-f]{40}\Z")
+_DIGEST = re.compile(r"[0-9a-f]{64}\Z")
 
 
 def validate_receipt_binding(receipt: dict, expected: dict) -> dict:
