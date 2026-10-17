@@ -7,6 +7,7 @@ from __future__ import annotations
 
 import json
 import os
+import re
 import sys
 from datetime import datetime, timezone
 from pathlib import Path
@@ -67,7 +68,9 @@ def probe_canonical_lane(
 
     # Query the PR independently. The worker cannot supply a replacement PR
     # response, packet digest, or state_version.
-    if (not isinstance(repository, str) or repository.count("/") != 1
+    if (not isinstance(repository, str)
+            or not re.fullmatch(r"[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+", repository)
+            or any(part in (".", "..") for part in repository.split("/"))
             or type(pr_number) is not int or pr_number <= 0):
         raise ValueError("invalid PR repository or number")
     if not isinstance(github_token, str) or not github_token.strip():
