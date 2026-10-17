@@ -25,6 +25,8 @@ def probe(receipt):
 class ReceiptEvidenceProbeTests(unittest.TestCase):
     @patch("tools.autonomous_receipt_evidence_probe.fetch_ci_evidence_artifact", return_value={"repository": "owner/repo", "pr_number": 120,
         "head_sha": "a" * 40, "verified_checks": {"Validate Module Library": 7},
+        "protected_run_id": 55, "protected_run_attempt": 1,
+        "protected_workflow_ref": "owner/repo/.github/workflows/autonomous-ci-probe.yml@refs/heads/main",
         "trusted_receipt": False, "completion_authorized": False})
     @patch("tools.autonomous_receipt_evidence_probe.fetch_json", return_value={
         "total_count": 1, "artifacts": [{"id": 42, "name": "autonomous-ci-evidence",
@@ -92,6 +94,8 @@ class ReceiptEvidenceProbeTests(unittest.TestCase):
     def test_rejects_forged_or_incomplete_ci_evidence(self, artifacts, run):
         valid = {"repository": "owner/repo", "pr_number": 120,
                  "head_sha": "a" * 40, "verified_checks": {"Validate Module Library": 7},
+                 "protected_run_id": 55, "protected_run_attempt": 1,
+                 "protected_workflow_ref": "owner/repo/.github/workflows/autonomous-ci-probe.yml@refs/heads/main",
                  "trusted_receipt": False, "completion_authorized": False}
         cases = (
             {**valid, "repository": "other/repo"},
@@ -121,6 +125,8 @@ class ReceiptEvidenceProbeTests(unittest.TestCase):
     def test_rejects_unexpected_evidence_fields(self, artifacts, run):
         evidence = {"repository": "owner/repo", "pr_number": 120,
                     "head_sha": "a" * 40, "verified_checks": {"Validate Module Library": 7},
+                    "protected_run_id": 55, "protected_run_attempt": 1,
+                    "protected_workflow_ref": "owner/repo/.github/workflows/autonomous-ci-probe.yml@refs/heads/main",
                     "trusted_receipt": False, "completion_authorized": False,
                     "worker_claimed_approval": True}
         with patch("tools.autonomous_receipt_evidence_probe.fetch_ci_evidence_artifact",
