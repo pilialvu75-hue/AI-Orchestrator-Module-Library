@@ -39,6 +39,12 @@ class ReceiptBindingTests(unittest.TestCase):
             with self.subTest(bad=bad), self.assertRaises(ValueError):
                 validate_receipt_binding(bad, IDENTITY)
 
+    def test_rejects_boolean_or_string_version_in_receipt(self):
+        for key, value in (("state_version", True), ("state_version", "7"),
+                           ("pr_number", True), ("pr_number", "120")):
+            with self.subTest(key=key, value=value), self.assertRaises(ValueError):
+                validate_receipt_binding({**IDENTITY, key: value}, IDENTITY)
+
     def test_rejects_missing_identity_fields(self):
         for key in IDENTITY:
             with self.subTest(field=key), self.assertRaises(ValueError):
