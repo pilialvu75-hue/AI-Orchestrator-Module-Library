@@ -25,6 +25,8 @@ def validate_protected_run(run: dict, *, repository: str, workflow_path: str,
         raise ValueError("protected workflow identity mismatch")
     if run.get("head_branch") != "main" or run.get("event") != "workflow_dispatch":
         raise ValueError("protected run must execute on default branch")
+    if not isinstance(head_sha, str) or len(head_sha) != 40 or any(c not in "0123456789abcdef" for c in head_sha):
+        raise ValueError("invalid protected commit SHA")
     if run.get("head_sha") != head_sha:
         raise ValueError("protected run commit mismatch")
     if run.get("status") != "completed" or run.get("conclusion") != "success":
