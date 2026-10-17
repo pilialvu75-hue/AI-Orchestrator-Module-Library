@@ -12,6 +12,7 @@ import zipfile
 from tools.autonomous_protected_run_probe import fetch_protected_run
 from tools.autonomous_ci_probe import fetch_json
 from tools.autonomous_receipt_binding import validate_receipt_binding
+from tools.autonomous_canonical_identity import derive_canonical_receipt_identity
 
 
 def fetch_ci_evidence_artifact(repository: str, artifact_id: int, token: str) -> dict:
@@ -129,3 +130,22 @@ def probe_receipt_evidence(*, receipt: dict, canonical_identity: dict,
         "trusted_receipt": False,
         "completion_authorized": False,
     }
+
+
+def probe_canonical_receipt_evidence(*, lane: dict, github_pr: dict,
+                                     receipt: dict, protected_repository: str,
+                                     run_id: int, run_attempt: int,
+                                     workflow_path: str, protected_sha: str,
+                                     github_token: str) -> dict:
+    """Bind evidence to canonical lane and independently fetched PR metadata.
+
+    The caller must obtain lane from the protected canonical snapshot and github_pr
+    from the GitHub API, never from worker-provided request fields. Read-only.
+    """
+    identity = derive_canonical_receipt_identity(lane, github_pr)
+    return probe_receipt_evidence(
+        receipt=receipt, canonical_identity=identity,
+        protected_repository=protected_repository, run_id=run_id,
+        run_attempt=run_attempt, workflow_path=workflow_path,
+        protected_sha=protected_sha, github_token=github_token,
+    )
