@@ -17,6 +17,8 @@ def prepare_autonomous_transition(lane: dict, github_pr: dict,
                                   *, now: datetime) -> dict:
     if not isinstance(now, datetime) or now.tzinfo is None or now.utcoffset() is None:
         raise ValueError("timezone-aware verifier timestamp required")
+    if not isinstance(lane, dict):
+        raise ValueError("canonical lane must be an object")
     claim = lane.get("active_claim")
     if not isinstance(claim, dict):
         raise ValueError("canonical claim missing")
@@ -31,12 +33,12 @@ def prepare_autonomous_transition(lane: dict, github_pr: dict,
     runtime = gates.get("G5_TARGET_RUNTIME")
     if runtime not in ("NOT_APPLICABLE", "NOT_APPLICABLE_UNTIL_RUNTIME_CHANGE") and not _review_gate_passed(runtime):
         raise ValueError("target runtime G5 evidence unresolved")
+    identity = derive_canonical_receipt_identity(lane, github_pr)
     attestation = lane.get("current_gate_attestation")
     if (not isinstance(attestation, dict)
             or attestation.get("claim_id") != claim.get("claim_id")
             or attestation.get("packet_sha256") != _review_packet_digest(lane["review_packet"])):
         raise ValueError("canonical gate attestation missing or stale")
-    identity = derive_canonical_receipt_identity(lane, github_pr)
     validate_receipt_binding(receipt, identity)
     if (not isinstance(verified_evidence, dict)
             or verified_evidence.get("identity") != identity
