@@ -115,6 +115,7 @@ def probe_receipt_evidence(*, receipt: dict, canonical_identity: dict,
             or type(evidence.get("pr_number")) is not int
             or evidence["pr_number"] != identity["pr_number"]
             or evidence.get("head_sha") != identity["head_sha"]
+            or evidence.get("canonical_identity") != identity
             or type(evidence.get("protected_run_id")) is not int
             or evidence["protected_run_id"] != run_id
             or type(evidence.get("protected_run_attempt")) is not int
@@ -122,7 +123,7 @@ def probe_receipt_evidence(*, receipt: dict, canonical_identity: dict,
             or evidence.get("protected_workflow_ref") != f"{protected_repository}/{workflow_path}@refs/heads/main"
             or evidence.get("trusted_receipt") is not False
             or evidence.get("completion_authorized") is not False
-            or set(evidence) != {"repository", "pr_number", "head_sha", "verified_checks",
+            or set(evidence) != {"repository", "pr_number", "head_sha", "verified_checks", "canonical_identity",
                                  "protected_run_id", "protected_run_attempt", "protected_workflow_ref",
                                  "trusted_receipt", "completion_authorized"}
             or not isinstance(evidence.get("verified_checks"), dict)
