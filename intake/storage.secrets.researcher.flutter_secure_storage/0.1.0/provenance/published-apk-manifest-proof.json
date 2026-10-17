@@ -1,0 +1,44 @@
+{
+  "schema": "ai-orchestrator.researcher-apk-backup-manifest-proof.v1",
+  "captured_at_utc": "2026-10-17T12:34:59Z",
+  "source": {
+    "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
+    "release_tag": "v1.0.12+3204",
+    "asset_id": 643772718,
+    "asset_name": "app-release.apk",
+    "size_bytes": 167959098,
+    "sha256": "551fa971087bbacf1848e8d17fb68599166a664a1cf0d60991038708a6b43073"
+  },
+  "evidence": {
+    "github_actions_run": "https://github.com/pilialvu75-hue/AI-Orchestrator-Module-Library/actions/runs/39033084733",
+    "artifact_name": "released-apk-backup-manifest-triage-39033084733",
+    "sha256_and_size_checked": true,
+    "aapt2_version": "37.0.0",
+    "merged_manifest_observed": true,
+    "allow_backup": "NOT_DECLARED",
+    "data_extraction_rules": "NOT_DECLARED",
+    "full_backup_content": "NOT_DECLARED",
+    "reason_codes": [
+      "BACKUP_NOT_EXPLICITLY_DISABLED",
+      "ANDROID12_EXTRACTION_POLICY_UNRESOLVED",
+      "LEGACY_BACKUP_POLICY_UNRESOLVED"
+    ]
+  },
+  "policy_reference": {
+    "android_allow_backup_default": "true",
+    "source": "https://developer.android.com/guide/topics/manifest/application-element",
+    "android12_cloud_vs_device_backup_rules": "https://developer.android.com/identity/data/autobackup",
+    "device_specific_transfer_behavior_unverified": true
+  },
+  "restrictions": {
+    "physical_backup_restore_tested": false,
+    "cloud_backup_policy_verified": false,
+    "device_to_device_transfer_policy_verified": false,
+    "signing_identity_verified": false,
+    "library_certified": false,
+    "apk_upgrade_authorized": false,
+    "secret_material_examined": false,
+    "acceptance_state": "EVIDENCE_INCOMPLETE"
+  },
+  "notes": "Read-only inspection of SHA-256-pinned public APK. Missing manifest attributes imply platform-default behavior, not confirmed loss or compromise. Actual backup content and restored Keystore behavior require independent physical proof before adoption."
+}
