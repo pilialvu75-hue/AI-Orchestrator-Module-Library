@@ -117,6 +117,74 @@ class StorageSecretsCandidate127Tests(unittest.TestCase):
         self.assertEqual(manifest["integration"]["estimated_effort"], "high")
         self.assertIn("major-version-migration", manifest["tags"])
 
+    def test_offline_migration_assessor_reports_all_pending_gates(self) -> None:
+        import runpy
+
+        assess = runpy.run_path(
+            str(SOURCE / "tests" / "migration_readiness.py")
+        )["assess"]
+        evidence = json.loads(
+            (SOURCE / "tests" / "migration-gates.json").read_text(encoding="utf-8")
+        )
+        report = assess(self.manifest(), evidence)
+        self.assertEqual(report["state"], "BLOCKED")
+        self.assertEqual(len(report["pending_gates"]), 8)
+        self.assertIn("MIGRATION_EVIDENCE_PENDING", report["blockers"])
+        self.assertFalse(report["library_certified"])
+        self.assertFalse(report["runtime_upgrade_authorized"])
+        self.assertFalse(report["secrets_read"])
+
+    def test_forged_pass_flags_cannot_grant_runtime_or_certification(self) -> None:
+        import runpy
+
+        assess = runpy.run_path(
+            str(SOURCE / "tests" / "migration_readiness.py")
+        )["assess"]
+        evidence = json.loads(
+            (SOURCE / "tests" / "migration-gates.json").read_text(encoding="utf-8")
+        )
+        for gate in evidence["acceptance_gates"]:
+            gate["state"] = "PASS"
+        report = assess(self.manifest(), evidence)
+        self.assertEqual(report["state"], "INDEPENDENT_REVIEW_REQUIRED")
+        self.assertFalse(report["library_certified"])
+        self.assertFalse(report["runtime_upgrade_authorized"])
+
+    def test_migration_assessor_rejects_pin_drift_and_fake_testing(self) -> None:
+        import runpy
+
+        assess = runpy.run_path(
+            str(SOURCE / "tests" / "migration_readiness.py")
+        )["assess"]
+        evidence = json.loads(
+            (SOURCE / "tests" / "migration-gates.json").read_text(encoding="utf-8")
+        )
+        bad = self.manifest()
+        bad["provenance"]["source_commit"] = "0" * 40
+        bad["validation"]["tests_passed"] = True
+        bad["security"]["reviewed"] = True
+        report = assess(bad, evidence)
+        self.assertEqual(report["state"], "BLOCKED")
+        self.assertIn("SOURCE_COMMIT_MISMATCH", report["blockers"])
+        self.assertIn("UNVERIFIED_TEST_CLAIM", report["blockers"])
+        self.assertIn("UNVERIFIED_SECURITY_REVIEW_CLAIM", report["blockers"])
+
+    def test_migration_assessor_detects_missing_credential_consumer(self) -> None:
+        import runpy
+
+        assess = runpy.run_path(
+            str(SOURCE / "tests" / "migration_readiness.py")
+        )["assess"]
+        evidence = json.loads(
+            (SOURCE / "tests" / "migration-gates.json").read_text(encoding="utf-8")
+        )
+        evidence["secret_consumer_inventory"].pop()
+        report = assess(self.manifest(), evidence)
+        self.assertEqual(report["state"], "BLOCKED")
+        self.assertIn(
+            "CREDENTIAL_CONSUMER_INVENTORY_INCOMPLETE", report["blockers"]
+        )
+
     def test_normalization_structure_is_valid_without_changing_stage(self) -> None:
         validate_normalization_gates(self.manifest(), SOURCE)
         self.assertEqual(self.manifest()["status"], "discovered")
