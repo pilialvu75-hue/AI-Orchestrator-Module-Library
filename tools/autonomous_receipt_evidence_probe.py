@@ -98,6 +98,8 @@ def probe_receipt_evidence(*, receipt: dict, canonical_identity: dict,
     if len(matching) != 1 or type(matching[0].get("id")) is not int or matching[0]["id"] <= 0:
         raise ValueError("missing or ambiguous protected CI artifact")
     artifact_run = matching[0]["workflow_run"]
+    if not isinstance(artifact_run, dict):
+        raise ValueError("invalid protected artifact workflow metadata")
     if (artifact_run.get("head_sha") != protected_sha
             or artifact_run.get("head_branch") != "main"
             or type(artifact_run.get("repository_id")) is not int
