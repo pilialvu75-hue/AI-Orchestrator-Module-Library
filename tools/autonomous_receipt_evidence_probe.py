@@ -92,6 +92,14 @@ def probe_receipt_evidence(*, receipt: dict, canonical_identity: dict,
                 and (a.get("workflow_run") or {}).get("id") == run_id]
     if len(matching) != 1 or type(matching[0].get("id")) is not int or matching[0]["id"] <= 0:
         raise ValueError("missing or ambiguous protected CI artifact")
+    artifact_run = matching[0]["workflow_run"]
+    if (artifact_run.get("head_sha") != protected_sha
+            or artifact_run.get("head_branch") != "main"
+            or type(artifact_run.get("repository_id")) is not int
+            or artifact_run["repository_id"] <= 0
+            or type(artifact_run.get("head_repository_id")) is not int
+            or artifact_run["head_repository_id"] != artifact_run["repository_id"]):
+        raise ValueError("protected artifact provenance metadata mismatch")
     evidence = fetch_ci_evidence_artifact(protected_repository, matching[0]["id"], github_token)
     if (evidence.get("repository") != identity["repository"]
             or type(evidence.get("pr_number")) is not int
