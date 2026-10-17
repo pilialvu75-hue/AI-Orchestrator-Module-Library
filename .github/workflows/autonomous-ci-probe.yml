@@ -15,10 +15,6 @@ on:
         description: "Pull request number"
         required: true
         type: number
-      required_check:
-        description: "Exact required check name"
-        required: true
-        type: string
 
 permissions:
   contents: read
@@ -46,11 +42,10 @@ jobs:
           TARGET_LANE_ID: ${{ inputs.lane_id }}
           TARGET_REPOSITORY: ${{ inputs.repository }}
           TARGET_PR_NUMBER: ${{ inputs.pr_number }}
-          REQUIRED_CHECK: ${{ inputs.required_check }}
         shell: bash
         run: |
           set -euo pipefail
-          python -m tools.autonomous_canonical_ci_probe "$TARGET_LANE_ID" "$TARGET_REPOSITORY" "$TARGET_PR_NUMBER" "$REQUIRED_CHECK" > "$RUNNER_TEMP/ci-evidence-raw.json"
+          python -m tools.autonomous_canonical_ci_probe "$TARGET_LANE_ID" "$TARGET_REPOSITORY" "$TARGET_PR_NUMBER" validate > "$RUNNER_TEMP/ci-evidence-raw.json"
           python - "$RUNNER_TEMP/ci-evidence-raw.json" "$RUNNER_TEMP/ci-evidence.json" <<'PY'
           import json, os, sys
           with open(sys.argv[1], encoding="utf-8") as source:
