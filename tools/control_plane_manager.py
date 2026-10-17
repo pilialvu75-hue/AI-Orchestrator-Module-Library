@@ -690,14 +690,6 @@ def validate_autonomous_completion(
     # receipt verification is implemented against a protected external source,
     # this API must never advertise eligibility for automatic state changes.
     raise ValueError("autonomous completion disabled: trusted receipt provenance is not verified")
-    return {
-        "lane_id": lane["id"],
-        "state_version": lane["state_version"],
-        "claim_id": claim_data["claim_id"],
-        "packet_sha256": digest,
-        "roadmap_sync_required": bool((packet.get("roadmap_impact") or {}).get("material")),
-        "eligible_for_transactional_processing": True,
-    }
 
 
 def review_accept(
