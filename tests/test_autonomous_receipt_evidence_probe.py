@@ -113,6 +113,21 @@ class ReceiptEvidenceProbeTests(unittest.TestCase):
                 with self.assertRaises(ValueError):
                     probe(IDENTITY.copy())
 
+    @patch("tools.autonomous_receipt_evidence_probe.fetch_protected_run", return_value=RUN)
+    @patch("tools.autonomous_receipt_evidence_probe.fetch_json", return_value={
+        "total_count": 1, "artifacts": [{"id": 42, "name": "autonomous-ci-evidence",
+                                        "expired": False, "workflow_run": {"id": 55}}],
+    })
+    def test_rejects_unexpected_evidence_fields(self, artifacts, run):
+        evidence = {"repository": "owner/repo", "pr_number": 120,
+                    "head_sha": "a" * 40, "verified_checks": {"Validate Module Library": 7},
+                    "trusted_receipt": False, "completion_authorized": False,
+                    "worker_claimed_approval": True}
+        with patch("tools.autonomous_receipt_evidence_probe.fetch_ci_evidence_artifact",
+                   return_value=evidence):
+            with self.assertRaisesRegex(ValueError, "protected CI evidence"):
+                probe(IDENTITY.copy())
+
     def test_rejects_wrong_run_identity(self):
         for field, value in (("run_id", 56), ("run_attempt", 2),
                              ("workflow_path", ".github/workflows/other.yml"),
