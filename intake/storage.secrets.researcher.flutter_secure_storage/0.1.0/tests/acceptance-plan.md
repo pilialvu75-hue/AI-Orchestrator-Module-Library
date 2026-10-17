@@ -42,3 +42,19 @@ Do not copy upstream code into the Library/Cantiere without an independent suppl
 5. Run certification dry-run and independent promotion. Until then **the catalog remains unchanged**; Researcher must not dispatch upstream source straight to Cantiere.
 
 The manifest `platforms` names candidate targets for future verification, **not validated support**. `validated_on` remains empty and the asset is not certified.
+
+
+## Existing Aivexus integration and breaking-upgrade assessment (17 October 2026)
+
+**Do not adopt as a new duplicate implementation.** At the Android repository main commit `40cb40fd8a0d7ca80d6656d9ee7524d57b5a16c4`:
+
+- `pubspec.yaml` already specifies `flutter_secure_storage: ^10.3.1`, and `pubspec.lock` resolves **10.3.4**.
+- The current lockfile requires **Dart >=3.12.0** and **Flutter >=3.44.0**; the broader application `pubspec.yaml` lower bounds (Dart >=3.4, Flutter >=3.22.2) are not evidence of actual CI toolchain incompatibility.
+- `android/app/build.gradle` sets **minSdk 28**.
+- Existing critical consumers include `lib/core/runtime/inference/cloud_credential_store.dart`, `lib/app_factory/workshop/workshop_library_github_auth.dart`, `lib/features/module_library/data/module_library_github_config.dart`, and `lib/core/diagnostics/github_diagnostics.dart`.
+- The app already has two injected read/write/delete storage boundaries (`CloudSecretStorage` and `WorkshopLibrarySecretStorage`), as well as two direct plugin usages. Avoid introducing an independent third credential store before consolidating the existing boundaries.
+- At pinned upstream 11.2.0, `flutter_secure_storage/CHANGELOG.md` warns that 11.0.0 removed deprecated cipher algorithms and options: data saved using removed algorithms/features may be unreadable after upgrade. Source's Android `resetOnError` defaults to **true**, which can erase data after an error. The changelog recommends migrating legacy data on v10 before moving to v11.
+
+The evidence file `tests/migration-gates.json` records the initial versions and **eight pending gates**. All test fixtures must use freshly generated disposable fake tokens, without exposing token values or hashes in logs, CI, GitHub issues or diagnostics. Do not use real credentials during exploratory migration and do not assume rollback preserves an encrypted store after a schema/cipher upgrade. 
+
+**Decision to resolve before implementation:** prefer certifying a reusable wrapper of the already operational v10.3.4 integration first, or plan a separately reviewed and physically tested 10.3.4 → 11.2.0 migration with backwards-compatible key semantics. The draft intake remains source-only and never upgrades the app on its own.
