@@ -16,6 +16,14 @@ from tools.autonomous_receipt_binding import validate_receipt_binding
 
 def fetch_ci_evidence_artifact(repository: str, artifact_id: int, token: str) -> dict:
     """Read the single JSON entry in a small GitHub Actions artifact ZIP."""
+    if (not isinstance(repository, str) or repository.count("/") != 1
+            or any(not part or any(c not in "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._" for c in part)
+                   for part in repository.split("/"))):
+        raise ValueError("invalid artifact repository")
+    if type(artifact_id) is not int or artifact_id <= 0:
+        raise ValueError("invalid artifact ID")
+    if not isinstance(token, str) or not token.strip():
+        raise ValueError("GitHub token required")
     url = f"https://api.github.com/repos/{repository}/actions/artifacts/{artifact_id}/zip"
     request = urllib.request.Request(url, headers={
         "Authorization": f"Bearer {token}",
@@ -32,6 +40,8 @@ def fetch_ci_evidence_artifact(repository: str, artifact_id: int, token: str) ->
             files = archive.infolist()
             if len(files) != 1 or files[0].filename != "ci-evidence.json":
                 raise ValueError("unexpected protected artifact entries")
+            if files[0].is_dir() or files[0].flag_bits & 1:
+                raise ValueError("encrypted or directory artifact entry rejected")
             if files[0].file_size > 65536:
                 raise ValueError("protected evidence JSON exceeds size limit")
             payload = archive.read(files[0])
