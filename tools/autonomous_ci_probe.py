@@ -49,6 +49,8 @@ def probe(repository: str, pr_number: int, required_names: list[str], token: str
         raise ValueError("PR base repository mismatch")
     if (pr.get("base") or {}).get("ref") != "main":
         raise ValueError("PR target branch must be main")
+    if pr.get("state") != "open" or pr.get("draft") is True:
+        raise ValueError("PR must be open and not draft")
     head_sha = (pr.get("head") or {}).get("sha")
     if not isinstance(head_sha, str) or len(head_sha) != 40 or any(c not in "0123456789abcdef" for c in head_sha):
         raise ValueError("invalid PR head")
@@ -106,8 +108,8 @@ def probe(repository: str, pr_number: int, required_names: list[str], token: str
         raise ValueError("PR target branch changed during CI verification")
     if ((latest_pr.get("head") or {}).get("repo") or {}).get("full_name") != repository:
         raise ValueError("PR head repository changed during CI verification")
-    if latest_pr.get("state") != "open":
-        raise ValueError("PR is no longer open")
+    if latest_pr.get("state") != "open" or latest_pr.get("draft") is True:
+        raise ValueError("PR is no longer open and ready for review")
     return verify_pr_checks(
         pr=pr, checks=checks, repository=repository,
         expected_head_sha=head_sha, required_check_names=required_names,
