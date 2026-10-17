@@ -44,7 +44,17 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          python -m tools.autonomous_ci_probe "$TARGET_REPOSITORY" "$TARGET_PR_NUMBER" "$REQUIRED_CHECK" | tee "$RUNNER_TEMP/ci-evidence.json"
+          python -m tools.autonomous_ci_probe "$TARGET_REPOSITORY" "$TARGET_PR_NUMBER" "$REQUIRED_CHECK" > "$RUNNER_TEMP/ci-evidence-raw.json"
+          python - "$RUNNER_TEMP/ci-evidence-raw.json" "$RUNNER_TEMP/ci-evidence.json" <<'PY'
+          import json, os, sys
+          with open(sys.argv[1], encoding="utf-8") as source:
+              evidence = json.load(source)
+          evidence["protected_run_id"] = int(os.environ["GITHUB_RUN_ID"])
+          evidence["protected_run_attempt"] = int(os.environ["GITHUB_RUN_ATTEMPT"])
+          evidence["protected_workflow_ref"] = os.environ["GITHUB_WORKFLOW_REF"]
+          with open(sys.argv[2], "w", encoding="utf-8") as target:
+              json.dump(evidence, target, sort_keys=True)
+          PY
       - name: Upload read-only CI evidence
         uses: actions/upload-artifact@v4
         with:
