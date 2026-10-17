@@ -35,6 +35,11 @@ class ProtectedRunTests(unittest.TestCase):
             with self.subTest(key=key, value=value), self.assertRaises(ValueError):
                 check({**RUN, key: value})
 
+    def test_rejects_invalid_expected_protected_sha(self):
+        with self.assertRaises(ValueError):
+            validate_protected_run(RUN, repository=REPO, workflow_path=PATH,
+                                   head_sha="invalid", run_id=55, run_attempt=1)
+
     def test_rejects_missing_fields(self):
         for key in RUN:
             with self.subTest(key=key), self.assertRaises(ValueError):
