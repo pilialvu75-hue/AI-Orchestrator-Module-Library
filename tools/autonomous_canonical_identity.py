@@ -30,13 +30,19 @@ def derive_canonical_receipt_identity(lane: dict, pr: dict) -> dict:
     if type(number) is not int or number <= 0 or pr.get("number") != number or type(pr.get("number")) is not int:
         raise ValueError("API PR number does not match canonical packet")
     repository = claim.get("repository")
-    base_repo = (pr.get("base") or {}).get("repo") or {}
+    base = pr.get("base")
+    if not isinstance(base, dict) or not isinstance(base.get("repo"), dict):
+        raise ValueError("invalid API PR base repository metadata")
+    base_repo = base["repo"]
     if not isinstance(repository, str) or base_repo.get("full_name") != repository:
         raise ValueError("API PR repository does not match canonical claim")
-    head = (pr.get("head") or {}).get("sha")
+    head_data = pr.get("head")
+    if not isinstance(head_data, dict):
+        raise ValueError("invalid API PR head metadata")
+    head = head_data.get("sha")
     if not isinstance(head, str) or not _SHA.fullmatch(head):
         raise ValueError("invalid API PR head SHA")
-    head_repo = (pr.get("head") or {}).get("repo")
+    head_repo = head_data.get("repo")
     if not isinstance(head_repo, dict) or head_repo.get("full_name") != repository:
         raise ValueError("PR head repository must match canonical repository")
     if pr.get("state") != "open":
