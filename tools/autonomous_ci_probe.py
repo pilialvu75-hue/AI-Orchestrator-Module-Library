@@ -33,7 +33,9 @@ def probe(repository: str, pr_number: int, required_names: list[str], token: str
         not isinstance(name, str) or not name.strip() for name in required_names
     ) or len(set(required_names)) != len(required_names):
         raise ValueError("invalid required check names")
-    if repository.count("/") != 1 or any(c not in "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._/" for c in repository):
+    if (not isinstance(repository, str) or repository.count("/") != 1
+            or any(not part or part in (".", "..") for part in repository.split("/"))
+            or any(c not in "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._/" for c in repository)):
         raise ValueError("invalid repository")
     if type(pr_number) is not int or pr_number < 1:
         raise ValueError("invalid PR number")
