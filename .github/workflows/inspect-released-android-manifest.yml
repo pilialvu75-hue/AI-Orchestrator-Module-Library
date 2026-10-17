@@ -52,7 +52,7 @@ jobs:
       - name: Inspect compiled AndroidManifest without running APK
         run: |
           set -euo pipefail
-          "$AAPT2" dump xmltree "${RUNNER_TEMP}/published-android.apk" AndroidManifest.xml \
+          "$AAPT2" dump xmltree --file AndroidManifest.xml "${RUNNER_TEMP}/published-android.apk" \
             > "${RUNNER_TEMP}/merged-xmltree.txt"
           python "$AUDIT" \
             --aapt2-xmltree "${RUNNER_TEMP}/merged-xmltree.txt" \
