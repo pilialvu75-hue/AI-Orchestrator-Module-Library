@@ -12,24 +12,31 @@ RUN = {"repository": "owner/repo", "head_sha": "c" * 40,
        "workflow_path": ".github/workflows/autonomous-ci-probe.yml",
        "authenticated": False, "completion_authorized": False}
 
+AUDIT = {"schema_version": 1, "canonical_identity": IDENTITY,
+         "workflow_run_id": 99, "trusted_receipt": False,
+         "completion_authorized": False}
+
 
 def probe(receipt):
-    return probe_receipt_evidence(
-        receipt=receipt, canonical_identity=IDENTITY,
-        protected_repository="owner/repo", run_id=55, run_attempt=1,
-        workflow_path=".github/workflows/autonomous-ci-probe.yml",
-        protected_sha="c" * 40, github_token="test-token",
-    )
+    with patch("tools.autonomous_independent_gates.audit_library_ci_gates", return_value=AUDIT):
+        return probe_receipt_evidence(
+            receipt=receipt, canonical_identity=IDENTITY,
+            protected_repository="owner/repo", run_id=55, run_attempt=1,
+            workflow_path=".github/workflows/autonomous-ci-probe.yml",
+            protected_sha="c" * 40, github_token="test-token",
+        )
 
 
 class ReceiptEvidenceProbeTests(unittest.TestCase):
     @patch("tools.autonomous_ci_probe.probe", return_value={"repository": "owner/repo", "pr_number": 120,
         "head_sha": "a" * 40, "verified_checks": {"Validate Module Library": 7},
         "canonical_identity": IDENTITY,
+        "independent_gate_audit": AUDIT,
         "trusted_receipt": False, "completion_authorized": False})
     @patch("tools.autonomous_receipt_evidence_probe.fetch_ci_evidence_artifact", return_value={"repository": "owner/repo", "pr_number": 120,
         "head_sha": "a" * 40, "verified_checks": {"Validate Module Library": 7},
         "canonical_identity": IDENTITY,
+        "independent_gate_audit": AUDIT,
         "protected_run_id": 55, "protected_run_attempt": 1,
         "protected_workflow_ref": "owner/repo/.github/workflows/autonomous-ci-probe.yml@refs/heads/main",
         "trusted_receipt": False, "completion_authorized": False})
@@ -57,6 +64,7 @@ class ReceiptEvidenceProbeTests(unittest.TestCase):
            return_value={"repository": "owner/repo", "pr_number": 120,
                          "head_sha": "a" * 40, "verified_checks": {"Validate Module Library": 7},
         "canonical_identity": IDENTITY,
+        "independent_gate_audit": AUDIT,
                          "protected_run_id": 55, "protected_run_attempt": 1,
                          "protected_workflow_ref": "owner/repo/.github/workflows/autonomous-ci-probe.yml@refs/heads/main",
                          "trusted_receipt": False, "completion_authorized": False})
@@ -167,6 +175,7 @@ class ReceiptEvidenceProbeTests(unittest.TestCase):
         valid = {"repository": "owner/repo", "pr_number": 120,
                  "head_sha": "a" * 40, "verified_checks": {"Validate Module Library": 7},
         "canonical_identity": IDENTITY,
+        "independent_gate_audit": AUDIT,
                  "protected_run_id": 55, "protected_run_attempt": 1,
                  "protected_workflow_ref": "owner/repo/.github/workflows/autonomous-ci-probe.yml@refs/heads/main",
                  "trusted_receipt": False, "completion_authorized": False}
@@ -175,6 +184,9 @@ class ReceiptEvidenceProbeTests(unittest.TestCase):
             {**valid, "pr_number": 121},
             {**valid, "head_sha": "f" * 40},
             {**valid, "canonical_identity": {**IDENTITY, "state_version": 10}},
+            {**valid, "independent_gate_audit": {**AUDIT, "workflow_run_id": 100}},
+            {**valid, "independent_gate_audit": {**AUDIT, "trusted_receipt": True}},
+            {key: value for key, value in valid.items() if key != "independent_gate_audit"},
             {key: value for key, value in valid.items() if key != "canonical_identity"},
             {**valid, "trusted_receipt": True},
             {**valid, "completion_authorized": True},
@@ -201,6 +213,7 @@ class ReceiptEvidenceProbeTests(unittest.TestCase):
         evidence = {"repository": "owner/repo", "pr_number": 120,
                     "head_sha": "a" * 40, "verified_checks": {"Validate Module Library": 7},
         "canonical_identity": IDENTITY,
+        "independent_gate_audit": AUDIT,
                     "protected_run_id": 55, "protected_run_attempt": 1,
                     "protected_workflow_ref": "owner/repo/.github/workflows/autonomous-ci-probe.yml@refs/heads/main",
                     "trusted_receipt": False, "completion_authorized": False,
@@ -219,6 +232,7 @@ class ReceiptEvidenceProbeTests(unittest.TestCase):
         valid = {"repository": "owner/repo", "pr_number": 120,
                  "head_sha": "a" * 40, "verified_checks": {"Validate Module Library": 7},
         "canonical_identity": IDENTITY,
+        "independent_gate_audit": AUDIT,
                  "protected_run_id": 55, "protected_run_attempt": 1,
                  "protected_workflow_ref": "owner/repo/.github/workflows/autonomous-ci-probe.yml@refs/heads/main",
                  "trusted_receipt": False, "completion_authorized": False}
