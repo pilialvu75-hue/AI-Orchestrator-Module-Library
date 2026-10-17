@@ -4,12 +4,14 @@
   "version": "0.1.0",
   "kind": "integration_bundle",
   "status": "discovered",
-  "description": "Quarantined-path intake proposal for the pinned flutter_secure_storage 11.2.0 upstream plugin; adaptation and platform testing remain outstanding.",
+  "description": "Discovery-only proposal to evolve the existing flutter_secure_storage 10.3.4 integration to pinned 11.2.0; credential migration, compatibility and adapter consolidation remain unverified.",
   "tags": [
     "storage.secrets",
     "researcher-candidate",
     "upstream-source-only",
-    "not-certified"
+    "not-certified",
+    "existing-app-dependency",
+    "major-version-migration"
   ],
   "capabilities": [
     "storage.secrets"
@@ -51,18 +53,23 @@
     "known_vulnerabilities": 0,
     "sbom": null,
     "review_report": null,
-    "notes": "Researcher source-only preflight CLEAR at pinned commit (runs 38982540775 and 38982734188); Library security review, SBOM evidence and certification are NOT yet complete."
+    "notes": "Read-only Researcher preflight at pinned commit CLEAR (runs 38982540775/38982734188); no Library-owned security signoff, no credential migration, no runtime validation. No source execution was performed."
   },
   "integration": {
-    "estimated_effort": "medium",
+    "estimated_effort": "high",
     "adaptation_allowed": true,
-    "adapter_notes": "Draft storage.secrets.v1 boundary; proposed package adapter, not implemented. Android and desktop platform assertions require tests and acceptance.",
+    "adapter_notes": "Aivexus/AI Orchestrator already uses flutter_secure_storage 10.3.4 in four areas: cloud credentials, Workshop Library GitHub auth, Module Library GitHub config and Diagnostics. Prefer consolidation and controlled migration over duplicate storage. No source code or adapter change is implemented by this intake.",
     "known_constraints": [
-      "Library storage.secrets.v1 contract status is draft",
-      "No integration adapter has been implemented",
-      "No Android or desktop execution evidence exists for this intake",
-      "Flutter >=3.19, Dart >=3.8, Android SDK >=23 reported in the pinned upstream source",
-      "Security preflight CLEAR does not replace Library review or target device validation"
+      "Library storage.secrets.v1 contract remains draft; no canonical adapter is implemented in this intake",
+      "Already in use: Ai-orchestrator-riserva pubspec.lock resolves flutter_secure_storage 10.3.4; declared dependency constraint ^10.3.1 excludes 11.2.0",
+      "Upstream 11.0.0 drops deprecated cipher algorithms and options; 10-to-11 migration must prove existing credential readability, availability and reversibility BEFORE switching production",
+      "Upstream AndroidOptions resetOnError defaults to true; avoid untested destructive error handling or automatic token loss",
+      "Existing secret consumers: Cloud credential store, Workshop Library GitHub auth, Module Library GitHub config, Diagnostics",
+      "App pubspec.yaml declares Dart >=3.4 and Flutter >=3.22.2; current pubspec.lock resolves Dart >=3.12 and Flutter >=3.44. Check actual CI toolchain rather than inferring incompatibility",
+      "App Android minSdk 28; upstream pinned 11.2.0 minimum Flutter 3.19, Dart 3.8, Android >=24 per upstream 11.0.0 changelog",
+      "No real target-runtime smoke tests, no existing-token migration proofs, and no rollback-tested upgrade",
+      "Researcher security/vulnerability preflight CLEAR is not Library admission or certification",
+      "Never update app dependency or Cantiere until a separate authorized claim and release-safe migration plan exist"
     ]
   },
   "connector": {
