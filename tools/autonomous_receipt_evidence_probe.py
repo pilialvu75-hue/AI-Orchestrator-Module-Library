@@ -106,7 +106,8 @@ def probe_receipt_evidence(*, receipt: dict, canonical_identity: dict,
             or artifact_run["head_repository_id"] != artifact_run["repository_id"]):
         raise ValueError("protected artifact provenance metadata mismatch")
     evidence = fetch_ci_evidence_artifact(protected_repository, matching[0]["id"], github_token)
-    if (evidence.get("repository") != identity["repository"]
+    if (not isinstance(evidence, dict)
+            or evidence.get("repository") != identity["repository"]
             or type(evidence.get("pr_number")) is not int
             or evidence["pr_number"] != identity["pr_number"]
             or evidence.get("head_sha") != identity["head_sha"]
