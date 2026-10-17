@@ -25,9 +25,11 @@ def probe(receipt):
 class ReceiptEvidenceProbeTests(unittest.TestCase):
     @patch("tools.autonomous_ci_probe.probe", return_value={"repository": "owner/repo", "pr_number": 120,
         "head_sha": "a" * 40, "verified_checks": {"Validate Module Library": 7},
+        "canonical_identity": IDENTITY,
         "trusted_receipt": False, "completion_authorized": False})
     @patch("tools.autonomous_receipt_evidence_probe.fetch_ci_evidence_artifact", return_value={"repository": "owner/repo", "pr_number": 120,
         "head_sha": "a" * 40, "verified_checks": {"Validate Module Library": 7},
+        "canonical_identity": IDENTITY,
         "protected_run_id": 55, "protected_run_attempt": 1,
         "protected_workflow_ref": "owner/repo/.github/workflows/autonomous-ci-probe.yml@refs/heads/main",
         "trusted_receipt": False, "completion_authorized": False})
@@ -54,6 +56,7 @@ class ReceiptEvidenceProbeTests(unittest.TestCase):
     @patch("tools.autonomous_receipt_evidence_probe.fetch_ci_evidence_artifact",
            return_value={"repository": "owner/repo", "pr_number": 120,
                          "head_sha": "a" * 40, "verified_checks": {"Validate Module Library": 7},
+        "canonical_identity": IDENTITY,
                          "protected_run_id": 55, "protected_run_attempt": 1,
                          "protected_workflow_ref": "owner/repo/.github/workflows/autonomous-ci-probe.yml@refs/heads/main",
                          "trusted_receipt": False, "completion_authorized": False})
@@ -163,6 +166,7 @@ class ReceiptEvidenceProbeTests(unittest.TestCase):
     def test_rejects_forged_or_incomplete_ci_evidence(self, artifacts, run):
         valid = {"repository": "owner/repo", "pr_number": 120,
                  "head_sha": "a" * 40, "verified_checks": {"Validate Module Library": 7},
+        "canonical_identity": IDENTITY,
                  "protected_run_id": 55, "protected_run_attempt": 1,
                  "protected_workflow_ref": "owner/repo/.github/workflows/autonomous-ci-probe.yml@refs/heads/main",
                  "trusted_receipt": False, "completion_authorized": False}
@@ -170,6 +174,8 @@ class ReceiptEvidenceProbeTests(unittest.TestCase):
             {**valid, "repository": "other/repo"},
             {**valid, "pr_number": 121},
             {**valid, "head_sha": "f" * 40},
+            {**valid, "canonical_identity": {**IDENTITY, "state_version": 10}},
+            {key: value for key, value in valid.items() if key != "canonical_identity"},
             {**valid, "trusted_receipt": True},
             {**valid, "completion_authorized": True},
             {**valid, "verified_checks": {}},
@@ -194,6 +200,7 @@ class ReceiptEvidenceProbeTests(unittest.TestCase):
     def test_rejects_unexpected_evidence_fields(self, artifacts, run):
         evidence = {"repository": "owner/repo", "pr_number": 120,
                     "head_sha": "a" * 40, "verified_checks": {"Validate Module Library": 7},
+        "canonical_identity": IDENTITY,
                     "protected_run_id": 55, "protected_run_attempt": 1,
                     "protected_workflow_ref": "owner/repo/.github/workflows/autonomous-ci-probe.yml@refs/heads/main",
                     "trusted_receipt": False, "completion_authorized": False,
@@ -211,6 +218,7 @@ class ReceiptEvidenceProbeTests(unittest.TestCase):
     def test_rejects_forged_protected_attempt_or_workflow_ref(self, artifacts, run):
         valid = {"repository": "owner/repo", "pr_number": 120,
                  "head_sha": "a" * 40, "verified_checks": {"Validate Module Library": 7},
+        "canonical_identity": IDENTITY,
                  "protected_run_id": 55, "protected_run_attempt": 1,
                  "protected_workflow_ref": "owner/repo/.github/workflows/autonomous-ci-probe.yml@refs/heads/main",
                  "trusted_receipt": False, "completion_authorized": False}
