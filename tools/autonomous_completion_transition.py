@@ -14,6 +14,8 @@ from tools.autonomous_canonical_identity import derive_canonical_receipt_identit
 def prepare_autonomous_transition(lane: dict, github_pr: dict,
                                   receipt: dict, verified_evidence: dict,
                                   *, now: datetime) -> dict:
+    if not isinstance(now, datetime) or now.tzinfo is None or now.utcoffset() is None:
+        raise ValueError("timezone-aware verifier timestamp required")
     identity = derive_canonical_receipt_identity(lane, github_pr)
     validate_receipt_binding(receipt, identity)
     if (not isinstance(verified_evidence, dict)
