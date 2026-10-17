@@ -5,8 +5,7 @@ canonical lane and protected receipt. Does not grant G6 reviewer approval.
 """
 from __future__ import annotations
 
-from copy import deepcopy
-from datetime import datetime, timezone
+from datetime import datetime
 
 from tools.autonomous_receipt_binding import validate_receipt_binding
 from tools.autonomous_canonical_identity import derive_canonical_receipt_identity
