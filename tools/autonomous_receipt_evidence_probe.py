@@ -5,6 +5,7 @@ Read-only: this validates consistency, NOT artifact authenticity or authority.
 from __future__ import annotations
 
 from tools.autonomous_protected_run_probe import fetch_protected_run
+from tools.autonomous_ci_probe import fetch_json
 from tools.autonomous_receipt_binding import validate_receipt_binding
 
 
@@ -29,7 +30,24 @@ def probe_receipt_evidence(*, receipt: dict, canonical_identity: dict,
             or run.get("authenticated") is not False
             or run.get("completion_authorized") is not False):
         raise ValueError("protected run metadata mismatch")
+    artifacts = fetch_json(
+        f"https://api.github.com/repos/{protected_repository}/actions/runs/{run_id}/artifacts?per_page=100",
+        github_token,
+    )
+    if not isinstance(artifacts, dict) or type(artifacts.get("total_count")) is not int:
+        raise ValueError("invalid protected artifact response")
+    entries = artifacts.get("artifacts")
+    if (not isinstance(entries, list) or artifacts["total_count"] != len(entries)
+            or artifacts["total_count"] > 100):
+        raise ValueError("incomplete protected artifact listing")
+    matching = [a for a in entries if isinstance(a, dict)
+                and a.get("name") == "autonomous-ci-evidence"
+                and a.get("expired") is False
+                and (a.get("workflow_run") or {}).get("id") == run_id]
+    if len(matching) != 1 or type(matching[0].get("id")) is not int:
+        raise ValueError("missing or ambiguous protected CI artifact")
     return {
+        "artifact_id": matching[0]["id"],
         "identity": identity,
         "protected_run": run,
         "trusted_receipt": False,
