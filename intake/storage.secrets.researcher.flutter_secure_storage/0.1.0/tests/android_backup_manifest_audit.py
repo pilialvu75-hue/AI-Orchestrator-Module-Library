@@ -13,10 +13,10 @@ import re
 from pathlib import Path
 from typing import Any
 
-APP = re.compile(r"^(?P<indent>\\s*)E:\\s+application(?:\\s|$)")
+APP = re.compile(r"^(?P<indent>\s*)E:\s+application(?:\s|$)")
 ATTR = re.compile(
-    r"^\\s*A:\\s+android:(?P<name>allowBackup|dataExtractionRules|fullBackupContent)"
-    r"\\([^)]*\\)=(?P<value>.+)$"
+    r"^\s*A:\s+android:(?P<name>allowBackup|dataExtractionRules|fullBackupContent)"
+    r"\([^)]*\)=(?P<value>.+)$"
 )
 
 
@@ -96,7 +96,7 @@ def main() -> None:
     parser.add_argument("--output", type=Path)
     args = parser.parse_args()
     result = audit(args.aapt2_xmltree.read_text(encoding="utf-8"))
-    rendered = json.dumps(result, indent=2, sort_keys=True) + "\\n"
+    rendered = json.dumps(result, indent=2, sort_keys=True) + "\n"
     if args.output is not None:
         args.output.parent.mkdir(parents=True, exist_ok=True)
         args.output.write_text(rendered, encoding="utf-8")
