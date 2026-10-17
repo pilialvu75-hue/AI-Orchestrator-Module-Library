@@ -10,8 +10,8 @@ import re
 from tools.autonomous_ci_probe import fetch_json
 from tools.autonomous_protected_run import validate_protected_run
 
-_REPO = re.compile(r"[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+\\Z")
-_SHA = re.compile(r"[0-9a-f]{40}\\Z")
+_REPO = re.compile(r"[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+\Z")
+_SHA = re.compile(r"[0-9a-f]{40}\Z")
 
 
 def fetch_protected_run(repository: str, run_id: int, run_attempt: int,
