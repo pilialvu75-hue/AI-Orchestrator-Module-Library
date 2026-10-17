@@ -11,7 +11,10 @@ def validate_protected_run(run: dict, *, repository: str, workflow_path: str,
         raise ValueError("protected workflow run must be an object")
     if not isinstance(repository, str) or repository.count("/") != 1:
         raise ValueError("invalid canonical repository")
-    if not isinstance(workflow_path, str) or not workflow_path.startswith(".github/workflows/"):
+    if (not isinstance(workflow_path, str) or not workflow_path.startswith(".github/workflows/")
+            or not workflow_path.endswith((".yml", ".yaml"))
+            or ".." in workflow_path or "\\" in workflow_path
+            or any(c.isspace() for c in workflow_path)):
         raise ValueError("invalid protected workflow path")
     if type(run_id) is not int or run_id <= 0 or type(run_attempt) is not int or run_attempt <= 0:
         raise ValueError("invalid protected run identity")
