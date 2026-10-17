@@ -45,6 +45,8 @@ def derive_canonical_receipt_identity(lane: dict, pr: dict) -> dict:
     head_repo = head_data.get("repo")
     if not isinstance(head_repo, dict) or head_repo.get("full_name") != repository:
         raise ValueError("PR head repository must match canonical repository")
+    if base.get("ref") != "main":
+        raise ValueError("PR must target canonical main branch")
     if pr.get("state") != "open":
         raise ValueError("PR must be open")
     return {"lane_id": lane_id, "state_version": version,
