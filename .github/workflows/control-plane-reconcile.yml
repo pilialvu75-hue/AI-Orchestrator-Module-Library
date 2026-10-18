@@ -71,7 +71,7 @@ jobs:
             python tools/control_plane_inbox.py process
             python tools/control_plane_manager.py reconcile
             python tools/validate_control_plane.py
-            if ! git diff --quiet; then
+            if [[ -n "$(git status --porcelain -- .airlab/control-plane/)" ]]; then
               git add \
                 .airlab/control-plane/canonical-state.json \
                 .airlab/control-plane/workstreams/ \
