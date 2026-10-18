@@ -7,7 +7,7 @@
     "policy": "This private repository is the single coordination authority. Chats and agents are workers, not independent sources of truth."
   },
   "updated_at": "2026-10-18",
-  "state_revision": 336,
+  "state_revision": 337,
   "lifecycle_status": "BOOTSTRAP_ACTIVE",
   "roadmap_authority": {
     "library": ".airlab/roadmap.yaml",
@@ -81,29 +81,14 @@
     "invalid_lane_behavior": "ISOLATE_AND_SURFACE_PROJECTION_INCIDENT"
   },
   "projection": {
-    "source_digest": "ac8185063df447b8a00105c12389df6ec486d2650fe35e92fbf1bae173f36e32",
-    "projected_at": "2026-10-18T18:13:45Z",
+    "source_digest": "3b3986a14320466e0b6976e55aa69b64f51c2fe4eef527b60cf2083d93cd9d0c",
+    "projected_at": "2026-10-18T18:17:38Z",
     "counts": {
-      "BLOCKED": 2,
-      "IMPLEMENTING": 1,
+      "BLOCKED": 3,
       "READY": 13,
       "REVIEW_REQUIRED": 2
     },
     "active_claims": [
-      {
-        "lane": "cantiere",
-        "claim_id": "d840975d34d7657fb98e",
-        "work_item": "issue-845-gate-evidence-visibility-v1",
-        "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
-        "lease_until": "2026-10-19T06:13:45Z",
-        "resource_locks": [
-          "branch:pilialvu75-hue/Ai-orchestrator-riserva:fix/cantiere-845-gate-evidence-visibility",
-          "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/app_factory/workshop/workshop_gate_evidence_export.dart",
-          "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/app_factory/workshop/workshop_production_dashboard_page.dart",
-          "file:pilialvu75-hue/Ai-orchestrator-riserva:test/app_factory/workshop/workshop_gate_evidence_export_test.dart",
-          "resource:cantiere-845-gate-evidence-export"
-        ]
-      },
       {
         "lane": "library-researcher",
         "claim_id": "a3be2c00b7d608d2df75",
@@ -146,12 +131,6 @@
         "work_item": "issue-849-android-selective-backup-exclusions"
       },
       {
-        "key": "branch:pilialvu75-hue/Ai-orchestrator-riserva:fix/cantiere-845-gate-evidence-visibility",
-        "lane": "cantiere",
-        "claim_id": "d840975d34d7657fb98e",
-        "work_item": "issue-845-gate-evidence-visibility-v1"
-      },
-      {
         "key": "file:pilialvu75-hue/AI-Orchestrator-Module-Researcher:.github/workflows/autonomous-seeding.yml",
         "lane": "library-researcher",
         "claim_id": "a3be2c00b7d608d2df75",
@@ -182,34 +161,10 @@
         "work_item": "issue-849-android-selective-backup-exclusions"
       },
       {
-        "key": "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/app_factory/workshop/workshop_gate_evidence_export.dart",
-        "lane": "cantiere",
-        "claim_id": "d840975d34d7657fb98e",
-        "work_item": "issue-845-gate-evidence-visibility-v1"
-      },
-      {
-        "key": "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/app_factory/workshop/workshop_production_dashboard_page.dart",
-        "lane": "cantiere",
-        "claim_id": "d840975d34d7657fb98e",
-        "work_item": "issue-845-gate-evidence-visibility-v1"
-      },
-      {
-        "key": "file:pilialvu75-hue/Ai-orchestrator-riserva:test/app_factory/workshop/workshop_gate_evidence_export_test.dart",
-        "lane": "cantiere",
-        "claim_id": "d840975d34d7657fb98e",
-        "work_item": "issue-845-gate-evidence-visibility-v1"
-      },
-      {
         "key": "resource:android-issue-849-backup-policy",
         "lane": "platform-android",
         "claim_id": "394d8d0d738e8b921f03",
         "work_item": "issue-849-android-selective-backup-exclusions"
-      },
-      {
-        "key": "resource:cantiere-845-gate-evidence-export",
-        "lane": "cantiere",
-        "claim_id": "d840975d34d7657fb98e",
-        "work_item": "issue-845-gate-evidence-visibility-v1"
       },
       {
         "key": "resource:researcher-discovery-reliability",
@@ -240,6 +195,24 @@
           ],
           "resume_condition": "All six platform GitHub workflow runs of PR #833 exact head 831015d149f2cbae6928683e8deb1aeafa3832b5 have completed, with outcomes available for inspection. Dedicated Aivexus CAD-1 Domain Tests run 38364393744 already succeeded.",
           "detected_at": "2026-10-13T07:45:35Z",
+          "review_required": false
+        }
+      },
+      {
+        "lane": "cantiere",
+        "reason": {
+          "code": "WAITING_EXTERNAL",
+          "wait_id": "cantiere:d840975d34d7657fb98e:WAITING_EXTERNAL",
+          "work_item": "issue-845-gate-evidence-visibility-v1",
+          "resource_locks": [
+            "branch:pilialvu75-hue/Ai-orchestrator-riserva:fix/cantiere-845-gate-evidence-visibility",
+            "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/app_factory/workshop/workshop_gate_evidence_export.dart",
+            "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/app_factory/workshop/workshop_production_dashboard_page.dart",
+            "file:pilialvu75-hue/Ai-orchestrator-riserva:test/app_factory/workshop/workshop_gate_evidence_export_test.dart",
+            "resource:cantiere-845-gate-evidence-export"
+          ],
+          "resume_condition": "All six GitHub Actions runs for PR #856 exact head a67c522b2b962c5f1233001b51f1ac34b80e473f finish with inspectable conclusions, before reviewer handoff.",
+          "detected_at": "2026-10-18T18:17:38Z",
           "review_required": false
         }
       },
@@ -390,27 +363,15 @@
       },
       {
         "id": "cantiere",
-        "status": "IMPLEMENTING",
+        "status": "BLOCKED",
         "activation": "active",
-        "state_version": 120,
+        "state_version": 121,
         "updated_at": "2026-10-18",
-        "active_claim": {
-          "claim_id": "d840975d34d7657fb98e",
-          "work_item": "issue-845-gate-evidence-visibility-v1",
-          "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
-          "lease_until": "2026-10-19T06:13:45Z",
-          "resource_locks": [
-            "branch:pilialvu75-hue/Ai-orchestrator-riserva:fix/cantiere-845-gate-evidence-visibility",
-            "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/app_factory/workshop/workshop_gate_evidence_export.dart",
-            "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/app_factory/workshop/workshop_production_dashboard_page.dart",
-            "file:pilialvu75-hue/Ai-orchestrator-riserva:test/app_factory/workshop/workshop_gate_evidence_export_test.dart",
-            "resource:cantiere-845-gate-evidence-export"
-          ]
-        },
+        "active_claim": null,
         "reviewer_state": "PENDING",
         "inference_profile_status": null,
         "historical_backlog_count": 3,
-        "next_action": "Check PR #856 exact-head CI and code review, fix only concrete issues, prepare claim-bound review packet; G5 generated star APK physical acceptance pending."
+        "next_action": "After six CI finish, resume wait with exact run evidence, reclaim reserved branch/files, fix only concrete errors, submit claim-bound review packet. Do not claim physical star success."
       },
       {
         "id": "diagnostics",
