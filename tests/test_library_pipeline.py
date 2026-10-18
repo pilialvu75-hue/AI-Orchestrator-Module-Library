@@ -216,12 +216,16 @@ class LibraryPipelineTest(unittest.TestCase):
             promote(self.root, ref)
 
     def test_unknown_license_never_qualifies_for_automatic_certification(self) -> None:
+        ref = self.make_asset(
+            status="tested", tests_passed=True, score=0.95,
+            license_name="NOASSERTION",
+        )
+        path = self.root / "intake" / ref.asset_id / ref.version / "manifest.json"
         for license_name in ("NOASSERTION", "UNKNOWN", "LICENSE_UNKNOWN", "UNDETERMINED"):
             with self.subTest(license=license_name):
-                ref = self.make_asset(
-                    status="tested", tests_passed=True, score=0.95,
-                    license_name=license_name,
-                )
+                manifest = json.loads(path.read_text(encoding="utf-8"))
+                manifest["provenance"]["license"] = license_name
+                self.write_json(path, manifest)
                 with self.assertRaisesRegex(PipelineError, "identified license"):
                     promote(self.root, ref, dry_run=True)
 
