@@ -40,8 +40,8 @@ the active `REVIEW_REQUIRED` claim must **not** remain locked indefinitely,
 but neither an ordinary `release` (which refuses expired leases) nor a fake
 `review_accept` is permitted. Use `reconcile_external_merge` through the
 transactional inbox. It is restricted to an explicit interactive
-`chatgpt:<worker lane>` identity currently `chatgpt:cantiere`, or
-`chatgpt:main-reviewer`; automation actors are **never** permitted.
+`chatgpt:<worker lane>` identity matching the target lane (for example
+`chatgpt:cantiere`), or `chatgpt:main-reviewer`; automation actors are **never** permitted.
 
 The reconciler independently fetches the GitHub PR and verifies the **exact**
 claimed PR number, original packet digest, head SHA, merged flag, merge commit,
