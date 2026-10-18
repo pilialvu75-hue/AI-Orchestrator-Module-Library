@@ -52,7 +52,7 @@ class AutonomousNeedsInboxTests(unittest.TestCase):
             "G5_TARGET_RUNTIME": "NOT_APPLICABLE_UNTIL_RUNTIME_CHANGE",
             "G6_REVIEWER": "PENDING", "G7_CANONICAL_SYNC": "PENDING",
         })
-        lane_path.write_text(json.dumps(lane, indent=2) + "\\n", encoding="utf-8")
+        lane_path.write_text(json.dumps(lane, indent=2) + "\n", encoding="utf-8")
         self.claim_id = control_plane_manager.claim(
             LANE, "needs-only-queue-maintenance", REPO,
             "Update Library needs queue without modifying executable modules",
