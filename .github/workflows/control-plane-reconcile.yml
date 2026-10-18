@@ -10,6 +10,8 @@ on:
       - ".airlab/control-plane/canonical-sync-receipts.json"
       - ".airlab/roadmap.yaml"
       - ".airlab/public-repositories/**/roadmap.yaml"
+      - ".github/workflows/control-plane-reconcile.yml"
+      - "tools/autonomous_needs_reconcile_scan.py"
   schedule:
     - cron: "17 * * * *"
   workflow_dispatch:
@@ -79,6 +81,11 @@ jobs:
             if [[ "${RECONCILE_TRIGGER}" == "workflow_run" && "${VERIFIER_CONCLUSION}" == "success" && -n "${VERIFIER_RUN_ID:-}" ]]; then
               python -m tools.autonomous_needs_enqueue "${VERIFIER_RUN_ID}" || echo "Protected needs run was not eligible for completion."
             fi
+
+            # workflow_run can be suppressed for runs initiated using GITHUB_TOKEN.
+            # Catch up from authenticated GitHub Actions API evidence on the
+            # regular hourly schedule (and when this reconciler is updated).
+            python -m tools.autonomous_needs_reconcile_scan || echo "Protected needs catch-up refused; no approval was granted."
 
             python tools/control_plane_inbox.py process
 
