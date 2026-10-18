@@ -21,6 +21,12 @@ class FirstPartyQuarantineTests(unittest.TestCase):
             target = self.root / "intake" / asset_id / VERSION / "manifest.json"
             target.parent.mkdir(parents=True, exist_ok=True)
             shutil.copyfile(source, target)
+            # CI re-runs after the protected workflow has advanced real intake.
+            # Keep the test's discovered-state starting point independent of
+            # mutable production history.
+            fixture = json.loads(target.read_text(encoding="utf-8"))
+            fixture["status"] = "discovered"
+            target.write_text(json.dumps(fixture), encoding="utf-8")
 
     def file(self, asset_id):
         return self.root / "intake" / asset_id / VERSION / "manifest.json"
@@ -73,6 +79,7 @@ class FirstPartyQuarantineTests(unittest.TestCase):
             with self.subTest(change=str(change)):
                 path = self.file(ALLOWED[0])
                 original = json.loads((ROOT / "intake" / ALLOWED[0] / VERSION / "manifest.json").read_text())
+                original["status"] = "discovered"
                 change(original)
                 path.write_text(json.dumps(original))
                 with self.assertRaisesRegex(ValueError, "unrecognized"):
