@@ -7,8 +7,8 @@
   "activation": "active",
   "scope": "Android packaging, permissions, hardware/runtime adapters, UI integration and releases using shared orchestration/contracts with target-optimized inference.",
   "shared_engine_policy": "adapter_only",
-  "state_version": 23,
-  "updated_at": "2026-10-17",
+  "state_version": 24,
+  "updated_at": "2026-10-18",
   "active_claim": {
     "claim_id": "394d8d0d738e8b921f03",
     "owner_lane": "platform-android",
@@ -402,6 +402,14 @@
       "work_item": "benchmark-switch-error-attribution",
       "reason": "Main/Reviewer accepted the bounded implementation/review gate.",
       "at": "2026-10-11T11:40:52Z"
+    },
+    {
+      "type": "REVIEW_WAIT_OVERDUE",
+      "claim_id": "394d8d0d738e8b921f03",
+      "work_item": "issue-849-android-selective-backup-exclusions",
+      "lease_until": "2026-10-18T01:38:08Z",
+      "detected_at": "2026-10-18T02:35:04Z",
+      "review_required": true
     }
   ],
   "stale_block_history": [
