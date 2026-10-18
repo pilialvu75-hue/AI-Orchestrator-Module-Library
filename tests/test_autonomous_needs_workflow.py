@@ -9,7 +9,7 @@ from tools.autonomous_independent_gates import LIBRARY_REPOSITORY as REPO
 from tools.autonomous_needs_dispatch import dispatch_ready_needs
 from tools.autonomous_needs_enqueue import enqueue_protected_needs_run
 
-LANE = "library-researcher"
+LANE = "library-curation"
 SHA = "a" * 40
 IDENTITY = {
     "lane_id": LANE, "state_version": 9,
@@ -45,7 +45,7 @@ class AutonomousNeedsWorkflowTests(unittest.TestCase):
         self.tmp = tempfile.TemporaryDirectory()
         self.addCleanup(self.tmp.cleanup)
         self.root = Path(self.tmp.name)
-        path = self.root / ".airlab/control-plane/workstreams/library-researcher.json"
+        path = self.root / ".airlab/control-plane/workstreams/library-curation.json"
         path.parent.mkdir(parents=True)
         self.path = path
         self.save()
@@ -72,7 +72,7 @@ class AutonomousNeedsWorkflowTests(unittest.TestCase):
         self.assertEqual(open_url.call_count, 1)
         request = open_url.call_args.args[0]
         self.assertIn(b'"ref": "main"', request.data)
-        self.assertIn(b'"lane_id": "library-researcher"', request.data)
+        self.assertIn(b'"lane_id": "library-curation"', request.data)
 
     def test_no_review_packet_or_ineligible_lane_does_not_dispatch(self):
         for altered in ({**LANE_SNAPSHOT, "status": "READY"},
