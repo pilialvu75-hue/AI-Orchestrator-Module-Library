@@ -692,6 +692,141 @@ def validate_autonomous_completion(
     raise ValueError("autonomous completion disabled: trusted receipt provenance is not verified")
 
 
+def complete_verified_library_needs(
+    lane_id: str,
+    *,
+    identity: dict[str, Any],
+    verified_scope: dict[str, Any],
+    protected_run: dict[str, Any],
+    verified_ci_audit: dict[str, Any],
+    root: Path = ROOT,
+    now: datetime | None = None,
+) -> None:
+    """Release one independently verified *metadata-only* Library claim.
+
+    The caller MUST be the transactional inbox, which fetches the protected
+    run and revalidates both GitHub CI and the exact PR diff. These arguments
+    are not a worker-accessible authorization interface.
+    """
+    now = now or _now()
+    if lane_id != "library-researcher":
+        raise ValueError("autonomous fast path restricted to the Library worker lane")
+    _, canonical = _canonical(root)
+    lane_path, lane = _lane_by_id(root, canonical, lane_id)
+    if lane.get("role") != "worker" or lane.get("status") != "REVIEW_REQUIRED":
+        raise ValueError("autonomous needs completion requires REVIEW_REQUIRED worker")
+    claim = lane.get("active_claim")
+    packet = lane.get("review_packet")
+    if not isinstance(claim, dict) or not isinstance(packet, dict):
+        raise ValueError("autonomous needs completion requires claim and packet")
+    _assert_claim_live(claim, now)
+    _validate_review_packet(lane_id, claim, packet)
+    expected_identity = {
+        "lane_id": lane_id,
+        "state_version": lane.get("state_version"),
+        "claim_id": claim.get("claim_id"),
+        "packet_sha256": _review_packet_digest(packet),
+        "repository": claim.get("repository"),
+        "pr_number": packet.get("pull_request"),
+        "head_sha": identity.get("head_sha") if isinstance(identity, dict) else None,
+    }
+    if not isinstance(identity, dict) or identity != expected_identity:
+        raise ValueError("stale or forged canonical autonomous receipt identity")
+    from tools.autonomous_receipt_binding import validate_receipt_binding
+    validate_receipt_binding(identity, expected_identity)
+    if (not isinstance(verified_scope, dict)
+            or verified_scope.get("profile") != "library-needs-only-v1"
+            or verified_scope.get("canonical_identity") != identity
+            or verified_scope.get("scope_verified") is not True
+            or verified_scope.get("runtime_applicable") is not False
+            or verified_scope.get("executable_changes") is not False
+            or verified_scope.get("changed_file") != "catalog/needs.json"):
+        raise ValueError("independently verified needs-only scope required")
+    if (not isinstance(protected_run, dict)
+            or protected_run.get("repository") != identity["repository"]
+            or type(protected_run.get("run_id")) is not int
+            or protected_run.get("workflow_path") != ".github/workflows/autonomous-ci-probe.yml"):
+        raise ValueError("protected workflow provenance is required")
+    if (not isinstance(verified_ci_audit, dict)
+            or verified_ci_audit.get("canonical_identity") != identity
+            or verified_ci_audit.get("trusted_receipt") is not False
+            or verified_ci_audit.get("completion_authorized") is not False
+            or not isinstance(verified_ci_audit.get("gate_assessment"), dict)
+            or verified_ci_audit["gate_assessment"].get("G2_STATIC") != "CI_PIPELINE_STEPS_VERIFIED"
+            or verified_ci_audit["gate_assessment"].get("G3_CI") != "EXACT_HEAD_SUCCESS_VERIFIED"):
+        raise ValueError("independently rechecked CI gate audit is required")
+
+    if (packet.get("roadmap_impact") or {}).get("material") is not False:
+        raise ValueError("material roadmap changes cannot use autonomous needs fast path")
+    if any(item.get("type") in ("runtime", "physical_device")
+           for item in packet.get("evidence", [])):
+        raise ValueError("runtime or physical evidence claims need independent review")
+    gates = lane.get("gates")
+    if not isinstance(gates, dict) or gates.get("G0_CLAIM") != "PASS":
+        raise ValueError("live canonical claim gate G0 must already be PASS")
+    if gates.get("G5_TARGET_RUNTIME") not in (
+        "NOT_APPLICABLE", "NOT_APPLICABLE_UNTIL_RUNTIME_CHANGE"
+    ):
+        raise ValueError("autonomous needs scope cannot override an unresolved runtime gate")
+    if gates.get("G6_REVIEWER") != "PENDING":
+        raise ValueError("autonomous completion may not reuse or forge G6 reviewer approval")
+    if (lane.get("reviewer") or {}).get("state") == "APPROVED":
+        raise ValueError("autonomous completion cannot replace a recorded human review")
+
+    at = _iso(now)
+    audit_ref = (
+        f"https://github.com/{identity['repository']}/actions/runs/"
+        f"{verified_ci_audit['workflow_run_id']}"
+    )
+    lane["current_gate_attestation"] = {
+        "at": at,
+        "claim_id": identity["claim_id"],
+        "packet_sha256": identity["packet_sha256"],
+        "verified_by": "protected-library-needs-v1",
+        "summary": "Needs-only metadata scope, exact-head CI and offline snapshot validated independently.",
+        "evidence_refs_by_gate": {
+            gate: [audit_ref]
+            for gate in ("G1_IMPLEMENTATION", "G2_STATIC", "G3_CI", "G4_INTEGRATION")
+        },
+    }
+    lane.setdefault("gate_evidence_history", []).append(lane["current_gate_attestation"])
+    lane["gate_evidence_history"] = lane["gate_evidence_history"][-20:]
+    for gate in ("G1_IMPLEMENTATION", "G2_STATIC", "G3_CI", "G4_INTEGRATION"):
+        gates[gate] = "PASS"
+    gates["G7_CANONICAL_SYNC"] = "PASS"
+    # G6 stays PENDING; do NOT write review_history/APPROVED.
+    lane.setdefault("autonomous_completion_history", []).append({
+        "at": at,
+        "claim_id": identity["claim_id"],
+        "work_item": claim["work_item"],
+        "profile": "library-needs-only-v1",
+        "identity": identity,
+        "protected_run_id": protected_run["run_id"],
+        "ci_run_id": verified_ci_audit["workflow_run_id"],
+        "scope_blob_sha": verified_scope["file_blob_sha"],
+        "decision": "VERIFIED_METADATA_ONLY",
+    })
+    lane["autonomous_completion_history"] = lane["autonomous_completion_history"][-20:]
+    lane.setdefault("reconciliation_events", []).append({
+        "type": "CLAIM_RELEASED_AFTER_AUTONOMOUS_NEEDS_VERIFICATION",
+        "claim_id": identity["claim_id"],
+        "work_item": claim["work_item"],
+        "at": at,
+    })
+    lane["reconciliation_events"] = lane["reconciliation_events"][-20:]
+    lane["active_claim"] = None
+    lane["status"] = "READY"
+    lane["state_version"] += 1
+    lane["updated_at"] = _date(now)
+    lane.pop("block_reason", None)
+    lane["next_action"] = (
+        "Claim the next bounded Library task. Executable module certification "
+        "still requires independent implementation/integration/runtime evidence."
+    )
+    _write(lane_path, lane)
+    project(root=root, now=now)
+
+
 def review_accept(
     lane_id: str,
     *,
