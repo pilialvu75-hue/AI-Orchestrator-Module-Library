@@ -622,8 +622,8 @@ def process_one(path: Path, *, root: Path = ROOT, now: datetime | None = None) -
 
         if operation == "reconcile_external_merge":
             actor = str(request.get("actor_id"))
-            if actor not in {"chatgpt:cantiere", "chatgpt:main-reviewer"}:
-                raise ValueError("external merge reconcile requires authorized interactive actor")
+            if actor not in {f"chatgpt:{lane_id}", "chatgpt:main-reviewer"}:
+                raise ValueError("external merge reconcile requires matching lane actor")
             if str(payload.get("actor_id") or "") != actor:
                 raise ValueError("external merge actor must match request actor")
             if automation_entry is not None:
