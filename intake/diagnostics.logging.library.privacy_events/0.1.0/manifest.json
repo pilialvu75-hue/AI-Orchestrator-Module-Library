@@ -27,11 +27,11 @@
   "dependencies": [],
   "provenance": {
     "origin": "built_in",
-    "source_repository": null,
-    "source_commit": null,
+    "source_repository": "https://github.com/pilialvu75-hue/AI-Orchestrator-Module-Library",
+    "source_commit": "30af487af6164b3a6e6f0cd2bc2b11ee6e737fee",
     "source_tag": null,
     "source_project_id": "pilialvu75-hue/AI-Orchestrator-Module-Library",
-    "source_task_id": "library-issue-139-privacy-diagnostics",
+    "source_task_id": "library-issue-139-privacy-diagnostics-pinned-source",
     "license": null,
     "license_file": null,
     "retrieved_at": "2026-10-18T12:30:00Z"
