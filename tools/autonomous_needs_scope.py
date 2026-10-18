@@ -17,6 +17,7 @@ _SHA = re.compile(r"[0-9a-f]{40}\Z")
 
 def verify_needs_only_scope(identity: dict, github_token: str) -> dict:
     if (not isinstance(identity, dict)
+            or identity.get("lane_id") != "library-curation"
             or identity.get("repository") != LIBRARY_REPOSITORY
             or type(identity.get("pr_number")) is not int
             or identity["pr_number"] <= 0
