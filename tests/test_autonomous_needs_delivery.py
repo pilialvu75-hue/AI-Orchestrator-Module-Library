@@ -47,8 +47,13 @@ LANE = {
     },
     "review_packet": PACKET,
     "pending_needs_delivery": PENDING,
-    "gates": {"G6_REVIEWER": "PENDING",
-              "G5_TARGET_RUNTIME": "NOT_APPLICABLE_UNTIL_RUNTIME_CHANGE"},
+    "gates": {
+        **{name: "PASS" for name in (
+            "G0_CLAIM", "G1_IMPLEMENTATION", "G2_STATIC",
+            "G3_CI", "G4_INTEGRATION")},
+        "G5_TARGET_RUNTIME": "NOT_APPLICABLE_UNTIL_RUNTIME_CHANGE",
+        "G6_REVIEWER": "PENDING", "G7_CANONICAL_SYNC": "PENDING",
+    },
     "reviewer": {"state": "PENDING"},
 }
 PR = {
