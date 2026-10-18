@@ -4,6 +4,7 @@ from __future__ import annotations
 import argparse
 import hashlib
 import json
+import re
 from collections import Counter
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
@@ -692,10 +693,7 @@ def validate_autonomous_completion(
     # A receipt flag in mutable lane JSON is NOT proof of provenance. Until
     # receipt verification is implemented against a protected external source,
     # this API must never advertise eligibility for automatic state changes.
-    raise ValueError("autonomous completion disabled: trusted receipt provenance is not verified")
-
-
-def complete_verified_library_needs(
+    raise ValueError("autonomous completion disabled: trusted receipt provenance is not verdef complete_verified_library_needs(
     lane_id: str,
     *,
     identity: dict[str, Any],
@@ -705,7 +703,7 @@ def complete_verified_library_needs(
     root: Path = ROOT,
     now: datetime | None = None,
 ) -> None:
-    """Release one independently verified *metadata-only* Library claim.
+    """Prepare one independently verified metadata-only Library delivery.
 
     The caller MUST be the transactional inbox, which fetches the protected
     run and revalidates both GitHub CI and the exact PR diff. These arguments
@@ -776,6 +774,8 @@ def complete_verified_library_needs(
     if (lane.get("reviewer") or {}).get("state") == "APPROVED":
         raise ValueError("autonomous completion cannot replace a recorded human review")
 
+    if lane.get("pending_needs_delivery") is not None:
+        raise ValueError("a verified needs-only delivery is already pending")
     at = _iso(now)
     audit_ref = (
         f"https://github.com/{identity['repository']}/actions/runs/"
@@ -796,38 +796,132 @@ def complete_verified_library_needs(
     lane["gate_evidence_history"] = lane["gate_evidence_history"][-20:]
     for gate in ("G1_IMPLEMENTATION", "G2_STATIC", "G3_CI", "G4_INTEGRATION"):
         gates[gate] = "PASS"
-    gates["G7_CANONICAL_SYNC"] = "PASS"
+    gates["G7_CANONICAL_SYNC"] = "PENDING"
     # G6 stays PENDING; do NOT write review_history/APPROVED.
-    lane.setdefault("autonomous_completion_history", []).append({
-        "at": at,
-        "claim_id": identity["claim_id"],
-        "work_item": claim["work_item"],
+    # Persist the independently verified PR identity BEFORE any GitHub merge
+    # side effect. A failed merge or process crash keeps the worker claim live
+    # and REVIEW_REQUIRED, allowing the serialized reconciler to recover.
+    lane["pending_needs_delivery"] = {
         "profile": "library-needs-only-v1",
+        "prepared_at": at,
         "identity": identity,
         "protected_run_id": protected_run["run_id"],
+        "protected_run_attempt": protected_run["run_attempt"],
+        "protected_sha": protected_run["head_sha"],
         "ci_run_id": verified_ci_audit["workflow_run_id"],
         "scope_blob_sha": verified_scope["file_blob_sha"],
-        "decision": "VERIFIED_METADATA_ONLY",
-    })
-    lane["autonomous_completion_history"] = lane["autonomous_completion_history"][-20:]
+        "changed_file": "catalog/needs.json",
+    }
     lane.setdefault("reconciliation_events", []).append({
-        "type": "CLAIM_RELEASED_AFTER_AUTONOMOUS_NEEDS_VERIFICATION",
+        "type": "AUTONOMOUS_NEEDS_DELIVERY_PREPARED",
         "claim_id": identity["claim_id"],
         "work_item": claim["work_item"],
         "at": at,
     })
     lane["reconciliation_events"] = lane["reconciliation_events"][-20:]
+    lane["status"] = "REVIEW_REQUIRED"
+    lane["state_version"] += 1
+    lane["updated_at"] = _date(now)
+    lane["next_action"] = (
+        "Protected needs-only evidence verified; merge the exact PR head into main "
+        "and verify its catalog blob before releasing the canonical claim."
+    )
+    _write(lane_path, lane)
+    project(root=root, now=now)
+
+
+def finalize_verified_library_needs(
+    lane_id: str,
+    *,
+    delivery: dict[str, Any],
+    root: Path = ROOT,
+    now: datetime | None = None,
+) -> None:
+    """Release the claim ONLY after protected code rechecked GitHub delivery.
+
+    The transactional inbox independently fetches the merged PR, verifies its
+    exact expected head/merge commit, main ancestry, and catalog blob before
+    calling this local state transition. The worker cannot provide approval.
+    """
+    now = now or _now()
+    if lane_id != "library-curation" or not isinstance(delivery, dict):
+        raise ValueError("needs-only delivery is restricted to Library curation")
+    _, canonical = _canonical(root)
+    lane_path, lane = _lane_by_id(root, canonical, lane_id)
+    claim, packet = lane.get("active_claim"), lane.get("review_packet")
+    pending = lane.get("pending_needs_delivery")
+    if (lane.get("role") != "worker"
+            or lane.get("status") != "REVIEW_REQUIRED"
+            or not isinstance(claim, dict)
+            or not isinstance(packet, dict)
+            or not isinstance(pending, dict)):
+        raise ValueError("cannot finalize an unprepared needs-only delivery")
+    identity = pending.get("identity")
+    if (not isinstance(identity, dict)
+            or identity.get("lane_id") != lane_id
+            or identity.get("repository") != "pilialvu75-hue/AI-Orchestrator-Module-Library"
+            or identity.get("claim_id") != claim.get("claim_id")
+            or identity.get("packet_sha256") != _review_packet_digest(packet)
+            or identity.get("pr_number") != packet.get("pull_request")
+            or type(identity.get("state_version")) is not int
+            or identity["state_version"] + 1 != lane.get("state_version")
+            or pending.get("profile") != "library-needs-only-v1"
+            or pending.get("changed_file") != "catalog/needs.json"):
+        raise ValueError("prepared delivery no longer matches canonical claim and packet")
+    if (set(delivery) != {"pr_number", "head_sha", "merge_commit_sha",
+                          "file_blob_sha"}
+            or delivery.get("pr_number") != identity["pr_number"]
+            or delivery.get("head_sha") != identity["head_sha"]
+            or delivery.get("file_blob_sha") != pending.get("scope_blob_sha")
+            or not isinstance(delivery.get("merge_commit_sha"), str)
+            or not re.fullmatch(r"[0-9a-f]{40}", delivery["merge_commit_sha"])):
+        raise ValueError("merged delivery proof differs from the prepared receipt")
+    if (lane.get("gates") or {}).get("G6_REVIEWER") != "PENDING":
+        raise ValueError("G6 reviewer approval must not be synthesized")
+    if (lane.get("reviewer") or {}).get("state") != "PENDING":
+        raise ValueError("needs-only delivery cannot impersonate reviewer approval")
+    if (lane["gates"].get("G5_TARGET_RUNTIME")
+            not in ("NOT_APPLICABLE", "NOT_APPLICABLE_UNTIL_RUNTIME_CHANGE")):
+        raise ValueError("runtime applicability changed before needs delivery")
+
+    at = _iso(now)
+    lane["gates"]["G7_CANONICAL_SYNC"] = "PASS"
+    lane.setdefault("autonomous_completion_history", []).append({
+        "at": at,
+        "claim_id": claim["claim_id"],
+        "work_item": claim["work_item"],
+        "profile": pending["profile"],
+        "identity": identity,
+        "protected_run_id": pending["protected_run_id"],
+        "ci_run_id": pending["ci_run_id"],
+        "scope_blob_sha": pending["scope_blob_sha"],
+        "merge_commit_sha": delivery["merge_commit_sha"],
+        "decision": "MERGED_METADATA_ONLY",
+    })
+    lane["autonomous_completion_history"] = lane["autonomous_completion_history"][-20:]
+    lane.setdefault("reconciliation_events", []).append({
+        "type": "CLAIM_RELEASED_AFTER_VERIFIED_NEEDS_MERGE",
+        "claim_id": claim["claim_id"],
+        "work_item": claim["work_item"],
+        "merge_commit_sha": delivery["merge_commit_sha"],
+        "at": at,
+    })
+    lane["reconciliation_events"] = lane["reconciliation_events"][-20:]
+    lane.pop("pending_needs_delivery", None)
     lane["active_claim"] = None
     lane["status"] = "READY"
     lane["state_version"] += 1
     lane["updated_at"] = _date(now)
     lane.pop("block_reason", None)
     lane["next_action"] = (
-        "Claim the next bounded Library task. Executable module certification "
-        "still requires independent implementation/integration/runtime evidence."
+        "Verified needs-only change is merged on main; Library can claim another "
+        "bounded task. Executable modules still require independent certification."
     )
     _write(lane_path, lane)
     project(root=root, now=now)
+
+
+ow=now)
 
 
 def review_accept(
