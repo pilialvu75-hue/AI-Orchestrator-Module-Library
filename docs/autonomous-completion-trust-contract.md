@@ -121,6 +121,54 @@ only be executed from a verified protected default-branch context. Adding
 `independent_gate_audit` does not change the existing autonomous-completion
 fail-closed policy, transactional inbox operation, or canonical G6 state rules.
 
+## First real autonomous lane profile: needs queue only (PR #120)
+
+A strictly limited production route is implemented for the
+`library-researcher` lane and **only a one-file change to
+`catalog/needs.json`**. This is metadata queue maintenance, NOT automatic
+certification or promotion of executable modules.
+
+The independent scope verifier (`tools/autonomous_needs_scope.py`) re-fetches
+GitHub's PR metadata, complete one-file diff and exact-head blob identity. It
+rejects forks, drafts, non-main targets, extra files, renamed/added/deleted
+files, stale heads and executable changes. The protected CI audit must verify
+the unchanged protected `validate-library.yml` and all required green steps,
+including catalog contracts, lifecycle and deterministic offline export. The
+runtime gate must already be explicitly N/A and no runtime/physical evidence
+claim is accepted. Material roadmap changes are excluded from this fast path.
+
+An eligible worker submits a normal claim-bound `review_packet` in the
+canonical inbox. The protected reconcile workflow, after serializing that
+handoff onto main, dispatches the **read-only** verifier on main. Successful
+protected runs trigger `workflow_run`; the reconciler independently fetches
+the run, artifact, canonical identity, exact-head PR and verified scope,
+then enqueues a request with ONLY `protected_run_id`, `run_attempt` and
+`protected_sha`. The ordinary inbox **rechecks all evidence again** under
+the current `expected_state_version` before applying it on an isolated
+canonical tree and running the regular validator. A worker-supplied approval
+flag never grants rights.
+
+Successful needs-only completion records `autonomous_completion_history`,
+claim/payload digest/CI run and an independent gate attestation; it releases
+the claim and moves the lane to **READY**. It deliberately leaves
+`G6_REVIEWER=PENDING`, does NOT write `review_history.APPROVED`,
+and does NOT claim a generic `DONE` state. A subsequent claim resets
+the implementation gates normally. Other software, module certification,
+runtime or physical work remains on the stronger independent-verifier route.
+
+The protected reconcile workflow uses `actions:write` only to dispatch
+the allowlisted read-only verifier; `contents:write` is used only by its
+existing serialized canonical state processor. PR code is never executed with
+those write credentials. Dispatch is event-triggered for a changed canonical
+lane; it is not a continuous polling/paid-service loop.
+
+**Activation prerequisite:** This behavior is staged in PR #120, not yet
+operating on main. Real confirmation requires (1) merge exact green head,
+(2) a separate eligible one-file needs-only PR with live claim/packet,
+(3) completed protected workflow and artifact, (4) an `APPLIED` inbox
+receipt and canonical lane READY. The end-to-end tests mock authenticated
+GitHub API responses and cannot substitute for that real proof.
+
 ## State transition
 
 Only after trusted verification may a dedicated transaction release a live
@@ -138,5 +186,4 @@ requirements. Fail closed on any missing provenance.
 4. CI passes on the exact PR head and the change is merged to the default branch.
 5. Only then enable the worker automation in the canonical registry.
 
-Current state: **NOT ACTIVE**. This document is an implementation contract,
-not a claim that the Library can already complete work autonomously.
+Current state: **NEEDS-ONLY FAST PATH STAGED, NOT ACTIVE ON MAIN**.\nGeneric executable-module completion and G6 replacement remain unavailable.
