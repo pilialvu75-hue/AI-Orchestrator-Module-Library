@@ -3,11 +3,11 @@
   "id": "cantiere",
   "title": "Cantiere",
   "role": "worker",
-  "status": "CLAIMED",
+  "status": "IMPLEMENTING",
   "activation": "active",
   "scope": "Exclusive Cantiere/App Factory execution, durability, build/review/validation/apply and first-real-app reliability.",
   "shared_engine_policy": "shared_or_control_plane",
-  "state_version": 115,
+  "state_version": 116,
   "updated_at": "2026-10-18",
   "active_claim": {
     "claim_id": "04b43b64a16f85a0d054",
@@ -25,8 +25,8 @@
       "file:pilialvu75-hue/Ai-orchestrator-riserva:test/app_factory/workshop/workshop_production_execution_controller_test.dart"
     ],
     "started_at": "2026-10-18T12:33:03Z",
-    "heartbeat_at": "2026-10-18T12:33:03Z",
-    "lease_until": "2026-10-19T00:33:03Z",
+    "heartbeat_at": "2026-10-18T12:39:05Z",
+    "lease_until": "2026-10-19T00:39:05Z",
     "lease_hours": 12
   },
   "dependencies": [],
@@ -52,7 +52,7 @@
     "reviewed_by": null,
     "reviewed_at": null
   },
-  "next_action": "Check six CI on exact PR #854 head 9119e728, correct failures, then submit canonical review packet; physical S24 FE test remains pending.",
+  "next_action": "Verify six exact-head CI outcomes and fresh Codex review, correct any findings, then submit canonical review packet. Physical +3278 star app acceptance remains untested.",
   "historical_backlog": [
     "Stay in Phase 1 ONLINE until a real generated Android app is physically accepted.",
     "Reproduce the recent manga-drawing app failure from current main with Diagnostics; do not restart generic audits.",
@@ -82,25 +82,6 @@
     "continuation": "Do not re-enable broad Cantiere autopilot until the remaining control-plane concurrency/resource-lock weakness is addressed or explicitly accepted for the next pilot."
   },
   "checkpoints": [
-    {
-      "seq": 13,
-      "at": "2026-10-03T19:40:23Z",
-      "claim_id": "2582374b5524b1b7c29d",
-      "work_item": "CANT-11-2975-planner-and-managed-restart",
-      "summary": "PR #782 review found two substantive issues; both addressed in head 39cd461: preserve only explicit per-field Workshop generation settings, and bound task-level criteria while carrying all original project acceptance constraints through normal/resumed execution. 80 affected tests pass, two review threads resolved; all six workflows rerunning on final head.",
-      "decisions": [
-        "No physical retest requested.",
-        "Full original project acceptance is authoritative; task summaries do not replace it."
-      ],
-      "evidence_refs": [
-        "Ai-orchestrator-riserva#782",
-        "commit:39cd46120552cbb8d75918f2e35ae0503cf76351",
-        "review:4174543698-addressed",
-        "review:4174543700-addressed",
-        "test:80-affected-PASS"
-      ],
-      "next_action": "Wait for exact-head CI and additional review findings, then merge and verify signed Android release; physical acceptance remains open."
-    },
     {
       "seq": 14,
       "at": "2026-10-03T20:04:31Z",
@@ -1022,25 +1003,43 @@
         "9119e7289befb8fc53a13a3cf46b58d80aa46431"
       ],
       "next_action": "Check six CI on exact PR #854 head 9119e728, correct failures, then submit canonical review packet; physical S24 FE test remains pending."
+    },
+    {
+      "seq": 63,
+      "at": "2026-10-18T12:39:05Z",
+      "claim_id": "04b43b64a16f85a0d054",
+      "work_item": "issue-853-rejected-gate-retry",
+      "summary": "PR #854 head eba877a1 repairs Reviewer/Validation rejected retry, explicitly reopens blocked virtual workspace from gate-specific captured baseline; Diagnostics now reports review/validation instead of modelRuntime; independent P1/P2 Codex findings addressed with focused tests.",
+      "decisions": [
+        "No false reviewer or validation approval; no real workspace mutations by retry preparation.",
+        "Preserve prior staged certified/library changes and owner offline mode.",
+        "Report runtime errors distinctly from rejected gate verdicts."
+      ],
+      "evidence_refs": [
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/issues/853",
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/854",
+        "eba877a1e8851ba6727577e40c23c2f5514b1af3"
+      ],
+      "next_action": "Verify six exact-head CI outcomes and fresh Codex review, correct any findings, then submit canonical review packet. Physical +3278 star app acceptance remains untested."
     }
   ],
   "last_checkpoint": {
-    "seq": 62,
-    "at": "2026-10-18T12:28:56Z",
-    "claim_id": "743d958369bce99e0e49",
+    "seq": 63,
+    "at": "2026-10-18T12:39:05Z",
+    "claim_id": "04b43b64a16f85a0d054",
     "work_item": "issue-853-rejected-gate-retry",
-    "summary": "PR #854 implements explicit failed + retryable state for Reviewer/Validation rejection, retaining rejection evidence and durable failed journal; test suite expanded for offline restore and reattempt.",
+    "summary": "PR #854 head eba877a1 repairs Reviewer/Validation rejected retry, explicitly reopens blocked virtual workspace from gate-specific captured baseline; Diagnostics now reports review/validation instead of modelRuntime; independent P1/P2 Codex findings addressed with focused tests.",
     "decisions": [
-      "No automatic approval/apply from a rejected gate.",
-      "No change to models, Vulkan, RAM or inference limits.",
-      "Preserve owner offline mode and execution identity on retries."
+      "No false reviewer or validation approval; no real workspace mutations by retry preparation.",
+      "Preserve prior staged certified/library changes and owner offline mode.",
+      "Report runtime errors distinctly from rejected gate verdicts."
     ],
     "evidence_refs": [
       "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/issues/853",
       "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/854",
-      "9119e7289befb8fc53a13a3cf46b58d80aa46431"
+      "eba877a1e8851ba6727577e40c23c2f5514b1af3"
     ],
-    "next_action": "Check six CI on exact PR #854 head 9119e728, correct failures, then submit canonical review packet; physical S24 FE test remains pending."
+    "next_action": "Verify six exact-head CI outcomes and fresh Codex review, correct any findings, then submit canonical review packet. Physical +3278 star app acceptance remains untested."
   },
   "review_history": [
     {
