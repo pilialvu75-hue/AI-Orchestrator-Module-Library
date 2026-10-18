@@ -522,43 +522,54 @@ class ControlPlaneInboxTests(unittest.TestCase):
                         "external-merge-130.json").read_text())["status"], "APPLIED"
         )
 
-    def test_external_merge_reconcile_rejects_unverified_or_unauthorized(self):
+    def _assert_external_merge_quarantined(self, changed_field):
         from unittest.mock import patch
 
-        for changed_field in ("unmerged", "wrong-head", "not-on-main", "actor"):
-            request = self._external_merge_request(
-                actor="chatgpt:other" if changed_field == "actor"
-                else "chatgpt:cantiere"
+        request = self._external_merge_request(
+            actor="chatgpt:other" if changed_field == "actor"
+            else "chatgpt:cantiere"
+        )
+        request["request_id"] += "-" + changed_field
+        original = self._cantiere()
+        pr = self._merged_pr_response()
+        comparison = {
+            "status": "identical", "behind_by": 0,
+            "base_commit": {"sha": "b" * 40},
+        }
+        if changed_field == "unmerged":
+            pr["merged"] = False
+        elif changed_field == "wrong-head":
+            pr["head"]["sha"] = "c" * 40
+        elif changed_field == "not-on-main":
+            comparison["behind_by"] = 1
+        with patch.dict("os.environ", {"GITHUB_TOKEN": "test-token"}), patch(
+            "tools.autonomous_ci_probe.fetch_json",
+            side_effect=[pr, comparison],
+        ):
+            result = inbox.process_one(
+                self._write_request(request),
+                root=self.root,
+                now=datetime(2026, 10, 18, 12, 0, tzinfo=timezone.utc),
             )
-            request["request_id"] += "-" + changed_field
-            original = self._cantiere()
-            pr = self._merged_pr_response()
-            comparison = {
-                "status": "identical", "behind_by": 0,
-                "base_commit": {"sha": "b" * 40},
-            }
-            if changed_field == "unmerged":
-                pr["merged"] = False
-            elif changed_field == "wrong-head":
-                pr["head"]["sha"] = "c" * 40
-            elif changed_field == "not-on-main":
-                comparison["behind_by"] = 1
-            with patch.dict("os.environ", {"GITHUB_TOKEN": "test-token"}), patch(
-                "tools.autonomous_ci_probe.fetch_json",
-                side_effect=[pr, comparison],
-            ):
-                result = inbox.process_one(
-                    self._write_request(request),
-                    root=self.root,
-                    now=datetime(2026, 10, 18, 12, 0, tzinfo=timezone.utc),
-                )
-            self.assertIn("quarantined", result, changed_field)
-            self.assertEqual(self._cantiere(), original)
-            receipt_path = self.root / ".airlab/control-plane/inbox/quarantine" / (
-                request["request_id"] + ".json"
-            )
-            self.assertEqual(json.loads(receipt_path.read_text())["status"],
-                             "QUARANTINED")
+        self.assertIn("quarantined", result, changed_field)
+        self.assertEqual(self._cantiere(), original)
+        receipt_path = self.root / ".airlab/control-plane/inbox/quarantine" / (
+            request["request_id"] + ".json"
+        )
+        self.assertEqual(json.loads(receipt_path.read_text())["status"],
+                         "QUARANTINED")
+
+    def test_external_merge_rejects_unmerged_pr(self):
+        self._assert_external_merge_quarantined("unmerged")
+
+    def test_external_merge_rejects_wrong_head(self):
+        self._assert_external_merge_quarantined("wrong-head")
+
+    def test_external_merge_rejects_no_main_ancestry(self):
+        self._assert_external_merge_quarantined("not-on-main")
+
+    def test_external_merge_rejects_unauthorized_actor(self):
+        self._assert_external_merge_quarantined("actor")
 
     def test_review_gate_evidence_records_g1_g4_without_promoting(self):
         lane = self._claimed_review_packet()
