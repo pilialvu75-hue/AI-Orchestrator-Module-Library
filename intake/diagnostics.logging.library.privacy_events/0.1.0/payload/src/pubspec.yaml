@@ -1,0 +1,7 @@
+name: privacy_diagnostic_events
+description: Pure Dart, data-minimizing diagnostic events for AI Orchestrator adapters.
+version: 0.1.0
+publish_to: none
+environment:
+  sdk: ">=3.4.0 <4.0.0"
+dependencies: {}
