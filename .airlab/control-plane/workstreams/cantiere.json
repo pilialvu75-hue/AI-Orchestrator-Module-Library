@@ -3,30 +3,13 @@
   "id": "cantiere",
   "title": "Cantiere",
   "role": "worker",
-  "status": "IMPLEMENTING",
+  "status": "READY",
   "activation": "active",
   "scope": "Exclusive Cantiere/App Factory execution, durability, build/review/validation/apply and first-real-app reliability.",
   "shared_engine_policy": "shared_or_control_plane",
-  "state_version": 113,
+  "state_version": 114,
   "updated_at": "2026-10-18",
-  "active_claim": {
-    "claim_id": "743d958369bce99e0e49",
-    "owner_lane": "cantiere",
-    "work_item": "issue-853-rejected-gate-retry",
-    "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
-    "scope": "Bounded rejected Reviewer/Validation retry state and durable project restore regression, no hardware or CI contract changes",
-    "branch": "fix/cantiere-853-rejected-gate-retry",
-    "resource_locks": [
-      "branch:pilialvu75-hue/Ai-orchestrator-riserva:fix/cantiere-853-rejected-gate-retry",
-      "contract:cantiere-rejected-task-retry",
-      "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/app_factory/workshop/workshop_production_execution_controller.dart",
-      "file:pilialvu75-hue/Ai-orchestrator-riserva:test/app_factory/workshop/workshop_production_execution_controller_test.dart"
-    ],
-    "started_at": "2026-10-18T12:22:58Z",
-    "heartbeat_at": "2026-10-18T12:28:56Z",
-    "lease_until": "2026-10-19T00:28:56Z",
-    "lease_hours": 12
-  },
+  "active_claim": null,
   "dependencies": [],
   "roadmap_refs": [
     ".airlab/public-repositories/Ai-orchestrator-riserva/roadmap.yaml#CANT-11",
@@ -35,7 +18,7 @@
   ],
   "evidence": [],
   "gates": {
-    "G0_CLAIM": "PASS",
+    "G0_CLAIM": "PENDING",
     "G1_IMPLEMENTATION": "PENDING",
     "G2_STATIC": "PENDING",
     "G3_CI": "PENDING",
@@ -1210,13 +1193,6 @@
   ],
   "reconciliation_events": [
     {
-      "type": "CLAIM_RELEASED_AFTER_REVIEW",
-      "claim_id": "3d39dee487b98eb463b1",
-      "work_item": "AIVEXUS-BASE-1",
-      "reason": "Main/Reviewer accepted the bounded implementation/review gate.",
-      "at": "2026-10-12T10:22:50Z"
-    },
-    {
       "type": "CANONICAL_SYNC_COMPLETED",
       "refs": [
         ".airlab/public-repositories/Ai-orchestrator-riserva/roadmap.yaml"
@@ -1439,6 +1415,13 @@
       "packet_sha256": "26109478ba98e5f547d32d488881437b3a6701361c465632399849f2702aea6c",
       "at": "2026-10-18T11:24:04Z",
       "review_approved": false
+    },
+    {
+      "type": "CLAIM_RELEASED",
+      "claim_id": "743d958369bce99e0e49",
+      "work_item": "issue-853-rejected-gate-retry",
+      "reason": "Expand the bounded #853 retry fix to include acceptance classifier and its regression tests after independent P2 finding. Preserve PR #854 and prior checkpoint; reacquire broader claim immediately.",
+      "at": "2026-10-18T12:32:27Z"
     }
   ],
   "review_packet_history": [
