@@ -4,6 +4,7 @@ from __future__ import annotations
 import argparse
 import json
 import os
+import sys
 import re
 import shutil
 import tempfile
@@ -16,6 +17,10 @@ import control_plane_manager
 import validate_control_plane
 
 ROOT = Path(__file__).resolve().parents[1]
+# The production workflow invokes this as python tools/control_plane_inbox.py,
+# whereas protected verifiers are imported as tools.* packages.
+if str(ROOT) not in sys.path:
+    sys.path.insert(0, str(ROOT))
 PENDING_REL = Path(".airlab/control-plane/inbox/pending")
 PROCESSED_REL = Path(".airlab/control-plane/inbox/processed")
 QUARANTINE_REL = Path(".airlab/control-plane/inbox/quarantine")
