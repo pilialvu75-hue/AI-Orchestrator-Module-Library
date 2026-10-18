@@ -7,7 +7,7 @@
     "policy": "This private repository is the single coordination authority. Chats and agents are workers, not independent sources of truth."
   },
   "updated_at": "2026-10-18",
-  "state_revision": 318,
+  "state_revision": 319,
   "lifecycle_status": "BOOTSTRAP_ACTIVE",
   "roadmap_authority": {
     "library": ".airlab/roadmap.yaml",
@@ -81,11 +81,11 @@
     "invalid_lane_behavior": "ISOLATE_AND_SURFACE_PROJECTION_INCIDENT"
   },
   "projection": {
-    "source_digest": "80677a4912d75187b2992d0464d5108eef468f651a0686b82e8378a84869ecdf",
-    "projected_at": "2026-10-18T02:35:04Z",
+    "source_digest": "a1bf3a745f160999f3805c9e1264e33d29d72e1405fba2dbffdb7441ec6b1010",
+    "projected_at": "2026-10-18T10:05:56Z",
     "counts": {
       "BLOCKED": 2,
-      "READY": 12,
+      "READY": 13,
       "REVIEW_REQUIRED": 3
     },
     "active_claims": [
@@ -433,6 +433,18 @@
         "inference_profile_status": null,
         "historical_backlog_count": 3,
         "next_action": "Merge PR #835 only at exact reviewed head 54a278b126b4ccc62eb5f4028e9bb0934bc406be. Keep issue #114 available for post-fix S24 FE export evidence; RAM stability, Vulkan validation and physical device acceptance remain open. No timeout/watchdog policy change is implied."
+      },
+      {
+        "id": "library-curation",
+        "status": "READY",
+        "activation": "active",
+        "state_version": 1,
+        "updated_at": "2026-10-18",
+        "active_claim": null,
+        "reviewer_state": "PENDING",
+        "inference_profile_status": null,
+        "historical_backlog_count": 2,
+        "next_action": "Claim only one bounded Library-owned catalog/needs.json edit through the canonical inbox, then submit an exact-head PR-bound review packet for protected needs-only verification. Do not touch the Researcher claim or auto-certify executable modules."
       },
       {
         "id": "library-researcher",
