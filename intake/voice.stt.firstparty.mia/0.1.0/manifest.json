@@ -36,7 +36,7 @@
     "adapter_notes": "Researcher discovery only; certification must establish license, security and target compatibility.",
     "estimated_effort": "medium",
     "known_constraints": [
-      "license unresolved at discovery; fail closed until trusted evidence establishes it"
+      "Mia root MIT license traced to pinned source commit; third-party dependencies, security and target-runtime compatibility still require independent verification"
     ]
   },
   "kind": "integration_bundle",
@@ -55,8 +55,8 @@
     "raspberry_pi"
   ],
   "provenance": {
-    "license": "NOASSERTION",
-    "license_file": null,
+    "license": "MIT",
+    "license_file": "provenance/LICENSE",
     "origin": "researcher",
     "retrieved_at": "2026-10-02T06:59:26.104496Z",
     "source_commit": "ebeaa2884bce22e891d15da7c1f61962dde0699a",
@@ -86,7 +86,7 @@
     "first-party"
   ],
   "validation": {
-    "score": 0.0,
+    "score": 0,
     "test_report": null,
     "tests_passed": false,
     "validated_at": null,
