@@ -29,6 +29,11 @@ class PrivacyCandidateReceiptTests(unittest.TestCase):
         destination.parent.mkdir(parents=True)
         shutil.copytree(source, destination)
         self.base = destination
+        # A successful protected workflow will change the live asset to tested.
+        # Keep the unit test independent from mutable real intake history.
+        report = destination / "tests" / "dart-linux-ci-report.json"
+        if report.exists():
+            report.unlink()
         self.manifest_file = destination / "manifest.json"
         manifest = self.manifest()
         manifest["status"] = "discovered"
