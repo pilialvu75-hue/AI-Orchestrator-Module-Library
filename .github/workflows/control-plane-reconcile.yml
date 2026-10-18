@@ -13,9 +13,15 @@ on:
   schedule:
     - cron: "17 * * * *"
   workflow_dispatch:
+  workflow_run:
+    workflows: ["Autonomous CI Evidence Probe"]
+    types: [completed]
 
 permissions:
   contents: write
+  actions: write
+  checks: read
+  pull-requests: read
 
 concurrency:
   group: canonical-control-plane-reconcile
@@ -37,6 +43,11 @@ jobs:
           python-version: "3.12"
 
       - name: Reconcile latest main and project canonical state
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          RECONCILE_TRIGGER: ${{ github.event_name }}
+          VERIFIER_RUN_ID: ${{ github.event.workflow_run.id }}
+          VERIFIER_CONCLUSION: ${{ github.event.workflow_run.conclusion }}
         shell: bash
         run: |
           set -euo pipefail
@@ -63,6 +74,12 @@ jobs:
             # canonical_sync_complete can reach the ordinary mutation processor.
             python tools/canonical_sync_receipts.py prepare
 
+            # Never trust workflow_run event fields as approval; the enqueue
+            # re-fetches protected run, artifact, PR, exact CI and safe diff.
+            if [[ "${RECONCILE_TRIGGER}" == "workflow_run" && "${VERIFIER_CONCLUSION}" == "success" && -n "${VERIFIER_RUN_ID:-}" ]]; then
+              python -m tools.autonomous_needs_enqueue "${VERIFIER_RUN_ID}" || echo "Protected needs run was not eligible for completion."
+            fi
+
             python tools/control_plane_inbox.py process
 
             # Finalize a receipt only after the ordinary inbox proves the matching request
@@ -75,6 +92,9 @@ jobs:
             if git diff --quiet; then
               echo "Canonical state already current."
               python tools/validate_control_plane.py
+              if [[ "${RECONCILE_TRIGGER}" == "push" ]]; then
+                python -m tools.autonomous_needs_dispatch || echo "No eligible needs-only verifier dispatch."
+              fi
               exit 0
             fi
 
@@ -86,6 +106,7 @@ jobs:
             git commit -m "control-plane: apply guarded mutations and reconcile"
 
             if git push origin HEAD:main; then
+              python -m tools.autonomous_needs_dispatch || echo "No eligible needs-only verifier dispatch."
               # Validation intentionally runs after the atomic state commit.
               # If a pre-existing malformed lane exists, projection incidents stay visible
               # and the workflow still fails closed instead of hiding all healthy lanes.

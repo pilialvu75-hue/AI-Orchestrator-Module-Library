@@ -1,3 +1,7 @@
+## Requested operating mode (15 October 2026)
+
+The project owner has requested removal of Main/Reviewer as an operational dependency for every worker lane. The reviewer automation has been disabled. **This is a migration instruction, not an assertion that the existing canonical state machine has changed.** Until an implemented and tested transition policy is merged, the existing `REVIEW_REQUIRED` and G6 rules remain enforced. Implement the replacement as a coherent migration of the control-plane manager, transactional inbox handlers, gates, worker bootstraps and tests; never forge approval or mark untested physical gates PASS. Preserve CI, provenance, security certification, claims, resource locks and runtime-device evidence. Do not send further manual Main/Reviewer relays while this migration is in progress.
+
 # Handoff
 
 This directory is the private continuity contract for Module Library.
@@ -14,7 +18,7 @@ Read in this order before starting work:
 8. `.airlab/decisions.md`
 9. Current repository CI/workflows, open work and Diagnostics evidence relevant to the selected roadmap item.
 
-The main/reviewer lane is the only lane that may promote worker results to VERIFIED/DONE. Worker lanes stop at REVIEW_REQUIRED.
+The main/reviewer lane remains required for generic VERIFIED/DONE. PR #120 stages a separate **needs-only** autonomous claim release to READY after a trusted protected CI receipt and one-file `catalog/needs.json` GitHub scope verification; it does not set G6 or certify executable modules. Before that PR is merged, all worker lanes still stop at REVIEW_REQUIRED.
 
 Use `tools/chat_lane_bootstrap.py --lane <lane-id>` to generate the current relay for a chat. Worker completion must be submitted as a structured `review_packet` and stop at REVIEW_REQUIRED.
 

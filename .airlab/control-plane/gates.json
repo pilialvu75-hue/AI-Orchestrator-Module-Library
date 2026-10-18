@@ -92,5 +92,27 @@
     "A stale or conflicting claim blocks new overlapping implementation until reconciled.",
     "Target inference profiles are platform-owned and benchmark-gated; no universal LLM/backend may be required across all targets.",
     "Inference profile promotion requires target resource headroom, quality, latency/stability and fallback evidence; CI alone is insufficient."
-  ]
+  ],
+  "temporary_worker_autonomy": {
+    "status": "NEEDS_ONLY_TRANSACTIONAL_PATH_STAGED_PENDING_MERGE",
+    "required_checks": [
+      "claim_live",
+      "packet_bound_attestation",
+      "G0_G4_pass",
+      "G5_if_applicable",
+      "canonical_sync_if_material"
+    ],
+    "policy": "Only exact-scope catalog/needs.json metadata changes can use separately authenticated protected CI and transactional inbox. No reviewer G6 PASS, generic DONE, module certification, executable or runtime self-approval. Not active until merged and verified on main.",
+    "first_profile": {
+      "id": "library-needs-only-v1",
+      "lane": "library-researcher",
+      "repository": "pilialvu75-hue/AI-Orchestrator-Module-Library",
+      "only_changed_file": "catalog/needs.json",
+      "trigger": "canonical_review_packet_protected_ci_workflow",
+      "completion": "READY_with_claim_released",
+      "reviewer_g6": "PENDING_not_forged",
+      "runtime_g5": "NOT_APPLICABLE_only",
+      "module_certification": "NOT_AUTHORIZED"
+    }
+  }
 }

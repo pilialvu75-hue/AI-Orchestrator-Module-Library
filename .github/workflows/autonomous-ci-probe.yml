@@ -1,0 +1,65 @@
+name: Autonomous CI Evidence Probe
+
+on:
+  workflow_dispatch:
+    inputs:
+      lane_id:
+        description: "Canonical worker lane awaiting verification"
+        required: true
+        type: string
+      repository:
+        description: "Repository containing the PR (owner/name)"
+        required: true
+        type: string
+      pr_number:
+        description: "Pull request number"
+        required: true
+        type: number
+
+permissions:
+  contents: read
+  actions: read
+  checks: read
+  pull-requests: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - name: Checkout protected default branch
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.sha }}
+          persist-credentials: false
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Read and verify GitHub CI evidence
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          TARGET_LANE_ID: ${{ inputs.lane_id }}
+          TARGET_REPOSITORY: ${{ inputs.repository }}
+          TARGET_PR_NUMBER: ${{ inputs.pr_number }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -m tools.autonomous_canonical_ci_probe "$TARGET_LANE_ID" "$TARGET_REPOSITORY" "$TARGET_PR_NUMBER" validate > "$RUNNER_TEMP/ci-evidence-raw.json"
+          python - "$RUNNER_TEMP/ci-evidence-raw.json" "$RUNNER_TEMP/ci-evidence.json" <<'PY'
+          import json, os, sys
+          with open(sys.argv[1], encoding="utf-8") as source:
+              evidence = json.load(source)
+          evidence["protected_run_id"] = int(os.environ["GITHUB_RUN_ID"])
+          evidence["protected_run_attempt"] = int(os.environ["GITHUB_RUN_ATTEMPT"])
+          evidence["protected_workflow_ref"] = os.environ["GITHUB_WORKFLOW_REF"]
+          with open(sys.argv[2], "w", encoding="utf-8") as target:
+              json.dump(evidence, target, sort_keys=True)
+          PY
+      - name: Upload read-only CI evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: autonomous-ci-evidence
+          path: ${{ runner.temp }}/ci-evidence.json
+          if-no-files-found: error
+          retention-days: 7

@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-10-11",
+  "updated_at": "2026-10-16",
   "policy": {
     "mutation_actor_id_required": true,
     "automation_actor_prefix": "automation:",
@@ -46,7 +46,7 @@
       "automation_id": "6abe4a9283b08191af4cc91bac843616",
       "title": "AI Orchestrator Reviewer",
       "actor_id": "automation:main-reviewer:6abe4a9283b08191af4cc91bac843616",
-      "enabled": true,
+      "enabled": false,
       "owner_lane": "main-reviewer",
       "kind": "reviewer",
       "read_capabilities": [
@@ -193,6 +193,43 @@
         "pilialvu75-hue/Ai-orchestrator-riserva"
       ],
       "scope": "Cantiere lane worker only. Enabled to advance one bounded non-overlapping software item from current canonical state; stop at REVIEW_REQUIRED or physical-owner gates.",
+      "allowed_operations": [
+        "claim",
+        "heartbeat",
+        "checkpoint",
+        "release",
+        "submit_review"
+      ],
+      "target_lane_policy": "owner_lane_only",
+      "allowed_target_lanes": [],
+      "forbidden_takeover_rules": [
+        "FOREIGN_LANE_MUTATION_FORBIDDEN",
+        "CROSS_LANE_REVIEW_FORBIDDEN"
+      ]
+    },
+    {
+      "automation_id": "6ad0ec9aadac819196d1f75e75bf7ed1",
+      "title": "Libreria sviluppo autonomo",
+      "actor_id": "automation:library-researcher:6ad0ec9aadac819196d1f75e75bf7ed1",
+      "enabled": false,
+      "owner_lane": "library-researcher",
+      "kind": "lane_worker",
+      "read_capabilities": [
+        "control_plane_state",
+        "github_pr_ci",
+        "runtime_evidence"
+      ],
+      "write_capabilities": [
+        "control_plane_mutation",
+        "repository_implementation"
+      ],
+      "read_repositories": [
+        "pilialvu75-hue/AI-Orchestrator-Module-Library"
+      ],
+      "write_repositories": [
+        "pilialvu75-hue/AI-Orchestrator-Module-Library"
+      ],
+      "scope": "Bounded library-researcher work only; disabled until external scheduler re-enabled and protocol migration verified. No self-promotion or foreign lane changes.",
       "allowed_operations": [
         "claim",
         "heartbeat",

@@ -3,6 +3,8 @@ from __future__ import annotations
 
 import argparse
 import json
+import os
+import sys
 import re
 import shutil
 import tempfile
@@ -15,6 +17,10 @@ import control_plane_manager
 import validate_control_plane
 
 ROOT = Path(__file__).resolve().parents[1]
+# The production workflow invokes this as python tools/control_plane_inbox.py,
+# whereas protected verifiers are imported as tools.* packages.
+if str(ROOT) not in sys.path:
+    sys.path.insert(0, str(ROOT))
 PENDING_REL = Path(".airlab/control-plane/inbox/pending")
 PROCESSED_REL = Path(".airlab/control-plane/inbox/processed")
 QUARANTINE_REL = Path(".airlab/control-plane/inbox/quarantine")
@@ -26,6 +32,8 @@ OPERATIONS = {
     "checkpoint",
     "release",
     "submit_review",
+    "autonomous_completion_preflight",
+    "autonomous_complete",
     "record_review_gates",
     "review_accept",
     "review_rework",
@@ -249,12 +257,73 @@ def _record_review_gates(
     control_plane_manager.project(root=root, now=now)
 
 
+def _independently_verify_needs_completion(
+    root: Path, lane_id: str, payload: dict[str, Any],
+    *, now: datetime,
+) -> dict[str, Any]:
+    """Re-fetch protected GitHub provenance; worker request is only a run locator."""
+    if lane_id != "library-researcher":
+        raise ValueError("autonomous needs fast path is limited to the Library worker lane")
+    if set(payload) != {"protected_run_id", "run_attempt", "protected_sha"}:
+        raise ValueError("autonomous needs payload requires exact protected run locator")
+    run_id, attempt, sha = (
+        payload["protected_run_id"], payload["run_attempt"], payload["protected_sha"]
+    )
+    if type(run_id) is not int or run_id <= 0 or type(attempt) is not int or attempt <= 0:
+        raise ValueError("invalid protected workflow run identity")
+    if not isinstance(sha, str) or not re.fullmatch(r"[0-9a-f]{40}", sha):
+        raise ValueError("invalid protected workflow SHA")
+    token = os.environ.get("GITHUB_TOKEN", "")
+    if not token.strip():
+        raise ValueError("protected GitHub API token required for autonomous completion")
+    lane = _load(root / _lane_rel(root, lane_id))
+    claim = lane.get("active_claim")
+    if not isinstance(claim, dict) or claim.get("repository") != (
+        "pilialvu75-hue/AI-Orchestrator-Module-Library"
+    ):
+        raise ValueError("autonomous needs claim must target the canonical Library repository")
+    packet = lane.get("review_packet")
+    if not isinstance(packet, dict) or type(packet.get("pull_request")) is not int:
+        raise ValueError("autonomous needs claim requires a PR-bound review packet")
+    from tools.autonomous_ci_probe import fetch_json
+    from tools.autonomous_canonical_identity import derive_canonical_receipt_identity
+    from tools.autonomous_receipt_evidence_probe import probe_receipt_evidence
+    from tools.autonomous_needs_scope import verify_needs_only_scope
+    repository = claim["repository"]
+    pr = fetch_json(
+        f"https://api.github.com/repos/{repository}/pulls/{packet['pull_request']}", token,
+    )
+    identity = derive_canonical_receipt_identity(lane, pr)
+    control_plane_manager._assert_claim_live(claim, now)
+    evidence = probe_receipt_evidence(
+        receipt=identity, canonical_identity=identity,
+        protected_repository=repository,
+        run_id=run_id, run_attempt=attempt,
+        workflow_path=".github/workflows/autonomous-ci-probe.yml",
+        protected_sha=sha, github_token=token,
+    )
+    # A read-only protected CI receipt is NOT an authorization. The separately
+    # verified exact PR file list is the restricted scope decision; neither
+    # part can be replaced by a worker-provided approval boolean.
+    scope = verify_needs_only_scope(identity, token)
+    audit = evidence["ci_evidence"]["independent_gate_audit"]
+    if (scope.get("canonical_identity") != identity
+            or audit.get("canonical_identity") != identity
+            or evidence.get("identity") != identity
+            or evidence.get("trusted_receipt") is not False
+            or evidence.get("completion_authorized") is not False):
+        raise ValueError("autonomous needs verification did not bind exact canonical identity")
+    return {"identity": identity, "pr": pr, "scope": scope,
+            "protected_run": evidence["protected_run"], "audit": audit}
+
+
 def _apply(
     root: Path,
     lane_id: str,
     operation: str,
     payload: dict[str, Any],
     now: datetime,
+    *, verified_autonomy: dict[str, Any] | None = None,
 ) -> None:
     if operation == "claim":
         control_plane_manager.claim(
@@ -313,6 +382,28 @@ def _apply(
             )
         finally:
             packet_path.unlink(missing_ok=True)
+    elif operation == "autonomous_completion_preflight":
+        if set(payload) != {"claim_id", "packet_sha256"}:
+            raise ValueError("autonomous preflight requires exact claim_id and packet_sha256")
+        lane = _load(root / _lane_rel(root, lane_id))
+        result = control_plane_manager.validate_autonomous_completion(lane, now=now)
+        if payload["claim_id"] != result["claim_id"] or payload["packet_sha256"] != result["packet_sha256"]:
+            raise ValueError("autonomous preflight request is stale or mismatched")
+        # Read-only by design: no claim release or reviewer approval.
+    elif operation == "autonomous_complete":
+        if not isinstance(verified_autonomy, dict):
+            raise ValueError("autonomous completion requires authenticated protected receipt")
+        if not isinstance(verified_autonomy.get("identity"), dict):
+            raise ValueError("autonomous completion identity missing")
+        if verified_autonomy["identity"].get("lane_id") != lane_id:
+            raise ValueError("autonomous completion target lane mismatch")
+        control_plane_manager.complete_verified_library_needs(
+            lane_id, identity=verified_autonomy["identity"],
+            verified_scope=verified_autonomy["scope"],
+            protected_run=verified_autonomy["protected_run"],
+            verified_ci_audit=verified_autonomy["audit"],
+            root=root, now=now,
+        )
     elif operation == "record_review_gates":
         _record_review_gates(root, lane_id, payload, now)
     elif operation == "review_accept":
@@ -402,6 +493,16 @@ def process_one(path: Path, *, root: Path = ROOT, now: datetime | None = None) -
             lane_id,
             operation,
         )
+        if operation == "autonomous_completion_preflight":
+            actor_id = str(request.get("actor_id"))
+            worker_chat = actor_id == f"chatgpt:{lane_id}"
+            authorized_worker_automation = (
+                automation_entry is not None
+                and automation_entry.get("kind") == "worker"
+                and automation_entry.get("owner_lane") == lane_id
+            )
+            if not worker_chat and not authorized_worker_automation:
+                raise ValueError("autonomous preflight requires authorized target worker identity")
         if operation == "record_review_gates":
             actor_id = str(request.get("actor_id"))
             automation_reviewer = (
@@ -421,6 +522,11 @@ def process_one(path: Path, *, root: Path = ROOT, now: datetime | None = None) -
             raise ValueError(
                 f"state_version conflict: expected {expected_version}, current {current_version}"
             )
+        verified_autonomy = None
+        if operation == "autonomous_complete":
+            verified_autonomy = _independently_verify_needs_completion(
+                root, lane_id, payload, now=now,
+            )
 
         try:
             baseline_errors = validate_control_plane.validate(root)
@@ -430,7 +536,8 @@ def process_one(path: Path, *, root: Path = ROOT, now: datetime | None = None) -
         with tempfile.TemporaryDirectory(prefix="control-plane-transaction-") as tmp:
             temp_root = Path(tmp)
             _copy_airlab(root, temp_root)
-            _apply(temp_root, lane_id, operation, payload, now)
+            _apply(temp_root, lane_id, operation, payload, now,
+                   verified_autonomy=verified_autonomy)
             candidate_errors = validate_control_plane.validate(temp_root)
             target_errors = _target_errors(candidate_errors, lane_id)
             new_errors = sorted(set(candidate_errors) - set(baseline_errors))
