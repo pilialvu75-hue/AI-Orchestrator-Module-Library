@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "request_id": "cantiere-20261018-issue853-rejected-review-checkpoint",
+  "actor_id": "chatgpt:cantiere",
+  "lane_id": "cantiere",
+  "operation": "checkpoint",
+  "expected_state_version": 112,
+  "payload": {
+    "summary": "PR #854 implements explicit failed + retryable state for Reviewer/Validation rejection, retaining rejection evidence and durable failed journal; test suite expanded for offline restore and reattempt.",
+    "next_action": "Check six CI on exact PR #854 head 9119e728, correct failures, then submit canonical review packet; physical S24 FE test remains pending.",
+    "decisions": [
+      "No automatic approval/apply from a rejected gate.",
+      "No change to models, Vulkan, RAM or inference limits.",
+      "Preserve owner offline mode and execution identity on retries."
+    ],
+    "evidence_refs": [
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/issues/853",
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/854",
+      "9119e7289befb8fc53a13a3cf46b58d80aa46431"
+    ]
+  }
+}
