@@ -122,10 +122,6 @@ class LibraryReadinessTests(unittest.TestCase):
         path.unlink()
         self.save()
         (self.base / "payload").symlink_to(self.root, target_is_directory=True)
-        with self.assertRaisesRegex(ReadinessError, "source snapshot"):
-            # A symlinked source dir cannot become a verified snapshot.
-            # The reporter refuses a nested symlink if encountered.
-            raise ReadinessError("source snapshot is untrusted")
         self.assertIn("SOURCE_SNAPSHOT_MISSING",
                       build_report(self.root)["candidates"][0]["blockers"])
 
