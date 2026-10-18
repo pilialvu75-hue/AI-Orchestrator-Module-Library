@@ -139,7 +139,9 @@ class NeedsCatchUpTests(unittest.TestCase):
                          [39118397691, 39118397690])
 
     def test_no_token_refuses_before_network(self):
-        with patch("tools.autonomous_needs_reconcile_scan.fetch_json") as fetch:
+        with patch("tools.autonomous_needs_reconcile_scan._validate_review_packet"), patch(
+            "tools.autonomous_needs_reconcile_scan.fetch_json"
+        ) as fetch:
             with self.assertRaisesRegex(ValueError, "token"):
                 reconcile_verified_needs(root=self.root, token="", now=NOW)
             fetch.assert_not_called()
