@@ -37,7 +37,7 @@ class PinnedMiaLicenseTests(unittest.TestCase):
                 self.assertEqual(provenance["license_file"], "provenance/LICENSE")
                 data = (folder / provenance["license_file"]).read_bytes()
                 self.assertEqual(hashlib.sha1(
-                    b"blob " + str(len(data)).encode("ascii") + b"\\0" + data
+                    b"blob " + str(len(data)).encode("ascii") + b"\0" + data
                 ).hexdigest(), LICENSE_BLOB)
                 self.assertIn(b"Copyright (c) 2026 Mia contributors", data)
                 self.assertEqual(manifest["status"], "discovered")
