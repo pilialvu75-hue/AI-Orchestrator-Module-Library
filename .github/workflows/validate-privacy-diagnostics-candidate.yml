@@ -1,0 +1,68 @@
+name: Validate Privacy Diagnostics Candidate
+
+on:
+  pull_request:
+    branches: ["main"]
+    paths:
+      - "intake/diagnostics.logging.library.privacy_events/**"
+      - ".github/workflows/validate-privacy-diagnostics-candidate.yml"
+  push:
+    branches: ["main"]
+    paths:
+      - "intake/diagnostics.logging.library.privacy_events/**"
+      - ".github/workflows/validate-privacy-diagnostics-candidate.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  isolate-dart-candidate:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 12
+    steps:
+      - name: Checkout exact candidate head
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+
+      - name: Set up Dart SDK
+        uses: dart-lang/setup-dart@v1
+        with:
+          sdk: stable
+
+      - name: Verify immutable Library local payload
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import json
+          import sys
+          from pathlib import Path
+          sys.path.insert(0, "tools")
+          from library_pipeline import validate_payload
+          base = Path("intake/diagnostics.logging.library.privacy_events/0.1.0")
+          manifest = json.loads((base / "manifest.json").read_text(encoding="utf-8"))
+          validate_payload(manifest, base)
+          assert manifest["status"] in ("discovered", "quarantined", "normalized")
+          assert manifest["validation"]["tests_passed"] is False
+          assert manifest["security"]["reviewed"] is False
+          print("Pinned source verified; no certification status asserted.")
+          PY
+
+      - name: Run real Dart analyzer and functional self-tests (unprivileged)
+        shell: bash
+        run: |
+          set -euo pipefail
+          cd intake/diagnostics.logging.library.privacy_events/0.1.0/payload/src
+          dart --version
+          dart pub get
+          dart analyze --fatal-infos
+          dart run bin/self_test.dart
+
+      - name: Confirm source remains untrusted until independent evidence review
+        shell: bash
+        run: |
+          set -euo pipefail
+          python tools/validate_library.py
+          python -m unittest -v tests.test_library_local_payload_integrity
