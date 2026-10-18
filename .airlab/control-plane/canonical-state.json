@@ -57,6 +57,7 @@
     ".airlab/control-plane/workstreams/platform-ios.json",
     ".airlab/control-plane/workstreams/platform-web.json",
     ".airlab/control-plane/workstreams/platform-raspberry-pi.json",
+    ".airlab/control-plane/workstreams/library-curation.json",
     ".airlab/control-plane/workstreams/library-researcher.json",
     ".airlab/control-plane/workstreams/airlab.json"
   ],
