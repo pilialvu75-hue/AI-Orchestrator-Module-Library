@@ -7,7 +7,7 @@
     "policy": "This private repository is the single coordination authority. Chats and agents are workers, not independent sources of truth."
   },
   "updated_at": "2026-10-18",
-  "state_revision": 326,
+  "state_revision": 327,
   "lifecycle_status": "BOOTSTRAP_ACTIVE",
   "roadmap_authority": {
     "library": ".airlab/roadmap.yaml",
@@ -81,28 +81,14 @@
     "invalid_lane_behavior": "ISOLATE_AND_SURFACE_PROJECTION_INCIDENT"
   },
   "projection": {
-    "source_digest": "f4108c4332de5ec2307ef21e503db5a4ede4e9c7daf24ec76bb9a8fb307ca6a6",
-    "projected_at": "2026-10-18T11:10:42Z",
+    "source_digest": "843c23254e7b5d5032c74ed71f835c492bfc12f23ca5806f920dfe4f8a837c72",
+    "projected_at": "2026-10-18T11:24:04Z",
     "counts": {
       "BLOCKED": 2,
-      "READY": 13,
-      "REVIEW_REQUIRED": 3
+      "READY": 14,
+      "REVIEW_REQUIRED": 2
     },
     "active_claims": [
-      {
-        "lane": "cantiere",
-        "claim_id": "0780c6a10b7fc5c768ff",
-        "work_item": "issue-845-star-functional-3204",
-        "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
-        "lease_until": "2026-10-17T01:28:07Z",
-        "resource_locks": [
-          "branch:pilialvu75-hue/Ai-orchestrator-riserva:fix/cantiere-845-star-functional-3204",
-          "contract:cantiere-engineer-functional-completeness",
-          "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/app_factory/workshop/workshop_proposal_implementation_runner.dart",
-          "file:pilialvu75-hue/Ai-orchestrator-riserva:test/app_factory/workshop/workshop_generated_star_negative_gate_test.dart",
-          "file:pilialvu75-hue/Ai-orchestrator-riserva:test/app_factory/workshop/workshop_proposal_implementation_runner_test.dart"
-        ]
-      },
       {
         "lane": "library-researcher",
         "claim_id": "a3be2c00b7d608d2df75",
@@ -145,18 +131,6 @@
         "work_item": "issue-849-android-selective-backup-exclusions"
       },
       {
-        "key": "branch:pilialvu75-hue/Ai-orchestrator-riserva:fix/cantiere-845-star-functional-3204",
-        "lane": "cantiere",
-        "claim_id": "0780c6a10b7fc5c768ff",
-        "work_item": "issue-845-star-functional-3204"
-      },
-      {
-        "key": "contract:cantiere-engineer-functional-completeness",
-        "lane": "cantiere",
-        "claim_id": "0780c6a10b7fc5c768ff",
-        "work_item": "issue-845-star-functional-3204"
-      },
-      {
         "key": "file:pilialvu75-hue/AI-Orchestrator-Module-Researcher:.github/workflows/autonomous-seeding.yml",
         "lane": "library-researcher",
         "claim_id": "a3be2c00b7d608d2df75",
@@ -187,24 +161,6 @@
         "work_item": "issue-849-android-selective-backup-exclusions"
       },
       {
-        "key": "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/app_factory/workshop/workshop_proposal_implementation_runner.dart",
-        "lane": "cantiere",
-        "claim_id": "0780c6a10b7fc5c768ff",
-        "work_item": "issue-845-star-functional-3204"
-      },
-      {
-        "key": "file:pilialvu75-hue/Ai-orchestrator-riserva:test/app_factory/workshop/workshop_generated_star_negative_gate_test.dart",
-        "lane": "cantiere",
-        "claim_id": "0780c6a10b7fc5c768ff",
-        "work_item": "issue-845-star-functional-3204"
-      },
-      {
-        "key": "file:pilialvu75-hue/Ai-orchestrator-riserva:test/app_factory/workshop/workshop_proposal_implementation_runner_test.dart",
-        "lane": "cantiere",
-        "claim_id": "0780c6a10b7fc5c768ff",
-        "work_item": "issue-845-star-functional-3204"
-      },
-      {
         "key": "resource:android-issue-849-backup-policy",
         "lane": "platform-android",
         "claim_id": "394d8d0d738e8b921f03",
@@ -218,7 +174,6 @@
       }
     ],
     "review_required": [
-      "cantiere",
       "library-researcher",
       "platform-android"
     ],
@@ -271,16 +226,6 @@
       }
     ],
     "checkpoint_watch": [
-      {
-        "lane": "cantiere",
-        "claim_id": "0780c6a10b7fc5c768ff",
-        "work_item": "issue-845-star-functional-3204",
-        "status": "REVIEW_REQUIRED",
-        "reason": "CHECKPOINT_STALE",
-        "last_checkpoint_at": "2026-10-16T13:30:12Z",
-        "due_since": "2026-10-16T15:30:12Z",
-        "warning_after_minutes": 120
-      },
       {
         "lane": "library-researcher",
         "claim_id": "a3be2c00b7d608d2df75",
@@ -400,27 +345,15 @@
       },
       {
         "id": "cantiere",
-        "status": "REVIEW_REQUIRED",
+        "status": "READY",
         "activation": "active",
-        "state_version": 110,
-        "updated_at": "2026-10-17",
-        "active_claim": {
-          "claim_id": "0780c6a10b7fc5c768ff",
-          "work_item": "issue-845-star-functional-3204",
-          "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
-          "lease_until": "2026-10-17T01:28:07Z",
-          "resource_locks": [
-            "branch:pilialvu75-hue/Ai-orchestrator-riserva:fix/cantiere-845-star-functional-3204",
-            "contract:cantiere-engineer-functional-completeness",
-            "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/app_factory/workshop/workshop_proposal_implementation_runner.dart",
-            "file:pilialvu75-hue/Ai-orchestrator-riserva:test/app_factory/workshop/workshop_generated_star_negative_gate_test.dart",
-            "file:pilialvu75-hue/Ai-orchestrator-riserva:test/app_factory/workshop/workshop_proposal_implementation_runner_test.dart"
-          ]
-        },
+        "state_version": 111,
+        "updated_at": "2026-10-18",
+        "active_claim": null,
         "reviewer_state": "PENDING",
         "inference_profile_status": null,
         "historical_backlog_count": 3,
-        "next_action": "Main/Reviewer must inspect the review_packet, linked evidence and required gates before promotion or rework."
+        "next_action": "Run physical target acceptance; independent review remains outstanding."
       },
       {
         "id": "diagnostics",
