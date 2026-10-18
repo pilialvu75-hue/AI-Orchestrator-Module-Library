@@ -11,7 +11,7 @@
     {
       "repository": "pilialvu75-hue/AI-Orchestrator-Module-Library",
       "baseline_at": "2026-10-03T16:20:00Z",
-      "cursor_merged_at": "2026-10-03T16:20:00Z"
+      "cursor_merged_at": "2026-10-03T16:24:59Z"
     },
     {
       "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
@@ -43,5 +43,37 @@
       "note": "Known motivating example for CP-HARDEN-03. It predates this incremental detector and is not retroactively reopened."
     }
   ],
-  "last_scan_at": null
+  "last_scan_at": "2026-10-18T12:08:54Z",
+  "scan_health": {
+    "pilialvu75-hue/AI-Orchestrator-Module-Library": {
+      "state": "OK",
+      "last_success_at": "2026-10-18T12:08:54Z",
+      "last_failure_at": null,
+      "error_code": null
+    },
+    "pilialvu75-hue/Ai-orchestrator-riserva": {
+      "state": "UNAVAILABLE",
+      "last_success_at": null,
+      "last_failure_at": "2026-10-18T12:08:54Z",
+      "error_code": "GITHUB_NOT_FOUND_OR_INACCESSIBLE_404"
+    },
+    "pilialvu75-hue/Ai-orchestrator-diagnostics": {
+      "state": "UNAVAILABLE",
+      "last_success_at": null,
+      "last_failure_at": "2026-10-18T12:08:54Z",
+      "error_code": "GITHUB_NOT_FOUND_OR_INACCESSIBLE_404"
+    },
+    "pilialvu75-hue/AI-Orchestrator-Module-Researcher": {
+      "state": "UNAVAILABLE",
+      "last_success_at": null,
+      "last_failure_at": "2026-10-18T12:08:54Z",
+      "error_code": "GITHUB_NOT_FOUND_OR_INACCESSIBLE_404"
+    },
+    "pilialvu75-hue/Ai_orchestrator-prova": {
+      "state": "UNAVAILABLE",
+      "last_success_at": null,
+      "last_failure_at": "2026-10-18T12:08:54Z",
+      "error_code": "GITHUB_NOT_FOUND_OR_INACCESSIBLE_404"
+    }
+  }
 }
