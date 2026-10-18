@@ -7,7 +7,7 @@
     "policy": "This private repository is the single coordination authority. Chats and agents are workers, not independent sources of truth."
   },
   "updated_at": "2026-10-18",
-  "state_revision": 328,
+  "state_revision": 329,
   "lifecycle_status": "BOOTSTRAP_ACTIVE",
   "roadmap_authority": {
     "library": ".airlab/roadmap.yaml",
@@ -81,11 +81,11 @@
     "invalid_lane_behavior": "ISOLATE_AND_SURFACE_PROJECTION_INCIDENT"
   },
   "projection": {
-    "source_digest": "7a71153c24b73a6ab802de040b92333b28933f2590f70a808970719e5b73bcca",
-    "projected_at": "2026-10-18T12:22:58Z",
+    "source_digest": "cf455d4c442bbebaec3787cd65c027a7ce0693f6db14f9ac18d2e39cbb996063",
+    "projected_at": "2026-10-18T12:28:56Z",
     "counts": {
       "BLOCKED": 2,
-      "CLAIMED": 1,
+      "IMPLEMENTING": 1,
       "READY": 13,
       "REVIEW_REQUIRED": 2
     },
@@ -95,7 +95,7 @@
         "claim_id": "743d958369bce99e0e49",
         "work_item": "issue-853-rejected-gate-retry",
         "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
-        "lease_until": "2026-10-19T00:22:58Z",
+        "lease_until": "2026-10-19T00:28:56Z",
         "resource_locks": [
           "branch:pilialvu75-hue/Ai-orchestrator-riserva:fix/cantiere-853-rejected-gate-retry",
           "contract:cantiere-rejected-task-retry",
@@ -383,15 +383,15 @@
       },
       {
         "id": "cantiere",
-        "status": "CLAIMED",
+        "status": "IMPLEMENTING",
         "activation": "active",
-        "state_version": 112,
+        "state_version": 113,
         "updated_at": "2026-10-18",
         "active_claim": {
           "claim_id": "743d958369bce99e0e49",
           "work_item": "issue-853-rejected-gate-retry",
           "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
-          "lease_until": "2026-10-19T00:22:58Z",
+          "lease_until": "2026-10-19T00:28:56Z",
           "resource_locks": [
             "branch:pilialvu75-hue/Ai-orchestrator-riserva:fix/cantiere-853-rejected-gate-retry",
             "contract:cantiere-rejected-task-retry",
@@ -402,7 +402,7 @@
         "reviewer_state": "PENDING",
         "inference_profile_status": null,
         "historical_backlog_count": 3,
-        "next_action": "Run physical target acceptance; independent review remains outstanding."
+        "next_action": "Check six CI on exact PR #854 head 9119e728, correct failures, then submit canonical review packet; physical S24 FE test remains pending."
       },
       {
         "id": "diagnostics",

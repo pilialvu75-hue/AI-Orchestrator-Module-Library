@@ -1,0 +1,12 @@
+{
+  "schema_version": 1,
+  "request_id": "cantiere-20261018-issue853-rejected-review-checkpoint",
+  "status": "APPLIED",
+  "processed_at": "2026-10-18T12:28:56Z",
+  "source_file": "cantiere-20261018-issue853-rejected-review-checkpoint.json",
+  "lane_id": "cantiere",
+  "operation": "checkpoint",
+  "actor_id": "chatgpt:cantiere",
+  "errors": [],
+  "result_state_version": 113
+}
