@@ -7,7 +7,7 @@
     "policy": "This private repository is the single coordination authority. Chats and agents are workers, not independent sources of truth."
   },
   "updated_at": "2026-10-18",
-  "state_revision": 335,
+  "state_revision": 336,
   "lifecycle_status": "BOOTSTRAP_ACTIVE",
   "roadmap_authority": {
     "library": ".airlab/roadmap.yaml",
@@ -81,11 +81,11 @@
     "invalid_lane_behavior": "ISOLATE_AND_SURFACE_PROJECTION_INCIDENT"
   },
   "projection": {
-    "source_digest": "843fd47e34ba66163aa846c530b46c6afd2572849759993cc200f0c8c71e466a",
-    "projected_at": "2026-10-18T18:09:02Z",
+    "source_digest": "ac8185063df447b8a00105c12389df6ec486d2650fe35e92fbf1bae173f36e32",
+    "projected_at": "2026-10-18T18:13:45Z",
     "counts": {
       "BLOCKED": 2,
-      "CLAIMED": 1,
+      "IMPLEMENTING": 1,
       "READY": 13,
       "REVIEW_REQUIRED": 2
     },
@@ -95,7 +95,7 @@
         "claim_id": "d840975d34d7657fb98e",
         "work_item": "issue-845-gate-evidence-visibility-v1",
         "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
-        "lease_until": "2026-10-19T06:09:02Z",
+        "lease_until": "2026-10-19T06:13:45Z",
         "resource_locks": [
           "branch:pilialvu75-hue/Ai-orchestrator-riserva:fix/cantiere-845-gate-evidence-visibility",
           "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/app_factory/workshop/workshop_gate_evidence_export.dart",
@@ -390,15 +390,15 @@
       },
       {
         "id": "cantiere",
-        "status": "CLAIMED",
+        "status": "IMPLEMENTING",
         "activation": "active",
-        "state_version": 119,
+        "state_version": 120,
         "updated_at": "2026-10-18",
         "active_claim": {
           "claim_id": "d840975d34d7657fb98e",
           "work_item": "issue-845-gate-evidence-visibility-v1",
           "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
-          "lease_until": "2026-10-19T06:09:02Z",
+          "lease_until": "2026-10-19T06:13:45Z",
           "resource_locks": [
             "branch:pilialvu75-hue/Ai-orchestrator-riserva:fix/cantiere-845-gate-evidence-visibility",
             "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/app_factory/workshop/workshop_gate_evidence_export.dart",
@@ -410,7 +410,7 @@
         "reviewer_state": "PENDING",
         "inference_profile_status": null,
         "historical_backlog_count": 3,
-        "next_action": "Run physical target acceptance; independent review remains outstanding."
+        "next_action": "Check PR #856 exact-head CI and code review, fix only concrete issues, prepare claim-bound review packet; G5 generated star APK physical acceptance pending."
       },
       {
         "id": "diagnostics",

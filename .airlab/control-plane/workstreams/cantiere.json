@@ -3,11 +3,11 @@
   "id": "cantiere",
   "title": "Cantiere",
   "role": "worker",
-  "status": "CLAIMED",
+  "status": "IMPLEMENTING",
   "activation": "active",
   "scope": "Exclusive Cantiere/App Factory execution, durability, build/review/validation/apply and first-real-app reliability.",
   "shared_engine_policy": "shared_or_control_plane",
-  "state_version": 119,
+  "state_version": 120,
   "updated_at": "2026-10-18",
   "active_claim": {
     "claim_id": "d840975d34d7657fb98e",
@@ -24,8 +24,8 @@
       "resource:cantiere-845-gate-evidence-export"
     ],
     "started_at": "2026-10-18T18:09:02Z",
-    "heartbeat_at": "2026-10-18T18:09:02Z",
-    "lease_until": "2026-10-19T06:09:02Z",
+    "heartbeat_at": "2026-10-18T18:13:45Z",
+    "lease_until": "2026-10-19T06:13:45Z",
     "lease_hours": 12
   },
   "dependencies": [],
@@ -51,7 +51,7 @@
     "reviewed_by": null,
     "reviewed_at": null
   },
-  "next_action": "Run physical target acceptance; independent review remains outstanding.",
+  "next_action": "Check PR #856 exact-head CI and code review, fix only concrete issues, prepare claim-bound review packet; G5 generated star APK physical acceptance pending.",
   "historical_backlog": [
     "Stay in Phase 1 ONLINE until a real generated Android app is physically accepted.",
     "Reproduce the recent manga-drawing app failure from current main with Diagnostics; do not restart generic audits.",
@@ -81,24 +81,6 @@
     "continuation": "Do not re-enable broad Cantiere autopilot until the remaining control-plane concurrency/resource-lock weakness is addressed or explicitly accepted for the next pilot."
   },
   "checkpoints": [
-    {
-      "seq": 16,
-      "at": "2026-10-03T20:43:58Z",
-      "claim_id": "146b5421aff70e95307a",
-      "work_item": "CANT-11-2979-reviewer-json-recovery",
-      "summary": "PR #783 opened at 40fefffb07c57eb6203cb37801fbf94b8f502d2c on c6133b1 main. Local 55 tests pass; Web, Cantiere first-app APK and Linux workflows green; Windows/macOS tests green, platform builds still running. No review findings currently open.",
-      "decisions": [
-        "No physical test on intermediate +2983: next signed build must include #783 and #782.",
-        "Resume persistent build-repair project:dashboard:1791058417410553 via Riprova task to avoid repeating completed planning; preserve original root and other projects."
-      ],
-      "evidence_refs": [
-        "Ai-orchestrator-riserva#783",
-        "commit:40fefffb07c57eb6203cb37801fbf94b8f502d2c",
-        "CI:37152170721,37152170737,37152170753,37152170784,37152170715,37152170709",
-        ".airlab/control-plane/evidence/cantiere/20261003-2979-reviewer-parsing.json"
-      ],
-      "next_action": "Finish all CI/review checks, merge under owner mandate if no substantive findings, verify main and signed release. Phase 1 physical APK install/open remains pending."
-    },
     {
       "seq": 17,
       "at": "2026-10-11T10:14:41Z",
@@ -1016,23 +998,43 @@
       ],
       "next_action": "Run physical target acceptance; independent review remains outstanding.",
       "kind": "EXTERNAL_MERGE_RECONCILIATION"
+    },
+    {
+      "seq": 66,
+      "at": "2026-10-18T18:13:45Z",
+      "claim_id": "d840975d34d7657fb98e",
+      "work_item": "issue-845-gate-evidence-visibility-v1",
+      "summary": "Physical +3285 Reviewer rejection remains correct; diagnosis-only draft PR #856 at 0a6dbbd adds persistent privacy-safe export status and failure reason classification with regression tests, before CI.",
+      "decisions": [
+        "Do not change Reviewer/Validation fail-closed behavior or gate source provenance.",
+        "Do not assert clipboard root cause or generated app success without runtime evidence.",
+        "Do not alter Qwen roles, Vulkan, RAM or timeouts."
+      ],
+      "evidence_refs": [
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/issues/845#issuecomment-6253288017",
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/856",
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/0a6dbbd424dbd70d042dc5cc163ac2a342b7abb6"
+      ],
+      "next_action": "Check PR #856 exact-head CI and code review, fix only concrete issues, prepare claim-bound review packet; G5 generated star APK physical acceptance pending."
     }
   ],
   "last_checkpoint": {
-    "seq": 65,
-    "at": "2026-10-18T13:15:50Z",
-    "claim_id": "04b43b64a16f85a0d054",
-    "work_item": "issue-853-rejected-gate-retry",
-    "summary": "Owner-directed GitHub merge verified; not independently approved.",
+    "seq": 66,
+    "at": "2026-10-18T18:13:45Z",
+    "claim_id": "d840975d34d7657fb98e",
+    "work_item": "issue-845-gate-evidence-visibility-v1",
+    "summary": "Physical +3285 Reviewer rejection remains correct; diagnosis-only draft PR #856 at 0a6dbbd adds persistent privacy-safe export status and failure reason classification with regression tests, before CI.",
     "decisions": [
-      "Retain open G5/G6; do not infer runtime or reviewer approval."
+      "Do not change Reviewer/Validation fail-closed behavior or gate source provenance.",
+      "Do not assert clipboard root cause or generated app success without runtime evidence.",
+      "Do not alter Qwen roles, Vulkan, RAM or timeouts."
     ],
     "evidence_refs": [
-      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/854",
-      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/7177e68b97ed4ad1f3b00ac6e45480b92c6eb209"
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/issues/845#issuecomment-6253288017",
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/856",
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/0a6dbbd424dbd70d042dc5cc163ac2a342b7abb6"
     ],
-    "next_action": "Run physical target acceptance; independent review remains outstanding.",
-    "kind": "EXTERNAL_MERGE_RECONCILIATION"
+    "next_action": "Check PR #856 exact-head CI and code review, fix only concrete issues, prepare claim-bound review packet; G5 generated star APK physical acceptance pending."
   },
   "review_history": [
     {

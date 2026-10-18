@@ -1,0 +1,12 @@
+{
+  "schema_version": 1,
+  "request_id": "cantiere-20261018-checkpoint-856-gate-visibility-v1",
+  "status": "APPLIED",
+  "processed_at": "2026-10-18T18:13:45Z",
+  "source_file": "cantiere-20261018-checkpoint-856-gate-visibility-v1.json",
+  "lane_id": "cantiere",
+  "operation": "checkpoint",
+  "actor_id": "chatgpt:cantiere",
+  "errors": [],
+  "result_state_version": 120
+}
