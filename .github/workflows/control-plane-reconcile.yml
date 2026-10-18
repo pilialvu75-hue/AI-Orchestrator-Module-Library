@@ -16,6 +16,9 @@ on:
 
 permissions:
   contents: write
+  actions: read
+  checks: read
+  pull-requests: read
 
 concurrency:
   group: canonical-control-plane-reconcile
@@ -37,6 +40,8 @@ jobs:
           python-version: "3.12"
 
       - name: Reconcile latest main and project canonical state
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         shell: bash
         run: |
           set -euo pipefail
