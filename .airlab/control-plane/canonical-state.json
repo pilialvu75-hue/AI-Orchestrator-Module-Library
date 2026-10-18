@@ -7,7 +7,7 @@
     "policy": "This private repository is the single coordination authority. Chats and agents are workers, not independent sources of truth."
   },
   "updated_at": "2026-10-18",
-  "state_revision": 325,
+  "state_revision": 326,
   "lifecycle_status": "BOOTSTRAP_ACTIVE",
   "roadmap_authority": {
     "library": ".airlab/roadmap.yaml",
@@ -81,12 +81,12 @@
     "invalid_lane_behavior": "ISOLATE_AND_SURFACE_PROJECTION_INCIDENT"
   },
   "projection": {
-    "source_digest": "30bdef8829f1314e80ad7a951907b34606890f96d5a13bdd008a9bbcd11c76e5",
-    "projected_at": "2026-10-18T11:10:29Z",
+    "source_digest": "f4108c4332de5ec2307ef21e503db5a4ede4e9c7daf24ec76bb9a8fb307ca6a6",
+    "projected_at": "2026-10-18T11:10:42Z",
     "counts": {
       "BLOCKED": 2,
-      "READY": 12,
-      "REVIEW_REQUIRED": 4
+      "READY": 13,
+      "REVIEW_REQUIRED": 3
     },
     "active_claims": [
       {
@@ -101,17 +101,6 @@
           "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/app_factory/workshop/workshop_proposal_implementation_runner.dart",
           "file:pilialvu75-hue/Ai-orchestrator-riserva:test/app_factory/workshop/workshop_generated_star_negative_gate_test.dart",
           "file:pilialvu75-hue/Ai-orchestrator-riserva:test/app_factory/workshop/workshop_proposal_implementation_runner_test.dart"
-        ]
-      },
-      {
-        "lane": "library-curation",
-        "claim_id": "d226d905c0b31fb5efc6",
-        "work_item": "library-needs-model-storage-web-20261018",
-        "repository": "pilialvu75-hue/AI-Orchestrator-Module-Library",
-        "lease_until": "2026-10-18T23:04:37Z",
-        "resource_locks": [
-          "branch:pilialvu75-hue/AI-Orchestrator-Module-Library:feat/library-needs-model-storage-web",
-          "file:pilialvu75-hue/AI-Orchestrator-Module-Library:catalog/needs.json"
         ]
       },
       {
@@ -144,12 +133,6 @@
     ],
     "active_resource_locks": [
       {
-        "key": "branch:pilialvu75-hue/AI-Orchestrator-Module-Library:feat/library-needs-model-storage-web",
-        "lane": "library-curation",
-        "claim_id": "d226d905c0b31fb5efc6",
-        "work_item": "library-needs-model-storage-web-20261018"
-      },
-      {
         "key": "branch:pilialvu75-hue/AI-Orchestrator-Module-Researcher:fix/researcher-zero-discovery-reliability-20261016",
         "lane": "library-researcher",
         "claim_id": "a3be2c00b7d608d2df75",
@@ -172,12 +155,6 @@
         "lane": "cantiere",
         "claim_id": "0780c6a10b7fc5c768ff",
         "work_item": "issue-845-star-functional-3204"
-      },
-      {
-        "key": "file:pilialvu75-hue/AI-Orchestrator-Module-Library:catalog/needs.json",
-        "lane": "library-curation",
-        "claim_id": "d226d905c0b31fb5efc6",
-        "work_item": "library-needs-model-storage-web-20261018"
       },
       {
         "key": "file:pilialvu75-hue/AI-Orchestrator-Module-Researcher:.github/workflows/autonomous-seeding.yml",
@@ -242,7 +219,6 @@
     ],
     "review_required": [
       "cantiere",
-      "library-curation",
       "library-researcher",
       "platform-android"
     ],
@@ -460,24 +436,15 @@
       },
       {
         "id": "library-curation",
-        "status": "REVIEW_REQUIRED",
+        "status": "READY",
         "activation": "active",
-        "state_version": 7,
+        "state_version": 8,
         "updated_at": "2026-10-18",
-        "active_claim": {
-          "claim_id": "d226d905c0b31fb5efc6",
-          "work_item": "library-needs-model-storage-web-20261018",
-          "repository": "pilialvu75-hue/AI-Orchestrator-Module-Library",
-          "lease_until": "2026-10-18T23:04:37Z",
-          "resource_locks": [
-            "branch:pilialvu75-hue/AI-Orchestrator-Module-Library:feat/library-needs-model-storage-web",
-            "file:pilialvu75-hue/AI-Orchestrator-Module-Library:catalog/needs.json"
-          ]
-        },
+        "active_claim": null,
         "reviewer_state": "PENDING",
         "inference_profile_status": null,
         "historical_backlog_count": 2,
-        "next_action": "Protected needs-only evidence verified; merge the exact PR head into main and verify its catalog blob before releasing the canonical claim."
+        "next_action": "Verified needs-only change is merged on main; Library can claim another bounded task. Executable modules still require independent certification."
       },
       {
         "id": "library-researcher",

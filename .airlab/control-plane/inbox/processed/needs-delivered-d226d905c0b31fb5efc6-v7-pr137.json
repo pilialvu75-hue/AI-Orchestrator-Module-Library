@@ -1,0 +1,12 @@
+{
+  "schema_version": 1,
+  "request_id": "needs-delivered-d226d905c0b31fb5efc6-v7-pr137",
+  "status": "APPLIED",
+  "processed_at": "2026-10-18T11:10:42Z",
+  "source_file": "needs-delivered-d226d905c0b31fb5efc6-v7-pr137.json",
+  "lane_id": "library-curation",
+  "operation": "autonomous_finalize_needs",
+  "actor_id": "system:github-actions:control-plane-reconcile",
+  "errors": [],
+  "result_state_version": 8
+}

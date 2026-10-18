@@ -3,28 +3,13 @@
   "id": "library-curation",
   "title": "Library Curation",
   "role": "worker",
-  "status": "REVIEW_REQUIRED",
+  "status": "READY",
   "activation": "active",
   "scope": "Library-owned needs queue, intake triage, metadata quality, reproducible certification evidence and reuse contracts. Researcher discovery and external Researcher PRs remain separately owned by library-researcher.",
   "shared_engine_policy": "shared_or_control_plane",
-  "state_version": 7,
+  "state_version": 8,
   "updated_at": "2026-10-18",
-  "active_claim": {
-    "claim_id": "d226d905c0b31fb5efc6",
-    "owner_lane": "library-curation",
-    "work_item": "library-needs-model-storage-web-20261018",
-    "repository": "pilialvu75-hue/AI-Orchestrator-Module-Library",
-    "scope": "Metadata-only update to catalog/needs.json: include browser/Web as research target for large-model storage, integrity and migration; preserve all certification and runtime gates.",
-    "branch": "feat/library-needs-model-storage-web",
-    "resource_locks": [
-      "branch:pilialvu75-hue/AI-Orchestrator-Module-Library:feat/library-needs-model-storage-web",
-      "file:pilialvu75-hue/AI-Orchestrator-Module-Library:catalog/needs.json"
-    ],
-    "started_at": "2026-10-18T11:04:37Z",
-    "heartbeat_at": "2026-10-18T11:04:37Z",
-    "lease_until": "2026-10-18T23:04:37Z",
-    "lease_hours": 12
-  },
+  "active_claim": null,
   "dependencies": [],
   "roadmap_refs": [
     ".airlab/roadmap.yaml#L19"
@@ -55,7 +40,7 @@
     "G4_INTEGRATION": "PASS",
     "G5_TARGET_RUNTIME": "NOT_APPLICABLE_UNTIL_RUNTIME_CHANGE",
     "G6_REVIEWER": "PENDING",
-    "G7_CANONICAL_SYNC": "PENDING"
+    "G7_CANONICAL_SYNC": "PASS"
   },
   "reviewer": {
     "required": true,
@@ -63,7 +48,7 @@
     "reviewed_by": null,
     "reviewed_at": null
   },
-  "next_action": "Protected needs-only evidence verified; merge the exact PR head into main and verify its catalog blob before releasing the canonical claim.",
+  "next_action": "Verified needs-only change is merged on main; Library can claim another bounded task. Executable modules still require independent certification.",
   "historical_backlog": [
     "Needs-only autonomous completion is metadata restricted, not certification authority.",
     "The existing library-researcher lane owns its historical Researcher claim and is not migrated or released by this separation."
@@ -178,6 +163,26 @@
       "ci_run_id": 39118326760,
       "scope_blob_sha": "e514e8e9e31ece52e58175fee5d23fb9dbbf2634",
       "decision": "VERIFIED_METADATA_ONLY"
+    },
+    {
+      "at": "2026-10-18T11:10:42Z",
+      "claim_id": "d226d905c0b31fb5efc6",
+      "work_item": "library-needs-model-storage-web-20261018",
+      "profile": "library-needs-only-v1",
+      "identity": {
+        "lane_id": "library-curation",
+        "state_version": 6,
+        "claim_id": "d226d905c0b31fb5efc6",
+        "packet_sha256": "f0957c4dd2b851fc6b5df245b38ab1cd828d1bdc7ac22234eebc9f1650c34a3e",
+        "repository": "pilialvu75-hue/AI-Orchestrator-Module-Library",
+        "pr_number": 137,
+        "head_sha": "d3e810159e088f9a974922ef3dc96f18821ad495"
+      },
+      "protected_run_id": 39121946273,
+      "ci_run_id": 39121835494,
+      "scope_blob_sha": "ebb1622e2a96fddddbffa64bd3e7397883173d0a",
+      "merge_commit_sha": "b6eb6966bb23dd557928186daae00c6d5d3ba124",
+      "decision": "MERGED_METADATA_ONLY"
     }
   ],
   "reconciliation_events": [
@@ -192,6 +197,13 @@
       "claim_id": "d226d905c0b31fb5efc6",
       "work_item": "library-needs-model-storage-web-20261018",
       "at": "2026-10-18T11:10:29Z"
+    },
+    {
+      "type": "CLAIM_RELEASED_AFTER_VERIFIED_NEEDS_MERGE",
+      "claim_id": "d226d905c0b31fb5efc6",
+      "work_item": "library-needs-model-storage-web-20261018",
+      "merge_commit_sha": "b6eb6966bb23dd557928186daae00c6d5d3ba124",
+      "at": "2026-10-18T11:10:42Z"
     }
   ],
   "review_packet_history": [
@@ -306,24 +318,5 @@
         "https://github.com/pilialvu75-hue/AI-Orchestrator-Module-Library/actions/runs/39121835494"
       ]
     }
-  },
-  "pending_needs_delivery": {
-    "profile": "library-needs-only-v1",
-    "prepared_at": "2026-10-18T11:10:29Z",
-    "identity": {
-      "lane_id": "library-curation",
-      "state_version": 6,
-      "claim_id": "d226d905c0b31fb5efc6",
-      "packet_sha256": "f0957c4dd2b851fc6b5df245b38ab1cd828d1bdc7ac22234eebc9f1650c34a3e",
-      "repository": "pilialvu75-hue/AI-Orchestrator-Module-Library",
-      "pr_number": 137,
-      "head_sha": "d3e810159e088f9a974922ef3dc96f18821ad495"
-    },
-    "protected_run_id": 39121946273,
-    "protected_run_attempt": 1,
-    "protected_sha": "55a5c5bf1dd487b96774c1c806c367aec366cd32",
-    "ci_run_id": 39121835494,
-    "scope_blob_sha": "ebb1622e2a96fddddbffa64bd3e7397883173d0a",
-    "changed_file": "catalog/needs.json"
   }
 }
