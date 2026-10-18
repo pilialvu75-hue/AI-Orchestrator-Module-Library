@@ -191,3 +191,26 @@ Generic executable-module completion and G6 replacement remain unavailable.
 ## Dedicated Library curation lane
 
 The needs-only first route now exclusively targets `library-curation`, registered as an independent worker in the canonical chat and workstream registries. The existing `library-researcher` lane and Researcher claim are intentionally unchanged. A Researcher repair can therefore remain in REVIEW_REQUIRED without preventing a new, distinct Library-owned metadata task from being claimed. Independent curation does not itself provide a scheduler to author needs changes or grant module certification rights.
+
+## Durable receipt catch-up after protected workflow completion
+
+The first production exercise on 18 October 2026 produced a valid protected CI
+workflow run and `autonomous-ci-evidence` artifact, but no follow-up
+`workflow_run`-triggered reconcile execution was observed. The upstream
+workflow was dispatched using the repository `GITHUB_TOKEN`; delivery of
+downstream automation events must therefore not be the sole durability path.
+
+The serialized `control-plane-reconcile.yml` now performs a bounded scan of
+successful protected `workflow_dispatch` runs on its existing hourly schedule,
+as well as during normal reconciliation. It considers only runs created after
+the current `library-curation` claim began, tied to the allowlisted workflow
+on main. The selected run ID is treated only as a locator: the normal
+`autonomous_needs_enqueue` verifier must independently retrieve the protected
+run, exact artifact, check runs, PR, claim/packet digest and needs-only scope,
+then enqueue the guarded compare-and-swap transaction. Failed, stale,
+ambiguous or untrusted candidates do not authorize any lane mutation.
+
+The PR that introduces the catch-up path adds its workflow and script to the
+push trigger allowlist, so its merge can exercise the recovery without relying
+on the suppressed event. A real `APPLIED` inbox receipt and lane READY are
+still required before claiming production completion.
