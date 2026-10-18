@@ -80,19 +80,24 @@ def _bind_local_source(base: Path, manifest: dict, report: dict, label: str) -> 
     _require(isinstance(declared, str) and declared == pinned,
              f"{label} payload_sha256 differs from manifest source pin")
     raw_path = payload.get("path")
-    _require(isinstance(raw_path, str) and raw_path and "\\\\" not in raw_path,
+    _require(isinstance(raw_path, str) and raw_path and chr(92) not in raw_path,
              f"{label} local source path invalid")
     relative = Path(raw_path)
     _require(not relative.is_absolute() and not any(
         part in ("", ".", "..") for part in raw_path.split("/")
     ), f"{label} local source path escapes asset")
     resolved_base = base.resolve()
+    _require(not base.is_symlink(), f"{label} asset base may not be a symlink")
     original_path = base / relative
+    # Refuse symlinks in every intermediate segment, not just the final path.
+    intermediate = base
+    for segment in relative.parts:
+        intermediate = intermediate / segment
+        _require(not intermediate.is_symlink(),
+                 f"{label} local source path may not traverse symlinks")
     source = original_path.resolve()
     _require(source != resolved_base and resolved_base in source.parents,
              f"{label} local source path escapes asset")
-    _require(not original_path.is_symlink(),
-             f"{label} local source must not be a symlink")
     try:
         actual = payload_tree_sha256(source)
     except (SourceIntegrityError, OSError) as exc:
