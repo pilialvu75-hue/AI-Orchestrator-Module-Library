@@ -1,0 +1,167 @@
+name: Admit Pinned Privacy Diagnostics Dart Tests
+
+on:
+  push:
+    branches: ["main"]
+    paths:
+      - ".github/workflows/admit-privacy-diagnostics-tests.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: library-privacy-diagnostics-tested-main
+  cancel-in-progress: false
+
+jobs:
+  run-unprivileged-dart-tests:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 12
+    permissions:
+      contents: read
+    steps:
+      - name: Checkout pinned tested source without persisting credentials
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          persist-credentials: false
+          fetch-depth: 1
+
+      - name: Install Dart SDK
+        uses: dart-lang/setup-dart@v1
+        with:
+          sdk: stable
+
+      - name: Verify pinned bytes then run real analyzer and tests
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import json
+          import sys
+          from pathlib import Path
+          sys.path.insert(0, "tools")
+          from library_pipeline import validate_payload
+          base = Path("intake/diagnostics.logging.library.privacy_events/0.1.0")
+          manifest = json.loads((base / "manifest.json").read_text(encoding="utf-8"))
+          if manifest["status"] not in ("discovered", "quarantined", "normalized", "tested"):
+              raise SystemExit("Unexpected candidate lifecycle state")
+          if manifest["security"]["reviewed"] is not False:
+              raise SystemExit("No security-review approval may be inferred here")
+          validate_payload(manifest, base)
+          PY
+          cd intake/diagnostics.logging.library.privacy_events/0.1.0/payload/src
+          dart pub get
+          dart analyze --fatal-infos
+          dart run bin/self_test.dart
+
+      - name: Produce immutable-run-scoped test receipt after passing checks
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import json
+          import os
+          from datetime import datetime, timezone
+          from pathlib import Path
+
+          root = Path("intake/diagnostics.logging.library.privacy_events/0.1.0")
+          manifest = json.loads((root / "manifest.json").read_text(encoding="utf-8"))
+          result = {
+              "schema": "ai-orchestrator.privacy-candidate-test-receipt.v1",
+              "repository": "pilialvu75-hue/AI-Orchestrator-Module-Library",
+              "workflow_sha": os.environ["GITHUB_SHA"],
+              "workflow_run_id": int(os.environ["GITHUB_RUN_ID"]),
+              "workflow_run_attempt": int(os.environ["GITHUB_RUN_ATTEMPT"]),
+              "asset_id": manifest["id"],
+              "version": manifest["version"],
+              "source_commit": manifest["provenance"]["source_commit"],
+              "payload_sha256": manifest["payload"]["sha256"],
+              "validated_at": datetime.now(timezone.utc).isoformat(),
+              "checks": ["dart analyze --fatal-infos", "dart run bin/self_test.dart"],
+              "validated_on": ["linux"],
+              "passed": True,
+          }
+          out = Path(os.environ["RUNNER_TEMP"]) / "privacy-dart-test-receipt.json"
+          out.write_text(json.dumps(result, indent=2) + "\n", encoding="utf-8")
+          print("Dart source passed; receipt generated for independent writer validation.")
+          PY
+
+      - name: Upload run-scoped test evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: privacy-dart-tested-${{ github.run_id }}
+          path: ${{ runner.temp }}/privacy-dart-test-receipt.json
+          if-no-files-found: error
+          retention-days: 14
+
+  accept-tested-evidence:
+    needs: run-unprivileged-dart-tests
+    if: ${{ needs.run-unprivileged-dart-tests.result == 'success' }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 12
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout protected main metadata
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - name: Retrieve exact same-run test report
+        uses: actions/download-artifact@v4
+        with:
+          name: privacy-dart-tested-${{ github.run_id }}
+          path: ${{ runner.temp }}/privacy-dart-proof
+
+      - name: Admit tested status through canonical lifecycle, not certification
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          SOURCE_MANIFEST="intake/diagnostics.logging.library.privacy_events/0.1.0/manifest.json"
+          TEST_REPORT="intake/diagnostics.logging.library.privacy_events/0.1.0/tests/dart-linux-ci-report.json"
+          RECEIPT="$RUNNER_TEMP/privacy-dart-proof/privacy-dart-test-receipt.json"
+          for attempt in 1 2 3; do
+            git fetch origin main
+            git reset --hard origin/main
+            git clean -fd -- "$TEST_REPORT"
+            git merge-base --is-ancestor "$GITHUB_SHA" origin/main || {
+              echo "CI source commit is no longer an ancestor of main" >&2
+              exit 1
+            }
+
+            python -m tools.library_privacy_candidate_receipt \
+              --receipt "$RECEIPT" \
+              --workflow-sha "$GITHUB_SHA" \
+              --run-id "$GITHUB_RUN_ID" \
+              --run-attempt "$GITHUB_RUN_ATTEMPT"
+
+            python tools/validate_library.py
+            python tools/validate_history.py
+            python tools/validate_lifecycle.py
+            git add -- "$SOURCE_MANIFEST" "$TEST_REPORT"
+            if git diff --cached --quiet; then
+              echo "No new test admission needed; already applied with same evidence."
+              exit 0
+            fi
+            while IFS= read -r path; do
+              case "$path" in
+                "$SOURCE_MANIFEST"|"$TEST_REPORT") ;;
+                *) echo "Unexpected writer path: $path" >&2; exit 1 ;;
+              esac
+            done < <(git diff --cached --name-only)
+            git commit -m "library: mark pinned privacy diagnostics as Dart-tested (not certified)"
+            if git push origin HEAD:main; then
+              echo "Exact pinned test receipt committed on main."
+              exit 0
+            fi
+            if [[ "$attempt" -eq 3 ]]; then
+              echo "Main changed on all test receipt admission attempts" >&2
+              exit 1
+            fi
+            echo "Main advanced during test receipt admission; re-verifying current pinned bytes."
+          done
