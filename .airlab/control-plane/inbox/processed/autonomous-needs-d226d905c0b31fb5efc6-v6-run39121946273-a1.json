@@ -1,0 +1,12 @@
+{
+  "schema_version": 1,
+  "request_id": "autonomous-needs-d226d905c0b31fb5efc6-v6-run39121946273-a1",
+  "status": "APPLIED",
+  "processed_at": "2026-10-18T11:10:29Z",
+  "source_file": "autonomous-needs-d226d905c0b31fb5efc6-v6-run39121946273-a1.json",
+  "lane_id": "library-curation",
+  "operation": "autonomous_complete",
+  "actor_id": "chatgpt:library-curation",
+  "errors": [],
+  "result_state_version": 7
+}
