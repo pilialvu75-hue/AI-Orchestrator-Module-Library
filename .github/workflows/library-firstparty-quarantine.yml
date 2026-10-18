@@ -1,0 +1,91 @@
+name: Library First-Party Quarantine Triage
+
+on:
+  push:
+    branches: ["main"]
+    paths:
+      - ".github/workflows/library-firstparty-quarantine.yml"
+      - "tools/library_firstparty_quarantine.py"
+  schedule:
+    - cron: "49 */6 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: library-firstparty-quarantine-triage
+  cancel-in-progress: false
+
+jobs:
+  quarantine:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 12
+    steps:
+      - name: Checkout protected main
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Quarantine only allowlisted first-party intake
+        run: |
+          set -euo pipefail
+          python -m tools.library_firstparty_quarantine --apply > "$RUNNER_TEMP/firstparty-triage.json"
+          cat "$RUNNER_TEMP/firstparty-triage.json"
+      - name: Validate Library and run all tests before a write
+        run: |
+          set -euo pipefail
+          python tools/validate_library.py
+          python -m unittest discover -s tests -p 'test_*.py' -v
+      - name: Persist only existing first-party intake manifests
+        shell: bash
+        run: |
+          set -euo pipefail
+          git add -u -- \
+            intake/ai.acceleration_backend.firstparty.ai-orchestrator-core/0.1.0/manifest.json \
+            intake/ai.local_inference.firstparty.ai-orchestrator-core/0.1.0/manifest.json
+          if git diff --cached --quiet; then
+            echo "No new first-party quarantine transition."
+            exit 0
+          fi
+          while IFS= read -r path; do
+            case "$path" in
+              intake/ai.acceleration_backend.firstparty.ai-orchestrator-core/0.1.0/manifest.json|intake/ai.local_inference.firstparty.ai-orchestrator-core/0.1.0/manifest.json)
+                ;;
+              *)
+                echo "Out-of-scope first-party triage change: $path" >&2
+                exit 1
+                ;;
+            esac
+          done < <(git diff --cached --name-only)
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -m "library: quarantine existing first-party candidates without certification"
+          git push origin HEAD:main
+      - name: Publish first-party triage evidence
+        if: always()
+        shell: bash
+        run: |
+          if [[ -s "$RUNNER_TEMP/firstparty-triage.json" ]]; then
+            {
+              echo "## First-party Library quarantine triage"
+              echo "Protected main workflow; metadata-only quarantine, no executable promotion."
+              echo '~~~json'
+              cat "$RUNNER_TEMP/firstparty-triage.json"
+              echo '~~~'
+            } >> "$GITHUB_STEP_SUMMARY"
+          else
+            echo "Triage report absent (job did not reach evaluation)." >> "$GITHUB_STEP_SUMMARY"
+          fi
+      - name: Upload triage report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: firstparty-quarantine-${{ github.run_id }}
+          path: ${{ runner.temp }}/firstparty-triage.json
+          if-no-files-found: warn
+          retention-days: 14
