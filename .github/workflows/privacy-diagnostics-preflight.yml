@@ -1,0 +1,65 @@
+name: Read-only Privacy Diagnostics SBOM Preflight
+
+on:
+  pull_request:
+    branches: ["main"]
+    paths:
+      - "tools/library_privacy_preflight.py"
+      - "tools/library_source_integrity.py"
+      - "tests/test_library_privacy_preflight.py"
+      - "intake/diagnostics.logging.library.privacy_events/**"
+      - ".github/workflows/privacy-diagnostics-preflight.yml"
+  push:
+    branches: ["main"]
+    paths:
+      - "tools/library_privacy_preflight.py"
+      - "tools/library_source_integrity.py"
+      - "tests/test_library_privacy_preflight.py"
+      - "intake/diagnostics.logging.library.privacy_events/**"
+      - ".github/workflows/privacy-diagnostics-preflight.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  source-inventory:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 8
+    steps:
+      - name: Checkout pinned run revision without storing GitHub credentials
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+          fetch-depth: 1
+
+      - name: Verify source hash and negative security-preflight cases
+        run: |
+          set -euo pipefail
+          python3 -m unittest discover -s tests -p test_library_privacy_preflight.py -v
+
+      - name: Generate read-only SBOM and source inventory
+        run: |
+          set -euo pipefail
+          python3 tools/library_privacy_preflight.py --output "${RUNNER_TEMP}/privacy-preflight.json"
+          python3 - <<'PY'
+          import json
+          import os
+          from pathlib import Path
+          report = json.loads((Path(os.environ["RUNNER_TEMP"]) / "privacy-preflight.json").read_text())
+          assert report["security_reviewed"] is False
+          assert report["security_certified"] is False
+          assert report["license_verified"] is False
+          assert report["vulnerability_scanned"] is False
+          assert report["runtime_validated"] is False
+          assert report["sbom"]["bomFormat"] == "CycloneDX"
+          print("Read-only SBOM generated; no reviewer or runtime authority asserted.")
+          PY
+
+      - name: Archive unprivileged reproducible preflight data
+        uses: actions/upload-artifact@v4
+        with:
+          name: privacy-diagnostics-preflight-${{ github.run_id }}
+          path: ${{ runner.temp }}/privacy-preflight.json
+          if-no-files-found: error
+          retention-days: 14
