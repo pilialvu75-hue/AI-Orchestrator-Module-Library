@@ -11,6 +11,7 @@ from datetime import datetime, timezone
 from pathlib import Path
 
 from library_evidence import EvidenceError, verify_manifest_evidence
+from library_source_integrity import SourceIntegrityError, payload_tree_sha256 as _source_digest
 
 SEMVER = re.compile(r"^(\d+)\.(\d+)\.(\d+)(?:[-+][0-9A-Za-z.-]+)?$")
 ASSET_ID = re.compile(r"^[A-Za-z0-9][A-Za-z0-9._-]{2,127}$")
@@ -135,48 +136,12 @@ def sha256_file(path: Path) -> str:
     return digest.hexdigest()
 
 
-MAX_LOCAL_PAYLOAD_FILES = 512
-MAX_LOCAL_PAYLOAD_BYTES = 16 * 1024 * 1024
-MAX_LOCAL_PAYLOAD_FILE_BYTES = 2 * 1024 * 1024
-
-
 def payload_tree_sha256(source: Path) -> str:
-    """Compute a bounded, path-bound digest of actual immutable source bytes.
-
-    Same normalized byte sequence for repository_path payloads and export.
-    Symlinks, empty directories and oversized payloads fail before digesting.
-    """
-    require(source.exists() and not source.is_symlink(),
-            "repository_path must point to a real non-symlink payload")
-    if source.is_file():
-        root, candidates = source.parent, [source]
-    else:
-        require(source.is_dir(), "repository_path payload must be a file or directory")
-        root = source
-        candidates = sorted(source.rglob("*"), key=lambda p: p.as_posix())
-    require(candidates, "repository_path payload must contain at least one file")
-    digest = hashlib.sha256()
-    file_count, total = 0, 0
-    for item in candidates:
-        require(not item.is_symlink(), "repository_path payload may not contain symlinks")
-        if item.is_dir():
-            continue
-        require(item.is_file(), "repository_path contains a non-file entry")
-        file_count += 1
-        require(file_count <= MAX_LOCAL_PAYLOAD_FILES,
-                "repository_path payload exceeds file count limit")
-        size = item.stat().st_size
-        require(size <= MAX_LOCAL_PAYLOAD_FILE_BYTES,
-                "repository_path payload contains an oversized file")
-        total += size
-        require(total <= MAX_LOCAL_PAYLOAD_BYTES,
-                "repository_path payload exceeds total size limit")
-        relative = item.relative_to(root).as_posix().encode("utf-8")
-        digest.update(len(relative).to_bytes(8, "big"))
-        digest.update(relative)
-        digest.update(bytes.fromhex(sha256_file(item)))
-    require(file_count > 0, "repository_path payload must contain at least one file")
-    return digest.hexdigest()
+    """Keep the public pipeline API while using the shared source digest."""
+    try:
+        return _source_digest(source)
+    except SourceIntegrityError as exc:
+        raise PipelineError(str(exc)) from exc
 
 
 def validate_payload(manifest: dict, base: Path) -> None:

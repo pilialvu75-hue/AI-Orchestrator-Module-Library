@@ -2,7 +2,10 @@ from __future__ import annotations
 
 import hashlib
 import json
+import re
 from pathlib import Path
+
+from library_source_integrity import SourceIntegrityError, payload_tree_sha256
 
 
 TEST_REPORT_SCHEMA = "ai-orchestrator.library-test-report.v1"
@@ -56,6 +59,53 @@ def _identity(report: dict, manifest: dict, label: str) -> None:
         _require(report.get("source_commit") == source_commit, f"{label} source_commit does not match manifest provenance")
 
 
+_SHA256 = re.compile(r"[0-9a-f]{64}")
+
+
+def _bind_local_source(base: Path, manifest: dict, report: dict, label: str) -> None:
+    """Tie a checked report to the manifest pin AND the real source file bytes.
+
+    An upstream-reference-only asset remains subject to its existing legacy
+    provenance policy; these local payload checks are not a shortcut to
+    accepting upstream references or granting a security review.
+    """
+    payload = manifest.get("payload") or {}
+    _require(isinstance(payload, dict), f"{label} manifest payload must be an object")
+    if payload.get("type") != "repository_path":
+        return
+    pinned = payload.get("sha256")
+    declared = report.get("payload_sha256")
+    _require(isinstance(pinned, str) and _SHA256.fullmatch(pinned) is not None,
+             f"{label} local source payload requires a valid SHA256 pin")
+    _require(isinstance(declared, str) and declared == pinned,
+             f"{label} payload_sha256 differs from manifest source pin")
+    raw_path = payload.get("path")
+    _require(isinstance(raw_path, str) and raw_path and chr(92) not in raw_path,
+             f"{label} local source path invalid")
+    relative = Path(raw_path)
+    _require(not relative.is_absolute() and not any(
+        part in ("", ".", "..") for part in raw_path.split("/")
+    ), f"{label} local source path escapes asset")
+    resolved_base = base.resolve()
+    _require(not base.is_symlink(), f"{label} asset base may not be a symlink")
+    original_path = base / relative
+    # Refuse symlinks in every intermediate segment, not just the final path.
+    intermediate = base
+    for segment in relative.parts:
+        intermediate = intermediate / segment
+        _require(not intermediate.is_symlink(),
+                 f"{label} local source path may not traverse symlinks")
+    source = original_path.resolve()
+    _require(source != resolved_base and resolved_base in source.parents,
+             f"{label} local source path escapes asset")
+    try:
+        actual = payload_tree_sha256(source)
+    except (SourceIntegrityError, OSError) as exc:
+        raise EvidenceError(f"{label} local source cannot be verified: {exc}") from exc
+    _require(actual == pinned,
+             f"{label} actual local source digest differs from manifest and report")
+
+
 def verify_test_evidence(base: Path, manifest: dict) -> None:
     validation = manifest.get("validation") or {}
     if validation.get("tests_passed") is not True:
@@ -66,6 +116,7 @@ def verify_test_evidence(base: Path, manifest: dict) -> None:
     _require(report.get("schema") == TEST_REPORT_SCHEMA, "validation.test_report has unsupported schema")
     _identity(report, manifest, "validation.test_report")
     _require(report.get("passed") is True, "validation.test_report must assert passed=true")
+    _bind_local_source(base, manifest, report, "validation.test_report")
 
     report_targets = report.get("validated_on")
     manifest_targets = validation.get("validated_on")
@@ -87,6 +138,7 @@ def verify_security_evidence(base: Path, manifest: dict) -> None:
     _require(report.get("schema") == SECURITY_REPORT_SCHEMA, "security.review_report has unsupported schema")
     _identity(report, manifest, "security.review_report")
     _require(report.get("reviewed") is True, "security.review_report must assert reviewed=true")
+    _bind_local_source(base, manifest, report, "security.review_report")
 
     known = security.get("known_vulnerabilities")
     _require(isinstance(known, int) and known >= 0, "security.known_vulnerabilities must be a non-negative integer")
