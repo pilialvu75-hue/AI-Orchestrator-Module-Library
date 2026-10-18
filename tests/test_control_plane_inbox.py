@@ -434,6 +434,132 @@ class ControlPlaneInboxTests(unittest.TestCase):
             },
         }
 
+    def _external_merge_request(self, actor="chatgpt:cantiere"):
+        lane = self._claimed_review_packet()
+        path = self.root / ".airlab/control-plane/workstreams/cantiere.json"
+        lane["review_packet"]["pull_request"] = 847
+        path.write_text(json.dumps(lane, indent=2) + "\n", encoding="utf-8")
+        return {
+            "schema_version": 1,
+            "request_id": "external-merge-130",
+            "actor_id": actor,
+            "lane_id": "cantiere",
+            "operation": "reconcile_external_merge",
+            "expected_state_version": lane["state_version"],
+            "payload": {
+                "actor_id": actor,
+                "owner_directed": True,
+                "claim_id": lane["active_claim"]["claim_id"],
+                "pr_number": 847,
+                "expected_head_sha": "a" * 40,
+                "merge_commit_sha": "b" * 40,
+                "packet_sha256": control_plane_manager._review_packet_digest(
+                    lane["review_packet"]
+                ),
+            },
+        }
+
+    @staticmethod
+    def _merged_pr_response():
+        return {
+            "number": 847, "state": "closed", "merged": True,
+            "head": {"sha": "a" * 40},
+            "base": {
+                "ref": "main",
+                "repo": {"full_name": "pilialvu75-hue/Ai-orchestrator-riserva"},
+            },
+            "merge_commit_sha": "b" * 40,
+        }
+
+    def test_external_merge_reconcile_archives_claim_without_review_approval(self):
+        from unittest.mock import patch
+
+        request = self._external_merge_request()
+        original = self._cantiere()
+        # Expired REVIEW_REQUIRED handoffs are still valid until reconciled.
+        original["active_claim"]["lease_until"] = "2026-10-09T11:00:00Z"
+        lane_path = self.root / ".airlab/control-plane/workstreams/cantiere.json"
+        lane_path.write_text(json.dumps(original, indent=2) + "\n", encoding="utf-8")
+        comparison = {
+            "status": "identical", "behind_by": 0,
+            "base_commit": {"sha": "b" * 40},
+        }
+        with patch.dict("os.environ", {"GITHUB_TOKEN": "test-token"}), patch(
+            "tools.autonomous_ci_probe.fetch_json",
+            side_effect=[self._merged_pr_response(), comparison],
+        ) as checked:
+            receipt = inbox.process_one(
+                self._write_request(request),
+                root=self.root,
+                now=datetime(2026, 10, 18, 12, 0, tzinfo=timezone.utc),
+            )
+        self.assertIn("applied", receipt)
+        self.assertEqual(checked.call_count, 2)
+        changed = self._cantiere()
+        self.assertEqual(changed["status"], "READY")
+        self.assertIsNone(changed["active_claim"])
+        self.assertNotIn("review_packet", changed)
+        self.assertEqual(changed["state_version"], original["state_version"] + 1)
+        self.assertEqual(changed["reviewer"]["state"], "PENDING")
+        self.assertIsNone(changed["reviewer"]["reviewed_by"])
+        self.assertEqual(changed["gates"]["G6_REVIEWER"], "PENDING")
+        self.assertEqual(changed["gates"]["G7_CANONICAL_SYNC"], "PENDING")
+        self.assertNotEqual(changed["gates"]["G5_TARGET_RUNTIME"], "PASS")
+        self.assertEqual(
+            changed["last_checkpoint"]["kind"], "EXTERNAL_MERGE_RECONCILIATION"
+        )
+        history = changed["external_merge_history"][-1]
+        self.assertEqual(history["pr_number"], 847)
+        self.assertEqual(history["merge_commit_sha"], "b" * 40)
+        self.assertFalse(history["review_approved"])
+        self.assertEqual(
+            history["packet_sha256"], request["payload"]["packet_sha256"]
+        )
+        self.assertEqual(changed["reconciliation_events"][-1]["type"],
+                         "OWNER_DIRECTED_EXTERNAL_MERGE_RECONCILED")
+        self.assertEqual(
+            json.loads((self.root / ".airlab/control-plane/inbox/processed/"
+                        "external-merge-130.json").read_text())["status"], "APPLIED"
+        )
+
+    def test_external_merge_reconcile_rejects_unverified_or_unauthorized(self):
+        from unittest.mock import patch
+
+        for changed_field in ("unmerged", "wrong-head", "not-on-main", "actor"):
+            request = self._external_merge_request(
+                actor="chatgpt:other" if changed_field == "actor"
+                else "chatgpt:cantiere"
+            )
+            request["request_id"] += "-" + changed_field
+            original = self._cantiere()
+            pr = self._merged_pr_response()
+            comparison = {
+                "status": "identical", "behind_by": 0,
+                "base_commit": {"sha": "b" * 40},
+            }
+            if changed_field == "unmerged":
+                pr["merged"] = False
+            elif changed_field == "wrong-head":
+                pr["head"]["sha"] = "c" * 40
+            elif changed_field == "not-on-main":
+                comparison["behind_by"] = 1
+            with patch.dict("os.environ", {"GITHUB_TOKEN": "test-token"}), patch(
+                "tools.autonomous_ci_probe.fetch_json",
+                side_effect=[pr, comparison],
+            ):
+                result = inbox.process_one(
+                    self._write_request(request),
+                    root=self.root,
+                    now=datetime(2026, 10, 18, 12, 0, tzinfo=timezone.utc),
+                )
+            self.assertIn("quarantined", result, changed_field)
+            self.assertEqual(self._cantiere(), original)
+            receipt_path = self.root / ".airlab/control-plane/inbox/quarantine" / (
+                request["request_id"] + ".json"
+            )
+            self.assertEqual(json.loads(receipt_path.read_text())["status"],
+                             "QUARANTINED")
+
     def test_review_gate_evidence_records_g1_g4_without_promoting(self):
         lane = self._claimed_review_packet()
         request = self._gate_request(lane)
