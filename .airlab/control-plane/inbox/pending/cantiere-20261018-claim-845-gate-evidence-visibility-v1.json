@@ -1,0 +1,20 @@
+{
+  "schema_version": 1,
+  "request_id": "cantiere-20261018-claim-845-gate-evidence-visibility-v1",
+  "actor_id": "chatgpt:cantiere",
+  "lane_id": "cantiere",
+  "operation": "claim",
+  "expected_state_version": 118,
+  "payload": {
+    "work_item": "issue-845-gate-evidence-visibility-v1",
+    "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
+    "branch": "fix/cantiere-845-gate-evidence-visibility",
+    "scope": "Make rejection evidence copy failures visible and actionable on S24 FE without bypassing scope, dumping source or modifying Reviewer/Validation; preserve project and offline runtime",
+    "resource_locks": [
+      "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/app_factory/workshop/workshop_production_dashboard_page.dart",
+      "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/app_factory/workshop/workshop_gate_evidence_export.dart",
+      "file:pilialvu75-hue/Ai-orchestrator-riserva:test/app_factory/workshop/workshop_gate_evidence_export_test.dart",
+      "resource:cantiere-845-gate-evidence-export"
+    ]
+  }
+}
