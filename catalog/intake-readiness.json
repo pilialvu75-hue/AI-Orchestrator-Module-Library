@@ -1,0 +1,1313 @@
+{
+  "schema_version": 1,
+  "report_type": "read_only_evidence_gaps_not_certification",
+  "summary": {
+    "certified_catalog_entries": 3,
+    "intake_candidates": 19,
+    "blocked_intake_candidates": 19,
+    "ready_for_automatic_certification": 0,
+    "blocker_counts": {
+      "LICENSE_EVIDENCE_MISSING": 19,
+      "REPRODUCIBLE_TEST_EVIDENCE_MISSING": 19,
+      "SECURITY_REVIEW_EVIDENCE_MISSING": 19,
+      "SOURCE_SNAPSHOT_MISSING": 19
+    }
+  },
+  "coverage": [
+    {
+      "capability_id": "release.packaging",
+      "title": "Platform packaging, signing and distribution pipeline",
+      "priority": "high",
+      "desired_candidates": 2,
+      "certified_count": 0,
+      "remaining_to_goal": 2,
+      "intake_candidates": 5,
+      "blocked_candidates": 5,
+      "certified_by_target": [
+        {
+          "target": "android",
+          "certified_count": 0
+        },
+        {
+          "target": "ios",
+          "certified_count": 0
+        },
+        {
+          "target": "linux",
+          "certified_count": 0
+        },
+        {
+          "target": "macos",
+          "certified_count": 0
+        },
+        {
+          "target": "raspberry_pi",
+          "certified_count": 0
+        },
+        {
+          "target": "web",
+          "certified_count": 0
+        },
+        {
+          "target": "windows",
+          "certified_count": 0
+        }
+      ]
+    },
+    {
+      "capability_id": "platform.filesystem",
+      "title": "Native/sandboxed filesystem abstraction",
+      "priority": "high",
+      "desired_candidates": 2,
+      "certified_count": 0,
+      "remaining_to_goal": 2,
+      "intake_candidates": 2,
+      "blocked_candidates": 2,
+      "certified_by_target": [
+        {
+          "target": "android",
+          "certified_count": 0
+        },
+        {
+          "target": "ios",
+          "certified_count": 0
+        },
+        {
+          "target": "linux",
+          "certified_count": 0
+        },
+        {
+          "target": "macos",
+          "certified_count": 0
+        },
+        {
+          "target": "raspberry_pi",
+          "certified_count": 0
+        },
+        {
+          "target": "windows",
+          "certified_count": 0
+        }
+      ]
+    },
+    {
+      "capability_id": "release.update_manager",
+      "title": "Update/download manager",
+      "priority": "high",
+      "desired_candidates": 2,
+      "certified_count": 0,
+      "remaining_to_goal": 2,
+      "intake_candidates": 2,
+      "blocked_candidates": 2,
+      "certified_by_target": [
+        {
+          "target": "android",
+          "certified_count": 0
+        },
+        {
+          "target": "desktop",
+          "certified_count": 0
+        }
+      ]
+    },
+    {
+      "capability_id": "ai.acceleration_backend",
+      "title": "Target-specific local inference acceleration backend",
+      "priority": "high",
+      "desired_candidates": 2,
+      "certified_count": 0,
+      "remaining_to_goal": 2,
+      "intake_candidates": 1,
+      "blocked_candidates": 1,
+      "certified_by_target": [
+        {
+          "target": "android",
+          "certified_count": 0
+        },
+        {
+          "target": "ios",
+          "certified_count": 0
+        },
+        {
+          "target": "linux",
+          "certified_count": 0
+        },
+        {
+          "target": "macos",
+          "certified_count": 0
+        },
+        {
+          "target": "raspberry_pi",
+          "certified_count": 0
+        },
+        {
+          "target": "web",
+          "certified_count": 0
+        },
+        {
+          "target": "windows",
+          "certified_count": 0
+        }
+      ]
+    },
+    {
+      "capability_id": "ai.local_inference",
+      "title": "Local LLM runtime integration bundle",
+      "priority": "high",
+      "desired_candidates": 2,
+      "certified_count": 0,
+      "remaining_to_goal": 2,
+      "intake_candidates": 1,
+      "blocked_candidates": 1,
+      "certified_by_target": [
+        {
+          "target": "android",
+          "certified_count": 0
+        },
+        {
+          "target": "desktop",
+          "certified_count": 0
+        },
+        {
+          "target": "ios",
+          "certified_count": 0
+        },
+        {
+          "target": "raspberry_pi",
+          "certified_count": 0
+        },
+        {
+          "target": "web",
+          "certified_count": 0
+        }
+      ]
+    },
+    {
+      "capability_id": "auth.session",
+      "title": "Authentication and session management",
+      "priority": "high",
+      "desired_candidates": 2,
+      "certified_count": 0,
+      "remaining_to_goal": 2,
+      "intake_candidates": 1,
+      "blocked_candidates": 1,
+      "certified_by_target": [
+        {
+          "target": "android",
+          "certified_count": 0
+        },
+        {
+          "target": "desktop",
+          "certified_count": 0
+        },
+        {
+          "target": "web",
+          "certified_count": 0
+        }
+      ]
+    },
+    {
+      "capability_id": "voice.stt",
+      "title": "Speech-to-text integration bundle",
+      "priority": "high",
+      "desired_candidates": 2,
+      "certified_count": 0,
+      "remaining_to_goal": 2,
+      "intake_candidates": 1,
+      "blocked_candidates": 1,
+      "certified_by_target": [
+        {
+          "target": "android",
+          "certified_count": 0
+        },
+        {
+          "target": "desktop",
+          "certified_count": 0
+        },
+        {
+          "target": "raspberry_pi",
+          "certified_count": 0
+        }
+      ]
+    },
+    {
+      "capability_id": "voice.tts",
+      "title": "Text-to-speech integration bundle",
+      "priority": "high",
+      "desired_candidates": 2,
+      "certified_count": 0,
+      "remaining_to_goal": 2,
+      "intake_candidates": 1,
+      "blocked_candidates": 1,
+      "certified_by_target": [
+        {
+          "target": "android",
+          "certified_count": 0
+        },
+        {
+          "target": "desktop",
+          "certified_count": 0
+        },
+        {
+          "target": "raspberry_pi",
+          "certified_count": 0
+        }
+      ]
+    },
+    {
+      "capability_id": "network.http",
+      "title": "HTTP/API client with retries, timeout and cancellation",
+      "priority": "high",
+      "desired_candidates": 2,
+      "certified_count": 0,
+      "remaining_to_goal": 2,
+      "intake_candidates": 0,
+      "blocked_candidates": 0,
+      "certified_by_target": [
+        {
+          "target": "android",
+          "certified_count": 0
+        },
+        {
+          "target": "desktop",
+          "certified_count": 0
+        },
+        {
+          "target": "web",
+          "certified_count": 0
+        }
+      ]
+    },
+    {
+      "capability_id": "platform.audio_io",
+      "title": "Microphone, speaker and audio-device routing abstraction",
+      "priority": "high",
+      "desired_candidates": 2,
+      "certified_count": 0,
+      "remaining_to_goal": 2,
+      "intake_candidates": 0,
+      "blocked_candidates": 0,
+      "certified_by_target": [
+        {
+          "target": "android",
+          "certified_count": 0
+        },
+        {
+          "target": "ios",
+          "certified_count": 0
+        },
+        {
+          "target": "linux",
+          "certified_count": 0
+        },
+        {
+          "target": "macos",
+          "certified_count": 0
+        },
+        {
+          "target": "raspberry_pi",
+          "certified_count": 0
+        },
+        {
+          "target": "web",
+          "certified_count": 0
+        },
+        {
+          "target": "windows",
+          "certified_count": 0
+        }
+      ]
+    },
+    {
+      "capability_id": "platform.background_execution",
+      "title": "Background task and service lifecycle abstraction",
+      "priority": "high",
+      "desired_candidates": 2,
+      "certified_count": 0,
+      "remaining_to_goal": 2,
+      "intake_candidates": 0,
+      "blocked_candidates": 0,
+      "certified_by_target": [
+        {
+          "target": "android",
+          "certified_count": 0
+        },
+        {
+          "target": "ios",
+          "certified_count": 0
+        },
+        {
+          "target": "linux",
+          "certified_count": 0
+        },
+        {
+          "target": "macos",
+          "certified_count": 0
+        },
+        {
+          "target": "raspberry_pi",
+          "certified_count": 0
+        },
+        {
+          "target": "windows",
+          "certified_count": 0
+        }
+      ]
+    },
+    {
+      "capability_id": "platform.connectivity",
+      "title": "Connectivity state, metering and offline/online transition abstraction",
+      "priority": "high",
+      "desired_candidates": 2,
+      "certified_count": 0,
+      "remaining_to_goal": 2,
+      "intake_candidates": 0,
+      "blocked_candidates": 0,
+      "certified_by_target": [
+        {
+          "target": "android",
+          "certified_count": 0
+        },
+        {
+          "target": "ios",
+          "certified_count": 0
+        },
+        {
+          "target": "linux",
+          "certified_count": 0
+        },
+        {
+          "target": "macos",
+          "certified_count": 0
+        },
+        {
+          "target": "raspberry_pi",
+          "certified_count": 0
+        },
+        {
+          "target": "web",
+          "certified_count": 0
+        },
+        {
+          "target": "windows",
+          "certified_count": 0
+        }
+      ]
+    },
+    {
+      "capability_id": "platform.lifecycle",
+      "title": "Application lifecycle, suspend/resume and shutdown abstraction",
+      "priority": "high",
+      "desired_candidates": 2,
+      "certified_count": 0,
+      "remaining_to_goal": 2,
+      "intake_candidates": 0,
+      "blocked_candidates": 0,
+      "certified_by_target": [
+        {
+          "target": "android",
+          "certified_count": 0
+        },
+        {
+          "target": "ios",
+          "certified_count": 0
+        },
+        {
+          "target": "linux",
+          "certified_count": 0
+        },
+        {
+          "target": "macos",
+          "certified_count": 0
+        },
+        {
+          "target": "raspberry_pi",
+          "certified_count": 0
+        },
+        {
+          "target": "web",
+          "certified_count": 0
+        },
+        {
+          "target": "windows",
+          "certified_count": 0
+        }
+      ]
+    },
+    {
+      "capability_id": "platform.permissions",
+      "title": "Runtime permissions and capability broker",
+      "priority": "high",
+      "desired_candidates": 2,
+      "certified_count": 0,
+      "remaining_to_goal": 2,
+      "intake_candidates": 0,
+      "blocked_candidates": 0,
+      "certified_by_target": [
+        {
+          "target": "android",
+          "certified_count": 0
+        },
+        {
+          "target": "ios",
+          "certified_count": 0
+        },
+        {
+          "target": "linux",
+          "certified_count": 0
+        },
+        {
+          "target": "macos",
+          "certified_count": 0
+        },
+        {
+          "target": "web",
+          "certified_count": 0
+        },
+        {
+          "target": "windows",
+          "certified_count": 0
+        }
+      ]
+    },
+    {
+      "capability_id": "platform.power_thermal",
+      "title": "Battery, power mode and thermal-pressure signals",
+      "priority": "high",
+      "desired_candidates": 2,
+      "certified_count": 0,
+      "remaining_to_goal": 2,
+      "intake_candidates": 0,
+      "blocked_candidates": 0,
+      "certified_by_target": [
+        {
+          "target": "android",
+          "certified_count": 0
+        },
+        {
+          "target": "ios",
+          "certified_count": 0
+        },
+        {
+          "target": "linux",
+          "certified_count": 0
+        },
+        {
+          "target": "macos",
+          "certified_count": 0
+        },
+        {
+          "target": "raspberry_pi",
+          "certified_count": 0
+        },
+        {
+          "target": "windows",
+          "certified_count": 0
+        }
+      ]
+    },
+    {
+      "capability_id": "platform.process",
+      "title": "Local process and shell execution abstraction",
+      "priority": "high",
+      "desired_candidates": 2,
+      "certified_count": 0,
+      "remaining_to_goal": 2,
+      "intake_candidates": 0,
+      "blocked_candidates": 0,
+      "certified_by_target": [
+        {
+          "target": "linux",
+          "certified_count": 0
+        },
+        {
+          "target": "macos",
+          "certified_count": 0
+        },
+        {
+          "target": "raspberry_pi",
+          "certified_count": 0
+        },
+        {
+          "target": "windows",
+          "certified_count": 0
+        }
+      ]
+    },
+    {
+      "capability_id": "release.auto_update",
+      "title": "Platform-aware self-update and update-channel integration",
+      "priority": "high",
+      "desired_candidates": 2,
+      "certified_count": 0,
+      "remaining_to_goal": 2,
+      "intake_candidates": 0,
+      "blocked_candidates": 0,
+      "certified_by_target": [
+        {
+          "target": "android",
+          "certified_count": 0
+        },
+        {
+          "target": "linux",
+          "certified_count": 0
+        },
+        {
+          "target": "macos",
+          "certified_count": 0
+        },
+        {
+          "target": "raspberry_pi",
+          "certified_count": 0
+        },
+        {
+          "target": "windows",
+          "certified_count": 0
+        }
+      ]
+    },
+    {
+      "capability_id": "storage.secrets",
+      "title": "Secure local storage / secrets abstraction",
+      "priority": "high",
+      "desired_candidates": 2,
+      "certified_count": 0,
+      "remaining_to_goal": 2,
+      "intake_candidates": 0,
+      "blocked_candidates": 0,
+      "certified_by_target": [
+        {
+          "target": "android",
+          "certified_count": 0
+        },
+        {
+          "target": "desktop",
+          "certified_count": 0
+        }
+      ]
+    },
+    {
+      "capability_id": "voice.device_policy",
+      "title": "Voice-device selection, duplex policy and interruption handling",
+      "priority": "high",
+      "desired_candidates": 2,
+      "certified_count": 0,
+      "remaining_to_goal": 2,
+      "intake_candidates": 0,
+      "blocked_candidates": 0,
+      "certified_by_target": [
+        {
+          "target": "android",
+          "certified_count": 0
+        },
+        {
+          "target": "ios",
+          "certified_count": 0
+        },
+        {
+          "target": "linux",
+          "certified_count": 0
+        },
+        {
+          "target": "macos",
+          "certified_count": 0
+        },
+        {
+          "target": "raspberry_pi",
+          "certified_count": 0
+        },
+        {
+          "target": "web",
+          "certified_count": 0
+        },
+        {
+          "target": "windows",
+          "certified_count": 0
+        }
+      ]
+    },
+    {
+      "capability_id": "storage.local_db",
+      "title": "Local database / persistence",
+      "priority": "high",
+      "desired_candidates": 2,
+      "certified_count": 1,
+      "remaining_to_goal": 1,
+      "intake_candidates": 3,
+      "blocked_candidates": 3,
+      "certified_by_target": [
+        {
+          "target": "android",
+          "certified_count": 0
+        },
+        {
+          "target": "desktop",
+          "certified_count": 1
+        }
+      ]
+    },
+    {
+      "capability_id": "ai.model_storage",
+      "title": "Large-model storage, integrity and migration abstraction",
+      "priority": "high",
+      "desired_candidates": 2,
+      "certified_count": 1,
+      "remaining_to_goal": 1,
+      "intake_candidates": 1,
+      "blocked_candidates": 1,
+      "certified_by_target": [
+        {
+          "target": "android",
+          "certified_count": 0
+        },
+        {
+          "target": "ios",
+          "certified_count": 0
+        },
+        {
+          "target": "linux",
+          "certified_count": 1
+        },
+        {
+          "target": "macos",
+          "certified_count": 0
+        },
+        {
+          "target": "raspberry_pi",
+          "certified_count": 0
+        },
+        {
+          "target": "web",
+          "certified_count": 0
+        },
+        {
+          "target": "windows",
+          "certified_count": 0
+        }
+      ]
+    },
+    {
+      "capability_id": "diagnostics.logging",
+      "title": "Structured logging and diagnostics",
+      "priority": "high",
+      "desired_candidates": 2,
+      "certified_count": 1,
+      "remaining_to_goal": 1,
+      "intake_candidates": 1,
+      "blocked_candidates": 1,
+      "certified_by_target": [
+        {
+          "target": "android",
+          "certified_count": 0
+        },
+        {
+          "target": "desktop",
+          "certified_count": 1
+        },
+        {
+          "target": "web",
+          "certified_count": 0
+        }
+      ]
+    },
+    {
+      "capability_id": "platform.desktop_shell",
+      "title": "Desktop window, tray and lifecycle integration",
+      "priority": "medium",
+      "desired_candidates": 2,
+      "certified_count": 0,
+      "remaining_to_goal": 2,
+      "intake_candidates": 0,
+      "blocked_candidates": 0,
+      "certified_by_target": [
+        {
+          "target": "linux",
+          "certified_count": 0
+        },
+        {
+          "target": "macos",
+          "certified_count": 0
+        },
+        {
+          "target": "windows",
+          "certified_count": 0
+        }
+      ]
+    },
+    {
+      "capability_id": "platform.file_picker_share",
+      "title": "File picker, document provider and share/export abstraction",
+      "priority": "medium",
+      "desired_candidates": 2,
+      "certified_count": 0,
+      "remaining_to_goal": 2,
+      "intake_candidates": 0,
+      "blocked_candidates": 0,
+      "certified_by_target": [
+        {
+          "target": "android",
+          "certified_count": 0
+        },
+        {
+          "target": "ios",
+          "certified_count": 0
+        },
+        {
+          "target": "linux",
+          "certified_count": 0
+        },
+        {
+          "target": "macos",
+          "certified_count": 0
+        },
+        {
+          "target": "web",
+          "certified_count": 0
+        },
+        {
+          "target": "windows",
+          "certified_count": 0
+        }
+      ]
+    },
+    {
+      "capability_id": "platform.notifications",
+      "title": "Native notification abstraction",
+      "priority": "medium",
+      "desired_candidates": 2,
+      "certified_count": 0,
+      "remaining_to_goal": 2,
+      "intake_candidates": 0,
+      "blocked_candidates": 0,
+      "certified_by_target": [
+        {
+          "target": "android",
+          "certified_count": 0
+        },
+        {
+          "target": "ios",
+          "certified_count": 0
+        },
+        {
+          "target": "linux",
+          "certified_count": 0
+        },
+        {
+          "target": "macos",
+          "certified_count": 0
+        },
+        {
+          "target": "web",
+          "certified_count": 0
+        },
+        {
+          "target": "windows",
+          "certified_count": 0
+        }
+      ]
+    },
+    {
+      "capability_id": "platform.startup_service",
+      "title": "OS startup, login item and headless service integration",
+      "priority": "medium",
+      "desired_candidates": 2,
+      "certified_count": 0,
+      "remaining_to_goal": 2,
+      "intake_candidates": 0,
+      "blocked_candidates": 0,
+      "certified_by_target": [
+        {
+          "target": "linux",
+          "certified_count": 0
+        },
+        {
+          "target": "macos",
+          "certified_count": 0
+        },
+        {
+          "target": "raspberry_pi",
+          "certified_count": 0
+        },
+        {
+          "target": "windows",
+          "certified_count": 0
+        }
+      ]
+    },
+    {
+      "capability_id": "platform.clipboard",
+      "title": "Clipboard abstraction with platform policy boundaries",
+      "priority": "low",
+      "desired_candidates": 1,
+      "certified_count": 0,
+      "remaining_to_goal": 1,
+      "intake_candidates": 0,
+      "blocked_candidates": 0,
+      "certified_by_target": [
+        {
+          "target": "android",
+          "certified_count": 0
+        },
+        {
+          "target": "ios",
+          "certified_count": 0
+        },
+        {
+          "target": "linux",
+          "certified_count": 0
+        },
+        {
+          "target": "macos",
+          "certified_count": 0
+        },
+        {
+          "target": "web",
+          "certified_count": 0
+        },
+        {
+          "target": "windows",
+          "certified_count": 0
+        }
+      ]
+    }
+  ],
+  "candidates": [
+    {
+      "asset_id": "ai.acceleration_backend.firstparty.ai-orchestrator-core",
+      "version": "0.1.0",
+      "status": "quarantined",
+      "capabilities": [
+        "ai.acceleration_backend"
+      ],
+      "source_repository": "https://github.com/pilialvu75-hue/AI-Orchestrator-Core",
+      "source_commit": "c65a8b8702930a40620dea34f1f14439532a5a9b",
+      "blockers": [
+        "LICENSE_EVIDENCE_MISSING",
+        "SOURCE_SNAPSHOT_MISSING",
+        "REPRODUCIBLE_TEST_EVIDENCE_MISSING",
+        "SECURITY_REVIEW_EVIDENCE_MISSING"
+      ],
+      "next_actions": [
+        "Resolve the upstream license and supply its attributable license file.",
+        "Materialize immutable source bytes from the pinned commit in an isolated evidence workflow.",
+        "Run isolated reproducible tests on the pinned source and attach a bound report.",
+        "Attach an independently generated security report and SBOM bound to the pinned source."
+      ],
+      "independent_certification_authorized": false
+    },
+    {
+      "asset_id": "ai.local_inference.firstparty.ai-orchestrator-core",
+      "version": "0.1.0",
+      "status": "quarantined",
+      "capabilities": [
+        "ai.local_inference"
+      ],
+      "source_repository": "https://github.com/pilialvu75-hue/AI-Orchestrator-Core",
+      "source_commit": "c65a8b8702930a40620dea34f1f14439532a5a9b",
+      "blockers": [
+        "LICENSE_EVIDENCE_MISSING",
+        "SOURCE_SNAPSHOT_MISSING",
+        "REPRODUCIBLE_TEST_EVIDENCE_MISSING",
+        "SECURITY_REVIEW_EVIDENCE_MISSING"
+      ],
+      "next_actions": [
+        "Resolve the upstream license and supply its attributable license file.",
+        "Materialize immutable source bytes from the pinned commit in an isolated evidence workflow.",
+        "Run isolated reproducible tests on the pinned source and attach a bound report.",
+        "Attach an independently generated security report and SBOM bound to the pinned source."
+      ],
+      "independent_certification_authorized": false
+    },
+    {
+      "asset_id": "ai.model_storage.firstparty.ai-orchestrator-core",
+      "version": "0.1.0",
+      "status": "discovered",
+      "capabilities": [
+        "ai.model_storage"
+      ],
+      "source_repository": "https://github.com/pilialvu75-hue/AI-Orchestrator-Core",
+      "source_commit": "c65a8b8702930a40620dea34f1f14439532a5a9b",
+      "blockers": [
+        "LICENSE_EVIDENCE_MISSING",
+        "SOURCE_SNAPSHOT_MISSING",
+        "REPRODUCIBLE_TEST_EVIDENCE_MISSING",
+        "SECURITY_REVIEW_EVIDENCE_MISSING"
+      ],
+      "next_actions": [
+        "Resolve the upstream license and supply its attributable license file.",
+        "Materialize immutable source bytes from the pinned commit in an isolated evidence workflow.",
+        "Run isolated reproducible tests on the pinned source and attach a bound report.",
+        "Attach an independently generated security report and SBOM bound to the pinned source."
+      ],
+      "independent_certification_authorized": false
+    },
+    {
+      "asset_id": "auth.session.firstparty.template-webview",
+      "version": "0.1.0",
+      "status": "discovered",
+      "capabilities": [
+        "auth.session"
+      ],
+      "source_repository": "https://github.com/pilialvu75-hue/Template-webview",
+      "source_commit": "95b7f49f297d33f46d9eb5a091d1f3b69dcdd089",
+      "blockers": [
+        "LICENSE_EVIDENCE_MISSING",
+        "SOURCE_SNAPSHOT_MISSING",
+        "REPRODUCIBLE_TEST_EVIDENCE_MISSING",
+        "SECURITY_REVIEW_EVIDENCE_MISSING"
+      ],
+      "next_actions": [
+        "Resolve the upstream license and supply its attributable license file.",
+        "Materialize immutable source bytes from the pinned commit in an isolated evidence workflow.",
+        "Run isolated reproducible tests on the pinned source and attach a bound report.",
+        "Attach an independently generated security report and SBOM bound to the pinned source."
+      ],
+      "independent_certification_authorized": false
+    },
+    {
+      "asset_id": "diagnostics.logging.firstparty.ai-orchestrator-core",
+      "version": "0.1.0",
+      "status": "discovered",
+      "capabilities": [
+        "diagnostics.logging"
+      ],
+      "source_repository": "https://github.com/pilialvu75-hue/AI-Orchestrator-Core",
+      "source_commit": "c65a8b8702930a40620dea34f1f14439532a5a9b",
+      "blockers": [
+        "LICENSE_EVIDENCE_MISSING",
+        "SOURCE_SNAPSHOT_MISSING",
+        "REPRODUCIBLE_TEST_EVIDENCE_MISSING",
+        "SECURITY_REVIEW_EVIDENCE_MISSING"
+      ],
+      "next_actions": [
+        "Resolve the upstream license and supply its attributable license file.",
+        "Materialize immutable source bytes from the pinned commit in an isolated evidence workflow.",
+        "Run isolated reproducible tests on the pinned source and attach a bound report.",
+        "Attach an independently generated security report and SBOM bound to the pinned source."
+      ],
+      "independent_certification_authorized": false
+    },
+    {
+      "asset_id": "platform.filesystem.firstparty.flutteride",
+      "version": "0.1.0",
+      "status": "discovered",
+      "capabilities": [
+        "platform.filesystem"
+      ],
+      "source_repository": "https://github.com/pilialvu75-hue/FLUTTERIDE",
+      "source_commit": "c005f94bed41bf699043ee5d40c20d03440561be",
+      "blockers": [
+        "LICENSE_EVIDENCE_MISSING",
+        "SOURCE_SNAPSHOT_MISSING",
+        "REPRODUCIBLE_TEST_EVIDENCE_MISSING",
+        "SECURITY_REVIEW_EVIDENCE_MISSING"
+      ],
+      "next_actions": [
+        "Resolve the upstream license and supply its attributable license file.",
+        "Materialize immutable source bytes from the pinned commit in an isolated evidence workflow.",
+        "Run isolated reproducible tests on the pinned source and attach a bound report.",
+        "Attach an independently generated security report and SBOM bound to the pinned source."
+      ],
+      "independent_certification_authorized": false
+    },
+    {
+      "asset_id": "platform.filesystem.firstparty.mobileide",
+      "version": "0.1.0",
+      "status": "discovered",
+      "capabilities": [
+        "platform.filesystem"
+      ],
+      "source_repository": "https://github.com/pilialvu75-hue/MobileIde",
+      "source_commit": "b964aa2869ac6d7e24f857a9a74b958ed120945d",
+      "blockers": [
+        "LICENSE_EVIDENCE_MISSING",
+        "SOURCE_SNAPSHOT_MISSING",
+        "REPRODUCIBLE_TEST_EVIDENCE_MISSING",
+        "SECURITY_REVIEW_EVIDENCE_MISSING"
+      ],
+      "next_actions": [
+        "Resolve the upstream license and supply its attributable license file.",
+        "Materialize immutable source bytes from the pinned commit in an isolated evidence workflow.",
+        "Run isolated reproducible tests on the pinned source and attach a bound report.",
+        "Attach an independently generated security report and SBOM bound to the pinned source."
+      ],
+      "independent_certification_authorized": false
+    },
+    {
+      "asset_id": "release.packaging.firstparty.flutteride",
+      "version": "0.1.0",
+      "status": "discovered",
+      "capabilities": [
+        "release.packaging"
+      ],
+      "source_repository": "https://github.com/pilialvu75-hue/FLUTTERIDE",
+      "source_commit": "c005f94bed41bf699043ee5d40c20d03440561be",
+      "blockers": [
+        "LICENSE_EVIDENCE_MISSING",
+        "SOURCE_SNAPSHOT_MISSING",
+        "REPRODUCIBLE_TEST_EVIDENCE_MISSING",
+        "SECURITY_REVIEW_EVIDENCE_MISSING"
+      ],
+      "next_actions": [
+        "Resolve the upstream license and supply its attributable license file.",
+        "Materialize immutable source bytes from the pinned commit in an isolated evidence workflow.",
+        "Run isolated reproducible tests on the pinned source and attach a bound report.",
+        "Attach an independently generated security report and SBOM bound to the pinned source."
+      ],
+      "independent_certification_authorized": false
+    },
+    {
+      "asset_id": "release.packaging.firstparty.mia",
+      "version": "0.1.0",
+      "status": "discovered",
+      "capabilities": [
+        "release.packaging"
+      ],
+      "source_repository": "https://github.com/pilialvu75-hue/Mia",
+      "source_commit": "ebeaa2884bce22e891d15da7c1f61962dde0699a",
+      "blockers": [
+        "LICENSE_EVIDENCE_MISSING",
+        "SOURCE_SNAPSHOT_MISSING",
+        "REPRODUCIBLE_TEST_EVIDENCE_MISSING",
+        "SECURITY_REVIEW_EVIDENCE_MISSING"
+      ],
+      "next_actions": [
+        "Resolve the upstream license and supply its attributable license file.",
+        "Materialize immutable source bytes from the pinned commit in an isolated evidence workflow.",
+        "Run isolated reproducible tests on the pinned source and attach a bound report.",
+        "Attach an independently generated security report and SBOM bound to the pinned source."
+      ],
+      "independent_certification_authorized": false
+    },
+    {
+      "asset_id": "release.packaging.firstparty.mobileide",
+      "version": "0.1.0",
+      "status": "discovered",
+      "capabilities": [
+        "release.packaging"
+      ],
+      "source_repository": "https://github.com/pilialvu75-hue/MobileIde",
+      "source_commit": "b964aa2869ac6d7e24f857a9a74b958ed120945d",
+      "blockers": [
+        "LICENSE_EVIDENCE_MISSING",
+        "SOURCE_SNAPSHOT_MISSING",
+        "REPRODUCIBLE_TEST_EVIDENCE_MISSING",
+        "SECURITY_REVIEW_EVIDENCE_MISSING"
+      ],
+      "next_actions": [
+        "Resolve the upstream license and supply its attributable license file.",
+        "Materialize immutable source bytes from the pinned commit in an isolated evidence workflow.",
+        "Run isolated reproducible tests on the pinned source and attach a bound report.",
+        "Attach an independently generated security report and SBOM bound to the pinned source."
+      ],
+      "independent_certification_authorized": false
+    },
+    {
+      "asset_id": "release.packaging.firstparty.template-ai-1",
+      "version": "0.1.0",
+      "status": "discovered",
+      "capabilities": [
+        "release.packaging"
+      ],
+      "source_repository": "https://github.com/pilialvu75-hue/Template-AI-1",
+      "source_commit": "23ff34ba3f437bee13abee5e56685ab6de8a84e0",
+      "blockers": [
+        "LICENSE_EVIDENCE_MISSING",
+        "SOURCE_SNAPSHOT_MISSING",
+        "REPRODUCIBLE_TEST_EVIDENCE_MISSING",
+        "SECURITY_REVIEW_EVIDENCE_MISSING"
+      ],
+      "next_actions": [
+        "Resolve the upstream license and supply its attributable license file.",
+        "Materialize immutable source bytes from the pinned commit in an isolated evidence workflow.",
+        "Run isolated reproducible tests on the pinned source and attach a bound report.",
+        "Attach an independently generated security report and SBOM bound to the pinned source."
+      ],
+      "independent_certification_authorized": false
+    },
+    {
+      "asset_id": "release.packaging.firstparty.template-webview",
+      "version": "0.1.0",
+      "status": "discovered",
+      "capabilities": [
+        "release.packaging"
+      ],
+      "source_repository": "https://github.com/pilialvu75-hue/Template-webview",
+      "source_commit": "95b7f49f297d33f46d9eb5a091d1f3b69dcdd089",
+      "blockers": [
+        "LICENSE_EVIDENCE_MISSING",
+        "SOURCE_SNAPSHOT_MISSING",
+        "REPRODUCIBLE_TEST_EVIDENCE_MISSING",
+        "SECURITY_REVIEW_EVIDENCE_MISSING"
+      ],
+      "next_actions": [
+        "Resolve the upstream license and supply its attributable license file.",
+        "Materialize immutable source bytes from the pinned commit in an isolated evidence workflow.",
+        "Run isolated reproducible tests on the pinned source and attach a bound report.",
+        "Attach an independently generated security report and SBOM bound to the pinned source."
+      ],
+      "independent_certification_authorized": false
+    },
+    {
+      "asset_id": "release.update_manager.firstparty.ai-orchestrator-core",
+      "version": "0.1.0",
+      "status": "discovered",
+      "capabilities": [
+        "release.update_manager"
+      ],
+      "source_repository": "https://github.com/pilialvu75-hue/AI-Orchestrator-Core",
+      "source_commit": "c65a8b8702930a40620dea34f1f14439532a5a9b",
+      "blockers": [
+        "LICENSE_EVIDENCE_MISSING",
+        "SOURCE_SNAPSHOT_MISSING",
+        "REPRODUCIBLE_TEST_EVIDENCE_MISSING",
+        "SECURITY_REVIEW_EVIDENCE_MISSING"
+      ],
+      "next_actions": [
+        "Resolve the upstream license and supply its attributable license file.",
+        "Materialize immutable source bytes from the pinned commit in an isolated evidence workflow.",
+        "Run isolated reproducible tests on the pinned source and attach a bound report.",
+        "Attach an independently generated security report and SBOM bound to the pinned source."
+      ],
+      "independent_certification_authorized": false
+    },
+    {
+      "asset_id": "release.update_manager.firstparty.mia",
+      "version": "0.1.0",
+      "status": "discovered",
+      "capabilities": [
+        "release.update_manager"
+      ],
+      "source_repository": "https://github.com/pilialvu75-hue/Mia",
+      "source_commit": "ebeaa2884bce22e891d15da7c1f61962dde0699a",
+      "blockers": [
+        "LICENSE_EVIDENCE_MISSING",
+        "SOURCE_SNAPSHOT_MISSING",
+        "REPRODUCIBLE_TEST_EVIDENCE_MISSING",
+        "SECURITY_REVIEW_EVIDENCE_MISSING"
+      ],
+      "next_actions": [
+        "Resolve the upstream license and supply its attributable license file.",
+        "Materialize immutable source bytes from the pinned commit in an isolated evidence workflow.",
+        "Run isolated reproducible tests on the pinned source and attach a bound report.",
+        "Attach an independently generated security report and SBOM bound to the pinned source."
+      ],
+      "independent_certification_authorized": false
+    },
+    {
+      "asset_id": "storage.local_db.firstparty.flutteride",
+      "version": "0.1.0",
+      "status": "discovered",
+      "capabilities": [
+        "storage.local_db"
+      ],
+      "source_repository": "https://github.com/pilialvu75-hue/FLUTTERIDE",
+      "source_commit": "c005f94bed41bf699043ee5d40c20d03440561be",
+      "blockers": [
+        "LICENSE_EVIDENCE_MISSING",
+        "SOURCE_SNAPSHOT_MISSING",
+        "REPRODUCIBLE_TEST_EVIDENCE_MISSING",
+        "SECURITY_REVIEW_EVIDENCE_MISSING"
+      ],
+      "next_actions": [
+        "Resolve the upstream license and supply its attributable license file.",
+        "Materialize immutable source bytes from the pinned commit in an isolated evidence workflow.",
+        "Run isolated reproducible tests on the pinned source and attach a bound report.",
+        "Attach an independently generated security report and SBOM bound to the pinned source."
+      ],
+      "independent_certification_authorized": false
+    },
+    {
+      "asset_id": "storage.local_db.firstparty.mobileide",
+      "version": "0.1.0",
+      "status": "discovered",
+      "capabilities": [
+        "storage.local_db"
+      ],
+      "source_repository": "https://github.com/pilialvu75-hue/MobileIde",
+      "source_commit": "b964aa2869ac6d7e24f857a9a74b958ed120945d",
+      "blockers": [
+        "LICENSE_EVIDENCE_MISSING",
+        "SOURCE_SNAPSHOT_MISSING",
+        "REPRODUCIBLE_TEST_EVIDENCE_MISSING",
+        "SECURITY_REVIEW_EVIDENCE_MISSING"
+      ],
+      "next_actions": [
+        "Resolve the upstream license and supply its attributable license file.",
+        "Materialize immutable source bytes from the pinned commit in an isolated evidence workflow.",
+        "Run isolated reproducible tests on the pinned source and attach a bound report.",
+        "Attach an independently generated security report and SBOM bound to the pinned source."
+      ],
+      "independent_certification_authorized": false
+    },
+    {
+      "asset_id": "storage.local_db.firstparty.template-webview",
+      "version": "0.1.0",
+      "status": "discovered",
+      "capabilities": [
+        "storage.local_db"
+      ],
+      "source_repository": "https://github.com/pilialvu75-hue/Template-webview",
+      "source_commit": "95b7f49f297d33f46d9eb5a091d1f3b69dcdd089",
+      "blockers": [
+        "LICENSE_EVIDENCE_MISSING",
+        "SOURCE_SNAPSHOT_MISSING",
+        "REPRODUCIBLE_TEST_EVIDENCE_MISSING",
+        "SECURITY_REVIEW_EVIDENCE_MISSING"
+      ],
+      "next_actions": [
+        "Resolve the upstream license and supply its attributable license file.",
+        "Materialize immutable source bytes from the pinned commit in an isolated evidence workflow.",
+        "Run isolated reproducible tests on the pinned source and attach a bound report.",
+        "Attach an independently generated security report and SBOM bound to the pinned source."
+      ],
+      "independent_certification_authorized": false
+    },
+    {
+      "asset_id": "voice.stt.firstparty.mia",
+      "version": "0.1.0",
+      "status": "discovered",
+      "capabilities": [
+        "voice.stt"
+      ],
+      "source_repository": "https://github.com/pilialvu75-hue/Mia",
+      "source_commit": "ebeaa2884bce22e891d15da7c1f61962dde0699a",
+      "blockers": [
+        "LICENSE_EVIDENCE_MISSING",
+        "SOURCE_SNAPSHOT_MISSING",
+        "REPRODUCIBLE_TEST_EVIDENCE_MISSING",
+        "SECURITY_REVIEW_EVIDENCE_MISSING"
+      ],
+      "next_actions": [
+        "Resolve the upstream license and supply its attributable license file.",
+        "Materialize immutable source bytes from the pinned commit in an isolated evidence workflow.",
+        "Run isolated reproducible tests on the pinned source and attach a bound report.",
+        "Attach an independently generated security report and SBOM bound to the pinned source."
+      ],
+      "independent_certification_authorized": false
+    },
+    {
+      "asset_id": "voice.tts.firstparty.mia",
+      "version": "0.1.0",
+      "status": "discovered",
+      "capabilities": [
+        "voice.tts"
+      ],
+      "source_repository": "https://github.com/pilialvu75-hue/Mia",
+      "source_commit": "ebeaa2884bce22e891d15da7c1f61962dde0699a",
+      "blockers": [
+        "LICENSE_EVIDENCE_MISSING",
+        "SOURCE_SNAPSHOT_MISSING",
+        "REPRODUCIBLE_TEST_EVIDENCE_MISSING",
+        "SECURITY_REVIEW_EVIDENCE_MISSING"
+      ],
+      "next_actions": [
+        "Resolve the upstream license and supply its attributable license file.",
+        "Materialize immutable source bytes from the pinned commit in an isolated evidence workflow.",
+        "Run isolated reproducible tests on the pinned source and attach a bound report.",
+        "Attach an independently generated security report and SBOM bound to the pinned source."
+      ],
+      "independent_certification_authorized": false
+    }
+  ]
+}
