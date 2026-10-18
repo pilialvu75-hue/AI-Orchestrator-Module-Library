@@ -12,6 +12,7 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "tools"))
 
 from library_package import PackageError, build_package  # noqa: E402
+from library_pipeline import payload_tree_sha256  # noqa: E402
 
 
 class LibraryPackageTest(unittest.TestCase):
@@ -111,7 +112,7 @@ class LibraryPackageTest(unittest.TestCase):
             payload = {
                 "type": "repository_path",
                 "path": "payload/src",
-                "sha256": None,
+                "sha256": payload_tree_sha256(source),
                 "upstream_repository": None,
                 "upstream_commit": None,
             }
@@ -214,6 +215,24 @@ class LibraryPackageTest(unittest.TestCase):
         package = build_package(self.root, "demo.repository", "1.0.0")["package"]
         self.assertEqual("demo.dart", package["files"][0]["target_path"])
         self.assertEqual("payload/src/demo.dart", package["files"][0]["source_path"])
+
+    def test_local_source_tampering_blocks_package_export(self) -> None:
+        self.add_asset("demo.repository", payload_type="repository_path")
+        self.finalize_catalog()
+        source = self.root / "modules/demo.repository/1.0.0/payload/src/demo.dart"
+        source.write_text("class StolenOrChangedCode {}\\n", encoding="utf-8")
+        with self.assertRaisesRegex(PackageError, "SHA256 mismatch"):
+            build_package(self.root, "demo.repository", "1.0.0")
+
+    def test_unpinned_local_payload_is_rejected_by_export(self) -> None:
+        self.add_asset("demo.repository", payload_type="repository_path")
+        self.finalize_catalog()
+        manifest = self.root / "modules/demo.repository/1.0.0/manifest.json"
+        value = json.loads(manifest.read_text(encoding="utf-8"))
+        value["payload"]["sha256"] = None
+        self.write_json(manifest, value)
+        with self.assertRaisesRegex(PackageError, "requires SHA256"):
+            build_package(self.root, "demo.repository", "1.0.0")
 
     def test_upstream_reference_is_fail_explicit_not_fake_source(self) -> None:
         self.add_asset("demo.upstream", payload_type="upstream_reference")
