@@ -1,0 +1,23 @@
+{
+  "schema": "ai-orchestrator.library-test-report.v1",
+  "asset_id": "diagnostics.logging.library.privacy_events",
+  "version": "0.1.0",
+  "source_commit": "30af487af6164b3a6e6f0cd2bc2b11ee6e737fee",
+  "passed": true,
+  "validated_on": [
+    "linux"
+  ],
+  "validated_at": "2026-10-18T12:47:27.894338+00:00",
+  "workflow_run_id": 39128739793,
+  "workflow_run_attempt": 1,
+  "workflow_sha": "4c9cb9d3f12bcc8e84d3d11067175ae409d53279",
+  "workflow_url": "https://github.com/pilialvu75-hue/AI-Orchestrator-Module-Library/actions/runs/39128739793",
+  "payload_sha256": "507458c47a1d6ffca23c053ca0a4d32fbd11e90d73ccae89ae38da2ff2add624",
+  "checks": [
+    "dart analyze --fatal-infos",
+    "dart run bin/self_test.dart"
+  ],
+  "score_basis": "policy_floor_0.80_for_dart_analyze_and_functional_selftest_only",
+  "runtime_certified": false,
+  "security_certified": false
+}

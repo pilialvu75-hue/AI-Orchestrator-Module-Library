@@ -3,7 +3,7 @@
   "name": "Privacy-safe structured diagnostic events",
   "version": "0.1.0",
   "kind": "module",
-  "status": "discovered",
+  "status": "tested",
   "description": "Pure Dart typed, closed-vocabulary diagnostic events that exclude raw prompts, file paths, secrets, and unclassified strings before serialization.",
   "tags": [
     "diagnostics.logging",
@@ -37,11 +37,13 @@
     "retrieved_at": "2026-10-18T12:30:00Z"
   },
   "validation": {
-    "score": 0,
-    "tests_passed": false,
-    "test_report": null,
-    "validated_at": null,
-    "validated_on": []
+    "score": 0.8,
+    "tests_passed": true,
+    "test_report": "tests/dart-linux-ci-report.json",
+    "validated_at": "2026-10-18T12:47:27.894338+00:00",
+    "validated_on": [
+      "linux"
+    ]
   },
   "security": {
     "reviewed": false,
