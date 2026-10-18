@@ -124,7 +124,7 @@ fail-closed policy, transactional inbox operation, or canonical G6 state rules.
 ## First real autonomous lane profile: needs queue only (PR #120)
 
 A strictly limited production route is implemented for the
-`library-researcher` lane and **only a one-file change to
+`library-curation` lane and **only a one-file change to
 `catalog/needs.json`**. This is metadata queue maintenance, NOT automatic
 certification or promotion of executable modules.
 
@@ -162,8 +162,7 @@ existing serialized canonical state processor. PR code is never executed with
 those write credentials. Dispatch is event-triggered for a changed canonical
 lane; it is not a continuous polling/paid-service loop.
 
-**Activation prerequisite:** This behavior is staged in PR #120, not yet
-operating on main. Real confirmation requires (1) merge exact green head,
+**Activation prerequisite:** PR #120 is merged into main, but a real eligible handoff has not yet produced an APPLIED receipt. Real confirmation requires (1) merge exact green head,
 (2) a separate eligible one-file needs-only PR with live claim/packet,
 (3) completed protected workflow and artifact, (4) an `APPLIED` inbox
 receipt and canonical lane READY. The end-to-end tests mock authenticated
@@ -186,4 +185,9 @@ requirements. Fail closed on any missing provenance.
 4. CI passes on the exact PR head and the change is merged to the default branch.
 5. Only then enable the worker automation in the canonical registry.
 
-Current state: **NEEDS-ONLY FAST PATH STAGED, NOT ACTIVE ON MAIN**.\nGeneric executable-module completion and G6 replacement remain unavailable.
+Current state: **NEEDS-ONLY FAST PATH IN MAIN, REAL ACCEPTANCE PENDING**.
+Generic executable-module completion and G6 replacement remain unavailable.
+
+## Dedicated Library curation lane
+
+The needs-only first route now exclusively targets `library-curation`, registered as an independent worker in the canonical chat and workstream registries. The existing `library-researcher` lane and Researcher claim are intentionally unchanged. A Researcher repair can therefore remain in REVIEW_REQUIRED without preventing a new, distinct Library-owned metadata task from being claimed. Independent curation does not itself provide a scheduler to author needs changes or grant module certification rights.
