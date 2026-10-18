@@ -7,7 +7,7 @@
     "policy": "This private repository is the single coordination authority. Chats and agents are workers, not independent sources of truth."
   },
   "updated_at": "2026-10-18",
-  "state_revision": 323,
+  "state_revision": 324,
   "lifecycle_status": "BOOTSTRAP_ACTIVE",
   "roadmap_authority": {
     "library": ".airlab/roadmap.yaml",
@@ -81,13 +81,12 @@
     "invalid_lane_behavior": "ISOLATE_AND_SURFACE_PROJECTION_INCIDENT"
   },
   "projection": {
-    "source_digest": "44ab1db1725aec54c7f1fda26d3972d617d8feceba5ef9a77e90de61cc0af04d",
-    "projected_at": "2026-10-18T11:04:37Z",
+    "source_digest": "d37d10613cf7c8d50f35a46cb402c0423920690f9d6b245809d31fe41204812b",
+    "projected_at": "2026-10-18T11:07:02Z",
     "counts": {
       "BLOCKED": 2,
-      "CLAIMED": 1,
       "READY": 12,
-      "REVIEW_REQUIRED": 3
+      "REVIEW_REQUIRED": 4
     },
     "active_claims": [
       {
@@ -243,6 +242,7 @@
     ],
     "review_required": [
       "cantiere",
+      "library-curation",
       "library-researcher",
       "platform-android"
     ],
@@ -460,9 +460,9 @@
       },
       {
         "id": "library-curation",
-        "status": "CLAIMED",
+        "status": "REVIEW_REQUIRED",
         "activation": "active",
-        "state_version": 5,
+        "state_version": 6,
         "updated_at": "2026-10-18",
         "active_claim": {
           "claim_id": "d226d905c0b31fb5efc6",
@@ -477,7 +477,7 @@
         "reviewer_state": "PENDING",
         "inference_profile_status": null,
         "historical_backlog_count": 2,
-        "next_action": "Claim the next bounded Library task. Executable module certification still requires independent implementation/integration/runtime evidence."
+        "next_action": "Main/Reviewer must inspect the review_packet, linked evidence and required gates before promotion or rework."
       },
       {
         "id": "library-researcher",
