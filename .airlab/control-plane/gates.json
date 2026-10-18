@@ -102,10 +102,10 @@
       "G5_if_applicable",
       "canonical_sync_if_material"
     ],
-    "policy": "Only exact-scope catalog/needs.json metadata changes can use separately authenticated protected CI and transactional inbox. No reviewer G6 PASS, generic DONE, module certification, executable or runtime self-approval. Not active until merged and verified on main.",
+    "policy": "Only library-curation can use protected CI for exact-scope catalog/needs.json edits; library-researcher retains independent Researcher claims. No generic reviewer G6 PASS, DONE, executable module certification, or target runtime self-approval.",
     "first_profile": {
       "id": "library-needs-only-v1",
-      "lane": "library-researcher",
+      "lane": "library-curation",
       "repository": "pilialvu75-hue/AI-Orchestrator-Module-Library",
       "only_changed_file": "catalog/needs.json",
       "trigger": "canonical_review_packet_protected_ci_workflow",

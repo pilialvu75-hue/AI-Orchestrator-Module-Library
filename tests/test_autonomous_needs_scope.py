@@ -8,7 +8,7 @@ from tools.autonomous_independent_gates import LIBRARY_REPOSITORY as REPO
 SHA = "a" * 40
 BLOB = "b" * 40
 IDENTITY = {
-    "lane_id": "library-researcher", "state_version": 9,
+    "lane_id": "library-curation", "state_version": 9,
     "claim_id": "claim", "packet_sha256": "c" * 64,
     "repository": REPO, "pr_number": 120, "head_sha": SHA,
 }

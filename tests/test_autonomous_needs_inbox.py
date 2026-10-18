@@ -21,7 +21,7 @@ import validate_control_plane
 
 REPO = "pilialvu75-hue/AI-Orchestrator-Module-Library"
 NOW = datetime(2026, 10, 18, 5, 0, tzinfo=timezone.utc)
-LANE = "library-researcher"
+LANE = "library-curation"
 
 
 class AutonomousNeedsInboxTests(unittest.TestCase):
@@ -33,7 +33,7 @@ class AutonomousNeedsInboxTests(unittest.TestCase):
         # PR CI checks out GitHub's synthetic merge with the current main.
         # That main may have a different live Researcher claim; isolate this
         # test's Library lane instead of depending on mutable repository state.
-        lane_path = self.root / ".airlab/control-plane/workstreams/library-researcher.json"
+        lane_path = self.root / ".airlab/control-plane/workstreams/library-curation.json"
         lane = json.loads(lane_path.read_text(encoding="utf-8"))
         lane["status"] = "READY"
         lane["active_claim"] = None
@@ -110,7 +110,7 @@ class AutonomousNeedsInboxTests(unittest.TestCase):
         }
         self.request = {
             "schema_version": 1, "request_id": "autonomous-needs-001",
-            "actor_id": "chatgpt:library-researcher", "lane_id": LANE,
+            "actor_id": "chatgpt:library-curation", "lane_id": LANE,
             "operation": "autonomous_complete",
             "expected_state_version": self.current["state_version"],
             "payload": {
@@ -120,7 +120,7 @@ class AutonomousNeedsInboxTests(unittest.TestCase):
         }
 
     def lane(self):
-        path = self.root / ".airlab/control-plane/workstreams/library-researcher.json"
+        path = self.root / ".airlab/control-plane/workstreams/library-curation.json"
         return json.loads(path.read_text(encoding="utf-8"))
 
     def write(self, request=None):
@@ -193,7 +193,7 @@ class AutonomousNeedsInboxTests(unittest.TestCase):
                 self.assertEqual(self.lane(), self.current)
 
     def test_runtime_claim_or_material_roadmap_blocks(self):
-        path = self.root / ".airlab/control-plane/workstreams/library-researcher.json"
+        path = self.root / ".airlab/control-plane/workstreams/library-curation.json"
         lane = self.lane()
         lane["gates"]["G5_TARGET_RUNTIME"] = "PENDING"
         path.write_text(json.dumps(lane))

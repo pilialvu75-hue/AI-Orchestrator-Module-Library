@@ -262,7 +262,7 @@ def _independently_verify_needs_completion(
     *, now: datetime,
 ) -> dict[str, Any]:
     """Re-fetch protected GitHub provenance; worker request is only a run locator."""
-    if lane_id != "library-researcher":
+    if lane_id != "library-curation":
         raise ValueError("autonomous needs fast path is limited to the Library worker lane")
     if set(payload) != {"protected_run_id", "run_attempt", "protected_sha"}:
         raise ValueError("autonomous needs payload requires exact protected run locator")

@@ -19,7 +19,7 @@ from tools.autonomous_needs_scope import verify_needs_only_scope
 from tools.autonomous_receipt_evidence_probe import probe_receipt_evidence
 from tools.control_plane_manager import ROOT, _assert_claim_live, _validate_review_packet
 
-LANE_FILE = ".airlab/control-plane/workstreams/library-researcher.json"
+LANE_FILE = ".airlab/control-plane/workstreams/library-curation.json"
 WORKFLOW_PATH = ".github/workflows/autonomous-ci-probe.yml"
 
 
@@ -32,7 +32,7 @@ def enqueue_protected_needs_run(
     if not isinstance(token, str) or not token.strip():
         raise ValueError("protected GitHub token missing")
     lane = json.loads((root / LANE_FILE).read_text(encoding="utf-8"))
-    if (lane.get("id") != "library-researcher"
+    if (lane.get("id") != "library-curation"
             or lane.get("status") != "REVIEW_REQUIRED"):
         return None
     claim, packet = lane.get("active_claim"), lane.get("review_packet")
@@ -43,7 +43,7 @@ def enqueue_protected_needs_run(
     now = now or datetime.now(timezone.utc)
     try:
         _assert_claim_live(claim, now)
-        _validate_review_packet("library-researcher", claim, packet)
+        _validate_review_packet("library-curation", claim, packet)
     except ValueError:
         return None
     run = fetch_json(
@@ -81,7 +81,7 @@ def enqueue_protected_needs_run(
         "schema_version": 1, "request_id": request_id,
         "submitted_at": now.astimezone(timezone.utc).isoformat(),
         "actor_id": "system:github-actions:control-plane-reconcile",
-        "lane_id": "library-researcher",
+        "lane_id": "library-curation",
         "operation": "autonomous_complete",
         "expected_state_version": identity["state_version"],
         "payload": {

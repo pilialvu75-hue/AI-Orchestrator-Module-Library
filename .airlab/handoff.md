@@ -18,7 +18,7 @@ Read in this order before starting work:
 8. `.airlab/decisions.md`
 9. Current repository CI/workflows, open work and Diagnostics evidence relevant to the selected roadmap item.
 
-The main/reviewer lane remains required for generic VERIFIED/DONE. PR #120 stages a separate **needs-only** autonomous claim release to READY after a trusted protected CI receipt and one-file `catalog/needs.json` GitHub scope verification; it does not set G6 or certify executable modules. Before that PR is merged, all worker lanes still stop at REVIEW_REQUIRED.
+The main/reviewer lane remains required for generic VERIFIED/DONE. PR #120 merged a separate, highly restricted **needs-only** autonomous claim release to READY, requiring a protected CI receipt and exactly one `catalog/needs.json` change. The first-route owner is `library-curation`; `library-researcher` retains its existing Researcher claim and review packet. No path certifies executable modules or falsely sets G6.
 
 Use `tools/chat_lane_bootstrap.py --lane <lane-id>` to generate the current relay for a chat. Worker completion must be submitted as a structured `review_packet` and stop at REVIEW_REQUIRED.
 
@@ -61,3 +61,7 @@ canonical checkpoint after every material change and before long/high-risk steps
 `last_checkpoint` plus current repository evidence.
 
 The final worker handoff to `REVIEW_REQUIRED` creates a final checkpoint automatically.
+
+## Separate Library curation from Researcher discovery (18 October 2026)
+
+`library-curation` is a new canonical worker lane for Library-owned needs queue work. It can be claimed independently while `library-researcher` remains in REVIEW_REQUIRED for its existing Researcher repair. The latter claim, lease, checkpoints and review packet must not be overwritten or released to test the new path. The first automated completion route remains restricted to `catalog/needs.json`, requires exact-head protected evidence and does not issue G6 review approval or certify executable modules.

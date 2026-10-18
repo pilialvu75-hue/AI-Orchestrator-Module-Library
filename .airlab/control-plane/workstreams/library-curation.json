@@ -1,0 +1,39 @@
+{
+  "schema_version": 1,
+  "id": "library-curation",
+  "title": "Library Curation",
+  "role": "worker",
+  "status": "READY",
+  "activation": "active",
+  "scope": "Library-owned needs queue, intake triage, metadata quality, reproducible certification evidence and reuse contracts. Researcher discovery and external Researcher PRs remain separately owned by library-researcher.",
+  "shared_engine_policy": "shared_or_control_plane",
+  "state_version": 1,
+  "updated_at": "2026-10-18",
+  "active_claim": null,
+  "dependencies": [],
+  "roadmap_refs": [
+    ".airlab/roadmap.yaml#L19"
+  ],
+  "evidence": [],
+  "gates": {
+    "G0_CLAIM": "PENDING",
+    "G1_IMPLEMENTATION": "PENDING",
+    "G2_STATIC": "PENDING",
+    "G3_CI": "PENDING",
+    "G4_INTEGRATION": "PENDING",
+    "G5_TARGET_RUNTIME": "NOT_APPLICABLE_UNTIL_RUNTIME_CHANGE",
+    "G6_REVIEWER": "PENDING",
+    "G7_CANONICAL_SYNC": "PENDING"
+  },
+  "reviewer": {
+    "required": true,
+    "state": "PENDING",
+    "reviewed_by": null,
+    "reviewed_at": null
+  },
+  "next_action": "Claim only one bounded Library-owned catalog/needs.json edit through the canonical inbox, then submit an exact-head PR-bound review packet for protected needs-only verification. Do not touch the Researcher claim or auto-certify executable modules.",
+  "historical_backlog": [
+    "Needs-only autonomous completion is metadata restricted, not certification authority.",
+    "The existing library-researcher lane owns its historical Researcher claim and is not migrated or released by this separation."
+  ]
+}
