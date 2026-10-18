@@ -1,0 +1,12 @@
+{
+  "schema_version": 1,
+  "request_id": "autonomous-needs-41e0520b7133ab02151c-v3-run39118397690-a1",
+  "status": "APPLIED",
+  "processed_at": "2026-10-18T10:23:04Z",
+  "source_file": "autonomous-needs-41e0520b7133ab02151c-v3-run39118397690-a1.json",
+  "lane_id": "library-curation",
+  "operation": "autonomous_complete",
+  "actor_id": "system:github-actions:control-plane-reconcile",
+  "errors": [],
+  "result_state_version": 4
+}
