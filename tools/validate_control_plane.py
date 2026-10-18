@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 import json
+import re
 import control_plane_manager
 from pathlib import Path
 
@@ -215,6 +216,47 @@ def validate(root=ROOT):
         state = lane.get("status")
         if state not in ALLOWED:
             errors.append(f"{lane_id}: invalid status {state}")
+        pending_delivery = lane.get("pending_needs_delivery")
+        if pending_delivery is not None:
+            claim_pending = lane.get("active_claim")
+            packet_pending = lane.get("review_packet")
+            identity_pending = (pending_delivery.get("identity")
+                                if isinstance(pending_delivery, dict) else None)
+            gates_pending = lane.get("gates") or {}
+            reviewer_pending = lane.get("reviewer") or {}
+            if (lane_id != "library-curation" or state != "REVIEW_REQUIRED"
+                    or not isinstance(claim_pending, dict)
+                    or not isinstance(packet_pending, dict)
+                    or not isinstance(identity_pending, dict)
+                    or pending_delivery.get("profile") != "library-needs-only-v1"
+                    or pending_delivery.get("changed_file") != "catalog/needs.json"):
+                errors.append(f"{lane_id}: invalid prepared needs-only delivery state")
+            else:
+                if (identity_pending.get("lane_id") != lane_id
+                        or identity_pending.get("claim_id") != claim_pending.get("claim_id")
+                        or identity_pending.get("packet_sha256") != control_plane_manager._review_packet_digest(packet_pending)
+                        or identity_pending.get("repository") != claim_pending.get("repository")
+                        or identity_pending.get("pr_number") != packet_pending.get("pull_request")
+                        or type(identity_pending.get("state_version")) is not int
+                        or identity_pending["state_version"] + 1 != lane.get("state_version")):
+                    errors.append(f"{lane_id}: prepared needs-only identity mismatch")
+                for sha_key in ("head_sha",):
+                    sha = identity_pending.get(sha_key)
+                    if not isinstance(sha, str) or not re.fullmatch(r"[0-9a-f]{40}", sha):
+                        errors.append(f"{lane_id}: prepared needs-only {sha_key} invalid")
+                scope_sha = pending_delivery.get("scope_blob_sha")
+                if not isinstance(scope_sha, str) or not re.fullmatch(r"[0-9a-f]{40}", scope_sha):
+                    errors.append(f"{lane_id}: prepared needs-only blob SHA invalid")
+                if (gates_pending.get("G6_REVIEWER") != "PENDING"
+                        or gates_pending.get("G7_CANONICAL_SYNC") != "PENDING"
+                        or gates_pending.get("G5_TARGET_RUNTIME") not in (
+                            "NOT_APPLICABLE", "NOT_APPLICABLE_UNTIL_RUNTIME_CHANGE"
+                        )
+                        or reviewer_pending.get("state") != "PENDING"):
+                    errors.append(f"{lane_id}: prepared delivery cannot bypass G5/G6/G7")
+                for gate in ("G1_IMPLEMENTATION", "G2_STATIC", "G3_CI", "G4_INTEGRATION"):
+                    if gates_pending.get(gate) != "PASS":
+                        errors.append(f"{lane_id}: prepared needs-only delivery requires {gate}=PASS")
         role = lane.get("role")
         if role != "reviewer" and state not in WORKER_MAX:
             reviewer = lane.get("reviewer") or {}

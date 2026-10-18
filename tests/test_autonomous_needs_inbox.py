@@ -96,7 +96,8 @@ class AutonomousNeedsInboxTests(unittest.TestCase):
                 "file_blob_sha": "b" * 40,
             },
             "protected_run": {
-                "repository": REPO, "run_id": 88,
+                "repository": REPO, "run_id": 88, "run_attempt": 1,
+                "head_sha": "c" * 40,
                 "workflow_path": ".github/workflows/autonomous-ci-probe.yml",
             },
             "audit": {
@@ -138,27 +139,78 @@ class AutonomousNeedsInboxTests(unittest.TestCase):
                 path, root=self.root, now=NOW + timedelta(minutes=2),
             )
 
-    def test_first_real_autonomous_needs_completion_without_reviewer_g6(self):
+    def test_authenticated_needs_receipt_prepares_merge_but_does_not_release_claim(self):
         result = self.process()
         self.assertIn("applied", result)
         lane = self.lane()
-        self.assertEqual(lane["status"], "READY")
-        self.assertIsNone(lane["active_claim"])
+        self.assertEqual(lane["status"], "REVIEW_REQUIRED")
+        self.assertEqual(lane["active_claim"]["claim_id"], self.claim_id)
         self.assertEqual(lane["state_version"], self.current["state_version"] + 1)
         self.assertEqual(lane["gates"]["G6_REVIEWER"], "PENDING")
+        self.assertEqual(lane["gates"]["G7_CANONICAL_SYNC"], "PENDING")
         self.assertEqual(lane["reviewer"]["state"], "PENDING")
-        self.assertTrue(all(lane["gates"][g] == "PASS" for g in (
-            "G0_CLAIM", "G1_IMPLEMENTATION", "G2_STATIC",
-            "G3_CI", "G4_INTEGRATION", "G7_CANONICAL_SYNC",
-        )))
-        self.assertEqual(lane["gates"]["G5_TARGET_RUNTIME"], "NOT_APPLICABLE_UNTIL_RUNTIME_CHANGE")
-        self.assertFalse(any(x.get("decision") == "APPROVED" for x in lane.get("review_history", [])))
-        history = lane["autonomous_completion_history"][-1]
-        self.assertEqual(history["decision"], "VERIFIED_METADATA_ONLY")
-        self.assertEqual(history["protected_run_id"], 88)
+        self.assertEqual(lane.get("autonomous_completion_history", []),
+                         self.current.get("autonomous_completion_history", []))
+        pending = lane["pending_needs_delivery"]
+        self.assertEqual(pending["identity"], self.identity)
+        self.assertEqual(pending["protected_run_id"], 88)
+        self.assertEqual(pending["scope_blob_sha"], "b" * 40)
         self.assertEqual(validate_control_plane.validate(self.root), [])
         receipt_path = self.root / ".airlab/control-plane/inbox/processed/autonomous-needs-001.json"
         self.assertEqual(json.loads(receipt_path.read_text())["status"], "APPLIED")
+
+    def test_real_finalization_requires_independently_confirmed_merged_catalog(self):
+        self.assertIn("applied", self.process())
+        lane = self.lane()
+        delivery = {"pr_number": 120, "head_sha": "a" * 40,
+                    "merge_commit_sha": "d" * 40, "file_blob_sha": "b" * 40}
+        request = {
+            **self.request,
+            "request_id": "needs-delivered-claim-v-final",
+            "operation": "autonomous_finalize_needs",
+            "expected_state_version": lane["state_version"],
+            "payload": delivery,
+        }
+        path = self.write(request)
+        with patch("control_plane_inbox._independently_verify_needs_finalization",
+                   return_value=delivery):
+            result = inbox.process_one(path, root=self.root, now=NOW + timedelta(minutes=3))
+        self.assertIn("applied", result)
+        completed = self.lane()
+        self.assertEqual(completed["status"], "READY")
+        self.assertIsNone(completed["active_claim"])
+        self.assertEqual(completed["state_version"], lane["state_version"] + 1)
+        self.assertNotIn("pending_needs_delivery", completed)
+        self.assertEqual(completed["gates"]["G7_CANONICAL_SYNC"], "PASS")
+        self.assertEqual(completed["gates"]["G6_REVIEWER"], "PENDING")
+        self.assertEqual(completed["reviewer"]["state"], "PENDING")
+        self.assertEqual(completed["autonomous_completion_history"][-1]["decision"],
+                         "MERGED_METADATA_ONLY")
+        self.assertEqual(completed["autonomous_completion_history"][-1]["merge_commit_sha"],
+                         "d" * 40)
+        self.assertEqual(validate_control_plane.validate(self.root), [])
+
+    def test_finalize_rejects_forged_merge_proof_without_releasing_claim(self):
+        self.assertIn("applied", self.process())
+        lane = self.lane()
+        true_delivery = {"pr_number": 120, "head_sha": "a" * 40,
+                         "merge_commit_sha": "d" * 40, "file_blob_sha": "b" * 40}
+        for idx, bogus in enumerate((
+            {**true_delivery, "file_blob_sha": "f" * 40},
+            {**true_delivery, "pr_number": 121},
+            {**true_delivery, "head_sha": "f" * 40},
+            {**true_delivery, "merge_commit_sha": "invalid"},
+        )):
+            req = {**self.request, "operation": "autonomous_finalize_needs",
+                   "request_id": f"needs-final-forgery-{idx}",
+                   "expected_state_version": lane["state_version"],
+                   "payload": bogus}
+            path = self.write(req)
+            with patch("control_plane_inbox._independently_verify_needs_finalization",
+                       return_value=bogus):
+                result = inbox.process_one(path, root=self.root, now=NOW + timedelta(minutes=3))
+            self.assertIn("quarantined", result)
+            self.assertEqual(self.lane(), lane)
 
     def test_replayed_completion_is_idempotent(self):
         self.assertIn("applied", self.process())

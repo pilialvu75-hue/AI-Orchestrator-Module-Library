@@ -214,3 +214,43 @@ The PR that introduces the catch-up path adds its workflow and script to the
 push trigger allowlist, so its merge can exercise the recovery without relying
 on the suppressed event. A real `APPLIED` inbox receipt and lane READY are
 still required before claiming production completion.
+
+## Delivery gate: merged PR and exact main blob required (issue #135)
+
+A green CI run and protected artifact authorize **preparation**, not delivery.
+The guarded `autonomous_complete` inbox operation now persists a
+`pending_needs_delivery` record (original claim, packet SHA256, exact PR head,
+verified `catalog/needs.json` Git blob, protected run and CI run) while
+retaining `REVIEW_REQUIRED`, a live claim and `G7_CANONICAL_SYNC=PENDING`.
+It does not create a new `autonomous_completion_history` entry or release
+any worker claim at this stage.
+
+Only the serialized protected main workflow may merge a prepared Library PR.
+Immediately before merge it independently re-checks the exact PR head, the
+allowlisted single-file diff, protected artifact and unchanged GitHub CI
+evidence. It invokes GitHub's merge endpoint with an explicit expected
+`sha` so a moving worker branch is refused. If GitHub rejects or the
+process exits, the durable prepared state remains available for retry.
+
+After the merge, the code independently fetches the merged PR, verifies the
+original head and returned merge commit, confirms that commit is an ancestor
+of current `main` and that `catalog/needs.json` on `main` has the *exact*
+approved Git blob SHA. The ordinary transactional inbox then receives
+`autonomous_finalize_needs`, verifies the GitHub evidence a second time,
+checks the current claim/version and applies its CAS transition. **Only that
+second APPLIED receipt** may release the claim to `READY` and record
+`MERGED_METADATA_ONLY` with the merge commit; G6 stays PENDING and
+physical/runtime permissions do not change.
+
+If a merge succeeds but CI processing crashes, the hourly reconciler sees
+the durable pending record, recognizes the previously merged exact head,
+rechecks main ancestry and the blob and finalizes idempotently. A PR merely
+closed without merge, a stale SHA, main with a different blob, an expired
+claim **before** merge, or an unverified CI receipt never grants delivery.
+
+The two-phase migration does not retroactively rewrite any already completed
+historical receipts; in particular the first real Library PR #131 was merged
+separately after its verified-only `APPLIED` receipt. A second production
+exercise is needed to show that the automated merge and second APPLIED
+receipt operate without human intervention. The profile remains limited to
+`library-curation` and a single `catalog/needs.json` modification.

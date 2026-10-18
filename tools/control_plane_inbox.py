@@ -34,6 +34,7 @@ OPERATIONS = {
     "submit_review",
     "autonomous_completion_preflight",
     "autonomous_complete",
+    "autonomous_finalize_needs",
     "record_review_gates",
     "review_accept",
     "review_rework",
@@ -317,6 +318,32 @@ def _independently_verify_needs_completion(
             "protected_run": evidence["protected_run"], "audit": audit}
 
 
+def _independently_verify_needs_finalization(
+    root: Path, lane_id: str, payload: dict[str, Any],
+) -> dict[str, Any]:
+    """Independently verify exact merged PR, ancestry and delivered main blob."""
+    if lane_id != "library-curation":
+        raise ValueError("autonomous merge completion limited to Library curation")
+    if not isinstance(payload, dict) or set(payload) != {
+        "pr_number", "head_sha", "merge_commit_sha", "file_blob_sha"
+    }:
+        raise ValueError("exact merged needs delivery proof fields required")
+    token = os.environ.get("GITHUB_TOKEN", "")
+    if not token.strip():
+        raise ValueError("protected GitHub token missing for merged needs verification")
+    from tools.autonomous_needs_delivery import _pending, verify_merged_delivery
+    canonical = _pending(root)
+    if canonical is None:
+        raise ValueError("no pending protected needs delivery in canonical lane")
+    lane, _claim, _packet, pending = canonical
+    if lane.get("id") != lane_id:
+        raise ValueError("verified delivery lane changed")
+    independently_verified = verify_merged_delivery(pending, token)
+    if independently_verified != payload:
+        raise ValueError("worker-supplied merged delivery proof differs from GitHub")
+    return independently_verified
+
+
 def _apply(
     root: Path,
     lane_id: str,
@@ -402,6 +429,13 @@ def _apply(
             verified_scope=verified_autonomy["scope"],
             protected_run=verified_autonomy["protected_run"],
             verified_ci_audit=verified_autonomy["audit"],
+            root=root, now=now,
+        )
+    elif operation == "autonomous_finalize_needs":
+        if not isinstance(verified_autonomy, dict):
+            raise ValueError("protected merged delivery proof is required")
+        control_plane_manager.finalize_verified_library_needs(
+            lane_id, delivery=verified_autonomy,
             root=root, now=now,
         )
     elif operation == "record_review_gates":
@@ -526,6 +560,10 @@ def process_one(path: Path, *, root: Path = ROOT, now: datetime | None = None) -
         if operation == "autonomous_complete":
             verified_autonomy = _independently_verify_needs_completion(
                 root, lane_id, payload, now=now,
+            )
+        elif operation == "autonomous_finalize_needs":
+            verified_autonomy = _independently_verify_needs_finalization(
+                root, lane_id, payload,
             )
 
         try:
