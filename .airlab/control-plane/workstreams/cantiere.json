@@ -3,13 +3,30 @@
   "id": "cantiere",
   "title": "Cantiere",
   "role": "worker",
-  "status": "READY",
+  "status": "CLAIMED",
   "activation": "active",
   "scope": "Exclusive Cantiere/App Factory execution, durability, build/review/validation/apply and first-real-app reliability.",
   "shared_engine_policy": "shared_or_control_plane",
-  "state_version": 111,
+  "state_version": 112,
   "updated_at": "2026-10-18",
-  "active_claim": null,
+  "active_claim": {
+    "claim_id": "743d958369bce99e0e49",
+    "owner_lane": "cantiere",
+    "work_item": "issue-853-rejected-gate-retry",
+    "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
+    "scope": "Bounded rejected Reviewer/Validation retry state and durable project restore regression, no hardware or CI contract changes",
+    "branch": "fix/cantiere-853-rejected-gate-retry",
+    "resource_locks": [
+      "branch:pilialvu75-hue/Ai-orchestrator-riserva:fix/cantiere-853-rejected-gate-retry",
+      "contract:cantiere-rejected-task-retry",
+      "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/app_factory/workshop/workshop_production_execution_controller.dart",
+      "file:pilialvu75-hue/Ai-orchestrator-riserva:test/app_factory/workshop/workshop_production_execution_controller_test.dart"
+    ],
+    "started_at": "2026-10-18T12:22:58Z",
+    "heartbeat_at": "2026-10-18T12:22:58Z",
+    "lease_until": "2026-10-19T00:22:58Z",
+    "lease_hours": 12
+  },
   "dependencies": [],
   "roadmap_refs": [
     ".airlab/public-repositories/Ai-orchestrator-riserva/roadmap.yaml#CANT-11",
@@ -18,7 +35,7 @@
   ],
   "evidence": [],
   "gates": {
-    "G0_CLAIM": "PENDING",
+    "G0_CLAIM": "PASS",
     "G1_IMPLEMENTATION": "PENDING",
     "G2_STATIC": "PENDING",
     "G3_CI": "PENDING",
