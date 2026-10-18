@@ -5,7 +5,7 @@
   "source_state": {
     "catalog_updated_at": "2026-09-17T23:10:06Z",
     "contracts_updated_at": "2026-09-14T19:55:00Z",
-    "needs_updated_at": "2026-09-18T18:24:59.976780Z",
+    "needs_updated_at": "2026-10-18T11:05:00Z",
     "lifecycle_revision": 0,
     "lifecycle_updated_at": null
   },
@@ -262,7 +262,9 @@
       "targets": [
         "android",
         "desktop",
-        "raspberry_pi"
+        "ios",
+        "raspberry_pi",
+        "web"
       ]
     },
     {
@@ -277,6 +279,7 @@
         "linux",
         "macos",
         "raspberry_pi",
+        "web",
         "windows"
       ]
     },
@@ -1014,5 +1017,5 @@
       ]
     }
   ],
-  "snapshot_sha256": "8bef5f4279e82799b18b6a3da6db3694bba9ec9b668da4d53ec4d1c7810f5601"
+  "snapshot_sha256": "4697d4dd0242f99679bea76d9791026066f6d0454c87506781d68c4dd63a52f7"
 }
