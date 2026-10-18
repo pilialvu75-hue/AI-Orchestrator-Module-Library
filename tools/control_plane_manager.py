@@ -712,7 +712,7 @@ def complete_verified_library_needs(
     are not a worker-accessible authorization interface.
     """
     now = now or _now()
-    if lane_id != "library-researcher":
+    if lane_id != "library-curation":
         raise ValueError("autonomous fast path restricted to the Library worker lane")
     _, canonical = _canonical(root)
     lane_path, lane = _lane_by_id(root, canonical, lane_id)
