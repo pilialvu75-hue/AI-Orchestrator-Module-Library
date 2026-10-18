@@ -693,7 +693,10 @@ def validate_autonomous_completion(
     # A receipt flag in mutable lane JSON is NOT proof of provenance. Until
     # receipt verification is implemented against a protected external source,
     # this API must never advertise eligibility for automatic state changes.
-    raise ValueError("autonomous completion disabled: trusted receipt provenance is not verdef complete_verified_library_needs(
+    raise ValueError("autonomous completion disabled: trusted receipt provenance is not verified")
+
+
+def complete_verified_library_needs(
     lane_id: str,
     *,
     identity: dict[str, Any],
@@ -919,9 +922,6 @@ def finalize_verified_library_needs(
     )
     _write(lane_path, lane)
     project(root=root, now=now)
-
-
-ow=now)
 
 
 def review_accept(
