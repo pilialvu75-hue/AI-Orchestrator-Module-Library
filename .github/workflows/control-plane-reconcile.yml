@@ -13,6 +13,8 @@ on:
       - ".github/workflows/control-plane-reconcile.yml"
       - "tools/autonomous_needs_reconcile_scan.py"
       - "tools/autonomous_receipt_evidence_probe.py"
+      - "tools/autonomous_needs_delivery.py"
+      - "tools/control_plane_manager.py"
   schedule:
     - cron: "17 * * * *"
   workflow_dispatch:
@@ -24,7 +26,7 @@ permissions:
   contents: write
   actions: write
   checks: read
-  pull-requests: read
+  pull-requests: write
 
 concurrency:
   group: canonical-control-plane-reconcile
@@ -56,6 +58,28 @@ jobs:
           set -euo pipefail
           git config user.name "ai-orchestrator-control-plane"
           git config user.email "actions@users.noreply.github.com"
+
+          # Complete a delivery only after preparation is already durably
+          # committed on main. The protected merge uses GitHub's exact SHA,
+          # rechecks the delivered blob, then the ordinary CAS inbox records
+          # the final APPLIED receipt. Failures retain REVIEW_REQUIRED.
+          finalize_prepared_needs() {
+            python -m tools.autonomous_needs_delivery merge || echo "No safe needs-only merge executed."
+            git fetch origin main
+            git reset --hard origin/main
+            python -m tools.autonomous_needs_delivery enqueue || echo "No merged needs-only delivery to finalize."
+            python tools/control_plane_inbox.py process
+            python tools/control_plane_manager.py reconcile
+            python tools/validate_control_plane.py
+            if ! git diff --quiet; then
+              git add \
+                .airlab/control-plane/canonical-state.json \
+                .airlab/control-plane/workstreams/ \
+                .airlab/control-plane/inbox/
+              git commit -m "control-plane: finalize verified needs merge on main"
+              git push origin HEAD:main
+            fi
+          }
 
           for attempt in 1 2 3; do
             git fetch origin main
@@ -100,6 +124,7 @@ jobs:
             if git diff --quiet; then
               echo "Canonical state already current."
               python tools/validate_control_plane.py
+              finalize_prepared_needs
               if [[ "${RECONCILE_TRIGGER}" == "push" ]]; then
                 python -m tools.autonomous_needs_dispatch || echo "No eligible needs-only verifier dispatch."
               fi
@@ -114,6 +139,7 @@ jobs:
             git commit -m "control-plane: apply guarded mutations and reconcile"
 
             if git push origin HEAD:main; then
+              finalize_prepared_needs
               python -m tools.autonomous_needs_dispatch || echo "No eligible needs-only verifier dispatch."
               # Validation intentionally runs after the atomic state commit.
               # If a pre-existing malformed lane exists, projection incidents stay visible
