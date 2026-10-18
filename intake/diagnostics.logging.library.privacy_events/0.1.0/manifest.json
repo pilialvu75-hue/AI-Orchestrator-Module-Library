@@ -1,0 +1,100 @@
+{
+  "id": "diagnostics.logging.library.privacy_events",
+  "name": "Privacy-safe structured diagnostic events",
+  "version": "0.1.0",
+  "kind": "module",
+  "status": "discovered",
+  "description": "Pure Dart typed, closed-vocabulary diagnostic events that exclude raw prompts, file paths, secrets, and unclassified strings before serialization.",
+  "tags": [
+    "diagnostics.logging",
+    "dart",
+    "privacy",
+    "local-library-source"
+  ],
+  "capabilities": [
+    "diagnostics.logging"
+  ],
+  "platforms": [
+    "linux"
+  ],
+  "languages": [
+    "dart"
+  ],
+  "frameworks": [],
+  "entry_paths": [
+    "lib/privacy_diagnostic_events.dart"
+  ],
+  "dependencies": [],
+  "provenance": {
+    "origin": "built_in",
+    "source_repository": null,
+    "source_commit": null,
+    "source_tag": null,
+    "source_project_id": "pilialvu75-hue/AI-Orchestrator-Module-Library",
+    "source_task_id": "library-issue-139-privacy-diagnostics",
+    "license": null,
+    "license_file": null,
+    "retrieved_at": "2026-10-18T12:30:00Z"
+  },
+  "validation": {
+    "score": 0,
+    "tests_passed": false,
+    "test_report": null,
+    "validated_at": null,
+    "validated_on": []
+  },
+  "security": {
+    "reviewed": false,
+    "reviewed_at": null,
+    "known_vulnerabilities": 0,
+    "sbom": null,
+    "review_report": null,
+    "notes": "Security and license review not completed; CI analysis does not grant certification."
+  },
+  "integration": {
+    "estimated_effort": "low",
+    "adaptation_allowed": true,
+    "adapter_notes": "Implement a host adapter for draft diagnostics.logging.v1 without adding raw messages or prompt data.",
+    "known_constraints": [
+      "Initial Dart SDK tests run on Ubuntu only; no Android or iOS runtime claim.",
+      "No persistence or transport provided; host owns diagnostics destination.",
+      "Contract diagnostics.logging.v1 is draft; integration review required."
+    ]
+  },
+  "connector": {
+    "standard": "ai-orchestrator-lego",
+    "standard_version": "1.0.0",
+    "provides": [
+      {
+        "capability_id": "diagnostics.logging",
+        "contract_id": "diagnostics.logging.v1",
+        "contract_version": "1.0"
+      }
+    ],
+    "requires": [],
+    "integration_mode": "source_bundle",
+    "adapters": [],
+    "configuration_schema": null,
+    "healthcheck": {
+      "type": "none",
+      "path": null
+    }
+  },
+  "payload": {
+    "type": "repository_path",
+    "path": "payload/src",
+    "sha256": "507458c47a1d6ffca23c053ca0a4d32fbd11e90d73ccae89ae38da2ff2add624",
+    "upstream_repository": null,
+    "upstream_commit": null
+  },
+  "quality": {
+    "reuse_count": 0,
+    "successful_integrations": 0,
+    "failed_integrations": 0,
+    "last_used_at": null
+  },
+  "deprecation": {
+    "reason": null,
+    "replacement": null
+  }
+}
