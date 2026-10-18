@@ -89,17 +89,7 @@ jobs:
               cat "$RUNNER_TEMP/firstparty-triage.json"
               echo '~~~'
               echo "### Read-only intake readiness summary"
-              python - <<'PY'
-              import json
-              from pathlib import Path
-              summary = json.loads(Path("catalog/intake-readiness.json").read_text())["summary"]
-              print("Certified catalog entries:", summary["certified_catalog_entries"])
-              print("Intake candidates:", summary["intake_candidates"])
-              print("Blocked intake candidates:", summary["blocked_intake_candidates"])
-              print("Independent certification authorized by this report: 0")
-              for blocker, count in sorted(summary["blocker_counts"].items()):
-                  print(f"- {blocker}: {count}")
-              PY
+              python -c 'import json; from pathlib import Path; summary=json.loads(Path("catalog/intake-readiness.json").read_text())["summary"]; print(json.dumps(summary, indent=2, sort_keys=True))'
             } >> "$GITHUB_STEP_SUMMARY"
           else
             echo "Triage report absent (job did not reach evaluation)." >> "$GITHUB_STEP_SUMMARY"
