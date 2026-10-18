@@ -30,6 +30,29 @@ class AutonomousNeedsInboxTests(unittest.TestCase):
         self.addCleanup(self.tmp.cleanup)
         self.root = Path(self.tmp.name)
         shutil.copytree(ROOT / ".airlab", self.root / ".airlab")
+        # PR CI checks out GitHub's synthetic merge with the current main.
+        # That main may have a different live Researcher claim; isolate this
+        # test's Library lane instead of depending on mutable repository state.
+        lane_path = self.root / ".airlab/control-plane/workstreams/library-researcher.json"
+        lane = json.loads(lane_path.read_text(encoding="utf-8"))
+        lane["status"] = "READY"
+        lane["active_claim"] = None
+        lane.pop("review_packet", None)
+        lane.pop("block_reason", None)
+        lane.pop("current_gate_attestation", None)
+        lane["evidence"] = []
+        lane["reviewer"] = {
+            "required": True, "state": "PENDING",
+            "reviewed_by": None, "reviewed_at": None,
+        }
+        lane["gates"].update({
+            "G0_CLAIM": "PENDING", "G1_IMPLEMENTATION": "PENDING",
+            "G2_STATIC": "PENDING", "G3_CI": "PENDING",
+            "G4_INTEGRATION": "PENDING",
+            "G5_TARGET_RUNTIME": "NOT_APPLICABLE_UNTIL_RUNTIME_CHANGE",
+            "G6_REVIEWER": "PENDING", "G7_CANONICAL_SYNC": "PENDING",
+        })
+        lane_path.write_text(json.dumps(lane, indent=2) + "\\n", encoding="utf-8")
         self.claim_id = control_plane_manager.claim(
             LANE, "needs-only-queue-maintenance", REPO,
             "Update Library needs queue without modifying executable modules",
