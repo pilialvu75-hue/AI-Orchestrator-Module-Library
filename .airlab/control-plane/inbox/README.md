@@ -33,6 +33,53 @@ Supported ordinary operations:
 - `review_rework`
 - `canonical_sync_complete`
 
+### Owner-directed external merges (without independent reviewer approval)
+
+When an owner has already merged a worker PR outside the canonical reviewer path,
+the active `REVIEW_REQUIRED` claim must **not** remain locked indefinitely,
+but neither an ordinary `release` (which refuses expired leases) nor a fake
+`review_accept` is permitted. Use `reconcile_external_merge` through the
+transactional inbox. It is restricted to an explicit interactive
+`chatgpt:<worker lane>` identity matching the target lane (for example
+`chatgpt:cantiere`), or `chatgpt:main-reviewer`; automation actors are **never** permitted.
+
+The reconciler independently fetches the GitHub PR and verifies the **exact**
+claimed PR number, original packet digest, head SHA, merged flag, merge commit,
+target `main`, and merge-commit ancestry on current `main`. It fails closed
+without `GITHUB_TOKEN`, without evidence, on actor/claim/version mismatch, or
+when GitHub returns a different identity.
+
+Example for an **already performed** owner-directed merge:
+
+```json
+{
+  "schema_version": 1,
+  "request_id": "cantiere-20261018-external-merge-847",
+  "actor_id": "chatgpt:cantiere",
+  "lane_id": "cantiere",
+  "operation": "reconcile_external_merge",
+  "expected_state_version": 110,
+  "payload": {
+    "actor_id": "chatgpt:cantiere",
+    "owner_directed": true,
+    "claim_id": "CLAIM_ID_FROM_CURRENT_LANE",
+    "pr_number": 847,
+    "expected_head_sha": "40_CHARACTER_GITHUB_HEAD_SHA",
+    "merge_commit_sha": "40_CHARACTER_GITHUB_MERGE_SHA",
+    "packet_sha256": "CURRENT_CANONICAL_REVIEW_PACKET_SHA256"
+  }
+}
+```
+
+The accepted transition archives the original packet digest, PR and claim,
+records an explicit exception and releases the resource locks. It returns the
+lane to `READY` for a **new** bounded claim, with G0–G4, G6 and G7
+`PENDING` (no backdated reviewer or canonical-sync approval). The physical
+G5 gate is preserved exactly as it was, and cannot become `PASS` through this
+operation. Follow-up independent review and real target-device validation
+remain outstanding. An accepted receipt is **not** a successful physical-app
+run or a completed review.
+
 ### Evidence-backed reviewer gate recording
 
 After a worker submits a claim-bound `REVIEW_REQUIRED` packet, interactive
