@@ -371,6 +371,9 @@ def claim(
         history.append(previous_packet)
         lane["review_packet_history"] = history[-20:]
     lane["evidence"] = []
+    # Claim-bound manual or autonomous gate evidence must never be carried into
+    # a different work item; its digest only attests the previous review packet.
+    lane.pop("current_gate_attestation", None)
     if lane.get("role") != "reviewer":
         lane["reviewer"] = {
             "required": True,
