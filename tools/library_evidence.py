@@ -59,7 +59,7 @@ def _identity(report: dict, manifest: dict, label: str) -> None:
         _require(report.get("source_commit") == source_commit, f"{label} source_commit does not match manifest provenance")
 
 
-_SHA256 = re.compile(r"[0-9a-f]{64}\\Z")
+_SHA256 = re.compile(r"[0-9a-f]{64}")
 
 
 def _bind_local_source(base: Path, manifest: dict, report: dict, label: str) -> None:
