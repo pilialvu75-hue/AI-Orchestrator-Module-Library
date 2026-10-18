@@ -51,32 +51,55 @@ jobs:
           set -euo pipefail
           python tools/validate_library.py
           python -m unittest discover -s tests -p 'test_*.py' -v
-      - name: Persist allowlisted quarantine manifests and read-only readiness report
+      - name: Persist allowlisted quarantine and evidence inventory with bounded CAS retry
         shell: bash
         run: |
           set -euo pipefail
-          git add -u -- \
-            intake/ai.acceleration_backend.firstparty.ai-orchestrator-core/0.1.0/manifest.json \
-            intake/ai.local_inference.firstparty.ai-orchestrator-core/0.1.0/manifest.json
-          git add -- catalog/intake-readiness.json
-          if git diff --cached --quiet; then
-            echo "No new quarantine transition or intake readiness change."
-            exit 0
-          fi
-          while IFS= read -r path; do
-            case "$path" in
-              intake/ai.acceleration_backend.firstparty.ai-orchestrator-core/0.1.0/manifest.json|intake/ai.local_inference.firstparty.ai-orchestrator-core/0.1.0/manifest.json|catalog/intake-readiness.json)
-                ;;
-              *)
-                echo "Out-of-scope first-party triage change: $path" >&2
-                exit 1
-                ;;
-            esac
-          done < <(git diff --cached --name-only)
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git commit -m "library: publish intake evidence-gap inventory without certification"
-          git push origin HEAD:main
+
+          # Multiple protected Library workflows can legitimately update main.
+          # Never force-push a stale report or overwrite another workflow's
+          # certification state. Re-fetch, regenerate and revalidate for EACH
+          # attempt so the report corresponds to the actual winning main head.
+          for attempt in 1 2 3; do
+            echo "Attempt ${attempt}/3: calculate readiness against current main."
+            git fetch origin main
+            git reset --hard origin/main
+
+            python -m tools.library_firstparty_quarantine --apply > "$RUNNER_TEMP/firstparty-triage.json"
+            python -m tools.library_intake_readiness --output catalog/intake-readiness.json
+            python tools/validate_library.py
+            python -m unittest discover -s tests -p 'test_*.py' -v
+
+            git add -u -- \
+              intake/ai.acceleration_backend.firstparty.ai-orchestrator-core/0.1.0/manifest.json \
+              intake/ai.local_inference.firstparty.ai-orchestrator-core/0.1.0/manifest.json
+            git add -- catalog/intake-readiness.json
+            if git diff --cached --quiet; then
+              echo "The current main already has up-to-date evidence inventory."
+              exit 0
+            fi
+            while IFS= read -r changed; do
+              case "$changed" in
+                intake/ai.acceleration_backend.firstparty.ai-orchestrator-core/0.1.0/manifest.json|intake/ai.local_inference.firstparty.ai-orchestrator-core/0.1.0/manifest.json|catalog/intake-readiness.json)
+                  ;;
+                *)
+                  echo "Out-of-scope Library metadata write: $changed" >&2
+                  exit 1
+                  ;;
+              esac
+            done < <(git diff --cached --name-only)
+            git commit -m "library: publish current intake evidence gaps without certification"
+            if git push origin HEAD:main; then
+              echo "Published evidence inventory on current main."
+              exit 0
+            fi
+            echo "Main advanced during metadata push; regenerate from latest head." >&2
+          done
+          echo "Readiness reconciliation exhausted three compare-and-swap retries." >&2
+          exit 1
+
       - name: Publish first-party triage evidence
         if: always()
         shell: bash
