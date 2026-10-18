@@ -149,7 +149,8 @@ class AutonomousNeedsInboxTests(unittest.TestCase):
         self.assertEqual(lane["gates"]["G6_REVIEWER"], "PENDING")
         self.assertEqual(lane["gates"]["G7_CANONICAL_SYNC"], "PENDING")
         self.assertEqual(lane["reviewer"]["state"], "PENDING")
-        self.assertEqual(lane.get("autonomous_completion_history", []), [])
+        self.assertEqual(lane.get("autonomous_completion_history", []),
+                         self.current.get("autonomous_completion_history", []))
         pending = lane["pending_needs_delivery"]
         self.assertEqual(pending["identity"], self.identity)
         self.assertEqual(pending["protected_run_id"], 88)
