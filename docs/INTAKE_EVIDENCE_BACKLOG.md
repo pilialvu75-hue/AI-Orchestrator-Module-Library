@@ -68,6 +68,25 @@ operation satisfy the Library's other gates. Until immutable source snapshots,
 isolated test results and independent security receipts exist, the candidates
 remain in intake, without certification or Cantiere reuse permission.
 
+## Concurrent Library writes and recovery
+
+The initial licensed-Mia evidence update surfaced a real concurrency race:
+the readiness workflow had validated and generated the correct new report,
+but another protected workflow moved `main` before it could push.
+The report was **not** published, despite a successful local calculation.
+
+The scheduled triage workflow now performs up to **three** bounded attempts.
+For each attempt it fetches and resets to the latest `main`, repeats only the
+allowlisted quarantine transitions, regenerates the deterministic backlog,
+re-runs the Library validator and all tests, and stages only the two existing
+first-party manifests plus `catalog/intake-readiness.json`.
+It never force-pushes and cannot stage certified module directories.
+
+A repeated run is a no-op if the current `main` already contains the right
+report. A failed compare-and-swap push triggers recomputation, not reuse of
+a stale report. Exhausted retries fail visibly without changing certification
+states. This avoids losing evidence updates during independent automation.
+
 ## Operations
 
 Generate a report locally or inside a protected Actions runner:
