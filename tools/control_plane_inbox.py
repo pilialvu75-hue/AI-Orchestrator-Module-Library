@@ -352,7 +352,7 @@ def _verify_external_merge(root: Path, lane_id: str, payload: dict[str, Any]) ->
     from tools.control_plane_manager import _review_packet_digest, _validate_review_packet
 
     if set(payload) != {
-        "claim_id", "pr_number", "expected_head_sha",
+        "actor_id", "claim_id", "pr_number", "expected_head_sha",
         "merge_commit_sha", "packet_sha256", "owner_directed",
     } or payload["owner_directed"] is not True:
         raise ValueError("external merge requires exact owner-directed evidence")
