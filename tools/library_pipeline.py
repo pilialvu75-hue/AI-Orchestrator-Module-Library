@@ -135,6 +135,50 @@ def sha256_file(path: Path) -> str:
     return digest.hexdigest()
 
 
+MAX_LOCAL_PAYLOAD_FILES = 512
+MAX_LOCAL_PAYLOAD_BYTES = 16 * 1024 * 1024
+MAX_LOCAL_PAYLOAD_FILE_BYTES = 2 * 1024 * 1024
+
+
+def payload_tree_sha256(source: Path) -> str:
+    """Compute a bounded, path-bound digest of actual immutable source bytes.
+
+    Same normalized byte sequence for repository_path payloads and export.
+    Symlinks, empty directories and oversized payloads fail before digesting.
+    """
+    require(source.exists() and not source.is_symlink(),
+            "repository_path must point to a real non-symlink payload")
+    if source.is_file():
+        root, candidates = source.parent, [source]
+    else:
+        require(source.is_dir(), "repository_path payload must be a file or directory")
+        root = source
+        candidates = sorted(source.rglob("*"), key=lambda p: p.as_posix())
+    require(candidates, "repository_path payload must contain at least one file")
+    digest = hashlib.sha256()
+    file_count, total = 0, 0
+    for item in candidates:
+        require(not item.is_symlink(), "repository_path payload may not contain symlinks")
+        if item.is_dir():
+            continue
+        require(item.is_file(), "repository_path contains a non-file entry")
+        file_count += 1
+        require(file_count <= MAX_LOCAL_PAYLOAD_FILES,
+                "repository_path payload exceeds file count limit")
+        size = item.stat().st_size
+        require(size <= MAX_LOCAL_PAYLOAD_FILE_BYTES,
+                "repository_path payload contains an oversized file")
+        total += size
+        require(total <= MAX_LOCAL_PAYLOAD_BYTES,
+                "repository_path payload exceeds total size limit")
+        relative = item.relative_to(root).as_posix().encode("utf-8")
+        digest.update(len(relative).to_bytes(8, "big"))
+        digest.update(relative)
+        digest.update(bytes.fromhex(sha256_file(item)))
+    require(file_count > 0, "repository_path payload must contain at least one file")
+    return digest.hexdigest()
+
+
 def validate_payload(manifest: dict, base: Path) -> None:
     payload = manifest.get("payload") or {}
     payload_type = payload.get("type")
@@ -157,6 +201,13 @@ def validate_payload(manifest: dict, base: Path) -> None:
     resolved = (base / str(relative)).resolve()
     require(base.resolve() in resolved.parents or resolved == base.resolve(), "payload.path must stay inside the asset directory")
     require(resolved.exists(), f"payload path does not exist: {relative}")
+
+    if payload_type == "repository_path":
+        expected = payload.get("sha256")
+        require(isinstance(expected, str) and re.fullmatch(r"[0-9a-fA-F]{64}", expected) is not None,
+                "repository_path payload requires a SHA256 digest")
+        require(payload_tree_sha256(resolved) == expected.lower(),
+                "repository_path payload SHA256 mismatch")
 
     if payload_type == "archive":
         require(resolved.is_file(), "archive payload.path must be a file")

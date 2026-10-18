@@ -5,11 +5,13 @@ import base64
 import binascii
 import hashlib
 import json
+import re
 import sys
 from pathlib import Path
 from typing import Any
 
 from library_resolver import asset_record, catalog, safe_repo_path, sha256_file
+from library_pipeline import PipelineError, payload_tree_sha256
 
 PACKAGE_SCHEMA = "ai-orchestrator.library-module-package.v1"
 PAYLOAD_SCHEMA = "ai-orchestrator.library-intake-payload.v1"
@@ -209,7 +211,16 @@ def build_package(root: Path, asset_id: str, version: str, *, include_deprecated
         files = _files_from_canonical_archive(safe_repo_path(base, relative), expected_sha)
     elif payload_type == "repository_path":
         relative = str(payload.get("path") or "").strip()
+        expected = str(payload.get("sha256") or "").strip().lower()
         require(relative, "repository_path payload requires path")
+        require(re.fullmatch(r"[0-9a-f]{64}", expected) is not None,
+                "repository_path payload requires SHA256")
+        source = safe_repo_path(base, relative)
+        try:
+            actual = payload_tree_sha256(source)
+        except PipelineError as exc:
+            raise PackageError(str(exc)) from exc
+        require(actual == expected, "repository_path payload SHA256 mismatch")
         files = _files_from_repository_path(base, relative)
     elif payload_type == "upstream_reference":
         repository = str(payload.get("upstream_repository") or "").strip()
