@@ -21,10 +21,10 @@ jobs:
     permissions:
       contents: read
     steps:
-      - name: Checkout pinned tested source without persisting credentials
+      - name: Checkout exact workflow SHA without persisting credentials
         uses: actions/checkout@v4
         with:
-          ref: main
+          ref: ${{ github.sha }}
           persist-credentials: false
           fetch-depth: 1
 
