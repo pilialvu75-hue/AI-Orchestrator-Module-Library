@@ -18,9 +18,9 @@ ROOT = Path(__file__).resolve().parents[1]
 if str(ROOT / "tools") not in sys.path:
     sys.path.insert(0, str(ROOT / "tools"))
 
-from library_evidence import verify_manifest_evidence  # noqa: E402
+from library_evidence import EvidenceError, verify_manifest_evidence  # noqa: E402
 from library_pipeline import (  # noqa: E402
-    AssetRef, load_json, payload_tree_sha256, transition_intake, validate_payload,
+    AssetRef, PipelineError, load_json, payload_tree_sha256, transition_intake, validate_payload,
     write_json,
 )
 
@@ -193,7 +193,7 @@ def main() -> int:
             workflow_run_id=args.run_id,
             workflow_run_attempt=args.run_attempt,
         )
-    except (OSError, ReceiptError, ValueError) as exc:
+    except (OSError, ReceiptError, ValueError, PipelineError, EvidenceError) as exc:
         print(f"privacy candidate test admission refused: {exc}", file=sys.stderr)
         return 1
     print(json.dumps(result, sort_keys=True))
