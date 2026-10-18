@@ -9,9 +9,8 @@ from pathlib import Path
 
 from tools.library_privacy_candidate_receipt import (
     ASSET_ID, VERSION, CHECKS, REPOSITORY, RECEIPT_SCHEMA,
-    ReceiptError, accept_receipt,
+    PipelineError, ReceiptError, accept_receipt,
 )
-from tools.library_pipeline import PipelineError
 
 SOURCE_ROOT = Path(__file__).resolve().parents[1]
 WORKFLOW_SHA = "a" * 40
