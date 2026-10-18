@@ -12,6 +12,7 @@ on:
       - ".airlab/public-repositories/**/roadmap.yaml"
       - ".github/workflows/control-plane-reconcile.yml"
       - "tools/autonomous_needs_reconcile_scan.py"
+      - "tools/autonomous_receipt_evidence_probe.py"
   schedule:
     - cron: "17 * * * *"
   workflow_dispatch:
