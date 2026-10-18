@@ -543,8 +543,8 @@ def reconcile_externally_merged_review(
         or not isinstance(verified_merge.get("merge_commit_sha"), str)
     ):
         raise ValueError("external merge evidence does not match the active review packet")
-    if actor_id not in {"chatgpt:cantiere", "chatgpt:main-reviewer"}:
-        raise ValueError("external merge reconciliation requires authorized interactive actor")
+    if actor_id not in {f"chatgpt:{lane_id}", "chatgpt:main-reviewer"}:
+        raise ValueError("external merge reconciliation requires matching worker or reviewer identity")
     merge_sha = verified_merge["merge_commit_sha"]
     identity = {
         "claim_id": claim_data["claim_id"],
@@ -559,6 +559,11 @@ def reconcile_externally_merged_review(
         "review_approved": False,
         "physical_runtime_verified": False,
         "known_risks": list(packet.get("known_risks") or []),
+        "original_summary": packet.get("summary"),
+        "original_changes": list(packet.get("changes") or []),
+        "original_evidence": list(packet.get("evidence") or []),
+        "original_reviewer_checks": list(packet.get("reviewer_checks") or []),
+        "roadmap_impact": dict(packet.get("roadmap_impact") or {}),
     }
     lane.setdefault("external_merge_history", []).append(identity)
     lane["external_merge_history"] = lane["external_merge_history"][-20:]
