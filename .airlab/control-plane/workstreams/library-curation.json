@@ -3,11 +3,11 @@
   "id": "library-curation",
   "title": "Library Curation",
   "role": "worker",
-  "status": "CLAIMED",
+  "status": "REVIEW_REQUIRED",
   "activation": "active",
   "scope": "Library-owned needs queue, intake triage, metadata quality, reproducible certification evidence and reuse contracts. Researcher discovery and external Researcher PRs remain separately owned by library-researcher.",
   "shared_engine_policy": "shared_or_control_plane",
-  "state_version": 2,
+  "state_version": 3,
   "updated_at": "2026-10-18",
   "active_claim": {
     "claim_id": "41e0520b7133ab02151c",
@@ -29,7 +29,24 @@
   "roadmap_refs": [
     ".airlab/roadmap.yaml#L19"
   ],
-  "evidence": [],
+  "evidence": [
+    {
+      "type": "ci",
+      "ref": "https://github.com/pilialvu75-hue/AI-Orchestrator-Module-Library/actions/runs/39118326760",
+      "result": "PASS",
+      "note": "Validate Module Library run #860 succeeded on PR head e75e7a50c260c8957fc5b9a6f16cba708dea00d6."
+    },
+    {
+      "type": "commit",
+      "ref": "https://github.com/pilialvu75-hue/AI-Orchestrator-Module-Library/commit/e75e7a50c260c8957fc5b9a6f16cba708dea00d6",
+      "result": "PASS"
+    },
+    {
+      "type": "pull_request",
+      "ref": "https://github.com/pilialvu75-hue/AI-Orchestrator-Module-Library/pull/131",
+      "result": "PASS"
+    }
+  ],
   "gates": {
     "G0_CLAIM": "PASS",
     "G1_IMPLEMENTATION": "PENDING",
@@ -46,9 +63,86 @@
     "reviewed_by": null,
     "reviewed_at": null
   },
-  "next_action": "Claim only one bounded Library-owned catalog/needs.json edit through the canonical inbox, then submit an exact-head PR-bound review packet for protected needs-only verification. Do not touch the Researcher claim or auto-certify executable modules.",
+  "next_action": "Main/Reviewer must inspect the review_packet, linked evidence and required gates before promotion or rework.",
   "historical_backlog": [
     "Needs-only autonomous completion is metadata restricted, not certification authority.",
     "The existing library-researcher lane owns its historical Researcher claim and is not migrated or released by this separation."
-  ]
+  ],
+  "checkpoints": [
+    {
+      "seq": 1,
+      "at": "2026-10-18T10:13:23Z",
+      "claim_id": "41e0520b7133ab02151c",
+      "work_item": "library-needs-ai-local-inference-ios-web-20261018",
+      "summary": "Extend the registered ai.local_inference research needs to iOS and Web without modifying executable modules or certification policy.",
+      "decisions": [],
+      "evidence_refs": [
+        "https://github.com/pilialvu75-hue/AI-Orchestrator-Module-Library/actions/runs/39118326760",
+        "https://github.com/pilialvu75-hue/AI-Orchestrator-Module-Library/commit/e75e7a50c260c8957fc5b9a6f16cba708dea00d6",
+        "https://github.com/pilialvu75-hue/AI-Orchestrator-Module-Library/pull/131"
+      ],
+      "next_action": "Main/Reviewer must inspect the review_packet, linked evidence and required gates before promotion or rework.",
+      "kind": "REVIEW_HANDOFF"
+    }
+  ],
+  "last_checkpoint": {
+    "seq": 1,
+    "at": "2026-10-18T10:13:23Z",
+    "claim_id": "41e0520b7133ab02151c",
+    "work_item": "library-needs-ai-local-inference-ios-web-20261018",
+    "summary": "Extend the registered ai.local_inference research needs to iOS and Web without modifying executable modules or certification policy.",
+    "decisions": [],
+    "evidence_refs": [
+      "https://github.com/pilialvu75-hue/AI-Orchestrator-Module-Library/actions/runs/39118326760",
+      "https://github.com/pilialvu75-hue/AI-Orchestrator-Module-Library/commit/e75e7a50c260c8957fc5b9a6f16cba708dea00d6",
+      "https://github.com/pilialvu75-hue/AI-Orchestrator-Module-Library/pull/131"
+    ],
+    "next_action": "Main/Reviewer must inspect the review_packet, linked evidence and required gates before promotion or rework.",
+    "kind": "REVIEW_HANDOFF"
+  },
+  "review_packet": {
+    "schema_version": 1,
+    "submitted_at": "2026-10-18T10:12:00Z",
+    "lane_id": "library-curation",
+    "claim_id": "41e0520b7133ab02151c",
+    "work_item": "library-needs-ai-local-inference-ios-web-20261018",
+    "repository": "pilialvu75-hue/AI-Orchestrator-Module-Library",
+    "branch": "feat/library-needs-local-inference-ios-web",
+    "pull_request": 131,
+    "summary": "Extend the registered ai.local_inference research needs to iOS and Web without modifying executable modules or certification policy.",
+    "changes": [
+      "catalog/needs.json: add ios and web to existing ai.local_inference.targets; retain all prior targets, high priority and desired_candidates=2."
+    ],
+    "evidence": [
+      {
+        "type": "ci",
+        "ref": "https://github.com/pilialvu75-hue/AI-Orchestrator-Module-Library/actions/runs/39118326760",
+        "result": "PASS",
+        "note": "Validate Module Library run #860 succeeded on PR head e75e7a50c260c8957fc5b9a6f16cba708dea00d6."
+      },
+      {
+        "type": "commit",
+        "ref": "https://github.com/pilialvu75-hue/AI-Orchestrator-Module-Library/commit/e75e7a50c260c8957fc5b9a6f16cba708dea00d6",
+        "result": "PASS"
+      },
+      {
+        "type": "pull_request",
+        "ref": "https://github.com/pilialvu75-hue/AI-Orchestrator-Module-Library/pull/131",
+        "result": "PASS"
+      }
+    ],
+    "known_risks": [
+      "An updated Library need does not establish iOS/Web local inference functionality, certification or physical runtime evidence.",
+      "Protected independent verification and APPLIED inbox receipt remain to be observed after canonical review handoff."
+    ],
+    "reviewer_checks": [
+      "Independently verify that the exact-head PR diff modifies catalog/needs.json only.",
+      "Verify all required Library validation steps, unchanged protected workflow and artifact provenance.",
+      "Do not alter the separate Researcher claim, approve G6 or infer target runtime PASS."
+    ],
+    "roadmap_impact": {
+      "material": false,
+      "refs": []
+    }
+  }
 }

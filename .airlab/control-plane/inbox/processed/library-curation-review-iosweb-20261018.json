@@ -1,0 +1,12 @@
+{
+  "schema_version": 1,
+  "request_id": "library-curation-review-iosweb-20261018",
+  "status": "APPLIED",
+  "processed_at": "2026-10-18T10:13:23Z",
+  "source_file": "library-curation-review-iosweb-20261018.json",
+  "lane_id": "library-curation",
+  "operation": "submit_review",
+  "actor_id": "chatgpt:library-curation",
+  "errors": [],
+  "result_state_version": 3
+}
