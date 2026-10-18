@@ -3,20 +3,35 @@
   "id": "library-curation",
   "title": "Library Curation",
   "role": "worker",
-  "status": "READY",
+  "status": "CLAIMED",
   "activation": "active",
   "scope": "Library-owned needs queue, intake triage, metadata quality, reproducible certification evidence and reuse contracts. Researcher discovery and external Researcher PRs remain separately owned by library-researcher.",
   "shared_engine_policy": "shared_or_control_plane",
-  "state_version": 1,
+  "state_version": 2,
   "updated_at": "2026-10-18",
-  "active_claim": null,
+  "active_claim": {
+    "claim_id": "41e0520b7133ab02151c",
+    "owner_lane": "library-curation",
+    "work_item": "library-needs-ai-local-inference-ios-web-20261018",
+    "repository": "pilialvu75-hue/AI-Orchestrator-Module-Library",
+    "scope": "One non-executable metadata-only change to catalog/needs.json: declare iOS and Web research targets for local inference, preserving all contract and certification gates.",
+    "branch": "feat/library-needs-local-inference-ios-web",
+    "resource_locks": [
+      "branch:pilialvu75-hue/AI-Orchestrator-Module-Library:feat/library-needs-local-inference-ios-web",
+      "file:pilialvu75-hue/AI-Orchestrator-Module-Library:catalog/needs.json"
+    ],
+    "started_at": "2026-10-18T10:08:39Z",
+    "heartbeat_at": "2026-10-18T10:08:39Z",
+    "lease_until": "2026-10-18T22:08:39Z",
+    "lease_hours": 12
+  },
   "dependencies": [],
   "roadmap_refs": [
     ".airlab/roadmap.yaml#L19"
   ],
   "evidence": [],
   "gates": {
-    "G0_CLAIM": "PENDING",
+    "G0_CLAIM": "PASS",
     "G1_IMPLEMENTATION": "PENDING",
     "G2_STATIC": "PENDING",
     "G3_CI": "PENDING",
