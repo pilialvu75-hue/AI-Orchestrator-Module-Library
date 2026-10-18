@@ -83,7 +83,7 @@
     "reviewed_at": null,
     "sbom": null
   },
-  "status": "discovered",
+  "status": "quarantined",
   "tags": [
     "ai.acceleration_backend",
     "researcher-candidate",

@@ -79,7 +79,7 @@
     "reviewed_at": null,
     "sbom": null
   },
-  "status": "discovered",
+  "status": "quarantined",
   "tags": [
     "ai.local_inference",
     "researcher-candidate",
