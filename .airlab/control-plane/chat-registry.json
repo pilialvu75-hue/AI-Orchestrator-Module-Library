@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-10-10",
+  "updated_at": "2026-10-18",
   "authority": ".airlab/control-plane/canonical-state.json",
   "bootstrap_generator": "tools/chat_lane_bootstrap.py",
   "lanes": [
@@ -97,6 +97,13 @@
       "mode": "worker",
       "primary_repository": "pilialvu75-hue/Ai-orchestrator-riserva",
       "purpose": "Raspberry Pi deployment, headless/UI modes, hardware/audio integration and target inference profile."
+    },
+    {
+      "id": "library-curation",
+      "chat_title": "AI ORCHESTRATOR — LIBRARY CURATION",
+      "mode": "worker",
+      "primary_repository": "pilialvu75-hue/AI-Orchestrator-Module-Library",
+      "purpose": "Library-side needs queue, intake triage, module evidence and reuse/certification contracts; Researcher discovery is a separate workstream."
     },
     {
       "id": "library-researcher",
