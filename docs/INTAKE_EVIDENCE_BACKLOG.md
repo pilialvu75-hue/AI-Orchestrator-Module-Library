@@ -52,6 +52,22 @@ The `library-researcher` claim and repair workflow are separate. This
 report is owned by Library-side inventory automation and must **not** release
 or overwrite Researcher's claim.
 
+## Pinned Mia MIT license evidence
+
+Four existing candidates — Mia `release.packaging`, `release.update_manager`,
+`voice.stt`, and `voice.tts` — all refer to the same immutable source commit
+`ebeaa2884bce22e891d15da7c1f61962dde0699a`. That commit contains a
+repository-root MIT `LICENSE` (Git blob
+`551bc9050a44181342ec8a7c8543af1c90fd0992`).
+
+The Library preserves the original complete license bytes at
+`intake/<asset>/0.1.0/provenance/LICENSE` and references the file from the
+manifest. This resolves **license provenance only** for those four candidates.
+It does not establish that bundled dependencies, target integration or runtime
+operation satisfy the Library's other gates. Until immutable source snapshots,
+isolated test results and independent security receipts exist, the candidates
+remain in intake, without certification or Cantiere reuse permission.
+
 ## Operations
 
 Generate a report locally or inside a protected Actions runner:
