@@ -6,6 +6,10 @@ on:
     paths:
       - ".github/workflows/library-firstparty-quarantine.yml"
       - "tools/library_firstparty_quarantine.py"
+      - "tools/library_intake_readiness.py"
+      - "intake/**"
+      - "catalog/needs.json"
+      - "catalog/index.json"
   schedule:
     - cron: "49 */6 * * *"
   workflow_dispatch:
@@ -36,25 +40,32 @@ jobs:
           set -euo pipefail
           python -m tools.library_firstparty_quarantine --apply > "$RUNNER_TEMP/firstparty-triage.json"
           cat "$RUNNER_TEMP/firstparty-triage.json"
+      - name: Build deterministic intake evidence-gap and coverage inventory
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -m tools.library_intake_readiness --output catalog/intake-readiness.json
+
       - name: Validate Library and run all tests before a write
         run: |
           set -euo pipefail
           python tools/validate_library.py
           python -m unittest discover -s tests -p 'test_*.py' -v
-      - name: Persist only existing first-party intake manifests
+      - name: Persist allowlisted quarantine manifests and read-only readiness report
         shell: bash
         run: |
           set -euo pipefail
           git add -u -- \
             intake/ai.acceleration_backend.firstparty.ai-orchestrator-core/0.1.0/manifest.json \
             intake/ai.local_inference.firstparty.ai-orchestrator-core/0.1.0/manifest.json
+          git add -- catalog/intake-readiness.json
           if git diff --cached --quiet; then
-            echo "No new first-party quarantine transition."
+            echo "No new quarantine transition or intake readiness change."
             exit 0
           fi
           while IFS= read -r path; do
             case "$path" in
-              intake/ai.acceleration_backend.firstparty.ai-orchestrator-core/0.1.0/manifest.json|intake/ai.local_inference.firstparty.ai-orchestrator-core/0.1.0/manifest.json)
+              intake/ai.acceleration_backend.firstparty.ai-orchestrator-core/0.1.0/manifest.json|intake/ai.local_inference.firstparty.ai-orchestrator-core/0.1.0/manifest.json|catalog/intake-readiness.json)
                 ;;
               *)
                 echo "Out-of-scope first-party triage change: $path" >&2
@@ -64,7 +75,7 @@ jobs:
           done < <(git diff --cached --name-only)
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git commit -m "library: quarantine existing first-party candidates without certification"
+          git commit -m "library: publish intake evidence-gap inventory without certification"
           git push origin HEAD:main
       - name: Publish first-party triage evidence
         if: always()
@@ -77,6 +88,8 @@ jobs:
               echo '~~~json'
               cat "$RUNNER_TEMP/firstparty-triage.json"
               echo '~~~'
+              echo "### Read-only intake readiness summary"
+              python -c 'import json; from pathlib import Path; summary=json.loads(Path("catalog/intake-readiness.json").read_text())["summary"]; print(json.dumps(summary, indent=2, sort_keys=True))'
             } >> "$GITHUB_STEP_SUMMARY"
           else
             echo "Triage report absent (job did not reach evaluation)." >> "$GITHUB_STEP_SUMMARY"
@@ -86,6 +99,8 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: firstparty-quarantine-${{ github.run_id }}
-          path: ${{ runner.temp }}/firstparty-triage.json
+          path: |
+            ${{ runner.temp }}/firstparty-triage.json
+            catalog/intake-readiness.json
           if-no-files-found: warn
           retention-days: 14
