@@ -229,8 +229,31 @@ def validate_certification_gates(manifest: dict, base: Path) -> None:
     require(isinstance(known, int) and known >= 0, "security.known_vulnerabilities must be a non-negative integer")
     require(known == 0, "automatic certification is blocked when known vulnerabilities are present")
 
-    license_name = str((manifest.get("provenance") or {}).get("license") or "")
-    if license_requires_explicit_review(license_name):
+    provenance = manifest.get("provenance") or {}
+    require(isinstance(provenance, dict),
+            "automatic certification requires a provenance object")
+    license_name = provenance.get("license")
+    require(nonempty(license_name)
+            and str(license_name).strip().upper() not in {
+                "NOASSERTION", "UNKNOWN", "LICENSE_UNKNOWN", "UNDETERMINED"
+            }, "automatic certification requires an explicitly identified license")
+    license_raw = provenance.get("license_file")
+    require(nonempty(license_raw),
+            "automatic certification requires an attributable license file")
+    require(chr(92) not in str(license_raw),
+            "certification license file must use a safe relative path")
+    license_relative = Path(str(license_raw))
+    require(not license_relative.is_absolute()
+            and not any(segment in ("", ".", "..")
+                        for segment in str(license_raw).split("/")),
+            "certification license file must stay inside its asset directory")
+    license_path = base / license_relative
+    require(not base.is_symlink() and not license_path.is_symlink()
+            and base.resolve() in license_path.resolve().parents,
+            "certification license evidence must not be a symlink or path escape")
+    require(license_path.is_file() and license_path.stat().st_size > 0,
+            "certification requires non-empty license evidence")
+    if license_requires_explicit_review(str(license_name)):
         raise PipelineError("automatic certification is blocked for strong/network copyleft licenses; explicit project-level review is required")
 
 

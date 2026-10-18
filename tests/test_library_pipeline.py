@@ -215,6 +215,57 @@ class LibraryPipelineTest(unittest.TestCase):
         with self.assertRaisesRegex(PipelineError, "SBOM digest"):
             promote(self.root, ref)
 
+    def test_unknown_license_never_qualifies_for_automatic_certification(self) -> None:
+        ref = self.make_asset(
+            status="tested", tests_passed=True, score=0.95,
+            license_name="NOASSERTION",
+        )
+        path = self.root / "intake" / ref.asset_id / ref.version / "manifest.json"
+        for license_name in ("NOASSERTION", "UNKNOWN", "LICENSE_UNKNOWN", "UNDETERMINED"):
+            with self.subTest(license=license_name):
+                manifest = json.loads(path.read_text(encoding="utf-8"))
+                manifest["provenance"]["license"] = license_name
+                self.write_json(path, manifest)
+                with self.assertRaisesRegex(PipelineError, "identified license"):
+                    promote(self.root, ref, dry_run=True)
+
+    def test_built_in_source_needs_explicit_license_and_evidence(self) -> None:
+        ref = self.make_asset(status="tested", tests_passed=True, score=0.95)
+        file = self.root / "intake" / ref.asset_id / ref.version / "manifest.json"
+        data = json.loads(file.read_text(encoding="utf-8"))
+        data["provenance"]["origin"] = "built_in"
+        data["provenance"]["license"] = None
+        self.write_json(file, data)
+        with self.assertRaisesRegex(PipelineError, "identified license"):
+            promote(self.root, ref, dry_run=True)
+
+        data["provenance"]["license"] = "MIT"
+        data["provenance"]["license_file"] = None
+        self.write_json(file, data)
+        with self.assertRaisesRegex(PipelineError, "attributable license file"):
+            promote(self.root, ref, dry_run=True)
+
+    def test_empty_or_escaping_license_file_is_rejected(self) -> None:
+        ref = self.make_asset(status="tested", tests_passed=True, score=0.95)
+        base = self.root / "intake" / ref.asset_id / ref.version
+        file = base / "manifest.json"
+        data = json.loads(file.read_text(encoding="utf-8"))
+
+        data["provenance"]["origin"] = "built_in"
+        (base / "provenance/LICENSE").write_text("", encoding="utf-8")
+        self.write_json(file, data)
+        with self.assertRaisesRegex(PipelineError, "non-empty license evidence"):
+            promote(self.root, ref, dry_run=True)
+
+        (base / "provenance/LICENSE").write_text("Attributable example permission\n")
+        for path in ("../../out-of-scope", "/etc/passwd", "provenance/../manifest.json",
+                     "provenance\\LICENSE"):
+            with self.subTest(path=path):
+                data["provenance"]["license_file"] = path
+                self.write_json(file, data)
+                with self.assertRaisesRegex(PipelineError, "license"):
+                    promote(self.root, ref, dry_run=True)
+
     def test_dry_run_does_not_mutate_repository(self) -> None:
         ref = self.make_asset(status="tested", tests_passed=True, score=0.95)
         result = promote(self.root, ref, dry_run=True)
