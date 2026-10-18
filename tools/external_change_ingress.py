@@ -134,6 +134,65 @@ def fetch_changes(registry: dict[str, Any], token: str | None) -> dict[str, list
     return result
 
 
+def fetch_changes_partially(
+    registry: dict[str, Any], token: str | None,
+) -> tuple[dict[str, list[dict[str, Any]]], dict[str, str]]:
+    """Query each tracked repository independently; never advance denied cursors.
+
+    GitHub's repository GITHUB_TOKEN cannot read unrelated private repos. A
+    failure on one repo must not discard real findings from accessible repos,
+    nor silently mark an inaccessible repo as successfully scanned.
+    """
+    verified: dict[str, list[dict[str, Any]]] = {}
+    failures: dict[str, str] = {}
+    for entry in registry.get("tracked_repositories") or []:
+        repository = entry["repository"]
+        try:
+            inspected = fetch_changes({"tracked_repositories": [entry]}, token)
+            verified[repository] = inspected[repository]
+        except RuntimeError as exc:
+            message = str(exc)
+            if "GitHub API 401 " in message:
+                failures[repository] = "GITHUB_AUTH_401"
+            elif "GitHub API 403 " in message:
+                failures[repository] = "GITHUB_ACCESS_403"
+            elif "GitHub API 404 " in message:
+                failures[repository] = "GITHUB_NOT_FOUND_OR_INACCESSIBLE_404"
+            else:
+                # Unknown repository/API failures remain fatal; do not falsely
+                # map bugs or malformed payloads to routine authorization.
+                raise
+    return verified, failures
+
+
+def record_scan_health(
+    registry: dict[str, Any], successes: dict[str, list[dict[str, Any]]],
+    failures: dict[str, str], *, now: str,
+) -> None:
+    health = registry.setdefault("scan_health", {})
+    if not isinstance(health, dict):
+        raise ValueError("external ingress scan_health must be an object")
+    for repo in successes:
+        previous = health.get(repo) or {}
+        if not isinstance(previous, dict):
+            raise ValueError("malformed external ingress source health")
+        health[repo] = {
+            "state": "OK", "last_success_at": now,
+            "last_failure_at": previous.get("last_failure_at"),
+            "error_code": None,
+        }
+    for repo, error_code in failures.items():
+        previous = health.get(repo) or {}
+        if not isinstance(previous, dict):
+            raise ValueError("malformed external ingress source health")
+        health[repo] = {
+            "state": "UNAVAILABLE",
+            "last_success_at": previous.get("last_success_at"),
+            "last_failure_at": now,
+            "error_code": error_code,
+        }
+
+
 def _workstreams(root: Path) -> list[dict[str, Any]]:
     lanes: list[dict[str, Any]] = []
     for path in sorted((root / ".airlab/control-plane/workstreams").glob("*.json")):
@@ -300,10 +359,19 @@ def cmd_scan(args: argparse.Namespace) -> int:
             print(f"ERROR: {error}", file=sys.stderr)
         return 2
     token = args.token or os.environ.get("GH_TOKEN") or os.environ.get("GITHUB_TOKEN")
-    changes = fetch_changes(registry, token)
-    updated = scan_registry(registry, _workstreams(ROOT), changes, now=args.now or _iso_now())
+    changes, failures = fetch_changes_partially(registry, token)
+    now = args.now or _iso_now()
+    updated = scan_registry(registry, _workstreams(ROOT), changes, now=now)
+    record_scan_health(updated, changes, failures, now=now)
     _write(registry_path, updated)
-    print(f"External ingress scan complete: {sum(len(v) for v in changes.values())} change(s) inspected; {len(unresolved_incidents(updated))} unresolved incident(s).")
+    print(
+        f"External ingress scan: {len(changes)} accessible source(s), "
+        f"{len(failures)} inaccessible source(s), "
+        f"{sum(len(v) for v in changes.values())} change(s) inspected, "
+        f"{len(unresolved_incidents(updated))} unresolved incident(s)."
+    )
+    for repository, code in sorted(failures.items()):
+        print(f"SOURCE_UNAVAILABLE: {repository}: {code}; cursor preserved", file=sys.stderr)
     return 0
 
 
@@ -312,6 +380,18 @@ def cmd_check(args: argparse.Namespace) -> int:
     errors = validate_registry(registry)
     for error in errors:
         print(f"ERROR: {error}", file=sys.stderr)
+    health = registry.get("scan_health") or {}
+    unscanned = []
+    for entry in registry.get("tracked_repositories") or []:
+        repo = entry["repository"]
+        record = health.get(repo) if isinstance(health, dict) else None
+        if not isinstance(record, dict) or record.get("state") != "OK":
+            state = (record.get("error_code") or "NEVER_SCANNED") if isinstance(record, dict) else "NEVER_SCANNED"
+            unscanned.append(repo)
+            print(
+                f"SOURCE_UNAVAILABLE: {repo}: {state}; cursor not verified",
+                file=sys.stderr,
+            )
     unresolved = unresolved_incidents(registry)
     for incident in unresolved:
         subject = f"PR #{incident['pull_request']}" if incident.get("pull_request") else str(incident.get("commit_sha"))[:12]
@@ -320,7 +400,7 @@ def cmd_check(args: argparse.Namespace) -> int:
             "Main/Reviewer reconciliation evidence is required before canonical progress attribution.",
             file=sys.stderr,
         )
-    return 1 if errors or unresolved else 0
+    return 1 if errors or unresolved or unscanned else 0
 
 
 def main() -> None:
