@@ -1,0 +1,55 @@
+{
+  "schema_version": 1,
+  "request_id": "library-curation-review-iosweb-20261018",
+  "actor_id": "chatgpt:library-curation",
+  "lane_id": "library-curation",
+  "operation": "submit_review",
+  "expected_state_version": 2,
+  "payload": {
+    "packet": {
+      "schema_version": 1,
+      "submitted_at": "2026-10-18T10:12:00Z",
+      "lane_id": "library-curation",
+      "claim_id": "41e0520b7133ab02151c",
+      "work_item": "library-needs-ai-local-inference-ios-web-20261018",
+      "repository": "pilialvu75-hue/AI-Orchestrator-Module-Library",
+      "branch": "feat/library-needs-local-inference-ios-web",
+      "pull_request": 131,
+      "summary": "Extend the registered ai.local_inference research needs to iOS and Web without modifying executable modules or certification policy.",
+      "changes": [
+        "catalog/needs.json: add ios and web to existing ai.local_inference.targets; retain all prior targets, high priority and desired_candidates=2."
+      ],
+      "evidence": [
+        {
+          "type": "ci",
+          "ref": "https://github.com/pilialvu75-hue/AI-Orchestrator-Module-Library/actions/runs/39118326760",
+          "result": "PASS",
+          "note": "Validate Module Library run #860 succeeded on PR head e75e7a50c260c8957fc5b9a6f16cba708dea00d6."
+        },
+        {
+          "type": "commit",
+          "ref": "https://github.com/pilialvu75-hue/AI-Orchestrator-Module-Library/commit/e75e7a50c260c8957fc5b9a6f16cba708dea00d6",
+          "result": "PASS"
+        },
+        {
+          "type": "pull_request",
+          "ref": "https://github.com/pilialvu75-hue/AI-Orchestrator-Module-Library/pull/131",
+          "result": "PASS"
+        }
+      ],
+      "known_risks": [
+        "An updated Library need does not establish iOS/Web local inference functionality, certification or physical runtime evidence.",
+        "Protected independent verification and APPLIED inbox receipt remain to be observed after canonical review handoff."
+      ],
+      "reviewer_checks": [
+        "Independently verify that the exact-head PR diff modifies catalog/needs.json only.",
+        "Verify all required Library validation steps, unchanged protected workflow and artifact provenance.",
+        "Do not alter the separate Researcher claim, approve G6 or infer target runtime PASS."
+      ],
+      "roadmap_impact": {
+        "material": false,
+        "refs": []
+      }
+    }
+  }
+}
