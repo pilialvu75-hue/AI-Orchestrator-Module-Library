@@ -31,6 +31,7 @@ OPERATIONS = {
     "heartbeat",
     "checkpoint",
     "release",
+    "reconcile_external_merge",
     "submit_review",
     "autonomous_completion_preflight",
     "autonomous_complete",
@@ -344,6 +345,65 @@ def _independently_verify_needs_finalization(
     return independently_verified
 
 
+
+def _verify_external_merge(root: Path, lane_id: str, payload: dict[str, Any]) -> dict[str, Any]:
+    """Independently verify a claim-bound owner-directed GitHub merge."""
+    from tools.autonomous_ci_probe import fetch_json
+    from tools.control_plane_manager import _review_packet_digest, _validate_review_packet
+
+    if set(payload) != {
+        "claim_id", "pr_number", "expected_head_sha",
+        "merge_commit_sha", "packet_sha256", "owner_directed",
+    } or payload["owner_directed"] is not True:
+        raise ValueError("external merge requires exact owner-directed evidence")
+    lane = _load(root / _lane_rel(root, lane_id))
+    claim = lane.get("active_claim")
+    packet = lane.get("review_packet")
+    if (lane.get("status") != "REVIEW_REQUIRED"
+            or not isinstance(claim, dict) or not isinstance(packet, dict)):
+        raise ValueError("external merge requires pending claim-bound review")
+    _validate_review_packet(lane_id, claim, packet)
+    number = packet.get("pull_request")
+    repo = claim.get("repository")
+    head = payload.get("expected_head_sha")
+    merge_sha = payload.get("merge_commit_sha")
+    if (type(number) is not int or number != payload["pr_number"]
+            or payload["claim_id"] != claim.get("claim_id")
+            or payload["packet_sha256"] != _review_packet_digest(packet)
+            or not isinstance(repo, str)
+            or not re.fullmatch(r"[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+", repo)
+            or not isinstance(head, str) or not re.fullmatch(r"[0-9a-f]{40}", head)
+            or not isinstance(merge_sha, str)
+            or not re.fullmatch(r"[0-9a-f]{40}", merge_sha)):
+        raise ValueError("external merge identity mismatches canonical packet")
+    token = os.environ.get("GITHUB_TOKEN") or os.environ.get("GH_TOKEN")
+    if not token:
+        raise ValueError("GitHub token required to independently verify external merge")
+    base = f"https://api.github.com/repos/{repo}"
+    pr = fetch_json(f"{base}/pulls/{number}", token)
+    if (not isinstance(pr, dict) or pr.get("number") != number
+            or pr.get("state") != "closed" or pr.get("merged") is not True
+            or (pr.get("head") or {}).get("sha") != head
+            or (pr.get("base") or {}).get("ref") != "main"
+            or ((pr.get("base") or {}).get("repo") or {}).get("full_name") != repo
+            or pr.get("merge_commit_sha") != merge_sha):
+        raise ValueError("GitHub does not confirm exact merged PR identity")
+    comparison = fetch_json(f"{base}/compare/{merge_sha}...main", token)
+    if (not isinstance(comparison, dict)
+            or comparison.get("status") not in ("ahead", "identical")
+            or comparison.get("behind_by") != 0
+            or (comparison.get("base_commit") or {}).get("sha") != merge_sha):
+        raise ValueError("GitHub does not confirm merge commit on current main")
+    return {
+        "claim_id": claim["claim_id"],
+        "repository": repo,
+        "pr_number": number,
+        "head_sha": head,
+        "merge_commit_sha": merge_sha,
+        "packet_sha256": payload["packet_sha256"],
+    }
+
+
 def _apply(
     root: Path,
     lane_id: str,
@@ -351,6 +411,7 @@ def _apply(
     payload: dict[str, Any],
     now: datetime,
     *, verified_autonomy: dict[str, Any] | None = None,
+    verified_external: dict[str, Any] | None = None,
 ) -> None:
     if operation == "claim":
         control_plane_manager.claim(
@@ -391,6 +452,16 @@ def _apply(
         control_plane_manager.release(
             lane_id,
             reason=str(payload.get("reason") or ""),
+            root=root,
+            now=now,
+        )
+    elif operation == "reconcile_external_merge":
+        if not isinstance(verified_external, dict):
+            raise ValueError("independent external merge proof required")
+        control_plane_manager.reconcile_externally_merged_review(
+            lane_id,
+            verified_merge=verified_external,
+            actor_id=str(payload.get("actor_id") or ""),
             root=root,
             now=now,
         )
@@ -549,6 +620,15 @@ def process_one(path: Path, *, root: Path = ROOT, now: datetime | None = None) -
                     "record_review_gates requires main-reviewer authority"
                 )
 
+        if operation == "reconcile_external_merge":
+            actor = str(request.get("actor_id"))
+            if actor not in {"chatgpt:cantiere", "chatgpt:main-reviewer"}:
+                raise ValueError("external merge reconcile requires authorized interactive actor")
+            if str(payload.get("actor_id") or "") != actor:
+                raise ValueError("external merge actor must match request actor")
+            if automation_entry is not None:
+                raise ValueError("external merge reconciliation cannot be automated")
+
         lane_rel = _lane_rel(root, lane_id)
         current_lane = _load(root / lane_rel)
         current_version = current_lane.get("state_version")
@@ -557,6 +637,9 @@ def process_one(path: Path, *, root: Path = ROOT, now: datetime | None = None) -
                 f"state_version conflict: expected {expected_version}, current {current_version}"
             )
         verified_autonomy = None
+        verified_external = None
+        if operation == "reconcile_external_merge":
+            verified_external = _verify_external_merge(root, lane_id, payload)
         if operation == "autonomous_complete":
             verified_autonomy = _independently_verify_needs_completion(
                 root, lane_id, payload, now=now,
@@ -575,7 +658,8 @@ def process_one(path: Path, *, root: Path = ROOT, now: datetime | None = None) -
             temp_root = Path(tmp)
             _copy_airlab(root, temp_root)
             _apply(temp_root, lane_id, operation, payload, now,
-                   verified_autonomy=verified_autonomy)
+                   verified_autonomy=verified_autonomy,
+                   verified_external=verified_external)
             candidate_errors = validate_control_plane.validate(temp_root)
             target_errors = _target_errors(candidate_errors, lane_id)
             new_errors = sorted(set(candidate_errors) - set(baseline_errors))
