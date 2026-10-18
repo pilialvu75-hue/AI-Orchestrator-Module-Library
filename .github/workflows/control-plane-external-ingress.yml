@@ -7,6 +7,7 @@ on:
 
 permissions:
   contents: write
+  pull-requests: read
 
 concurrency:
   group: canonical-control-plane-reconcile
@@ -29,7 +30,9 @@ jobs:
 
       - name: Scan and persist external ingress ledger
         env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          # Optional read-only fine-grained token scoped to tracked private repositories.
+          # Without it, github.token can read PRs in this repository only.
+          GH_TOKEN: ${{ secrets.EXTERNAL_INGRESS_READ_TOKEN || github.token }}
         shell: bash
         run: |
           set -euo pipefail
@@ -58,7 +61,7 @@ jobs:
             echo "External ingress ledger push raced with main; rescanning latest main."
           done
 
-      - name: Require Main/Reviewer reconciliation for unclaimed changes
+      - name: Require observable source coverage and reconciliation for unclaimed changes
         shell: bash
         run: |
           set -euo pipefail

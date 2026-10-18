@@ -1,8 +1,11 @@
 import importlib.util
+import argparse
+import io
 import json
 import tempfile
 import unittest
 from pathlib import Path
+from unittest.mock import patch
 
 ROOT = Path(__file__).resolve().parents[1]
 SPEC = importlib.util.spec_from_file_location(
@@ -43,6 +46,69 @@ class ExternalChangeIngressTests(unittest.TestCase):
             "title": "Change X",
             "html_url": "https://github.com/owner/app/pull/12",
         }
+
+    def test_cross_repo_permission_denial_preserves_readable_repo_results(self):
+        registry = self._registry()
+        registry["tracked_repositories"].append({
+            "repository": "owner/private",
+            "baseline_at": "2026-10-03T10:00:00Z",
+            "cursor_merged_at": "2026-10-03T10:00:00Z",
+        })
+
+        def fake_fetch(one, token):
+            repo = one["tracked_repositories"][0]["repository"]
+            if repo == "owner/private":
+                raise RuntimeError(
+                    "GitHub API 403 for https://api.github.com/repos/owner/private/pulls: "
+                    "Resource not accessible by integration"
+                )
+            return {repo: [self._pr()]}
+        with patch.object(module, "fetch_changes", side_effect=fake_fetch):
+            changes, failures = module.fetch_changes_partially(registry, "token")
+        self.assertEqual(changes, {"owner/app": [self._pr()]})
+        self.assertEqual(failures, {"owner/private": "GITHUB_ACCESS_403"})
+        updated = module.scan_registry(registry, [], changes, now="2026-10-03T11:05:00Z")
+        module.record_scan_health(updated, changes, failures, now="2026-10-03T11:05:00Z")
+        self.assertEqual(updated["tracked_repositories"][0]["cursor_merged_at"], "2026-10-03T11:00:00Z")
+        self.assertEqual(updated["tracked_repositories"][1]["cursor_merged_at"], "2026-10-03T10:00:00Z")
+        self.assertEqual(updated["scan_health"]["owner/private"]["state"], "UNAVAILABLE")
+        self.assertEqual(len(updated["incidents"]), 1)
+
+    def test_scan_persists_partial_work_and_check_refuses_inaccessible_sources(self):
+        registry = self._registry()
+        registry["tracked_repositories"].append({
+            "repository": "owner/private",
+            "baseline_at": "2026-10-03T10:00:00Z",
+            "cursor_merged_at": "2026-10-03T10:00:00Z",
+        })
+        with tempfile.TemporaryDirectory() as tmp:
+            path = Path(tmp) / "external.json"
+            path.write_text(json.dumps(registry))
+            args = argparse.Namespace(registry=str(path), token="fake-token", now="2026-10-03T11:00:00Z")
+            with patch.object(module, "fetch_changes_partially", return_value=(
+                {"owner/app": []}, {"owner/private": "GITHUB_ACCESS_403"}
+            )), patch.object(module, "_workstreams", return_value=[]):
+                self.assertEqual(module.cmd_scan(args), 0)
+            saved = json.loads(path.read_text())
+            self.assertEqual(saved["scan_health"]["owner/app"]["state"], "OK")
+            self.assertEqual(saved["scan_health"]["owner/private"]["error_code"], "GITHUB_ACCESS_403")
+            self.assertEqual(saved["tracked_repositories"][1]["cursor_merged_at"], "2026-10-03T10:00:00Z")
+            with patch("sys.stderr", new_callable=io.StringIO) as stderr:
+                self.assertEqual(module.cmd_check(argparse.Namespace(registry=str(path))), 1)
+                self.assertIn("SOURCE_UNAVAILABLE: owner/private", stderr.getvalue())
+            with patch.object(module, "fetch_changes_partially", return_value=(
+                {"owner/app": [], "owner/private": []}, {}
+            )), patch.object(module, "_workstreams", return_value=[]):
+                self.assertEqual(module.cmd_scan(args), 0)
+            saved = json.loads(path.read_text())
+            self.assertEqual(saved["scan_health"]["owner/private"]["state"], "OK")
+            self.assertIsNone(saved["scan_health"]["owner/private"]["error_code"])
+            self.assertEqual(module.cmd_check(argparse.Namespace(registry=str(path))), 0)
+
+    def test_unknown_api_error_fails_without_fabricating_scan_health(self):
+        with patch.object(module, "fetch_changes", side_effect=RuntimeError("GitHub API 500")):
+            with self.assertRaisesRegex(RuntimeError, "API 500"):
+                module.fetch_changes_partially(self._registry(), "token")
 
     def test_unclaimed_merged_pr_becomes_persistent_incident(self):
         registry = module.scan_registry(
