@@ -1,6 +1,11 @@
 name: Control Plane External Ingress Watch
 
 on:
+  push:
+    branches: ["main"]
+    paths:
+      - ".github/workflows/control-plane-external-ingress.yml"
+      - "tools/external_change_ingress.py"
   schedule:
     - cron: "37 * * * *"
   workflow_dispatch:
