@@ -19,7 +19,7 @@ from tools.autonomous_independent_gates import LIBRARY_REPOSITORY
 from tools.autonomous_needs_scope import verify_needs_only_scope
 from tools.control_plane_manager import ROOT, _assert_claim_live, _validate_review_packet
 
-LANE_FILE = ".airlab/control-plane/workstreams/library-researcher.json"
+LANE_FILE = ".airlab/control-plane/workstreams/library-curation.json"
 WORKFLOW = "autonomous-ci-probe.yml"
 
 
@@ -36,7 +36,7 @@ def dispatch_ready_needs(*, root: Path = ROOT, token: str, changed_commit_only: 
             return False
     lane_path = root / LANE_FILE
     lane = json.loads(lane_path.read_text(encoding="utf-8"))
-    if (lane.get("id") != "library-researcher" or lane.get("role") != "worker"
+    if (lane.get("id") != "library-curation" or lane.get("role") != "worker"
             or lane.get("status") != "REVIEW_REQUIRED"):
         return False
     claim, packet = lane.get("active_claim"), lane.get("review_packet")
@@ -47,7 +47,7 @@ def dispatch_ready_needs(*, root: Path = ROOT, token: str, changed_commit_only: 
     now = now or datetime.now(timezone.utc)
     try:
         _assert_claim_live(claim, now)
-        _validate_review_packet("library-researcher", claim, packet)
+        _validate_review_packet("library-curation", claim, packet)
     except ValueError:
         return False
     pr_number = packet["pull_request"]
@@ -67,7 +67,7 @@ def dispatch_ready_needs(*, root: Path = ROOT, token: str, changed_commit_only: 
     body = json.dumps({
         "ref": "main",
         "inputs": {
-            "lane_id": "library-researcher",
+            "lane_id": "library-curation",
             "repository": LIBRARY_REPOSITORY,
             "pr_number": str(pr_number),
         },
