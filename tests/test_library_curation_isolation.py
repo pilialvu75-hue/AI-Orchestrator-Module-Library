@@ -23,6 +23,28 @@ class LibraryCurationIsolationTests(unittest.TestCase):
         self.addCleanup(self.tmp.cleanup)
         self.root = Path(self.tmp.name)
         shutil.copytree(ROOT / ".airlab", self.root / ".airlab")
+        # Keep the test independent from the live canonical state, which
+        # legitimately changes as a Library curation claim is processed.
+        curator_path = self.root / CURATION
+        curator = json.loads(curator_path.read_text(encoding="utf-8"))
+        curator["status"] = "READY"
+        curator["active_claim"] = None
+        curator.pop("review_packet", None)
+        curator.pop("block_reason", None)
+        curator.pop("current_gate_attestation", None)
+        curator["evidence"] = []
+        curator["reviewer"] = {
+            "required": True, "state": "PENDING",
+            "reviewed_by": None, "reviewed_at": None,
+        }
+        curator["gates"].update({
+            "G0_CLAIM": "PENDING", "G1_IMPLEMENTATION": "PENDING",
+            "G2_STATIC": "PENDING", "G3_CI": "PENDING",
+            "G4_INTEGRATION": "PENDING", "G6_REVIEWER": "PENDING",
+            "G7_CANONICAL_SYNC": "PENDING",
+            "G5_TARGET_RUNTIME": "NOT_APPLICABLE_UNTIL_RUNTIME_CHANGE",
+        })
+        curator_path.write_text(json.dumps(curator, indent=2) + "\n", encoding="utf-8")
 
     def test_curator_claim_does_not_modify_researcher_claim_or_packet(self):
         researcher_before = (self.root / RESEARCHER).read_bytes()
