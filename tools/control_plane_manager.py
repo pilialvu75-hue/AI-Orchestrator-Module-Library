@@ -508,6 +508,113 @@ def release(
     project(root=root, now=now)
 
 
+
+def reconcile_externally_merged_review(
+    lane_id: str,
+    *,
+    verified_merge: dict[str, Any],
+    actor_id: str,
+    root: Path = ROOT,
+    now: datetime | None = None,
+) -> None:
+    """Release a merged worker claim WITHOUT granting any reviewer/runtime gate.
+
+    Only the serialized inbox may call this with independently GitHub-verified
+    merge identity. Never interpret a merge as approval of the review packet.
+    """
+    now = now or _now()
+    _, canonical = _canonical(root)
+    lane_path, lane = _lane_by_id(root, canonical, lane_id)
+    if lane.get("role") == "reviewer" or lane.get("status") != "REVIEW_REQUIRED":
+        raise ValueError("external merge reconciliation requires a worker REVIEW_REQUIRED lane")
+    claim_data = lane.get("active_claim")
+    packet = lane.get("review_packet")
+    if not isinstance(claim_data, dict) or not isinstance(packet, dict):
+        raise ValueError("external merge reconciliation requires a claim-bound review packet")
+    _validate_review_packet(lane_id, claim_data, packet)
+    number = packet.get("pull_request")
+    if (
+        type(number) is not int
+        or verified_merge.get("pr_number") != number
+        or verified_merge.get("repository") != claim_data.get("repository")
+        or verified_merge.get("claim_id") != claim_data.get("claim_id")
+        or verified_merge.get("packet_sha256") != _review_packet_digest(packet)
+        or not isinstance(verified_merge.get("head_sha"), str)
+        or not isinstance(verified_merge.get("merge_commit_sha"), str)
+    ):
+        raise ValueError("external merge evidence does not match the active review packet")
+    if actor_id not in {"chatgpt:cantiere", "chatgpt:main-reviewer"}:
+        raise ValueError("external merge reconciliation requires authorized interactive actor")
+    merge_sha = verified_merge["merge_commit_sha"]
+    identity = {
+        "claim_id": claim_data["claim_id"],
+        "work_item": claim_data["work_item"],
+        "repository": claim_data["repository"],
+        "pr_number": number,
+        "head_sha": verified_merge["head_sha"],
+        "merge_commit_sha": merge_sha,
+        "packet_sha256": verified_merge["packet_sha256"],
+        "actor_id": actor_id,
+        "at": _iso(now),
+        "review_approved": False,
+        "physical_runtime_verified": False,
+        "known_risks": list(packet.get("known_risks") or []),
+    }
+    lane.setdefault("external_merge_history", []).append(identity)
+    lane["external_merge_history"] = lane["external_merge_history"][-20:]
+    lane.setdefault("reconciliation_events", []).append({
+        "type": "OWNER_DIRECTED_EXTERNAL_MERGE_RECONCILED",
+        "claim_id": claim_data["claim_id"],
+        "work_item": claim_data["work_item"],
+        "merge_commit_sha": merge_sha,
+        "packet_sha256": verified_merge["packet_sha256"],
+        "at": _iso(now),
+        "review_approved": False,
+    })
+    lane["reconciliation_events"] = lane["reconciliation_events"][-20:]
+    checkpoints = lane.setdefault("checkpoints", [])
+    seq = int(checkpoints[-1]["seq"]) + 1 if checkpoints else 1
+    checkpoint = {
+        "seq": seq,
+        "at": _iso(now),
+        "claim_id": claim_data["claim_id"],
+        "work_item": claim_data["work_item"],
+        "summary": "Owner-directed GitHub merge verified; not independently approved.",
+        "decisions": ["Retain open G5/G6; do not infer runtime or reviewer approval."],
+        "evidence_refs": [
+            f"https://github.com/{claim_data['repository']}/pull/{number}",
+            f"https://github.com/{claim_data['repository']}/commit/{merge_sha}",
+        ],
+        "next_action": "Run physical target acceptance; independent review remains outstanding.",
+        "kind": "EXTERNAL_MERGE_RECONCILIATION",
+    }
+    checkpoints.append(checkpoint)
+    lane["checkpoints"] = checkpoints[-50:]
+    lane["last_checkpoint"] = checkpoint
+    lane["active_claim"] = None
+    lane.pop("review_packet", None)
+    lane.pop("current_gate_attestation", None)
+    lane.pop("block_reason", None)
+    lane["evidence"] = []
+    lane["status"] = "READY"
+    lane["updated_at"] = _date(now)
+    lane["state_version"] = int(lane.get("state_version", 0)) + 1
+    gates = lane.setdefault("gates", {})
+    for gate in ("G0_CLAIM", "G1_IMPLEMENTATION", "G2_STATIC", "G3_CI",
+                 "G4_INTEGRATION", "G6_REVIEWER", "G7_CANONICAL_SYNC"):
+        gates[gate] = "PENDING"
+    # G5 is intentionally untouched: it can only be set by real runtime proof.
+    lane["reviewer"] = {
+        "required": True,
+        "state": "PENDING",
+        "reviewed_by": None,
+        "reviewed_at": None,
+    }
+    lane["next_action"] = checkpoint["next_action"]
+    _write(lane_path, lane)
+    project(root=root, now=now)
+
+
 def _validate_review_packet(lane_id: str, claim_data: dict[str, Any], packet: dict[str, Any]) -> None:
     required = (
         "schema_version", "submitted_at", "lane_id", "claim_id", "work_item",
