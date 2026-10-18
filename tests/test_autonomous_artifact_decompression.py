@@ -19,6 +19,9 @@ class Response:
     def __init__(self, data):
         self.stream = io.BytesIO(data)
 
+    def geturl(self):
+        return "https://api.github.com/repos/owner/repo/actions/artifacts/42/zip"
+
     def __enter__(self):
         return self
 

@@ -7,6 +7,8 @@ from __future__ import annotations
 import io
 import json
 import urllib.request
+import urllib.error
+from urllib.parse import urlsplit
 import zipfile
 from pathlib import Path
 
@@ -28,13 +30,33 @@ def fetch_ci_evidence_artifact(repository: str, artifact_id: int, token: str) ->
         raise ValueError("GitHub token required")
     url = f"https://api.github.com/repos/{repository}/actions/artifacts/{artifact_id}/zip"
     request = urllib.request.Request(url, headers={
-        "Authorization": f"Bearer {token}",
         "Accept": "application/vnd.github+json",
         "X-GitHub-Api-Version": "2022-11-28",
         "User-Agent": "airlab-autonomous-receipt-probe",
     })
-    with urllib.request.urlopen(request, timeout=20) as response:
-        data = response.read(262145)
+    # GitHub answers artifact ZIP requests with a redirect to a short-lived
+    # signed object-store URL. The GitHub bearer must authenticate ONLY the
+    # api.github.com request; forwarding it to the storage host can cause 401
+    # and discloses a privileged token outside the intended origin.
+    request.add_unredirected_header("Authorization", f"Bearer {token}")
+    try:
+        with urllib.request.urlopen(request, timeout=20) as response:
+            final_url = urlsplit(response.geturl())
+            host = final_url.hostname or ""
+            approved_host = (
+                host in {"api.github.com", "objects.githubusercontent.com"}
+                or host.endswith(".actions.githubusercontent.com")
+                or host.endswith(".blob.core.windows.net")
+            )
+            if final_url.scheme != "https" or not approved_host:
+                raise ValueError("protected artifact redirected to unapproved host")
+            data = response.read(262145)
+    except urllib.error.HTTPError as exc:
+        host = urlsplit(exc.geturl()).hostname or "unknown"
+        # Never log the signed query string or bearer token.
+        raise ValueError(
+            f"protected artifact ZIP download HTTP {exc.code} at {host}"
+        ) from exc
     if len(data) > 262144:
         raise ValueError("protected artifact exceeds size limit")
     try:
