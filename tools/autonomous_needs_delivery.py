@@ -63,6 +63,12 @@ def _pending(root: Path) -> tuple[dict, dict, dict, dict] | None:
             or type(pending.get("protected_run_attempt")) is not int
             or not isinstance(pending.get("protected_sha"), str)
             or not _SHA.fullmatch(pending["protected_sha"])
+            or (lane.get("gates") or {}).get("G0_CLAIM") != "PASS"
+            or any((lane.get("gates") or {}).get(gate) != "PASS"
+                   for gate in ("G1_IMPLEMENTATION", "G2_STATIC",
+                                "G3_CI", "G4_INTEGRATION"))
+            or (lane.get("gates") or {}).get("G7_CANONICAL_SYNC") != "PENDING"
+            or (packet.get("roadmap_impact") or {}).get("material") is not False
             or (lane.get("gates") or {}).get("G6_REVIEWER") != "PENDING"
             or (lane.get("reviewer") or {}).get("state") != "PENDING"
             or (lane.get("gates") or {}).get("G5_TARGET_RUNTIME") not in
