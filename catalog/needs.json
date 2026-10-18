@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-09-18T18:24:59.976780Z",
+  "updated_at": "2026-10-18T10:09:00Z",
   "items": [
     {
       "capability_id": "ai.acceleration_backend",
@@ -27,7 +27,9 @@
       "targets": [
         "android",
         "desktop",
-        "raspberry_pi"
+        "ios",
+        "raspberry_pi",
+        "web"
       ]
     },
     {
