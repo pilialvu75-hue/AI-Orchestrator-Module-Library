@@ -3,11 +3,11 @@
   "id": "diagnostics",
   "title": "Diagnostics",
   "role": "worker",
-  "status": "CLAIMED",
+  "status": "IMPLEMENTING",
   "activation": "active",
   "scope": "Shared observability contract, logs, evidence receipts and comparable telemetry across all platforms.",
   "shared_engine_policy": "shared_or_control_plane",
-  "state_version": 14,
+  "state_version": 15,
   "updated_at": "2026-10-19",
   "active_claim": {
     "claim_id": "226dac1145a5ce86c7be",
@@ -25,8 +25,8 @@
       "resource:diagnostics-cache-reuse-857"
     ],
     "started_at": "2026-10-19T12:24:18Z",
-    "heartbeat_at": "2026-10-19T12:24:18Z",
-    "lease_until": "2026-10-20T00:24:18Z",
+    "heartbeat_at": "2026-10-19T12:26:28Z",
+    "lease_until": "2026-10-20T00:26:28Z",
     "lease_hours": 12
   },
   "dependencies": [],
@@ -51,7 +51,7 @@
     "reviewed_by": null,
     "reviewed_at": null
   },
-  "next_action": "Merge PR #835 only at exact reviewed head 54a278b126b4ccc62eb5f4028e9bb0934bc406be. Keep issue #114 available for post-fix S24 FE export evidence; RAM stability, Vulkan validation and physical device acceptance remain open. No timeout/watchdog policy change is implied.",
+  "next_action": "Inspect exact-head CI and fix failures. Complete request-bound terminal receipt assessment for issue857 before final handoff; periodic samples alone may miss short generations. Keep RAM/GPU/trim15 acceptance open.",
   "historical_backlog": [
     "PR #711 cross-platform remote runtime parity is merged and is the baseline.",
     "PR #543 privacy-filtered PostHog bridge is merged; raw prompts/text/paths/credentials remain excluded.",
@@ -201,31 +201,39 @@
       ],
       "next_action": "Merge PR #835 only at exact reviewed head 54a278b126b4ccc62eb5f4028e9bb0934bc406be. Keep issue #114 available for post-fix S24 FE export evidence; RAM stability, Vulkan validation and physical device acceptance remain open. No timeout/watchdog policy change is implied.",
       "kind": "REVIEW_ACCEPTED"
+    },
+    {
+      "seq": 8,
+      "at": "2026-10-19T12:26:28Z",
+      "claim_id": "226dac1145a5ce86c7be",
+      "work_item": "issue-857-cache-reuse-telemetry",
+      "summary": "Published draft Riserva PR858 head 5e97c7f45fb253dc41a1512e551ad0698a1e59cc: measured cache counters in RESOURCE_SAMPLE plus closed backward-compatible projection and three regressions. git diff --check PASS; Flutter CI pending, not tested locally. No runtime improvement claim.",
+      "decisions": [
+        "No cache algorithm or inference policy change.",
+        "Preserve legacy log grammar; unknown=-1 is not zero reuse."
+      ],
+      "evidence_refs": [
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/858",
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/5e97c7f45fb253dc41a1512e551ad0698a1e59cc"
+      ],
+      "next_action": "Inspect exact-head CI and fix failures. Complete request-bound terminal receipt assessment for issue857 before final handoff; periodic samples alone may miss short generations. Keep RAM/GPU/trim15 acceptance open."
     }
   ],
   "last_checkpoint": {
-    "seq": 7,
-    "at": "2026-10-12T21:32:57Z",
-    "claim_id": "141bd9a1731636791e19",
-    "work_item": "diagnostics-issue-114-public-stall-projection",
-    "summary": "Diagnostics #114 / Riserva PR #835 accepted at exact final head 54a278b126b4ccc62eb5f4028e9bb0934bc406be. The post-approval P2 was confirmed and fixed: unsupported existing terminal producers retain privacy-safe event identity only, while supported stall/terminal producers export only closed allowlisted state/reason/numeric fields. Sensitive and free-form payload is discarded. Live and persisted Diagnostics paths both apply publicLogProjection. Cross-repository scope is covered by the Diagnostics claim and explicit Riserva file locks. All five exact-head workflows PASS. No physical S24 FE, RAM or Vulkan success is claimed.",
+    "seq": 8,
+    "at": "2026-10-19T12:26:28Z",
+    "claim_id": "226dac1145a5ce86c7be",
+    "work_item": "issue-857-cache-reuse-telemetry",
+    "summary": "Published draft Riserva PR858 head 5e97c7f45fb253dc41a1512e551ad0698a1e59cc: measured cache counters in RESOURCE_SAMPLE plus closed backward-compatible projection and three regressions. git diff --check PASS; Flutter CI pending, not tested locally. No runtime improvement claim.",
     "decisions": [
-      "Main/Reviewer accepted the implementation/review gate."
+      "No cache algorithm or inference policy change.",
+      "Preserve legacy log grammar; unknown=-1 is not zero reuse."
     ],
     "evidence_refs": [
-      "Ai-orchestrator-riserva#835",
-      "commit:54a278b126b4ccc62eb5f4028e9bb0934bc406be",
-      "CI:38308978780",
-      "CI:38308978823",
-      "CI:38308978820",
-      "CI:38308979156",
-      "CI:38308978841",
-      "P2:discussion_r4252333761:resolved",
-      "integration:github_diagnostics:_capture->publicLogProjection",
-      "AI-Orchestrator-Module-Library#114"
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/858",
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/5e97c7f45fb253dc41a1512e551ad0698a1e59cc"
     ],
-    "next_action": "Merge PR #835 only at exact reviewed head 54a278b126b4ccc62eb5f4028e9bb0934bc406be. Keep issue #114 available for post-fix S24 FE export evidence; RAM stability, Vulkan validation and physical device acceptance remain open. No timeout/watchdog policy change is implied.",
-    "kind": "REVIEW_ACCEPTED"
+    "next_action": "Inspect exact-head CI and fix failures. Complete request-bound terminal receipt assessment for issue857 before final handoff; periodic samples alone may miss short generations. Keep RAM/GPU/trim15 acceptance open."
   },
   "review_history": [
     {

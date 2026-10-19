@@ -1,0 +1,12 @@
+{
+  "schema_version": 1,
+  "request_id": "diagnostics-20261019T1226Z-checkpoint-858",
+  "status": "APPLIED",
+  "processed_at": "2026-10-19T12:26:28Z",
+  "source_file": "diagnostics-20261019T1226Z-checkpoint-858.json",
+  "lane_id": "diagnostics",
+  "operation": "checkpoint",
+  "actor_id": "chatgpt:diagnostics",
+  "errors": [],
+  "result_state_version": 15
+}
