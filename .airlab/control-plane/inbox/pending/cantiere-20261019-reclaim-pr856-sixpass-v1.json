@@ -1,0 +1,20 @@
+{
+  "schema_version": 1,
+  "request_id": "cantiere-20261019-reclaim-pr856-sixpass-v1",
+  "actor_id": "chatgpt:cantiere",
+  "lane_id": "cantiere",
+  "operation": "claim",
+  "expected_state_version": 122,
+  "payload": {
+    "work_item": "issue-845-gate-evidence-visibility-v1",
+    "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
+    "branch": "fix/cantiere-845-gate-evidence-visibility",
+    "scope": "Complete bounded PR #856 gate export diagnosis CI and review handoff; only three previously authorized Cantiere files",
+    "resource_locks": [
+      "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/app_factory/workshop/workshop_production_dashboard_page.dart",
+      "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/app_factory/workshop/workshop_gate_evidence_export.dart",
+      "file:pilialvu75-hue/Ai-orchestrator-riserva:test/app_factory/workshop/workshop_gate_evidence_export_test.dart",
+      "resource:cantiere-845-gate-evidence-export"
+    ]
+  }
+}
