@@ -1,0 +1,12 @@
+{
+  "schema_version": 1,
+  "request_id": "cantiere-20261019-wait-pr856-d5b6-six-ci-v1",
+  "status": "APPLIED",
+  "processed_at": "2026-10-19T08:26:25Z",
+  "source_file": "cantiere-20261019-wait-pr856-d5b6-six-ci-v1.json",
+  "lane_id": "cantiere",
+  "operation": "enter_wait",
+  "actor_id": "chatgpt:cantiere",
+  "errors": [],
+  "result_state_version": 127
+}
