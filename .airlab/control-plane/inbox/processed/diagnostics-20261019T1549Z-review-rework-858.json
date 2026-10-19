@@ -1,0 +1,12 @@
+{
+  "schema_version": 1,
+  "request_id": "diagnostics-20261019T1549Z-review-rework-858",
+  "status": "APPLIED",
+  "processed_at": "2026-10-19T15:50:19Z",
+  "source_file": "diagnostics-20261019T1549Z-review-rework-858.json",
+  "lane_id": "diagnostics",
+  "operation": "review_rework",
+  "actor_id": "chatgpt:main-reviewer",
+  "errors": [],
+  "result_state_version": 17
+}

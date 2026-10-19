@@ -1,0 +1,12 @@
+{
+  "schema_version": 1,
+  "request_id": "cantiere-20261019-resume-pr856-d5b6-allpass-v2",
+  "status": "APPLIED",
+  "processed_at": "2026-10-19T15:50:19Z",
+  "source_file": "cantiere-20261019-resume-pr856-d5b6-allpass-v2.json",
+  "lane_id": "cantiere",
+  "operation": "resume_wait",
+  "actor_id": "chatgpt:cantiere",
+  "errors": [],
+  "result_state_version": 128
+}

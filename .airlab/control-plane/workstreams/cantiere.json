@@ -3,11 +3,11 @@
   "id": "cantiere",
   "title": "Cantiere",
   "role": "worker",
-  "status": "BLOCKED",
+  "status": "READY",
   "activation": "active",
   "scope": "Exclusive Cantiere/App Factory execution, durability, build/review/validation/apply and first-real-app reliability.",
   "shared_engine_policy": "shared_or_control_plane",
-  "state_version": 127,
+  "state_version": 128,
   "updated_at": "2026-10-19",
   "active_claim": null,
   "dependencies": [],
@@ -100,7 +100,7 @@
     "reviewed_by": "main-reviewer",
     "reviewed_at": "2026-10-19T08:18:37Z"
   },
-  "next_action": "Inspect exact-head CI and review; resume_wait with run refs, re-claim same branch/files then resubmit packet or repair a proven failure. Do not infer star APK generation or G5/G6 approval.",
+  "next_action": "Claim the previously reserved PR #856 branch/resources, verify exact-head CI/review, resubmit updated claim-bound review packet to independent Main/Reviewer; physical star app G5 remains pending.",
   "historical_backlog": [
     "Stay in Phase 1 ONLINE until a real generated Android app is physically accepted.",
     "Reproduce the recent manga-drawing app failure from current main with Diagnostics; do not restart generic audits.",
@@ -1254,14 +1254,6 @@
   ],
   "reconciliation_events": [
     {
-      "type": "REVIEW_WAIT_OVERDUE",
-      "claim_id": "c0d7e9a1f346b8d5021a",
-      "work_item": "cantiere-engineer-flutter-native-import-3140",
-      "lease_until": "2026-10-13T17:19:32Z",
-      "detected_at": "2026-10-13T17:29:48Z",
-      "review_required": true
-    },
-    {
       "type": "CLAIM_RELEASED_AFTER_REVIEW",
       "claim_id": "c0d7e9a1f346b8d5021a",
       "work_item": "cantiere-engineer-flutter-native-import-3140",
@@ -1510,6 +1502,23 @@
         "resource:cantiere-845-gate-evidence-export"
       ],
       "at": "2026-10-19T08:26:25Z"
+    },
+    {
+      "type": "WAIT_RESUMED",
+      "wait_id": "cantiere:8e8e2ce5633f9e6458b3:WAITING_EXTERNAL",
+      "work_item": "issue-845-gate-evidence-visibility-v1",
+      "signal_id": "github-pr856-d5b6-six-workflows-completed-success-codex-no-findings",
+      "evidence_refs": [
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/856",
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/39222270752",
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/39222270296",
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/39222270305",
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/39222270279",
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/39222270409",
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/39222270551",
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/856#issuecomment-6263014985"
+      ],
+      "at": "2026-10-19T15:50:19Z"
     }
   ],
   "review_packet_history": [
@@ -3018,6 +3027,50 @@
         "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/39153267656",
         "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/39153267744"
       ]
+    },
+    {
+      "schema_version": 1,
+      "wait_id": "cantiere:8e8e2ce5633f9e6458b3:WAITING_EXTERNAL",
+      "type": "WAITING_EXTERNAL",
+      "work_item": "issue-845-gate-evidence-visibility-v1",
+      "prior_claim_id": "8e8e2ce5633f9e6458b3",
+      "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
+      "branch": "fix/cantiere-845-gate-evidence-visibility",
+      "scope": "Complete bounded PR #856 gate export diagnosis CI and review handoff; only three previously authorized Cantiere files",
+      "resource_locks": [
+        "branch:pilialvu75-hue/Ai-orchestrator-riserva:fix/cantiere-845-gate-evidence-visibility",
+        "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/app_factory/workshop/workshop_gate_evidence_export.dart",
+        "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/app_factory/workshop/workshop_production_dashboard_page.dart",
+        "file:pilialvu75-hue/Ai-orchestrator-riserva:test/app_factory/workshop/workshop_gate_evidence_export_test.dart",
+        "resource:cantiere-845-gate-evidence-export"
+      ],
+      "entered_at": "2026-10-19T08:26:25Z",
+      "resume_condition": "All six GitHub Actions workflow runs for PR #856 exact head d5b6fc5ab557c6fa679db42290462c6bcc621426 have inspectable terminal outcomes and Codex P2 re-review can be checked.",
+      "summary": "PR #856 Codex P2 stale clipboard confirmation corrected on exact head d5b6fc5, scoped to three claimed files with deterministic regression; Web passed, other 5 workflows pending. Preserve claim locks while CI finishes.",
+      "evidence_refs": [
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/856",
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/d5b6fc5ab557c6fa679db42290462c6bcc621426",
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/issues/845#issuecomment-6262955289",
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/39222270305",
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/39222270752",
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/39222270279",
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/39222270551",
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/39222270296",
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/39222270409"
+      ],
+      "resume_next_action": "Inspect exact-head CI and review; resume_wait with run refs, re-claim same branch/files then resubmit packet or repair a proven failure. Do not infer star APK generation or G5/G6 approval.",
+      "resumed_at": "2026-10-19T15:50:19Z",
+      "signal_id": "github-pr856-d5b6-six-workflows-completed-success-codex-no-findings",
+      "resume_evidence_refs": [
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/856",
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/39222270752",
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/39222270296",
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/39222270305",
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/39222270279",
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/39222270409",
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/39222270551",
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/856#issuecomment-6263014985"
+      ]
     }
   ],
   "external_merge_history": [
@@ -3333,52 +3386,5 @@
         ".airlab/public-repositories/Ai-orchestrator-riserva/roadmap.yaml"
       ]
     }
-  },
-  "wait_state": {
-    "schema_version": 1,
-    "wait_id": "cantiere:8e8e2ce5633f9e6458b3:WAITING_EXTERNAL",
-    "type": "WAITING_EXTERNAL",
-    "work_item": "issue-845-gate-evidence-visibility-v1",
-    "prior_claim_id": "8e8e2ce5633f9e6458b3",
-    "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
-    "branch": "fix/cantiere-845-gate-evidence-visibility",
-    "scope": "Complete bounded PR #856 gate export diagnosis CI and review handoff; only three previously authorized Cantiere files",
-    "resource_locks": [
-      "branch:pilialvu75-hue/Ai-orchestrator-riserva:fix/cantiere-845-gate-evidence-visibility",
-      "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/app_factory/workshop/workshop_gate_evidence_export.dart",
-      "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/app_factory/workshop/workshop_production_dashboard_page.dart",
-      "file:pilialvu75-hue/Ai-orchestrator-riserva:test/app_factory/workshop/workshop_gate_evidence_export_test.dart",
-      "resource:cantiere-845-gate-evidence-export"
-    ],
-    "entered_at": "2026-10-19T08:26:25Z",
-    "resume_condition": "All six GitHub Actions workflow runs for PR #856 exact head d5b6fc5ab557c6fa679db42290462c6bcc621426 have inspectable terminal outcomes and Codex P2 re-review can be checked.",
-    "summary": "PR #856 Codex P2 stale clipboard confirmation corrected on exact head d5b6fc5, scoped to three claimed files with deterministic regression; Web passed, other 5 workflows pending. Preserve claim locks while CI finishes.",
-    "evidence_refs": [
-      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/856",
-      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/d5b6fc5ab557c6fa679db42290462c6bcc621426",
-      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/issues/845#issuecomment-6262955289",
-      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/39222270305",
-      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/39222270752",
-      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/39222270279",
-      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/39222270551",
-      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/39222270296",
-      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/39222270409"
-    ],
-    "resume_next_action": "Inspect exact-head CI and review; resume_wait with run refs, re-claim same branch/files then resubmit packet or repair a proven failure. Do not infer star APK generation or G5/G6 approval."
-  },
-  "block_reason": {
-    "code": "WAITING_EXTERNAL",
-    "wait_id": "cantiere:8e8e2ce5633f9e6458b3:WAITING_EXTERNAL",
-    "work_item": "issue-845-gate-evidence-visibility-v1",
-    "resource_locks": [
-      "branch:pilialvu75-hue/Ai-orchestrator-riserva:fix/cantiere-845-gate-evidence-visibility",
-      "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/app_factory/workshop/workshop_gate_evidence_export.dart",
-      "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/app_factory/workshop/workshop_production_dashboard_page.dart",
-      "file:pilialvu75-hue/Ai-orchestrator-riserva:test/app_factory/workshop/workshop_gate_evidence_export_test.dart",
-      "resource:cantiere-845-gate-evidence-export"
-    ],
-    "resume_condition": "All six GitHub Actions workflow runs for PR #856 exact head d5b6fc5ab557c6fa679db42290462c6bcc621426 have inspectable terminal outcomes and Codex P2 re-review can be checked.",
-    "detected_at": "2026-10-19T08:26:25Z",
-    "review_required": false
   }
 }

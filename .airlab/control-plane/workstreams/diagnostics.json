@@ -3,11 +3,11 @@
   "id": "diagnostics",
   "title": "Diagnostics",
   "role": "worker",
-  "status": "REVIEW_REQUIRED",
+  "status": "IMPLEMENTING",
   "activation": "active",
   "scope": "Shared observability contract, logs, evidence receipts and comparable telemetry across all platforms.",
   "shared_engine_policy": "shared_or_control_plane",
-  "state_version": 16,
+  "state_version": 17,
   "updated_at": "2026-10-19",
   "active_claim": {
     "claim_id": "226dac1145a5ce86c7be",
@@ -107,11 +107,11 @@
   },
   "reviewer": {
     "required": true,
-    "state": "PENDING",
-    "reviewed_by": null,
-    "reviewed_at": null
+    "state": "CHANGES_REQUESTED",
+    "reviewed_by": "main-reviewer",
+    "reviewed_at": "2026-10-19T15:50:19Z"
   },
-  "next_action": "Main/Reviewer must inspect the review_packet, linked evidence and required gates before promotion or rework.",
+  "next_action": "Diagnostics worker verifies exact-head abaf96d488754eafc027438170fa94f54cd76e7b CI, obtains independent re-review of stale tuple guard, and resubmits a current packet. Keep issue857 request-bound receipt and S24 FE runtime acceptance open; no merge or G6 approval.",
   "historical_backlog": [
     "PR #711 cross-platform remote runtime parity is merged and is the baseline.",
     "PR #543 privacy-filtered PostHog bridge is merged; raw prompts/text/paths/credentials remain excluded.",
@@ -299,29 +299,33 @@
       ],
       "next_action": "Main/Reviewer must inspect the review_packet, linked evidence and required gates before promotion or rework.",
       "kind": "REVIEW_HANDOFF"
+    },
+    {
+      "seq": 10,
+      "at": "2026-10-19T15:50:19Z",
+      "claim_id": "226dac1145a5ce86c7be",
+      "work_item": "issue-857-cache-reuse-telemetry",
+      "summary": "Administrative recording of independent Codex review5573875580 finding discussion_r4315656616 on PR858 head5e97c7f4: stale prefill/cache tuples can describe prior request. Worker correction abaf96d4 already published, but its CI/re-review are pending and previous packet must not be accepted as current. No independent approval by implementation chat is asserted.",
+      "decisions": [
+        "Main/Reviewer requested bounded rework."
+      ],
+      "evidence_refs": [],
+      "next_action": "Diagnostics worker verifies exact-head abaf96d488754eafc027438170fa94f54cd76e7b CI, obtains independent re-review of stale tuple guard, and resubmits a current packet. Keep issue857 request-bound receipt and S24 FE runtime acceptance open; no merge or G6 approval.",
+      "kind": "REVIEW_REWORK"
     }
   ],
   "last_checkpoint": {
-    "seq": 9,
-    "at": "2026-10-19T14:33:57Z",
+    "seq": 10,
+    "at": "2026-10-19T15:50:19Z",
     "claim_id": "226dac1145a5ce86c7be",
     "work_item": "issue-857-cache-reuse-telemetry",
-    "summary": "Bounded cross-repository Diagnostics implementation in Riserva PR858 at 5e97c7f45fb253dc41a1512e551ad0698a1e59cc. Existing FFI cache counters exported in RESOURCE_SAMPLE with backwards-compatible closed grammar. Six exact-head CI workflows and three added regressions PASS. No runtime/performance approval; issue857 request-bound terminal receipt work remains open.",
-    "decisions": [],
-    "evidence_refs": [
-      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/858",
-      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/5e97c7f45fb253dc41a1512e551ad0698a1e59cc",
-      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/39252016776",
-      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/39252016820",
-      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/39252016850",
-      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/39252016865",
-      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/39252016884",
-      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/39252016890",
-      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/39252016890/job/118057874235",
-      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/858/files"
+    "summary": "Administrative recording of independent Codex review5573875580 finding discussion_r4315656616 on PR858 head5e97c7f4: stale prefill/cache tuples can describe prior request. Worker correction abaf96d4 already published, but its CI/re-review are pending and previous packet must not be accepted as current. No independent approval by implementation chat is asserted.",
+    "decisions": [
+      "Main/Reviewer requested bounded rework."
     ],
-    "next_action": "Main/Reviewer must inspect the review_packet, linked evidence and required gates before promotion or rework.",
-    "kind": "REVIEW_HANDOFF"
+    "evidence_refs": [],
+    "next_action": "Diagnostics worker verifies exact-head abaf96d488754eafc027438170fa94f54cd76e7b CI, obtains independent re-review of stale tuple guard, and resubmits a current packet. Keep issue857 request-bound receipt and S24 FE runtime acceptance open; no merge or G6 approval.",
+    "kind": "REVIEW_REWORK"
   },
   "review_history": [
     {
@@ -370,6 +374,14 @@
         "integration:github_diagnostics:_capture->publicLogProjection",
         "AI-Orchestrator-Module-Library#114"
       ]
+    },
+    {
+      "reviewed_at": "2026-10-19T15:50:19Z",
+      "reviewed_by": "main-reviewer",
+      "claim_id": "226dac1145a5ce86c7be",
+      "work_item": "issue-857-cache-reuse-telemetry",
+      "decision": "CHANGES_REQUESTED",
+      "summary": "Administrative recording of independent Codex review5573875580 finding discussion_r4315656616 on PR858 head5e97c7f4: stale prefill/cache tuples can describe prior request. Worker correction abaf96d4 already published, but its CI/re-review are pending and previous packet must not be accepted as current. No independent approval by implementation chat is asserted."
     }
   ],
   "gate_evidence_history": [

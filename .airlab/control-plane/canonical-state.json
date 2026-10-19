@@ -7,7 +7,7 @@
     "policy": "This private repository is the single coordination authority. Chats and agents are workers, not independent sources of truth."
   },
   "updated_at": "2026-10-19",
-  "state_revision": 348,
+  "state_revision": 350,
   "lifecycle_status": "BOOTSTRAP_ACTIVE",
   "roadmap_authority": {
     "library": ".airlab/roadmap.yaml",
@@ -81,12 +81,13 @@
     "invalid_lane_behavior": "ISOLATE_AND_SURFACE_PROJECTION_INCIDENT"
   },
   "projection": {
-    "source_digest": "75a4faf9f86a961ee5b1c79c9ad10f3e295a67ff4d31ef6647743bb16462f1b4",
-    "projected_at": "2026-10-19T14:33:57Z",
+    "source_digest": "9981d4445aa17e94ff68381c40a2018421e5e73cf0ef760da20dca267a7740fa",
+    "projected_at": "2026-10-19T15:50:19Z",
     "counts": {
-      "BLOCKED": 2,
-      "READY": 13,
-      "REVIEW_REQUIRED": 3
+      "BLOCKED": 1,
+      "IMPLEMENTING": 1,
+      "READY": 14,
+      "REVIEW_REQUIRED": 2
     },
     "active_claims": [
       {
@@ -225,7 +226,6 @@
       }
     ],
     "review_required": [
-      "diagnostics",
       "library-researcher",
       "platform-android"
     ],
@@ -247,24 +247,6 @@
           ],
           "resume_condition": "All six platform GitHub workflow runs of PR #833 exact head 831015d149f2cbae6928683e8deb1aeafa3832b5 have completed, with outcomes available for inspection. Dedicated Aivexus CAD-1 Domain Tests run 38364393744 already succeeded.",
           "detected_at": "2026-10-13T07:45:35Z",
-          "review_required": false
-        }
-      },
-      {
-        "lane": "cantiere",
-        "reason": {
-          "code": "WAITING_EXTERNAL",
-          "wait_id": "cantiere:8e8e2ce5633f9e6458b3:WAITING_EXTERNAL",
-          "work_item": "issue-845-gate-evidence-visibility-v1",
-          "resource_locks": [
-            "branch:pilialvu75-hue/Ai-orchestrator-riserva:fix/cantiere-845-gate-evidence-visibility",
-            "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/app_factory/workshop/workshop_gate_evidence_export.dart",
-            "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/app_factory/workshop/workshop_production_dashboard_page.dart",
-            "file:pilialvu75-hue/Ai-orchestrator-riserva:test/app_factory/workshop/workshop_gate_evidence_export_test.dart",
-            "resource:cantiere-845-gate-evidence-export"
-          ],
-          "resume_condition": "All six GitHub Actions workflow runs for PR #856 exact head d5b6fc5ab557c6fa679db42290462c6bcc621426 have inspectable terminal outcomes and Codex P2 re-review can be checked.",
-          "detected_at": "2026-10-19T08:26:25Z",
           "review_required": false
         }
       }
@@ -389,21 +371,21 @@
       },
       {
         "id": "cantiere",
-        "status": "BLOCKED",
+        "status": "READY",
         "activation": "active",
-        "state_version": 127,
+        "state_version": 128,
         "updated_at": "2026-10-19",
         "active_claim": null,
         "reviewer_state": "CHANGES_REQUESTED",
         "inference_profile_status": null,
         "historical_backlog_count": 3,
-        "next_action": "Inspect exact-head CI and review; resume_wait with run refs, re-claim same branch/files then resubmit packet or repair a proven failure. Do not infer star APK generation or G5/G6 approval."
+        "next_action": "Claim the previously reserved PR #856 branch/resources, verify exact-head CI/review, resubmit updated claim-bound review packet to independent Main/Reviewer; physical star app G5 remains pending."
       },
       {
         "id": "diagnostics",
-        "status": "REVIEW_REQUIRED",
+        "status": "IMPLEMENTING",
         "activation": "active",
-        "state_version": 16,
+        "state_version": 17,
         "updated_at": "2026-10-19",
         "active_claim": {
           "claim_id": "226dac1145a5ce86c7be",
@@ -419,10 +401,10 @@
             "resource:diagnostics-cache-reuse-857"
           ]
         },
-        "reviewer_state": "PENDING",
+        "reviewer_state": "CHANGES_REQUESTED",
         "inference_profile_status": null,
         "historical_backlog_count": 3,
-        "next_action": "Main/Reviewer must inspect the review_packet, linked evidence and required gates before promotion or rework."
+        "next_action": "Diagnostics worker verifies exact-head abaf96d488754eafc027438170fa94f54cd76e7b CI, obtains independent re-review of stale tuple guard, and resubmits a current packet. Keep issue857 request-bound receipt and S24 FE runtime acceptance open; no merge or G6 approval."
       },
       {
         "id": "library-curation",
