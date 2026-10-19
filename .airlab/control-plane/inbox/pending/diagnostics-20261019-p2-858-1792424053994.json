@@ -1,0 +1,62 @@
+{
+  "schema_version": 1,
+  "request_id": "diagnostics-20261019-p2-858-1792424053994",
+  "actor_id": "chatgpt:diagnostics",
+  "lane_id": "diagnostics",
+  "operation": "submit_review",
+  "expected_state_version": 16,
+  "payload": {
+    "packet": {
+      "schema_version": 1,
+      "submitted_at": "2026-10-19T15:34:13.993Z",
+      "lane_id": "diagnostics",
+      "claim_id": "226dac1145a5ce86c7be",
+      "work_item": "issue-857-cache-reuse-telemetry",
+      "repository": "pilialvu75-hue/Ai-orchestrator-diagnostics",
+      "branch": "fix/diagnostics-857-cache-reuse",
+      "pull_request": 858,
+      "summary": "PR858 updated to abaf96d488754eafc027438170fa94f54cd76e7b after independent Codex P2 finding: suppress all three cache/prefill metrics unless streaming and all are available. New regression covers stale/pre-generation/terminal and incomplete tuples. New-head CI and independent re-review PENDING; previous head CI is not acceptance of new code.",
+      "changes": [
+        "ResourceMonitor exports measured reused_tokens/prefilled_tokens; unknown=-1 remains distinct from zero.",
+        "Public projection accepts paired bounded counters, preserving old formats and rejecting malformed/private additions.",
+        "Three regressions cover producer-to-public export, reset/unavailable/zero, legacy samples, and invalid payload rejection.",
+        "Gate exported prefill tuple on streaming phase and all three nonnegative native metrics; raw native readings and runtime policy unchanged."
+      ],
+      "evidence": [
+        {
+          "type": "commit",
+          "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/abaf96d488754eafc027438170fa94f54cd76e7b",
+          "result": "PASS"
+        },
+        {
+          "type": "analysis",
+          "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/858#discussion_r4315656616",
+          "result": "INFO",
+          "note": "Independent P2 finding addressed in code; verification pending."
+        },
+        {
+          "type": "ci",
+          "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/858/checks",
+          "result": "PENDING",
+          "note": "New head supersedes previous six passing runs."
+        }
+      ],
+      "known_risks": [
+        "Periodic resource samples are not request/model-bound terminal receipts; short-generation/reset attribution remains open in issue857.",
+        "No installed S24 FE export or measured latency improvement verified; RAM/trim15/Vulkan acceptance remain open.",
+        "PR840 modifies shared projection files and needs integration review before either merge.",
+        "Local Flutter bootstrap was not run; test verification relies on exact-head CI.",
+        "New head has not passed CI or independent re-review yet; do not accept previous packet."
+      ],
+      "reviewer_checks": [
+        "Review exact four-file diff and closed grammar/privacy behavior.",
+        "Verify CI and new regression evidence for head5e97c7f4 independently.",
+        "Keep issue857 partially open for request-bound evidence and physical export validation; do not equate this telemetry change with a speed or memory fix."
+      ],
+      "roadmap_impact": {
+        "material": false,
+        "refs": []
+      }
+    }
+  }
+}
