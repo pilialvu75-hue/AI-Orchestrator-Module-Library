@@ -6,8 +6,8 @@
     "owner_lane": "main-reviewer",
     "policy": "This private repository is the single coordination authority. Chats and agents are workers, not independent sources of truth."
   },
-  "updated_at": "2026-10-18",
-  "state_revision": 337,
+  "updated_at": "2026-10-19",
+  "state_revision": 338,
   "lifecycle_status": "BOOTSTRAP_ACTIVE",
   "roadmap_authority": {
     "library": ".airlab/roadmap.yaml",
@@ -81,11 +81,11 @@
     "invalid_lane_behavior": "ISOLATE_AND_SURFACE_PROJECTION_INCIDENT"
   },
   "projection": {
-    "source_digest": "3b3986a14320466e0b6976e55aa69b64f51c2fe4eef527b60cf2083d93cd9d0c",
-    "projected_at": "2026-10-18T18:17:38Z",
+    "source_digest": "bb1205a0a8ec6d0404aba2abe59ec95339d0a7d546725dccac0ee30ccc704a90",
+    "projected_at": "2026-10-19T08:09:17Z",
     "counts": {
-      "BLOCKED": 3,
-      "READY": 13,
+      "BLOCKED": 2,
+      "READY": 14,
       "REVIEW_REQUIRED": 2
     },
     "active_claims": [
@@ -195,24 +195,6 @@
           ],
           "resume_condition": "All six platform GitHub workflow runs of PR #833 exact head 831015d149f2cbae6928683e8deb1aeafa3832b5 have completed, with outcomes available for inspection. Dedicated Aivexus CAD-1 Domain Tests run 38364393744 already succeeded.",
           "detected_at": "2026-10-13T07:45:35Z",
-          "review_required": false
-        }
-      },
-      {
-        "lane": "cantiere",
-        "reason": {
-          "code": "WAITING_EXTERNAL",
-          "wait_id": "cantiere:d840975d34d7657fb98e:WAITING_EXTERNAL",
-          "work_item": "issue-845-gate-evidence-visibility-v1",
-          "resource_locks": [
-            "branch:pilialvu75-hue/Ai-orchestrator-riserva:fix/cantiere-845-gate-evidence-visibility",
-            "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/app_factory/workshop/workshop_gate_evidence_export.dart",
-            "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/app_factory/workshop/workshop_production_dashboard_page.dart",
-            "file:pilialvu75-hue/Ai-orchestrator-riserva:test/app_factory/workshop/workshop_gate_evidence_export_test.dart",
-            "resource:cantiere-845-gate-evidence-export"
-          ],
-          "resume_condition": "All six GitHub Actions runs for PR #856 exact head a67c522b2b962c5f1233001b51f1ac34b80e473f finish with inspectable conclusions, before reviewer handoff.",
-          "detected_at": "2026-10-18T18:17:38Z",
           "review_required": false
         }
       },
@@ -363,15 +345,15 @@
       },
       {
         "id": "cantiere",
-        "status": "BLOCKED",
+        "status": "READY",
         "activation": "active",
-        "state_version": 121,
-        "updated_at": "2026-10-18",
+        "state_version": 122,
+        "updated_at": "2026-10-19",
         "active_claim": null,
         "reviewer_state": "PENDING",
         "inference_profile_status": null,
         "historical_backlog_count": 3,
-        "next_action": "After six CI finish, resume wait with exact run evidence, reclaim reserved branch/files, fix only concrete errors, submit claim-bound review packet. Do not claim physical star success."
+        "next_action": "Claim same reserved PR #856 branch and files; inspect exact-head tests and diff, submit claim-bound review packet, retain G5/G6 physical/independent review pending."
       },
       {
         "id": "diagnostics",
