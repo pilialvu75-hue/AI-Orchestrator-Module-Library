@@ -1,0 +1,12 @@
+{
+  "schema_version": 1,
+  "request_id": "cantiere-20261019-submit-pr856-sixpass-v1",
+  "status": "APPLIED",
+  "processed_at": "2026-10-19T08:12:25Z",
+  "source_file": "cantiere-20261019-submit-pr856-sixpass-v1.json",
+  "lane_id": "cantiere",
+  "operation": "submit_review",
+  "actor_id": "chatgpt:cantiere",
+  "errors": [],
+  "result_state_version": 124
+}
