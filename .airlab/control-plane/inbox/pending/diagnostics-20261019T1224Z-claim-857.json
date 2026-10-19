@@ -1,0 +1,21 @@
+{
+  "schema_version": 1,
+  "request_id": "diagnostics-20261019T1224Z-claim-857",
+  "actor_id": "chatgpt:diagnostics",
+  "lane_id": "diagnostics",
+  "operation": "claim",
+  "expected_state_version": 13,
+  "payload": {
+    "work_item": "issue-857-cache-reuse-telemetry",
+    "repository": "pilialvu75-hue/Ai-orchestrator-diagnostics",
+    "branch": "fix/diagnostics-857-cache-reuse",
+    "scope": "Cross-repository observability only in Riserva: export existing measured reused_tokens/prefilled_tokens in RESOURCE_SAMPLE and safe public projection, with tests. No inference/cache algorithm, memory guard, profile or routing changes. User authorized Diagnostics role; PR840 remains open and requires fresh coordination after this bounded claim.",
+    "resource_locks": [
+      "resource:diagnostics-cache-reuse-857",
+      "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/core/runtime/inference/resource_monitor.dart",
+      "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/core/diagnostics/public_log_projection.dart",
+      "file:pilialvu75-hue/Ai-orchestrator-riserva:test/core/runtime/inference/resource_monitor_test.dart",
+      "file:pilialvu75-hue/Ai-orchestrator-riserva:test/core/diagnostics/public_log_projection_test.dart"
+    ]
+  }
+}
