@@ -1,0 +1,12 @@
+{
+  "schema_version": 1,
+  "request_id": "cantiere-20261019-review-rework-856-codex-p2-v1",
+  "actor_id": "chatgpt:main-reviewer",
+  "lane_id": "cantiere",
+  "operation": "review_rework",
+  "expected_state_version": 124,
+  "payload": {
+    "reason": "Codex external automated review found unresolved P2 on PR #856 exact head a67c522b: gate clipboard copy status is not tied to project/task identity and may display stale evidence after switching saved projects. CHANGES_REQUESTED solely for this independently surfaced finding, not G6 approval.",
+    "next_action": "In the existing Cantiere claim/branch, bind gate copy status to current project+task identity and clear or hide it on task/project switch, add regression covering saved project switching; rerun exact-head CI and resubmit review packet. Preserve all Reviewer/Validation and physical G5 gates."
+  }
+}
