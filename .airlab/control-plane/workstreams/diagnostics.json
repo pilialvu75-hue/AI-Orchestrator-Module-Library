@@ -3,11 +3,11 @@
   "id": "diagnostics",
   "title": "Diagnostics",
   "role": "worker",
-  "status": "IMPLEMENTING",
+  "status": "REVIEW_REQUIRED",
   "activation": "active",
   "scope": "Shared observability contract, logs, evidence receipts and comparable telemetry across all platforms.",
   "shared_engine_policy": "shared_or_control_plane",
-  "state_version": 15,
+  "state_version": 16,
   "updated_at": "2026-10-19",
   "active_claim": {
     "claim_id": "226dac1145a5ce86c7be",
@@ -34,7 +34,67 @@
     ".airlab/public-repositories/Ai-orchestrator-diagnostics/roadmap.yaml#D7",
     ".airlab/public-repositories/Ai-orchestrator-diagnostics/roadmap.yaml#D8"
   ],
-  "evidence": [],
+  "evidence": [
+    {
+      "type": "pull_request",
+      "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/858",
+      "result": "PASS",
+      "note": "Draft implementation only; not merged or approved."
+    },
+    {
+      "type": "commit",
+      "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/5e97c7f45fb253dc41a1512e551ad0698a1e59cc",
+      "result": "PASS"
+    },
+    {
+      "type": "ci",
+      "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/39252016776",
+      "result": "PASS",
+      "note": "Build Linux Desktop completed successfully on exact head."
+    },
+    {
+      "type": "ci",
+      "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/39252016820",
+      "result": "PASS",
+      "note": "Build Windows Desktop completed successfully on exact head."
+    },
+    {
+      "type": "ci",
+      "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/39252016850",
+      "result": "PASS",
+      "note": "Build macOS Desktop completed successfully on exact head."
+    },
+    {
+      "type": "ci",
+      "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/39252016865",
+      "result": "PASS",
+      "note": "Web Cantiere Build completed successfully on exact head."
+    },
+    {
+      "type": "ci",
+      "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/39252016884",
+      "result": "PASS",
+      "note": "Cantiere First App APK completed successfully on exact head."
+    },
+    {
+      "type": "ci",
+      "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/39252016890",
+      "result": "PASS",
+      "note": "Build & Release APK completed successfully on exact head."
+    },
+    {
+      "type": "test",
+      "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/39252016890/job/118057874235",
+      "result": "PASS",
+      "note": "Inspected decoded logs: all three new regressions explicitly pass; Flutter analyze and full Run Flutter tests steps success."
+    },
+    {
+      "type": "analysis",
+      "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/858/files",
+      "result": "PASS",
+      "note": "git diff --check PASS. Four-file diff; no native cache, GPU, timeout or memory policy change."
+    }
+  ],
   "gates": {
     "G0_CLAIM": "PASS",
     "G1_IMPLEMENTATION": "PENDING",
@@ -51,7 +111,7 @@
     "reviewed_by": null,
     "reviewed_at": null
   },
-  "next_action": "Inspect exact-head CI and fix failures. Complete request-bound terminal receipt assessment for issue857 before final handoff; periodic samples alone may miss short generations. Keep RAM/GPU/trim15 acceptance open.",
+  "next_action": "Main/Reviewer must inspect the review_packet, linked evidence and required gates before promotion or rework.",
   "historical_backlog": [
     "PR #711 cross-platform remote runtime parity is merged and is the baseline.",
     "PR #543 privacy-filtered PostHog bridge is merged; raw prompts/text/paths/credentials remain excluded.",
@@ -217,23 +277,51 @@
         "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/5e97c7f45fb253dc41a1512e551ad0698a1e59cc"
       ],
       "next_action": "Inspect exact-head CI and fix failures. Complete request-bound terminal receipt assessment for issue857 before final handoff; periodic samples alone may miss short generations. Keep RAM/GPU/trim15 acceptance open."
+    },
+    {
+      "seq": 9,
+      "at": "2026-10-19T14:33:57Z",
+      "claim_id": "226dac1145a5ce86c7be",
+      "work_item": "issue-857-cache-reuse-telemetry",
+      "summary": "Bounded cross-repository Diagnostics implementation in Riserva PR858 at 5e97c7f45fb253dc41a1512e551ad0698a1e59cc. Existing FFI cache counters exported in RESOURCE_SAMPLE with backwards-compatible closed grammar. Six exact-head CI workflows and three added regressions PASS. No runtime/performance approval; issue857 request-bound terminal receipt work remains open.",
+      "decisions": [],
+      "evidence_refs": [
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/858",
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/5e97c7f45fb253dc41a1512e551ad0698a1e59cc",
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/39252016776",
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/39252016820",
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/39252016850",
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/39252016865",
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/39252016884",
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/39252016890",
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/39252016890/job/118057874235",
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/858/files"
+      ],
+      "next_action": "Main/Reviewer must inspect the review_packet, linked evidence and required gates before promotion or rework.",
+      "kind": "REVIEW_HANDOFF"
     }
   ],
   "last_checkpoint": {
-    "seq": 8,
-    "at": "2026-10-19T12:26:28Z",
+    "seq": 9,
+    "at": "2026-10-19T14:33:57Z",
     "claim_id": "226dac1145a5ce86c7be",
     "work_item": "issue-857-cache-reuse-telemetry",
-    "summary": "Published draft Riserva PR858 head 5e97c7f45fb253dc41a1512e551ad0698a1e59cc: measured cache counters in RESOURCE_SAMPLE plus closed backward-compatible projection and three regressions. git diff --check PASS; Flutter CI pending, not tested locally. No runtime improvement claim.",
-    "decisions": [
-      "No cache algorithm or inference policy change.",
-      "Preserve legacy log grammar; unknown=-1 is not zero reuse."
-    ],
+    "summary": "Bounded cross-repository Diagnostics implementation in Riserva PR858 at 5e97c7f45fb253dc41a1512e551ad0698a1e59cc. Existing FFI cache counters exported in RESOURCE_SAMPLE with backwards-compatible closed grammar. Six exact-head CI workflows and three added regressions PASS. No runtime/performance approval; issue857 request-bound terminal receipt work remains open.",
+    "decisions": [],
     "evidence_refs": [
       "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/858",
-      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/5e97c7f45fb253dc41a1512e551ad0698a1e59cc"
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/5e97c7f45fb253dc41a1512e551ad0698a1e59cc",
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/39252016776",
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/39252016820",
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/39252016850",
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/39252016865",
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/39252016884",
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/39252016890",
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/39252016890/job/118057874235",
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/858/files"
     ],
-    "next_action": "Inspect exact-head CI and fix failures. Complete request-bound terminal receipt assessment for issue857 before final handoff; periodic samples alone may miss short generations. Keep RAM/GPU/trim15 acceptance open."
+    "next_action": "Main/Reviewer must inspect the review_packet, linked evidence and required gates before promotion or rework.",
+    "kind": "REVIEW_HANDOFF"
   },
   "review_history": [
     {
@@ -559,5 +647,97 @@
         ]
       }
     }
-  ]
+  ],
+  "review_packet": {
+    "schema_version": 1,
+    "submitted_at": "2026-10-19T14:34:00Z",
+    "lane_id": "diagnostics",
+    "claim_id": "226dac1145a5ce86c7be",
+    "work_item": "issue-857-cache-reuse-telemetry",
+    "repository": "pilialvu75-hue/Ai-orchestrator-diagnostics",
+    "branch": "fix/diagnostics-857-cache-reuse",
+    "pull_request": 858,
+    "summary": "Bounded cross-repository Diagnostics implementation in Riserva PR858 at 5e97c7f45fb253dc41a1512e551ad0698a1e59cc. Existing FFI cache counters exported in RESOURCE_SAMPLE with backwards-compatible closed grammar. Six exact-head CI workflows and three added regressions PASS. No runtime/performance approval; issue857 request-bound terminal receipt work remains open.",
+    "changes": [
+      "ResourceMonitor exports measured reused_tokens/prefilled_tokens; unknown=-1 remains distinct from zero.",
+      "Public projection accepts paired bounded counters, preserving old formats and rejecting malformed/private additions.",
+      "Three regressions cover producer-to-public export, reset/unavailable/zero, legacy samples, and invalid payload rejection."
+    ],
+    "evidence": [
+      {
+        "type": "pull_request",
+        "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/858",
+        "result": "PASS",
+        "note": "Draft implementation only; not merged or approved."
+      },
+      {
+        "type": "commit",
+        "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/5e97c7f45fb253dc41a1512e551ad0698a1e59cc",
+        "result": "PASS"
+      },
+      {
+        "type": "ci",
+        "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/39252016776",
+        "result": "PASS",
+        "note": "Build Linux Desktop completed successfully on exact head."
+      },
+      {
+        "type": "ci",
+        "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/39252016820",
+        "result": "PASS",
+        "note": "Build Windows Desktop completed successfully on exact head."
+      },
+      {
+        "type": "ci",
+        "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/39252016850",
+        "result": "PASS",
+        "note": "Build macOS Desktop completed successfully on exact head."
+      },
+      {
+        "type": "ci",
+        "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/39252016865",
+        "result": "PASS",
+        "note": "Web Cantiere Build completed successfully on exact head."
+      },
+      {
+        "type": "ci",
+        "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/39252016884",
+        "result": "PASS",
+        "note": "Cantiere First App APK completed successfully on exact head."
+      },
+      {
+        "type": "ci",
+        "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/39252016890",
+        "result": "PASS",
+        "note": "Build & Release APK completed successfully on exact head."
+      },
+      {
+        "type": "test",
+        "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/39252016890/job/118057874235",
+        "result": "PASS",
+        "note": "Inspected decoded logs: all three new regressions explicitly pass; Flutter analyze and full Run Flutter tests steps success."
+      },
+      {
+        "type": "analysis",
+        "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/858/files",
+        "result": "PASS",
+        "note": "git diff --check PASS. Four-file diff; no native cache, GPU, timeout or memory policy change."
+      }
+    ],
+    "known_risks": [
+      "Periodic resource samples are not request/model-bound terminal receipts; short-generation/reset attribution remains open in issue857.",
+      "No installed S24 FE export or measured latency improvement verified; RAM/trim15/Vulkan acceptance remain open.",
+      "PR840 modifies shared projection files and needs integration review before either merge.",
+      "Local Flutter bootstrap was not run; test verification relies on exact-head CI."
+    ],
+    "reviewer_checks": [
+      "Review exact four-file diff and closed grammar/privacy behavior.",
+      "Verify CI and new regression evidence for head5e97c7f4 independently.",
+      "Keep issue857 partially open for request-bound evidence and physical export validation; do not equate this telemetry change with a speed or memory fix."
+    ],
+    "roadmap_impact": {
+      "material": false,
+      "refs": []
+    }
+  }
 }
