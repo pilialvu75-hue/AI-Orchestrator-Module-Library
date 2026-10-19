@@ -1,0 +1,20 @@
+{
+  "schema_version": 1,
+  "request_id": "diagnostics-20261019T1226Z-checkpoint-858",
+  "actor_id": "chatgpt:diagnostics",
+  "lane_id": "diagnostics",
+  "operation": "checkpoint",
+  "expected_state_version": 14,
+  "payload": {
+    "summary": "Published draft Riserva PR858 head 5e97c7f45fb253dc41a1512e551ad0698a1e59cc: measured cache counters in RESOURCE_SAMPLE plus closed backward-compatible projection and three regressions. git diff --check PASS; Flutter CI pending, not tested locally. No runtime improvement claim.",
+    "next_action": "Inspect exact-head CI and fix failures. Complete request-bound terminal receipt assessment for issue857 before final handoff; periodic samples alone may miss short generations. Keep RAM/GPU/trim15 acceptance open.",
+    "evidence_refs": [
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/858",
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/5e97c7f45fb253dc41a1512e551ad0698a1e59cc"
+    ],
+    "decisions": [
+      "No cache algorithm or inference policy change.",
+      "Preserve legacy log grammar; unknown=-1 is not zero reuse."
+    ]
+  }
+}
