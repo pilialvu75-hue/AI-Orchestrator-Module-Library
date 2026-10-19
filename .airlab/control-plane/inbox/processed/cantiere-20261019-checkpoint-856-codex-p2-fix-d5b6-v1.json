@@ -1,0 +1,12 @@
+{
+  "schema_version": 1,
+  "request_id": "cantiere-20261019-checkpoint-856-codex-p2-fix-d5b6-v1",
+  "status": "APPLIED",
+  "processed_at": "2026-10-19T08:23:52Z",
+  "source_file": "cantiere-20261019-checkpoint-856-codex-p2-fix-d5b6-v1.json",
+  "lane_id": "cantiere",
+  "operation": "checkpoint",
+  "actor_id": "chatgpt:cantiere",
+  "errors": [],
+  "result_state_version": 126
+}

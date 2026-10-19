@@ -7,7 +7,7 @@
   "activation": "active",
   "scope": "Exclusive Cantiere/App Factory execution, durability, build/review/validation/apply and first-real-app reliability.",
   "shared_engine_policy": "shared_or_control_plane",
-  "state_version": 125,
+  "state_version": 126,
   "updated_at": "2026-10-19",
   "active_claim": {
     "claim_id": "8e8e2ce5633f9e6458b3",
@@ -24,8 +24,8 @@
       "resource:cantiere-845-gate-evidence-export"
     ],
     "started_at": "2026-10-19T08:09:58Z",
-    "heartbeat_at": "2026-10-19T08:09:58Z",
-    "lease_until": "2026-10-19T20:09:58Z",
+    "heartbeat_at": "2026-10-19T08:23:52Z",
+    "lease_until": "2026-10-19T20:23:52Z",
     "lease_hours": 12
   },
   "dependencies": [],
@@ -118,7 +118,7 @@
     "reviewed_by": "main-reviewer",
     "reviewed_at": "2026-10-19T08:18:37Z"
   },
-  "next_action": "In the existing Cantiere claim/branch, bind gate copy status to current project+task identity and clear or hide it on task/project switch, add regression covering saved project switching; rerun exact-head CI and resubmit review packet. Preserve all Reviewer/Validation and physical G5 gates.",
+  "next_action": "Inspect all six CI outcomes and Codex re-review on d5b6fc5. Repair only specific defects, resubmit claim-bound review packet; no merge or phone acceptance until real evidence.",
   "historical_backlog": [
     "Stay in Phase 1 ONLINE until a real generated Android app is physically accepted.",
     "Reproduce the recent manga-drawing app failure from current main with Diagnostics; do not restart generic audits.",
@@ -148,28 +148,6 @@
     "continuation": "Do not re-enable broad Cantiere autopilot until the remaining control-plane concurrency/resource-lock weakness is addressed or explicitly accepted for the next pilot."
   },
   "checkpoints": [
-    {
-      "seq": 19,
-      "at": "2026-10-11T10:54:06Z",
-      "claim_id": "c792cfdec8aee6363eba",
-      "work_item": "AIVEXUS-BASE-1",
-      "summary": "AIVEXUS-BASE-1 is implemented in PR #826 at 6eaf98bfd816ff26cb23401d0351c680b8bfb90e and all six exact-head workflows passed. Review is limited to additive contracts, revision-safe persistence and recovery, immutable browser attachment storage, resource-exchange hooks and existing software editing. BASE-2 and domain execution remain separate gated work; no merge, deployment, Fusion/print/gameplay or physical acceptance is claimed.",
-      "decisions": [],
-      "evidence_refs": [
-        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/6eaf98bfd816ff26cb23401d0351c680b8bfb90e",
-        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/826",
-        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38132363946",
-        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38132363946/job/114449143774",
-        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38132363946/job/114449143774",
-        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38132363928",
-        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38132363925",
-        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38132363991",
-        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38132363929",
-        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38132364000"
-      ],
-      "next_action": "Main/Reviewer must inspect the review_packet, linked evidence and required gates before promotion or rework.",
-      "kind": "REVIEW_HANDOFF"
-    },
     {
       "seq": 20,
       "at": "2026-10-11T12:46:32Z",
@@ -1078,20 +1056,43 @@
       "evidence_refs": [],
       "next_action": "In the existing Cantiere claim/branch, bind gate copy status to current project+task identity and clear or hide it on task/project switch, add regression covering saved project switching; rerun exact-head CI and resubmit review packet. Preserve all Reviewer/Validation and physical G5 gates.",
       "kind": "REVIEW_REWORK"
+    },
+    {
+      "seq": 69,
+      "at": "2026-10-19T08:23:52Z",
+      "claim_id": "8e8e2ce5633f9e6458b3",
+      "work_item": "issue-845-gate-evidence-visibility-v1",
+      "summary": "External Codex P2 found stale gate copy status after switching saved projects. Canonical review_rework APPLIED at v125; bounded rework committed on original three claimed files, PR #856 head d5b6fc5, with project/task-bound copy feedback and regression; six exact-head CI running.",
+      "decisions": [
+        "Do not show previous project's clipboard status or stale success Snackbar after switching projects.",
+        "Keep source export fail-closed; no changes to Engineer/Reviewer/Validation, RAM/Vulkan/model/timeouts.",
+        "Do not infer generated star APK or physical success from host CI."
+      ],
+      "evidence_refs": [
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/856",
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/d5b6fc5ab557c6fa679db42290462c6bcc621426",
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/856#discussion_r4311622544"
+      ],
+      "next_action": "Inspect all six CI outcomes and Codex re-review on d5b6fc5. Repair only specific defects, resubmit claim-bound review packet; no merge or phone acceptance until real evidence."
     }
   ],
   "last_checkpoint": {
-    "seq": 68,
-    "at": "2026-10-19T08:18:37Z",
+    "seq": 69,
+    "at": "2026-10-19T08:23:52Z",
     "claim_id": "8e8e2ce5633f9e6458b3",
     "work_item": "issue-845-gate-evidence-visibility-v1",
-    "summary": "Codex external automated review found unresolved P2 on PR #856 exact head a67c522b: gate clipboard copy status is not tied to project/task identity and may display stale evidence after switching saved projects. CHANGES_REQUESTED solely for this independently surfaced finding, not G6 approval.",
+    "summary": "External Codex P2 found stale gate copy status after switching saved projects. Canonical review_rework APPLIED at v125; bounded rework committed on original three claimed files, PR #856 head d5b6fc5, with project/task-bound copy feedback and regression; six exact-head CI running.",
     "decisions": [
-      "Main/Reviewer requested bounded rework."
+      "Do not show previous project's clipboard status or stale success Snackbar after switching projects.",
+      "Keep source export fail-closed; no changes to Engineer/Reviewer/Validation, RAM/Vulkan/model/timeouts.",
+      "Do not infer generated star APK or physical success from host CI."
     ],
-    "evidence_refs": [],
-    "next_action": "In the existing Cantiere claim/branch, bind gate copy status to current project+task identity and clear or hide it on task/project switch, add regression covering saved project switching; rerun exact-head CI and resubmit review packet. Preserve all Reviewer/Validation and physical G5 gates.",
-    "kind": "REVIEW_REWORK"
+    "evidence_refs": [
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/856",
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/d5b6fc5ab557c6fa679db42290462c6bcc621426",
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/856#discussion_r4311622544"
+    ],
+    "next_action": "Inspect all six CI outcomes and Codex re-review on d5b6fc5. Repair only specific defects, resubmit claim-bound review packet; no merge or phone acceptance until real evidence."
   },
   "review_history": [
     {
