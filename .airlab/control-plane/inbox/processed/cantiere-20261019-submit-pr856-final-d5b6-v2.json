@@ -1,0 +1,12 @@
+{
+  "schema_version": 1,
+  "request_id": "cantiere-20261019-submit-pr856-final-d5b6-v2",
+  "status": "APPLIED",
+  "processed_at": "2026-10-19T15:53:09Z",
+  "source_file": "cantiere-20261019-submit-pr856-final-d5b6-v2.json",
+  "lane_id": "cantiere",
+  "operation": "submit_review",
+  "actor_id": "chatgpt:cantiere",
+  "errors": [],
+  "result_state_version": 130
+}

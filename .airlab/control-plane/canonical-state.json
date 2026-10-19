@@ -7,7 +7,7 @@
     "policy": "This private repository is the single coordination authority. Chats and agents are workers, not independent sources of truth."
   },
   "updated_at": "2026-10-19",
-  "state_revision": 351,
+  "state_revision": 352,
   "lifecycle_status": "BOOTSTRAP_ACTIVE",
   "roadmap_authority": {
     "library": ".airlab/roadmap.yaml",
@@ -81,14 +81,13 @@
     "invalid_lane_behavior": "ISOLATE_AND_SURFACE_PROJECTION_INCIDENT"
   },
   "projection": {
-    "source_digest": "5a5a352cfca8e3b18ed1583679dc10a54cd78c9d046ff7d1a43e1821c50967da",
-    "projected_at": "2026-10-19T15:51:39Z",
+    "source_digest": "163285c5710ef2f367ea4024e3640b84a08a3643f8390adf725f1b6ee64a0d99",
+    "projected_at": "2026-10-19T15:53:09Z",
     "counts": {
       "BLOCKED": 1,
-      "CLAIMED": 1,
       "IMPLEMENTING": 1,
       "READY": 13,
-      "REVIEW_REQUIRED": 2
+      "REVIEW_REQUIRED": 3
     },
     "active_claims": [
       {
@@ -271,6 +270,7 @@
       }
     ],
     "review_required": [
+      "cantiere",
       "library-researcher",
       "platform-android"
     ],
@@ -416,9 +416,9 @@
       },
       {
         "id": "cantiere",
-        "status": "CLAIMED",
+        "status": "REVIEW_REQUIRED",
         "activation": "active",
-        "state_version": 129,
+        "state_version": 130,
         "updated_at": "2026-10-19",
         "active_claim": {
           "claim_id": "fe3284318d6cfd4cf6b4",
@@ -436,7 +436,7 @@
         "reviewer_state": "PENDING",
         "inference_profile_status": null,
         "historical_backlog_count": 3,
-        "next_action": "Claim the previously reserved PR #856 branch/resources, verify exact-head CI/review, resubmit updated claim-bound review packet to independent Main/Reviewer; physical star app G5 remains pending."
+        "next_action": "Main/Reviewer must inspect the review_packet, linked evidence and required gates before promotion or rework."
       },
       {
         "id": "diagnostics",
