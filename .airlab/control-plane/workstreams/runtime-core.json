@@ -3,12 +3,12 @@
   "id": "runtime-core",
   "title": "Runtime Core",
   "role": "worker",
-  "status": "BLOCKED",
+  "status": "READY",
   "activation": "active",
   "scope": "Shared inference contract, capability/model routing semantics, context, streaming, cancellation, errors, model-profile schema and lifecycle. Target platforms own their benchmark-gated LLM/backend/runtime profiles.",
   "shared_engine_policy": "shared_or_control_plane",
-  "state_version": 38,
-  "updated_at": "2026-10-14",
+  "state_version": 39,
+  "updated_at": "2026-10-19",
   "active_claim": null,
   "dependencies": [],
   "roadmap_refs": [
@@ -32,7 +32,7 @@
     "reviewed_by": null,
     "reviewed_at": null
   },
-  "next_action": "Verify final-head 6589d989 full CI and Codex re-review, then resolve validated threads and submit REVIEW_REQUIRED packet under claim 95be453817ace65c0fd8. Keep physical S24 FE and issue 839 open.",
+  "next_action": "Reacquire a bounded runtime-core claim before continuing issue839/PR840; inspect current head and evidence. Diagnostics issue857 requires its own claim and coordination for shared projection files. Keep issue839, RAM, trim15 and physical S24 FE validation open.",
   "inference_ownership": {
     "owns": [
       "shared inference API",
@@ -713,6 +713,18 @@
       ],
       "lease_until": "2026-10-14T22:36:39Z",
       "detected_at": "2026-10-14T22:50:49Z"
+    },
+    {
+      "type": "STALE_BLOCK_RESOLVED_BY_REVIEWER",
+      "claim_id": "95be453817ace65c0fd8",
+      "work_item": "issue-839-same-conversation-recall-context",
+      "summary": "Owner explicitly authorized this chat on 2026-10-19 for limited Main/Reviewer administrative reconciliation only. Expired claim already reconciled, active_claim=null. Archive stale block and permit a fresh bounded claim. No review acceptance, merge or runtime approval for PR840.",
+      "evidence_refs": [
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/840",
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/issues/857",
+        "owner-authorization:2026-10-19T14:22:37+02:00:limited-administrative-reconciliation"
+      ],
+      "at": "2026-10-19T12:23:09Z"
     }
   ],
   "review_packet_history": [
@@ -945,27 +957,42 @@
       ]
     }
   },
-  "block_reason": {
-    "code": "CLAIM_LEASE_EXPIRED",
-    "work_item": "issue-839-same-conversation-recall-context",
-    "claim_id": "95be453817ace65c0fd8",
-    "resource_locks": [
-      "branch:pilialvu75-hue/Ai-orchestrator-riserva:fix/runtime-core-839-conversation-recall",
-      "contract:conversation-context-recall",
-      "contract:diagnostics-context-receipts",
-      "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/core/diagnostics/public_log_projection.dart",
-      "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/features/chat/data/repositories/chat_repository_impl.dart",
-      "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/features/chat_memory/chronological_recall_policy.dart",
-      "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/features/chat_memory/conversation_memory_service.dart",
-      "file:pilialvu75-hue/Ai-orchestrator-riserva:test/core/diagnostics/public_log_projection_test.dart",
-      "file:pilialvu75-hue/Ai-orchestrator-riserva:test/features/chat/data/repositories/chat_repository_impl_context_test.dart",
-      "file:pilialvu75-hue/Ai-orchestrator-riserva:test/features/chat_memory/chronological_recall_policy_test.dart",
-      "file:pilialvu75-hue/Ai-orchestrator-riserva:test/features/chat_memory/conversation_memory_hotpath_test.dart",
-      "file:pilialvu75-hue/Ai-orchestrator-riserva:test/features/chat_memory/conversation_recall_prompt_test.dart",
-      "pr:pilialvu75-hue/Ai-orchestrator-riserva#840"
-    ],
-    "lease_until": "2026-10-14T22:36:39Z",
-    "detected_at": "2026-10-14T22:50:49Z",
-    "review_required": true
-  }
+  "stale_block_history": [
+    {
+      "code": "CLAIM_LEASE_EXPIRED",
+      "work_item": "issue-839-same-conversation-recall-context",
+      "claim_id": "95be453817ace65c0fd8",
+      "resource_locks": [
+        "branch:pilialvu75-hue/Ai-orchestrator-riserva:fix/runtime-core-839-conversation-recall",
+        "contract:conversation-context-recall",
+        "contract:diagnostics-context-receipts",
+        "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/core/diagnostics/public_log_projection.dart",
+        "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/features/chat/data/repositories/chat_repository_impl.dart",
+        "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/features/chat_memory/chronological_recall_policy.dart",
+        "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/features/chat_memory/conversation_memory_service.dart",
+        "file:pilialvu75-hue/Ai-orchestrator-riserva:test/core/diagnostics/public_log_projection_test.dart",
+        "file:pilialvu75-hue/Ai-orchestrator-riserva:test/features/chat/data/repositories/chat_repository_impl_context_test.dart",
+        "file:pilialvu75-hue/Ai-orchestrator-riserva:test/features/chat_memory/chronological_recall_policy_test.dart",
+        "file:pilialvu75-hue/Ai-orchestrator-riserva:test/features/chat_memory/conversation_memory_hotpath_test.dart",
+        "file:pilialvu75-hue/Ai-orchestrator-riserva:test/features/chat_memory/conversation_recall_prompt_test.dart",
+        "pr:pilialvu75-hue/Ai-orchestrator-riserva#840"
+      ],
+      "lease_until": "2026-10-14T22:36:39Z",
+      "detected_at": "2026-10-14T22:50:49Z",
+      "review_required": true,
+      "resolved_at": "2026-10-19T12:23:09Z",
+      "resolution": {
+        "type": "STALE_BLOCK_RESOLVED_BY_REVIEWER",
+        "claim_id": "95be453817ace65c0fd8",
+        "work_item": "issue-839-same-conversation-recall-context",
+        "summary": "Owner explicitly authorized this chat on 2026-10-19 for limited Main/Reviewer administrative reconciliation only. Expired claim already reconciled, active_claim=null. Archive stale block and permit a fresh bounded claim. No review acceptance, merge or runtime approval for PR840.",
+        "evidence_refs": [
+          "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/840",
+          "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/issues/857",
+          "owner-authorization:2026-10-19T14:22:37+02:00:limited-administrative-reconciliation"
+        ],
+        "at": "2026-10-19T12:23:09Z"
+      }
+    }
+  ]
 }

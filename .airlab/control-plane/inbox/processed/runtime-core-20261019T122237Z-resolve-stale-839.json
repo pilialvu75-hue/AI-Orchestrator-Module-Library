@@ -1,0 +1,12 @@
+{
+  "schema_version": 1,
+  "request_id": "runtime-core-20261019T122237Z-resolve-stale-839",
+  "status": "APPLIED",
+  "processed_at": "2026-10-19T12:23:09Z",
+  "source_file": "runtime-core-20261019T122237Z-resolve-stale-839.json",
+  "lane_id": "runtime-core",
+  "operation": "resolve_stale_block",
+  "actor_id": "chatgpt:main-reviewer",
+  "errors": [],
+  "result_state_version": 39
+}
