@@ -1,0 +1,12 @@
+{
+  "schema_version": 1,
+  "request_id": "cantiere-20261019-review-rework-856-codex-p2-v1",
+  "status": "APPLIED",
+  "processed_at": "2026-10-19T08:18:37Z",
+  "source_file": "cantiere-20261019-review-rework-856-codex-p2-v1.json",
+  "lane_id": "cantiere",
+  "operation": "review_rework",
+  "actor_id": "chatgpt:main-reviewer",
+  "errors": [],
+  "result_state_version": 125
+}

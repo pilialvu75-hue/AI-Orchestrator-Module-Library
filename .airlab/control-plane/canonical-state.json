@@ -7,7 +7,7 @@
     "policy": "This private repository is the single coordination authority. Chats and agents are workers, not independent sources of truth."
   },
   "updated_at": "2026-10-19",
-  "state_revision": 340,
+  "state_revision": 341,
   "lifecycle_status": "BOOTSTRAP_ACTIVE",
   "roadmap_authority": {
     "library": ".airlab/roadmap.yaml",
@@ -81,12 +81,13 @@
     "invalid_lane_behavior": "ISOLATE_AND_SURFACE_PROJECTION_INCIDENT"
   },
   "projection": {
-    "source_digest": "40e18f07209ad9034b90110f93d9637a454e71a1e788305654d356c153678a0c",
-    "projected_at": "2026-10-19T08:12:25Z",
+    "source_digest": "59c55ea97e9cbd0e69d829c11d9331b9e20899f8c3f400a082c9125e5f33f95d",
+    "projected_at": "2026-10-19T08:18:37Z",
     "counts": {
       "BLOCKED": 2,
+      "IMPLEMENTING": 1,
       "READY": 13,
-      "REVIEW_REQUIRED": 3
+      "REVIEW_REQUIRED": 2
     },
     "active_claims": [
       {
@@ -218,7 +219,6 @@
       }
     ],
     "review_required": [
-      "cantiere",
       "library-researcher",
       "platform-android"
     ],
@@ -390,9 +390,9 @@
       },
       {
         "id": "cantiere",
-        "status": "REVIEW_REQUIRED",
+        "status": "IMPLEMENTING",
         "activation": "active",
-        "state_version": 124,
+        "state_version": 125,
         "updated_at": "2026-10-19",
         "active_claim": {
           "claim_id": "8e8e2ce5633f9e6458b3",
@@ -407,10 +407,10 @@
             "resource:cantiere-845-gate-evidence-export"
           ]
         },
-        "reviewer_state": "PENDING",
+        "reviewer_state": "CHANGES_REQUESTED",
         "inference_profile_status": null,
         "historical_backlog_count": 3,
-        "next_action": "Main/Reviewer must inspect the review_packet, linked evidence and required gates before promotion or rework."
+        "next_action": "In the existing Cantiere claim/branch, bind gate copy status to current project+task identity and clear or hide it on task/project switch, add regression covering saved project switching; rerun exact-head CI and resubmit review packet. Preserve all Reviewer/Validation and physical G5 gates."
       },
       {
         "id": "diagnostics",
