@@ -7,7 +7,7 @@
     "policy": "This private repository is the single coordination authority. Chats and agents are workers, not independent sources of truth."
   },
   "updated_at": "2026-10-19",
-  "state_revision": 338,
+  "state_revision": 339,
   "lifecycle_status": "BOOTSTRAP_ACTIVE",
   "roadmap_authority": {
     "library": ".airlab/roadmap.yaml",
@@ -81,14 +81,29 @@
     "invalid_lane_behavior": "ISOLATE_AND_SURFACE_PROJECTION_INCIDENT"
   },
   "projection": {
-    "source_digest": "bb1205a0a8ec6d0404aba2abe59ec95339d0a7d546725dccac0ee30ccc704a90",
-    "projected_at": "2026-10-19T08:09:17Z",
+    "source_digest": "282829949cac8354966e089d828f39e42e4af8d3d6e827ace58dcb8125596656",
+    "projected_at": "2026-10-19T08:09:58Z",
     "counts": {
       "BLOCKED": 2,
-      "READY": 14,
+      "CLAIMED": 1,
+      "READY": 13,
       "REVIEW_REQUIRED": 2
     },
     "active_claims": [
+      {
+        "lane": "cantiere",
+        "claim_id": "8e8e2ce5633f9e6458b3",
+        "work_item": "issue-845-gate-evidence-visibility-v1",
+        "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
+        "lease_until": "2026-10-19T20:09:58Z",
+        "resource_locks": [
+          "branch:pilialvu75-hue/Ai-orchestrator-riserva:fix/cantiere-845-gate-evidence-visibility",
+          "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/app_factory/workshop/workshop_gate_evidence_export.dart",
+          "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/app_factory/workshop/workshop_production_dashboard_page.dart",
+          "file:pilialvu75-hue/Ai-orchestrator-riserva:test/app_factory/workshop/workshop_gate_evidence_export_test.dart",
+          "resource:cantiere-845-gate-evidence-export"
+        ]
+      },
       {
         "lane": "library-researcher",
         "claim_id": "a3be2c00b7d608d2df75",
@@ -131,6 +146,12 @@
         "work_item": "issue-849-android-selective-backup-exclusions"
       },
       {
+        "key": "branch:pilialvu75-hue/Ai-orchestrator-riserva:fix/cantiere-845-gate-evidence-visibility",
+        "lane": "cantiere",
+        "claim_id": "8e8e2ce5633f9e6458b3",
+        "work_item": "issue-845-gate-evidence-visibility-v1"
+      },
+      {
         "key": "file:pilialvu75-hue/AI-Orchestrator-Module-Researcher:.github/workflows/autonomous-seeding.yml",
         "lane": "library-researcher",
         "claim_id": "a3be2c00b7d608d2df75",
@@ -161,10 +182,34 @@
         "work_item": "issue-849-android-selective-backup-exclusions"
       },
       {
+        "key": "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/app_factory/workshop/workshop_gate_evidence_export.dart",
+        "lane": "cantiere",
+        "claim_id": "8e8e2ce5633f9e6458b3",
+        "work_item": "issue-845-gate-evidence-visibility-v1"
+      },
+      {
+        "key": "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/app_factory/workshop/workshop_production_dashboard_page.dart",
+        "lane": "cantiere",
+        "claim_id": "8e8e2ce5633f9e6458b3",
+        "work_item": "issue-845-gate-evidence-visibility-v1"
+      },
+      {
+        "key": "file:pilialvu75-hue/Ai-orchestrator-riserva:test/app_factory/workshop/workshop_gate_evidence_export_test.dart",
+        "lane": "cantiere",
+        "claim_id": "8e8e2ce5633f9e6458b3",
+        "work_item": "issue-845-gate-evidence-visibility-v1"
+      },
+      {
         "key": "resource:android-issue-849-backup-policy",
         "lane": "platform-android",
         "claim_id": "394d8d0d738e8b921f03",
         "work_item": "issue-849-android-selective-backup-exclusions"
+      },
+      {
+        "key": "resource:cantiere-845-gate-evidence-export",
+        "lane": "cantiere",
+        "claim_id": "8e8e2ce5633f9e6458b3",
+        "work_item": "issue-845-gate-evidence-visibility-v1"
       },
       {
         "key": "resource:researcher-discovery-reliability",
@@ -345,11 +390,23 @@
       },
       {
         "id": "cantiere",
-        "status": "READY",
+        "status": "CLAIMED",
         "activation": "active",
-        "state_version": 122,
+        "state_version": 123,
         "updated_at": "2026-10-19",
-        "active_claim": null,
+        "active_claim": {
+          "claim_id": "8e8e2ce5633f9e6458b3",
+          "work_item": "issue-845-gate-evidence-visibility-v1",
+          "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
+          "lease_until": "2026-10-19T20:09:58Z",
+          "resource_locks": [
+            "branch:pilialvu75-hue/Ai-orchestrator-riserva:fix/cantiere-845-gate-evidence-visibility",
+            "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/app_factory/workshop/workshop_gate_evidence_export.dart",
+            "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/app_factory/workshop/workshop_production_dashboard_page.dart",
+            "file:pilialvu75-hue/Ai-orchestrator-riserva:test/app_factory/workshop/workshop_gate_evidence_export_test.dart",
+            "resource:cantiere-845-gate-evidence-export"
+          ]
+        },
         "reviewer_state": "PENDING",
         "inference_profile_status": null,
         "historical_backlog_count": 3,
