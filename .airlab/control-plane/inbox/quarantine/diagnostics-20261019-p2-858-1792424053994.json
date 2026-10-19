@@ -1,0 +1,14 @@
+{
+  "schema_version": 1,
+  "request_id": "diagnostics-20261019-p2-858-1792424053994",
+  "status": "QUARANTINED",
+  "processed_at": "2026-10-19T15:34:24Z",
+  "source_file": "diagnostics-20261019-p2-858-1792424053994.json",
+  "lane_id": "diagnostics",
+  "operation": "submit_review",
+  "actor_id": "chatgpt:diagnostics",
+  "errors": [
+    "ValueError: lane diagnostics cannot submit review from state REVIEW_REQUIRED"
+  ],
+  "result_state_version": null
+}
