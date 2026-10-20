@@ -7,8 +7,8 @@
   "activation": "active",
   "scope": "Exclusive Cantiere/App Factory execution, durability, build/review/validation/apply and first-real-app reliability.",
   "shared_engine_policy": "shared_or_control_plane",
-  "state_version": 130,
-  "updated_at": "2026-10-19",
+  "state_version": 131,
+  "updated_at": "2026-10-20",
   "active_claim": {
     "claim_id": "fe3284318d6cfd4cf6b4",
     "owner_lane": "cantiere",
@@ -1303,13 +1303,6 @@
   ],
   "reconciliation_events": [
     {
-      "type": "CLAIM_RELEASED_AFTER_REVIEW",
-      "claim_id": "c0d7e9a1f346b8d5021a",
-      "work_item": "cantiere-engineer-flutter-native-import-3140",
-      "reason": "Main/Reviewer accepted the bounded implementation/review gate.",
-      "at": "2026-10-14T13:39:46Z"
-    },
-    {
       "type": "CLAIM_RELEASED",
       "claim_id": "2e5e9291924d5c3f141c",
       "work_item": "issue-845-first-star-app-review-scope-3184",
@@ -1568,6 +1561,14 @@
         "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/856#issuecomment-6263014985"
       ],
       "at": "2026-10-19T15:50:19Z"
+    },
+    {
+      "type": "REVIEW_WAIT_OVERDUE",
+      "claim_id": "fe3284318d6cfd4cf6b4",
+      "work_item": "issue-845-gate-evidence-visibility-v1",
+      "lease_until": "2026-10-20T03:51:39Z",
+      "detected_at": "2026-10-20T04:32:03Z",
+      "review_required": true
     }
   ],
   "review_packet_history": [
