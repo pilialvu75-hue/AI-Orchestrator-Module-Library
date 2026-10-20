@@ -1,0 +1,31 @@
+{
+  "schema": "ai-orchestrator.researcher-source-preflight-proof.v1",
+  "source": {
+    "repository": "juliansteenbakker/flutter_secure_storage",
+    "commit_sha": "e8eeb449cd512b26153f0a3376dfe374dd39a999",
+    "license": "BSD-3-Clause",
+    "upstream_package": "flutter_secure_storage",
+    "upstream_package_version": "11.2.0"
+  },
+  "provenance": {
+    "license_blob_sha": "defe7c855aea6c6a59a2556a5dcd968dcbe9c33c",
+    "source_readme_verified": true,
+    "source_manifest_verified": true
+  },
+  "evidence": {
+    "discovery_run": "https://github.com/pilialvu75-hue/AI-Orchestrator-Module-Researcher/actions/runs/38982409403",
+    "preflight_run": "https://github.com/pilialvu75-hue/AI-Orchestrator-Module-Researcher/actions/runs/38982734188",
+    "static_security": "CLEAR",
+    "vulnerability_report": "CLEAR",
+    "vulnerability_admission_eligible": true,
+    "sbom_unresolved_count": 0
+  },
+  "restrictions": {
+    "source_code_executed": false,
+    "library_accessed_by_preflight": false,
+    "library_certified": false,
+    "library_security_review_complete": false,
+    "adaptor_complete": false,
+    "platform_validated": false
+  }
+}

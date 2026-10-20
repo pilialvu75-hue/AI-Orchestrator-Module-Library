@@ -1,0 +1,101 @@
+{
+  "id": "storage.secrets.researcher.flutter_secure_storage",
+  "name": "Flutter Secure Storage — pinned upstream source candidate",
+  "version": "0.1.0",
+  "kind": "integration_bundle",
+  "status": "discovered",
+  "description": "Discovery-only proposal to evolve the existing flutter_secure_storage 10.3.4 integration to pinned 11.2.0; credential migration, compatibility and adapter consolidation remain unverified.",
+  "tags": [
+    "storage.secrets",
+    "researcher-candidate",
+    "upstream-source-only",
+    "not-certified",
+    "existing-app-dependency",
+    "major-version-migration"
+  ],
+  "capabilities": [
+    "storage.secrets"
+  ],
+  "platforms": [
+    "android",
+    "desktop"
+  ],
+  "languages": [
+    "dart"
+  ],
+  "frameworks": [
+    "flutter"
+  ],
+  "entry_paths": [
+    "flutter_secure_storage/lib/flutter_secure_storage.dart"
+  ],
+  "provenance": {
+    "origin": "researcher",
+    "source_repository": "https://github.com/juliansteenbakker/flutter_secure_storage",
+    "source_commit": "e8eeb449cd512b26153f0a3376dfe374dd39a999",
+    "source_tag": null,
+    "source_project_id": "juliansteenbakker/flutter_secure_storage",
+    "source_task_id": "researcher-live-discovery:library-issue-127",
+    "license": "BSD-3-Clause",
+    "license_file": "provenance/LICENSE",
+    "retrieved_at": null
+  },
+  "validation": {
+    "score": 0,
+    "tests_passed": false,
+    "test_report": null,
+    "validated_at": null,
+    "validated_on": []
+  },
+  "security": {
+    "reviewed": false,
+    "reviewed_at": null,
+    "known_vulnerabilities": 0,
+    "sbom": null,
+    "review_report": null,
+    "notes": "Read-only Researcher preflight at pinned commit CLEAR (runs 38982540775/38982734188); no Library-owned security signoff, no credential migration, no runtime validation. No source execution was performed."
+  },
+  "integration": {
+    "estimated_effort": "high",
+    "adaptation_allowed": true,
+    "adapter_notes": "Aivexus/AI Orchestrator already uses flutter_secure_storage 10.3.4 in four areas: cloud credentials, Workshop Library GitHub auth, Module Library GitHub config and Diagnostics. Prefer consolidation and controlled migration over duplicate storage. No source code or adapter change is implemented by this intake.",
+    "known_constraints": [
+      "Library storage.secrets.v1 contract remains draft; no canonical adapter is implemented in this intake",
+      "Already in use: Ai-orchestrator-riserva pubspec.lock resolves flutter_secure_storage 10.3.4; declared dependency constraint ^10.3.1 excludes 11.2.0",
+      "Upstream 11.0.0 drops deprecated cipher algorithms and options; 10-to-11 migration must prove existing credential readability, availability and reversibility BEFORE switching production",
+      "Upstream AndroidOptions resetOnError defaults to true; avoid untested destructive error handling or automatic token loss",
+      "Existing secret consumers: Cloud credential store, Workshop Library GitHub auth, Module Library GitHub config, Diagnostics",
+      "App pubspec.yaml declares Dart >=3.4 and Flutter >=3.22.2; current pubspec.lock resolves Dart >=3.12 and Flutter >=3.44. Check actual CI toolchain rather than inferring incompatibility",
+      "App Android minSdk 28; upstream pinned 11.2.0 build.gradle minSdk 24, pubspec requires Flutter >=3.19 and Dart >=3.8",
+      "No real target-runtime smoke tests, no existing-token migration proofs, and no rollback-tested upgrade",
+      "Researcher security/vulnerability preflight CLEAR is not Library admission or certification",
+      "Never update app dependency or Cantiere until a separate authorized claim and release-safe migration plan exist"
+    ]
+  },
+  "connector": {
+    "standard": "ai-orchestrator-lego",
+    "standard_version": "1.0.0",
+    "provides": [
+      {
+        "capability_id": "storage.secrets",
+        "contract_id": "storage.secrets.v1",
+        "contract_version": "1.0"
+      }
+    ],
+    "requires": [],
+    "integration_mode": "package",
+    "adapters": [],
+    "configuration_schema": null,
+    "healthcheck": {
+      "type": "none",
+      "path": null
+    }
+  },
+  "payload": {
+    "type": "upstream_reference",
+    "upstream_repository": "https://github.com/juliansteenbakker/flutter_secure_storage",
+    "upstream_commit": "e8eeb449cd512b26153f0a3376dfe374dd39a999",
+    "path": null,
+    "sha256": null
+  }
+}

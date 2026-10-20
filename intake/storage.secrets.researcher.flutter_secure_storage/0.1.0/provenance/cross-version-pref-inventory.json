@@ -1,0 +1,63 @@
+{
+  "schema": "ai-orchestrator.flutter-secure-storage-cross-version-pref-inventory.v1",
+  "source_repo": "juliansteenbakker/flutter_secure_storage",
+  "baseline": {
+    "release": "v10.3.4",
+    "tag_ref": "refs/tags/v10.3.4",
+    "verified_annotated_tag_sha": "7d7bdf8239c506303eb6562f754c29dd3f5d3a3b",
+    "commit": "692a374a5071c0b60939f624ede58d666b6b645c",
+    "tag_signature_verified_by_github": true,
+    "android_min_sdk": 23
+  },
+  "candidate": {
+    "release": "v11.2.0",
+    "commit": "e8eeb449cd512b26153f0a3376dfe374dd39a999",
+    "android_min_sdk": 24
+  },
+  "source_paths": {
+    "java_config": "flutter_secure_storage/android/src/main/java/com/it_nomads/fluttersecurestorage/FlutterSecureStorageConfig.java",
+    "java_config_markers": "flutter_secure_storage/android/src/main/java/com/it_nomads/fluttersecurestorage/NamespacedConfigSource.java",
+    "java_impl": "flutter_secure_storage/android/src/main/java/com/it_nomads/fluttersecurestorage/FlutterSecureStorage.java",
+    "dart_options": "flutter_secure_storage/lib/options/android_options.dart"
+  },
+  "verified_common_default_preferences": [
+    "FlutterSecureStorage.xml",
+    "FlutterSecureKeyStorage.xml",
+    "FlutterSecureStorageConfiguration.xml",
+    "FlutterSecureStorageConfiguration:FlutterSecureStorage.xml"
+  ],
+  "default_option_evidence": {
+    "baseline_reset_on_error": true,
+    "candidate_reset_on_error": true,
+    "baseline_migrate_on_algorithm_change": true,
+    "candidate_migrate_on_algorithm_change": true,
+    "baseline_migrate_with_backup": false,
+    "candidate_migrate_with_backup": false
+  },
+  "legacy_backend_behavior": {
+    "baseline_10_3_4": "v10 source still probes deprecated EncryptedSharedPreferences and supports migrating its entries to custom cipher prefs",
+    "candidate_11_2_0": "v11 removes legacy EncryptedSharedPreferences backend; pre-read checkUpgradeStatus can indicate legacyBackendPresent and other unreadable data states",
+    "path_with_custom_storage_namespace": "PENDING_DYNAMIC_INVENTORY"
+  },
+  "app_code_inventory": {
+    "app_repository": "pilialvu75-hue/Ai-orchestrator-riserva",
+    "source_commit": "40cb40fd8a0d7ca80d6656d9ee7524d57b5a16c4",
+    "current_consumers_using_unconfigured_FlutterSecureStorage_constructor": [
+      "lib/core/runtime/inference/cloud_credential_store.dart",
+      "lib/app_factory/workshop/workshop_library_github_auth.dart",
+      "lib/features/module_library/data/module_library_github_config.dart",
+      "lib/core/diagnostics/github_diagnostics.dart"
+    ]
+  },
+  "acceptance": "SOURCE_LAYOUT_MATCH_ONLY",
+  "proof_type": "READ_ONLY_SOURCE_ANALYSIS",
+  "not_proven": [
+    "Actual on-device SharedPreferences file inventory from current release",
+    "Whether historical installs used different options or legacy encrypted shared preferences",
+    "Correct cloud and device-to-device backup effects on all target Android versions",
+    "Successful token-preserving migration on a physical phone",
+    "Backend compatibility for downgrade/rollback"
+  ],
+  "source_executed": false,
+  "library_certified": false
+}
