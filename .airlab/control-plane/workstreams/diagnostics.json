@@ -3,32 +3,13 @@
   "id": "diagnostics",
   "title": "Diagnostics",
   "role": "worker",
-  "status": "IMPLEMENTING",
+  "status": "BLOCKED",
   "activation": "active",
   "scope": "Shared observability contract, logs, evidence receipts and comparable telemetry across all platforms.",
   "shared_engine_policy": "shared_or_control_plane",
-  "state_version": 17,
-  "updated_at": "2026-10-19",
-  "active_claim": {
-    "claim_id": "226dac1145a5ce86c7be",
-    "owner_lane": "diagnostics",
-    "work_item": "issue-857-cache-reuse-telemetry",
-    "repository": "pilialvu75-hue/Ai-orchestrator-diagnostics",
-    "scope": "Cross-repository observability only in Riserva: export existing measured reused_tokens/prefilled_tokens in RESOURCE_SAMPLE and safe public projection, with tests. No inference/cache algorithm, memory guard, profile or routing changes. User authorized Diagnostics role; PR840 remains open and requires fresh coordination after this bounded claim.",
-    "branch": "fix/diagnostics-857-cache-reuse",
-    "resource_locks": [
-      "branch:pilialvu75-hue/Ai-orchestrator-diagnostics:fix/diagnostics-857-cache-reuse",
-      "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/core/diagnostics/public_log_projection.dart",
-      "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/core/runtime/inference/resource_monitor.dart",
-      "file:pilialvu75-hue/Ai-orchestrator-riserva:test/core/diagnostics/public_log_projection_test.dart",
-      "file:pilialvu75-hue/Ai-orchestrator-riserva:test/core/runtime/inference/resource_monitor_test.dart",
-      "resource:diagnostics-cache-reuse-857"
-    ],
-    "started_at": "2026-10-19T12:24:18Z",
-    "heartbeat_at": "2026-10-19T12:26:28Z",
-    "lease_until": "2026-10-20T00:26:28Z",
-    "lease_hours": 12
-  },
+  "state_version": 18,
+  "updated_at": "2026-10-20",
+  "active_claim": null,
   "dependencies": [],
   "roadmap_refs": [
     ".airlab/public-repositories/Ai-orchestrator-diagnostics/roadmap.yaml#D7",
@@ -107,7 +88,7 @@
   },
   "reviewer": {
     "required": true,
-    "state": "CHANGES_REQUESTED",
+    "state": "PENDING",
     "reviewed_by": "main-reviewer",
     "reviewed_at": "2026-10-19T15:50:19Z"
   },
@@ -456,6 +437,21 @@
       "work_item": "diagnostics-issue-114-public-stall-projection",
       "reason": "Main/Reviewer accepted the bounded implementation/review gate.",
       "at": "2026-10-12T21:32:57Z"
+    },
+    {
+      "type": "CLAIM_LEASE_EXPIRED",
+      "claim_id": "226dac1145a5ce86c7be",
+      "work_item": "issue-857-cache-reuse-telemetry",
+      "resource_locks": [
+        "branch:pilialvu75-hue/Ai-orchestrator-diagnostics:fix/diagnostics-857-cache-reuse",
+        "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/core/diagnostics/public_log_projection.dart",
+        "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/core/runtime/inference/resource_monitor.dart",
+        "file:pilialvu75-hue/Ai-orchestrator-riserva:test/core/diagnostics/public_log_projection_test.dart",
+        "file:pilialvu75-hue/Ai-orchestrator-riserva:test/core/runtime/inference/resource_monitor_test.dart",
+        "resource:diagnostics-cache-reuse-857"
+      ],
+      "lease_until": "2026-10-20T00:26:28Z",
+      "detected_at": "2026-10-20T00:59:25Z"
     }
   ],
   "review_packet_history": [
@@ -751,5 +747,21 @@
       "material": false,
       "refs": []
     }
+  },
+  "block_reason": {
+    "code": "CLAIM_LEASE_EXPIRED",
+    "work_item": "issue-857-cache-reuse-telemetry",
+    "claim_id": "226dac1145a5ce86c7be",
+    "resource_locks": [
+      "branch:pilialvu75-hue/Ai-orchestrator-diagnostics:fix/diagnostics-857-cache-reuse",
+      "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/core/diagnostics/public_log_projection.dart",
+      "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/core/runtime/inference/resource_monitor.dart",
+      "file:pilialvu75-hue/Ai-orchestrator-riserva:test/core/diagnostics/public_log_projection_test.dart",
+      "file:pilialvu75-hue/Ai-orchestrator-riserva:test/core/runtime/inference/resource_monitor_test.dart",
+      "resource:diagnostics-cache-reuse-857"
+    ],
+    "lease_until": "2026-10-20T00:26:28Z",
+    "detected_at": "2026-10-20T00:59:25Z",
+    "review_required": true
   }
 }
