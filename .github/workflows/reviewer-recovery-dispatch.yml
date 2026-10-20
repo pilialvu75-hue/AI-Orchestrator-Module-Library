@@ -1,0 +1,51 @@
+name: Reviewer recovery dispatch
+on:
+  schedule:
+    - cron: '17 * * * *'
+  workflow_dispatch:
+permissions:
+  contents: read
+  issues: write
+  pull-requests: read
+concurrency:
+  group: reviewer-recovery-dispatch
+  cancel-in-progress: false
+jobs:
+  dispatch:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Queue independent reviewer requests without approving or merging
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          import json, os, subprocess
+          def gh(*args):
+              return json.loads(subprocess.check_output(["gh","api",*args],text=True))
+          repo=os.environ["GH_REPO"]
+          prs=gh(f"repos/{repo}/pulls?state=open&per_page=100")
+          for pr in prs:
+              number=pr["number"]
+              if pr["draft"] and number != 117:
+                  continue
+              head=pr["head"]["sha"]
+              reviews=gh(f"repos/{repo}/pulls/{number}/reviews?per_page=100")
+              if any(r.get("commit_id")==head and r.get("state") in ("APPROVED","CHANGES_REQUESTED") for r in reviews):
+                  continue
+              checks=gh(f"repos/{repo}/commits/{head}/check-runs?per_page=100")
+              runs=checks.get("check_runs",[])
+              if not runs or any(r["status"]!="completed" or r["conclusion"]!="success" for r in runs):
+                  continue
+              marker=f"<!-- reviewer-recovery:v1:{number}:{head} -->"
+              comments=gh(f"repos/{repo}/issues/{number}/comments?per_page=100")
+              if any(marker in c.get("body","") for c in comments):
+                  continue
+              body=(f"{marker}\nIndependent review requested for exact head `{head}`. "
+                    "This is a dispatch receipt only, NOT an approval. "
+                    "A reviewer must inspect provenance, security and canonical gates. "
+                    "No claim promotion, merge, or runtime certification is authorized.")
+              subprocess.check_call(["gh","api",f"repos/{repo}/issues/{number}/comments",
+                                     "-f",f"body={body}"])
+          PY
