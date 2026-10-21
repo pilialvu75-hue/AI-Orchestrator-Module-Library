@@ -1,0 +1,4 @@
+# A repository_path payload is pinned by raw Git file bytes, not working-tree
+# checkout line endings. Never normalize source payload files on Windows.
+# Changing these bytes must require a new manifest SHA256 and new test receipts.
+intake/diagnostics.logging.library.privacy_events/0.1.0/payload/src/** -text
