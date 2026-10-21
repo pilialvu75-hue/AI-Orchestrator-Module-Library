@@ -8,7 +8,7 @@ import unittest
 from pathlib import Path
 
 from tools.library_privacy_preflight import CANDIDATE, security_preflight
-from tools.library_pipeline import PipelineError
+from library_pipeline import PipelineError
 from tools.library_privacy_multiplatform_admission import (
     ASSET_ID, CHECKS, PLATFORMS, RECEIPT_SCHEMA,
     PlatformAdmissionError, admit_multiplatform,
