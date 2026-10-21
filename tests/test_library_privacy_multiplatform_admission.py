@@ -5,7 +5,14 @@ import json
 import shutil
 import tempfile
 import unittest
+import sys
 from pathlib import Path
+
+# The protected writer executes this test module in isolation, not only in
+# the larger discover suite where unrelated tests might alter sys.path first.
+ROOT = Path(__file__).resolve().parents[1]
+if str(ROOT / "tools") not in sys.path:
+    sys.path.insert(0, str(ROOT / "tools"))
 
 from tools.library_privacy_preflight import CANDIDATE, security_preflight
 from library_pipeline import PipelineError
@@ -14,7 +21,6 @@ from tools.library_privacy_multiplatform_admission import (
     PlatformAdmissionError, admit_multiplatform,
 )
 
-ROOT = Path(__file__).resolve().parents[1]
 RUN = 39556595702
 SHA = "f" * 40
 
