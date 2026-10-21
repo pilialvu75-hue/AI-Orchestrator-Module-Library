@@ -1,7 +1,6 @@
 """Fail-closed tests for real three-platform pinned Dart evidence admission."""
 from __future__ import annotations
 
-import copy
 import json
 import shutil
 import tempfile
@@ -9,6 +8,7 @@ import unittest
 from pathlib import Path
 
 from tools.library_privacy_preflight import CANDIDATE, security_preflight
+from tools.library_pipeline import PipelineError
 from tools.library_privacy_multiplatform_admission import (
     ASSET_ID, CHECKS, PLATFORMS, RECEIPT_SCHEMA,
     PlatformAdmissionError, admit_multiplatform,
@@ -143,7 +143,7 @@ class MultiPlatformAdmissionTests(unittest.TestCase):
         self.write(path, report)
         source = self.candidate / "payload/src/lib/privacy_diagnostic_events.dart"
         source.write_text(source.read_text(encoding="utf-8") + "\n// altered\n", encoding="utf-8")
-        with self.assertRaises((ValueError, Exception)):
+        with self.assertRaisesRegex(PipelineError, "SHA256 mismatch"):
             self.admit()
         self.assertFalse((self.candidate / "tests/dart-cross-platform-ci-report.json").exists())
 
@@ -154,7 +154,7 @@ class MultiPlatformAdmissionTests(unittest.TestCase):
             {**original, "provenance": {**original["provenance"], "license": "MIT"}},
         ]:
             self.write(self.manifest_path, mutated)
-            with self.assertRaises((PlatformAdmissionError, ValueError)):
+            with self.assertRaises(PlatformAdmissionError):
                 self.admit()
             self.write(self.manifest_path, original)
 
