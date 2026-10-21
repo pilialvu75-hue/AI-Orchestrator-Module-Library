@@ -66,6 +66,13 @@ jobs:
             echo "Source checkout does not disable Git EOL conversion" >&2
             exit 1
           fi
+          REPORT="intake/diagnostics.logging.library.privacy_events/0.1.0/tests/dart-linux-ci-report.json"
+          REPORT_EXPECTED="$REPORT: text: unset"
+          REPORT_ACTUAL="$(git check-attr text -- "$REPORT")"
+          if [[ "$REPORT_ACTUAL" != "$REPORT_EXPECTED" ]]; then
+            echo "Pinned CI report checkout must preserve original byte identity" >&2
+            exit 1
+          fi
           # Never suppress or recalculate the manifest's immutable source hash.
           # The next step verifies the exact bytes checked out on this runner.
 
