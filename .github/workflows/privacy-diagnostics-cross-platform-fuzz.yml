@@ -8,6 +8,8 @@ on:
       - "tests/privacy_diagnostics_redaction_fuzz.dart"
       - "intake/diagnostics.logging.library.privacy_events/**"
       - "tools/library_privacy_preflight.py"
+      - "tools/library_privacy_multiplatform_admission.py"
+      - "tests/test_library_privacy_multiplatform_admission.py"
       - "tools/library_source_integrity.py"
   push:
     branches: ["main"]
@@ -15,6 +17,8 @@ on:
       - ".github/workflows/privacy-diagnostics-cross-platform-fuzz.yml"
       - "tests/privacy_diagnostics_redaction_fuzz.dart"
       - "intake/diagnostics.logging.library.privacy_events/**"
+      - "tools/library_privacy_multiplatform_admission.py"
+      - "tests/test_library_privacy_multiplatform_admission.py"
   workflow_dispatch:
 
 permissions:
@@ -34,6 +38,8 @@ jobs:
           - platform: macos
             os: macos-15
     runs-on: ${{ matrix.os }}
+    permissions:
+      contents: read
     timeout-minutes: 15
 
     steps:
@@ -141,3 +147,75 @@ jobs:
             privacy-preflight.json
           retention-days: 14
           if-no-files-found: error
+
+  admit-three-platform-tested-evidence:
+    name: Admit exact-run Dart OS test receipts (not certification)
+    needs: [adversarial-test]
+    if: ${{ github.event_name != 'pull_request' && github.ref == 'refs/heads/main' && needs.adversarial-test.result == 'success' }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 12
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout protected Library main for metadata writer
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - name: Download all three same-run platform receipts
+        uses: actions/download-artifact@v4
+        with:
+          pattern: privacy-adversarial-*-${{ github.run_id }}
+          path: ${{ runner.temp }}/dart-three-platform-proofs
+          merge-multiple: false
+
+      - name: Validate and commit independently checked tested-only platform evidence
+        shell: bash
+        env:
+          PROOF_DIR: ${{ runner.temp }}/dart-three-platform-proofs
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          BASE="intake/diagnostics.logging.library.privacy_events/0.1.0"
+          MANIFEST="$BASE/manifest.json"
+          REPORT="$BASE/tests/dart-cross-platform-ci-report.json"
+          for attempt in 1 2 3; do
+            git fetch origin main
+            git reset --hard origin/main
+            git clean -fd -- "$REPORT"
+            git merge-base --is-ancestor "$GITHUB_SHA" origin/main || {
+              echo "Unprivileged Dart evidence commit is not an ancestor of current main" >&2
+              exit 1
+            }
+            python -m tools.library_privacy_multiplatform_admission \
+              --root . \
+              --artifacts "$PROOF_DIR" \
+              --workflow-sha "$GITHUB_SHA" \
+              --run-id "$GITHUB_RUN_ID" \
+              --run-attempt "$GITHUB_RUN_ATTEMPT"
+            python tools/validate_library.py
+            python -m unittest discover -s tests -p 'test_library_privacy_multiplatform_admission.py' -v
+            git add -- "$MANIFEST" "$REPORT"
+            if git diff --cached --quiet; then
+              echo "Same pinned Dart platform coverage already accepted; no write."
+              exit 0
+            fi
+            while IFS= read -r changed; do
+              case "$changed" in
+                "$MANIFEST"|"$REPORT") ;;
+                *) echo "Protected writer attempted unexpected change: $changed" >&2; exit 1 ;;
+              esac
+            done < <(git diff --cached --name-only)
+            git commit -m "library: accept pinned Dart Linux macOS Windows test receipts [skip ci]"
+            if git push origin HEAD:main; then
+              echo "Recorded all three real OS test proofs; security and license remain pending."
+              exit 0
+            fi
+            if [[ "$attempt" -eq 3 ]]; then
+              echo "Main changed during all evidence-admission attempts" >&2
+              exit 1
+            fi
+            echo "Main advanced; re-verify all same-run evidence against current main."
+          done
