@@ -59,7 +59,10 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          cd intake/diagnostics.logging.library.privacy_events/0.1.0/payload/src
+          # dart pub get creates .dart_tool and lock files. Run in an isolated
+          # copy so the checked-out SHA256-pinned candidate stays unchanged.
+          cp -a intake/diagnostics.logging.library.privacy_events/0.1.0/payload/src "$RUNNER_TEMP/privacy-dart-test-src"
+          cd "$RUNNER_TEMP/privacy-dart-test-src"
           dart --version
           dart pub get
           dart analyze --fatal-infos
