@@ -65,7 +65,7 @@ def accept_receipt(
     if (manifest.get("id") != ASSET_ID
             or manifest.get("version") != VERSION
             or manifest.get("capabilities") != ["diagnostics.logging"]
-            or manifest.get("platforms") != ["linux"]
+            or manifest.get("platforms") not in (["linux"], ["linux", "macos", "windows"])
             or origin.get("origin") != "built_in"
             or origin.get("source_repository") != f"https://github.com/{REPOSITORY}"
             or not isinstance(origin.get("source_commit"), str)
@@ -112,6 +112,12 @@ def accept_receipt(
         raise ReceiptError("validation timestamp must contain timezone")
 
     if manifest["status"] == "tested":
+        if validation.get("test_report") == "tests/dart-cross-platform-ci-report.json":
+            if (manifest.get("platforms") != ["linux", "macos", "windows"]
+                    or validation.get("validated_on") != ["linux", "macos", "windows"]):
+                raise ReceiptError("multiplatform tested candidate has inconsistent targets")
+            verify_manifest_evidence(base, manifest)
+            return {"asset": f"{ASSET_ID}@{VERSION}", "result": "already_tested_multiplatform"}
         report = load_json(base / REPORT_REL)
         if (report.get("workflow_sha") != workflow_sha
                 or report.get("workflow_run_id") != workflow_run_id
