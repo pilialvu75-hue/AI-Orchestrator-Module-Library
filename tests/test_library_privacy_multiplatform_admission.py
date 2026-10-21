@@ -28,6 +28,23 @@ class MultiPlatformAdmissionTests(unittest.TestCase):
         self.candidate.parent.mkdir(parents=True)
         shutil.copytree(ROOT / CANDIDATE, self.candidate)
         self.manifest_path = self.candidate / "manifest.json"
+        # The protected writer can update production to three-platform tested
+        # at any time. Always start unit tests from a reproducible Linux-only
+        # tested *sandbox*, not the mutable real manifest.
+        cross_report = self.candidate / "tests/dart-cross-platform-ci-report.json"
+        if cross_report.exists():
+            cross_report.unlink()
+        manifest = json.loads(self.manifest_path.read_text(encoding="utf-8"))
+        linux_report = json.loads(
+            (self.candidate / "tests/dart-linux-ci-report.json").read_text(encoding="utf-8")
+        )
+        manifest["status"] = "tested"
+        manifest["platforms"] = ["linux"]
+        manifest["validation"]["tests_passed"] = True
+        manifest["validation"]["validated_on"] = ["linux"]
+        manifest["validation"]["test_report"] = "tests/dart-linux-ci-report.json"
+        manifest["validation"]["validated_at"] = linux_report["validated_at"]
+        self.manifest_path.write_text(json.dumps(manifest, indent=2) + "\\n", encoding="utf-8")
         self.artifacts = self.root / "downloaded-artifacts"
         self.artifacts.mkdir()
         self.preflight = security_preflight(self.root)
