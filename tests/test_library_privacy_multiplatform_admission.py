@@ -44,7 +44,7 @@ class MultiPlatformAdmissionTests(unittest.TestCase):
         manifest["validation"]["validated_on"] = ["linux"]
         manifest["validation"]["test_report"] = "tests/dart-linux-ci-report.json"
         manifest["validation"]["validated_at"] = linux_report["validated_at"]
-        self.manifest_path.write_text(json.dumps(manifest, indent=2) + "\\n", encoding="utf-8")
+        self.manifest_path.write_text(json.dumps(manifest, indent=2) + "\n", encoding="utf-8")
         self.artifacts = self.root / "downloaded-artifacts"
         self.artifacts.mkdir()
         self.preflight = security_preflight(self.root)
