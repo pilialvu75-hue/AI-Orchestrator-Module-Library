@@ -15,7 +15,9 @@
     "diagnostics.logging"
   ],
   "platforms": [
-    "linux"
+    "linux",
+    "macos",
+    "windows"
   ],
   "languages": [
     "dart"
@@ -39,10 +41,12 @@
   "validation": {
     "score": 0.8,
     "tests_passed": true,
-    "test_report": "tests/dart-linux-ci-report.json",
-    "validated_at": "2026-10-18T12:47:27.894338+00:00",
+    "test_report": "tests/dart-cross-platform-ci-report.json",
+    "validated_at": "2026-10-21T08:25:04.223222+00:00",
     "validated_on": [
-      "linux"
+      "linux",
+      "macos",
+      "windows"
     ]
   },
   "security": {

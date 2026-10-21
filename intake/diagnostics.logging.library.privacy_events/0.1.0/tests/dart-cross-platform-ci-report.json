@@ -1,0 +1,46 @@
+{
+  "schema": "ai-orchestrator.library-test-report.v1",
+  "asset_id": "diagnostics.logging.library.privacy_events",
+  "version": "0.1.0",
+  "source_commit": "30af487af6164b3a6e6f0cd2bc2b11ee6e737fee",
+  "payload_sha256": "507458c47a1d6ffca23c053ca0a4d32fbd11e90d73ccae89ae38da2ff2add624",
+  "passed": true,
+  "validated_on": [
+    "linux",
+    "macos",
+    "windows"
+  ],
+  "validated_at": "2026-10-21T08:25:04.223222+00:00",
+  "workflow_run_id": 39569014899,
+  "workflow_run_attempt": 1,
+  "workflow_sha": "3d2cf1abaea7aa43a97849978e5be022f406691b",
+  "workflow_url": "https://github.com/pilialvu75-hue/AI-Orchestrator-Module-Library/actions/runs/39569014899",
+  "checks": [
+    "dart analyze --fatal-infos",
+    "dart run bin/self_test.dart",
+    "dart tests/privacy_diagnostics_redaction_fuzz.dart"
+  ],
+  "deterministic_adversarial_cases_per_platform": 4096,
+  "platform_proofs": {
+    "linux": {
+      "artifact_name": "privacy-adversarial-linux-39569014899",
+      "evidence_sha256": "99a1ba51cc93801e3e4b9c71ccc6d833ac4d5855df047bbcc4a1bf4a09e4a3da",
+      "preflight_sha256": "03a43f42a416bf2bc58c2a1dc61f326b56ecc9948b4ad1d1689c72e4c65c6324"
+    },
+    "macos": {
+      "artifact_name": "privacy-adversarial-macos-39569014899",
+      "evidence_sha256": "63bff9bbe23c98d9e3d49d494743e94380133e09c3dd923d9bbf6fc252b2cc55",
+      "preflight_sha256": "03a43f42a416bf2bc58c2a1dc61f326b56ecc9948b4ad1d1689c72e4c65c6324"
+    },
+    "windows": {
+      "artifact_name": "privacy-adversarial-windows-39569014899",
+      "evidence_sha256": "5f583b35344c7c7ee189f456cab71f9a59d3cee49acc35ea6012218997c5ed8b",
+      "preflight_sha256": "cc1b2aa8b871b55a19f02c85af8f59cb1c11b95ccf797b191c71eb16e90417a0"
+    }
+  },
+  "scope": "Dart SDK self-test, analysis and adversarial redaction only",
+  "score_basis": "existing_tested_floor_only_no_additional_certification",
+  "security_certified": false,
+  "license_verified": false,
+  "runtime_certified": false
+}
