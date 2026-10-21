@@ -1,0 +1,129 @@
+name: Privacy Diagnostics Cross-Platform Adversarial Tests
+
+on:
+  pull_request:
+    branches: ["main"]
+    paths:
+      - ".github/workflows/privacy-diagnostics-cross-platform-fuzz.yml"
+      - "tests/privacy_diagnostics_redaction_fuzz.dart"
+      - "intake/diagnostics.logging.library.privacy_events/**"
+      - "tools/library_privacy_preflight.py"
+      - "tools/library_source_integrity.py"
+  push:
+    branches: ["main"]
+    paths:
+      - ".github/workflows/privacy-diagnostics-cross-platform-fuzz.yml"
+      - "tests/privacy_diagnostics_redaction_fuzz.dart"
+      - "intake/diagnostics.logging.library.privacy_events/**"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  adversarial-test:
+    name: Adversarial Dart / ${{ matrix.platform }}
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - platform: linux
+            os: ubuntu-24.04
+          - platform: windows
+            os: windows-2025
+          - platform: macos
+            os: macos-15
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 15
+
+    steps:
+      - name: Checkout immutable workflow revision without persisted credentials
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.sha }}
+          persist-credentials: false
+          fetch-depth: 1
+
+      - name: Install Dart SDK
+        uses: dart-lang/setup-dart@v1
+        with:
+          sdk: stable
+
+      - name: Re-verify exact candidate source and read-only SBOM
+        shell: bash
+        run: |
+          set -euo pipefail
+          python tools/library_privacy_preflight.py --output privacy-preflight.json
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          report = json.loads(Path("privacy-preflight.json").read_text(encoding="utf-8"))
+          assert report["security_reviewed"] is False
+          assert report["security_certified"] is False
+          assert report["license_verified"] is False
+          assert report["runtime_validated"] is False
+          assert report["vulnerability_scanned"] is False
+          assert report["payload_tree_sha256"] == "507458c47a1d6ffca23c053ca0a4d32fbd11e90d73ccae89ae38da2ff2add624"
+          PY
+
+      - name: Run real Dart analysis and baseline regression on candidate source
+        shell: bash
+        run: |
+          set -euo pipefail
+          cd intake/diagnostics.logging.library.privacy_events/0.1.0/payload/src
+          dart pub get
+          dart analyze --fatal-infos
+          dart run bin/self_test.dart
+
+      - name: Run 4096 deterministic adversarial redaction and immutability cases
+        shell: bash
+        run: |
+          set -euo pipefail
+          dart tests/privacy_diagnostics_redaction_fuzz.dart
+
+      - name: Record unprivileged exact-run evidence (no security certification)
+        shell: bash
+        env:
+          TARGET_PLATFORM: ${{ matrix.platform }}
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import json
+          import os
+          from pathlib import Path
+          preflight = json.loads(Path("privacy-preflight.json").read_text(encoding="utf-8"))
+          receipt = {
+              "schema": "ai-orchestrator.library-privacy-adversarial-test.v1",
+              "asset_id": preflight["asset_id"],
+              "version": preflight["version"],
+              "payload_sha256": preflight["payload_tree_sha256"],
+              "platform": os.environ["TARGET_PLATFORM"],
+              "workflow_sha": os.environ["GITHUB_SHA"],
+              "run_id": int(os.environ["GITHUB_RUN_ID"]),
+              "run_attempt": int(os.environ["GITHUB_RUN_ATTEMPT"]),
+              "checked_source_files": preflight["source_files"],
+              "checks": [
+                  "dart analyze --fatal-infos",
+                  "dart run bin/self_test.dart",
+                  "dart tests/privacy_diagnostics_redaction_fuzz.dart",
+              ],
+              "deterministic_adversarial_cases": 4096,
+              "passed": True,
+              "security_reviewed": False,
+              "license_verified": False,
+              "runtime_certified": False,
+              "vulnerability_scanned": False,
+          }
+          Path("privacy-target-evidence.json").write_text(
+              json.dumps(receipt, sort_keys=True, indent=2) + "\n", encoding="utf-8")
+          PY
+
+      - name: Upload exact-run platform evidence for independent reviewer
+        uses: actions/upload-artifact@v4
+        with:
+          name: privacy-adversarial-${{ matrix.platform }}-${{ github.run_id }}
+          path: |
+            privacy-target-evidence.json
+            privacy-preflight.json
+          retention-days: 14
+          if-no-files-found: error
