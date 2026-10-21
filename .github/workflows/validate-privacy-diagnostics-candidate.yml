@@ -41,11 +41,16 @@ jobs:
           from pathlib import Path
           sys.path.insert(0, "tools")
           from library_pipeline import validate_payload
+          from library_evidence import verify_manifest_evidence
           base = Path("intake/diagnostics.logging.library.privacy_events/0.1.0")
           manifest = json.loads((base / "manifest.json").read_text(encoding="utf-8"))
           validate_payload(manifest, base)
-          assert manifest["status"] in ("discovered", "quarantined", "normalized")
-          assert manifest["validation"]["tests_passed"] is False
+          assert manifest["status"] in ("discovered", "quarantined", "normalized", "tested")
+          if manifest["status"] == "tested":
+              assert manifest["validation"]["tests_passed"] is True
+              verify_manifest_evidence(base, manifest)
+          else:
+              assert manifest["validation"]["tests_passed"] is False
           assert manifest["security"]["reviewed"] is False
           print("Pinned source verified; no certification status asserted.")
           PY
