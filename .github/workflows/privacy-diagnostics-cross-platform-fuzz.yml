@@ -49,6 +49,20 @@ jobs:
         with:
           sdk: stable
 
+      - name: Confirm Git checkout preserves byte-for-byte pinned Dart source
+        shell: bash
+        run: |
+          set -euo pipefail
+          SOURCE="intake/diagnostics.logging.library.privacy_events/0.1.0/payload/src/lib/privacy_diagnostic_events.dart"
+          EXPECTED="$SOURCE: text: unset"
+          ACTUAL="$(git check-attr text -- "$SOURCE")"
+          if [[ "$ACTUAL" != "$EXPECTED" ]]; then
+            echo "Source checkout does not disable Git EOL conversion" >&2
+            exit 1
+          fi
+          # Never suppress or recalculate the manifest's immutable source hash.
+          # The next step verifies the exact bytes checked out on this runner.
+
       - name: Re-verify exact candidate source and read-only SBOM
         shell: bash
         run: |
