@@ -24,6 +24,20 @@ class ResearchProposalIntakeTests(unittest.TestCase):
             saved = json.loads(next((root / ".airlab/research-improvements/pending").glob("*.json")).read_text())
             self.assertEqual(saved["state"], "AWAITING_TRIAGE")
 
+    def test_conflicting_reimport_is_rejected(self):
+        with tempfile.TemporaryDirectory() as td:
+            root = Path(td)
+            original = self.proposal()
+            self.assertEqual(ingest(root, original)["created"], 1)
+            changed = self.proposal()
+            changed["proposals"][0]["novelty"] = ["topic:different"]
+            with self.assertRaises(ValueError):
+                ingest(root, changed)
+            saved = json.loads(
+                next((root / ".airlab/research-improvements/pending").glob("*.json")).read_text()
+            )
+            self.assertEqual(saved["proposal"]["novelty"], ["topic:quantization"])
+
     def test_invalid_batch_does_not_write_partial_data(self):
         with tempfile.TemporaryDirectory() as td:
             root = Path(td)
