@@ -38,6 +38,21 @@ class ResearchProposalIntakeTests(unittest.TestCase):
             )
             self.assertEqual(saved["proposal"]["novelty"], ["topic:quantization"])
 
+    def test_conflicting_batch_does_not_import_earlier_new_items(self):
+        with tempfile.TemporaryDirectory() as td:
+            root = Path(td)
+            original = self.proposal()
+            ingest(root, original)
+            batch = self.proposal()
+            new_item = {**batch["proposals"][0], "proposal_id": "b" * 64}
+            conflicting_item = {**batch["proposals"][0], "novelty": ["topic:changed"]}
+            batch["proposals"] = [new_item, conflicting_item]
+            with self.assertRaises(ValueError):
+                ingest(root, batch)
+            self.assertFalse(
+                (root / ".airlab/research-improvements/pending" / ("b" * 64 + ".json")).exists()
+            )
+
     def test_invalid_batch_does_not_write_partial_data(self):
         with tempfile.TemporaryDirectory() as td:
             root = Path(td)
