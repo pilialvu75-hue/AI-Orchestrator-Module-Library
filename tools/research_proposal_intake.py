@@ -47,6 +47,9 @@ def ingest(root: Path, payload: dict) -> dict:
     for identifier, item in validated:
         path = destination / (identifier + ".json")
         if path.exists():
+            saved = json.loads(path.read_text(encoding="utf-8"))
+            if saved.get("proposal") != item:
+                raise ValueError("proposal identifier conflicts with existing content")
             existing += 1
             continue
         destination.mkdir(parents=True, exist_ok=True)
