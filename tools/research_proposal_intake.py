@@ -42,7 +42,9 @@ def ingest(root: Path, payload: dict) -> dict:
             raise ValueError("duplicate proposal in batch")
         seen.add(identifier)
         validated.append((identifier, item))
-    created = 0
+    # Check all pre-existing records before creating any new record.
+    # A conflicting batch must not leave a partially imported queue.
+    pending = []
     existing = 0
     for identifier, item in validated:
         path = destination / (identifier + ".json")
@@ -51,15 +53,25 @@ def ingest(root: Path, payload: dict) -> dict:
             if saved.get("proposal") != item:
                 raise ValueError("proposal identifier conflicts with existing content")
             existing += 1
-            continue
+        else:
+            pending.append((path, item))
+    created = 0
+    for path, item in pending:
         destination.mkdir(parents=True, exist_ok=True)
         # Exclusive creation prevents duplicate writes from concurrent imports.
-        with path.open("x", encoding="utf-8") as handle:
-            json.dump({"schema_version": 1, "state": "AWAITING_TRIAGE",
-                       "source": "AI-Orchestrator-Module-Researcher",
-                       "proposal": item}, handle, indent=2, sort_keys=True)
-            handle.write("\n")
-        created += 1
+        try:
+            with path.open("x", encoding="utf-8") as handle:
+                json.dump({"schema_version": 1, "state": "AWAITING_TRIAGE",
+                           "source": "AI-Orchestrator-Module-Researcher",
+                           "proposal": item}, handle, indent=2, sort_keys=True)
+                handle.write("\n")
+        except FileExistsError:
+            saved = json.loads(path.read_text(encoding="utf-8"))
+            if saved.get("proposal") != item:
+                raise ValueError("concurrent proposal identifier conflict")
+            existing += 1
+        else:
+            created += 1
     return {"created": created, "existing": existing, "total": len(validated)}
 
 
