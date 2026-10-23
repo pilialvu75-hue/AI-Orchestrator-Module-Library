@@ -42,6 +42,7 @@ def transfer(researcher: Path, library: Path, data_dir: Path, limit: int = 100) 
     env["DATA_DIR"] = str(data_dir.resolve(strict=True))
     env["PYTHONPATH"] = str(source / "src")
     totals = {"created": 0, "existing": 0, "total": 0, "has_more": False}
+    observed_ids = set()
     offset = 0
     # Bound each invocation while allowing a full backlog to drain over runs.
     for _ in range(100):
@@ -62,7 +63,11 @@ def transfer(researcher: Path, library: Path, data_dir: Path, limit: int = 100) 
         if not isinstance(proposals, list) or len(proposals) > limit:
             raise ValueError("Researcher export exceeded requested page size")
         count = len(proposals)
+        identifiers = [item.get("proposal_id") for item in proposals if isinstance(item, dict)]
+        if len(identifiers) != count or any(identifier in observed_ids for identifier in identifiers):
+            raise ValueError("Researcher export contains repeated proposals across pages")
         page = ingest(library, payload)
+        observed_ids.update(identifiers)
         for key in ("created", "existing", "total"):
             totals[key] += page[key]
         if count < limit:
