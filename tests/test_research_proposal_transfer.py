@@ -18,6 +18,7 @@ class TransferTests(unittest.TestCase):
             (researcher / "src/researcher/cli.py").write_text("")
             data = root / "data"
             data.mkdir()
+            (data / "researcher.db").touch()
             library = root / "library"
             payload = {
                 "schema_version": 1,
