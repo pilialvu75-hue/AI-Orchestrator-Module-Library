@@ -1,0 +1,20 @@
+{
+  "proposal": {
+    "acceptance_gates": [
+      "implementation_tests_pass",
+      "security_gates_pass",
+      "regression_tests_pass",
+      "library_contract_pass"
+    ],
+    "capability_id": "ai.acceleration_backend",
+    "created_at": "2026-09-21T18:30:47.594444Z",
+    "novelty": [
+      "practice:ci_present"
+    ],
+    "proposal_id": "393cdda372feb21ab944350ebdd7e9a85fa884e8342d0188649c0b0804afe84b",
+    "status": "PROPOSED"
+  },
+  "schema_version": 1,
+  "source": "AI-Orchestrator-Module-Researcher",
+  "state": "AWAITING_TRIAGE"
+}

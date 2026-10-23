@@ -1,0 +1,53 @@
+{
+  "proposal": {
+    "acceptance_gates": [
+      "implementation_tests_pass",
+      "security_gates_pass",
+      "regression_tests_pass",
+      "library_contract_pass"
+    ],
+    "capability_id": "ai.model_storage",
+    "created_at": "2026-09-21T18:30:47.811767Z",
+    "novelty": [
+      "concept:agent",
+      "concept:atlas",
+      "concept:curated",
+      "concept:dataset",
+      "concept:design",
+      "concept:engineer",
+      "concept:field",
+      "concept:gates",
+      "concept:graph-structured",
+      "concept:graphs",
+      "concept:guide",
+      "concept:handoffs",
+      "practice:dependabot_present",
+      "practice:security_policy_present",
+      "topic:agent-evaluation",
+      "topic:agent-framework",
+      "topic:agent-orchestration",
+      "topic:agentic-ai",
+      "topic:agentic-workflows",
+      "topic:ai",
+      "topic:ai-agents",
+      "topic:ai-engineering",
+      "topic:artificial-intelligence",
+      "topic:autonomous-agents",
+      "topic:awesome-list",
+      "topic:dataset",
+      "topic:distributed-systems",
+      "topic:generative-ai",
+      "topic:graph-engineering",
+      "topic:large-language-models",
+      "topic:llm",
+      "topic:llm-agents",
+      "topic:llm-orchestration",
+      "topic:multi-agent-systems"
+    ],
+    "proposal_id": "b4a52bc7cf79c3af4f7695c36c2bc1d5e757fd9249278a584ad6e19f589f8b77",
+    "status": "PROPOSED"
+  },
+  "schema_version": 1,
+  "source": "AI-Orchestrator-Module-Researcher",
+  "state": "AWAITING_TRIAGE"
+}

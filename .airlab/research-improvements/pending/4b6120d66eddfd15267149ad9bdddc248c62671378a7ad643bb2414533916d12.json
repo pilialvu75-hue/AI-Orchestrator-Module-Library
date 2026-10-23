@@ -1,0 +1,23 @@
+{
+  "proposal": {
+    "acceptance_gates": [
+      "implementation_tests_pass",
+      "security_gates_pass",
+      "regression_tests_pass",
+      "library_contract_pass"
+    ],
+    "capability_id": "auth.session",
+    "created_at": "2026-09-21T18:30:47.844400Z",
+    "novelty": [
+      "language:python",
+      "manifest_kind:pyproject.toml",
+      "practice:ci_present",
+      "practice:security_policy_present"
+    ],
+    "proposal_id": "4b6120d66eddfd15267149ad9bdddc248c62671378a7ad643bb2414533916d12",
+    "status": "PROPOSED"
+  },
+  "schema_version": 1,
+  "source": "AI-Orchestrator-Module-Researcher",
+  "state": "AWAITING_TRIAGE"
+}
