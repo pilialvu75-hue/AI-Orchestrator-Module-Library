@@ -41,7 +41,7 @@ def transfer(researcher: Path, library: Path, data_dir: Path, limit: int = 100) 
     env = {key: os.environ[key] for key in allowed if key in os.environ}
     env["DATA_DIR"] = str(data_dir.resolve(strict=True))
     env["PYTHONPATH"] = str(source / "src")
-    totals = {"created": 0, "existing": 0, "total": 0}
+    totals = {"created": 0, "existing": 0, "total": 0, "has_more": False}
     offset = 0
     # Bound each invocation while allowing a full backlog to drain over runs.
     for _ in range(100):
@@ -63,7 +63,7 @@ def transfer(researcher: Path, library: Path, data_dir: Path, limit: int = 100) 
             raise ValueError("Researcher export exceeded requested page size")
         count = len(proposals)
         page = ingest(library, payload)
-        for key in totals:
+        for key in ("created", "existing", "total"):
             totals[key] += page[key]
         if count < limit:
             break
