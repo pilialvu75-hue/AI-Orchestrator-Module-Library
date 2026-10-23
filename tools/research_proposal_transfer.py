@@ -41,18 +41,31 @@ def transfer(researcher: Path, library: Path, data_dir: Path, limit: int = 100) 
     env = {key: os.environ[key] for key in allowed if key in os.environ}
     env["DATA_DIR"] = str(data_dir.resolve(strict=True))
     env["PYTHONPATH"] = str(source / "src")
-    result = subprocess.run(
-        [sys.executable, "-m", "researcher", "export-improvement-proposals",
-         "--limit", str(limit)],
-        cwd=source,
-        env=env,
-        check=True,
-        capture_output=True,
-        text=True,
-        timeout=60,
-    )
-    payload = json.loads(result.stdout)
-    return ingest(library, payload)
+    totals = {"created": 0, "existing": 0, "total": 0}
+    offset = 0
+    # Bound each invocation while allowing a full backlog to drain over runs.
+    for _ in range(100):
+        result = subprocess.run(
+            [sys.executable, "-m", "researcher", "export-improvement-proposals",
+             "--limit", str(limit), "--offset", str(offset)],
+            cwd=source,
+            env=env,
+            check=True,
+            capture_output=True,
+            text=True,
+            timeout=60,
+        )
+        payload = json.loads(result.stdout)
+        count = len(payload.get("proposals", []))
+        page = ingest(library, payload)
+        for key in totals:
+            totals[key] += page[key]
+        if count < limit:
+            break
+        offset += count
+    else:
+        raise RuntimeError("proposal export exceeded 100 pages; retry with a larger limit")
+    return totals
 
 
 def main() -> None:
