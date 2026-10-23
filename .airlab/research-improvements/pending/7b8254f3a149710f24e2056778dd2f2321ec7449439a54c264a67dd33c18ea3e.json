@@ -1,0 +1,48 @@
+{
+  "proposal": {
+    "acceptance_gates": [
+      "implementation_tests_pass",
+      "security_gates_pass",
+      "regression_tests_pass",
+      "library_contract_pass"
+    ],
+    "capability_id": "ai.model_storage",
+    "created_at": "2026-10-23T18:45:53.298145Z",
+    "novelty": [
+      "concept:auditable",
+      "concept:c++20",
+      "concept:cloud",
+      "concept:data-processing",
+      "concept:deterministic",
+      "concept:docwire",
+      "concept:formats",
+      "concept:infrastructure",
+      "concept:local",
+      "concept:local-first",
+      "concept:on-premise",
+      "concept:opt-in",
+      "language:c++",
+      "topic:cpp",
+      "topic:cpp20",
+      "topic:cross-platform",
+      "topic:data-extraction",
+      "topic:data-processing",
+      "topic:document-processing",
+      "topic:edge-computing",
+      "topic:extract-transform-load",
+      "topic:local-ai",
+      "topic:nlp",
+      "topic:ocr",
+      "topic:on-premise",
+      "topic:parsing",
+      "topic:rag",
+      "topic:sdk",
+      "topic:text-extraction"
+    ],
+    "proposal_id": "7b8254f3a149710f24e2056778dd2f2321ec7449439a54c264a67dd33c18ea3e",
+    "status": "PROPOSED"
+  },
+  "schema_version": 1,
+  "source": "AI-Orchestrator-Module-Researcher",
+  "state": "AWAITING_TRIAGE"
+}
