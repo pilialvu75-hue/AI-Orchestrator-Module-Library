@@ -115,10 +115,11 @@ class TransferTests(unittest.TestCase):
                     "schema_version": 1, "kind": "research_improvement_proposals",
                     "proposals": items})})()
             with patch("research_proposal_transfer.subprocess.run") as run:
-                run.side_effect = [page([item])] * 100 + [page([item])]
+                run.side_effect = [page([{**item, "proposal_id": f"{i:064x}"}])
+                                   for i in range(101)]
                 result = transfer(researcher, root / "library", data, limit=1)
-            self.assertEqual(result["created"], 1)
-            self.assertEqual(result["existing"], 99)
+            self.assertEqual(result["created"], 100)
+            self.assertEqual(result["existing"], 0)
             self.assertTrue(result["has_more"])
             self.assertEqual(run.call_count, 101)
 
