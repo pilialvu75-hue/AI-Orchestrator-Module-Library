@@ -10,6 +10,7 @@ import argparse
 import json
 import os
 import subprocess
+import sqlite3
 import sys
 from pathlib import Path
 
@@ -22,12 +23,22 @@ def transfer(researcher: Path, library: Path, data_dir: Path, limit: int = 100) 
     source = researcher.resolve(strict=True)
     if not data_dir.is_dir():
         raise ValueError("Researcher data directory does not exist")
-    if not (data_dir / "researcher.db").is_file():
+    database = data_dir / "researcher.db"
+    if not database.is_file():
         raise ValueError("Researcher state database does not exist")
+    # Validate the state file without creating or writing database contents.
+    with sqlite3.connect(database.resolve().as_uri() + "?mode=ro", uri=True) as conn:
+        found = conn.execute(
+            "SELECT 1 FROM sqlite_master "
+            "WHERE type='table' AND name='improvement_proposals'"
+        ).fetchone()
+    if found is None:
+        raise ValueError("Researcher database lacks improvement proposals table")
     if not (source / "src" / "researcher" / "cli.py").is_file():
         raise ValueError("not a Researcher checkout")
     # Avoid inheriting unrelated credentials into the export subprocess.
-    env = {key: os.environ[key] for key in ("PATH", "HOME", "SYSTEMROOT", "WINDIR", "TMPDIR", "TEMP", "TMP") if key in os.environ}
+    allowed = ("PATH", "HOME", "SYSTEMROOT", "WINDIR", "TMPDIR", "TEMP", "TMP")
+    env = {key: os.environ[key] for key in allowed if key in os.environ}
     env["DATA_DIR"] = str(data_dir.resolve(strict=True))
     env["PYTHONPATH"] = str(source / "src")
     result = subprocess.run(
