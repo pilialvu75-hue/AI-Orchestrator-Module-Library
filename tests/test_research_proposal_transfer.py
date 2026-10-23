@@ -37,6 +37,7 @@ class TransferTests(unittest.TestCase):
                 run.return_value.stdout = json.dumps(payload)
                 result = transfer(researcher, library, data, limit=10)
             self.assertEqual(result["created"], 1)
+            self.assertFalse(result["has_more"])
             self.assertTrue(
                 (library / ".airlab/research-improvements/pending" / ("a" * 64 + ".json")).is_file()
             )
@@ -71,6 +72,7 @@ class TransferTests(unittest.TestCase):
                 ]
                 result = transfer(researcher, library, data, limit=2)
             self.assertEqual(result["created"], 3)
+            self.assertFalse(result["has_more"])
             self.assertEqual(run.call_count, 2)
             self.assertEqual(run.call_args_list[1].args[0][-2:], ["--offset", "2"])
 
