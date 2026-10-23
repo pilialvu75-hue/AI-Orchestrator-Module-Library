@@ -20,6 +20,10 @@ def transfer(researcher: Path, library: Path, data_dir: Path, limit: int = 100) 
     if not 1 <= limit <= 1000:
         raise ValueError("limit must be between 1 and 1000")
     source = researcher.resolve(strict=True)
+    if not data_dir.is_dir():
+        raise ValueError("Researcher data directory does not exist")
+    if not (data_dir / "researcher.db").is_file():
+        raise ValueError("Researcher state database does not exist")
     if not (source / "src" / "researcher" / "cli.py").is_file():
         raise ValueError("not a Researcher checkout")
     # Avoid inheriting unrelated credentials into the export subprocess.
