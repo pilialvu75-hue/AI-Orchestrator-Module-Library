@@ -1,4 +1,5 @@
 import json
+import sqlite3
 import sys
 import tempfile
 import unittest
@@ -18,7 +19,8 @@ class TransferTests(unittest.TestCase):
             (researcher / "src/researcher/cli.py").write_text("")
             data = root / "data"
             data.mkdir()
-            (data / "researcher.db").touch()
+            with sqlite3.connect(data / "researcher.db") as conn:
+                conn.execute("CREATE TABLE improvement_proposals (proposal_id TEXT)")
             library = root / "library"
             payload = {
                 "schema_version": 1,
@@ -40,6 +42,21 @@ class TransferTests(unittest.TestCase):
             )
             self.assertEqual(run.call_args.kwargs["env"]["DATA_DIR"], str(data))
             self.assertEqual(run.call_args.kwargs["timeout"], 60)
+
+    def test_invalid_database_schema_fails_before_export(self):
+        with tempfile.TemporaryDirectory() as td:
+            root = Path(td)
+            researcher = root / "researcher"
+            (researcher / "src/researcher").mkdir(parents=True)
+            (researcher / "src/researcher/cli.py").write_text("")
+            data = root / "data"
+            data.mkdir()
+            with sqlite3.connect(data / "researcher.db") as conn:
+                conn.execute("CREATE TABLE unrelated (id INTEGER)")
+            with patch("research_proposal_transfer.subprocess.run") as run:
+                with self.assertRaises(ValueError):
+                    transfer(researcher, root / "library", data)
+                run.assert_not_called()
 
     def test_missing_researcher_checkout_fails_closed(self):
         with tempfile.TemporaryDirectory() as td:
