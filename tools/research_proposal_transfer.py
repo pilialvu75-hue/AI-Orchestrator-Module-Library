@@ -69,7 +69,17 @@ def transfer(researcher: Path, library: Path, data_dir: Path, limit: int = 100) 
             break
         offset += count
     else:
-        raise RuntimeError("proposal export exceeded 100 pages; retry with a larger limit")
+        # A full final page may be exactly the end of the backlog.
+        # Probe the next page without importing it before reporting truncation.
+        result = subprocess.run(
+            [sys.executable, "-m", "researcher", "export-improvement-proposals",
+             "--limit", "1", "--offset", str(offset)],
+            cwd=source, env=env, check=True, capture_output=True, text=True, timeout=60,
+        )
+        probe = json.loads(result.stdout)
+        if not isinstance(probe, dict) or not isinstance(probe.get("proposals"), list):
+            raise ValueError("invalid Researcher export probe")
+        totals["has_more"] = bool(probe["proposals"])
     return totals
 
 
