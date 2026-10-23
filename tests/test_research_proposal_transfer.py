@@ -95,6 +95,31 @@ class TransferTests(unittest.TestCase):
                     transfer(researcher, root / "library", data, limit=1)
             self.assertFalse((root / "library/.airlab").exists())
 
+    def test_full_page_limit_reports_remaining_work(self):
+        with tempfile.TemporaryDirectory() as td:
+            root = Path(td)
+            researcher = root / "researcher"
+            (researcher / "src/researcher").mkdir(parents=True)
+            (researcher / "src/researcher/cli.py").write_text("")
+            data = root / "data"
+            data.mkdir()
+            with sqlite3.connect(data / "researcher.db") as conn:
+                conn.execute("CREATE TABLE improvement_proposals (proposal_id TEXT)")
+            item = {"proposal_id": "a" * 64, "capability_id": "ai.local_inference",
+                    "novelty": ["topic:quantization"],
+                    "acceptance_gates": ["security_gates_pass"], "status": "PROPOSED"}
+            def page(items):
+                return type("Result", (), {"stdout": json.dumps({
+                    "schema_version": 1, "kind": "research_improvement_proposals",
+                    "proposals": items})})()
+            with patch("research_proposal_transfer.subprocess.run") as run:
+                run.side_effect = [page([item])] * 100 + [page([item])]
+                result = transfer(researcher, root / "library", data, limit=1)
+            self.assertEqual(result["created"], 1)
+            self.assertEqual(result["existing"], 99)
+            self.assertTrue(result["has_more"])
+            self.assertEqual(run.call_count, 101)
+
     def test_invalid_database_schema_fails_before_export(self):
         with tempfile.TemporaryDirectory() as td:
             root = Path(td)
