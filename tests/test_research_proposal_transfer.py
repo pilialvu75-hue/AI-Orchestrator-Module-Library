@@ -74,6 +74,27 @@ class TransferTests(unittest.TestCase):
             self.assertEqual(run.call_count, 2)
             self.assertEqual(run.call_args_list[1].args[0][-2:], ["--offset", "2"])
 
+    def test_oversized_page_is_rejected(self):
+        with tempfile.TemporaryDirectory() as td:
+            root = Path(td)
+            researcher = root / "researcher"
+            (researcher / "src/researcher").mkdir(parents=True)
+            (researcher / "src/researcher/cli.py").write_text("")
+            data = root / "data"
+            data.mkdir()
+            with sqlite3.connect(data / "researcher.db") as conn:
+                conn.execute("CREATE TABLE improvement_proposals (proposal_id TEXT)")
+            item = {"proposal_id": "a" * 64, "capability_id": "ai.local_inference",
+                    "novelty": ["topic:quantization"],
+                    "acceptance_gates": ["security_gates_pass"], "status": "PROPOSED"}
+            payload = {"schema_version": 1, "kind": "research_improvement_proposals",
+                       "proposals": [item, {**item, "proposal_id": "b" * 64}]}
+            with patch("research_proposal_transfer.subprocess.run") as run:
+                run.return_value.stdout = json.dumps(payload)
+                with self.assertRaises(ValueError):
+                    transfer(researcher, root / "library", data, limit=1)
+            self.assertFalse((root / "library/.airlab").exists())
+
     def test_invalid_database_schema_fails_before_export(self):
         with tempfile.TemporaryDirectory() as td:
             root = Path(td)
