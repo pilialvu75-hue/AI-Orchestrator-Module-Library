@@ -1,0 +1,32 @@
+{
+  "proposal": {
+    "acceptance_gates": [
+      "implementation_tests_pass",
+      "security_gates_pass",
+      "regression_tests_pass",
+      "library_contract_pass"
+    ],
+    "capability_id": "ai.acceleration_backend",
+    "created_at": "2026-09-21T18:30:47.589825Z",
+    "novelty": [
+      "concept:\"skip",
+      "concept:awesome",
+      "concept:community",
+      "concept:daily",
+      "concept:honest",
+      "concept:install",
+      "concept:maturity",
+      "concept:open-source",
+      "concept:scored",
+      "concept:setup",
+      "concept:tells",
+      "concept:tools",
+      "practice:readme_present"
+    ],
+    "proposal_id": "46d3210c343113b4c5831284dcc3f1ff78add85561f6a06c636bcd1883a1553d",
+    "status": "PROPOSED"
+  },
+  "schema_version": 1,
+  "source": "AI-Orchestrator-Module-Researcher",
+  "state": "AWAITING_TRIAGE"
+}

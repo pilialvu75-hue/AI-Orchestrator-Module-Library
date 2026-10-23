@@ -1,0 +1,32 @@
+{
+  "proposal": {
+    "acceptance_gates": [
+      "implementation_tests_pass",
+      "security_gates_pass",
+      "regression_tests_pass",
+      "library_contract_pass"
+    ],
+    "capability_id": "ai.acceleration_backend",
+    "created_at": "2026-09-21T18:30:47.654358Z",
+    "novelty": [
+      "concept:automotive",
+      "concept:clear",
+      "concept:concepts",
+      "concept:concise",
+      "concept:cybersecurity",
+      "concept:definitions",
+      "concept:glossary",
+      "concept:provides",
+      "concept:security",
+      "concept:terminology",
+      "language:javascript",
+      "topic:automotive-security",
+      "topic:carhacking"
+    ],
+    "proposal_id": "05a00bb657e83f59f8b4603f9a328f967bfd4736f6433ffefb12fd3517150d48",
+    "status": "PROPOSED"
+  },
+  "schema_version": 1,
+  "source": "AI-Orchestrator-Module-Researcher",
+  "state": "AWAITING_TRIAGE"
+}

@@ -1,0 +1,33 @@
+{
+  "proposal": {
+    "acceptance_gates": [
+      "implementation_tests_pass",
+      "security_gates_pass",
+      "regression_tests_pass",
+      "library_contract_pass"
+    ],
+    "capability_id": "ai.local_inference",
+    "created_at": "2026-09-21T18:30:47.680996Z",
+    "novelty": [
+      "concept:c/c++",
+      "concept:model",
+      "concept:openai's",
+      "concept:whisper",
+      "language:c++",
+      "manifest_kind:build.gradle",
+      "manifest_kind:go.mod",
+      "manifest_kind:package.json",
+      "manifest_kind:requirements.txt",
+      "topic:inference",
+      "topic:speech-recognition",
+      "topic:speech-to-text",
+      "topic:transformer",
+      "topic:whisper"
+    ],
+    "proposal_id": "4c66f3eafc9fea84f55cecb2afee4eb2033778e26a0b1738f7bab56c6d743848",
+    "status": "PROPOSED"
+  },
+  "schema_version": 1,
+  "source": "AI-Orchestrator-Module-Researcher",
+  "state": "AWAITING_TRIAGE"
+}

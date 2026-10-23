@@ -1,0 +1,23 @@
+{
+  "proposal": {
+    "acceptance_gates": [
+      "implementation_tests_pass",
+      "security_gates_pass",
+      "regression_tests_pass",
+      "library_contract_pass"
+    ],
+    "capability_id": "ai.acceleration_backend",
+    "created_at": "2026-09-21T18:30:47.636373Z",
+    "novelty": [
+      "concept:projects",
+      "concept:research",
+      "manifest_kind:cargo.toml",
+      "manifest_kind:go.mod"
+    ],
+    "proposal_id": "eda909bd282ca22bdb2c789a20721f9a4c6c836f412df49bf1ddd9e4576d4ff6",
+    "status": "PROPOSED"
+  },
+  "schema_version": 1,
+  "source": "AI-Orchestrator-Module-Researcher",
+  "state": "AWAITING_TRIAGE"
+}
