@@ -22,7 +22,8 @@ def transfer(researcher: Path, library: Path, data_dir: Path, limit: int = 100) 
     source = researcher.resolve(strict=True)
     if not (source / "src" / "researcher" / "cli.py").is_file():
         raise ValueError("not a Researcher checkout")
-    env = dict(os.environ)
+    # Avoid inheriting unrelated credentials into the export subprocess.
+    env = {key: os.environ[key] for key in ("PATH", "HOME", "SYSTEMROOT", "WINDIR", "TMPDIR", "TEMP", "TMP") if key in os.environ}
     env["DATA_DIR"] = str(data_dir.resolve(strict=True))
     env["PYTHONPATH"] = str(source / "src")
     result = subprocess.run(
