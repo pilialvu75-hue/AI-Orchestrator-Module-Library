@@ -56,7 +56,12 @@ def transfer(researcher: Path, library: Path, data_dir: Path, limit: int = 100) 
             timeout=60,
         )
         payload = json.loads(result.stdout)
-        count = len(payload.get("proposals", []))
+        if not isinstance(payload, dict):
+            raise ValueError("invalid Researcher export payload")
+        proposals = payload.get("proposals")
+        if not isinstance(proposals, list) or len(proposals) > limit:
+            raise ValueError("Researcher export exceeded requested page size")
+        count = len(proposals)
         page = ingest(library, payload)
         for key in totals:
             totals[key] += page[key]
