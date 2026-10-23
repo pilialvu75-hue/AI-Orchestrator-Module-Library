@@ -122,6 +122,28 @@ class TransferTests(unittest.TestCase):
             self.assertTrue(result["has_more"])
             self.assertEqual(run.call_count, 101)
 
+    def test_duplicate_across_pages_fails_closed(self):
+        with tempfile.TemporaryDirectory() as td:
+            root = Path(td)
+            researcher = root / "researcher"
+            (researcher / "src/researcher").mkdir(parents=True)
+            (researcher / "src/researcher/cli.py").write_text("")
+            data = root / "data"
+            data.mkdir()
+            with sqlite3.connect(data / "researcher.db") as conn:
+                conn.execute("CREATE TABLE improvement_proposals (proposal_id TEXT)")
+            item = {"proposal_id": "a" * 64, "capability_id": "ai.local_inference",
+                    "novelty": ["topic:quantization"],
+                    "acceptance_gates": ["security_gates_pass"], "status": "PROPOSED"}
+            payload = json.dumps({"schema_version": 1,
+                                  "kind": "research_improvement_proposals",
+                                  "proposals": [item]})
+            with patch("research_proposal_transfer.subprocess.run") as run:
+                run.return_value.stdout = payload
+                with self.assertRaisesRegex(ValueError, "repeated proposals"):
+                    transfer(researcher, root / "library", data, limit=1)
+            self.assertEqual(run.call_count, 2)
+
     def test_invalid_database_schema_fails_before_export(self):
         with tempfile.TemporaryDirectory() as td:
             root = Path(td)
