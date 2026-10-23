@@ -36,11 +36,37 @@ def report(root: Path) -> dict:
         sorted(ids) for ids in exact.values() if len(ids) > 1
     ]
     duplicates.sort()
+    # Explicit policy preference only; not an inferred implementation readiness score.
+    preference = {
+        "ai.local_inference": 0,
+        "ai.acceleration_backend": 1,
+        "ai.model_storage": 2,
+        "auth.session": 3,
+    }
+    candidates = sorted(
+        rows,
+        key=lambda row: (
+            preference.get(row["capability_id"], 99),
+            row["capability_id"],
+            row["proposal_id"],
+        ),
+    )
+    review_queue = [
+        {
+            "proposal_id": row["proposal_id"],
+            "capability_id": row["capability_id"],
+            "priority_tier": preference.get(row["capability_id"], 99),
+            "readiness": "UNVERIFIED",
+            "next_action": "validate_source_license_security_compatibility_and_tests",
+        }
+        for row in candidates
+    ]
     return {
         "schema_version": 1,
         "kind": "research_proposal_triage_report",
         "total_pending": len(rows),
         "by_capability": dict(sorted(by_capability.items())),
+        "review_queue": review_queue,
         "exact_metadata_duplicate_groups": duplicates,
         "duplicate_review_count": sum(len(group) - 1 for group in duplicates),
         "requires_human_or_worker_validation": True,

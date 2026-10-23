@@ -31,6 +31,9 @@ class ProposalTriageTests(unittest.TestCase):
             before = {p.name: p.read_bytes() for p in pending.iterdir()}
             result = report(root)
             self.assertEqual(result["total_pending"], 3)
+            self.assertEqual([x["capability_id"] for x in result["review_queue"]], ["ai.local_inference", "ai.local_inference", "ai.acceleration_backend"])
+            self.assertTrue(all(x["readiness"] == "UNVERIFIED" for x in result["review_queue"]))
+            self.assertTrue(all(x["next_action"] == "validate_source_license_security_compatibility_and_tests" for x in result["review_queue"]))
             self.assertEqual(result["duplicate_review_count"], 1)
             self.assertEqual(result["exact_metadata_duplicate_groups"], [["a" * 64, "b" * 64]])
             self.assertEqual(result["by_capability"]["ai.local_inference"], 2)
