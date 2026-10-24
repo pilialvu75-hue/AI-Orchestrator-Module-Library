@@ -3,11 +3,11 @@
   "id": "cantiere",
   "title": "Cantiere",
   "role": "worker",
-  "status": "CLAIMED",
+  "status": "IMPLEMENTING",
   "activation": "active",
   "scope": "Exclusive Cantiere/App Factory execution, durability, build/review/validation/apply and first-real-app reliability.",
   "shared_engine_policy": "shared_or_control_plane",
-  "state_version": 133,
+  "state_version": 134,
   "updated_at": "2026-10-24",
   "active_claim": {
     "claim_id": "66dd75d49cc0f54b8cd6",
@@ -23,8 +23,8 @@
       "resource:cantiere-845-engineer-output-metrics"
     ],
     "started_at": "2026-10-24T18:01:04Z",
-    "heartbeat_at": "2026-10-24T18:01:04Z",
-    "lease_until": "2026-10-25T06:01:04Z",
+    "heartbeat_at": "2026-10-24T18:03:46Z",
+    "lease_until": "2026-10-25T06:03:46Z",
     "lease_hours": 12
   },
   "dependencies": [],
@@ -50,7 +50,7 @@
     "reviewed_by": null,
     "reviewed_at": null
   },
-  "next_action": "Run physical target acceptance; independent review remains outstanding.",
+  "next_action": "Inspect exact-head PR #884 CI, repair any proven issues; after CI deliver bounded review packet, preserve G5 original star as pending and G6 pending. Coordinate later public projection with draft Android PR #867 (overlapping Diagnostics path) rather than concurrent edits.",
   "historical_backlog": [
     "Stay in Phase 1 ONLINE until a real generated Android app is physically accepted.",
     "Reproduce the recent manga-drawing app failure from current main with Diagnostics; do not restart generic audits.",
@@ -80,19 +80,6 @@
     "continuation": "Do not re-enable broad Cantiere autopilot until the remaining control-plane concurrency/resource-lock weakness is addressed or explicitly accepted for the next pilot."
   },
   "checkpoints": [
-    {
-      "seq": 22,
-      "at": "2026-10-11T17:18:10Z",
-      "claim_id": "c792cfdec8aee6363eba",
-      "work_item": "AIVEXUS-BASE-1",
-      "summary": "PR #826 packet evidence is now complete and PASS on exact head 6eaf98bfd816ff26cb23401d0351c680b8bfb90e, but GitHub currently reports mergeable=false because Riserva main advanced to 9f320c82073fc74c7cd4a8b974071ec0addb3772. This is a merge-integration blocker, not a request to reopen BASE-1 functionality. Rework is limited to aligning the existing branch with current main, resolving only conflicts in the already claimed AIVEXUS-BASE-1 files, preserving scope and behavior, then re-running exact-head CI.",
-      "decisions": [
-        "Main/Reviewer requested bounded rework."
-      ],
-      "evidence_refs": [],
-      "next_action": "Update feat/aivexus-shared-project-base-v1 from current Riserva main 9f320c82073fc74c7cd4a8b974071ec0addb3772 without adding BASE-2 or domain work. Resolve only necessary integration conflicts, keep ProjectExtension/ResourceExchange semantics unchanged, run the existing six workflow gates on the new head, then resubmit the same claim-bound AIVEXUS-BASE-1 review packet with new commit/PR PASS evidence. Physical/device, Fusion/print/gameplay and BASE-2 remain open.",
-      "kind": "REVIEW_REWORK"
-    },
     {
       "seq": 23,
       "at": "2026-10-12T10:12:18Z",
@@ -1012,23 +999,45 @@
       ],
       "next_action": "Run physical target acceptance; independent review remains outstanding.",
       "kind": "EXTERNAL_MERGE_RECONCILIATION"
+    },
+    {
+      "seq": 72,
+      "at": "2026-10-24T18:03:46Z",
+      "claim_id": "66dd75d49cc0f54b8cd6",
+      "work_item": "issue-845-engineer-output-metrics-v1",
+      "summary": "After owner-directed PR #856 reconciliation APPLIED v132, claimed narrowly as fe? new claim 66dd75d49cc0f54b8cd6 v133. Implemented privacy-safe Engineer output metadata in WorkshopStageRoleInference, never recording prompt/source/IDs/exceptions. Draft PR #884 head 23df23470550b9a7ac4286d310a0bba0b73e7ca0 with tests of normal, identity and first-token paths. Seven exact-head CI workflows running; no Reviewer or RAM/token budget changed.",
+      "decisions": [
+        "Avoid source conflicts: do not edit Engineer implementation runner (open PR #583), inference pipeline (#769), Cantiere dashboard (#814), Android memory/Diagnostics (#867).",
+        "Keep prompt/source/session/project/task IDs out of persisted output-metadata events.",
+        "No Cantiere output considered physically validated. No local model retries or token-budget increase."
+      ],
+      "evidence_refs": [
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/884",
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/23df23470550b9a7ac4286d310a0bba0b73e7ca0",
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/issues/845",
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/867"
+      ],
+      "next_action": "Inspect exact-head PR #884 CI, repair any proven issues; after CI deliver bounded review packet, preserve G5 original star as pending and G6 pending. Coordinate later public projection with draft Android PR #867 (overlapping Diagnostics path) rather than concurrent edits."
     }
   ],
   "last_checkpoint": {
-    "seq": 71,
-    "at": "2026-10-24T17:30:41Z",
-    "claim_id": "fe3284318d6cfd4cf6b4",
-    "work_item": "issue-845-gate-evidence-visibility-v1",
-    "summary": "Owner-directed GitHub merge verified; not independently approved.",
+    "seq": 72,
+    "at": "2026-10-24T18:03:46Z",
+    "claim_id": "66dd75d49cc0f54b8cd6",
+    "work_item": "issue-845-engineer-output-metrics-v1",
+    "summary": "After owner-directed PR #856 reconciliation APPLIED v132, claimed narrowly as fe? new claim 66dd75d49cc0f54b8cd6 v133. Implemented privacy-safe Engineer output metadata in WorkshopStageRoleInference, never recording prompt/source/IDs/exceptions. Draft PR #884 head 23df23470550b9a7ac4286d310a0bba0b73e7ca0 with tests of normal, identity and first-token paths. Seven exact-head CI workflows running; no Reviewer or RAM/token budget changed.",
     "decisions": [
-      "Retain open G5/G6; do not infer runtime or reviewer approval."
+      "Avoid source conflicts: do not edit Engineer implementation runner (open PR #583), inference pipeline (#769), Cantiere dashboard (#814), Android memory/Diagnostics (#867).",
+      "Keep prompt/source/session/project/task IDs out of persisted output-metadata events.",
+      "No Cantiere output considered physically validated. No local model retries or token-budget increase."
     ],
     "evidence_refs": [
-      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/856",
-      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/a39a1db237bb259acf6d9b77f0772eb4404d0ac3"
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/884",
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/23df23470550b9a7ac4286d310a0bba0b73e7ca0",
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/issues/845",
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/867"
     ],
-    "next_action": "Run physical target acceptance; independent review remains outstanding.",
-    "kind": "EXTERNAL_MERGE_RECONCILIATION"
+    "next_action": "Inspect exact-head PR #884 CI, repair any proven issues; after CI deliver bounded review packet, preserve G5 original star as pending and G6 pending. Coordinate later public projection with draft Android PR #867 (overlapping Diagnostics path) rather than concurrent edits."
   },
   "review_history": [
     {
