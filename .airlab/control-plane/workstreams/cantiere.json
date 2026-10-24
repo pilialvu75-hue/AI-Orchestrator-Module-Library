@@ -3,119 +3,22 @@
   "id": "cantiere",
   "title": "Cantiere",
   "role": "worker",
-  "status": "REVIEW_REQUIRED",
+  "status": "READY",
   "activation": "active",
   "scope": "Exclusive Cantiere/App Factory execution, durability, build/review/validation/apply and first-real-app reliability.",
   "shared_engine_policy": "shared_or_control_plane",
-  "state_version": 131,
-  "updated_at": "2026-10-20",
-  "active_claim": {
-    "claim_id": "fe3284318d6cfd4cf6b4",
-    "owner_lane": "cantiere",
-    "work_item": "issue-845-gate-evidence-visibility-v1",
-    "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
-    "scope": "Final bounded Cantiere PR #856 exact-head CI and review packet handoff, original three authorized files, no Engineer changes",
-    "branch": "fix/cantiere-845-gate-evidence-visibility",
-    "resource_locks": [
-      "branch:pilialvu75-hue/Ai-orchestrator-riserva:fix/cantiere-845-gate-evidence-visibility",
-      "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/app_factory/workshop/workshop_gate_evidence_export.dart",
-      "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/app_factory/workshop/workshop_production_dashboard_page.dart",
-      "file:pilialvu75-hue/Ai-orchestrator-riserva:test/app_factory/workshop/workshop_gate_evidence_export_test.dart",
-      "resource:cantiere-845-gate-evidence-export"
-    ],
-    "started_at": "2026-10-19T15:51:39Z",
-    "heartbeat_at": "2026-10-19T15:51:39Z",
-    "lease_until": "2026-10-20T03:51:39Z",
-    "lease_hours": 12
-  },
+  "state_version": 132,
+  "updated_at": "2026-10-24",
+  "active_claim": null,
   "dependencies": [],
   "roadmap_refs": [
     ".airlab/public-repositories/Ai-orchestrator-riserva/roadmap.yaml#CANT-11",
     ".airlab/public-repositories/Ai-orchestrator-riserva/roadmap.yaml#AIVEXUS-BASE-1",
     ".airlab/public-repositories/Ai-orchestrator-riserva/roadmap.yaml#AIVEXUS-BASE-2"
   ],
-  "evidence": [
-    {
-      "type": "commit",
-      "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/d5b6fc5ab557c6fa679db42290462c6bcc621426",
-      "result": "PASS",
-      "note": "Exact latest PR head; bounded 3-file change with claim ownership; baseline main 7177e68b."
-    },
-    {
-      "type": "pull_request",
-      "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/856",
-      "result": "PASS",
-      "note": "Ready for independent review, open and unmerged. P2 old review thread resolved/outdated; new Codex review found no new problems on exact head."
-    },
-    {
-      "type": "test",
-      "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/39222270279/job/117960479360",
-      "result": "PASS",
-      "note": "Android job log gate export test file has 14 passing cases, including new project/task feedback identity and fail-closed privacy regressions."
-    },
-    {
-      "type": "ci",
-      "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/39222270279",
-      "result": "PASS",
-      "note": "Android Build & Release APK, Flutter analyze/tests, signed APK/AAB, CodeQL, ABI and artifact upload successful, exact head; PR artifacts not post-merge release."
-    },
-    {
-      "type": "ci",
-      "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/39222270752",
-      "result": "PASS",
-      "note": "Deterministic Cantiere First App fixture including physical-failure regression harness and offline Build Lab; not owner's original saved star project."
-    },
-    {
-      "type": "ci",
-      "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/39222270305",
-      "result": "PASS",
-      "note": "Web Cantiere CI on same head."
-    },
-    {
-      "type": "ci",
-      "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/39222270551",
-      "result": "PASS",
-      "note": "Windows desktop CI on same head."
-    },
-    {
-      "type": "ci",
-      "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/39222270296",
-      "result": "PASS",
-      "note": "Linux desktop CI on same head."
-    },
-    {
-      "type": "ci",
-      "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/39222270409",
-      "result": "PASS",
-      "note": "macOS desktop CI on same head."
-    },
-    {
-      "type": "analysis",
-      "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/856#issuecomment-6263014985",
-      "result": "PASS",
-      "note": "Automated Codex re-review on d5b6fc5 no new findings. Not canonical independent G6 approval."
-    },
-    {
-      "type": "analysis",
-      "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/856#discussion_r4311622544",
-      "result": "PASS",
-      "note": "Prior P2 stale clipboard status addressed and review thread resolved/outdated."
-    },
-    {
-      "type": "diagnostics",
-      "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/issues/845#issuecomment-6271320761",
-      "result": "INFO",
-      "note": "Physical +3285 Reviewer correctly rejected Engineer-generated incomplete lib/main.dart. The diagnostic PR helps capture code evidence in a later released host."
-    },
-    {
-      "type": "physical_device",
-      "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/issues/845",
-      "result": "PENDING",
-      "note": "G5 Samsung S24 FE original star project still has 0/1 tasks, no generated APK/install/launch/touch verification. Post-merge diagnostic host release not yet published or physically tested."
-    }
-  ],
+  "evidence": [],
   "gates": {
-    "G0_CLAIM": "PASS",
+    "G0_CLAIM": "PENDING",
     "G1_IMPLEMENTATION": "PENDING",
     "G2_STATIC": "PENDING",
     "G3_CI": "PENDING",
@@ -130,7 +33,7 @@
     "reviewed_by": null,
     "reviewed_at": null
   },
-  "next_action": "Main/Reviewer must inspect the review_packet, linked evidence and required gates before promotion or rework.",
+  "next_action": "Run physical target acceptance; independent review remains outstanding.",
   "historical_backlog": [
     "Stay in Phase 1 ONLINE until a real generated Android app is physically accepted.",
     "Reproduce the recent manga-drawing app failure from current main with Diagnostics; do not restart generic audits.",
@@ -160,28 +63,6 @@
     "continuation": "Do not re-enable broad Cantiere autopilot until the remaining control-plane concurrency/resource-lock weakness is addressed or explicitly accepted for the next pilot."
   },
   "checkpoints": [
-    {
-      "seq": 21,
-      "at": "2026-10-11T13:57:49Z",
-      "claim_id": "c792cfdec8aee6363eba",
-      "work_item": "AIVEXUS-BASE-1",
-      "summary": "Evidence-only resubmission for AIVEXUS-BASE-1 at exact PR #826 head 6eaf98bfd816ff26cb23401d0351c680b8bfb90e: commit and pull_request evidence now PASS after verification. All six existing CI workflow PASS receipts and test/analysis PASS receipts unchanged. No code/head modification, reviewer approval, merge, deployment or physical/domain acceptance claimed.",
-      "decisions": [],
-      "evidence_refs": [
-        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/6eaf98bfd816ff26cb23401d0351c680b8bfb90e",
-        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/826",
-        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38132363946",
-        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38132363946/job/114449143774",
-        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38132363946/job/114449143774",
-        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38132363928",
-        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38132363925",
-        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38132363991",
-        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38132363929",
-        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38132364000"
-      ],
-      "next_action": "Main/Reviewer must inspect the review_packet, linked evidence and required gates before promotion or rework.",
-      "kind": "REVIEW_HANDOFF"
-    },
     {
       "seq": 22,
       "at": "2026-10-11T17:18:10Z",
@@ -1098,32 +979,39 @@
       ],
       "next_action": "Main/Reviewer must inspect the review_packet, linked evidence and required gates before promotion or rework.",
       "kind": "REVIEW_HANDOFF"
+    },
+    {
+      "seq": 71,
+      "at": "2026-10-24T17:30:41Z",
+      "claim_id": "fe3284318d6cfd4cf6b4",
+      "work_item": "issue-845-gate-evidence-visibility-v1",
+      "summary": "Owner-directed GitHub merge verified; not independently approved.",
+      "decisions": [
+        "Retain open G5/G6; do not infer runtime or reviewer approval."
+      ],
+      "evidence_refs": [
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/856",
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/a39a1db237bb259acf6d9b77f0772eb4404d0ac3"
+      ],
+      "next_action": "Run physical target acceptance; independent review remains outstanding.",
+      "kind": "EXTERNAL_MERGE_RECONCILIATION"
     }
   ],
   "last_checkpoint": {
-    "seq": 70,
-    "at": "2026-10-19T15:53:09Z",
+    "seq": 71,
+    "at": "2026-10-24T17:30:41Z",
     "claim_id": "fe3284318d6cfd4cf6b4",
     "work_item": "issue-845-gate-evidence-visibility-v1",
-    "summary": "Review-ready diagnosis for S24 FE +3285 first-star-app Reviewer rejection. PR #856 on d5b6fc5 shows persistent privacy-safe rejected gate evidence clipboard feedback; latest rework binds message to saved project/task to prevent stale messages and asynchronous Snackbar confusion. All 6 exact-head CI successful, 14/14 focused export tests passed, new Codex review on same head has no findings; old P2 thread resolved. No modifications to Engineer source generation, Reviewer/Validation authority, models, or safety limits. Original star app still 0/1 and not generated; owner physical acceptance G5 remains pending.",
-    "decisions": [],
-    "evidence_refs": [
-      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/d5b6fc5ab557c6fa679db42290462c6bcc621426",
-      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/856",
-      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/39222270279/job/117960479360",
-      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/39222270279",
-      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/39222270752",
-      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/39222270305",
-      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/39222270551",
-      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/39222270296",
-      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/39222270409",
-      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/856#issuecomment-6263014985",
-      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/856#discussion_r4311622544",
-      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/issues/845#issuecomment-6271320761",
-      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/issues/845"
+    "summary": "Owner-directed GitHub merge verified; not independently approved.",
+    "decisions": [
+      "Retain open G5/G6; do not infer runtime or reviewer approval."
     ],
-    "next_action": "Main/Reviewer must inspect the review_packet, linked evidence and required gates before promotion or rework.",
-    "kind": "REVIEW_HANDOFF"
+    "evidence_refs": [
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/856",
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/a39a1db237bb259acf6d9b77f0772eb4404d0ac3"
+    ],
+    "next_action": "Run physical target acceptance; independent review remains outstanding.",
+    "kind": "EXTERNAL_MERGE_RECONCILIATION"
   },
   "review_history": [
     {
@@ -1302,13 +1190,6 @@
     }
   ],
   "reconciliation_events": [
-    {
-      "type": "CLAIM_RELEASED",
-      "claim_id": "2e5e9291924d5c3f141c",
-      "work_item": "issue-845-first-star-app-review-scope-3184",
-      "reason": "CI discovered that strict full-diff allowlist rejects legitimate previously certified Library staged files. Releasing before re-claim with exact additional task-pipeline locks and revised provenance-gated scope.",
-      "at": "2026-10-14T21:10:18Z"
-    },
     {
       "type": "WAIT_ENTERED",
       "wait_id": "cantiere:026e0790f36a8e294ae1:WAITING_EXTERNAL",
@@ -1569,6 +1450,15 @@
       "lease_until": "2026-10-20T03:51:39Z",
       "detected_at": "2026-10-20T04:32:03Z",
       "review_required": true
+    },
+    {
+      "type": "OWNER_DIRECTED_EXTERNAL_MERGE_RECONCILED",
+      "claim_id": "fe3284318d6cfd4cf6b4",
+      "work_item": "issue-845-gate-evidence-visibility-v1",
+      "merge_commit_sha": "a39a1db237bb259acf6d9b77f0772eb4404d0ac3",
+      "packet_sha256": "b0fd1a6b5fca318e0f4c88ac30684d60d6ab8bbc14593f2f9df550adf89364ac",
+      "at": "2026-10-24T17:30:41Z",
+      "review_approved": false
     }
   ],
   "review_packet_history": [
@@ -3435,123 +3325,126 @@
           ".airlab/public-repositories/Ai-orchestrator-riserva/roadmap.yaml#CANT-11"
         ]
       }
-    }
-  ],
-  "review_packet": {
-    "schema_version": 1,
-    "submitted_at": "2026-10-19T15:52:00Z",
-    "lane_id": "cantiere",
-    "claim_id": "fe3284318d6cfd4cf6b4",
-    "work_item": "issue-845-gate-evidence-visibility-v1",
-    "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
-    "branch": "fix/cantiere-845-gate-evidence-visibility",
-    "pull_request": 856,
-    "summary": "Review-ready diagnosis for S24 FE +3285 first-star-app Reviewer rejection. PR #856 on d5b6fc5 shows persistent privacy-safe rejected gate evidence clipboard feedback; latest rework binds message to saved project/task to prevent stale messages and asynchronous Snackbar confusion. All 6 exact-head CI successful, 14/14 focused export tests passed, new Codex review on same head has no findings; old P2 thread resolved. No modifications to Engineer source generation, Reviewer/Validation authority, models, or safety limits. Original star app still 0/1 and not generated; owner physical acceptance G5 remains pending.",
-    "changes": [
-      "lib/app_factory/workshop/workshop_gate_evidence_export.dart: map known export failure codes to privacy-safe user explanations, preserve strict failed-gate provenance, source limits and task scoping; add immutable project+task-bound feedback data class.",
-      "lib/app_factory/workshop/workshop_production_dashboard_page.dart: show persistent selectable failure/success-request feedback under explicit copy button; handle clipboard exceptions and suppress stale UI/Snackbar after switching saved project or task; clear feedback on retry.",
-      "test/app_factory/workshop/workshop_gate_evidence_export_test.dart: preserve existing fail-closed and source provenance tests; cover missing/incomplete/oversized source, sensitive exceptions, and same task across different projects or same project across different tasks."
-    ],
-    "evidence": [
-      {
-        "type": "commit",
-        "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/d5b6fc5ab557c6fa679db42290462c6bcc621426",
-        "result": "PASS",
-        "note": "Exact latest PR head; bounded 3-file change with claim ownership; baseline main 7177e68b."
-      },
-      {
-        "type": "pull_request",
-        "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/856",
-        "result": "PASS",
-        "note": "Ready for independent review, open and unmerged. P2 old review thread resolved/outdated; new Codex review found no new problems on exact head."
-      },
-      {
-        "type": "test",
-        "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/39222270279/job/117960479360",
-        "result": "PASS",
-        "note": "Android job log gate export test file has 14 passing cases, including new project/task feedback identity and fail-closed privacy regressions."
-      },
-      {
-        "type": "ci",
-        "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/39222270279",
-        "result": "PASS",
-        "note": "Android Build & Release APK, Flutter analyze/tests, signed APK/AAB, CodeQL, ABI and artifact upload successful, exact head; PR artifacts not post-merge release."
-      },
-      {
-        "type": "ci",
-        "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/39222270752",
-        "result": "PASS",
-        "note": "Deterministic Cantiere First App fixture including physical-failure regression harness and offline Build Lab; not owner's original saved star project."
-      },
-      {
-        "type": "ci",
-        "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/39222270305",
-        "result": "PASS",
-        "note": "Web Cantiere CI on same head."
-      },
-      {
-        "type": "ci",
-        "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/39222270551",
-        "result": "PASS",
-        "note": "Windows desktop CI on same head."
-      },
-      {
-        "type": "ci",
-        "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/39222270296",
-        "result": "PASS",
-        "note": "Linux desktop CI on same head."
-      },
-      {
-        "type": "ci",
-        "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/39222270409",
-        "result": "PASS",
-        "note": "macOS desktop CI on same head."
-      },
-      {
-        "type": "analysis",
-        "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/856#issuecomment-6263014985",
-        "result": "PASS",
-        "note": "Automated Codex re-review on d5b6fc5 no new findings. Not canonical independent G6 approval."
-      },
-      {
-        "type": "analysis",
-        "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/856#discussion_r4311622544",
-        "result": "PASS",
-        "note": "Prior P2 stale clipboard status addressed and review thread resolved/outdated."
-      },
-      {
-        "type": "diagnostics",
-        "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/issues/845#issuecomment-6271320761",
-        "result": "INFO",
-        "note": "Physical +3285 Reviewer correctly rejected Engineer-generated incomplete lib/main.dart. The diagnostic PR helps capture code evidence in a later released host."
-      },
-      {
-        "type": "physical_device",
-        "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/issues/845",
-        "result": "PENDING",
-        "note": "G5 Samsung S24 FE original star project still has 0/1 tasks, no generated APK/install/launch/touch verification. Post-merge diagnostic host release not yet published or physically tested."
+    },
+    {
+      "claim_id": "fe3284318d6cfd4cf6b4",
+      "work_item": "issue-845-gate-evidence-visibility-v1",
+      "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
+      "pr_number": 856,
+      "head_sha": "d5b6fc5ab557c6fa679db42290462c6bcc621426",
+      "merge_commit_sha": "a39a1db237bb259acf6d9b77f0772eb4404d0ac3",
+      "packet_sha256": "b0fd1a6b5fca318e0f4c88ac30684d60d6ab8bbc14593f2f9df550adf89364ac",
+      "actor_id": "chatgpt:cantiere",
+      "at": "2026-10-24T17:30:41Z",
+      "review_approved": false,
+      "physical_runtime_verified": false,
+      "known_risks": [
+        "Cause of original Android clipboard failure is still unknown: missing/incomplete snapshot, oversized source or Android clipboard platform behavior have not been discriminated by a physical run on a host containing this PR.",
+        "Clipboard.setData success only confirms accepted platform request, not clipboard readback or successful pasting by external app; no runtime test of new UI on S24 FE.",
+        "The widget diagnostic feedback is project+task-bound, with deterministic test at helper level; physical navigation and clipboard concurrency not verified on phone.",
+        "Original Engineer produced incomplete star color interaction logic in lib/main.dart; Reviewer correctly refused. This PR intentionally does not solve Engineer functional fidelity or bypass Reviewer/Validation.",
+        "PR #856 Android build artifacts are PR-head CI outputs, not published signed post-merge host release; original star APK G5 and canonical G6 remain pending."
+      ],
+      "original_summary": "Review-ready diagnosis for S24 FE +3285 first-star-app Reviewer rejection. PR #856 on d5b6fc5 shows persistent privacy-safe rejected gate evidence clipboard feedback; latest rework binds message to saved project/task to prevent stale messages and asynchronous Snackbar confusion. All 6 exact-head CI successful, 14/14 focused export tests passed, new Codex review on same head has no findings; old P2 thread resolved. No modifications to Engineer source generation, Reviewer/Validation authority, models, or safety limits. Original star app still 0/1 and not generated; owner physical acceptance G5 remains pending.",
+      "original_changes": [
+        "lib/app_factory/workshop/workshop_gate_evidence_export.dart: map known export failure codes to privacy-safe user explanations, preserve strict failed-gate provenance, source limits and task scoping; add immutable project+task-bound feedback data class.",
+        "lib/app_factory/workshop/workshop_production_dashboard_page.dart: show persistent selectable failure/success-request feedback under explicit copy button; handle clipboard exceptions and suppress stale UI/Snackbar after switching saved project or task; clear feedback on retry.",
+        "test/app_factory/workshop/workshop_gate_evidence_export_test.dart: preserve existing fail-closed and source provenance tests; cover missing/incomplete/oversized source, sensitive exceptions, and same task across different projects or same project across different tasks."
+      ],
+      "original_evidence": [
+        {
+          "type": "commit",
+          "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/d5b6fc5ab557c6fa679db42290462c6bcc621426",
+          "result": "PASS",
+          "note": "Exact latest PR head; bounded 3-file change with claim ownership; baseline main 7177e68b."
+        },
+        {
+          "type": "pull_request",
+          "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/856",
+          "result": "PASS",
+          "note": "Ready for independent review, open and unmerged. P2 old review thread resolved/outdated; new Codex review found no new problems on exact head."
+        },
+        {
+          "type": "test",
+          "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/39222270279/job/117960479360",
+          "result": "PASS",
+          "note": "Android job log gate export test file has 14 passing cases, including new project/task feedback identity and fail-closed privacy regressions."
+        },
+        {
+          "type": "ci",
+          "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/39222270279",
+          "result": "PASS",
+          "note": "Android Build & Release APK, Flutter analyze/tests, signed APK/AAB, CodeQL, ABI and artifact upload successful, exact head; PR artifacts not post-merge release."
+        },
+        {
+          "type": "ci",
+          "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/39222270752",
+          "result": "PASS",
+          "note": "Deterministic Cantiere First App fixture including physical-failure regression harness and offline Build Lab; not owner's original saved star project."
+        },
+        {
+          "type": "ci",
+          "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/39222270305",
+          "result": "PASS",
+          "note": "Web Cantiere CI on same head."
+        },
+        {
+          "type": "ci",
+          "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/39222270551",
+          "result": "PASS",
+          "note": "Windows desktop CI on same head."
+        },
+        {
+          "type": "ci",
+          "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/39222270296",
+          "result": "PASS",
+          "note": "Linux desktop CI on same head."
+        },
+        {
+          "type": "ci",
+          "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/39222270409",
+          "result": "PASS",
+          "note": "macOS desktop CI on same head."
+        },
+        {
+          "type": "analysis",
+          "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/856#issuecomment-6263014985",
+          "result": "PASS",
+          "note": "Automated Codex re-review on d5b6fc5 no new findings. Not canonical independent G6 approval."
+        },
+        {
+          "type": "analysis",
+          "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/856#discussion_r4311622544",
+          "result": "PASS",
+          "note": "Prior P2 stale clipboard status addressed and review thread resolved/outdated."
+        },
+        {
+          "type": "diagnostics",
+          "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/issues/845#issuecomment-6271320761",
+          "result": "INFO",
+          "note": "Physical +3285 Reviewer correctly rejected Engineer-generated incomplete lib/main.dart. The diagnostic PR helps capture code evidence in a later released host."
+        },
+        {
+          "type": "physical_device",
+          "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/issues/845",
+          "result": "PENDING",
+          "note": "G5 Samsung S24 FE original star project still has 0/1 tasks, no generated APK/install/launch/touch verification. Post-merge diagnostic host release not yet published or physically tested."
+        }
+      ],
+      "original_reviewer_checks": [
+        "Inspect exact 3 changed files, original main baseline and claim scope; do not approve unrelated changes.",
+        "Confirm no source, project ID, raw exception details or model prompts are emitted to public logs or generic visible error paths; rejected gate export remains opt-in and fail-closed.",
+        "Verify project/task identity guard for restored saved projects, cleared/hidden statuses and suppression of delayed Snackbar; compare to resolved P2 Codex thread.",
+        "Verify 14 named gate-export tests and 6 complete exact-head CI on d5b6fc5, including Android signed artifact and CodeQL steps.",
+        "Distinguish safe diagnostic functionality from the separate Engineer-generated incomplete star output; preserve G5/G6 and app install/launch/tap as pending.",
+        "Record independent canonical review/G1-G4 evidence according to current control-plane rules; Codex suggestions and green CI do not alone authorize G6 approval."
+      ],
+      "roadmap_impact": {
+        "material": false,
+        "refs": [
+          ".airlab/public-repositories/Ai-orchestrator-riserva/roadmap.yaml"
+        ]
       }
-    ],
-    "known_risks": [
-      "Cause of original Android clipboard failure is still unknown: missing/incomplete snapshot, oversized source or Android clipboard platform behavior have not been discriminated by a physical run on a host containing this PR.",
-      "Clipboard.setData success only confirms accepted platform request, not clipboard readback or successful pasting by external app; no runtime test of new UI on S24 FE.",
-      "The widget diagnostic feedback is project+task-bound, with deterministic test at helper level; physical navigation and clipboard concurrency not verified on phone.",
-      "Original Engineer produced incomplete star color interaction logic in lib/main.dart; Reviewer correctly refused. This PR intentionally does not solve Engineer functional fidelity or bypass Reviewer/Validation.",
-      "PR #856 Android build artifacts are PR-head CI outputs, not published signed post-merge host release; original star APK G5 and canonical G6 remain pending."
-    ],
-    "reviewer_checks": [
-      "Inspect exact 3 changed files, original main baseline and claim scope; do not approve unrelated changes.",
-      "Confirm no source, project ID, raw exception details or model prompts are emitted to public logs or generic visible error paths; rejected gate export remains opt-in and fail-closed.",
-      "Verify project/task identity guard for restored saved projects, cleared/hidden statuses and suppression of delayed Snackbar; compare to resolved P2 Codex thread.",
-      "Verify 14 named gate-export tests and 6 complete exact-head CI on d5b6fc5, including Android signed artifact and CodeQL steps.",
-      "Distinguish safe diagnostic functionality from the separate Engineer-generated incomplete star output; preserve G5/G6 and app install/launch/tap as pending.",
-      "Record independent canonical review/G1-G4 evidence according to current control-plane rules; Codex suggestions and green CI do not alone authorize G6 approval."
-    ],
-    "roadmap_impact": {
-      "material": false,
-      "refs": [
-        ".airlab/public-repositories/Ai-orchestrator-riserva/roadmap.yaml"
-      ]
     }
-  }
+  ]
 }

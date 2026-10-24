@@ -6,8 +6,8 @@
     "owner_lane": "main-reviewer",
     "policy": "This private repository is the single coordination authority. Chats and agents are workers, not independent sources of truth."
   },
-  "updated_at": "2026-10-20",
-  "state_revision": 355,
+  "updated_at": "2026-10-24",
+  "state_revision": 356,
   "lifecycle_status": "BOOTSTRAP_ACTIVE",
   "roadmap_authority": {
     "library": ".airlab/roadmap.yaml",
@@ -81,28 +81,14 @@
     "invalid_lane_behavior": "ISOLATE_AND_SURFACE_PROJECTION_INCIDENT"
   },
   "projection": {
-    "source_digest": "cd212f1fc681ef64728b4a509abf021e31ba4447cdff51bf4d10b69ec0a7e3fd",
-    "projected_at": "2026-10-20T04:32:03Z",
+    "source_digest": "0bcacf55a6d07cc1ac82ee2cccb804efa33769ba945dafe49cc15e5dab57f273",
+    "projected_at": "2026-10-24T17:30:41Z",
     "counts": {
       "BLOCKED": 2,
-      "READY": 13,
-      "REVIEW_REQUIRED": 3
+      "READY": 14,
+      "REVIEW_REQUIRED": 2
     },
     "active_claims": [
-      {
-        "lane": "cantiere",
-        "claim_id": "fe3284318d6cfd4cf6b4",
-        "work_item": "issue-845-gate-evidence-visibility-v1",
-        "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
-        "lease_until": "2026-10-20T03:51:39Z",
-        "resource_locks": [
-          "branch:pilialvu75-hue/Ai-orchestrator-riserva:fix/cantiere-845-gate-evidence-visibility",
-          "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/app_factory/workshop/workshop_gate_evidence_export.dart",
-          "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/app_factory/workshop/workshop_production_dashboard_page.dart",
-          "file:pilialvu75-hue/Ai-orchestrator-riserva:test/app_factory/workshop/workshop_gate_evidence_export_test.dart",
-          "resource:cantiere-845-gate-evidence-export"
-        ]
-      },
       {
         "lane": "library-researcher",
         "claim_id": "a3be2c00b7d608d2df75",
@@ -145,12 +131,6 @@
         "work_item": "issue-849-android-selective-backup-exclusions"
       },
       {
-        "key": "branch:pilialvu75-hue/Ai-orchestrator-riserva:fix/cantiere-845-gate-evidence-visibility",
-        "lane": "cantiere",
-        "claim_id": "fe3284318d6cfd4cf6b4",
-        "work_item": "issue-845-gate-evidence-visibility-v1"
-      },
-      {
         "key": "file:pilialvu75-hue/AI-Orchestrator-Module-Researcher:.github/workflows/autonomous-seeding.yml",
         "lane": "library-researcher",
         "claim_id": "a3be2c00b7d608d2df75",
@@ -181,34 +161,10 @@
         "work_item": "issue-849-android-selective-backup-exclusions"
       },
       {
-        "key": "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/app_factory/workshop/workshop_gate_evidence_export.dart",
-        "lane": "cantiere",
-        "claim_id": "fe3284318d6cfd4cf6b4",
-        "work_item": "issue-845-gate-evidence-visibility-v1"
-      },
-      {
-        "key": "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/app_factory/workshop/workshop_production_dashboard_page.dart",
-        "lane": "cantiere",
-        "claim_id": "fe3284318d6cfd4cf6b4",
-        "work_item": "issue-845-gate-evidence-visibility-v1"
-      },
-      {
-        "key": "file:pilialvu75-hue/Ai-orchestrator-riserva:test/app_factory/workshop/workshop_gate_evidence_export_test.dart",
-        "lane": "cantiere",
-        "claim_id": "fe3284318d6cfd4cf6b4",
-        "work_item": "issue-845-gate-evidence-visibility-v1"
-      },
-      {
         "key": "resource:android-issue-849-backup-policy",
         "lane": "platform-android",
         "claim_id": "394d8d0d738e8b921f03",
         "work_item": "issue-849-android-selective-backup-exclusions"
-      },
-      {
-        "key": "resource:cantiere-845-gate-evidence-export",
-        "lane": "cantiere",
-        "claim_id": "fe3284318d6cfd4cf6b4",
-        "work_item": "issue-845-gate-evidence-visibility-v1"
       },
       {
         "key": "resource:researcher-discovery-reliability",
@@ -218,7 +174,6 @@
       }
     ],
     "review_required": [
-      "cantiere",
       "library-researcher",
       "platform-android"
     ],
@@ -264,16 +219,6 @@
       }
     ],
     "checkpoint_watch": [
-      {
-        "lane": "cantiere",
-        "claim_id": "fe3284318d6cfd4cf6b4",
-        "work_item": "issue-845-gate-evidence-visibility-v1",
-        "status": "REVIEW_REQUIRED",
-        "reason": "CHECKPOINT_STALE",
-        "last_checkpoint_at": "2026-10-19T15:53:09Z",
-        "due_since": "2026-10-19T17:53:09Z",
-        "warning_after_minutes": 120
-      },
       {
         "lane": "library-researcher",
         "claim_id": "a3be2c00b7d608d2df75",
@@ -393,27 +338,15 @@
       },
       {
         "id": "cantiere",
-        "status": "REVIEW_REQUIRED",
+        "status": "READY",
         "activation": "active",
-        "state_version": 131,
-        "updated_at": "2026-10-20",
-        "active_claim": {
-          "claim_id": "fe3284318d6cfd4cf6b4",
-          "work_item": "issue-845-gate-evidence-visibility-v1",
-          "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
-          "lease_until": "2026-10-20T03:51:39Z",
-          "resource_locks": [
-            "branch:pilialvu75-hue/Ai-orchestrator-riserva:fix/cantiere-845-gate-evidence-visibility",
-            "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/app_factory/workshop/workshop_gate_evidence_export.dart",
-            "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/app_factory/workshop/workshop_production_dashboard_page.dart",
-            "file:pilialvu75-hue/Ai-orchestrator-riserva:test/app_factory/workshop/workshop_gate_evidence_export_test.dart",
-            "resource:cantiere-845-gate-evidence-export"
-          ]
-        },
+        "state_version": 132,
+        "updated_at": "2026-10-24",
+        "active_claim": null,
         "reviewer_state": "PENDING",
         "inference_profile_status": null,
         "historical_backlog_count": 3,
-        "next_action": "Main/Reviewer must inspect the review_packet, linked evidence and required gates before promotion or rework."
+        "next_action": "Run physical target acceptance; independent review remains outstanding."
       },
       {
         "id": "diagnostics",
