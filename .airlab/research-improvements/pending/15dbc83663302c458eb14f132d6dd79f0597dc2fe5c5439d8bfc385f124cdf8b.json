@@ -1,0 +1,43 @@
+{
+  "proposal": {
+    "acceptance_gates": [
+      "implementation_tests_pass",
+      "security_gates_pass",
+      "regression_tests_pass",
+      "library_contract_pass"
+    ],
+    "capability_id": "auth.session",
+    "created_at": "2026-10-24T01:11:42.898094Z",
+    "novelty": [
+      "concept:alternative",
+      "concept:auth0/keycloak",
+      "concept:biometric",
+      "concept:cloud",
+      "concept:enterprise-ready",
+      "concept:passkeys",
+      "concept:passwordless",
+      "concept:source",
+      "topic:2fa",
+      "topic:auth0",
+      "topic:biometric",
+      "topic:clerk-alternative",
+      "topic:firebase-alternative",
+      "topic:identity",
+      "topic:identity-provider",
+      "topic:keycloak",
+      "topic:mfa",
+      "topic:oidc",
+      "topic:openid-connect",
+      "topic:passkeys",
+      "topic:passwordless",
+      "topic:sso",
+      "topic:supertokens",
+      "topic:webauthn"
+    ],
+    "proposal_id": "15dbc83663302c458eb14f132d6dd79f0597dc2fe5c5439d8bfc385f124cdf8b",
+    "status": "PROPOSED"
+  },
+  "schema_version": 1,
+  "source": "AI-Orchestrator-Module-Researcher",
+  "state": "AWAITING_TRIAGE"
+}
