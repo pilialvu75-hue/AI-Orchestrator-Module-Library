@@ -1,0 +1,22 @@
+{
+  "proposal": {
+    "acceptance_gates": [
+      "implementation_tests_pass",
+      "security_gates_pass",
+      "regression_tests_pass",
+      "library_contract_pass"
+    ],
+    "capability_id": "diagnostics.logging",
+    "created_at": "2026-10-24T06:42:12.822138Z",
+    "novelty": [
+      "concept:collection",
+      "concept:servers",
+      "topic:ai"
+    ],
+    "proposal_id": "c0ac19fc83d45cfcba6ee30880a03e23ba9e7859fdb48f32840d719212bae9ca",
+    "status": "PROPOSED"
+  },
+  "schema_version": 1,
+  "source": "AI-Orchestrator-Module-Researcher",
+  "state": "AWAITING_TRIAGE"
+}

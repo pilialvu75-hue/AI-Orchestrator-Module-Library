@@ -1,0 +1,24 @@
+{
+  "proposal": {
+    "acceptance_gates": [
+      "implementation_tests_pass",
+      "security_gates_pass",
+      "regression_tests_pass",
+      "library_contract_pass"
+    ],
+    "capability_id": "ai.model_storage",
+    "created_at": "2026-10-23T18:45:59.683273Z",
+    "novelty": [
+      "concept:learnings",
+      "concept:meeting",
+      "concept:minutes",
+      "concept:physical",
+      "concept:space"
+    ],
+    "proposal_id": "d4f81fa7ad9ebd4b43fbc1be08810de8200e050b58cee0ef68823e4c6914b581",
+    "status": "PROPOSED"
+  },
+  "schema_version": 1,
+  "source": "AI-Orchestrator-Module-Researcher",
+  "state": "AWAITING_TRIAGE"
+}

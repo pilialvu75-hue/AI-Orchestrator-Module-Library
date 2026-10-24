@@ -1,0 +1,38 @@
+{
+  "proposal": {
+    "acceptance_gates": [
+      "implementation_tests_pass",
+      "security_gates_pass",
+      "regression_tests_pass",
+      "library_contract_pass"
+    ],
+    "capability_id": "diagnostics.logging",
+    "created_at": "2026-10-24T06:42:12.231025Z",
+    "novelty": [
+      "concept:achieves",
+      "concept:android",
+      "concept:androidworld",
+      "concept:antigravity",
+      "concept:artemis",
+      "concept:assistants",
+      "concept:automates",
+      "concept:automation",
+      "concept:benchmark",
+      "concept:captures",
+      "concept:claude",
+      "concept:codex",
+      "language:python",
+      "manifest_kind:build.gradle.kts",
+      "manifest_kind:pyproject.toml",
+      "topic:android",
+      "topic:google",
+      "topic:test-automation",
+      "topic:testing"
+    ],
+    "proposal_id": "31a85fe9f3229b1f235032f1d0a5b51db50f1602f28ecfe33693411e0f8b1438",
+    "status": "PROPOSED"
+  },
+  "schema_version": 1,
+  "source": "AI-Orchestrator-Module-Researcher",
+  "state": "AWAITING_TRIAGE"
+}
