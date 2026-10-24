@@ -7,7 +7,7 @@
     "policy": "This private repository is the single coordination authority. Chats and agents are workers, not independent sources of truth."
   },
   "updated_at": "2026-10-24",
-  "state_revision": 362,
+  "state_revision": 363,
   "lifecycle_status": "BOOTSTRAP_ACTIVE",
   "roadmap_authority": {
     "library": ".airlab/roadmap.yaml",
@@ -81,8 +81,8 @@
     "invalid_lane_behavior": "ISOLATE_AND_SURFACE_PROJECTION_INCIDENT"
   },
   "projection": {
-    "source_digest": "25ae99e4065721ff20966c6313c218bbf7ee6c1be3cf27cb8beae5651aae728c",
-    "projected_at": "2026-10-24T18:36:25Z",
+    "source_digest": "938fbe5f3de9f84617b6c8e69805463b85efe965e597c4e16d30aa4adc8a45f6",
+    "projected_at": "2026-10-24T21:26:06Z",
     "counts": {
       "BLOCKED": 2,
       "READY": 13,
@@ -257,6 +257,16 @@
       }
     ],
     "checkpoint_watch": [
+      {
+        "lane": "cantiere",
+        "claim_id": "e3cd3aada78af20ff148",
+        "work_item": "issue-845-engineer-output-metrics-v1",
+        "status": "REVIEW_REQUIRED",
+        "reason": "CHECKPOINT_STALE",
+        "last_checkpoint_at": "2026-10-24T18:36:25Z",
+        "due_since": "2026-10-24T20:36:25Z",
+        "warning_after_minutes": 120
+      },
       {
         "lane": "library-researcher",
         "claim_id": "a3be2c00b7d608d2df75",
