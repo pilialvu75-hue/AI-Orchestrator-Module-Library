@@ -1,0 +1,19 @@
+{
+  "schema_version": 1,
+  "request_id": "cantiere-20261024-claim-engineer-output-metrics-v1",
+  "actor_id": "chatgpt:cantiere",
+  "lane_id": "cantiere",
+  "operation": "claim",
+  "expected_state_version": 132,
+  "payload": {
+    "work_item": "issue-845-engineer-output-metrics-v1",
+    "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
+    "branch": "fix/cantiere-845-engineer-output-metrics",
+    "scope": "Only privacy-safe inference output metrics in Workshop stage-role boundary and regression test, no Engineer token budgets/response content/Reviewer/gate/RAM changes",
+    "resource_locks": [
+      "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/app_factory/workshop/workshop_stage_role_inference.dart",
+      "file:pilialvu75-hue/Ai-orchestrator-riserva:test/app_factory/workshop/workshop_stage_role_inference_test.dart",
+      "resource:cantiere-845-engineer-output-metrics"
+    ]
+  }
+}
