@@ -3,13 +3,30 @@
   "id": "cantiere",
   "title": "Cantiere",
   "role": "worker",
-  "status": "READY",
+  "status": "CLAIMED",
   "activation": "active",
   "scope": "Exclusive Cantiere/App Factory execution, durability, build/review/validation/apply and first-real-app reliability.",
   "shared_engine_policy": "shared_or_control_plane",
-  "state_version": 136,
+  "state_version": 137,
   "updated_at": "2026-10-24",
-  "active_claim": null,
+  "active_claim": {
+    "claim_id": "e3cd3aada78af20ff148",
+    "owner_lane": "cantiere",
+    "work_item": "issue-845-engineer-output-metrics-v1",
+    "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
+    "scope": "Review delivery for PR #884 after successful CI and Codex review.",
+    "branch": "fix/cantiere-845-engineer-output-metrics",
+    "resource_locks": [
+      "branch:pilialvu75-hue/Ai-orchestrator-riserva:fix/cantiere-845-engineer-output-metrics",
+      "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/app_factory/workshop/workshop_stage_role_inference.dart",
+      "file:pilialvu75-hue/Ai-orchestrator-riserva:test/app_factory/workshop/workshop_stage_role_inference_test.dart",
+      "resource:cantiere-845-engineer-output-metrics"
+    ],
+    "started_at": "2026-10-24T18:34:17Z",
+    "heartbeat_at": "2026-10-24T18:34:17Z",
+    "lease_until": "2026-10-25T06:34:17Z",
+    "lease_hours": 12
+  },
   "dependencies": [],
   "roadmap_refs": [
     ".airlab/public-repositories/Ai-orchestrator-riserva/roadmap.yaml#CANT-11",
