@@ -3,11 +3,11 @@
   "id": "cantiere",
   "title": "Cantiere",
   "role": "worker",
-  "status": "CLAIMED",
+  "status": "REVIEW_REQUIRED",
   "activation": "active",
   "scope": "Exclusive Cantiere/App Factory execution, durability, build/review/validation/apply and first-real-app reliability.",
   "shared_engine_policy": "shared_or_control_plane",
-  "state_version": 137,
+  "state_version": 138,
   "updated_at": "2026-10-24",
   "active_claim": {
     "claim_id": "e3cd3aada78af20ff148",
@@ -33,7 +33,86 @@
     ".airlab/public-repositories/Ai-orchestrator-riserva/roadmap.yaml#AIVEXUS-BASE-1",
     ".airlab/public-repositories/Ai-orchestrator-riserva/roadmap.yaml#AIVEXUS-BASE-2"
   ],
-  "evidence": [],
+  "evidence": [
+    {
+      "type": "commit",
+      "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/23df23470550b9a7ac4286d310a0bba0b73e7ca0",
+      "result": "PASS",
+      "note": "Latest PR head is exactly two authorized files; no code changes to Engineer model/prompt/token budgets/retries or Android RAM policy."
+    },
+    {
+      "type": "pull_request",
+      "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/884",
+      "result": "PASS",
+      "note": "Open, ready for review, mergeable/clean against advanced main; no merge or final approval inferred."
+    },
+    {
+      "type": "ci",
+      "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/40118891828",
+      "result": "PASS",
+      "note": "Build & Release APK exact-head success: Flutter analyze, Flutter tests, signed APK/AAB compilation, CodeQL final analysis and upload. Artifact AI-Orchestrator-android-release-1.0.14-103364 is PR-head, not published and not original star project APK."
+    },
+    {
+      "type": "ci",
+      "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/40118891826",
+      "result": "PASS",
+      "note": "Assistant Android Source Validation exact-head completed success."
+    },
+    {
+      "type": "ci",
+      "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/40118891812",
+      "result": "PASS",
+      "note": "Cantiere First App deterministic offline fixture success, not owner S24 original star G5."
+    },
+    {
+      "type": "ci",
+      "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/40118891825",
+      "result": "PASS",
+      "note": "Web Cantiere Build exact-head success."
+    },
+    {
+      "type": "ci",
+      "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/40118891892",
+      "result": "PASS",
+      "note": "Windows Desktop exact-head build and tests successful."
+    },
+    {
+      "type": "ci",
+      "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/40118891817",
+      "result": "PASS",
+      "note": "Linux Desktop exact-head build and tests successful."
+    },
+    {
+      "type": "ci",
+      "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/40118891822",
+      "result": "PASS",
+      "note": "macOS Desktop exact-head build and tests successful."
+    },
+    {
+      "type": "analysis",
+      "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/884#issuecomment-6387702780",
+      "result": "PASS",
+      "note": "Codex code review explicitly confirmed same exact head with no major findings and no unresolved review threads. This is not canonical independent G6 approval."
+    },
+    {
+      "type": "test",
+      "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/blob/23df23470550b9a7ac4286d310a0bba0b73e7ca0/test/app_factory/workshop/workshop_stage_role_inference_test.dart",
+      "result": "PASS",
+      "note": "Dedicated 3-path Engineer metadata/no-private-data test included in passing Flutter test suite."
+    },
+    {
+      "type": "analysis",
+      "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/867",
+      "result": "INFO",
+      "note": "Existing source-only Android memory safety PR #867 remains draft, overlapping future public diagnostics projection. Avoid new overlapping changes and do not infer memory-crash fix."
+    },
+    {
+      "type": "physical_device",
+      "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/issues/845",
+      "result": "PENDING",
+      "note": "Original Samsung S24 FE saved project is 0/1; Reviewer rejects incomplete generated lib/main.dart. No generated, installed, launched or touch-tested star APK."
+    }
+  ],
   "gates": {
     "G0_CLAIM": "PASS",
     "G1_IMPLEMENTATION": "PENDING",
@@ -50,7 +129,7 @@
     "reviewed_by": null,
     "reviewed_at": null
   },
-  "next_action": "Confirm all seven exact-head checks pass and Codex review on same commit has no findings; bounded new claim for PR884 release-compatible review packet or conflict repair, retaining draft and independent G6.",
+  "next_action": "Main/Reviewer must inspect the review_packet, linked evidence and required gates before promotion or rework.",
   "historical_backlog": [
     "Stay in Phase 1 ONLINE until a real generated Android app is physically accepted.",
     "Reproduce the recent manga-drawing app failure from current main with Diagnostics; do not restart generic audits.",
@@ -80,28 +159,6 @@
     "continuation": "Do not re-enable broad Cantiere autopilot until the remaining control-plane concurrency/resource-lock weakness is addressed or explicitly accepted for the next pilot."
   },
   "checkpoints": [
-    {
-      "seq": 23,
-      "at": "2026-10-12T10:12:18Z",
-      "claim_id": "3d39dee487b98eb463b1",
-      "work_item": "AIVEXUS-BASE-1",
-      "summary": "Current-main resubmission for AIVEXUS-BASE-1 at exact PR #826 head a63b8cf14c07e6aeba361a1ee4e6e832e6ce1df1. Branch is aligned to Riserva main 9f320c82073fc74c7cd4a8b974071ec0addb3772, PR is open/not draft/mergeable, and all six exact-head workflows are successful. No BASE-2, CAD/Game, deploy or physical/runtime acceptance is claimed.",
-      "decisions": [],
-      "evidence_refs": [
-        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/a63b8cf14c07e6aeba361a1ee4e6e832e6ce1df1",
-        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/826",
-        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38161301515",
-        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38161301515/job/114534601604",
-        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38161301515/job/114534601604",
-        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38161301477",
-        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38161301505",
-        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38161301503",
-        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38161301487",
-        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38161301491"
-      ],
-      "next_action": "Main/Reviewer must inspect the review_packet, linked evidence and required gates before promotion or rework.",
-      "kind": "REVIEW_HANDOFF"
-    },
     {
       "seq": 24,
       "at": "2026-10-12T10:21:35Z",
@@ -1018,26 +1075,57 @@
         "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/867"
       ],
       "next_action": "Inspect exact-head PR #884 CI, repair any proven issues; after CI deliver bounded review packet, preserve G5 original star as pending and G6 pending. Coordinate later public projection with draft Android PR #867 (overlapping Diagnostics path) rather than concurrent edits."
+    },
+    {
+      "seq": 73,
+      "at": "2026-10-24T18:36:25Z",
+      "claim_id": "e3cd3aada78af20ff148",
+      "work_item": "issue-845-engineer-output-metrics-v1",
+      "summary": "Bounded privacy-safe numerical diagnostics for completed Engineer inference in Cantiere #845, on exact PR #884 head 23df23470550b9a7ac4286d310a0bba0b73e7ca0. Single event WORKSHOP_ENGINEER_OUTPUT records outcome/terminal state, requested token budget, generated tokens, output character count and has-text flag. Does not record generated source, prompt, private IDs, exceptions or free-form details. Tests cover legacy, identity-aware and first-token-timeout role invocation, avoiding emission for Reviewer. All seven exact-head CI PASS; Codex re-review same head completed without findings. This measures, but does not fix, original saved S24 FE star generation failure; original star G5 0/1 remains pending. Public Diagnostics projection does NOT yet export this event. Independent canonical G6 remains pending.",
+      "decisions": [],
+      "evidence_refs": [
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/23df23470550b9a7ac4286d310a0bba0b73e7ca0",
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/884",
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/40118891828",
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/40118891826",
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/40118891812",
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/40118891825",
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/40118891892",
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/40118891817",
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/40118891822",
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/884#issuecomment-6387702780",
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/blob/23df23470550b9a7ac4286d310a0bba0b73e7ca0/test/app_factory/workshop/workshop_stage_role_inference_test.dart",
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/867",
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/issues/845"
+      ],
+      "next_action": "Main/Reviewer must inspect the review_packet, linked evidence and required gates before promotion or rework.",
+      "kind": "REVIEW_HANDOFF"
     }
   ],
   "last_checkpoint": {
-    "seq": 72,
-    "at": "2026-10-24T18:03:46Z",
-    "claim_id": "66dd75d49cc0f54b8cd6",
+    "seq": 73,
+    "at": "2026-10-24T18:36:25Z",
+    "claim_id": "e3cd3aada78af20ff148",
     "work_item": "issue-845-engineer-output-metrics-v1",
-    "summary": "After owner-directed PR #856 reconciliation APPLIED v132, claimed narrowly as fe? new claim 66dd75d49cc0f54b8cd6 v133. Implemented privacy-safe Engineer output metadata in WorkshopStageRoleInference, never recording prompt/source/IDs/exceptions. Draft PR #884 head 23df23470550b9a7ac4286d310a0bba0b73e7ca0 with tests of normal, identity and first-token paths. Seven exact-head CI workflows running; no Reviewer or RAM/token budget changed.",
-    "decisions": [
-      "Avoid source conflicts: do not edit Engineer implementation runner (open PR #583), inference pipeline (#769), Cantiere dashboard (#814), Android memory/Diagnostics (#867).",
-      "Keep prompt/source/session/project/task IDs out of persisted output-metadata events.",
-      "No Cantiere output considered physically validated. No local model retries or token-budget increase."
-    ],
+    "summary": "Bounded privacy-safe numerical diagnostics for completed Engineer inference in Cantiere #845, on exact PR #884 head 23df23470550b9a7ac4286d310a0bba0b73e7ca0. Single event WORKSHOP_ENGINEER_OUTPUT records outcome/terminal state, requested token budget, generated tokens, output character count and has-text flag. Does not record generated source, prompt, private IDs, exceptions or free-form details. Tests cover legacy, identity-aware and first-token-timeout role invocation, avoiding emission for Reviewer. All seven exact-head CI PASS; Codex re-review same head completed without findings. This measures, but does not fix, original saved S24 FE star generation failure; original star G5 0/1 remains pending. Public Diagnostics projection does NOT yet export this event. Independent canonical G6 remains pending.",
+    "decisions": [],
     "evidence_refs": [
-      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/884",
       "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/23df23470550b9a7ac4286d310a0bba0b73e7ca0",
-      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/issues/845",
-      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/867"
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/884",
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/40118891828",
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/40118891826",
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/40118891812",
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/40118891825",
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/40118891892",
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/40118891817",
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/40118891822",
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/884#issuecomment-6387702780",
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/blob/23df23470550b9a7ac4286d310a0bba0b73e7ca0/test/app_factory/workshop/workshop_stage_role_inference_test.dart",
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/867",
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/issues/845"
     ],
-    "next_action": "Inspect exact-head PR #884 CI, repair any proven issues; after CI deliver bounded review packet, preserve G5 original star as pending and G6 pending. Coordinate later public projection with draft Android PR #867 (overlapping Diagnostics path) rather than concurrent edits."
+    "next_action": "Main/Reviewer must inspect the review_packet, linked evidence and required gates before promotion or rework.",
+    "kind": "REVIEW_HANDOFF"
   },
   "review_history": [
     {
@@ -3513,5 +3601,123 @@
         ]
       }
     }
-  ]
+  ],
+  "review_packet": {
+    "schema_version": 1,
+    "submitted_at": "2026-10-24T18:34:17Z",
+    "lane_id": "cantiere",
+    "claim_id": "e3cd3aada78af20ff148",
+    "work_item": "issue-845-engineer-output-metrics-v1",
+    "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
+    "branch": "fix/cantiere-845-engineer-output-metrics",
+    "pull_request": 884,
+    "summary": "Bounded privacy-safe numerical diagnostics for completed Engineer inference in Cantiere #845, on exact PR #884 head 23df23470550b9a7ac4286d310a0bba0b73e7ca0. Single event WORKSHOP_ENGINEER_OUTPUT records outcome/terminal state, requested token budget, generated tokens, output character count and has-text flag. Does not record generated source, prompt, private IDs, exceptions or free-form details. Tests cover legacy, identity-aware and first-token-timeout role invocation, avoiding emission for Reviewer. All seven exact-head CI PASS; Codex re-review same head completed without findings. This measures, but does not fix, original saved S24 FE star generation failure; original star G5 0/1 remains pending. Public Diagnostics projection does NOT yet export this event. Independent canonical G6 remains pending.",
+    "changes": [
+      "lib/app_factory/workshop/workshop_stage_role_inference.dart: log enum/numeric Engineer inference result metadata only, via existing bounded RuntimeEventLog, for three result-returning inference entry points; leave role routing, lease release, runtime and token selection unchanged.",
+      "test/app_factory/workshop/workshop_stage_role_inference_test.dart: verify three Engineer entry points emit bounded metrics, Reviewer emits none, and sensitive session/project/task/prompt supplied by caller is omitted."
+    ],
+    "evidence": [
+      {
+        "type": "commit",
+        "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/23df23470550b9a7ac4286d310a0bba0b73e7ca0",
+        "result": "PASS",
+        "note": "Latest PR head is exactly two authorized files; no code changes to Engineer model/prompt/token budgets/retries or Android RAM policy."
+      },
+      {
+        "type": "pull_request",
+        "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/884",
+        "result": "PASS",
+        "note": "Open, ready for review, mergeable/clean against advanced main; no merge or final approval inferred."
+      },
+      {
+        "type": "ci",
+        "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/40118891828",
+        "result": "PASS",
+        "note": "Build & Release APK exact-head success: Flutter analyze, Flutter tests, signed APK/AAB compilation, CodeQL final analysis and upload. Artifact AI-Orchestrator-android-release-1.0.14-103364 is PR-head, not published and not original star project APK."
+      },
+      {
+        "type": "ci",
+        "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/40118891826",
+        "result": "PASS",
+        "note": "Assistant Android Source Validation exact-head completed success."
+      },
+      {
+        "type": "ci",
+        "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/40118891812",
+        "result": "PASS",
+        "note": "Cantiere First App deterministic offline fixture success, not owner S24 original star G5."
+      },
+      {
+        "type": "ci",
+        "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/40118891825",
+        "result": "PASS",
+        "note": "Web Cantiere Build exact-head success."
+      },
+      {
+        "type": "ci",
+        "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/40118891892",
+        "result": "PASS",
+        "note": "Windows Desktop exact-head build and tests successful."
+      },
+      {
+        "type": "ci",
+        "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/40118891817",
+        "result": "PASS",
+        "note": "Linux Desktop exact-head build and tests successful."
+      },
+      {
+        "type": "ci",
+        "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/40118891822",
+        "result": "PASS",
+        "note": "macOS Desktop exact-head build and tests successful."
+      },
+      {
+        "type": "analysis",
+        "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/884#issuecomment-6387702780",
+        "result": "PASS",
+        "note": "Codex code review explicitly confirmed same exact head with no major findings and no unresolved review threads. This is not canonical independent G6 approval."
+      },
+      {
+        "type": "test",
+        "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/blob/23df23470550b9a7ac4286d310a0bba0b73e7ca0/test/app_factory/workshop/workshop_stage_role_inference_test.dart",
+        "result": "PASS",
+        "note": "Dedicated 3-path Engineer metadata/no-private-data test included in passing Flutter test suite."
+      },
+      {
+        "type": "analysis",
+        "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/867",
+        "result": "INFO",
+        "note": "Existing source-only Android memory safety PR #867 remains draft, overlapping future public diagnostics projection. Avoid new overlapping changes and do not infer memory-crash fix."
+      },
+      {
+        "type": "physical_device",
+        "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/issues/845",
+        "result": "PENDING",
+        "note": "Original Samsung S24 FE saved project is 0/1; Reviewer rejects incomplete generated lib/main.dart. No generated, installed, launched or touch-tested star APK."
+      }
+    ],
+    "known_risks": [
+      "Metrics are emitted for returned WorkshopInferenceResult; uncaught thrown exceptions will not produce this event. An output terminal success is not the same as semantically complete or compiled Flutter code.",
+      "New internal RuntimeEventLog event WORKSHOP_ENGINEER_OUTPUT is not in public Diagnostics projection allowlist, so public export will discard it; a separate privacy-audited, non-conflicting projection change is required for a user-readable public diagnostic stream.",
+      "Numeric generated tokens may be zero if runtime provider does not report a counter; count may be less than character-based content or unavailable and is not automatically proof of token exhaustion.",
+      "Persisted RuntimeEventLog contains only enums/numeric fields for this event, but logs have other historical events; do not treat entire raw crash log as privacy-safe for public export.",
+      "Original star failure root cause not confirmed; Engineer initial maxTokens 640 and retry budget 512 are unchanged. Reviewer/Validation stay fail-closed and G5 real first-app build/install/touch stays pending.",
+      "Main has advanced independently since PR branch creation; GitHub currently reports clean mergeability, but approval/recheck are still required before integration.",
+      "Android memory safety PR #867 remains draft and unmerged; signed PR artifact does not establish post-merge release, update compatibility or S24 FE low-memory stability."
+    ],
+    "reviewer_checks": [
+      "Inspect exactly two changed files at PR head 23df234; confirm metrics never use user prompt, generated source, free-form error, workspace path, project/task/session/attempt IDs or model output text.",
+      "Verify stage-scoped event fires only for Engineer role on returned result, including identity-aware and first-token-timeout routes, with foreground execution lease still released and no extra model calls.",
+      "Verify test assertions on 3 Engineer paths, no Reviewer event and withheld sensitive string; cross-check Android Flutter tests/analyze/CodeQL, Cantiere fixture, desktop/Web/source CI exact head.",
+      "Do not conflate a terminal state of success with functionality; user star still failed Reviewer and no code fix is asserted.",
+      "Public Diagnostics export does not currently include this internal event; ensure any future extension enforces a strictly closed grammar while avoiding simultaneous edits with Android memory PR #867.",
+      "Keep user-directed physical G5 and independent canonical G6 pending until their own evidence; Codex review and 7/7 CI alone do not grant merge or reviewer approval."
+    ],
+    "roadmap_impact": {
+      "material": false,
+      "refs": [
+        ".airlab/public-repositories/Ai-orchestrator-riserva/roadmap.yaml#CANT-11"
+      ]
+    }
+  }
 }

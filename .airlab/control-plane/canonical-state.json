@@ -7,7 +7,7 @@
     "policy": "This private repository is the single coordination authority. Chats and agents are workers, not independent sources of truth."
   },
   "updated_at": "2026-10-24",
-  "state_revision": 361,
+  "state_revision": 362,
   "lifecycle_status": "BOOTSTRAP_ACTIVE",
   "roadmap_authority": {
     "library": ".airlab/roadmap.yaml",
@@ -81,13 +81,12 @@
     "invalid_lane_behavior": "ISOLATE_AND_SURFACE_PROJECTION_INCIDENT"
   },
   "projection": {
-    "source_digest": "86453197529c9123b080ac13f00effe61500ef7ed79d4791b6f8b7232d207162",
-    "projected_at": "2026-10-24T18:34:17Z",
+    "source_digest": "25ae99e4065721ff20966c6313c218bbf7ee6c1be3cf27cb8beae5651aae728c",
+    "projected_at": "2026-10-24T18:36:25Z",
     "counts": {
       "BLOCKED": 2,
-      "CLAIMED": 1,
       "READY": 13,
-      "REVIEW_REQUIRED": 2
+      "REVIEW_REQUIRED": 3
     },
     "active_claims": [
       {
@@ -212,6 +211,7 @@
       }
     ],
     "review_required": [
+      "cantiere",
       "library-researcher",
       "platform-android"
     ],
@@ -376,9 +376,9 @@
       },
       {
         "id": "cantiere",
-        "status": "CLAIMED",
+        "status": "REVIEW_REQUIRED",
         "activation": "active",
-        "state_version": 137,
+        "state_version": 138,
         "updated_at": "2026-10-24",
         "active_claim": {
           "claim_id": "e3cd3aada78af20ff148",
@@ -395,7 +395,7 @@
         "reviewer_state": "PENDING",
         "inference_profile_status": null,
         "historical_backlog_count": 3,
-        "next_action": "Confirm all seven exact-head checks pass and Codex review on same commit has no findings; bounded new claim for PR884 release-compatible review packet or conflict repair, retaining draft and independent G6."
+        "next_action": "Main/Reviewer must inspect the review_packet, linked evidence and required gates before promotion or rework."
       },
       {
         "id": "diagnostics",
