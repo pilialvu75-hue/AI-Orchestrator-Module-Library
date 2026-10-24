@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "request_id": "cantiere-20261024-resume-pr884-seven-success-codex-clean-v1",
+  "actor_id": "chatgpt:cantiere",
+  "lane_id": "cantiere",
+  "operation": "resume_wait",
+  "expected_state_version": 135,
+  "payload": {
+    "signal_id": "pr884-exact-head-23df234-seven-workflows-success-codex-clean",
+    "evidence_refs": [
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/884",
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/40118891822",
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/40118891892",
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/40118891828",
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/40118891826",
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/40118891825",
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/40118891812",
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/40118891817",
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/884#issuecomment-6387702780"
+    ],
+    "next_action": "Confirm all seven exact-head checks pass and Codex review on same commit has no findings; bounded new claim for PR884 release-compatible review packet or conflict repair, retaining draft and independent G6."
+  }
+}
