@@ -1,0 +1,31 @@
+{
+  "proposal": {
+    "acceptance_gates": [
+      "implementation_tests_pass",
+      "security_gates_pass",
+      "regression_tests_pass",
+      "library_contract_pass"
+    ],
+    "capability_id": "voice.tts",
+    "created_at": "2026-10-23T18:32:06.698348Z",
+    "novelty": [
+      "concept:discussion",
+      "concept:forum",
+      "concept:https://discourse.mozilla.org/c/tts",
+      "concept:robot",
+      "concept:speech",
+      "concept:speech_balloon",
+      "language:jupyter notebook",
+      "topic:dataset-analysis",
+      "topic:gantts",
+      "topic:multiband-melgan",
+      "topic:tacotron2",
+      "topic:tensorflow2"
+    ],
+    "proposal_id": "a0d1396e21eb88d081a453448084f3a342552092d021bae1f08ea5a32940ede1",
+    "status": "PROPOSED"
+  },
+  "schema_version": 1,
+  "source": "AI-Orchestrator-Module-Researcher",
+  "state": "AWAITING_TRIAGE"
+}
