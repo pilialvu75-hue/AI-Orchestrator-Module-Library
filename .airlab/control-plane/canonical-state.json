@@ -7,7 +7,7 @@
     "policy": "This private repository is the single coordination authority. Chats and agents are workers, not independent sources of truth."
   },
   "updated_at": "2026-10-24",
-  "state_revision": 359,
+  "state_revision": 360,
   "lifecycle_status": "BOOTSTRAP_ACTIVE",
   "roadmap_authority": {
     "library": ".airlab/roadmap.yaml",
@@ -81,11 +81,11 @@
     "invalid_lane_behavior": "ISOLATE_AND_SURFACE_PROJECTION_INCIDENT"
   },
   "projection": {
-    "source_digest": "e7be79d52324001db3eb53535876467e679fd84d929ac82d256d554e6fd10c76",
-    "projected_at": "2026-10-24T18:06:06Z",
+    "source_digest": "a83db2c6b482d7c012ff6479da8686c33b95f20ad304c55e0801b2cbb5f2fda5",
+    "projected_at": "2026-10-24T18:33:12Z",
     "counts": {
-      "BLOCKED": 3,
-      "READY": 13,
+      "BLOCKED": 2,
+      "READY": 14,
       "REVIEW_REQUIRED": 2
     },
     "active_claims": [
@@ -195,23 +195,6 @@
           ],
           "resume_condition": "All six platform GitHub workflow runs of PR #833 exact head 831015d149f2cbae6928683e8deb1aeafa3832b5 have completed, with outcomes available for inspection. Dedicated Aivexus CAD-1 Domain Tests run 38364393744 already succeeded.",
           "detected_at": "2026-10-13T07:45:35Z",
-          "review_required": false
-        }
-      },
-      {
-        "lane": "cantiere",
-        "reason": {
-          "code": "WAITING_EXTERNAL",
-          "wait_id": "cantiere:66dd75d49cc0f54b8cd6:WAITING_EXTERNAL",
-          "work_item": "issue-845-engineer-output-metrics-v1",
-          "resource_locks": [
-            "branch:pilialvu75-hue/Ai-orchestrator-riserva:fix/cantiere-845-engineer-output-metrics",
-            "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/app_factory/workshop/workshop_stage_role_inference.dart",
-            "file:pilialvu75-hue/Ai-orchestrator-riserva:test/app_factory/workshop/workshop_stage_role_inference_test.dart",
-            "resource:cantiere-845-engineer-output-metrics"
-          ],
-          "resume_condition": "All seven exact-head PR #884 GitHub workflows reached inspectable terminal conclusions (pass or fail), and Codex review status for 23df23470550b9a7ac4286d310a0bba0b73e7ca0 can be inspected.",
-          "detected_at": "2026-10-24T18:06:06Z",
           "review_required": false
         }
       },
@@ -355,15 +338,15 @@
       },
       {
         "id": "cantiere",
-        "status": "BLOCKED",
+        "status": "READY",
         "activation": "active",
-        "state_version": 135,
+        "state_version": 136,
         "updated_at": "2026-10-24",
         "active_claim": null,
         "reviewer_state": "PENDING",
         "inference_profile_status": null,
         "historical_backlog_count": 3,
-        "next_action": "Inspect exact-head CI and Codex, repair a concrete finding with same locked scope if needed; otherwise submit claim-bound review packet. Public projection must be coordinated with open Android memory PR #867."
+        "next_action": "Confirm all seven exact-head checks pass and Codex review on same commit has no findings; bounded new claim for PR884 release-compatible review packet or conflict repair, retaining draft and independent G6."
       },
       {
         "id": "diagnostics",

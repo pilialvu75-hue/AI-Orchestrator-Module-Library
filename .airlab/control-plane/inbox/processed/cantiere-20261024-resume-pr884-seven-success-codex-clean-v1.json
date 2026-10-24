@@ -1,0 +1,12 @@
+{
+  "schema_version": 1,
+  "request_id": "cantiere-20261024-resume-pr884-seven-success-codex-clean-v1",
+  "status": "APPLIED",
+  "processed_at": "2026-10-24T18:33:12Z",
+  "source_file": "cantiere-20261024-resume-pr884-seven-success-codex-clean-v1.json",
+  "lane_id": "cantiere",
+  "operation": "resume_wait",
+  "actor_id": "chatgpt:cantiere",
+  "errors": [],
+  "result_state_version": 136
+}
