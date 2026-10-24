@@ -1,0 +1,29 @@
+{
+  "proposal": {
+    "acceptance_gates": [
+      "implementation_tests_pass",
+      "security_gates_pass",
+      "regression_tests_pass",
+      "library_contract_pass"
+    ],
+    "capability_id": "auth.session",
+    "created_at": "2026-10-24T01:06:31.969238Z",
+    "novelty": [
+      "concept:awesome",
+      "concept:curated",
+      "concept:flask",
+      "concept:plugins",
+      "concept:resources",
+      "topic:awesome",
+      "topic:awesome-list",
+      "topic:flask",
+      "topic:flask-resources",
+      "topic:python"
+    ],
+    "proposal_id": "af66375dc7725d3f264192f77eb54c72dd22c7955e7234b80ed80b518cb43e48",
+    "status": "PROPOSED"
+  },
+  "schema_version": 1,
+  "source": "AI-Orchestrator-Module-Researcher",
+  "state": "AWAITING_TRIAGE"
+}
