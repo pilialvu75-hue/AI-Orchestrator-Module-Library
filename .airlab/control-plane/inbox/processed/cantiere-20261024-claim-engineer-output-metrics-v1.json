@@ -1,0 +1,12 @@
+{
+  "schema_version": 1,
+  "request_id": "cantiere-20261024-claim-engineer-output-metrics-v1",
+  "status": "APPLIED",
+  "processed_at": "2026-10-24T18:01:04Z",
+  "source_file": "cantiere-20261024-claim-engineer-output-metrics-v1.json",
+  "lane_id": "cantiere",
+  "operation": "claim",
+  "actor_id": "chatgpt:cantiere",
+  "errors": [],
+  "result_state_version": 133
+}
