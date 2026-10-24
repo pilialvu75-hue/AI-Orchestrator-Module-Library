@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "request_id": "cantiere-20261024-wait-pr884-seven-ci-codex-v1",
+  "actor_id": "chatgpt:cantiere",
+  "lane_id": "cantiere",
+  "operation": "enter_wait",
+  "expected_state_version": 134,
+  "payload": {
+    "wait_type": "WAITING_EXTERNAL",
+    "resume_condition": "All seven exact-head PR #884 GitHub workflows reached inspectable terminal conclusions (pass or fail), and Codex review status for 23df23470550b9a7ac4286d310a0bba0b73e7ca0 can be inspected.",
+    "summary": "Draft PR #884 adds privacy-safe numeric Engineer output telemetry in stage-role inference with regression; prior claim 66dd75d49cc0f54b8cd6 and canonical checkpoint #72; all seven exact-head workflows in progress, Codex manual review running. Do not treat this as physical S24 test or G6 approval.",
+    "next_action": "Inspect exact-head CI and Codex, repair a concrete finding with same locked scope if needed; otherwise submit claim-bound review packet. Public projection must be coordinated with open Android memory PR #867.",
+    "evidence_refs": [
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/884",
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/23df23470550b9a7ac4286d310a0bba0b73e7ca0",
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/40118891817",
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/40118891822",
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/40118891812",
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/40118891828",
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/40118891892",
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/40118891826",
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/40118891825"
+    ]
+  }
+}
