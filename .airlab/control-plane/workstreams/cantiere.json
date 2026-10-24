@@ -3,30 +3,13 @@
   "id": "cantiere",
   "title": "Cantiere",
   "role": "worker",
-  "status": "IMPLEMENTING",
+  "status": "BLOCKED",
   "activation": "active",
   "scope": "Exclusive Cantiere/App Factory execution, durability, build/review/validation/apply and first-real-app reliability.",
   "shared_engine_policy": "shared_or_control_plane",
-  "state_version": 134,
+  "state_version": 135,
   "updated_at": "2026-10-24",
-  "active_claim": {
-    "claim_id": "66dd75d49cc0f54b8cd6",
-    "owner_lane": "cantiere",
-    "work_item": "issue-845-engineer-output-metrics-v1",
-    "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
-    "scope": "Only privacy-safe inference output metrics in Workshop stage-role boundary and regression test, no Engineer token budgets/response content/Reviewer/gate/RAM changes",
-    "branch": "fix/cantiere-845-engineer-output-metrics",
-    "resource_locks": [
-      "branch:pilialvu75-hue/Ai-orchestrator-riserva:fix/cantiere-845-engineer-output-metrics",
-      "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/app_factory/workshop/workshop_stage_role_inference.dart",
-      "file:pilialvu75-hue/Ai-orchestrator-riserva:test/app_factory/workshop/workshop_stage_role_inference_test.dart",
-      "resource:cantiere-845-engineer-output-metrics"
-    ],
-    "started_at": "2026-10-24T18:01:04Z",
-    "heartbeat_at": "2026-10-24T18:03:46Z",
-    "lease_until": "2026-10-25T06:03:46Z",
-    "lease_hours": 12
-  },
+  "active_claim": null,
   "dependencies": [],
   "roadmap_refs": [
     ".airlab/public-repositories/Ai-orchestrator-riserva/roadmap.yaml#CANT-11",
@@ -50,7 +33,7 @@
     "reviewed_by": null,
     "reviewed_at": null
   },
-  "next_action": "Inspect exact-head PR #884 CI, repair any proven issues; after CI deliver bounded review packet, preserve G5 original star as pending and G6 pending. Coordinate later public projection with draft Android PR #867 (overlapping Diagnostics path) rather than concurrent edits.",
+  "next_action": "Inspect exact-head CI and Codex, repair a concrete finding with same locked scope if needed; otherwise submit claim-bound review packet. Public projection must be coordinated with open Android memory PR #867.",
   "historical_backlog": [
     "Stay in Phase 1 ONLINE until a real generated Android app is physically accepted.",
     "Reproduce the recent manga-drawing app failure from current main with Diagnostics; do not restart generic audits.",
@@ -1217,26 +1200,6 @@
   ],
   "reconciliation_events": [
     {
-      "type": "WAIT_ENTERED",
-      "wait_id": "cantiere:026e0790f36a8e294ae1:WAITING_EXTERNAL",
-      "wait_type": "WAITING_EXTERNAL",
-      "prior_claim_id": "026e0790f36a8e294ae1",
-      "work_item": "issue-845-first-star-app-review-scope-3184",
-      "resource_locks": [
-        "branch:pilialvu75-hue/Ai-orchestrator-riserva:fix/cantiere-845-first-star-review-scope",
-        "contract:cantiere-review-stage-scope",
-        "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/app_factory/workshop/workshop_proposal_implementation_runner.dart",
-        "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/app_factory/workshop/workshop_proposal_review_runner.dart",
-        "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/app_factory/workshop/workshop_proposal_workspace_stager.dart",
-        "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/app_factory/workshop/workshop_task_inference_pipeline.dart",
-        "file:pilialvu75-hue/Ai-orchestrator-riserva:test/app_factory/workshop/workshop_proposal_implementation_runner_test.dart",
-        "file:pilialvu75-hue/Ai-orchestrator-riserva:test/app_factory/workshop/workshop_proposal_review_runner_test.dart",
-        "file:pilialvu75-hue/Ai-orchestrator-riserva:test/app_factory/workshop/workshop_proposal_workspace_stager_test.dart",
-        "file:pilialvu75-hue/Ai-orchestrator-riserva:test/app_factory/workshop/workshop_task_inference_pipeline_test.dart"
-      ],
-      "at": "2026-10-14T21:30:16Z"
-    },
-    {
       "type": "WAIT_RESUMED",
       "wait_id": "cantiere:026e0790f36a8e294ae1:WAITING_EXTERNAL",
       "work_item": "issue-845-first-star-app-review-scope-3184",
@@ -1485,6 +1448,20 @@
       "packet_sha256": "b0fd1a6b5fca318e0f4c88ac30684d60d6ab8bbc14593f2f9df550adf89364ac",
       "at": "2026-10-24T17:30:41Z",
       "review_approved": false
+    },
+    {
+      "type": "WAIT_ENTERED",
+      "wait_id": "cantiere:66dd75d49cc0f54b8cd6:WAITING_EXTERNAL",
+      "wait_type": "WAITING_EXTERNAL",
+      "prior_claim_id": "66dd75d49cc0f54b8cd6",
+      "work_item": "issue-845-engineer-output-metrics-v1",
+      "resource_locks": [
+        "branch:pilialvu75-hue/Ai-orchestrator-riserva:fix/cantiere-845-engineer-output-metrics",
+        "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/app_factory/workshop/workshop_stage_role_inference.dart",
+        "file:pilialvu75-hue/Ai-orchestrator-riserva:test/app_factory/workshop/workshop_stage_role_inference_test.dart",
+        "resource:cantiere-845-engineer-output-metrics"
+      ],
+      "at": "2026-10-24T18:06:06Z"
     }
   ],
   "review_packet_history": [
@@ -3472,5 +3449,50 @@
         ]
       }
     }
-  ]
+  ],
+  "wait_state": {
+    "schema_version": 1,
+    "wait_id": "cantiere:66dd75d49cc0f54b8cd6:WAITING_EXTERNAL",
+    "type": "WAITING_EXTERNAL",
+    "work_item": "issue-845-engineer-output-metrics-v1",
+    "prior_claim_id": "66dd75d49cc0f54b8cd6",
+    "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
+    "branch": "fix/cantiere-845-engineer-output-metrics",
+    "scope": "Only privacy-safe inference output metrics in Workshop stage-role boundary and regression test, no Engineer token budgets/response content/Reviewer/gate/RAM changes",
+    "resource_locks": [
+      "branch:pilialvu75-hue/Ai-orchestrator-riserva:fix/cantiere-845-engineer-output-metrics",
+      "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/app_factory/workshop/workshop_stage_role_inference.dart",
+      "file:pilialvu75-hue/Ai-orchestrator-riserva:test/app_factory/workshop/workshop_stage_role_inference_test.dart",
+      "resource:cantiere-845-engineer-output-metrics"
+    ],
+    "entered_at": "2026-10-24T18:06:06Z",
+    "resume_condition": "All seven exact-head PR #884 GitHub workflows reached inspectable terminal conclusions (pass or fail), and Codex review status for 23df23470550b9a7ac4286d310a0bba0b73e7ca0 can be inspected.",
+    "summary": "Draft PR #884 adds privacy-safe numeric Engineer output telemetry in stage-role inference with regression; prior claim 66dd75d49cc0f54b8cd6 and canonical checkpoint #72; all seven exact-head workflows in progress, Codex manual review running. Do not treat this as physical S24 test or G6 approval.",
+    "evidence_refs": [
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/884",
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/23df23470550b9a7ac4286d310a0bba0b73e7ca0",
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/40118891817",
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/40118891822",
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/40118891812",
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/40118891828",
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/40118891892",
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/40118891826",
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/40118891825"
+    ],
+    "resume_next_action": "Inspect exact-head CI and Codex, repair a concrete finding with same locked scope if needed; otherwise submit claim-bound review packet. Public projection must be coordinated with open Android memory PR #867."
+  },
+  "block_reason": {
+    "code": "WAITING_EXTERNAL",
+    "wait_id": "cantiere:66dd75d49cc0f54b8cd6:WAITING_EXTERNAL",
+    "work_item": "issue-845-engineer-output-metrics-v1",
+    "resource_locks": [
+      "branch:pilialvu75-hue/Ai-orchestrator-riserva:fix/cantiere-845-engineer-output-metrics",
+      "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/app_factory/workshop/workshop_stage_role_inference.dart",
+      "file:pilialvu75-hue/Ai-orchestrator-riserva:test/app_factory/workshop/workshop_stage_role_inference_test.dart",
+      "resource:cantiere-845-engineer-output-metrics"
+    ],
+    "resume_condition": "All seven exact-head PR #884 GitHub workflows reached inspectable terminal conclusions (pass or fail), and Codex review status for 23df23470550b9a7ac4286d310a0bba0b73e7ca0 can be inspected.",
+    "detected_at": "2026-10-24T18:06:06Z",
+    "review_required": false
+  }
 }
