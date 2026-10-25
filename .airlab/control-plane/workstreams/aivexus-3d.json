@@ -3,13 +3,32 @@
   "id": "aivexus-3d",
   "title": "Aivexus Studio 3D",
   "role": "worker",
-  "status": "READY",
+  "status": "CLAIMED",
   "activation": "active",
   "scope": "CAD/3D domain only: CadSpec, measured and photographic inputs, editable CAD/mesh sources, CAD/print exports and domain verification. Must consume the Cantiere-owned shared ProjectExtension/persistence/navigation base instead of modifying or duplicating it.",
   "shared_engine_policy": "domain_extension_only",
-  "state_version": 26,
+  "state_version": 27,
   "updated_at": "2026-10-25",
-  "active_claim": null,
+  "active_claim": {
+    "claim_id": "987969fd3c326ee99948",
+    "owner_lane": "aivexus-3d",
+    "work_item": "AIVEXUS-CAD-1",
+    "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
+    "scope": "CAD domain-only PR #833 follow-up after 7/7 exact-head CI: prepare verifiable real STEP/STL/3MF samples in GitHub Actions artifacts for Fusion and physical print testing, preserve matching hashes and revision provenance; strengthen automated CAD-only evidence and handoff; no shared Cantiere storage, runner, project contracts, navigation or ResourceExchange changes.",
+    "branch": "feat/aivexus-cad1-parametric-sample",
+    "resource_locks": [
+      "branch:pilialvu75-hue/Ai-orchestrator-riserva:feat/aivexus-cad1-parametric-sample",
+      "file:pilialvu75-hue/Ai-orchestrator-riserva:.github/workflows/aivexus-cad1-tests.yml",
+      "file:pilialvu75-hue/Ai-orchestrator-riserva:tools/aivexus/cad/README.md",
+      "file:pilialvu75-hue/Ai-orchestrator-riserva:tools/aivexus/cad/test_cad1.py",
+      "file:pilialvu75-hue/Ai-orchestrator-riserva:tools/aivexus/cad/validate_plate.py",
+      "scope:aivexus:cad"
+    ],
+    "started_at": "2026-10-25T08:59:20Z",
+    "heartbeat_at": "2026-10-25T08:59:20Z",
+    "lease_until": "2026-10-25T20:59:20Z",
+    "lease_hours": 12
+  },
   "dependencies": [
     "cantiere:AIVEXUS-BASE-1",
     "cantiere:AIVEXUS-BASE-2"
