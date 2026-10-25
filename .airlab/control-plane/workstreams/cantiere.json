@@ -3,13 +3,29 @@
   "id": "cantiere",
   "title": "Cantiere",
   "role": "worker",
-  "status": "READY",
+  "status": "CLAIMED",
   "activation": "active",
   "scope": "Exclusive Cantiere/App Factory execution, durability, build/review/validation/apply and first-real-app reliability.",
   "shared_engine_policy": "shared_or_control_plane",
-  "state_version": 148,
+  "state_version": 149,
   "updated_at": "2026-10-25",
-  "active_claim": null,
+  "active_claim": {
+    "claim_id": "61b9ba1aefd4636ef43d",
+    "owner_lane": "cantiere",
+    "work_item": "issue-845-star-negative-ci-coverage-v1",
+    "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
+    "scope": "Wire existing source and malformed-drawable negative fixture into Cantiere First App APK CI so AAPT2 is required and actually runs; workflow-only; no LLM, Android RAM, UI, Reviewer or project modifications.",
+    "branch": "fix/cantiere-845-star-negative-aapt2-ci",
+    "resource_locks": [
+      "branch:pilialvu75-hue/Ai-orchestrator-riserva:fix/cantiere-845-star-negative-aapt2-ci",
+      "file:pilialvu75-hue/Ai-orchestrator-riserva:.github/workflows/cantiere-first-app.yml",
+      "resource:cantiere-845-star-negative-ci-coverage"
+    ],
+    "started_at": "2026-10-25T22:25:52Z",
+    "heartbeat_at": "2026-10-25T22:25:52Z",
+    "lease_until": "2026-10-26T10:25:52Z",
+    "lease_hours": 12
+  },
   "dependencies": [],
   "roadmap_refs": [
     ".airlab/public-repositories/Ai-orchestrator-riserva/roadmap.yaml#CANT-11",
@@ -18,7 +34,7 @@
   ],
   "evidence": [],
   "gates": {
-    "G0_CLAIM": "PENDING",
+    "G0_CLAIM": "PASS",
     "G1_IMPLEMENTATION": "PENDING",
     "G2_STATIC": "PENDING",
     "G3_CI": "PENDING",
