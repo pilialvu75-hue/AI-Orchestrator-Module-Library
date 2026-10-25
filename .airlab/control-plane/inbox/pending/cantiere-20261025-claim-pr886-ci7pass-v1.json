@@ -1,0 +1,19 @@
+{
+  "schema_version": 1,
+  "request_id": "cantiere-20261025-claim-pr886-ci7pass-v1",
+  "actor_id": "chatgpt:cantiere",
+  "lane_id": "cantiere",
+  "operation": "claim",
+  "expected_state_version": 145,
+  "payload": {
+    "work_item": "issue-845-engineer-public-projection-v1",
+    "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
+    "scope": "Complete diagnostics-only PR #886: strict numeric/enum WORKSHOP_ENGINEER_OUTPUT public projection and negative privacy tests, review handoff after 7/7 CI. Do not modify Android RAM/model/token/Reviewer policy or overlap Windows lane.",
+    "branch": "fix/cantiere-845-engineer-public-projection",
+    "resource_locks": [
+      "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/core/diagnostics/public_log_projection.dart",
+      "file:pilialvu75-hue/Ai-orchestrator-riserva:test/core/diagnostics/public_log_projection_test.dart",
+      "resource:cantiere-845-engineer-public-projection"
+    ]
+  }
+}
