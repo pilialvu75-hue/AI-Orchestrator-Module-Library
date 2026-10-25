@@ -1,0 +1,20 @@
+{
+  "schema_version": 1,
+  "request_id": "aivexus-3d-20261025-wait-platform-ci-head1d132d-v16",
+  "actor_id": "chatgpt:aivexus-3d",
+  "lane_id": "aivexus-3d",
+  "operation": "enter_wait",
+  "expected_state_version": 28,
+  "payload": {
+    "wait_type": "WAITING_EXTERNAL",
+    "resume_condition": "All GitHub PR-triggered workflow runs for PR #833 exact head 1d132d296f587db5122b9e27a81f7870a3f398a3 (seven other platform and Android-source checks plus already-green Aivexus CAD-1 Domain Tests 40178877895) reach completed with actual conclusions inspected.",
+    "summary": "CAD-1 now provides physically testable 4mm/5mm STEP/STL/3MF sample bytes packaged in validated GitHub Actions artifact ID 12593825191, exact input specs and receipts; dedicated CAD run 40178877895 successfully verified 14/14 tests and 5/5 geometry checks per revision. Checkpoint seq8 APPLIED at v28 after two CAD-only commits to PR #833 head 1d132d. Seven other platform workflows still in progress. Cantiere runner/immutable project storage, ResourceExchange, Fusion import, physical slicing/print and remote Diagnostics remain unverified. Library #113 open; draft PR not merged.",
+    "next_action": "When all GitHub workflows on head 1d132d conclude, authorize resume_wait and new bounded claim, inspect failing jobs if any. Prepare independent Main/Reviewer review packet for bounded CAD domain work; coordinate certified runner and attachment persistence with Library #113 / Cantiere lane. Do not conflate GitHub artifact with Cantiere persistence; physical Fusion/print UNKNOWN.",
+    "evidence_refs": [
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/833",
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/40178877895",
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/1d132d296f587db5122b9e27a81f7870a3f398a3",
+      "https://github.com/pilialvu75-hue/AI-Orchestrator-Module-Library/issues/113"
+    ]
+  }
+}
