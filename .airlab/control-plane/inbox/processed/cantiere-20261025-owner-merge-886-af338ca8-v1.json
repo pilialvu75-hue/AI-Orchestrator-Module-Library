@@ -1,0 +1,12 @@
+{
+  "schema_version": 1,
+  "request_id": "cantiere-20261025-owner-merge-886-af338ca8-v1",
+  "status": "APPLIED",
+  "processed_at": "2026-10-25T08:49:38Z",
+  "source_file": "cantiere-20261025-owner-merge-886-af338ca8-v1.json",
+  "lane_id": "cantiere",
+  "operation": "reconcile_external_merge",
+  "actor_id": "chatgpt:cantiere",
+  "errors": [],
+  "result_state_version": 148
+}
