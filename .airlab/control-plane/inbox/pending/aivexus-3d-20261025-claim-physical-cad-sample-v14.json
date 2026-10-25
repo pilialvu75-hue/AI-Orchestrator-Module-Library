@@ -1,0 +1,21 @@
+{
+  "schema_version": 1,
+  "request_id": "aivexus-3d-20261025-claim-physical-cad-sample-v14",
+  "actor_id": "chatgpt:aivexus-3d",
+  "lane_id": "aivexus-3d",
+  "operation": "claim",
+  "expected_state_version": 26,
+  "payload": {
+    "work_item": "AIVEXUS-CAD-1",
+    "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
+    "scope": "CAD domain-only PR #833 follow-up after 7/7 exact-head CI: prepare verifiable real STEP/STL/3MF samples in GitHub Actions artifacts for Fusion and physical print testing, preserve matching hashes and revision provenance; strengthen automated CAD-only evidence and handoff; no shared Cantiere storage, runner, project contracts, navigation or ResourceExchange changes.",
+    "branch": "feat/aivexus-cad1-parametric-sample",
+    "resource_locks": [
+      "scope:aivexus:cad",
+      "file:pilialvu75-hue/Ai-orchestrator-riserva:.github/workflows/aivexus-cad1-tests.yml",
+      "file:pilialvu75-hue/Ai-orchestrator-riserva:tools/aivexus/cad/README.md",
+      "file:pilialvu75-hue/Ai-orchestrator-riserva:tools/aivexus/cad/test_cad1.py",
+      "file:pilialvu75-hue/Ai-orchestrator-riserva:tools/aivexus/cad/validate_plate.py"
+    ]
+  }
+}
