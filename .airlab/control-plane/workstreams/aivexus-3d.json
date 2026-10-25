@@ -3,12 +3,12 @@
   "id": "aivexus-3d",
   "title": "Aivexus Studio 3D",
   "role": "worker",
-  "status": "BLOCKED",
+  "status": "READY",
   "activation": "active",
   "scope": "CAD/3D domain only: CadSpec, measured and photographic inputs, editable CAD/mesh sources, CAD/print exports and domain verification. Must consume the Cantiere-owned shared ProjectExtension/persistence/navigation base instead of modifying or duplicating it.",
   "shared_engine_policy": "domain_extension_only",
-  "state_version": 25,
-  "updated_at": "2026-10-13",
+  "state_version": 26,
+  "updated_at": "2026-10-25",
   "active_claim": null,
   "dependencies": [
     "cantiere:AIVEXUS-BASE-1",
@@ -395,6 +395,23 @@
         "scope:aivexus:cad"
       ],
       "at": "2026-10-13T07:45:35Z"
+    },
+    {
+      "type": "WAIT_RESUMED",
+      "wait_id": "aivexus-3d:89a3d6132f1d52ce3198:WAITING_EXTERNAL",
+      "work_item": "AIVEXUS-CAD-1",
+      "signal_id": "cad1-pr833-head831015d-seven-github-checks-success-oct25",
+      "evidence_refs": [
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/833",
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38364393744",
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38364393638",
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38364393573",
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38364393620",
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38364393634",
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38364393478",
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38364393468"
+      ],
+      "at": "2026-10-25T08:58:37Z"
     }
   ],
   "wait_history": [
@@ -597,52 +614,47 @@
         "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38334817369",
         "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38334817395"
       ]
+    },
+    {
+      "schema_version": 1,
+      "wait_id": "aivexus-3d:89a3d6132f1d52ce3198:WAITING_EXTERNAL",
+      "type": "WAITING_EXTERNAL",
+      "work_item": "AIVEXUS-CAD-1",
+      "prior_claim_id": "89a3d6132f1d52ce3198",
+      "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
+      "branch": "feat/aivexus-cad1-parametric-sample",
+      "scope": "Fix P2 domain-only exact STL/3MF hole-position geometry validation discovered on PR #833 and add reproducible shifted-hole and contour regression tests. Keep Cantiere shared contract/storage/runner/navigation untouched, no physical Fusion/print or Diagnostics claims.",
+      "resource_locks": [
+        "branch:pilialvu75-hue/Ai-orchestrator-riserva:feat/aivexus-cad1-parametric-sample",
+        "file:pilialvu75-hue/Ai-orchestrator-riserva:.github/workflows/aivexus-cad1-tests.yml",
+        "file:pilialvu75-hue/Ai-orchestrator-riserva:tools/aivexus/cad/README.md",
+        "file:pilialvu75-hue/Ai-orchestrator-riserva:tools/aivexus/cad/parametric_plate.py",
+        "file:pilialvu75-hue/Ai-orchestrator-riserva:tools/aivexus/cad/test_cad1.py",
+        "file:pilialvu75-hue/Ai-orchestrator-riserva:tools/aivexus/cad/validate_plate.py",
+        "scope:aivexus:cad"
+      ],
+      "entered_at": "2026-10-13T07:45:35Z",
+      "resume_condition": "All six platform GitHub workflow runs of PR #833 exact head 831015d149f2cbae6928683e8deb1aeafa3832b5 have completed, with outcomes available for inspection. Dedicated Aivexus CAD-1 Domain Tests run 38364393744 already succeeded.",
+      "summary": "CAD-1 P2 mesh hole-position validation fix committed on head 831015d. GitHub dedicated domain CI succeeded 14/14 real Python tests, including both shifted-hole STL and 3MF rejection, three cross-sections, and 5/5 export checks for each of two measured revisions. SHA-256 receipt artifact 11795978290 persisted on GitHub Actions. Checkpoint 7 APPLIED state v24. Six platform CI runs still in progress/partially passing. PR remains draft. Cantiere runner/immutable project attachment persistence, Fusion 360, physical print and remote Diagnostics separate UNKNOWN gates; Library #113 open.",
+      "evidence_refs": [
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/833",
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38364393744",
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/831015d149f2cbae6928683e8deb1aeafa3832b5",
+        "https://github.com/pilialvu75-hue/AI-Orchestrator-Module-Library/issues/113"
+      ],
+      "resume_next_action": "On platform CI conclusion, resume through transactional authorized inbox and reacquire bounded claim. Fix any exact-head failures in CAD domain only; if green, coordinate Main/Reviewer code review and Library #113 certified runner/Cantiere-owned artifact persistence. Never auto-merge or claim physical/operational acceptance.",
+      "resumed_at": "2026-10-25T08:58:37Z",
+      "signal_id": "cad1-pr833-head831015d-seven-github-checks-success-oct25",
+      "resume_evidence_refs": [
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/833",
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38364393744",
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38364393638",
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38364393573",
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38364393620",
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38364393634",
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38364393478",
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38364393468"
+      ]
     }
-  ],
-  "wait_state": {
-    "schema_version": 1,
-    "wait_id": "aivexus-3d:89a3d6132f1d52ce3198:WAITING_EXTERNAL",
-    "type": "WAITING_EXTERNAL",
-    "work_item": "AIVEXUS-CAD-1",
-    "prior_claim_id": "89a3d6132f1d52ce3198",
-    "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
-    "branch": "feat/aivexus-cad1-parametric-sample",
-    "scope": "Fix P2 domain-only exact STL/3MF hole-position geometry validation discovered on PR #833 and add reproducible shifted-hole and contour regression tests. Keep Cantiere shared contract/storage/runner/navigation untouched, no physical Fusion/print or Diagnostics claims.",
-    "resource_locks": [
-      "branch:pilialvu75-hue/Ai-orchestrator-riserva:feat/aivexus-cad1-parametric-sample",
-      "file:pilialvu75-hue/Ai-orchestrator-riserva:.github/workflows/aivexus-cad1-tests.yml",
-      "file:pilialvu75-hue/Ai-orchestrator-riserva:tools/aivexus/cad/README.md",
-      "file:pilialvu75-hue/Ai-orchestrator-riserva:tools/aivexus/cad/parametric_plate.py",
-      "file:pilialvu75-hue/Ai-orchestrator-riserva:tools/aivexus/cad/test_cad1.py",
-      "file:pilialvu75-hue/Ai-orchestrator-riserva:tools/aivexus/cad/validate_plate.py",
-      "scope:aivexus:cad"
-    ],
-    "entered_at": "2026-10-13T07:45:35Z",
-    "resume_condition": "All six platform GitHub workflow runs of PR #833 exact head 831015d149f2cbae6928683e8deb1aeafa3832b5 have completed, with outcomes available for inspection. Dedicated Aivexus CAD-1 Domain Tests run 38364393744 already succeeded.",
-    "summary": "CAD-1 P2 mesh hole-position validation fix committed on head 831015d. GitHub dedicated domain CI succeeded 14/14 real Python tests, including both shifted-hole STL and 3MF rejection, three cross-sections, and 5/5 export checks for each of two measured revisions. SHA-256 receipt artifact 11795978290 persisted on GitHub Actions. Checkpoint 7 APPLIED state v24. Six platform CI runs still in progress/partially passing. PR remains draft. Cantiere runner/immutable project attachment persistence, Fusion 360, physical print and remote Diagnostics separate UNKNOWN gates; Library #113 open.",
-    "evidence_refs": [
-      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/833",
-      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38364393744",
-      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/831015d149f2cbae6928683e8deb1aeafa3832b5",
-      "https://github.com/pilialvu75-hue/AI-Orchestrator-Module-Library/issues/113"
-    ],
-    "resume_next_action": "On platform CI conclusion, resume through transactional authorized inbox and reacquire bounded claim. Fix any exact-head failures in CAD domain only; if green, coordinate Main/Reviewer code review and Library #113 certified runner/Cantiere-owned artifact persistence. Never auto-merge or claim physical/operational acceptance."
-  },
-  "block_reason": {
-    "code": "WAITING_EXTERNAL",
-    "wait_id": "aivexus-3d:89a3d6132f1d52ce3198:WAITING_EXTERNAL",
-    "work_item": "AIVEXUS-CAD-1",
-    "resource_locks": [
-      "branch:pilialvu75-hue/Ai-orchestrator-riserva:feat/aivexus-cad1-parametric-sample",
-      "file:pilialvu75-hue/Ai-orchestrator-riserva:.github/workflows/aivexus-cad1-tests.yml",
-      "file:pilialvu75-hue/Ai-orchestrator-riserva:tools/aivexus/cad/README.md",
-      "file:pilialvu75-hue/Ai-orchestrator-riserva:tools/aivexus/cad/parametric_plate.py",
-      "file:pilialvu75-hue/Ai-orchestrator-riserva:tools/aivexus/cad/test_cad1.py",
-      "file:pilialvu75-hue/Ai-orchestrator-riserva:tools/aivexus/cad/validate_plate.py",
-      "scope:aivexus:cad"
-    ],
-    "resume_condition": "All six platform GitHub workflow runs of PR #833 exact head 831015d149f2cbae6928683e8deb1aeafa3832b5 have completed, with outcomes available for inspection. Dedicated Aivexus CAD-1 Domain Tests run 38364393744 already succeeded.",
-    "detected_at": "2026-10-13T07:45:35Z",
-    "review_required": false
-  }
+  ]
 }

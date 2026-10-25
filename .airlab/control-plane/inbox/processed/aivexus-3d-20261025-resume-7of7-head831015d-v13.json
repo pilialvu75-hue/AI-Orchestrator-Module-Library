@@ -1,0 +1,12 @@
+{
+  "schema_version": 1,
+  "request_id": "aivexus-3d-20261025-resume-7of7-head831015d-v13",
+  "status": "APPLIED",
+  "processed_at": "2026-10-25T08:58:37Z",
+  "source_file": "aivexus-3d-20261025-resume-7of7-head831015d-v13.json",
+  "lane_id": "aivexus-3d",
+  "operation": "resume_wait",
+  "actor_id": "chatgpt:aivexus-3d",
+  "errors": [],
+  "result_state_version": 26
+}
