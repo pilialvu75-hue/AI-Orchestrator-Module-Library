@@ -1,0 +1,26 @@
+{
+  "schema_version": 1,
+  "request_id": "cantiere-20261025-wait-pr886-seven-ci-v1",
+  "actor_id": "chatgpt:cantiere",
+  "lane_id": "cantiere",
+  "operation": "enter_wait",
+  "expected_state_version": 143,
+  "payload": {
+    "wait_type": "WAITING_EXTERNAL",
+    "resume_condition": "All seven PR #886 GitHub workflow runs for exact head 0fe3fa597afb42b013e5e250605f51723b934e0b have inspectable terminal outcomes (success or failure); Codex final-head review already completed with no findings.",
+    "summary": "Draft PR #886 exports strict numeric/enum WORKSHOP_ENGINEER_OUTPUT through fail-closed public Diagnostics, with negative privacy tests; Codex clean on final SHA. Web CI PASS, six other CI not yet terminal. Bounded Cantiere claim ed63bca78def053c226d, checkpoint #76. No G5 first star physical proof or G6 approval.",
+    "next_action": "Inspect all final-head CI; if failures repair only proven issues with original locked two-file scope; if success resume wait, reclaim original resources and submit canonical independent review packet. Preserve #867 Android RAM diagnostics integration, no device reinstall or downgrade.",
+    "evidence_refs": [
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/886",
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/0fe3fa597afb42b013e5e250605f51723b934e0b",
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/886#issuecomment-6395389099",
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/40176475175",
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/40176475302",
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/40176475225",
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/40176475222",
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/40176475210",
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/40176475212",
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/40176475188"
+    ]
+  }
+}
