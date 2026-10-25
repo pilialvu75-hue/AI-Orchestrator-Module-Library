@@ -7,7 +7,7 @@
     "policy": "This private repository is the single coordination authority. Chats and agents are workers, not independent sources of truth."
   },
   "updated_at": "2026-10-25",
-  "state_revision": 379,
+  "state_revision": 380,
   "lifecycle_status": "BOOTSTRAP_ACTIVE",
   "roadmap_authority": {
     "library": ".airlab/roadmap.yaml",
@@ -81,27 +81,14 @@
     "invalid_lane_behavior": "ISOLATE_AND_SURFACE_PROJECTION_INCIDENT"
   },
   "projection": {
-    "source_digest": "0ec295665af958b014301c168c264551d7ec9add5270d8af81f1e4b3b225451b",
-    "projected_at": "2026-10-25T22:28:05Z",
+    "source_digest": "33e2408ca85f264a3b1f01bb72b454264ff59202c42bcaca9e4830f09d208a5e",
+    "projected_at": "2026-10-25T22:29:28Z",
     "counts": {
-      "BLOCKED": 2,
-      "IMPLEMENTING": 1,
+      "BLOCKED": 3,
       "READY": 13,
       "REVIEW_REQUIRED": 2
     },
     "active_claims": [
-      {
-        "lane": "cantiere",
-        "claim_id": "61b9ba1aefd4636ef43d",
-        "work_item": "issue-845-star-negative-ci-coverage-v1",
-        "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
-        "lease_until": "2026-10-26T10:28:05Z",
-        "resource_locks": [
-          "branch:pilialvu75-hue/Ai-orchestrator-riserva:fix/cantiere-845-star-negative-aapt2-ci",
-          "file:pilialvu75-hue/Ai-orchestrator-riserva:.github/workflows/cantiere-first-app.yml",
-          "resource:cantiere-845-star-negative-ci-coverage"
-        ]
-      },
       {
         "lane": "library-researcher",
         "claim_id": "a3be2c00b7d608d2df75",
@@ -144,12 +131,6 @@
         "work_item": "issue-849-android-selective-backup-exclusions"
       },
       {
-        "key": "branch:pilialvu75-hue/Ai-orchestrator-riserva:fix/cantiere-845-star-negative-aapt2-ci",
-        "lane": "cantiere",
-        "claim_id": "61b9ba1aefd4636ef43d",
-        "work_item": "issue-845-star-negative-ci-coverage-v1"
-      },
-      {
         "key": "file:pilialvu75-hue/AI-Orchestrator-Module-Researcher:.github/workflows/autonomous-seeding.yml",
         "lane": "library-researcher",
         "claim_id": "a3be2c00b7d608d2df75",
@@ -160,12 +141,6 @@
         "lane": "library-researcher",
         "claim_id": "a3be2c00b7d608d2df75",
         "work_item": "researcher-zero-discovery-reliability-20261016"
-      },
-      {
-        "key": "file:pilialvu75-hue/Ai-orchestrator-riserva:.github/workflows/cantiere-first-app.yml",
-        "lane": "cantiere",
-        "claim_id": "61b9ba1aefd4636ef43d",
-        "work_item": "issue-845-star-negative-ci-coverage-v1"
       },
       {
         "key": "file:pilialvu75-hue/Ai-orchestrator-riserva:android/app/src/main/AndroidManifest.xml",
@@ -190,12 +165,6 @@
         "lane": "platform-android",
         "claim_id": "394d8d0d738e8b921f03",
         "work_item": "issue-849-android-selective-backup-exclusions"
-      },
-      {
-        "key": "resource:cantiere-845-star-negative-ci-coverage",
-        "lane": "cantiere",
-        "claim_id": "61b9ba1aefd4636ef43d",
-        "work_item": "issue-845-star-negative-ci-coverage-v1"
       },
       {
         "key": "resource:researcher-discovery-reliability",
@@ -225,6 +194,22 @@
           ],
           "resume_condition": "All GitHub PR-triggered workflow runs for PR #833 exact head 1d132d296f587db5122b9e27a81f7870a3f398a3 (seven other platform and Android-source checks plus already-green Aivexus CAD-1 Domain Tests 40178877895) reach completed with actual conclusions inspected.",
           "detected_at": "2026-10-25T09:04:30Z",
+          "review_required": false
+        }
+      },
+      {
+        "lane": "cantiere",
+        "reason": {
+          "code": "WAITING_EXTERNAL",
+          "wait_id": "cantiere:61b9ba1aefd4636ef43d:WAITING_EXTERNAL",
+          "work_item": "issue-845-star-negative-ci-coverage-v1",
+          "resource_locks": [
+            "branch:pilialvu75-hue/Ai-orchestrator-riserva:fix/cantiere-845-star-negative-aapt2-ci",
+            "file:pilialvu75-hue/Ai-orchestrator-riserva:.github/workflows/cantiere-first-app.yml",
+            "resource:cantiere-845-star-negative-ci-coverage"
+          ],
+          "resume_condition": "Exact-head PR #897 Cantiere First App APK and other required workflows have final inspectable outcomes. Codex current review is blocked by usage quota, not documented source findings; do not fabricate approval.",
+          "detected_at": "2026-10-25T22:29:28Z",
           "review_required": false
         }
       },
@@ -368,25 +353,15 @@
       },
       {
         "id": "cantiere",
-        "status": "IMPLEMENTING",
+        "status": "BLOCKED",
         "activation": "active",
-        "state_version": 150,
+        "state_version": 151,
         "updated_at": "2026-10-25",
-        "active_claim": {
-          "claim_id": "61b9ba1aefd4636ef43d",
-          "work_item": "issue-845-star-negative-ci-coverage-v1",
-          "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
-          "lease_until": "2026-10-26T10:28:05Z",
-          "resource_locks": [
-            "branch:pilialvu75-hue/Ai-orchestrator-riserva:fix/cantiere-845-star-negative-aapt2-ci",
-            "file:pilialvu75-hue/Ai-orchestrator-riserva:.github/workflows/cantiere-first-app.yml",
-            "resource:cantiere-845-star-negative-ci-coverage"
-          ]
-        },
+        "active_claim": null,
         "reviewer_state": "PENDING",
         "inference_profile_status": null,
         "historical_backlog_count": 3,
-        "next_action": "Wait for exact-head Cantiere First App APK job and confirm [CANTIERE_AAPT2_NEGATIVE] output after actual nonzero AAPT2 rejection. Verify all required checks and Codex final-head review; fix if negative fixture fails. Submit review packet via canonical inbox; G5 original S24 star remains 0/1 and G6 remains PENDING."
+        "next_action": "Check exact-head CI and full job logs for marker [CANTIERE_AAPT2_NEGATIVE] plus actual rejected AAPT2 process exit; if verified and checks pass, submit claim-bound review packet for one-file CI fix. Independent G6 stays PENDING; user-directed bypass is not reviewer approval. Keep original device data untouched."
       },
       {
         "id": "diagnostics",
