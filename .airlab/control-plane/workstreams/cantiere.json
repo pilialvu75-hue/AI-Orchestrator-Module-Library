@@ -3,11 +3,11 @@
   "id": "cantiere",
   "title": "Cantiere",
   "role": "worker",
-  "status": "CLAIMED",
+  "status": "IMPLEMENTING",
   "activation": "active",
   "scope": "Exclusive Cantiere/App Factory execution, durability, build/review/validation/apply and first-real-app reliability.",
   "shared_engine_policy": "shared_or_control_plane",
-  "state_version": 149,
+  "state_version": 150,
   "updated_at": "2026-10-25",
   "active_claim": {
     "claim_id": "61b9ba1aefd4636ef43d",
@@ -22,8 +22,8 @@
       "resource:cantiere-845-star-negative-ci-coverage"
     ],
     "started_at": "2026-10-25T22:25:52Z",
-    "heartbeat_at": "2026-10-25T22:25:52Z",
-    "lease_until": "2026-10-26T10:25:52Z",
+    "heartbeat_at": "2026-10-25T22:28:05Z",
+    "lease_until": "2026-10-26T10:28:05Z",
     "lease_hours": 12
   },
   "dependencies": [],
@@ -49,7 +49,7 @@
     "reviewed_by": null,
     "reviewed_at": null
   },
-  "next_action": "Run physical target acceptance; independent review remains outstanding.",
+  "next_action": "Wait for exact-head Cantiere First App APK job and confirm [CANTIERE_AAPT2_NEGATIVE] output after actual nonzero AAPT2 rejection. Verify all required checks and Codex final-head review; fix if negative fixture fails. Submit review packet via canonical inbox; G5 original S24 star remains 0/1 and G6 remains PENDING.",
   "historical_backlog": [
     "Stay in Phase 1 ONLINE until a real generated Android app is physically accepted.",
     "Reproduce the recent manga-drawing app failure from current main with Diagnostics; do not restart generic audits.",
@@ -79,29 +79,6 @@
     "continuation": "Do not re-enable broad Cantiere autopilot until the remaining control-plane concurrency/resource-lock weakness is addressed or explicitly accepted for the next pilot."
   },
   "checkpoints": [
-    {
-      "seq": 29,
-      "at": "2026-10-12T11:35:41Z",
-      "claim_id": "7c6ae34131e828ee79a1",
-      "work_item": "AIVEXUS-BASE-2",
-      "summary": "AIVEXUS-BASE-2 accepted at exact PR #832 head 82b5ac57f9132775fd0695eebb4d2de834c860ed. Shared App/Software, Stampa 3D and Videogiochi selector/navigation meets BASE-2 scope; CAD/Game drafts persist and reopen through the same BASE-1-backed list without inference or simulated generation. The software edit kind-switch P2 is fixed and regression-tested. All six exact-head workflows and final-head Codex re-review are PASS. No CAD-1, GAME-1, deployment or physical/runtime acceptance is implied.",
-      "decisions": [
-        "Main/Reviewer accepted the implementation/review gate."
-      ],
-      "evidence_refs": [
-        "Ai-orchestrator-riserva#832",
-        "commit:82b5ac57f9132775fd0695eebb4d2de834c860ed",
-        "CI:38241204190",
-        "CI:38241204381",
-        "CI:38241204385",
-        "CI:38241204453",
-        "CI:38241204290",
-        "CI:38241204451",
-        "review:6123358247"
-      ],
-      "next_action": "Merge PR #832 at exact reviewed head, synchronize the private Riserva roadmap marking AIVEXUS-BASE-2 integrated, complete evidence-backed G7, then allow aivexus-3d and aivexus-games to independently proceed with CAD-1 and GAME-1 according to their canonical lanes.",
-      "kind": "REVIEW_ACCEPTED"
-    },
     {
       "seq": 30,
       "at": "2026-10-12T18:48:03Z",
@@ -1009,23 +986,45 @@
       ],
       "next_action": "Run physical target acceptance; independent review remains outstanding.",
       "kind": "EXTERNAL_MERGE_RECONCILIATION"
+    },
+    {
+      "seq": 79,
+      "at": "2026-10-25T22:28:05Z",
+      "claim_id": "61b9ba1aefd4636ef43d",
+      "work_item": "issue-845-star-negative-ci-coverage-v1",
+      "summary": "Claim 61b9ba1aefd4636ef43d accepted v149 for bounded Cantiere Android CI correction. Draft PR #897 exact head cec374a61d9828f6808fb6b09d65340dfa314002 changes ONLY .github/workflows/cantiere-first-app.yml: adds existing workshop_generated_star_negative_gate_test.dart to PR paths filter and exact flutter test list. This test executes real Dart analyzer reject of known-invalid star source, and in dedicated CI it requires Android SDK/AAPT2 to reject malformed drawable XML; SDK missing fails closed. Existing workflow previously omitted the test, so prior first app CI PASS was not proof of this negative coverage. New head CI running and Codex requested.",
+      "decisions": [
+        "Only CI workflow file changed. No Flutter app/Engineer/Reviewer/token/RAM changes.",
+        "Do not claim successful first-star-app generation or physical G5 from negative source rejection.",
+        "Do not edit draft Android memory PR #867 or user device; no local app/PC process opened."
+      ],
+      "evidence_refs": [
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/897",
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/cec374a61d9828f6808fb6b09d65340dfa314002",
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/40240244084",
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/issues/845"
+      ],
+      "next_action": "Wait for exact-head Cantiere First App APK job and confirm [CANTIERE_AAPT2_NEGATIVE] output after actual nonzero AAPT2 rejection. Verify all required checks and Codex final-head review; fix if negative fixture fails. Submit review packet via canonical inbox; G5 original S24 star remains 0/1 and G6 remains PENDING."
     }
   ],
   "last_checkpoint": {
-    "seq": 78,
-    "at": "2026-10-25T08:49:38Z",
-    "claim_id": "e50b419ab12a79569f47",
-    "work_item": "issue-845-engineer-public-projection-v1",
-    "summary": "Owner-directed GitHub merge verified; not independently approved.",
+    "seq": 79,
+    "at": "2026-10-25T22:28:05Z",
+    "claim_id": "61b9ba1aefd4636ef43d",
+    "work_item": "issue-845-star-negative-ci-coverage-v1",
+    "summary": "Claim 61b9ba1aefd4636ef43d accepted v149 for bounded Cantiere Android CI correction. Draft PR #897 exact head cec374a61d9828f6808fb6b09d65340dfa314002 changes ONLY .github/workflows/cantiere-first-app.yml: adds existing workshop_generated_star_negative_gate_test.dart to PR paths filter and exact flutter test list. This test executes real Dart analyzer reject of known-invalid star source, and in dedicated CI it requires Android SDK/AAPT2 to reject malformed drawable XML; SDK missing fails closed. Existing workflow previously omitted the test, so prior first app CI PASS was not proof of this negative coverage. New head CI running and Codex requested.",
     "decisions": [
-      "Retain open G5/G6; do not infer runtime or reviewer approval."
+      "Only CI workflow file changed. No Flutter app/Engineer/Reviewer/token/RAM changes.",
+      "Do not claim successful first-star-app generation or physical G5 from negative source rejection.",
+      "Do not edit draft Android memory PR #867 or user device; no local app/PC process opened."
     ],
     "evidence_refs": [
-      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/886",
-      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/af338ca81e9c501705a89dcd6e8c20f3187b48d8"
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/897",
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/cec374a61d9828f6808fb6b09d65340dfa314002",
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/40240244084",
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/issues/845"
     ],
-    "next_action": "Run physical target acceptance; independent review remains outstanding.",
-    "kind": "EXTERNAL_MERGE_RECONCILIATION"
+    "next_action": "Wait for exact-head Cantiere First App APK job and confirm [CANTIERE_AAPT2_NEGATIVE] output after actual nonzero AAPT2 rejection. Verify all required checks and Codex final-head review; fix if negative fixture fails. Submit review packet via canonical inbox; G5 original S24 star remains 0/1 and G6 remains PENDING."
   },
   "review_history": [
     {
