@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "request_id": "cantiere-20261025-checkpoint-pr886-projection-v1",
+  "actor_id": "chatgpt:cantiere",
+  "lane_id": "cantiere",
+  "operation": "checkpoint",
+  "expected_state_version": 141,
+  "payload": {
+    "summary": "Claim ed63bca78def053c226d accepted for bounded public Diagnostics export of WORKSHOP_ENGINEER_OUTPUT, internal producer from merged #884. Draft PR #886 head 2e3789aa0bd5fbab65b7f14c23385f56f2e71cf2: public_log_projection.dart allowlist and closed grammar, tests rejecting extra sensitive source/prompt/identity, no memory/Engineer changes. Initial patch reconstruction contained accidental duplication, corrected in same branch before review; current diff limited to 2 files (+1 allowlist item and +25 lines handler +82 lines tests), 7 CI workflows on fixed head started. Codex review requested exact final head.",
+    "next_action": "Confirm final-head CI & independent Codex review. Repair findings within 2-file claim scope. Coordinate with Android memory PR #867's separate Diagnostics region to avoid merging divergent protections. Submit canonical review packet without fabricating independent G6 or physical G5.",
+    "decisions": [
+      "No files of Android memory PR #867 other than narrow public Diagnostics event allowlist/handler; no RAM protections edited.",
+      "No user identity, prompts, generated source, model ID or raw exception exported; regex fails closed on extra fields.",
+      "No S24 original star run; no Android host installation requested."
+    ],
+    "evidence_refs": [
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/886",
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/2e3789aa0bd5fbab65b7f14c23385f56f2e71cf2",
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/issues/845",
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/867"
+    ]
+  }
+}
