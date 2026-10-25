@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "request_id": "cantiere-20261025-claim-star-aapt2-negative-ci-v1",
+  "actor_id": "chatgpt:cantiere",
+  "lane_id": "cantiere",
+  "operation": "claim",
+  "expected_state_version": 148,
+  "payload": {
+    "work_item": "issue-845-star-negative-ci-coverage-v1",
+    "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
+    "branch": "fix/cantiere-845-star-negative-aapt2-ci",
+    "scope": "Wire existing source and malformed-drawable negative fixture into Cantiere First App APK CI so AAPT2 is required and actually runs; workflow-only; no LLM, Android RAM, UI, Reviewer or project modifications.",
+    "resource_locks": [
+      "file:pilialvu75-hue/Ai-orchestrator-riserva:.github/workflows/cantiere-first-app.yml",
+      "resource:cantiere-845-star-negative-ci-coverage"
+    ]
+  }
+}
