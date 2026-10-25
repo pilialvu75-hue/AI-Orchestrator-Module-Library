@@ -7,7 +7,7 @@
   "activation": "active",
   "scope": "Exclusive Cantiere/App Factory execution, durability, build/review/validation/apply and first-real-app reliability.",
   "shared_engine_policy": "shared_or_control_plane",
-  "state_version": 142,
+  "state_version": 143,
   "updated_at": "2026-10-25",
   "active_claim": {
     "claim_id": "ed63bca78def053c226d",
@@ -23,8 +23,8 @@
       "resource:cantiere-845-engineer-public-projection"
     ],
     "started_at": "2026-10-25T08:18:33Z",
-    "heartbeat_at": "2026-10-25T08:23:12Z",
-    "lease_until": "2026-10-25T20:23:12Z",
+    "heartbeat_at": "2026-10-25T08:27:21Z",
+    "lease_until": "2026-10-25T20:27:21Z",
     "lease_hours": 12
   },
   "dependencies": [],
@@ -50,7 +50,7 @@
     "reviewed_by": null,
     "reviewed_at": null
   },
-  "next_action": "Confirm final-head CI & independent Codex review. Repair findings within 2-file claim scope. Coordinate with Android memory PR #867's separate Diagnostics region to avoid merging divergent protections. Submit canonical review packet without fabricating independent G6 or physical G5.",
+  "next_action": "Once 7 exact-head CI terminal and Codex review on 0fe3fa5 complete, resume and inspect. Correct only actual findings and then submit review packet; never treat source-only PR #867 RAM parity or original Samsung star G5 as resolved.",
   "historical_backlog": [
     "Stay in Phase 1 ONLINE until a real generated Android app is physically accepted.",
     "Reproduce the recent manga-drawing app failure from current main with Diagnostics; do not restart generic audits.",
@@ -80,28 +80,6 @@
     "continuation": "Do not re-enable broad Cantiere autopilot until the remaining control-plane concurrency/resource-lock weakness is addressed or explicitly accepted for the next pilot."
   },
   "checkpoints": [
-    {
-      "seq": 26,
-      "at": "2026-10-12T10:22:50Z",
-      "claim_id": "3d39dee487b98eb463b1",
-      "work_item": "AIVEXUS-BASE-1",
-      "summary": "AIVEXUS-BASE-1 accepted at exact PR #826 head a63b8cf14c07e6aeba361a1ee4e6e832e6ce1df1 after metadata-only roadmap ref correction. Packet-bound G1-G4 are PASS. Approval is limited to BASE-1 shared foundations and does not imply BASE-2, CAD/Game or physical/runtime acceptance.",
-      "decisions": [
-        "Main/Reviewer accepted the implementation/review gate."
-      ],
-      "evidence_refs": [
-        "Ai-orchestrator-riserva#826",
-        "commit:a63b8cf14c07e6aeba361a1ee4e6e832e6ce1df1",
-        "CI:38161301515",
-        "CI:38161301477",
-        "CI:38161301505",
-        "CI:38161301503",
-        "CI:38161301487",
-        "CI:38161301491"
-      ],
-      "next_action": "Merge PR #826 at exact reviewed head, synchronize .airlab/public-repositories/Ai-orchestrator-riserva/roadmap.yaml to record BASE-1 integration, complete canonical sync, then claim AIVEXUS-BASE-2.",
-      "kind": "REVIEW_ACCEPTED"
-    },
     {
       "seq": 27,
       "at": "2026-10-12T11:29:06Z",
@@ -1021,26 +999,45 @@
         "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/867"
       ],
       "next_action": "Confirm final-head CI & independent Codex review. Repair findings within 2-file claim scope. Coordinate with Android memory PR #867's separate Diagnostics region to avoid merging divergent protections. Submit canonical review packet without fabricating independent G6 or physical G5."
+    },
+    {
+      "seq": 76,
+      "at": "2026-10-25T08:27:21Z",
+      "claim_id": "ed63bca78def053c226d",
+      "work_item": "issue-845-engineer-public-projection-v1",
+      "summary": "Bounded Cantiere issue #845 public Diagnostics PR #886 now at final HEAD 0fe3fa597afb42b013e5e250605f51723b934e0b; 2 files only: allowlist plus strict numeric/enum full-line WORKSHOP_ENGINEER_OUTPUT projection, negative privacy tests including trailing newline. Original auto-generated malformed patch detected by diff immediately and corrected in branch; independent Codex clean on intermediate head, new exact-head review requested. Seven exact-head CI running; Linux shared tests PASS, all other jobs still pending/in-progress. PR remains draft, not merged.",
+      "decisions": [
+        "Do not merge PR886 before new exact-head checks/review; previous head Codex receipt is not evidence for new SHA.",
+        "Avoid overlapping the Android GPU memory control files and #867 code region; coordinate merge order, rebase if necessary.",
+        "Public projection rejects unknown fields and excludes owner prompts, generated source, session/project IDs and raw errors."
+      ],
+      "evidence_refs": [
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/886",
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/0fe3fa597afb42b013e5e250605f51723b934e0b",
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/886#issuecomment-6395374809",
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/867#issuecomment-6395379079"
+      ],
+      "next_action": "Once 7 exact-head CI terminal and Codex review on 0fe3fa5 complete, resume and inspect. Correct only actual findings and then submit review packet; never treat source-only PR #867 RAM parity or original Samsung star G5 as resolved."
     }
   ],
   "last_checkpoint": {
-    "seq": 75,
-    "at": "2026-10-25T08:23:12Z",
+    "seq": 76,
+    "at": "2026-10-25T08:27:21Z",
     "claim_id": "ed63bca78def053c226d",
     "work_item": "issue-845-engineer-public-projection-v1",
-    "summary": "Claim ed63bca78def053c226d accepted for bounded public Diagnostics export of WORKSHOP_ENGINEER_OUTPUT, internal producer from merged #884. Draft PR #886 head 2e3789aa0bd5fbab65b7f14c23385f56f2e71cf2: public_log_projection.dart allowlist and closed grammar, tests rejecting extra sensitive source/prompt/identity, no memory/Engineer changes. Initial patch reconstruction contained accidental duplication, corrected in same branch before review; current diff limited to 2 files (+1 allowlist item and +25 lines handler +82 lines tests), 7 CI workflows on fixed head started. Codex review requested exact final head.",
+    "summary": "Bounded Cantiere issue #845 public Diagnostics PR #886 now at final HEAD 0fe3fa597afb42b013e5e250605f51723b934e0b; 2 files only: allowlist plus strict numeric/enum full-line WORKSHOP_ENGINEER_OUTPUT projection, negative privacy tests including trailing newline. Original auto-generated malformed patch detected by diff immediately and corrected in branch; independent Codex clean on intermediate head, new exact-head review requested. Seven exact-head CI running; Linux shared tests PASS, all other jobs still pending/in-progress. PR remains draft, not merged.",
     "decisions": [
-      "No files of Android memory PR #867 other than narrow public Diagnostics event allowlist/handler; no RAM protections edited.",
-      "No user identity, prompts, generated source, model ID or raw exception exported; regex fails closed on extra fields.",
-      "No S24 original star run; no Android host installation requested."
+      "Do not merge PR886 before new exact-head checks/review; previous head Codex receipt is not evidence for new SHA.",
+      "Avoid overlapping the Android GPU memory control files and #867 code region; coordinate merge order, rebase if necessary.",
+      "Public projection rejects unknown fields and excludes owner prompts, generated source, session/project IDs and raw errors."
     ],
     "evidence_refs": [
       "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/886",
-      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/2e3789aa0bd5fbab65b7f14c23385f56f2e71cf2",
-      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/issues/845",
-      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/867"
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/0fe3fa597afb42b013e5e250605f51723b934e0b",
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/886#issuecomment-6395374809",
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/867#issuecomment-6395379079"
     ],
-    "next_action": "Confirm final-head CI & independent Codex review. Repair findings within 2-file claim scope. Coordinate with Android memory PR #867's separate Diagnostics region to avoid merging divergent protections. Submit canonical review packet without fabricating independent G6 or physical G5."
+    "next_action": "Once 7 exact-head CI terminal and Codex review on 0fe3fa5 complete, resume and inspect. Correct only actual findings and then submit review packet; never treat source-only PR #867 RAM parity or original Samsung star G5 as resolved."
   },
   "review_history": [
     {

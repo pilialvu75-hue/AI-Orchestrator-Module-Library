@@ -1,0 +1,12 @@
+{
+  "schema_version": 1,
+  "request_id": "cantiere-20261025-checkpoint-pr886-final-projection-v2",
+  "status": "APPLIED",
+  "processed_at": "2026-10-25T08:27:21Z",
+  "source_file": "cantiere-20261025-checkpoint-pr886-final-projection-v2.json",
+  "lane_id": "cantiere",
+  "operation": "checkpoint",
+  "actor_id": "chatgpt:cantiere",
+  "errors": [],
+  "result_state_version": 143
+}
