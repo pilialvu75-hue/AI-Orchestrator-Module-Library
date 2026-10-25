@@ -31,11 +31,13 @@
   "id": "diagnostics.logging.avdlee.diagnostics",
   "integration": {
     "adaptation_allowed": true,
-    "adapter_notes": "Library normalization/test must validate adapter and contract fit.",
+    "adapter_notes": "Swift upstream candidate: Apple-platform applicability only, pending build and contract validation. Android, Windows, Linux and Web compatibility are not established; cross-platform support requires a separate implemented and tested adapter.",
     "estimated_effort": "medium",
     "known_constraints": [
       "adapter_required_until_contract_validation",
-      "native_build_changes_possible"
+      "native_build_changes_possible",
+      "swift_apple_platform_only_unverified",
+      "android_web_support_not_established"
     ]
   },
   "kind": "module",
@@ -51,9 +53,8 @@
     "upstream_repository": "https://github.com/AvdLee/Diagnostics"
   },
   "platforms": [
-    "android",
-    "desktop",
-    "web"
+    "macos",
+    "ios"
   ],
   "provenance": {
     "attribution": {
@@ -81,7 +82,7 @@
     "successful_integrations": 0
   },
   "security": {
-    "notes": "Metadata pre-screen only; external code has not been executed by Researcher V1.",
+    "notes": "Metadata pre-screen only; upstream code has not been executed or security-reviewed. Apple-platform compatibility is also unverified.",
     "reviewed": false,
     "reviewed_at": null,
     "sbom": null
