@@ -1,0 +1,21 @@
+{
+  "schema_version": 1,
+  "request_id": "cantiere-20261025-wait-pr897-star-ci-and-codex-quota-v1",
+  "actor_id": "chatgpt:cantiere",
+  "lane_id": "cantiere",
+  "operation": "enter_wait",
+  "expected_state_version": 150,
+  "payload": {
+    "wait_type": "WAITING_EXTERNAL",
+    "resume_condition": "Exact-head PR #897 Cantiere First App APK and other required workflows have final inspectable outcomes. Codex current review is blocked by usage quota, not documented source findings; do not fabricate approval.",
+    "summary": "Claim 61b9ba1aefd4636ef43d, PR #897 head cec374a61d9828f6808fb6b09d65340dfa314002. Dedicated Cantiere First App APK `Run Cantiere physical-failure regressions` step completed success with newly included Dart/AAPT2 star negative fixture. Workflow is still building deterministic starter APK; other CI in progress. Codex review request failed due account quota limit without documented code findings. No G5/G6 approval claimed, original S24 FE star remains 0/1.",
+    "next_action": "Check exact-head CI and full job logs for marker [CANTIERE_AAPT2_NEGATIVE] plus actual rejected AAPT2 process exit; if verified and checks pass, submit claim-bound review packet for one-file CI fix. Independent G6 stays PENDING; user-directed bypass is not reviewer approval. Keep original device data untouched.",
+    "evidence_refs": [
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/897",
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/cec374a61d9828f6808fb6b09d65340dfa314002",
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/40240244084",
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/897#issuecomment-6404266219",
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/issues/845"
+    ]
+  }
+}
