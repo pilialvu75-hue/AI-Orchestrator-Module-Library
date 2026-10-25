@@ -3,32 +3,13 @@
   "id": "aivexus-3d",
   "title": "Aivexus Studio 3D",
   "role": "worker",
-  "status": "IMPLEMENTING",
+  "status": "BLOCKED",
   "activation": "active",
   "scope": "CAD/3D domain only: CadSpec, measured and photographic inputs, editable CAD/mesh sources, CAD/print exports and domain verification. Must consume the Cantiere-owned shared ProjectExtension/persistence/navigation base instead of modifying or duplicating it.",
   "shared_engine_policy": "domain_extension_only",
-  "state_version": 28,
+  "state_version": 29,
   "updated_at": "2026-10-25",
-  "active_claim": {
-    "claim_id": "987969fd3c326ee99948",
-    "owner_lane": "aivexus-3d",
-    "work_item": "AIVEXUS-CAD-1",
-    "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
-    "scope": "CAD domain-only PR #833 follow-up after 7/7 exact-head CI: prepare verifiable real STEP/STL/3MF samples in GitHub Actions artifacts for Fusion and physical print testing, preserve matching hashes and revision provenance; strengthen automated CAD-only evidence and handoff; no shared Cantiere storage, runner, project contracts, navigation or ResourceExchange changes.",
-    "branch": "feat/aivexus-cad1-parametric-sample",
-    "resource_locks": [
-      "branch:pilialvu75-hue/Ai-orchestrator-riserva:feat/aivexus-cad1-parametric-sample",
-      "file:pilialvu75-hue/Ai-orchestrator-riserva:.github/workflows/aivexus-cad1-tests.yml",
-      "file:pilialvu75-hue/Ai-orchestrator-riserva:tools/aivexus/cad/README.md",
-      "file:pilialvu75-hue/Ai-orchestrator-riserva:tools/aivexus/cad/test_cad1.py",
-      "file:pilialvu75-hue/Ai-orchestrator-riserva:tools/aivexus/cad/validate_plate.py",
-      "scope:aivexus:cad"
-    ],
-    "started_at": "2026-10-25T08:59:20Z",
-    "heartbeat_at": "2026-10-25T09:03:51Z",
-    "lease_until": "2026-10-25T21:03:51Z",
-    "lease_hours": 12
-  },
+  "active_claim": null,
   "dependencies": [
     "cantiere:AIVEXUS-BASE-1",
     "cantiere:AIVEXUS-BASE-2"
@@ -55,7 +36,7 @@
     "reviewed_by": null,
     "reviewed_at": null
   },
-  "next_action": "Inspect the other seven GitHub workflow run conclusions for PR #833 exact head 1d132d296f587db5122b9e27a81f7870a3f398a3. After all complete, resume_wait and reacquire bounded claim. Prepare Main/Reviewer bounded package for domain library reuse, but retain draft until Cantiere-authorized runner/project immutable artifact integration and independent real Fusion/slicer/print evidence. GitHub samples are short-lived external test assets, not persistent project artifacts.",
+  "next_action": "When all GitHub workflows on head 1d132d conclude, authorize resume_wait and new bounded claim, inspect failing jobs if any. Prepare independent Main/Reviewer review packet for bounded CAD domain work; coordinate certified runner and attachment persistence with Library #113 / Cantiere lane. Do not conflate GitHub artifact with Cantiere persistence; physical Fusion/print UNKNOWN.",
   "coordination": {
     "domain_lock": "scope:aivexus:cad",
     "shared_contract_owner": "cantiere",
@@ -450,6 +431,22 @@
         "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38364393468"
       ],
       "at": "2026-10-25T08:58:37Z"
+    },
+    {
+      "type": "WAIT_ENTERED",
+      "wait_id": "aivexus-3d:987969fd3c326ee99948:WAITING_EXTERNAL",
+      "wait_type": "WAITING_EXTERNAL",
+      "prior_claim_id": "987969fd3c326ee99948",
+      "work_item": "AIVEXUS-CAD-1",
+      "resource_locks": [
+        "branch:pilialvu75-hue/Ai-orchestrator-riserva:feat/aivexus-cad1-parametric-sample",
+        "file:pilialvu75-hue/Ai-orchestrator-riserva:.github/workflows/aivexus-cad1-tests.yml",
+        "file:pilialvu75-hue/Ai-orchestrator-riserva:tools/aivexus/cad/README.md",
+        "file:pilialvu75-hue/Ai-orchestrator-riserva:tools/aivexus/cad/test_cad1.py",
+        "file:pilialvu75-hue/Ai-orchestrator-riserva:tools/aivexus/cad/validate_plate.py",
+        "scope:aivexus:cad"
+      ],
+      "at": "2026-10-25T09:04:30Z"
     }
   ],
   "wait_history": [
@@ -694,5 +691,49 @@
         "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38364393468"
       ]
     }
-  ]
+  ],
+  "wait_state": {
+    "schema_version": 1,
+    "wait_id": "aivexus-3d:987969fd3c326ee99948:WAITING_EXTERNAL",
+    "type": "WAITING_EXTERNAL",
+    "work_item": "AIVEXUS-CAD-1",
+    "prior_claim_id": "987969fd3c326ee99948",
+    "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
+    "branch": "feat/aivexus-cad1-parametric-sample",
+    "scope": "CAD domain-only PR #833 follow-up after 7/7 exact-head CI: prepare verifiable real STEP/STL/3MF samples in GitHub Actions artifacts for Fusion and physical print testing, preserve matching hashes and revision provenance; strengthen automated CAD-only evidence and handoff; no shared Cantiere storage, runner, project contracts, navigation or ResourceExchange changes.",
+    "resource_locks": [
+      "branch:pilialvu75-hue/Ai-orchestrator-riserva:feat/aivexus-cad1-parametric-sample",
+      "file:pilialvu75-hue/Ai-orchestrator-riserva:.github/workflows/aivexus-cad1-tests.yml",
+      "file:pilialvu75-hue/Ai-orchestrator-riserva:tools/aivexus/cad/README.md",
+      "file:pilialvu75-hue/Ai-orchestrator-riserva:tools/aivexus/cad/test_cad1.py",
+      "file:pilialvu75-hue/Ai-orchestrator-riserva:tools/aivexus/cad/validate_plate.py",
+      "scope:aivexus:cad"
+    ],
+    "entered_at": "2026-10-25T09:04:30Z",
+    "resume_condition": "All GitHub PR-triggered workflow runs for PR #833 exact head 1d132d296f587db5122b9e27a81f7870a3f398a3 (seven other platform and Android-source checks plus already-green Aivexus CAD-1 Domain Tests 40178877895) reach completed with actual conclusions inspected.",
+    "summary": "CAD-1 now provides physically testable 4mm/5mm STEP/STL/3MF sample bytes packaged in validated GitHub Actions artifact ID 12593825191, exact input specs and receipts; dedicated CAD run 40178877895 successfully verified 14/14 tests and 5/5 geometry checks per revision. Checkpoint seq8 APPLIED at v28 after two CAD-only commits to PR #833 head 1d132d. Seven other platform workflows still in progress. Cantiere runner/immutable project storage, ResourceExchange, Fusion import, physical slicing/print and remote Diagnostics remain unverified. Library #113 open; draft PR not merged.",
+    "evidence_refs": [
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/833",
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/40178877895",
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/1d132d296f587db5122b9e27a81f7870a3f398a3",
+      "https://github.com/pilialvu75-hue/AI-Orchestrator-Module-Library/issues/113"
+    ],
+    "resume_next_action": "When all GitHub workflows on head 1d132d conclude, authorize resume_wait and new bounded claim, inspect failing jobs if any. Prepare independent Main/Reviewer review packet for bounded CAD domain work; coordinate certified runner and attachment persistence with Library #113 / Cantiere lane. Do not conflate GitHub artifact with Cantiere persistence; physical Fusion/print UNKNOWN."
+  },
+  "block_reason": {
+    "code": "WAITING_EXTERNAL",
+    "wait_id": "aivexus-3d:987969fd3c326ee99948:WAITING_EXTERNAL",
+    "work_item": "AIVEXUS-CAD-1",
+    "resource_locks": [
+      "branch:pilialvu75-hue/Ai-orchestrator-riserva:feat/aivexus-cad1-parametric-sample",
+      "file:pilialvu75-hue/Ai-orchestrator-riserva:.github/workflows/aivexus-cad1-tests.yml",
+      "file:pilialvu75-hue/Ai-orchestrator-riserva:tools/aivexus/cad/README.md",
+      "file:pilialvu75-hue/Ai-orchestrator-riserva:tools/aivexus/cad/test_cad1.py",
+      "file:pilialvu75-hue/Ai-orchestrator-riserva:tools/aivexus/cad/validate_plate.py",
+      "scope:aivexus:cad"
+    ],
+    "resume_condition": "All GitHub PR-triggered workflow runs for PR #833 exact head 1d132d296f587db5122b9e27a81f7870a3f398a3 (seven other platform and Android-source checks plus already-green Aivexus CAD-1 Domain Tests 40178877895) reach completed with actual conclusions inspected.",
+    "detected_at": "2026-10-25T09:04:30Z",
+    "review_required": false
+  }
 }
