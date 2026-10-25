@@ -3,11 +3,11 @@
   "id": "cantiere",
   "title": "Cantiere",
   "role": "worker",
-  "status": "CLAIMED",
+  "status": "IMPLEMENTING",
   "activation": "active",
   "scope": "Exclusive Cantiere/App Factory execution, durability, build/review/validation/apply and first-real-app reliability.",
   "shared_engine_policy": "shared_or_control_plane",
-  "state_version": 141,
+  "state_version": 142,
   "updated_at": "2026-10-25",
   "active_claim": {
     "claim_id": "ed63bca78def053c226d",
@@ -23,8 +23,8 @@
       "resource:cantiere-845-engineer-public-projection"
     ],
     "started_at": "2026-10-25T08:18:33Z",
-    "heartbeat_at": "2026-10-25T08:18:33Z",
-    "lease_until": "2026-10-25T20:18:33Z",
+    "heartbeat_at": "2026-10-25T08:23:12Z",
+    "lease_until": "2026-10-25T20:23:12Z",
     "lease_hours": 12
   },
   "dependencies": [],
@@ -50,7 +50,7 @@
     "reviewed_by": null,
     "reviewed_at": null
   },
-  "next_action": "Run physical target acceptance; independent review remains outstanding.",
+  "next_action": "Confirm final-head CI & independent Codex review. Repair findings within 2-file claim scope. Coordinate with Android memory PR #867's separate Diagnostics region to avoid merging divergent protections. Submit canonical review packet without fabricating independent G6 or physical G5.",
   "historical_backlog": [
     "Stay in Phase 1 ONLINE until a real generated Android app is physically accepted.",
     "Reproduce the recent manga-drawing app failure from current main with Diagnostics; do not restart generic audits.",
@@ -80,28 +80,6 @@
     "continuation": "Do not re-enable broad Cantiere autopilot until the remaining control-plane concurrency/resource-lock weakness is addressed or explicitly accepted for the next pilot."
   },
   "checkpoints": [
-    {
-      "seq": 25,
-      "at": "2026-10-12T10:22:10Z",
-      "claim_id": "3d39dee487b98eb463b1",
-      "work_item": "AIVEXUS-BASE-1",
-      "summary": "Metadata-corrected current-main resubmission for AIVEXUS-BASE-1 at exact PR #826 head a63b8cf14c07e6aeba361a1ee4e6e832e6ce1df1. Branch is aligned to Riserva main 9f320c82073fc74c7cd4a8b974071ec0addb3772, PR is open/not draft/mergeable, and all six exact-head workflows are successful. No code/head/CI change from the previously reviewed packet; roadmap sync metadata now references only the authoritative private roadmap file.",
-      "decisions": [],
-      "evidence_refs": [
-        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/a63b8cf14c07e6aeba361a1ee4e6e832e6ce1df1",
-        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/826",
-        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38161301515",
-        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38161301515/job/114534601604",
-        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38161301515/job/114534601604",
-        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38161301477",
-        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38161301505",
-        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38161301503",
-        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38161301487",
-        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38161301491"
-      ],
-      "next_action": "Main/Reviewer must inspect the review_packet, linked evidence and required gates before promotion or rework.",
-      "kind": "REVIEW_HANDOFF"
-    },
     {
       "seq": 26,
       "at": "2026-10-12T10:22:50Z",
@@ -1024,23 +1002,45 @@
       ],
       "next_action": "Run physical target acceptance; independent review remains outstanding.",
       "kind": "EXTERNAL_MERGE_RECONCILIATION"
+    },
+    {
+      "seq": 75,
+      "at": "2026-10-25T08:23:12Z",
+      "claim_id": "ed63bca78def053c226d",
+      "work_item": "issue-845-engineer-public-projection-v1",
+      "summary": "Claim ed63bca78def053c226d accepted for bounded public Diagnostics export of WORKSHOP_ENGINEER_OUTPUT, internal producer from merged #884. Draft PR #886 head 2e3789aa0bd5fbab65b7f14c23385f56f2e71cf2: public_log_projection.dart allowlist and closed grammar, tests rejecting extra sensitive source/prompt/identity, no memory/Engineer changes. Initial patch reconstruction contained accidental duplication, corrected in same branch before review; current diff limited to 2 files (+1 allowlist item and +25 lines handler +82 lines tests), 7 CI workflows on fixed head started. Codex review requested exact final head.",
+      "decisions": [
+        "No files of Android memory PR #867 other than narrow public Diagnostics event allowlist/handler; no RAM protections edited.",
+        "No user identity, prompts, generated source, model ID or raw exception exported; regex fails closed on extra fields.",
+        "No S24 original star run; no Android host installation requested."
+      ],
+      "evidence_refs": [
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/886",
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/2e3789aa0bd5fbab65b7f14c23385f56f2e71cf2",
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/issues/845",
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/867"
+      ],
+      "next_action": "Confirm final-head CI & independent Codex review. Repair findings within 2-file claim scope. Coordinate with Android memory PR #867's separate Diagnostics region to avoid merging divergent protections. Submit canonical review packet without fabricating independent G6 or physical G5."
     }
   ],
   "last_checkpoint": {
-    "seq": 74,
-    "at": "2026-10-25T08:10:40Z",
-    "claim_id": "e3cd3aada78af20ff148",
-    "work_item": "issue-845-engineer-output-metrics-v1",
-    "summary": "Owner-directed GitHub merge verified; not independently approved.",
+    "seq": 75,
+    "at": "2026-10-25T08:23:12Z",
+    "claim_id": "ed63bca78def053c226d",
+    "work_item": "issue-845-engineer-public-projection-v1",
+    "summary": "Claim ed63bca78def053c226d accepted for bounded public Diagnostics export of WORKSHOP_ENGINEER_OUTPUT, internal producer from merged #884. Draft PR #886 head 2e3789aa0bd5fbab65b7f14c23385f56f2e71cf2: public_log_projection.dart allowlist and closed grammar, tests rejecting extra sensitive source/prompt/identity, no memory/Engineer changes. Initial patch reconstruction contained accidental duplication, corrected in same branch before review; current diff limited to 2 files (+1 allowlist item and +25 lines handler +82 lines tests), 7 CI workflows on fixed head started. Codex review requested exact final head.",
     "decisions": [
-      "Retain open G5/G6; do not infer runtime or reviewer approval."
+      "No files of Android memory PR #867 other than narrow public Diagnostics event allowlist/handler; no RAM protections edited.",
+      "No user identity, prompts, generated source, model ID or raw exception exported; regex fails closed on extra fields.",
+      "No S24 original star run; no Android host installation requested."
     ],
     "evidence_refs": [
-      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/884",
-      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/4b87528a7dda4d50a70208956ea93f7f5bf96774"
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/886",
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/2e3789aa0bd5fbab65b7f14c23385f56f2e71cf2",
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/issues/845",
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/867"
     ],
-    "next_action": "Run physical target acceptance; independent review remains outstanding.",
-    "kind": "EXTERNAL_MERGE_RECONCILIATION"
+    "next_action": "Confirm final-head CI & independent Codex review. Repair findings within 2-file claim scope. Coordinate with Android memory PR #867's separate Diagnostics region to avoid merging divergent protections. Submit canonical review packet without fabricating independent G6 or physical G5."
   },
   "review_history": [
     {

@@ -7,7 +7,7 @@
     "policy": "This private repository is the single coordination authority. Chats and agents are workers, not independent sources of truth."
   },
   "updated_at": "2026-10-25",
-  "state_revision": 366,
+  "state_revision": 367,
   "lifecycle_status": "BOOTSTRAP_ACTIVE",
   "roadmap_authority": {
     "library": ".airlab/roadmap.yaml",
@@ -81,11 +81,11 @@
     "invalid_lane_behavior": "ISOLATE_AND_SURFACE_PROJECTION_INCIDENT"
   },
   "projection": {
-    "source_digest": "6e4155e827b97c76f001b691de45ef0679fdf988f0e2cd2825c263290a240299",
-    "projected_at": "2026-10-25T08:18:33Z",
+    "source_digest": "46dac1ea4ac5adee160839eb82d7a06a16320442cb528d6f506776180b74f052",
+    "projected_at": "2026-10-25T08:23:12Z",
     "counts": {
       "BLOCKED": 2,
-      "CLAIMED": 1,
+      "IMPLEMENTING": 1,
       "READY": 13,
       "REVIEW_REQUIRED": 2
     },
@@ -95,7 +95,7 @@
         "claim_id": "ed63bca78def053c226d",
         "work_item": "issue-845-engineer-public-projection-v1",
         "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
-        "lease_until": "2026-10-25T20:18:33Z",
+        "lease_until": "2026-10-25T20:23:12Z",
         "resource_locks": [
           "branch:pilialvu75-hue/Ai-orchestrator-riserva:fix/cantiere-845-engineer-public-projection",
           "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/core/diagnostics/public_log_projection.dart",
@@ -376,15 +376,15 @@
       },
       {
         "id": "cantiere",
-        "status": "CLAIMED",
+        "status": "IMPLEMENTING",
         "activation": "active",
-        "state_version": 141,
+        "state_version": 142,
         "updated_at": "2026-10-25",
         "active_claim": {
           "claim_id": "ed63bca78def053c226d",
           "work_item": "issue-845-engineer-public-projection-v1",
           "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
-          "lease_until": "2026-10-25T20:18:33Z",
+          "lease_until": "2026-10-25T20:23:12Z",
           "resource_locks": [
             "branch:pilialvu75-hue/Ai-orchestrator-riserva:fix/cantiere-845-engineer-public-projection",
             "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/core/diagnostics/public_log_projection.dart",
@@ -395,7 +395,7 @@
         "reviewer_state": "PENDING",
         "inference_profile_status": null,
         "historical_backlog_count": 3,
-        "next_action": "Run physical target acceptance; independent review remains outstanding."
+        "next_action": "Confirm final-head CI & independent Codex review. Repair findings within 2-file claim scope. Coordinate with Android memory PR #867's separate Diagnostics region to avoid merging divergent protections. Submit canonical review packet without fabricating independent G6 or physical G5."
       },
       {
         "id": "diagnostics",
