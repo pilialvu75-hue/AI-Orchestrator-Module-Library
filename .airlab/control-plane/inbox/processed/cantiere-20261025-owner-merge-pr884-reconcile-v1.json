@@ -1,0 +1,12 @@
+{
+  "schema_version": 1,
+  "request_id": "cantiere-20261025-owner-merge-pr884-reconcile-v1",
+  "status": "APPLIED",
+  "processed_at": "2026-10-25T08:10:40Z",
+  "source_file": "cantiere-20261025-owner-merge-pr884-reconcile-v1.json",
+  "lane_id": "cantiere",
+  "operation": "reconcile_external_merge",
+  "actor_id": "chatgpt:cantiere",
+  "errors": [],
+  "result_state_version": 140
+}
