@@ -3,30 +3,13 @@
   "id": "cantiere",
   "title": "Cantiere",
   "role": "worker",
-  "status": "IMPLEMENTING",
+  "status": "BLOCKED",
   "activation": "active",
   "scope": "Exclusive Cantiere/App Factory execution, durability, build/review/validation/apply and first-real-app reliability.",
   "shared_engine_policy": "shared_or_control_plane",
-  "state_version": 143,
+  "state_version": 144,
   "updated_at": "2026-10-25",
-  "active_claim": {
-    "claim_id": "ed63bca78def053c226d",
-    "owner_lane": "cantiere",
-    "work_item": "issue-845-engineer-public-projection-v1",
-    "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
-    "scope": "Export only closed-grammar numeric Engineer output metrics in public Diagnostics with privacy regression, no runtime/retry/token/model/RAM or gate changes. Independent from draft PR867 Android memory projection region.",
-    "branch": "fix/cantiere-845-engineer-public-projection",
-    "resource_locks": [
-      "branch:pilialvu75-hue/Ai-orchestrator-riserva:fix/cantiere-845-engineer-public-projection",
-      "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/core/diagnostics/public_log_projection.dart",
-      "file:pilialvu75-hue/Ai-orchestrator-riserva:test/core/diagnostics/public_log_projection_test.dart",
-      "resource:cantiere-845-engineer-public-projection"
-    ],
-    "started_at": "2026-10-25T08:18:33Z",
-    "heartbeat_at": "2026-10-25T08:27:21Z",
-    "lease_until": "2026-10-25T20:27:21Z",
-    "lease_hours": 12
-  },
+  "active_claim": null,
   "dependencies": [],
   "roadmap_refs": [
     ".airlab/public-repositories/Ai-orchestrator-riserva/roadmap.yaml#CANT-11",
@@ -50,7 +33,7 @@
     "reviewed_by": null,
     "reviewed_at": null
   },
-  "next_action": "Once 7 exact-head CI terminal and Codex review on 0fe3fa5 complete, resume and inspect. Correct only actual findings and then submit review packet; never treat source-only PR #867 RAM parity or original Samsung star G5 as resolved.",
+  "next_action": "Inspect all final-head CI; if failures repair only proven issues with original locked two-file scope; if success resume wait, reclaim original resources and submit canonical independent review packet. Preserve #867 Android RAM diagnostics integration, no device reinstall or downgrade.",
   "historical_backlog": [
     "Stay in Phase 1 ONLINE until a real generated Android app is physically accepted.",
     "Reproduce the recent manga-drawing app failure from current main with Diagnostics; do not restart generic audits.",
@@ -1217,21 +1200,6 @@
   ],
   "reconciliation_events": [
     {
-      "type": "WAIT_RESUMED",
-      "wait_id": "cantiere:0b384727ff120df27b3d:WAITING_EXTERNAL",
-      "work_item": "issue-845-first-star-app-review-scope-3184",
-      "signal_id": "github-ci-pr846-2b9362bf-6of6-pass",
-      "evidence_refs": [
-        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38651456810",
-        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38651456942",
-        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38651456860",
-        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38651456686",
-        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38651456673",
-        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38651456695"
-      ],
-      "at": "2026-10-15T09:54:34Z"
-    },
-    {
       "type": "WAIT_ENTERED",
       "wait_id": "cantiere:8151fb713b2dd86a9c3f:WAITING_EXTERNAL",
       "wait_type": "WAITING_EXTERNAL",
@@ -1469,6 +1437,20 @@
       "packet_sha256": "17b39bd1df74f7b9562e527581b59b0de41971475a294c82080ea41465e38b60",
       "at": "2026-10-25T08:10:40Z",
       "review_approved": false
+    },
+    {
+      "type": "WAIT_ENTERED",
+      "wait_id": "cantiere:ed63bca78def053c226d:WAITING_EXTERNAL",
+      "wait_type": "WAITING_EXTERNAL",
+      "prior_claim_id": "ed63bca78def053c226d",
+      "work_item": "issue-845-engineer-public-projection-v1",
+      "resource_locks": [
+        "branch:pilialvu75-hue/Ai-orchestrator-riserva:fix/cantiere-845-engineer-public-projection",
+        "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/core/diagnostics/public_log_projection.dart",
+        "file:pilialvu75-hue/Ai-orchestrator-riserva:test/core/diagnostics/public_log_projection_test.dart",
+        "resource:cantiere-845-engineer-public-projection"
+      ],
+      "at": "2026-10-25T08:28:20Z"
     }
   ],
   "review_packet_history": [
@@ -3621,5 +3603,51 @@
         ]
       }
     }
-  ]
+  ],
+  "wait_state": {
+    "schema_version": 1,
+    "wait_id": "cantiere:ed63bca78def053c226d:WAITING_EXTERNAL",
+    "type": "WAITING_EXTERNAL",
+    "work_item": "issue-845-engineer-public-projection-v1",
+    "prior_claim_id": "ed63bca78def053c226d",
+    "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
+    "branch": "fix/cantiere-845-engineer-public-projection",
+    "scope": "Export only closed-grammar numeric Engineer output metrics in public Diagnostics with privacy regression, no runtime/retry/token/model/RAM or gate changes. Independent from draft PR867 Android memory projection region.",
+    "resource_locks": [
+      "branch:pilialvu75-hue/Ai-orchestrator-riserva:fix/cantiere-845-engineer-public-projection",
+      "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/core/diagnostics/public_log_projection.dart",
+      "file:pilialvu75-hue/Ai-orchestrator-riserva:test/core/diagnostics/public_log_projection_test.dart",
+      "resource:cantiere-845-engineer-public-projection"
+    ],
+    "entered_at": "2026-10-25T08:28:20Z",
+    "resume_condition": "All seven PR #886 GitHub workflow runs for exact head 0fe3fa597afb42b013e5e250605f51723b934e0b have inspectable terminal outcomes (success or failure); Codex final-head review already completed with no findings.",
+    "summary": "Draft PR #886 exports strict numeric/enum WORKSHOP_ENGINEER_OUTPUT through fail-closed public Diagnostics, with negative privacy tests; Codex clean on final SHA. Web CI PASS, six other CI not yet terminal. Bounded Cantiere claim ed63bca78def053c226d, checkpoint #76. No G5 first star physical proof or G6 approval.",
+    "evidence_refs": [
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/886",
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/0fe3fa597afb42b013e5e250605f51723b934e0b",
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/886#issuecomment-6395389099",
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/40176475175",
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/40176475302",
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/40176475225",
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/40176475222",
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/40176475210",
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/40176475212",
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/40176475188"
+    ],
+    "resume_next_action": "Inspect all final-head CI; if failures repair only proven issues with original locked two-file scope; if success resume wait, reclaim original resources and submit canonical independent review packet. Preserve #867 Android RAM diagnostics integration, no device reinstall or downgrade."
+  },
+  "block_reason": {
+    "code": "WAITING_EXTERNAL",
+    "wait_id": "cantiere:ed63bca78def053c226d:WAITING_EXTERNAL",
+    "work_item": "issue-845-engineer-public-projection-v1",
+    "resource_locks": [
+      "branch:pilialvu75-hue/Ai-orchestrator-riserva:fix/cantiere-845-engineer-public-projection",
+      "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/core/diagnostics/public_log_projection.dart",
+      "file:pilialvu75-hue/Ai-orchestrator-riserva:test/core/diagnostics/public_log_projection_test.dart",
+      "resource:cantiere-845-engineer-public-projection"
+    ],
+    "resume_condition": "All seven PR #886 GitHub workflow runs for exact head 0fe3fa597afb42b013e5e250605f51723b934e0b have inspectable terminal outcomes (success or failure); Codex final-head review already completed with no findings.",
+    "detected_at": "2026-10-25T08:28:20Z",
+    "review_required": false
+  }
 }
