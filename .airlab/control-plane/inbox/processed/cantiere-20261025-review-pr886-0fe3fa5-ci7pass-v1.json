@@ -1,0 +1,12 @@
+{
+  "schema_version": 1,
+  "request_id": "cantiere-20261025-review-pr886-0fe3fa5-ci7pass-v1",
+  "status": "APPLIED",
+  "processed_at": "2026-10-25T08:47:12Z",
+  "source_file": "cantiere-20261025-review-pr886-0fe3fa5-ci7pass-v1.json",
+  "lane_id": "cantiere",
+  "operation": "submit_review",
+  "actor_id": "chatgpt:cantiere",
+  "errors": [],
+  "result_state_version": 147
+}
