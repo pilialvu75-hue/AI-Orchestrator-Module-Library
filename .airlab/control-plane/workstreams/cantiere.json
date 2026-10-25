@@ -7,8 +7,8 @@
   "activation": "active",
   "scope": "Exclusive Cantiere/App Factory execution, durability, build/review/validation/apply and first-real-app reliability.",
   "shared_engine_policy": "shared_or_control_plane",
-  "state_version": 138,
-  "updated_at": "2026-10-24",
+  "state_version": 139,
+  "updated_at": "2026-10-25",
   "active_claim": {
     "claim_id": "e3cd3aada78af20ff148",
     "owner_lane": "cantiere",
@@ -1305,13 +1305,6 @@
   ],
   "reconciliation_events": [
     {
-      "type": "CLAIM_RELEASED",
-      "claim_id": "5f0b20632bafab7b6960",
-      "work_item": "issue-845-first-star-app-review-scope-3184",
-      "reason": "Independent reviewer P2 requires actual certified Module Library staging receipt in workshop_library_reuse_service.dart, beyond old file locks; release then re-claim exact expanded scope before modifying these files.",
-      "at": "2026-10-14T22:52:54Z"
-    },
-    {
       "type": "WAIT_ENTERED",
       "wait_id": "cantiere:0b384727ff120df27b3d:WAITING_EXTERNAL",
       "wait_type": "WAITING_EXTERNAL",
@@ -1570,6 +1563,14 @@
         "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/884#issuecomment-6387702780"
       ],
       "at": "2026-10-24T18:33:12Z"
+    },
+    {
+      "type": "REVIEW_WAIT_OVERDUE",
+      "claim_id": "e3cd3aada78af20ff148",
+      "work_item": "issue-845-engineer-output-metrics-v1",
+      "lease_until": "2026-10-25T06:34:17Z",
+      "detected_at": "2026-10-25T06:41:13Z",
+      "review_required": true
     }
   ],
   "review_packet_history": [
