@@ -3,13 +3,30 @@
   "id": "cantiere",
   "title": "Cantiere",
   "role": "worker",
-  "status": "READY",
+  "status": "CLAIMED",
   "activation": "active",
   "scope": "Exclusive Cantiere/App Factory execution, durability, build/review/validation/apply and first-real-app reliability.",
   "shared_engine_policy": "shared_or_control_plane",
-  "state_version": 140,
+  "state_version": 141,
   "updated_at": "2026-10-25",
-  "active_claim": null,
+  "active_claim": {
+    "claim_id": "ed63bca78def053c226d",
+    "owner_lane": "cantiere",
+    "work_item": "issue-845-engineer-public-projection-v1",
+    "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
+    "scope": "Export only closed-grammar numeric Engineer output metrics in public Diagnostics with privacy regression, no runtime/retry/token/model/RAM or gate changes. Independent from draft PR867 Android memory projection region.",
+    "branch": "fix/cantiere-845-engineer-public-projection",
+    "resource_locks": [
+      "branch:pilialvu75-hue/Ai-orchestrator-riserva:fix/cantiere-845-engineer-public-projection",
+      "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/core/diagnostics/public_log_projection.dart",
+      "file:pilialvu75-hue/Ai-orchestrator-riserva:test/core/diagnostics/public_log_projection_test.dart",
+      "resource:cantiere-845-engineer-public-projection"
+    ],
+    "started_at": "2026-10-25T08:18:33Z",
+    "heartbeat_at": "2026-10-25T08:18:33Z",
+    "lease_until": "2026-10-25T20:18:33Z",
+    "lease_hours": 12
+  },
   "dependencies": [],
   "roadmap_refs": [
     ".airlab/public-repositories/Ai-orchestrator-riserva/roadmap.yaml#CANT-11",
@@ -18,7 +35,7 @@
   ],
   "evidence": [],
   "gates": {
-    "G0_CLAIM": "PENDING",
+    "G0_CLAIM": "PASS",
     "G1_IMPLEMENTATION": "PENDING",
     "G2_STATIC": "PENDING",
     "G3_CI": "PENDING",
