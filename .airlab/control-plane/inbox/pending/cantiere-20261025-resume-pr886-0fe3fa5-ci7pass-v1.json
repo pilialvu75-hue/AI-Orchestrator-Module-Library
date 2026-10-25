@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "request_id": "cantiere-20261025-resume-pr886-0fe3fa5-ci7pass-v1",
+  "actor_id": "chatgpt:cantiere",
+  "lane_id": "cantiere",
+  "operation": "resume_wait",
+  "expected_state_version": 144,
+  "payload": {
+    "signal_id": "github:pr886:0fe3fa597afb42b013e5e250605f51723b934e0b:all7-success",
+    "evidence_refs": [
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/40176475225",
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/40176475175",
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/40176475302",
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/40176475222",
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/40176475188",
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/40176475212",
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/40176475210",
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/886#issuecomment-6395389099"
+    ],
+    "next_action": "PR #886 exact HEAD all seven CI success and Codex clean. Reclaim previous bounded locks for the 2-file diagnostics-only change, verify final diff and submit the canonical independent review packet; G5 physical S24 star generation and G6 reviewer remain pending."
+  }
+}
