@@ -1,0 +1,14 @@
+{
+  "schema_version": 1,
+  "request_id": "cantiere-20261026-submit-pr897-ci-aapt2-review-v1",
+  "status": "QUARANTINED",
+  "processed_at": "2026-10-26T01:45:12Z",
+  "source_file": "cantiere-20261026-submit-pr897-ci-aapt2-review-v1.json",
+  "lane_id": "cantiere",
+  "operation": "submit_review",
+  "actor_id": "chatgpt:cantiere",
+  "errors": [
+    "ValueError: review packet missing submitted_at"
+  ],
+  "result_state_version": null
+}
