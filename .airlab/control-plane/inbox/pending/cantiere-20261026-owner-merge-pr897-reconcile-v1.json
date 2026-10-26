@@ -1,0 +1,17 @@
+{
+  "schema_version": 1,
+  "request_id": "cantiere-20261026-owner-merge-pr897-reconcile-v1",
+  "actor_id": "chatgpt:cantiere",
+  "lane_id": "cantiere",
+  "operation": "reconcile_external_merge",
+  "expected_state_version": 154,
+  "payload": {
+    "actor_id": "chatgpt:cantiere",
+    "claim_id": "bba8818e52db526a7ce5",
+    "pr_number": 897,
+    "expected_head_sha": "cec374a61d9828f6808fb6b09d65340dfa314002",
+    "merge_commit_sha": "d389479326cf6593463feb4b15a6bfd1faa18da3",
+    "packet_sha256": "63a1715a72ff119497fdc178cbc27007b4e95b3ee2d174720b036fc2ca2894a4",
+    "owner_directed": true
+  }
+}
