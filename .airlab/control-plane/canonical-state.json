@@ -7,7 +7,7 @@
     "policy": "This private repository is the single coordination authority. Chats and agents are workers, not independent sources of truth."
   },
   "updated_at": "2026-10-26",
-  "state_revision": 382,
+  "state_revision": 383,
   "lifecycle_status": "BOOTSTRAP_ACTIVE",
   "roadmap_authority": {
     "library": ".airlab/roadmap.yaml",
@@ -81,13 +81,12 @@
     "invalid_lane_behavior": "ISOLATE_AND_SURFACE_PROJECTION_INCIDENT"
   },
   "projection": {
-    "source_digest": "0cb2abb7d0890b1720533115fbe54baccec39ed1b8e4c84ae161c3ad345f68fa",
-    "projected_at": "2026-10-26T01:43:47Z",
+    "source_digest": "ce10e34fc7bee9e2f7af5c8e37d29465032c4d4fa766488e58a8b1b65460d811",
+    "projected_at": "2026-10-26T01:45:43Z",
     "counts": {
       "BLOCKED": 2,
-      "CLAIMED": 1,
       "READY": 13,
-      "REVIEW_REQUIRED": 2
+      "REVIEW_REQUIRED": 3
     },
     "active_claims": [
       {
@@ -205,6 +204,7 @@
       }
     ],
     "review_required": [
+      "cantiere",
       "library-researcher",
       "platform-android"
     ],
@@ -368,9 +368,9 @@
       },
       {
         "id": "cantiere",
-        "status": "CLAIMED",
+        "status": "REVIEW_REQUIRED",
         "activation": "active",
-        "state_version": 153,
+        "state_version": 154,
         "updated_at": "2026-10-26",
         "active_claim": {
           "claim_id": "bba8818e52db526a7ce5",
@@ -386,7 +386,7 @@
         "reviewer_state": "PENDING",
         "inference_profile_status": null,
         "historical_backlog_count": 3,
-        "next_action": "Exact-head #897 four CI PASS and full Cantiere job logs confirm [CANTIERE_AAPT2_NEGATIVE] executable=aapt2 command=compile exit_code=1 rejection=PASS twice; Codex review not source-rejected but quota-exhausted. Reclaim bounded CI file and submit review packet; original S24 first-star G5 remains pending and G6 independent reviewer remains pending."
+        "next_action": "Main/Reviewer must inspect the review_packet, linked evidence and required gates before promotion or rework."
       },
       {
         "id": "diagnostics",
