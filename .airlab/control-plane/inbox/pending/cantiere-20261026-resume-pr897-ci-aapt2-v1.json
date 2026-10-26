@@ -1,0 +1,20 @@
+{
+  "schema_version": 1,
+  "request_id": "cantiere-20261026-resume-pr897-ci-aapt2-v1",
+  "actor_id": "chatgpt:cantiere",
+  "lane_id": "cantiere",
+  "operation": "resume_wait",
+  "expected_state_version": 151,
+  "payload": {
+    "signal_id": "pr897-cec374a-six-verified-step-aapt2-reject-ci-four-success",
+    "evidence_refs": [
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/897",
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/40240244140",
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/40240244175",
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/40240244084",
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/40240244106",
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/897#issuecomment-6404268568"
+    ],
+    "next_action": "Exact-head #897 four CI PASS and full Cantiere job logs confirm [CANTIERE_AAPT2_NEGATIVE] executable=aapt2 command=compile exit_code=1 rejection=PASS twice; Codex review not source-rejected but quota-exhausted. Reclaim bounded CI file and submit review packet; original S24 first-star G5 remains pending and G6 independent reviewer remains pending."
+  }
+}
