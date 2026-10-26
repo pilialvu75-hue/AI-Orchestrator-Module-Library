@@ -3,12 +3,12 @@
   "id": "cantiere",
   "title": "Cantiere",
   "role": "worker",
-  "status": "BLOCKED",
+  "status": "READY",
   "activation": "active",
   "scope": "Exclusive Cantiere/App Factory execution, durability, build/review/validation/apply and first-real-app reliability.",
   "shared_engine_policy": "shared_or_control_plane",
-  "state_version": 151,
-  "updated_at": "2026-10-25",
+  "state_version": 152,
+  "updated_at": "2026-10-26",
   "active_claim": null,
   "dependencies": [],
   "roadmap_refs": [
@@ -33,7 +33,7 @@
     "reviewed_by": null,
     "reviewed_at": null
   },
-  "next_action": "Check exact-head CI and full job logs for marker [CANTIERE_AAPT2_NEGATIVE] plus actual rejected AAPT2 process exit; if verified and checks pass, submit claim-bound review packet for one-file CI fix. Independent G6 stays PENDING; user-directed bypass is not reviewer approval. Keep original device data untouched.",
+  "next_action": "Exact-head #897 four CI PASS and full Cantiere job logs confirm [CANTIERE_AAPT2_NEGATIVE] executable=aapt2 command=compile exit_code=1 rejection=PASS twice; Codex review not source-rejected but quota-exhausted. Reclaim bounded CI file and submit review packet; original S24 first-star G5 remains pending and G6 independent reviewer remains pending.",
   "historical_backlog": [
     "Stay in Phase 1 ONLINE until a real generated Android app is physically accepted.",
     "Reproduce the recent manga-drawing app failure from current main with Diagnostics; do not restart generic audits.",
@@ -1188,21 +1188,6 @@
   ],
   "reconciliation_events": [
     {
-      "type": "WAIT_ENTERED",
-      "wait_id": "cantiere:fd9db7ade2a91e22c15c:WAITING_EXTERNAL",
-      "wait_type": "WAITING_EXTERNAL",
-      "prior_claim_id": "fd9db7ade2a91e22c15c",
-      "work_item": "issue-845-star-functional-3204",
-      "resource_locks": [
-        "branch:pilialvu75-hue/Ai-orchestrator-riserva:fix/cantiere-845-star-functional-3204",
-        "contract:cantiere-engineer-functional-completeness",
-        "file:pilialvu75-hue/Ai-orchestrator-riserva:lib/app_factory/workshop/workshop_proposal_implementation_runner.dart",
-        "file:pilialvu75-hue/Ai-orchestrator-riserva:test/app_factory/workshop/workshop_generated_star_negative_gate_test.dart",
-        "file:pilialvu75-hue/Ai-orchestrator-riserva:test/app_factory/workshop/workshop_proposal_implementation_runner_test.dart"
-      ],
-      "at": "2026-10-16T11:35:42Z"
-    },
-    {
       "type": "WAIT_RESUMED",
       "wait_id": "cantiere:fd9db7ade2a91e22c15c:WAITING_EXTERNAL",
       "work_item": "issue-845-star-functional-3204",
@@ -1431,6 +1416,21 @@
         "resource:cantiere-845-star-negative-ci-coverage"
       ],
       "at": "2026-10-25T22:29:28Z"
+    },
+    {
+      "type": "WAIT_RESUMED",
+      "wait_id": "cantiere:61b9ba1aefd4636ef43d:WAITING_EXTERNAL",
+      "work_item": "issue-845-star-negative-ci-coverage-v1",
+      "signal_id": "pr897-cec374a-six-verified-step-aapt2-reject-ci-four-success",
+      "evidence_refs": [
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/897",
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/40240244140",
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/40240244175",
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/40240244084",
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/40240244106",
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/897#issuecomment-6404268568"
+      ],
+      "at": "2026-10-26T01:43:22Z"
     }
   ],
   "review_packet_history": [
@@ -3176,6 +3176,42 @@
         "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/40176475210",
         "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/886#issuecomment-6395389099"
       ]
+    },
+    {
+      "schema_version": 1,
+      "wait_id": "cantiere:61b9ba1aefd4636ef43d:WAITING_EXTERNAL",
+      "type": "WAITING_EXTERNAL",
+      "work_item": "issue-845-star-negative-ci-coverage-v1",
+      "prior_claim_id": "61b9ba1aefd4636ef43d",
+      "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
+      "branch": "fix/cantiere-845-star-negative-aapt2-ci",
+      "scope": "Wire existing source and malformed-drawable negative fixture into Cantiere First App APK CI so AAPT2 is required and actually runs; workflow-only; no LLM, Android RAM, UI, Reviewer or project modifications.",
+      "resource_locks": [
+        "branch:pilialvu75-hue/Ai-orchestrator-riserva:fix/cantiere-845-star-negative-aapt2-ci",
+        "file:pilialvu75-hue/Ai-orchestrator-riserva:.github/workflows/cantiere-first-app.yml",
+        "resource:cantiere-845-star-negative-ci-coverage"
+      ],
+      "entered_at": "2026-10-25T22:29:28Z",
+      "resume_condition": "Exact-head PR #897 Cantiere First App APK and other required workflows have final inspectable outcomes. Codex current review is blocked by usage quota, not documented source findings; do not fabricate approval.",
+      "summary": "Claim 61b9ba1aefd4636ef43d, PR #897 head cec374a61d9828f6808fb6b09d65340dfa314002. Dedicated Cantiere First App APK `Run Cantiere physical-failure regressions` step completed success with newly included Dart/AAPT2 star negative fixture. Workflow is still building deterministic starter APK; other CI in progress. Codex review request failed due account quota limit without documented code findings. No G5/G6 approval claimed, original S24 FE star remains 0/1.",
+      "evidence_refs": [
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/897",
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/cec374a61d9828f6808fb6b09d65340dfa314002",
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/40240244084",
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/897#issuecomment-6404266219",
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/issues/845"
+      ],
+      "resume_next_action": "Check exact-head CI and full job logs for marker [CANTIERE_AAPT2_NEGATIVE] plus actual rejected AAPT2 process exit; if verified and checks pass, submit claim-bound review packet for one-file CI fix. Independent G6 stays PENDING; user-directed bypass is not reviewer approval. Keep original device data untouched.",
+      "resumed_at": "2026-10-26T01:43:22Z",
+      "signal_id": "pr897-cec374a-six-verified-step-aapt2-reject-ci-four-success",
+      "resume_evidence_refs": [
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/897",
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/40240244140",
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/40240244175",
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/40240244084",
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/40240244106",
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/897#issuecomment-6404268568"
+      ]
     }
   ],
   "external_merge_history": [
@@ -3740,44 +3776,5 @@
         ]
       }
     }
-  ],
-  "wait_state": {
-    "schema_version": 1,
-    "wait_id": "cantiere:61b9ba1aefd4636ef43d:WAITING_EXTERNAL",
-    "type": "WAITING_EXTERNAL",
-    "work_item": "issue-845-star-negative-ci-coverage-v1",
-    "prior_claim_id": "61b9ba1aefd4636ef43d",
-    "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
-    "branch": "fix/cantiere-845-star-negative-aapt2-ci",
-    "scope": "Wire existing source and malformed-drawable negative fixture into Cantiere First App APK CI so AAPT2 is required and actually runs; workflow-only; no LLM, Android RAM, UI, Reviewer or project modifications.",
-    "resource_locks": [
-      "branch:pilialvu75-hue/Ai-orchestrator-riserva:fix/cantiere-845-star-negative-aapt2-ci",
-      "file:pilialvu75-hue/Ai-orchestrator-riserva:.github/workflows/cantiere-first-app.yml",
-      "resource:cantiere-845-star-negative-ci-coverage"
-    ],
-    "entered_at": "2026-10-25T22:29:28Z",
-    "resume_condition": "Exact-head PR #897 Cantiere First App APK and other required workflows have final inspectable outcomes. Codex current review is blocked by usage quota, not documented source findings; do not fabricate approval.",
-    "summary": "Claim 61b9ba1aefd4636ef43d, PR #897 head cec374a61d9828f6808fb6b09d65340dfa314002. Dedicated Cantiere First App APK `Run Cantiere physical-failure regressions` step completed success with newly included Dart/AAPT2 star negative fixture. Workflow is still building deterministic starter APK; other CI in progress. Codex review request failed due account quota limit without documented code findings. No G5/G6 approval claimed, original S24 FE star remains 0/1.",
-    "evidence_refs": [
-      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/897",
-      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/cec374a61d9828f6808fb6b09d65340dfa314002",
-      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/40240244084",
-      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/897#issuecomment-6404266219",
-      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/issues/845"
-    ],
-    "resume_next_action": "Check exact-head CI and full job logs for marker [CANTIERE_AAPT2_NEGATIVE] plus actual rejected AAPT2 process exit; if verified and checks pass, submit claim-bound review packet for one-file CI fix. Independent G6 stays PENDING; user-directed bypass is not reviewer approval. Keep original device data untouched."
-  },
-  "block_reason": {
-    "code": "WAITING_EXTERNAL",
-    "wait_id": "cantiere:61b9ba1aefd4636ef43d:WAITING_EXTERNAL",
-    "work_item": "issue-845-star-negative-ci-coverage-v1",
-    "resource_locks": [
-      "branch:pilialvu75-hue/Ai-orchestrator-riserva:fix/cantiere-845-star-negative-aapt2-ci",
-      "file:pilialvu75-hue/Ai-orchestrator-riserva:.github/workflows/cantiere-first-app.yml",
-      "resource:cantiere-845-star-negative-ci-coverage"
-    ],
-    "resume_condition": "Exact-head PR #897 Cantiere First App APK and other required workflows have final inspectable outcomes. Codex current review is blocked by usage quota, not documented source findings; do not fabricate approval.",
-    "detected_at": "2026-10-25T22:29:28Z",
-    "review_required": false
-  }
+  ]
 }

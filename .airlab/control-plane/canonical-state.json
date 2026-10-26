@@ -6,8 +6,8 @@
     "owner_lane": "main-reviewer",
     "policy": "This private repository is the single coordination authority. Chats and agents are workers, not independent sources of truth."
   },
-  "updated_at": "2026-10-25",
-  "state_revision": 380,
+  "updated_at": "2026-10-26",
+  "state_revision": 381,
   "lifecycle_status": "BOOTSTRAP_ACTIVE",
   "roadmap_authority": {
     "library": ".airlab/roadmap.yaml",
@@ -81,11 +81,11 @@
     "invalid_lane_behavior": "ISOLATE_AND_SURFACE_PROJECTION_INCIDENT"
   },
   "projection": {
-    "source_digest": "33e2408ca85f264a3b1f01bb72b454264ff59202c42bcaca9e4830f09d208a5e",
-    "projected_at": "2026-10-25T22:29:28Z",
+    "source_digest": "2d775a337aa2d27d63fe3f1b5728c264cc52ba2ccc28feeb4946d92cab1fe7fd",
+    "projected_at": "2026-10-26T01:43:22Z",
     "counts": {
-      "BLOCKED": 3,
-      "READY": 13,
+      "BLOCKED": 2,
+      "READY": 14,
       "REVIEW_REQUIRED": 2
     },
     "active_claims": [
@@ -194,22 +194,6 @@
           ],
           "resume_condition": "All GitHub PR-triggered workflow runs for PR #833 exact head 1d132d296f587db5122b9e27a81f7870a3f398a3 (seven other platform and Android-source checks plus already-green Aivexus CAD-1 Domain Tests 40178877895) reach completed with actual conclusions inspected.",
           "detected_at": "2026-10-25T09:04:30Z",
-          "review_required": false
-        }
-      },
-      {
-        "lane": "cantiere",
-        "reason": {
-          "code": "WAITING_EXTERNAL",
-          "wait_id": "cantiere:61b9ba1aefd4636ef43d:WAITING_EXTERNAL",
-          "work_item": "issue-845-star-negative-ci-coverage-v1",
-          "resource_locks": [
-            "branch:pilialvu75-hue/Ai-orchestrator-riserva:fix/cantiere-845-star-negative-aapt2-ci",
-            "file:pilialvu75-hue/Ai-orchestrator-riserva:.github/workflows/cantiere-first-app.yml",
-            "resource:cantiere-845-star-negative-ci-coverage"
-          ],
-          "resume_condition": "Exact-head PR #897 Cantiere First App APK and other required workflows have final inspectable outcomes. Codex current review is blocked by usage quota, not documented source findings; do not fabricate approval.",
-          "detected_at": "2026-10-25T22:29:28Z",
           "review_required": false
         }
       },
@@ -353,15 +337,15 @@
       },
       {
         "id": "cantiere",
-        "status": "BLOCKED",
+        "status": "READY",
         "activation": "active",
-        "state_version": 151,
-        "updated_at": "2026-10-25",
+        "state_version": 152,
+        "updated_at": "2026-10-26",
         "active_claim": null,
         "reviewer_state": "PENDING",
         "inference_profile_status": null,
         "historical_backlog_count": 3,
-        "next_action": "Check exact-head CI and full job logs for marker [CANTIERE_AAPT2_NEGATIVE] plus actual rejected AAPT2 process exit; if verified and checks pass, submit claim-bound review packet for one-file CI fix. Independent G6 stays PENDING; user-directed bypass is not reviewer approval. Keep original device data untouched."
+        "next_action": "Exact-head #897 four CI PASS and full Cantiere job logs confirm [CANTIERE_AAPT2_NEGATIVE] executable=aapt2 command=compile exit_code=1 rejection=PASS twice; Codex review not source-rejected but quota-exhausted. Reclaim bounded CI file and submit review packet; original S24 first-star G5 remains pending and G6 independent reviewer remains pending."
       },
       {
         "id": "diagnostics",

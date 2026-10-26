@@ -1,0 +1,12 @@
+{
+  "schema_version": 1,
+  "request_id": "cantiere-20261026-resume-pr897-ci-aapt2-v1",
+  "status": "APPLIED",
+  "processed_at": "2026-10-26T01:43:22Z",
+  "source_file": "cantiere-20261026-resume-pr897-ci-aapt2-v1.json",
+  "lane_id": "cantiere",
+  "operation": "resume_wait",
+  "actor_id": "chatgpt:cantiere",
+  "errors": [],
+  "result_state_version": 152
+}
