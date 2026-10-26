@@ -3,87 +3,22 @@
   "id": "cantiere",
   "title": "Cantiere",
   "role": "worker",
-  "status": "REVIEW_REQUIRED",
+  "status": "READY",
   "activation": "active",
   "scope": "Exclusive Cantiere/App Factory execution, durability, build/review/validation/apply and first-real-app reliability.",
   "shared_engine_policy": "shared_or_control_plane",
-  "state_version": 154,
+  "state_version": 155,
   "updated_at": "2026-10-26",
-  "active_claim": {
-    "claim_id": "bba8818e52db526a7ce5",
-    "owner_lane": "cantiere",
-    "work_item": "issue-845-star-negative-ci-coverage-v1",
-    "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
-    "scope": "Exact-head PR #897 CI evidence and owner-directed bounded review handoff only; workflow path and runner invocation for negative star Dart/AAPT2 fixture. No app source/model/RAM/Reviewer edits.",
-    "branch": "fix/cantiere-845-star-negative-aapt2-ci",
-    "resource_locks": [
-      "branch:pilialvu75-hue/Ai-orchestrator-riserva:fix/cantiere-845-star-negative-aapt2-ci",
-      "file:pilialvu75-hue/Ai-orchestrator-riserva:.github/workflows/cantiere-first-app.yml",
-      "resource:cantiere-845-star-negative-ci-coverage"
-    ],
-    "started_at": "2026-10-26T01:43:47Z",
-    "heartbeat_at": "2026-10-26T01:43:47Z",
-    "lease_until": "2026-10-26T13:43:47Z",
-    "lease_hours": 12
-  },
+  "active_claim": null,
   "dependencies": [],
   "roadmap_refs": [
     ".airlab/public-repositories/Ai-orchestrator-riserva/roadmap.yaml#CANT-11",
     ".airlab/public-repositories/Ai-orchestrator-riserva/roadmap.yaml#AIVEXUS-BASE-1",
     ".airlab/public-repositories/Ai-orchestrator-riserva/roadmap.yaml#AIVEXUS-BASE-2"
   ],
-  "evidence": [
-    {
-      "type": "commit",
-      "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/cec374a61d9828f6808fb6b09d65340dfa314002",
-      "result": "PASS",
-      "note": "Exact-head, one workflow file, two added lines; no runtime/LLM/Reviewer/RAM changes."
-    },
-    {
-      "type": "pull_request",
-      "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/897",
-      "result": "PASS",
-      "note": "Draft, mergeable clean against main at evidence collection; Codex service quota blocked review."
-    },
-    {
-      "type": "ci",
-      "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/40240244084",
-      "result": "PASS",
-      "note": "Cantiere First App APK run completed success, including physical-failure regressions, guarded lifecycle, offline Build Lab and artifact upload. Full decoded job log job_id=121310289274 confirms [CANTIERE_AAPT2_NEGATIVE] executable=aapt2 command=compile exit_code=1 rejection=PASS at 2026-10-25T22:28:00 and 22:28:04 UTC."
-    },
-    {
-      "type": "ci",
-      "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/40240244140",
-      "result": "PASS",
-      "note": "Build & Release APK exact-head success; this is host CI, not generated owner star app G5."
-    },
-    {
-      "type": "ci",
-      "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/40240244175",
-      "result": "PASS",
-      "note": "Web Cantiere Build exact-head success."
-    },
-    {
-      "type": "ci",
-      "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/40240244106",
-      "result": "PASS",
-      "note": "Windows Desktop Build exact-head success."
-    },
-    {
-      "type": "analysis",
-      "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/897#issuecomment-6404268568",
-      "result": "INFO",
-      "note": "Codex usage quota exhausted and review failed operationally; no reviewer findings recorded; do not represent as approval or defect-free review."
-    },
-    {
-      "type": "physical_device",
-      "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/issues/845",
-      "result": "PENDING",
-      "note": "Original generated star project still 0/1; no owner physical install, launch or tap proof."
-    }
-  ],
+  "evidence": [],
   "gates": {
-    "G0_CLAIM": "PASS",
+    "G0_CLAIM": "PENDING",
     "G1_IMPLEMENTATION": "PENDING",
     "G2_STATIC": "PENDING",
     "G3_CI": "PENDING",
@@ -98,7 +33,7 @@
     "reviewed_by": null,
     "reviewed_at": null
   },
-  "next_action": "Main/Reviewer must inspect the review_packet, linked evidence and required gates before promotion or rework.",
+  "next_action": "Run physical target acceptance; independent review remains outstanding.",
   "historical_backlog": [
     "Stay in Phase 1 ONLINE until a real generated Android app is physically accepted.",
     "Reproduce the recent manga-drawing app failure from current main with Diagnostics; do not restart generic audits.",
@@ -128,22 +63,6 @@
     "continuation": "Do not re-enable broad Cantiere autopilot until the remaining control-plane concurrency/resource-lock weakness is addressed or explicitly accepted for the next pilot."
   },
   "checkpoints": [
-    {
-      "seq": 31,
-      "at": "2026-10-12T18:53:09Z",
-      "claim_id": "94876ef45cb7b6e77d9c",
-      "work_item": "cantiere-gate-evidence-reviewer-3117",
-      "summary": "PR #834 initial Android analyze failed only with undefined productionBusy in button; fixed scope to _mutationBusy || execution.isRunning. New exact head 65fe53a starts six CI; no runtime success claimed.",
-      "decisions": [
-        "Keep PR draft until exact-head Android/test CI and Main Reviewer.",
-        "Do not repeat +3117 test; preserve existing project."
-      ],
-      "evidence_refs": [
-        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/834",
-        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38293677733"
-      ],
-      "next_action": "Review six exact-head CI runs for PR #834 at 65fe53a and repair only evidenced failures before review handoff."
-    },
     {
       "seq": 32,
       "at": "2026-10-12T18:56:06Z",
@@ -1058,27 +977,39 @@
       ],
       "next_action": "Main/Reviewer must inspect the review_packet, linked evidence and required gates before promotion or rework.",
       "kind": "REVIEW_HANDOFF"
+    },
+    {
+      "seq": 81,
+      "at": "2026-10-26T01:47:30Z",
+      "claim_id": "bba8818e52db526a7ce5",
+      "work_item": "issue-845-star-negative-ci-coverage-v1",
+      "summary": "Owner-directed GitHub merge verified; not independently approved.",
+      "decisions": [
+        "Retain open G5/G6; do not infer runtime or reviewer approval."
+      ],
+      "evidence_refs": [
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/897",
+        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/d389479326cf6593463feb4b15a6bfd1faa18da3"
+      ],
+      "next_action": "Run physical target acceptance; independent review remains outstanding.",
+      "kind": "EXTERNAL_MERGE_RECONCILIATION"
     }
   ],
   "last_checkpoint": {
-    "seq": 80,
-    "at": "2026-10-26T01:45:43Z",
+    "seq": 81,
+    "at": "2026-10-26T01:47:30Z",
     "claim_id": "bba8818e52db526a7ce5",
     "work_item": "issue-845-star-negative-ci-coverage-v1",
-    "summary": "CI-only two-line correction on exact PR #897 HEAD cec374a61d9828f6808fb6b09d65340dfa314002: existing test/app_factory/workshop/workshop_generated_star_negative_gate_test.dart is now present in cantiere-first-app.yml on.pull_request.paths and Run Cantiere physical-failure regressions flutter test invocation. All four exact-head workflows SUCCESS; actual Cantiere First App APK full job log confirms test ran and [CANTIERE_AAPT2_NEGATIVE] executable=aapt2 command=compile exit_code=1 rejection=PASS (twice), reflecting malformed generated drawable rejection. Dart analyzer negative regression runs too. GitHub reports mergeable clean. Codex could not review due account usage quota; no independent canonical G6 approval. This is negative-test CI coverage, not actual generation/installation of owner original star app on S24 FE; G5 remains pending.",
-    "decisions": [],
-    "evidence_refs": [
-      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/cec374a61d9828f6808fb6b09d65340dfa314002",
-      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/897",
-      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/40240244084",
-      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/40240244140",
-      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/40240244175",
-      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/40240244106",
-      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/897#issuecomment-6404268568",
-      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/issues/845"
+    "summary": "Owner-directed GitHub merge verified; not independently approved.",
+    "decisions": [
+      "Retain open G5/G6; do not infer runtime or reviewer approval."
     ],
-    "next_action": "Main/Reviewer must inspect the review_packet, linked evidence and required gates before promotion or rework.",
-    "kind": "REVIEW_HANDOFF"
+    "evidence_refs": [
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/897",
+      "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/d389479326cf6593463feb4b15a6bfd1faa18da3"
+    ],
+    "next_action": "Run physical target acceptance; independent review remains outstanding.",
+    "kind": "EXTERNAL_MERGE_RECONCILIATION"
   },
   "review_history": [
     {
@@ -1257,21 +1188,6 @@
     }
   ],
   "reconciliation_events": [
-    {
-      "type": "WAIT_RESUMED",
-      "wait_id": "cantiere:fd9db7ade2a91e22c15c:WAITING_EXTERNAL",
-      "work_item": "issue-845-star-functional-3204",
-      "signal_id": "pr847-exact-head-six-ci-success-20261016",
-      "evidence_refs": [
-        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38894509746",
-        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38894509681",
-        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38894510345",
-        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38894509788",
-        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38894509610",
-        "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/38894509669"
-      ],
-      "at": "2026-10-16T13:27:00Z"
-    },
     {
       "type": "REVIEW_WAIT_OVERDUE",
       "claim_id": "0780c6a10b7fc5c768ff",
@@ -1501,6 +1417,15 @@
         "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/897#issuecomment-6404268568"
       ],
       "at": "2026-10-26T01:43:22Z"
+    },
+    {
+      "type": "OWNER_DIRECTED_EXTERNAL_MERGE_RECONCILED",
+      "claim_id": "bba8818e52db526a7ce5",
+      "work_item": "issue-845-star-negative-ci-coverage-v1",
+      "merge_commit_sha": "d389479326cf6593463feb4b15a6bfd1faa18da3",
+      "packet_sha256": "63a1715a72ff119497fdc178cbc27007b4e95b3ee2d174720b036fc2ca2894a4",
+      "at": "2026-10-26T01:47:30Z",
+      "review_approved": false
     }
   ],
   "review_packet_history": [
@@ -3845,89 +3770,92 @@
           ".airlab/public-repositories/Ai-orchestrator-riserva/roadmap.yaml#CANT-7"
         ]
       }
-    }
-  ],
-  "review_packet": {
-    "schema_version": 1,
-    "lane_id": "cantiere",
-    "claim_id": "bba8818e52db526a7ce5",
-    "work_item": "issue-845-star-negative-ci-coverage-v1",
-    "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
-    "branch": "fix/cantiere-845-star-negative-aapt2-ci",
-    "pull_request": 897,
-    "summary": "CI-only two-line correction on exact PR #897 HEAD cec374a61d9828f6808fb6b09d65340dfa314002: existing test/app_factory/workshop/workshop_generated_star_negative_gate_test.dart is now present in cantiere-first-app.yml on.pull_request.paths and Run Cantiere physical-failure regressions flutter test invocation. All four exact-head workflows SUCCESS; actual Cantiere First App APK full job log confirms test ran and [CANTIERE_AAPT2_NEGATIVE] executable=aapt2 command=compile exit_code=1 rejection=PASS (twice), reflecting malformed generated drawable rejection. Dart analyzer negative regression runs too. GitHub reports mergeable clean. Codex could not review due account usage quota; no independent canonical G6 approval. This is negative-test CI coverage, not actual generation/installation of owner original star app on S24 FE; G5 remains pending.",
-    "changes": [
-      ".github/workflows/cantiere-first-app.yml adds existing star negative fixture to PR path trigger and to expanded flutter test command; only 2 insertions, no application source changes."
-    ],
-    "evidence": [
-      {
-        "type": "commit",
-        "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/cec374a61d9828f6808fb6b09d65340dfa314002",
-        "result": "PASS",
-        "note": "Exact-head, one workflow file, two added lines; no runtime/LLM/Reviewer/RAM changes."
-      },
-      {
-        "type": "pull_request",
-        "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/897",
-        "result": "PASS",
-        "note": "Draft, mergeable clean against main at evidence collection; Codex service quota blocked review."
-      },
-      {
-        "type": "ci",
-        "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/40240244084",
-        "result": "PASS",
-        "note": "Cantiere First App APK run completed success, including physical-failure regressions, guarded lifecycle, offline Build Lab and artifact upload. Full decoded job log job_id=121310289274 confirms [CANTIERE_AAPT2_NEGATIVE] executable=aapt2 command=compile exit_code=1 rejection=PASS at 2026-10-25T22:28:00 and 22:28:04 UTC."
-      },
-      {
-        "type": "ci",
-        "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/40240244140",
-        "result": "PASS",
-        "note": "Build & Release APK exact-head success; this is host CI, not generated owner star app G5."
-      },
-      {
-        "type": "ci",
-        "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/40240244175",
-        "result": "PASS",
-        "note": "Web Cantiere Build exact-head success."
-      },
-      {
-        "type": "ci",
-        "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/40240244106",
-        "result": "PASS",
-        "note": "Windows Desktop Build exact-head success."
-      },
-      {
-        "type": "analysis",
-        "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/897#issuecomment-6404268568",
-        "result": "INFO",
-        "note": "Codex usage quota exhausted and review failed operationally; no reviewer findings recorded; do not represent as approval or defect-free review."
-      },
-      {
-        "type": "physical_device",
-        "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/issues/845",
-        "result": "PENDING",
-        "note": "Original generated star project still 0/1; no owner physical install, launch or tap proof."
-      }
-    ],
-    "known_risks": [
-      "Negative fixture rejects already-known invalid Dart and AAPT2 XML; success is not proof of positive generated star functionality.",
-      "CI runner's deterministic starter APK differs from user's actual generated app. G5 original saved star project still PENDING.",
-      "Codex review blocked by usage quota; independent G6 PENDING. No security review or automatic approval was obtained.",
-      "Separate Android memory parity PR #867 remains DRAFT; host stable 1.0.14+103401 lacks beta GPU cold-load/admission/residency guards. No Samsung update recommended.",
-      "Check if new main commits require branch revalidation before any merge."
-    ],
-    "reviewer_checks": [
-      "Verify only two lines added in .github/workflows/cantiere-first-app.yml, valid trigger path and actual flutter test invocation.",
-      "Inspect run #40240244084 job 121310289274 for both [CANTIERE_AAPT2_NEGATIVE] exit_code=1 rejection=PASS markers and Dart analyzer negative star test; fail if AAPT2 skipped or SDK absent.",
-      "Cross-check all four exact-head CI completed success; ensure no other paths touched or gates loosened.",
-      "Do not treat unavailable Codex due quota as G6 independent approval and do not conflate negative fixture with owner physical acceptance."
-    ],
-    "roadmap_impact": {
-      "material": false,
-      "refs": [
-        ".airlab/public-repositories/Ai-orchestrator-riserva/roadmap.yaml#CANT-11"
-      ]
     },
-    "submitted_at": "2026-10-26T01:45:12Z"
-  }
+    {
+      "claim_id": "bba8818e52db526a7ce5",
+      "work_item": "issue-845-star-negative-ci-coverage-v1",
+      "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
+      "pr_number": 897,
+      "head_sha": "cec374a61d9828f6808fb6b09d65340dfa314002",
+      "merge_commit_sha": "d389479326cf6593463feb4b15a6bfd1faa18da3",
+      "packet_sha256": "63a1715a72ff119497fdc178cbc27007b4e95b3ee2d174720b036fc2ca2894a4",
+      "actor_id": "chatgpt:cantiere",
+      "at": "2026-10-26T01:47:30Z",
+      "review_approved": false,
+      "physical_runtime_verified": false,
+      "known_risks": [
+        "Negative fixture rejects already-known invalid Dart and AAPT2 XML; success is not proof of positive generated star functionality.",
+        "CI runner's deterministic starter APK differs from user's actual generated app. G5 original saved star project still PENDING.",
+        "Codex review blocked by usage quota; independent G6 PENDING. No security review or automatic approval was obtained.",
+        "Separate Android memory parity PR #867 remains DRAFT; host stable 1.0.14+103401 lacks beta GPU cold-load/admission/residency guards. No Samsung update recommended.",
+        "Check if new main commits require branch revalidation before any merge."
+      ],
+      "original_summary": "CI-only two-line correction on exact PR #897 HEAD cec374a61d9828f6808fb6b09d65340dfa314002: existing test/app_factory/workshop/workshop_generated_star_negative_gate_test.dart is now present in cantiere-first-app.yml on.pull_request.paths and Run Cantiere physical-failure regressions flutter test invocation. All four exact-head workflows SUCCESS; actual Cantiere First App APK full job log confirms test ran and [CANTIERE_AAPT2_NEGATIVE] executable=aapt2 command=compile exit_code=1 rejection=PASS (twice), reflecting malformed generated drawable rejection. Dart analyzer negative regression runs too. GitHub reports mergeable clean. Codex could not review due account usage quota; no independent canonical G6 approval. This is negative-test CI coverage, not actual generation/installation of owner original star app on S24 FE; G5 remains pending.",
+      "original_changes": [
+        ".github/workflows/cantiere-first-app.yml adds existing star negative fixture to PR path trigger and to expanded flutter test command; only 2 insertions, no application source changes."
+      ],
+      "original_evidence": [
+        {
+          "type": "commit",
+          "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/cec374a61d9828f6808fb6b09d65340dfa314002",
+          "result": "PASS",
+          "note": "Exact-head, one workflow file, two added lines; no runtime/LLM/Reviewer/RAM changes."
+        },
+        {
+          "type": "pull_request",
+          "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/897",
+          "result": "PASS",
+          "note": "Draft, mergeable clean against main at evidence collection; Codex service quota blocked review."
+        },
+        {
+          "type": "ci",
+          "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/40240244084",
+          "result": "PASS",
+          "note": "Cantiere First App APK run completed success, including physical-failure regressions, guarded lifecycle, offline Build Lab and artifact upload. Full decoded job log job_id=121310289274 confirms [CANTIERE_AAPT2_NEGATIVE] executable=aapt2 command=compile exit_code=1 rejection=PASS at 2026-10-25T22:28:00 and 22:28:04 UTC."
+        },
+        {
+          "type": "ci",
+          "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/40240244140",
+          "result": "PASS",
+          "note": "Build & Release APK exact-head success; this is host CI, not generated owner star app G5."
+        },
+        {
+          "type": "ci",
+          "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/40240244175",
+          "result": "PASS",
+          "note": "Web Cantiere Build exact-head success."
+        },
+        {
+          "type": "ci",
+          "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/actions/runs/40240244106",
+          "result": "PASS",
+          "note": "Windows Desktop Build exact-head success."
+        },
+        {
+          "type": "analysis",
+          "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/897#issuecomment-6404268568",
+          "result": "INFO",
+          "note": "Codex usage quota exhausted and review failed operationally; no reviewer findings recorded; do not represent as approval or defect-free review."
+        },
+        {
+          "type": "physical_device",
+          "ref": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/issues/845",
+          "result": "PENDING",
+          "note": "Original generated star project still 0/1; no owner physical install, launch or tap proof."
+        }
+      ],
+      "original_reviewer_checks": [
+        "Verify only two lines added in .github/workflows/cantiere-first-app.yml, valid trigger path and actual flutter test invocation.",
+        "Inspect run #40240244084 job 121310289274 for both [CANTIERE_AAPT2_NEGATIVE] exit_code=1 rejection=PASS markers and Dart analyzer negative star test; fail if AAPT2 skipped or SDK absent.",
+        "Cross-check all four exact-head CI completed success; ensure no other paths touched or gates loosened.",
+        "Do not treat unavailable Codex due quota as G6 independent approval and do not conflate negative fixture with owner physical acceptance."
+      ],
+      "roadmap_impact": {
+        "material": false,
+        "refs": [
+          ".airlab/public-repositories/Ai-orchestrator-riserva/roadmap.yaml#CANT-11"
+        ]
+      }
+    }
+  ]
 }

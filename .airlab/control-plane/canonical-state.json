@@ -7,7 +7,7 @@
     "policy": "This private repository is the single coordination authority. Chats and agents are workers, not independent sources of truth."
   },
   "updated_at": "2026-10-26",
-  "state_revision": 383,
+  "state_revision": 384,
   "lifecycle_status": "BOOTSTRAP_ACTIVE",
   "roadmap_authority": {
     "library": ".airlab/roadmap.yaml",
@@ -81,26 +81,14 @@
     "invalid_lane_behavior": "ISOLATE_AND_SURFACE_PROJECTION_INCIDENT"
   },
   "projection": {
-    "source_digest": "ce10e34fc7bee9e2f7af5c8e37d29465032c4d4fa766488e58a8b1b65460d811",
-    "projected_at": "2026-10-26T01:45:43Z",
+    "source_digest": "5bc558fcabcc8fb0d98ebd522690520682268bfaa82d49d881d4e3307dc7cf7b",
+    "projected_at": "2026-10-26T01:47:30Z",
     "counts": {
       "BLOCKED": 2,
-      "READY": 13,
-      "REVIEW_REQUIRED": 3
+      "READY": 14,
+      "REVIEW_REQUIRED": 2
     },
     "active_claims": [
-      {
-        "lane": "cantiere",
-        "claim_id": "bba8818e52db526a7ce5",
-        "work_item": "issue-845-star-negative-ci-coverage-v1",
-        "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
-        "lease_until": "2026-10-26T13:43:47Z",
-        "resource_locks": [
-          "branch:pilialvu75-hue/Ai-orchestrator-riserva:fix/cantiere-845-star-negative-aapt2-ci",
-          "file:pilialvu75-hue/Ai-orchestrator-riserva:.github/workflows/cantiere-first-app.yml",
-          "resource:cantiere-845-star-negative-ci-coverage"
-        ]
-      },
       {
         "lane": "library-researcher",
         "claim_id": "a3be2c00b7d608d2df75",
@@ -143,12 +131,6 @@
         "work_item": "issue-849-android-selective-backup-exclusions"
       },
       {
-        "key": "branch:pilialvu75-hue/Ai-orchestrator-riserva:fix/cantiere-845-star-negative-aapt2-ci",
-        "lane": "cantiere",
-        "claim_id": "bba8818e52db526a7ce5",
-        "work_item": "issue-845-star-negative-ci-coverage-v1"
-      },
-      {
         "key": "file:pilialvu75-hue/AI-Orchestrator-Module-Researcher:.github/workflows/autonomous-seeding.yml",
         "lane": "library-researcher",
         "claim_id": "a3be2c00b7d608d2df75",
@@ -159,12 +141,6 @@
         "lane": "library-researcher",
         "claim_id": "a3be2c00b7d608d2df75",
         "work_item": "researcher-zero-discovery-reliability-20261016"
-      },
-      {
-        "key": "file:pilialvu75-hue/Ai-orchestrator-riserva:.github/workflows/cantiere-first-app.yml",
-        "lane": "cantiere",
-        "claim_id": "bba8818e52db526a7ce5",
-        "work_item": "issue-845-star-negative-ci-coverage-v1"
       },
       {
         "key": "file:pilialvu75-hue/Ai-orchestrator-riserva:android/app/src/main/AndroidManifest.xml",
@@ -191,12 +167,6 @@
         "work_item": "issue-849-android-selective-backup-exclusions"
       },
       {
-        "key": "resource:cantiere-845-star-negative-ci-coverage",
-        "lane": "cantiere",
-        "claim_id": "bba8818e52db526a7ce5",
-        "work_item": "issue-845-star-negative-ci-coverage-v1"
-      },
-      {
         "key": "resource:researcher-discovery-reliability",
         "lane": "library-researcher",
         "claim_id": "a3be2c00b7d608d2df75",
@@ -204,7 +174,6 @@
       }
     ],
     "review_required": [
-      "cantiere",
       "library-researcher",
       "platform-android"
     ],
@@ -368,25 +337,15 @@
       },
       {
         "id": "cantiere",
-        "status": "REVIEW_REQUIRED",
+        "status": "READY",
         "activation": "active",
-        "state_version": 154,
+        "state_version": 155,
         "updated_at": "2026-10-26",
-        "active_claim": {
-          "claim_id": "bba8818e52db526a7ce5",
-          "work_item": "issue-845-star-negative-ci-coverage-v1",
-          "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
-          "lease_until": "2026-10-26T13:43:47Z",
-          "resource_locks": [
-            "branch:pilialvu75-hue/Ai-orchestrator-riserva:fix/cantiere-845-star-negative-aapt2-ci",
-            "file:pilialvu75-hue/Ai-orchestrator-riserva:.github/workflows/cantiere-first-app.yml",
-            "resource:cantiere-845-star-negative-ci-coverage"
-          ]
-        },
+        "active_claim": null,
         "reviewer_state": "PENDING",
         "inference_profile_status": null,
         "historical_backlog_count": 3,
-        "next_action": "Main/Reviewer must inspect the review_packet, linked evidence and required gates before promotion or rework."
+        "next_action": "Run physical target acceptance; independent review remains outstanding."
       },
       {
         "id": "diagnostics",
