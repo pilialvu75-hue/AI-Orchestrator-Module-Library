@@ -3,13 +3,29 @@
   "id": "cantiere",
   "title": "Cantiere",
   "role": "worker",
-  "status": "READY",
+  "status": "CLAIMED",
   "activation": "active",
   "scope": "Exclusive Cantiere/App Factory execution, durability, build/review/validation/apply and first-real-app reliability.",
   "shared_engine_policy": "shared_or_control_plane",
-  "state_version": 152,
+  "state_version": 153,
   "updated_at": "2026-10-26",
-  "active_claim": null,
+  "active_claim": {
+    "claim_id": "bba8818e52db526a7ce5",
+    "owner_lane": "cantiere",
+    "work_item": "issue-845-star-negative-ci-coverage-v1",
+    "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
+    "scope": "Exact-head PR #897 CI evidence and owner-directed bounded review handoff only; workflow path and runner invocation for negative star Dart/AAPT2 fixture. No app source/model/RAM/Reviewer edits.",
+    "branch": "fix/cantiere-845-star-negative-aapt2-ci",
+    "resource_locks": [
+      "branch:pilialvu75-hue/Ai-orchestrator-riserva:fix/cantiere-845-star-negative-aapt2-ci",
+      "file:pilialvu75-hue/Ai-orchestrator-riserva:.github/workflows/cantiere-first-app.yml",
+      "resource:cantiere-845-star-negative-ci-coverage"
+    ],
+    "started_at": "2026-10-26T01:43:47Z",
+    "heartbeat_at": "2026-10-26T01:43:47Z",
+    "lease_until": "2026-10-26T13:43:47Z",
+    "lease_hours": 12
+  },
   "dependencies": [],
   "roadmap_refs": [
     ".airlab/public-repositories/Ai-orchestrator-riserva/roadmap.yaml#CANT-11",
