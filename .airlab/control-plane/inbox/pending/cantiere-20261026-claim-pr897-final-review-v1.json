@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "request_id": "cantiere-20261026-claim-pr897-final-review-v1",
+  "actor_id": "chatgpt:cantiere",
+  "lane_id": "cantiere",
+  "operation": "claim",
+  "expected_state_version": 152,
+  "payload": {
+    "work_item": "issue-845-star-negative-ci-coverage-v1",
+    "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
+    "branch": "fix/cantiere-845-star-negative-aapt2-ci",
+    "scope": "Exact-head PR #897 CI evidence and owner-directed bounded review handoff only; workflow path and runner invocation for negative star Dart/AAPT2 fixture. No app source/model/RAM/Reviewer edits.",
+    "resource_locks": [
+      "file:pilialvu75-hue/Ai-orchestrator-riserva:.github/workflows/cantiere-first-app.yml",
+      "resource:cantiere-845-star-negative-ci-coverage"
+    ]
+  }
+}
