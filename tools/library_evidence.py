@@ -6,6 +6,7 @@ import re
 from pathlib import Path
 
 from library_source_integrity import SourceIntegrityError, payload_tree_sha256
+from library_review_attestation import ReviewAuthorizationError, verify_local_review_authorization
 
 
 TEST_REPORT_SCHEMA = "ai-orchestrator.library-test-report.v1"
@@ -144,6 +145,15 @@ def verify_security_evidence(base: Path, manifest: dict) -> None:
     _require(isinstance(known, int) and known >= 0, "security.known_vulnerabilities must be a non-negative integer")
     _require(report.get("known_vulnerabilities") == known, "security.review_report vulnerability count does not match manifest")
     _require(report.get("sbom_sha256") == _sha256(sbom_path), "security.review_report SBOM digest does not match security.sbom")
+
+    # A local JSON assertion is not an independent security approval.
+    # Newly materialized source must carry a detached signature from the
+    # reviewer key configured exclusively on the protected default branch.
+    if (manifest.get("payload") or {}).get("type") == "repository_path":
+        try:
+            verify_local_review_authorization(base, manifest, report, sbom_path)
+        except ReviewAuthorizationError as exc:
+            raise EvidenceError(f"independent local security review required: {exc}") from exc
 
 
 def verify_manifest_evidence(base: Path, manifest: dict) -> None:
