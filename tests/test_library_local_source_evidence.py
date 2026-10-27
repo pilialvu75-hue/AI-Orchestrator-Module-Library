@@ -126,7 +126,10 @@ class PinnedLocalSourceEvidenceTests(unittest.TestCase):
             "review_report": "security/review.json",
         }
         self.write("security/review.json", report)
-        verify_security_evidence(self.base, self.manifest)
+        # This legacy fixture supplies hashes, not an independently signed
+        # reviewer assertion. Local-source promotion must now reject it.
+        with self.assertRaisesRegex(EvidenceError, "independent local security review required"):
+            verify_security_evidence(self.base, self.manifest)
 
         (self.source / "lib.dart").write_text("int answer() => 0;\n")
         with self.assertRaisesRegex(EvidenceError, "actual local source digest"):
