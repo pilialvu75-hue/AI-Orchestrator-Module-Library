@@ -1,0 +1,31 @@
+{
+  "schema": "ai-orchestrator.library-test-report.v1",
+  "asset_id": "vision.local_image_labeling_android.firstparty.cantiere",
+  "version": "0.1.0",
+  "source_commit": "acc8d28b54489c91cb4f59552a1be2e07203de1a",
+  "payload_sha256": "878d573db79710f14e7d21a477ea47ebba54c521a67844b390dc8c68bae5c709",
+  "passed": true,
+  "validated_on": [
+    "linux",
+    "android"
+  ],
+  "validated_at": "2026-10-27T18:14:40Z",
+  "workflow_run_id": 40557369058,
+  "workflow_run_attempt": 1,
+  "workflow_sha": "562bc54ff1cd5a43c496fb3a556c7c32054e3e37",
+  "workflow_url": "https://github.com/pilialvu75-hue/AI-Orchestrator-Module-Library/actions/runs/40557369058",
+  "checks": [
+    "Exact SHA-256 of locally copied source tree, immutable upstream Cantiere commit",
+    "Flutter 3.47.5 pub get and static analyzer (No issues found)",
+    "flutter test --reporter expanded (5 passed)",
+    "flutter create temporary Android host",
+    "flutter build apk --debug --target-platform android-arm64 (success, APK built)",
+    "Presence of DEX and SHA256 of generated debug APK verified"
+  ],
+  "test_cases_passed": 5,
+  "scope": "Linux-hosted Flutter MethodChannel mocks passed and real Android ARM64 debug APK with Kotlin ML Kit compiled. No hardware/device runtime, accuracy or on-device pixel inference test.",
+  "security_certified": false,
+  "license_verified": false,
+  "production_approved": false,
+  "notes": "Source-only sandbox_preview. No signing/release APK, no transfer of image bytes, no installation on S24 FE. Do not coinstall with Cantiere explicit same-name channel."
+}
