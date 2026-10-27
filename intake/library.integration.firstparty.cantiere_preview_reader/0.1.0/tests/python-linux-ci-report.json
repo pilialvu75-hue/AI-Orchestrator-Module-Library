@@ -1,0 +1,28 @@
+{
+  "schema": "ai-orchestrator.library-test-report.v1",
+  "asset_id": "library.integration.firstparty.cantiere_preview_reader",
+  "version": "0.1.0",
+  "source_commit": "f94055868061850e3f2cf6318358bab9e49f80c9",
+  "payload_sha256": "5a570a720087d043fbeee03d2a23b0e74e050fc2f488707a313b7aee19297183",
+  "passed": true,
+  "validated_on": [
+    "linux"
+  ],
+  "validated_at": "2026-10-27T17:19:11Z",
+  "workflow_run_id": 40549386176,
+  "workflow_run_attempt": 1,
+  "workflow_sha": "9b76ca8774848dde1cde0b22f8b2d3f58338bc62",
+  "workflow_url": "https://github.com/pilialvu75-hue/AI-Orchestrator-Module-Library/actions/runs/40549386176",
+  "checks": [
+    "python tools/validate_library.py",
+    "python -m unittest discover -s tests -p 'test_*.py' -v",
+    "python source tree SHA256 exact manifest pin check",
+    "python -m unittest discover -s intake/library.integration.firstparty.cantiere_preview_reader/0.1.0/payload/src/test/tool -p 'test_*.py' -v"
+  ],
+  "test_cases_passed": 5,
+  "scope": "Pinned Cantiere Python source and five pure offline safety regressions on Linux Python 3.12; Cantiere separate live Node integration workflow not reexecuted",
+  "security_certified": false,
+  "license_verified": false,
+  "production_approved": false,
+  "notes": "Not a Linux production install or Flutter builder integration; no new independent security attestation."
+}

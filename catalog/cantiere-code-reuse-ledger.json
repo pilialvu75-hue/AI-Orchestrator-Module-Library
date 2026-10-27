@@ -30,7 +30,7 @@
       "certified": false,
       "classification": "candidate_requires_extraction_and_tests",
       "import_count": 12,
-      "module_status": "not_materialized",
+      "module_status": "tested_in_library",
       "path": "tool/cantiere_library_sandbox_preview.py",
       "source_bytes": 9806,
       "source_commit": "f94055868061850e3f2cf6318358bab9e49f80c9",
@@ -46,7 +46,13 @@
         "_run_allowlisted_probe",
         "main"
       ],
-      "tested": false
+      "tested": false,
+      "library_pin": "library.integration.firstparty.cantiere_preview_reader@0.1.0",
+      "library_payload_sha256": "5a570a720087d043fbeee03d2a23b0e74e050fc2f488707a313b7aee19297183",
+      "library_test_workflow_run": 40549386176,
+      "tested_platforms": [
+        "linux"
+      ]
     }
   ],
   "schema": "ai-orchestrator.cantiere-code-reuse-ledger.v1",
