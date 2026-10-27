@@ -2,32 +2,229 @@
   "schema_version": 1,
   "updated_at": "2026-09-14T19:55:00Z",
   "contracts": [
-    {"capability_id":"auth.session","contract_id":"auth.session.v1","contract_version":"1.0","status":"draft","description":"Logical authentication/session capability boundary.","replacement":null},
-    {"capability_id":"storage.secrets","contract_id":"storage.secrets.v1","contract_version":"1.0","status":"draft","description":"Logical secure secret storage capability boundary.","replacement":null},
-    {"capability_id":"network.http","contract_id":"network.http.v1","contract_version":"1.0","status":"draft","description":"Logical HTTP client capability boundary with timeout/cancellation/retry semantics.","replacement":null},
-    {"capability_id":"storage.local_db","contract_id":"storage.local_db.v1","contract_version":"1.0","status":"draft","description":"Logical local persistence capability boundary.","replacement":null},
-    {"capability_id":"diagnostics.logging","contract_id":"diagnostics.logging.v1","contract_version":"1.0","status":"draft","description":"Logical structured logging and diagnostic-event boundary.","replacement":null},
-    {"capability_id":"release.update_manager","contract_id":"release.update_manager.v1","contract_version":"1.0","status":"draft","description":"Logical download/update management boundary.","replacement":null},
-    {"capability_id":"ai.local_inference","contract_id":"ai.local_inference.v1","contract_version":"1.0","status":"draft","description":"Logical local inference runtime boundary.","replacement":null},
-    {"capability_id":"voice.stt","contract_id":"voice.stt.v1","contract_version":"1.0","status":"draft","description":"Logical speech-to-text boundary independent from the concrete engine.","replacement":null},
-    {"capability_id":"voice.tts","contract_id":"voice.tts.v1","contract_version":"1.0","status":"draft","description":"Logical text-to-speech boundary independent from the concrete engine.","replacement":null},
-    {"capability_id":"platform.filesystem","contract_id":"platform.filesystem.v1","contract_version":"1.0","status":"draft","description":"Sandbox-aware filesystem boundary with scoped read/write, atomic replace and path capability semantics.","replacement":null},
-    {"capability_id":"platform.process","contract_id":"platform.process.v1","contract_version":"1.0","status":"draft","description":"Local process execution boundary with argv, cwd, environment, stdout/stderr streaming, cancellation and exit status.","replacement":null},
-    {"capability_id":"platform.permissions","contract_id":"platform.permissions.v1","contract_version":"1.0","status":"draft","description":"Runtime permission and capability broker with query, request and denial-state semantics.","replacement":null},
-    {"capability_id":"platform.audio_io","contract_id":"platform.audio_io.v1","contract_version":"1.0","status":"draft","description":"Audio capture/playback and device-routing boundary with explicit format negotiation.","replacement":null},
-    {"capability_id":"platform.background_execution","contract_id":"platform.background_execution.v1","contract_version":"1.0","status":"draft","description":"Background task/service lifecycle boundary constrained by target operating-system policy.","replacement":null},
-    {"capability_id":"platform.notifications","contract_id":"platform.notifications.v1","contract_version":"1.0","status":"draft","description":"Native notification scheduling, delivery and action callback boundary.","replacement":null},
-    {"capability_id":"platform.desktop_shell","contract_id":"platform.desktop_shell.v1","contract_version":"1.0","status":"draft","description":"Desktop window, tray and application lifecycle integration boundary.","replacement":null},
-    {"capability_id":"release.packaging","contract_id":"release.packaging.v1","contract_version":"1.0","status":"draft","description":"Target packaging/signing/distribution artifact boundary with reproducible metadata.","replacement":null},
-    {"capability_id":"ai.acceleration_backend","contract_id":"ai.acceleration_backend.v1","contract_version":"1.0","status":"draft","description":"Target-specific local inference acceleration backend selection and capability-reporting boundary.","replacement":null},
-    {"capability_id":"platform.lifecycle","contract_id":"platform.lifecycle.v1","contract_version":"1.0","status":"draft","description":"Application foreground/background/suspend/resume/shutdown lifecycle event boundary.","replacement":null},
-    {"capability_id":"platform.connectivity","contract_id":"platform.connectivity.v1","contract_version":"1.0","status":"draft","description":"Connectivity-state boundary exposing online/offline transitions without owning application retry policy.","replacement":null},
-    {"capability_id":"platform.power_thermal","contract_id":"platform.power_thermal.v1","contract_version":"1.0","status":"draft","description":"Battery, power-source and thermal-pressure observation boundary for adaptive workloads.","replacement":null},
-    {"capability_id":"platform.startup_service","contract_id":"platform.startup_service.v1","contract_version":"1.0","status":"draft","description":"Login/startup/service registration boundary with explicit user and OS policy constraints.","replacement":null},
-    {"capability_id":"platform.file_picker_share","contract_id":"platform.file_picker_share.v1","contract_version":"1.0","status":"draft","description":"User-mediated file selection, save and sharing boundary.","replacement":null},
-    {"capability_id":"platform.clipboard","contract_id":"platform.clipboard.v1","contract_version":"1.0","status":"draft","description":"Clipboard read/write boundary with platform permission and focus constraints.","replacement":null},
-    {"capability_id":"release.auto_update","contract_id":"release.auto_update.v1","contract_version":"1.0","status":"draft","description":"Target-aware update discovery, staged download, integrity verification and install handoff boundary.","replacement":null},
-    {"capability_id":"ai.model_storage","contract_id":"ai.model_storage.v1","contract_version":"1.0","status":"draft","description":"Large model artifact storage boundary with resumable writes, integrity checks, capacity reporting and eviction policy hooks.","replacement":null},
-    {"capability_id":"voice.device_policy","contract_id":"voice.device_policy.v1","contract_version":"1.0","status":"draft","description":"Voice input/output device selection and routing policy boundary independent from STT/TTS engines.","replacement":null}
+    {
+      "capability_id": "auth.session",
+      "contract_id": "auth.session.v1",
+      "contract_version": "1.0",
+      "status": "draft",
+      "description": "Logical authentication/session capability boundary.",
+      "replacement": null
+    },
+    {
+      "capability_id": "storage.secrets",
+      "contract_id": "storage.secrets.v1",
+      "contract_version": "1.0",
+      "status": "draft",
+      "description": "Logical secure secret storage capability boundary.",
+      "replacement": null
+    },
+    {
+      "capability_id": "network.http",
+      "contract_id": "network.http.v1",
+      "contract_version": "1.0",
+      "status": "draft",
+      "description": "Logical HTTP client capability boundary with timeout/cancellation/retry semantics.",
+      "replacement": null
+    },
+    {
+      "capability_id": "storage.local_db",
+      "contract_id": "storage.local_db.v1",
+      "contract_version": "1.0",
+      "status": "draft",
+      "description": "Logical local persistence capability boundary.",
+      "replacement": null
+    },
+    {
+      "capability_id": "diagnostics.logging",
+      "contract_id": "diagnostics.logging.v1",
+      "contract_version": "1.0",
+      "status": "draft",
+      "description": "Logical structured logging and diagnostic-event boundary.",
+      "replacement": null
+    },
+    {
+      "capability_id": "release.update_manager",
+      "contract_id": "release.update_manager.v1",
+      "contract_version": "1.0",
+      "status": "draft",
+      "description": "Logical download/update management boundary.",
+      "replacement": null
+    },
+    {
+      "capability_id": "ai.local_inference",
+      "contract_id": "ai.local_inference.v1",
+      "contract_version": "1.0",
+      "status": "draft",
+      "description": "Logical local inference runtime boundary.",
+      "replacement": null
+    },
+    {
+      "capability_id": "voice.stt",
+      "contract_id": "voice.stt.v1",
+      "contract_version": "1.0",
+      "status": "draft",
+      "description": "Logical speech-to-text boundary independent from the concrete engine.",
+      "replacement": null
+    },
+    {
+      "capability_id": "voice.tts",
+      "contract_id": "voice.tts.v1",
+      "contract_version": "1.0",
+      "status": "draft",
+      "description": "Logical text-to-speech boundary independent from the concrete engine.",
+      "replacement": null
+    },
+    {
+      "capability_id": "platform.filesystem",
+      "contract_id": "platform.filesystem.v1",
+      "contract_version": "1.0",
+      "status": "draft",
+      "description": "Sandbox-aware filesystem boundary with scoped read/write, atomic replace and path capability semantics.",
+      "replacement": null
+    },
+    {
+      "capability_id": "platform.process",
+      "contract_id": "platform.process.v1",
+      "contract_version": "1.0",
+      "status": "draft",
+      "description": "Local process execution boundary with argv, cwd, environment, stdout/stderr streaming, cancellation and exit status.",
+      "replacement": null
+    },
+    {
+      "capability_id": "platform.permissions",
+      "contract_id": "platform.permissions.v1",
+      "contract_version": "1.0",
+      "status": "draft",
+      "description": "Runtime permission and capability broker with query, request and denial-state semantics.",
+      "replacement": null
+    },
+    {
+      "capability_id": "platform.audio_io",
+      "contract_id": "platform.audio_io.v1",
+      "contract_version": "1.0",
+      "status": "draft",
+      "description": "Audio capture/playback and device-routing boundary with explicit format negotiation.",
+      "replacement": null
+    },
+    {
+      "capability_id": "platform.background_execution",
+      "contract_id": "platform.background_execution.v1",
+      "contract_version": "1.0",
+      "status": "draft",
+      "description": "Background task/service lifecycle boundary constrained by target operating-system policy.",
+      "replacement": null
+    },
+    {
+      "capability_id": "platform.notifications",
+      "contract_id": "platform.notifications.v1",
+      "contract_version": "1.0",
+      "status": "draft",
+      "description": "Native notification scheduling, delivery and action callback boundary.",
+      "replacement": null
+    },
+    {
+      "capability_id": "platform.desktop_shell",
+      "contract_id": "platform.desktop_shell.v1",
+      "contract_version": "1.0",
+      "status": "draft",
+      "description": "Desktop window, tray and application lifecycle integration boundary.",
+      "replacement": null
+    },
+    {
+      "capability_id": "release.packaging",
+      "contract_id": "release.packaging.v1",
+      "contract_version": "1.0",
+      "status": "draft",
+      "description": "Target packaging/signing/distribution artifact boundary with reproducible metadata.",
+      "replacement": null
+    },
+    {
+      "capability_id": "ai.acceleration_backend",
+      "contract_id": "ai.acceleration_backend.v1",
+      "contract_version": "1.0",
+      "status": "draft",
+      "description": "Target-specific local inference acceleration backend selection and capability-reporting boundary.",
+      "replacement": null
+    },
+    {
+      "capability_id": "platform.lifecycle",
+      "contract_id": "platform.lifecycle.v1",
+      "contract_version": "1.0",
+      "status": "draft",
+      "description": "Application foreground/background/suspend/resume/shutdown lifecycle event boundary.",
+      "replacement": null
+    },
+    {
+      "capability_id": "platform.connectivity",
+      "contract_id": "platform.connectivity.v1",
+      "contract_version": "1.0",
+      "status": "draft",
+      "description": "Connectivity-state boundary exposing online/offline transitions without owning application retry policy.",
+      "replacement": null
+    },
+    {
+      "capability_id": "platform.power_thermal",
+      "contract_id": "platform.power_thermal.v1",
+      "contract_version": "1.0",
+      "status": "draft",
+      "description": "Battery, power-source and thermal-pressure observation boundary for adaptive workloads.",
+      "replacement": null
+    },
+    {
+      "capability_id": "platform.startup_service",
+      "contract_id": "platform.startup_service.v1",
+      "contract_version": "1.0",
+      "status": "draft",
+      "description": "Login/startup/service registration boundary with explicit user and OS policy constraints.",
+      "replacement": null
+    },
+    {
+      "capability_id": "platform.file_picker_share",
+      "contract_id": "platform.file_picker_share.v1",
+      "contract_version": "1.0",
+      "status": "draft",
+      "description": "User-mediated file selection, save and sharing boundary.",
+      "replacement": null
+    },
+    {
+      "capability_id": "platform.clipboard",
+      "contract_id": "platform.clipboard.v1",
+      "contract_version": "1.0",
+      "status": "draft",
+      "description": "Clipboard read/write boundary with platform permission and focus constraints.",
+      "replacement": null
+    },
+    {
+      "capability_id": "release.auto_update",
+      "contract_id": "release.auto_update.v1",
+      "contract_version": "1.0",
+      "status": "draft",
+      "description": "Target-aware update discovery, staged download, integrity verification and install handoff boundary.",
+      "replacement": null
+    },
+    {
+      "capability_id": "ai.model_storage",
+      "contract_id": "ai.model_storage.v1",
+      "contract_version": "1.0",
+      "status": "draft",
+      "description": "Large model artifact storage boundary with resumable writes, integrity checks, capacity reporting and eviction policy hooks.",
+      "replacement": null
+    },
+    {
+      "capability_id": "voice.device_policy",
+      "contract_id": "voice.device_policy.v1",
+      "contract_version": "1.0",
+      "status": "draft",
+      "description": "Voice input/output device selection and routing policy boundary independent from STT/TTS engines.",
+      "replacement": null
+    },
+    {
+      "capability_id": "library.integration",
+      "contract_id": "library.integration.v1",
+      "contract_version": "1.0",
+      "status": "draft",
+      "description": "Read-only pinned Library experimental package verification and isolated staging; never a production installer.",
+      "replacement": null
+    }
   ]
 }
