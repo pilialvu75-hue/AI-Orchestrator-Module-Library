@@ -58,14 +58,14 @@ jobs:
       - name: Commit certified Library changes
         shell: bash
         run: |
-          if git diff --quiet --exit-code; then
+          git add catalog modules intake packages
+          if git diff --cached --quiet --exit-code; then
             echo "No Library certification/export changes."
             exit 0
           fi
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add catalog modules intake packages
-          git commit -m "library: certify eligible intake [skip ci]"
+          git commit -m "library: refresh certified and sandbox module packages [skip ci]"
           git push origin HEAD:main
 
       - name: Upload certification report
