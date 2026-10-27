@@ -1,0 +1,32 @@
+{
+  "schema": "ai-orchestrator.library-test-report.v1",
+  "asset_id": "vision.image_label_postprocessing.firstparty.cantiere",
+  "version": "0.1.0",
+  "source_commit": "acc8d28b54489c91cb4f59552a1be2e07203de1a",
+  "payload_sha256": "e87e4a04b1cc5d83923eabe896b1d63ef797788d1ee5492919ae5d93e05772f8",
+  "passed": true,
+  "validated_on": [
+    "linux"
+  ],
+  "validated_at": "2026-10-27T17:54:28Z",
+  "workflow_run_id": 40554890792,
+  "workflow_run_attempt": 1,
+  "workflow_sha": "340f6ad7006a99524559aec179b68f4763a7b729",
+  "workflow_url": "https://github.com/pilialvu75-hue/AI-Orchestrator-Module-Library/actions/runs/40554890792",
+  "checks": [
+    "python tools/validate_library.py",
+    "python tools/validate_history.py and validate_lifecycle.py",
+    "python -m unittest discover -s tests -p 'test_*.py'",
+    "pinned original Android/Flutter bridge three git blob SHA checks",
+    "pinned actual source tree SHA256 check",
+    "dart pub get --offline",
+    "dart analyze",
+    "dart run tool/self_test.dart"
+  ],
+  "test_cases_passed": 18,
+  "scope": "Real pure Dart image-label post-processing executed on Ubuntu Linux. Original Kotlin ML Kit Android inference, native app integration and physical Galaxy S24 FE not compiled or executed by this report.",
+  "security_certified": false,
+  "license_verified": false,
+  "production_approved": false,
+  "notes": "Source-only sandbox package. Native Android references preserved, not deployable without host bridge."
+}

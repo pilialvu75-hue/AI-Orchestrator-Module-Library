@@ -1,0 +1,129 @@
+{
+  "id": "vision.image_label_postprocessing.firstparty.cantiere",
+  "name": "Cantiere offline image-label post-processing (pure Dart, with native provenance)",
+  "version": "0.1.0",
+  "kind": "module",
+  "status": "tested",
+  "description": "Functional pure-Dart local image label processor extracted and adapted from pinned Cantiere Flutter implementation. Includes original Android ML Kit bridge, host service and regression tests as provenance, not as an installed plugin.",
+  "tags": [
+    "vision",
+    "image-labels",
+    "offline",
+    "firstparty",
+    "cantiere-reuse",
+    "dart",
+    "android-reference"
+  ],
+  "capabilities": [
+    "vision.image_label_postprocessing"
+  ],
+  "platforms": [
+    "linux",
+    "android"
+  ],
+  "languages": [
+    "dart",
+    "kotlin"
+  ],
+  "frameworks": [
+    "Dart",
+    "Flutter",
+    "Android ML Kit (reference only)"
+  ],
+  "entry_paths": [
+    "lib/local_image_labels.dart"
+  ],
+  "dependencies": [
+    {
+      "name": "Dart SDK",
+      "version": ">=3.4.0 <4.0.0",
+      "source": "host runtime"
+    },
+    {
+      "name": "Google ML Kit image-labeling",
+      "version": "17.0.9",
+      "source": "optional Android native backend only"
+    },
+    {
+      "name": "Flutter MethodChannel",
+      "version": "host Flutter version",
+      "source": "optional Android native integration"
+    }
+  ],
+  "provenance": {
+    "origin": "built_in",
+    "source_repository": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva",
+    "source_commit": "acc8d28b54489c91cb4f59552a1be2e07203de1a",
+    "source_tag": null,
+    "source_project_id": "pilialvu75-hue/Ai-orchestrator-riserva",
+    "source_task_id": "cantiere-harvest:acc8d28b54489c91cb4f59552a1be2e07203de1a:lib/features/chat/data/services/chat_local_image_vision_service.dart",
+    "license": null,
+    "license_file": null,
+    "retrieved_at": "2026-10-27T18:45:00Z"
+  },
+  "validation": {
+    "score": 0.8,
+    "tests_passed": true,
+    "test_report": "tests/dart-linux-ci-report.json",
+    "validated_at": "2026-10-27T17:54:28Z",
+    "validated_on": [
+      "linux"
+    ]
+  },
+  "security": {
+    "reviewed": false,
+    "reviewed_at": null,
+    "known_vulnerabilities": null,
+    "sbom": null,
+    "review_report": null,
+    "notes": "Security/license not independently audited. Neither native Android classifier nor phone hardware validated by this Dart-only module CI."
+  },
+  "integration": {
+    "estimated_effort": "medium",
+    "adaptation_allowed": true,
+    "adapter_notes": "Pure Dart class LocalImageLabelProcessor.fromNative() consumes exact MethodChannel labelImage response; Android ML Kit Kotlin bridge, original Flutter service and tests preserved byte-for-byte under reference/cantiere. Android host must explicitly wire MethodChannel, permissions, RAM guard, file path and 8 MiB input validation. No images, prompts or credentials enter this label processor.",
+    "known_constraints": [
+      "Output is image category labels, NOT image description, OCR, object counts, colors, text or multimodal LLM inference.",
+      "Only pure Dart post-processing is standalone and testable on Linux; Android Kotlin bridge and Flutter app service are source references that cannot compile independently.",
+      "No physical S24 FE result or Android integration validation from this package.",
+      "Existing app must still explicitly provide the native ML Kit classifier and follow platform-specific packaging policy.",
+      "No automatic production module installation, redistribution or security approval."
+    ]
+  },
+  "connector": {
+    "standard": "ai-orchestrator-lego",
+    "standard_version": "1.0.0",
+    "provides": [
+      {
+        "capability_id": "vision.image_label_postprocessing",
+        "contract_id": "vision.image_label_postprocessing.v1",
+        "contract_version": "1.0"
+      }
+    ],
+    "requires": [],
+    "integration_mode": "source_bundle",
+    "adapters": [],
+    "configuration_schema": null,
+    "healthcheck": {
+      "type": "none",
+      "path": null
+    }
+  },
+  "payload": {
+    "type": "repository_path",
+    "path": "payload/src",
+    "sha256": "e87e4a04b1cc5d83923eabe896b1d63ef797788d1ee5492919ae5d93e05772f8",
+    "upstream_repository": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva",
+    "upstream_commit": "acc8d28b54489c91cb4f59552a1be2e07203de1a"
+  },
+  "quality": {
+    "reuse_count": 0,
+    "successful_integrations": 0,
+    "failed_integrations": 0,
+    "last_used_at": null
+  },
+  "deprecation": {
+    "reason": null,
+    "replacement": null
+  }
+}
