@@ -1,0 +1,66 @@
+name: Prepare Privacy Diagnostics Independent Review Packet
+
+on:
+  pull_request:
+    branches: ["main"]
+    paths:
+      - "tools/library_privacy_review_packet.py"
+      - "tests/test_library_privacy_review_packet.py"
+      - "tools/library_privacy_preflight.py"
+      - "tools/library_evidence.py"
+      - "intake/diagnostics.logging.library.privacy_events/**"
+      - ".github/workflows/privacy-diagnostics-independent-review.yml"
+  push:
+    branches: ["main"]
+    paths:
+      - "tools/library_privacy_review_packet.py"
+      - "tests/test_library_privacy_review_packet.py"
+      - ".github/workflows/privacy-diagnostics-independent-review.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  prepare-independent-review:
+    name: Reproducible reviewer handoff (no certification)
+    runs-on: ubuntu-24.04
+    timeout-minutes: 8
+    steps:
+      - name: Checkout exact unprivileged workflow revision
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+          fetch-depth: 1
+
+      - name: Test source-bound review request and forged-evidence refusal
+        run: |
+          set -euo pipefail
+          python3 -m unittest discover -s tests -p 'test_library_privacy_review_packet.py' -v
+
+      - name: Build non-authorizing security and license review packet
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 tools/library_privacy_review_packet.py --output "$RUNNER_TEMP/library-review-request.json"
+          python3 - <<'PY'
+          import json
+          import os
+          from pathlib import Path
+          packet = json.loads((Path(os.environ["RUNNER_TEMP"]) / "library-review-request.json").read_text())
+          assert packet["status"] == "INDEPENDENT_REVIEW_REQUIRED"
+          assert packet["module_certification_authorized"] is False
+          assert packet["security_reviewed"] is False
+          assert packet["license_verified"] is False
+          assert packet["test_claims_to_verify_independently"]["github_workflow_verified"] is False
+          assert packet["security_review"]["actual_vulnerability_scan_complete"] is False
+          print("Pinned evidence assembled. Independent approval still required.")
+          PY
+
+      - name: Upload immutable input inventory for independent reviewer
+        uses: actions/upload-artifact@v4
+        with:
+          name: privacy-diagnostics-review-request-${{ github.run_id }}
+          path: ${{ runner.temp }}/library-review-request.json
+          if-no-files-found: error
+          retention-days: 30
