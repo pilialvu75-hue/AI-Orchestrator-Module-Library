@@ -1,0 +1,105 @@
+name: Validate isolated Cantiere Android Image LOCAL plugin
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'intake/vision.local_image_labeling_android.firstparty.cantiere/**'
+      - 'contracts/index.json'
+      - '.github/workflows/validate-cantiere-local-image-android.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: image-local-android-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  isolated-android:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 35
+    steps:
+      - name: Checkout pinned Library source
+        uses: actions/checkout@v4
+
+      - name: Verify real image-source payload integrity (no build if changed)
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import json, sys
+          from pathlib import Path
+          sys.path.insert(0, "tools")
+          from library_source_integrity import payload_tree_sha256
+          base = Path("intake/vision.local_image_labeling_android.firstparty.cantiere/0.1.0")
+          m = json.loads((base / "manifest.json").read_text())
+          assert m["provenance"]["source_commit"] == "acc8d28b54489c91cb4f59552a1be2e07203de1a"
+          actual = payload_tree_sha256(base / "payload/src")
+          assert actual == m["payload"]["sha256"], f"Image LOCAL source mismatch: {actual}"
+          original = json.loads((base / "payload/src/reference/source-provenance.json").read_text())
+          assert original["native_origin"]["git_blob_sha1"] == "210613e0b45a85bf72bf685c45ebf10a10999f43"
+          print("PASS: pinned derived image plugin source tree", actual)
+          PY
+
+      - name: Set up Java 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+
+      - name: Set up Flutter with Android toolchain
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.47.5'
+          channel: stable
+          cache: true
+
+      - name: Run actual Flutter static analysis and MethodChannel unit tests
+        shell: bash
+        working-directory: intake/vision.local_image_labeling_android.firstparty.cantiere/0.1.0/payload/src
+        run: |
+          set -euo pipefail
+          flutter pub get
+          flutter analyze
+          flutter test --reporter expanded
+
+      - name: Build temporary Android consumer (no Cantiere modifications)
+        shell: bash
+        env:
+          PLUGIN: ${{ github.workspace }}/intake/vision.local_image_labeling_android.firstparty.cantiere/0.1.0/payload/src
+        run: |
+          set -euo pipefail
+          APP="$RUNNER_TEMP/image-local-android-smoke"
+          flutter create --empty --platforms android --project-name image_local_smoke --org com.aivexus "$APP"
+          export APP
+          python3 - <<'PY'
+          import os
+          from pathlib import Path
+          app = Path(os.environ["APP"])
+          yaml = app / "pubspec.yaml"
+          content = yaml.read_text()
+          assert "dependencies:\n" in content
+          content = content.replace(
+              "dependencies:\n",
+              "dependencies:\n  cantiere_local_image_vision:\n    path: " +
+              os.environ["PLUGIN"] + "\n", 1,
+          )
+          yaml.write_text(content)
+          (app / "lib/main.dart").write_text(
+              "import 'package:flutter/material.dart';\n"
+              "import 'package:cantiere_local_image_vision/cantiere_local_image_vision.dart';\n"
+              "void main() { CantiereLocalImageVision(); "
+              "runApp(const MaterialApp(home: Scaffold(body: Text('Image LOCAL')))); }\n"
+          )
+          PY
+          cd "$APP"
+          flutter pub get
+          flutter build apk --debug --target-platform android-arm64
+          APK=build/app/outputs/flutter-apk/app-debug.apk
+          test -s "$APK"
+          unzip -Z -1 "$APK" | grep -Eq '^classes[0-9]*\.dex$'
+          sha256sum "$APK"
+          echo "PASS: real Android arm64 APK compiles FlutterPlugin plus Google ML Kit dependency"
+          echo "Build only: no Android phone ML Kit inference has been demonstrated."
