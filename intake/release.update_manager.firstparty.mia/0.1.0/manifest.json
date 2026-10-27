@@ -9,7 +9,7 @@
       "path": null,
       "type": "none"
     },
-    "integration_mode": "adapter",
+    "integration_mode": "source_bundle",
     "provides": [
       {
         "capability_id": "release.update_manager",
@@ -25,33 +25,39 @@
     "reason": null,
     "replacement": null
   },
-  "description": "Autonomously discovered first-party candidate for release.update_manager.",
+  "description": "Pinned Mia OTA update, module dependency, backup and rollback primitives for isolated Node.js evaluation; no production deployment.",
   "entry_paths": [
-    "services/mia-ota-manager"
+    "services/mia-ota-manager/src/otaManager.js"
   ],
-  "frameworks": [],
+  "frameworks": [
+    "nodejs"
+  ],
   "id": "release.update_manager.firstparty.mia",
   "integration": {
     "adaptation_allowed": true,
-    "adapter_notes": "Researcher discovery only; certification must establish license, security and target compatibility.",
+    "adapter_notes": "Pinned Mia OTA JavaScript source copied with its two exact shared dependencies. An added package.json is a Library-only ESM harness. Isolated Node.js test only; Cantiere Flutter integration not established.",
     "estimated_effort": "medium",
     "known_constraints": [
-      "Mia root MIT license traced to pinned source commit; third-party dependencies, security and target-runtime compatibility still require independent verification"
+      "Source contains a synthetic uploadToGithub receipt, not a GitHub upload.",
+      "Hot reload/rollback methods are not transactional; never enable unsandboxed updates or privileged execution.",
+      "Only Linux Node.js sandbox tests can establish experimental availability; Android and browser are not validated.",
+      "Security review and production certification remain pending."
     ]
   },
   "kind": "module",
-  "languages": [],
+  "languages": [
+    "javascript"
+  ],
   "name": "Mia:services/mia-ota-manager",
   "payload": {
-    "path": null,
-    "sha256": null,
-    "type": "upstream_reference",
-    "upstream_commit": "ebeaa2884bce22e891d15da7c1f61962dde0699a",
-    "upstream_repository": "https://github.com/pilialvu75-hue/Mia"
+    "type": "repository_path",
+    "path": "payload/src",
+    "sha256": "e251b87d68fe0665be542cf59d1d3cef79df0bc608a0c9ce0a19d6e461b1fbf4",
+    "upstream_repository": "https://github.com/pilialvu75-hue/Mia",
+    "upstream_commit": "ebeaa2884bce22e891d15da7c1f61962dde0699a"
   },
   "platforms": [
-    "android",
-    "desktop"
+    "linux"
   ],
   "provenance": {
     "license": "MIT",
@@ -78,18 +84,27 @@
     "reviewed_at": null,
     "sbom": null
   },
-  "status": "discovered",
+  "status": "tested",
   "tags": [
     "release.update_manager",
     "researcher-candidate",
     "first-party"
   ],
   "validation": {
-    "score": 0,
-    "test_report": null,
-    "tests_passed": false,
-    "validated_at": null,
-    "validated_on": []
+    "score": 0.8,
+    "tests_passed": true,
+    "test_report": "tests/node-linux-ci-report.json",
+    "validated_at": "2026-10-27T16:36:50Z",
+    "validated_on": [
+      "linux"
+    ]
   },
-  "version": "0.1.0"
+  "version": "0.1.0",
+  "dependencies": [
+    {
+      "name": "Node.js",
+      "version": ">=20",
+      "source": "host runtime; no npm install required"
+    }
+  ]
 }

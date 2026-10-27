@@ -9,6 +9,7 @@ import unittest
 from pathlib import Path
 
 from tools.library_intake_readiness import build_report
+from tools.library_source_integrity import payload_tree_sha256
 
 ROOT = Path(__file__).resolve().parents[1]
 SOURCE_COMMIT = "ebeaa2884bce22e891d15da7c1f61962dde0699a"
@@ -40,8 +41,15 @@ class PinnedMiaLicenseTests(unittest.TestCase):
                     b"blob " + str(len(data)).encode("ascii") + b"\0" + data
                 ).hexdigest(), LICENSE_BLOB)
                 self.assertIn(b"Copyright (c) 2026 Mia contributors", data)
-                self.assertEqual(manifest["status"], "discovered")
-                self.assertIs(manifest["validation"]["tests_passed"], False)
+                self.assertIn(manifest["status"], ("discovered", "tested"))
+                if manifest["payload"]["type"] == "repository_path":
+                    path = folder / manifest["payload"]["path"]
+                    self.assertEqual(payload_tree_sha256(path),
+                                     manifest["payload"]["sha256"])
+                    self.assertEqual(manifest["status"] == "tested",
+                                     manifest["validation"]["tests_passed"])
+                else:
+                    self.assertIs(manifest["validation"]["tests_passed"], False)
                 self.assertIs(manifest["security"]["reviewed"], False)
 
     def test_readiness_reduces_license_gap_but_never_certifies_mia_sources(self):
@@ -51,8 +59,18 @@ class PinnedMiaLicenseTests(unittest.TestCase):
             with self.subTest(asset=asset_id):
                 record = candidates[asset_id]
                 self.assertNotIn("LICENSE_EVIDENCE_MISSING", record["blockers"])
-                self.assertIn("SOURCE_SNAPSHOT_MISSING", record["blockers"])
-                self.assertIn("REPRODUCIBLE_TEST_EVIDENCE_MISSING", record["blockers"])
+                manifest = json.loads((ROOT / "intake" / asset_id / "0.1.0"
+                                       / "manifest.json").read_text())
+                if manifest["payload"]["type"] == "repository_path":
+                    self.assertNotIn("SOURCE_SNAPSHOT_MISSING", record["blockers"])
+                else:
+                    self.assertIn("SOURCE_SNAPSHOT_MISSING", record["blockers"])
+                if manifest["validation"]["tests_passed"]:
+                    self.assertNotIn("REPRODUCIBLE_TEST_EVIDENCE_MISSING",
+                                     record["blockers"])
+                else:
+                    self.assertIn("REPRODUCIBLE_TEST_EVIDENCE_MISSING",
+                                  record["blockers"])
                 self.assertIn("SECURITY_REVIEW_EVIDENCE_MISSING", record["blockers"])
                 self.assertIs(record["independent_certification_authorized"], False)
         self.assertEqual(report["summary"]["ready_for_automatic_certification"], 0)
