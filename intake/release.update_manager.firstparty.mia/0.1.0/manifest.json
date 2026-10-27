@@ -53,8 +53,8 @@
     "type": "repository_path",
     "path": "payload/src",
     "sha256": "e251b87d68fe0665be542cf59d1d3cef79df0bc608a0c9ce0a19d6e461b1fbf4",
-    "upstream_repository": null,
-    "upstream_commit": null
+    "upstream_repository": "https://github.com/pilialvu75-hue/Mia",
+    "upstream_commit": "ebeaa2884bce22e891d15da7c1f61962dde0699a"
   },
   "platforms": [
     "linux"
