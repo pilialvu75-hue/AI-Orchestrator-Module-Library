@@ -1,0 +1,68 @@
+name: Harvest Cantiere source for Library module reuse
+
+on:
+  push:
+    branches: ["main"]
+    paths:
+      - "tools/cantiere_code_reuse_harvest.py"
+      - "tests/test_cantiere_code_reuse_harvest.py"
+      - ".github/workflows/harvest-cantiere-reuse.yml"
+  schedule:
+    - cron: "17 3 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: library-cantiere-source-harvest
+  cancel-in-progress: false
+
+jobs:
+  source-analysis:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - name: Checkout canonical Library
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Verify analysis is read-only, repeatable and fail-closed
+        run: python -m unittest discover -s tests -p 'test_cantiere_code_reuse_harvest.py' -v
+      - name: Analyse all changed Cantiere source on a pinned GitHub head
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          for attempt in 1 2 3; do
+            git fetch origin main
+            git reset --hard origin/main
+            python tools/cantiere_code_reuse_harvest.py | tee "$RUNNER_TEMP/cantiere-reuse.json"
+            git add -- catalog/cantiere-code-reuse-ledger.json
+            if git diff --cached --quiet; then
+              echo "Cantiere source already analysed."
+              exit 0
+            fi
+            git commit -m "library: observe pinned Cantiere code for reuse (not modules)"
+            if git push origin HEAD:main; then
+              echo "Cantiere analysis stored in Library without touching Researcher claims."
+              exit 0
+            fi
+            echo "Library main moved: compare against fresh cursor and retry."
+          done
+          echo "Source analysis CAS retries exhausted. Cursor remains intact on main." >&2
+          exit 1
+      - name: Attach read-only classification report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: cantiere-module-reuse-harvest-${{ github.run_id }}
+          path: ${{ runner.temp }}/cantiere-reuse.json
+          if-no-files-found: ignore
+          retention-days: 7
