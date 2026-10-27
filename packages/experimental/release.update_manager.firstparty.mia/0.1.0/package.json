@@ -1,0 +1,94 @@
+{
+  "schema": "ai-orchestrator.library-module-package-envelope.v1",
+  "package": {
+    "schema": "ai-orchestrator.library-module-package.v1",
+    "asset_id": "release.update_manager.firstparty.mia",
+    "version": "0.1.0",
+    "pin": "release.update_manager.firstparty.mia@0.1.0",
+    "tier": "sandbox_preview",
+    "status": "tested",
+    "certified": false,
+    "availability": "experimental",
+    "usage_policy": "internal-isolated-evaluation-only",
+    "capabilities": [
+      "release.update_manager"
+    ],
+    "contracts": [
+      "release.update_manager.v1"
+    ],
+    "targets": [
+      "linux"
+    ],
+    "files": [
+      {
+        "source_path": "payload/src/package.json",
+        "target_path": "package.json",
+        "content": "{\n  \"private\": true,\n  \"type\": \"module\",\n  \"description\": \"Library sandbox Node.js harness (not present in pinned Mia source)\"\n}\n"
+      },
+      {
+        "source_path": "payload/src/services/mia-ota-manager/src/otaManager.js",
+        "target_path": "services/mia-ota-manager/src/otaManager.js",
+        "content": "import crypto from 'node:crypto';\nimport zlib from 'node:zlib';\nimport { MAX_BACKUP_HISTORY } from '../../shared/constants.js';\nimport { compareVersions } from '../../shared/version.js';\n\nexport class ModuleLoader {\n  constructor() {\n    this.modules = new Map();\n  }\n\n  loadModule(moduleSpec) {\n    const deps = moduleSpec.dependencies ?? [];\n    const missing = deps.filter((dep) => !this.modules.has(dep));\n    if (missing.length) {\n      throw new Error(`Missing dependencies: ${missing.join(', ')}`);\n    }\n\n    this.modules.set(moduleSpec.name, {\n      name: moduleSpec.name,\n      version: moduleSpec.version,\n      dependencies: deps,\n      content: moduleSpec.content ?? '',\n      updatedAt: new Date().toISOString(),\n    });\n\n    return this.modules.get(moduleSpec.name);\n  }\n\n  unloadModule(moduleName) {\n    this.modules.delete(moduleName);\n  }\n\n  hotReload(moduleSpec) {\n    this.unloadModule(moduleSpec.name);\n    return this.loadModule(moduleSpec);\n  }\n\n  manageDependencies(moduleSpec) {\n    return (moduleSpec.dependencies ?? []).every((dep) => this.modules.has(dep));\n  }\n}\n\nexport class BackupManager {\n  constructor() {\n    this.history = [];\n  }\n\n  compressModules(modules) {\n    return zlib.gzipSync(Buffer.from(JSON.stringify(modules), 'utf8'));\n  }\n\n  createBackup({ version, modules }) {\n    const archive = this.compressModules(modules);\n    const sha256 = crypto.createHash('sha256').update(archive).digest('hex');\n    const backup = {\n      version,\n      sha256,\n      createdAt: new Date().toISOString(),\n      archive,\n    };\n    this.history.unshift(backup);\n    this.history = this.history.slice(0, MAX_BACKUP_HISTORY);\n    return backup;\n  }\n\n  uploadToGithub({ version, sha256 }) {\n    return {\n      tag: version,\n      releaseName: `MIA OTA ${version}`,\n      checksum: sha256,\n      uploaded: true,\n    };\n  }\n\n  versioning() {\n    return this.history.map(({ version, sha256, createdAt }) => ({ version, sha256, createdAt }));\n  }\n}\n\nexport class RollbackManager {\n  constructor({ crashThreshold = 3 } = {}) {\n    this.crashThreshold = crashThreshold;\n    this.crashCount = 0;\n    this.incidents = [];\n  }\n\n  detectCrash(error) {\n    this.crashCount += 1;\n    this.incidents.push({\n      message: error?.message ?? String(error ?? 'unknown'),\n      at: new Date().toISOString(),\n      crashCount: this.crashCount,\n    });\n    return this.crashCount >= this.crashThreshold;\n  }\n\n  rollbackToPrevious(stableVersions) {\n    if (!stableVersions.length) {\n      throw new Error('No stable version available for rollback');\n    }\n    return stableVersions[stableVersions.length - 1];\n  }\n\n  compareVersions(currentVersion, previousVersion) {\n    return compareVersions(currentVersion, previousVersion);\n  }\n\n  restoreBackup(backup) {\n    this.crashCount = 0;\n    return {\n      restoredVersion: backup.version,\n      restoredAt: new Date().toISOString(),\n    };\n  }\n}\n\nexport class HealthMonitor {\n  constructor() {\n    this.logs = [];\n  }\n\n  monitorCrashes(err) {\n    this.logs.push({ type: 'crash', message: err.message, at: new Date().toISOString() });\n  }\n\n  trackPerformance(metric) {\n    this.logs.push({ type: 'performance', ...metric, at: new Date().toISOString() });\n  }\n\n  logErrors(err) {\n    this.logs.push({ type: 'error', message: err.message, at: new Date().toISOString() });\n  }\n\n  triggerRollback(rollbackManager, err) {\n    this.monitorCrashes(err);\n    return rollbackManager.detectCrash(err);\n  }\n}\n\nexport class AutoUpdateEngine {\n  checkUpdates(currentVersion, availableVersions) {\n    const sorted = [...availableVersions].sort((a, b) => compareVersions(a.version, b.version));\n    const latest = sorted.at(-1);\n    if (!latest || compareVersions(latest.version, currentVersion) <= 0) {\n      return null;\n    }\n    return latest;\n  }\n\n  async downloadModules(update, downloader) {\n    return downloader(update);\n  }\n\n  verifyIntegrity(buffer, expectedSha256) {\n    const actual = crypto.createHash('sha256').update(buffer).digest('hex');\n    return actual === expectedSha256;\n  }\n\n  applyUpdate(moduleLoader, updateBundle) {\n    updateBundle.modules.forEach((moduleSpec) => moduleLoader.hotReload(moduleSpec));\n    return { appliedVersion: updateBundle.version, appliedAt: new Date().toISOString() };\n  }\n}\n\nexport class OTAManager {\n  constructor({\n    autoUpdateEngine = new AutoUpdateEngine(),\n    backupManager = new BackupManager(),\n    rollbackManager = new RollbackManager(),\n    moduleLoader = new ModuleLoader(),\n    healthMonitor = new HealthMonitor(),\n  } = {}) {\n    this.autoUpdateEngine = autoUpdateEngine;\n    this.backupManager = backupManager;\n    this.rollbackManager = rollbackManager;\n    this.moduleLoader = moduleLoader;\n    this.healthMonitor = healthMonitor;\n    this.stableVersions = [];\n  }\n\n  async runUpdateCycle({\n    currentVersion,\n    availableUpdates,\n    downloader,\n    monitor,\n  }) {\n    const candidate = this.autoUpdateEngine.checkUpdates(currentVersion, availableUpdates);\n    if (!candidate) {\n      return { status: 'no-update', currentVersion };\n    }\n\n    const bundle = await this.autoUpdateEngine.downloadModules(candidate, downloader);\n    if (!this.autoUpdateEngine.verifyIntegrity(bundle.payload, bundle.sha256)) {\n      return { status: 'integrity-failed', version: bundle.version };\n    }\n\n    const modulesWithMissingDeps = bundle.modules.filter((m) => !this.moduleLoader.manageDependencies(m));\n    if (modulesWithMissingDeps.length) {\n      return { status: 'dependency-failed', modules: modulesWithMissingDeps.map((m) => m.name) };\n    }\n\n    const applied = this.autoUpdateEngine.applyUpdate(this.moduleLoader, bundle);\n\n    try {\n      await monitor(bundle.version);\n      this.stableVersions.push(bundle.version);\n      const backup = this.backupManager.createBackup({ version: bundle.version, modules: bundle.modules });\n      const release = this.backupManager.uploadToGithub({ version: bundle.version, sha256: backup.sha256 });\n      return {\n        status: 'stable',\n        applied,\n        backup: { version: backup.version, sha256: backup.sha256 },\n        release,\n      };\n    } catch (err) {\n      const shouldRollback = this.healthMonitor.triggerRollback(this.rollbackManager, err);\n      if (shouldRollback && this.stableVersions.length) {\n        const rollbackVersion = this.rollbackManager.rollbackToPrevious(this.stableVersions);\n        return {\n          status: 'rolled-back',\n          rollbackVersion,\n          reason: err.message,\n        };\n      }\n      return { status: 'monitoring-failed', reason: err.message };\n    }\n  }\n}\n"
+      },
+      {
+        "source_path": "payload/src/services/shared/constants.js",
+        "target_path": "services/shared/constants.js",
+        "content": "export const MAX_BACKUP_HISTORY = 10;\n"
+      },
+      {
+        "source_path": "payload/src/services/shared/version.js",
+        "target_path": "services/shared/version.js",
+        "content": "export const compareVersions = (a, b) => {\n  const pa = a.replace(/^v/, '').split('.').map(Number);\n  const pb = b.replace(/^v/, '').split('.').map(Number);\n  const max = Math.max(pa.length, pb.length);\n  for (let i = 0; i < max; i += 1) {\n    const da = pa[i] ?? 0;\n    const db = pb[i] ?? 0;\n    if (da > db) return 1;\n    if (da < db) return -1;\n  }\n  return 0;\n};\n"
+      }
+    ],
+    "requirements": [
+      {
+        "kind": "dependency",
+        "description": "Node.js >=20 (host runtime; no npm install required)",
+        "required": true
+      },
+      {
+        "kind": "distributionRestriction",
+        "description": "Isolated internal tests only. No production, release, redistribution, or automatic privileged execution; license and security certification pending.",
+        "required": true
+      },
+      {
+        "kind": "manualReview",
+        "description": "Hot reload/rollback methods are not transactional; never enable unsandboxed updates or privileged execution.",
+        "required": false
+      },
+      {
+        "kind": "manualReview",
+        "description": "Only Linux Node.js sandbox tests can establish experimental availability; Android and browser are not validated.",
+        "required": false
+      },
+      {
+        "kind": "manualReview",
+        "description": "Security review and production certification remain pending.",
+        "required": false
+      },
+      {
+        "kind": "manualReview",
+        "description": "Source contains a synthetic uploadToGithub receipt, not a GitHub upload.",
+        "required": false
+      }
+    ],
+    "integrity": {
+      "manifest_sha256": "aed93ac43ea067aa0cdf5711afb7d2702297eceb04d353a1ffe2570007307501",
+      "module_tree_sha256": "3cd1552619f78fb0e7d915a2959796b82ff3ee787e5e1a9b88109995a5ee400a",
+      "payload_sha256": "e251b87d68fe0665be542cf59d1d3cef79df0bc608a0c9ce0a19d6e461b1fbf4",
+      "test_report_sha256": "a79a9713bb4a8046740f63c4ce9b2d34589dd83042d9be308ec6bc03a4f2e7c4"
+    },
+    "source": {
+      "payload_type": "repository_path",
+      "source_repository": "https://github.com/pilialvu75-hue/Mia",
+      "source_commit": "ebeaa2884bce22e891d15da7c1f61962dde0699a"
+    },
+    "review": {
+      "license_verified": false,
+      "security_reviewed": false,
+      "production_approved": false
+    }
+  },
+  "package_sha256": "c3a498cf4ea0bc290fcb4c397920c4ba1142cdac6fe57a0a17f69b1e143d786c"
+}

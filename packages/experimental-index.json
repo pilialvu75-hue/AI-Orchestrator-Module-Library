@@ -9,6 +9,13 @@
       "package_sha256": "f36be29147f99aa8c61003beabd40dabd5c13399df962898eb2c646fb5eed722",
       "tier": "sandbox_preview",
       "production_approved": false
+    },
+    {
+      "pin": "release.update_manager.firstparty.mia@0.1.0",
+      "path": "packages/experimental/release.update_manager.firstparty.mia/0.1.0/package.json",
+      "package_sha256": "c3a498cf4ea0bc290fcb4c397920c4ba1142cdac6fe57a0a17f69b1e143d786c",
+      "tier": "sandbox_preview",
+      "production_approved": false
     }
   ],
   "blocked": []
