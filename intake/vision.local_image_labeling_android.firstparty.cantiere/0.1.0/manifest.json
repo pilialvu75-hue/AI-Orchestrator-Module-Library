@@ -1,0 +1,138 @@
+{
+  "id": "vision.local_image_labeling_android.firstparty.cantiere",
+  "name": "Cantiere Android offline ML Kit Flutter image-label plugin",
+  "version": "0.1.0",
+  "kind": "module",
+  "status": "tested",
+  "description": "Reusable Android Flutter plugin with actual Cantiere-derived Kotlin ML Kit bundled on-device image-classification bridge, FlutterPlugin registration, local MethodChannel Dart API, source-pinned pure Dart label processor and unit tests. No physical-device result claimed.",
+  "tags": [
+    "image",
+    "offline",
+    "android",
+    "flutter-plugin",
+    "google-ml-kit",
+    "firstparty",
+    "cantiere-reuse"
+  ],
+  "capabilities": [
+    "vision.local_image_labeling_android"
+  ],
+  "platforms": [
+    "android",
+    "linux"
+  ],
+  "languages": [
+    "kotlin",
+    "dart"
+  ],
+  "frameworks": [
+    "Flutter",
+    "Android",
+    "ML Kit image-labeling"
+  ],
+  "entry_paths": [
+    "lib/cantiere_local_image_vision.dart",
+    "android/src/main/kotlin/com/aivexus/local_image_vision/LocalImageVisionPlugin.kt"
+  ],
+  "dependencies": [
+    {
+      "name": "Flutter SDK",
+      "version": ">=3.22.2",
+      "source": "host app"
+    },
+    {
+      "name": "Android Gradle Plugin",
+      "version": "8.11.1",
+      "source": "Android build toolchain"
+    },
+    {
+      "name": "Kotlin Gradle Plugin",
+      "version": "2.2.20",
+      "source": "Android build toolchain"
+    },
+    {
+      "name": "Google ML Kit bundled image-labeling",
+      "version": "17.0.9",
+      "source": "Maven/Android compiled runtime"
+    }
+  ],
+  "provenance": {
+    "origin": "built_in",
+    "source_repository": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva",
+    "source_commit": "acc8d28b54489c91cb4f59552a1be2e07203de1a",
+    "source_tag": null,
+    "source_project_id": "pilialvu75-hue/Ai-orchestrator-riserva",
+    "source_task_id": "cantiere-harvest:acc8d28b54489c91cb4f59552a1be2e07203de1a:android/app/src/main/kotlin/com/aiorchestrator/LocalImageVisionBridge.kt",
+    "license": null,
+    "license_file": null,
+    "retrieved_at": "2026-10-27T18:45:00Z"
+  },
+  "validation": {
+    "score": 0.8,
+    "tests_passed": true,
+    "test_report": "tests/android-arm64-ci-report.json",
+    "validated_at": "2026-10-27T18:14:40Z",
+    "validated_on": [
+      "android",
+      "linux"
+    ]
+  },
+  "security": {
+    "reviewed": false,
+    "reviewed_at": null,
+    "known_vulnerabilities": null,
+    "sbom": null,
+    "review_report": null,
+    "notes": "Derived Cantiere Kotlin source and ML Kit dependency not independently certified for production. No physical device inference, battery, or privacy runtime validation."
+  },
+  "integration": {
+    "estimated_effort": "medium",
+    "adaptation_allowed": true,
+    "adapter_notes": "Plugin auto-registers Cantiere ML Kit labelImage bridge on the original com.aiorchestrator/local_image_vision channel. DO NOT co-install with original Cantiere MainActivity explicit LocalImageVisionBridge.register() on same engine. For new Flutter projects, add as path dependency; test in isolated Android host. Host handles user file selection and privacy. No install/update in Riserva.",
+    "known_constraints": [
+      "Android-only image inference; Linux support limited to mocked Flutter MethodChannel tests.",
+      "No OCR, precise colors, counting, text-image grounding or full multimodal LLM.",
+      "Native bridge uses original Cantiere 8 MiB input, memory floor 256 MiB, 1024-px decoded edge and confidence threshold.",
+      "ML Kit model dependency must be bundled at build time; no user data is uploaded by this plugin.",
+      "Android APK compilation cannot verify actual ML Kit outputs, device performance or physical Galaxy S24 FE behavior.",
+      "Original Cantiere app must migrate away from its explicit local image channel registration before using this standalone plugin.",
+      "Internal experimental source only; third-party dependency compliance/security and redistribution approval pending."
+    ]
+  },
+  "connector": {
+    "standard": "ai-orchestrator-lego",
+    "standard_version": "1.0.0",
+    "provides": [
+      {
+        "capability_id": "vision.local_image_labeling_android",
+        "contract_id": "vision.local_image_labeling_android.v1",
+        "contract_version": "1.0"
+      }
+    ],
+    "requires": [],
+    "integration_mode": "source_bundle",
+    "adapters": [],
+    "configuration_schema": null,
+    "healthcheck": {
+      "type": "none",
+      "path": null
+    }
+  },
+  "payload": {
+    "type": "repository_path",
+    "path": "payload/src",
+    "sha256": "878d573db79710f14e7d21a477ea47ebba54c521a67844b390dc8c68bae5c709",
+    "upstream_repository": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva",
+    "upstream_commit": "acc8d28b54489c91cb4f59552a1be2e07203de1a"
+  },
+  "quality": {
+    "reuse_count": 0,
+    "successful_integrations": 0,
+    "failed_integrations": 0,
+    "last_used_at": null
+  },
+  "deprecation": {
+    "reason": null,
+    "replacement": null
+  }
+}

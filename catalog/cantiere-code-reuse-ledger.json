@@ -60,13 +60,21 @@
       "certified": false,
       "classification": "app_bound_or_helper_review",
       "import_count": 14,
-      "module_status": "not_materialized",
+      "module_status": "android_plugin_compiled_no_device_test",
       "path": "android/app/src/main/kotlin/com/aiorchestrator/LocalImageVisionBridge.kt",
       "source_bytes": 8237,
       "source_commit": "acc8d28b54489c91cb4f59552a1be2e07203de1a",
       "source_sha256": "aa0d7c472fe8010a89a1a3801893ccba958d0aaf944194e594e74961f25b10ca",
       "symbols": [],
-      "tested": false
+      "tested": true,
+      "library_pin": "vision.local_image_labeling_android.firstparty.cantiere@0.1.0",
+      "library_payload_sha256": "878d573db79710f14e7d21a477ea47ebba54c521a67844b390dc8c68bae5c709",
+      "library_test_workflow_run": 40557369058,
+      "tested_platforms": [
+        "linux",
+        "android"
+      ],
+      "verified_scope": "Flutter MethodChannel tests plus Android ARM64 host APK compilation, not device runtime"
     },
     {
       "blob_sha": "3c6acf84c77cd42050d1fa4424f427794cdfb9e2",
