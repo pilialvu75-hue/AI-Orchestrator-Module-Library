@@ -1,0 +1,6 @@
+name: cantiere_local_image_labels
+version: 0.1.0
+description: Offline category label post-processing from the Aivexus Cantiere
+publish_to: none
+environment:
+  sdk: '>=3.4.0 <4.0.0'
