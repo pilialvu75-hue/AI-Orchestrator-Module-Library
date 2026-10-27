@@ -225,6 +225,14 @@
       "status": "draft",
       "description": "Read-only pinned Library experimental package verification and isolated staging; never a production installer.",
       "replacement": null
+    },
+    {
+      "capability_id": "vision.image_label_postprocessing",
+      "contract_id": "vision.image_label_postprocessing.v1",
+      "contract_version": "1.0",
+      "status": "draft",
+      "description": "Device-local post-processing of native image category labels with bounded confidence, transparent limitations and no Cloud side effects; actual pixel inference is a separate platform provider.",
+      "replacement": null
     }
   ]
 }
