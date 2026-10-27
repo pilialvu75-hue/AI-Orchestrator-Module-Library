@@ -1,0 +1,19 @@
+name: cantiere_local_image_vision
+description: Offline Android ML Kit image-category labeling extracted from Aivexus Cantiere
+version: 0.1.0
+publish_to: none
+environment:
+  sdk: '>=3.4.0 <4.0.0'
+  flutter: '>=3.22.2'
+dependencies:
+  flutter:
+    sdk: flutter
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+flutter:
+  plugin:
+    platforms:
+      android:
+        package: com.aivexus.local_image_vision
+        pluginClass: LocalImageVisionPlugin
