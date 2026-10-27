@@ -74,6 +74,81 @@ class ExternalChangeIngressTests(unittest.TestCase):
         self.assertEqual(updated["scan_health"]["owner/private"]["state"], "UNAVAILABLE")
         self.assertEqual(len(updated["incidents"]), 1)
 
+    def test_cross_repo_404_retries_only_a_verified_public_source(self):
+        registry = self._registry()
+        seen_tokens = []
+
+        def fake_fetch(one, token):
+            seen_tokens.append(token)
+            repo = one["tracked_repositories"][0]["repository"]
+            if token == "repo-scoped-token":
+                raise RuntimeError(
+                    f"GitHub API 404 for https://api.github.com/repos/{repo}/pulls: Not Found"
+                )
+            return {repo: [self._pr()]}
+
+        with patch.object(module, "fetch_changes", side_effect=fake_fetch), \
+             patch.object(module, "_repo_api", return_value={
+                 "private": False, "full_name": "owner/app"
+             }) as repo_probe:
+            verified, failures = module.fetch_changes_partially(
+                registry, "repo-scoped-token"
+            )
+
+        self.assertEqual(verified, {"owner/app": [self._pr()]})
+        self.assertEqual(failures, {})
+        self.assertEqual(seen_tokens, ["repo-scoped-token", None])
+        repo_probe.assert_called_once_with("owner/app", "", None)
+
+        changed = module.scan_registry(
+            registry, [], verified, now="2026-10-03T11:05:00Z"
+        )
+        self.assertEqual(
+            changed["tracked_repositories"][0]["cursor_merged_at"],
+            "2026-10-03T11:00:00Z"
+        )
+
+    def test_cross_repo_404_private_source_does_not_downgrade_or_advance(self):
+        registry = self._registry()
+        registry["tracked_repositories"][0]["repository"] = "owner/private"
+        original_cursor = registry["tracked_repositories"][0]["cursor_merged_at"]
+        for probe in [
+            {"private": True, "full_name": "owner/private"},
+            {"private": False, "full_name": "owner/different"},
+        ]:
+            with self.subTest(probe=probe), \
+                 patch.object(module, "fetch_changes", side_effect=RuntimeError(
+                     "GitHub API 404 for https://api.github.com/repos/owner/private/pulls: Not Found"
+                 )) as get_changes, \
+                 patch.object(module, "_repo_api", return_value=probe):
+                verified, failures = module.fetch_changes_partially(
+                    registry, "repo-scoped-token"
+                )
+                self.assertEqual(verified, {})
+                self.assertEqual(
+                    failures,
+                    {"owner/private": "GITHUB_NOT_FOUND_OR_INACCESSIBLE_404"},
+                )
+                get_changes.assert_called_once()
+                module.scan_registry(registry, [], verified, now="2026-10-03T11:05:00Z")
+                self.assertEqual(
+                    registry["tracked_repositories"][0]["cursor_merged_at"],
+                    original_cursor,
+                )
+
+    def test_cross_repo_404_anonymous_probe_error_stays_unavailable(self):
+        registry = self._registry()
+        with patch.object(module, "fetch_changes", side_effect=RuntimeError(
+                "GitHub API 404 for https://api.github.com/repos/owner/app/pulls: Not Found"
+             )), patch.object(module, "_repo_api", side_effect=RuntimeError(
+                "GitHub API 403 for https://api.github.com/repos/owner/app: rate limited"
+             )):
+            verified, failures = module.fetch_changes_partially(
+                registry, "repo-scoped-token"
+            )
+        self.assertEqual(verified, {})
+        self.assertEqual(failures, {"owner/app": "GITHUB_NOT_FOUND_OR_INACCESSIBLE_404"})
+
     def test_scan_persists_partial_work_and_check_refuses_inaccessible_sources(self):
         registry = self._registry()
         registry["tracked_repositories"].append({
