@@ -24,6 +24,11 @@ jobs:
   certify:
     runs-on: ubuntu-24.04
     timeout-minutes: 10
+    env:
+      # Public trust anchor is controlled via protected repository settings,
+      # never a file submitted by a worker PR. A missing key fails closed for
+      # local repository_path certification, without affecting tested intake.
+      LIBRARY_SECURITY_REVIEW_PUBLIC_KEY_PEM: ${{ vars.LIBRARY_SECURITY_REVIEW_PUBLIC_KEY_PEM }}
     steps:
       - name: Checkout Library main
         uses: actions/checkout@v4
