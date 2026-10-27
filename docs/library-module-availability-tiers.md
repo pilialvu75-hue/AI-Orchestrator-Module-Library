@@ -8,13 +8,14 @@ in un Cantiere isolato.
 
 ## Livello A — Source preview, automatico
 
-Un candidato `intake/*/*` può produrre automaticamente un pacchetto
+Un candidato `intake/*/*` da un repository posseduto da Aivexus può produrre automaticamente un pacchetto
 `sandbox_preview` quando:
 
 - è `tested`, con report di test presente, coerenza fra manifest, report,
   commit, piattaforme validate e impronta SHA256 dei **file sorgente reali**;
-- è `built_in` dalla Libreria canonica, con commit fissato, percorso
-  `repository_path`, codice materializzato e nessuna dipendenza esterna;
+- proviene da un repository Aivexus posseduto dal progetto (Libreria,
+  Ricercatore, Cantiere e altri), con commit immutabile, percorso
+  `repository_path` e codice materializzato;
 - i path sono sicuri, non contengono segreti/chiavi, non seguono symlink,
   non oltrepassano i limiti di dimensione e il codice non è stato alterato
   dopo l'evidenza di test.
@@ -25,6 +26,10 @@ Il builder può usarlo **soltanto in ambiente isolato di sviluppo**, senza
 permessi operativi, pubblicazione, installazione automatica o inclusione in
 release. Se la licenza è ancora non chiarita, il pacchetto resta confinato
 alla sperimentazione interna: non è autorizzazione alla redistribuzione.
+
+Eventuali dipendenze vengono **dichiarate nei requisiti del pacchetto**,
+senza essere scaricate o avviate dalla Libreria. Verranno verificate nei
+test isolati del Cantiere: non sono un blocco alla scoperta/alla prova.
 
 Il pacchetto espone `tier=sandbox_preview`, `certified=false`,
 `production_approved=false`, i file sorgente verificati, digest immutabili,

@@ -127,17 +127,39 @@ class SandboxAvailabilityTests(unittest.TestCase):
         with self.assertRaises(PackageError):
             preview_package(self.root, ASSET, VERSION)
 
-    def test_foreign_origin_or_external_dependencies_require_more_checks(self):
+    def test_researcher_owned_real_source_and_declared_deps_can_be_previewed(self):
         manifest = self.manifest()
-        manifest["provenance"]["origin"] = "imported"
+        manifest["provenance"]["origin"] = "researcher"
+        manifest["provenance"]["source_repository"] = (
+            "https://github.com/pilialvu75-hue/AI-Orchestrator-Module-Researcher"
+        )
+        manifest["dependencies"] = [
+            {"name": "dart_package", "version": "^1.0.0", "source": "pub"},
+        ]
         self.write_manifest(manifest)
-        with self.assertRaisesRegex(PackageError, "first-party"):
-            preview_package(self.root, ASSET, VERSION)
-        manifest["provenance"]["origin"] = "built_in"
-        manifest["dependencies"] = [{"name": "unknown", "version": "any"}]
-        self.write_manifest(manifest)
-        with self.assertRaisesRegex(PackageError, "dependencies"):
-            preview_package(self.root, ASSET, VERSION)
+        package = preview_package(self.root, ASSET, VERSION)["package"]
+        self.assertEqual(package["tier"], "sandbox_preview")
+        self.assertTrue(any(rule["kind"] == "dependency"
+                            for rule in package["requirements"]))
+        self.assertEqual(
+            package["source"]["source_repository"],
+            manifest["provenance"]["source_repository"],
+        )
+        self.assertFalse(package["certified"])
+
+    def test_foreign_repo_or_lookalike_owner_is_excluded(self):
+        manifest = self.manifest()
+        for source in (
+            "https://github.com/outsider/unknown-source",
+            "https://github.com/pilialvu75-hue.evil/unknown",
+            "https://github.com/pilialvu75-hue/repo/subfolder",
+            "",
+        ):
+            with self.subTest(source=source):
+                manifest["provenance"]["source_repository"] = source
+                self.write_manifest(manifest)
+                with self.assertRaisesRegex(PackageError, "Aivexus-owned"):
+                    preview_package(self.root, ASSET, VERSION)
 
     def test_unsafe_filename_rejected_even_with_matching_source_digest(self):
         source = self.base / "payload/src"
