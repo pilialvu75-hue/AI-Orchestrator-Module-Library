@@ -32,7 +32,7 @@ void main() {
     {'label': 'Unknown', 'confidence': -0.2},
     {'label': 'Unknown', 'confidence': 1.01},
     {'label': 'Unknown', 'confidence': '0.9'},
-    {'label': 'Z' * 71, 'confidence': 1},
+    {'label': List<String>.filled(71, 'Z').join(), 'confidence': 1},
   ]);
   check(!empty.hasCategories, 'invalid inputs all rejected');
   check(empty.text.contains('Non ho riconosciuto categorie'), 'honest fallback');
