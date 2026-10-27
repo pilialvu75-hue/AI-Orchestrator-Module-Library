@@ -220,6 +220,14 @@
       "replacement": null
     },
     {
+      "capability_id": "vision.image_label_postprocessing",
+      "contract_id": "vision.image_label_postprocessing.v1",
+      "contract_version": "1.0",
+      "status": "draft",
+      "description": "Device-local post-processing of native image category labels with bounded confidence, transparent limitations and no Cloud side effects; actual pixel inference is a separate platform provider.",
+      "replacement": null
+    },
+    {
       "capability_id": "voice.device_policy",
       "contract_id": "voice.device_policy.v1",
       "contract_version": "1.0",
@@ -1025,5 +1033,5 @@
       ]
     }
   ],
-  "snapshot_sha256": "92ea84b273a397c5768ad5797dbb94d9513f6732a5ecd239831414e4cde71f53"
+  "snapshot_sha256": "65ceaf23c3cffcfb3fee7a4d125a6b525afc5bd628de8517398beed4713213e2"
 }

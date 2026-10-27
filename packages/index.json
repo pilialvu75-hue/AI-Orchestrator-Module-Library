@@ -1,6 +1,6 @@
 {
   "schema": "ai-orchestrator.library-package-index.v1",
-  "snapshot_sha256": "92ea84b273a397c5768ad5797dbb94d9513f6732a5ecd239831414e4cde71f53",
+  "snapshot_sha256": "65ceaf23c3cffcfb3fee7a4d125a6b525afc5bd628de8517398beed4713213e2",
   "packages": [
     {
       "pin": "ai.model_storage.whuppi.cellar@0.1.0",
