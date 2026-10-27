@@ -84,18 +84,20 @@
     "reviewed_at": null,
     "sbom": null
   },
-  "status": "discovered",
+  "status": "tested",
   "tags": [
     "release.update_manager",
     "researcher-candidate",
     "first-party"
   ],
   "validation": {
-    "score": 0,
-    "test_report": null,
-    "tests_passed": false,
-    "validated_at": null,
-    "validated_on": []
+    "score": 0.8,
+    "tests_passed": true,
+    "test_report": "tests/node-linux-ci-report.json",
+    "validated_at": "2026-10-27T16:36:50Z",
+    "validated_on": [
+      "linux"
+    ]
   },
   "version": "0.1.0",
   "dependencies": [
