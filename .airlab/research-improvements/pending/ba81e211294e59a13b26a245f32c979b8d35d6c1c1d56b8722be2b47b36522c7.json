@@ -1,0 +1,24 @@
+{
+  "proposal": {
+    "acceptance_gates": [
+      "implementation_tests_pass",
+      "security_gates_pass",
+      "regression_tests_pass",
+      "library_contract_pass"
+    ],
+    "capability_id": "diagnostics.logging",
+    "created_at": "2026-10-27T12:56:55.453454Z",
+    "novelty": [
+      "concept:trace",
+      "language:c",
+      "practice:codeql_present",
+      "topic:covesa",
+      "topic:dlt-daemon"
+    ],
+    "proposal_id": "ba81e211294e59a13b26a245f32c979b8d35d6c1c1d56b8722be2b47b36522c7",
+    "status": "PROPOSED"
+  },
+  "schema_version": 1,
+  "source": "AI-Orchestrator-Module-Researcher",
+  "state": "AWAITING_TRIAGE"
+}

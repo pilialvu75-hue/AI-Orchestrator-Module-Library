@@ -1,0 +1,24 @@
+{
+  "proposal": {
+    "acceptance_gates": [
+      "implementation_tests_pass",
+      "security_gates_pass",
+      "regression_tests_pass",
+      "library_contract_pass"
+    ],
+    "capability_id": "diagnostics.logging",
+    "created_at": "2026-10-27T12:53:58.215377Z",
+    "novelty": [
+      "concept:computations",
+      "concept:dataflow",
+      "concept:diagnostic",
+      "concept:timely",
+      "concept:tools"
+    ],
+    "proposal_id": "fcf7e681987e5cfae21c5adf2a79826dbc81d575a1a265d652ece82375e3b42e",
+    "status": "PROPOSED"
+  },
+  "schema_version": 1,
+  "source": "AI-Orchestrator-Module-Researcher",
+  "state": "AWAITING_TRIAGE"
+}
