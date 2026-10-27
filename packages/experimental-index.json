@@ -1,0 +1,15 @@
+{
+  "schema": "ai-orchestrator.library-experimental-index.v1",
+  "policy": "internal-isolated-evaluation-only",
+  "certified": false,
+  "packages": [
+    {
+      "pin": "diagnostics.logging.library.privacy_events@0.1.0",
+      "path": "packages/experimental/diagnostics.logging.library.privacy_events/0.1.0/package.json",
+      "package_sha256": "f36be29147f99aa8c61003beabd40dabd5c13399df962898eb2c646fb5eed722",
+      "tier": "sandbox_preview",
+      "production_approved": false
+    }
+  ],
+  "blocked": []
+}

@@ -1,0 +1,86 @@
+{
+  "schema": "ai-orchestrator.library-module-package-envelope.v1",
+  "package": {
+    "schema": "ai-orchestrator.library-module-package.v1",
+    "asset_id": "diagnostics.logging.library.privacy_events",
+    "version": "0.1.0",
+    "pin": "diagnostics.logging.library.privacy_events@0.1.0",
+    "tier": "sandbox_preview",
+    "status": "tested",
+    "certified": false,
+    "availability": "experimental",
+    "usage_policy": "internal-isolated-evaluation-only",
+    "capabilities": [
+      "diagnostics.logging"
+    ],
+    "contracts": [
+      "diagnostics.logging.v1"
+    ],
+    "targets": [
+      "linux",
+      "macos",
+      "windows"
+    ],
+    "files": [
+      {
+        "source_path": "payload/src/README.md",
+        "target_path": "README.md",
+        "content": "# Privacy-safe structured diagnostics (pure Dart)\n\nThis locally authored candidate contains executable Dart source, not an\nupstream pointer. It implements a conservative, vocabulary-only adapter to\nthe draft diagnostics.logging.v1 logical contract.\n\nNo free-form message, prompt, model path, user ID, authorization header or\narbitrary string value is accepted. Unknown fields and invalid values are\ndiscarded before any event representation can be exported.\n\nUsage:\n    final event = PrivacyDiagnosticEvent(\n      eventCode: 'LOCAL_INFERENCE',\n      severity: 'info',\n      timestamp: DateTime.now(),\n      fields: {'stage': 'decode', 'duration_ms': 500},\n    );\n    final safe = event.toMap();\n\nRun (Dart SDK only, no package dependencies):\n    dart pub get\n    dart analyze --fatal-infos\n    dart run bin/self_test.dart\n\nEvidence scope: GitHub Actions Ubuntu/Dart SDK static and functional checks.\nNo Android, iOS, GPU, runtime, transport or privacy certification is claimed.\nThe Library module lifecycle and independent security reviewer remain pending.\n"
+      },
+      {
+        "source_path": "payload/src/bin/self_test.dart",
+        "target_path": "bin/self_test.dart",
+        "content": "import 'package:privacy_diagnostic_events/privacy_diagnostic_events.dart';\n\nvoid expectTrue(bool condition, String caseName) {\n  if (!condition) throw StateError('FAILED: $caseName');\n}\n\nvoid main() {\n  final raw = <String, Object?>{\n    'prompt': 'sensitive user prompt',\n    'api_key': 'private credential',\n    'authorization': 'Bearer secret',\n    'model_path': '/user/private/models/file.gguf',\n    'message': 'untrusted model output',\n    'stage': 'prefill',\n    'backend': 'vulkan',\n    'platform': 'linux',\n    'error_code': 'NONE',\n    'token_count': 32,\n    'duration_ms': 391,\n    'bytes_total': 475271763,\n    'cache_hit': false,\n    'offline': true,\n    'result': 'success',\n    'attempt_count': -4,\n  };\n  final event = PrivacyDiagnosticEvent(\n    eventCode: 'LOCAL_INFERENCE',\n    severity: 'info',\n    timestamp: DateTime.utc(2026, 10, 18, 10, 0),\n    fields: raw,\n  );\n  final view = event.toMap();\n  final fields = view['fields'] as Map<String, Object>;\n  final serialized = view.toString();\n\n  expectTrue(event.timestampUtc.isUtc, 'UTC timestamp');\n  expectTrue(fields['stage'] == 'prefill', 'known enum accepted');\n  expectTrue(fields['backend'] == 'vulkan', 'known backend accepted');\n  expectTrue(fields['token_count'] == 32, 'numeric metric accepted');\n  expectTrue(fields['bytes_total'] == 475271763, 'large model count accepted');\n  expectTrue(fields['offline'] == true, 'typed flag accepted');\n  expectTrue(!fields.containsKey('attempt_count'), 'negative number rejected');\n  for (final secret in ['sensitive user prompt', 'private credential',\n                        'Bearer secret', '/user/private/models', 'untrusted model output']) {\n    expectTrue(!serialized.contains(secret), 'raw input must never escape');\n  }\n  expectTrue(!fields.containsKey('prompt') && !fields.containsKey('api_key'),\n      'unsafe keys discarded');\n  raw['token_count'] = 999;\n  expectTrue(fields['token_count'] == 32, 'input alias cannot mutate emitted event');\n\n  final invalid = PrivacyDiagnosticEvent(\n    eventCode: 'MODEL_DOWNLOAD',\n    severity: 'warning',\n    timestamp: DateTime.utc(2026),\n    fields: {'result': 'user secret', 'stage': 'private-folder',\n             'token_count': 1.5, 'cache_hit': 'yes',\n             'bytes_done': 1125899906842625},\n  );\n  expectTrue((invalid.toMap()['fields'] as Map<String, Object>).isEmpty,\n      'invalid allowed-key values also discarded');\n\n  var blockedCode = false;\n  try {\n    PrivacyDiagnosticEvent(\n      eventCode: 'SECRET_USERNAME',\n      severity: 'info',\n      timestamp: DateTime.utc(2026),\n    );\n  } on ArgumentError {\n    blockedCode = true;\n  }\n  expectTrue(blockedCode, 'event identifier constrained to vocabulary');\n\n  var blockedSeverity = false;\n  try {\n    PrivacyDiagnosticEvent(\n      eventCode: 'MODEL_LOAD',\n      severity: 'secret text',\n      timestamp: DateTime.utc(2026),\n    );\n  } on ArgumentError {\n    blockedSeverity = true;\n  }\n  expectTrue(blockedSeverity, 'severity constrained to vocabulary');\n\n  var immutable = false;\n  try {\n    event.fields['token_count'] = 99;\n  } on UnsupportedError {\n    immutable = true;\n  }\n  expectTrue(immutable, 'safe result immutable');\n  print('PASS: privacy diagnostic contract, redaction, bounds and immutability');\n}\n"
+      },
+      {
+        "source_path": "payload/src/lib/privacy_diagnostic_events.dart",
+        "target_path": "lib/privacy_diagnostic_events.dart",
+        "content": "/// Pure-Dart diagnostic events built from a closed vocabulary of safe values.\n///\n/// There is deliberately no API for free-text messages, prompts, paths,\n/// tokens, user identifiers or unclassified string values. Unrecognized\n/// fields are silently dropped, never retained for deferred serialization.\nfinal class PrivacyDiagnosticEvent {\n  static const Set<String> _events = {\n    'MODEL_LOAD', 'MODEL_DOWNLOAD', 'LOCAL_INFERENCE',\n    'DIAGNOSTIC_STALL', 'WORKSHOP_TASK', 'MODULE_VALIDATE',\n  };\n  static const Set<String> _severities = {'debug', 'info', 'warning', 'error'};\n  static const Set<String> _countKeys = {\n    'duration_ms', 'token_count', 'bytes_total', 'bytes_done',\n    'attempt_count', 'context_tokens',\n  };\n  static const Set<String> _flagKeys = {'cache_hit', 'offline', 'cancelled'};\n  static const Map<String, Set<String>> _labels = {\n    'stage': {\n      'load', 'prefill', 'decode', 'download', 'verify',\n      'review', 'validate', 'apply', 'idle',\n    },\n    'backend': {'cpu', 'vulkan', 'metal', 'cuda', 'cloud', 'unknown'},\n    'platform': {\n      'android', 'ios', 'linux', 'macos', 'windows',\n      'web', 'raspberry_pi', 'unknown',\n    },\n    'result': {'success', 'failure', 'cancelled', 'degraded', 'skipped'},\n    'error_code': {\n      'NONE', 'TIMEOUT', 'OUT_OF_MEMORY', 'CANCELLED',\n      'MODEL_NOT_FOUND', 'VALIDATION_FAILED', 'HTTP_429',\n      'NATIVE_FAILURE', 'UNKNOWN',\n    },\n  };\n  static const int _maxMetric = 1125899906842624; // 1 PiB or bounded count\n\n  final String eventCode;\n  final String severity;\n  final DateTime timestampUtc;\n  final Map<String, Object> fields;\n\n  PrivacyDiagnosticEvent({\n    required this.eventCode,\n    required this.severity,\n    required DateTime timestamp,\n    Map<String, Object?> fields = const {},\n  })  : timestampUtc = timestamp.toUtc(),\n        fields = Map.unmodifiable(_safeFields(fields)) {\n    if (!_events.contains(eventCode)) {\n      throw ArgumentError.value(eventCode, 'eventCode', 'unrecognized event');\n    }\n    if (!_severities.contains(severity)) {\n      throw ArgumentError.value(severity, 'severity', 'unrecognized severity');\n    }\n  }\n\n  /// Return the entire permissible event representation. No raw input map\n  /// escapes and returned maps cannot be mutated by a downstream transport.\n  Map<String, Object> toMap() => Map.unmodifiable({\n        'schema': 'ai-orchestrator.privacy-diagnostic-event.v1',\n        'event': eventCode,\n        'severity': severity,\n        'timestamp': timestampUtc.toIso8601String(),\n        'fields': fields,\n      });\n\n  static Map<String, Object> _safeFields(Map<String, Object?> raw) {\n    final selected = <String, Object>{};\n    final keys = raw.keys.toList()..sort();\n    for (final key in keys) {\n      final value = raw[key];\n      if (_countKeys.contains(key)) {\n        if (value is int && value >= 0 && value <= _maxMetric) {\n          selected[key] = value;\n        }\n      } else if (_flagKeys.contains(key)) {\n        if (value is bool) selected[key] = value;\n      } else {\n        final validLabels = _labels[key];\n        if (validLabels != null && value is String &&\n            validLabels.contains(value)) {\n          selected[key] = value;\n        }\n      }\n    }\n    return selected;\n  }\n}\n"
+      },
+      {
+        "source_path": "payload/src/pubspec.yaml",
+        "target_path": "pubspec.yaml",
+        "content": "name: privacy_diagnostic_events\ndescription: Pure Dart, data-minimizing diagnostic events for AI Orchestrator adapters.\nversion: 0.1.0\npublish_to: none\nenvironment:\n  sdk: \">=3.4.0 <4.0.0\"\ndependencies: {}\n"
+      }
+    ],
+    "requirements": [
+      {
+        "kind": "distributionRestriction",
+        "description": "Isolated internal tests only. No production, release, redistribution, or automatic privileged execution; license and security certification pending.",
+        "required": true
+      },
+      {
+        "kind": "manualReview",
+        "description": "Contract diagnostics.logging.v1 is draft; integration review required.",
+        "required": false
+      },
+      {
+        "kind": "manualReview",
+        "description": "Initial Dart SDK tests run on Ubuntu only; no Android or iOS runtime claim.",
+        "required": false
+      },
+      {
+        "kind": "manualReview",
+        "description": "No persistence or transport provided; host owns diagnostics destination.",
+        "required": false
+      }
+    ],
+    "integrity": {
+      "manifest_sha256": "f4098a58214628747654bb1dcbec74535eedb4d56bec38626ae0705a7f4a9407",
+      "module_tree_sha256": "603dc10ea3ffd0b85f9ed5dcadb3aaa78267e1597065ab506620e9a28ca05a70",
+      "payload_sha256": "507458c47a1d6ffca23c053ca0a4d32fbd11e90d73ccae89ae38da2ff2add624",
+      "test_report_sha256": "c9105f6eda2640d60bf82e4f34456273c0b6a9eb174e92c55217e56635c3f4da"
+    },
+    "source": {
+      "payload_type": "repository_path",
+      "source_repository": "https://github.com/pilialvu75-hue/AI-Orchestrator-Module-Library",
+      "source_commit": "30af487af6164b3a6e6f0cd2bc2b11ee6e737fee"
+    },
+    "review": {
+      "license_verified": false,
+      "security_reviewed": false,
+      "production_approved": false
+    }
+  },
+  "package_sha256": "f36be29147f99aa8c61003beabd40dabd5c13399df962898eb2c646fb5eed722"
+}
