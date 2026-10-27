@@ -110,7 +110,7 @@
   "payload": {
     "type": "repository_path",
     "path": "payload/src",
-    "sha256": "c24657926b63accfba2267ebd4caf2a93c9124af5f27fb10b751a7723684f606",
+    "sha256": "e87e4a04b1cc5d83923eabe896b1d63ef797788d1ee5492919ae5d93e05772f8",
     "upstream_repository": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva",
     "upstream_commit": "acc8d28b54489c91cb4f59552a1be2e07203de1a"
   },
