@@ -1,6 +1,6 @@
 {
   "baseline_note": "Start from Cantiere main prior to first real experimental Library sandbox import PR #919. Older source needs a separate historical backfill; no full-history coverage is claimed.",
-  "last_scanned_sha": "f94055868061850e3f2cf6318358bab9e49f80c9",
+  "last_scanned_sha": "acc8d28b54489c91cb4f59552a1be2e07203de1a",
   "observations": [
     {
       "blob_sha": "5a65cc4239184866e02178141661db4faac24fd1",
@@ -30,6 +30,9 @@
       "certified": false,
       "classification": "candidate_requires_extraction_and_tests",
       "import_count": 12,
+      "library_payload_sha256": "5a570a720087d043fbeee03d2a23b0e74e050fc2f488707a313b7aee19297183",
+      "library_pin": "library.integration.firstparty.cantiere_preview_reader@0.1.0",
+      "library_test_workflow_run": 40549386176,
       "module_status": "tested_in_library",
       "path": "tool/cantiere_library_sandbox_preview.py",
       "source_bytes": 9806,
@@ -47,12 +50,100 @@
         "main"
       ],
       "tested": false,
-      "library_pin": "library.integration.firstparty.cantiere_preview_reader@0.1.0",
-      "library_payload_sha256": "5a570a720087d043fbeee03d2a23b0e74e050fc2f488707a313b7aee19297183",
-      "library_test_workflow_run": 40549386176,
       "tested_platforms": [
         "linux"
       ]
+    },
+    {
+      "blob_sha": "210613e0b45a85bf72bf685c45ebf10a10999f43",
+      "capability_hint": "utility.reuse",
+      "certified": false,
+      "classification": "app_bound_or_helper_review",
+      "import_count": 14,
+      "module_status": "not_materialized",
+      "path": "android/app/src/main/kotlin/com/aiorchestrator/LocalImageVisionBridge.kt",
+      "source_bytes": 8237,
+      "source_commit": "acc8d28b54489c91cb4f59552a1be2e07203de1a",
+      "source_sha256": "aa0d7c472fe8010a89a1a3801893ccba958d0aaf944194e594e74961f25b10ca",
+      "symbols": [],
+      "tested": false
+    },
+    {
+      "blob_sha": "3c6acf84c77cd42050d1fa4424f427794cdfb9e2",
+      "capability_hint": "utility.reuse",
+      "certified": false,
+      "classification": "candidate_requires_extraction_and_tests",
+      "import_count": 20,
+      "module_status": "not_materialized",
+      "path": "android/app/src/main/kotlin/com/aiorchestrator/MainActivity.kt",
+      "source_bytes": 35529,
+      "source_commit": "acc8d28b54489c91cb4f59552a1be2e07203de1a",
+      "source_sha256": "dd99659ac240fa15bcec1b833829a14a669c977e28d8acdc019305b57333fc3d",
+      "symbols": [
+        "MainActivity"
+      ],
+      "tested": false
+    },
+    {
+      "blob_sha": "cb4edcc28e02e9d383045b239e7d352e31e9f2f3",
+      "capability_hint": "ai.local_inference",
+      "certified": false,
+      "classification": "app_bound_or_helper_review",
+      "import_count": 43,
+      "module_status": "not_materialized",
+      "path": "lib/core/runtime/inference/cloud_routing_bootstrap.dart",
+      "source_bytes": 10691,
+      "source_commit": "acc8d28b54489c91cb4f59552a1be2e07203de1a",
+      "source_sha256": "77caadc4f504bcc029da05629c0bd5a2b3fe0e6ae4ed78d656d2b1e82989d52e",
+      "symbols": [],
+      "tested": false
+    },
+    {
+      "blob_sha": "b1cd4521520d54695c5f5e3451fdb1572e635cdb",
+      "capability_hint": "utility.reuse",
+      "certified": false,
+      "classification": "candidate_requires_extraction_and_tests",
+      "import_count": 27,
+      "module_status": "not_materialized",
+      "path": "lib/features/chat/data/repositories/chat_repository_impl.dart",
+      "source_bytes": 30636,
+      "source_commit": "acc8d28b54489c91cb4f59552a1be2e07203de1a",
+      "source_sha256": "4179914e7a6dd525300880be18bc43b35da5e450e0939f62f6496344e15c6c7b",
+      "symbols": [
+        "ChatRepositoryImpl"
+      ],
+      "tested": false
+    },
+    {
+      "blob_sha": "c34a7c0bee21c7b44c90b4ecd5bf6c913aa3db72",
+      "capability_hint": "utility.reuse",
+      "certified": false,
+      "classification": "candidate_requires_extraction_and_tests",
+      "import_count": 7,
+      "module_status": "not_materialized",
+      "path": "lib/features/chat/data/services/chat_local_image_vision_service.dart",
+      "source_bytes": 4617,
+      "source_commit": "acc8d28b54489c91cb4f59552a1be2e07203de1a",
+      "source_sha256": "9dd3c8b2f99a3ca8ec6f1b405fb5eb75e579d2bfde85b43c55564f2f6cba6b9c",
+      "symbols": [
+        "AndroidChatLocalImageVisionService",
+        "_LocalImageLabel"
+      ],
+      "tested": false
+    },
+    {
+      "blob_sha": "73bf737b8a65696f354492f0a70fe99f66927c08",
+      "capability_hint": "utility.reuse",
+      "certified": false,
+      "classification": "test_support",
+      "import_count": 5,
+      "module_status": "not_materialized",
+      "path": "test/features/chat/data/services/chat_local_image_vision_service_test.dart",
+      "source_bytes": 5007,
+      "source_commit": "acc8d28b54489c91cb4f59552a1be2e07203de1a",
+      "source_sha256": "b6f9ce0ab565cde597dfd480809e837329cf08b2dc305e5a9de1b42c915ce8ac",
+      "symbols": [],
+      "tested": false
     }
   ],
   "schema": "ai-orchestrator.cantiere-code-reuse-ledger.v1",
