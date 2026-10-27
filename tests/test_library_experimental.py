@@ -54,7 +54,6 @@ class SandboxAvailabilityTests(unittest.TestCase):
             {f["target_path"] for f in package["files"]},
             {"lib/privacy_diagnostic_events.dart",
              "bin/self_test.dart",
-             "bin/privacy_diagnostics_redaction_fuzz.dart",
              "pubspec.yaml",
              "README.md"},
         )
