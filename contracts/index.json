@@ -233,6 +233,14 @@
       "status": "draft",
       "description": "Device-local post-processing of native image category labels with bounded confidence, transparent limitations and no Cloud side effects; actual pixel inference is a separate platform provider.",
       "replacement": null
+    },
+    {
+      "capability_id": "vision.local_image_labeling_android",
+      "contract_id": "vision.local_image_labeling_android.v1",
+      "contract_version": "1.0",
+      "status": "draft",
+      "description": "Android image file -> offline Google ML Kit category labels via Flutter MethodChannel; bounded file, memory and confidence, explicitly no general visual reasoning.",
+      "replacement": null
     }
   ]
 }
