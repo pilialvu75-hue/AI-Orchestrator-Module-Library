@@ -3,13 +3,13 @@
   "report_type": "read_only_evidence_gaps_not_certification",
   "summary": {
     "certified_catalog_entries": 3,
-    "intake_candidates": 21,
-    "blocked_intake_candidates": 21,
+    "intake_candidates": 22,
+    "blocked_intake_candidates": 22,
     "ready_for_automatic_certification": 0,
     "blocker_counts": {
-      "LICENSE_EVIDENCE_MISSING": 17,
+      "LICENSE_EVIDENCE_MISSING": 18,
       "REPRODUCIBLE_TEST_EVIDENCE_MISSING": 18,
-      "SECURITY_REVIEW_EVIDENCE_MISSING": 21,
+      "SECURITY_REVIEW_EVIDENCE_MISSING": 22,
       "SOURCE_SNAPSHOT_MISSING": 18
     }
   },
@@ -1289,6 +1289,25 @@
         "Resolve the upstream license and supply its attributable license file.",
         "Materialize immutable source bytes from the pinned commit in an isolated evidence workflow.",
         "Run isolated reproducible tests on the pinned source and attach a bound report.",
+        "Attach an independently generated security report and SBOM bound to the pinned source."
+      ],
+      "independent_certification_authorized": false
+    },
+    {
+      "asset_id": "vision.image_label_postprocessing.firstparty.cantiere",
+      "version": "0.1.0",
+      "status": "tested",
+      "capabilities": [
+        "vision.image_label_postprocessing"
+      ],
+      "source_repository": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva",
+      "source_commit": "acc8d28b54489c91cb4f59552a1be2e07203de1a",
+      "blockers": [
+        "LICENSE_EVIDENCE_MISSING",
+        "SECURITY_REVIEW_EVIDENCE_MISSING"
+      ],
+      "next_actions": [
+        "Resolve the upstream license and supply its attributable license file.",
         "Attach an independently generated security report and SBOM bound to the pinned source."
       ],
       "independent_certification_authorized": false
