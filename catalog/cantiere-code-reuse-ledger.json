@@ -1,7 +1,54 @@
 {
+  "baseline_note": "Start from Cantiere main prior to first real experimental Library sandbox import PR #919. Older source needs a separate historical backfill; no full-history coverage is claimed.",
+  "last_scanned_sha": "f94055868061850e3f2cf6318358bab9e49f80c9",
+  "observations": [
+    {
+      "blob_sha": "5a65cc4239184866e02178141661db4faac24fd1",
+      "capability_hint": "library.integration",
+      "certified": false,
+      "classification": "test_support",
+      "import_count": 6,
+      "module_status": "not_materialized",
+      "path": "test/tool/test_cantiere_library_sandbox_preview.py",
+      "source_bytes": 5247,
+      "source_commit": "f94055868061850e3f2cf6318358bab9e49f80c9",
+      "source_sha256": "555758a72633d45df85d74e2f1669d0486fa5365648366a8aac4abc49216874c",
+      "symbols": [
+        "fixture",
+        "CantiereExperimentalImportTests",
+        "test_real_payload_content_is_checked_before_staging",
+        "test_tampered_envelope_rejected",
+        "test_index_cannot_self_approve_production_execution",
+        "test_duplicate_or_parent_escape_target_fails",
+        "test_dependency_and_platform_must_be_declared"
+      ],
+      "tested": false
+    },
+    {
+      "blob_sha": "849f7952a0747f670b93714643eef0ac10d11ac6",
+      "capability_hint": "library.integration",
+      "certified": false,
+      "classification": "candidate_requires_extraction_and_tests",
+      "import_count": 12,
+      "module_status": "not_materialized",
+      "path": "tool/cantiere_library_sandbox_preview.py",
+      "source_bytes": 9806,
+      "source_commit": "f94055868061850e3f2cf6318358bab9e49f80c9",
+      "source_sha256": "3f4d0fd8ac8cefce79460b8d55300abeb4c7b8ee77d1afbbf9ea6b9aa518fd3e",
+      "symbols": [
+        "PreviewError",
+        "_ensure",
+        "_safe_path",
+        "_download_json",
+        "_canonical_sha256",
+        "verify_preview",
+        "_write_preview",
+        "_run_allowlisted_probe",
+        "main"
+      ],
+      "tested": false
+    }
+  ],
   "schema": "ai-orchestrator.cantiere-code-reuse-ledger.v1",
-  "source_repository": "pilialvu75-hue/Ai-orchestrator-riserva",
-  "last_scanned_sha": "986fcacf2f276af6681a093d2d128ed5cf37ee7a",
-  "observations": [],
-  "baseline_note": "Start from Cantiere main prior to first real experimental Library sandbox import PR #919. Older source needs a separate historical backfill; no full-history coverage is claimed."
+  "source_repository": "pilialvu75-hue/Ai-orchestrator-riserva"
 }
