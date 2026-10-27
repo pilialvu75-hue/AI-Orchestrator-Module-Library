@@ -152,6 +152,26 @@ def fetch_changes_partially(
             verified[repository] = inspected[repository]
         except RuntimeError as exc:
             message = str(exc)
+            # The workflow GITHUB_TOKEN belongs to the Library installation.
+            # An installation-scoped token can return 404 for *other* public
+            # repositories. Retry without its Authorization header ONLY after
+            # anonymously verifying that the exact repository is public.
+            # Private, renamed or inaccessible repositories remain UNAVAILABLE;
+            # their cursors must never advance on a failed or partial scan.
+            if token and "GitHub API 404 " in message:
+                try:
+                    public_metadata = _repo_api(repository, "", None)
+                    if (isinstance(public_metadata, dict)
+                            and public_metadata.get("private") is False
+                            and public_metadata.get("full_name") == repository):
+                        public_changes = fetch_changes(
+                            {"tracked_repositories": [entry]}, None
+                        )
+                        verified[repository] = public_changes[repository]
+                        continue
+                except RuntimeError:
+                    # Anonymous GitHub API failure is not verification.
+                    pass
             if "GitHub API 401 " in message:
                 failures[repository] = "GITHUB_AUTH_401"
             elif "GitHub API 403 " in message:
