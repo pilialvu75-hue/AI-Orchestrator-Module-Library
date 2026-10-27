@@ -5,6 +5,8 @@ on:
     branches: ["main"]
     paths:
       - "tools/cantiere_code_reuse_harvest.py"
+      - "tools/cantiere_reuse_materialize.py"
+      - "tests/test_cantiere_reuse_materialize.py"
       - "tests/test_cantiere_code_reuse_harvest.py"
       - ".github/workflows/harvest-cantiere-reuse.yml"
   schedule:
@@ -33,7 +35,9 @@ jobs:
         with:
           python-version: "3.12"
       - name: Verify analysis is read-only, repeatable and fail-closed
-        run: python -m unittest discover -s tests -p 'test_cantiere_code_reuse_harvest.py' -v
+        run: |
+          python -m unittest discover -s tests -p 'test_cantiere_code_reuse_harvest.py' -v
+          python -m unittest discover -s tests -p 'test_cantiere_reuse_materialize.py' -v
       - name: Analyse all changed Cantiere source on a pinned GitHub head
         shell: bash
         run: |
@@ -58,6 +62,42 @@ jobs:
           done
           echo "Source analysis CAS retries exhausted. Cursor remains intact on main." >&2
           exit 1
+      - name: Stage one first-party Cantiere code+test candidate without execution
+        shell: bash
+        run: |
+          set -euo pipefail
+          # Source bytes are fetched only at the exact ledger source commit.
+          # The stager never executes or promotes them. Git write remains
+          # scoped to Library intake and its own observation ledger.
+          for attempt in 1 2 3; do
+            git fetch origin main
+            git reset --hard origin/main
+            python tools/cantiere_reuse_materialize.py | tee "$RUNNER_TEMP/cantiere-materialize.json"
+            python tools/validate_library.py
+            git add -A -- catalog/cantiere-code-reuse-ledger.json intake/
+            if git diff --cached --quiet; then
+              echo "No new test-backed Cantiere Python source to materialize."
+              exit 0
+            fi
+            while IFS= read -r path; do
+              case "$path" in
+                catalog/cantiere-code-reuse-ledger.json|intake/library.integration.firstparty.cantiere_*/0.1.0/manifest.json|intake/library.integration.firstparty.cantiere_*/0.1.0/payload/src/*)
+                  ;;
+                *)
+                  echo "Out-of-scope Cantiere auto-staging path: $path" >&2
+                  exit 1
+                  ;;
+              esac
+            done < <(git diff --cached --name-only)
+            git commit -m "library: stage pinned Cantiere reusable source (tests not yet run)"
+            if git push origin HEAD:main; then
+              echo "Pinned source materialized; no automatic test pass or publication claimed."
+              exit 0
+            fi
+          done
+          echo "Cantiere materialization exhausted compare-and-swap retries" >&2
+          exit 1
+
       - name: Attach read-only classification report
         if: always()
         uses: actions/upload-artifact@v4
