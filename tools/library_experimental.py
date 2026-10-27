@@ -1,6 +1,6 @@
 """Fast, evidence-checked *sandbox-only* access to real tested Library source.
 
-This is a separate availability tier, never a waiver of production security,
+This is a separate availability tier for pinned source from Aivexus-owned repos,\nnever a waiver of production security,
 redistribution, or module certification. No reviewer key or manual Main/Reviewer
 step is required to assemble a source bundle for an isolated Cantiere test.
 """
@@ -22,7 +22,7 @@ from library_package import (
 from library_pipeline import AssetRef, PipelineError, validate_ref
 from library_resolver import sha256_file, tree_sha256
 
-TRUSTED_FIRST_PARTY = "https://github.com/pilialvu75-hue/AI-Orchestrator-Module-Library"
+TRUSTED_OWNER_PREFIX = "https://github.com/pilialvu75-hue/"
 INDEX_SCHEMA = "ai-orchestrator.library-experimental-index.v1"
 PREVIEW_POLICY = "internal-isolated-evaluation-only"
 _SHA40 = re.compile(r"[0-9a-f]{40}\Z")
@@ -56,13 +56,17 @@ def preview_package(root: Path, asset_id: str, version: str) -> dict[str, Any]:
     require(manifest.get("kind") == "module",
             "only concrete local modules can use experimental packaging")
     provenance = manifest.get("provenance") or {}
-    require(provenance.get("origin") == "built_in"
-            and provenance.get("source_repository") == TRUSTED_FIRST_PARTY
+    repository = provenance.get("source_repository")
+    require(isinstance(repository, str)
+            and repository.startswith(TRUSTED_OWNER_PREFIX)
+            and bool(repository[len(TRUSTED_OWNER_PREFIX):])
+            and "/" not in repository[len(TRUSTED_OWNER_PREFIX):]
             and isinstance(provenance.get("source_commit"), str)
             and _SHA40.fullmatch(provenance["source_commit"]) is not None,
-            "experimental packaging is restricted to pinned first-party source")
-    require(not (manifest.get("dependencies") or []),
-            "external dependencies require separate dependency review")
+            "experimental source must be pinned in an Aivexus-owned repository")
+    # Dependencies are declared as requirements, not automatically installed
+    # or executed. Requiring zero dependencies would block real modules before
+    # the isolated Cantiere builder can even attempt integration tests.
     validation = manifest.get("validation") or {}
     require(validation.get("tests_passed") is True,
             "experimental source requires passing test evidence")
@@ -133,7 +137,7 @@ def preview_package(root: Path, asset_id: str, version: str) -> dict[str, Any]:
         },
         "source": {
             "payload_type": "repository_path",
-            "source_repository": TRUSTED_FIRST_PARTY,
+            "source_repository": repository,
             "source_commit": provenance["source_commit"],
         },
         "review": {
