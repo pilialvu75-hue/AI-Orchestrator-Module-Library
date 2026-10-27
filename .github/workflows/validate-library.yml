@@ -39,6 +39,28 @@ jobs:
       - name: Run Library tests
         run: python -m unittest discover -s tests -p 'test_*.py' -v
 
+
+      - name: Verify materialized Mia OTA source hash
+        run: |
+          python - <<'PY'
+          import json, sys
+          from pathlib import Path
+          sys.path.insert(0, 'tools')
+          from library_source_integrity import payload_tree_sha256
+          base = Path('intake/release.update_manager.firstparty.mia/0.1.0')
+          manifest = json.loads((base / 'manifest.json').read_text())
+          assert payload_tree_sha256(base / 'payload/src') == manifest['payload']['sha256']
+          print('PASS: pinned Mia OTA source tree SHA-256')
+          PY
+
+      - name: Set up Node.js for real Mia OTA sandbox tests
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Execute Mia OTA sandbox tests
+        run: node --test intake/release.update_manager.firstparty.mia/0.1.0/tests/node-ota.test.mjs
+
       - name: Export deterministic offline Library snapshot
         run: python tools/library_resolver.py export-cache --output /tmp/ai-orchestrator-module-library.json
 
