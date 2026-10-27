@@ -1,0 +1,26 @@
+{
+  "schema": "ai-orchestrator.library-test-report.v1",
+  "asset_id": "release.update_manager.firstparty.mia",
+  "version": "0.1.0",
+  "source_commit": "ebeaa2884bce22e891d15da7c1f61962dde0699a",
+  "payload_sha256": "e251b87d68fe0665be542cf59d1d3cef79df0bc608a0c9ce0a19d6e461b1fbf4",
+  "passed": true,
+  "validated_on": [
+    "linux"
+  ],
+  "validated_at": "2026-10-27T16:36:50Z",
+  "workflow_run_id": 40542554481,
+  "workflow_run_attempt": 1,
+  "workflow_sha": "adfa52579565dfc8e55d84bcc2e2ce3a7eb2ce13",
+  "workflow_url": "https://github.com/pilialvu75-hue/AI-Orchestrator-Module-Library/actions/runs/40542554481",
+  "checks": [
+    "python tools/validate_library.py",
+    "python -m unittest discover -s tests -p 'test_*.py' -v",
+    "python local-source SHA256 comparison",
+    "node --test intake/release.update_manager.firstparty.mia/0.1.0/tests/node-ota.test.mjs"
+  ],
+  "scope": "Node.js v22 on Ubuntu 24.04 only; synthetic OTA fixtures, no network update or production installation",
+  "notes": "Upstream Mia uploadToGithub() is a stub; rollback/hot-reload transactional safety, platform-specific execution and independent security review were not validated.",
+  "security_certified": false,
+  "production_approved": false
+}
