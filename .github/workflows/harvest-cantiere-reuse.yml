@@ -72,6 +72,9 @@ jobs:
           for attempt in 1 2 3; do
             git fetch origin main
             git reset --hard origin/main
+            # On a failed CAS push, generated paths are untracked. Never reuse
+            # bytes staged from an obsolete cursor on the next attempt.
+            git clean -fd -- intake/library.integration.firstparty.cantiere_*
             python tools/cantiere_reuse_materialize.py | tee "$RUNNER_TEMP/cantiere-materialize.json"
             python tools/validate_library.py
             git add -A -- catalog/cantiere-code-reuse-ledger.json intake/
