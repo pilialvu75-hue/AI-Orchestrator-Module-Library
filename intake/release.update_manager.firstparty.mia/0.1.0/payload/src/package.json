@@ -1,0 +1,5 @@
+{
+  "private": true,
+  "type": "module",
+  "description": "Library sandbox Node.js harness (not present in pinned Mia source)"
+}
