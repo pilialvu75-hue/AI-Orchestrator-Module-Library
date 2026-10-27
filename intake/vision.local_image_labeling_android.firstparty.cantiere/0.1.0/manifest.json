@@ -3,7 +3,7 @@
   "name": "Cantiere Android offline ML Kit Flutter image-label plugin",
   "version": "0.1.0",
   "kind": "module",
-  "status": "discovered",
+  "status": "tested",
   "description": "Reusable Android Flutter plugin with actual Cantiere-derived Kotlin ML Kit bundled on-device image-classification bridge, FlutterPlugin registration, local MethodChannel Dart API, source-pinned pure Dart label processor and unit tests. No physical-device result claimed.",
   "tags": [
     "image",
@@ -68,11 +68,14 @@
     "retrieved_at": "2026-10-27T18:45:00Z"
   },
   "validation": {
-    "score": 0,
-    "tests_passed": false,
-    "test_report": null,
-    "validated_at": null,
-    "validated_on": []
+    "score": 0.8,
+    "tests_passed": true,
+    "test_report": "tests/android-arm64-ci-report.json",
+    "validated_at": "2026-10-27T18:14:40Z",
+    "validated_on": [
+      "android",
+      "linux"
+    ]
   },
   "security": {
     "reviewed": false,
