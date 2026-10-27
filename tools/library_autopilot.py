@@ -8,6 +8,7 @@ import tempfile
 from pathlib import Path
 
 from library_package import PackageError, build_package
+from library_experimental import export_experimental_packages
 from library_pipeline import (
     AssetRef,
     PipelineError,
@@ -157,9 +158,15 @@ def refresh_consumption_exports(root: Path) -> dict[str, object]:
         json.dumps(index, indent=2, ensure_ascii=False) + "\n",
         encoding="utf-8",
     )
+    # Separately export already tested, locally authored source for isolated
+    # Cantiere experiments. Never promote it to the certified catalog or
+    # declare licenses, runtime safety or reviewer approval.
+    experimental = export_experimental_packages(root)
     return {
         "snapshot_sha256": snapshot_result["snapshot_sha256"],
         "package_count": len(rows),
+        "sandbox_preview_count": experimental["count"],
+        "sandbox_preview_blocked": experimental["blocked"],
     }
 
 
