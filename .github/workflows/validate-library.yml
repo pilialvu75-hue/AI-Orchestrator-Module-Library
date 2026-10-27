@@ -79,6 +79,39 @@ jobs:
           PY
           python -m unittest discover -s intake/library.integration.firstparty.cantiere_preview_reader/0.1.0/payload/src/test/tool -p 'test_*.py' -v
 
+      - name: Verify extracted Cantiere image vision provenance and Dart payload SHA
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import json, sys
+          from pathlib import Path
+          sys.path.insert(0, "tools")
+          from library_source_integrity import payload_tree_sha256
+          base = Path("intake/vision.image_label_postprocessing.firstparty.cantiere/0.1.0")
+          manifest = json.loads((base / "manifest.json").read_text())
+          assert manifest["provenance"]["source_commit"] == "acc8d28b54489c91cb4f59552a1be2e07203de1a"
+          assert payload_tree_sha256(base / "payload/src") == manifest["payload"]["sha256"], "image label source changed"
+          print("PASS: source-tree digest and pinned Cantiere origin")
+          PY
+          bundle="intake/vision.image_label_postprocessing.firstparty.cantiere/0.1.0/payload/src/reference/cantiere"
+          test "$(git hash-object "$bundle/LocalImageVisionBridge.kt")" = "210613e0b45a85bf72bf685c45ebf10a10999f43"
+          test "$(git hash-object "$bundle/chat_local_image_vision_service.dart")" = "c34a7c0bee21c7b44c90b4ecd5bf6c913aa3db72"
+          test "$(git hash-object "$bundle/chat_local_image_vision_service_test.dart")" = "73bf737b8a65696f354492f0a70fe99f66927c08"
+          echo "PASS: three original Cantiere source blobs preserved exactly"
+
+      - name: Set up Dart SDK for standalone image label module
+        uses: dart-lang/setup-dart@v1
+
+      - name: Analyze and run real extracted Dart image-label code
+        shell: bash
+        working-directory: intake/vision.image_label_postprocessing.firstparty.cantiere/0.1.0/payload/src
+        run: |
+          set -euo pipefail
+          dart pub get --offline
+          dart analyze
+          dart run tool/self_test.dart
+
       - name: Export deterministic offline Library snapshot
         run: python tools/library_resolver.py export-cache --output /tmp/ai-orchestrator-module-library.json
 
