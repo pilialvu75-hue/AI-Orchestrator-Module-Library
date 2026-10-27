@@ -1,0 +1,113 @@
+{
+  "id": "library.integration.firstparty.cantiere_preview_reader",
+  "name": "Cantiere isolated experimental Library package verifier",
+  "version": "0.1.0",
+  "kind": "module",
+  "status": "discovered",
+  "description": "Exact pinned Cantiere Python source and regression tests to verify and import real Library sandbox package envelopes without automatic production installation.",
+  "tags": [
+    "library.integration",
+    "firstparty",
+    "cantiere-reuse",
+    "python",
+    "sandbox-only"
+  ],
+  "capabilities": [
+    "library.integration"
+  ],
+  "platforms": [
+    "linux"
+  ],
+  "languages": [
+    "python"
+  ],
+  "frameworks": [],
+  "entry_paths": [
+    "tool/cantiere_library_sandbox_preview.py"
+  ],
+  "dependencies": [
+    {
+      "name": "Python",
+      "version": ">=3.12",
+      "source": "host runtime"
+    },
+    {
+      "name": "Node.js",
+      "version": ">=22",
+      "source": "optional CLI allowlisted smoke probe"
+    }
+  ],
+  "provenance": {
+    "origin": "built_in",
+    "source_repository": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva",
+    "source_commit": "f94055868061850e3f2cf6318358bab9e49f80c9",
+    "source_tag": null,
+    "source_project_id": "pilialvu75-hue/Ai-orchestrator-riserva",
+    "source_task_id": "library-cantiere-harvest:f94055868061850e3f2cf6318358bab9e49f80c9:tool/cantiere_library_sandbox_preview.py",
+    "license": null,
+    "license_file": null,
+    "retrieved_at": "2026-10-27T17:00:00Z"
+  },
+  "validation": {
+    "score": 0,
+    "tests_passed": false,
+    "test_report": null,
+    "validated_at": null,
+    "validated_on": []
+  },
+  "security": {
+    "reviewed": false,
+    "reviewed_at": null,
+    "known_vulnerabilities": null,
+    "sbom": null,
+    "review_report": null,
+    "notes": "First-party source extraction; security and redistribution license not reviewed. Not approved for privileged execution or production."
+  },
+  "integration": {
+    "estimated_effort": "low",
+    "adaptation_allowed": true,
+    "adapter_notes": "Exact upstream source and tests in original relative tool/test layout. Python API verify_preview(index,envelope,pin) accepts explicit offline inputs; network CLI must remain sandbox only.",
+    "known_constraints": [
+      "Only Cantiere Linux sandbox Python tests can establish availability; Android/Web/Flutter deployment untested.",
+      "GitHub network URL is fixed in the source CLI; no arbitrary repository endpoints.",
+      "No independently reviewed source license or production security certification.",
+      "Package fetching and isolated Node probe are explicitly opt-in; production auto-installation is forbidden."
+    ]
+  },
+  "connector": {
+    "standard": "ai-orchestrator-lego",
+    "standard_version": "1.0.0",
+    "provides": [
+      {
+        "capability_id": "library.integration",
+        "contract_id": "library.integration.v1",
+        "contract_version": "1.0"
+      }
+    ],
+    "requires": [],
+    "integration_mode": "source_bundle",
+    "adapters": [],
+    "configuration_schema": null,
+    "healthcheck": {
+      "type": "none",
+      "path": null
+    }
+  },
+  "payload": {
+    "type": "repository_path",
+    "path": "payload/src",
+    "sha256": "5a570a720087d043fbeee03d2a23b0e74e050fc2f488707a313b7aee19297183",
+    "upstream_repository": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva",
+    "upstream_commit": "f94055868061850e3f2cf6318358bab9e49f80c9"
+  },
+  "quality": {
+    "reuse_count": 0,
+    "successful_integrations": 0,
+    "failed_integrations": 0,
+    "last_used_at": null
+  },
+  "deprecation": {
+    "reason": null,
+    "replacement": null
+  }
+}
