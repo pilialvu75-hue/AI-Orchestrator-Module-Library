@@ -98,7 +98,7 @@ class CantiereMaterializationTests(unittest.TestCase):
         with self.assertRaisesRegex(MaterializationError, "source hash mismatch"):
             stage_one(self.root, raw_get=self.raw_get)
         self.assertEqual(self.ledger_file.read_bytes(), before)
-        self.assertFalse((self.root / "intake/library.integration.firstparty.cantiere_" + NAME).exists())
+        self.assertFalse((self.root / ("intake/library.integration.firstparty.cantiere_" + NAME)).exists())
 
     def test_untrusted_source_is_never_imported_or_executed_in_stager(self):
         malicious = b"from pathlib import Path\nPath('EXECUTED').write_text('unsafe')\n"
