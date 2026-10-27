@@ -1,0 +1,160 @@
+{
+  "schema": "ai-orchestrator.library-module-package-envelope.v1",
+  "package": {
+    "schema": "ai-orchestrator.library-module-package.v1",
+    "asset_id": "vision.local_image_labeling_android.firstparty.cantiere",
+    "version": "0.1.0",
+    "pin": "vision.local_image_labeling_android.firstparty.cantiere@0.1.0",
+    "tier": "sandbox_preview",
+    "status": "tested",
+    "certified": false,
+    "availability": "experimental",
+    "usage_policy": "internal-isolated-evaluation-only",
+    "capabilities": [
+      "vision.local_image_labeling_android"
+    ],
+    "contracts": [
+      "vision.local_image_labeling_android.v1"
+    ],
+    "targets": [
+      "android",
+      "linux"
+    ],
+    "files": [
+      {
+        "source_path": "payload/src/README.md",
+        "target_path": "README.md",
+        "content": "# Cantiere Image LOCAL ML Kit Flutter plugin\n\nFunctional Flutter/Android plugin adapted from Cantiere source at immutable\ncommit `acc8d28b54489c91cb4f59552a1be2e07203de1a`. The\nnative bridge uses Android's bundled on-device Google ML Kit image-labeling\nartifact `com.google.mlkit:image-labeling:17.0.9`, not a Cloud VLM.\n\n## API\n\n```dart\nfinal labels = await CantiereLocalImageVision().labelFile('/path/to/photo.jpg');\nprint(labels.text);\n```\n\nCall with a **local readable image path on Android**. The native plugin performs\nfile-size checking (8 MiB), low-memory checks, bounded decoding (1024-pixel edge,\nRGB_565), one job at a time, and native label inference. Dart filters categories\nbelow 0.55 confidence and reports at most five with honest limitations.\n\nThis is category tagging, not object counts, OCR, colors, a full visual\ndescription, or conversational vision. No picture, prompt, or credential is\nrouted to a Cloud provider by this plugin.\n\nFor a *different* Flutter app, add this package as a path dependency and let\nFlutter register `LocalImageVisionPlugin` automatically. **Do not install\nalongside the original Cantiere MainActivity bridge without removing or\ndisabling its existing `LocalImageVisionBridge.register()` call:** both use\n`com.aiorchestrator/local_image_vision` and would compete for one channel.\n\n## Tests\n\n```sh\nflutter pub get\nflutter analyze\nflutter test\n```\n\nAndroid compilation validation is performed by the separate scoped Library\nCI. A build or mocked MethodChannel test does not prove ML Kit inference on\na physical Galaxy S24 FE; that still requires a device test.\n\n**Experimental/internal-only**. License, security and distribution review\npending. Native ML Kit and Android Gradle dependencies are subject to the\nhost app's SDK/minSdk constraints. No new APK is installed by this package.\n"
+      },
+      {
+        "source_path": "payload/src/analysis_options.yaml",
+        "target_path": "analysis_options.yaml",
+        "content": "analyzer:\n  errors:\n    invalid_use_of_visible_for_testing_member: ignore\n"
+      },
+      {
+        "source_path": "payload/src/android/build.gradle",
+        "target_path": "android/build.gradle",
+        "content": "group 'com.aivexus.local_image_vision'\nversion '0.1.0'\n\nbuildscript {\n    ext.kotlin_version = '2.2.20'\n    repositories { google(); mavenCentral() }\n    dependencies {\n        classpath 'com.android.tools.build:gradle:8.11.1'\n        classpath \"org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version\"\n    }\n}\n\napply plugin: 'com.android.library'\napply plugin: 'kotlin-android'\n\nandroid {\n    namespace 'com.aivexus.local_image_vision'\n    compileSdk 36\n    compileOptions {\n        sourceCompatibility JavaVersion.VERSION_17\n        targetCompatibility JavaVersion.VERSION_17\n    }\n    kotlinOptions { jvmTarget = '17' }\n    defaultConfig { minSdk 24 }\n}\ndependencies {\n    // Bundled image category labeler: no on-demand model download.\n    implementation 'com.google.mlkit:image-labeling:17.0.9'\n}\n"
+      },
+      {
+        "source_path": "payload/src/android/src/main/AndroidManifest.xml",
+        "target_path": "android/src/main/AndroidManifest.xml",
+        "content": "<manifest xmlns:android=\"http://schemas.android.com/apk/res/android\"/>\n"
+      },
+      {
+        "source_path": "payload/src/android/src/main/kotlin/com/aivexus/local_image_vision/LocalImageVisionBridge.kt",
+        "target_path": "android/src/main/kotlin/com/aivexus/local_image_vision/LocalImageVisionBridge.kt",
+        "content": "package com.aivexus.local_image_vision\n\nimport android.content.Context\nimport android.app.ActivityManager\nimport android.graphics.Bitmap\nimport android.graphics.BitmapFactory\nimport android.os.Handler\nimport android.os.Looper\nimport com.google.mlkit.vision.common.InputImage\nimport com.google.mlkit.vision.label.ImageLabeling\nimport com.google.mlkit.vision.label.defaults.ImageLabelerOptions\nimport io.flutter.plugin.common.BinaryMessenger\nimport io.flutter.plugin.common.MethodChannel\nimport java.io.File\nimport java.util.concurrent.Executors\nimport java.util.concurrent.atomic.AtomicBoolean\n\n/**\n * Offline image-category recognition. The bundled ML Kit model does not\n * contact an API, understand fine details, or run a multimodal LLM.\n * Never log image paths, labels, bytes, or user questions.\n */\ninternal object LocalImageVisionBridge {\n    private const val channelName = \"com.aiorchestrator/local_image_vision\"\n    private var registeredChannel: MethodChannel? = null\n    private const val maxBytes = 8L * 1024 * 1024\n    private const val maxDecodedEdge = 1024\n    private val busy = AtomicBoolean(false)\n    private val worker = Executors.newSingleThreadExecutor()\n    private val main = Handler(Looper.getMainLooper())\n\n    fun register(context: Context, messenger: BinaryMessenger) {\n        val appContext = context.applicationContext\n        MethodChannel(messenger, channelName)\n            .also { registeredChannel = it }\n            .setMethodCallHandler { call, result ->\n                if (call.method != \"labelImage\") {\n                    result.notImplemented()\n                    return@setMethodCallHandler\n                }\n                val path = call.argument<String>(\"path\")\n                if (path.isNullOrBlank()) {\n                    result.error(\"INVALID_IMAGE\", \"Nessuna immagine selezionata.\", null)\n                    return@setMethodCallHandler\n                }\n                if (!busy.compareAndSet(false, true)) {\n                    result.error(\"IMAGE_BUSY\", \"Analisi locale già in corso.\", null)\n                    return@setMethodCallHandler\n                }\n                worker.execute {\n                    try {\n                        val file = File(path)\n                        if (!file.isFile || !file.canRead() ||\n                            file.length() !in 1L..maxBytes) {\n                            main.post {\n                                busy.set(false)\n                                result.error(\"INVALID_IMAGE\", \"Immagine non disponibile o oltre 8 MB.\", null)\n                            }\n                            return@execute\n                        }\n\n                        // Refuse a new vision workload if Android is already\n                        // under memory pressure. Keep the resident text model\n                        // untouched; a single image is never worth an OOM crash.\n                        val activityManager = appContext.getSystemService(\n                            Context.ACTIVITY_SERVICE\n                        ) as? ActivityManager\n                        val memory = ActivityManager.MemoryInfo()\n                        activityManager?.getMemoryInfo(memory)\n                        if (activityManager != null &&\n                            (memory.lowMemory || memory.availMem < 256L * 1024 * 1024)) {\n                            main.post {\n                                busy.set(false)\n                                result.error(\n                                    \"LOCAL_VISION_MEMORY\",\n                                    \"Memoria libera insufficiente per Image LOCAL. \" +\n                                        \"Chiudi altre applicazioni e riprova.\",\n                                    null\n                                )\n                            }\n                            return@execute\n                        }\n\n                        // Decode bounds first, then a downsampled RGB_565 bitmap\n                        // to bound peak RAM on devices with small memory budgets.\n                        val bounds = BitmapFactory.Options().apply {\n                            inJustDecodeBounds = true\n                        }\n                        BitmapFactory.decodeFile(file.path, bounds)\n                        val width = bounds.outWidth\n                        val height = bounds.outHeight\n                        if (width <= 0 || height <= 0 || width > 16384 || height > 16384) {\n                            main.post {\n                                busy.set(false)\n                                result.error(\"INVALID_IMAGE\", \"Formato o dimensioni immagine non supportati.\", null)\n                            }\n                            return@execute\n                        }\n                        var sampleSize = 1\n                        while (width / sampleSize > maxDecodedEdge ||\n                            height / sampleSize > maxDecodedEdge) {\n                            sampleSize *= 2\n                        }\n                        val options = BitmapFactory.Options().apply {\n                            inSampleSize = sampleSize\n                            inPreferredConfig = Bitmap.Config.RGB_565\n                        }\n                        val bitmap = BitmapFactory.decodeFile(file.path, options)\n                            ?: throw IllegalArgumentException(\"cannot decode image\")\n                        main.post {\n                            val labeler = ImageLabeling.getClient(\n                                ImageLabelerOptions.Builder()\n                                    .setConfidenceThreshold(0.55f)\n                                    .build()\n                            )\n                            try {\n                                labeler.process(InputImage.fromBitmap(bitmap, 0))\n                                    .addOnSuccessListener { labels ->\n                                        val payload = labels\n                                            .sortedByDescending { it.confidence }\n                                            .take(5)\n                                            .map {\n                                                mapOf(\n                                                    \"label\" to it.text,\n                                                    \"confidence\" to it.confidence.toDouble()\n                                                )\n                                            }\n                                        result.success(payload)\n                                    }\n                                    .addOnFailureListener {\n                                        result.error(\n                                            \"LOCAL_VISION_FAILED\",\n                                            \"Riconoscimento visivo locale non riuscito.\",\n                                            null\n                                        )\n                                    }\n                                    .addOnCompleteListener {\n                                        bitmap.recycle()\n                                        labeler.close()\n                                        busy.set(false)\n                                    }\n                            } catch (_: Exception) {\n                                bitmap.recycle()\n                                labeler.close()\n                                busy.set(false)\n                                result.error(\n                                    \"LOCAL_VISION_FAILED\",\n                                    \"Riconoscimento visivo locale non riuscito.\",\n                                    null\n                                )\n                            }\n                        }\n                    } catch (_: OutOfMemoryError) {\n                        main.post {\n                            busy.set(false)\n                            result.error(\"LOCAL_VISION_OOM\", \"Memoria insufficiente per analizzare la foto.\", null)\n                        }\n                    } catch (_: Exception) {\n                        main.post {\n                            busy.set(false)\n                            result.error(\"LOCAL_VISION_FAILED\", \"Impossibile leggere la foto sul dispositivo.\", null)\n                        }\n                    }\n                }\n            }\n    }\n\n    fun unregister() {\n        registeredChannel?.setMethodCallHandler(null)\n        registeredChannel = null\n    }\n}\n"
+      },
+      {
+        "source_path": "payload/src/android/src/main/kotlin/com/aivexus/local_image_vision/LocalImageVisionPlugin.kt",
+        "target_path": "android/src/main/kotlin/com/aivexus/local_image_vision/LocalImageVisionPlugin.kt",
+        "content": "package com.aivexus.local_image_vision\n\nimport io.flutter.embedding.engine.plugins.FlutterPlugin\n\n/** Automatically registered by Flutter; the host must NOT also register the\n * original Cantiere MainActivity channel or duplicate listeners will compete. */\nclass LocalImageVisionPlugin : FlutterPlugin {\n    override fun onAttachedToEngine(binding: FlutterPlugin.FlutterPluginBinding) {\n        LocalImageVisionBridge.register(binding.applicationContext, binding.binaryMessenger)\n    }\n\n    override fun onDetachedFromEngine(binding: FlutterPlugin.FlutterPluginBinding) {\n        LocalImageVisionBridge.unregister()\n    }\n}\n"
+      },
+      {
+        "source_path": "payload/src/lib/cantiere_local_image_vision.dart",
+        "target_path": "lib/cantiere_local_image_vision.dart",
+        "content": "import 'package:flutter/foundation.dart';\nimport 'package:flutter/services.dart';\n\nimport 'src/local_image_labels.dart';\n\nexport 'src/local_image_labels.dart';\n\n/// Android ML Kit offline image category classification, not a multimodal LLM.\n///\n/// The native plugin limits file size to 8 MiB, checks memory and downscales\n/// bitmaps. This wrapper never sends the picture, prompt or context to Cloud.\nclass CantiereLocalImageVision {\n  CantiereLocalImageVision({\n    MethodChannel? channel,\n    bool? supportedPlatform,\n  })  : _channel = channel ??\n            const MethodChannel('com.aiorchestrator/local_image_vision'),\n        _supportedPlatform = supportedPlatform ??\n            (!kIsWeb && defaultTargetPlatform == TargetPlatform.android);\n\n  static const Duration timeout = Duration(seconds: 20);\n  final MethodChannel _channel;\n  final bool _supportedPlatform;\n\n  Future<LocalImageLabelResult> labelFile(String imagePath) async {\n    if (!_supportedPlatform) {\n      throw UnsupportedError(\n        'Image LOCAL ML Kit richiede Android. Nessuna immagine inviata al Cloud.',\n      );\n    }\n    if (imagePath.trim().isEmpty) {\n      throw ArgumentError.value(imagePath, 'imagePath', 'Missing local image');\n    }\n    final response = await _channel.invokeMethod<List<dynamic>>(\n      'labelImage',\n      <String, String>{'path': imagePath},\n    ).timeout(timeout);\n    return LocalImageLabelProcessor.fromNative(response ?? <Object?>[]);\n  }\n}\n"
+      },
+      {
+        "source_path": "payload/src/lib/src/local_image_labels.dart",
+        "target_path": "lib/src/local_image_labels.dart",
+        "content": "/// Pure Dart post-processing of offline Android image labels.\n///\n/// Extracted/adapted from the pinned Cantiere vision service. Image decoding,\n/// ML Kit model inference, file limits and RAM checks remain the Android\n/// host bridge's responsibility. No IO, telemetry, network or Cloud routing.\nclass LocalImageLabel {\n  const LocalImageLabel(this.name, this.confidence);\n  final String name;\n  final double confidence;\n}\n\nclass LocalImageLabelResult {\n  const LocalImageLabelResult({required this.labels, required this.text});\n  static const String providerId = 'localImageLabels';\n  final List<LocalImageLabel> labels;\n  final String text;\n  bool get hasCategories => labels.isNotEmpty;\n}\n\nabstract final class LocalImageLabelProcessor {\n  static const double minConfidence = 0.55;\n  static const int maxLabels = 5;\n\n  static LocalImageLabelResult fromNative(Iterable<Object?> rawLabels) {\n    final labels = <LocalImageLabel>[];\n    for (final item in rawLabels) {\n      if (item is! Map) continue;\n      final rawName = item['label'];\n      final rawConfidence = item['confidence'];\n      if (rawName is! String || rawConfidence is! num) continue;\n      final name = rawName.trim().replaceAll(RegExp(r'\\s+'), ' ');\n      final confidence = rawConfidence.toDouble();\n      if (name.isEmpty ||\n          name.length > 70 ||\n          !confidence.isFinite ||\n          confidence < minConfidence ||\n          confidence > 1) {\n        continue;\n      }\n      labels.add(LocalImageLabel(name, confidence));\n    }\n    labels.sort((a, b) => b.confidence.compareTo(a.confidence));\n    final selected = List<LocalImageLabel>.unmodifiable(labels.take(maxLabels));\n\n    if (selected.isEmpty) {\n      return const LocalImageLabelResult(\n        labels: <LocalImageLabel>[],\n        text: 'Non ho riconosciuto categorie visive con sufficiente '\n            'affidabilità in questa foto. Il riconoscitore offline attuale '\n            'è limitato; non posso descrivere dettagli, colori o testo '\n            'dell\\'immagine. Nessun dato è stato inviato al Cloud.',\n      );\n    }\n    final detected = selected.map(\n      (label) => '${label.name} (${(label.confidence * 100).round()}%)',\n    );\n    return LocalImageLabelResult(\n      labels: selected,\n      text: 'Riconoscimento visivo sul dispositivo (categorie probabili): '\n          '${detected.join(', ')}.\\n'\n          'Queste sono etichette stimate da un classificatore offline, '\n          'non una descrizione completa. Non posso ancora dedurre con '\n          'affidabilità colori, quantità, testo o altri dettagli della foto. '\n          'Nessuna immagine è stata inviata al Cloud.',\n    );\n  }\n}\n"
+      },
+      {
+        "source_path": "payload/src/pubspec.yaml",
+        "target_path": "pubspec.yaml",
+        "content": "name: cantiere_local_image_vision\ndescription: Offline Android ML Kit image-category labeling extracted from Aivexus Cantiere\nversion: 0.1.0\npublish_to: none\nenvironment:\n  sdk: '>=3.4.0 <4.0.0'\n  flutter: '>=3.22.2'\ndependencies:\n  flutter:\n    sdk: flutter\ndev_dependencies:\n  flutter_test:\n    sdk: flutter\nflutter:\n  plugin:\n    platforms:\n      android:\n        package: com.aivexus.local_image_vision\n        pluginClass: LocalImageVisionPlugin\n"
+      },
+      {
+        "source_path": "payload/src/reference/source-provenance.json",
+        "target_path": "reference/source-provenance.json",
+        "content": "{\n  \"schema\": \"ai-orchestrator.derived-firstparty-source.v1\",\n  \"source_repository\": \"https://github.com/pilialvu75-hue/Ai-orchestrator-riserva\",\n  \"source_commit\": \"acc8d28b54489c91cb4f59552a1be2e07203de1a\",\n  \"native_origin\": {\n    \"path\": \"android/app/src/main/kotlin/com/aiorchestrator/LocalImageVisionBridge.kt\",\n    \"git_blob_sha1\": \"210613e0b45a85bf72bf685c45ebf10a10999f43\"\n  },\n  \"dart_processor_origin\": {\n    \"library_package_pin\": \"vision.image_label_postprocessing.firstparty.cantiere@0.1.0\",\n    \"path\": \"payload/src/lib/local_image_labels.dart\",\n    \"original_cantiere_source_path\": \"lib/features/chat/data/services/chat_local_image_vision_service.dart\",\n    \"original_cantiere_blob_sha1\": \"c34a7c0bee21c7b44c90b4ecd5bf6c913aa3db72\"\n  },\n  \"adaptations\": [\n    \"Moved Kotlin bridge package to com.aivexus.local_image_vision\",\n    \"Replaced explicit FlutterEngine registration with FlutterPlugin plus BinaryMessenger registration and detach handler\",\n    \"Preserved Android worker, low-memory, RGB_565 downsampling, 8-MiB limit and bundled ML Kit 17.0.9\",\n    \"Added standalone Flutter package, Dart wrapper and MethodChannel tests\",\n    \"Reused pure Dart label processor without modification\"\n  ],\n  \"limitations\": [\n    \"Native original source is a source provenance reference, not a certified copied Android plugin\",\n    \"No real device inference test\",\n    \"Must not co-install with original Cantiere bridge on the same MethodChannel\"\n  ],\n  \"security_reviewed\": false,\n  \"production_approved\": false\n}\n"
+      },
+      {
+        "source_path": "payload/src/test/cantiere_local_image_vision_test.dart",
+        "target_path": "test/cantiere_local_image_vision_test.dart",
+        "content": "import 'package:cantiere_local_image_vision/cantiere_local_image_vision.dart';\nimport 'package:flutter/services.dart';\nimport 'package:flutter_test/flutter_test.dart';\n\nvoid main() {\n  TestWidgetsFlutterBinding.ensureInitialized();\n  const channel = MethodChannel('com.aiorchestrator/local_image_vision');\n  final messenger =\n      TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger;\n\n  tearDown(() => messenger.setMockMethodCallHandler(channel, null));\n\n  test('invokes only local filepath and filters labels without Cloud', () async {\n    var calls = 0;\n    messenger.setMockMethodCallHandler(channel, (call) async {\n      calls++;\n      expect(call.method, 'labelImage');\n      expect(call.arguments, <String, String>{'path': '/tmp/fruit.png'});\n      return <Map<String, Object>>[\n        {'label': 'Apple', 'confidence': 0.94},\n        {'label': 'Unknown', 'confidence': 0.14}\n      ];\n    });\n    final result = await CantiereLocalImageVision(\n      supportedPlatform: true,\n    ).labelFile('/tmp/fruit.png');\n    expect(calls, 1);\n    expect(result.labels, hasLength(1));\n    expect(result.text, contains('Apple (94%)'));\n    expect(result.text, isNot(contains('Unknown')));\n    expect(result.text, contains('non una descrizione completa'));\n  });\n\n  test('no labels reports uncertainty, no invented details', () async {\n    messenger.setMockMethodCallHandler(channel, (call) async => <Object>[]);\n    final result = await CantiereLocalImageVision(\n      supportedPlatform: true,\n    ).labelFile('/tmp/unknown.png');\n    expect(result.hasCategories, isFalse);\n    expect(result.text, contains('Non ho riconosciuto categorie'));\n  });\n\n  test('unsupported target rejects before invoking native bridge', () async {\n    var calls = 0;\n    messenger.setMockMethodCallHandler(channel, (call) async {\n      calls++;\n      return <Object>[];\n    });\n    await expectLater(\n      CantiereLocalImageVision(\n        supportedPlatform: false,\n      ).labelFile('/tmp/fruit.png'),\n      throwsUnsupportedError,\n    );\n    expect(calls, 0);\n  });\n\n  test('empty filepath rejects before invoking native bridge', () async {\n    var calls = 0;\n    messenger.setMockMethodCallHandler(channel, (call) async {\n      calls++;\n      return <Object>[];\n    });\n    await expectLater(\n      CantiereLocalImageVision(\n        supportedPlatform: true,\n      ).labelFile('  '),\n      throwsArgumentError,\n    );\n    expect(calls, 0);\n  });\n\n  test('ML Kit errors are propagated, not replaced with fabricated labels',\n      () async {\n    messenger.setMockMethodCallHandler(channel, (call) async {\n      throw PlatformException(code: 'LOCAL_VISION_MEMORY');\n    });\n    await expectLater(\n      CantiereLocalImageVision(\n        supportedPlatform: true,\n      ).labelFile('/tmp/fruit.png'),\n      throwsA(isA<PlatformException>().having(\n        (e) => e.code, 'code', 'LOCAL_VISION_MEMORY',\n      )),\n    );\n  });\n}\n"
+      }
+    ],
+    "requirements": [
+      {
+        "kind": "dependency",
+        "description": "Android Gradle Plugin 8.11.1 (Android build toolchain)",
+        "required": true
+      },
+      {
+        "kind": "dependency",
+        "description": "Flutter SDK >=3.22.2 (host app)",
+        "required": true
+      },
+      {
+        "kind": "dependency",
+        "description": "Google ML Kit bundled image-labeling 17.0.9 (Maven/Android compiled runtime)",
+        "required": true
+      },
+      {
+        "kind": "dependency",
+        "description": "Kotlin Gradle Plugin 2.2.20 (Android build toolchain)",
+        "required": true
+      },
+      {
+        "kind": "distributionRestriction",
+        "description": "Isolated internal tests only. No production, release, redistribution, or automatic privileged execution; license and security certification pending.",
+        "required": true
+      },
+      {
+        "kind": "manualReview",
+        "description": "Android APK compilation cannot verify actual ML Kit outputs, device performance or physical Galaxy S24 FE behavior.",
+        "required": false
+      },
+      {
+        "kind": "manualReview",
+        "description": "Android-only image inference; Linux support limited to mocked Flutter MethodChannel tests.",
+        "required": false
+      },
+      {
+        "kind": "manualReview",
+        "description": "Internal experimental source only; third-party dependency compliance/security and redistribution approval pending.",
+        "required": false
+      },
+      {
+        "kind": "manualReview",
+        "description": "ML Kit model dependency must be bundled at build time; no user data is uploaded by this plugin.",
+        "required": false
+      },
+      {
+        "kind": "manualReview",
+        "description": "Native bridge uses original Cantiere 8 MiB input, memory floor 256 MiB, 1024-px decoded edge and confidence threshold.",
+        "required": false
+      },
+      {
+        "kind": "manualReview",
+        "description": "No OCR, precise colors, counting, text-image grounding or full multimodal LLM.",
+        "required": false
+      },
+      {
+        "kind": "manualReview",
+        "description": "Original Cantiere app must migrate away from its explicit local image channel registration before using this standalone plugin.",
+        "required": false
+      }
+    ],
+    "integrity": {
+      "manifest_sha256": "f6ef2c930b6dab1d4b300ee5a4f3de5c1a07cd6e7de1d7e12f96638477ae83cb",
+      "module_tree_sha256": "ac00722bda430ef546465462baafc4cebfdb2972819feec66acfd82470f87229",
+      "payload_sha256": "878d573db79710f14e7d21a477ea47ebba54c521a67844b390dc8c68bae5c709",
+      "test_report_sha256": "50f5cf8773bb088654164699167dd3d9c1cd1d03da61ba875a47f10f20bf65ba"
+    },
+    "source": {
+      "payload_type": "repository_path",
+      "source_repository": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva",
+      "source_commit": "acc8d28b54489c91cb4f59552a1be2e07203de1a"
+    },
+    "review": {
+      "license_verified": false,
+      "security_reviewed": false,
+      "production_approved": false
+    }
+  },
+  "package_sha256": "c2c2850bc2bf344ef802603a8c283c0d415beff47d20e4417820f61d0bec1bf2"
+}

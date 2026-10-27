@@ -228,6 +228,14 @@
       "replacement": null
     },
     {
+      "capability_id": "vision.local_image_labeling_android",
+      "contract_id": "vision.local_image_labeling_android.v1",
+      "contract_version": "1.0",
+      "status": "draft",
+      "description": "Android image file -> offline Google ML Kit category labels via Flutter MethodChannel; bounded file, memory and confidence, explicitly no general visual reasoning.",
+      "replacement": null
+    },
+    {
       "capability_id": "voice.device_policy",
       "contract_id": "voice.device_policy.v1",
       "contract_version": "1.0",
@@ -1033,5 +1041,5 @@
       ]
     }
   ],
-  "snapshot_sha256": "65ceaf23c3cffcfb3fee7a4d125a6b525afc5bd628de8517398beed4713213e2"
+  "snapshot_sha256": "01cb1f4151bb71f486cedad18c5f7eff47614c5a9a2657c01831d6848922e789"
 }
