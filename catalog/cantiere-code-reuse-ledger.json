@@ -120,7 +120,7 @@
       "certified": false,
       "classification": "candidate_requires_extraction_and_tests",
       "import_count": 7,
-      "module_status": "not_materialized",
+      "module_status": "tested_postprocessing_adapter_in_library",
       "path": "lib/features/chat/data/services/chat_local_image_vision_service.dart",
       "source_bytes": 4617,
       "source_commit": "acc8d28b54489c91cb4f59552a1be2e07203de1a",
@@ -129,7 +129,14 @@
         "AndroidChatLocalImageVisionService",
         "_LocalImageLabel"
       ],
-      "tested": false
+      "tested": true,
+      "library_pin": "vision.image_label_postprocessing.firstparty.cantiere@0.1.0",
+      "library_payload_sha256": "e87e4a04b1cc5d83923eabe896b1d63ef797788d1ee5492919ae5d93e05772f8",
+      "library_test_workflow_run": 40554890792,
+      "tested_platforms": [
+        "linux"
+      ],
+      "scope": "Adapted pure Dart label output only; source Android bridge and Flutter tests retained but native inference untested in Library"
     },
     {
       "blob_sha": "73bf737b8a65696f354492f0a70fe99f66927c08",
