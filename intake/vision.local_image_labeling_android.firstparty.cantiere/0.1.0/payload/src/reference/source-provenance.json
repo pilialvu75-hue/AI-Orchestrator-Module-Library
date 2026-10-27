@@ -1,0 +1,29 @@
+{
+  "schema": "ai-orchestrator.derived-firstparty-source.v1",
+  "source_repository": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva",
+  "source_commit": "acc8d28b54489c91cb4f59552a1be2e07203de1a",
+  "native_origin": {
+    "path": "android/app/src/main/kotlin/com/aiorchestrator/LocalImageVisionBridge.kt",
+    "git_blob_sha1": "210613e0b45a85bf72bf685c45ebf10a10999f43"
+  },
+  "dart_processor_origin": {
+    "library_package_pin": "vision.image_label_postprocessing.firstparty.cantiere@0.1.0",
+    "path": "payload/src/lib/local_image_labels.dart",
+    "original_cantiere_source_path": "lib/features/chat/data/services/chat_local_image_vision_service.dart",
+    "original_cantiere_blob_sha1": "c34a7c0bee21c7b44c90b4ecd5bf6c913aa3db72"
+  },
+  "adaptations": [
+    "Moved Kotlin bridge package to com.aivexus.local_image_vision",
+    "Replaced explicit FlutterEngine registration with FlutterPlugin plus BinaryMessenger registration and detach handler",
+    "Preserved Android worker, low-memory, RGB_565 downsampling, 8-MiB limit and bundled ML Kit 17.0.9",
+    "Added standalone Flutter package, Dart wrapper and MethodChannel tests",
+    "Reused pure Dart label processor without modification"
+  ],
+  "limitations": [
+    "Native original source is a source provenance reference, not a certified copied Android plugin",
+    "No real device inference test",
+    "Must not co-install with original Cantiere bridge on the same MethodChannel"
+  ],
+  "security_reviewed": false,
+  "production_approved": false
+}
