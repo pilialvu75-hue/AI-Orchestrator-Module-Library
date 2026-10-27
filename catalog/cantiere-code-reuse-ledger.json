@@ -1,0 +1,7 @@
+{
+  "schema": "ai-orchestrator.cantiere-code-reuse-ledger.v1",
+  "source_repository": "pilialvu75-hue/Ai-orchestrator-riserva",
+  "last_scanned_sha": "986fcacf2f276af6681a093d2d128ed5cf37ee7a",
+  "observations": [],
+  "baseline_note": "Start from Cantiere main prior to first real experimental Library sandbox import PR #919. Older source needs a separate historical backfill; no full-history coverage is claimed."
+}
