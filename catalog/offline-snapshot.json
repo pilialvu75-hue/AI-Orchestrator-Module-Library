@@ -60,6 +60,14 @@
       "replacement": null
     },
     {
+      "capability_id": "library.integration",
+      "contract_id": "library.integration.v1",
+      "contract_version": "1.0",
+      "status": "draft",
+      "description": "Read-only pinned Library experimental package verification and isolated staging; never a production installer.",
+      "replacement": null
+    },
+    {
       "capability_id": "network.http",
       "contract_id": "network.http.v1",
       "contract_version": "1.0",
@@ -1017,5 +1025,5 @@
       ]
     }
   ],
-  "snapshot_sha256": "4697d4dd0242f99679bea76d9791026066f6d0454c87506781d68c4dd63a52f7"
+  "snapshot_sha256": "92ea84b273a397c5768ad5797dbb94d9513f6732a5ecd239831414e4cde71f53"
 }

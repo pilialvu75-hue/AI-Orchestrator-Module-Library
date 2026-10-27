@@ -11,6 +11,13 @@
       "production_approved": false
     },
     {
+      "pin": "library.integration.firstparty.cantiere_preview_reader@0.1.0",
+      "path": "packages/experimental/library.integration.firstparty.cantiere_preview_reader/0.1.0/package.json",
+      "package_sha256": "fe65ae48f44be5db28eb9cb9399f5b5752d2979d03ad5cc5310dbc9dc3b5ce91",
+      "tier": "sandbox_preview",
+      "production_approved": false
+    },
+    {
       "pin": "release.update_manager.firstparty.mia@0.1.0",
       "path": "packages/experimental/release.update_manager.firstparty.mia/0.1.0/package.json",
       "package_sha256": "c3a498cf4ea0bc290fcb4c397920c4ba1142cdac6fe57a0a17f69b1e143d786c",
