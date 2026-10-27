@@ -154,7 +154,10 @@ class SandboxAvailabilityTests(unittest.TestCase):
 
     def test_cannot_use_preview_for_certified_package(self):
         from library_package import build_package
-        with self.assertRaises(PackageError):
+        catalog = self.root / "catalog" / "index.json"
+        catalog.parent.mkdir(parents=True)
+        catalog.write_text('{"assets":[]}', encoding="utf-8")
+        with self.assertRaisesRegex(PackageError, "catalog pin not found"):
             build_package(self.root, ASSET, VERSION)
 
 
