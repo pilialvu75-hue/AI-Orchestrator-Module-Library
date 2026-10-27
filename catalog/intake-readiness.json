@@ -8,9 +8,9 @@
     "ready_for_automatic_certification": 0,
     "blocker_counts": {
       "LICENSE_EVIDENCE_MISSING": 16,
-      "REPRODUCIBLE_TEST_EVIDENCE_MISSING": 19,
+      "REPRODUCIBLE_TEST_EVIDENCE_MISSING": 18,
       "SECURITY_REVIEW_EVIDENCE_MISSING": 20,
-      "SOURCE_SNAPSHOT_MISSING": 19
+      "SOURCE_SNAPSHOT_MISSING": 18
     }
   },
   "coverage": [
@@ -1191,20 +1191,16 @@
     {
       "asset_id": "release.update_manager.firstparty.mia",
       "version": "0.1.0",
-      "status": "discovered",
+      "status": "tested",
       "capabilities": [
         "release.update_manager"
       ],
       "source_repository": "https://github.com/pilialvu75-hue/Mia",
       "source_commit": "ebeaa2884bce22e891d15da7c1f61962dde0699a",
       "blockers": [
-        "SOURCE_SNAPSHOT_MISSING",
-        "REPRODUCIBLE_TEST_EVIDENCE_MISSING",
         "SECURITY_REVIEW_EVIDENCE_MISSING"
       ],
       "next_actions": [
-        "Materialize immutable source bytes from the pinned commit in an isolated evidence workflow.",
-        "Run isolated reproducible tests on the pinned source and attach a bound report.",
         "Attach an independently generated security report and SBOM bound to the pinned source."
       ],
       "independent_certification_authorized": false
