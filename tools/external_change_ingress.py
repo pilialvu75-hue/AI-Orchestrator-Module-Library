@@ -414,14 +414,32 @@ def cmd_check(args: argparse.Namespace) -> int:
                 file=sys.stderr,
             )
     unresolved = unresolved_incidents(registry)
-    for incident in unresolved:
+    # The hourly watcher is an observer, not an approval authority. It should
+    # report unclaimed changes without blocking unrelated CI or hiding history.
+    # Strict `check` (the default) still refuses canonical attribution.
+    monitor_only = bool(getattr(args, "monitor_only", False))
+    visible = unresolved[:10] if monitor_only else unresolved
+    for incident in visible:
         subject = f"PR #{incident['pull_request']}" if incident.get("pull_request") else str(incident.get("commit_sha"))[:12]
         print(
             f"UNRECONCILED: {incident.get('repository')} {subject} ({incident.get('incident_id')}). "
             "Main/Reviewer reconciliation evidence is required before canonical progress attribution.",
             file=sys.stderr,
         )
-    return 1 if errors or unresolved or unscanned else 0
+    if monitor_only and len(unresolved) > len(visible):
+        print(
+            f"UNRECONCILED_MORE: {len(unresolved) - len(visible)} additional "
+            "incident(s) retained in the durable registry.",
+            file=sys.stderr,
+        )
+    if monitor_only and unresolved:
+        print(
+            "::warning title=External changes await reconciliation::"
+            f"{len(unresolved)} unclaimed change(s) recorded; "
+            "no canonical progress or module certification is implied.",
+            file=sys.stderr,
+        )
+    return 1 if errors or unscanned or (unresolved and not monitor_only) else 0
 
 
 def main() -> None:
@@ -432,6 +450,10 @@ def main() -> None:
     scan.add_argument("--token")
     scan.add_argument("--now")
     check = subparsers.add_parser("check")
+    check.add_argument(
+        "--monitor-only", action="store_true",
+        help="report unresolved incidents as warnings; fail for missing source coverage",
+    )
     scan.set_defaults(func=cmd_scan)
     check.set_defaults(func=cmd_check)
     args = parser.parse_args()
