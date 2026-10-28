@@ -66,8 +66,10 @@ jobs:
             echo "External ingress ledger push raced with main; rescanning latest main."
           done
 
-      - name: Require observable source coverage and reconciliation for unclaimed changes
+      - name: Require source coverage; report unreconciled changes without blocking discovery
         shell: bash
         run: |
           set -euo pipefail
-          python tools/external_change_ingress.py check
+          # This hourly workflow observes; it does not approve any incident.
+          # Strict 'check' without --monitor-only remains the canonical gate.
+          python tools/external_change_ingress.py check --monitor-only
