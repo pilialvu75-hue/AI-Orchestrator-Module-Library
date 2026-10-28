@@ -7,6 +7,7 @@ on:
       - ".github/workflows/verify-upstream-swift.yml"
       - "tools/swift_probe.py"
       - "tools/swift_adapter.py"
+      - "tools/complete_swift_testing.py"
       - "tools/swift_adapters/**"
   schedule:
     # Cheap daily Linux planner; an unchanged source commit is probed once.
@@ -300,4 +301,46 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git commit -m "library: record tested native logging bridge, not certification [skip ci]"
+          git push origin HEAD:main
+
+  finalize_native_tested:
+    # Independent metadata-only verifier: test receipts are NOT authority.
+    # Re-fetch protected main job conclusions from GitHub before any writes.
+    needs: [prepare, record_adapter_trusted]
+    if: ${{ always() && needs.prepare.result == 'success' && (needs.record_adapter_trusted.result == 'success' || needs.record_adapter_trusted.result == 'skipped') }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 7
+    permissions:
+      contents: write
+      actions: read
+    steps:
+      - name: Checkout latest canonical Library main
+        uses: actions/checkout@v6
+        with:
+          ref: main
+          fetch-depth: 1
+      - name: Independently attest exact native job outcomes and advance to TESTED only
+        shell: bash
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          python3 tools/complete_swift_testing.py --root . \
+            --output "$RUNNER_TEMP/verified-swift-tested.json"
+          if [[ "$(python3 -c 'import json,os; print(json.load(open(os.environ["RUNNER_TEMP"]+"/verified-swift-tested.json"))["tested"])')" != "1" ]]; then
+            echo "No new fully source-bound native adapter test evidence."
+            exit 0
+          fi
+          python3 tools/validate_library.py
+          python3 -m unittest discover -s tests -p 'test_complete_swift_testing.py' -v
+          git add -- catalog/intake-readiness.json
+          git add -- intake/*/*/manifest.json
+          git add -- intake/*/*/evidence/test-report.json
+          if git diff --cached --quiet; then
+            echo "Test state already confirmed."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -m "library: attest native adapter as tested only, security pending [skip ci]"
           git push origin HEAD:main
