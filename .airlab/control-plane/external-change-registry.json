@@ -16,7 +16,7 @@
     {
       "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
       "baseline_at": "2026-10-03T16:20:00Z",
-      "cursor_merged_at": "2026-10-27T23:46:11Z"
+      "cursor_merged_at": "2026-10-28T10:50:50Z"
     },
     {
       "repository": "pilialvu75-hue/Ai-orchestrator-diagnostics",
@@ -2108,6 +2108,40 @@
       "url": "https://github.com/pilialvu75-hue/AI-Orchestrator-Module-Researcher/commit/3c89f1d116e3348e9f8e1e9c362395976ed379ff",
       "match_ref": null,
       "reconciliation": null
+    },
+    {
+      "incident_id": "835a3a01c837d284ec31",
+      "status": "UNRECONCILED",
+      "detected_at": "2026-10-28T11:39:10Z",
+      "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
+      "kind": "direct_commit",
+      "pull_request": null,
+      "merge_sha": null,
+      "commit_sha": "a9edd542a23646dabb8f132b516acc1298a090d1",
+      "head_branch": null,
+      "base_branch": "main",
+      "change_at": "2026-10-28T10:48:49Z",
+      "title": "feat(chat): completa menu ⋮; Archivia solo visibile e disattivato (#924)",
+      "url": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/a9edd542a23646dabb8f132b516acc1298a090d1",
+      "match_ref": null,
+      "reconciliation": null
+    },
+    {
+      "incident_id": "b3942dc7f6c6c7bef489",
+      "status": "UNRECONCILED",
+      "detected_at": "2026-10-28T11:39:10Z",
+      "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
+      "kind": "direct_commit",
+      "pull_request": null,
+      "merge_sha": null,
+      "commit_sha": "ef0dcdbda97f680bd0fad0526af0c9c1bc444a6f",
+      "head_branch": null,
+      "base_branch": "main",
+      "change_at": "2026-10-28T10:50:50Z",
+      "title": "feat(Image LOCAL): riordina righe OCR da coordinate ML Kit; PDF resta separato (#925)",
+      "url": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/ef0dcdbda97f680bd0fad0526af0c9c1bc444a6f",
+      "match_ref": null,
+      "reconciliation": null
     }
   ],
   "reconciliation_history": [
@@ -2118,35 +2152,35 @@
       "note": "Known motivating example for CP-HARDEN-03. It predates this incremental detector and is not retroactively reopened."
     }
   ],
-  "last_scan_at": "2026-10-28T10:39:33Z",
+  "last_scan_at": "2026-10-28T11:39:10Z",
   "scan_health": {
     "pilialvu75-hue/AI-Orchestrator-Module-Library": {
       "state": "OK",
-      "last_success_at": "2026-10-28T10:39:33Z",
+      "last_success_at": "2026-10-28T11:39:10Z",
       "last_failure_at": null,
       "error_code": null
     },
     "pilialvu75-hue/Ai-orchestrator-riserva": {
       "state": "OK",
-      "last_success_at": "2026-10-28T10:39:33Z",
+      "last_success_at": "2026-10-28T11:39:10Z",
       "last_failure_at": "2026-10-28T07:39:58Z",
       "error_code": null
     },
     "pilialvu75-hue/Ai-orchestrator-diagnostics": {
       "state": "OK",
-      "last_success_at": "2026-10-28T10:39:33Z",
+      "last_success_at": "2026-10-28T11:39:10Z",
       "last_failure_at": "2026-10-28T07:39:58Z",
       "error_code": null
     },
     "pilialvu75-hue/AI-Orchestrator-Module-Researcher": {
       "state": "OK",
-      "last_success_at": "2026-10-28T10:39:33Z",
+      "last_success_at": "2026-10-28T11:39:10Z",
       "last_failure_at": "2026-10-28T07:39:58Z",
       "error_code": null
     },
     "pilialvu75-hue/Ai_orchestrator-prova": {
       "state": "OK",
-      "last_success_at": "2026-10-28T10:39:33Z",
+      "last_success_at": "2026-10-28T11:39:10Z",
       "last_failure_at": "2026-10-28T07:39:58Z",
       "error_code": null
     }
