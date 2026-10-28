@@ -201,6 +201,61 @@ class ExternalChangeIngressTests(unittest.TestCase):
             self.assertIsNone(saved["scan_health"]["owner/private"]["error_code"])
             self.assertEqual(module.cmd_check(argparse.Namespace(registry=str(path))), 0)
 
+    def test_monitor_reports_unreconciled_without_claiming_certification(self):
+        registry = module.scan_registry(
+            self._registry(), [], {"owner/app": [self._pr()]},
+            now="2026-10-03T11:05:00Z",
+        )
+        module.record_scan_health(
+            registry, {"owner/app": [self._pr()]}, {},
+            now="2026-10-03T11:05:00Z",
+        )
+        with tempfile.TemporaryDirectory() as folder:
+            path = Path(folder) / "registry.json"
+            path.write_text(json.dumps(registry), encoding="utf-8")
+            with patch("sys.stderr", new_callable=io.StringIO) as stderr:
+                status = module.cmd_check(argparse.Namespace(
+                    registry=str(path), monitor_only=True,
+                ))
+            self.assertEqual(status, 0)
+            self.assertIn("UNRECONCILED:", stderr.getvalue())
+            self.assertIn("::warning title=External changes", stderr.getvalue())
+            saved = json.loads(path.read_text(encoding="utf-8"))
+            self.assertEqual(saved["incidents"][0]["status"], "UNRECONCILED")
+            self.assertIsNone(saved["incidents"][0]["reconciliation"])
+            # Strict validation remains a failing gate for progress attribution.
+            with patch("sys.stderr", new_callable=io.StringIO):
+                self.assertEqual(
+                    module.cmd_check(argparse.Namespace(registry=str(path))),
+                    1,
+                )
+
+    def test_monitor_never_passes_when_source_coverage_is_incomplete(self):
+        registry = self._registry()
+        registry["incidents"] = [{
+            "incident_id": "one",
+            "status": "UNRECONCILED",
+            "repository": "owner/app",
+            "pull_request": 12,
+            "reconciliation": None,
+        }]
+        registry["scan_health"] = {
+            "owner/app": {
+                "state": "UNAVAILABLE",
+                "error_code": "GITHUB_NOT_FOUND_OR_INACCESSIBLE_404",
+            },
+        }
+        with tempfile.TemporaryDirectory() as folder:
+            path = Path(folder) / "registry.json"
+            path.write_text(json.dumps(registry), encoding="utf-8")
+            with patch("sys.stderr", new_callable=io.StringIO) as stderr:
+                status = module.cmd_check(argparse.Namespace(
+                    registry=str(path), monitor_only=True,
+                ))
+            self.assertEqual(status, 1)
+            self.assertIn("SOURCE_UNAVAILABLE:", stderr.getvalue())
+            self.assertIn("UNRECONCILED:", stderr.getvalue())
+
     def test_unknown_api_error_fails_without_fabricating_scan_health(self):
         with patch.object(module, "fetch_changes", side_effect=RuntimeError("GitHub API 500")):
             with self.assertRaisesRegex(RuntimeError, "API 500"):
