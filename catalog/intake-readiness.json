@@ -3,14 +3,14 @@
   "report_type": "read_only_evidence_gaps_not_certification",
   "summary": {
     "certified_catalog_entries": 3,
-    "intake_candidates": 23,
-    "blocked_intake_candidates": 23,
+    "intake_candidates": 24,
+    "blocked_intake_candidates": 24,
     "ready_for_automatic_certification": 0,
     "blocker_counts": {
       "LICENSE_EVIDENCE_MISSING": 19,
-      "REPRODUCIBLE_TEST_EVIDENCE_MISSING": 18,
-      "SECURITY_REVIEW_EVIDENCE_MISSING": 23,
-      "SOURCE_SNAPSHOT_MISSING": 18
+      "REPRODUCIBLE_TEST_EVIDENCE_MISSING": 19,
+      "SECURITY_REVIEW_EVIDENCE_MISSING": 24,
+      "SOURCE_SNAPSHOT_MISSING": 19
     }
   },
   "coverage": [
@@ -627,6 +627,30 @@
       ]
     },
     {
+      "capability_id": "diagnostics.logging",
+      "title": "Structured logging and diagnostics",
+      "priority": "high",
+      "desired_candidates": 2,
+      "certified_count": 1,
+      "remaining_to_goal": 1,
+      "intake_candidates": 3,
+      "blocked_candidates": 3,
+      "certified_by_target": [
+        {
+          "target": "android",
+          "certified_count": 0
+        },
+        {
+          "target": "desktop",
+          "certified_count": 1
+        },
+        {
+          "target": "web",
+          "certified_count": 0
+        }
+      ]
+    },
+    {
       "capability_id": "storage.local_db",
       "title": "Local database / persistence",
       "priority": "high",
@@ -643,30 +667,6 @@
         {
           "target": "desktop",
           "certified_count": 1
-        }
-      ]
-    },
-    {
-      "capability_id": "diagnostics.logging",
-      "title": "Structured logging and diagnostics",
-      "priority": "high",
-      "desired_candidates": 2,
-      "certified_count": 1,
-      "remaining_to_goal": 1,
-      "intake_candidates": 2,
-      "blocked_candidates": 2,
-      "certified_by_target": [
-        {
-          "target": "android",
-          "certified_count": 0
-        },
-        {
-          "target": "desktop",
-          "certified_count": 1
-        },
-        {
-          "target": "web",
-          "certified_count": 0
         }
       ]
     },
@@ -958,6 +958,27 @@
       ],
       "next_actions": [
         "Resolve the upstream license and supply its attributable license file.",
+        "Materialize immutable source bytes from the pinned commit in an isolated evidence workflow.",
+        "Run isolated reproducible tests on the pinned source and attach a bound report.",
+        "Attach an independently generated security report and SBOM bound to the pinned source."
+      ],
+      "independent_certification_authorized": false
+    },
+    {
+      "asset_id": "diagnostics.logging.avdlee.diagnostics",
+      "version": "0.1.0",
+      "status": "discovered",
+      "capabilities": [
+        "diagnostics.logging"
+      ],
+      "source_repository": "https://github.com/AvdLee/Diagnostics",
+      "source_commit": "e3b6ffc95ab07ac3cb31e99103fc64cfb13efaeb",
+      "blockers": [
+        "SOURCE_SNAPSHOT_MISSING",
+        "REPRODUCIBLE_TEST_EVIDENCE_MISSING",
+        "SECURITY_REVIEW_EVIDENCE_MISSING"
+      ],
+      "next_actions": [
         "Materialize immutable source bytes from the pinned commit in an isolated evidence workflow.",
         "Run isolated reproducible tests on the pinned source and attach a bound report.",
         "Attach an independently generated security report and SBOM bound to the pinned source."
