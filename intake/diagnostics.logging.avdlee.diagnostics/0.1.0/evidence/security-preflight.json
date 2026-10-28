@@ -1,0 +1,64 @@
+{
+  "asset_id": "diagnostics.logging.avdlee.diagnostics",
+  "certification_authorized": false,
+  "dependency_licenses": [
+    {
+      "commit": "a7acaf40f8bd67a1f3a05a14de5b6a861ac3d1ac",
+      "license_path": "license",
+      "license_resolved": true,
+      "license_sha256": "5c932d88256b4ab958f64a856fa48e8bd1f55bc1d96b8149c65689e0c61789d3",
+      "license_spdx": "MIT",
+      "repository": "https://github.com/sindresorhus/ExceptionCatcher"
+    }
+  ],
+  "generated_at": "2026-10-28T18:40:48Z",
+  "osv_queries": [
+    {
+      "commit": "e3b6ffc95ab07ac3cb31e99103fc64cfb13efaeb"
+    },
+    {
+      "commit": "a7acaf40f8bd67a1f3a05a14de5b6a861ac3d1ac"
+    },
+    {
+      "package": {
+        "ecosystem": "SwiftURL",
+        "name": "github.com/sindresorhus/ExceptionCatcher"
+      },
+      "version": "2.0.1"
+    }
+  ],
+  "osv_results": [
+    {},
+    {},
+    {}
+  ],
+  "osv_vulnerability_ids": [],
+  "payload_sha256": "071e62e85210fba7464dc190fbdaea5aacd604c5c5207414b4f634cac6f3a423",
+  "review_required_reasons": [
+    "sensitive_system_capture_requires_independent_review"
+  ],
+  "reviewed": false,
+  "sbom_path": "evidence/sbom.cdx.json",
+  "sbom_sha256": "c26257866fb0766734813eb61dabed95bb2862e32ec0c9534576e96b1ca5f61d",
+  "schema": "ai-orchestrator.swift-security-preflight.v1",
+  "security_scope": "static source patterns and lockfile-pinned dependency OSV; not a full source audit",
+  "source_commit": "e3b6ffc95ab07ac3cb31e99103fc64cfb13efaeb",
+  "source_privacy_findings": [
+    {
+      "classification": "requires_independent_privacy_security_review",
+      "rule": "global_stdout_stderr_capture",
+      "source_path": "Sources/Logging/DiagnosticsLogger.swift"
+    },
+    {
+      "classification": "requires_independent_privacy_security_review",
+      "rule": "process_environment_access",
+      "source_path": "Sources/Logging/DiagnosticsLogger.swift"
+    },
+    {
+      "classification": "requires_independent_privacy_security_review",
+      "rule": "system_metrics_monitoring",
+      "source_path": "Sources/Logging/DiagnosticsLogger.swift"
+    }
+  ],
+  "version": "0.1.0"
+}

@@ -1,0 +1,38 @@
+{
+  "bomFormat": "CycloneDX",
+  "components": [
+    {
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/sindresorhus/ExceptionCatcher/tree/a7acaf40f8bd67a1f3a05a14de5b6a861ac3d1ac"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "name": "ExceptionCatcher",
+      "type": "library",
+      "version": "2.0.1"
+    }
+  ],
+  "metadata": {
+    "component": {
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "071e62e85210fba7464dc190fbdaea5aacd604c5c5207414b4f634cac6f3a423"
+        }
+      ],
+      "name": "diagnostics.logging.avdlee.diagnostics",
+      "type": "library",
+      "version": "0.1.0"
+    }
+  },
+  "specVersion": "1.5",
+  "version": 1
+}
