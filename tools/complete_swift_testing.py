@@ -102,7 +102,7 @@ def _eligible(root: Path, path: Path) -> tuple[dict, dict, dict] | None:
     payload = manifest.get("payload") or {}
     if (manifest.get("id") != base.parent.name
             or manifest.get("version") != base.name
-            or manifest.get("status") not in {"discovered", "quarantined", "normalized"}
+            or manifest.get("status") not in {"discovered", "quarantined", "normalized", "tested"}
             or payload.get("type") != "upstream_reference"
             or "swift" not in manifest.get("languages", [])
             or "macos" not in manifest.get("platforms", [])
@@ -139,6 +139,17 @@ def _eligible(root: Path, path: Path) -> tuple[dict, dict, dict] | None:
         raise TestPromotionError("native test evidence does not match canonical bridge")
     if payload_tree_sha256(base / "payload") != payload["sha256"]:
         raise TestPromotionError("upstream source changed after native test")
+    # TESTED does not mean every future adapter-template revision passed.
+    # Re-attest the exact current template once the new protected CI run
+    # succeeds; never reuse an older bridge test-report for changed code.
+    if manifest.get("status") == "tested":
+        old_report_path = base / "evidence" / "test-report.json"
+        if old_report_path.is_file():
+            prior = read(old_report_path)
+            if (prior.get("adapter_sha256") == adapter["adapter_sha256"]
+                    and prior.get("payload_sha256") == payload["sha256"]
+                    and (manifest.get("validation") or {}).get("tests_passed") is True):
+                return None
     return manifest, original, adapter
 
 

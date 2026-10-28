@@ -3,8 +3,19 @@ import Diagnostics
 @testable import AivexusDiagnosticsLoggingBridge
 
 final class AivexusDiagnosticsBridgeTests: XCTestCase {
+    func testCaptureIsDisabledUnlessCallerExplicitlyOptsIn() {
+        XCTAssertThrowsError(
+            try AivexusDiagnosticsLoggingBridge.initialize()
+        ) { error in
+            XCTAssertEqual(
+                error as? AivexusLoggingError,
+                .explicitCaptureAuthorizationRequired
+            )
+        }
+    }
+
     func testBootAndRealLoggingThroughPinnedDependency() throws {
-        try AivexusDiagnosticsLoggingBridge.initialize()
+        try AivexusDiagnosticsLoggingBridge.initialize(allowProcessWideLogCapture: true)
         XCTAssertTrue(DiagnosticsLogger.isSetUp())
         let rendered = try AivexusDiagnosticsLoggingBridge.log(
             "bridge integration event", severity: .info
@@ -13,7 +24,7 @@ final class AivexusDiagnosticsBridgeTests: XCTestCase {
     }
 
     func testSecretRedactionBeforeForwarding() throws {
-        try AivexusDiagnosticsLoggingBridge.initialize()
+        try AivexusDiagnosticsLoggingBridge.initialize(allowProcessWideLogCapture: true)
         let rendered = try AivexusDiagnosticsLoggingBridge.log(
             "password=private-123 token: AB12 authorization: Bearer my-token"
         )
@@ -25,14 +36,14 @@ final class AivexusDiagnosticsBridgeTests: XCTestCase {
     }
 
     func testEmptyInputFailsWithoutSending() throws {
-        try AivexusDiagnosticsLoggingBridge.initialize()
+        try AivexusDiagnosticsLoggingBridge.initialize(allowProcessWideLogCapture: true)
         XCTAssertThrowsError(try AivexusDiagnosticsLoggingBridge.log("  \n ")) { error in
             XCTAssertEqual(error as? AivexusLoggingError, .emptyMessage)
         }
     }
 
     func testOversizeFailsWithoutSending() throws {
-        try AivexusDiagnosticsLoggingBridge.initialize()
+        try AivexusDiagnosticsLoggingBridge.initialize(allowProcessWideLogCapture: true)
         XCTAssertThrowsError(
             try AivexusDiagnosticsLoggingBridge.log(
                 String(repeating: "x", count: AivexusDiagnosticsLoggingBridge.maxMessageBytes + 1)

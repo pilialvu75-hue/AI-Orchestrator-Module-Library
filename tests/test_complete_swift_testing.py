@@ -12,6 +12,7 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "tools"))
 from complete_swift_testing import TestPromotionError, promote_tested  # noqa: E402
 from library_evidence import verify_manifest_evidence  # noqa: E402
+from library_source_integrity import payload_tree_sha256  # noqa: E402
 
 SOURCE = ROOT / "intake/diagnostics.logging.avdlee.diagnostics/0.1.0"
 TEMPLATE = ROOT / "tools/swift_adapters/diagnostics.logging.v1"
@@ -28,6 +29,13 @@ class TrustedSwiftTestCompletion(unittest.TestCase):
         bridge = self.root / "tools/swift_adapters/diagnostics.logging.v1"
         bridge.parent.mkdir(parents=True)
         shutil.copytree(TEMPLATE, bridge)
+        # Mocked GitHub verifier test fixtures must represent a complete
+        # source+adapter test pair with the CURRENT bridge template digest.
+        # This does NOT modify real receipts or bypass production CI checks.
+        native_proof_path = self.base / "provenance/swift-adapter.json"
+        native_proof = json.loads(native_proof_path.read_text())
+        native_proof["adapter_sha256"] = payload_tree_sha256(bridge)
+        native_proof_path.write_text(json.dumps(native_proof))
         # The protected job first advances the working checkout to TESTED,
         # then runs this regression suite. Always reconstruct the original
         # discovered fixture explicitly, never inherit the live checkout state.
@@ -79,6 +87,31 @@ class TrustedSwiftTestCompletion(unittest.TestCase):
         with self.assertRaisesRegex(TestPromotionError, "source changed"):
             promote_tested(self.root, verify=lambda *_: True)
         self.assertEqual(self.original, json.loads((self.base / "manifest.json").read_text()))
+
+    def test_tested_source_requires_fresh_bridge_evidence_after_template_change(self):
+        verify = lambda _run, _job: True
+        first = promote_tested(self.root, verify=verify, now="2026-10-28T18:30:00Z")
+        self.assertEqual(1, first["tested"])
+        old_report = json.loads((self.base / "evidence/test-report.json").read_text())
+        self.assertEqual(0, promote_tested(self.root, verify=verify)["tested"])
+
+        template = (self.root / "tools/swift_adapters/diagnostics.logging.v1"
+                    / "Sources/AivexusDiagnosticsLoggingBridge.swift")
+        template.write_text(template.read_text() + "\n// new guarded bridge revision\n")
+        new_digest = payload_tree_sha256(template.parent.parent)
+        proof_path = self.base / "provenance/swift-adapter.json"
+        proof = json.loads(proof_path.read_text())
+        proof["adapter_sha256"] = new_digest
+        proof["github_run_id"] = "40788888888"
+        proof_path.write_text(json.dumps(proof))
+
+        revised = promote_tested(self.root, verify=verify, now="2026-10-28T19:00:00Z")
+        self.assertEqual(1, revised["tested"])
+        report = json.loads((self.base / "evidence/test-report.json").read_text())
+        self.assertNotEqual(old_report["adapter_sha256"], report["adapter_sha256"])
+        self.assertEqual(new_digest, report["adapter_sha256"])
+        self.assertEqual("tested", json.loads((self.base / "manifest.json").read_text())["status"])
+        self.assertEqual(0, promote_tested(self.root, verify=verify)["tested"])
 
     def test_upstream_test_failure_never_advances(self):
         path = self.base / "provenance/swift-probe.json"

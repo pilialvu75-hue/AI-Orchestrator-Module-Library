@@ -51,7 +51,7 @@ def _verified_candidate(root: Path, base: Path) -> dict | None:
     if (
         data.get("id") != base.parent.name
         or data.get("version") != base.name
-        or data.get("status") != "discovered"
+        or data.get("status") not in {"discovered", "tested"}
         or data.get("capabilities") != ["diagnostics.logging"]
         or "swift" not in [str(x).lower() for x in data.get("languages", [])]
         or TARGET not in data.get("platforms", [])

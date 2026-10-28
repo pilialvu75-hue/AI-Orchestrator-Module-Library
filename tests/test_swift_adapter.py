@@ -139,6 +139,20 @@ class SwiftAdapterTests(unittest.TestCase):
         path.write_text(json.dumps(proof))
         self.assertEqual(0, plan(self.root)["count"])
 
+    def test_tested_candidate_can_build_new_adapter_revision(self):
+        self.manifest["status"] = "tested"
+        (self.base / "manifest.json").write_text(json.dumps(self.manifest))
+        old_plan = plan(self.root)
+        self.assertEqual(1, old_plan["count"])
+        record(self.root, old_plan, self.result(old_plan, 0), "success", "40777777777")
+        self.assertEqual(0, plan(self.root)["count"])
+        new_bridge = (self.root / "tools/swift_adapters/diagnostics.logging.v1"
+                      / "Sources/AivexusDiagnosticsLoggingBridge.swift")
+        new_bridge.write_text(new_bridge.read_text() + "\n// explicit opt-in revision\n")
+        next_plan = plan(self.root)
+        self.assertEqual(1, next_plan["count"])
+        self.assertNotEqual(old_plan["adapter_sha256"], next_plan["adapter_sha256"])
+
     def test_new_template_version_is_retested_not_assumed_valid(self):
         item = plan(self.root)
         record(self.root, item, self.result(item, 1), "failure", "40777777777")
