@@ -1,6 +1,6 @@
 {
   "baseline_note": "Start from Cantiere main prior to first real experimental Library sandbox import PR #919. Older source needs a separate historical backfill; no full-history coverage is claimed.",
-  "last_scanned_sha": "acc8d28b54489c91cb4f59552a1be2e07203de1a",
+  "last_scanned_sha": "bcea24bdc63cb3ced62a216e95cb35be57969601",
   "observations": [
     {
       "blob_sha": "5a65cc4239184866e02178141661db4faac24fd1",
@@ -60,6 +60,9 @@
       "certified": false,
       "classification": "app_bound_or_helper_review",
       "import_count": 14,
+      "library_payload_sha256": "878d573db79710f14e7d21a477ea47ebba54c521a67844b390dc8c68bae5c709",
+      "library_pin": "vision.local_image_labeling_android.firstparty.cantiere@0.1.0",
+      "library_test_workflow_run": 40557369058,
       "module_status": "android_plugin_compiled_no_device_test",
       "path": "android/app/src/main/kotlin/com/aiorchestrator/LocalImageVisionBridge.kt",
       "source_bytes": 8237,
@@ -67,9 +70,6 @@
       "source_sha256": "aa0d7c472fe8010a89a1a3801893ccba958d0aaf944194e594e74961f25b10ca",
       "symbols": [],
       "tested": true,
-      "library_pin": "vision.local_image_labeling_android.firstparty.cantiere@0.1.0",
-      "library_payload_sha256": "878d573db79710f14e7d21a477ea47ebba54c521a67844b390dc8c68bae5c709",
-      "library_test_workflow_run": 40557369058,
       "tested_platforms": [
         "linux",
         "android"
@@ -128,8 +128,12 @@
       "certified": false,
       "classification": "candidate_requires_extraction_and_tests",
       "import_count": 7,
+      "library_payload_sha256": "e87e4a04b1cc5d83923eabe896b1d63ef797788d1ee5492919ae5d93e05772f8",
+      "library_pin": "vision.image_label_postprocessing.firstparty.cantiere@0.1.0",
+      "library_test_workflow_run": 40554890792,
       "module_status": "tested_postprocessing_adapter_in_library",
       "path": "lib/features/chat/data/services/chat_local_image_vision_service.dart",
+      "scope": "Adapted pure Dart label output only; source Android bridge and Flutter tests retained but native inference untested in Library",
       "source_bytes": 4617,
       "source_commit": "acc8d28b54489c91cb4f59552a1be2e07203de1a",
       "source_sha256": "9dd3c8b2f99a3ca8ec6f1b405fb5eb75e579d2bfde85b43c55564f2f6cba6b9c",
@@ -138,13 +142,9 @@
         "_LocalImageLabel"
       ],
       "tested": true,
-      "library_pin": "vision.image_label_postprocessing.firstparty.cantiere@0.1.0",
-      "library_payload_sha256": "e87e4a04b1cc5d83923eabe896b1d63ef797788d1ee5492919ae5d93e05772f8",
-      "library_test_workflow_run": 40554890792,
       "tested_platforms": [
         "linux"
-      ],
-      "scope": "Adapted pure Dart label output only; source Android bridge and Flutter tests retained but native inference untested in Library"
+      ]
     },
     {
       "blob_sha": "73bf737b8a65696f354492f0a70fe99f66927c08",
@@ -157,6 +157,256 @@
       "source_bytes": 5007,
       "source_commit": "acc8d28b54489c91cb4f59552a1be2e07203de1a",
       "source_sha256": "b6f9ce0ab565cde597dfd480809e837329cf08b2dc305e5a9de1b42c915ce8ac",
+      "symbols": [],
+      "tested": false
+    },
+    {
+      "blob_sha": "c798693e91ca87a69fa29006898dd3c404e21266",
+      "capability_hint": "utility.reuse",
+      "certified": false,
+      "classification": "app_bound_or_helper_review",
+      "import_count": 14,
+      "module_status": "not_materialized",
+      "path": "android/app/src/main/kotlin/com/aiorchestrator/LocalImageTextBridge.kt",
+      "source_bytes": 7547,
+      "source_commit": "bcea24bdc63cb3ced62a216e95cb35be57969601",
+      "source_sha256": "d034b8259348bd62aedb49936a16391adddb665d7cad0423d6d17da34ad0065f",
+      "symbols": [],
+      "tested": false
+    },
+    {
+      "blob_sha": "314a4ca196e9820dfbe3a1910a41b440c773d143",
+      "capability_hint": "utility.reuse",
+      "certified": false,
+      "classification": "candidate_requires_extraction_and_tests",
+      "import_count": 20,
+      "module_status": "not_materialized",
+      "path": "android/app/src/main/kotlin/com/aiorchestrator/MainActivity.kt",
+      "source_bytes": 35771,
+      "source_commit": "bcea24bdc63cb3ced62a216e95cb35be57969601",
+      "source_sha256": "cc25c37bd45f8811c78ea62190f4ed31d76aac9269581ece2067fae1a04ac6af",
+      "symbols": [
+        "MainActivity"
+      ],
+      "tested": false
+    },
+    {
+      "blob_sha": "deb9e304d93cd8e71767ef080a9ca18f7a86bc7c",
+      "capability_hint": "release.update_manager",
+      "certified": false,
+      "classification": "candidate_requires_extraction_and_tests",
+      "import_count": 17,
+      "module_status": "not_materialized",
+      "path": "lib/core/system/update/update_manager.dart",
+      "source_bytes": 68529,
+      "source_commit": "bcea24bdc63cb3ced62a216e95cb35be57969601",
+      "source_sha256": "f1e18e4e34dab106d41b335575cfd1c2e07a2d41dd14617f440600c7ab4edb47",
+      "symbols": [
+        "_ApkVerificationResult",
+        "_InstalledIdentity",
+        "UpdateManager"
+      ],
+      "tested": false
+    },
+    {
+      "blob_sha": "85d0048fc74bf1f1e7929746b9dd172ecd9f7789",
+      "capability_hint": "utility.reuse",
+      "certified": false,
+      "classification": "candidate_requires_extraction_and_tests",
+      "import_count": 27,
+      "module_status": "not_materialized",
+      "path": "lib/features/chat/data/repositories/chat_repository_impl.dart",
+      "source_bytes": 30780,
+      "source_commit": "bcea24bdc63cb3ced62a216e95cb35be57969601",
+      "source_sha256": "611b4a2c07e297d58874d040133d357f5e8e8a122f1e622460596f3271b43005",
+      "symbols": [
+        "ChatRepositoryImpl"
+      ],
+      "tested": false
+    },
+    {
+      "blob_sha": "9ff7ae674bca272f87f6781a09c1d1139a5e5b9b",
+      "capability_hint": "utility.reuse",
+      "certified": false,
+      "classification": "candidate_requires_extraction_and_tests",
+      "import_count": 3,
+      "module_status": "not_materialized",
+      "path": "lib/features/chat/data/services/chat_local_image_ocr_enrichment.dart",
+      "source_bytes": 3713,
+      "source_commit": "bcea24bdc63cb3ced62a216e95cb35be57969601",
+      "source_sha256": "59880392fc8bebf5f39a852a85cdc77ef94d1abd426092f524c9e356ace4c99e",
+      "symbols": [
+        "ChatLocalImageOcrEnrichment",
+        "ChatLocalOcrResult"
+      ],
+      "tested": false
+    },
+    {
+      "blob_sha": "cd3022cd71d72615aec378bfae0f2f0e46c668c1",
+      "capability_hint": "utility.reuse",
+      "certified": false,
+      "classification": "candidate_requires_extraction_and_tests",
+      "import_count": 9,
+      "module_status": "not_materialized",
+      "path": "lib/features/chat/data/services/chat_local_image_vision_service.dart",
+      "source_bytes": 3659,
+      "source_commit": "bcea24bdc63cb3ced62a216e95cb35be57969601",
+      "source_sha256": "12e636b5b11849390dcdf55321f5cdde32e9034148943fa26202d5b5885ae7dd",
+      "symbols": [
+        "AndroidChatLocalImageVisionService"
+      ],
+      "tested": false
+    },
+    {
+      "blob_sha": "2adaaae58eacde9ee54d59dabd7c99af223a983a",
+      "capability_hint": "utility.reuse",
+      "certified": false,
+      "classification": "app_bound_or_helper_review",
+      "import_count": 117,
+      "module_status": "not_materialized",
+      "path": "lib/injection_container.dart",
+      "source_bytes": 31539,
+      "source_commit": "bcea24bdc63cb3ced62a216e95cb35be57969601",
+      "source_sha256": "633d3e9b3eccc6945e1dae46a35ca1bf89c7fc45bc6357c53f8a685fca6a669d",
+      "symbols": [],
+      "tested": false
+    },
+    {
+      "blob_sha": "ea7eb39825fde4f3ed8c4c8904085addde374411",
+      "capability_hint": "utility.reuse",
+      "certified": false,
+      "classification": "app_bound_or_helper_review",
+      "import_count": 14,
+      "module_status": "not_materialized",
+      "path": "packages/cantiere_local_image_vision/android/src/main/kotlin/com/aivexus/local_image_vision/LocalImageVisionBridge.kt",
+      "source_bytes": 8454,
+      "source_commit": "bcea24bdc63cb3ced62a216e95cb35be57969601",
+      "source_sha256": "024830c1526d98a2b86ace0926ff239c563325be40118aee1e58592d8ad6fbf6",
+      "symbols": [],
+      "tested": false
+    },
+    {
+      "blob_sha": "58bb596caafcb7c77e0cfa55c9ea629b75e28b3a",
+      "capability_hint": "utility.reuse",
+      "certified": false,
+      "classification": "candidate_requires_extraction_and_tests",
+      "import_count": 1,
+      "module_status": "not_materialized",
+      "path": "packages/cantiere_local_image_vision/android/src/main/kotlin/com/aivexus/local_image_vision/LocalImageVisionPlugin.kt",
+      "source_bytes": 624,
+      "source_commit": "bcea24bdc63cb3ced62a216e95cb35be57969601",
+      "source_sha256": "4c809188b282d5bf88c6552b3ea864d3115e1c519ba24181958b521de1504032",
+      "symbols": [
+        "LocalImageVisionPlugin"
+      ],
+      "tested": false
+    },
+    {
+      "blob_sha": "ea27867c5443e79df96c5cc7fb5dabb7c4cdd0ac",
+      "capability_hint": "utility.reuse",
+      "certified": false,
+      "classification": "candidate_requires_extraction_and_tests",
+      "import_count": 3,
+      "module_status": "not_materialized",
+      "path": "packages/cantiere_local_image_vision/lib/cantiere_local_image_vision.dart",
+      "source_bytes": 1453,
+      "source_commit": "bcea24bdc63cb3ced62a216e95cb35be57969601",
+      "source_sha256": "05607d4541e697d8d90dc33a46c1f630386f2a2a9208c7ceec7b110c5dd97047",
+      "symbols": [
+        "CantiereLocalImageVision"
+      ],
+      "tested": false
+    },
+    {
+      "blob_sha": "7ed9018e4e77f9bc5dfdc1afed8636355672f9a5",
+      "capability_hint": "utility.reuse",
+      "certified": false,
+      "classification": "candidate_requires_extraction_and_tests",
+      "import_count": 0,
+      "module_status": "not_materialized",
+      "path": "packages/cantiere_local_image_vision/lib/src/local_image_labels.dart",
+      "source_bytes": 2660,
+      "source_commit": "bcea24bdc63cb3ced62a216e95cb35be57969601",
+      "source_sha256": "e562e82cfe345d3e1853f8895e74dc5b8558a58105d89a7d3cecccda56ec1f38",
+      "symbols": [
+        "LocalImageLabel",
+        "LocalImageLabelResult"
+      ],
+      "tested": false
+    },
+    {
+      "blob_sha": "f58e8d0e5d695a01da69248e74364605ae31e2c7",
+      "capability_hint": "utility.reuse",
+      "certified": false,
+      "classification": "test_support",
+      "import_count": 3,
+      "module_status": "not_materialized",
+      "path": "packages/cantiere_local_image_vision/test/cantiere_local_image_vision_test.dart",
+      "source_bytes": 2912,
+      "source_commit": "bcea24bdc63cb3ced62a216e95cb35be57969601",
+      "source_sha256": "0d70b5f41d1e6cb065797ab0fad9c0eba37df5520b0286712998badb858e42be",
+      "symbols": [],
+      "tested": false
+    },
+    {
+      "blob_sha": "0581767c4bc8076888abb17c47e90295d30bba06",
+      "capability_hint": "utility.reuse",
+      "certified": false,
+      "classification": "candidate_requires_extraction_and_tests",
+      "import_count": 3,
+      "module_status": "not_materialized",
+      "path": "scripts/check_android_release_gate.py",
+      "source_bytes": 4404,
+      "source_commit": "bcea24bdc63cb3ced62a216e95cb35be57969601",
+      "source_sha256": "4bbe44bbb12d44b3c28d7b63f05a6daab0d5fa1cd9e9f85f9eac90daf9790d72",
+      "symbols": [
+        "validate",
+        "validate_desktop_publisher",
+        "main"
+      ],
+      "tested": false
+    },
+    {
+      "blob_sha": "92340d82a6084c95dfc2c87055b2c77042da8e88",
+      "capability_hint": "release.update_manager",
+      "certified": false,
+      "classification": "test_support",
+      "import_count": 13,
+      "module_status": "not_materialized",
+      "path": "test/core/system/update/android_beta_ota_detection_test.dart",
+      "source_bytes": 6924,
+      "source_commit": "bcea24bdc63cb3ced62a216e95cb35be57969601",
+      "source_sha256": "30b6c51c723633d377d182c0a1dc6333a70bb844af76d06f885deb784d3379af",
+      "symbols": [
+        "_FakeIntentHandler"
+      ],
+      "tested": false
+    },
+    {
+      "blob_sha": "0d0c35059335ae03f18f4fff7739d9a5787ea849",
+      "capability_hint": "utility.reuse",
+      "certified": false,
+      "classification": "test_support",
+      "import_count": 4,
+      "module_status": "not_materialized",
+      "path": "test/features/chat/data/services/chat_local_image_ocr_enrichment_test.dart",
+      "source_bytes": 5374,
+      "source_commit": "bcea24bdc63cb3ced62a216e95cb35be57969601",
+      "source_sha256": "fbd8d2318520ee161dabaca4804c0e2b85f270fb59a6d639317cc18add06ceb0",
+      "symbols": [],
+      "tested": false
+    },
+    {
+      "blob_sha": "99d43a937459de2cff0bd6c0e37ef1db0bc15146",
+      "capability_hint": "utility.reuse",
+      "certified": false,
+      "classification": "test_support",
+      "import_count": 5,
+      "module_status": "not_materialized",
+      "path": "test/features/chat/data/services/chat_local_image_vision_service_test.dart",
+      "source_bytes": 6419,
+      "source_commit": "bcea24bdc63cb3ced62a216e95cb35be57969601",
+      "source_sha256": "96be192d374d123d044f6a2c76913892bf2f0113c3b75341631d854f0bd57630",
       "symbols": [],
       "tested": false
     }
