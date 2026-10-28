@@ -9,7 +9,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "tools"))
 from library_source_integrity import payload_tree_sha256  # noqa: E402
-from swift_probe import ProbeError, select, record  # noqa: E402
+from swift_probe import ProbeError, TOOLCHAIN_PROFILE, select, record  # noqa: E402
 
 
 class SwiftProbeTests(unittest.TestCase):
@@ -66,6 +66,7 @@ class SwiftProbeTests(unittest.TestCase):
             "source_commit": item["source_commit"],
             "payload_sha256": item["payload_sha256"],
             "platform": "macos", "test_exit_code": exit_code,
+            "toolchain_profile": TOOLCHAIN_PROFILE,
         }
 
     def test_source_bound_selection_and_drift_fail_closed(self):
@@ -101,6 +102,22 @@ class SwiftProbeTests(unittest.TestCase):
         value["object"]["pins"][0]["state"]["revision"] = "main"
         lockfile.write_text(json.dumps(value))
         self.assertEqual(0, select(self.root)["count"])
+
+    def test_old_toolchain_failure_is_retriable_once(self):
+        item = select(self.root)
+        record(self.root, item, self.receipt(item, 1), "failure", "40733333333")
+        previous = self.base / "provenance" / "swift-probe.json"
+        old = json.loads(previous.read_text())
+        old.pop("toolchain_profile")
+        previous.write_text(json.dumps(old))
+        self.assertEqual(1, select(self.root)["count"])
+
+    def test_wrong_toolchain_receipt_cannot_be_accepted(self):
+        item = select(self.root)
+        claim = self.receipt(item, 0)
+        claim["toolchain_profile"] = "macos15-swift61"
+        with self.assertRaisesRegex(ProbeError, "not corroborated"):
+            record(self.root, item, claim, "success", "40733333333")
 
     def test_unknown_license_is_rejected(self):
         self.manifest["provenance"]["license"] = "NOASSERTION"
