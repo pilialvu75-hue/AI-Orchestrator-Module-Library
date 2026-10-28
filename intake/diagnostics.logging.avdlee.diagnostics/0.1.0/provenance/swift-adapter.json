@@ -1,0 +1,20 @@
+{
+  "adapter_sha256": "882d5caac4301291c869082124815d6ae4c408739307e7ec2456753708fdda8e",
+  "asset_id": "diagnostics.logging.avdlee.diagnostics",
+  "certification_authorized": false,
+  "contract_id": "diagnostics.logging.v1",
+  "github_run_id": "40744901771",
+  "has_executable_bridge_source": true,
+  "independent_security_reviewed": false,
+  "integration_scope": "macOS native diagnostics.logging.v1 adapter smoke, redaction and rejection tests",
+  "payload_sha256": "071e62e85210fba7464dc190fbdaea5aacd604c5c5207414b4f634cac6f3a423",
+  "platform": "macos",
+  "release_eligible": false,
+  "result": "passed",
+  "schema": "ai-orchestrator.library-swift-adapter-proof.v1",
+  "source_commit": "e3b6ffc95ab07ac3cb31e99103fc64cfb13efaeb",
+  "test_command": "swift test --disable-automatic-resolution -j 2 --filter AivexusDiagnosticsBridgeTests",
+  "test_exit_code": 0,
+  "toolchain_profile": "macos26-xcode26-swift62",
+  "version": "0.1.0"
+}
