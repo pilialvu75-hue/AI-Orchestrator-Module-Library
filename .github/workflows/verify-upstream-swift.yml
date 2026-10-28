@@ -1,0 +1,157 @@
+name: Probe immutable upstream Swift packages (no certification)
+
+on:
+  push:
+    branches: ["main"]
+    paths:
+      - ".github/workflows/verify-upstream-swift.yml"
+      - "tools/swift_probe.py"
+  schedule:
+    # Cheap daily Linux planner; an unchanged source commit is probed once.
+    - cron: "47 5 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: library-swift-native-probe-main
+  cancel-in-progress: false
+
+jobs:
+  prepare:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    permissions:
+      contents: read
+    outputs:
+      count: ${{ steps.plan.outputs.count }}
+    steps:
+      - name: Checkout only trusted Library metadata
+        uses: actions/checkout@v6
+        with:
+          ref: main
+          persist-credentials: false
+          sparse-checkout: |
+            intake
+            tools
+      - name: Plan exactly one new pinned Swift package
+        id: plan
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 tools/swift_probe.py plan --root . --output "$RUNNER_TEMP/swift-plan.json"
+          if [[ "$(python3 -c 'import json,os; print(json.load(open(os.environ["RUNNER_TEMP"]+"/swift-plan.json"))["count"])')" == "1" ]]; then
+            SOURCE="$(python3 -c 'import json,os; print(json.load(open(os.environ["RUNNER_TEMP"]+"/swift-plan.json"))["source_path"])')"
+            tar -czf "$RUNNER_TEMP/swift-pinned-source.tar.gz" -C "$SOURCE" .
+          fi
+      - name: Stage immutable source and bound plan
+        if: ${{ steps.plan.outputs.count == '1' }}
+        uses: actions/upload-artifact@v6
+        with:
+          name: pinned-swift-probe-input
+          path: |
+            ${{ runner.temp }}/swift-plan.json
+            ${{ runner.temp }}/swift-pinned-source.tar.gz
+          if-no-files-found: error
+          retention-days: 2
+
+  verify_untrusted:
+    needs: prepare
+    if: ${{ needs.prepare.outputs.count == '1' }}
+    runs-on: macos-15
+    timeout-minutes: 18
+    # No repository checkout and no code-write permissions on this runner.
+    permissions: {}
+    steps:
+      - name: Download source-only artifact
+        uses: actions/download-artifact@v6
+        with:
+          name: pinned-swift-probe-input
+          path: ${{ runner.temp }}/swift-staged
+      - name: Run upstream Swift package tests on Apple runner
+        shell: bash
+        env:
+          GITHUB_TOKEN: ""
+          GH_TOKEN: ""
+          GIT_TERMINAL_PROMPT: "0"
+        run: |
+          set -euo pipefail
+          mkdir -p "$RUNNER_TEMP/swift-source"
+          tar -xzf "$RUNNER_TEMP/swift-staged/swift-pinned-source.tar.gz" -C "$RUNNER_TEMP/swift-source"
+          test -f "$RUNNER_TEMP/swift-source/Package.swift"
+          test -f "$RUNNER_TEMP/swift-source/Package.resolved"
+          swift --version
+          set +e
+          (cd "$RUNNER_TEMP/swift-source" && swift test --disable-automatic-resolution -j 2) > "$RUNNER_TEMP/swift-test.log" 2>&1
+          result=$?
+          set -e
+          tail -n 60 "$RUNNER_TEMP/swift-test.log"
+          export SWIFT_EXIT="$result"
+          python3 - <<'PY'
+          import json, os
+          from pathlib import Path
+          temp = Path(os.environ["RUNNER_TEMP"])
+          plan = json.loads((temp / "swift-staged/swift-plan.json").read_text())
+          result = {
+              "schema": "ai-orchestrator.swift-test-run.v1",
+              "asset_id": plan["asset_id"],
+              "version": plan["version"],
+              "source_commit": plan["source_commit"],
+              "payload_sha256": plan["payload_sha256"],
+              "platform": "macos",
+              "test_exit_code": int(os.environ["SWIFT_EXIT"]),
+          }
+          (temp / "swift-probe-result.json").write_text(json.dumps(result, indent=2, sort_keys=True) + "\n")
+          PY
+          exit "$result"
+      - name: Upload test outcome even if build or tests failed
+        if: ${{ always() }}
+        uses: actions/upload-artifact@v6
+        with:
+          name: pinned-swift-probe-result
+          path: ${{ runner.temp }}/swift-probe-result.json
+          if-no-files-found: warn
+          retention-days: 7
+
+  record_trusted:
+    needs: [prepare, verify_untrusted]
+    if: ${{ always() && needs.prepare.result == 'success' && needs.prepare.outputs.count == '1' && (needs.verify_untrusted.result == 'success' || needs.verify_untrusted.result == 'failure') }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout current trusted Library
+        uses: actions/checkout@v6
+        with:
+          ref: main
+          fetch-depth: 1
+      - name: Download bound plan and job receipt
+        uses: actions/download-artifact@v6
+        with:
+          pattern: pinned-swift-probe-*
+          path: ${{ runner.temp }}/swift-receipts
+      - name: Record probe without altering module trust or lifecycle
+        shell: bash
+        env:
+          JOB_RESULT: ${{ needs.verify_untrusted.result }}
+          RUN_ID: ${{ github.run_id }}
+        run: |
+          set -euo pipefail
+          python3 tools/swift_probe.py record --root . \
+            --plan "$RUNNER_TEMP/swift-receipts/pinned-swift-probe-input/swift-plan.json" \
+            --result "$RUNNER_TEMP/swift-receipts/pinned-swift-probe-result/swift-probe-result.json" \
+            --job-result "$JOB_RESULT" \
+            --run-id "$RUN_ID"
+          git add -- intake/*/*/provenance/swift-probe.json
+          if git diff --cached --quiet; then
+            echo "Identical source already probed."
+            exit 0
+          fi
+          python3 tools/validate_library.py
+          python3 -m unittest discover -s tests -p 'test_swift_probe.py' -v
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -m "library: record native Swift test outcome, not certification [skip ci]"
+          git push origin HEAD:main
