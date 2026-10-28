@@ -26,7 +26,7 @@
     {
       "repository": "pilialvu75-hue/AI-Orchestrator-Module-Researcher",
       "baseline_at": "2026-10-03T16:20:00Z",
-      "cursor_merged_at": "2026-10-27T23:34:42Z"
+      "cursor_merged_at": "2026-10-28T08:44:41Z"
     },
     {
       "repository": "pilialvu75-hue/Ai_orchestrator-prova",
@@ -2091,6 +2091,23 @@
       "url": "https://github.com/pilialvu75-hue/AI-Orchestrator-Module-Researcher/commit/33d4de77dfebf134fbf8b19d08d3691618443046",
       "match_ref": null,
       "reconciliation": null
+    },
+    {
+      "incident_id": "e778f2677923f3cc15c8",
+      "status": "UNRECONCILED",
+      "detected_at": "2026-10-28T09:39:33Z",
+      "repository": "pilialvu75-hue/AI-Orchestrator-Module-Researcher",
+      "kind": "direct_commit",
+      "pull_request": null,
+      "merge_sha": null,
+      "commit_sha": "3c89f1d116e3348e9f8e1e9c362395976ed379ff",
+      "head_branch": null,
+      "base_branch": "main",
+      "change_at": "2026-10-28T08:44:41Z",
+      "title": "fix(researcher): fair SPDX license choices, immutable GitHub license evidence and bounded retries",
+      "url": "https://github.com/pilialvu75-hue/AI-Orchestrator-Module-Researcher/commit/3c89f1d116e3348e9f8e1e9c362395976ed379ff",
+      "match_ref": null,
+      "reconciliation": null
     }
   ],
   "reconciliation_history": [
@@ -2101,35 +2118,35 @@
       "note": "Known motivating example for CP-HARDEN-03. It predates this incremental detector and is not retroactively reopened."
     }
   ],
-  "last_scan_at": "2026-10-28T08:41:16Z",
+  "last_scan_at": "2026-10-28T09:39:33Z",
   "scan_health": {
     "pilialvu75-hue/AI-Orchestrator-Module-Library": {
       "state": "OK",
-      "last_success_at": "2026-10-28T08:41:16Z",
+      "last_success_at": "2026-10-28T09:39:33Z",
       "last_failure_at": null,
       "error_code": null
     },
     "pilialvu75-hue/Ai-orchestrator-riserva": {
       "state": "OK",
-      "last_success_at": "2026-10-28T08:41:16Z",
+      "last_success_at": "2026-10-28T09:39:33Z",
       "last_failure_at": "2026-10-28T07:39:58Z",
       "error_code": null
     },
     "pilialvu75-hue/Ai-orchestrator-diagnostics": {
       "state": "OK",
-      "last_success_at": "2026-10-28T08:41:16Z",
+      "last_success_at": "2026-10-28T09:39:33Z",
       "last_failure_at": "2026-10-28T07:39:58Z",
       "error_code": null
     },
     "pilialvu75-hue/AI-Orchestrator-Module-Researcher": {
       "state": "OK",
-      "last_success_at": "2026-10-28T08:41:16Z",
+      "last_success_at": "2026-10-28T09:39:33Z",
       "last_failure_at": "2026-10-28T07:39:58Z",
       "error_code": null
     },
     "pilialvu75-hue/Ai_orchestrator-prova": {
       "state": "OK",
-      "last_success_at": "2026-10-28T08:41:16Z",
+      "last_success_at": "2026-10-28T09:39:33Z",
       "last_failure_at": "2026-10-28T07:39:58Z",
       "error_code": null
     }
