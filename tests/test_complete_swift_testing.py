@@ -28,7 +28,17 @@ class TrustedSwiftTestCompletion(unittest.TestCase):
         bridge = self.root / "tools/swift_adapters/diagnostics.logging.v1"
         bridge.parent.mkdir(parents=True)
         shutil.copytree(TEMPLATE, bridge)
+        # The protected job first advances the working checkout to TESTED,
+        # then runs this regression suite. Always reconstruct the original
+        # discovered fixture explicitly, never inherit the live checkout state.
         self.original = json.loads((self.base / "manifest.json").read_text())
+        self.original["status"] = "discovered"
+        self.original["validation"] = {
+            "score": 0.7618, "test_report": None, "tests_passed": False,
+            "validated_at": None, "validated_on": [],
+        }
+        (self.base / "manifest.json").write_text(json.dumps(self.original))
+        (self.base / "evidence/test-report.json").unlink(missing_ok=True)
 
     def test_exact_external_source_and_both_successful_jobs_become_tested(self):
         jobs = []
