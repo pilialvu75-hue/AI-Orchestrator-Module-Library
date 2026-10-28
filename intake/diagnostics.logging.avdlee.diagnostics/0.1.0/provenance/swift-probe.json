@@ -1,15 +1,16 @@
 {
   "asset_id": "diagnostics.logging.avdlee.diagnostics",
   "certification_authorized": false,
-  "github_run_id": "40741589496",
+  "github_run_id": "40742192345",
   "payload_sha256": "071e62e85210fba7464dc190fbdaea5aacd604c5c5207414b4f634cac6f3a423",
   "platform": "macos",
-  "result": "failed",
+  "result": "passed",
   "reviewed": false,
   "schema": "ai-orchestrator.library-swift-probe.v1",
   "scope": "upstream Swift package only; Aivexus connector NOT tested",
   "source_commit": "e3b6ffc95ab07ac3cb31e99103fc64cfb13efaeb",
   "test_command": "swift test --disable-automatic-resolution -j 2",
-  "test_exit_code": 1,
+  "test_exit_code": 0,
+  "toolchain_profile": "macos26-xcode26-swift62",
   "version": "0.1.0"
 }
