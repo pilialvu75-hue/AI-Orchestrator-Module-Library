@@ -59,7 +59,7 @@ jobs:
   verify_untrusted:
     needs: prepare
     if: ${{ needs.prepare.outputs.count == '1' }}
-    runs-on: macos-15
+    runs-on: macos-26
     timeout-minutes: 18
     # No repository checkout and no code-write permissions on this runner.
     permissions: {}
@@ -81,7 +81,15 @@ jobs:
           tar -xzf "$RUNNER_TEMP/swift-staged/swift-pinned-source.tar.gz" -C "$RUNNER_TEMP/swift-source"
           test -f "$RUNNER_TEMP/swift-source/Package.swift"
           test -f "$RUNNER_TEMP/swift-source/Package.resolved"
+          xcodebuild -version
           swift --version
+          python3 - <<'PY'
+          import re, subprocess
+          version = subprocess.check_output(["swift", "--version"], text=True)
+          match = re.search(r"Swift version (\d+)\.(\d+)", version)
+          if match is None or (int(match.group(1)), int(match.group(2))) < (6, 2):
+              raise SystemExit("Swift 6.2+ required for nonisolated(nonsending)")
+          PY
           set +e
           (cd "$RUNNER_TEMP/swift-source" && swift test --disable-automatic-resolution -j 2) > "$RUNNER_TEMP/swift-test.log" 2>&1
           result=$?
@@ -100,6 +108,7 @@ jobs:
               "source_commit": plan["source_commit"],
               "payload_sha256": plan["payload_sha256"],
               "platform": "macos",
+              "toolchain_profile": "macos26-xcode26-swift62",
               "test_exit_code": int(os.environ["SWIFT_EXIT"]),
           }
           (temp / "swift-probe-result.json").write_text(json.dumps(result, indent=2, sort_keys=True) + "\n")
