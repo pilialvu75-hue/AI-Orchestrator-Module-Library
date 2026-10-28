@@ -3,13 +3,13 @@
   "report_type": "read_only_evidence_gaps_not_certification",
   "summary": {
     "certified_catalog_entries": 3,
-    "intake_candidates": 24,
-    "blocked_intake_candidates": 24,
+    "intake_candidates": 25,
+    "blocked_intake_candidates": 25,
     "ready_for_automatic_certification": 0,
     "blocker_counts": {
-      "LICENSE_EVIDENCE_MISSING": 19,
+      "LICENSE_EVIDENCE_MISSING": 20,
       "REPRODUCIBLE_TEST_EVIDENCE_MISSING": 19,
-      "SECURITY_REVIEW_EVIDENCE_MISSING": 24,
+      "SECURITY_REVIEW_EVIDENCE_MISSING": 25,
       "SOURCE_SNAPSHOT_MISSING": 19
     }
   },
@@ -1036,6 +1036,25 @@
       ],
       "source_repository": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva",
       "source_commit": "f94055868061850e3f2cf6318358bab9e49f80c9",
+      "blockers": [
+        "LICENSE_EVIDENCE_MISSING",
+        "SECURITY_REVIEW_EVIDENCE_MISSING"
+      ],
+      "next_actions": [
+        "Resolve the upstream license and supply its attributable license file.",
+        "Attach an independently generated security report and SBOM bound to the pinned source."
+      ],
+      "independent_certification_authorized": false
+    },
+    {
+      "asset_id": "library.integration.firstparty.researcher_handoff",
+      "version": "0.1.0",
+      "status": "tested",
+      "capabilities": [
+        "library.integration"
+      ],
+      "source_repository": "https://github.com/pilialvu75-hue/AI-Orchestrator-Module-Library",
+      "source_commit": "bacb1bca23c96fea0a492fe5ca98d020dae53445",
       "blockers": [
         "LICENSE_EVIDENCE_MISSING",
         "SECURITY_REVIEW_EVIDENCE_MISSING"
