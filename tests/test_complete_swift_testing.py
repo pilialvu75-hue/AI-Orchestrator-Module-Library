@@ -6,11 +6,12 @@ import shutil
 import sys
 import tempfile
 import unittest
+from unittest.mock import patch
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "tools"))
-from complete_swift_testing import TestPromotionError, promote_tested  # noqa: E402
+from complete_swift_testing import TestPromotionError, promote_tested, verify_run  # noqa: E402
 from library_evidence import verify_manifest_evidence  # noqa: E402
 from library_source_integrity import payload_tree_sha256  # noqa: E402
 
@@ -121,6 +122,82 @@ class TrustedSwiftTestCompletion(unittest.TestCase):
         with self.assertRaisesRegex(TestPromotionError, "attestation"):
             promote_tested(self.root, verify=lambda *_: True)
         self.assertFalse((self.base / "evidence/test-report.json").exists())
+
+
+class GitHubNativeJobVerificationTests(unittest.TestCase):
+    RUN_ID = "40799999999"
+
+    @staticmethod
+    def run(status="in_progress", conclusion=None):
+        return {
+            "status": status,
+            "conclusion": conclusion,
+            "event": "push",
+            "head_branch": "main",
+            "path": ".github/workflows/verify-upstream-swift.yml",
+            "head_sha": "e" * 40,
+            "repository": {"full_name": "pilialvu75-hue/AI-Orchestrator-Module-Library"},
+        }
+
+    @staticmethod
+    def jobs(other_name="finalize_native_tested", other_conclusion=None):
+        records = [
+            {"name": "verify_adapter_untrusted", "status": "completed",
+             "conclusion": "success"},
+            {"name": other_name,
+             "status": "in_progress" if other_conclusion is None else "completed",
+             "conclusion": other_conclusion},
+        ]
+        return {"total_count": len(records), "jobs": records}
+
+    def verify(self, run, jobs, *, run_id=None):
+        responses = iter([run, jobs])
+        with patch("complete_swift_testing._github_json",
+                   side_effect=lambda _path: next(responses)):
+            if run_id is None:
+                return verify_run(self.RUN_ID, "verify_adapter_untrusted")
+            return verify_run(run_id, "verify_adapter_untrusted")
+
+    def test_current_protected_workflow_validates_completed_native_job(self):
+        with patch.dict("os.environ", {"GITHUB_RUN_ID": self.RUN_ID}):
+            self.assertTrue(self.verify(self.run(), self.jobs()))
+
+    def test_another_running_workflow_is_not_authorized(self):
+        with patch.dict("os.environ", {"GITHUB_RUN_ID": "40700000000"}):
+            with self.assertRaisesRegex(TestPromotionError, "unverified"):
+                self.verify(self.run(), self.jobs())
+
+    def test_completed_failure_allowed_only_for_metadata_finalizer(self):
+        self.assertTrue(self.verify(
+            self.run("completed", "failure"),
+            self.jobs("finalize_native_tested", "failure"),
+        ))
+        with self.assertRaisesRegex(TestPromotionError, "unverified"):
+            self.verify(
+                self.run("completed", "failure"),
+                self.jobs("record_adapter_trusted", "failure"),
+            )
+
+    def test_failed_native_test_is_never_accepted(self):
+        jobs = self.jobs()
+        jobs["jobs"][0]["conclusion"] = "failure"
+        with patch.dict("os.environ", {"GITHUB_RUN_ID": self.RUN_ID}):
+            with self.assertRaisesRegex(TestPromotionError, "not independently successful"):
+                self.verify(self.run(), jobs)
+
+    def test_incomplete_job_list_fails_closed(self):
+        jobs = self.jobs()
+        jobs["total_count"] += 1
+        with patch.dict("os.environ", {"GITHUB_RUN_ID": self.RUN_ID}):
+            with self.assertRaisesRegex(TestPromotionError, "incomplete"):
+                self.verify(self.run(), jobs)
+
+    def test_wrong_workflow_or_repository_does_not_verify(self):
+        corrupted = self.run()
+        corrupted["path"] = ".github/workflows/fake.yml"
+        with patch.dict("os.environ", {"GITHUB_RUN_ID": self.RUN_ID}):
+            with self.assertRaisesRegex(TestPromotionError, "unverified"):
+                self.verify(corrupted, self.jobs())
 
 
 if __name__ == "__main__":
