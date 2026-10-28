@@ -47,6 +47,27 @@ class ExternalChangeIngressTests(unittest.TestCase):
             "html_url": "https://github.com/owner/app/pull/12",
         }
 
+    def test_repository_metadata_probe_uses_canonical_github_api_url(self):
+        # GitHub REST can 404 on /repos/OWNER/REPO/ (trailing slash).
+        # The anonymous public probe introduced for repo-scoped tokens must
+        # use the documented /repos/OWNER/REPO URL instead.
+        with patch.object(module, "_api_get", return_value={
+            "full_name": "owner/public", "private": False
+        }) as get:
+            metadata = module._repo_api("owner/public", "", None)
+        self.assertEqual(metadata["private"], False)
+        get.assert_called_once_with(
+            "https://api.github.com/repos/owner/public", None
+        )
+
+    def test_repository_child_endpoints_keep_exact_one_slash(self):
+        with patch.object(module, "_api_get", return_value=[]) as get:
+            module._repo_api("owner/public", "pulls?state=closed", "token")
+        get.assert_called_once_with(
+            "https://api.github.com/repos/owner/public/pulls?state=closed",
+            "token",
+        )
+
     def test_cross_repo_permission_denial_preserves_readable_repo_results(self):
         registry = self._registry()
         registry["tracked_repositories"].append({

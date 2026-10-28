@@ -53,7 +53,8 @@ def _api_get(url: str, token: str | None) -> Any:
 def _repo_api(repository: str, suffix: str, token: str | None) -> Any:
     owner, name = repository.split("/", 1)
     return _api_get(
-        f"https://api.github.com/repos/{urllib.parse.quote(owner)}/{urllib.parse.quote(name)}/{suffix}",
+        (f"https://api.github.com/repos/{urllib.parse.quote(owner)}/{urllib.parse.quote(name)}"
+         + (f"/{suffix}" if suffix else "")),
         token,
     )
 
