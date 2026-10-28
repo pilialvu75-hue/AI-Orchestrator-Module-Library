@@ -46,8 +46,9 @@
   ],
   "name": "Diagnostics",
   "payload": {
-    "path": null,
-    "sha256": null,
+    "acquisition_evidence": "provenance/source-acquisition.json",
+    "path": "payload",
+    "sha256": "071e62e85210fba7464dc190fbdaea5aacd604c5c5207414b4f634cac6f3a423",
     "type": "upstream_reference",
     "upstream_commit": "e3b6ffc95ab07ac3cb31e99103fc64cfb13efaeb",
     "upstream_repository": "https://github.com/AvdLee/Diagnostics"

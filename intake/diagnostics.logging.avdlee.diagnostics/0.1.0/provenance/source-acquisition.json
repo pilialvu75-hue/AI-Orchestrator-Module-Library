@@ -1,0 +1,16 @@
+{
+  "asset_id": "diagnostics.logging.avdlee.diagnostics",
+  "certification_authorized": false,
+  "executed_upstream_code": false,
+  "license_bytes_matched": true,
+  "payload_sha256": "071e62e85210fba7464dc190fbdaea5aacd604c5c5207414b4f634cac6f3a423",
+  "schema": "ai-orchestrator.pinned-source-acquisition.v1",
+  "security_reviewed": false,
+  "source_bytes": 3328020,
+  "source_commit": "e3b6ffc95ab07ac3cb31e99103fc64cfb13efaeb",
+  "source_files": 108,
+  "source_repository": "https://github.com/AvdLee/Diagnostics",
+  "source_tree": "e967ab3a0917ab9de59eca008afa0adc99e06347",
+  "tests_passed": false,
+  "version": "0.1.0"
+}
