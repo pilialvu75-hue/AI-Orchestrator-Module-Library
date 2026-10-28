@@ -6,6 +6,8 @@ on:
     paths:
       - ".github/workflows/verify-upstream-swift.yml"
       - "tools/swift_probe.py"
+      - "tools/swift_adapter.py"
+      - "tools/swift_adapters/**"
   schedule:
     # Cheap daily Linux planner; an unchanged source commit is probed once.
     - cron: "47 5 * * *"
@@ -26,6 +28,7 @@ jobs:
       contents: read
     outputs:
       count: ${{ steps.plan.outputs.count }}
+      adapter_count: ${{ steps.bridge_plan.outputs.count }}
     steps:
       - name: Checkout only trusted Library metadata
         uses: actions/checkout@v6
@@ -55,6 +58,36 @@ jobs:
             ${{ runner.temp }}/swift-pinned-source.tar.gz
           if-no-files-found: error
           retention-days: 2
+
+
+      - name: Plan and stage one real Aivexus Swift logging bridge
+        id: bridge_plan
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [[ "${{ steps.plan.outputs.count }}" != "0" ]]; then
+            echo "count=0" >> "$GITHUB_OUTPUT"
+            echo "Upstream package probe has priority; defer bridge to next cycle."
+            exit 0
+          fi
+          python3 tools/swift_adapter.py plan --root . --output "$RUNNER_TEMP/swift-adapter-plan.json"
+          if [[ "$(python3 -c 'import json,os; print(json.load(open(os.environ["RUNNER_TEMP"]+"/swift-adapter-plan.json"))["count"])')" == "1" ]]; then
+            python3 tools/swift_adapter.py stage --root . \
+              --plan "$RUNNER_TEMP/swift-adapter-plan.json" \
+              --output "$RUNNER_TEMP/swift-bridge-patched"
+            tar -czf "$RUNNER_TEMP/swift-bridge-patched.tar.gz" \
+              -C "$RUNNER_TEMP/swift-bridge-patched" .
+          fi
+      - name: Upload trusted native adapter build input
+        if: ${{ steps.bridge_plan.outputs.count == '1' }}
+        uses: actions/upload-artifact@v6
+        with:
+          name: swift-bridge-input
+          path: |
+            ${{ runner.temp }}/swift-adapter-plan.json
+            ${{ runner.temp }}/swift-bridge-patched.tar.gz
+          retention-days: 2
+          if-no-files-found: error
 
   verify_untrusted:
     needs: prepare
@@ -163,4 +196,108 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git commit -m "library: record native Swift test outcome, not certification [skip ci]"
+          git push origin HEAD:main
+
+
+  verify_adapter_untrusted:
+    needs: prepare
+    if: ${{ needs.prepare.outputs.adapter_count == '1' }}
+    runs-on: macos-26
+    timeout-minutes: 18
+    permissions: {}
+    steps:
+      - name: Download source-bound trusted bridge overlay
+        uses: actions/download-artifact@v6
+        with:
+          name: swift-bridge-input
+          path: ${{ runner.temp }}/swift-bridge-input
+      - name: Execute native Aivexus adapter contract tests without write permissions
+        shell: bash
+        env:
+          GITHUB_TOKEN: ""
+          GH_TOKEN: ""
+          GIT_TERMINAL_PROMPT: "0"
+        run: |
+          set -euo pipefail
+          mkdir -p "$RUNNER_TEMP/swift-bridge"
+          tar -xzf "$RUNNER_TEMP/swift-bridge-input/swift-bridge-patched.tar.gz" -C "$RUNNER_TEMP/swift-bridge"
+          swift --version
+          python3 - <<'PY'
+          import re
+          import subprocess
+          version = subprocess.check_output(["swift", "--version"], text=True)
+          match = re.search(r"Swift version (\d+)\.(\d+)", version)
+          if match is None or (int(match.group(1)), int(match.group(2))) < (6, 2):
+              raise SystemExit("Aivexus bridge needs Swift 6.2 or newer")
+          PY
+          set +e
+          (cd "$RUNNER_TEMP/swift-bridge" && swift test --disable-automatic-resolution -j 2 --filter AivexusDiagnosticsBridgeTests) \
+            > "$RUNNER_TEMP/swift-bridge-test.log" 2>&1
+          result=$?
+          set -e
+          tail -n 80 "$RUNNER_TEMP/swift-bridge-test.log"
+          export BRIDGE_EXIT="$result"
+          python3 - <<'PY'
+          import json
+          import os
+          from pathlib import Path
+          root = Path(os.environ["RUNNER_TEMP"])
+          plan = json.loads((root / "swift-bridge-input/swift-adapter-plan.json").read_text())
+          fields = ("asset_id", "version", "source_commit", "payload_sha256",
+                    "adapter_sha256", "contract_id", "platform", "toolchain_profile")
+          receipt = {"schema": "ai-orchestrator.swift-adapter-test-run.v1",
+                     **{key: plan[key] for key in fields},
+                     "test_exit_code": int(os.environ["BRIDGE_EXIT"])}
+          (root / "swift-bridge-result.json").write_text(
+              json.dumps(receipt, indent=2, sort_keys=True) + "\n")
+          PY
+          exit "$result"
+      - name: Upload source-bound actual adapter result
+        if: ${{ always() }}
+        uses: actions/upload-artifact@v6
+        with:
+          name: swift-bridge-result
+          path: ${{ runner.temp }}/swift-bridge-result.json
+          if-no-files-found: warn
+          retention-days: 7
+
+  record_adapter_trusted:
+    needs: [prepare, verify_adapter_untrusted]
+    if: ${{ always() && needs.prepare.result == 'success' && needs.prepare.outputs.adapter_count == '1' && (needs.verify_adapter_untrusted.result == 'success' || needs.verify_adapter_untrusted.result == 'failure') }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout current trusted Library
+        uses: actions/checkout@v6
+        with:
+          ref: main
+          fetch-depth: 1
+      - name: Download immutable bridge plan and integration result
+        uses: actions/download-artifact@v6
+        with:
+          pattern: swift-bridge-*
+          path: ${{ runner.temp }}/bridge-receipts
+      - name: Validate result against exact candidate and record non-certifying proof
+        env:
+          TEST_JOB_RESULT: ${{ needs.verify_adapter_untrusted.result }}
+          RUN_ID: ${{ github.run_id }}
+        run: |
+          set -euo pipefail
+          python3 tools/swift_adapter.py record --root . \
+            --plan "$RUNNER_TEMP/bridge-receipts/swift-bridge-input/swift-adapter-plan.json" \
+            --result "$RUNNER_TEMP/bridge-receipts/swift-bridge-result/swift-bridge-result.json" \
+            --job-result "$TEST_JOB_RESULT" \
+            --run-id "$RUN_ID"
+          git add -- intake/*/*/provenance/swift-adapter.json
+          if git diff --cached --quiet; then
+            echo "Same adapter/source combination was already tested."
+            exit 0
+          fi
+          python3 tools/validate_library.py
+          python3 -m unittest discover -s tests -p 'test_swift_adapter.py' -v
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -m "library: record tested native logging bridge, not certification [skip ci]"
           git push origin HEAD:main
