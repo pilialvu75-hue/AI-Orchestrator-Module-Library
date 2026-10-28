@@ -19,7 +19,16 @@ class UpstreamWorkflowIsolationTest(unittest.TestCase):
         prefix, trusted = text.split("  promote_trusted:", 1)
         untrusted = prefix.split("  validate_untrusted:", 1)[1]
 
-        self.assertNotIn("contents: write", prefix)
+        # Trusted source-only recovery writes pinned data without running it.
+        # The preparation/staging and untrusted execution jobs remain read-only.
+        self.assertIn("  recover_pinned_source:", prefix)
+        recovery = prefix.split("  recover_pinned_source:", 1)[1].split("  prepare:", 1)[0]
+        preparation = prefix.split("  prepare:", 1)[1].split("  validate_untrusted:", 1)[0]
+        self.assertIn("contents: write", recovery)
+        self.assertIn("tools/recover_upstream_snapshots.py", recovery)
+        self.assertNotIn("flutter pub get", recovery)
+        self.assertNotIn("dart test", recovery)
+        self.assertNotIn("contents: write", preparation)
         self.assertIn("permissions: {}", untrusted)
         self.assertIn("dart analyze --fatal-infos", untrusted)
         self.assertIn("dart test", untrusted)

@@ -10,6 +10,8 @@ on:
       - "tools/materialize_upstream_evidence.py"
       - "tools/library_autopilot.py"
   workflow_dispatch:
+  schedule:
+    - cron: "13 4 * * *"
 
 # Read-only is the workflow default. Only the final trusted promotion job may
 # request write access to the Library.
@@ -21,7 +23,39 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
+  recover_pinned_source:
+    # Source acquisition is metadata-only: NEVER run upstream code here.
+    # One candidate at most per day, bounded to 512 files and 16 MiB.
+    runs-on: ubuntu-24.04
+    timeout-minutes: 8
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout trusted Library
+        uses: actions/checkout@v6
+        with:
+          ref: main
+          fetch-depth: 1
+      - name: Recover next eligible immutable upstream snapshot
+        run: |
+          set -euo pipefail
+          python3 tools/recover_upstream_snapshots.py --root . --output /tmp/upstream-recovery.json
+          git add -f -A -- intake
+          if git diff --cached --quiet; then
+            echo "No eligible immutable source to acquire."
+            exit 0
+          fi
+          python3 tools/validate_library.py
+          python3 -m unittest discover -s tests -p 'test_upstream_source_recovery.py' -v
+          python3 -m unittest discover -s tests -p 'test_library_intake_readiness.py' -v
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -m "library: acquire verified upstream source without execution [skip ci]"
+          # Reject concurrent main advances rather than rewriting another worker's history.
+          git push origin HEAD:main
+
   prepare:
+    needs: recover_pinned_source
     runs-on: ubuntu-24.04
     timeout-minutes: 5
     permissions:
@@ -65,6 +99,15 @@ jobs:
                   data.get("status") != "discovered"
                   or payload.get("type") != "upstream_reference"
               ):
+                  continue
+              # A pinned snapshot is not evidence of passing platform tests.
+              # Only the existing Dart/Linux runner can validate Dart candidates;
+              # Swift, CMake and other profiles remain discovered until a
+              # separately isolated compatible validator is implemented.
+              if "dart" not in {
+                  str(lang).lower() for lang in data.get("languages", [])
+              }:
+                  print(f"Deferring unsupported upstream validation profile: {path}")
                   continue
 
               # Legacy manifest-only candidates cannot be certified without
