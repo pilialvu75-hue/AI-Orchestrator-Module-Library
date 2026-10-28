@@ -46,7 +46,8 @@ jobs:
             exit 0
           fi
           python3 tools/validate_library.py
-          python3 -m unittest tests.test_upstream_source_recovery tests.test_library_intake_readiness -v
+          python3 -m unittest discover -s tests -p 'test_upstream_source_recovery.py' -v
+          python3 -m unittest discover -s tests -p 'test_library_intake_readiness.py' -v
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git commit -m "library: acquire verified upstream source without execution [skip ci]"
