@@ -88,17 +88,21 @@
     "reviewed_at": null,
     "sbom": null
   },
-  "status": "discovered",
+  "status": "tested",
   "tags": [
     "diagnostics.logging",
     "researcher-candidate"
   ],
   "validation": {
-    "score": 0.7618,
-    "test_report": null,
-    "tests_passed": false,
-    "validated_at": null,
-    "validated_on": []
+    "researcher_recommendation_score": 0.7618,
+    "score": 0.95,
+    "score_basis": "independently_verified_native_upstream_and_contract_test_jobs",
+    "test_report": "evidence/test-report.json",
+    "tests_passed": true,
+    "validated_at": "2026-10-28T18:33:42Z",
+    "validated_on": [
+      "macos"
+    ]
   },
   "version": "0.1.0"
 }

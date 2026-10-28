@@ -1,0 +1,23 @@
+{
+  "adapter_sha256": "882d5caac4301291c869082124815d6ae4c408739307e7ec2456753708fdda8e",
+  "asset_id": "diagnostics.logging.avdlee.diagnostics",
+  "evidence": {
+    "adapter_github_run_id": "40744901771",
+    "commands": [
+      "swift test --disable-automatic-resolution -j 2",
+      "swift test --disable-automatic-resolution -j 2 --filter AivexusDiagnosticsBridgeTests"
+    ],
+    "scope_note": "Verified macOS Swift package and Aivexus logging adapter; not iOS, not a full app integration or security approval",
+    "upstream_github_run_id": "40742192345",
+    "verification": "two protected-main GitHub jobs independently checked via Actions API"
+  },
+  "generated_at": "2026-10-28T18:33:42Z",
+  "passed": true,
+  "payload_sha256": "071e62e85210fba7464dc190fbdaea5aacd604c5c5207414b4f634cac6f3a423",
+  "schema": "ai-orchestrator.library-test-report.v1",
+  "source_commit": "e3b6ffc95ab07ac3cb31e99103fc64cfb13efaeb",
+  "validated_on": [
+    "macos"
+  ],
+  "version": "0.1.0"
+}
