@@ -40,6 +40,26 @@ jobs:
         run: python -m unittest discover -s tests -p 'test_*.py' -v
 
 
+      - name: Test real pinned Researcher-to-Library handoff module (Linux)
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import json, sys
+          from pathlib import Path
+          sys.path.insert(0, "tools")
+          from library_source_integrity import payload_tree_sha256
+          base = Path("intake/library.integration.firstparty.researcher_handoff/0.1.0")
+          manifest = json.loads((base / "manifest.json").read_text())
+          actual = payload_tree_sha256(base / "payload/src")
+          assert actual == manifest["payload"]["sha256"], "researcher handoff payload changed"
+          assert manifest["provenance"]["source_commit"] == "bacb1bca23c96fea0a492fe5ca98d020dae53445"
+          print("PASS: immutable handoff source digest", actual)
+          PY
+          python -m unittest discover \
+            -s intake/library.integration.firstparty.researcher_handoff/0.1.0/payload/src/test \
+            -p 'test_*.py' -v
+
       - name: Verify materialized Mia OTA source hash
         run: |
           python - <<'PY'

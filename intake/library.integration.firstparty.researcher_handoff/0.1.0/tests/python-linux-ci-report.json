@@ -1,0 +1,28 @@
+{
+  "schema": "ai-orchestrator.library-test-report.v1",
+  "asset_id": "library.integration.firstparty.researcher_handoff",
+  "version": "0.1.0",
+  "source_commit": "bacb1bca23c96fea0a492fe5ca98d020dae53445",
+  "payload_sha256": "bc3382c4adc268774e62c2d5c0b45bb89b54415d8f70df8de3c75357da692637",
+  "passed": true,
+  "validated_on": [
+    "linux"
+  ],
+  "validated_at": "2026-10-28T08:21:02Z",
+  "workflow_run_id": 40656088830,
+  "workflow_run_attempt": 1,
+  "workflow_sha": "5720bddd412a5a823a77da57015af8ec75a14724",
+  "workflow_url": "https://github.com/pilialvu75-hue/AI-Orchestrator-Module-Library/actions/runs/40656088830",
+  "checks": [
+    "python tools/validate_library.py",
+    "python -m unittest discover -s tests -p 'test_*.py' -v",
+    "python library_source_integrity.payload_tree_sha256 (exact source-tree comparison)",
+    "python -m unittest discover -s intake/library.integration.firstparty.researcher_handoff/0.1.0/payload/src/test -p 'test_*.py' -v"
+  ],
+  "test_cases_passed": 11,
+  "scope": "11 executable Python 3.12 tests on Ubuntu CI, including real local proposal intake, read-only SQLite fixture validation, page-bound transfers, pagination, conflict rejection, duplicate detection, idempotence, and missing-checkout failure. The Researcher export subprocess is mocked in unit tests; no live cross-repo delivery claim.",
+  "security_certified": false,
+  "license_verified": false,
+  "production_approved": false,
+  "notes": "Sandbox-only; no network, production deployment, candidate execution, security attestation, or independent source-license verification."
+}

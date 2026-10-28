@@ -1,0 +1,112 @@
+{
+  "id": "library.integration.firstparty.researcher_handoff",
+  "name": "Bounded Researcher-to-Library proposal transfer",
+  "version": "0.1.0",
+  "kind": "module",
+  "status": "tested",
+  "description": "Runnable, pinned Python 3.12 source bundle for idempotent bounded transfer of actual Researcher SQLite proposals into a Library planning queue; preserves duplicate detection, schema checks, and read-only source DB semantics.",
+  "tags": [
+    "library.integration",
+    "researcher",
+    "firstparty",
+    "python",
+    "planning-only"
+  ],
+  "capabilities": [
+    "library.integration"
+  ],
+  "platforms": [
+    "linux"
+  ],
+  "languages": [
+    "python"
+  ],
+  "frameworks": [],
+  "entry_paths": [
+    "tools/research_proposal_transfer.py",
+    "tools/research_proposal_intake.py"
+  ],
+  "dependencies": [
+    {
+      "name": "Python",
+      "version": ">=3.12",
+      "source": "host runtime; stdlib only"
+    }
+  ],
+  "provenance": {
+    "origin": "built_in",
+    "source_repository": "https://github.com/pilialvu75-hue/AI-Orchestrator-Module-Library",
+    "source_commit": "bacb1bca23c96fea0a492fe5ca98d020dae53445",
+    "source_tag": null,
+    "source_project_id": "pilialvu75-hue/AI-Orchestrator-Module-Library",
+    "source_task_id": "library-internal-extraction:research-proposal-transfer-and-intake",
+    "license": null,
+    "license_file": null,
+    "retrieved_at": "2026-10-28T08:20:00Z"
+  },
+  "validation": {
+    "score": 0.8,
+    "tests_passed": true,
+    "test_report": "tests/python-linux-ci-report.json",
+    "validated_at": "2026-10-28T08:21:02Z",
+    "validated_on": [
+      "linux"
+    ]
+  },
+  "security": {
+    "reviewed": false,
+    "reviewed_at": null,
+    "known_vulnerabilities": null,
+    "sbom": null,
+    "review_report": null,
+    "notes": "Pending independent security and license review. Sandbox-only. No claim of production certification."
+  },
+  "integration": {
+    "estimated_effort": "low",
+    "adaptation_allowed": true,
+    "adapter_notes": "Python source tools from immutable Library commit, including original negative/idempotency unit tests. The transfer CLI requires an explicit trusted Researcher checkout, its existing read-only SQLite DB, and a caller-controlled Library planning queue directory; it never approves/certifies or publishes a module.",
+    "known_constraints": [
+      "No authentication, GitHub PR creation, or remote repository writing in module",
+      "Read-only Researcher SQLite access but local Library planning queue writes by design",
+      "No execution of candidate code or automatic security certification",
+      "Linux Python 3.12 tests passed (11/11); Android, Windows and live cross-repo delivery not validated",
+      "No independent production security or redistribution license sign-off"
+    ]
+  },
+  "connector": {
+    "standard": "ai-orchestrator-lego",
+    "standard_version": "1.0.0",
+    "provides": [
+      {
+        "capability_id": "library.integration",
+        "contract_id": "library.integration.v1",
+        "contract_version": "1.0"
+      }
+    ],
+    "requires": [],
+    "integration_mode": "source_bundle",
+    "adapters": [],
+    "configuration_schema": null,
+    "healthcheck": {
+      "type": "none",
+      "path": null
+    }
+  },
+  "payload": {
+    "type": "repository_path",
+    "path": "payload/src",
+    "sha256": "bc3382c4adc268774e62c2d5c0b45bb89b54415d8f70df8de3c75357da692637",
+    "upstream_repository": "https://github.com/pilialvu75-hue/AI-Orchestrator-Module-Library",
+    "upstream_commit": "bacb1bca23c96fea0a492fe5ca98d020dae53445"
+  },
+  "quality": {
+    "reuse_count": 0,
+    "successful_integrations": 0,
+    "failed_integrations": 0,
+    "last_used_at": null
+  },
+  "deprecation": {
+    "reason": null,
+    "replacement": null
+  }
+}
