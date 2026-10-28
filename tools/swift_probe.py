@@ -14,6 +14,7 @@ DIGEST = re.compile(r"[a-f0-9]{64}\Z")
 ID = re.compile(r"[A-Za-z0-9][A-Za-z0-9._-]{2,127}\Z")
 VERSION = re.compile(r"\d+\.\d+\.\d+(?:[-+][0-9A-Za-z.-]+)?\Z")
 SCHEMA = "ai-orchestrator.library-swift-probe.v1"
+TOOLCHAIN_PROFILE = "macos26-xcode26-swift62"
 LICENSES = {"MIT", "Apache-2.0", "BSD-2-Clause", "BSD-3-Clause", "ISC", "0BSD", "MIT-0"}
 
 
@@ -93,6 +94,7 @@ def select(root: Path) -> dict:
             result = read(previous)
             if (result.get("schema") == SCHEMA and result.get("source_commit") == commit
                     and result.get("payload_sha256") == digest
+                    and result.get("toolchain_profile") == TOOLCHAIN_PROFILE
                     and result.get("result") in {"passed", "failed"}):
                 continue
         return {
@@ -123,6 +125,7 @@ def record(root: Path, plan: dict, claim: dict, job_result: str, run_id: str) ->
             or claim.get("source_commit") != plan["source_commit"]
             or claim.get("payload_sha256") != plan["payload_sha256"]
             or claim.get("platform") != "macos"
+            or claim.get("toolchain_profile") != TOOLCHAIN_PROFILE
             or type(claim.get("test_exit_code")) is not int
             or (claim["test_exit_code"] == 0) != (job_result == "success")
             or not re.fullmatch(r"\d{5,18}", run_id)):
@@ -131,6 +134,7 @@ def record(root: Path, plan: dict, claim: dict, job_result: str, run_id: str) ->
         "schema": SCHEMA, "asset_id": asset_id, "version": version,
         "source_commit": plan["source_commit"],
         "payload_sha256": plan["payload_sha256"], "platform": "macos",
+        "toolchain_profile": TOOLCHAIN_PROFILE,
         "test_command": "swift test --disable-automatic-resolution -j 2",
         "test_exit_code": claim["test_exit_code"],
         "result": "passed" if job_result == "success" else "failed",
