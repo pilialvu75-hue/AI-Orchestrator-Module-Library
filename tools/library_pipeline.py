@@ -159,6 +159,14 @@ def validate_payload(manifest: dict, base: Path) -> None:
             require(str(provenance["source_commit"]) == str(commit), "payload and provenance commits differ")
         if provenance.get("source_repository"):
             require(str(provenance["source_repository"]).rstrip("/") == str(payload["upstream_repository"]).rstrip("/"), "payload and provenance repositories differ")
+        # A recovered upstream reference is still an untrusted intake. Bind
+        # its actual materialized bytes to the recorded immutable digest.
+        if payload.get("sha256") is not None:
+            require(payload.get("path") == "payload", "pinned upstream snapshot path must be payload")
+            require(re.fullmatch(r"[0-9a-f]{64}", str(payload["sha256"])) is not None,
+                    "pinned upstream snapshot requires SHA256 digest")
+            require(payload_tree_sha256(base / "payload") == payload["sha256"],
+                    "upstream snapshot SHA256 mismatch")
         return
 
     relative = payload.get("path")
