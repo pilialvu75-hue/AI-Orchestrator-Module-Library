@@ -1,0 +1,103 @@
+{
+  "capabilities": [
+    "diagnostics.logging"
+  ],
+  "connector": {
+    "adapters": [],
+    "configuration_schema": null,
+    "healthcheck": {
+      "path": null,
+      "type": "none"
+    },
+    "integration_mode": "adapter",
+    "provides": [
+      {
+        "capability_id": "diagnostics.logging",
+        "contract_id": "diagnostics.logging.v1",
+        "contract_version": "1.0"
+      }
+    ],
+    "requires": [],
+    "standard": "ai-orchestrator-lego",
+    "standard_version": "1.0.0"
+  },
+  "deprecation": {
+    "reason": null,
+    "replacement": null
+  },
+  "description": "Allow users to easily share Diagnostics with your support team to improve the flow of fixing bugs.",
+  "entry_paths": [],
+  "frameworks": [],
+  "id": "diagnostics.logging.avdlee.diagnostics",
+  "integration": {
+    "adaptation_allowed": true,
+    "adapter_notes": "Swift upstream candidate: Apple-platform applicability only, pending build and contract validation. Android, Windows, Linux and Web compatibility are not established; cross-platform support requires a separate implemented and tested adapter.",
+    "estimated_effort": "medium",
+    "known_constraints": [
+      "adapter_required_until_contract_validation",
+      "native_build_changes_possible",
+      "swift_apple_platform_only_unverified",
+      "android_web_support_not_established"
+    ]
+  },
+  "kind": "module",
+  "languages": [
+    "swift"
+  ],
+  "name": "Diagnostics",
+  "payload": {
+    "path": null,
+    "sha256": null,
+    "type": "upstream_reference",
+    "upstream_commit": "e3b6ffc95ab07ac3cb31e99103fc64cfb13efaeb",
+    "upstream_repository": "https://github.com/AvdLee/Diagnostics"
+  },
+  "platforms": [
+    "macos",
+    "ios"
+  ],
+  "provenance": {
+    "attribution": {
+      "obligations_must_be_validated_before_promotion": true,
+      "preserve_upstream_notices": true,
+      "upstream_commit": "e3b6ffc95ab07ac3cb31e99103fc64cfb13efaeb",
+      "upstream_repository": "https://github.com/AvdLee/Diagnostics"
+    },
+    "license": "MIT",
+    "license_detection_source": "repository_metadata",
+    "license_file": "provenance/LICENSE",
+    "license_source_url": "https://github.com/AvdLee/Diagnostics/blob/e3b6ffc95ab07ac3cb31e99103fc64cfb13efaeb/LICENSE",
+    "origin": "researcher",
+    "retrieved_at": "2026-10-24T01:12:15.936844Z",
+    "source_commit": "e3b6ffc95ab07ac3cb31e99103fc64cfb13efaeb",
+    "source_project_id": null,
+    "source_repository": "https://github.com/AvdLee/Diagnostics",
+    "source_tag": "7.0.3",
+    "source_task_id": "b0ac893d44e8a12d792b89a889c7af7847a223610dc3378f3072d2152e04bc0c"
+  },
+  "quality": {
+    "failed_integrations": 0,
+    "last_used_at": null,
+    "reuse_count": 0,
+    "successful_integrations": 0
+  },
+  "security": {
+    "notes": "Metadata pre-screen only; upstream code has not been executed or security-reviewed. Apple-platform compatibility is also unverified.",
+    "reviewed": false,
+    "reviewed_at": null,
+    "sbom": null
+  },
+  "status": "discovered",
+  "tags": [
+    "diagnostics.logging",
+    "researcher-candidate"
+  ],
+  "validation": {
+    "score": 0.7618,
+    "test_report": null,
+    "tests_passed": false,
+    "validated_at": null,
+    "validated_on": []
+  },
+  "version": "0.1.0"
+}

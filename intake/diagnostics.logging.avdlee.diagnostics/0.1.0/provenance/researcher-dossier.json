@@ -1,0 +1,251 @@
+{
+  "benchmark_plan": {
+    "capability_id": "diagnostics.logging",
+    "commit_sha": "e3b6ffc95ab07ac3cb31e99103fc64cfb13efaeb",
+    "metrics": [
+      "correctness",
+      "latency",
+      "resource_usage",
+      "footprint"
+    ],
+    "reason": "Sandbox policy/planning exists, but no untrusted-code executor is enabled.",
+    "repository": "AvdLee/Diagnostics",
+    "required_sandbox": {
+      "cleanup": "mandatory",
+      "cpu_limit": true,
+      "ephemeral_filesystem": true,
+      "memory_limit": true,
+      "network": "disabled_by_default",
+      "secrets": "none",
+      "timeout": true
+    },
+    "sandbox_foundation": {
+      "candidate_source_mount": "read_only",
+      "capabilities": "drop_all",
+      "cleanup": "mandatory_when_executor_exists",
+      "cpu_limit": true,
+      "docker_socket": "forbidden",
+      "ephemeral_work_tmpfs": true,
+      "executor_enabled": false,
+      "host_devices": "none",
+      "memory_limit": true,
+      "network": "none",
+      "no_new_privileges": true,
+      "pid_limit": true,
+      "planner": "researcher.sandbox.DockerSandboxPlanner",
+      "project_repository_mounts": "forbidden",
+      "root_filesystem": "read_only",
+      "secrets": "none",
+      "trusted_image_digest_required": true,
+      "wall_clock_limit": true
+    },
+    "status": "PLANNED_NOT_EXECUTED",
+    "targets": [
+      "android",
+      "desktop",
+      "web"
+    ]
+  },
+  "candidate": {
+    "acquired_at": "2026-10-24T01:12:15.936844Z",
+    "archived": false,
+    "commit_sha": "e3b6ffc95ab07ac3cb31e99103fc64cfb13efaeb",
+    "default_branch": "main",
+    "description": "Allow users to easily share Diagnostics with your support team to improve the flow of fixing bugs.",
+    "extra": {
+      "ci_present": true,
+      "codeql_present": false,
+      "dependabot_present": false,
+      "dependency_manifests": [
+        "package.json"
+      ],
+      "disabled": false,
+      "fork": false,
+      "latest_stable_version": null,
+      "license_detection_source": "repository_metadata",
+      "provenance_tree_sha": "e967ab3a0917ab9de59eca008afa0adc99e06347",
+      "readme_present": true,
+      "release_resolution_strategy": "repository_tip_no_matching_pubspec",
+      "release_tag_verified": true,
+      "research_targets": [
+        "android",
+        "desktop",
+        "web"
+      ],
+      "security_policy_present": false,
+      "source_manifest_path": null,
+      "source_stable": null,
+      "source_version": null,
+      "target_discovery_evidence": {
+        "android": "github_targeted_repository_search",
+        "desktop": "github_targeted_repository_search",
+        "web": "github_targeted_repository_search"
+      },
+      "target_support_certified": false,
+      "tests_present": false,
+      "tree_truncated": false,
+      "visibility": "public"
+    },
+    "forks": 67,
+    "has_issues": true,
+    "has_wiki": true,
+    "homepage": "",
+    "language": "Swift",
+    "license_file_url": "https://github.com/AvdLee/Diagnostics/blob/e3b6ffc95ab07ac3cb31e99103fc64cfb13efaeb/LICENSE",
+    "license_spdx": "MIT",
+    "name": "Diagnostics",
+    "open_issues": 6,
+    "owner": "AvdLee",
+    "provider": "github",
+    "pushed_at": "2026-09-26T07:00:27Z",
+    "release_tag": "7.0.3",
+    "repository": "AvdLee/Diagnostics",
+    "size_kb": 4352,
+    "stars": 1309,
+    "topics": [
+      "swift"
+    ],
+    "upstream_url": "https://github.com/AvdLee/Diagnostics"
+  },
+  "capability_id": "diagnostics.logging",
+  "created_at": "2026-10-24T01:12:40.171043Z",
+  "dependency_evidence": {
+    "dependencies_enumerated": true,
+    "dependency_count": 0,
+    "known_vulnerability_count": 0,
+    "lockfiles_present": [
+      "Gemfile.lock"
+    ],
+    "manifest_files_detected": [
+      "package.json"
+    ],
+    "manifests_analyzed": [
+      "package.json"
+    ],
+    "note": "Static source, dependency provenance, SBOM and vulnerability admission only; candidate/package-manager code was not executed.",
+    "sbom_complete": true,
+    "sbom_component_count": 0,
+    "sbom_fingerprint": "0b41d2b16a4c08bc388b02fdb8ef14d0e9e71dc820c8f998f128fa5f2f8da1c9",
+    "supply_chain_verdict": "CLEAR",
+    "vulnerability_database_checked": true,
+    "vulnerability_verdict": "CLEAR"
+  },
+  "fingerprint": "b0ac893d44e8a12d792b89a889c7af7847a223610dc3378f3072d2152e04bc0c",
+  "integration_estimate": {
+    "adapters": 1,
+    "effort": "medium",
+    "native_build_changes_possible": true,
+    "reasons": [
+      "adapter_required_until_contract_validation",
+      "native_build_changes_possible"
+    ],
+    "score": 0.45000000000000007
+  },
+  "license_evidence": {
+    "classification": "permissive",
+    "direct_reuse": true,
+    "fit": 1.0,
+    "research_use": true,
+    "warning": null
+  },
+  "lifecycle": "SHORTLISTED",
+  "maintenance_evidence": {
+    "archived": false,
+    "forks_signal_only": 67,
+    "last_push_age_days": 27,
+    "open_issues": 6,
+    "score": 1.0,
+    "stars_signal_only": 1309
+  },
+  "schema_version": 1,
+  "scores": {
+    "contract_fit": 0.75,
+    "documentation": 0.7999999999999999,
+    "footprint": 0.9,
+    "functional_fit": 0.9900000000000001,
+    "integration_cost": 0.45000000000000007,
+    "license_fit": 1.0,
+    "maintenance": 1.0,
+    "performance": 0.5,
+    "platform_fit": 0.55,
+    "reasons": [
+      "functional keywords matched: 2/5",
+      "maintenance score: 1.00",
+      "license: permissive",
+      "integration effort: medium",
+      "contract present: True",
+      "tests present signal: False",
+      "CI present signal: True"
+    ],
+    "recommendation": 0.7618,
+    "security": 0.65,
+    "test_quality": 0.5
+  },
+  "security_evidence": {
+    "admission_gate": {
+      "admission_eligible": true,
+      "blobs_seen": 108,
+      "commit_sha": "e3b6ffc95ab07ac3cb31e99103fc64cfb13efaeb",
+      "complete": true,
+      "executed_untrusted_code": false,
+      "findings": [],
+      "opaque_artifacts": [],
+      "relevant_blobs": 85,
+      "repository": "AvdLee/Diagnostics",
+      "scanned_bytes": 210988,
+      "scanned_files": 85,
+      "skipped_assets": 23,
+      "submodules": [],
+      "supply_chain": {
+        "admission_eligible": true,
+        "dependencies": [],
+        "executed_untrusted_code": false,
+        "findings": [],
+        "lockfiles_present": [
+          "Gemfile.lock"
+        ],
+        "manifests_analyzed": [
+          "package.json"
+        ],
+        "verdict": "CLEAR",
+        "vulnerability_database_checked": false
+      },
+      "symlinks": [],
+      "total_entries": 148,
+      "tree_sha": "e967ab3a0917ab9de59eca008afa0adc99e06347",
+      "verdict": "CLEAR"
+    },
+    "score": 0.65,
+    "static_metadata_only": true,
+    "untrusted_code_executed": false,
+    "vulnerability_gate": {
+      "admission_eligible": true,
+      "sbom": {
+        "complete": true,
+        "components": [],
+        "fingerprint": "0b41d2b16a4c08bc388b02fdb8ef14d0e9e71dc820c8f998f128fa5f2f8da1c9",
+        "format": "researcher-sbom",
+        "schema_version": 1,
+        "source_files": [
+          "Gemfile.lock",
+          "package.json"
+        ],
+        "unresolved": []
+      },
+      "vulnerability_report": {
+        "admission_eligible": true,
+        "database": "OSV",
+        "database_checked": true,
+        "error": null,
+        "executed_untrusted_code": false,
+        "hits": [],
+        "queried_components": 0,
+        "sbom_fingerprint": "0b41d2b16a4c08bc388b02fdb8ef14d0e9e71dc820c8f998f128fa5f2f8da1c9",
+        "unresolved": [],
+        "verdict": "CLEAR"
+      }
+    },
+    "warnings": []
+  },
+  "warnings": []
+}
