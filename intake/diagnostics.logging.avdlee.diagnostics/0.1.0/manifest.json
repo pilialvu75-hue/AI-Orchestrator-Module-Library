@@ -99,7 +99,7 @@
     "score_basis": "independently_verified_native_upstream_and_contract_test_jobs",
     "test_report": "evidence/test-report.json",
     "tests_passed": true,
-    "validated_at": "2026-10-28T18:33:42Z",
+    "validated_at": "2026-10-28T18:51:14Z",
     "validated_on": [
       "macos"
     ]

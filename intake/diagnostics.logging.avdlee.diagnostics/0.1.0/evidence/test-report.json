@@ -1,8 +1,8 @@
 {
-  "adapter_sha256": "882d5caac4301291c869082124815d6ae4c408739307e7ec2456753708fdda8e",
+  "adapter_sha256": "84476cf9e55c9ee03664b71437b8bf1a7d4b73f7bb77b666b2018bde0b9f57ef",
   "asset_id": "diagnostics.logging.avdlee.diagnostics",
   "evidence": {
-    "adapter_github_run_id": "40744901771",
+    "adapter_github_run_id": "40748121879",
     "commands": [
       "swift test --disable-automatic-resolution -j 2",
       "swift test --disable-automatic-resolution -j 2 --filter AivexusDiagnosticsBridgeTests"
@@ -11,7 +11,7 @@
     "upstream_github_run_id": "40742192345",
     "verification": "two protected-main GitHub jobs independently checked via Actions API"
   },
-  "generated_at": "2026-10-28T18:33:42Z",
+  "generated_at": "2026-10-28T18:51:14Z",
   "passed": true,
   "payload_sha256": "071e62e85210fba7464dc190fbdaea5aacd604c5c5207414b4f634cac6f3a423",
   "schema": "ai-orchestrator.library-test-report.v1",
