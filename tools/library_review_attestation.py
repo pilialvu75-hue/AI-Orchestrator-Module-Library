@@ -76,8 +76,15 @@ def verify_local_review_authorization(base: Path, manifest: dict, report: dict, 
     before producing a signature; it is not a vulnerability scanner.
     """
     source = manifest.get("payload") or {}
-    _require(source.get("type") == "repository_path",
-             "independent local review is only for materialized local source")
+    payload_type = source.get("type")
+    materialized_upstream = (
+        payload_type == "upstream_reference"
+        and source.get("path") == "payload"
+        and isinstance(source.get("sha256"), str)
+        and _SHA256.fullmatch(source["sha256"]) is not None
+    )
+    _require(payload_type == "repository_path" or materialized_upstream,
+             "independent review requires a materialized and SHA256-pinned source")
     attestation = report.get("independent_attestation")
     _require(isinstance(attestation, dict)
              and set(attestation) == {"algorithm", "statement", "signature_base64"}

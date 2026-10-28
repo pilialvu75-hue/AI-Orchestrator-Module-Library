@@ -66,13 +66,19 @@ _SHA256 = re.compile(r"[0-9a-f]{64}")
 def _bind_local_source(base: Path, manifest: dict, report: dict, label: str) -> None:
     """Tie a checked report to the manifest pin AND the real source file bytes.
 
-    An upstream-reference-only asset remains subject to its existing legacy
-    provenance policy; these local payload checks are not a shortcut to
-    accepting upstream references or granting a security review.
+    Legacy upstream references without materialized bytes keep their existing
+    provenance policy. Once an upstream source is acquired, both its test
+    evidence and any security approval must bind to the actual source tree.
     """
     payload = manifest.get("payload") or {}
     _require(isinstance(payload, dict), f"{label} manifest payload must be an object")
-    if payload.get("type") != "repository_path":
+    payload_type = payload.get("type")
+    if payload_type == "upstream_reference" and (
+        payload.get("sha256") is not None or payload.get("path") is not None
+    ):
+        _require(payload.get("path") == "payload",
+                 f"{label} materialized upstream source path must be payload")
+    elif payload_type != "repository_path":
         return
     pinned = payload.get("sha256")
     declared = report.get("payload_sha256")
@@ -146,10 +152,16 @@ def verify_security_evidence(base: Path, manifest: dict) -> None:
     _require(report.get("known_vulnerabilities") == known, "security.review_report vulnerability count does not match manifest")
     _require(report.get("sbom_sha256") == _sha256(sbom_path), "security.review_report SBOM digest does not match security.sbom")
 
-    # A local JSON assertion is not an independent security approval.
-    # Newly materialized source must carry a detached signature from the
-    # reviewer key configured exclusively on the protected default branch.
-    if (manifest.get("payload") or {}).get("type") == "repository_path":
+    # A worker-authored JSON is not an independent security decision.
+    # Require the protected reviewer's detached signature for *both*
+    # first-party local sources and newly materialized upstream snapshots.
+    # Historical upstream references with no local source are unchanged.
+    payload = manifest.get("payload") or {}
+    materialized_upstream = (
+        payload.get("type") == "upstream_reference"
+        and (payload.get("sha256") is not None or payload.get("path") is not None)
+    )
+    if payload.get("type") == "repository_path" or materialized_upstream:
         try:
             verify_local_review_authorization(base, manifest, report, sbom_path)
         except ReviewAuthorizationError as exc:

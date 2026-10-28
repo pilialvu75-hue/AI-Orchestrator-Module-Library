@@ -170,6 +170,63 @@ class SignedLocalReviewTests(unittest.TestCase):
                 self.statement = original.copy()
         self.sign(self.statement)
 
+    def _materialize_upstream_reference(self):
+        # Emulate the newly acquired immutable upstream-reference payload.
+        # The existing local-source fixture uses payload/src; upstream
+        # snapshots pin the entire payload/ directory instead.
+        digest = payload_tree_sha256(self.base / "payload")
+        self.manifest["payload"] = {
+            "type": "upstream_reference",
+            "path": "payload",
+            "sha256": digest,
+            "upstream_repository": "https://github.com/example/upstream",
+            "upstream_commit": "a" * 40,
+        }
+        self.statement["payload_sha256"] = digest
+        self.sign(self.statement)
+
+    def test_materialized_upstream_requires_independently_signed_review(self):
+        self._materialize_upstream_reference()
+        self.verify()
+        raw = json.loads(self.review_file.read_text())
+        raw.pop("independent_attestation")
+        _write_json(self.review_file, raw)
+        with self.assertRaisesRegex(EvidenceError, "independent local security review required"):
+            self.verify()
+
+    def test_materialized_upstream_rejects_tampered_source_and_wrong_key(self):
+        self._materialize_upstream_reference()
+        with patch.dict(os.environ, {PUBLIC_KEY_ENV: ""}):
+            with self.assertRaisesRegex(EvidenceError, "key is not configured"):
+                verify_security_evidence(self.base, self.manifest)
+        (self.source / "diagnostics.dart").write_text("String event() => 'mutated';\n")
+        with self.assertRaisesRegex(EvidenceError, "actual local source digest"):
+            self.verify()
+
+    def test_materialized_upstream_incomplete_pin_cannot_reuse_a_signed_report(self):
+        self._materialize_upstream_reference()
+        self.manifest["payload"].pop("path")
+        with self.assertRaisesRegex(EvidenceError, "upstream source path must be payload"):
+            self.verify()
+        self.manifest["payload"]["path"] = "payload"
+        self.manifest["payload"].pop("sha256")
+        with self.assertRaisesRegex(EvidenceError, "valid SHA256 pin"):
+            self.verify()
+
+    def test_legacy_unmaterialized_upstream_evidence_is_not_retroactively_changed(self):
+        # Existing certified upstream-reference manifests have no materialized
+        # source or digest. This narrow backward-compatibility path must not
+        # be mistaken for newly authenticated source code.
+        self.manifest["payload"] = {
+            "type": "upstream_reference",
+            "upstream_repository": "https://github.com/example/legacy",
+            "upstream_commit": "a" * 40,
+        }
+        report = json.loads(self.review_file.read_text())
+        report.pop("independent_attestation")
+        _write_json(self.review_file, report)
+        self.verify()
+
     def test_signature_bytes_and_algorithms_are_strict(self):
         original = json.loads(self.review_file.read_text())
         for change in (
