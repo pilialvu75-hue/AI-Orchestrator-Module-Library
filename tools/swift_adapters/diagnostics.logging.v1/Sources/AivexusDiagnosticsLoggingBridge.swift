@@ -12,6 +12,7 @@ public enum AivexusSeverity: String, Sendable {
 
 public enum AivexusLoggingError: Error, Equatable {
     case notInitialized
+    case explicitCaptureAuthorizationRequired
     case emptyMessage
     case oversizedMessage
 }
@@ -19,8 +20,13 @@ public enum AivexusLoggingError: Error, Equatable {
 public enum AivexusDiagnosticsLoggingBridge {
     public static let maxMessageBytes = 4096
 
-    /// Initializes the pinned Diagnostics dependency on its supported target.
-    public static func initialize() throws {
+    /// DiagnosticsLogger.setup() can intercept process-wide stdout/stderr.
+    /// The caller must explicitly authorize this side effect. This is *not*
+    /// a user-facing consent dialog or a privacy/security certification.
+    public static func initialize(allowProcessWideLogCapture: Bool = false) throws {
+        guard allowProcessWideLogCapture else {
+            throw AivexusLoggingError.explicitCaptureAuthorizationRequired
+        }
         try DiagnosticsLogger.setup()
         guard DiagnosticsLogger.isSetUp() else {
             throw AivexusLoggingError.notInitialized
