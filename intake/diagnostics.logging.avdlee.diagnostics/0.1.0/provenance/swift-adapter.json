@@ -1,9 +1,9 @@
 {
-  "adapter_sha256": "882d5caac4301291c869082124815d6ae4c408739307e7ec2456753708fdda8e",
+  "adapter_sha256": "84476cf9e55c9ee03664b71437b8bf1a7d4b73f7bb77b666b2018bde0b9f57ef",
   "asset_id": "diagnostics.logging.avdlee.diagnostics",
   "certification_authorized": false,
   "contract_id": "diagnostics.logging.v1",
-  "github_run_id": "40744901771",
+  "github_run_id": "40748121879",
   "has_executable_bridge_source": true,
   "independent_security_reviewed": false,
   "integration_scope": "macOS native diagnostics.logging.v1 adapter smoke, redaction and rejection tests",
