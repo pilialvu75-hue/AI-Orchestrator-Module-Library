@@ -8,6 +8,7 @@ on:
       - "tools/swift_probe.py"
       - "tools/swift_adapter.py"
       - "tools/complete_swift_testing.py"
+      - "tools/swift_security_preflight.py"
       - "tools/swift_adapters/**"
   schedule:
     # Cheap daily Linux planner; an unchanged source commit is probed once.
@@ -343,4 +344,40 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git commit -m "library: attest native adapter as tested only, security pending [skip ci]"
+          git push origin HEAD:main
+
+
+  independent_security_preflight:
+    # Separate trusted scan of the source/lockfile, never an approval.
+    # No untrusted code executes here and no module certification is granted.
+    needs: [prepare, finalize_native_tested]
+    if: ${{ always() && needs.prepare.result == 'success' && (needs.finalize_native_tested.result == 'success' || needs.finalize_native_tested.result == 'skipped') }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 8
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout current immutable source evidence on main
+        uses: actions/checkout@v6
+        with:
+          ref: main
+          fetch-depth: 1
+      - name: Generate source-bound SwiftPM CycloneDX SBOM and independent OSV preflight
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 tools/swift_security_preflight.py --root . \
+            --output "$RUNNER_TEMP/swift-security-preflight.json"
+          if [[ "$(python3 -c 'import json,os; print(json.load(open(os.environ["RUNNER_TEMP"]+"/swift-security-preflight.json"))["scanned"])')" != "1" ]]; then
+            echo "No new TESTED Swift source requires a separate security preflight."
+            exit 0
+          fi
+          python3 tools/validate_library.py
+          python3 -m unittest discover -s tests -p 'test_swift_security_preflight.py' -v
+          git add -- intake/*/*/evidence/security-preflight.json
+          git add -- intake/*/*/evidence/sbom.cdx.json
+          git diff --cached --quiet && exit 0
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -m "library: record independent Swift SBOM and OSV preflight, security pending [skip ci]"
           git push origin HEAD:main
