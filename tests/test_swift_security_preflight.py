@@ -23,6 +23,11 @@ class SwiftSecurityPreflightTests(unittest.TestCase):
         self.base = self.root / "intake/diagnostics.logging.avdlee.diagnostics/0.1.0"
         self.base.parent.mkdir(parents=True)
         shutil.copytree(EXTERNAL, self.base)
+        # The protected security job runs this suite AFTER producing new
+        # scan evidence in its working checkout. Reconstruct a genuinely
+        # unscanned test fixture rather than inheriting those new outputs.
+        for artifact in ("evidence/security-preflight.json", "evidence/sbom.cdx.json"):
+            (self.base / artifact).unlink(missing_ok=True)
         self.calls = []
 
     def _osv(self, queries):
