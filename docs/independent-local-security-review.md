@@ -1,9 +1,13 @@
-# Independent local module security review (v1)
+# Independent review of materialized module source (v1)
 
-Local source under `payload.type=repository_path` must never be certified
-merely because a worker writes `security.reviewed=true` in the manifest and
-a local JSON report. The protected certification job validates a detached
-**Ed25519** signature from a separately controlled reviewer identity.
+Materialized source under `payload.type=repository_path` **or**
+`payload.type=upstream_reference` with a real pinned `payload/` snapshot
+must never be certified merely because a worker writes
+`security.reviewed=true` in a manifest or local JSON report. The protected
+certification job validates a detached **Ed25519** signature from a
+separately controlled reviewer identity. Historical reference-only assets
+without materialized source remain under their existing legacy policy;
+this does not retroactively assert their source was audited.
 
 ## Who can sign
 
@@ -94,3 +98,27 @@ test-only private/public key pair. Tests cover authenticated sign-off,
 missing trusted key, forged reviewer identity, tampered source, license,
 SBOM, altered vulnerability counts and invalid signature algorithms.
 Real reviewer private key material never enters CI.
+
+## Current external Swift candidate — security not approved (28 Oct 2026)
+
+`diagnostics.logging.avdlee.diagnostics@0.1.0` is genuinely **tested**
+on macOS (53 upstream package tests plus 5 Aivexus logging bridge tests);
+the original source commit and bridge template SHA-256 are pinned in the
+independently GitHub-job-verified test report.
+
+The independent security-preflight record at
+`intake/diagnostics.logging.avdlee.diagnostics/0.1.0/evidence/security-preflight.json`
+contains a CycloneDX dependency inventory, pinned dependency license evidence
+and an OSV snapshot. The recorded scan returned no matching advisories, **not
+proof of absence of vulnerabilities**. The upstream logger intercepts process
+`stdout/stderr`, reads process environment and starts system metrics monitoring.
+Reviewers must assess privacy consent, redaction before collection, platform
+permissions, data retention, exception/exit handling and entitlement effects,
+as well as the **Aivexus adapter source**, before considering sign-off.
+
+This preflight is not a signed approval. Keep `security.reviewed=false`
+and `certification_authorized=false` until the independent reviewer examines
+the complete delivered artifact, tests real runtime permissions and signs the
+exact, immutable source/SBOM/license evidence with the separately controlled
+key. A compatible *production package* containing the tested adapter source is
+also required: a manifest or an upstream reference alone is not deliverable code.
