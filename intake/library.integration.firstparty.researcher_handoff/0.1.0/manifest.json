@@ -3,7 +3,7 @@
   "name": "Bounded Researcher-to-Library proposal transfer",
   "version": "0.1.0",
   "kind": "module",
-  "status": "discovered",
+  "status": "tested",
   "description": "Runnable, pinned Python 3.12 source bundle for idempotent bounded transfer of actual Researcher SQLite proposals into a Library planning queue; preserves duplicate detection, schema checks, and read-only source DB semantics.",
   "tags": [
     "library.integration",
@@ -45,11 +45,13 @@
     "retrieved_at": "2026-10-28T08:20:00Z"
   },
   "validation": {
-    "score": 0,
-    "tests_passed": false,
-    "test_report": null,
-    "validated_at": null,
-    "validated_on": []
+    "score": 0.8,
+    "tests_passed": true,
+    "test_report": "tests/python-linux-ci-report.json",
+    "validated_at": "2026-10-28T08:21:02Z",
+    "validated_on": [
+      "linux"
+    ]
   },
   "security": {
     "reviewed": false,
@@ -67,7 +69,7 @@
       "No authentication, GitHub PR creation, or remote repository writing in module",
       "Read-only Researcher SQLite access but local Library planning queue writes by design",
       "No execution of candidate code or automatic security certification",
-      "Linux Python 3.12 isolated testing only; Android and Windows not validated",
+      "Linux Python 3.12 tests passed (11/11); Android, Windows and live cross-repo delivery not validated",
       "No independent production security or redistribution license sign-off"
     ]
   },
