@@ -1,0 +1,8 @@
+name: aivexus_external_logging_consumer
+description: Offline downstream consumer smoke test for a real tested Library module.
+publish_to: none
+environment:
+  sdk: ^3.4.0
+dependencies:
+  aivexus_external_logging:
+    path: ../../intake/diagnostics.logging.dartlang.logging_adapter/0.1.0/payload/src

@@ -142,6 +142,15 @@ jobs:
           dart analyze tool
           dart run tool/self_test.dart
 
+      - name: Verify a separate Dart app can import and use the real external Library module
+        shell: bash
+        working-directory: examples/external_logging_consumer
+        run: |
+          set -euo pipefail
+          dart pub get --offline
+          dart analyze
+          dart run bin/main.dart
+
       - name: Export deterministic offline Library snapshot
         run: python tools/library_resolver.py export-cache --output /tmp/ai-orchestrator-module-library.json
 
