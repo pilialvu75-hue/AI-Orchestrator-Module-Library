@@ -131,9 +131,19 @@ def plan(root: Path) -> dict:
 
 
 def stage(root: Path, selection: dict, output: Path) -> dict:
+    """Stage an untested source only when the trusted planner selected it."""
     actual = plan(root)
     if selection != actual or actual.get("count") != 1:
         raise AdapterError("source, bridge template or previous test state changed")
+    return assemble_pinned_source(root, selection, output)
+
+
+def assemble_pinned_source(root: Path, selection: dict, output: Path) -> dict:
+    """Non-executing overlay for a separately authenticated tested candidate.
+
+    This helper NEVER authorizes production use or certifies code. Callers must
+    independently verify the exact pinned source and bridge test evidence.
+    """
     if output.exists() or output.is_symlink():
         raise AdapterError("staging directory must be new")
     src = root / selection["source_path"]
