@@ -51,7 +51,7 @@ jobs:
               file = source / relative
               assert not file.is_symlink(), f"unsafe symlink: {relative}"
               data = file.read_bytes()
-              git_sha = hashlib.sha1(b"blob " + str(len(data)).encode() + b"\\x00" + data).hexdigest()
+              git_sha = hashlib.sha1(b"blob " + str(len(data)).encode() + b"\x00" + data).hexdigest()
               assert sha == git_sha, f"pinned upstream source bytes changed: {relative}"
           assert "version: 1.3.0" in (source / "pubspec.yaml").read_text()
           assert (source / "LICENSE").read_text().startswith("Copyright 2013")
