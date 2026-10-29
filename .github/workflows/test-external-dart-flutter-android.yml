@@ -1,0 +1,145 @@
+name: First external Dart module — isolated Flutter Android proof
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'examples/external_logging_flutter_consumer/**'
+      - 'intake/diagnostics.logging.dartlang.logging_adapter/0.1.1/**'
+      - '.github/workflows/test-external-dart-flutter-android.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: external-dart-flutter-android-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  android-demo:
+    name: Compile real external logging Flutter demo (NOT CERTIFIED)
+    runs-on: ubuntu-24.04
+    timeout-minutes: 40
+    steps:
+      - name: Checkout public Library source without credentials
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+          submodules: false
+
+      - name: Verify exact tested module hash, preserved public license and unapproved status
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import json
+          import sys
+          from pathlib import Path
+          sys.path.insert(0, "tools")
+          from library_source_integrity import payload_tree_sha256
+          from library_evidence import verify_test_evidence
+          base = Path("intake/diagnostics.logging.dartlang.logging_adapter/0.1.1")
+          m = json.loads((base / "manifest.json").read_text())
+          assert m["status"] == "tested"
+          assert m["security"]["reviewed"] is False
+          assert m["provenance"]["source_repository"] == "https://github.com/dart-lang/core"
+          assert m["provenance"]["source_commit"] == "8151b9f57fa3fee10421a19ce24470e143c0dee5"
+          assert m["payload"]["sha256"] == "2eaa1c85c6d116936bbfa461bd37173aa6ea6b3d841d58c2905ee421f39e0fab"
+          assert payload_tree_sha256(base / "payload/src") == m["payload"]["sha256"]
+          assert (base / "payload/src/vendor/logging/LICENSE").read_bytes() == (base / "provenance/LICENSE").read_bytes()
+          verify_test_evidence(base, m)
+          print("PASS: 18 real pinned source files, public license, tested status, not certified")
+          PY
+          python3 tools/external_dart_logging_typed_review.py --root . \
+            --output "$RUNNER_TEMP/external-logging-typed-review-REQUEST.json"
+
+      - name: Set up Java 17 for Android
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+
+      - name: Set up Flutter and Android build toolchain
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.47.5'
+          channel: stable
+          cache: true
+
+      - name: Generate Android scaffold on CI runner only
+        shell: bash
+        working-directory: examples/external_logging_flutter_consumer
+        run: |
+          set -euo pipefail
+          sha256sum pubspec.yaml lib/main.dart test/widget_test.dart > "$RUNNER_TEMP/demo-source.sha256"
+          flutter create --empty --platforms=android \
+            --project-name=aivexus_external_logging_flutter_demo \
+            --org=ai.aivexus.demo .
+          sha256sum -c "$RUNNER_TEMP/demo-source.sha256"
+          test -f android/app/build.gradle.kts -o -f android/app/build.gradle
+          echo "PASS: generated Android scaffold preserved exact committed Flutter demo"
+
+      - name: Resolve local external source, analyze and test Flutter UI
+        shell: bash
+        working-directory: examples/external_logging_flutter_consumer
+        run: |
+          set -euo pipefail
+          flutter pub get
+          flutter analyze
+          flutter test --reporter expanded
+          test -f ../../intake/diagnostics.logging.dartlang.logging_adapter/0.1.1/payload/src/vendor/logging/LICENSE
+
+      - name: Build arm64 experimental release APK (not production signed)
+        shell: bash
+        working-directory: examples/external_logging_flutter_consumer
+        run: |
+          set -euo pipefail
+          flutter build apk --release --target-platform android-arm64
+          APK=build/app/outputs/flutter-apk/app-release.apk
+          test -s "$APK"
+          unzip -Z -1 "$APK" | grep -q '^lib/arm64-v8a/libflutter.so$'
+          sha256sum "$APK"
+          mkdir -p "$RUNNER_TEMP/external-logging-android-demo"
+          cp "$APK" "$RUNNER_TEMP/external-logging-android-demo/EXPERIMENTAL-NOT-CERTIFIED.apk"
+          cd "$RUNNER_TEMP/external-logging-android-demo"
+          sha256sum EXPERIMENTAL-NOT-CERTIFIED.apk > EXPERIMENTAL-NOT-CERTIFIED.apk.sha256
+
+      - name: Include build limitations and source identity
+        shell: bash
+        env:
+          CI_SOURCE_SHA: ${{ github.sha }}
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import json, os
+          from pathlib import Path
+          folder = Path(os.environ["RUNNER_TEMP"]) / "external-logging-android-demo"
+          report = {
+            "schema": "ai-orchestrator.external-dart-flutter-android-demo.v1",
+            "source_revision": os.environ["CI_SOURCE_SHA"],
+            "upstream_repository": "https://github.com/dart-lang/core",
+            "upstream_commit": "8151b9f57fa3fee10421a19ce24470e143c0dee5",
+            "module": "diagnostics.logging.dartlang.logging_adapter@0.1.1",
+            "module_payload_sha256": "2eaa1c85c6d116936bbfa461bd37173aa6ea6b3d841d58c2905ee421f39e0fab",
+            "android_target": "arm64-v8a",
+            "scope": "Flutter widget test plus compiled Android APK only",
+            "physical_device_tested": False,
+            "installed_in_ai_orchestrator": False,
+            "security_reviewed": False,
+            "certification_authorized": False,
+            "production_ready": False,
+          }
+          (folder / "build-scope.json").write_text(
+              json.dumps(report, sort_keys=True, indent=2) + "\n")
+          PY
+          cp "$RUNNER_TEMP/external-logging-typed-review-REQUEST.json" \
+            "$RUNNER_TEMP/external-logging-android-demo/review-REQUEST.json"
+
+      - name: Publish Android APK for isolated testing ONLY
+        uses: actions/upload-artifact@v4
+        with:
+          name: external-dart-logging-typed-v011-android-TEST-ONLY
+          path: ${{ runner.temp }}/external-logging-android-demo/
+          retention-days: 14
+          if-no-files-found: error
