@@ -8,6 +8,7 @@ on:
       - "tools/swift_probe.py"
       - "tools/swift_adapter.py"
       - "tools/swift_sandbox_bundle.py"
+      - "tools/swift_review_packet.py"
       - "tools/complete_swift_testing.py"
       - "tools/swift_security_preflight.py"
       - "tools/swift_adapters/**"
@@ -409,7 +410,14 @@ jobs:
             --archive "$RUNNER_TEMP/aivexus-swift-sandbox-source.tar.gz" \
             --output "$RUNNER_TEMP/aivexus-swift-sandbox-receipt.json"
           echo "Native Swift sandbox staging completed; see count in receipt."
-      - name: Publish source archive for isolated macOS review (14 days only)
+      - name: Generate deterministic independent privacy/security review request
+        if: ${{ steps.export.outputs.count == '1' }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 tools/swift_review_packet.py --root . \
+            --output "$RUNNER_TEMP/aivexus-swift-independent-review-REQUEST.json"
+      - name: Publish source archive and unsigned review request (14 days only)
         if: ${{ steps.export.outputs.count == '1' }}
         uses: actions/upload-artifact@v6
         with:
@@ -417,5 +425,6 @@ jobs:
           path: |
             ${{ runner.temp }}/aivexus-swift-sandbox-source.tar.gz
             ${{ runner.temp }}/aivexus-swift-sandbox-receipt.json
+            ${{ runner.temp }}/aivexus-swift-independent-review-REQUEST.json
           if-no-files-found: error
           retention-days: 14
