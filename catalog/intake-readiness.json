@@ -3,13 +3,13 @@
   "report_type": "read_only_evidence_gaps_not_certification",
   "summary": {
     "certified_catalog_entries": 3,
-    "intake_candidates": 25,
-    "blocked_intake_candidates": 25,
+    "intake_candidates": 26,
+    "blocked_intake_candidates": 26,
     "ready_for_automatic_certification": 0,
     "blocker_counts": {
       "LICENSE_EVIDENCE_MISSING": 20,
       "REPRODUCIBLE_TEST_EVIDENCE_MISSING": 18,
-      "SECURITY_REVIEW_EVIDENCE_MISSING": 25,
+      "SECURITY_REVIEW_EVIDENCE_MISSING": 26,
       "SOURCE_SNAPSHOT_MISSING": 18
     }
   },
@@ -633,8 +633,8 @@
       "desired_candidates": 2,
       "certified_count": 1,
       "remaining_to_goal": 1,
-      "intake_candidates": 3,
-      "blocked_candidates": 3,
+      "intake_candidates": 4,
+      "blocked_candidates": 4,
       "certified_by_target": [
         {
           "target": "android",
@@ -973,6 +973,23 @@
       ],
       "source_repository": "https://github.com/AvdLee/Diagnostics",
       "source_commit": "e3b6ffc95ab07ac3cb31e99103fc64cfb13efaeb",
+      "blockers": [
+        "SECURITY_REVIEW_EVIDENCE_MISSING"
+      ],
+      "next_actions": [
+        "Attach an independently generated security report and SBOM bound to the pinned source."
+      ],
+      "independent_certification_authorized": false
+    },
+    {
+      "asset_id": "diagnostics.logging.dartlang.logging_adapter",
+      "version": "0.1.0",
+      "status": "tested",
+      "capabilities": [
+        "diagnostics.logging"
+      ],
+      "source_repository": "https://github.com/dart-lang/core",
+      "source_commit": "8151b9f57fa3fee10421a19ce24470e143c0dee5",
       "blockers": [
         "SECURITY_REVIEW_EVIDENCE_MISSING"
       ],
