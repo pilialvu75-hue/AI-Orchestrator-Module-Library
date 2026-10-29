@@ -132,6 +132,16 @@ jobs:
           dart analyze
           dart run tool/self_test.dart
 
+      - name: Test first real external Dart logging source registered in Library intake
+        shell: bash
+        working-directory: intake/diagnostics.logging.dartlang.logging_adapter/0.1.0/payload/src
+        run: |
+          set -euo pipefail
+          dart pub get --offline
+          dart analyze lib
+          dart analyze tool
+          dart run tool/self_test.dart
+
       - name: Export deterministic offline Library snapshot
         run: python tools/library_resolver.py export-cache --output /tmp/ai-orchestrator-module-library.json
 
