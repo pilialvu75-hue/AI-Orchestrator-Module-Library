@@ -234,13 +234,88 @@ class LibraryPackageTest(unittest.TestCase):
         with self.assertRaisesRegex(PackageError, "requires SHA256"):
             build_package(self.root, "demo.repository", "1.0.0")
 
-    def test_upstream_reference_is_fail_explicit_not_fake_source(self) -> None:
+    def materialize_upstream(self) -> Path:
+        base = self.root / "modules/demo.upstream/1.0.0"
+        source = base / "payload"
+        (source / "Sources").mkdir(parents=True, exist_ok=True)
+        (source / "Package.swift").write_text("// swift-tools-version: 6.2\\n", encoding="utf-8")
+        (source / "Sources/Demo.swift").write_text("public struct Demo {}\\n", encoding="utf-8")
+        (source / "LICENSE").write_text("MIT License\\n", encoding="utf-8")
+        path = base / "manifest.json"
+        manifest = json.loads(path.read_text(encoding="utf-8"))
+        manifest["payload"]["path"] = "payload"
+        manifest["payload"]["sha256"] = payload_tree_sha256(source)
+        manifest["provenance"]["source_commit"] = manifest["payload"]["upstream_commit"]
+        manifest["provenance"]["source_repository"] = manifest["payload"]["upstream_repository"]
+        manifest["connector"]["integration_mode"] = "adapter"
+        self.write_json(path, manifest)
+        return source
+
+    def test_upstream_without_materialized_source_is_refused(self) -> None:
         self.add_asset("demo.upstream", payload_type="upstream_reference")
         self.finalize_catalog()
-        package = build_package(self.root, "demo.upstream", "1.0.0")["package"]
-        self.assertEqual([], package["files"])
-        manual = [item for item in package["requirements"] if item["kind"] == "manualReview" and item["required"]]
-        self.assertTrue(any("0123456789abcdef" in item["description"] for item in manual))
+        with self.assertRaisesRegex(PackageError, "metadata-only references are not exportable"):
+            build_package(self.root, "demo.upstream", "1.0.0")
+
+    def test_upstream_real_source_is_exported_deterministically_not_adapter(self) -> None:
+        self.add_asset("demo.upstream", payload_type="upstream_reference")
+        source = self.materialize_upstream()
+        self.finalize_catalog()
+        envelope = build_package(self.root, "demo.upstream", "1.0.0")
+        self.assertEqual(envelope, build_package(self.root, "demo.upstream", "1.0.0"))
+        package = envelope["package"]
+        self.assertEqual(
+            ["LICENSE", "Package.swift", "Sources/Demo.swift"],
+            [entry["target_path"] for entry in package["files"]],
+        )
+        self.assertEqual("payload/Sources/Demo.swift", package["files"][2]["source_path"])
+        self.assertEqual("public struct Demo {}\\n", package["files"][2]["content"])
+        self.assertEqual(payload_tree_sha256(source), package["source"]["verified_payload_sha256"])
+        self.assertIs(False, package["source"]["adapter_included"])
+        self.assertTrue(any("NOT included" in item["description"]
+                            for item in package["requirements"] if item["required"]))
+
+    def test_upstream_tampered_source_is_refused(self) -> None:
+        self.add_asset("demo.upstream", payload_type="upstream_reference")
+        source = self.materialize_upstream()
+        self.finalize_catalog()
+        (source / "Sources/Demo.swift").write_text("public struct Tampered {}\\n", encoding="utf-8")
+        with self.assertRaisesRegex(PackageError, "upstream_reference payload SHA256 mismatch"):
+            build_package(self.root, "demo.upstream", "1.0.0")
+
+    def test_upstream_missing_digest_is_refused(self) -> None:
+        self.add_asset("demo.upstream", payload_type="upstream_reference")
+        self.materialize_upstream()
+        self.finalize_catalog()
+        path = self.root / "modules/demo.upstream/1.0.0/manifest.json"
+        manifest = json.loads(path.read_text(encoding="utf-8"))
+        manifest["payload"]["sha256"] = None
+        self.write_json(path, manifest)
+        with self.assertRaisesRegex(PackageError, "metadata-only references are not exportable"):
+            build_package(self.root, "demo.upstream", "1.0.0")
+
+    def test_upstream_commit_provenance_mismatch_is_refused(self) -> None:
+        self.add_asset("demo.upstream", payload_type="upstream_reference")
+        self.materialize_upstream()
+        self.finalize_catalog()
+        path = self.root / "modules/demo.upstream/1.0.0/manifest.json"
+        manifest = json.loads(path.read_text(encoding="utf-8"))
+        manifest["provenance"]["source_commit"] = "f" * 40
+        self.write_json(path, manifest)
+        with self.assertRaisesRegex(PackageError, "repository/commit provenance mismatch"):
+            build_package(self.root, "demo.upstream", "1.0.0")
+
+    def test_upstream_binary_file_is_not_silently_dropped(self) -> None:
+        self.add_asset("demo.upstream", payload_type="upstream_reference")
+        source = self.materialize_upstream()
+        (source / "binary.dat").write_bytes(bytes([255, 254]))
+        path = self.root / "modules/demo.upstream/1.0.0/manifest.json"
+        manifest = json.loads(path.read_text(encoding="utf-8"))
+        manifest["payload"]["sha256"] = payload_tree_sha256(source)
+        self.write_json(path, manifest)
+        self.finalize_catalog()
+        with self.assertRaisesRegex(PackageError, "not UTF-8 text"):
+            build_package(self.root, "demo.upstream", "1.0.0")
 
     def test_revoked_is_never_exported_and_deprecated_requires_opt_in(self) -> None:
         self.add_asset("demo.revoked", availability="revoked")

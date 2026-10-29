@@ -111,11 +111,20 @@ def _requirements(manifest: dict[str, Any], *, upstream_reference: bool) -> list
         result.append(
             {
                 "kind": "manualReview",
-                "description": f"Resolve immutable upstream source {repository}@{commit}",
+                "description": f"Review target integration of included original upstream source {repository}@{commit}; source-only export is not an Aivexus adapter",
                 "required": True,
             }
         )
 
+    if upstream_reference and (manifest.get("connector") or {}).get("integration_mode") == "adapter":
+        result.append({
+            "kind": "manualReview",
+            "description": (
+                "Aivexus contract adapter is NOT included in the upstream source package; "
+                "implement, independently review and test the adapter before application integration"
+            ),
+            "required": True,
+        })
     result.sort(key=lambda item: (str(item["kind"]), str(item["description"]), bool(item["required"])))
     return result
 
@@ -225,8 +234,29 @@ def build_package(root: Path, asset_id: str, version: str, *, include_deprecated
     elif payload_type == "upstream_reference":
         repository = str(payload.get("upstream_repository") or "").strip()
         commit = str(payload.get("upstream_commit") or "").strip()
-        require(repository and commit, "upstream_reference requires repository and immutable commit")
-        files = []
+        require(repository and re.fullmatch(r"[0-9a-f]{40}", commit) is not None,
+                "upstream_reference requires repository and immutable full commit SHA")
+        expected = payload.get("sha256")
+        require(payload.get("path") == "payload"
+                and isinstance(expected, str)
+                and re.fullmatch(r"[0-9a-f]{64}", expected) is not None,
+                "certified upstream source must be materialized at payload with a SHA256 pin; "
+                "metadata-only references are not exportable")
+        provenance = manifest.get("provenance") or {}
+        require(provenance.get("source_commit") == commit
+                and str(provenance.get("source_repository") or "").rstrip("/") == repository.rstrip("/"),
+                "upstream_reference repository/commit provenance mismatch")
+        source = safe_repo_path(base, "payload")
+        require(source.is_dir() and not source.is_symlink(),
+                "materialized upstream source must be a real directory")
+        try:
+            actual = payload_tree_sha256(source)
+        except PipelineError as exc:
+            raise PackageError(str(exc)) from exc
+        require(actual == expected, "upstream_reference payload SHA256 mismatch")
+        # Export only the original source bytes pinned for independent review.
+        # Do NOT blend in an unsigned Aivexus adapter from another directory.
+        files = _files_from_repository_path(base, "payload")
     else:
         raise PackageError(f"unsupported payload.type: {payload_type}")
 
@@ -257,6 +287,8 @@ def build_package(root: Path, asset_id: str, version: str, *, include_deprecated
             "payload_type": payload_type,
             "upstream_repository": payload.get("upstream_repository"),
             "upstream_commit": payload.get("upstream_commit"),
+            "verified_payload_sha256": payload.get("sha256") if upstream_reference else None,
+            "adapter_included": False if upstream_reference else None,
         },
     }
     package_json = canonical_json(package)

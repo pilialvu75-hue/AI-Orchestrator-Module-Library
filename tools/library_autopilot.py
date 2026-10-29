@@ -111,6 +111,7 @@ def refresh_consumption_exports(root: Path) -> dict[str, object]:
 
     catalog = load_json(root / "catalog" / "index.json")
     rows: list[dict[str, object]] = []
+    not_exportable: list[dict[str, str]] = []
     for entry in sorted(
         (item for item in catalog.get("assets", []) if isinstance(item, dict)),
         key=lambda item: (str(item.get("id")), str(item.get("version"))),
@@ -128,6 +129,23 @@ def refresh_consumption_exports(root: Path) -> dict[str, object]:
                 include_deprecated=availability == "deprecated",
             )
         except PackageError as exc:
+            # Legacy upstream references were historically allowed to reach
+            # the catalog without source bytes. Do not publish their former
+            # empty packages, but let other independently certified packages
+            # remain available. Any tampered/malformed materialized source
+            # must still fail the entire export.
+            manifest_file = manifest_path(root, "modules", AssetRef(asset_id, version))
+            legacy = load_json(manifest_file).get("payload") or {}
+            if (legacy.get("type") == "upstream_reference"
+                    and legacy.get("path") is None
+                    and legacy.get("sha256") is None
+                    and not (manifest_file.parent / "payload").exists()
+                    and "metadata-only references are not exportable" in str(exc)):
+                not_exportable.append({
+                    "pin": f"{asset_id}@{version}",
+                    "reason": "legacy upstream metadata-only; no source bytes to export",
+                })
+                continue
             raise AutopilotError(
                 f"cannot export certified package {asset_id}@{version}: {exc}"
             ) from exc
@@ -165,6 +183,8 @@ def refresh_consumption_exports(root: Path) -> dict[str, object]:
     return {
         "snapshot_sha256": snapshot_result["snapshot_sha256"],
         "package_count": len(rows),
+        "not_exportable_count": len(not_exportable),
+        "not_exportable": not_exportable,
         "sandbox_preview_count": experimental["count"],
         "sandbox_preview_blocked": experimental["blocked"],
     }
