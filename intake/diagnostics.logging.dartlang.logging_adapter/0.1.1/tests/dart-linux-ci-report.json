@@ -1,0 +1,30 @@
+{
+  "schema": "ai-orchestrator.library-test-report.v1",
+  "asset_id": "diagnostics.logging.dartlang.logging_adapter",
+  "version": "0.1.1",
+  "source_commit": "8151b9f57fa3fee10421a19ce24470e143c0dee5",
+  "payload_sha256": "2eaa1c85c6d116936bbfa461bd37173aa6ea6b3d841d58c2905ee421f39e0fab",
+  "passed": true,
+  "validated_on": [
+    "linux"
+  ],
+  "generated_at": "2026-10-29T18:21:49Z",
+  "evidence": {
+    "workflow_name": "Validate Module Library",
+    "github_run_id": 40929969173,
+    "github_commit": "b9d42dc9994c9816e0eb0466aefaa21f69d52e69",
+    "runner": "ubuntu-24.04",
+    "workflow_conclusion": "success",
+    "source_validation": "Library canonical SHA256 + original upstream bytes",
+    "checks": [
+      "python -m unittest discover -s tests -p test_*.py -v",
+      "dart pub get --offline",
+      "dart analyze lib",
+      "dart analyze tool",
+      "dart run tool/self_test.dart"
+    ],
+    "scope": "exact v0.1.1 source, enum-only code rejection, FIFO, levels, disposal and local-only Logger.detached"
+  },
+  "independent_security_reviewed": false,
+  "certification_authorized": false
+}

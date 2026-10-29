@@ -196,6 +196,15 @@ jobs:
           dart analyze
           dart run bin/main.dart
 
+      - name: Verify separate consumer of typed source-pinned external logging v0.1.1
+        working-directory: examples/external_logging_typed_consumer
+        shell: bash
+        run: |
+          set -euo pipefail
+          dart pub get --offline
+          dart analyze
+          dart run bin/main.dart
+
       - name: Export deterministic offline Library snapshot
         run: python tools/library_resolver.py export-cache --output /tmp/ai-orchestrator-module-library.json
 
