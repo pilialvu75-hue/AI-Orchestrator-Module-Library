@@ -37,6 +37,7 @@ coordination_snapshot:
     - 'PR #929: prevent unintended document-triggered Web search, merged'
     - 'PR #930: PDF table quantity and verified single-page provenance, merged'
     - 'PR #931: native horizontally scrollable Markdown table widget, merged; six PR CI successful'
+    - 'PR #932: safe collapsed one-line Markdown table recognition, merged as 71497e37 after 6/6 PR CI PASS; target physical QA pending'
     - 'Signed stable release v1.0.15+103532, build #3532, published 2026-10-29'
     - 'Current main docs evidence: 009f13a7 (S24 Markdown failure appended after release)'
   device_evidence:
@@ -181,7 +182,7 @@ cross_project_dependencies:
     state: planned_domain_pilot
     gate: 'Playable and reopenable 2D Web artifact; no dependency on 3D asset availability.'
 single_next_actions:
-  - 'CANT-UX-1: parse and render only unambiguous flattened Markdown tables, protect code fences and streaming, add focused tests, then physical S24 comparison.'
+  - 'CANT-UX-1: merged PR #932 code and six CI gates PASS; await signed stable APK and reproduce same S24 table output, horizontal scrolling, RAM and responsiveness before promoting the physical gate.'
   - 'CANT-IMAGE-1: compare the same synthetic multilingual JPG before/after PR #925 reflow, explicitly verify OCR layout without claiming scene understanding.'
   - 'CANT-QUALITY-1: compare new/long session document answers and false assertions offline, with verified provenance and no unexpected network.'
   - 'CANT-UX-2: progressively add small native icons and formatting, with Android/ASUS memory and scrolling regression gates.'
@@ -521,6 +522,7 @@ roadmap:
   current_evidence:
   - 'PR #931 merged; 6/6 CI PASS; stable APK +103532 published.'
   - 'Physical S24: model flattened 5-column Markdown into one line; no graphic table. FAILED target gate.'
+  - 'PR #932 merged on main commit 71497e37: six workflows successful; parser handles verified single-line tables without editing copied text. Stable build request 9 accepted; Android build #3536 running. Physical success NOT YET demonstrated.'
   done_when: >-
     Native complete table and safe unambiguous flattened table render correctly
     on S24; code fences, malformed widths, partial streaming and ordinary
