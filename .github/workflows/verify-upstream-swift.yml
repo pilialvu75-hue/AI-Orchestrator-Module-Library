@@ -7,6 +7,7 @@ on:
       - ".github/workflows/verify-upstream-swift.yml"
       - "tools/swift_probe.py"
       - "tools/swift_adapter.py"
+      - "tools/swift_sandbox_bundle.py"
       - "tools/complete_swift_testing.py"
       - "tools/swift_security_preflight.py"
       - "tools/swift_adapters/**"
@@ -381,3 +382,40 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git commit -m "library: record independent Swift SBOM and OSV preflight, security pending [skip ci]"
           git push origin HEAD:main
+
+
+  export_verified_native_sandbox:
+    # Produce actual runnable source for isolated macOS builder experiments.
+    # NEVER certified, never an installer or a production module.
+    needs: [prepare, finalize_native_tested, independent_security_preflight]
+    if: ${{ github.event_name == 'push' && needs.prepare.result == 'success' && needs.finalize_native_tested.result == 'success' && needs.independent_security_preflight.result == 'success' }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 7
+    permissions:
+      contents: read
+    steps:
+      - name: Checkout trusted Library without retained credentials
+        uses: actions/checkout@v6
+        with:
+          ref: main
+          persist-credentials: false
+          fetch-depth: 1
+      - name: Export immutable upstream and tested Aivexus adapter as sandbox-only SwiftPM
+        id: export
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 tools/swift_sandbox_bundle.py --root . \
+            --archive "$RUNNER_TEMP/aivexus-swift-sandbox-source.tar.gz" \
+            --output "$RUNNER_TEMP/aivexus-swift-sandbox-receipt.json"
+          echo "Native Swift sandbox staging completed; see count in receipt."
+      - name: Publish source archive for isolated macOS review (14 days only)
+        if: ${{ steps.export.outputs.count == '1' }}
+        uses: actions/upload-artifact@v6
+        with:
+          name: aivexus-swift-sandbox-source-NOT-CERTIFIED
+          path: |
+            ${{ runner.temp }}/aivexus-swift-sandbox-source.tar.gz
+            ${{ runner.temp }}/aivexus-swift-sandbox-receipt.json
+          if-no-files-found: error
+          retention-days: 14
