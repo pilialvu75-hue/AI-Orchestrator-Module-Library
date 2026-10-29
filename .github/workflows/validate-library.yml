@@ -75,6 +75,45 @@ jobs:
           if-no-files-found: error
           retention-days: 14
 
+      - name: Prepare review request for the improved TESTED typed external module v0.1.1
+        shell: bash
+        run: |
+          set -euo pipefail
+          python tools/external_dart_logging_typed_review.py --root . \
+            --output "$RUNNER_TEMP/external-logging-typed-v011-review-REQUEST.json"
+          python - <<'PY'
+          import json, os
+          from pathlib import Path
+          root = Path(os.environ["RUNNER_TEMP"])
+          request = json.loads(
+              (root / "external-logging-typed-v011-review-REQUEST.json").read_text()
+          )
+          assert request["status"] == "INDEPENDENT_REVIEW_REQUIRED"
+          assert request["module_status"] == "tested"
+          assert request["independent_security_reviewed"] is False
+          assert request["certification_authorized"] is False
+          assert request["reviewer_signature_present"] is False
+          findings = {row["finding"]: row["state"] for row in request["findings"]}
+          assert findings["FREE_FORM_EVENT_CODE_API"] == (
+              "MITIGATED_IN_SOURCE_PENDING_INDEPENDENT_REVIEW"
+          )
+          sbom = request["dependency_inventory"]["cyclonedx_sbom"]
+          (root / "external-logging-typed-v011-SBOM.json").write_text(
+              json.dumps(sbom, sort_keys=True, indent=2) + "\n"
+          )
+          print("PASS: real typed v0.1.1 evidence collected without self-approval")
+          PY
+
+      - name: Publish typed 0.1.1 review packet and SBOM for independent reviewer
+        uses: actions/upload-artifact@v4
+        with:
+          name: external-dart-logging-v011-typed-review-REQUEST-NOT-CERTIFIED
+          path: |
+            ${{ runner.temp }}/external-logging-typed-v011-review-REQUEST.json
+            ${{ runner.temp }}/external-logging-typed-v011-SBOM.json
+          if-no-files-found: error
+          retention-days: 14
+
       - name: Test real pinned Researcher-to-Library handoff module (Linux)
         shell: bash
         run: |
