@@ -8,7 +8,7 @@
     "ready_for_automatic_certification": 0,
     "blocker_counts": {
       "LICENSE_EVIDENCE_MISSING": 20,
-      "REPRODUCIBLE_TEST_EVIDENCE_MISSING": 19,
+      "REPRODUCIBLE_TEST_EVIDENCE_MISSING": 18,
       "SECURITY_REVIEW_EVIDENCE_MISSING": 27,
       "SOURCE_SNAPSHOT_MISSING": 18
     }
@@ -1001,18 +1001,16 @@
     {
       "asset_id": "diagnostics.logging.dartlang.logging_adapter",
       "version": "0.1.1",
-      "status": "normalized",
+      "status": "tested",
       "capabilities": [
         "diagnostics.logging"
       ],
       "source_repository": "https://github.com/dart-lang/core",
       "source_commit": "8151b9f57fa3fee10421a19ce24470e143c0dee5",
       "blockers": [
-        "REPRODUCIBLE_TEST_EVIDENCE_MISSING",
         "SECURITY_REVIEW_EVIDENCE_MISSING"
       ],
       "next_actions": [
-        "Run isolated reproducible tests on the pinned source and attach a bound report.",
         "Attach an independently generated security report and SBOM bound to the pinned source."
       ],
       "independent_certification_authorized": false
