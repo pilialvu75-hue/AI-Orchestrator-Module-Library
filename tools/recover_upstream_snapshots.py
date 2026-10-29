@@ -12,7 +12,10 @@ import re
 import shutil
 import subprocess
 import tempfile
+from functools import lru_cache
 from pathlib import Path, PurePosixPath
+from urllib import error as url_error
+from urllib import request as url_request
 
 from library_source_integrity import (
     MAX_LOCAL_PAYLOAD_BYTES,
@@ -29,6 +32,50 @@ LICENSE_BASENAMES = {"license", "license.txt", "license.md", "copying", "copying
 
 class SourceRecoveryError(ValueError):
     pass
+
+
+@lru_cache(maxsize=64)
+def public_repository_state(repo: str) -> bool:
+    """Unauthenticated GitHub visibility check; never use a Library CI token.
+
+    404 means not publicly readable (private, missing, renamed or disabled).
+    All other API failures fail closed instead of downgrading a network problem
+    into a permanent private-source claim.
+    """
+    if not isinstance(repo, str) or REPO.fullmatch(repo) is None:
+        raise SourceRecoveryError("invalid upstream repository visibility target")
+    name = repo.removeprefix("https://github.com/").removesuffix(".git")
+    url = f"https://api.github.com/repos/{name}"
+    req = url_request.Request(url, headers={
+        "Accept": "application/vnd.github+json",
+        "User-Agent": "AI-Orchestrator-Library-Public-Source-Only",
+    })
+    try:
+        with url_request.urlopen(req, timeout=8) as response:
+            data = response.read(65537)
+    except url_error.HTTPError as exc:
+        if exc.code == 404:
+            return False
+        raise SourceRecoveryError(
+            f"cannot verify public visibility (GitHub status {exc.code})"
+        ) from exc
+    except (url_error.URLError, OSError, TimeoutError) as exc:
+        raise SourceRecoveryError("public visibility verification unavailable") from exc
+    try:
+        if len(data) > 65536:
+            raise ValueError("visibility response too large")
+        metadata = json.loads(data)
+        if not isinstance(metadata, dict):
+            raise ValueError("not a repository object")
+        if not isinstance(metadata.get("full_name"), str):
+            raise ValueError("missing canonical repository name")
+        if metadata["full_name"].casefold() != name.casefold():
+            raise ValueError("repository moved or identity changed")
+        if type(metadata.get("private")) is not bool:
+            raise ValueError("repository visibility unknown")
+    except (ValueError, TypeError) as exc:
+        raise SourceRecoveryError("public visibility metadata invalid") from exc
+    return metadata["private"] is False
 
 
 def _git(directory: Path, *args: str, timeout: int = 90) -> bytes:
@@ -121,6 +168,12 @@ def acquire(manifest_path: Path, *, test_remote: str | None = None) -> dict:
             or (base / "payload").exists()):
         raise SourceRecoveryError("candidate is not eligible for immutable acquisition")
 
+    # The Module Library is public. Never copy private upstream source into
+    # a public repository just because a different actor has read access.
+    # test_remote is an explicit local-only test fixture, not a manifest field.
+    if test_remote is None and not public_repository_state(repo):
+        raise SourceRecoveryError("upstream repository is not publicly readable")
+
     license_path = base / _safe_path(provenance["license_file"])
     if license_path.is_symlink() or not license_path.is_file():
         raise SourceRecoveryError("license evidence missing")
@@ -210,9 +263,25 @@ def main() -> int:
     parser.add_argument("--output", type=Path, required=True)
     args = parser.parse_args()
     candidates = eligible_intakes(args.root)
-    result = {"acquired": False, "eligible_count": len(candidates)}
-    if candidates:
-        result = {"acquired": True, **acquire(candidates[0])}
+    result = {
+        "acquired": False,
+        "eligible_count": len(candidates),
+        "deferred_nonpublic": [],
+        "certification_authorized": False,
+    }
+    # One actual immutable source acquisition per workflow, but nonpublic
+    # repositories must not starve public candidates or fail every daily run.
+    for candidate in candidates:
+        manifest = _read_manifest(candidate)
+        repo = (manifest.get("provenance") or {}).get("source_repository")
+        if not public_repository_state(repo):
+            result["deferred_nonpublic"].append(
+                f"{manifest['id']}@{manifest['version']}"
+            )
+            continue
+        receipt = acquire(candidate)
+        result.update({"acquired": True, **receipt})
+        break
     args.output.write_text(json.dumps(result, indent=2, sort_keys=True) + "\n", encoding="utf-8")
     print(json.dumps(result, sort_keys=True))
     return 0
