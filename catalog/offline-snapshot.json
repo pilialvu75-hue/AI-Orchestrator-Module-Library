@@ -770,7 +770,8 @@
         "module": "modules/ai.model_storage.whuppi.cellar/0.1.0"
       },
       "warnings": [
-        "non-stable contracts: ai.model_storage.v1"
+        "non-stable contracts: ai.model_storage.v1",
+        "reference-only upstream asset: original source bytes not materialized; not exportable or selectable as a ready module"
       ]
     },
     {
@@ -903,7 +904,8 @@
         "module": "modules/diagnostics.logging.dart-lang.logging/0.1.0"
       },
       "warnings": [
-        "non-stable contracts: diagnostics.logging.v1"
+        "non-stable contracts: diagnostics.logging.v1",
+        "reference-only upstream asset: original source bytes not materialized; not exportable or selectable as a ready module"
       ]
     },
     {
@@ -1037,9 +1039,10 @@
         "module": "modules/storage.local_db.simolus3.drift/0.1.0"
       },
       "warnings": [
-        "non-stable contracts: storage.local_db.v1"
+        "non-stable contracts: storage.local_db.v1",
+        "reference-only upstream asset: original source bytes not materialized; not exportable or selectable as a ready module"
       ]
     }
   ],
-  "snapshot_sha256": "01cb1f4151bb71f486cedad18c5f7eff47614c5a9a2657c01831d6848922e789"
+  "snapshot_sha256": "e0399bf0f99cafcc8377c62501cf16c71fb12110f05548c74d2ebbb097ff0479"
 }

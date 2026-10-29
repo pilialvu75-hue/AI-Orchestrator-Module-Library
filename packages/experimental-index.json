@@ -46,5 +46,10 @@
       "production_approved": false
     }
   ],
-  "blocked": []
+  "blocked": [
+    {
+      "pin": "diagnostics.logging.dartlang.logging_adapter@0.1.0",
+      "reason": "experimental source must be pinned in an Aivexus-owned repository"
+    }
+  ]
 }
