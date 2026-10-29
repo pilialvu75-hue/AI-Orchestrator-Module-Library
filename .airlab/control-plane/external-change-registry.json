@@ -16,7 +16,7 @@
     {
       "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
       "baseline_at": "2026-10-03T16:20:00Z",
-      "cursor_merged_at": "2026-10-29T12:38:20Z"
+      "cursor_merged_at": "2026-10-29T18:47:43Z"
     },
     {
       "repository": "pilialvu75-hue/Ai-orchestrator-diagnostics",
@@ -2278,6 +2278,23 @@
       "url": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/20676d325390f41d9fb1932018f175b59bb1de1f",
       "match_ref": null,
       "reconciliation": null
+    },
+    {
+      "incident_id": "b02be3c267fee35d5cd1",
+      "status": "UNRECONCILED",
+      "detected_at": "2026-10-29T19:39:20Z",
+      "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
+      "kind": "direct_commit",
+      "pull_request": null,
+      "merge_sha": null,
+      "commit_sha": "009f13a7af27dca6effd262f2373d3e5e8049a77",
+      "head_branch": null,
+      "base_branch": "main",
+      "change_at": "2026-10-29T18:47:43Z",
+      "title": "docs(roadmap): register S24 physical Markdown table failure and next bounded formatting gate",
+      "url": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/009f13a7af27dca6effd262f2373d3e5e8049a77",
+      "match_ref": null,
+      "reconciliation": null
     }
   ],
   "reconciliation_history": [
@@ -2288,35 +2305,35 @@
       "note": "Known motivating example for CP-HARDEN-03. It predates this incremental detector and is not retroactively reopened."
     }
   ],
-  "last_scan_at": "2026-10-29T18:41:22Z",
+  "last_scan_at": "2026-10-29T19:39:20Z",
   "scan_health": {
     "pilialvu75-hue/AI-Orchestrator-Module-Library": {
       "state": "OK",
-      "last_success_at": "2026-10-29T18:41:22Z",
+      "last_success_at": "2026-10-29T19:39:20Z",
       "last_failure_at": null,
       "error_code": null
     },
     "pilialvu75-hue/Ai-orchestrator-riserva": {
       "state": "OK",
-      "last_success_at": "2026-10-29T18:41:22Z",
+      "last_success_at": "2026-10-29T19:39:20Z",
       "last_failure_at": "2026-10-28T07:39:58Z",
       "error_code": null
     },
     "pilialvu75-hue/Ai-orchestrator-diagnostics": {
       "state": "OK",
-      "last_success_at": "2026-10-29T18:41:22Z",
+      "last_success_at": "2026-10-29T19:39:20Z",
       "last_failure_at": "2026-10-28T07:39:58Z",
       "error_code": null
     },
     "pilialvu75-hue/AI-Orchestrator-Module-Researcher": {
       "state": "OK",
-      "last_success_at": "2026-10-29T18:41:22Z",
+      "last_success_at": "2026-10-29T19:39:20Z",
       "last_failure_at": "2026-10-28T07:39:58Z",
       "error_code": null
     },
     "pilialvu75-hue/Ai_orchestrator-prova": {
       "state": "OK",
-      "last_success_at": "2026-10-29T18:41:22Z",
+      "last_success_at": "2026-10-29T19:39:20Z",
       "last_failure_at": "2026-10-28T07:39:58Z",
       "error_code": null
     }
