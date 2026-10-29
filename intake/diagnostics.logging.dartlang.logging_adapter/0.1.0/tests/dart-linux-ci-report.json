@@ -1,0 +1,30 @@
+{
+  "schema": "ai-orchestrator.library-test-report.v1",
+  "asset_id": "diagnostics.logging.dartlang.logging_adapter",
+  "version": "0.1.0",
+  "source_commit": "8151b9f57fa3fee10421a19ce24470e143c0dee5",
+  "payload_sha256": "eacf34e460dd796eae2a9d62f9f0ff75a4946a3d36d7b6b37d5f0b7ba26b3474",
+  "passed": true,
+  "validated_on": [
+    "linux"
+  ],
+  "generated_at": "2026-10-29T05:02:06Z",
+  "evidence": {
+    "workflow_name": "Test real external Dart logging module (sandbox only)",
+    "github_run_id": 40821013224,
+    "github_commit": "c6e3b21da9a949e13ae5aecc363060b5c211b5c9",
+    "workflow_conclusion": "success",
+    "runner": "ubuntu-24.04",
+    "source": "byte-for-byte copy of sandbox sources validated at same Git head",
+    "checks": [
+      "verify every upstream Git blob",
+      "dart pub get --offline",
+      "dart analyze lib",
+      "dart analyze tool",
+      "dart run tool/self_test.dart"
+    ],
+    "scope": "Offline detached logger integration, FIFO buffer, severity, unsafe code rejection and isolation"
+  },
+  "security_reviewed": false,
+  "certification_authorized": false
+}

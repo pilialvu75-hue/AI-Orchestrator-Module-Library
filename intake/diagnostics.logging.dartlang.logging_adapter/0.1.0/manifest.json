@@ -1,0 +1,110 @@
+{
+  "id": "diagnostics.logging.dartlang.logging_adapter",
+  "name": "Dart logging 1.3.0 — Aivexus bounded local adapter",
+  "version": "0.1.0",
+  "kind": "module",
+  "status": "tested",
+  "description": "Functional Aivexus diagnostics logging adapter backed by the exact public dart-lang/core logging 1.3.0 source and verified in Linux CI.",
+  "tags": [
+    "diagnostics.logging",
+    "external-source",
+    "dart",
+    "offline",
+    "source-materialized",
+    "tested-not-certified"
+  ],
+  "capabilities": [
+    "diagnostics.logging"
+  ],
+  "platforms": [
+    "linux"
+  ],
+  "languages": [
+    "dart"
+  ],
+  "frameworks": [
+    "Dart"
+  ],
+  "entry_paths": [
+    "lib/aivexus_external_logging.dart"
+  ],
+  "provenance": {
+    "origin": "open_source",
+    "source_repository": "https://github.com/dart-lang/core",
+    "source_commit": "8151b9f57fa3fee10421a19ce24470e143c0dee5",
+    "source_tag": "logging-v1.3.0",
+    "source_project_id": null,
+    "source_task_id": "library-pr-204-pinned-public-logging",
+    "source_subtree": "pkgs/logging",
+    "source_git_tree": "90ba3565cb83facd809fe382826f61904a7489c8",
+    "license": "BSD-3-Clause",
+    "license_file": "provenance/LICENSE",
+    "retrieved_at": "2026-10-29T05:02:06Z",
+    "adapter_source": "Aivexus adapter separately developed alongside preserved upstream package"
+  },
+  "validation": {
+    "score": 0.86,
+    "tests_passed": true,
+    "test_report": "tests/dart-linux-ci-report.json",
+    "validated_at": "2026-10-29T05:02:06Z",
+    "validated_on": [
+      "linux"
+    ]
+  },
+  "security": {
+    "reviewed": false,
+    "reviewed_at": null,
+    "known_vulnerabilities": null,
+    "sbom": null,
+    "review_report": null,
+    "notes": "Functional Linux test is not an independent security/privacy audit. NOT CERTIFIED or production-approved."
+  },
+  "integration": {
+    "estimated_effort": "low",
+    "adaptation_allowed": true,
+    "adapter_notes": "AivexusLoggingModule is a real detached Dart Logger adapter; call emit(eventCode) and snapshot(), dispose to release the buffer. Integrate explicitly via local path dependency; original upstream source and local Aivexus bridge are both in the verified payload.",
+    "known_constraints": [
+      "Only Linux Dart execution is verified. Android, macOS, iOS, Windows and Web remain untested.",
+      "Original source is pinned to public Git commit; the separately maintained Aivexus adapter is included in the payload hash.",
+      "Event code regex is syntax validation, NOT a domain allowlist or guarantee of absence of personal information. Do not use user content as codes.",
+      "No network, storage or global stdout/stderr interception; use only within reviewed isolation boundaries.",
+      "No application installation or production certification until independent license/security/privacy approval and target-specific tests."
+    ]
+  },
+  "connector": {
+    "standard": "ai-orchestrator-lego",
+    "standard_version": "1.0.0",
+    "provides": [
+      {
+        "capability_id": "diagnostics.logging",
+        "contract_id": "diagnostics.logging.v1",
+        "contract_version": "1.0"
+      }
+    ],
+    "requires": [],
+    "integration_mode": "source_bundle",
+    "adapters": [],
+    "configuration_schema": null,
+    "healthcheck": {
+      "type": "none",
+      "path": null
+    }
+  },
+  "payload": {
+    "type": "repository_path",
+    "path": "payload/src",
+    "sha256": "eacf34e460dd796eae2a9d62f9f0ff75a4946a3d36d7b6b37d5f0b7ba26b3474",
+    "upstream_repository": "https://github.com/dart-lang/core",
+    "upstream_commit": "8151b9f57fa3fee10421a19ce24470e143c0dee5"
+  },
+  "quality": {
+    "reuse_count": 0,
+    "successful_integrations": 0,
+    "failed_integrations": 0,
+    "last_used_at": null
+  },
+  "deprecation": {
+    "reason": null,
+    "replacement": null
+  }
+}

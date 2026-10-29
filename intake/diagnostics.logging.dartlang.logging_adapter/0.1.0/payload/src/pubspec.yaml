@@ -1,0 +1,9 @@
+name: aivexus_external_logging
+description: Isolated Aivexus adapter backed by byte-identical pinned public dart-lang/logging 1.3.0.
+version: 0.1.0
+publish_to: none
+environment:
+  sdk: ^3.4.0
+dependencies:
+  logging:
+    path: vendor/logging
