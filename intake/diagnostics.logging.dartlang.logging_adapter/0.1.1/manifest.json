@@ -1,0 +1,109 @@
+{
+  "id": "diagnostics.logging.dartlang.logging_adapter",
+  "name": "Dart logging 1.3.0 — Aivexus closed-vocabulary logging adapter",
+  "version": "0.1.1",
+  "kind": "module",
+  "status": "normalized",
+  "description": "Real public dart-lang/core logging source with a typed, closed-vocabulary Aivexus adapter. New version awaiting Linux CI and independent security review.",
+  "tags": [
+    "diagnostics.logging",
+    "external-source",
+    "dart",
+    "offline",
+    "source-materialized",
+    "closed-event-vocabulary",
+    "not-certified"
+  ],
+  "capabilities": [
+    "diagnostics.logging"
+  ],
+  "platforms": [
+    "linux"
+  ],
+  "languages": [
+    "dart"
+  ],
+  "frameworks": [
+    "Dart"
+  ],
+  "entry_paths": [
+    "lib/aivexus_external_logging.dart"
+  ],
+  "provenance": {
+    "origin": "open_source",
+    "source_repository": "https://github.com/dart-lang/core",
+    "source_commit": "8151b9f57fa3fee10421a19ce24470e143c0dee5",
+    "source_tag": "logging-v1.3.0",
+    "source_project_id": null,
+    "source_task_id": "library-v011-typed-event-enum-hardening",
+    "source_subtree": "pkgs/logging",
+    "source_git_tree": "90ba3565cb83facd809fe382826f61904a7489c8",
+    "license": "BSD-3-Clause",
+    "license_file": "provenance/LICENSE",
+    "retrieved_at": "2026-10-29T05:02:06Z",
+    "adapter_source": "Aivexus adapter separately developed alongside preserved upstream package"
+  },
+  "validation": {
+    "score": 0,
+    "tests_passed": false,
+    "test_report": null,
+    "validated_at": null,
+    "validated_on": []
+  },
+  "security": {
+    "reviewed": false,
+    "reviewed_at": null,
+    "known_vulnerabilities": null,
+    "sbom": null,
+    "review_report": null,
+    "notes": "Closed event vocabulary reduces raw input risk; independently reviewed production authorization still absent."
+  },
+  "integration": {
+    "estimated_effort": "low",
+    "adaptation_allowed": true,
+    "adapter_notes": "New v0.1.1 API requires AivexusEventCode enum, not caller-supplied event code strings; local Dart logging remains detached, bounded and offline.",
+    "known_constraints": [
+      "New v0.1.1 source has not yet passed Linux CI. Do not treat it as tested until verified results are source-bound.",
+      "Only enum values declared in source can be emitted, but privacy, license and dependency review remain necessary.",
+      "No Flutter/Android or other host runtime tests have been performed.",
+      "Original public dart-lang/core 1.3.0 package preserved byte-for-byte; adapter separately maintained.",
+      "Production certification requires independent signed source/adapter, license and SBOM approval."
+    ]
+  },
+  "connector": {
+    "standard": "ai-orchestrator-lego",
+    "standard_version": "1.0.0",
+    "provides": [
+      {
+        "capability_id": "diagnostics.logging",
+        "contract_id": "diagnostics.logging.v1",
+        "contract_version": "1.0"
+      }
+    ],
+    "requires": [],
+    "integration_mode": "source_bundle",
+    "adapters": [],
+    "configuration_schema": null,
+    "healthcheck": {
+      "type": "none",
+      "path": null
+    }
+  },
+  "payload": {
+    "type": "repository_path",
+    "path": "payload/src",
+    "sha256": "2eaa1c85c6d116936bbfa461bd37173aa6ea6b3d841d58c2905ee421f39e0fab",
+    "upstream_repository": "https://github.com/dart-lang/core",
+    "upstream_commit": "8151b9f57fa3fee10421a19ce24470e143c0dee5"
+  },
+  "quality": {
+    "reuse_count": 0,
+    "successful_integrations": 0,
+    "failed_integrations": 0,
+    "last_used_at": null
+  },
+  "deprecation": {
+    "reason": null,
+    "replacement": null
+  }
+}

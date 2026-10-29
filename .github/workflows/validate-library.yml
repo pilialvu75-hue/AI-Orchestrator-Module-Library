@@ -177,6 +177,16 @@ jobs:
           dart analyze tool
           dart run tool/self_test.dart
 
+      - name: Run newly hardened closed-vocabulary external Dart candidate (no promotion)
+        shell: bash
+        working-directory: intake/diagnostics.logging.dartlang.logging_adapter/0.1.1/payload/src
+        run: |
+          set -euo pipefail
+          dart pub get --offline
+          dart analyze lib
+          dart analyze tool
+          dart run tool/self_test.dart
+
       - name: Verify a separate Dart app can import and use the real external Library module
         shell: bash
         working-directory: examples/external_logging_consumer
