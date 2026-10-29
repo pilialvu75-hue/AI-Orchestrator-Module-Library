@@ -2,7 +2,7 @@ schema_version: 1
 repository: pilialvu75-hue/Ai-orchestrator-riserva
 visibility: public
 roadmap_storage: private_library
-updated_at: '2026-10-01'
+updated_at: '2026-10-29'
 baseline_commit: 0c1fa14c154308a03a62a6ad730d639d7ace3e65
 lifecycle:
   status: active_primary
@@ -15,6 +15,177 @@ lifecycle:
 mission: Remain the primary offline-first Flutter AI Orchestrator and Cantiere application, coordinating local/cloud
   intelligence, Library reuse, project generation, durable execution and real artifacts without becoming dependent
   on one provider or a live chat session.
+# Authoritative single coordination roadmap for AI-Orchestrator-riserva.
+# The public docs/ROADMAP_EVOLUTIVA.md is a product-facing companion, not a
+# competing control-plane source. Retain original audit history and work IDs.
+coordination_snapshot:
+  recorded_at: '2026-10-29'
+  authoritative_roadmap: .airlab/public-repositories/Ai-orchestrator-riserva/roadmap.yaml
+  policy: >-
+    Use this roadmap plus canonical-state, lane checkpoints, current repository
+    commits and physical/device receipts for every operational decision.
+    Do not let a public narrative roadmap or old chat override these records.
+  public_companion: pilialvu75-hue/Ai-orchestrator-riserva/docs/ROADMAP_EVOLUTIVA.md
+  public_companion_note: >-
+    Public product narrative and phase definitions must remain consistent,
+    but never copy private coordination state, user content, locks or secrets
+    to a public repository. Update only the appropriate public summaries.
+  current_app_main_evidence:
+    - 'PR #923: image offline OCR, merged; later image text layout PR #925 merged'
+    - 'PR #926: local PDF native text/scanned page handling, merged'
+    - 'PR #928: compact query-directed PDF evidence, merged'
+    - 'PR #929: prevent unintended document-triggered Web search, merged'
+    - 'PR #930: PDF table quantity and verified single-page provenance, merged'
+    - 'PR #931: native horizontally scrollable Markdown table widget, merged; six PR CI successful'
+    - 'Signed stable release v1.0.15+103532, build #3532, published 2026-10-29'
+    - 'Current main docs evidence: 009f13a7 (S24 Markdown failure appended after release)'
+  device_evidence:
+    target: Samsung Galaxy S24 FE
+    modality: LOCAL_airplane_mode
+    model: Phi-3.5 Mini
+    observed_pdf_pass: >-
+      With AIVEXUS_Test_PDF_S24.pdf attached once, the model answered
+      Teiera rossa (quantity 1, price 24.00 EUR, code TR-07, page 1/1),
+      followed by Tazza blu (quantity 1, price 8.90 EUR, code TZ-19,
+      page 1/1) without attaching the PDF again. These are two specific
+      physical PASS cases, not a general proof against hallucinations.
+    observed_table_fail: >-
+      On stable 103532, a request to create an explicit Markdown table
+      returned article, quantity, price, code and page values for three
+      observed rows (The vert, Tazza blu, Teiera rossa), but Phi flattened
+      header, separator and cells into one logical line; one trial also
+      included a markdown code fence. The renderer only accepts real lines
+      outside code fences. No rendered table was visible. Fix output
+      normalization and/or opt-in instruction; never fabricate cells/pages.
+    observed_image_state: >-
+      Image LOCAL classifier recognized only general objects; bundled
+      Latin OCR subsequently transcribed text from a French poster offline
+      on S24 (103489 physical PASS for text), but a multilingual JPG table
+      had broken column/row associations (layout FAIL). PR #925 spatial
+      reflow is integrated, but an equivalent exact physical layout PASS
+      for that new reflow is not yet recorded. This is not VLM vision.
+    user_reported_performance: >-
+      ASUS Windows and Galaxy S24 FE feel substantially faster than before.
+      Freeze new speed-chasing experiments temporarily; retain regression
+      protection in RAM, UI frame smoothness, history startup and local
+      first-token latency. Do not claim measured performance deltas without
+      before/after evidence.
+  evidence_quality_rule: >-
+    Distinguish code merged, CI green, physical functionality observed,
+    and full acceptance. Tests on one PDF or one image cannot certify
+    all document or visual tasks. Evidence from chats must be associated
+    with the source build and device before a gate is promoted.
+active_product_priorities:
+  - id: P0-RESPONSE-RELIABILITY
+    work_ref: CANT-QUALITY-1
+    state: active
+    intent: >-
+      Reduce unsupported claims, wrong answers, incomplete fields,
+      preceding-turn contamination, document misattribution, forced
+      Web search and prompt-budget errors. Ask for uncertainty when
+      source evidence is inadequate; no hidden Cloud fallback.
+  - id: P0-LIGHTWEIGHT-CHAT-UI
+    work_ref: CANT-UX-1
+    state: active
+    intent: >-
+      Repair tabular output from small LOCAL models, then incrementally
+      add tiny status/document icons, headings, lists, code blocks and
+      links via native widgets with no heavy animations or dependencies.
+      Status icons for success/failure must derive from real events, not
+      from an unverified model's assertion.
+  - id: P0-IMAGE-LOCAL-CORRECTNESS
+    work_ref: CANT-IMAGE-1
+    state: active
+    intent: >-
+      Confirm physical offline text recognition and table geometry layout
+      using safe synthetic inputs. Keep classifier and OCR sequential and
+      memory-bounded; do not add simultaneous large vision models.
+  - id: PERF-SAFETY-ONLY
+    work_ref: CANT-PERF-GUARD
+    state: maintenance_only
+    intent: >-
+      Pause new speed optimization campaigns until Work is available
+      again; no speed regression is permitted in any ongoing work.
+  - id: P2-REAL-PROGRESS-VISUALIZATION
+    work_ref: CANT-UX-3
+    state: deferred
+    intent: >-
+      Future progress components are allowed only once underlying
+      execution and checkpoints emit verifiable stage events. Never
+      display fictitious completion percentages.
+product_maturity_gates:
+  F0:
+    state: active_not_accepted
+    title: Reliable single-user chat, offline local document/image tools and light UI
+    acceptance: >-
+      Main chat and attachment routes, context, citations, menu actions,
+      model limitations, voice and OTA are verified on actual target
+      devices; known hallucinations and serious regressions are bounded.
+  F1:
+    state: planned_foundations_exist
+    title: Single-device durable personal memory with provenance
+    acceptance: 'Synthetic store/retrieve/revise/forget, session separation and restart proof.'
+  F2:
+    state: planned
+    title: One user across authorized S24, ASUS, Mac and optional Raspberry
+    acceptance: 'Encrypted paired sync with conflict/revoke tests and offline continuity.'
+  F3:
+    state: planned
+    title: Distinct fictitious profiles with complete data and credential isolation
+    acceptance: 'No cross-profile leakage in SQLite, embeddings, cache, Cloud or backup.'
+  F4:
+    state: planned
+    title: Shared general improvements while memories remain private
+    acceptance: 'Verified reusable skills and diagnostics with privacy redaction.'
+  F5:
+    state: deferred
+    title: Distribution to external users and future 1.0.16
+    acceptance: 'Owner approval after F0-F4 and security/privacy/install gates.'
+cantiere_delivery_rings:
+  P0: physical_generated_app_baseline_not_yet_accepted
+  P1: one_canonical_bounded_production_loop
+  P2: bounded_self_repair_only_for_code_errors
+  P3: auditable_execution_attempts
+  P4: semantic_checkpoint_resume_and_idempotency
+  P5: isolated_airlab_staging_into_controlled_apply
+  P6: provenance_aware_web_verification
+  P7: provider_neutral_continuity_with_spending_guard
+  P8: reuse_first_library_and_researcher_integration
+  P9: offline_end_to_end_verified_artifact
+  P10: multi_domain_app_web_3d_and_games_without_duplicate_core
+  status_rule: >-
+    These describe delivery order, not verified completion. Continue
+    existing CANT-1..19 and AIVEXUS ids and review actual artifacts.
+cross_project_dependencies:
+  certified_library:
+    state: partial
+    facts:
+      - 'Three historical certified assets remain catalogued.'
+      - 'External typed Dart logging 0.1.1 is source-pinned and Linux tested with consumer; security review pending, not certified and not installed into Android.'
+    gate: 'Reuse only approved, target-compatible, certified assets.'
+  researcher:
+    state: developing
+    facts:
+      - 'First-party builder pilot exists; it cannot self-certify Library admission.'
+      - 'License/evidence and target-aware retry repairs have landed.'
+    gate: 'First real external code module must pass acquisition, materialization, licensing, independent safety and consumer-use gates.'
+  aivexus_shared_base:
+    state: merged_ci_only
+    facts:
+      - 'AIVEXUS-BASE-1 and BASE-2 recorded done in this roadmap after CI and review.'
+      - 'This does not establish a real CAD runner, game runner or target-device success.'
+  aivexus_3d:
+    state: planned_domain_pilot
+    gate: 'Actual editable parametric geometry, measured STEP/STL/3MF and target proofs.'
+  aivexus_games:
+    state: planned_domain_pilot
+    gate: 'Playable and reopenable 2D Web artifact; no dependency on 3D asset availability.'
+single_next_actions:
+  - 'CANT-UX-1: parse and render only unambiguous flattened Markdown tables, protect code fences and streaming, add focused tests, then physical S24 comparison.'
+  - 'CANT-IMAGE-1: compare the same synthetic multilingual JPG before/after PR #925 reflow, explicitly verify OCR layout without claiming scene understanding.'
+  - 'CANT-QUALITY-1: compare new/long session document answers and false assertions offline, with verified provenance and no unexpected network.'
+  - 'CANT-UX-2: progressively add small native icons and formatting, with Android/ASUS memory and scrolling regression gates.'
+  - 'Resume speed optimization only by a later explicit decision, not as a side effect of UI work.'
 current_state:
   local_runtime:
     status: active
@@ -317,6 +488,100 @@ roadmap:
   outcome: >-
     Integrate one coherent original AI Orchestrator visual identity across Android, Windows, macOS, iOS, Linux,
     Web/PWA and Raspberry Pi/ARM; historical icon assets were prepared but repository integration was not completed.
+- id: CANT-QUALITY-1
+  title: Evidence-grounded, complete and consistent LOCAL and Cloud answers
+  state: active
+  priority: P0
+  owner_lane: runtime-core
+  dependencies:
+  - CANT-2
+  outcome: >-
+    Reliable evidence selection, current-question focus, context budgeting,
+    multi-turn document continuity, explicit uncertainty when unsupported,
+    real offline choice and no accidental Cloud or Web invocation.
+  current_evidence:
+  - 'Android PR #926-#930 merged. Offline S24 PDF two-turn factual PASS on 103528/103532.'
+  - 'Other PDFs, mixed chats, hallucination rates and robust long-context answers remain unproven.'
+  done_when: >-
+    Reproducible local/Cloud tests cover unsupported claims, missing table
+    columns, wrong page, old-context leakage and tool interception; physical
+    tests show stable outcomes without network leakage or speed regression.
+- id: CANT-UX-1
+  title: Render Markdown tables from small-model output without guessing
+  state: active
+  priority: P0
+  owner_lane: platform-android
+  dependencies:
+  - CANT-QUALITY-1
+  outcome: >-
+    Preserve the PR #931 native horizontal table renderer and accept ordinary
+    Markdown plus safely recoverable collapsed single-line tables produced by
+    Phi in offline mode. Never invent or repair numerical cells. Keep copy,
+    TTS and persisted raw text unchanged.
+  current_evidence:
+  - 'PR #931 merged; 6/6 CI PASS; stable APK +103532 published.'
+  - 'Physical S24: model flattened 5-column Markdown into one line; no graphic table. FAILED target gate.'
+  done_when: >-
+    Native complete table and safe unambiguous flattened table render correctly
+    on S24; code fences, malformed widths, partial streaming and ordinary
+    prose stay safe; performance and RAM are no worse than stable 103532.
+- id: CANT-UX-2
+  title: Light visual chat components and verified status micro-icons
+  state: planned
+  priority: P0
+  dependencies:
+  - CANT-UX-1
+  outcome: >-
+    Small document, copy, success, warning and error icons plus headings,
+    lists, code blocks and link formatting, selected by trusted UI state;
+    native lightweight widgets, accessible/scrollable on a narrow phone.
+  done_when: >-
+    Screens and tests pass with no fake progress/success, no heavyweight
+    animations, and no measurable S24/ASUS scrolling or inference regression.
+- id: CANT-IMAGE-1
+  title: Offline image OCR, spatial table reading and grounded visual limits
+  state: active
+  priority: P0
+  owner_lane: platform-android
+  dependencies:
+  - CANT-QUALITY-1
+  outcome: >-
+    Retain bounded bundled offline classifier and Latin OCR, validate
+    spatial reflow for table rows and ordered texts, preserve all observed
+    characters while never inferring missing columns or semantic objects.
+  current_evidence:
+  - 'PR #923 image OCR and PR #925 spatial reflow merged; separate PR #926 adds PDF support.'
+  - 'S24 103489 physical poster text OCR PASS; multilingual JPG table column reconstruction FAIL in prior test.'
+  - 'No documented same-image target PASS for reflow after #925.'
+  done_when: >-
+    Repeat same offline JPG table and poster on installed current app;
+    compare expected rows and symbols, report uncertain cells, guard memory,
+    ensure model inference still works and no image/cloud upload occurs.
+- id: CANT-PERF-GUARD
+  title: Preserve achieved responsiveness without new performance campaigns
+  state: active
+  priority: P0
+  outcome: >-
+    Do not pursue new speed optimization until user resumes Work-assisted
+    tuning. Every quality, OCR and UI change must protect current perceived
+    speed, warm/cold chat startup, scrolling, first-token latency and RAM.
+  done_when: >-
+    Small comparable checks before/after UI changes and no regression in
+    real S24/ASUS operation. No unsupported claims about speedup.
+- id: CANT-UX-3
+  title: Future trustworthy execution progress UI
+  state: planned
+  priority: P2
+  dependencies:
+  - CANT-8
+  - CANT-11
+  outcome: >-
+    Show progress only from real execution-stage and checkpoint events in
+    the existing Cantiere lifecycle, not generated model narration.
+  done_when: >-
+    Real stage/step receipts, cancellation and resume events survive restarts;
+    UI never fabricates done states or percentages.
+
 audit_review:
   reviewed_at: '2026-09-27'
   audited_repository: pilialvu75-hue/Ai-orchestrator-riserva
