@@ -40,6 +40,41 @@ jobs:
         run: python -m unittest discover -s tests -p 'test_*.py' -v
 
 
+      - name: Generate source-bound external logging review request and CycloneDX inventory
+        shell: bash
+        run: |
+          set -euo pipefail
+          python tools/external_dart_logging_review.py \
+            --root . --output "$RUNNER_TEMP/external-logging-independent-review-REQUEST.json"
+          python - <<'PY'
+          import json, os
+          from pathlib import Path
+          review = json.loads(
+              (Path(os.environ["RUNNER_TEMP"]) /
+               "external-logging-independent-review-REQUEST.json").read_text()
+          )
+          assert review["status"] == "INDEPENDENT_REVIEW_REQUIRED"
+          assert review["certification_authorized"] is False
+          assert review["independent_security_reviewed"] is False
+          assert any(f["severity"] == "blocking"
+                     for f in review["risks_requiring_resolution"])
+          sbom = review["dependency_inventory"]["cyclonedx_sbom"]
+          path = (Path(os.environ["RUNNER_TEMP"]) /
+                  "external-logging-cyclonedx-SBOM.json")
+          path.write_text(json.dumps(sbom, indent=2, sort_keys=True) + "\n")
+          print("PASS: bounded source and licenses, review still required")
+          PY
+
+      - name: Upload unsigned external-source review request for independent auditor
+        uses: actions/upload-artifact@v4
+        with:
+          name: external-dart-logging-independent-review-REQUEST-NOT-CERTIFIED
+          path: |
+            ${{ runner.temp }}/external-logging-independent-review-REQUEST.json
+            ${{ runner.temp }}/external-logging-cyclonedx-SBOM.json
+          if-no-files-found: error
+          retention-days: 14
+
       - name: Test real pinned Researcher-to-Library handoff module (Linux)
         shell: bash
         run: |
@@ -150,41 +185,6 @@ jobs:
           dart pub get --offline
           dart analyze
           dart run bin/main.dart
-
-      - name: Generate source-bound external logging review request and CycloneDX inventory
-        shell: bash
-        run: |
-          set -euo pipefail
-          python tools/external_dart_logging_review.py \
-            --root . --output "$RUNNER_TEMP/external-logging-independent-review-REQUEST.json"
-          python - <<'PY'
-          import json, os
-          from pathlib import Path
-          review = json.loads(
-              (Path(os.environ["RUNNER_TEMP"]) /
-               "external-logging-independent-review-REQUEST.json").read_text()
-          )
-          assert review["status"] == "INDEPENDENT_REVIEW_REQUIRED"
-          assert review["certification_authorized"] is False
-          assert review["independent_security_reviewed"] is False
-          assert any(f["severity"] == "blocking"
-                     for f in review["risks_requiring_resolution"])
-          sbom = review["dependency_inventory"]["cyclonedx_sbom"]
-          path = (Path(os.environ["RUNNER_TEMP"]) /
-                  "external-logging-cyclonedx-SBOM.json")
-          path.write_text(json.dumps(sbom, indent=2, sort_keys=True) + "\n")
-          print("PASS: bounded source and licenses, review still required")
-          PY
-
-      - name: Upload unsigned external-source review request for independent auditor
-        uses: actions/upload-artifact@v4
-        with:
-          name: external-dart-logging-independent-review-REQUEST-NOT-CERTIFIED
-          path: |
-            ${{ runner.temp }}/external-logging-independent-review-REQUEST.json
-            ${{ runner.temp }}/external-logging-cyclonedx-SBOM.json
-          if-no-files-found: error
-          retention-days: 14
 
       - name: Export deterministic offline Library snapshot
         run: python tools/library_resolver.py export-cache --output /tmp/ai-orchestrator-module-library.json
