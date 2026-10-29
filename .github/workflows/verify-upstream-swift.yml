@@ -408,9 +408,7 @@ jobs:
           python3 tools/swift_sandbox_bundle.py --root . \
             --archive "$RUNNER_TEMP/aivexus-swift-sandbox-source.tar.gz" \
             --output "$RUNNER_TEMP/aivexus-swift-sandbox-receipt.json"
-          if [[ "${{ steps.export.outputs.count }}" == "1" ]]; then
-            echo "Non-production Swift source sandbox archive generated."
-          fi
+          echo "Native Swift sandbox staging completed; see count in receipt."
       - name: Publish source archive for isolated macOS review (14 days only)
         if: ${{ steps.export.outputs.count == '1' }}
         uses: actions/upload-artifact@v6
