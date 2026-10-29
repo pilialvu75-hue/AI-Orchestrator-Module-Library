@@ -236,16 +236,16 @@ def build_package(root: Path, asset_id: str, version: str, *, include_deprecated
         commit = str(payload.get("upstream_commit") or "").strip()
         require(repository and re.fullmatch(r"[0-9a-f]{40}", commit) is not None,
                 "upstream_reference requires repository and immutable full commit SHA")
-        provenance = manifest.get("provenance") or {}
-        require(provenance.get("source_commit") == commit
-                and str(provenance.get("source_repository") or "").rstrip("/") == repository.rstrip("/"),
-                "upstream_reference repository/commit provenance mismatch")
         expected = payload.get("sha256")
         require(payload.get("path") == "payload"
                 and isinstance(expected, str)
                 and re.fullmatch(r"[0-9a-f]{64}", expected) is not None,
                 "certified upstream source must be materialized at payload with a SHA256 pin; "
                 "metadata-only references are not exportable")
+        provenance = manifest.get("provenance") or {}
+        require(provenance.get("source_commit") == commit
+                and str(provenance.get("source_repository") or "").rstrip("/") == repository.rstrip("/"),
+                "upstream_reference repository/commit provenance mismatch")
         source = safe_repo_path(base, "payload")
         require(source.is_dir() and not source.is_symlink(),
                 "materialized upstream source must be a real directory")
