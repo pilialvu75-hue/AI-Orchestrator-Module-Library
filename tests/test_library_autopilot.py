@@ -192,7 +192,10 @@ class LibraryAutopilotTest(unittest.TestCase):
         self.assertEqual(1, len(catalog["assets"]))
         self.assertTrue((self.root / "catalog" / "offline-snapshot.json").is_file())
         package_index = json.loads((self.root / "packages" / "index.json").read_text())
-        self.assertEqual(1, len(package_index["packages"]))
+        self.assertEqual([], package_index["packages"])
+        self.assertEqual(0, report["exports"]["package_count"])
+        self.assertEqual(1, report["exports"]["not_exportable_count"])
+        self.assertEqual("voice.autopilot_stt@1.0.0", report["exports"]["not_exportable"][0]["pin"])
 
     def test_failed_gate_restores_exact_intake_and_does_not_certify(self) -> None:
         base = self._asset(valid=False)
