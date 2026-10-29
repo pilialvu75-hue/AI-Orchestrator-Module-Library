@@ -193,6 +193,13 @@ def asset_record(root: Path, entry: dict, registry: dict[str, dict] | None = Non
         warnings.append("unknown contracts: " + ", ".join(unknown))
     if draft:
         warnings.append("non-stable contracts: " + ", ".join(draft))
+    payload = manifest.get("payload") or {}
+    if (payload.get("type") == "upstream_reference"
+            and (payload.get("path") is None or payload.get("sha256") is None)):
+        warnings.append(
+            "reference-only upstream asset: original source bytes not materialized; "
+            "not exportable or selectable as a ready module"
+        )
 
     module_dir = manifest_path.parent
     return {
@@ -239,6 +246,16 @@ def candidate_matches(
     require_stable_contract: bool,
 ) -> bool:
     status = record["status"]
+    payload = record.get("payload") or {}
+    # Preserve legacy catalog/provenance for recovery and auditing, but never
+    # recommend an upstream URL without materialized, pinned source as a
+    # certified module ready for Cantiere consumption.
+    if status == "certified" and payload.get("type") == "upstream_reference":
+        if (payload.get("path") != "payload"
+                or not isinstance(payload.get("sha256"), str)
+                or len(payload["sha256"]) != 64
+                or any(char not in "0123456789abcdef" for char in payload["sha256"])):
+            return False
     if status != "certified":
         if not include_adaptable or status != "tested":
             return False
