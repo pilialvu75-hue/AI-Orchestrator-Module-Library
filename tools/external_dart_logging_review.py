@@ -179,7 +179,7 @@ def build_request(repo_root: Path) -> dict:
     upstream_spec = checked_file(original / "pubspec.yaml").decode("utf-8")
     require(re.search(r"(?m)^name: logging$", upstream_spec) is not None
             and re.search(r"(?m)^version: 1\.3\.0$", upstream_spec) is not None
-            and "dependencies:" not in upstream_spec,
+            and re.search(r"(?m)^dependencies:", upstream_spec) is None,
             "upstream dependencies or pinned package changed")
     adapter_spec = checked_file(source / "pubspec.yaml").decode("utf-8")
     require(re.search(r"(?m)^name: aivexus_external_logging$", adapter_spec) is not None
