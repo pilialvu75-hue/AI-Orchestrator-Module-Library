@@ -1,0 +1,85 @@
+name: Test real external Dart logging module (sandbox only)
+
+on:
+  pull_request:
+    branches: ["main"]
+    paths:
+      - "sandbox/external_dart_logging/**"
+      - ".github/workflows/test-external-dart-logging.yml"
+  push:
+    branches: ["main"]
+    paths:
+      - "sandbox/external_dart_logging/**"
+      - ".github/workflows/test-external-dart-logging.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  test_external_logging:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 9
+    steps:
+      - name: Checkout source without retained credentials
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Verify every vendored file matches immutable public Git blobs
+        run: |
+          python3 - <<'PY'
+          import hashlib
+          import json
+          from pathlib import Path
+          base = Path("sandbox/external_dart_logging")
+          p = json.loads((base / "UPSTREAM_PROVENANCE.json").read_text())
+          assert p["origin"] == "public"
+          assert p["repository"] == "https://github.com/dart-lang/core"
+          assert p["source_commit"] == "8151b9f57fa3fee10421a19ce24470e143c0dee5"
+          assert p["source_subtree"] == "pkgs/logging"
+          assert p["source_git_tree_sha"] == "90ba3565cb83facd809fe382826f61904a7489c8"
+          assert p["license"] == "BSD-3-Clause"
+          assert p["status"] == "SANDBOX_ONLY"
+          assert p["security_reviewed"] is False
+          assert p["certification_authorized"] is False
+          expected = p["git_blob_sha_by_path"]
+          assert len(expected) == p["upstream_source_file_count"] == 13
+          source = base / "vendor/logging"
+          actual = {f.relative_to(source).as_posix() for f in source.rglob("*") if f.is_file()}
+          assert actual == set(expected), "upstream file was added or removed"
+          for relative, sha in expected.items():
+              file = source / relative
+              assert not file.is_symlink(), f"unsafe symlink: {relative}"
+              data = file.read_bytes()
+              git_sha = hashlib.sha1(b"blob " + str(len(data)).encode() + b"\\x00" + data).hexdigest()
+              assert sha == git_sha, f"pinned upstream source bytes changed: {relative}"
+          assert "version: 1.3.0" in (source / "pubspec.yaml").read_text()
+          assert (source / "LICENSE").read_text().startswith("Copyright 2013")
+          print(f"PASS: {len(expected)} original public Git blobs from immutable dart-lang/core commit")
+          PY
+      - name: Set up Dart stable
+        uses: dart-lang/setup-dart@v1
+      - name: Resolve only pinned local upstream dependency (offline)
+        working-directory: sandbox/external_dart_logging
+        run: dart pub get --offline
+      - name: Analyze real Aivexus adapter
+        working-directory: sandbox/external_dart_logging
+        run: |
+          dart analyze lib
+          dart analyze tool
+      - name: Run external source plus real Aivexus contract self-test
+        working-directory: sandbox/external_dart_logging
+        run: dart run tool/self_test.dart
+      - name: Package runnable external code and adapter (never certified)
+        run: |
+          tar -czf "$RUNNER_TEMP/aivexus-external-dart-logging-sandbox.tar.gz" \
+            --exclude='.dart_tool' \
+            --exclude='pubspec.lock' \
+            -C sandbox/external_dart_logging .
+      - name: Publish real source + adapter for sandbox use
+        uses: actions/upload-artifact@v4
+        with:
+          name: aivexus-external-dart-logging-WORKING-NOT-CERTIFIED
+          path: ${{ runner.temp }}/aivexus-external-dart-logging-sandbox.tar.gz
+          retention-days: 14
+          if-no-files-found: error
