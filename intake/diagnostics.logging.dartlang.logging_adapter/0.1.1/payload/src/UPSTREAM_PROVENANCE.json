@@ -1,0 +1,28 @@
+{
+  "schema": "aivexus.external-upstream-source.v1",
+  "origin": "public",
+  "repository": "https://github.com/dart-lang/core",
+  "source_commit": "8151b9f57fa3fee10421a19ce24470e143c0dee5",
+  "source_subtree": "pkgs/logging",
+  "source_git_tree_sha": "90ba3565cb83facd809fe382826f61904a7489c8",
+  "license": "BSD-3-Clause",
+  "upstream_source_file_count": 13,
+  "git_blob_sha_by_path": {
+    ".gitignore": "79f51c3d50b9fab9b8951b536361df2248f417c3",
+    "analysis_options.yaml": "7c004e0f3cdf4369bf5febb2d9b02cafc39f92cb",
+    "AUTHORS": "630ab0e76170dc59222736a3a84837687c74c431",
+    "CHANGELOG.md": "088183c9c48bd51471fc13af65b7de4a495a9c94",
+    "example/main.dart": "b565c3c1f423b2474724c2e54fe40497d3aa4401",
+    "lib/logging.dart": "6f447e7c1353fd23e35f79293e0df5da0346b03c",
+    "lib/src/level.dart": "36694335707c424419d7b3f68cf50b8a971cdfa5",
+    "lib/src/log_record.dart": "8a0ee6180170c2c54322460edf548a3c0478efc5",
+    "lib/src/logger.dart": "d9fa2544fb4be1b87b767f5f42bb55d498a1ddb8",
+    "LICENSE": "ab3bfa0144c520d26162f64353b53a5ebe447a44",
+    "pubspec.yaml": "8fb8a43612c8180169c78084ad8a0bb3cb34c366",
+    "README.md": "662314500193c959d7b6962cb61f809153c3ca53",
+    "test/logging_test.dart": "6bff3d86e3838f602b8dfa38b5b312f18acf5914"
+  },
+  "status": "SANDBOX_ONLY",
+  "security_reviewed": false,
+  "certification_authorized": false
+}
