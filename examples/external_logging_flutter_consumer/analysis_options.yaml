@@ -1,0 +1,9 @@
+# Self-contained analysis rules for the isolated Flutter demonstration.
+# The CI-built Android scaffold must not assume flutter_lints is installed.
+analyzer:
+  errors:
+    invalid_use_of_visible_for_testing_member: error
+
+linter:
+  rules:
+    avoid_print: true
