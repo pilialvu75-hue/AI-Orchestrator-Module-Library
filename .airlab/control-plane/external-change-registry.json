@@ -16,7 +16,7 @@
     {
       "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
       "baseline_at": "2026-10-03T16:20:00Z",
-      "cursor_merged_at": "2026-10-29T08:19:50Z"
+      "cursor_merged_at": "2026-10-29T12:38:20Z"
     },
     {
       "repository": "pilialvu75-hue/Ai-orchestrator-diagnostics",
@@ -2244,6 +2244,40 @@
       "url": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/19305d463ff215114fa4c1253b729b8580465524",
       "match_ref": null,
       "reconciliation": null
+    },
+    {
+      "incident_id": "8fb1c3bc71b220aa579e",
+      "status": "UNRECONCILED",
+      "detected_at": "2026-10-29T12:44:07Z",
+      "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
+      "kind": "direct_commit",
+      "pull_request": null,
+      "merge_sha": null,
+      "commit_sha": "4b456d0ea522cac97ca68e885e6cf4fa889a0046",
+      "head_branch": null,
+      "base_branch": "main",
+      "change_at": "2026-10-29T12:37:14Z",
+      "title": "feat(chat): tabelle Markdown leggibili e scorrevoli nelle risposte Android LOCAL (#931)",
+      "url": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/4b456d0ea522cac97ca68e885e6cf4fa889a0046",
+      "match_ref": null,
+      "reconciliation": null
+    },
+    {
+      "incident_id": "f203bde95a95df0425d4",
+      "status": "UNRECONCILED",
+      "detected_at": "2026-10-29T12:44:07Z",
+      "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
+      "kind": "direct_commit",
+      "pull_request": null,
+      "merge_sha": null,
+      "commit_sha": "20676d325390f41d9fb1932018f175b59bb1de1f",
+      "head_branch": null,
+      "base_branch": "main",
+      "change_at": "2026-10-29T12:38:20Z",
+      "title": "docs(roadmap): prioritize response reliability and lightweight visual chat, preserve achieved performance",
+      "url": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/20676d325390f41d9fb1932018f175b59bb1de1f",
+      "match_ref": null,
+      "reconciliation": null
     }
   ],
   "reconciliation_history": [
@@ -2254,35 +2288,35 @@
       "note": "Known motivating example for CP-HARDEN-03. It predates this incremental detector and is not retroactively reopened."
     }
   ],
-  "last_scan_at": "2026-10-29T11:39:05Z",
+  "last_scan_at": "2026-10-29T12:44:07Z",
   "scan_health": {
     "pilialvu75-hue/AI-Orchestrator-Module-Library": {
       "state": "OK",
-      "last_success_at": "2026-10-29T11:39:05Z",
+      "last_success_at": "2026-10-29T12:44:07Z",
       "last_failure_at": null,
       "error_code": null
     },
     "pilialvu75-hue/Ai-orchestrator-riserva": {
       "state": "OK",
-      "last_success_at": "2026-10-29T11:39:05Z",
+      "last_success_at": "2026-10-29T12:44:07Z",
       "last_failure_at": "2026-10-28T07:39:58Z",
       "error_code": null
     },
     "pilialvu75-hue/Ai-orchestrator-diagnostics": {
       "state": "OK",
-      "last_success_at": "2026-10-29T11:39:05Z",
+      "last_success_at": "2026-10-29T12:44:07Z",
       "last_failure_at": "2026-10-28T07:39:58Z",
       "error_code": null
     },
     "pilialvu75-hue/AI-Orchestrator-Module-Researcher": {
       "state": "OK",
-      "last_success_at": "2026-10-29T11:39:05Z",
+      "last_success_at": "2026-10-29T12:44:07Z",
       "last_failure_at": "2026-10-28T07:39:58Z",
       "error_code": null
     },
     "pilialvu75-hue/Ai_orchestrator-prova": {
       "state": "OK",
-      "last_success_at": "2026-10-29T11:39:05Z",
+      "last_success_at": "2026-10-29T12:44:07Z",
       "last_failure_at": "2026-10-28T07:39:58Z",
       "error_code": null
     }
