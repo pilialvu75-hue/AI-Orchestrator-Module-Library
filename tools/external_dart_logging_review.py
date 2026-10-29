@@ -26,9 +26,9 @@ RUN_SHA = "c6e3b21da9a949e13ae5aecc363060b5c211b5c9"
 REPO = "https://github.com/dart-lang/core"
 PIN = "pkg:pub/logging@1.3.0"
 LOCAL = "pkg:generic/aivexus_external_logging@0.1.0"
-SHA40 = re.compile(r"[a-f0-9]{40}\\Z")
-SHA256 = re.compile(r"[a-f0-9]{64}\\Z")
-IMPORT_RE = re.compile(r"""(?:import|export)\\s+['"]([^'"]+)['"]""")
+SHA40 = re.compile(r"[a-f0-9]{40}\Z")
+SHA256 = re.compile(r"[a-f0-9]{64}\Z")
+IMPORT_RE = re.compile(r"""(?:import|export)\s+['"]([^'"]+)['"]""")
 MAX_FILES = 64
 
 
@@ -158,14 +158,14 @@ def build_request(repo_root: Path) -> dict:
     require(set(blobs) == actual_original, "original upstream file list changed")
     for relative, git_sha in blobs.items():
         require(isinstance(relative, str) and relative
-                and not relative.startswith("/") and "\\\\" not in relative
+                and not relative.startswith("/") and "\\" not in relative
                 and all(s not in {"", ".", ".."} for s in relative.split("/")),
                 "unsafe upstream blob path")
         require(isinstance(git_sha, str) and SHA40.fullmatch(git_sha) is not None,
                 "upstream blob missing Git SHA")
         contents = checked_file(original / relative)
         actual_git_sha = hashlib.sha1(
-            b"blob " + str(len(contents)).encode("ascii") + b"\\x00" + contents
+            b"blob " + str(len(contents)).encode("ascii") + b"\x00" + contents
         ).hexdigest()
         require(actual_git_sha == git_sha, f"original upstream Git blob changed: {relative}")
 
@@ -178,13 +178,13 @@ def build_request(repo_root: Path) -> dict:
             "unexpected license content")
     upstream_spec = checked_file(original / "pubspec.yaml").decode("utf-8")
     require(re.search(r"(?m)^name: logging$", upstream_spec) is not None
-            and re.search(r"(?m)^version: 1\\.3\\.0$", upstream_spec) is not None
+            and re.search(r"(?m)^version: 1\.3\.0$", upstream_spec) is not None
             and "dependencies:" not in upstream_spec,
             "upstream dependencies or pinned package changed")
     adapter_spec = checked_file(source / "pubspec.yaml").decode("utf-8")
     require(re.search(r"(?m)^name: aivexus_external_logging$", adapter_spec) is not None
             and adapter_spec.count("logging:") == 1
-            and re.search(r"(?m)^\\s+path: vendor/logging$", adapter_spec) is not None
+            and re.search(r"(?m)^\s+path: vendor/logging$", adapter_spec) is not None
             and "git:" not in adapter_spec
             and "dependency_overrides:" not in adapter_spec
             and "dev_dependencies:" not in adapter_spec,
