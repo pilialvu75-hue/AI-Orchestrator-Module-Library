@@ -388,7 +388,7 @@ jobs:
     # Produce actual runnable source for isolated macOS builder experiments.
     # NEVER certified, never an installer or a production module.
     needs: [prepare, finalize_native_tested, independent_security_preflight]
-    if: ${{ github.event_name == 'push' && needs.prepare.result == 'success' && needs.finalize_native_tested.result == 'success' && needs.independent_security_preflight.result == 'success' }}
+    if: ${{ always() && github.event_name == 'push' && needs.prepare.result == 'success' && needs.finalize_native_tested.result == 'success' && needs.independent_security_preflight.result == 'success' }}
     runs-on: ubuntu-24.04
     timeout-minutes: 7
     permissions:
