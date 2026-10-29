@@ -212,11 +212,11 @@ class LibraryResolverTest(unittest.TestCase):
                 "healthcheck": None,
             },
             "payload": {
-                "type": "upstream_reference",
-                "path": None,
-                "sha256": None,
-                "upstream_repository": "https://github.com/example/fixture",
-                "upstream_commit": "0123456789abcdef0123456789abcdef01234567",
+                "type": "repository_path",
+                "path": "payload/src",
+                "sha256": "a" * 64,
+                "upstream_repository": None,
+                "upstream_commit": None,
             },
         }
         self.write_json(path, manifest)
@@ -231,6 +231,33 @@ class LibraryResolverTest(unittest.TestCase):
             "platforms": ["android"],
             "contracts": [contract_id],
         }
+
+    def test_legacy_certified_upstream_link_is_visible_but_not_selectable(self) -> None:
+        legacy = self.make_asset(
+            "voice.legacy_reference_only", "1.0.0",
+            score=1.0, effort="trivial", availability="active",
+        )
+        path = self.root / legacy["manifest"]
+        manifest = json.loads(path.read_text(encoding="utf-8"))
+        manifest["payload"] = {
+            "type": "upstream_reference",
+            "path": None,
+            "sha256": None,
+            "upstream_repository": "https://github.com/example/fixture",
+            "upstream_commit": "0123456789abcdef0123456789abcdef01234567",
+        }
+        self.write_json(path, manifest)
+        current = json.loads((self.root / "catalog/index.json").read_text(encoding="utf-8"))
+        current["assets"].append(legacy)
+        self.write_json(self.root / "catalog/index.json", current)
+
+        output = query(self.root, capability="voice.stt")
+        self.assertNotIn("voice.legacy_reference_only", [item["id"] for item in output])
+        snapshots = build_snapshot(self.root)
+        record = next(item for item in snapshots["assets"]
+                      if item["id"] == "voice.legacy_reference_only")
+        self.assertEqual("certified", record["status"])  # history is not destroyed
+        self.assertTrue(any("not exportable" in warning for warning in record["warnings"]))
 
     def test_query_excludes_deprecated_and_revoked_by_default(self) -> None:
         candidates = query(
