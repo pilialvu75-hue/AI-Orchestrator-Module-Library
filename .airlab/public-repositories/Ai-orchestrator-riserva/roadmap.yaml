@@ -123,9 +123,9 @@ product_maturity_gates:
       model limitations, voice and OTA are verified on actual target
       devices; known hallucinations and serious regressions are bounded.
   F1:
-    state: planned_foundations_exist
+    state: synthetic_restart_tests_pass_physical_pending
     title: Single-device durable personal memory with provenance
-    acceptance: 'Synthetic store/retrieve/revise/forget, session separation and restart proof.'
+    acceptance: 'Synthetic store/retrieve/revise/forget, session separation and restart proof; physical restart on S24 and ASUS, UI review, privacy policy and user-facing reset still pending.'
   F2:
     state: planned
     title: One user across authorized S24, ASUS, Mac and optional Raspberry
@@ -1299,8 +1299,22 @@ audit_findings:
     merged_commit: d74d84dfc9e37628c5022305da054456af38c796
   next_acceptance_candidate:
     url: https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/934
-    state: sqlite_restart_regression_ci_pending
-    scope: File-backed temporary SQLite; remember/reopen/recall/update/forget, conversation isolation and confirmed-only memories. No actual S24/ASUS restart proven.
+    state: merged_synthetic_sqlite_restart_ci_pass
+    merged_commit: 9e33ff44a55aac9c5130fc25f4abd39a0ac21798
+    scope: File-backed temporary SQLite; remember/reopen/recall/update/forget, conversation isolation and confirmed-only memories; 5/5 CI PASS. Not physical S24/ASUS acceptance.
+  optional_preference_candidates:
+    url: https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/935
+    state: pending_ci
+    goal: >-
+      Prepare tiny deterministic opt-in suggestions based only on direct
+      user-stated answer preferences. Proposals remain unconfirmed,
+      excluded from inference prompts and subordinate to confirmed facts.
+      Bounded candidate records must never evict confirmed memory.
+    activation_gate: >-
+      Do not wire into production until informed consent, review/edit/
+      reject user interface, owner isolation, selective reset and
+      physical-device tests have been implemented and accepted.
+      No automatic memory capture is active from this proposal alone.
 
 - id: CANT-AUDIT-17
   audit_item: 17
