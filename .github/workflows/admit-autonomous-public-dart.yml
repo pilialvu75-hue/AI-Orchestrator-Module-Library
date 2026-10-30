@@ -1,0 +1,113 @@
+name: Admit autonomous Researcher source as real TESTED Library intake
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'tools/autonomous_public_dart_admit.py'
+      - '.github/workflows/admit-autonomous-public-dart.yml'
+  workflow_run:
+    workflows:
+      - Protected merge of dual-CI verified Researcher public source
+    types: [completed]
+  schedule:
+    - cron: '13 */6 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  actions: read
+  pull-requests: read
+
+concurrency:
+  group: library-protected-autonomous-tested-intake
+  cancel-in-progress: false
+
+jobs:
+  admit-tested:
+    if: >-
+      github.event_name != 'workflow_run' ||
+      (github.event.workflow_run.conclusion == 'success' &&
+       github.event.workflow_run.event != 'pull_request')
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - name: Checkout trusted Library main, not the Researcher PR
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 1
+          persist-credentials: false
+          submodules: false
+
+      - name: Verify protected Library intake code before creating source-bound evidence
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 -m unittest discover -s tests -p test_autonomous_public_dart_gate.py -v
+          python3 -m unittest discover -s tests -p test_autonomous_public_dart_merger.py -v
+          python3 -m unittest discover -s tests -p test_autonomous_public_dart_admit.py -v
+
+      - name: Check signed-off CI runs and materialize first real new intake
+        id: intake
+        shell: bash
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          python3 tools/autonomous_public_dart_admit.py --root . \
+            --output "$RUNNER_TEMP/researcher-tested-intake-report.json"
+          python3 - <<'PY'
+          import json, os
+          from pathlib import Path
+          report = json.loads(
+              (Path(os.environ["RUNNER_TEMP"]) /
+               "researcher-tested-intake-report.json").read_text())
+          assert report.get("certification_authorized") is not True
+          assert report.get("security_reviewed") is not True
+          with open(os.environ["GITHUB_OUTPUT"], "a", encoding="utf-8") as target:
+              target.write("created=" + str(report["created"]).lower() + "\n")
+              target.write("path=" + str(report.get("path") or "none") + "\n")
+          PY
+
+      - name: Validate complete Library and stage ONLY independent Linux-tested module
+        if: steps.intake.outputs.created == 'true'
+        shell: bash
+        env:
+          CANDIDATE_PATH: ${{ steps.intake.outputs.path }}
+        run: |
+          set -euo pipefail
+          [[ "$CANDIDATE_PATH" =~ ^intake/utility[.](path_operations|text_graphemes|int64_arithmetic)[.]external[.]dartlang[.](path|characters|fixnum)/0[.]1[.]0$ ]]
+          python3 tools/validate_library.py
+          python3 -m unittest discover -s tests -p 'test_autonomous_public_dart_admit.py' -v
+          git add -- "$CANDIDATE_PATH"
+          git diff --cached --name-only | grep -Eq "^intake/utility[.](path_operations|text_graphemes|int64_arithmetic)[.]external[.]dartlang[.](path|characters|fixnum)/0[.]1[.]0/"
+          if git diff --cached --name-only | grep -Ev "^intake/utility[.](path_operations|text_graphemes|int64_arithmetic)[.]external[.]dartlang[.](path|characters|fixnum)/0[.]1[.]0/"; then
+            echo "::error::Protected intake attempted to stage an out-of-scope file"
+            exit 1
+          fi
+          echo "PASS: real source tree, exact Linux CI receipt and limited utility contract; no security certification"
+
+      - name: Commit verified TESTED intake to Library main without force-push
+        if: steps.intake.outputs.created == 'true'
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git commit -m 'library: promote independently tested Researcher public source (security review pending)'
+          git -c "http.extraheader=AUTHORIZATION: basic $(printf 'x-access-token:%s' "$GH_TOKEN" | base64 -w0)" \
+            push https://github.com/pilialvu75-hue/AI-Orchestrator-Module-Library.git \
+              HEAD:refs/heads/main
+          echo "PASS: source-bound tested intake persisted; no production publish"
+
+      - name: Upload audit report, including no-op or rejection reasons
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: library-autonomous-tested-intake-${{ github.run_id }}
+          path: ${{ runner.temp }}/researcher-tested-intake-report.json
+          if-no-files-found: warn
+          retention-days: 14
