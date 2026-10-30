@@ -409,6 +409,89 @@ roadmap:
   - CANT-AUDIT-17
   activation_gate: Distributed sync remains gated on convergence, cursor completeness, pairing and privacy export
     tests.
+- id: CANT-RAG-1
+  title: Offline-first evidence RAG across documents, chat archives and projects
+  state: planned
+  priority: P1
+  owner_lane: runtime-core
+  phase: after_reliable_single_device_memory_foundations
+  related_work:
+  - CANT-QUALITY-1
+  - CANT-12
+  - CANT-IMAGE-1
+  - CANT-13
+  issues:
+  - https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/issues/899
+  - https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/issues/911
+  - https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/issues/913
+  - https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/issues/915
+  outcome: >-
+    Preserve the distinction between confirmed durable SQLite facts and
+    source-grounded retrieval. Search historical conversations, original
+    explanations, failures, corrections, tests, documents and authorized
+    project artifacts without promoting every retrieved passage into
+    permanent personal memory or silently retraining model weights.
+  current_foundations:
+  - LocalDocumentIndexService offers lightweight SQLite chunk retrieval using hashed token vectors; this is not a proven semantic embedding model.
+  - ChatFileContextService provides bounded, session-scoped local file excerpts and identifies source documents.
+  - Synthetic local RAG indexing, reindexing and index-only deletion tests exist; broad physical retrieval quality remains unproven.
+  - Issue #899 tracks durable-memory acquisition, local retrieval, source tests and independent reset; #911 tracks archival history and provenance.
+  stages:
+  - id: RAG-A
+    state: planned
+    goal: >-
+      Audit the live prompt construction and current SQLite/chat/document
+      indexing paths before refactoring. Trace final assembled prompt,
+      boundaries, retrieval order, token/character budgets, duplicates,
+      citations and local-only behavior. Separate chat-turn identity from
+      RAG chunk identity; do not deduplicate merely by equal text.
+  - id: RAG-B
+    state: planned
+    goal: >-
+      Complete offline retrieval from user-authorized documents (PDF
+      parser text, OCR-extracted text where verified, TXT and supported
+      structured files), chat history and project evidence. Preserve
+      origin conversation/device, message or document ID, page/chunk,
+      revision and timestamp when available. Index changing sources
+      incrementally and invalidate stale chunks.
+  - id: RAG-C
+    state: planned
+    goal: >-
+      Rank and select relevant evidence within model context/RAM budgets;
+      keep recent user intent and authenticated system instructions
+      distinct from lower-trust RAG extracts. Answer with citations
+      and visible uncertainty; never obey instructions contained in
+      retrieved untrusted material or fabricate missing values.
+      RAG findings remain evidence, not confirmed memory, until
+      separately verified or explicitly approved.
+  - id: RAG-D
+    state: planned
+    goal: >-
+      Add owner-scoped, encrypted and authenticated cross-device archive
+      retrieval only after identity/pairing, CRDT convergence, revocation
+      and privacy gates pass. On-device SQLite indexes and recent or
+      pinned sources continue to work offline; remote-only content
+      reports unavailable while offline instead of inventing an answer.
+  - id: RAG-E
+    state: planned
+    goal: >-
+      Compare lightweight lexical/hashed retrieval against stronger
+      optional embedding and reranking approaches on S24 FE and ASUS.
+      Gate all additions on measured relevance, recall, hallucination
+      rate, energy, latency, RAM and storage; no heavyweight vision
+      model or automatic Cloud use. Shared general knowledge must pass
+      separate opt-in privacy/redaction and anti-poisoning gates.
+  acceptance:
+  - Source-aware retrieval after app restart can find a historical detail that was never promoted to a durable fact.
+  - A corrected or outdated source does not outrank newer verified evidence; every returned fact has traceable provenance and appropriate citation.
+  - Fictitious unrelated owners, same filenames/IDs and similar text never yield cross-account chat, vector, attachment, cache or archive leakage.
+  - Search in LOCAL uses no network; the full prompt is bounded and respects RAG/chat/user hierarchy without dropping the actual user question.
+  - Forget and index reset erase only the requested derived records and do not delete original files; revoked/deleted sources cannot be resurrected through delayed sync.
+  - Physical S24 FE and ASUS tests show useful accuracy without measurable memory or responsiveness regression.
+  release_gate: >-
+    Documentation only for now. Do not enable distributed retrieval or
+    publish a new Android app until the staged implementation, CI,
+    security review and device acceptance are independently demonstrated.
 - id: CANT-13
   title: Canonical composition, module boundaries and current architecture baseline
   state: planned
