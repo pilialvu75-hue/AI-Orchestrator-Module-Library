@@ -460,13 +460,17 @@ roadmap:
         incompatible generated indexes when recomputation is cheaper.
     preferred_existing_hardware_candidate:
       name: WD My Cloud 2 TB WDBCTL0020HWT-00 (first-generation OS 3)
-      status: recovery_and_security_assessment_required
+      status: deferred_by_user_2026_10_30
       recorded_context: >-
         Internal WD20EFRX 2 TB disk has been readable separately through
         a powered SATA/USB adapter under Linux; historical NAS enclosure
         boot/LED issue remains undiagnosed. Recovery copies have been
         transferred to a separate ALD 2 TB disk; completeness and integrity
         should be verified before any destructive action.
+      user_decision: >-
+        WD My Cloud diagnostics are explicitly set aside for now.
+        Continue single-device memory and RAG foundations without any
+        NAS hardware checks, purchases or storage changes.
       investigation_first: >-
         Read-only inventory of power supply, enclosure board, Ethernet
         link and boot behavior; inspect disk SMART without modifying
@@ -1271,7 +1275,7 @@ audit_findings:
 - id: CANT-AUDIT-16
   audit_item: 16
   title: Aggiornamenti della memoria Assistant possono sovrascriversi
-  state: planned
+  state: active
   priority: P2
   source_priority: P2
   epics:
@@ -1285,13 +1289,18 @@ audit_findings:
   done_when: Due upsert di chiavi diverse e combinazioni confirm/remove/upsert mantengono tutte le modifiche valide.
   evidence_urls:
   - https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/blob/0c1fa14c154308a03a62a6ad730d639d7ace3e65/lib/core/memory/assistant_durable_memory_store.dart#L91-L109
-  reproduction_status: Risk identified from read-modify-write structure; deterministic concurrency tests now proposed in PR #933; CI/acceptance pending.
+  reproduction_status: In-process concurrent read-modify-write regression coverage merged in PR #933; 7/7 CI workflows PASS, including targeted Ubuntu/macOS tests. Real device and cross-process convergence remain unverified.
   current_implementation_candidate:
     url: https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/933
-    state: awaiting_ci_and_review
+    state: merged_source_ci_pass
     scope: In-process per-scope write serialization for the existing singleton; no SQLite schema change.
     tests: Concurrent upsert, confirm/remove/upsert, and recovery after a failed write.
     limitations: Does not yet protect against separate store instances/processes or enable authenticated cross-device sync.
+    merged_commit: d74d84dfc9e37628c5022305da054456af38c796
+  next_acceptance_candidate:
+    url: https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/934
+    state: sqlite_restart_regression_ci_pending
+    scope: File-backed temporary SQLite; remember/reopen/recall/update/forget, conversation isolation and confirmed-only memories. No actual S24/ASUS restart proven.
 
 - id: CANT-AUDIT-17
   audit_item: 17
