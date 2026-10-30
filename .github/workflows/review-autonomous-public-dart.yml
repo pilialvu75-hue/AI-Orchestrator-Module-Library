@@ -6,6 +6,7 @@ on:
     paths:
       - 'tools/autonomous_public_dart_review.py'
       - 'tools/autonomous_public_dart_osv_scan.py'
+      - 'tests/test_autonomous_public_dart_osv_scan.py'
       - '.github/workflows/review-autonomous-public-dart.yml'
   workflow_run:
     workflows:
@@ -42,6 +43,7 @@ jobs:
         run: |
           set -euo pipefail
           python3 -m unittest discover -s tests -p test_autonomous_public_dart_review.py -v
+          python3 -m unittest discover -s tests -p test_autonomous_public_dart_osv_scan.py -v
           python3 tools/autonomous_public_dart_review.py --root . \
             --output "$RUNNER_TEMP/autonomous-researcher-review-REQUEST.json"
           python3 tools/autonomous_public_dart_osv_scan.py \
