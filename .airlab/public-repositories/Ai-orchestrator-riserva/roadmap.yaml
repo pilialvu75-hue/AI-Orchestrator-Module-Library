@@ -1319,22 +1319,34 @@ audit_findings:
       No automatic memory capture is active from this proposal alone.
   candidate_review_backend:
     url: https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/937
-    state: open_ci_in_progress
+    state: merged_ci_pass
+    ci: 7/7 PASS
     scope: >-
       Safe approve, correct and reject operations for exact user-statement
-      preference candidates. Explicit owner confirmation, optimistic snapshot
-      check, rejection limited to the chosen draft and the existing SQLite
-      reset barrier prevent silent promotion, stale decisions or resurrection.
-      Synthetic SQLite reopen and targeted safety regressions are in CI.
-    first_ci_findings: >-
-      Initial targeted run found a synchronous-exception expectation mistake
-      in a test; the test was fixed. Latest targeted Ubuntu/macOS CI is PASS.
-      Full multi-platform workflows were still running at the last check.
+      preference candidates. Explicit user confirmation, optimistic snapshot
+      check, rejection limited to the chosen draft and the SQLite reset
+      barrier prevent silent promotion, stale decisions or resurrection.
+      Includes verified synthetic file-backed SQLite reopen.
     activation_gate: >-
-      Backend alone does not enable automatic memory extraction, consent
-      settings, or an end-user review UI. Preserve owner isolation,
-      user-controlled review, safe reset and physical-device acceptance
-      before any production wiring.
+      Backend does not enable automatic memory extraction or owner-aware
+      multi-device sync. Keep informed consent, owner isolation, safe reset,
+      tested UI and physical S24/ASUS verification as mandatory release gates.
+  candidate_review_ui:
+    url: https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/938
+    state: developer_only_pr_ci_in_progress
+    scope: >-
+      Single review screen shown only in developer mode, with one-operation
+      consent for manual preference test proposals and explicit confirmation
+      for approve/edit/reject. All data remain on-device; no automatic
+      reading of conversations, uploads or cloud. Widget tests in CI.
+    duplicate_prevented: >-
+      PR #939 was closed without merging because it would have added a second
+      review screen visible to normal users. Prefer the stricter developer-only
+      implementation in PR #938. Keep single-source ownership.
+    release_gate: >-
+      Do not expose an end-user memory-capture toggle or normal-user review UI
+      until identity isolation, persistence of informed consent, translated
+      IT/EN/FR/ES text and physical S24/ASUS acceptance are tested.
 
 - id: CANT-AUDIT-17
   audit_item: 17
