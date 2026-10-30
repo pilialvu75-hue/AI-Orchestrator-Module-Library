@@ -1112,7 +1112,14 @@ audit_findings:
   done_when: Due upsert di chiavi diverse e combinazioni confirm/remove/upsert mantengono tutte le modifiche valide.
   evidence_urls:
   - https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/blob/0c1fa14c154308a03a62a6ad730d639d7ace3e65/lib/core/memory/assistant_durable_memory_store.dart#L91-L109
-  reproduction_status: Risk identified from read-modify-write structure; not reproduced during this audit.
+  reproduction_status: Risk identified from read-modify-write structure; deterministic concurrency tests now proposed in PR #933; CI/acceptance pending.
+  current_implementation_candidate:
+    url: https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/933
+    state: awaiting_ci_and_review
+    scope: In-process per-scope write serialization for the existing singleton; no SQLite schema change.
+    tests: Concurrent upsert, confirm/remove/upsert, and recovery after a failed write.
+    limitations: Does not yet protect against separate store instances/processes or enable authenticated cross-device sync.
+
 - id: CANT-AUDIT-17
   audit_item: 17
   title: Memory Fabric non ancora memoria condivisa effettiva
