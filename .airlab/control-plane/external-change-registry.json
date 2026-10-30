@@ -16,7 +16,7 @@
     {
       "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
       "baseline_at": "2026-10-03T16:20:00Z",
-      "cursor_merged_at": "2026-10-29T20:25:38Z"
+      "cursor_merged_at": "2026-10-30T11:06:34Z"
     },
     {
       "repository": "pilialvu75-hue/Ai-orchestrator-diagnostics",
@@ -2346,6 +2346,40 @@
       "url": "https://github.com/pilialvu75-hue/AI-Orchestrator-Module-Researcher/commit/177c1bad41225921c2c9f341502b7a121333f19d",
       "match_ref": null,
       "reconciliation": null
+    },
+    {
+      "incident_id": "3f6ac7a2924f8af67aa3",
+      "status": "UNRECONCILED",
+      "detected_at": "2026-10-30T11:39:13Z",
+      "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
+      "kind": "direct_commit",
+      "pull_request": null,
+      "merge_sha": null,
+      "commit_sha": "d74d84dfc9e37628c5022305da054456af38c796",
+      "head_branch": null,
+      "base_branch": "main",
+      "change_at": "2026-10-30T10:48:00Z",
+      "title": "fix(memory): serialize scoped SQLite durable-memory writes (CANT-AUDIT-16) (#933)",
+      "url": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/d74d84dfc9e37628c5022305da054456af38c796",
+      "match_ref": null,
+      "reconciliation": null
+    },
+    {
+      "incident_id": "5acacd2647ec0c1c016a",
+      "status": "UNRECONCILED",
+      "detected_at": "2026-10-30T11:39:13Z",
+      "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
+      "kind": "direct_commit",
+      "pull_request": null,
+      "merge_sha": null,
+      "commit_sha": "9e33ff44a55aac9c5130fc25f4abd39a0ac21798",
+      "head_branch": null,
+      "base_branch": "main",
+      "change_at": "2026-10-30T11:06:34Z",
+      "title": "test(memory): SQLite durable recall after restart, update, forget and chat isolation (#934)",
+      "url": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/9e33ff44a55aac9c5130fc25f4abd39a0ac21798",
+      "match_ref": null,
+      "reconciliation": null
     }
   ],
   "reconciliation_history": [
@@ -2356,35 +2390,35 @@
       "note": "Known motivating example for CP-HARDEN-03. It predates this incremental detector and is not retroactively reopened."
     }
   ],
-  "last_scan_at": "2026-10-30T10:39:49Z",
+  "last_scan_at": "2026-10-30T11:39:13Z",
   "scan_health": {
     "pilialvu75-hue/AI-Orchestrator-Module-Library": {
       "state": "OK",
-      "last_success_at": "2026-10-30T10:39:49Z",
+      "last_success_at": "2026-10-30T11:39:13Z",
       "last_failure_at": null,
       "error_code": null
     },
     "pilialvu75-hue/Ai-orchestrator-riserva": {
       "state": "OK",
-      "last_success_at": "2026-10-30T10:39:49Z",
+      "last_success_at": "2026-10-30T11:39:13Z",
       "last_failure_at": "2026-10-28T07:39:58Z",
       "error_code": null
     },
     "pilialvu75-hue/Ai-orchestrator-diagnostics": {
       "state": "OK",
-      "last_success_at": "2026-10-30T10:39:49Z",
+      "last_success_at": "2026-10-30T11:39:13Z",
       "last_failure_at": "2026-10-28T07:39:58Z",
       "error_code": null
     },
     "pilialvu75-hue/AI-Orchestrator-Module-Researcher": {
       "state": "OK",
-      "last_success_at": "2026-10-30T10:39:49Z",
+      "last_success_at": "2026-10-30T11:39:13Z",
       "last_failure_at": "2026-10-28T07:39:58Z",
       "error_code": null
     },
     "pilialvu75-hue/Ai_orchestrator-prova": {
       "state": "OK",
-      "last_success_at": "2026-10-30T10:39:49Z",
+      "last_success_at": "2026-10-30T11:39:13Z",
       "last_failure_at": "2026-10-28T07:39:58Z",
       "error_code": null
     }
