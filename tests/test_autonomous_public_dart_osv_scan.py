@@ -48,6 +48,14 @@ class ScanTests(unittest.TestCase):
         self.assertEqual(result["packages"][0]["vulnerability_ids"], ["GHSA-example"])
         self.assertFalse(result["certification_authorized"])
 
+    def test_malformed_osv_response_fails_closed(self):
+        for response in (b'[]', b'{"vulns":{}}', b'{"vulns":[{}]}'):
+            with self.subTest(response=response):
+                with patch('autonomous_public_dart_osv_scan.urllib.request.urlopen',
+                           return_value=BytesIO(response)):
+                    with self.assertRaisesRegex(ValueError, 'invalid OSV'):
+                        scan(request())
+
     def test_network_failure_fails_closed(self):
         with patch("autonomous_public_dart_osv_scan.urllib.request.urlopen",
                    side_effect=TimeoutError("OSV unavailable")):
