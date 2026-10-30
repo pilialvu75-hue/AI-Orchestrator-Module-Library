@@ -1,0 +1,30 @@
+{
+  "schema": "ai-orchestrator.library-test-report.v1",
+  "asset_id": "utility.int64_arithmetic.external.dartlang.fixnum",
+  "version": "0.1.0",
+  "source_commit": "17d1b2cd13991f3cf844886db1c7ad18910a8908",
+  "payload_sha256": "b7241fcdfca77f7ec525da0279fa527ff9ca403ca7af592cc9bff804d4776f6a",
+  "passed": true,
+  "validated_on": [
+    "linux"
+  ],
+  "generated_at": "2026-10-30T06:38:11Z",
+  "evidence": {
+    "github_run_id": 41015199646,
+    "github_commit": "fbc133a50e86536dc9bfb97c524e5b4bdb8a9028",
+    "researcher_merged_pr": 220,
+    "validated_workflows": [
+      "Library isolated verification of Researcher public Dart intake",
+      "Validate Module Library"
+    ],
+    "checks": [
+      "dart pub get --offline",
+      "dart analyze lib",
+      "dart analyze tool",
+      "dart run tool/self_test.dart"
+    ],
+    "runtime": "Ubuntu Linux Dart SDK (read-only isolated PR runner)"
+  },
+  "independent_security_reviewed": false,
+  "certification_authorized": false
+}
