@@ -1334,13 +1334,29 @@ audit_findings:
       GitHub workflows. Not a physical device acceptance or multi-owner proof.
     developer_preview_ui:
       url: https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/938
-      state: open_ci_pending
+      state: merged_source_only
       scope: >-
-        Italian developer-mode-only manual review page with per-action
-        opt-in, explicit approve/edit/reject confirmation, no automatic
-        conversation extraction and no network. Widget regressions run
-        on a synthetic in-memory store; physical S24/ASUS validation is
-        still required before exposing to external testers.
+        Developer-mode-only manual review page with per-action opt-in,
+        explicit approve/edit/reject confirmation, no automatic conversation
+        extraction and no network. Widget regressions on synthetic memory
+        are green; physical S24/ASUS acceptance is not yet demonstrated.
+      localization:
+        url: https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/940
+        state: merged_source_only
+        languages: [it, en, fr, es]
+        caveat: The preference recognizer still accepts Italian examples only.
+      selective_forget:
+        url: https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/945
+        state: in_review_ci_pending
+        goal: >-
+          Add selective forgetting of a single confirmed local-user fact to
+          the developer memory review page, requiring user confirmation and
+          exact snapshot comparison under per-scope write serialization.
+          Preserve unrelated facts, chat history, project/conversation scopes
+          and new corrections. Add IT/EN/FR/ES copy and widget/core tests.
+        gate: >-
+          Await exact-head CI and review; no claimed physical acceptance,
+          automatic extraction or cross-user privacy isolation.
     activation_gate: >-
       Backend alone does not enable automatic memory extraction, consent
       settings, or an end-user review UI. Preserve owner isolation,
