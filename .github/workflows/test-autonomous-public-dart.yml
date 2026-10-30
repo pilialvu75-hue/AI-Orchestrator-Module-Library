@@ -1,0 +1,116 @@
+name: Library isolated verification of Researcher public Dart intake
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'sandbox/researcher_public_dart/**'
+      - '.github/workflows/test-autonomous-public-dart.yml'
+      - 'tools/autonomous_public_dart_gate.py'
+      - 'tests/test_autonomous_public_dart_gate.py'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: library-public-dart-intake-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  verify-public-dart:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - name: Checkout Library without credential persistence
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+          submodules: false
+
+      - name: Validate original Git blobs and Review-only status before executing code
+        id: preflight
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 -m unittest discover -s tests -p 'test_autonomous_public_dart_gate.py' -v
+          python3 tools/autonomous_public_dart_gate.py --root . \
+            --output "$RUNNER_TEMP/autonomous-public-dart-preflight.json"
+          python3 - <<'PY'
+          import json, os
+          from pathlib import Path
+          f = Path(os.environ["RUNNER_TEMP"]) / "autonomous-public-dart-preflight.json"
+          data = json.loads(f.read_text())
+          assert data["certification_authorized"] is False
+          assert data["candidate_count"] <= 3
+          with open(os.environ["GITHUB_OUTPUT"], "a") as output:
+              output.write("count=" + str(data["candidate_count"]) + "\n")
+          PY
+
+      - name: Set up isolated Dart SDK
+        if: steps.preflight.outputs.count != '0'
+        uses: dart-lang/setup-dart@v1
+        with:
+          sdk: stable
+
+      - name: Analyze and execute functional tests on real external public code
+        if: steps.preflight.outputs.count != '0'
+        shell: bash
+        run: |
+          set -euo pipefail
+          shopt -s nullglob
+          for source in sandbox/researcher_public_dart/*/payload/src; do
+            test -f "$source/lib/aivexus_external.dart"
+            echo "::group::Verify real external source ${source}"
+            (
+              cd "$source"
+              dart pub get --offline
+              dart analyze lib
+              dart analyze tool
+              dart run tool/self_test.dart
+            )
+            echo "::endgroup::"
+          done
+
+      - name: Record source-bound Linux proof, explicitly without certification
+        if: steps.preflight.outputs.count != '0'
+        shell: bash
+        env:
+          CHECKED_HEAD: ${{ github.event.pull_request.head.sha || github.sha }}
+          CHECKED_RUN: ${{ github.run_id }}
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import json, os
+          from pathlib import Path
+          root = Path(os.environ["RUNNER_TEMP"])
+          preflight = json.loads((root / "autonomous-public-dart-preflight.json").read_text())
+          summary = {
+              "schema": "aivexus.library.researcher-public-dart-linux-ci.v1",
+              "ci_run_id": os.environ["CHECKED_RUN"],
+              "head_sha": os.environ["CHECKED_HEAD"],
+              "passed": True,
+              "platform": "linux",
+              "candidates": preflight["candidates"],
+              "source_materialized": True,
+              "functional_test_executed": True,
+              "independent_security_reviewed": False,
+              "certification_authorized": False,
+              "installed_in_ai_orchestrator": False,
+          }
+          (root / "autonomous-public-dart-linux-tested.json").write_text(
+              json.dumps(summary, indent=2, sort_keys=True) + "\n"
+          )
+          print("PASS: independently tested physical upstream source on Linux; NOT CERTIFIED")
+          PY
+
+      - name: Publish unsigned proof and digest for subsequent Library intake
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: researcher-public-dart-source-and-test-evidence-${{ github.run_id }}
+          path: |
+            ${{ runner.temp }}/autonomous-public-dart-preflight.json
+            ${{ runner.temp }}/autonomous-public-dart-linux-tested.json
+          if-no-files-found: warn
+          retention-days: 14
