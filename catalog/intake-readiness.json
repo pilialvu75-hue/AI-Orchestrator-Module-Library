@@ -3,13 +3,13 @@
   "report_type": "read_only_evidence_gaps_not_certification",
   "summary": {
     "certified_catalog_entries": 3,
-    "intake_candidates": 27,
-    "blocked_intake_candidates": 27,
+    "intake_candidates": 29,
+    "blocked_intake_candidates": 29,
     "ready_for_automatic_certification": 0,
     "blocker_counts": {
       "LICENSE_EVIDENCE_MISSING": 20,
       "REPRODUCIBLE_TEST_EVIDENCE_MISSING": 18,
-      "SECURITY_REVIEW_EVIDENCE_MISSING": 27,
+      "SECURITY_REVIEW_EVIDENCE_MISSING": 29,
       "SOURCE_SNAPSHOT_MISSING": 18
     }
   },
@@ -1359,6 +1359,40 @@
         "Resolve the upstream license and supply its attributable license file.",
         "Materialize immutable source bytes from the pinned commit in an isolated evidence workflow.",
         "Run isolated reproducible tests on the pinned source and attach a bound report.",
+        "Attach an independently generated security report and SBOM bound to the pinned source."
+      ],
+      "independent_certification_authorized": false
+    },
+    {
+      "asset_id": "utility.int64_arithmetic.external.dartlang.fixnum",
+      "version": "0.1.0",
+      "status": "tested",
+      "capabilities": [
+        "utility.int64_arithmetic"
+      ],
+      "source_repository": "https://github.com/dart-lang/core",
+      "source_commit": "17d1b2cd13991f3cf844886db1c7ad18910a8908",
+      "blockers": [
+        "SECURITY_REVIEW_EVIDENCE_MISSING"
+      ],
+      "next_actions": [
+        "Attach an independently generated security report and SBOM bound to the pinned source."
+      ],
+      "independent_certification_authorized": false
+    },
+    {
+      "asset_id": "utility.path_operations.external.dartlang.path",
+      "version": "0.1.0",
+      "status": "tested",
+      "capabilities": [
+        "utility.path_operations"
+      ],
+      "source_repository": "https://github.com/dart-lang/core",
+      "source_commit": "010a343e71238b3ed7fcd55dad5869ecaa40991a",
+      "blockers": [
+        "SECURITY_REVIEW_EVIDENCE_MISSING"
+      ],
+      "next_actions": [
         "Attach an independently generated security report and SBOM bound to the pinned source."
       ],
       "independent_certification_authorized": false
