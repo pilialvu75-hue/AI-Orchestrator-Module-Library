@@ -26,7 +26,7 @@
     {
       "repository": "pilialvu75-hue/AI-Orchestrator-Module-Researcher",
       "baseline_at": "2026-10-03T16:20:00Z",
-      "cursor_merged_at": "2026-10-28T16:12:22Z"
+      "cursor_merged_at": "2026-10-30T03:34:56Z"
     },
     {
       "repository": "pilialvu75-hue/Ai_orchestrator-prova",
@@ -2312,6 +2312,40 @@
       "url": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/71497e37e6e0fc17816e3fc2b381112f25505dfa",
       "match_ref": null,
       "reconciliation": null
+    },
+    {
+      "incident_id": "fccf2a43ebf8f13c2366",
+      "status": "UNRECONCILED",
+      "detected_at": "2026-10-30T03:40:34Z",
+      "repository": "pilialvu75-hue/AI-Orchestrator-Module-Researcher",
+      "kind": "direct_commit",
+      "pull_request": null,
+      "merge_sha": null,
+      "commit_sha": "4baaad67ea195106a913f422b26b2523f464a51a",
+      "head_branch": null,
+      "base_branch": "main",
+      "change_at": "2026-10-30T03:31:10Z",
+      "title": "feat(researcher): autonomous public Dart discovery and immutable source handoff (#131)",
+      "url": "https://github.com/pilialvu75-hue/AI-Orchestrator-Module-Researcher/commit/4baaad67ea195106a913f422b26b2523f464a51a",
+      "match_ref": null,
+      "reconciliation": null
+    },
+    {
+      "incident_id": "f43fa518137c68ad8ff9",
+      "status": "UNRECONCILED",
+      "detected_at": "2026-10-30T03:40:34Z",
+      "repository": "pilialvu75-hue/AI-Orchestrator-Module-Researcher",
+      "kind": "direct_commit",
+      "pull_request": null,
+      "merge_sha": null,
+      "commit_sha": "177c1bad41225921c2c9f341502b7a121333f19d",
+      "head_branch": null,
+      "base_branch": "main",
+      "change_at": "2026-10-30T03:34:56Z",
+      "title": "fix(researcher): canonical source hashes and same-PR autonomous repair (#132)",
+      "url": "https://github.com/pilialvu75-hue/AI-Orchestrator-Module-Researcher/commit/177c1bad41225921c2c9f341502b7a121333f19d",
+      "match_ref": null,
+      "reconciliation": null
     }
   ],
   "reconciliation_history": [
@@ -2322,35 +2356,35 @@
       "note": "Known motivating example for CP-HARDEN-03. It predates this incremental detector and is not retroactively reopened."
     }
   ],
-  "last_scan_at": "2026-10-30T02:41:00Z",
+  "last_scan_at": "2026-10-30T03:40:34Z",
   "scan_health": {
     "pilialvu75-hue/AI-Orchestrator-Module-Library": {
       "state": "OK",
-      "last_success_at": "2026-10-30T02:41:00Z",
+      "last_success_at": "2026-10-30T03:40:34Z",
       "last_failure_at": null,
       "error_code": null
     },
     "pilialvu75-hue/Ai-orchestrator-riserva": {
       "state": "OK",
-      "last_success_at": "2026-10-30T02:41:00Z",
+      "last_success_at": "2026-10-30T03:40:34Z",
       "last_failure_at": "2026-10-28T07:39:58Z",
       "error_code": null
     },
     "pilialvu75-hue/Ai-orchestrator-diagnostics": {
       "state": "OK",
-      "last_success_at": "2026-10-30T02:41:00Z",
+      "last_success_at": "2026-10-30T03:40:34Z",
       "last_failure_at": "2026-10-28T07:39:58Z",
       "error_code": null
     },
     "pilialvu75-hue/AI-Orchestrator-Module-Researcher": {
       "state": "OK",
-      "last_success_at": "2026-10-30T02:41:00Z",
+      "last_success_at": "2026-10-30T03:40:34Z",
       "last_failure_at": "2026-10-28T07:39:58Z",
       "error_code": null
     },
     "pilialvu75-hue/Ai_orchestrator-prova": {
       "state": "OK",
-      "last_success_at": "2026-10-30T02:41:00Z",
+      "last_success_at": "2026-10-30T03:40:34Z",
       "last_failure_at": "2026-10-28T07:39:58Z",
       "error_code": null
     }
