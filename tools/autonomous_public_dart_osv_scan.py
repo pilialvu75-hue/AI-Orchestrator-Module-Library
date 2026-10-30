@@ -33,7 +33,12 @@ def scan(request, timeout=20):
                                      method="POST")
         with urllib.request.urlopen(req, timeout=timeout) as response:
             data = json.load(response)
+        if not isinstance(data, dict) or not isinstance(data.get("vulns", []), list):
+            raise ValueError("invalid OSV advisory response")
         vulns = data.get("vulns", [])
+        if any(not isinstance(v, dict) or not isinstance(v.get("id"), str)
+               or not v["id"] for v in vulns):
+            raise ValueError("invalid OSV vulnerability identity")
         results.append({"package": name, "version": version,
                         "vulnerability_ids": sorted(v["id"] for v in vulns)})
     if not results:
