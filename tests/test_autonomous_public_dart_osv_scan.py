@@ -1,0 +1,69 @@
+"""Offline tests for live OSV evidence; no external network required."""
+import json
+import sys
+import unittest
+from pathlib import Path
+from unittest.mock import patch
+from io import BytesIO
+
+sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "tools"))
+from autonomous_public_dart_osv_scan import scan
+
+
+def request():
+    return {
+        "status": "INDEPENDENT_REVIEW_REQUIRED",
+        "asset_id": "utility.fixnum.external.dartlang.fixnum",
+        "source": {"payload_tree_sha256": "a" * 64},
+        "dependency_inventory": {"cyclonedx_sbom": {"components": [
+            {"purl": "pkg:pub/fixnum@1.1.1"},
+            {"name": "local-adapter"},
+        ]}},
+    }
+
+
+class ScanTests(unittest.TestCase):
+    def test_clean_advisory_scan_never_certifies(self):
+        class Response(BytesIO):
+            pass
+        with patch("autonomous_public_dart_osv_scan.urllib.request.urlopen",
+                   return_value=Response(b"{}")) as urlopen:
+            result = scan(request())
+        self.assertEqual(result["packages"][0]["package"], "fixnum")
+        self.assertTrue(result["advisory_scan_completed"])
+        self.assertEqual(result["vulnerabilities_found"], 0)
+        self.assertFalse(result["security_reviewed"])
+        self.assertFalse(result["certification_authorized"])
+        args, kwargs = urlopen.call_args
+        self.assertEqual(args[0].full_url, "https://api.osv.dev/v1/query")
+        self.assertEqual(json.loads(args[0].data)["package"]["ecosystem"], "Pub")
+
+    def test_known_advisories_are_preserved(self):
+        with patch("autonomous_public_dart_osv_scan.urllib.request.urlopen",
+                   return_value=BytesIO(b'{"vulns":[{"id":"GHSA-example"}]}')):
+            result = scan(request())
+        self.assertEqual(result["vulnerabilities_found"], 1)
+        self.assertEqual(result["packages"][0]["vulnerability_ids"], ["GHSA-example"])
+        self.assertFalse(result["certification_authorized"])
+
+    def test_network_failure_fails_closed(self):
+        with patch("autonomous_public_dart_osv_scan.urllib.request.urlopen",
+                   side_effect=TimeoutError("OSV unavailable")):
+            with self.assertRaises(TimeoutError):
+                scan(request())
+
+    def test_no_upstream_package_fails_closed(self):
+        item = request()
+        item["dependency_inventory"]["cyclonedx_sbom"]["components"] = []
+        with self.assertRaises(ValueError):
+            scan(item)
+
+    def test_unapproved_request_fails_closed(self):
+        item = request()
+        item["status"] = "CERTIFIED"
+        with self.assertRaises(ValueError):
+            scan(item)
+
+
+if __name__ == "__main__":
+    unittest.main()
