@@ -436,6 +436,53 @@ roadmap:
   - ChatFileContextService provides bounded, session-scoped local file excerpts and identifies source documents.
   - Synthetic local RAG indexing, reindexing and index-only deletion tests exist; broad physical retrieval quality remains unproven.
   - Issue #899 tracks durable-memory acquisition, local retrieval, source tests and independent reset; #911 tracks archival history and provenance.
+  dedicated_rag_storage:
+    state: future_design_only
+    purpose: >-
+      Keep large historical RAG sources, chunk corpora and optional vector
+      indexes in a dedicated, scalable encrypted archive reachable from every
+      authorized Aivexus platform; do not fill each device with a full copy.
+    tiers:
+      canonical_archive: >-
+        Owner-scoped, portable and versioned source/document/chat archives
+        plus provenance, integrity manifests and deletion tombstones; a
+        backup/recovery strategy is required to avoid one storage failure
+        destroying the only copy.
+      per_device_local: >-
+        SQLite catalog, confirmed facts, a small offline-retrievable index,
+        recent/frequently accessed/pinned excerpts and only explicitly
+        authorized cached files. S24 FE uses strict disk/RAM budgets and
+        bounded on-demand fetching; desktop budgets may be larger.
+      derived_indexes: >-
+        Regenerable per-user search indexes, embeddings, text extraction
+        and rerank metadata. Version by embedding/index algorithm and
+        invalidation policy, not merely by pathname. Avoid synchronizing
+        incompatible generated indexes when recomputation is cheaper.
+    backend_selection: >-
+      Do not pick or configure a storage service yet. Later compare
+      user-controlled NAS/WebDAV or S3-compatible private storage and
+      other authorized providers for cost, encryption, availability,
+      portability and recovery. A Freebox-attached disk is an option
+      to evaluate, not a selected or activated solution.
+    privacy_and_safety: >-
+      Separate owner/account namespaces and verified device membership,
+      encrypt before upload, authenticate requests, honor key rotation
+      and revocation, and never use public GitHub/Diagnostics for private
+      chat or RAG storage. No cross-user exchange of private sources.
+      Shared general skills require a separate explicit opt-in path.
+    offline_and_retention: >-
+      Offline inference and LOCAL RAG continue from the local SQLite
+      index/cache. Show missing remote-only content as unavailable
+      instead of inventing it. Do not evict a local source before a
+      verified recoverable remote copy, user-approved retention policy
+      and backup checks; never remove original documents by resetting
+      a regenerable index.
+    gate: >-
+      Future stage only; wait for single-device memory/RAG correctness,
+      owner isolation, encrypted pairing, conflict convergence,
+      revocation, secure archive roundtrips and physical multi-platform
+      acceptance. No automatic upload, move, deletion, billing or
+      provider configuration in this documentation change.
   stages:
   - id: RAG-A
     state: planned
@@ -472,6 +519,15 @@ roadmap:
       and privacy gates pass. On-device SQLite indexes and recent or
       pinned sources continue to work offline; remote-only content
       reports unavailable while offline instead of inventing an answer.
+  - id: RAG-STORAGE
+    state: deferred
+    goal: >-
+      Introduce the dedicated tiered RAG archive described above after
+      ownership/security and durable offline indexes are demonstrated:
+      portable encrypted storage, selective per-device cache policies,
+      incremental indexing, verified restore and platform-neutral
+      retrieval across Android, Windows, Linux, macOS and future targets.
+      No synchronization or storage backend is enabled by this milestone.
   - id: RAG-E
     state: planned
     goal: >-
@@ -482,6 +538,8 @@ roadmap:
       model or automatic Cloud use. Shared general knowledge must pass
       separate opt-in privacy/redaction and anti-poisoning gates.
   acceptance:
+  - Dedicated archive works across supported authorized devices without each platform retaining every source or vector; offline LOCAL still uses a bounded on-device subset.
+  - Archive loss, credential revocation, key rotation and interrupted transfer have a tested recovery policy before any local eviction.
   - Source-aware retrieval after app restart can find a historical detail that was never promoted to a durable fact.
   - A corrected or outdated source does not outrank newer verified evidence; every returned fact has traceable provenance and appropriate citation.
   - Fictitious unrelated owners, same filenames/IDs and similar text never yield cross-account chat, vector, attachment, cache or archive leakage.
