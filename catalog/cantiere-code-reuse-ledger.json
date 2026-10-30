@@ -1,6 +1,6 @@
 {
   "baseline_note": "Start from Cantiere main prior to first real experimental Library sandbox import PR #919. Older source needs a separate historical backfill; no full-history coverage is claimed.",
-  "last_scanned_sha": "bcea24bdc63cb3ced62a216e95cb35be57969601",
+  "last_scanned_sha": "71497e37e6e0fc17816e3fc2b381112f25505dfa",
   "observations": [
     {
       "blob_sha": "5a65cc4239184866e02178141661db4faac24fd1",
@@ -407,6 +407,529 @@
       "source_bytes": 6419,
       "source_commit": "bcea24bdc63cb3ced62a216e95cb35be57969601",
       "source_sha256": "96be192d374d123d044f6a2c76913892bf2f0113c3b75341631d854f0bd57630",
+      "symbols": [],
+      "tested": false
+    },
+    {
+      "blob_sha": "3ddb5a2b0bdb86933a46e574190acb7713f4c318",
+      "capability_hint": "utility.reuse",
+      "certified": false,
+      "classification": "app_bound_or_helper_review",
+      "import_count": 14,
+      "module_status": "not_materialized",
+      "path": "android/app/src/main/kotlin/com/aiorchestrator/LocalImageTextBridge.kt",
+      "source_bytes": 10037,
+      "source_commit": "71497e37e6e0fc17816e3fc2b381112f25505dfa",
+      "source_sha256": "6d655ba5ecb08d536ba67ba8fee858a1180d356d22fbb5b9384ad2a9ac0df666",
+      "symbols": [],
+      "tested": false
+    },
+    {
+      "blob_sha": "4f8b60666d200d14893d8be9771765025608f7dc",
+      "capability_hint": "utility.reuse",
+      "certified": false,
+      "classification": "app_bound_or_helper_review",
+      "import_count": 21,
+      "module_status": "not_materialized",
+      "path": "android/app/src/main/kotlin/com/aiorchestrator/LocalPdfTextBridge.kt",
+      "source_bytes": 11384,
+      "source_commit": "71497e37e6e0fc17816e3fc2b381112f25505dfa",
+      "source_sha256": "8b352892381c14a083fa269a75ee8022cec6ff4c3732541c4eb193001db60b31",
+      "symbols": [],
+      "tested": false
+    },
+    {
+      "blob_sha": "867f3eb9ff3ebc51c4d22e4d2690d42516b1e42a",
+      "capability_hint": "utility.reuse",
+      "certified": false,
+      "classification": "candidate_requires_extraction_and_tests",
+      "import_count": 20,
+      "module_status": "not_materialized",
+      "path": "android/app/src/main/kotlin/com/aiorchestrator/MainActivity.kt",
+      "source_bytes": 35828,
+      "source_commit": "71497e37e6e0fc17816e3fc2b381112f25505dfa",
+      "source_sha256": "33894c4dce6f665b0a139e3c870e430a56904db6350bad02d906ec147942fd17",
+      "symbols": [
+        "MainActivity"
+      ],
+      "tested": false
+    },
+    {
+      "blob_sha": "e06f2fdd9b48e1704917d0e7a4f97109733baded",
+      "capability_hint": "utility.reuse",
+      "certified": false,
+      "classification": "candidate_requires_extraction_and_tests",
+      "import_count": 5,
+      "module_status": "not_materialized",
+      "path": "lib/core/database/database_helper.dart",
+      "source_bytes": 24207,
+      "source_commit": "71497e37e6e0fc17816e3fc2b381112f25505dfa",
+      "source_sha256": "4431bad857c9ae6fa5efac703e40bc3ca167d3b4347f6deabd38e676045e6575",
+      "symbols": [
+        "DatabaseHelper"
+      ],
+      "tested": false
+    },
+    {
+      "blob_sha": "4a4352fc72e2e0bd1a46993998b37d2275861076",
+      "capability_hint": "utility.reuse",
+      "certified": false,
+      "classification": "candidate_requires_extraction_and_tests",
+      "import_count": 18,
+      "module_status": "not_materialized",
+      "path": "lib/core/orchestrator/assistant_web_aware_orchestrator.dart",
+      "source_bytes": 12824,
+      "source_commit": "71497e37e6e0fc17816e3fc2b381112f25505dfa",
+      "source_sha256": "3c0a5166a98f377a3ba2e583e3b3f2a3a7f7383f6f6e27828a871e369f7683aa",
+      "symbols": [
+        "AssistantWebAwareOrchestrator"
+      ],
+      "tested": false
+    },
+    {
+      "blob_sha": "661082fd5ba3c242eeac37f1fd7afe31f70957d9",
+      "capability_hint": "utility.reuse",
+      "certified": false,
+      "classification": "candidate_requires_extraction_and_tests",
+      "import_count": 1,
+      "module_status": "not_materialized",
+      "path": "lib/core/orchestrator/intent_analyzer.dart",
+      "source_bytes": 3277,
+      "source_commit": "71497e37e6e0fc17816e3fc2b381112f25505dfa",
+      "source_sha256": "ff7a8b6d4d9d3564fc88a5fcfd89d88f5805be2bf9e23382bc4e1b88f7e0b96a",
+      "symbols": [
+        "IntentAnalyzer"
+      ],
+      "tested": false
+    },
+    {
+      "blob_sha": "1d0f5de279c35735d88d70138e318745e957c10a",
+      "capability_hint": "utility.reuse",
+      "certified": false,
+      "classification": "candidate_requires_extraction_and_tests",
+      "import_count": 16,
+      "module_status": "not_materialized",
+      "path": "lib/core/orchestrator/orchestrator.dart",
+      "source_bytes": 17155,
+      "source_commit": "71497e37e6e0fc17816e3fc2b381112f25505dfa",
+      "source_sha256": "876b3ae144c864bc13d9550431d512801188e566e13edaa4bdd540343090a63c",
+      "symbols": [
+        "Orchestrator"
+      ],
+      "tested": false
+    },
+    {
+      "blob_sha": "6f53db87666895e47d2f0f8ed4b1ec1bb5953651",
+      "capability_hint": "ai.local_inference",
+      "certified": false,
+      "classification": "candidate_requires_extraction_and_tests",
+      "import_count": 1,
+      "module_status": "not_materialized",
+      "path": "lib/core/runtime/inference/inference_request.dart",
+      "source_bytes": 8759,
+      "source_commit": "71497e37e6e0fc17816e3fc2b381112f25505dfa",
+      "source_sha256": "28c85cb519f0e09ebc6813401cf16f80f9fa87796b5f515eed0d41cf92704c22",
+      "symbols": [
+        "InferenceRouteDirective",
+        "InferenceRequest"
+      ],
+      "tested": false
+    },
+    {
+      "blob_sha": "0269043956c47503ef508fb3b0a18db141ce47ed",
+      "capability_hint": "ai.local_inference",
+      "certified": false,
+      "classification": "candidate_requires_extraction_and_tests",
+      "import_count": 19,
+      "module_status": "not_materialized",
+      "path": "lib/core/runtime/inference/inference_service.dart",
+      "source_bytes": 48028,
+      "source_commit": "71497e37e6e0fc17816e3fc2b381112f25505dfa",
+      "source_sha256": "216466c7e89623bc4a19da682807c7e70cc8b0c4901255953242a23707ff61cb",
+      "symbols": [
+        "InferenceService"
+      ],
+      "tested": false
+    },
+    {
+      "blob_sha": "d553984825f84ba839452cf64bcd474f3e2bf627",
+      "capability_hint": "network.search",
+      "certified": false,
+      "classification": "app_bound_or_helper_review",
+      "import_count": 0,
+      "module_status": "not_materialized",
+      "path": "lib/core/tools/search/assistant_web_search_policy.dart",
+      "source_bytes": 13729,
+      "source_commit": "71497e37e6e0fc17816e3fc2b381112f25505dfa",
+      "source_sha256": "1b786c9382b3703a0b8a109425e62a21eb721053e8466ad1c2375bf7da367e24",
+      "symbols": [],
+      "tested": false
+    },
+    {
+      "blob_sha": "f5191c0ad1b1245b9408c94d66f656a6e271453d",
+      "capability_hint": "utility.reuse",
+      "certified": false,
+      "classification": "candidate_requires_extraction_and_tests",
+      "import_count": 28,
+      "module_status": "not_materialized",
+      "path": "lib/features/chat/data/repositories/chat_repository_impl.dart",
+      "source_bytes": 31895,
+      "source_commit": "71497e37e6e0fc17816e3fc2b381112f25505dfa",
+      "source_sha256": "627cc340a9da71e364e749191aec6d1e6dfd721aebe891b7f47aa9e0cdfaacd9",
+      "symbols": [
+        "ChatRepositoryImpl"
+      ],
+      "tested": false
+    },
+    {
+      "blob_sha": "8c320e49b65766cccad6e7d3e52ec29b45782c93",
+      "capability_hint": "utility.reuse",
+      "certified": false,
+      "classification": "candidate_requires_extraction_and_tests",
+      "import_count": 9,
+      "module_status": "not_materialized",
+      "path": "lib/features/chat/data/services/chat_file_context_service.dart",
+      "source_bytes": 9656,
+      "source_commit": "71497e37e6e0fc17816e3fc2b381112f25505dfa",
+      "source_sha256": "fa5539a66abeb4394cf7e2c7ae21f65c92845f5d1a27bcb75a2cfaf40e92b091",
+      "symbols": [
+        "ChatFileContext",
+        "ChatFileContextService"
+      ],
+      "tested": false
+    },
+    {
+      "blob_sha": "b5f9efaf42dddd29fa63867c5dc4d468c6bdc264",
+      "capability_hint": "utility.reuse",
+      "certified": false,
+      "classification": "candidate_requires_extraction_and_tests",
+      "import_count": 0,
+      "module_status": "not_materialized",
+      "path": "lib/features/chat/data/services/chat_local_document_excerpt.dart",
+      "source_bytes": 6682,
+      "source_commit": "71497e37e6e0fc17816e3fc2b381112f25505dfa",
+      "source_sha256": "2db9d864f6ad3133c31b44d4da4552d841ceed228125e22bf332b81c85d6f01b",
+      "symbols": [
+        "ChatLocalDocumentExcerpt",
+        "_EvidenceLine"
+      ],
+      "tested": false
+    },
+    {
+      "blob_sha": "8851f85742188e2e0e7c88da4a09c59af4ca3fdd",
+      "capability_hint": "utility.reuse",
+      "certified": false,
+      "classification": "candidate_requires_extraction_and_tests",
+      "import_count": 4,
+      "module_status": "not_materialized",
+      "path": "lib/features/chat/data/services/chat_local_image_ocr_enrichment.dart",
+      "source_bytes": 4199,
+      "source_commit": "71497e37e6e0fc17816e3fc2b381112f25505dfa",
+      "source_sha256": "63c577f83cd02320e999984920863bebefe5bf5f0c295a3e608d991bd7c7ad50",
+      "symbols": [
+        "ChatLocalImageOcrEnrichment",
+        "ChatLocalOcrResult"
+      ],
+      "tested": false
+    },
+    {
+      "blob_sha": "a99b467932457e328143ba7c79dbd3120396f4ec",
+      "capability_hint": "utility.reuse",
+      "certified": false,
+      "classification": "candidate_requires_extraction_and_tests",
+      "import_count": 0,
+      "module_status": "not_materialized",
+      "path": "lib/features/chat/data/services/chat_local_ocr_layout_formatter.dart",
+      "source_bytes": 4108,
+      "source_commit": "71497e37e6e0fc17816e3fc2b381112f25505dfa",
+      "source_sha256": "135e2b532a5186af59cbac61288110173b241ab4bdac3ac93570c4e55296fe8c",
+      "symbols": [
+        "ChatLocalOcrLayoutFormatter",
+        "_OcrLine",
+        "_OcrRow"
+      ],
+      "tested": false
+    },
+    {
+      "blob_sha": "7636e544d859b0236263a02e7326fa9d3555be40",
+      "capability_hint": "utility.reuse",
+      "certified": false,
+      "classification": "candidate_requires_extraction_and_tests",
+      "import_count": 3,
+      "module_status": "not_materialized",
+      "path": "lib/features/chat/data/services/chat_local_pdf_text_service.dart",
+      "source_bytes": 2017,
+      "source_commit": "71497e37e6e0fc17816e3fc2b381112f25505dfa",
+      "source_sha256": "91c7ca6669cc524d5615dff0d1ad518d6b5c74e1a9b5c7df6665693aac1f317f",
+      "symbols": [
+        "class",
+        "AndroidPdfOfflineTextReader"
+      ],
+      "tested": false
+    },
+    {
+      "blob_sha": "273b9edeef14c36d2a08f4f21867949971c40f99",
+      "capability_hint": "utility.reuse",
+      "certified": false,
+      "classification": "candidate_requires_extraction_and_tests",
+      "import_count": 4,
+      "module_status": "not_materialized",
+      "path": "lib/features/chat/data/services/chat_session_store.dart",
+      "source_bytes": 8164,
+      "source_commit": "71497e37e6e0fc17816e3fc2b381112f25505dfa",
+      "source_sha256": "5ffce7309faf8b01b3f7c228c552440ec8afa969414c9ff835085140ba48277c",
+      "symbols": [
+        "ChatSessionInfo",
+        "ChatSessionStore"
+      ],
+      "tested": false
+    },
+    {
+      "blob_sha": "2dbbc52bf2359398c5466b60aac365d292797b6c",
+      "capability_hint": "utility.reuse",
+      "certified": false,
+      "classification": "candidate_requires_extraction_and_tests",
+      "import_count": 48,
+      "module_status": "not_materialized",
+      "path": "lib/features/chat/presentation/pages/chat_page.dart",
+      "source_bytes": 84297,
+      "source_commit": "71497e37e6e0fc17816e3fc2b381112f25505dfa",
+      "source_sha256": "7dd400202bdaff56650bfb12b486d948a6c74b92f806f67b3099f697a6566c25",
+      "symbols": [
+        "_ChatSessionAction",
+        "_ChatNavigation",
+        "_ChatSessionList",
+        "ChatPage",
+        "_ChatPageState",
+        "_NarrowLayout",
+        "_WideLayout",
+        "_ChatBody",
+        "_ChatBodyState",
+        "_SidebarTile"
+      ],
+      "tested": false
+    },
+    {
+      "blob_sha": "bd3d5c99092ff918d5ba6983cba32172568cf12e",
+      "capability_hint": "utility.reuse",
+      "certified": false,
+      "classification": "candidate_requires_extraction_and_tests",
+      "import_count": 1,
+      "module_status": "not_materialized",
+      "path": "lib/features/chat/presentation/widgets/assistant_message_content.dart",
+      "source_bytes": 8052,
+      "source_commit": "71497e37e6e0fc17816e3fc2b381112f25505dfa",
+      "source_sha256": "2e9e8969903af9c0e2749be31373b7bb6b1c3564bfa6eaaebe727dc418baba7d",
+      "symbols": [
+        "AssistantMessageContent",
+        "_ContentSegment",
+        "_MarkdownTable"
+      ],
+      "tested": false
+    },
+    {
+      "blob_sha": "fa9803297d5c0bde1f062236812acf8f9fb28400",
+      "capability_hint": "utility.reuse",
+      "certified": false,
+      "classification": "candidate_requires_extraction_and_tests",
+      "import_count": 9,
+      "module_status": "not_materialized",
+      "path": "lib/features/chat/presentation/widgets/chat_bubble.dart",
+      "source_bytes": 12658,
+      "source_commit": "71497e37e6e0fc17816e3fc2b381112f25505dfa",
+      "source_sha256": "47b7e6994ca207c950963da19dd288d5e47a42757bb1d9790800a0baeea42a94",
+      "symbols": [
+        "ChatBubble",
+        "_AttachmentBubbleCard",
+        "_AttachmentThumb",
+        "_Avatar",
+        "_TypingIndicator",
+        "_TypingIndicatorState"
+      ],
+      "tested": false
+    },
+    {
+      "blob_sha": "92f5a4e71343b07a435f1888282261e65552ba62",
+      "capability_hint": "utility.reuse",
+      "certified": false,
+      "classification": "candidate_requires_extraction_and_tests",
+      "import_count": 6,
+      "module_status": "not_materialized",
+      "path": "lib/features/document_intelligence/data/services/local_document_index_service.dart",
+      "source_bytes": 7423,
+      "source_commit": "71497e37e6e0fc17816e3fc2b381112f25505dfa",
+      "source_sha256": "87b50c899c70f47b3a5933608df7a513eceea4dc92fa15b3de69bad29b7a50a4",
+      "symbols": [
+        "LocalDocumentMatch",
+        "LocalDocumentIndexService"
+      ],
+      "tested": false
+    },
+    {
+      "blob_sha": "22f9dbb7fdd3cc93fe3d976ffe3c6af4f4da48f3",
+      "capability_hint": "utility.reuse",
+      "certified": false,
+      "classification": "test_support",
+      "import_count": 16,
+      "module_status": "not_materialized",
+      "path": "test/core/orchestrator/assistant_web_aware_orchestrator_test.dart",
+      "source_bytes": 21198,
+      "source_commit": "71497e37e6e0fc17816e3fc2b381112f25505dfa",
+      "source_sha256": "a0b02418f50118e05add3c966ddce5b7c3b32231db8d6988a6f60d017daab299",
+      "symbols": [
+        "_MockExecutionEngine",
+        "_MockInferenceService",
+        "_MockWebSearchTool",
+        "_MockRuntimeSettings",
+        "_MockCloudRuntimeProvider"
+      ],
+      "tested": false
+    },
+    {
+      "blob_sha": "902504c09bd4a3b8e4e574a0040baf38eeefd799",
+      "capability_hint": "utility.reuse",
+      "certified": false,
+      "classification": "test_support",
+      "import_count": 3,
+      "module_status": "not_materialized",
+      "path": "test/core/planner/intent_analyzer_test.dart",
+      "source_bytes": 3862,
+      "source_commit": "71497e37e6e0fc17816e3fc2b381112f25505dfa",
+      "source_sha256": "54b37d34a277eec3070f4f9501da70d2d2500e410fd8d275a7169801f275569b",
+      "symbols": [],
+      "tested": false
+    },
+    {
+      "blob_sha": "693d8ab633de5d8ba6451e8e99143a7a6583722a",
+      "capability_hint": "ai.local_inference",
+      "certified": false,
+      "classification": "test_support",
+      "import_count": 19,
+      "module_status": "not_materialized",
+      "path": "test/core/runtime/inference/inference_service_test.dart",
+      "source_bytes": 33613,
+      "source_commit": "71497e37e6e0fc17816e3fc2b381112f25505dfa",
+      "source_sha256": "924abe1c1c7f47ac6f8bd32057f74b7a58996f78551e756f074f7487340aa9c7",
+      "symbols": [
+        "_FinalThenNaturalCloseProvider",
+        "FakeLocalRuntimeProvider",
+        "_FakeWebSearchTool"
+      ],
+      "tested": false
+    },
+    {
+      "blob_sha": "d635d532b7a443f1897a0509f0e63477390cd9ac",
+      "capability_hint": "network.search",
+      "certified": false,
+      "classification": "test_support",
+      "import_count": 2,
+      "module_status": "not_materialized",
+      "path": "test/core/tools/assistant_web_search_policy_test.dart",
+      "source_bytes": 10232,
+      "source_commit": "71497e37e6e0fc17816e3fc2b381112f25505dfa",
+      "source_sha256": "39028e8e3538aadae46435fc3c414a98ead28cce5416255c3509a5f71620e388",
+      "symbols": [],
+      "tested": false
+    },
+    {
+      "blob_sha": "e132b12c41cf68a67a062050731b8873ca927172",
+      "capability_hint": "utility.reuse",
+      "certified": false,
+      "classification": "test_support",
+      "import_count": 9,
+      "module_status": "not_materialized",
+      "path": "test/features/chat/data/services/chat_file_context_service_test.dart",
+      "source_bytes": 15626,
+      "source_commit": "71497e37e6e0fc17816e3fc2b381112f25505dfa",
+      "source_sha256": "5d6d33d14b8e585ce2e8b4541baa3e0a78b463c08b85f252d7916c13e05bd0fb",
+      "symbols": [
+        "_PdfStub"
+      ],
+      "tested": false
+    },
+    {
+      "blob_sha": "97424ace73e95b1a0fa68d4e7f2ed8d3d91f5f43",
+      "capability_hint": "utility.reuse",
+      "certified": false,
+      "classification": "test_support",
+      "import_count": 2,
+      "module_status": "not_materialized",
+      "path": "test/features/chat/data/services/chat_local_document_excerpt_test.dart",
+      "source_bytes": 4810,
+      "source_commit": "71497e37e6e0fc17816e3fc2b381112f25505dfa",
+      "source_sha256": "b7a66abd439d30ad04d64c60b043abd46f8a6b17bdc33c2c09afbce10b6a8018",
+      "symbols": [
+        "_Chunk"
+      ],
+      "tested": false
+    },
+    {
+      "blob_sha": "82050c4fcaa1c34ae5947cafe70f3a4d5919879a",
+      "capability_hint": "utility.reuse",
+      "certified": false,
+      "classification": "test_support",
+      "import_count": 4,
+      "module_status": "not_materialized",
+      "path": "test/features/chat/data/services/chat_local_image_ocr_enrichment_test.dart",
+      "source_bytes": 7580,
+      "source_commit": "71497e37e6e0fc17816e3fc2b381112f25505dfa",
+      "source_sha256": "a970ceabeea4de3f9d86c072567e76f1818182be7899bd638a70c2c6f55c6555",
+      "symbols": [],
+      "tested": false
+    },
+    {
+      "blob_sha": "54ab6c4c6de840d7767d0115180021ff1bdfc087",
+      "capability_hint": "utility.reuse",
+      "certified": false,
+      "classification": "test_support",
+      "import_count": 2,
+      "module_status": "not_materialized",
+      "path": "test/features/chat/data/services/chat_local_ocr_layout_formatter_test.dart",
+      "source_bytes": 3131,
+      "source_commit": "71497e37e6e0fc17816e3fc2b381112f25505dfa",
+      "source_sha256": "4427aba4c2117895b80fb51ce99eb7edc49fb91ebd708ffc92c0afafcf576e35",
+      "symbols": [],
+      "tested": false
+    },
+    {
+      "blob_sha": "ee873dac3b0f28d012ad9a94027f67a007943443",
+      "capability_hint": "utility.reuse",
+      "certified": false,
+      "classification": "test_support",
+      "import_count": 3,
+      "module_status": "not_materialized",
+      "path": "test/features/chat/data/services/chat_local_pdf_text_service_test.dart",
+      "source_bytes": 2531,
+      "source_commit": "71497e37e6e0fc17816e3fc2b381112f25505dfa",
+      "source_sha256": "e093713f3eb17f98adc1ebbb3a0d97227650d71505e9472f7e178d28e1516755",
+      "symbols": [],
+      "tested": false
+    },
+    {
+      "blob_sha": "cafb067e5e23a7fb0506f43c0867450973fe7e51",
+      "capability_hint": "utility.reuse",
+      "certified": false,
+      "classification": "test_support",
+      "import_count": 4,
+      "module_status": "not_materialized",
+      "path": "test/features/chat/data/services/chat_session_store_test.dart",
+      "source_bytes": 9605,
+      "source_commit": "71497e37e6e0fc17816e3fc2b381112f25505dfa",
+      "source_sha256": "58b3d720eb6cfd1ab2a88551dcb905d8fc4850cd98e633574f061ae11921abbd",
+      "symbols": [],
+      "tested": false
+    },
+    {
+      "blob_sha": "9a94f5e0c4c1a9357ca9b2d8a33d7ccdba4f16e4",
+      "capability_hint": "utility.reuse",
+      "certified": false,
+      "classification": "test_support",
+      "import_count": 4,
+      "module_status": "not_materialized",
+      "path": "test/features/chat/presentation/widgets/chat_bubble_test.dart",
+      "source_bytes": 8037,
+      "source_commit": "71497e37e6e0fc17816e3fc2b381112f25505dfa",
+      "source_sha256": "b181c0205a406f1c7b7ed6b3d2e61dc06a1cbfbfcd73cb6e002cd80c7801e7bf",
       "symbols": [],
       "tested": false
     }
