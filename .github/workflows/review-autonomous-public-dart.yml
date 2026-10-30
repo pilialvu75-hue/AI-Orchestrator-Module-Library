@@ -1,0 +1,71 @@
+name: Independent review handoff for autonomously TESTED public modules
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'tools/autonomous_public_dart_review.py'
+      - '.github/workflows/review-autonomous-public-dart.yml'
+  workflow_run:
+    workflows:
+      - Admit autonomous Researcher source as real TESTED Library intake
+    types: [completed]
+  schedule:
+    - cron: '43 */6 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: library-independent-source-review-handoff
+  cancel-in-progress: true
+
+jobs:
+  source-bound-review-packet:
+    if: >-
+      github.event_name != 'workflow_run' ||
+      github.event.workflow_run.conclusion == 'success'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - name: Checkout trusted Library main without saved credentials
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          persist-credentials: false
+          submodules: false
+
+      - name: Verify immutable source, original license, real CI and review-request code
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 -m unittest discover -s tests -p test_autonomous_public_dart_review.py -v
+          python3 tools/autonomous_public_dart_review.py --root . \
+            --output "$RUNNER_TEMP/autonomous-researcher-review-REQUEST.json"
+          python3 - <<'PY'
+          import json, os
+          from pathlib import Path
+          path = Path(os.environ["RUNNER_TEMP"]) / "autonomous-researcher-review-REQUEST.json"
+          report = json.loads(path.read_text(encoding="utf-8"))
+          assert report["certification_authorized"] is False
+          for item in report["requests"]:
+              assert item["status"] == "INDEPENDENT_REVIEW_REQUIRED"
+              assert item["security_reviewed"] is False
+              assert item["reviewer_signature_present"] is False
+              assert item["dependency_inventory"]["live_advisory_or_vulnerability_scan_completed"] is False
+          (Path(os.environ["RUNNER_TEMP"]) / "review-summary.txt").write_text(
+              f"Source-bound independent review requests: {report['count']}\n"
+              "NOT a vulnerability scan, security approval or installation authorization.\n"
+          )
+          PY
+
+      - name: Publish source-bound independent audit requests (never sign)
+        uses: actions/upload-artifact@v4
+        with:
+          name: autonomous-public-dart-independent-review-REQUEST-${{ github.run_id }}
+          path: |
+            ${{ runner.temp }}/autonomous-researcher-review-REQUEST.json
+            ${{ runner.temp }}/review-summary.txt
+          if-no-files-found: error
+          retention-days: 14
