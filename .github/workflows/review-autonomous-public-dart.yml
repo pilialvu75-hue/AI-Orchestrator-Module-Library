@@ -5,6 +5,8 @@ on:
     branches: [main]
     paths:
       - 'tools/autonomous_public_dart_review.py'
+      - 'tools/autonomous_public_dart_osv_scan.py'
+      - 'tests/test_autonomous_public_dart_osv_scan.py'
       - '.github/workflows/review-autonomous-public-dart.yml'
   workflow_run:
     workflows:
@@ -41,8 +43,12 @@ jobs:
         run: |
           set -euo pipefail
           python3 -m unittest discover -s tests -p test_autonomous_public_dart_review.py -v
+          python3 -m unittest discover -s tests -p test_autonomous_public_dart_osv_scan.py -v
           python3 tools/autonomous_public_dart_review.py --root . \
             --output "$RUNNER_TEMP/autonomous-researcher-review-REQUEST.json"
+          python3 tools/autonomous_public_dart_osv_scan.py \
+            --requests "$RUNNER_TEMP/autonomous-researcher-review-REQUEST.json" \
+            --output "$RUNNER_TEMP/autonomous-researcher-osv-EVIDENCE.json"
           python3 - <<'PY'
           import json, os
           from pathlib import Path
@@ -56,7 +62,7 @@ jobs:
               assert item["dependency_inventory"]["live_advisory_or_vulnerability_scan_completed"] is False
           (Path(os.environ["RUNNER_TEMP"]) / "review-summary.txt").write_text(
               f"Source-bound independent review requests: {report['count']}\n"
-              "NOT a vulnerability scan, security approval or installation authorization.\n"
+              "OSV advisory evidence is separate; NOT security approval or installation authorization.\n"
           )
           PY
 
@@ -67,5 +73,6 @@ jobs:
           path: |
             ${{ runner.temp }}/autonomous-researcher-review-REQUEST.json
             ${{ runner.temp }}/review-summary.txt
+            ${{ runner.temp }}/autonomous-researcher-osv-EVIDENCE.json
           if-no-files-found: error
           retention-days: 14
