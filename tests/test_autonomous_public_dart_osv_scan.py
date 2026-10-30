@@ -5,6 +5,8 @@ import unittest
 from pathlib import Path
 from unittest.mock import patch
 from io import BytesIO
+from tempfile import TemporaryDirectory
+from autonomous_public_dart_osv_scan import main
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "tools"))
 from autonomous_public_dart_osv_scan import scan
@@ -57,6 +59,16 @@ class ScanTests(unittest.TestCase):
         item["dependency_inventory"]["cyclonedx_sbom"]["components"] = []
         with self.assertRaises(ValueError):
             scan(item)
+
+    def test_empty_review_collection_fails_closed(self):
+        with TemporaryDirectory() as folder:
+            source = Path(folder) / 'requests.json'
+            target = Path(folder) / 'osv.json'
+            source.write_text(json.dumps({'requests': []}))
+            with patch('sys.argv', ['scan', '--requests', str(source), '--output', str(target)]):
+                with self.assertRaisesRegex(ValueError, 'no independent review requests'):
+                    main()
+            self.assertFalse(target.exists())
 
     def test_unapproved_request_fails_closed(self):
         item = request()
