@@ -4,7 +4,7 @@
   "independent_security_reviewed": false,
   "package": "path",
   "package_version": "1.9.1",
-  "payload_sha256": "8bc7e9edc8083a66a538de982645b72f5221c7fc33c8f88adeac3610bc267cfb",
+  "payload_sha256": "c89ca742137ba28b414dac79277ed88a258cbccfba2db7f1f96d1468d6cc0c9b",
   "production_installation_authorized": false,
   "schema": "aivexus.researcher.autonomous-public-dart-intake.v1",
   "source_commit": "010a343e71238b3ed7fcd55dad5869ecaa40991a",
