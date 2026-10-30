@@ -458,6 +458,38 @@ roadmap:
         and rerank metadata. Version by embedding/index algorithm and
         invalidation policy, not merely by pathname. Avoid synchronizing
         incompatible generated indexes when recomputation is cheaper.
+    preferred_existing_hardware_candidate:
+      name: WD My Cloud 2 TB WDBCTL0020HWT-00 (first-generation OS 3)
+      status: recovery_and_security_assessment_required
+      recorded_context: >-
+        Internal WD20EFRX 2 TB disk has been readable separately through
+        a powered SATA/USB adapter under Linux; historical NAS enclosure
+        boot/LED issue remains undiagnosed. Recovery copies have been
+        transferred to a separate ALD 2 TB disk; completeness and integrity
+        should be verified before any destructive action.
+      investigation_first: >-
+        Read-only inventory of power supply, enclosure board, Ethernet
+        link and boot behavior; inspect disk SMART without modifying
+        partitions. Preserve recovered and original user files and
+        avoid unverified firmware flashing, filesystem repair or reset.
+      product_security: >-
+        Original WD My Cloud OS 3 firmware for WDBCTLxxxxxxx-00 reached
+        end of security support on 2022-04-15. Do not expose this
+        unsupported firmware to the internet or use it as the public
+        encrypted sync endpoint. For sensitive Aivexus data require
+        a supported/maintained access layer and verified authentication,
+        encryption and owner isolation.
+      alternatives: >-
+        If the original controller is not serviceable or secure, evaluate
+        reusing the healthy WD disk via a supported host/NAS or existing
+        Freebox setup (subject to verified disk health, separate backup
+        and safe filesystems). Keep generic NAS/WebDAV/S3 adapters
+        possible without tying Aivexus to this single device.
+      acceptance_gate: >-
+        Verified and complete data backup, hardware/disk health tests,
+        reliable local file read/write only on disposable test data,
+        security assessment, restart/recovery tests and second recoverable
+        copy before considering it an archive backend.
     backend_selection: >-
       Do not pick or configure a storage service yet. Later compare
       user-controlled NAS/WebDAV or S3-compatible private storage and
