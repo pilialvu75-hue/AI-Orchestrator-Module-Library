@@ -241,6 +241,30 @@
       "status": "draft",
       "description": "Android image file -> offline Google ML Kit category labels via Flutter MethodChannel; bounded file, memory and confidence, explicitly no general visual reasoning.",
       "replacement": null
+    },
+    {
+      "capability_id": "utility.path_operations",
+      "contract_id": "utility.path_operations.v1",
+      "contract_version": "1.0",
+      "status": "draft",
+      "description": "Pure in-memory POSIX path join and normalization for strings; does not access or modify any filesystem.",
+      "replacement": null
+    },
+    {
+      "capability_id": "utility.text_graphemes",
+      "contract_id": "utility.text_graphemes.v1",
+      "contract_version": "1.0",
+      "status": "draft",
+      "description": "Pure Unicode grapheme-cluster counting from a Dart string; no telemetry or user-data persistence.",
+      "replacement": null
+    },
+    {
+      "capability_id": "utility.int64_arithmetic",
+      "contract_id": "utility.int64_arithmetic.v1",
+      "contract_version": "1.0",
+      "status": "draft",
+      "description": "Pure fixed-width integer arithmetic operations; no process execution or external I/O.",
+      "replacement": null
     }
   ]
 }
