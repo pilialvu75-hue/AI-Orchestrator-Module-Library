@@ -58,6 +58,8 @@ def main():
     parser.add_argument("--output", type=Path, required=True)
     args = parser.parse_args()
     source = json.loads(args.requests.read_text(encoding="utf-8"))
+    if not source.get("requests"):
+        raise ValueError("no independent review requests: OSV evidence cannot be empty")
     reports = [scan(item) for item in source["requests"]]
     result = {"schema": "aivexus.library.osv-advisory-collection.v1",
               "reports": reports, "count": len(reports),
