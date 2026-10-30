@@ -1304,7 +1304,9 @@ audit_findings:
     scope: File-backed temporary SQLite; remember/reopen/recall/update/forget, conversation isolation and confirmed-only memories; 5/5 CI PASS. Not physical S24/ASUS acceptance.
   optional_preference_candidates:
     url: https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/935
-    state: pending_ci
+    state: merged_ci_pass
+    merged_commit: a18c02c1123d65ec5392806b798d2c3b85187184
+    ci: 7/7 PASS
     goal: >-
       Prepare tiny deterministic opt-in suggestions based only on direct
       user-stated answer preferences. Proposals remain unconfirmed,
@@ -1315,6 +1317,24 @@ audit_findings:
       reject user interface, owner isolation, selective reset and
       physical-device tests have been implemented and accepted.
       No automatic memory capture is active from this proposal alone.
+  candidate_review_backend:
+    url: https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/937
+    state: open_ci_in_progress
+    scope: >-
+      Safe approve, correct and reject operations for exact user-statement
+      preference candidates. Explicit owner confirmation, optimistic snapshot
+      check, rejection limited to the chosen draft and the existing SQLite
+      reset barrier prevent silent promotion, stale decisions or resurrection.
+      Synthetic SQLite reopen and targeted safety regressions are in CI.
+    first_ci_findings: >-
+      Initial targeted run found a synchronous-exception expectation mistake
+      in a test; the test was fixed. Latest targeted Ubuntu/macOS CI is PASS.
+      Full multi-platform workflows were still running at the last check.
+    activation_gate: >-
+      Backend alone does not enable automatic memory extraction, consent
+      settings, or an end-user review UI. Preserve owner isolation,
+      user-controlled review, safe reset and physical-device acceptance
+      before any production wiring.
 
 - id: CANT-AUDIT-17
   audit_item: 17
