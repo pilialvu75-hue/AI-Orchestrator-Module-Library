@@ -1319,17 +1319,28 @@ audit_findings:
       No automatic memory capture is active from this proposal alone.
   candidate_review_backend:
     url: https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/937
-    state: open_ci_in_progress
+    state: merged_full_ci_pass
+    merged_commit: 94f498fd0da063abdc7a10358dc59262b656a663
+    ci: 7/7 PASS
     scope: >-
       Safe approve, correct and reject operations for exact user-statement
       preference candidates. Explicit owner confirmation, optimistic snapshot
       check, rejection limited to the chosen draft and the existing SQLite
       reset barrier prevent silent promotion, stale decisions or resurrection.
       Synthetic SQLite reopen and targeted safety regressions are in CI.
-    first_ci_findings: >-
-      Initial targeted run found a synchronous-exception expectation mistake
-      in a test; the test was fixed. Latest targeted Ubuntu/macOS CI is PASS.
-      Full multi-platform workflows were still running at the last check.
+    verified_ci: >-
+      Review-specific safe approval, correction, rejection, stale-snapshot,
+      reset-barrier and SQLite reopen tests passed as part of all seven
+      GitHub workflows. Not a physical device acceptance or multi-owner proof.
+    developer_preview_ui:
+      url: https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/pull/938
+      state: open_ci_pending
+      scope: >-
+        Italian developer-mode-only manual review page with per-action
+        opt-in, explicit approve/edit/reject confirmation, no automatic
+        conversation extraction and no network. Widget regressions run
+        on a synthetic in-memory store; physical S24/ASUS validation is
+        still required before exposing to external testers.
     activation_gate: >-
       Backend alone does not enable automatic memory extraction, consent
       settings, or an end-user review UI. Preserve owner isolation,
