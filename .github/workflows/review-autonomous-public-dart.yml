@@ -60,7 +60,7 @@ jobs:
               assert item["dependency_inventory"]["live_advisory_or_vulnerability_scan_completed"] is False
           (Path(os.environ["RUNNER_TEMP"]) / "review-summary.txt").write_text(
               f"Source-bound independent review requests: {report['count']}\n"
-              "NOT a vulnerability scan, security approval or installation authorization.\n"
+              "OSV advisory evidence is separate; NOT security approval or installation authorization.\n"
           )
           PY
 
