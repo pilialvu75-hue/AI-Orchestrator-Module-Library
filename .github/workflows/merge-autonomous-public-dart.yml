@@ -1,0 +1,62 @@
+name: Protected merge of dual-CI verified Researcher public source
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'tools/autonomous_public_dart_merger.py'
+      - '.github/workflows/merge-autonomous-public-dart.yml'
+  workflow_run:
+    workflows:
+      - Validate Module Library
+      - Library isolated verification of Researcher public Dart intake
+    types: [completed]
+  schedule:
+    - cron: '53 */6 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+  actions: read
+
+concurrency:
+  group: library-protected-public-source-merger
+  cancel-in-progress: false
+
+jobs:
+  merge-verified-sandbox:
+    if: >-
+      github.event_name != 'workflow_run' ||
+      (github.event.workflow_run.event == 'pull_request' &&
+       github.event.workflow_run.conclusion == 'success' &&
+       startsWith(github.event.workflow_run.head_branch, 'researcher/public-dart-'))
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - name: Checkout ONLY trusted Library main code
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          persist-credentials: false
+
+      - name: Self-test independent merge policy
+        shell: bash
+        run: python3 -m unittest discover -s tests -p 'test_autonomous_public_dart_merger.py' -v
+
+      - name: Compare real GitHub PR head, scoped file list and two green CI runs
+        shell: bash
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          python3 tools/autonomous_public_dart_merger.py | tee "$RUNNER_TEMP/merge-receipt.json"
+          # GitHub branch protection applies normally; no bypass or signature.
+          python3 - <<'PY'
+          import json, os
+          from pathlib import Path
+          data = json.loads((Path(os.environ["RUNNER_TEMP"]) / "merge-receipt.json").read_text())
+          assert data["security_certified"] is False
+          assert data["production_installation"] is False
+          print("PASS: only sandbox source eligible, never certified or installed")
+          PY
