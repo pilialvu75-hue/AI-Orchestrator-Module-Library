@@ -18,12 +18,20 @@ def scan(request, timeout=20):
         raise ValueError("expected unsigned review request")
     inventory = request["dependency_inventory"]["cyclonedx_sbom"]
     components = inventory["components"]
+    if not isinstance(components, list):
+        raise ValueError("invalid SBOM components")
     results = []
     for component in components:
+        if not isinstance(component, dict):
+            raise ValueError("invalid SBOM component")
         purl = component.get("purl")
         if not purl or not purl.startswith("pkg:pub/"):
             continue
+        if purl.count("@") != 1:
+            raise ValueError("invalid pub package identity")
         name, version = purl.removeprefix("pkg:pub/").rsplit("@", 1)
+        if component.get("name") != name or component.get("version") != version:
+            raise ValueError("SBOM package identity mismatch")
         if not name or not version:
             raise ValueError("invalid pub package identity")
         payload = json.dumps({"package": {"ecosystem": "Pub", "name": name},
