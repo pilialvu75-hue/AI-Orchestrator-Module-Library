@@ -123,11 +123,30 @@ product_maturity_gates:
       model limitations, voice and OTA are verified on actual target
       devices; known hallucinations and serious regressions are bounded.
   F1:
-    state: synthetic_restart_tests_pass_physical_pending
+    state: synthetic_restart_tests_pass_s24_partial_physical
     title: Single-device durable personal memory with provenance
     acceptance: 'Synthetic store/retrieve/revise/forget, session separation and restart proof; physical restart on S24 and ASUS, UI review, privacy policy and user-facing reset still pending.'
     physical_acceptance:
-      status: planned_not_executed
+      status: s24_offline_update_and_recall_pass_forget_pending
+
+      s24_observed:
+        date: '2026-10-31'
+        release: 1.0.15+103569
+        evidence: >-
+          User reports following full airplane-mode (Wi-Fi off), Qwen Local,
+          explicit update to "budget di prova = 680", app process close/reopen
+          and separate-chat recall procedure exactly. Screenshot at 09:55
+          shows airplane icon and answer "Il budget di prova è680." following
+          question "Qual è il budget di prova?". Earlier recall of 420 occurred
+          with Internet enabled. Outcome: offline update and recall across
+          reported app restart on real Galaxy S24 FE PASS on user evidence.
+        limits: >-
+          Not a direct SQLite inspection, independent proof of process
+          termination, security test, owner isolation or ASUS acceptance.
+          Do not equate correct model text alone with database verification.
+          Chat-scoped isolation, selective forget, candidate review and
+          user-facing consent still pending. PR #945 button is not in 103569.
+        issue: https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/issues/899
       safety: >-
         Use only invented harmless test facts on one personal device and
         an approved signed build that actually contains merged memory code.
@@ -135,7 +154,7 @@ product_maturity_gates:
         global Danger Zone reset, change Android signing, or upload private
         memory to Diagnostics/GitHub. Test Local offline where possible.
       preflight:
-      - Capture exact installed build and code identity; confirm that the developer-only review page and selective Forget are present.
+      - Capture exact installed build and code identity; the 103569 release includes developer review but not the selective Forget button merged later in PR #945.
       - Verify the existing local model operates without network and avoid heavy RAM/thermal workloads on S24 FE.
       checks:
       - "New chat: Ricorda che il budget di prova è 420; check confirmed local memory in developer-only review, then fully stop/reopen the app."
