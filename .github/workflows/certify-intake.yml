@@ -10,6 +10,9 @@ on:
       - "tools/library_experimental.py"
       - "tools/library_pipeline.py"
       - "tools/library_evidence.py"
+      - "tools/library_review_attestation.py"
+      - "tools/library_source_integrity.py"
+      - "tests/test_library_review_attestation.py"
       - "tools/validate_library.py"
       - ".github/workflows/certify-intake.yml"
   workflow_dispatch:
