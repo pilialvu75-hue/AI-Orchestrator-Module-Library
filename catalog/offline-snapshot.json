@@ -220,6 +220,30 @@
       "replacement": null
     },
     {
+      "capability_id": "utility.int64_arithmetic",
+      "contract_id": "utility.int64_arithmetic.v1",
+      "contract_version": "1.0",
+      "status": "draft",
+      "description": "Pure fixed-width integer arithmetic operations; no process execution or external I/O.",
+      "replacement": null
+    },
+    {
+      "capability_id": "utility.path_operations",
+      "contract_id": "utility.path_operations.v1",
+      "contract_version": "1.0",
+      "status": "draft",
+      "description": "Pure in-memory POSIX path join and normalization for strings; does not access or modify any filesystem.",
+      "replacement": null
+    },
+    {
+      "capability_id": "utility.text_graphemes",
+      "contract_id": "utility.text_graphemes.v1",
+      "contract_version": "1.0",
+      "status": "draft",
+      "description": "Pure Unicode grapheme-cluster counting from a Dart string; no telemetry or user-data persistence.",
+      "replacement": null
+    },
+    {
       "capability_id": "vision.image_label_postprocessing",
       "contract_id": "vision.image_label_postprocessing.v1",
       "contract_version": "1.0",
@@ -1044,5 +1068,5 @@
       ]
     }
   ],
-  "snapshot_sha256": "e0399bf0f99cafcc8377c62501cf16c71fb12110f05548c74d2ebbb097ff0479"
+  "snapshot_sha256": "8c6d713783d23e8d70ec7b8f338f1f36ebd5edac98d05e4871b08c40ed3946ff"
 }

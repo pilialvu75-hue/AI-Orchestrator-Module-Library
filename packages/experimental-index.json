@@ -54,6 +54,14 @@
     {
       "pin": "diagnostics.logging.dartlang.logging_adapter@0.1.1",
       "reason": "experimental source must be pinned in an Aivexus-owned repository"
+    },
+    {
+      "pin": "utility.int64_arithmetic.external.dartlang.fixnum@0.1.0",
+      "reason": "experimental source must be pinned in an Aivexus-owned repository"
+    },
+    {
+      "pin": "utility.path_operations.external.dartlang.path@0.1.0",
+      "reason": "experimental source must be pinned in an Aivexus-owned repository"
     }
   ]
 }
