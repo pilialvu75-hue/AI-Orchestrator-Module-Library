@@ -16,7 +16,7 @@
     {
       "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
       "baseline_at": "2026-10-03T16:20:00Z",
-      "cursor_merged_at": "2026-10-31T09:11:05Z"
+      "cursor_merged_at": "2026-10-31T13:10:09Z"
     },
     {
       "repository": "pilialvu75-hue/Ai-orchestrator-diagnostics",
@@ -2550,6 +2550,23 @@
       "url": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/a977cf8377250c614fdddd5da25caab6a265dd6a",
       "match_ref": null,
       "reconciliation": null
+    },
+    {
+      "incident_id": "a8d5333c8b57db64e823",
+      "status": "UNRECONCILED",
+      "detected_at": "2026-10-31T13:39:22Z",
+      "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
+      "kind": "direct_commit",
+      "pull_request": null,
+      "merge_sha": null,
+      "commit_sha": "6afdab2b8ee86f53f567b4ba09d91942c72b2a03",
+      "head_branch": null,
+      "base_branch": "main",
+      "change_at": "2026-10-31T13:10:09Z",
+      "title": "fix(memory): riconosci 'ricorda il budget' su Android, Windows e macOS (#949)",
+      "url": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/6afdab2b8ee86f53f567b4ba09d91942c72b2a03",
+      "match_ref": null,
+      "reconciliation": null
     }
   ],
   "reconciliation_history": [
@@ -2560,35 +2577,35 @@
       "note": "Known motivating example for CP-HARDEN-03. It predates this incremental detector and is not retroactively reopened."
     }
   ],
-  "last_scan_at": "2026-10-31T12:39:33Z",
+  "last_scan_at": "2026-10-31T13:39:22Z",
   "scan_health": {
     "pilialvu75-hue/AI-Orchestrator-Module-Library": {
       "state": "OK",
-      "last_success_at": "2026-10-31T12:39:33Z",
+      "last_success_at": "2026-10-31T13:39:22Z",
       "last_failure_at": null,
       "error_code": null
     },
     "pilialvu75-hue/Ai-orchestrator-riserva": {
       "state": "OK",
-      "last_success_at": "2026-10-31T12:39:33Z",
+      "last_success_at": "2026-10-31T13:39:22Z",
       "last_failure_at": "2026-10-28T07:39:58Z",
       "error_code": null
     },
     "pilialvu75-hue/Ai-orchestrator-diagnostics": {
       "state": "OK",
-      "last_success_at": "2026-10-31T12:39:33Z",
+      "last_success_at": "2026-10-31T13:39:22Z",
       "last_failure_at": "2026-10-28T07:39:58Z",
       "error_code": null
     },
     "pilialvu75-hue/AI-Orchestrator-Module-Researcher": {
       "state": "OK",
-      "last_success_at": "2026-10-31T12:39:33Z",
+      "last_success_at": "2026-10-31T13:39:22Z",
       "last_failure_at": "2026-10-28T07:39:58Z",
       "error_code": null
     },
     "pilialvu75-hue/Ai_orchestrator-prova": {
       "state": "OK",
-      "last_success_at": "2026-10-31T12:39:33Z",
+      "last_success_at": "2026-10-31T13:39:22Z",
       "last_failure_at": "2026-10-28T07:39:58Z",
       "error_code": null
     }
