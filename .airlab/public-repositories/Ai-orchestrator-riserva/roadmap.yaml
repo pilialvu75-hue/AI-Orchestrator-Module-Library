@@ -127,7 +127,7 @@ product_maturity_gates:
     title: Single-device durable personal memory with provenance
     acceptance: 'Synthetic store/retrieve/revise/forget, session separation and restart proof; physical restart on S24 and ASUS, UI review, privacy policy and user-facing reset still pending.'
     physical_acceptance:
-      status: s24_offline_update_and_recall_pass_forget_pending
+      status: s24_offline_update_recall_pass_forget_functional_observed_sqlite_pending
 
       s24_observed:
         date: '2026-10-31'
@@ -146,6 +146,21 @@ product_maturity_gates:
           Do not equate correct model text alone with database verification.
           Chat-scoped isolation, selective forget, candidate review and
           user-facing consent still pending. PR #945 button is not in 103569.
+        forget_observed:
+          time: '10:09'
+          conditions: >-
+            Same Galaxy S24 FE release 1.0.15+103569. Airplane icon visible
+            in screenshot of a separate query "quale e il budget di prova?".
+            The local model says no specific test budget was available, and
+            does not repeat 680 (previously recalled) or 420.
+          verdict: >-
+            Functional post-forget response consistent with deletion: PASS
+            as observable behavior, not yet proof of SQLite record removal.
+            The screenshot does not contain the command's "Long-term
+            Assistant memory updated." runtime notice or a direct database
+            inspection; the exact delete execution remains unverified.
+            Verify notice before marking full selective-forget acceptance.
+            Model speculation about a document/conference is not evidence.
         issue: https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/issues/899
       safety: >-
         Use only invented harmless test facts on one personal device and
