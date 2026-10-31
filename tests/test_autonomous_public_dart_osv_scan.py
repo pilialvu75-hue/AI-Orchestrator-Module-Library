@@ -17,7 +17,7 @@ def request():
         "asset_id": "utility.fixnum.external.dartlang.fixnum",
         "source": {"payload_tree_sha256": "a" * 64},
         "dependency_inventory": {"cyclonedx_sbom": {"components": [
-            {"purl": "pkg:pub/fixnum@1.1.1"},
+            {"purl": "pkg:pub/fixnum@1.1.1", "name": "fixnum", "version": "1.1.1"},
             {"name": "local-adapter"},
         ]}},
     }
@@ -54,6 +54,14 @@ class ScanTests(unittest.TestCase):
                            return_value=BytesIO(response)):
                     with self.assertRaisesRegex(ValueError, 'invalid OSV'):
                         scan(request())
+
+    def test_sbom_identity_mismatch_fails_closed(self):
+        for change in ({"name": "other"}, {"version": "9.9.9"}, {"purl": "pkg:pub/fixnum"}):
+            with self.subTest(change=change):
+                item = request()
+                item["dependency_inventory"]["cyclonedx_sbom"]["components"][0].update(change)
+                with self.assertRaises(ValueError):
+                    scan(item)
 
     def test_network_failure_fails_closed(self):
         with patch("autonomous_public_dart_osv_scan.urllib.request.urlopen",
