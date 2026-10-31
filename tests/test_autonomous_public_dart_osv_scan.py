@@ -6,10 +6,9 @@ from pathlib import Path
 from unittest.mock import patch
 from io import BytesIO
 from tempfile import TemporaryDirectory
-from autonomous_public_dart_osv_scan import main
-
+# unittest discovery does not automatically add the repository's tools/ path.
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "tools"))
-from autonomous_public_dart_osv_scan import scan
+from autonomous_public_dart_osv_scan import main, scan  # noqa: E402
 
 
 def request():
