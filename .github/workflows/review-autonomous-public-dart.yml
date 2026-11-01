@@ -65,6 +65,7 @@ jobs:
           python3 tools/library_independent_review_preflight.py \
             --requests "$RUNNER_TEMP/autonomous-researcher-review-REQUEST.json" \
             --evidence "$RUNNER_TEMP/autonomous-researcher-osv-EVIDENCE.json" \
+            --static-audit "$RUNNER_TEMP/independent-dart-static-audit-EVIDENCE.json" \
             --output "$RUNNER_TEMP/independent-review-preflight-BLOCKED.json"
           python3 - <<'PY'
           import json, os, sys
