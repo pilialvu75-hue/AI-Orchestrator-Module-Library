@@ -23,6 +23,7 @@ def scan(request, timeout=20):
     results = []
     scanned_purls = set()
     local_adapter_count = 0
+    local_adapter_names = []
     for component in components:
         if not isinstance(component, dict):
             raise ValueError("invalid SBOM component")
@@ -33,6 +34,7 @@ def scan(request, timeout=20):
                     and component.get("name") == ref.removeprefix("pkg:generic/").split("@")[0]
                     and ref.endswith("@" + str(component.get("version", "")))
                     and component.get("version")):
+                local_adapter_names.append(component['name'])
                 local_adapter_count += 1
                 if local_adapter_count > 1:
                     raise ValueError('duplicate local adapter identity')
@@ -44,6 +46,7 @@ def scan(request, timeout=20):
                     or not component.get("version")
                     or not purl.endswith("@" + str(component["version"]))):
                 raise ValueError("invalid local adapter identity")
+            local_adapter_names.append(component['name'])
             local_adapter_count += 1
             if local_adapter_count > 1:
                 raise ValueError("duplicate local adapter identity")
@@ -77,6 +80,9 @@ def scan(request, timeout=20):
                         "vulnerability_ids": sorted(v["id"] for v in vulns)})
     if not results:
         raise ValueError("no verifiable public package to scan")
+    package = str(request.get("asset_id", "")).split(".")[-1]
+    if local_adapter_names != ["aivexus_external_" + package] or not any(p["package"] == package for p in results):
+        raise ValueError("local adapter not bound to reviewed upstream package")
     return {"schema": "aivexus.library.osv-advisory-evidence.v1",
             "asset_id": request["asset_id"],
             "source_payload_sha256": request["source"]["payload_tree_sha256"],
