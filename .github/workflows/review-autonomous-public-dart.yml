@@ -7,6 +7,8 @@ on:
       - 'tools/autonomous_public_dart_review.py'
       - 'tools/autonomous_public_dart_osv_scan.py'
       - 'tools/library_review_evidence_crosscheck.py'
+      - 'tools/library_independent_review_preflight.py'
+      - 'tests/test_library_independent_review_preflight.py'
       - 'tests/test_library_review_evidence_crosscheck.py'
       - 'tests/test_autonomous_public_dart_osv_scan.py'
       - '.github/workflows/review-autonomous-public-dart.yml'
@@ -47,11 +49,16 @@ jobs:
           python3 -m unittest discover -s tests -p test_autonomous_public_dart_review.py -v
           python3 -m unittest discover -s tests -p test_autonomous_public_dart_osv_scan.py -v
           python3 -m unittest discover -s tests -p test_library_review_evidence_crosscheck.py -v
+          python3 -m unittest discover -s tests -p test_library_independent_review_preflight.py -v
           python3 tools/autonomous_public_dart_review.py --root . \
             --output "$RUNNER_TEMP/autonomous-researcher-review-REQUEST.json"
           python3 tools/autonomous_public_dart_osv_scan.py \
             --requests "$RUNNER_TEMP/autonomous-researcher-review-REQUEST.json" \
             --output "$RUNNER_TEMP/autonomous-researcher-osv-EVIDENCE.json"
+          python3 tools/library_independent_review_preflight.py \
+            --requests "$RUNNER_TEMP/autonomous-researcher-review-REQUEST.json" \
+            --evidence "$RUNNER_TEMP/autonomous-researcher-osv-EVIDENCE.json" \
+            --output "$RUNNER_TEMP/independent-review-preflight-BLOCKED.json"
           python3 - <<'PY'
           import json, os, sys
           from pathlib import Path
@@ -87,5 +94,6 @@ jobs:
             ${{ runner.temp }}/autonomous-researcher-review-REQUEST.json
             ${{ runner.temp }}/review-summary.txt
             ${{ runner.temp }}/autonomous-researcher-osv-EVIDENCE.json
+            ${{ runner.temp }}/independent-review-preflight-BLOCKED.json
           if-no-files-found: error
           retention-days: 14
