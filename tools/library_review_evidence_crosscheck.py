@@ -38,6 +38,10 @@ def verify(requests, evidence):
         if not isinstance(packages, list) or not expected or expected != sorted(p.get("purl") for p in packages):
             raise ValueError("OSV package coverage mismatch")
         count = report.get("vulnerabilities_found")
-        if type(count) is not int or count != sum(len(p["vulnerability_ids"]) for p in packages):
+        if type(count) is not int or count < 0:
+            raise ValueError("invalid OSV vulnerability count")
+        if any(not isinstance(p.get("vulnerability_ids"), list) for p in packages):
+            raise ValueError("invalid OSV vulnerability inventory")
+        if count != sum(len(p["vulnerability_ids"]) for p in packages):
             raise ValueError("OSV vulnerability count mismatch")
     return len(items)
