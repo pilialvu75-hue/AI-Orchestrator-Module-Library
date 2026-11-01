@@ -29,6 +29,13 @@ class EvidenceTests(unittest.TestCase):
     def test_exact_packet(self):
         self.assertEqual(verify(*packet()), 1)
 
+    def test_malformed_vulnerability_inventory_rejected(self):
+        for malformed in (None, "not-a-list", 7):
+            requests, evidence = copy.deepcopy(packet())
+            evidence["reports"][0]["packages"][0]["vulnerability_ids"] = malformed
+            with self.subTest(malformed=malformed), self.assertRaises(ValueError):
+                verify(requests, evidence)
+
     def test_tampering_fails_closed(self):
         for mutation in ("source", "sbom", "request", "coverage", "count", "approval"):
             requests, evidence = copy.deepcopy(packet())
