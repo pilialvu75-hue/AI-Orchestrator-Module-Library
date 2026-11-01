@@ -18,7 +18,7 @@ def request():
         "source": {"payload_tree_sha256": "a" * 64},
         "dependency_inventory": {"cyclonedx_sbom": {"components": [
             {"purl": "pkg:pub/fixnum@1.1.1", "name": "fixnum", "version": "1.1.1"},
-            {"name": "local-adapter", "purl": "pkg:generic/aivexus_external_fixnum@0.1.0"},
+            {"name": "aivexus_external_fixnum", "version": "0.1.0", "purl": "pkg:generic/aivexus_external_fixnum@0.1.0"},
         ]}},
     }
 
