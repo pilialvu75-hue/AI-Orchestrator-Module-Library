@@ -21,12 +21,20 @@ def scan(request, timeout=20):
     if not isinstance(components, list):
         raise ValueError("invalid SBOM components")
     results = []
+    scanned_purls = set()
     for component in components:
         if not isinstance(component, dict):
             raise ValueError("invalid SBOM component")
         purl = component.get("purl")
-        if not purl or not purl.startswith("pkg:pub/"):
-            continue
+        if not isinstance(purl, str):
+            raise ValueError("SBOM component missing package identity")
+        if purl.startswith("pkg:generic/aivexus_external_"):
+            continue  # local adapter, not an upstream Pub release
+        if not purl.startswith("pkg:pub/"):
+            raise ValueError("unsupported SBOM package ecosystem")
+        if purl in scanned_purls:
+            raise ValueError("duplicate SBOM package identity")
+        scanned_purls.add(purl)
         if purl.count("@") != 1:
             raise ValueError("invalid pub package identity")
         name, version = purl.removeprefix("pkg:pub/").rsplit("@", 1)
