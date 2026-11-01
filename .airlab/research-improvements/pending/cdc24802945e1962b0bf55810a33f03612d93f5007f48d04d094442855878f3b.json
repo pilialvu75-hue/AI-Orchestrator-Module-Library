@@ -1,0 +1,23 @@
+{
+  "proposal": {
+    "acceptance_gates": [
+      "implementation_tests_pass",
+      "security_gates_pass",
+      "regression_tests_pass",
+      "library_contract_pass"
+    ],
+    "capability_id": "diagnostics.logging",
+    "created_at": "2026-11-01T06:38:11.826115Z",
+    "novelty": [
+      "concept:download",
+      "concept:manager",
+      "concept:open-source",
+      "concept:redefining"
+    ],
+    "proposal_id": "cdc24802945e1962b0bf55810a33f03612d93f5007f48d04d094442855878f3b",
+    "status": "PROPOSED"
+  },
+  "schema_version": 1,
+  "source": "AI-Orchestrator-Module-Researcher",
+  "state": "AWAITING_TRIAGE"
+}
