@@ -10,6 +10,7 @@ on:
       - 'tools/library_independent_review_preflight.py'
       - 'tools/library_independent_dart_static_audit.py'
       - 'tests/test_library_independent_dart_static_audit.py'
+      - 'tests/test_library_static_findings_preflight.py'
       - 'tests/test_library_independent_review_preflight.py'
       - 'tests/test_library_review_evidence_crosscheck.py'
       - 'tests/test_autonomous_public_dart_osv_scan.py'
@@ -53,6 +54,7 @@ jobs:
           python3 -m unittest discover -s tests -p test_library_review_evidence_crosscheck.py -v
           python3 -m unittest discover -s tests -p test_library_independent_review_preflight.py -v
           python3 -m unittest discover -s tests -p test_library_independent_dart_static_audit.py -v
+          python3 -m unittest discover -s tests -p test_library_static_findings_preflight.py -v
           python3 tools/autonomous_public_dart_review.py --root . \
             --output "$RUNNER_TEMP/autonomous-researcher-review-REQUEST.json"
           python3 tools/autonomous_public_dart_osv_scan.py \
@@ -65,6 +67,7 @@ jobs:
           python3 tools/library_independent_review_preflight.py \
             --requests "$RUNNER_TEMP/autonomous-researcher-review-REQUEST.json" \
             --evidence "$RUNNER_TEMP/autonomous-researcher-osv-EVIDENCE.json" \
+            --static-audit "$RUNNER_TEMP/independent-dart-static-audit-EVIDENCE.json" \
             --output "$RUNNER_TEMP/independent-review-preflight-BLOCKED.json"
           python3 - <<'PY'
           import json, os, sys
