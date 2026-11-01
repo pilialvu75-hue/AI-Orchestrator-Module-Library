@@ -22,6 +22,7 @@ def scan(request, timeout=20):
         raise ValueError("invalid SBOM components")
     results = []
     scanned_purls = set()
+    local_adapter_count = 0
     for component in components:
         if not isinstance(component, dict):
             raise ValueError("invalid SBOM component")
@@ -32,11 +33,21 @@ def scan(request, timeout=20):
                     and component.get("name") == ref.removeprefix("pkg:generic/").split("@")[0]
                     and ref.endswith("@" + str(component.get("version", "")))
                     and component.get("version")):
+                local_adapter_count += 1
+                if local_adapter_count > 1:
+                    raise ValueError('duplicate local adapter identity')
                 continue
         if not isinstance(purl, str):
             raise ValueError("SBOM component missing package identity")
         if purl.startswith("pkg:generic/aivexus_external_"):
-            continue  # local adapter, not an upstream Pub release
+            if (component.get("name") != purl.removeprefix("pkg:generic/").split("@")[0]
+                    or not component.get("version")
+                    or not purl.endswith("@" + str(component["version"]))):
+                raise ValueError("invalid local adapter identity")
+            local_adapter_count += 1
+            if local_adapter_count > 1:
+                raise ValueError("duplicate local adapter identity")
+            continue  # validated local adapter, not a Pub release
         if not purl.startswith("pkg:pub/"):
             raise ValueError("unsupported SBOM package ecosystem")
         if purl in scanned_purls:
