@@ -1,5 +1,6 @@
 """Offline tests for live OSV evidence; no external network required."""
 import json
+import hashlib
 import sys
 import unittest
 from pathlib import Path
@@ -31,6 +32,10 @@ class ScanTests(unittest.TestCase):
                    return_value=Response(b"{}")) as urlopen:
             result = scan(request())
         self.assertEqual(result["packages"][0]["package"], "fixnum")
+        self.assertEqual(result["packages"][0]["purl"], "pkg:pub/fixnum@1.1.1")
+        canonical_sbom = json.dumps(request()["dependency_inventory"]["cyclonedx_sbom"],
+                                    sort_keys=True, separators=(",", ":")).encode()
+        self.assertEqual(result["sbom_sha256"], hashlib.sha256(canonical_sbom).hexdigest())
         self.assertTrue(result["advisory_scan_completed"])
         self.assertEqual(result["vulnerabilities_found"], 0)
         self.assertFalse(result["security_reviewed"])

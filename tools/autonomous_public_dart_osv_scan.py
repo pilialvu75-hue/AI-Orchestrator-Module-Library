@@ -73,13 +73,14 @@ def scan(request, timeout=20):
         if any(not isinstance(v, dict) or not isinstance(v.get("id"), str)
                or not v["id"] for v in vulns):
             raise ValueError("invalid OSV vulnerability identity")
-        results.append({"package": name, "version": version,
+        results.append({"purl": purl, "package": name, "version": version,
                         "vulnerability_ids": sorted(v["id"] for v in vulns)})
     if not results:
         raise ValueError("no verifiable public package to scan")
     return {"schema": "aivexus.library.osv-advisory-evidence.v1",
             "asset_id": request["asset_id"],
             "source_payload_sha256": request["source"]["payload_tree_sha256"],
+            "sbom_sha256": hashlib.sha256(json.dumps(inventory, sort_keys=True, separators=(",", ":")).encode()).hexdigest(),
             "review_request_sha256": hashlib.sha256(
                 json.dumps(request, sort_keys=True, separators=(",", ":")).encode()
             ).hexdigest(),
