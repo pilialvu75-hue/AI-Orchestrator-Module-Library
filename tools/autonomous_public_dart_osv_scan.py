@@ -26,6 +26,13 @@ def scan(request, timeout=20):
         if not isinstance(component, dict):
             raise ValueError("invalid SBOM component")
         purl = component.get("purl")
+        if purl is None and isinstance(component.get("bom-ref"), str):
+            ref = component["bom-ref"]
+            if (ref.startswith("pkg:generic/aivexus_external_")
+                    and component.get("name") == ref.removeprefix("pkg:generic/").split("@")[0]
+                    and ref.endswith("@" + str(component.get("version", "")))
+                    and component.get("version")):
+                continue
         if not isinstance(purl, str):
             raise ValueError("SBOM component missing package identity")
         if purl.startswith("pkg:generic/aivexus_external_"):
