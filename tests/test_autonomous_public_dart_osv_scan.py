@@ -108,6 +108,22 @@ class ScanTests(unittest.TestCase):
             with self.subTest(extra=extra), self.assertRaises(ValueError):
                 scan(item)
 
+    def test_adapter_must_match_reviewed_upstream(self):
+        for change in ("missing", "unrelated", "wrong_asset"):
+            item = request()
+            components = item["dependency_inventory"]["cyclonedx_sbom"]["components"]
+            if change == "missing":
+                components.pop()
+            elif change == "unrelated":
+                components[1] = {"name": "aivexus_external_other", "version": "0.1.0",
+                                 "purl": "pkg:generic/aivexus_external_other@0.1.0"}
+            else:
+                item["asset_id"] = "utility.other.external.dartlang.other"
+            with self.subTest(change=change), self.assertRaises(ValueError):
+                with patch("autonomous_public_dart_osv_scan.urllib.request.urlopen",
+                           return_value=BytesIO(b"{}")):
+                    scan(item)
+
     def test_network_failure_fails_closed(self):
         with patch("autonomous_public_dart_osv_scan.urllib.request.urlopen",
                    side_effect=TimeoutError("OSV unavailable")):
