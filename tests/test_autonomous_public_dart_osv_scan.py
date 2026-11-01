@@ -63,6 +63,20 @@ class ScanTests(unittest.TestCase):
                 with self.assertRaises(ValueError):
                     scan(item)
 
+    def test_generated_local_adapter_bom_ref_is_accepted(self):
+        item = request()
+        item["dependency_inventory"]["cyclonedx_sbom"]["components"][1] = {
+            "type": "library",
+            "bom-ref": "pkg:generic/aivexus_external_fixnum@0.1.0",
+            "name": "aivexus_external_fixnum",
+            "version": "0.1.0",
+        }
+        with patch("autonomous_public_dart_osv_scan.urllib.request.urlopen",
+                   return_value=BytesIO(b"{}")):
+            result = scan(item)
+        self.assertEqual(len(result["packages"]), 1)
+        self.assertFalse(result["certification_authorized"])
+
     def test_unknown_or_duplicate_sbom_component_fails_closed(self):
         for purl in (None, "pkg:npm/unreviewed@1.0", "pkg:pub/fixnum@1.1.1"):
             with self.subTest(purl=purl):
