@@ -16,7 +16,7 @@
     {
       "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
       "baseline_at": "2026-10-03T16:20:00Z",
-      "cursor_merged_at": "2026-11-02T20:53:13Z"
+      "cursor_merged_at": "2026-11-02T22:07:05Z"
     },
     {
       "repository": "pilialvu75-hue/Ai-orchestrator-diagnostics",
@@ -2805,6 +2805,40 @@
       "url": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/5f85f53f2b420c5906c621b4d2b97a0d4f979ad3",
       "match_ref": null,
       "reconciliation": null
+    },
+    {
+      "incident_id": "1d64f15d86ac77552252",
+      "status": "UNRECONCILED",
+      "detected_at": "2026-11-02T22:39:12Z",
+      "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
+      "kind": "direct_commit",
+      "pull_request": null,
+      "merge_sha": null,
+      "commit_sha": "711bc20610316983f15f6767bcfe59ab66860d24",
+      "head_branch": null,
+      "base_branch": "main",
+      "change_at": "2026-11-02T21:45:05Z",
+      "title": "[source-only] ci(release): dispatch authorized desktop recovery from controlled GitHub request (#978)",
+      "url": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/711bc20610316983f15f6767bcfe59ab66860d24",
+      "match_ref": null,
+      "reconciliation": null
+    },
+    {
+      "incident_id": "4d8875041ac910b8157a",
+      "status": "UNRECONCILED",
+      "detected_at": "2026-11-02T22:39:12Z",
+      "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
+      "kind": "direct_commit",
+      "pull_request": null,
+      "merge_sha": null,
+      "commit_sha": "3381636d9148117078db28d0a40f989f4310b4fc",
+      "head_branch": null,
+      "base_branch": "main",
+      "change_at": "2026-11-02T22:07:05Z",
+      "title": "[source-only] branding: integra icone originali approvate tramite import verificato (#980)",
+      "url": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/3381636d9148117078db28d0a40f989f4310b4fc",
+      "match_ref": null,
+      "reconciliation": null
     }
   ],
   "reconciliation_history": [
@@ -2815,35 +2849,35 @@
       "note": "Known motivating example for CP-HARDEN-03. It predates this incremental detector and is not retroactively reopened."
     }
   ],
-  "last_scan_at": "2026-11-02T21:39:21Z",
+  "last_scan_at": "2026-11-02T22:39:12Z",
   "scan_health": {
     "pilialvu75-hue/AI-Orchestrator-Module-Library": {
       "state": "OK",
-      "last_success_at": "2026-11-02T21:39:21Z",
+      "last_success_at": "2026-11-02T22:39:12Z",
       "last_failure_at": null,
       "error_code": null
     },
     "pilialvu75-hue/Ai-orchestrator-riserva": {
       "state": "OK",
-      "last_success_at": "2026-11-02T21:39:21Z",
+      "last_success_at": "2026-11-02T22:39:12Z",
       "last_failure_at": "2026-10-28T07:39:58Z",
       "error_code": null
     },
     "pilialvu75-hue/Ai-orchestrator-diagnostics": {
       "state": "OK",
-      "last_success_at": "2026-11-02T21:39:21Z",
+      "last_success_at": "2026-11-02T22:39:12Z",
       "last_failure_at": "2026-10-28T07:39:58Z",
       "error_code": null
     },
     "pilialvu75-hue/AI-Orchestrator-Module-Researcher": {
       "state": "OK",
-      "last_success_at": "2026-11-02T21:39:21Z",
+      "last_success_at": "2026-11-02T22:39:12Z",
       "last_failure_at": "2026-10-28T07:39:58Z",
       "error_code": null
     },
     "pilialvu75-hue/Ai_orchestrator-prova": {
       "state": "OK",
-      "last_success_at": "2026-11-02T21:39:21Z",
+      "last_success_at": "2026-11-02T22:39:12Z",
       "last_failure_at": "2026-10-28T07:39:58Z",
       "error_code": null
     }
