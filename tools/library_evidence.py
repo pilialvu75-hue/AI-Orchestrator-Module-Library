@@ -148,7 +148,7 @@ def verify_security_evidence(base: Path, manifest: dict) -> None:
     _bind_local_source(base, manifest, report, "security.review_report")
 
     known = security.get("known_vulnerabilities")
-    _require(isinstance(known, int) and known >= 0, "security.known_vulnerabilities must be a non-negative integer")
+    _require(type(known) is int and known >= 0, "security.known_vulnerabilities must be a non-negative integer")
     _require(report.get("known_vulnerabilities") == known, "security.review_report vulnerability count does not match manifest")
     _require(report.get("sbom_sha256") == _sha256(sbom_path), "security.review_report SBOM digest does not match security.sbom")
 
