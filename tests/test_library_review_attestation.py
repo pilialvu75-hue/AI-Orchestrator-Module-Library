@@ -227,6 +227,14 @@ class SignedLocalReviewTests(unittest.TestCase):
         _write_json(self.review_file, report)
         self.verify()
 
+    def test_boolean_vulnerability_count_is_not_zero(self):
+        self.manifest["security"]["known_vulnerabilities"] = False
+        report = json.loads(self.review_file.read_text())
+        report["known_vulnerabilities"] = False
+        _write_json(self.review_file, report)
+        with self.assertRaisesRegex(EvidenceError, "non-negative integer"):
+            self.verify()
+
     def test_signature_bytes_and_algorithms_are_strict(self):
         original = json.loads(self.review_file.read_text())
         for change in (
