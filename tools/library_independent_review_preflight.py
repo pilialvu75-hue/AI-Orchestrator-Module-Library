@@ -19,7 +19,10 @@ def assess(requests, evidence, static_audit=None):
                     or scanned.get("source_payload_sha256") != item["source"]["payload_tree_sha256"]
                     or scanned.get("static_scan_completed") is not True):
                 raise ValueError("static audit identity or source hash mismatch")
-            if scanned.get("findings"):
+            findings = scanned.get("findings")
+            if not isinstance(findings, list) or any(not isinstance(finding, dict) for finding in findings):
+                raise ValueError("static audit findings must be an explicit list of records")
+            if findings:
                 reasons.append("STATIC_SOURCE_SECURITY_FINDINGS")
         if report["vulnerabilities_found"]:
             reasons.append("KNOWN_UPSTREAM_ADVISORIES")
