@@ -9,6 +9,24 @@ from library_independent_dart_static_audit import audit
 
 
 class StaticAuditTests(unittest.TestCase):
+    def test_nested_symlink_cannot_escape_source_inventory(self):
+        with TemporaryDirectory() as temp:
+            root = Path(temp)
+            base = root / "intake" / "test.module" / "0.1.0" / "payload" / "src"
+            base.mkdir(parents=True)
+            outside = root / "outside"
+            outside.mkdir()
+            data = b"void main() {}\n"
+            (outside / "sample.dart").write_bytes(data)
+            (base / "nested").symlink_to(outside, target_is_directory=True)
+            request = {"asset_id": "test.module", "version": "0.1.0",
+                       "source": {"payload_tree_sha256": "a" * 64,
+                                  "all_file_digests": [{"path": "nested/sample.dart",
+                                  "sha256": hashlib.sha256(data).hexdigest(),
+                                  "bytes": len(data)}]}}
+            with self.assertRaisesRegex(ValueError, "traverses symlink"):
+                audit(root, request)
+
     def test_findings_are_not_approval(self):
         with TemporaryDirectory() as temp:
             base = Path(temp) / "intake" / "test.module" / "0.1.0" / "payload" / "src"
