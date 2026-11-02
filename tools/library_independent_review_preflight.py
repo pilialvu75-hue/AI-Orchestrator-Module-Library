@@ -45,11 +45,11 @@ def main():
     parser.add_argument("--requests", type=Path, required=True)
     parser.add_argument("--evidence", type=Path, required=True)
     parser.add_argument("--output", type=Path, required=True)
-    parser.add_argument("--static-audit", type=Path)
+    parser.add_argument("--static-audit", type=Path, required=True)
     args = parser.parse_args()
     result = assess(json.loads(args.requests.read_text()),
                     json.loads(args.evidence.read_text()),
-                    json.loads(args.static_audit.read_text()) if args.static_audit else None)
+                    json.loads(args.static_audit.read_text()))
     args.output.write_text(json.dumps(result, indent=2, sort_keys=True) + "\n")
 
 
