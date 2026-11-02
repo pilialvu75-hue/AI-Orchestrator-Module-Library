@@ -16,7 +16,7 @@
     {
       "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
       "baseline_at": "2026-10-03T16:20:00Z",
-      "cursor_merged_at": "2026-11-02T09:06:36Z"
+      "cursor_merged_at": "2026-11-02T20:53:13Z"
     },
     {
       "repository": "pilialvu75-hue/Ai-orchestrator-diagnostics",
@@ -2788,6 +2788,23 @@
       "url": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/9decf7524830aa928de351973d5a01987efe34b2",
       "match_ref": null,
       "reconciliation": null
+    },
+    {
+      "incident_id": "821192ca40aab531de93",
+      "status": "UNRECONCILED",
+      "detected_at": "2026-11-02T21:39:21Z",
+      "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
+      "kind": "direct_commit",
+      "pull_request": null,
+      "merge_sha": null,
+      "commit_sha": "5f85f53f2b420c5906c621b4d2b97a0d4f979ad3",
+      "head_branch": null,
+      "base_branch": "main",
+      "change_at": "2026-11-02T20:53:13Z",
+      "title": "[source-only] ci(release): recupera publisher Windows/macOS senza ripubblicare Android (#976)",
+      "url": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/5f85f53f2b420c5906c621b4d2b97a0d4f979ad3",
+      "match_ref": null,
+      "reconciliation": null
     }
   ],
   "reconciliation_history": [
@@ -2798,35 +2815,35 @@
       "note": "Known motivating example for CP-HARDEN-03. It predates this incremental detector and is not retroactively reopened."
     }
   ],
-  "last_scan_at": "2026-11-02T20:39:45Z",
+  "last_scan_at": "2026-11-02T21:39:21Z",
   "scan_health": {
     "pilialvu75-hue/AI-Orchestrator-Module-Library": {
       "state": "OK",
-      "last_success_at": "2026-11-02T20:39:45Z",
+      "last_success_at": "2026-11-02T21:39:21Z",
       "last_failure_at": null,
       "error_code": null
     },
     "pilialvu75-hue/Ai-orchestrator-riserva": {
       "state": "OK",
-      "last_success_at": "2026-11-02T20:39:45Z",
+      "last_success_at": "2026-11-02T21:39:21Z",
       "last_failure_at": "2026-10-28T07:39:58Z",
       "error_code": null
     },
     "pilialvu75-hue/Ai-orchestrator-diagnostics": {
       "state": "OK",
-      "last_success_at": "2026-11-02T20:39:45Z",
+      "last_success_at": "2026-11-02T21:39:21Z",
       "last_failure_at": "2026-10-28T07:39:58Z",
       "error_code": null
     },
     "pilialvu75-hue/AI-Orchestrator-Module-Researcher": {
       "state": "OK",
-      "last_success_at": "2026-11-02T20:39:45Z",
+      "last_success_at": "2026-11-02T21:39:21Z",
       "last_failure_at": "2026-10-28T07:39:58Z",
       "error_code": null
     },
     "pilialvu75-hue/Ai_orchestrator-prova": {
       "state": "OK",
-      "last_success_at": "2026-11-02T20:39:45Z",
+      "last_success_at": "2026-11-02T21:39:21Z",
       "last_failure_at": "2026-10-28T07:39:58Z",
       "error_code": null
     }
