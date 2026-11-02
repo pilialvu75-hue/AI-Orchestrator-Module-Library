@@ -28,7 +28,12 @@ def audit(root: Path, request: dict) -> dict:
         if not isinstance(name, str) or name.startswith("/") or "\\" in name or any(p in ("", ".", "..") for p in name.split("/")):
             raise ValueError("unsafe source path")
         path = base / name
-        if path.is_symlink() or not path.is_file():
+        current = base
+        for segment in name.split("/"):
+            current = current / segment
+            if current.is_symlink():
+                raise ValueError("source inventory path traverses symlink")
+        if not path.is_file():
             raise ValueError("source inventory file missing or symlink")
         raw = path.read_bytes()
         if hashlib.sha256(raw).hexdigest() != entry["sha256"] or len(raw) != entry["bytes"]:
