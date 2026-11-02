@@ -149,7 +149,7 @@ def verify_security_evidence(base: Path, manifest: dict) -> None:
 
     known = security.get("known_vulnerabilities")
     _require(type(known) is int and known >= 0, "security.known_vulnerabilities must be a non-negative integer")
-    _require(report.get("known_vulnerabilities") == known, "security.review_report vulnerability count does not match manifest")
+    _require(type(report.get("known_vulnerabilities")) is int and report["known_vulnerabilities"] == known, "security.review_report vulnerability count must be an integer matching manifest")
     _require(report.get("sbom_sha256") == _sha256(sbom_path), "security.review_report SBOM digest does not match security.sbom")
 
     # A worker-authored JSON is not an independent security decision.
