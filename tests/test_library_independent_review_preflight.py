@@ -22,5 +22,34 @@ class PreflightTests(unittest.TestCase):
         self.assertIn("KNOWN_UPSTREAM_ADVISORIES", result["items"][0]["reasons"])
 
 
+    def test_missing_source_license_and_ci_evidence_are_explicit_blockers(self):
+        requests, evidence = packet()
+        result = assess(requests, evidence)
+        reasons = result["items"][0]["reasons"]
+        self.assertIn("SOURCE_FILE_INVENTORY_MISSING", reasons)
+        self.assertIn("ORIGINAL_LICENSE_DIGEST_MISSING", reasons)
+        self.assertIn("REPRODUCIBLE_CI_IDENTITY_MISSING", reasons)
+        self.assertIn("INDEPENDENT_SOURCE_LICENSE_PRIVACY_REVIEW_REQUIRED", reasons)
+        self.assertIn("PROTECTED_REVIEWER_SIGNATURE_REQUIRED", reasons)
+        self.assertFalse(result["items"][0]["security_reviewed"])
+        self.assertFalse(result["items"][0]["certification_authorized"])
+
+    def test_complete_metadata_still_requires_independent_review(self):
+        requests, evidence = packet()
+        source = requests["requests"][0]["source"]
+        source["all_file_digests"] = {"lib/src.dart": "a" * 64}
+        source["license_sha256"] = "b" * 64
+        requests["requests"][0]["tested_evidence"] = {"ci_run_id": 12345}
+        from library_review_evidence_crosscheck import digest
+        evidence["reports"][0]["review_request_sha256"] = digest(requests["requests"][0])
+        result = assess(requests, evidence)
+        reasons = result["items"][0]["reasons"]
+        self.assertNotIn("SOURCE_FILE_INVENTORY_MISSING", reasons)
+        self.assertNotIn("ORIGINAL_LICENSE_DIGEST_MISSING", reasons)
+        self.assertNotIn("REPRODUCIBLE_CI_IDENTITY_MISSING", reasons)
+        self.assertIn("PROTECTED_REVIEWER_SIGNATURE_REQUIRED", reasons)
+        self.assertEqual(result["items"][0]["decision"], "BLOCKED")
+        self.assertFalse(result["certification_authorized"])
+
 if __name__ == "__main__":
     unittest.main()
