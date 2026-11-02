@@ -40,5 +40,22 @@ class StaticFindingsPreflightTests(unittest.TestCase):
             assess(requests, evidence, scan)
 
 
+    def test_missing_or_malformed_findings_fail_closed(self):
+        requests, evidence = packet()
+        item = requests["requests"][0]
+        base = {"asset_id": item["asset_id"],
+                "source_payload_sha256": item["source"]["payload_tree_sha256"],
+                "static_scan_completed": True}
+        for invalid in (None, {}, "clean", [None], [1]):
+            scanned = dict(base)
+            if invalid is not None:
+                scanned["findings"] = invalid
+            audit = {"schema": "aivexus.library.static-source-audit.v1",
+                     "items": [scanned]}
+            with self.subTest(findings=invalid):
+                with self.assertRaisesRegex(ValueError, "findings must be"):
+                    assess(requests, evidence, audit)
+
+
 if __name__ == "__main__":
     unittest.main()
