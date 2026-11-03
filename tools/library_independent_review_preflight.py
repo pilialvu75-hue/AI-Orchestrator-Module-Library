@@ -19,6 +19,8 @@ def assess(requests, evidence, static_audit=None):
         reasons = []
         if static_audit is not None:
             scanned = static_audit["items"][index]
+            if not isinstance(scanned, dict):
+                raise ValueError("static audit item must be an object")
             if (scanned.get("asset_id") != item["asset_id"]
                     or scanned.get("source_payload_sha256") != item["source"]["payload_tree_sha256"]
                     or scanned.get("static_scan_completed") is not True):

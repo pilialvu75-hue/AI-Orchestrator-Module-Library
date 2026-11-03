@@ -15,6 +15,12 @@ class PreflightTests(unittest.TestCase):
                 with self.assertRaises(ValueError):
                     assess(requests, evidence, invalid)
 
+    def test_non_object_static_audit_item_is_rejected(self):
+        requests, evidence = packet()
+        audit = {"schema": "aivexus.library.static-source-audit.v1", "items": [None]}
+        with self.assertRaisesRegex(ValueError, "static audit item must be an object"):
+            assess(requests, evidence, audit)
+
     def test_clean_advisories_do_not_approve(self):
         requests, evidence = packet()
         result = assess(requests, evidence)
