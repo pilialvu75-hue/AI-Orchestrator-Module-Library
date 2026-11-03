@@ -8,6 +8,13 @@ from test_library_review_evidence_crosscheck import packet
 
 
 class PreflightTests(unittest.TestCase):
+    def test_malformed_static_audit_is_rejected(self):
+        requests, evidence = packet()
+        for invalid in ([], {"schema": "aivexus.library.static-source-audit.v1", "items": None}):
+            with self.subTest(invalid=invalid):
+                with self.assertRaises(ValueError):
+                    assess(requests, evidence, invalid)
+
     def test_clean_advisories_do_not_approve(self):
         requests, evidence = packet()
         result = assess(requests, evidence)
