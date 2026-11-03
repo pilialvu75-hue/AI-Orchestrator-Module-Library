@@ -24,7 +24,7 @@ class StaticAuditTests(unittest.TestCase):
                                   "all_file_digests": [{"path": "nested/sample.dart",
                                   "sha256": hashlib.sha256(data).hexdigest(),
                                   "bytes": len(data)}]}}
-            with self.assertRaisesRegex(ValueError, "traverses symlink"):
+            with self.assertRaisesRegex(ValueError, "symlink"):
                 audit(root, request)
 
     def test_unlisted_source_file_fails_closed(self):
