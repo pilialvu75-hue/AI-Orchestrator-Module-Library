@@ -6,6 +6,10 @@ from library_review_evidence_crosscheck import verify
 
 def assess(requests, evidence, static_audit=None):
     if static_audit is not None:
+        if not isinstance(static_audit, dict):
+            raise ValueError('static source audit must be an object')
+        if not isinstance(static_audit.get('items'), list):
+            raise ValueError('static source audit items must be a list')
         if (static_audit.get('schema') != 'aivexus.library.static-source-audit.v1'
                 or len(static_audit.get('items', [])) != len(requests['requests'])):
             raise ValueError('static source audit does not match review collection')
