@@ -1,6 +1,6 @@
 {
   "baseline_note": "Start from Cantiere main prior to first real experimental Library sandbox import PR #919. Older source needs a separate historical backfill; no full-history coverage is claimed.",
-  "last_scanned_sha": "b25f8dc9a4160a420e0bb0b7edeb171edaa9eccf",
+  "last_scanned_sha": "08ce934ec6e0c545756395ec302ccc8e965fc9ce",
   "observations": [
     {
       "blob_sha": "5a65cc4239184866e02178141661db4faac24fd1",
@@ -1987,6 +1987,198 @@
         "_FailIfQueriedEmbeddingService",
         "_BlockingEmbeddingService",
         "_RecordingSemanticIndex"
+      ],
+      "tested": false
+    },
+    {
+      "blob_sha": "95fa34e863b2dff125778cb53582aa9bdb1a10c5",
+      "capability_hint": "utility.reuse",
+      "certified": false,
+      "classification": "candidate_requires_extraction_and_tests",
+      "import_count": 2,
+      "module_status": "not_materialized",
+      "path": "lib/core/memory/fabric/memory_fabric.dart",
+      "source_bytes": 10638,
+      "source_commit": "08ce934ec6e0c545756395ec302ccc8e965fc9ce",
+      "source_sha256": "22fd3dcd6972a6f4e658a851ed2da4a2bc294fed240569c87b3c2a827709b723",
+      "symbols": [
+        "MemoryFabricPolicyException",
+        "MemoryFabricRoutingPolicy",
+        "MemoryFabricNode",
+        "MemoryFabric"
+      ],
+      "tested": false
+    },
+    {
+      "blob_sha": "060dc655e5dc91e921c14760b0361e35f0ebf753",
+      "capability_hint": "ai.local_inference",
+      "certified": false,
+      "classification": "app_bound_or_helper_review",
+      "import_count": 43,
+      "module_status": "not_materialized",
+      "path": "lib/core/runtime/inference/cloud_routing_bootstrap.dart",
+      "source_bytes": 10762,
+      "source_commit": "08ce934ec6e0c545756395ec302ccc8e965fc9ce",
+      "source_sha256": "e528796f3b960a36f397308350da2c67cc64b656f9b0ff09e22cf4eb5480d82e",
+      "symbols": [],
+      "tested": false
+    },
+    {
+      "blob_sha": "f1d2e41f37526637f2e976960d7e3c88ef8c79d2",
+      "capability_hint": "utility.reuse",
+      "certified": false,
+      "classification": "candidate_requires_extraction_and_tests",
+      "import_count": 10,
+      "module_status": "not_materialized",
+      "path": "lib/features/chat/data/repositories/prompt_resolving_chat_repository.dart",
+      "source_bytes": 5759,
+      "source_commit": "08ce934ec6e0c545756395ec302ccc8e965fc9ce",
+      "source_sha256": "745863f68035db8776164de684301b61d7c7f367d637054caf0586177a46ebab",
+      "symbols": [
+        "PromptResolvingChatRepository"
+      ],
+      "tested": false
+    },
+    {
+      "blob_sha": "48ba60a02495f43976023de0ea5c9327e1191f20",
+      "capability_hint": "utility.reuse",
+      "certified": false,
+      "classification": "candidate_requires_extraction_and_tests",
+      "import_count": 3,
+      "module_status": "not_materialized",
+      "path": "scripts/check_android_release_gate.py",
+      "source_bytes": 5444,
+      "source_commit": "08ce934ec6e0c545756395ec302ccc8e965fc9ce",
+      "source_sha256": "0cd962a9c637485488434e76045c8a1eb19bd9ba80057a60662cc13bbb26de51",
+      "symbols": [
+        "validate",
+        "validate_desktop_publisher",
+        "main"
+      ],
+      "tested": false
+    },
+    {
+      "blob_sha": "66ae2d5f55f345877a02a4f1456bdd5b128c764b",
+      "capability_hint": "utility.reuse",
+      "certified": false,
+      "classification": "app_bound_or_helper_review",
+      "import_count": 0,
+      "module_status": "not_materialized",
+      "path": "scripts/dispatch_authorized_desktop_replay.sh",
+      "source_bytes": 3155,
+      "source_commit": "08ce934ec6e0c545756395ec302ccc8e965fc9ce",
+      "source_sha256": "85f6c5469abff8e3bf8d6a50ef8bf95de2e8070f9233d67f2c7874bd7a3d71d9",
+      "symbols": [],
+      "tested": false
+    },
+    {
+      "blob_sha": "3ec64673d6f67df48aa31038b652f4de470ec688",
+      "capability_hint": "utility.reuse",
+      "certified": false,
+      "classification": "candidate_requires_extraction_and_tests",
+      "import_count": 7,
+      "module_status": "not_materialized",
+      "path": "scripts/install_platform_icons.py",
+      "source_bytes": 6355,
+      "source_commit": "08ce934ec6e0c545756395ec302ccc8e965fc9ce",
+      "source_sha256": "60d905499c2f8a018e5d02c777b9b1423dd9fe930a9e5239c4049edb444bfe34",
+      "symbols": [
+        "destinations",
+        "add_group",
+        "update_background_color",
+        "install",
+        "main"
+      ],
+      "tested": false
+    },
+    {
+      "blob_sha": "7a59d65ac689bd502c4d15e53fce671dbdb4b91f",
+      "capability_hint": "utility.reuse",
+      "certified": false,
+      "classification": "candidate_requires_extraction_and_tests",
+      "import_count": 7,
+      "module_status": "not_materialized",
+      "path": "scripts/unpack_icon_transport.py",
+      "source_bytes": 2842,
+      "source_commit": "08ce934ec6e0c545756395ec302ccc8e965fc9ce",
+      "source_sha256": "3a7e1b9f1de480a327884df04dcb8df61e0021199798fa2e98a77fcf3d5cebe7",
+      "symbols": [
+        "unpack_icons",
+        "main"
+      ],
+      "tested": false
+    },
+    {
+      "blob_sha": "ac40de394ace2433320647b27ce6559747064582",
+      "capability_hint": "utility.reuse",
+      "certified": false,
+      "classification": "test_support",
+      "import_count": 4,
+      "module_status": "not_materialized",
+      "path": "test/core/memory/fabric/memory_fabric_test.dart",
+      "source_bytes": 13947,
+      "source_commit": "08ce934ec6e0c545756395ec302ccc8e965fc9ce",
+      "source_sha256": "71212817c5740b8b86b5542a232629b20c06fdea3857c0855ad9b662ad46b40d",
+      "symbols": [
+        "_MapProvider"
+      ],
+      "tested": false
+    },
+    {
+      "blob_sha": "d9086f1b22a78a733625c711171445bdb16af68c",
+      "capability_hint": "utility.reuse",
+      "certified": false,
+      "classification": "test_support",
+      "import_count": 17,
+      "module_status": "not_materialized",
+      "path": "test/features/chat/data/repositories/prompt_resolving_chat_repository_test.dart",
+      "source_bytes": 26241,
+      "source_commit": "08ce934ec6e0c545756395ec302ccc8e965fc9ce",
+      "source_sha256": "79ac44fce1b51ec19c3adcea85b8d07197e91d4485cfa6434a94a285f4772530",
+      "symbols": [
+        "_RecordingChatRepository",
+        "_PromptMemoryPersistence"
+      ],
+      "tested": false
+    },
+    {
+      "blob_sha": "b24c28c2f9b03732798bed520a5d904838d82b96",
+      "capability_hint": "utility.reuse",
+      "certified": false,
+      "classification": "test_support",
+      "import_count": 9,
+      "module_status": "not_materialized",
+      "path": "test/scripts/test_icon_transport.py",
+      "source_bytes": 2643,
+      "source_commit": "08ce934ec6e0c545756395ec302ccc8e965fc9ce",
+      "source_sha256": "bf2aa457db0641e09f3199edb69814b5b69f55e15ff69552965f96d93cf10af6",
+      "symbols": [
+        "IconTransferTest",
+        "setUp",
+        "test_compact_wrapper_restores_identical_original",
+        "test_original_zip_can_still_be_used",
+        "test_corrupt_wrapper_rejected_before_writing",
+        "test_mismatched_original_rejected"
+      ],
+      "tested": false
+    },
+    {
+      "blob_sha": "0192fa50106ec8610faaf5b584c0282937077b10",
+      "capability_hint": "utility.reuse",
+      "certified": false,
+      "classification": "test_support",
+      "import_count": 7,
+      "module_status": "not_materialized",
+      "path": "test/scripts/test_install_platform_icons.py",
+      "source_bytes": 3578,
+      "source_commit": "08ce934ec6e0c545756395ec302ccc8e965fc9ce",
+      "source_sha256": "08345830f1ca1bdd299ce2cd592e46bd2814e88ec59826b459367785369d9e3c",
+      "symbols": [
+        "InstallPlatformIconsTest",
+        "setUp",
+        "test_dry_run_never_writes_assets_or_color",
+        "test_apply_copies_exact_assets_and_merges_colors",
+        "test_wrong_pack_is_rejected_without_writing"
       ],
       "tested": false
     }
