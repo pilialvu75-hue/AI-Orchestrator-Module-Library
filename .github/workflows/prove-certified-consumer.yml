@@ -1,0 +1,66 @@
+name: Prove certified Dart package consumer execution
+
+on:
+  workflow_dispatch:
+  push:
+    branches: ["main"]
+    paths:
+      - "packages/**"
+      - "tools/library_consumer_execution.py"
+      - ".github/workflows/prove-certified-consumer.yml"
+
+# The consumer executes third-party source; it must never hold write credentials.
+permissions: {}
+
+jobs:
+  consumer:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: dart-lang/setup-dart@v1
+      - name: Execute all published Dart package behavioral tests
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import json
+          import subprocess
+          from pathlib import Path
+          index = json.loads(Path("packages/index.json").read_text())
+          rows = index.get("packages", [])
+          if not rows:
+              print("NO_CONSUMER_PROOF: no certified package exports")
+              raise SystemExit(0)
+          executed = 0
+          for row in rows:
+              package_file = Path(row["path"])
+              if package_file.is_absolute() or ".." in package_file.parts or not package_file.is_relative_to("packages"):
+                  raise SystemExit("unsafe package index path")
+              envelope = json.loads(package_file.read_text())
+              package = envelope.get("package", {})
+              # Non-Dart packages need their own real platform consumer lane.
+              if "pubspec.yaml" not in {f.get("target_path") for f in package.get("files", [])}:
+                  continue
+              executed += 1
+              result = subprocess.run([
+                  "python3", "tools/library_consumer_execution.py",
+                  "--package", str(package_file),
+                  "--report", f"/tmp/consumer-{executed}.json",
+              ], check=False)
+              if result.returncode:
+                  raise SystemExit(result.returncode)
+          print(f"CONSUMER_PROOFS_EXECUTED={executed}")
+          if not executed:
+              print("NO_CONSUMER_PROOF: no Dart packages with executable tests")
+          PY
+      - name: Upload consumer evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: certified-consumer-execution
+          path: /tmp/consumer-*.json
+          if-no-files-found: ignore
+          retention-days: 14
