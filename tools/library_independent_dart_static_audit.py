@@ -21,6 +21,17 @@ def audit(root: Path, request: dict) -> dict:
     inventory = request["source"]["all_file_digests"]
     if not isinstance(inventory, list) or not inventory:
         raise ValueError("source inventory missing")
+    names = [entry["path"] for entry in inventory]
+    if len(names) != len(set(names)):
+        raise ValueError("duplicate source inventory path")
+    actual = set()
+    for path in base.rglob("*"):
+        if path.is_symlink():
+            raise ValueError("source tree contains symlink")
+        if path.is_file():
+            actual.add(path.relative_to(base).as_posix())
+    if actual != set(names):
+        raise ValueError("source inventory does not cover exact source tree")
     findings = []
     import hashlib
     for entry in inventory:
