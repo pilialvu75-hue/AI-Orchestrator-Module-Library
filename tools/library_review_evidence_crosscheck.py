@@ -40,8 +40,14 @@ def verify(requests, evidence):
         count = report.get("vulnerabilities_found")
         if type(count) is not int or count < 0:
             raise ValueError("invalid OSV vulnerability count")
-        if any(not isinstance(p.get("vulnerability_ids"), list) for p in packages):
-            raise ValueError("invalid OSV vulnerability inventory")
+        for package in packages:
+            if not isinstance(package, dict):
+                raise ValueError("invalid OSV package record")
+            ids = package.get("vulnerability_ids")
+            if (not isinstance(ids, list)
+                    or any(not isinstance(v, str) or not v.strip() for v in ids)
+                    or len(ids) != len(set(ids))):
+                raise ValueError("invalid OSV vulnerability inventory")
         if count != sum(len(p["vulnerability_ids"]) for p in packages):
             raise ValueError("OSV vulnerability count mismatch")
     return len(items)
