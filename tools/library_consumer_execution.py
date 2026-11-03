@@ -58,9 +58,11 @@ def consume(envelope, *, runner=None):
             dest.parent.mkdir(parents=True, exist_ok=True)
             dest.write_text(entry["content"], encoding="utf-8")
         # Only a package with executable tests can count. No tests => no proof.
-        if "pubspec.yaml" not in seen or not any(
-            p.startswith("test/") and p.endswith("_test.dart") for p in seen
-        ):
+        if "pubspec.yaml" not in seen:
+            raise ValueError("package has no Dart pubspec")
+        has_dart_tests = any(p.startswith("test/") and p.endswith("_test.dart") for p in seen)
+        has_self_test = "tool/self_test.dart" in seen
+        if not has_dart_tests and not has_self_test:
             raise ValueError("package has no executable Dart behavioral tests")
         if runner is None:
             def runner(command, cwd):
@@ -69,11 +71,12 @@ def consume(envelope, *, runner=None):
         pub = runner(["dart", "pub", "get"], root)
         if pub.returncode != 0:
             raise ValueError("consumer dart pub get failed")
-        result = runner(["dart", "test"], root)
+        behavioral_command = ["dart", "test"] if has_dart_tests else ["dart", "run", "tool/self_test.dart"]
+        result = runner(behavioral_command, root)
         if result.returncode != 0:
             raise ValueError("consumer Dart behavioral tests failed")
     return {"schema": SCHEMA, "pin": package.get("pin"),
-            "package_sha256": digest, "behavioral_test_command": "dart test",
+            "package_sha256": digest, "behavioral_test_command": " ".join(behavioral_command),
             "consumer_executed": True, "passed": True}
 
 
