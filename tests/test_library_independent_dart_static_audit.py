@@ -27,6 +27,25 @@ class StaticAuditTests(unittest.TestCase):
             with self.assertRaisesRegex(ValueError, "traverses symlink"):
                 audit(root, request)
 
+    def test_unlisted_source_file_fails_closed(self):
+        with TemporaryDirectory() as temp:
+            base = Path(temp) / "intake" / "test.module" / "0.1.0" / "payload" / "src"
+            base.mkdir(parents=True)
+            data = b"void main() {}\\n"
+            (base / "listed.dart").write_bytes(data)
+            (base / "hidden.dart").write_text("import 'dart:io';\\n")
+            request = {"asset_id": "test.module", "version": "0.1.0",
+                       "source": {"payload_tree_sha256": "a" * 64,
+                                  "all_file_digests": [{"path": "listed.dart",
+                                  "sha256": hashlib.sha256(data).hexdigest(),
+                                  "bytes": len(data)}]}}
+            with self.assertRaisesRegex(ValueError, "exact source tree"):
+                audit(Path(temp), request)
+            (base / "hidden.dart").unlink()
+            request["source"]["all_file_digests"].append(dict(request["source"]["all_file_digests"][0]))
+            with self.assertRaisesRegex(ValueError, "duplicate source inventory"):
+                audit(Path(temp), request)
+
     def test_findings_are_not_approval(self):
         with TemporaryDirectory() as temp:
             base = Path(temp) / "intake" / "test.module" / "0.1.0" / "payload" / "src"
