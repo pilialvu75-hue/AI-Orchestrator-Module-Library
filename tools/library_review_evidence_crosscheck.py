@@ -35,13 +35,19 @@ def verify(requests, evidence):
             raise ValueError("OSV scan incomplete")
         expected = sorted(c["purl"] for c in item["dependency_inventory"]["cyclonedx_sbom"]["components"] if isinstance(c.get("purl"), str) and c["purl"].startswith("pkg:pub/"))
         packages = report.get("packages")
-        if not isinstance(packages, list) or not expected or expected != sorted(p.get("purl") for p in packages):
+        if (not isinstance(packages, list) or not expected
+                or any(not isinstance(p, dict) for p in packages)
+                or expected != sorted(p.get("purl") for p in packages)):
             raise ValueError("OSV package coverage mismatch")
         count = report.get("vulnerabilities_found")
         if type(count) is not int or count < 0:
             raise ValueError("invalid OSV vulnerability count")
-        if any(not isinstance(p.get("vulnerability_ids"), list) for p in packages):
-            raise ValueError("invalid OSV vulnerability inventory")
+        for package in packages:
+            ids = package.get("vulnerability_ids")
+            if (not isinstance(ids, list)
+                    or any(not isinstance(v, str) or not v.strip() for v in ids)
+                    or len(ids) != len(set(ids))):
+                raise ValueError("invalid OSV vulnerability inventory")
         if count != sum(len(p["vulnerability_ids"]) for p in packages):
             raise ValueError("OSV vulnerability count mismatch")
     return len(items)
