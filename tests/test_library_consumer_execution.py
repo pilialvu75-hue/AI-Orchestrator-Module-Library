@@ -36,6 +36,24 @@ class ConsumerExecutionTests(unittest.TestCase):
         self.assertTrue(report["consumer_executed"])
         self.assertTrue(report["passed"])
 
+    def test_researcher_self_test_is_real_behavioral_execution(self):
+        commands = []
+        files = [FILES[0], ("tool/self_test.dart", "void main() {}")]
+        def runner(command, root):
+            commands.append(command)
+            self.assertTrue((root / "tool/self_test.dart").is_file())
+            return SimpleNamespace(returncode=0)
+        report = consume(envelope(files), runner=runner)
+        self.assertEqual(commands, [["dart", "pub", "get"], ["dart", "run", "tool/self_test.dart"]])
+        self.assertEqual(report["behavioral_test_command"], "dart run tool/self_test.dart")
+
+    def test_failing_researcher_self_test_never_passes(self):
+        files = [FILES[0], ("tool/self_test.dart", "void main() {}")]
+        def runner(command, root):
+            return SimpleNamespace(returncode=1 if command[-1] == "tool/self_test.dart" else 0)
+        with self.assertRaisesRegex(ValueError, "behavioral tests failed"):
+            consume(envelope(files), runner=runner)
+
     def test_no_tests_cannot_be_consumer_proof(self):
         with self.assertRaisesRegex(ValueError, "no executable"):
             consume(envelope(FILES[:1]), runner=lambda *_: self.fail("must not execute"))
