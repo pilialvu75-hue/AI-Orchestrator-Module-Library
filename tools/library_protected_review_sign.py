@@ -16,8 +16,8 @@ from pathlib import Path
 FIELDS = {"schema", "asset_id", "version", "source_commit", "payload_sha256",
           "sbom_sha256", "license_file_sha256", "reviewed_at", "reviewer_id",
           "known_vulnerabilities", "decision"}
-SHA = re.compile(r"[0-9a-f]{64}\\Z")
-COMMIT = re.compile(r"[0-9a-f]{40}\\Z")
+SHA = re.compile(r"[0-9a-f]{64}\Z")
+COMMIT = re.compile(r"[0-9a-f]{40}\Z")
 
 
 def sign(statement, private_pem):
@@ -39,9 +39,9 @@ def sign(statement, private_pem):
             raise ValueError("missing reviewer statement metadata")
     if not isinstance(private_pem, str) or "-----BEGIN PRIVATE KEY-----" not in private_pem:
         raise ValueError("protected signing key unavailable")
-    payload = b"AI-ORCHESTRATOR-LOCAL-REVIEW-v1\\n" + json.dumps(
+    payload = b"AI-ORCHESTRATOR-LOCAL-REVIEW-v1\n" + json.dumps(
         statement, sort_keys=True, separators=(",", ":"), ensure_ascii=True
-    ).encode("ascii") + b"\\n"
+    ).encode("ascii") + b"\n"
     with tempfile.TemporaryDirectory(prefix="protected-review-") as folder:
         root = Path(folder)
         key = root / "key.pem"
@@ -70,7 +70,7 @@ def main():
     statement = json.loads(args.statement.read_text(encoding="utf-8"))
     result = sign(statement, os.environ.get("LIBRARY_SECURITY_REVIEW_PRIVATE_KEY_PEM", ""))
     args.output.parent.mkdir(parents=True, exist_ok=True)
-    args.output.write_text(json.dumps(result, sort_keys=True, indent=2) + "\\n", encoding="utf-8")
+    args.output.write_text(json.dumps(result, sort_keys=True, indent=2) + "\n", encoding="utf-8")
     print("Protected reviewer signature generated; no certification or publication performed.")
 
 
