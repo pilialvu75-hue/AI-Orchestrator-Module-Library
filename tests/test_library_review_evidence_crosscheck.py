@@ -36,6 +36,20 @@ class EvidenceTests(unittest.TestCase):
             with self.subTest(malformed=malformed), self.assertRaises(ValueError):
                 verify(requests, evidence)
 
+    def test_invalid_advisory_identifiers_are_rejected(self):
+        for invalid in ([None], [123], [""], ["GHSA-example", "GHSA-example"]):
+            requests, evidence = copy.deepcopy(packet())
+            evidence["reports"][0]["packages"][0]["vulnerability_ids"] = invalid
+            evidence["reports"][0]["vulnerabilities_found"] = len(invalid)
+            with self.subTest(invalid=invalid), self.assertRaises(ValueError):
+                verify(requests, evidence)
+
+    def test_non_object_package_is_rejected(self):
+        requests, evidence = copy.deepcopy(packet())
+        evidence["reports"][0]["packages"] = [None]
+        with self.assertRaises(ValueError):
+            verify(requests, evidence)
+
     def test_tampering_fails_closed(self):
         for mutation in ("source", "sbom", "request", "coverage", "count", "approval"):
             requests, evidence = copy.deepcopy(packet())
