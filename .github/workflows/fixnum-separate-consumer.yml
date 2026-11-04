@@ -1,0 +1,79 @@
+name: Pilot fixnum in a separate Dart consumer (TESTED only)
+
+on:
+  pull_request:
+    paths:
+      - 'intake/utility.int64_arithmetic.external.dartlang.fixnum/**'
+      - '.github/workflows/fixnum-separate-consumer.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'intake/utility.int64_arithmetic.external.dartlang.fixnum/**'
+      - '.github/workflows/fixnum-separate-consumer.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  separate-consumer:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+          submodules: false
+      - uses: dart-lang/setup-dart@v1
+      - name: Verify actual source and TESTED-only status
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import json, pathlib, sys
+          sys.path.insert(0, "tools")
+          from library_source_integrity import payload_tree_sha256
+          base = pathlib.Path("intake/utility.int64_arithmetic.external.dartlang.fixnum/0.1.0")
+          m = json.loads((base / "manifest.json").read_text())
+          assert m["id"] == "utility.int64_arithmetic.external.dartlang.fixnum"
+          assert m["status"] == "tested"
+          assert m["security"]["reviewed"] is False
+          assert payload_tree_sha256(base / m["payload"]["path"]) == m["payload"]["sha256"]
+          PY
+      - name: Build independent consumer outside Library payload
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p "$RUNNER_TEMP/fixnum_consumer/bin"
+          cat > "$RUNNER_TEMP/fixnum_consumer/pubspec.yaml" <<EOF
+          name: independent_fixnum_consumer
+          publish_to: none
+          environment:
+            sdk: ^3.4.0
+          dependencies:
+            aivexus_external_fixnum:
+              path: $GITHUB_WORKSPACE/intake/utility.int64_arithmetic.external.dartlang.fixnum/0.1.0/payload/src
+          EOF
+          cat > "$RUNNER_TEMP/fixnum_consumer/bin/main.dart" <<'EOF'
+          import 'package:aivexus_external_fixnum/aivexus_external.dart';
+          void main() {
+            final ops = AivexusIntOps();
+            const cases = <(int, int, int)>[
+              (3, 8, 11), (0, 0, 0), (-7, 12, 5),
+              (-20, -22, -42), (2147483647, 1, 2147483648),
+            ];
+            for (final (a, b, expected) in cases) {
+              final actual = ops.sum(a, b);
+              if (actual != expected) {
+                throw StateError('sum($a, $b): $actual != $expected');
+              }
+            }
+            print('PASS: separate consumer imported real vendored fixnum and passed ${cases.length} cases');
+          }
+          EOF
+          cd "$RUNNER_TEMP/fixnum_consumer"
+          dart pub get --offline
+          dart analyze
+          dart run bin/main.dart
+      - name: Explicit non-certification result
+        run: echo 'PASS means Linux consumer functionality only; security certification and production installation remain BLOCKED.'
