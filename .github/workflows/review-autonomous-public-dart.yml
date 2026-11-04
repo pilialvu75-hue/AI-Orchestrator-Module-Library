@@ -4,6 +4,7 @@ on:
   push:
     branches: [main]
     paths:
+      - '.github/workflows/fixnum-separate-consumer.yml'
       - 'tools/autonomous_public_dart_review.py'
       - 'tools/autonomous_public_dart_osv_scan.py'
       - 'tools/library_review_evidence_crosscheck.py'
@@ -90,10 +91,18 @@ jobs:
               assert item["security_reviewed"] is False
               assert item["reviewer_signature_present"] is False
               assert item["dependency_inventory"]["live_advisory_or_vulnerability_scan_completed"] is False
-          (Path(os.environ["RUNNER_TEMP"]) / "review-summary.txt").write_text(
-              f"Source-bound independent review requests: {report['count']}\n"
-              "OSV advisory evidence is separate; NOT security approval or installation authorization.\n"
-          )
+          temp = Path(os.environ["RUNNER_TEMP"])
+          preflight = json.loads((temp / "independent-review-preflight-BLOCKED.json").read_text())
+          audit = json.loads((temp / "independent-dart-static-audit-EVIDENCE.json").read_text())
+          osv = json.loads((temp / "autonomous-researcher-osv-EVIDENCE.json").read_text())
+          assert len(preflight["items"]) == len(audit["items"]) == len(osv["reports"]) == report["count"]
+          lines = [f"Source-bound independent review requests: {report['count']}"]
+          for request, gate, static, advisory in zip(report["requests"], preflight["items"], audit["items"], osv["reports"]):
+              assert request["asset_id"] == gate["asset_id"] == static["asset_id"] == advisory["asset_id"]
+              assert gate["decision"] == "BLOCKED" and gate["certification_authorized"] is False
+              lines.append(f"{request['asset_id']}: BLOCKED; static findings={len(static['findings'])}; OSV advisories={advisory['vulnerabilities_found']}; blockers={','.join(gate['reasons'])}")
+          lines.append("OSV and static audit evidence are NOT independent reviewer approval or production authorization.")
+          (temp / "review-summary.txt").write_text("\\n".join(lines) + "\\n")
           PY
 
       - name: Publish source-bound independent audit requests (never sign)
