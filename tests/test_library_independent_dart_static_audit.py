@@ -6,6 +6,7 @@ from pathlib import Path
 from tempfile import TemporaryDirectory
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "tools"))
 from library_independent_dart_static_audit import audit
+from library_source_integrity import payload_tree_sha256
 
 
 class StaticAuditTests(unittest.TestCase):
@@ -39,9 +40,10 @@ class StaticAuditTests(unittest.TestCase):
                                   "all_file_digests": [{"path": "listed.dart",
                                   "sha256": hashlib.sha256(data).hexdigest(),
                                   "bytes": len(data)}]}}
-            with self.assertRaisesRegex(ValueError, "exact source tree"):
+            with self.assertRaisesRegex(ValueError, "source payload digest mismatch"):
                 audit(Path(temp), request)
             (base / "hidden.dart").unlink()
+            request["source"]["payload_tree_sha256"] = payload_tree_sha256(base)
             request["source"]["all_file_digests"].append(dict(request["source"]["all_file_digests"][0]))
             with self.assertRaisesRegex(ValueError, "duplicate source inventory"):
                 audit(Path(temp), request)
@@ -57,6 +59,10 @@ class StaticAuditTests(unittest.TestCase):
                                   "all_file_digests": [{"path": "sample.dart",
                                   "sha256": hashlib.sha256(data).hexdigest(),
                                   "bytes": len(data)}]}}
+            request["source"]["payload_tree_sha256"] = "a" * 64
+            with self.assertRaisesRegex(ValueError, "source payload digest mismatch"):
+                audit(Path(temp), request)
+            request["source"]["payload_tree_sha256"] = payload_tree_sha256(base)
             result = audit(Path(temp), request)
             self.assertIn("SENSITIVE_IMPORT", [x["rule"] for x in result["findings"]])
             self.assertFalse(result["certification_authorized"])

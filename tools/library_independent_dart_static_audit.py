@@ -2,6 +2,7 @@
 import json
 import re
 from pathlib import Path
+from library_source_integrity import payload_tree_sha256
 
 RULES = {
     "PROCESS_EXECUTION": re.compile(r"\bProcess\s*\.\s*(?:run|start|runSync)\s*\("),
@@ -18,6 +19,9 @@ def audit(root: Path, request: dict) -> dict:
     base = root / "intake" / asset / request["version"] / "payload" / "src"
     if not base.is_dir() or base.is_symlink():
         raise ValueError("materialized source missing")
+    actual_digest = payload_tree_sha256(base)
+    if actual_digest != request["source"]["payload_tree_sha256"]:
+        raise ValueError("static audit source payload digest mismatch")
     inventory = request["source"]["all_file_digests"]
     if not isinstance(inventory, list) or not inventory:
         raise ValueError("source inventory missing")
