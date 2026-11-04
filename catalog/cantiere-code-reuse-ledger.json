@@ -1,6 +1,6 @@
 {
   "baseline_note": "Start from Cantiere main prior to first real experimental Library sandbox import PR #919. Older source needs a separate historical backfill; no full-history coverage is claimed.",
-  "last_scanned_sha": "08ce934ec6e0c545756395ec302ccc8e965fc9ce",
+  "last_scanned_sha": "5b8c4ddcdcc01cf553faea15bdc54a06838e336a",
   "observations": [
     {
       "blob_sha": "5a65cc4239184866e02178141661db4faac24fd1",
@@ -2179,6 +2179,173 @@
         "test_dry_run_never_writes_assets_or_color",
         "test_apply_copies_exact_assets_and_merges_colors",
         "test_wrong_pack_is_rejected_without_writing"
+      ],
+      "tested": false
+    },
+    {
+      "blob_sha": "9243c21dcc2e61a9937e8cbcacc48aea0df59153",
+      "capability_hint": "utility.reuse",
+      "certified": false,
+      "classification": "candidate_requires_extraction_and_tests",
+      "import_count": 3,
+      "module_status": "not_materialized",
+      "path": "lib/core/memory/assistant_durable_memory_capture_service.dart",
+      "source_bytes": 18956,
+      "source_commit": "5b8c4ddcdcc01cf553faea15bdc54a06838e336a",
+      "source_sha256": "1514dc8bb8d72a0f8348f8dfb1129498ff5b5251e8507ae2c8ca8bac7a0de47a",
+      "symbols": [
+        "AssistantMemoryCommandStatus",
+        "AssistantMemoryCommandResult",
+        "AssistantDurableMemoryCaptureService"
+      ],
+      "tested": false
+    },
+    {
+      "blob_sha": "62ab57e542a4494047750a90f8f29454788af3c2",
+      "capability_hint": "utility.reuse",
+      "certified": false,
+      "classification": "candidate_requires_extraction_and_tests",
+      "import_count": 2,
+      "module_status": "not_materialized",
+      "path": "lib/core/memory/assistant_durable_memory_service.dart",
+      "source_bytes": 6422,
+      "source_commit": "5b8c4ddcdcc01cf553faea15bdc54a06838e336a",
+      "source_sha256": "c7b553932190b34d45107c22ce3974501d030476f980153b09e871b7399f8312",
+      "symbols": [
+        "AssistantDurableMemoryService"
+      ],
+      "tested": false
+    },
+    {
+      "blob_sha": "b780a10a2fcbcf032d1871112091f38fb9f5a974",
+      "capability_hint": "utility.reuse",
+      "certified": false,
+      "classification": "candidate_requires_extraction_and_tests",
+      "import_count": 3,
+      "module_status": "not_materialized",
+      "path": "lib/core/memory/assistant_durable_memory_store.dart",
+      "source_bytes": 16744,
+      "source_commit": "5b8c4ddcdcc01cf553faea15bdc54a06838e336a",
+      "source_sha256": "8febc80681e4b8aad602ba9671bdf6a052bb0cf080e577e7b107aa62eec1046b",
+      "symbols": [
+        "AssistantDurableMemoryPersistence",
+        "SqliteAssistantDurableMemoryPersistence",
+        "AssistantDurableMemoryStore"
+      ],
+      "tested": false
+    },
+    {
+      "blob_sha": "e13491049729d94999369f05b8325d5f43b34a54",
+      "capability_hint": "utility.reuse",
+      "certified": false,
+      "classification": "candidate_requires_extraction_and_tests",
+      "import_count": 29,
+      "module_status": "not_materialized",
+      "path": "lib/features/chat/data/repositories/chat_repository_impl.dart",
+      "source_bytes": 33938,
+      "source_commit": "5b8c4ddcdcc01cf553faea15bdc54a06838e336a",
+      "source_sha256": "45ba5a9850adfde9eb0723496edaf46b479f6b53d90875b05c8611ba910c7242",
+      "symbols": [
+        "ChatRepositoryImpl"
+      ],
+      "tested": false
+    },
+    {
+      "blob_sha": "6abc21a4036c2d2de81beba877139b0f8aa39f13",
+      "capability_hint": "utility.reuse",
+      "certified": false,
+      "classification": "candidate_requires_extraction_and_tests",
+      "import_count": 9,
+      "module_status": "not_materialized",
+      "path": "lib/features/chat/data/repositories/cloud_web_enriching_chat_repository.dart",
+      "source_bytes": 6406,
+      "source_commit": "5b8c4ddcdcc01cf553faea15bdc54a06838e336a",
+      "source_sha256": "90ae184e854c6331fec58fce011bb97021a6258aa12effde24df8b81adf84662",
+      "symbols": [
+        "CloudWebEnrichingChatRepository"
+      ],
+      "tested": false
+    },
+    {
+      "blob_sha": "bd3bc1e8aa8c2b09f22bf8249ca9c81aad0f516d",
+      "capability_hint": "utility.reuse",
+      "certified": false,
+      "classification": "candidate_requires_extraction_and_tests",
+      "import_count": 11,
+      "module_status": "not_materialized",
+      "path": "lib/features/chat/data/repositories/prompt_resolving_chat_repository.dart",
+      "source_bytes": 7849,
+      "source_commit": "5b8c4ddcdcc01cf553faea15bdc54a06838e336a",
+      "source_sha256": "5ea1797f65b4a06537c0c9eb6a8ac412dd3c790d98e29c8ed0c37889312a3347",
+      "symbols": [
+        "PromptResolvingChatRepository"
+      ],
+      "tested": false
+    },
+    {
+      "blob_sha": "53d884834e342ca150eecbf0feb7b848a2ce7b97",
+      "capability_hint": "utility.reuse",
+      "certified": false,
+      "classification": "candidate_requires_extraction_and_tests",
+      "import_count": 1,
+      "module_status": "not_materialized",
+      "path": "lib/features/chat/domain/repositories/verified_memory_action_writer.dart",
+      "source_bytes": 669,
+      "source_commit": "5b8c4ddcdcc01cf553faea15bdc54a06838e336a",
+      "source_sha256": "113a57ec735e956cb0693495c507b9f3b19a08a41fd18dac84b0d78667c43ae3",
+      "symbols": [
+        "class"
+      ],
+      "tested": false
+    },
+    {
+      "blob_sha": "331617ec8e8df449fd0983d5de636870f77eb5fa",
+      "capability_hint": "utility.reuse",
+      "certified": false,
+      "classification": "candidate_requires_extraction_and_tests",
+      "import_count": 3,
+      "module_status": "not_materialized",
+      "path": "scripts/check_android_release_gate.py",
+      "source_bytes": 6828,
+      "source_commit": "5b8c4ddcdcc01cf553faea15bdc54a06838e336a",
+      "source_sha256": "6c65ecf31a77e3cfe6d6f536c310d60625742c13b3d69a37d16c44c02eb68cb0",
+      "symbols": [
+        "validate",
+        "validate_desktop_publisher",
+        "main"
+      ],
+      "tested": false
+    },
+    {
+      "blob_sha": "9f5dee0507d1de2646e9c423a0be3bf3a895b0a2",
+      "capability_hint": "utility.reuse",
+      "certified": false,
+      "classification": "test_support",
+      "import_count": 7,
+      "module_status": "not_materialized",
+      "path": "test/core/memory/assistant_durable_memory_capture_service_test.dart",
+      "source_bytes": 13676,
+      "source_commit": "5b8c4ddcdcc01cf553faea15bdc54a06838e336a",
+      "source_sha256": "cdfb8cf08b81dc2bcb3d86c0e8cb6b9d9e58c8d18edb706049fa22927d2aa37f",
+      "symbols": [
+        "_MemoryPersistence"
+      ],
+      "tested": false
+    },
+    {
+      "blob_sha": "0d19097c875b50e7ff4a162fcba85a22464ba3e1",
+      "capability_hint": "utility.reuse",
+      "certified": false,
+      "classification": "test_support",
+      "import_count": 18,
+      "module_status": "not_materialized",
+      "path": "test/features/chat/data/repositories/prompt_resolving_chat_repository_test.dart",
+      "source_bytes": 31272,
+      "source_commit": "5b8c4ddcdcc01cf553faea15bdc54a06838e336a",
+      "source_sha256": "ee0ce31d4ab9998eded866a7a97268d91d5a3834e7d111eb49a1e9480009034b",
+      "symbols": [
+        "_RecordingChatRepository",
+        "_PromptMemoryPersistence"
       ],
       "tested": false
     }
