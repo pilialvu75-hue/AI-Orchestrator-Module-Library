@@ -16,7 +16,7 @@
     {
       "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
       "baseline_at": "2026-10-03T16:20:00Z",
-      "cursor_merged_at": "2026-11-04T15:39:19Z"
+      "cursor_merged_at": "2026-11-04T22:23:45Z"
     },
     {
       "repository": "pilialvu75-hue/Ai-orchestrator-diagnostics",
@@ -2941,6 +2941,57 @@
       "url": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/803b6b6f8910dd87ae34b0f01d846ded5d876ec0",
       "match_ref": null,
       "reconciliation": null
+    },
+    {
+      "incident_id": "9d6d7ddc7d496c51734c",
+      "status": "UNRECONCILED",
+      "detected_at": "2026-11-04T22:38:58Z",
+      "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
+      "kind": "direct_commit",
+      "pull_request": null,
+      "merge_sha": null,
+      "commit_sha": "9ac08e4ef7a2cf3bbe3bf13d290349a28c2efe60",
+      "head_branch": null,
+      "base_branch": "main",
+      "change_at": "2026-11-04T22:18:22Z",
+      "title": "feat(web): self-test Cloud/AUTO synthetic free-only (#989)",
+      "url": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/9ac08e4ef7a2cf3bbe3bf13d290349a28c2efe60",
+      "match_ref": null,
+      "reconciliation": null
+    },
+    {
+      "incident_id": "a55cc670c4916a465450",
+      "status": "UNRECONCILED",
+      "detected_at": "2026-11-04T22:38:58Z",
+      "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
+      "kind": "direct_commit",
+      "pull_request": null,
+      "merge_sha": null,
+      "commit_sha": "1feade63cd6e59fdb14a4355acfdcfbad5dda5f7",
+      "head_branch": null,
+      "base_branch": "main",
+      "change_at": "2026-11-04T22:23:25Z",
+      "title": "feat(web): localized IT/FR/EN/ES UI integrated with Cloud self-test (#990)",
+      "url": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/1feade63cd6e59fdb14a4355acfdcfbad5dda5f7",
+      "match_ref": null,
+      "reconciliation": null
+    },
+    {
+      "incident_id": "6b7458c8ef9d82f85500",
+      "status": "UNRECONCILED",
+      "detected_at": "2026-11-04T22:38:58Z",
+      "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
+      "kind": "direct_commit",
+      "pull_request": null,
+      "merge_sha": null,
+      "commit_sha": "06cd891b6bb0a9eef9f7b1c537d565721fdabbd6",
+      "head_branch": null,
+      "base_branch": "main",
+      "change_at": "2026-11-04T22:23:45Z",
+      "title": "deploy(web): request owner-approved private Self-Test + multilingual release",
+      "url": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/06cd891b6bb0a9eef9f7b1c537d565721fdabbd6",
+      "match_ref": null,
+      "reconciliation": null
     }
   ],
   "reconciliation_history": [
@@ -2951,35 +3002,35 @@
       "note": "Known motivating example for CP-HARDEN-03. It predates this incremental detector and is not retroactively reopened."
     }
   ],
-  "last_scan_at": "2026-11-04T21:39:07Z",
+  "last_scan_at": "2026-11-04T22:38:58Z",
   "scan_health": {
     "pilialvu75-hue/AI-Orchestrator-Module-Library": {
       "state": "OK",
-      "last_success_at": "2026-11-04T21:39:07Z",
+      "last_success_at": "2026-11-04T22:38:58Z",
       "last_failure_at": null,
       "error_code": null
     },
     "pilialvu75-hue/Ai-orchestrator-riserva": {
       "state": "OK",
-      "last_success_at": "2026-11-04T21:39:07Z",
+      "last_success_at": "2026-11-04T22:38:58Z",
       "last_failure_at": "2026-10-28T07:39:58Z",
       "error_code": null
     },
     "pilialvu75-hue/Ai-orchestrator-diagnostics": {
       "state": "OK",
-      "last_success_at": "2026-11-04T21:39:07Z",
+      "last_success_at": "2026-11-04T22:38:58Z",
       "last_failure_at": "2026-10-28T07:39:58Z",
       "error_code": null
     },
     "pilialvu75-hue/AI-Orchestrator-Module-Researcher": {
       "state": "OK",
-      "last_success_at": "2026-11-04T21:39:07Z",
+      "last_success_at": "2026-11-04T22:38:58Z",
       "last_failure_at": "2026-10-28T07:39:58Z",
       "error_code": null
     },
     "pilialvu75-hue/Ai_orchestrator-prova": {
       "state": "OK",
-      "last_success_at": "2026-11-04T21:39:07Z",
+      "last_success_at": "2026-11-04T22:38:58Z",
       "last_failure_at": "2026-10-28T07:39:58Z",
       "error_code": null
     }
