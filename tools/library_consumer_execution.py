@@ -39,6 +39,11 @@ def consume(envelope, *, runner=None):
     digest = hashlib.sha256(canonical(package).encode("utf-8")).hexdigest()
     if envelope.get("package_sha256") != digest:
         raise ValueError("package SHA256 mismatch")
+    asset_id, version, pin = package.get("asset_id"), package.get("version"), package.get("pin")
+    if (not isinstance(asset_id, str) or not asset_id
+            or not isinstance(version, str) or not version
+            or pin != f"{asset_id}@{version}"):
+        raise ValueError("consumer package identity pin mismatch")
     if package.get("availability") != "active":
         raise ValueError("consumer requires active certified package")
     files = package.get("files")
