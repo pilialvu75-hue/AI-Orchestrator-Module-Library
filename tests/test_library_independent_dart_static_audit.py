@@ -43,6 +43,7 @@ class StaticAuditTests(unittest.TestCase):
             with self.assertRaisesRegex(ValueError, "exact source tree"):
                 audit(Path(temp), request)
             (base / "hidden.dart").unlink()
+            request["source"]["payload_tree_sha256"] = payload_tree_sha256(base)
             request["source"]["all_file_digests"].append(dict(request["source"]["all_file_digests"][0]))
             with self.assertRaisesRegex(ValueError, "duplicate source inventory"):
                 audit(Path(temp), request)
