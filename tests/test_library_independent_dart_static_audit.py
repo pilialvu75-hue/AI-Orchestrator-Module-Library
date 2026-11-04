@@ -21,7 +21,7 @@ class StaticAuditTests(unittest.TestCase):
             (outside / "sample.dart").write_bytes(data)
             (base / "nested").symlink_to(outside, target_is_directory=True)
             request = {"asset_id": "test.module", "version": "0.1.0",
-                       "source": {"payload_tree_sha256": payload_tree_sha256(base),
+                       "source": {"payload_tree_sha256": "a" * 64,
                                   "all_file_digests": [{"path": "nested/sample.dart",
                                   "sha256": hashlib.sha256(data).hexdigest(),
                                   "bytes": len(data)}]}}
@@ -40,7 +40,7 @@ class StaticAuditTests(unittest.TestCase):
                                   "all_file_digests": [{"path": "listed.dart",
                                   "sha256": hashlib.sha256(data).hexdigest(),
                                   "bytes": len(data)}]}}
-            with self.assertRaisesRegex(ValueError, "exact source tree"):
+            with self.assertRaisesRegex(ValueError, "source payload digest mismatch"):
                 audit(Path(temp), request)
             (base / "hidden.dart").unlink()
             request["source"]["payload_tree_sha256"] = payload_tree_sha256(base)
