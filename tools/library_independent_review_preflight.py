@@ -5,6 +5,8 @@ from library_review_evidence_crosscheck import verify
 
 
 def assess(requests, evidence, static_audit=None):
+    if static_audit is None:
+        raise ValueError('independent static source audit is required')
     if static_audit is not None:
         if not isinstance(static_audit, dict):
             raise ValueError('static source audit must be an object')

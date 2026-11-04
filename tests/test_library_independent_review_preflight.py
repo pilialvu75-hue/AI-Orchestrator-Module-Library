@@ -8,6 +8,14 @@ from test_library_review_evidence_crosscheck import packet
 
 
 class PreflightTests(unittest.TestCase):
+    @staticmethod
+    def _audit(requests):
+        return {'schema': 'aivexus.library.static-source-audit.v1', 'items': [
+            {'asset_id': item['asset_id'],
+             'source_payload_sha256': item['source']['payload_tree_sha256'],
+             'static_scan_completed': True, 'findings': []}
+            for item in requests['requests']]}
+
     def test_malformed_static_audit_is_rejected(self):
         requests, evidence = packet()
         for invalid in ([], {"schema": "aivexus.library.static-source-audit.v1", "items": None}):
@@ -21,9 +29,14 @@ class PreflightTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "static audit item must be an object"):
             assess(requests, evidence, audit)
 
+    def test_missing_static_audit_is_rejected(self):
+        requests, evidence = packet()
+        with self.assertRaisesRegex(ValueError, 'independent static source audit is required'):
+            assess(requests, evidence)
+
     def test_clean_advisories_do_not_approve(self):
         requests, evidence = packet()
-        result = assess(requests, evidence)
+        result = assess(requests, evidence, self._audit(requests))
         self.assertEqual(result["items"][0]["decision"], "BLOCKED")
         self.assertFalse(result["certification_authorized"])
 
@@ -31,13 +44,13 @@ class PreflightTests(unittest.TestCase):
         requests, evidence = packet()
         evidence["reports"][0]["packages"][0]["vulnerability_ids"] = ["GHSA-example"]
         evidence["reports"][0]["vulnerabilities_found"] = 1
-        result = assess(requests, evidence)
+        result = assess(requests, evidence, self._audit(requests))
         self.assertIn("KNOWN_UPSTREAM_ADVISORIES", result["items"][0]["reasons"])
 
 
     def test_missing_source_license_and_ci_evidence_are_explicit_blockers(self):
         requests, evidence = packet()
-        result = assess(requests, evidence)
+        result = assess(requests, evidence, self._audit(requests))
         reasons = result["items"][0]["reasons"]
         self.assertIn("SOURCE_FILE_INVENTORY_MISSING", reasons)
         self.assertIn("ORIGINAL_LICENSE_DIGEST_MISSING", reasons)
@@ -55,7 +68,7 @@ class PreflightTests(unittest.TestCase):
         requests["requests"][0]["tested_evidence"] = {"ci_run_id": 12345}
         from library_review_evidence_crosscheck import digest
         evidence["reports"][0]["review_request_sha256"] = digest(requests["requests"][0])
-        result = assess(requests, evidence)
+        result = assess(requests, evidence, self._audit(requests))
         reasons = result["items"][0]["reasons"]
         self.assertNotIn("SOURCE_FILE_INVENTORY_MISSING", reasons)
         self.assertNotIn("ORIGINAL_LICENSE_DIGEST_MISSING", reasons)
