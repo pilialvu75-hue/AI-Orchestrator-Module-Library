@@ -12,6 +12,7 @@ from library_consumer_execution import consume, canonical
 def envelope(files):
     package = {
         "schema": "ai-orchestrator.library-module-package.v1",
+        "asset_id": "demo.external", "version": "0.1.0",
         "pin": "demo.external@0.1.0", "availability": "active",
         "files": [{"target_path": name, "content": content} for name, content in files],
     }
@@ -57,6 +58,14 @@ class ConsumerExecutionTests(unittest.TestCase):
     def test_no_tests_cannot_be_consumer_proof(self):
         with self.assertRaisesRegex(ValueError, "no executable"):
             consume(envelope(FILES[:1]), runner=lambda *_: self.fail("must not execute"))
+
+    def test_rehashed_but_wrong_identity_pin_rejected(self):
+        value = envelope(FILES)
+        value["package"]["pin"] = "different.external@0.1.0"
+        value["package_sha256"] = hashlib.sha256(
+            canonical(value["package"]).encode()).hexdigest()
+        with self.assertRaisesRegex(ValueError, "identity pin mismatch"):
+            consume(value, runner=lambda *_: self.fail("must not execute"))
 
     def test_tampered_package_rejected(self):
         value = envelope(FILES)
