@@ -67,6 +67,17 @@ class ConsumerExecutionTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "identity pin mismatch"):
             consume(value, runner=lambda *_: self.fail("must not execute"))
 
+    def test_source_only_upstream_is_not_aivexus_consumer_proof(self):
+        value = envelope(FILES)
+        value["package"]["source"] = {
+            "payload_type": "upstream_reference",
+            "adapter_included": False,
+        }
+        value["package_sha256"] = hashlib.sha256(
+            canonical(value["package"]).encode()).hexdigest()
+        with self.assertRaisesRegex(ValueError, "source-only upstream export"):
+            consume(value, runner=lambda *_: self.fail("must not execute"))
+
     def test_tampered_package_rejected(self):
         value = envelope(FILES)
         value["package"]["files"][1]["content"] = "changed"
