@@ -44,6 +44,11 @@ def consume(envelope, *, runner=None):
             or not isinstance(version, str) or not version
             or pin != f"{asset_id}@{version}"):
         raise ValueError("consumer package identity pin mismatch")
+    source = package.get("source") or {}
+    if not isinstance(source, dict):
+        raise ValueError("invalid package source metadata")
+    if source.get("payload_type") == "upstream_reference" and source.get("adapter_included") is False:
+        raise ValueError("source-only upstream export is not an integrated Aivexus consumer")
     if package.get("availability") != "active":
         raise ValueError("consumer requires active certified package")
     files = package.get("files")
