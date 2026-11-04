@@ -16,6 +16,14 @@ def assess(requests, evidence, static_audit=None):
                 or len(static_audit.get('items', [])) != len(requests['requests'])):
             raise ValueError('static source audit does not match review collection')
     verify(requests, evidence)
+    # Require a unique source-bound audit record for every requested asset.
+    # Positional comparison alone must not permit duplicated audit identities.
+    audit_keys = [
+        (row.get('asset_id'), row.get('source_payload_sha256'))
+        for row in static_audit['items'] if isinstance(row, dict)
+    ]
+    if len(audit_keys) != len(set(audit_keys)):
+        raise ValueError('duplicate static audit source identity')
     rows = []
     for index, (item, report) in enumerate(zip(requests["requests"], evidence["reports"])):
         reasons = []
