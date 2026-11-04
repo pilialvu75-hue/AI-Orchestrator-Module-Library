@@ -29,6 +29,19 @@ class PreflightTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "static audit item must be an object"):
             assess(requests, evidence, audit)
 
+    def test_duplicate_static_audit_identity_is_rejected(self):
+        requests, evidence = packet()
+        audit = self._audit(requests)
+        audit['items'].append(dict(audit['items'][0]))
+        requests['requests'].append(dict(requests['requests'][0], asset_id='second.asset'))
+        requests['count'] = 2
+        evidence['reports'].append(dict(evidence['reports'][0], asset_id='second.asset'))
+        evidence['count'] = 2
+        from library_review_evidence_crosscheck import digest
+        evidence['reports'][1]['review_request_sha256'] = digest(requests['requests'][1])
+        with self.assertRaisesRegex(ValueError, 'duplicate static audit source identity'):
+            assess(requests, evidence, audit)
+
     def test_missing_static_audit_is_rejected(self):
         requests, evidence = packet()
         with self.assertRaisesRegex(ValueError, 'independent static source audit is required'):
