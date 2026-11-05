@@ -16,7 +16,7 @@
     {
       "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
       "baseline_at": "2026-10-03T16:20:00Z",
-      "cursor_merged_at": "2026-11-05T14:10:34Z"
+      "cursor_merged_at": "2026-11-05T15:30:25Z"
     },
     {
       "repository": "pilialvu75-hue/Ai-orchestrator-diagnostics",
@@ -3366,6 +3366,40 @@
       "url": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/54b6734892f0cb55f3195d657a01a7fe1e816c8a",
       "match_ref": null,
       "reconciliation": null
+    },
+    {
+      "incident_id": "97193c8a45608161e306",
+      "status": "UNRECONCILED",
+      "detected_at": "2026-11-05T15:39:34Z",
+      "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
+      "kind": "direct_commit",
+      "pull_request": null,
+      "merge_sha": null,
+      "commit_sha": "477a5527e3cfce38fa9257eed4ded05e80a676dc",
+      "head_branch": null,
+      "base_branch": "main",
+      "change_at": "2026-11-05T15:29:28Z",
+      "title": "fix(web): distinguere esaurimento token nei Self-Test NVIDIA reasoning (#1005)",
+      "url": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/477a5527e3cfce38fa9257eed4ded05e80a676dc",
+      "match_ref": null,
+      "reconciliation": null
+    },
+    {
+      "incident_id": "df96163fa3ee38009391",
+      "status": "UNRECONCILED",
+      "detected_at": "2026-11-05T15:39:34Z",
+      "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
+      "kind": "direct_commit",
+      "pull_request": null,
+      "merge_sha": null,
+      "commit_sha": "41083328d111303f508449c91f808c8dcca8414f",
+      "head_branch": null,
+      "base_branch": "main",
+      "change_at": "2026-11-05T15:30:25Z",
+      "title": "deploy(web): publish verified Access and NVIDIA inference diagnostics",
+      "url": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/41083328d111303f508449c91f808c8dcca8414f",
+      "match_ref": null,
+      "reconciliation": null
     }
   ],
   "reconciliation_history": [
@@ -3376,35 +3410,35 @@
       "note": "Known motivating example for CP-HARDEN-03. It predates this incremental detector and is not retroactively reopened."
     }
   ],
-  "last_scan_at": "2026-11-05T14:39:21Z",
+  "last_scan_at": "2026-11-05T15:39:34Z",
   "scan_health": {
     "pilialvu75-hue/AI-Orchestrator-Module-Library": {
       "state": "OK",
-      "last_success_at": "2026-11-05T14:39:21Z",
+      "last_success_at": "2026-11-05T15:39:34Z",
       "last_failure_at": null,
       "error_code": null
     },
     "pilialvu75-hue/Ai-orchestrator-riserva": {
       "state": "OK",
-      "last_success_at": "2026-11-05T14:39:21Z",
+      "last_success_at": "2026-11-05T15:39:34Z",
       "last_failure_at": "2026-10-28T07:39:58Z",
       "error_code": null
     },
     "pilialvu75-hue/Ai-orchestrator-diagnostics": {
       "state": "OK",
-      "last_success_at": "2026-11-05T14:39:21Z",
+      "last_success_at": "2026-11-05T15:39:34Z",
       "last_failure_at": "2026-10-28T07:39:58Z",
       "error_code": null
     },
     "pilialvu75-hue/AI-Orchestrator-Module-Researcher": {
       "state": "OK",
-      "last_success_at": "2026-11-05T14:39:21Z",
+      "last_success_at": "2026-11-05T15:39:34Z",
       "last_failure_at": "2026-10-28T07:39:58Z",
       "error_code": null
     },
     "pilialvu75-hue/Ai_orchestrator-prova": {
       "state": "OK",
-      "last_success_at": "2026-11-05T14:39:21Z",
+      "last_success_at": "2026-11-05T15:39:34Z",
       "last_failure_at": "2026-10-28T07:39:58Z",
       "error_code": null
     }
