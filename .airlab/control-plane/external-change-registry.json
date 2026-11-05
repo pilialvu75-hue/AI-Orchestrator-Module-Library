@@ -16,7 +16,7 @@
     {
       "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
       "baseline_at": "2026-10-03T16:20:00Z",
-      "cursor_merged_at": "2026-11-04T23:31:47Z"
+      "cursor_merged_at": "2026-11-05T08:03:53Z"
     },
     {
       "repository": "pilialvu75-hue/Ai-orchestrator-diagnostics",
@@ -3060,6 +3060,40 @@
       "url": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/a2a93d673b4b8751878af3abdef4b12a3751cb66",
       "match_ref": null,
       "reconciliation": null
+    },
+    {
+      "incident_id": "29cf57c21ae3aa6aec1a",
+      "status": "UNRECONCILED",
+      "detected_at": "2026-11-05T08:39:21Z",
+      "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
+      "kind": "direct_commit",
+      "pull_request": null,
+      "merge_sha": null,
+      "commit_sha": "9ebe44e5e2b01eefd2223868a68db7ccef77bd40",
+      "head_branch": null,
+      "base_branch": "main",
+      "change_at": "2026-11-05T07:39:28Z",
+      "title": "[source-only] feat(memory ME-0): cancellazione definitiva chat dal cestino senza perdere ricordi USER (#994)",
+      "url": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/9ebe44e5e2b01eefd2223868a68db7ccef77bd40",
+      "match_ref": null,
+      "reconciliation": null
+    },
+    {
+      "incident_id": "21cb1dc67d934eae531b",
+      "status": "UNRECONCILED",
+      "detected_at": "2026-11-05T08:39:21Z",
+      "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
+      "kind": "direct_commit",
+      "pull_request": null,
+      "merge_sha": null,
+      "commit_sha": "19c7f5bea956dee91aec1a22f207391db89043a1",
+      "head_branch": null,
+      "base_branch": "main",
+      "change_at": "2026-11-05T08:03:53Z",
+      "title": "[source-only] fix(memory ME-0): impedisci la resurrezione degli indici dopo eliminazione chat (#995)",
+      "url": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/19c7f5bea956dee91aec1a22f207391db89043a1",
+      "match_ref": null,
+      "reconciliation": null
     }
   ],
   "reconciliation_history": [
@@ -3070,35 +3104,35 @@
       "note": "Known motivating example for CP-HARDEN-03. It predates this incremental detector and is not retroactively reopened."
     }
   ],
-  "last_scan_at": "2026-11-05T07:39:25Z",
+  "last_scan_at": "2026-11-05T08:39:21Z",
   "scan_health": {
     "pilialvu75-hue/AI-Orchestrator-Module-Library": {
       "state": "OK",
-      "last_success_at": "2026-11-05T07:39:25Z",
+      "last_success_at": "2026-11-05T08:39:21Z",
       "last_failure_at": null,
       "error_code": null
     },
     "pilialvu75-hue/Ai-orchestrator-riserva": {
       "state": "OK",
-      "last_success_at": "2026-11-05T07:39:25Z",
+      "last_success_at": "2026-11-05T08:39:21Z",
       "last_failure_at": "2026-10-28T07:39:58Z",
       "error_code": null
     },
     "pilialvu75-hue/Ai-orchestrator-diagnostics": {
       "state": "OK",
-      "last_success_at": "2026-11-05T07:39:25Z",
+      "last_success_at": "2026-11-05T08:39:21Z",
       "last_failure_at": "2026-10-28T07:39:58Z",
       "error_code": null
     },
     "pilialvu75-hue/AI-Orchestrator-Module-Researcher": {
       "state": "OK",
-      "last_success_at": "2026-11-05T07:39:25Z",
+      "last_success_at": "2026-11-05T08:39:21Z",
       "last_failure_at": "2026-10-28T07:39:58Z",
       "error_code": null
     },
     "pilialvu75-hue/Ai_orchestrator-prova": {
       "state": "OK",
-      "last_success_at": "2026-11-05T07:39:25Z",
+      "last_success_at": "2026-11-05T08:39:21Z",
       "last_failure_at": "2026-10-28T07:39:58Z",
       "error_code": null
     }
