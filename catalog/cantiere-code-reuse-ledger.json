@@ -1,6 +1,6 @@
 {
   "baseline_note": "Start from Cantiere main prior to first real experimental Library sandbox import PR #919. Older source needs a separate historical backfill; no full-history coverage is claimed.",
-  "last_scanned_sha": "5b8c4ddcdcc01cf553faea15bdc54a06838e336a",
+  "last_scanned_sha": "a2a93d673b4b8751878af3abdef4b12a3751cb66",
   "observations": [
     {
       "blob_sha": "5a65cc4239184866e02178141661db4faac24fd1",
@@ -2347,6 +2347,425 @@
         "_RecordingChatRepository",
         "_PromptMemoryPersistence"
       ],
+      "tested": false
+    },
+    {
+      "blob_sha": "c826441e4bcdaa8dba6e8599d33aa1ab9e2f9742",
+      "capability_hint": "ai.local_inference",
+      "certified": false,
+      "classification": "candidate_requires_extraction_and_tests",
+      "import_count": 0,
+      "module_status": "not_materialized",
+      "path": "functions/api/cantiere/inference.js",
+      "source_bytes": 13918,
+      "source_commit": "a2a93d673b4b8751878af3abdef4b12a3751cb66",
+      "source_sha256": "ee4687b03845dab81bcfe93ba35bbd7a1685ccaf4b048a0cae58712ae5bc996f",
+      "symbols": [
+        "jsonResponse",
+        "error",
+        "upstreamError",
+        "parseRoutes",
+        "providerForEndpoint",
+        "boundedNumber",
+        "validateMessages",
+        "safeIdentity",
+        "isTransientStatus",
+        "retryDelayMs",
+        "sleep"
+      ],
+      "tested": false
+    },
+    {
+      "blob_sha": "a355b24f85884aa71329e207368c3bd9dafed36d",
+      "capability_hint": "utility.reuse",
+      "certified": false,
+      "classification": "candidate_requires_extraction_and_tests",
+      "import_count": 0,
+      "module_status": "not_materialized",
+      "path": "functions/api/cantiere/models.js",
+      "source_bytes": 2851,
+      "source_commit": "a2a93d673b4b8751878af3abdef4b12a3751cb66",
+      "source_sha256": "0c02fd03d41b32b115da3757ccad0b185cf1e84163491394953e5e4ecb2c338e",
+      "symbols": [
+        "providerLabel",
+        "catalogue",
+        "onRequest"
+      ],
+      "tested": false
+    },
+    {
+      "blob_sha": "e793e46843657a9011b22f1afbe2fd8237453fd7",
+      "capability_hint": "utility.reuse",
+      "certified": false,
+      "classification": "candidate_requires_extraction_and_tests",
+      "import_count": 14,
+      "module_status": "not_materialized",
+      "path": "lib/app_factory/workshop/web/workshop_web_cloud_broker.dart",
+      "source_bytes": 11421,
+      "source_commit": "a2a93d673b4b8751878af3abdef4b12a3751cb66",
+      "source_sha256": "2de5c4e73f11b787e6ee545f825aa456876f8825637720973249ed41846e6107",
+      "symbols": [
+        "WorkshopWebCloudCapability",
+        "WorkshopWebCloudBrokerHealth",
+        "WorkshopWebCloudBrokerClient",
+        "WorkshopWebCloudRuntimeProvider"
+      ],
+      "tested": false
+    },
+    {
+      "blob_sha": "69ac7d57909ac2baafbcdfdf6b41cb820412619c",
+      "capability_hint": "utility.reuse",
+      "certified": false,
+      "classification": "test_support",
+      "import_count": 3,
+      "module_status": "not_materialized",
+      "path": "lib/app_factory/workshop/web/workshop_web_cloud_self_test.dart",
+      "source_bytes": 5444,
+      "source_commit": "a2a93d673b4b8751878af3abdef4b12a3751cb66",
+      "source_sha256": "4b7c1f1261ff4bcc7c060174cdd9c1a97926d96ff1496c6ad9707429186d79ef",
+      "symbols": [
+        "WorkshopWebCloudSelfTestResult",
+        "WorkshopWebCloudSelfTestClient"
+      ],
+      "tested": false
+    },
+    {
+      "blob_sha": "d3b8db8f70047a8531e12ea956f32cc2a7aa9658",
+      "capability_hint": "utility.reuse",
+      "certified": false,
+      "classification": "candidate_requires_extraction_and_tests",
+      "import_count": 5,
+      "module_status": "not_materialized",
+      "path": "lib/app_factory/workshop/web/workshop_web_cloud_tools_page.dart",
+      "source_bytes": 11217,
+      "source_commit": "a2a93d673b4b8751878af3abdef4b12a3751cb66",
+      "source_sha256": "80f1964d6c4fe391e5913a1d7123898351d8de40b97796750d686172acb18e3a",
+      "symbols": [
+        "WorkshopWebCloudToolsPage",
+        "_WorkshopWebCloudToolsPageState"
+      ],
+      "tested": false
+    },
+    {
+      "blob_sha": "7ad95ae409767043c5c70dcd4bfcaaf437ce6f3c",
+      "capability_hint": "utility.reuse",
+      "certified": false,
+      "classification": "candidate_requires_extraction_and_tests",
+      "import_count": 3,
+      "module_status": "not_materialized",
+      "path": "lib/app_factory/workshop/web/workshop_web_language.dart",
+      "source_bytes": 22944,
+      "source_commit": "a2a93d673b4b8751878af3abdef4b12a3751cb66",
+      "source_sha256": "6230694549bcdc7cdbb922e310d0451341735aa5d6c10d8bb306ea53fa525624",
+      "symbols": [
+        "WorkshopWebLanguage",
+        "WorkshopWebLanguageScope"
+      ],
+      "tested": false
+    },
+    {
+      "blob_sha": "74fc2ab087a156697f94d04685ced1e07ca82d9a",
+      "capability_hint": "utility.reuse",
+      "certified": false,
+      "classification": "candidate_requires_extraction_and_tests",
+      "import_count": 5,
+      "module_status": "not_materialized",
+      "path": "lib/app_factory/workshop/web/workshop_web_models.dart",
+      "source_bytes": 5589,
+      "source_commit": "a2a93d673b4b8751878af3abdef4b12a3751cb66",
+      "source_sha256": "c2b0cd05b9afac8e0fa6a30b8740945512f71363ed93786023750f0f5741058c",
+      "symbols": [
+        "WorkshopWebModelRoute",
+        "WorkshopWebModelCatalogue",
+        "WorkshopWebModelCatalogueClient",
+        "WorkshopWebModelPreference"
+      ],
+      "tested": false
+    },
+    {
+      "blob_sha": "76f0bd5fe361d1cc44d46da6b95dfda755882186",
+      "capability_hint": "utility.reuse",
+      "certified": false,
+      "classification": "candidate_requires_extraction_and_tests",
+      "import_count": 5,
+      "module_status": "not_materialized",
+      "path": "lib/app_factory/workshop/web/workshop_web_projects_page.dart",
+      "source_bytes": 32006,
+      "source_commit": "a2a93d673b4b8751878af3abdef4b12a3751cb66",
+      "source_sha256": "08e6d7609ff9b52e5131c3a8b0dcc500374f4ff28955443cc9dfc0d5ec000619",
+      "symbols": [
+        "WorkshopWebProjectsPage",
+        "_WorkshopWebProjectsPageState",
+        "_EmptyProjectCard"
+      ],
+      "tested": false
+    },
+    {
+      "blob_sha": "285f4aef1b4be4df293677030695bc0ff84cf490",
+      "capability_hint": "utility.reuse",
+      "certified": false,
+      "classification": "candidate_requires_extraction_and_tests",
+      "import_count": 6,
+      "module_status": "not_materialized",
+      "path": "lib/app_factory/workshop/web/workshop_web_shell.dart",
+      "source_bytes": 15184,
+      "source_commit": "a2a93d673b4b8751878af3abdef4b12a3751cb66",
+      "source_sha256": "a70ab5e794fc7d5961dbe14ece6e97da95c356ff77750a2a06a584a5aaf8a065",
+      "symbols": [
+        "WorkshopWebCapabilityState",
+        "WorkshopWebCapability",
+        "WorkshopWebShell",
+        "_CloudAutoCard",
+        "_CloudAutoCardState",
+        "_DurableStorageCard",
+        "_DurableStorageCardState",
+        "_CapabilityCard"
+      ],
+      "tested": false
+    },
+    {
+      "blob_sha": "dcab3caeee678c3e032cf45381d4507a63b071d0",
+      "capability_hint": "utility.reuse",
+      "certified": false,
+      "classification": "candidate_requires_extraction_and_tests",
+      "import_count": 3,
+      "module_status": "not_materialized",
+      "path": "lib/app_factory/workshop/workshop_chat_controller.dart",
+      "source_bytes": 18638,
+      "source_commit": "a2a93d673b4b8751878af3abdef4b12a3751cb66",
+      "source_sha256": "2a56eb249ee8569303db9c724e4ccfce78cdc851e5170554a55e787d1d872970",
+      "symbols": [
+        "WorkshopChatReplyKind",
+        "_WorkshopParsedReply",
+        "WorkshopChatController"
+      ],
+      "tested": false
+    },
+    {
+      "blob_sha": "a214ae9f74c2ba900ab3a9537fb7f86828116eca",
+      "capability_hint": "utility.reuse",
+      "certified": false,
+      "classification": "app_bound_or_helper_review",
+      "import_count": 0,
+      "module_status": "not_materialized",
+      "path": "lib/core/config/ai/assistant_reply_language_policy.dart",
+      "source_bytes": 3705,
+      "source_commit": "a2a93d673b4b8751878af3abdef4b12a3751cb66",
+      "source_sha256": "4e62f3580ba8f2e32b99f1315e033b0a065f4d47567d89e8e58e4ea308b1ba32",
+      "symbols": [],
+      "tested": false
+    },
+    {
+      "blob_sha": "78873f67fcc76afbff6bc75fe312f8dac5a07d8b",
+      "capability_hint": "ai.local_inference",
+      "certified": false,
+      "classification": "candidate_requires_extraction_and_tests",
+      "import_count": 19,
+      "module_status": "not_materialized",
+      "path": "lib/core/runtime/inference/inference_service.dart",
+      "source_bytes": 48536,
+      "source_commit": "a2a93d673b4b8751878af3abdef4b12a3751cb66",
+      "source_sha256": "d3bf24bbc4803b79a5cb88ef58f8bd3eb50132ff7b6f9ff4327a565e609bad3a",
+      "symbols": [
+        "InferenceService"
+      ],
+      "tested": false
+    },
+    {
+      "blob_sha": "129286d12e0de4898941dac4123955ab96ef8d52",
+      "capability_hint": "ai.local_inference",
+      "certified": false,
+      "classification": "candidate_requires_extraction_and_tests",
+      "import_count": 7,
+      "module_status": "not_materialized",
+      "path": "lib/core/runtime/inference/local_prompt_templates.dart",
+      "source_bytes": 30560,
+      "source_commit": "a2a93d673b4b8751878af3abdef4b12a3751cb66",
+      "source_sha256": "1ee390bf292036503b9eb8c92bef700ec7ac422638220bd97a6687dd71e3ad70",
+      "symbols": [
+        "LocalPromptTemplates"
+      ],
+      "tested": false
+    },
+    {
+      "blob_sha": "2378400d8a1d9df3cb24914bc4bb402552724c5a",
+      "capability_hint": "network.search",
+      "certified": false,
+      "classification": "app_bound_or_helper_review",
+      "import_count": 0,
+      "module_status": "not_materialized",
+      "path": "lib/core/tools/search/assistant_web_search_policy.dart",
+      "source_bytes": 16412,
+      "source_commit": "a2a93d673b4b8751878af3abdef4b12a3751cb66",
+      "source_sha256": "344787e2d4f57c6bd2b1b72b0a463fe709082906cb492019a757a3ec65bd2b70",
+      "symbols": [],
+      "tested": false
+    },
+    {
+      "blob_sha": "054d21b441d152e446b382dfcd4f450b927ac986",
+      "capability_hint": "utility.reuse",
+      "certified": false,
+      "classification": "candidate_requires_extraction_and_tests",
+      "import_count": 17,
+      "module_status": "not_materialized",
+      "path": "lib/web_main.dart",
+      "source_bytes": 26185,
+      "source_commit": "a2a93d673b4b8751878af3abdef4b12a3751cb66",
+      "source_sha256": "938d52e643a243e9f82bb828de70d35e360ca13418b7ef658f17d1e6430384e7",
+      "symbols": [
+        "WorkshopWebApp",
+        "WorkshopWebHome",
+        "_WorkshopWebHomeState",
+        "WorkshopWebChatPage",
+        "_WorkshopWebChatPageState",
+        "_EmptyConversation",
+        "_MessageBubble",
+        "_StatusNotice"
+      ],
+      "tested": false
+    },
+    {
+      "blob_sha": "c91911725104d510593be6295aecfb62a34eedac",
+      "capability_hint": "utility.reuse",
+      "certified": false,
+      "classification": "test_support",
+      "import_count": 2,
+      "module_status": "not_materialized",
+      "path": "test/app_factory/workshop/web/workshop_web_cloud_self_test_contract_test.dart",
+      "source_bytes": 1640,
+      "source_commit": "a2a93d673b4b8751878af3abdef4b12a3751cb66",
+      "source_sha256": "5ca4f6e5a65b7af00a138614ba6e3fdccdb18b289345f2b4241339c537b09b11",
+      "symbols": [],
+      "tested": false
+    },
+    {
+      "blob_sha": "28e509bfa33ebad27b1bef58dadc6dd5e1d0ac59",
+      "capability_hint": "utility.reuse",
+      "certified": false,
+      "classification": "test_support",
+      "import_count": 5,
+      "module_status": "not_materialized",
+      "path": "test/app_factory/workshop/web/workshop_web_cloud_self_test_test.dart",
+      "source_bytes": 4839,
+      "source_commit": "a2a93d673b4b8751878af3abdef4b12a3751cb66",
+      "source_sha256": "2e072be934ccc9c0ce807d91713c0a60435522a230deed9ec87032ae9723f799",
+      "symbols": [],
+      "tested": false
+    },
+    {
+      "blob_sha": "a6d3c685d40fa16e437d172c93e26c6e55ef8ed9",
+      "capability_hint": "utility.reuse",
+      "certified": false,
+      "classification": "test_support",
+      "import_count": 7,
+      "module_status": "not_materialized",
+      "path": "test/app_factory/workshop/web/workshop_web_language_test.dart",
+      "source_bytes": 2787,
+      "source_commit": "a2a93d673b4b8751878af3abdef4b12a3751cb66",
+      "source_sha256": "a3f320fd58e53ac03c45057d3f7178a797abecff85113168a22043869690b9cb",
+      "symbols": [],
+      "tested": false
+    },
+    {
+      "blob_sha": "1c5c6e4f671c30c45c482bdd2365f7db95336179",
+      "capability_hint": "utility.reuse",
+      "certified": false,
+      "classification": "test_support",
+      "import_count": 11,
+      "module_status": "not_materialized",
+      "path": "test/app_factory/workshop/web/workshop_web_model_tools_test.dart",
+      "source_bytes": 6099,
+      "source_commit": "a2a93d673b4b8751878af3abdef4b12a3751cb66",
+      "source_sha256": "081fd0a536e6a525b1cb6b8c700f780c85b5164a6f4756a9bf904e68214ee19b",
+      "symbols": [],
+      "tested": false
+    },
+    {
+      "blob_sha": "6b7b729a1248c731b4a2a344b3e3e4cf937a1520",
+      "capability_hint": "utility.reuse",
+      "certified": false,
+      "classification": "test_support",
+      "import_count": 9,
+      "module_status": "not_materialized",
+      "path": "test/app_factory/workshop/web/workshop_web_shell_test.dart",
+      "source_bytes": 4960,
+      "source_commit": "a2a93d673b4b8751878af3abdef4b12a3751cb66",
+      "source_sha256": "fc11151c38b9fe2349ecf1850871313489e399e48eecdcec44ebbe7d702079e3",
+      "symbols": [],
+      "tested": false
+    },
+    {
+      "blob_sha": "eaa3a5be914b6aa0e44b4ea5399a153388545c57",
+      "capability_hint": "utility.reuse",
+      "certified": false,
+      "classification": "test_support",
+      "import_count": 2,
+      "module_status": "not_materialized",
+      "path": "test/core/config/ai/assistant_reply_language_policy_test.dart",
+      "source_bytes": 2793,
+      "source_commit": "a2a93d673b4b8751878af3abdef4b12a3751cb66",
+      "source_sha256": "393f4f5afd5ff387dd26ad5c18b35740af55948e876982f290d744f07f06bdab",
+      "symbols": [],
+      "tested": false
+    },
+    {
+      "blob_sha": "af2ca97184ff7dcf10f2d064f59fbf562f95d400",
+      "capability_hint": "utility.reuse",
+      "certified": false,
+      "classification": "test_support",
+      "import_count": 10,
+      "module_status": "not_materialized",
+      "path": "test/core/memory/assistant_memory_sqlite_restart_integration_test.dart",
+      "source_bytes": 12278,
+      "source_commit": "a2a93d673b4b8751878af3abdef4b12a3751cb66",
+      "source_sha256": "bfeb5c2a38fb48627bbe7503b6de00c3dd2ab1b94068fa8ccb033189ca37ca51",
+      "symbols": [],
+      "tested": false
+    },
+    {
+      "blob_sha": "cb6e5f7f38e3485e09179fb29cb9b5901c592c9d",
+      "capability_hint": "ai.local_inference",
+      "certified": false,
+      "classification": "test_support",
+      "import_count": 20,
+      "module_status": "not_materialized",
+      "path": "test/core/runtime/inference/inference_service_test.dart",
+      "source_bytes": 34077,
+      "source_commit": "a2a93d673b4b8751878af3abdef4b12a3751cb66",
+      "source_sha256": "026b58b9a0a39d73a40815ae8a4d703dd834750e395d16b7a2451584937704ae",
+      "symbols": [
+        "_FinalThenNaturalCloseProvider",
+        "FakeLocalRuntimeProvider",
+        "_FakeWebSearchTool"
+      ],
+      "tested": false
+    },
+    {
+      "blob_sha": "bd8c0906aaa8cd2e11de603fa7687d4c2f518224",
+      "capability_hint": "ai.local_inference",
+      "certified": false,
+      "classification": "test_support",
+      "import_count": 6,
+      "module_status": "not_materialized",
+      "path": "test/core/runtime/inference/local_prompt_templates_test.dart",
+      "source_bytes": 11674,
+      "source_commit": "a2a93d673b4b8751878af3abdef4b12a3751cb66",
+      "source_sha256": "9fe928da6ac2d27b2dc7bab4f4a74f0328ee01475380066cebfab53395d0f661",
+      "symbols": [],
+      "tested": false
+    },
+    {
+      "blob_sha": "e02b1550a5da87bddf9b696aedf5063d7937c7bf",
+      "capability_hint": "network.search",
+      "certified": false,
+      "classification": "test_support",
+      "import_count": 2,
+      "module_status": "not_materialized",
+      "path": "test/core/tools/assistant_web_search_policy_test.dart",
+      "source_bytes": 13948,
+      "source_commit": "a2a93d673b4b8751878af3abdef4b12a3751cb66",
+      "source_sha256": "c6a63aeba481968e3ad7cafe8c8e765d8a6579b54b83fb5a8c0d1903393d6dda",
+      "symbols": [],
       "tested": false
     }
   ],
