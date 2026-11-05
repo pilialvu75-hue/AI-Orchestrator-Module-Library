@@ -16,7 +16,7 @@
     {
       "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
       "baseline_at": "2026-10-03T16:20:00Z",
-      "cursor_merged_at": "2026-11-05T10:30:48Z"
+      "cursor_merged_at": "2026-11-05T13:37:51Z"
     },
     {
       "repository": "pilialvu75-hue/Ai-orchestrator-diagnostics",
@@ -3196,6 +3196,142 @@
       "url": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/9dc9686ffeb8579e7bf92a5ae06abfa699b809cf",
       "match_ref": null,
       "reconciliation": null
+    },
+    {
+      "incident_id": "412d849ca97074c9e51d",
+      "status": "UNRECONCILED",
+      "detected_at": "2026-11-05T13:39:32Z",
+      "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
+      "kind": "direct_commit",
+      "pull_request": null,
+      "merge_sha": null,
+      "commit_sha": "f3c279cadf5e93d10afaf0d27a07184dd1cbd1d7",
+      "head_branch": null,
+      "base_branch": "main",
+      "change_at": "2026-11-05T13:00:10Z",
+      "title": "[source-only] feat(memory ME-1): colore dell'auto dal dialogo naturale IT/EN/FR/ES (#999)",
+      "url": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/f3c279cadf5e93d10afaf0d27a07184dd1cbd1d7",
+      "match_ref": null,
+      "reconciliation": null
+    },
+    {
+      "incident_id": "972db9ec012789cdb769",
+      "status": "UNRECONCILED",
+      "detected_at": "2026-11-05T13:39:32Z",
+      "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
+      "kind": "direct_commit",
+      "pull_request": null,
+      "merge_sha": null,
+      "commit_sha": "8c91bcd064bc5a1b1dedec435a0d5dddc8a4b182",
+      "head_branch": null,
+      "base_branch": "main",
+      "change_at": "2026-11-05T13:13:02Z",
+      "title": "feat: Kimi K2.6 and DeepSeek V4.1 Flash for Web and Hybrid (#1001)",
+      "url": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/8c91bcd064bc5a1b1dedec435a0d5dddc8a4b182",
+      "match_ref": null,
+      "reconciliation": null
+    },
+    {
+      "incident_id": "8b86d747c28241922154",
+      "status": "UNRECONCILED",
+      "detected_at": "2026-11-05T13:39:32Z",
+      "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
+      "kind": "direct_commit",
+      "pull_request": null,
+      "merge_sha": null,
+      "commit_sha": "f512dc58cf148d05ec8e333b63cab502e09ba1aa",
+      "head_branch": null,
+      "base_branch": "main",
+      "change_at": "2026-11-05T13:13:22Z",
+      "title": "ops(web): preflight two NVIDIA NIM 500B+ manual routes in Cloudflare",
+      "url": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/f512dc58cf148d05ec8e333b63cab502e09ba1aa",
+      "match_ref": null,
+      "reconciliation": null
+    },
+    {
+      "incident_id": "1a587ba1ad4f2e1f3836",
+      "status": "UNRECONCILED",
+      "detected_at": "2026-11-05T13:39:32Z",
+      "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
+      "kind": "direct_commit",
+      "pull_request": null,
+      "merge_sha": null,
+      "commit_sha": "b3d7008463df0e1998ac8733954fb18c475aae71",
+      "head_branch": null,
+      "base_branch": "main",
+      "change_at": "2026-11-05T13:13:57Z",
+      "title": "ops(web): enroll approved Kimi 1T + DeepSeek 552B as manual-only free-trial routes",
+      "url": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/b3d7008463df0e1998ac8733954fb18c475aae71",
+      "match_ref": null,
+      "reconciliation": null
+    },
+    {
+      "incident_id": "f52e38d471ad631554a0",
+      "status": "UNRECONCILED",
+      "detected_at": "2026-11-05T13:39:32Z",
+      "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
+      "kind": "direct_commit",
+      "pull_request": null,
+      "merge_sha": null,
+      "commit_sha": "99f2bbb101df1542b6db0d38fbdd7d1874da1d24",
+      "head_branch": null,
+      "base_branch": "main",
+      "change_at": "2026-11-05T13:14:54Z",
+      "title": "deploy(web): publish manual-only Kimi 1T and DeepSeek 552B routes",
+      "url": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/99f2bbb101df1542b6db0d38fbdd7d1874da1d24",
+      "match_ref": null,
+      "reconciliation": null
+    },
+    {
+      "incident_id": "4e31a532f17851efc764",
+      "status": "UNRECONCILED",
+      "detected_at": "2026-11-05T13:39:32Z",
+      "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
+      "kind": "direct_commit",
+      "pull_request": null,
+      "merge_sha": null,
+      "commit_sha": "af22c001f796d76c06ee039ac1ca9696347c0c38",
+      "head_branch": null,
+      "base_branch": "main",
+      "change_at": "2026-11-05T13:35:52Z",
+      "title": "fix(web): diagnose large NIM model self-test failures safely (#1002)",
+      "url": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/af22c001f796d76c06ee039ac1ca9696347c0c38",
+      "match_ref": null,
+      "reconciliation": null
+    },
+    {
+      "incident_id": "047a1c7cda57c79656a9",
+      "status": "UNRECONCILED",
+      "detected_at": "2026-11-05T13:39:32Z",
+      "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
+      "kind": "direct_commit",
+      "pull_request": null,
+      "merge_sha": null,
+      "commit_sha": "74b2f81298d55b1a26c70534fed17376d8780298",
+      "head_branch": null,
+      "base_branch": "main",
+      "change_at": "2026-11-05T13:36:23Z",
+      "title": "deploy(web): publish safer large NVIDIA model self-test and diagnostics",
+      "url": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/74b2f81298d55b1a26c70534fed17376d8780298",
+      "match_ref": null,
+      "reconciliation": null
+    },
+    {
+      "incident_id": "f24b7d679a33b3d13638",
+      "status": "UNRECONCILED",
+      "detected_at": "2026-11-05T13:39:32Z",
+      "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
+      "kind": "direct_commit",
+      "pull_request": null,
+      "merge_sha": null,
+      "commit_sha": "b795b3b2cf46ad3290d64972133b114fd793decb",
+      "head_branch": null,
+      "base_branch": "main",
+      "change_at": "2026-11-05T13:37:51Z",
+      "title": "[source-only] test(memory ME-0/ME-1): ricordi naturali persistono dopo purge e riavvio (#1000)",
+      "url": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/b795b3b2cf46ad3290d64972133b114fd793decb",
+      "match_ref": null,
+      "reconciliation": null
     }
   ],
   "reconciliation_history": [
@@ -3206,35 +3342,35 @@
       "note": "Known motivating example for CP-HARDEN-03. It predates this incremental detector and is not retroactively reopened."
     }
   ],
-  "last_scan_at": "2026-11-05T12:40:26Z",
+  "last_scan_at": "2026-11-05T13:39:32Z",
   "scan_health": {
     "pilialvu75-hue/AI-Orchestrator-Module-Library": {
       "state": "OK",
-      "last_success_at": "2026-11-05T12:40:26Z",
+      "last_success_at": "2026-11-05T13:39:32Z",
       "last_failure_at": null,
       "error_code": null
     },
     "pilialvu75-hue/Ai-orchestrator-riserva": {
       "state": "OK",
-      "last_success_at": "2026-11-05T12:40:26Z",
+      "last_success_at": "2026-11-05T13:39:32Z",
       "last_failure_at": "2026-10-28T07:39:58Z",
       "error_code": null
     },
     "pilialvu75-hue/Ai-orchestrator-diagnostics": {
       "state": "OK",
-      "last_success_at": "2026-11-05T12:40:26Z",
+      "last_success_at": "2026-11-05T13:39:32Z",
       "last_failure_at": "2026-10-28T07:39:58Z",
       "error_code": null
     },
     "pilialvu75-hue/AI-Orchestrator-Module-Researcher": {
       "state": "OK",
-      "last_success_at": "2026-11-05T12:40:26Z",
+      "last_success_at": "2026-11-05T13:39:32Z",
       "last_failure_at": "2026-10-28T07:39:58Z",
       "error_code": null
     },
     "pilialvu75-hue/Ai_orchestrator-prova": {
       "state": "OK",
-      "last_success_at": "2026-11-05T12:40:26Z",
+      "last_success_at": "2026-11-05T13:39:32Z",
       "last_failure_at": "2026-10-28T07:39:58Z",
       "error_code": null
     }
