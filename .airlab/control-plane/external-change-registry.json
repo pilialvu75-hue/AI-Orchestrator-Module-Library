@@ -16,7 +16,7 @@
     {
       "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
       "baseline_at": "2026-10-03T16:20:00Z",
-      "cursor_merged_at": "2026-11-05T22:29:28Z"
+      "cursor_merged_at": "2026-11-05T23:36:06Z"
     },
     {
       "repository": "pilialvu75-hue/Ai-orchestrator-diagnostics",
@@ -3417,6 +3417,40 @@
       "url": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/d6fc19e7d0e439652840074a655f5355a0792bcf",
       "match_ref": null,
       "reconciliation": null
+    },
+    {
+      "incident_id": "fa3e976877a74e5dc138",
+      "status": "UNRECONCILED",
+      "detected_at": "2026-11-05T23:39:06Z",
+      "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
+      "kind": "direct_commit",
+      "pull_request": null,
+      "merge_sha": null,
+      "commit_sha": "289b3b0ff8bf77c3938e27a508e90107415eac3a",
+      "head_branch": null,
+      "base_branch": "main",
+      "change_at": "2026-11-05T23:02:14Z",
+      "title": "[source-only] [beta-checkpoint] ci: release beta automatica con gate multipiattaforma (#1009)",
+      "url": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/289b3b0ff8bf77c3938e27a508e90107415eac3a",
+      "match_ref": null,
+      "reconciliation": null
+    },
+    {
+      "incident_id": "de35381c2218fdb5ea9c",
+      "status": "UNRECONCILED",
+      "detected_at": "2026-11-05T23:39:06Z",
+      "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
+      "kind": "direct_commit",
+      "pull_request": null,
+      "merge_sha": null,
+      "commit_sha": "0b95cf4fe23e49020610c29e080c577890c33946",
+      "head_branch": null,
+      "base_branch": "main",
+      "change_at": "2026-11-05T23:36:06Z",
+      "title": "[source-only] fix(macOS): retry limitato verifica DMG per errore temporaneo del runner (#1010)",
+      "url": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/0b95cf4fe23e49020610c29e080c577890c33946",
+      "match_ref": null,
+      "reconciliation": null
     }
   ],
   "reconciliation_history": [
@@ -3427,35 +3461,35 @@
       "note": "Known motivating example for CP-HARDEN-03. It predates this incremental detector and is not retroactively reopened."
     }
   ],
-  "last_scan_at": "2026-11-05T22:38:59Z",
+  "last_scan_at": "2026-11-05T23:39:06Z",
   "scan_health": {
     "pilialvu75-hue/AI-Orchestrator-Module-Library": {
       "state": "OK",
-      "last_success_at": "2026-11-05T22:38:59Z",
+      "last_success_at": "2026-11-05T23:39:06Z",
       "last_failure_at": null,
       "error_code": null
     },
     "pilialvu75-hue/Ai-orchestrator-riserva": {
       "state": "OK",
-      "last_success_at": "2026-11-05T22:38:59Z",
+      "last_success_at": "2026-11-05T23:39:06Z",
       "last_failure_at": "2026-10-28T07:39:58Z",
       "error_code": null
     },
     "pilialvu75-hue/Ai-orchestrator-diagnostics": {
       "state": "OK",
-      "last_success_at": "2026-11-05T22:38:59Z",
+      "last_success_at": "2026-11-05T23:39:06Z",
       "last_failure_at": "2026-10-28T07:39:58Z",
       "error_code": null
     },
     "pilialvu75-hue/AI-Orchestrator-Module-Researcher": {
       "state": "OK",
-      "last_success_at": "2026-11-05T22:38:59Z",
+      "last_success_at": "2026-11-05T23:39:06Z",
       "last_failure_at": "2026-10-28T07:39:58Z",
       "error_code": null
     },
     "pilialvu75-hue/Ai_orchestrator-prova": {
       "state": "OK",
-      "last_success_at": "2026-11-05T22:38:59Z",
+      "last_success_at": "2026-11-05T23:39:06Z",
       "last_failure_at": "2026-10-28T07:39:58Z",
       "error_code": null
     }
