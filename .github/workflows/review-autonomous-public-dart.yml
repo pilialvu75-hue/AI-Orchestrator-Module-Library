@@ -19,6 +19,7 @@ on:
   workflow_run:
     workflows:
       - Admit autonomous Researcher source as real TESTED Library intake
+      - Pilot fixnum in a separate Dart consumer (TESTED only)
     types: [completed]
   schedule:
     - cron: '43 */6 * * *'
@@ -35,7 +36,8 @@ jobs:
   source-bound-review-packet:
     if: >-
       github.event_name != 'workflow_run' ||
-      github.event.workflow_run.conclusion == 'success'
+      (github.event.workflow_run.conclusion == 'success' &&
+       github.event.workflow_run.event == 'push')
     runs-on: ubuntu-24.04
     timeout-minutes: 5
     steps:
