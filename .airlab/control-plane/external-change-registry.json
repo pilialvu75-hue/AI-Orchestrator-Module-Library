@@ -16,7 +16,7 @@
     {
       "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
       "baseline_at": "2026-10-03T16:20:00Z",
-      "cursor_merged_at": "2026-11-05T08:03:53Z"
+      "cursor_merged_at": "2026-11-05T09:25:41Z"
     },
     {
       "repository": "pilialvu75-hue/Ai-orchestrator-diagnostics",
@@ -3094,6 +3094,91 @@
       "url": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/19c7f5bea956dee91aec1a22f207391db89043a1",
       "match_ref": null,
       "reconciliation": null
+    },
+    {
+      "incident_id": "3898cfc3b259c4179012",
+      "status": "UNRECONCILED",
+      "detected_at": "2026-11-05T09:38:59Z",
+      "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
+      "kind": "direct_commit",
+      "pull_request": null,
+      "merge_sha": null,
+      "commit_sha": "25bf6487b9a4fcf0b2ecbcaa75584ffbe6bc1b40",
+      "head_branch": null,
+      "base_branch": "main",
+      "change_at": "2026-11-05T09:17:18Z",
+      "title": "[source-only] feat(memory ME-1): nomi dichiarati naturalmente IT/EN/FR/ES con consenso e revisione (#996)",
+      "url": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/25bf6487b9a4fcf0b2ecbcaa75584ffbe6bc1b40",
+      "match_ref": null,
+      "reconciliation": null
+    },
+    {
+      "incident_id": "d340d6c97b2d09fd8108",
+      "status": "UNRECONCILED",
+      "detected_at": "2026-11-05T09:38:59Z",
+      "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
+      "kind": "direct_commit",
+      "pull_request": null,
+      "merge_sha": null,
+      "commit_sha": "1dcc5388d7e3f86710722010fe0bb03e5af269e9",
+      "head_branch": null,
+      "base_branch": "main",
+      "change_at": "2026-11-05T09:23:40Z",
+      "title": "ops(web): guarded Cloudflare Nemotron Ultra free Self-Test authorization (#997)",
+      "url": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/1dcc5388d7e3f86710722010fe0bb03e5af269e9",
+      "match_ref": null,
+      "reconciliation": null
+    },
+    {
+      "incident_id": "2984984059e9b504b5e6",
+      "status": "UNRECONCILED",
+      "detected_at": "2026-11-05T09:38:59Z",
+      "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
+      "kind": "direct_commit",
+      "pull_request": null,
+      "merge_sha": null,
+      "commit_sha": "7c79ea5ace946da7c325e7bddb1e3d7876af6310",
+      "head_branch": null,
+      "base_branch": "main",
+      "change_at": "2026-11-05T09:24:03Z",
+      "title": "ops(web): request read-only Cloudflare Ultra P0 preflight",
+      "url": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/7c79ea5ace946da7c325e7bddb1e3d7876af6310",
+      "match_ref": null,
+      "reconciliation": null
+    },
+    {
+      "incident_id": "be31cb3218cf83c626b9",
+      "status": "UNRECONCILED",
+      "detected_at": "2026-11-05T09:38:59Z",
+      "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
+      "kind": "direct_commit",
+      "pull_request": null,
+      "merge_sha": null,
+      "commit_sha": "bb3f90e16da70a6e03ff591fdd27f25416aa7f17",
+      "head_branch": null,
+      "base_branch": "main",
+      "change_at": "2026-11-05T09:24:51Z",
+      "title": "ops(web): authorize verified NVIDIA Ultra free prototype Self-Test route",
+      "url": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/bb3f90e16da70a6e03ff591fdd27f25416aa7f17",
+      "match_ref": null,
+      "reconciliation": null
+    },
+    {
+      "incident_id": "23328705ef17e0a07534",
+      "status": "UNRECONCILED",
+      "detected_at": "2026-11-05T09:38:59Z",
+      "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
+      "kind": "direct_commit",
+      "pull_request": null,
+      "merge_sha": null,
+      "commit_sha": "c65d7fac8ea9908a8d8f90d5bba8b78741ba50e5",
+      "head_branch": null,
+      "base_branch": "main",
+      "change_at": "2026-11-05T09:25:41Z",
+      "title": "deploy(web): activate verified NVIDIA Ultra free Self-Test permission",
+      "url": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/c65d7fac8ea9908a8d8f90d5bba8b78741ba50e5",
+      "match_ref": null,
+      "reconciliation": null
     }
   ],
   "reconciliation_history": [
@@ -3104,35 +3189,35 @@
       "note": "Known motivating example for CP-HARDEN-03. It predates this incremental detector and is not retroactively reopened."
     }
   ],
-  "last_scan_at": "2026-11-05T08:39:21Z",
+  "last_scan_at": "2026-11-05T09:38:59Z",
   "scan_health": {
     "pilialvu75-hue/AI-Orchestrator-Module-Library": {
       "state": "OK",
-      "last_success_at": "2026-11-05T08:39:21Z",
+      "last_success_at": "2026-11-05T09:38:59Z",
       "last_failure_at": null,
       "error_code": null
     },
     "pilialvu75-hue/Ai-orchestrator-riserva": {
       "state": "OK",
-      "last_success_at": "2026-11-05T08:39:21Z",
+      "last_success_at": "2026-11-05T09:38:59Z",
       "last_failure_at": "2026-10-28T07:39:58Z",
       "error_code": null
     },
     "pilialvu75-hue/Ai-orchestrator-diagnostics": {
       "state": "OK",
-      "last_success_at": "2026-11-05T08:39:21Z",
+      "last_success_at": "2026-11-05T09:38:59Z",
       "last_failure_at": "2026-10-28T07:39:58Z",
       "error_code": null
     },
     "pilialvu75-hue/AI-Orchestrator-Module-Researcher": {
       "state": "OK",
-      "last_success_at": "2026-11-05T08:39:21Z",
+      "last_success_at": "2026-11-05T09:38:59Z",
       "last_failure_at": "2026-10-28T07:39:58Z",
       "error_code": null
     },
     "pilialvu75-hue/Ai_orchestrator-prova": {
       "state": "OK",
-      "last_success_at": "2026-11-05T08:39:21Z",
+      "last_success_at": "2026-11-05T09:38:59Z",
       "last_failure_at": "2026-10-28T07:39:58Z",
       "error_code": null
     }
