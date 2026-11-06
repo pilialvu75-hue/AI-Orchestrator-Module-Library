@@ -16,7 +16,7 @@
     {
       "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
       "baseline_at": "2026-10-03T16:20:00Z",
-      "cursor_merged_at": "2026-11-06T15:56:08Z"
+      "cursor_merged_at": "2026-11-06T17:20:07Z"
     },
     {
       "repository": "pilialvu75-hue/Ai-orchestrator-diagnostics",
@@ -3655,6 +3655,91 @@
       "url": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/6494331f9ac3d02a664deb7e44734d23415f9995",
       "match_ref": null,
       "reconciliation": null
+    },
+    {
+      "incident_id": "f590e4a8bcef9066f143",
+      "status": "UNRECONCILED",
+      "detected_at": "2026-11-06T17:39:32Z",
+      "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
+      "kind": "direct_commit",
+      "pull_request": null,
+      "merge_sha": null,
+      "commit_sha": "454a165ba9438f1a1eb446c69531bbedc7db5d96",
+      "head_branch": null,
+      "base_branch": "main",
+      "change_at": "2026-11-06T16:35:38Z",
+      "title": "test(hybrid): verify network recovery on a new reviewed turn; extend internal Android QA (H47)",
+      "url": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/454a165ba9438f1a1eb446c69531bbedc7db5d96",
+      "match_ref": null,
+      "reconciliation": null
+    },
+    {
+      "incident_id": "7e9084e8750d5976b5c9",
+      "status": "UNRECONCILED",
+      "detected_at": "2026-11-06T17:39:32Z",
+      "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
+      "kind": "direct_commit",
+      "pull_request": null,
+      "merge_sha": null,
+      "commit_sha": "3ce2a44e62cdac54c595ffa9c077e99d8608fbd5",
+      "head_branch": null,
+      "base_branch": "main",
+      "change_at": "2026-11-06T16:37:56Z",
+      "title": "ci(hybrid): rerun consent-enabled Windows macOS Linux QA on every internal hybrid PR (H47b)",
+      "url": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/3ce2a44e62cdac54c595ffa9c077e99d8608fbd5",
+      "match_ref": null,
+      "reconciliation": null
+    },
+    {
+      "incident_id": "9c1da041d72bf8f9c310",
+      "status": "UNRECONCILED",
+      "detected_at": "2026-11-06T17:39:32Z",
+      "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
+      "kind": "direct_commit",
+      "pull_request": null,
+      "merge_sha": null,
+      "commit_sha": "8be647bb4b428b08181869dbe8fb49263e097da5",
+      "head_branch": null,
+      "base_branch": "main",
+      "change_at": "2026-11-06T17:00:28Z",
+      "title": "test(memory ME-2): exercise consent, review and name-isolation in settings widget",
+      "url": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/8be647bb4b428b08181869dbe8fb49263e097da5",
+      "match_ref": null,
+      "reconciliation": null
+    },
+    {
+      "incident_id": "88202711e642d1740caa",
+      "status": "UNRECONCILED",
+      "detected_at": "2026-11-06T17:39:32Z",
+      "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
+      "kind": "unmatched_merge_commit",
+      "pull_request": null,
+      "merge_sha": null,
+      "commit_sha": "a1ce6c850df2e1db67ae6e7b60f2f6aa88eeeaef",
+      "head_branch": null,
+      "base_branch": "main",
+      "change_at": "2026-11-06T17:10:39Z",
+      "title": "[source-only] merge(hybrid): network recovery next-turn QA and reusable platform gates (#1021)",
+      "url": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/a1ce6c850df2e1db67ae6e7b60f2f6aa88eeeaef",
+      "match_ref": null,
+      "reconciliation": null
+    },
+    {
+      "incident_id": "5d049c5d2bfaa3eb0df0",
+      "status": "UNRECONCILED",
+      "detected_at": "2026-11-06T17:39:32Z",
+      "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
+      "kind": "unmatched_merge_commit",
+      "pull_request": null,
+      "merge_sha": null,
+      "commit_sha": "4202f8aa59a3653b0fa712672ab6bb48daa2376c",
+      "head_branch": null,
+      "base_branch": "main",
+      "change_at": "2026-11-06T17:20:07Z",
+      "title": "Merge pull request #1023 from pilialvu75-hue/test/me2-review-page-manual-identity-gate-20261106",
+      "url": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/4202f8aa59a3653b0fa712672ab6bb48daa2376c",
+      "match_ref": null,
+      "reconciliation": null
     }
   ],
   "reconciliation_history": [
@@ -3665,35 +3750,35 @@
       "note": "Known motivating example for CP-HARDEN-03. It predates this incremental detector and is not retroactively reopened."
     }
   ],
-  "last_scan_at": "2026-11-06T16:39:04Z",
+  "last_scan_at": "2026-11-06T17:39:32Z",
   "scan_health": {
     "pilialvu75-hue/AI-Orchestrator-Module-Library": {
       "state": "OK",
-      "last_success_at": "2026-11-06T16:39:04Z",
+      "last_success_at": "2026-11-06T17:39:32Z",
       "last_failure_at": null,
       "error_code": null
     },
     "pilialvu75-hue/Ai-orchestrator-riserva": {
       "state": "OK",
-      "last_success_at": "2026-11-06T16:39:04Z",
+      "last_success_at": "2026-11-06T17:39:32Z",
       "last_failure_at": "2026-10-28T07:39:58Z",
       "error_code": null
     },
     "pilialvu75-hue/Ai-orchestrator-diagnostics": {
       "state": "OK",
-      "last_success_at": "2026-11-06T16:39:04Z",
+      "last_success_at": "2026-11-06T17:39:32Z",
       "last_failure_at": "2026-10-28T07:39:58Z",
       "error_code": null
     },
     "pilialvu75-hue/AI-Orchestrator-Module-Researcher": {
       "state": "OK",
-      "last_success_at": "2026-11-06T16:39:04Z",
+      "last_success_at": "2026-11-06T17:39:32Z",
       "last_failure_at": "2026-10-28T07:39:58Z",
       "error_code": null
     },
     "pilialvu75-hue/Ai_orchestrator-prova": {
       "state": "OK",
-      "last_success_at": "2026-11-06T16:39:04Z",
+      "last_success_at": "2026-11-06T17:39:32Z",
       "last_failure_at": "2026-10-28T07:39:58Z",
       "error_code": null
     }
