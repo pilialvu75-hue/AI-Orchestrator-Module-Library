@@ -16,7 +16,7 @@
     {
       "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
       "baseline_at": "2026-10-03T16:20:00Z",
-      "cursor_merged_at": "2026-11-06T20:29:52Z"
+      "cursor_merged_at": "2026-11-06T23:29:57Z"
     },
     {
       "repository": "pilialvu75-hue/Ai-orchestrator-diagnostics",
@@ -4063,6 +4063,91 @@
       "url": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/3c2a5761c3c6de5093c614ab2050ab285f6be16a",
       "match_ref": null,
       "reconciliation": null
+    },
+    {
+      "incident_id": "10206f75417a75cd97d2",
+      "status": "UNRECONCILED",
+      "detected_at": "2026-11-06T23:39:12Z",
+      "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
+      "kind": "direct_commit",
+      "pull_request": null,
+      "merge_sha": null,
+      "commit_sha": "c68c0f05aa843305ec2f77bcceeebe5de73ff813",
+      "head_branch": null,
+      "base_branch": "main",
+      "change_at": "2026-11-06T23:29:42Z",
+      "title": "Voice P0: routing TTS spagnolo e test regressione (#1033) (#1035)",
+      "url": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/c68c0f05aa843305ec2f77bcceeebe5de73ff813",
+      "match_ref": null,
+      "reconciliation": null
+    },
+    {
+      "incident_id": "1dea0db79223e3a78cd8",
+      "status": "UNRECONCILED",
+      "detected_at": "2026-11-06T23:39:12Z",
+      "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
+      "kind": "direct_commit",
+      "pull_request": null,
+      "merge_sha": null,
+      "commit_sha": "324706c6a3101b3dcc97f3bd6ec494ce26dcb29a",
+      "head_branch": null,
+      "base_branch": "main",
+      "change_at": "2026-11-06T23:29:45Z",
+      "title": "Voice P0: fondazione barge-in sicuro con gate audio e test (#1033) (#1041)",
+      "url": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/324706c6a3101b3dcc97f3bd6ec494ce26dcb29a",
+      "match_ref": null,
+      "reconciliation": null
+    },
+    {
+      "incident_id": "eba204a0ac71063c101a",
+      "status": "UNRECONCILED",
+      "detected_at": "2026-11-06T23:39:12Z",
+      "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
+      "kind": "direct_commit",
+      "pull_request": null,
+      "merge_sha": null,
+      "commit_sha": "758525eb0f9dc7f6223e12a488a632d962b41cc1",
+      "head_branch": null,
+      "base_branch": "main",
+      "change_at": "2026-11-06T23:29:49Z",
+      "title": "Voice P0: diagnostica nativa Android AEC/NS senza abilitare barge-in (#1033) (#1043)",
+      "url": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/758525eb0f9dc7f6223e12a488a632d962b41cc1",
+      "match_ref": null,
+      "reconciliation": null
+    },
+    {
+      "incident_id": "e80b48c71f0801931555",
+      "status": "UNRECONCILED",
+      "detected_at": "2026-11-06T23:39:12Z",
+      "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
+      "kind": "direct_commit",
+      "pull_request": null,
+      "merge_sha": null,
+      "commit_sha": "cfb5a4a5db4f65376775cbb05193fd9f57bd29aa",
+      "head_branch": null,
+      "base_branch": "main",
+      "change_at": "2026-11-06T23:29:53Z",
+      "title": "Voice P0: richiedi AEC e noise suppression sul microfono Android (#1033) (#1044)",
+      "url": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/cfb5a4a5db4f65376775cbb05193fd9f57bd29aa",
+      "match_ref": null,
+      "reconciliation": null
+    },
+    {
+      "incident_id": "efe36529846637afe3ff",
+      "status": "UNRECONCILED",
+      "detected_at": "2026-11-06T23:39:12Z",
+      "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
+      "kind": "direct_commit",
+      "pull_request": null,
+      "merge_sha": null,
+      "commit_sha": "cbd8cf216d40739e9d66da623071c1e75febd14c",
+      "head_branch": null,
+      "base_branch": "main",
+      "change_at": "2026-11-06T23:29:57Z",
+      "title": "Voice P0: misura latenza primo token e prima richiesta TTS (#1033) (#1048)",
+      "url": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/cbd8cf216d40739e9d66da623071c1e75febd14c",
+      "match_ref": null,
+      "reconciliation": null
     }
   ],
   "reconciliation_history": [
@@ -4073,35 +4158,35 @@
       "note": "Known motivating example for CP-HARDEN-03. It predates this incremental detector and is not retroactively reopened."
     }
   ],
-  "last_scan_at": "2026-11-06T22:39:38Z",
+  "last_scan_at": "2026-11-06T23:39:12Z",
   "scan_health": {
     "pilialvu75-hue/AI-Orchestrator-Module-Library": {
       "state": "OK",
-      "last_success_at": "2026-11-06T22:39:38Z",
+      "last_success_at": "2026-11-06T23:39:12Z",
       "last_failure_at": null,
       "error_code": null
     },
     "pilialvu75-hue/Ai-orchestrator-riserva": {
       "state": "OK",
-      "last_success_at": "2026-11-06T22:39:38Z",
+      "last_success_at": "2026-11-06T23:39:12Z",
       "last_failure_at": "2026-10-28T07:39:58Z",
       "error_code": null
     },
     "pilialvu75-hue/Ai-orchestrator-diagnostics": {
       "state": "OK",
-      "last_success_at": "2026-11-06T22:39:38Z",
+      "last_success_at": "2026-11-06T23:39:12Z",
       "last_failure_at": "2026-10-28T07:39:58Z",
       "error_code": null
     },
     "pilialvu75-hue/AI-Orchestrator-Module-Researcher": {
       "state": "OK",
-      "last_success_at": "2026-11-06T22:39:38Z",
+      "last_success_at": "2026-11-06T23:39:12Z",
       "last_failure_at": "2026-10-28T07:39:58Z",
       "error_code": null
     },
     "pilialvu75-hue/Ai_orchestrator-prova": {
       "state": "OK",
-      "last_success_at": "2026-11-06T22:39:38Z",
+      "last_success_at": "2026-11-06T23:39:12Z",
       "last_failure_at": "2026-10-28T07:39:58Z",
       "error_code": null
     }
