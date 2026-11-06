@@ -16,7 +16,7 @@
     {
       "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
       "baseline_at": "2026-10-03T16:20:00Z",
-      "cursor_merged_at": "2026-11-06T12:48:10Z"
+      "cursor_merged_at": "2026-11-06T14:30:24Z"
     },
     {
       "repository": "pilialvu75-hue/Ai-orchestrator-diagnostics",
@@ -3485,6 +3485,57 @@
       "url": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/11c24fdda2440edfae973ede5d2e3c8ba7ae4be1",
       "match_ref": null,
       "reconciliation": null
+    },
+    {
+      "incident_id": "a2d888a2e7eb669a9eb1",
+      "status": "UNRECONCILED",
+      "detected_at": "2026-11-06T14:39:33Z",
+      "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
+      "kind": "unmatched_merge_commit",
+      "pull_request": null,
+      "merge_sha": null,
+      "commit_sha": "6f101533a9132a2517729f14fbf75f33d84086f7",
+      "head_branch": null,
+      "base_branch": "main",
+      "change_at": "2026-11-06T14:01:57Z",
+      "title": "Merge pull request #1012 from pilialvu75-hue/feat/me2-explicit-reference-guards-20261106",
+      "url": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/6f101533a9132a2517729f14fbf75f33d84086f7",
+      "match_ref": null,
+      "reconciliation": null
+    },
+    {
+      "incident_id": "868b7460e2ee5f11aa19",
+      "status": "UNRECONCILED",
+      "detected_at": "2026-11-06T14:39:33Z",
+      "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
+      "kind": "direct_commit",
+      "pull_request": null,
+      "merge_sha": null,
+      "commit_sha": "0bba2a2e8ffe6f76b4a426cf3921e68498364c8b",
+      "head_branch": null,
+      "base_branch": "main",
+      "change_at": "2026-11-06T14:13:18Z",
+      "title": "style(chat): titoli e grassetto Markdown su tutte le piattaforme (#1013)",
+      "url": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/0bba2a2e8ffe6f76b4a426cf3921e68498364c8b",
+      "match_ref": null,
+      "reconciliation": null
+    },
+    {
+      "incident_id": "f5597a835f67f64eea88",
+      "status": "UNRECONCILED",
+      "detected_at": "2026-11-06T14:39:33Z",
+      "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
+      "kind": "direct_commit",
+      "pull_request": null,
+      "merge_sha": null,
+      "commit_sha": "4b457147153e105f4363ce7ea95c837bc06ff734",
+      "head_branch": null,
+      "base_branch": "main",
+      "change_at": "2026-11-06T14:30:24Z",
+      "title": "fix(beta): dispatch Windows release after verified Android checkpoint (#1014)",
+      "url": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/4b457147153e105f4363ce7ea95c837bc06ff734",
+      "match_ref": null,
+      "reconciliation": null
     }
   ],
   "reconciliation_history": [
@@ -3495,35 +3546,35 @@
       "note": "Known motivating example for CP-HARDEN-03. It predates this incremental detector and is not retroactively reopened."
     }
   ],
-  "last_scan_at": "2026-11-06T13:39:17Z",
+  "last_scan_at": "2026-11-06T14:39:33Z",
   "scan_health": {
     "pilialvu75-hue/AI-Orchestrator-Module-Library": {
       "state": "OK",
-      "last_success_at": "2026-11-06T13:39:17Z",
+      "last_success_at": "2026-11-06T14:39:33Z",
       "last_failure_at": null,
       "error_code": null
     },
     "pilialvu75-hue/Ai-orchestrator-riserva": {
       "state": "OK",
-      "last_success_at": "2026-11-06T13:39:17Z",
+      "last_success_at": "2026-11-06T14:39:33Z",
       "last_failure_at": "2026-10-28T07:39:58Z",
       "error_code": null
     },
     "pilialvu75-hue/Ai-orchestrator-diagnostics": {
       "state": "OK",
-      "last_success_at": "2026-11-06T13:39:17Z",
+      "last_success_at": "2026-11-06T14:39:33Z",
       "last_failure_at": "2026-10-28T07:39:58Z",
       "error_code": null
     },
     "pilialvu75-hue/AI-Orchestrator-Module-Researcher": {
       "state": "OK",
-      "last_success_at": "2026-11-06T13:39:17Z",
+      "last_success_at": "2026-11-06T14:39:33Z",
       "last_failure_at": "2026-10-28T07:39:58Z",
       "error_code": null
     },
     "pilialvu75-hue/Ai_orchestrator-prova": {
       "state": "OK",
-      "last_success_at": "2026-11-06T13:39:17Z",
+      "last_success_at": "2026-11-06T14:39:33Z",
       "last_failure_at": "2026-10-28T07:39:58Z",
       "error_code": null
     }
