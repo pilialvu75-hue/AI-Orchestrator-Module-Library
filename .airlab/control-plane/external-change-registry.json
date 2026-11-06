@@ -16,7 +16,7 @@
     {
       "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
       "baseline_at": "2026-10-03T16:20:00Z",
-      "cursor_merged_at": "2026-11-06T14:30:24Z"
+      "cursor_merged_at": "2026-11-06T15:39:14Z"
     },
     {
       "repository": "pilialvu75-hue/Ai-orchestrator-diagnostics",
@@ -3536,6 +3536,108 @@
       "url": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/4b457147153e105f4363ce7ea95c837bc06ff734",
       "match_ref": null,
       "reconciliation": null
+    },
+    {
+      "incident_id": "3592684b7d1e336a5a45",
+      "status": "UNRECONCILED",
+      "detected_at": "2026-11-06T15:39:32Z",
+      "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
+      "kind": "unmatched_merge_commit",
+      "pull_request": null,
+      "merge_sha": null,
+      "commit_sha": "ce494fd7d8308218071b8b863899f0bb4bc20127",
+      "head_branch": null,
+      "base_branch": "main",
+      "change_at": "2026-11-06T14:54:29Z",
+      "title": "Merge pull request #1015 from pilialvu75-hue/feat/me2-manual-relational-review-20261106",
+      "url": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/ce494fd7d8308218071b8b863899f0bb4bc20127",
+      "match_ref": null,
+      "reconciliation": null
+    },
+    {
+      "incident_id": "0daf1bc49a49defb67ae",
+      "status": "UNRECONCILED",
+      "detected_at": "2026-11-06T15:39:32Z",
+      "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
+      "kind": "direct_commit",
+      "pull_request": null,
+      "merge_sha": null,
+      "commit_sha": "bf50edc5857174a28bec038a228ff1e7cb75288d",
+      "head_branch": null,
+      "base_branch": "main",
+      "change_at": "2026-11-06T15:00:57Z",
+      "title": "test(memory ME-2): SQLite restart, manual review, isolation, forgetting and denied consent",
+      "url": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/bf50edc5857174a28bec038a228ff1e7cb75288d",
+      "match_ref": null,
+      "reconciliation": null
+    },
+    {
+      "incident_id": "2c404c1aaafc174acfaf",
+      "status": "UNRECONCILED",
+      "detected_at": "2026-11-06T15:39:32Z",
+      "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
+      "kind": "unmatched_merge_commit",
+      "pull_request": null,
+      "merge_sha": null,
+      "commit_sha": "d55c5279c0541ff814e8b2e8624d7e490d390fb7",
+      "head_branch": null,
+      "base_branch": "main",
+      "change_at": "2026-11-06T15:13:42Z",
+      "title": "merge(main): preserve ME-2 and Windows beta bridge, add HYBRID cross-feature regression tests (H45)",
+      "url": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/d55c5279c0541ff814e8b2e8624d7e490d390fb7",
+      "match_ref": null,
+      "reconciliation": null
+    },
+    {
+      "incident_id": "2c7015f612ac02871b5c",
+      "status": "UNRECONCILED",
+      "detected_at": "2026-11-06T15:39:32Z",
+      "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
+      "kind": "unmatched_merge_commit",
+      "pull_request": null,
+      "merge_sha": null,
+      "commit_sha": "84a06673fcf0c46d60bc90c1343b1f7c321e2883",
+      "head_branch": null,
+      "base_branch": "main",
+      "change_at": "2026-11-06T15:20:26Z",
+      "title": "Merge pull request #1018 from pilialvu75-hue/test/me2-relational-sqlite-restart-gate-20261106",
+      "url": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/84a06673fcf0c46d60bc90c1343b1f7c321e2883",
+      "match_ref": null,
+      "reconciliation": null
+    },
+    {
+      "incident_id": "aa6311d011f9e2603b42",
+      "status": "UNRECONCILED",
+      "detected_at": "2026-11-06T15:39:32Z",
+      "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
+      "kind": "unmatched_merge_commit",
+      "pull_request": null,
+      "merge_sha": null,
+      "commit_sha": "a9ef456cc4f1b026d1147f8aaf9d424328520d4a",
+      "head_branch": null,
+      "base_branch": "main",
+      "change_at": "2026-11-06T15:34:49Z",
+      "title": "merge(main): retain ME-2 SQLite restart tests in guarded HYBRID checkpoint (H46)",
+      "url": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/a9ef456cc4f1b026d1147f8aaf9d424328520d4a",
+      "match_ref": null,
+      "reconciliation": null
+    },
+    {
+      "incident_id": "78d996037784fe092615",
+      "status": "UNRECONCILED",
+      "detected_at": "2026-11-06T15:39:32Z",
+      "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
+      "kind": "unmatched_merge_commit",
+      "pull_request": null,
+      "merge_sha": null,
+      "commit_sha": "e805d94c818bb9b622229ab8229abe9ce0137ca5",
+      "head_branch": null,
+      "base_branch": "main",
+      "change_at": "2026-11-06T15:39:14Z",
+      "title": "[source-only] merge(hybrid): periodic guarded consent integration and ME-2 regression checkpoint (#977)",
+      "url": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/e805d94c818bb9b622229ab8229abe9ce0137ca5",
+      "match_ref": null,
+      "reconciliation": null
     }
   ],
   "reconciliation_history": [
@@ -3546,35 +3648,35 @@
       "note": "Known motivating example for CP-HARDEN-03. It predates this incremental detector and is not retroactively reopened."
     }
   ],
-  "last_scan_at": "2026-11-06T14:39:33Z",
+  "last_scan_at": "2026-11-06T15:39:32Z",
   "scan_health": {
     "pilialvu75-hue/AI-Orchestrator-Module-Library": {
       "state": "OK",
-      "last_success_at": "2026-11-06T14:39:33Z",
+      "last_success_at": "2026-11-06T15:39:32Z",
       "last_failure_at": null,
       "error_code": null
     },
     "pilialvu75-hue/Ai-orchestrator-riserva": {
       "state": "OK",
-      "last_success_at": "2026-11-06T14:39:33Z",
+      "last_success_at": "2026-11-06T15:39:32Z",
       "last_failure_at": "2026-10-28T07:39:58Z",
       "error_code": null
     },
     "pilialvu75-hue/Ai-orchestrator-diagnostics": {
       "state": "OK",
-      "last_success_at": "2026-11-06T14:39:33Z",
+      "last_success_at": "2026-11-06T15:39:32Z",
       "last_failure_at": "2026-10-28T07:39:58Z",
       "error_code": null
     },
     "pilialvu75-hue/AI-Orchestrator-Module-Researcher": {
       "state": "OK",
-      "last_success_at": "2026-11-06T14:39:33Z",
+      "last_success_at": "2026-11-06T15:39:32Z",
       "last_failure_at": "2026-10-28T07:39:58Z",
       "error_code": null
     },
     "pilialvu75-hue/Ai_orchestrator-prova": {
       "state": "OK",
-      "last_success_at": "2026-11-06T14:39:33Z",
+      "last_success_at": "2026-11-06T15:39:32Z",
       "last_failure_at": "2026-10-28T07:39:58Z",
       "error_code": null
     }
