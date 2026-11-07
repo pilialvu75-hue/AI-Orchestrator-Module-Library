@@ -126,6 +126,18 @@ jobs:
           receipt["admission_authorized"]=False
           p.write_text(json.dumps(receipt,indent=2)+"\n")
           PY
+      - name: Verify evidence before TESTED intake review
+        if: success()
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [ -f "$RUNNER_TEMP/async-adapter-receipt.json" ]; then
+            python3 tools/verify_next_async_admission.py \\
+              --upstream "$RUNNER_TEMP/next-upstream-test-receipt.json" \\
+              --consumer "$RUNNER_TEMP/next-consumer-receipt.json" \\
+              --adapter "$RUNNER_TEMP/async-adapter-receipt.json" \\
+              --output "$RUNNER_TEMP/async-tested-intake-review.json"
+          fi
       - name: Publish verified AIVEXUS async adapter bundle
         if: success()
         uses: actions/upload-artifact@v4
@@ -134,6 +146,7 @@ jobs:
           path: |
             ${{ runner.temp }}/async-adapter/
             ${{ runner.temp }}/async-adapter-receipt.json
+            ${{ runner.temp }}/async-tested-intake-review.json
           if-no-files-found: ignore
           retention-days: 14
       - name: Publish discovery and test target evidence
