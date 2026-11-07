@@ -105,6 +105,8 @@ jobs:
               lines.append(f"{request['asset_id']}: BLOCKED; static findings={len(static['findings'])}; OSV advisories={advisory['vulnerabilities_found']}; blockers={','.join(gate['reasons'])}")
           lines.append("OSV and static audit evidence are NOT independent reviewer approval or production authorization.")
           (temp / "review-summary.txt").write_text("\n".join(lines) + "\n")
+          saved_lines = (temp / "review-summary.txt").read_text().splitlines()
+          assert saved_lines == lines, "review summary must preserve one line per decision"
           PY
 
       - name: Publish source-bound independent audit requests (never sign)
