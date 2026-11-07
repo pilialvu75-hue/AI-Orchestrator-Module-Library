@@ -25,7 +25,7 @@ def main():
     dest = root / "library_candidate" / "intake" / asset / "0.1.0"
     payload = dest / "payload/src"
     payload.mkdir(parents=True)
-    shutil.copytree(source, payload / "vendor/args", ignore=shutil.ignore_patterns(".dart_tool", "build", ".packages"))
+    shutil.copytree(source, payload / "vendor/args", ignore=shutil.ignore_patterns(".dart_tool", "build", ".packages", "pubspec.lock"))
     shutil.copytree(source / "lib", payload / "lib/vendor/args")
     (payload / "lib/aivexus_external.dart").write_text(
         "export 'vendor/args/args.dart' show ArgParser, ArgResults, ArgParserException;\n")
