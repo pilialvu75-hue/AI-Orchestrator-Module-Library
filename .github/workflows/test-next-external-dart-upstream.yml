@@ -126,6 +126,16 @@ jobs:
           receipt["admission_authorized"]=False
           p.write_text(json.dumps(receipt,indent=2)+"\n")
           PY
+      - name: Publish verified AIVEXUS async adapter bundle
+        if: success()
+        uses: actions/upload-artifact@v4
+        with:
+          name: aivexus-async-tested-adapter-not-admitted
+          path: |
+            ${{ runner.temp }}/async-adapter/
+            ${{ runner.temp }}/async-adapter-receipt.json
+          if-no-files-found: ignore
+          retention-days: 14
       - name: Publish discovery and test target evidence
         if: always()
         uses: actions/upload-artifact@v4
