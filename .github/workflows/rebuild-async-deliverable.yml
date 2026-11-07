@@ -1,0 +1,58 @@
+name: Rebuild AIVEXUS async deliverable
+on:
+  pull_request:
+    paths:
+      - 'tools/rebuild_async_adapter.py'
+      - 'tools/build_next_external_dart_adapter.py'
+      - 'examples/async_adapter_consumer/**'
+      - '.github/workflows/rebuild-async-deliverable.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'tools/rebuild_async_adapter.py'
+      - 'tools/build_next_external_dart_adapter.py'
+      - 'examples/async_adapter_consumer/**'
+      - '.github/workflows/rebuild-async-deliverable.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  rebuild:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dart-lang/setup-dart@v1
+      - name: Resolve upstream HEAD to immutable SHA
+        shell: bash
+        run: |
+          set -euo pipefail
+          sha="$(git ls-remote https://github.com/dart-lang/core refs/heads/main | cut -f1)"
+          [[ "$sha" =~ ^[0-9a-f]{40}$ ]]
+          echo "UPSTREAM_SHA=$sha" >> "$GITHUB_ENV"
+          echo "Pinned upstream: $sha"
+      - name: Rebuild deliverable and run independent consumer
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 tools/rebuild_async_adapter.py --source-commit "$UPSTREAM_SHA" --output "$RUNNER_TEMP/aivexus-async"
+          python3 - <<'PY'
+          import json, os
+          from pathlib import Path
+          p = Path(os.environ['RUNNER_TEMP']) / 'aivexus-async/adapter-receipt.json'
+          r = json.loads(p.read_text())
+          assert r['status'] == 'PACKAGED_CONSUMER_PASS'
+          assert r['source_commit'] == os.environ['UPSTREAM_SHA']
+          assert r['admission_authorized'] is False
+          assert r['certification_authorized'] is False
+          print('PASS: exact pinned SHA and independently executed adapter')
+          PY
+      - name: Publish rebuildable tested adapter (not admitted)
+        uses: actions/upload-artifact@v4
+        with:
+          name: async-rebuilt-adapter-not-admitted
+          path: |
+            ${{ runner.temp }}/aivexus-async/adapter/
+            ${{ runner.temp }}/aivexus-async/adapter-receipt.json
+          if-no-files-found: error
+          retention-days: 14
