@@ -16,7 +16,7 @@
     {
       "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
       "baseline_at": "2026-10-03T16:20:00Z",
-      "cursor_merged_at": "2026-11-07T21:36:15Z"
+      "cursor_merged_at": "2026-11-07T21:56:02Z"
     },
     {
       "repository": "pilialvu75-hue/Ai-orchestrator-diagnostics",
@@ -4845,6 +4845,23 @@
       "url": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/bf6cb12c4691bebe2eaf1fd51e37e17ca7b88fd4",
       "match_ref": null,
       "reconciliation": null
+    },
+    {
+      "incident_id": "4f374278dfb2ce423f3b",
+      "status": "UNRECONCILED",
+      "detected_at": "2026-11-07T22:39:23Z",
+      "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
+      "kind": "unmatched_merge_commit",
+      "pull_request": null,
+      "merge_sha": null,
+      "commit_sha": "d901eaea75a412fbfc9d1353c75973d7ff8356bc",
+      "head_branch": null,
+      "base_branch": "main",
+      "change_at": "2026-11-07T21:56:02Z",
+      "title": "Merge pull request #1058 from pilialvu75-hue/test/voice-handoff-concurrent-resume-20261107",
+      "url": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/d901eaea75a412fbfc9d1353c75973d7ff8356bc",
+      "match_ref": null,
+      "reconciliation": null
     }
   ],
   "reconciliation_history": [
@@ -4855,35 +4872,35 @@
       "note": "Known motivating example for CP-HARDEN-03. It predates this incremental detector and is not retroactively reopened."
     }
   ],
-  "last_scan_at": "2026-11-07T21:39:29Z",
+  "last_scan_at": "2026-11-07T22:39:23Z",
   "scan_health": {
     "pilialvu75-hue/AI-Orchestrator-Module-Library": {
       "state": "OK",
-      "last_success_at": "2026-11-07T21:39:29Z",
+      "last_success_at": "2026-11-07T22:39:23Z",
       "last_failure_at": null,
       "error_code": null
     },
     "pilialvu75-hue/Ai-orchestrator-riserva": {
       "state": "OK",
-      "last_success_at": "2026-11-07T21:39:29Z",
+      "last_success_at": "2026-11-07T22:39:23Z",
       "last_failure_at": "2026-10-28T07:39:58Z",
       "error_code": null
     },
     "pilialvu75-hue/Ai-orchestrator-diagnostics": {
       "state": "OK",
-      "last_success_at": "2026-11-07T21:39:29Z",
+      "last_success_at": "2026-11-07T22:39:23Z",
       "last_failure_at": "2026-10-28T07:39:58Z",
       "error_code": null
     },
     "pilialvu75-hue/AI-Orchestrator-Module-Researcher": {
       "state": "OK",
-      "last_success_at": "2026-11-07T21:39:29Z",
+      "last_success_at": "2026-11-07T22:39:23Z",
       "last_failure_at": "2026-10-28T07:39:58Z",
       "error_code": null
     },
     "pilialvu75-hue/Ai_orchestrator-prova": {
       "state": "OK",
-      "last_success_at": "2026-11-07T21:39:29Z",
+      "last_success_at": "2026-11-07T22:39:23Z",
       "last_failure_at": "2026-10-28T07:39:58Z",
       "error_code": null
     }
