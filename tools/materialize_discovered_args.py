@@ -28,9 +28,9 @@ def main():
     shutil.copytree(source, payload / "vendor/args", ignore=shutil.ignore_patterns(".dart_tool", "build", ".packages"))
     (payload / "lib").mkdir()
     (payload / "lib/aivexus_external.dart").write_text(
-        "export '../vendor/args/lib/args.dart' show ArgParser, ArgResults, ArgException;\\n")
+        "export '../vendor/args/lib/args.dart' show ArgParser, ArgResults, ArgException;\n")
     (payload / "pubspec.yaml").write_text(
-        "name: aivexus_external_args\\npublish_to: none\\nenvironment:\\n  sdk: ^3.4.0\\n")
+        "name: aivexus_external_args\npublish_to: none\nenvironment:\n  sdk: ^3.4.0\n")
     # Keep the original source, its pinned revision, and the real CI evidence.
     from library_source_integrity import payload_tree_sha256
     digest = payload_tree_sha256(payload)
@@ -63,10 +63,10 @@ def main():
                            "checks":["upstream dart test","independent consumer dart analyze",
                                      "independent consumer dart run bin/main.dart"]},
                "independent_security_reviewed":False,"certification_authorized":False}
-    (dest / "tests/dart-linux-ci-report.json").write_text(json.dumps(receipt,indent=2)+"\\n")
-    (dest / "manifest.json").write_text(json.dumps(manifest,indent=2)+"\\n")
+    (dest / "tests/dart-linux-ci-report.json").write_text(json.dumps(receipt,indent=2)+"\n")
+    (dest / "manifest.json").write_text(json.dumps(manifest,indent=2)+"\n")
     (root / "library_candidate" / "README.txt").write_text(
-        "TESTED-only candidate artifact; requires Library validation and controlled integration. NOT CERTIFIED.\\n")
+        "TESTED-only candidate artifact; requires Library validation and controlled integration. NOT CERTIFIED.\n")
     print("Created tested-only candidate:",asset,"sha256:",digest)
 
 if __name__ == "__main__":
