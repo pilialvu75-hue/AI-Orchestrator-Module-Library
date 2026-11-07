@@ -28,7 +28,7 @@ def main():
     shutil.copytree(source, payload / "vendor/args", ignore=shutil.ignore_patterns(".dart_tool", "build", ".packages"))
     (payload / "lib").mkdir()
     (payload / "lib/aivexus_external.dart").write_text(
-        "export '../vendor/args/lib/args.dart' show ArgParser, ArgResults, ArgException;\n")
+        "export '../vendor/args/lib/args.dart' show ArgParser, ArgResults, ArgParserException;\n")
     (payload / "pubspec.yaml").write_text(
         "name: aivexus_external_args\npublish_to: none\nenvironment:\n  sdk: ^3.4.0\n")
     # Keep the original source, its pinned revision, and the real CI evidence.
