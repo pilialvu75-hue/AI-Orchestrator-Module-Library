@@ -125,7 +125,7 @@ jobs:
           branch="researcher/auto-tested-args"
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git fetch origin main
+          git fetch origin main "$branch" || git fetch origin main
           git checkout -B "$branch" origin/main
           cp -R "$RUNNER_TEMP/library_candidate/intake/." intake/
           python3 tools/validate_library.py
