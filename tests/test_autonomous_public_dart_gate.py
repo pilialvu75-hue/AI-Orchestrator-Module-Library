@@ -10,7 +10,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "tools"))
-from autonomous_public_dart_gate import AutonomousSourceError, inspect, inspect_all
+from autonomous_public_dart_gate import AutonomousSourceError, discover, inspect, inspect_all
 from library_source_integrity import payload_tree_sha256
 
 
@@ -93,6 +93,21 @@ class AutonomousPublicDartGateTests(unittest.TestCase):
     def test_unknown_package_fails_closed(self):
         other = self.root / "sandbox/researcher_public_dart/eval_exec"
         other.mkdir(parents=True)
+        with self.assertRaisesRegex(AutonomousSourceError, "unrecognized"):
+            inspect_all(self.root)
+
+
+    def test_discovery_lists_unknown_without_admitting_it(self):
+        other = self.root / "sandbox/researcher_public_dart/new_candidate"
+        other.mkdir(parents=True)
+        report = discover(self.root)
+        self.assertEqual(2, report["candidate_count"])
+        self.assertEqual(["new_candidate", "path"], [x["package"] for x in report["candidates"]])
+        self.assertFalse(report["candidates"][0]["supported_profile"])
+        self.assertTrue(report["candidates"][1]["supported_profile"])
+        self.assertTrue(all(x["state"] == "UNTRUSTED_NOT_ADMITTED" for x in report["candidates"]))
+        self.assertFalse(report["code_executed"])
+        self.assertFalse(report["certification_authorized"])
         with self.assertRaisesRegex(AutonomousSourceError, "unrecognized"):
             inspect_all(self.root)
 

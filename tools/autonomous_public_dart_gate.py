@@ -123,6 +123,19 @@ def inspect(root: Path, package: str) -> dict:
     }
 
 
+
+def discover(root: Path) -> dict:
+    """List candidate names without admitting or executing unknown source."""
+    base = root / "sandbox/researcher_public_dart"
+    names = sorted(p.name for p in base.iterdir() if p.is_dir() and not p.is_symlink()) if base.is_dir() else []
+    require(len(names) <= MAX_FILES, "too many Researcher candidate directories")
+    return {"schema": "aivexus.library.researcher-candidate-discovery.v1",
+            "candidate_count": len(names),
+            "candidates": [{"package": name, "supported_profile": name in PROFILES,
+                            "state": "UNTRUSTED_NOT_ADMITTED"} for name in names],
+            "code_executed": False, "security_reviewed": False,
+            "certification_authorized": False}
+
 def inspect_all(root: Path) -> dict:
     base = root / "sandbox/researcher_public_dart"
     found = sorted(p.name for p in base.iterdir() if p.is_dir()) if base.is_dir() else []
