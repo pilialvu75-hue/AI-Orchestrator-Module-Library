@@ -1,0 +1,33 @@
+name: Discover real external Dart modules
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '17 9 * * 1'
+permissions:
+  contents: read
+jobs:
+  discover:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Discover real upstream modules at pinned Git commit
+        run: python3 tools/discover_external_dart_packages.py --output "$RUNNER_TEMP/discovered-modules.json"
+      - name: Verify discovery contains candidates beyond original three profiles
+        run: |
+          python3 - "$RUNNER_TEMP/discovered-modules.json" <<'PY'
+          import json,sys
+          data=json.load(open(sys.argv[1]))
+          assert data["candidate_count"] > 0
+          assert len(data["source_commit"]) == 40
+          assert data["certification_authorized"] is False
+          print("Real upstream candidates:", data["candidate_count"])
+          print("New names:", [x["package"] for x in data["candidates"] if x["package"] not in ("path","characters","fixnum")][:20])
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: real-external-dart-discovery-not-tested
+          path: ${{ runner.temp }}/discovered-modules.json
+          retention-days: 14
