@@ -77,8 +77,7 @@ jobs:
           import json, pathlib, sys
           p = pathlib.Path(sys.argv[1])
           receipt = json.loads(p.read_text())
-          receipt["independent_consumer"] = "IMPORT_SMOKE_PASS"
-          receipt["behavior_tested"] = False
+          receipt["independent_consumer"] = ("BEHAVIOR_PASS" if receipt["behavior_tested"] else "IMPORT_SMOKE_PASS")
           p.write_text(json.dumps(receipt, indent=2) + "\n")
           PY
       - name: Publish discovery and test target evidence
