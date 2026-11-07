@@ -80,6 +80,53 @@ jobs:
           receipt["independent_consumer"] = ("BEHAVIOR_PASS" if receipt["behavior_tested"] else "IMPORT_SMOKE_PASS")
           p.write_text(json.dumps(receipt, indent=2) + "\n")
           PY
+      - name: Package and execute independent AIVEXUS adapter consumer for async
+        if: success()
+        shell: bash
+        run: |
+          set -euo pipefail
+          selected="$(python3 -c 'import json,sys;print(json.load(open(sys.argv[1]))["package"])' "$RUNNER_TEMP/next.json")"
+          if [ "$selected" != "async" ]; then
+            echo "No packaged adapter contract for $selected; leave admission unauthorized"
+            exit 0
+          fi
+          python3 tools/build_next_external_dart_adapter.py --candidate "$RUNNER_TEMP/next.json" --upstream "$RUNNER_TEMP/upstream" --output "$RUNNER_TEMP/async-adapter" --receipt "$RUNNER_TEMP/async-adapter-receipt.json"
+          mkdir -p "$RUNNER_TEMP/adapter-consumer/bin"
+          cat > "$RUNNER_TEMP/adapter-consumer/pubspec.yaml" <<EOF
+          name: aivexus_async_adapter_consumer
+          publish_to: none
+          environment:
+            sdk: ^3.4.0
+          dependencies:
+            aivexus_external_async:
+              path: $RUNNER_TEMP/async-adapter
+          EOF
+          cat > "$RUNNER_TEMP/adapter-consumer/bin/main.dart" <<'DART'
+          import 'package:async/async.dart' show StreamQueue;
+          import 'package:aivexus_external_async/aivexus_external.dart' as aivexus;
+          Future<void> main() async {
+            final queue = aivexus.StreamQueue<int>(Stream<int>.fromIterable([2, 4, 6]));
+            if (await queue.next != 2) throw StateError('first');
+            if (await queue.peek != 4) throw StateError('peek');
+            if (await queue.next != 4) throw StateError('second');
+            if (await queue.next != 6) throw StateError('third');
+            if (await queue.hasNext) throw StateError('exhaustion');
+            await queue.cancel();
+            print('PASS: packaged AIVEXUS async adapter behavioral consumer');
+          }
+          DART
+          cd "$RUNNER_TEMP/adapter-consumer"
+          dart pub get
+          dart analyze
+          dart run bin/main.dart
+          python3 - "$RUNNER_TEMP/async-adapter-receipt.json" <<'PY'
+          import json, pathlib, sys
+          p=pathlib.Path(sys.argv[1])
+          receipt=json.loads(p.read_text())
+          receipt["status"]="PACKAGED_CONSUMER_PASS"
+          receipt["admission_authorized"]=False
+          p.write_text(json.dumps(receipt,indent=2)+"\n")
+          PY
       - name: Publish discovery and test target evidence
         if: always()
         uses: actions/upload-artifact@v4
@@ -90,4 +137,5 @@ jobs:
             ${{ runner.temp }}/next.json
             ${{ runner.temp }}/next-upstream-test-receipt.json
             ${{ runner.temp }}/next-consumer-receipt.json
+            ${{ runner.temp }}/async-adapter-receipt.json
           retention-days: 14
