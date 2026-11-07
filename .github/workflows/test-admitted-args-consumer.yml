@@ -1,0 +1,56 @@
+name: Smoke test admitted external args consumer
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'intake/utility.cli_arguments.external.dartlang.args/**'
+      - '.github/workflows/test-admitted-args-consumer.yml'
+  pull_request:
+    paths:
+      - 'intake/utility.cli_arguments.external.dartlang.args/**'
+      - '.github/workflows/test-admitted-args-consumer.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  consumer:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dart-lang/setup-dart@v1
+      - name: Validate admitted Library asset and pinned source digest
+        run: python3 tools/validate_library.py
+      - name: Create independent consumer of admitted package
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p "$RUNNER_TEMP/args_consumer/bin"
+          cat > "$RUNNER_TEMP/args_consumer/pubspec.yaml" <<EOF
+          name: admitted_args_consumer
+          publish_to: none
+          environment:
+            sdk: ^3.4.0
+          dependencies:
+            aivexus_external_args:
+              path: $GITHUB_WORKSPACE/intake/utility.cli_arguments.external.dartlang.args/0.1.0/payload/src
+          EOF
+          cat > "$RUNNER_TEMP/args_consumer/bin/main.dart" <<'DART'
+          import 'package:aivexus_external_args/aivexus_external.dart';
+          void main() {
+            final parser = ArgParser()..addOption('mode')..addFlag('safe');
+            final result = parser.parse(['--mode', 'test', '--safe', 'file']);
+            if (result['mode'] != 'test' || result['safe'] != true || result.rest.single != 'file') {
+              throw StateError('Admitted Library args adapter regression');
+            }
+            print('PASS: consumer imported and exercised admitted Library args package');
+          }
+          DART
+      - name: Resolve, analyze and execute independent consumer
+        shell: bash
+        run: |
+          set -euo pipefail
+          cd "$RUNNER_TEMP/args_consumer"
+          dart pub get
+          dart analyze
+          dart run bin/main.dart
