@@ -34,7 +34,7 @@ def build(candidate, upstream_root, output):
         f"  {package}:\n    path: {source.resolve()}\n"
     )
     (output / "bin" / "main.dart").write_text(
-        f"import 'package:{package}/{library.name}';\n"
+        f"// ignore: unused_import\nimport 'package:{package}/{library.name}';\n"
         "void main() { print('PASS: independent public API import'); }\n"
     )
     return {"package": package, "source_commit": candidate["source_commit"],
