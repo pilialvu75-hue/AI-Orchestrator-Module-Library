@@ -11,7 +11,8 @@ on:
   schedule:
     - cron: '17 9 * * 1'
 permissions:
-  contents: read
+  contents: write
+  pull-requests: write
 jobs:
   discover:
     runs-on: ubuntu-24.04
@@ -92,6 +93,53 @@ jobs:
           assert (base/"payload/src/vendor/args/lib/args.dart").is_file()
           print("PASS: real source bundle with verified digest and TESTED-only manifest")
           PY
+      - name: Verify packaged adapter in a second independent consumer
+        shell: bash
+        run: |
+          set -euo pipefail
+          bundle="$RUNNER_TEMP/library_candidate/intake/utility.cli_arguments.external.dartlang.args/0.1.0/payload/src"
+          mkdir -p "$RUNNER_TEMP/bundle_consumer/bin"
+          printf 'name: aivexus_args_bundle_consumer\npublish_to: none\nenvironment:\n  sdk: ^3.4.0\ndependencies:\n  aivexus_external_args:\n    path: %s\n' "$bundle" > "$RUNNER_TEMP/bundle_consumer/pubspec.yaml"
+          cat > "$RUNNER_TEMP/bundle_consumer/bin/main.dart" <<'DART'
+          import 'package:aivexus_external_args/aivexus_external.dart';
+          void main() {
+            final parser = ArgParser()..addOption('mode')..addFlag('safe');
+            final result = parser.parse(['--mode', 'test', '--safe', 'file']);
+            if (result['mode'] != 'test' || result['safe'] != true || result.rest.single != 'file') {
+              throw StateError('Packaged AIVEXUS adapter did not work');
+            }
+            print('PASS: independent consumer imported packaged AIVEXUS adapter');
+          }
+          DART
+          cd "$RUNNER_TEMP/bundle_consumer"
+          dart pub get
+          dart analyze
+          dart run bin/main.dart
+      - name: Create or update PR to admit TESTED args bundle
+        if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          branch="researcher/auto-tested-args"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git fetch origin main
+          git checkout -B "$branch" origin/main
+          cp -R "$RUNNER_TEMP/library_candidate/intake/." intake/
+          git add intake/utility.cli_arguments.external.dartlang.args/0.1.0
+          if git diff --cached --quiet; then
+            echo "TESTED args bundle already in main; no PR required"
+            exit 0
+          fi
+          git commit -m "intake: admit verified external args module as TESTED only"
+          git push --force-with-lease origin "$branch"
+          if ! gh pr list --head "$branch" --base main --state open --json number --jq '.[0].number' | grep -q '[0-9]'; then
+            gh pr create --base main --head "$branch" --title "Researcher: admit independently tested args bundle" --body "Automated candidate from successful upstream tests, independent upstream consumer and independent packaged-adapter consumer. Functional TESTED only; NOT CERTIFIED. Source commit and evidence are in manifest."
+          else
+            echo "Existing admission PR updated"
+          fi
       - uses: actions/upload-artifact@v4
         with:
           name: args-library-tested-candidate-not-certified
