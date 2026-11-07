@@ -54,6 +54,8 @@ def main():
                                    validated_at=datetime.now(timezone.utc).isoformat())
     manifest["security"]["reviewed"] = False
     manifest["integration"]["adapter_notes"] = "Dart ArgParser public API re-export"
+    (dest / "provenance").mkdir()
+    shutil.copy2(source / "LICENSE", dest / "provenance/LICENSE")
     (dest / "tests").mkdir()
     receipt = {"schema":"ai-orchestrator.library-test-report.v1",
                "asset_id":asset,"version":"0.1.0","source_commit":discovery["source_commit"],
