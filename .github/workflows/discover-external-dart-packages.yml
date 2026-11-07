@@ -6,6 +6,7 @@ on:
     paths:
       - 'tools/discover_external_dart_packages.py'
       - 'tools/build_external_args_consumer.py'
+      - 'tools/materialize_discovered_args.py'
       - '.github/workflows/discover-external-dart-packages.yml'
   schedule:
     - cron: '17 9 * * 1'
@@ -76,6 +77,26 @@ jobs:
           p.write_text(json.dumps(data, indent=2)+"\\n")
           print("Independent consumer PASS for",data["package"])
           PY
+      - name: Materialize TESTED-only Library candidate from proven source
+        shell: bash
+        run: |
+          set -euo pipefail
+          PYTHONPATH=tools python3 tools/materialize_discovered_args.py "$RUNNER_TEMP" "$GITHUB_WORKSPACE"
+          PYTHONPATH=tools python3 - "$RUNNER_TEMP/library_candidate" <<'PY'
+          import json, pathlib, sys
+          from library_source_integrity import payload_tree_sha256
+          base=pathlib.Path(sys.argv[1])/"intake/utility.cli_arguments.external.dartlang.args/0.1.0"
+          m=json.loads((base/"manifest.json").read_text())
+          assert m["status"]=="tested" and m["security"]["reviewed"] is False
+          assert payload_tree_sha256(base/m["payload"]["path"])==m["payload"]["sha256"]
+          assert (base/"payload/src/vendor/args/lib/args.dart").is_file()
+          print("PASS: real source bundle with verified digest and TESTED-only manifest")
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: args-library-tested-candidate-not-certified
+          path: ${{ runner.temp }}/library_candidate/
+          retention-days: 14
       - name: Publish real selected module test evidence
         if: always()
         run: |
