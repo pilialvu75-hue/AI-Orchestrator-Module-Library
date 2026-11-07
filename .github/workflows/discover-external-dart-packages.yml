@@ -128,6 +128,7 @@ jobs:
           git fetch origin main
           git checkout -B "$branch" origin/main
           cp -R "$RUNNER_TEMP/library_candidate/intake/." intake/
+          python3 tools/validate_library.py
           git add intake/utility.cli_arguments.external.dartlang.args/0.1.0
           if git diff --cached --quiet; then
             echo "TESTED args bundle already in main; no PR required"
