@@ -102,7 +102,6 @@ jobs:
               path: $RUNNER_TEMP/async-adapter
           EOF
           cat > "$RUNNER_TEMP/adapter-consumer/bin/main.dart" <<'DART'
-          import 'package:async/async.dart' show StreamQueue;
           import 'package:aivexus_external_async/aivexus_external.dart' as aivexus;
           Future<void> main() async {
             final queue = aivexus.StreamQueue<int>(Stream<int>.fromIterable([2, 4, 6]));
