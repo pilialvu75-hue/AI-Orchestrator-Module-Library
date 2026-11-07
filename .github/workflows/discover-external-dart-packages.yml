@@ -74,7 +74,7 @@ jobs:
           assert data["package"] == "args"
           assert len(data["checks"]) == 5
           data["status"] = "CONSUMER_PASS"
-          p.write_text(json.dumps(data, indent=2)+"\\n")
+          p.write_text(json.dumps(data, indent=2)+"\n")
           print("Independent consumer PASS for",data["package"])
           PY
       - name: Materialize TESTED-only Library candidate from proven source
