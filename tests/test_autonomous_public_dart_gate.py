@@ -3,6 +3,7 @@ from __future__ import annotations
 
 import hashlib
 import json
+import subprocess
 import sys
 import tempfile
 import unittest
@@ -110,6 +111,23 @@ class AutonomousPublicDartGateTests(unittest.TestCase):
         self.assertFalse(report["certification_authorized"])
         with self.assertRaisesRegex(AutonomousSourceError, "unrecognized"):
             inspect_all(self.root)
+
+
+    def test_cli_discovery_report_and_default_fail_closed(self):
+        other = self.root / "sandbox/researcher_public_dart/new_candidate"
+        other.mkdir(parents=True)
+        command = [sys.executable, str(ROOT / "tools/autonomous_public_dart_gate.py"),
+                   "--root", str(self.root)]
+        output = self.root / "discovered.json"
+        completed = subprocess.run(command + ["--discover", "--output", str(output)],
+                                   capture_output=True, text=True, check=True)
+        self.assertEqual("discovery", json.loads(completed.stdout)["mode"])
+        report = json.loads(output.read_text())
+        self.assertEqual(2, report["candidate_count"])
+        self.assertFalse(report["certification_authorized"])
+        denied = subprocess.run(command, capture_output=True, text=True)
+        self.assertNotEqual(0, denied.returncode)
+        self.assertIn("unrecognized", denied.stderr)
 
     def test_no_candidate_report_is_empty_without_certification(self):
         with tempfile.TemporaryDirectory() as p:

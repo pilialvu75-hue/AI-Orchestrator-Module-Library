@@ -152,12 +152,15 @@ def main() -> None:
     p = argparse.ArgumentParser()
     p.add_argument("--root", type=Path, default=Path(__file__).resolve().parents[1])
     p.add_argument("--output", type=Path)
+    p.add_argument("--discover", action="store_true",
+                   help="inventory untrusted candidates; never admit or execute them")
     args = p.parse_args()
-    result = inspect_all(args.root)
+    result = discover(args.root) if args.discover else inspect_all(args.root)
     if args.output:
         args.output.parent.mkdir(parents=True, exist_ok=True)
         args.output.write_text(json.dumps(result, indent=2, sort_keys=True) + "\n")
     print(json.dumps({"candidate_count": result["candidate_count"],
+                      "mode": "discovery" if args.discover else "admission_preflight",
                       "certification_authorized": False}))
 
 
