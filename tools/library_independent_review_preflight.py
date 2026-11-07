@@ -15,6 +15,9 @@ def assess(requests, evidence, static_audit=None):
         if (static_audit.get('schema') != 'aivexus.library.static-source-audit.v1'
                 or len(static_audit.get('items', [])) != len(requests['requests'])):
             raise ValueError('static source audit does not match review collection')
+    if (static_audit.get('security_reviewed') is not False
+            or static_audit.get('certification_authorized') is not False):
+        raise ValueError('unsigned static audit cannot authorize certification')
     verify(requests, evidence)
     # Require a unique source-bound audit record for every requested asset.
     # Positional comparison alone must not permit duplicated audit identities.
@@ -35,6 +38,10 @@ def assess(requests, evidence, static_audit=None):
                     or scanned.get("source_payload_sha256") != item["source"]["payload_tree_sha256"]
                     or scanned.get("static_scan_completed") is not True):
                 raise ValueError("static audit identity or source hash mismatch")
+            if (scanned.get('security_reviewed') is not False
+                    or scanned.get('certification_authorized') is not False
+                    or scanned.get('manual_security_review_required') is not True):
+                raise ValueError('static audit item cannot assert security approval')
             findings = scanned.get("findings")
             if not isinstance(findings, list) or any(not isinstance(finding, dict) for finding in findings):
                 raise ValueError("static audit findings must be an explicit list of records")
