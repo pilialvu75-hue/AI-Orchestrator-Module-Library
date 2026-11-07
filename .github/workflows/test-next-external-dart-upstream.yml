@@ -1,0 +1,55 @@
+name: Test next unadmitted upstream Dart package
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/test-next-external-dart-upstream.yml'
+      - 'tools/select_next_external_dart_package.py'
+  pull_request:
+    paths:
+      - '.github/workflows/test-next-external-dart-upstream.yml'
+      - 'tools/select_next_external_dart_package.py'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  next-upstream:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dart-lang/setup-dart@v1
+      - name: Discover upstream modules at real pinned commit
+        run: python3 tools/discover_external_dart_packages.py --output "$RUNNER_TEMP/discovery.json"
+      - name: Select next candidate not already admitted
+        run: python3 tools/select_next_external_dart_package.py --discovery "$RUNNER_TEMP/discovery.json" --intake intake --output "$RUNNER_TEMP/next.json"
+      - name: Acquire pinned upstream repository and execute real package tests
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - "$RUNNER_TEMP/next.json" "$RUNNER_TEMP" <<'PY'
+          import json, pathlib, subprocess, sys
+          data=json.load(open(sys.argv[1]))
+          root=pathlib.Path(sys.argv[2])
+          assert data["status"]=="DISCOVERED_UNTESTED"
+          subprocess.run(["git","clone","--quiet","--filter=blob:none","https://github.com/dart-lang/core",str(root/"upstream")],check=True)
+          subprocess.run(["git","-C",str(root/"upstream"),"checkout","--quiet",data["source_commit"]],check=True)
+          target=root/"upstream"/data["source_path"]
+          assert target.is_dir() and (target/"pubspec.yaml").is_file()
+          print("NEXT_UPSTREAM_TEST_TARGET",data["package"],data["source_commit"],flush=True)
+          PY
+          package_path="$(python3 -c 'import json,sys;print(json.load(open(sys.argv[1]))["source_path"])' "$RUNNER_TEMP/next.json")"
+          cd "$RUNNER_TEMP/upstream/$package_path"
+          dart pub get
+          dart analyze
+          dart test
+          echo "PASS: real upstream Dart package tests"
+      - name: Publish discovery and test target evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: next-upstream-dart-test-target
+          path: |
+            ${{ runner.temp }}/discovery.json
+            ${{ runner.temp }}/next.json
+          retention-days: 14
