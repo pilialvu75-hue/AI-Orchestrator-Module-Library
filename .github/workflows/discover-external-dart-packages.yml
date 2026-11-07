@@ -5,6 +5,7 @@ on:
     branches: [main]
     paths:
       - 'tools/discover_external_dart_packages.py'
+      - 'tools/build_external_args_consumer.py'
       - '.github/workflows/discover-external-dart-packages.yml'
   schedule:
     - cron: '17 9 * * 1'
@@ -53,6 +54,28 @@ jobs:
           dart pub get
           dart analyze
           dart test
+      - name: Generate and execute independent consumer against selected upstream package
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 tools/build_external_args_consumer.py "$RUNNER_TEMP/discovered-modules.json" "$RUNNER_TEMP"
+          cd "$RUNNER_TEMP/independent_consumer"
+          dart pub get
+          dart analyze
+          dart run bin/main.dart
+      - name: Record successful independent consumer proof
+        shell: bash
+        run: |
+          python3 - "$RUNNER_TEMP/consumer-evidence.json" <<'PY'
+          import json, pathlib, sys
+          p=pathlib.Path(sys.argv[1])
+          data=json.loads(p.read_text())
+          assert data["package"] == "args"
+          assert len(data["checks"]) == 5
+          data["status"] = "CONSUMER_PASS"
+          p.write_text(json.dumps(data, indent=2)+"\\n")
+          print("Independent consumer PASS for",data["package"])
+          PY
       - name: Publish real selected module test evidence
         if: always()
         run: |
@@ -65,4 +88,5 @@ jobs:
           path: |
             ${{ runner.temp }}/discovered-modules.json
             ${{ runner.temp }}/selected-module.txt
+            ${{ runner.temp }}/consumer-evidence.json
           retention-days: 14
