@@ -104,7 +104,7 @@ jobs:
               assert gate["decision"] == "BLOCKED" and gate["certification_authorized"] is False
               lines.append(f"{request['asset_id']}: BLOCKED; static findings={len(static['findings'])}; OSV advisories={advisory['vulnerabilities_found']}; blockers={','.join(gate['reasons'])}")
           lines.append("OSV and static audit evidence are NOT independent reviewer approval or production authorization.")
-          (temp / "review-summary.txt").write_text("\\n".join(lines) + "\\n")
+          (temp / "review-summary.txt").write_text("\n".join(lines) + "\n")
           PY
 
       - name: Publish source-bound independent audit requests (never sign)
