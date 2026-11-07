@@ -1,0 +1,23 @@
+name: Test next external Dart candidate selection
+on:
+  pull_request:
+    paths:
+      - 'tools/select_next_external_dart_package.py'
+      - 'test_next_external_dart_package.py'
+      - '.github/workflows/test-next-external-candidate-selection.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'tools/select_next_external_dart_package.py'
+      - 'test_next_external_dart_package.py'
+      - '.github/workflows/test-next-external-candidate-selection.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  selection:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - name: Run deterministic candidate selection tests
+        run: python3 -m unittest -v test_next_external_dart_package
