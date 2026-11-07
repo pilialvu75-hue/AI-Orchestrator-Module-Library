@@ -5,6 +5,7 @@ on:
     paths:
       - '.github/workflows/test-next-external-dart-upstream.yml'
       - 'tools/select_next_external_dart_package.py'
+      - 'examples/async_adapter_consumer/**'
   pull_request:
     paths:
       - '.github/workflows/test-next-external-dart-upstream.yml'
@@ -101,19 +102,7 @@ jobs:
             aivexus_external_async:
               path: $RUNNER_TEMP/async-adapter
           EOF
-          cat > "$RUNNER_TEMP/adapter-consumer/bin/main.dart" <<'DART'
-          import 'package:aivexus_external_async/aivexus_external.dart' as aivexus;
-          Future<void> main() async {
-            final queue = aivexus.StreamQueue<int>(Stream<int>.fromIterable([2, 4, 6]));
-            if (await queue.next != 2) throw StateError('first');
-            if (await queue.peek != 4) throw StateError('peek');
-            if (await queue.next != 4) throw StateError('second');
-            if (await queue.next != 6) throw StateError('third');
-            if (await queue.hasNext) throw StateError('exhaustion');
-            await queue.cancel();
-            print('PASS: packaged AIVEXUS async adapter behavioral consumer');
-          }
-          DART
+          cp examples/async_adapter_consumer/bin/main.dart "$RUNNER_TEMP/adapter-consumer/bin/main.dart"
           cd "$RUNNER_TEMP/adapter-consumer"
           dart pub get
           dart analyze
