@@ -56,6 +56,10 @@
       "reason": "experimental source must be pinned in an Aivexus-owned repository"
     },
     {
+      "pin": "utility.cli_arguments.external.dartlang.args@0.1.0",
+      "reason": "experimental source must be pinned in an Aivexus-owned repository"
+    },
+    {
       "pin": "utility.int64_arithmetic.external.dartlang.fixnum@0.1.0",
       "reason": "experimental source must be pinned in an Aivexus-owned repository"
     },

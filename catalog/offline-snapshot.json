@@ -220,6 +220,14 @@
       "replacement": null
     },
     {
+      "capability_id": "utility.cli_arguments",
+      "contract_id": "utility.cli_arguments.v1",
+      "contract_version": "1.0",
+      "status": "draft",
+      "description": "Pure command-line argument parsing for options, flags, and positional inputs in Dart; no process execution or external I/O.",
+      "replacement": null
+    },
+    {
       "capability_id": "utility.int64_arithmetic",
       "contract_id": "utility.int64_arithmetic.v1",
       "contract_version": "1.0",
@@ -1068,5 +1076,5 @@
       ]
     }
   ],
-  "snapshot_sha256": "8c6d713783d23e8d70ec7b8f338f1f36ebd5edac98d05e4871b08c40ed3946ff"
+  "snapshot_sha256": "cc1fe21e1936f337ce6f3b4bc4c4b346020745994a9ea2b2e32d3d799a7ac2a8"
 }
