@@ -33,14 +33,35 @@ def build(candidate, upstream_root, output):
         f"environment:\n  sdk: ^3.4.0\ndependencies:\n"
         f"  {package}:\n    path: {source.resolve()}\n"
     )
-    (output / "bin" / "main.dart").write_text(
-        f"// ignore: unused_import\nimport 'package:{package}/{library.name}';\n"
-        "void main() { print('PASS: independent public API import'); }\n"
-    )
+    if package == "async" and library.name == "async.dart":
+        consumer_source = """import 'dart:async';
+import 'package:async/async.dart';
+
+Future<void> main() async {
+  final queue = StreamQueue<int>(Stream<int>.fromIterable([3, 5, 8]));
+  if (await queue.next != 3) throw StateError('first item incorrect');
+  if (await queue.peek != 5) throw StateError('peek incorrect');
+  if (await queue.next != 5) throw StateError('peek consumed an item');
+  if (await queue.next != 8) throw StateError('last item incorrect');
+  if (await queue.hasNext) throw StateError('stream should be exhausted');
+  await queue.cancel();
+  print('PASS: independent async StreamQueue behavior (5 assertions)');
+}
+"""
+        consumer_kind = "async_streamqueue_behavior"
+        behavior_tested = True
+    else:
+        consumer_source = (
+            f"// ignore: unused_import\\nimport 'package:{package}/{library.name}';\\n"
+            "void main() { print('PASS: independent public API import'); }\\n"
+        )
+        consumer_kind = "import_smoke_only"
+        behavior_tested = False
+    (output / "bin" / "main.dart").write_text(consumer_source)
     return {"package": package, "source_commit": candidate["source_commit"],
             "public_library": library.name,
-            "consumer_kind": "import_smoke_only",
-            "behavior_tested": False,
+            "consumer_kind": consumer_kind,
+            "behavior_tested": behavior_tested,
             "admission_authorized": False, "certification_authorized": False}
 
 
