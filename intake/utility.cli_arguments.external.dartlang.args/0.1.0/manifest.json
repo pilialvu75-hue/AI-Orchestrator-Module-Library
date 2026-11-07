@@ -1,10 +1,10 @@
 {
   "id": "utility.cli_arguments.external.dartlang.args",
-  "name": "Dart args \u2014 discovered and independently exercised",
+  "name": "Dart args — discovered and independently exercised",
   "version": "0.1.0",
   "kind": "module",
   "status": "tested",
-  "description": "CLI argument parsing; upstream and independent consumer tested on Linux; not certified.",
+  "description": "Discovered external Dart args; upstream tests, independent consumer and packaged AIVEXUS adapter consumer passed on Linux; functional TESTED only, not security-certified.",
   "tags": [
     "autonomous-researcher",
     "public-source",
