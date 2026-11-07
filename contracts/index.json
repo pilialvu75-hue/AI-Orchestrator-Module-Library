@@ -265,6 +265,14 @@
       "status": "draft",
       "description": "Pure fixed-width integer arithmetic operations; no process execution or external I/O.",
       "replacement": null
+    },
+    {
+      "capability_id": "utility.cli_arguments",
+      "contract_id": "utility.cli_arguments.v1",
+      "contract_version": "1.0",
+      "status": "draft",
+      "description": "Pure command-line argument parsing for options, flags, and positional inputs in Dart; no process execution or external I/O.",
+      "replacement": null
     }
   ]
 }
