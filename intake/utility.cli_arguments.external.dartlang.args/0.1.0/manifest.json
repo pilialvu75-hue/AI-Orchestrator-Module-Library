@@ -1,0 +1,108 @@
+{
+  "id": "utility.cli_arguments.external.dartlang.args",
+  "name": "Dart args — discovered and independently exercised",
+  "version": "0.1.0",
+  "kind": "module",
+  "status": "tested",
+  "description": "Discovered external Dart args; upstream tests, independent consumer and packaged AIVEXUS adapter consumer passed on Linux; functional TESTED only, not security-certified.",
+  "tags": [
+    "autonomous-researcher",
+    "public-source",
+    "dart",
+    "source-materialized",
+    "tested-not-certified",
+    "narrow-capability"
+  ],
+  "capabilities": [
+    "utility.cli_arguments"
+  ],
+  "platforms": [
+    "linux"
+  ],
+  "languages": [
+    "dart"
+  ],
+  "frameworks": [
+    "Dart"
+  ],
+  "entry_paths": [
+    "lib/aivexus_external.dart"
+  ],
+  "provenance": {
+    "origin": "researcher",
+    "source_repository": "https://github.com/dart-lang/core",
+    "source_commit": "fa0c6b77d67b6837eb2891e251c40cdfbeab1f4d",
+    "source_tag": null,
+    "source_subtree": "pkgs/args",
+    "source_project_id": null,
+    "source_task_id": "researcher-live-discovery:args",
+    "retrieved_at": "2026-10-30T06:37:50Z",
+    "license": "BSD-3-Clause",
+    "license_file": "provenance/LICENSE",
+    "adapter_source": "Deterministic re-export of actual upstream public API"
+  },
+  "validation": {
+    "score": 0.8,
+    "tests_passed": true,
+    "test_report": "tests/dart-linux-ci-report.json",
+    "validated_at": "2026-11-07T11:24:54.070209+00:00",
+    "validated_on": [
+      "linux"
+    ]
+  },
+  "security": {
+    "reviewed": false,
+    "reviewed_at": null,
+    "known_vulnerabilities": null,
+    "sbom": null,
+    "review_report": null,
+    "notes": "No independent security/OSV/privacy/license clearance. Tested status is functional only."
+  },
+  "integration": {
+    "estimated_effort": "low",
+    "adaptation_allowed": true,
+    "adapter_notes": "Dart ArgParser public API re-export",
+    "known_constraints": [
+      "This narrow utility does not satisfy an entire broad platform need.",
+      "Only Linux Dart execution has passed; no Android device proof.",
+      "No independent license/security/privacy approval; not production installable.",
+      "The upstream Git blobs are preserved exactly in payload/src/vendor."
+    ]
+  },
+  "connector": {
+    "standard": "ai-orchestrator-lego",
+    "standard_version": "1.0.0",
+    "integration_mode": "source_bundle",
+    "provides": [
+      {
+        "capability_id": "utility.cli_arguments",
+        "contract_id": "utility.cli_arguments.v1",
+        "contract_version": "1.0"
+      }
+    ],
+    "requires": [],
+    "adapters": [],
+    "configuration_schema": null,
+    "healthcheck": {
+      "type": "none",
+      "path": null
+    }
+  },
+  "payload": {
+    "type": "repository_path",
+    "path": "payload/src",
+    "sha256": "952ad2125aef1fd9eeea0630ba77e1e7dbca3fbd0f83d3732e227ee9058a0465",
+    "upstream_repository": "https://github.com/dart-lang/core",
+    "upstream_commit": "fa0c6b77d67b6837eb2891e251c40cdfbeab1f4d"
+  },
+  "quality": {
+    "reuse_count": 0,
+    "successful_integrations": 0,
+    "failed_integrations": 0,
+    "last_used_at": null
+  },
+  "deprecation": {
+    "reason": null,
+    "replacement": null
+  }
+}
