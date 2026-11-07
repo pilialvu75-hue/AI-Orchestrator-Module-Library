@@ -16,7 +16,7 @@
     {
       "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
       "baseline_at": "2026-10-03T16:20:00Z",
-      "cursor_merged_at": "2026-11-07T03:03:48Z"
+      "cursor_merged_at": "2026-11-07T09:37:59Z"
     },
     {
       "repository": "pilialvu75-hue/Ai-orchestrator-diagnostics",
@@ -4369,6 +4369,159 @@
       "url": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/585409ef32f859efd2cc53b26a8740c7d22b7229",
       "match_ref": null,
       "reconciliation": null
+    },
+    {
+      "incident_id": "038ab748708c3f040222",
+      "status": "UNRECONCILED",
+      "detected_at": "2026-11-07T09:39:12Z",
+      "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
+      "kind": "direct_commit",
+      "pull_request": null,
+      "merge_sha": null,
+      "commit_sha": "b46eb661d48b5a43db9befc4c66f8f4a13d0b3ba",
+      "head_branch": null,
+      "base_branch": "main",
+      "change_at": "2026-11-07T09:05:39Z",
+      "title": "fix(stt): stop hidden native dictation recorder after final transcript before next capture",
+      "url": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/b46eb661d48b5a43db9befc4c66f8f4a13d0b3ba",
+      "match_ref": null,
+      "reconciliation": null
+    },
+    {
+      "incident_id": "9a347827458827cbe54e",
+      "status": "UNRECONCILED",
+      "detected_at": "2026-11-07T09:39:12Z",
+      "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
+      "kind": "direct_commit",
+      "pull_request": null,
+      "merge_sha": null,
+      "commit_sha": "ae33a5472f234557c9587c45d4983bfac5e2af05",
+      "head_branch": null,
+      "base_branch": "main",
+      "change_at": "2026-11-07T09:07:39Z",
+      "title": "test(stt): final transcript and route exit stop native microphone capture",
+      "url": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/ae33a5472f234557c9587c45d4983bfac5e2af05",
+      "match_ref": null,
+      "reconciliation": null
+    },
+    {
+      "incident_id": "e3abe34b8d5e88307985",
+      "status": "UNRECONCILED",
+      "detected_at": "2026-11-07T09:39:12Z",
+      "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
+      "kind": "direct_commit",
+      "pull_request": null,
+      "merge_sha": null,
+      "commit_sha": "403985618e6d5c226c456be3cec7d823731c1dd5",
+      "head_branch": null,
+      "base_branch": "main",
+      "change_at": "2026-11-07T09:11:06Z",
+      "title": "fix(stt): await native recorder shutdown before submitting dictated prompt to LLM",
+      "url": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/403985618e6d5c226c456be3cec7d823731c1dd5",
+      "match_ref": null,
+      "reconciliation": null
+    },
+    {
+      "incident_id": "4d888f7ece776a14c4c6",
+      "status": "UNRECONCILED",
+      "detected_at": "2026-11-07T09:39:12Z",
+      "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
+      "kind": "direct_commit",
+      "pull_request": null,
+      "merge_sha": null,
+      "commit_sha": "02d9ea0c10df5859cabc15686e067bb915c696d3",
+      "head_branch": null,
+      "base_branch": "main",
+      "change_at": "2026-11-07T09:12:34Z",
+      "title": "fix(stt): capture voice service before deferred teardown across widget dispose",
+      "url": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/02d9ea0c10df5859cabc15686e067bb915c696d3",
+      "match_ref": null,
+      "reconciliation": null
+    },
+    {
+      "incident_id": "3685b0e3440e42060c06",
+      "status": "UNRECONCILED",
+      "detected_at": "2026-11-07T09:39:12Z",
+      "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
+      "kind": "direct_commit",
+      "pull_request": null,
+      "merge_sha": null,
+      "commit_sha": "dd606b3c40d7eedd0d6f5f2846a15a8788c35a36",
+      "head_branch": null,
+      "base_branch": "main",
+      "change_at": "2026-11-07T09:13:30Z",
+      "title": "fix(stt): reset mic-button UI after dictated prompt submitted and recorder closed",
+      "url": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/dd606b3c40d7eedd0d6f5f2846a15a8788c35a36",
+      "match_ref": null,
+      "reconciliation": null
+    },
+    {
+      "incident_id": "27788b27a56da9d3225f",
+      "status": "UNRECONCILED",
+      "detected_at": "2026-11-07T09:39:12Z",
+      "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
+      "kind": "direct_commit",
+      "pull_request": null,
+      "merge_sha": null,
+      "commit_sha": "faf1f9e632dac21d7e6043f1c5ecad9dbab4e489",
+      "head_branch": null,
+      "base_branch": "main",
+      "change_at": "2026-11-07T09:13:43Z",
+      "title": "fix(stt): avoid redundant native Stop on disposed mic button after Send barrier",
+      "url": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/faf1f9e632dac21d7e6043f1c5ecad9dbab4e489",
+      "match_ref": null,
+      "reconciliation": null
+    },
+    {
+      "incident_id": "158f4e04fba110dbb8f0",
+      "status": "UNRECONCILED",
+      "detected_at": "2026-11-07T09:39:12Z",
+      "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
+      "kind": "direct_commit",
+      "pull_request": null,
+      "merge_sha": null,
+      "commit_sha": "59f98bc14a48868a9fb9a8bee6b6b29e0a8b1371",
+      "head_branch": null,
+      "base_branch": "main",
+      "change_at": "2026-11-07T09:15:59Z",
+      "title": "fix(audio): preempt PCM synthesis and recover player after focus loss (#1034)",
+      "url": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/59f98bc14a48868a9fb9a8bee6b6b29e0a8b1371",
+      "match_ref": null,
+      "reconciliation": null
+    },
+    {
+      "incident_id": "cbb0e993c4ec73772c57",
+      "status": "UNRECONCILED",
+      "detected_at": "2026-11-07T09:39:12Z",
+      "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
+      "kind": "unmatched_merge_commit",
+      "pull_request": null,
+      "merge_sha": null,
+      "commit_sha": "8dc8c81b7dae8ff927c9c279b021fc5126437bd2",
+      "head_branch": null,
+      "base_branch": "main",
+      "change_at": "2026-11-07T09:16:48Z",
+      "title": "merge(main): preserve verified audio fixes in fix/android-dictation-recorder-lifecycle-20261107",
+      "url": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/8dc8c81b7dae8ff927c9c279b021fc5126437bd2",
+      "match_ref": null,
+      "reconciliation": null
+    },
+    {
+      "incident_id": "65764e6e417396ce9f28",
+      "status": "UNRECONCILED",
+      "detected_at": "2026-11-07T09:39:12Z",
+      "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
+      "kind": "unmatched_merge_commit",
+      "pull_request": null,
+      "merge_sha": null,
+      "commit_sha": "fbf6f65276045e26c5a70e4d369b0b9b7b8dd3d1",
+      "head_branch": null,
+      "base_branch": "main",
+      "change_at": "2026-11-07T09:37:59Z",
+      "title": "Merge pull request #1053 from pilialvu75-hue/fix/android-dictation-recorder-lifecycle-20261107",
+      "url": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/fbf6f65276045e26c5a70e4d369b0b9b7b8dd3d1",
+      "match_ref": null,
+      "reconciliation": null
     }
   ],
   "reconciliation_history": [
@@ -4379,35 +4532,35 @@
       "note": "Known motivating example for CP-HARDEN-03. It predates this incremental detector and is not retroactively reopened."
     }
   ],
-  "last_scan_at": "2026-11-07T08:38:58Z",
+  "last_scan_at": "2026-11-07T09:39:12Z",
   "scan_health": {
     "pilialvu75-hue/AI-Orchestrator-Module-Library": {
       "state": "OK",
-      "last_success_at": "2026-11-07T08:38:58Z",
+      "last_success_at": "2026-11-07T09:39:12Z",
       "last_failure_at": null,
       "error_code": null
     },
     "pilialvu75-hue/Ai-orchestrator-riserva": {
       "state": "OK",
-      "last_success_at": "2026-11-07T08:38:58Z",
+      "last_success_at": "2026-11-07T09:39:12Z",
       "last_failure_at": "2026-10-28T07:39:58Z",
       "error_code": null
     },
     "pilialvu75-hue/Ai-orchestrator-diagnostics": {
       "state": "OK",
-      "last_success_at": "2026-11-07T08:38:58Z",
+      "last_success_at": "2026-11-07T09:39:12Z",
       "last_failure_at": "2026-10-28T07:39:58Z",
       "error_code": null
     },
     "pilialvu75-hue/AI-Orchestrator-Module-Researcher": {
       "state": "OK",
-      "last_success_at": "2026-11-07T08:38:58Z",
+      "last_success_at": "2026-11-07T09:39:12Z",
       "last_failure_at": "2026-10-28T07:39:58Z",
       "error_code": null
     },
     "pilialvu75-hue/Ai_orchestrator-prova": {
       "state": "OK",
-      "last_success_at": "2026-11-07T08:38:58Z",
+      "last_success_at": "2026-11-07T09:39:12Z",
       "last_failure_at": "2026-10-28T07:39:58Z",
       "error_code": null
     }
