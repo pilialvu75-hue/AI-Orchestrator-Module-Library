@@ -132,10 +132,10 @@ jobs:
         run: |
           set -euo pipefail
           if [ -f "$RUNNER_TEMP/async-adapter-receipt.json" ]; then
-            python3 tools/verify_next_async_admission.py \\
-              --upstream "$RUNNER_TEMP/next-upstream-test-receipt.json" \\
-              --consumer "$RUNNER_TEMP/next-consumer-receipt.json" \\
-              --adapter "$RUNNER_TEMP/async-adapter-receipt.json" \\
+            python3 tools/verify_next_async_admission.py \
+              --upstream "$RUNNER_TEMP/next-upstream-test-receipt.json" \
+              --consumer "$RUNNER_TEMP/next-consumer-receipt.json" \
+              --adapter "$RUNNER_TEMP/async-adapter-receipt.json" \
               --output "$RUNNER_TEMP/async-tested-intake-review.json"
           fi
       - name: Publish verified AIVEXUS async adapter bundle
