@@ -134,7 +134,7 @@ jobs:
             exit 0
           fi
           git commit -m "intake: admit verified external args module as TESTED only"
-          git push --force-with-lease origin "$branch"
+          git -c "http.extraheader=AUTHORIZATION: basic $(printf 'x-access-token:%s' "$GH_TOKEN" | base64 -w0)" push --force-with-lease origin "$branch"
           if ! gh pr list --head "$branch" --base main --state open --json number --jq '.[0].number' | grep -q '[0-9]'; then
             gh pr create --base main --head "$branch" --title "Researcher: admit independently tested args bundle" --body "Automated candidate from successful upstream tests, independent upstream consumer and independent packaged-adapter consumer. Functional TESTED only; NOT CERTIFIED. Source commit and evidence are in manifest."
           else
