@@ -34,9 +34,18 @@ def discover():
                        and len(p.split("/")) == 3 and SAFE.fullmatch(p.split("/")[1])})
     if not packages:
         raise ValueError("no upstream Dart packages discovered")
+    runnable = [p for p in packages if any(x.startswith("pkgs/" + p + "/lib/") and x.endswith(".dart") for x in paths)
+                and any(x.startswith("pkgs/" + p + "/test/") and x.endswith("_test.dart") for x in paths)
+                and p not in ("path", "characters", "fixnum")]
+    if not runnable:
+        raise ValueError("no new package with source and upstream tests")
+    selected = runnable[0]
     return {"schema": "aivexus.library.external-dart-discovery.v1",
             "repository": "https://github.com/" + REPO,
             "source_commit": sha,
+            "selected_package": selected,
+            "selected_source_path": "pkgs/" + selected,
+            "selection_rule": "first alphabetical non-pilot package with Dart library and upstream test",
             "candidates": [{"package": p, "pubspec_path": "pkgs/" + p + "/pubspec.yaml",
                             "state": "DISCOVERED_UNTESTED"} for p in packages],
             "candidate_count": len(packages), "certification_authorized": False}
