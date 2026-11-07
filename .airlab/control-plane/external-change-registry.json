@@ -16,7 +16,7 @@
     {
       "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
       "baseline_at": "2026-10-03T16:20:00Z",
-      "cursor_merged_at": "2026-11-07T20:36:43Z"
+      "cursor_merged_at": "2026-11-07T21:36:15Z"
     },
     {
       "repository": "pilialvu75-hue/Ai-orchestrator-diagnostics",
@@ -4811,6 +4811,40 @@
       "url": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/3330b55c0047dd49f526a329a67af6eb7c2190f2",
       "match_ref": null,
       "reconciliation": null
+    },
+    {
+      "incident_id": "cbcee1183c79dbd52e95",
+      "status": "UNRECONCILED",
+      "detected_at": "2026-11-07T21:39:29Z",
+      "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
+      "kind": "direct_commit",
+      "pull_request": null,
+      "merge_sha": null,
+      "commit_sha": "a40d042675d043310553f0806ba40ed0fbf66a6e",
+      "head_branch": null,
+      "base_branch": "main",
+      "change_at": "2026-11-07T20:58:37Z",
+      "title": "P0 Cantiere: regression tests for real async module bridge (#1063)",
+      "url": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/a40d042675d043310553f0806ba40ed0fbf66a6e",
+      "match_ref": null,
+      "reconciliation": null
+    },
+    {
+      "incident_id": "625f872504cd5c9018c6",
+      "status": "UNRECONCILED",
+      "detected_at": "2026-11-07T21:39:29Z",
+      "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
+      "kind": "direct_commit",
+      "pull_request": null,
+      "merge_sha": null,
+      "commit_sha": "bf6cb12c4691bebe2eaf1fd51e37e17ca7b88fd4",
+      "head_branch": null,
+      "base_branch": "main",
+      "change_at": "2026-11-07T21:36:15Z",
+      "title": "P0 Cantiere: generate and run first Flutter app with Library async module (#1064)",
+      "url": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/bf6cb12c4691bebe2eaf1fd51e37e17ca7b88fd4",
+      "match_ref": null,
+      "reconciliation": null
     }
   ],
   "reconciliation_history": [
@@ -4821,35 +4855,35 @@
       "note": "Known motivating example for CP-HARDEN-03. It predates this incremental detector and is not retroactively reopened."
     }
   ],
-  "last_scan_at": "2026-11-07T20:39:32Z",
+  "last_scan_at": "2026-11-07T21:39:29Z",
   "scan_health": {
     "pilialvu75-hue/AI-Orchestrator-Module-Library": {
       "state": "OK",
-      "last_success_at": "2026-11-07T20:39:32Z",
+      "last_success_at": "2026-11-07T21:39:29Z",
       "last_failure_at": null,
       "error_code": null
     },
     "pilialvu75-hue/Ai-orchestrator-riserva": {
       "state": "OK",
-      "last_success_at": "2026-11-07T20:39:32Z",
+      "last_success_at": "2026-11-07T21:39:29Z",
       "last_failure_at": "2026-10-28T07:39:58Z",
       "error_code": null
     },
     "pilialvu75-hue/Ai-orchestrator-diagnostics": {
       "state": "OK",
-      "last_success_at": "2026-11-07T20:39:32Z",
+      "last_success_at": "2026-11-07T21:39:29Z",
       "last_failure_at": "2026-10-28T07:39:58Z",
       "error_code": null
     },
     "pilialvu75-hue/AI-Orchestrator-Module-Researcher": {
       "state": "OK",
-      "last_success_at": "2026-11-07T20:39:32Z",
+      "last_success_at": "2026-11-07T21:39:29Z",
       "last_failure_at": "2026-10-28T07:39:58Z",
       "error_code": null
     },
     "pilialvu75-hue/Ai_orchestrator-prova": {
       "state": "OK",
-      "last_success_at": "2026-11-07T20:39:32Z",
+      "last_success_at": "2026-11-07T21:39:29Z",
       "last_failure_at": "2026-10-28T07:39:58Z",
       "error_code": null
     }
