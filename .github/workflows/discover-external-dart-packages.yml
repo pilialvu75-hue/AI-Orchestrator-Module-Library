@@ -5,6 +5,7 @@ on:
     branches: [main]
     paths:
       - 'tools/discover_external_dart_packages.py'
+      - 'tools/select_next_external_dart_package.py'
       - 'tools/build_external_args_consumer.py'
       - 'tools/materialize_discovered_args.py'
       - '.github/workflows/discover-external-dart-packages.yml'
@@ -35,6 +36,8 @@ jobs:
           print("Real upstream candidates:", data["candidate_count"])
           print("New names:", [x["package"] for x in data["candidates"] if x["package"] not in ("path","characters","fixnum")][:20])
           PY
+      - name: Select next unadmitted upstream package as DISCOVERED_UNTESTED
+        run: python3 tools/select_next_external_dart_package.py --discovery "$RUNNER_TEMP/discovered-modules.json" --intake intake --output "$RUNNER_TEMP/next-unadmitted-candidate.json"
       - name: Acquire selected upstream package and execute its actual tests
         shell: bash
         run: |
@@ -159,4 +162,5 @@ jobs:
             ${{ runner.temp }}/discovered-modules.json
             ${{ runner.temp }}/selected-module.txt
             ${{ runner.temp }}/consumer-evidence.json
+            ${{ runner.temp }}/next-unadmitted-candidate.json
           retention-days: 14
