@@ -13,8 +13,11 @@ class PreflightTests(unittest.TestCase):
         return {'schema': 'aivexus.library.static-source-audit.v1', 'items': [
             {'asset_id': item['asset_id'],
              'source_payload_sha256': item['source']['payload_tree_sha256'],
-             'static_scan_completed': True, 'findings': []}
-            for item in requests['requests']]}
+             'static_scan_completed': True, 'findings': [],
+             'security_reviewed': False, 'certification_authorized': False,
+             'manual_security_review_required': True}
+            for item in requests['requests']],
+            'security_reviewed': False, 'certification_authorized': False}
 
     def test_malformed_static_audit_is_rejected(self):
         requests, evidence = packet()
@@ -40,6 +43,24 @@ class PreflightTests(unittest.TestCase):
         from library_review_evidence_crosscheck import digest
         evidence['reports'][1]['review_request_sha256'] = digest(requests['requests'][1])
         with self.assertRaisesRegex(ValueError, 'duplicate static audit source identity'):
+            assess(requests, evidence, audit)
+
+    def test_unsigned_audit_cannot_claim_security_approval(self):
+        requests, evidence = packet()
+        for field, forged in (('security_reviewed', True), ('certification_authorized', True)):
+            with self.subTest(scope='packet', field=field):
+                audit = self._audit(requests)
+                audit[field] = forged
+                with self.assertRaisesRegex(ValueError, 'unsigned static audit'):
+                    assess(requests, evidence, audit)
+            with self.subTest(scope='item', field=field):
+                audit = self._audit(requests)
+                audit['items'][0][field] = forged
+                with self.assertRaisesRegex(ValueError, 'cannot assert security approval'):
+                    assess(requests, evidence, audit)
+        audit = self._audit(requests)
+        audit['items'][0]['manual_security_review_required'] = False
+        with self.assertRaisesRegex(ValueError, 'cannot assert security approval'):
             assess(requests, evidence, audit)
 
     def test_missing_static_audit_is_rejected(self):
