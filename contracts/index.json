@@ -243,6 +243,14 @@
       "replacement": null
     },
     {
+      "capability_id": "math.running_total",
+      "contract_id": "math.running_total.v1",
+      "contract_version": "1.0",
+      "status": "draft",
+      "description": "Pure Dart integer running totals over an iterable, preserving input and returning an unmodifiable cumulative-sum list; no external I/O.",
+      "replacement": null
+    },
+    {
       "capability_id": "utility.path_operations",
       "contract_id": "utility.path_operations.v1",
       "contract_version": "1.0",
