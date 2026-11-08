@@ -16,7 +16,7 @@
     {
       "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
       "baseline_at": "2026-10-03T16:20:00Z",
-      "cursor_merged_at": "2026-11-08T11:02:00Z"
+      "cursor_merged_at": "2026-11-08T13:31:26Z"
     },
     {
       "repository": "pilialvu75-hue/Ai-orchestrator-diagnostics",
@@ -5100,6 +5100,142 @@
       "url": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/a409e80c4749b99abbd1aae599e8f91118b7cc30",
       "match_ref": null,
       "reconciliation": null
+    },
+    {
+      "incident_id": "23ebd7c0a9941259698a",
+      "status": "UNRECONCILED",
+      "detected_at": "2026-11-08T13:39:15Z",
+      "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
+      "kind": "direct_commit",
+      "pull_request": null,
+      "merge_sha": null,
+      "commit_sha": "2ba8f8e17e9aacec6685cb15564b352fa59befc5",
+      "head_branch": null,
+      "base_branch": "main",
+      "change_at": "2026-11-08T11:52:38Z",
+      "title": "feat: add Cantiere-side consumer for generated Library Dart package",
+      "url": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/2ba8f8e17e9aacec6685cb15564b352fa59befc5",
+      "match_ref": null,
+      "reconciliation": null
+    },
+    {
+      "incident_id": "b0420ec9224dfde6e9ac",
+      "status": "UNRECONCILED",
+      "detected_at": "2026-11-08T13:39:15Z",
+      "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
+      "kind": "direct_commit",
+      "pull_request": null,
+      "merge_sha": null,
+      "commit_sha": "f72328612b9269986a177d7fcd1c2552cf34264a",
+      "head_branch": null,
+      "base_branch": "main",
+      "change_at": "2026-11-08T11:52:43Z",
+      "title": "ci: prove Cantiere code imports and executes generated Library module",
+      "url": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/f72328612b9269986a177d7fcd1c2552cf34264a",
+      "match_ref": null,
+      "reconciliation": null
+    },
+    {
+      "incident_id": "533c22db71e540fbd197",
+      "status": "UNRECONCILED",
+      "detected_at": "2026-11-08T13:39:15Z",
+      "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
+      "kind": "direct_commit",
+      "pull_request": null,
+      "merge_sha": null,
+      "commit_sha": "5a0de51ca88edb0cc15f7fee084f7fdb4d9f20c6",
+      "head_branch": null,
+      "base_branch": "main",
+      "change_at": "2026-11-08T11:58:58Z",
+      "title": "fix: keep isolated generated-package consumer outside Flutter analyzer source scan",
+      "url": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/5a0de51ca88edb0cc15f7fee084f7fdb4d9f20c6",
+      "match_ref": null,
+      "reconciliation": null
+    },
+    {
+      "incident_id": "37f9d746c947d79c07e8",
+      "status": "UNRECONCILED",
+      "detected_at": "2026-11-08T13:39:15Z",
+      "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
+      "kind": "direct_commit",
+      "pull_request": null,
+      "merge_sha": null,
+      "commit_sha": "a18b5165c1c4ded75c05218a66064372e8a8ab8b",
+      "head_branch": null,
+      "base_branch": "main",
+      "change_at": "2026-11-08T11:59:00Z",
+      "title": "fix: remove unresolved external-package import from app analyzer scope",
+      "url": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/a18b5165c1c4ded75c05218a66064372e8a8ab8b",
+      "match_ref": null,
+      "reconciliation": null
+    },
+    {
+      "incident_id": "a3f47207f362d307e87b",
+      "status": "UNRECONCILED",
+      "detected_at": "2026-11-08T13:39:15Z",
+      "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
+      "kind": "direct_commit",
+      "pull_request": null,
+      "merge_sha": null,
+      "commit_sha": "e79f30dced80558878113823a7695ad2c3bfb61f",
+      "head_branch": null,
+      "base_branch": "main",
+      "change_at": "2026-11-08T11:59:04Z",
+      "title": "ci: copy isolated consumer fixture into independent Dart project",
+      "url": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/e79f30dced80558878113823a7695ad2c3bfb61f",
+      "match_ref": null,
+      "reconciliation": null
+    },
+    {
+      "incident_id": "7e6f4eb0665e2581e039",
+      "status": "UNRECONCILED",
+      "detected_at": "2026-11-08T13:39:15Z",
+      "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
+      "kind": "unmatched_merge_commit",
+      "pull_request": null,
+      "merge_sha": null,
+      "commit_sha": "b509a1b8193e601aa4bf4684921b8f13c4bb8e8f",
+      "head_branch": null,
+      "base_branch": "main",
+      "change_at": "2026-11-08T13:09:51Z",
+      "title": "Merge pull request #1081 from pilialvu75-hue/feat/cantiere-generated-dart-library-consumer",
+      "url": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/b509a1b8193e601aa4bf4684921b8f13c4bb8e8f",
+      "match_ref": null,
+      "reconciliation": null
+    },
+    {
+      "incident_id": "5075ab55f9b86e573692",
+      "status": "UNRECONCILED",
+      "detected_at": "2026-11-08T13:39:15Z",
+      "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
+      "kind": "direct_commit",
+      "pull_request": null,
+      "merge_sha": null,
+      "commit_sha": "2bc20118fb9f054f51e801b0ba3c0d18242b8e02",
+      "head_branch": null,
+      "base_branch": "main",
+      "change_at": "2026-11-08T13:23:19Z",
+      "title": "feat(memory): reviewed named-person corrections with atomic version check (#1080)",
+      "url": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/2bc20118fb9f054f51e801b0ba3c0d18242b8e02",
+      "match_ref": null,
+      "reconciliation": null
+    },
+    {
+      "incident_id": "89bde0cdd0e1a00188a2",
+      "status": "UNRECONCILED",
+      "detected_at": "2026-11-08T13:39:15Z",
+      "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
+      "kind": "direct_commit",
+      "pull_request": null,
+      "merge_sha": null,
+      "commit_sha": "015f221da52adda173a35197fd5fbd03070aa068",
+      "head_branch": null,
+      "base_branch": "main",
+      "change_at": "2026-11-08T13:31:26Z",
+      "title": "fix(memory): preserve scoped records when a confirmed correction shadows its predecessor (#1083)",
+      "url": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/015f221da52adda173a35197fd5fbd03070aa068",
+      "match_ref": null,
+      "reconciliation": null
     }
   ],
   "reconciliation_history": [
@@ -5110,35 +5246,35 @@
       "note": "Known motivating example for CP-HARDEN-03. It predates this incremental detector and is not retroactively reopened."
     }
   ],
-  "last_scan_at": "2026-11-08T12:39:03Z",
+  "last_scan_at": "2026-11-08T13:39:15Z",
   "scan_health": {
     "pilialvu75-hue/AI-Orchestrator-Module-Library": {
       "state": "OK",
-      "last_success_at": "2026-11-08T12:39:03Z",
+      "last_success_at": "2026-11-08T13:39:15Z",
       "last_failure_at": null,
       "error_code": null
     },
     "pilialvu75-hue/Ai-orchestrator-riserva": {
       "state": "OK",
-      "last_success_at": "2026-11-08T12:39:03Z",
+      "last_success_at": "2026-11-08T13:39:15Z",
       "last_failure_at": "2026-10-28T07:39:58Z",
       "error_code": null
     },
     "pilialvu75-hue/Ai-orchestrator-diagnostics": {
       "state": "OK",
-      "last_success_at": "2026-11-08T12:39:03Z",
+      "last_success_at": "2026-11-08T13:39:15Z",
       "last_failure_at": "2026-10-28T07:39:58Z",
       "error_code": null
     },
     "pilialvu75-hue/AI-Orchestrator-Module-Researcher": {
       "state": "OK",
-      "last_success_at": "2026-11-08T12:39:03Z",
+      "last_success_at": "2026-11-08T13:39:15Z",
       "last_failure_at": "2026-10-28T07:39:58Z",
       "error_code": null
     },
     "pilialvu75-hue/Ai_orchestrator-prova": {
       "state": "OK",
-      "last_success_at": "2026-11-08T12:39:03Z",
+      "last_success_at": "2026-11-08T13:39:15Z",
       "last_failure_at": "2026-10-28T07:39:58Z",
       "error_code": null
     }
