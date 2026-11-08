@@ -38,3 +38,9 @@ jobs:
           name: aivexus-running-total-tested-intake
           path: ${{ runner.temp }}/library-workspace/intake/aivexus.dart.running_total/0.1.0/
           if-no-files-found: error
+      - name: Upload certification blocker report (not approval)
+        uses: actions/upload-artifact@v4
+        with:
+          name: aivexus-running-total-certification-blockers
+          path: ${{ runner.temp }}/certification-preflight.json
+          if-no-files-found: error
