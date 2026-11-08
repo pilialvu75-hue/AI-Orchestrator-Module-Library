@@ -1,0 +1,33 @@
+name: Generated Dart TESTED intake admission
+on:
+  pull_request:
+    paths:
+      - 'tools/generated_dart_tested_admission.py'
+      - '.github/workflows/generated-dart-tested-intake.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  tested-intake:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dart-lang/setup-dart@v1
+      - name: Generate Dart module
+        run: python3 tools/generate_first_dart_module.py --spec examples/first-generated-module-spec.json --output "$RUNNER_TEMP/generated"
+      - name: Run actual Dart tests
+        working-directory: ${{ runner.temp }}/generated
+        run: |
+          dart pub get
+          dart analyze --fatal-infos
+          dart test
+      - name: Generate verified candidate
+        run: python3 tools/generated_dart_intake_candidate.py --package "$RUNNER_TEMP/generated" --output "$RUNNER_TEMP/candidate" --source-commit "$GITHUB_SHA"
+      - name: Advance isolated candidate through intake pipeline
+        run: python3 tools/generated_dart_tested_admission.py --bundle "$RUNNER_TEMP/candidate/bundle.json" --sha256-file "$RUNNER_TEMP/candidate/bundle.sha256" --root "$RUNNER_TEMP/library-workspace" --dart-test-passed
+      - name: Upload TESTED evidence (not CERTIFIED)
+        uses: actions/upload-artifact@v4
+        with:
+          name: aivexus-running-total-tested-intake
+          path: ${{ runner.temp }}/library-workspace/intake/aivexus.dart.running_total/0.1.0/
+          if-no-files-found: error
