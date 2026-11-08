@@ -1,0 +1,35 @@
+name: First generated reusable Dart module
+on:
+  pull_request:
+    paths:
+      - 'tools/generate_first_dart_module.py'
+      - 'examples/first-generated-module-spec.json'
+      - '.github/workflows/first-generated-dart-module.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  generate-and-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dart-lang/setup-dart@v1
+      - name: Generate module from capability request
+        run: python3 tools/generate_first_dart_module.py --spec examples/first-generated-module-spec.json --output "$RUNNER_TEMP/generated-module"
+      - name: Resolve generated module dependencies
+        working-directory: ${{ runner.temp }}/generated-module
+        run: dart pub get
+      - name: Analyze generated source
+        working-directory: ${{ runner.temp }}/generated-module
+        run: dart analyze --fatal-infos
+      - name: Execute real generated module tests
+        working-directory: ${{ runner.temp }}/generated-module
+        run: dart test
+      - name: Upload tested reusable module
+        uses: actions/upload-artifact@v4
+        with:
+          name: aivexus-generated-running-total-dart
+          path: ${{ runner.temp }}/generated-module/
+          if-no-files-found: error
