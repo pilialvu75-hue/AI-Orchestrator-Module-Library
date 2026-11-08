@@ -3,51 +3,11 @@
   "updated_at": "2026-09-14T19:55:00Z",
   "contracts": [
     {
-      "capability_id": "auth.session",
-      "contract_id": "auth.session.v1",
+      "capability_id": "ai.acceleration_backend",
+      "contract_id": "ai.acceleration_backend.v1",
       "contract_version": "1.0",
       "status": "draft",
-      "description": "Logical authentication/session capability boundary.",
-      "replacement": null
-    },
-    {
-      "capability_id": "storage.secrets",
-      "contract_id": "storage.secrets.v1",
-      "contract_version": "1.0",
-      "status": "draft",
-      "description": "Logical secure secret storage capability boundary.",
-      "replacement": null
-    },
-    {
-      "capability_id": "network.http",
-      "contract_id": "network.http.v1",
-      "contract_version": "1.0",
-      "status": "draft",
-      "description": "Logical HTTP client capability boundary with timeout/cancellation/retry semantics.",
-      "replacement": null
-    },
-    {
-      "capability_id": "storage.local_db",
-      "contract_id": "storage.local_db.v1",
-      "contract_version": "1.0",
-      "status": "draft",
-      "description": "Logical local persistence capability boundary.",
-      "replacement": null
-    },
-    {
-      "capability_id": "diagnostics.logging",
-      "contract_id": "diagnostics.logging.v1",
-      "contract_version": "1.0",
-      "status": "draft",
-      "description": "Logical structured logging and diagnostic-event boundary.",
-      "replacement": null
-    },
-    {
-      "capability_id": "release.update_manager",
-      "contract_id": "release.update_manager.v1",
-      "contract_version": "1.0",
-      "status": "draft",
-      "description": "Logical download/update management boundary.",
+      "description": "Target-specific local inference acceleration backend selection and capability-reporting boundary.",
       "replacement": null
     },
     {
@@ -59,43 +19,51 @@
       "replacement": null
     },
     {
-      "capability_id": "voice.stt",
-      "contract_id": "voice.stt.v1",
+      "capability_id": "ai.model_storage",
+      "contract_id": "ai.model_storage.v1",
       "contract_version": "1.0",
       "status": "draft",
-      "description": "Logical speech-to-text boundary independent from the concrete engine.",
+      "description": "Large model artifact storage boundary with resumable writes, integrity checks, capacity reporting and eviction policy hooks.",
       "replacement": null
     },
     {
-      "capability_id": "voice.tts",
-      "contract_id": "voice.tts.v1",
+      "capability_id": "auth.session",
+      "contract_id": "auth.session.v1",
       "contract_version": "1.0",
       "status": "draft",
-      "description": "Logical text-to-speech boundary independent from the concrete engine.",
+      "description": "Logical authentication/session capability boundary.",
       "replacement": null
     },
     {
-      "capability_id": "platform.filesystem",
-      "contract_id": "platform.filesystem.v1",
+      "capability_id": "diagnostics.logging",
+      "contract_id": "diagnostics.logging.v1",
       "contract_version": "1.0",
       "status": "draft",
-      "description": "Sandbox-aware filesystem boundary with scoped read/write, atomic replace and path capability semantics.",
+      "description": "Logical structured logging and diagnostic-event boundary.",
       "replacement": null
     },
     {
-      "capability_id": "platform.process",
-      "contract_id": "platform.process.v1",
+      "capability_id": "library.integration",
+      "contract_id": "library.integration.v1",
       "contract_version": "1.0",
       "status": "draft",
-      "description": "Local process execution boundary with argv, cwd, environment, stdout/stderr streaming, cancellation and exit status.",
+      "description": "Read-only pinned Library experimental package verification and isolated staging; never a production installer.",
       "replacement": null
     },
     {
-      "capability_id": "platform.permissions",
-      "contract_id": "platform.permissions.v1",
+      "capability_id": "math.running_total",
+      "contract_id": "math.running_total.v1",
       "contract_version": "1.0",
       "status": "draft",
-      "description": "Runtime permission and capability broker with query, request and denial-state semantics.",
+      "description": "Pure Dart integer running totals over an iterable, preserving input and returning an unmodifiable cumulative-sum list; no external I/O.",
+      "replacement": null
+    },
+    {
+      "capability_id": "network.http",
+      "contract_id": "network.http.v1",
+      "contract_version": "1.0",
+      "status": "draft",
+      "description": "Logical HTTP client capability boundary with timeout/cancellation/retry semantics.",
       "replacement": null
     },
     {
@@ -115,43 +83,11 @@
       "replacement": null
     },
     {
-      "capability_id": "platform.notifications",
-      "contract_id": "platform.notifications.v1",
+      "capability_id": "platform.clipboard",
+      "contract_id": "platform.clipboard.v1",
       "contract_version": "1.0",
       "status": "draft",
-      "description": "Native notification scheduling, delivery and action callback boundary.",
-      "replacement": null
-    },
-    {
-      "capability_id": "platform.desktop_shell",
-      "contract_id": "platform.desktop_shell.v1",
-      "contract_version": "1.0",
-      "status": "draft",
-      "description": "Desktop window, tray and application lifecycle integration boundary.",
-      "replacement": null
-    },
-    {
-      "capability_id": "release.packaging",
-      "contract_id": "release.packaging.v1",
-      "contract_version": "1.0",
-      "status": "draft",
-      "description": "Target packaging/signing/distribution artifact boundary with reproducible metadata.",
-      "replacement": null
-    },
-    {
-      "capability_id": "ai.acceleration_backend",
-      "contract_id": "ai.acceleration_backend.v1",
-      "contract_version": "1.0",
-      "status": "draft",
-      "description": "Target-specific local inference acceleration backend selection and capability-reporting boundary.",
-      "replacement": null
-    },
-    {
-      "capability_id": "platform.lifecycle",
-      "contract_id": "platform.lifecycle.v1",
-      "contract_version": "1.0",
-      "status": "draft",
-      "description": "Application foreground/background/suspend/resume/shutdown lifecycle event boundary.",
+      "description": "Clipboard read/write boundary with platform permission and focus constraints.",
       "replacement": null
     },
     {
@@ -163,19 +99,11 @@
       "replacement": null
     },
     {
-      "capability_id": "platform.power_thermal",
-      "contract_id": "platform.power_thermal.v1",
+      "capability_id": "platform.desktop_shell",
+      "contract_id": "platform.desktop_shell.v1",
       "contract_version": "1.0",
       "status": "draft",
-      "description": "Battery, power-source and thermal-pressure observation boundary for adaptive workloads.",
-      "replacement": null
-    },
-    {
-      "capability_id": "platform.startup_service",
-      "contract_id": "platform.startup_service.v1",
-      "contract_version": "1.0",
-      "status": "draft",
-      "description": "Login/startup/service registration boundary with explicit user and OS policy constraints.",
+      "description": "Desktop window, tray and application lifecycle integration boundary.",
       "replacement": null
     },
     {
@@ -187,11 +115,59 @@
       "replacement": null
     },
     {
-      "capability_id": "platform.clipboard",
-      "contract_id": "platform.clipboard.v1",
+      "capability_id": "platform.filesystem",
+      "contract_id": "platform.filesystem.v1",
       "contract_version": "1.0",
       "status": "draft",
-      "description": "Clipboard read/write boundary with platform permission and focus constraints.",
+      "description": "Sandbox-aware filesystem boundary with scoped read/write, atomic replace and path capability semantics.",
+      "replacement": null
+    },
+    {
+      "capability_id": "platform.lifecycle",
+      "contract_id": "platform.lifecycle.v1",
+      "contract_version": "1.0",
+      "status": "draft",
+      "description": "Application foreground/background/suspend/resume/shutdown lifecycle event boundary.",
+      "replacement": null
+    },
+    {
+      "capability_id": "platform.notifications",
+      "contract_id": "platform.notifications.v1",
+      "contract_version": "1.0",
+      "status": "draft",
+      "description": "Native notification scheduling, delivery and action callback boundary.",
+      "replacement": null
+    },
+    {
+      "capability_id": "platform.permissions",
+      "contract_id": "platform.permissions.v1",
+      "contract_version": "1.0",
+      "status": "draft",
+      "description": "Runtime permission and capability broker with query, request and denial-state semantics.",
+      "replacement": null
+    },
+    {
+      "capability_id": "platform.power_thermal",
+      "contract_id": "platform.power_thermal.v1",
+      "contract_version": "1.0",
+      "status": "draft",
+      "description": "Battery, power-source and thermal-pressure observation boundary for adaptive workloads.",
+      "replacement": null
+    },
+    {
+      "capability_id": "platform.process",
+      "contract_id": "platform.process.v1",
+      "contract_version": "1.0",
+      "status": "draft",
+      "description": "Local process execution boundary with argv, cwd, environment, stdout/stderr streaming, cancellation and exit status.",
+      "replacement": null
+    },
+    {
+      "capability_id": "platform.startup_service",
+      "contract_id": "platform.startup_service.v1",
+      "contract_version": "1.0",
+      "status": "draft",
+      "description": "Login/startup/service registration boundary with explicit user and OS policy constraints.",
       "replacement": null
     },
     {
@@ -203,43 +179,51 @@
       "replacement": null
     },
     {
-      "capability_id": "ai.model_storage",
-      "contract_id": "ai.model_storage.v1",
+      "capability_id": "release.packaging",
+      "contract_id": "release.packaging.v1",
       "contract_version": "1.0",
       "status": "draft",
-      "description": "Large model artifact storage boundary with resumable writes, integrity checks, capacity reporting and eviction policy hooks.",
+      "description": "Target packaging/signing/distribution artifact boundary with reproducible metadata.",
       "replacement": null
     },
     {
-      "capability_id": "voice.device_policy",
-      "contract_id": "voice.device_policy.v1",
+      "capability_id": "release.update_manager",
+      "contract_id": "release.update_manager.v1",
       "contract_version": "1.0",
       "status": "draft",
-      "description": "Voice input/output device selection and routing policy boundary independent from STT/TTS engines.",
+      "description": "Logical download/update management boundary.",
       "replacement": null
     },
     {
-      "capability_id": "library.integration",
-      "contract_id": "library.integration.v1",
+      "capability_id": "storage.local_db",
+      "contract_id": "storage.local_db.v1",
       "contract_version": "1.0",
       "status": "draft",
-      "description": "Read-only pinned Library experimental package verification and isolated staging; never a production installer.",
+      "description": "Logical local persistence capability boundary.",
       "replacement": null
     },
     {
-      "capability_id": "vision.image_label_postprocessing",
-      "contract_id": "vision.image_label_postprocessing.v1",
+      "capability_id": "storage.secrets",
+      "contract_id": "storage.secrets.v1",
       "contract_version": "1.0",
       "status": "draft",
-      "description": "Device-local post-processing of native image category labels with bounded confidence, transparent limitations and no Cloud side effects; actual pixel inference is a separate platform provider.",
+      "description": "Logical secure secret storage capability boundary.",
       "replacement": null
     },
     {
-      "capability_id": "vision.local_image_labeling_android",
-      "contract_id": "vision.local_image_labeling_android.v1",
+      "capability_id": "utility.cli_arguments",
+      "contract_id": "utility.cli_arguments.v1",
       "contract_version": "1.0",
       "status": "draft",
-      "description": "Android image file -> offline Google ML Kit category labels via Flutter MethodChannel; bounded file, memory and confidence, explicitly no general visual reasoning.",
+      "description": "Pure command-line argument parsing for options, flags, and positional inputs in Dart; no process execution or external I/O.",
+      "replacement": null
+    },
+    {
+      "capability_id": "utility.int64_arithmetic",
+      "contract_id": "utility.int64_arithmetic.v1",
+      "contract_version": "1.0",
+      "status": "draft",
+      "description": "Pure fixed-width integer arithmetic operations; no process execution or external I/O.",
       "replacement": null
     },
     {
@@ -259,19 +243,43 @@
       "replacement": null
     },
     {
-      "capability_id": "utility.int64_arithmetic",
-      "contract_id": "utility.int64_arithmetic.v1",
+      "capability_id": "vision.image_label_postprocessing",
+      "contract_id": "vision.image_label_postprocessing.v1",
       "contract_version": "1.0",
       "status": "draft",
-      "description": "Pure fixed-width integer arithmetic operations; no process execution or external I/O.",
+      "description": "Device-local post-processing of native image category labels with bounded confidence, transparent limitations and no Cloud side effects; actual pixel inference is a separate platform provider.",
       "replacement": null
     },
     {
-      "capability_id": "utility.cli_arguments",
-      "contract_id": "utility.cli_arguments.v1",
+      "capability_id": "vision.local_image_labeling_android",
+      "contract_id": "vision.local_image_labeling_android.v1",
       "contract_version": "1.0",
       "status": "draft",
-      "description": "Pure command-line argument parsing for options, flags, and positional inputs in Dart; no process execution or external I/O.",
+      "description": "Android image file -> offline Google ML Kit category labels via Flutter MethodChannel; bounded file, memory and confidence, explicitly no general visual reasoning.",
+      "replacement": null
+    },
+    {
+      "capability_id": "voice.device_policy",
+      "contract_id": "voice.device_policy.v1",
+      "contract_version": "1.0",
+      "status": "draft",
+      "description": "Voice input/output device selection and routing policy boundary independent from STT/TTS engines.",
+      "replacement": null
+    },
+    {
+      "capability_id": "voice.stt",
+      "contract_id": "voice.stt.v1",
+      "contract_version": "1.0",
+      "status": "draft",
+      "description": "Logical speech-to-text boundary independent from the concrete engine.",
+      "replacement": null
+    },
+    {
+      "capability_id": "voice.tts",
+      "contract_id": "voice.tts.v1",
+      "contract_version": "1.0",
+      "status": "draft",
+      "description": "Logical text-to-speech boundary independent from the concrete engine.",
       "replacement": null
     }
   ]
