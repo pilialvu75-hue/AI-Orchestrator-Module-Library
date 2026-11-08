@@ -16,7 +16,7 @@
     {
       "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
       "baseline_at": "2026-10-03T16:20:00Z",
-      "cursor_merged_at": "2026-11-08T13:31:26Z"
+      "cursor_merged_at": "2026-11-08T17:31:07Z"
     },
     {
       "repository": "pilialvu75-hue/Ai-orchestrator-diagnostics",
@@ -5236,6 +5236,57 @@
       "url": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/015f221da52adda173a35197fd5fbd03070aa068",
       "match_ref": null,
       "reconciliation": null
+    },
+    {
+      "incident_id": "aedc2ca9084b4225df0b",
+      "status": "UNRECONCILED",
+      "detected_at": "2026-11-08T17:39:17Z",
+      "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
+      "kind": "unmatched_merge_commit",
+      "pull_request": null,
+      "merge_sha": null,
+      "commit_sha": "7b7371dab2b89fdb2cf8021983094570bcf25187",
+      "head_branch": null,
+      "base_branch": "main",
+      "change_at": "2026-11-08T17:23:07Z",
+      "title": "Merge pull request #1082 from pilialvu75-hue/feat/cantiere-running-total-capability",
+      "url": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/7b7371dab2b89fdb2cf8021983094570bcf25187",
+      "match_ref": null,
+      "reconciliation": null
+    },
+    {
+      "incident_id": "5fddc7a45817832931ef",
+      "status": "UNRECONCILED",
+      "detected_at": "2026-11-08T17:39:17Z",
+      "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
+      "kind": "direct_commit",
+      "pull_request": null,
+      "merge_sha": null,
+      "commit_sha": "6de0ba37bdd8aa61f87cb0672045853271f07ebc",
+      "head_branch": null,
+      "base_branch": "main",
+      "change_at": "2026-11-08T17:30:10Z",
+      "title": "fix(memory): forget entire superseded correction lineage atomically (#1085)",
+      "url": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/6de0ba37bdd8aa61f87cb0672045853271f07ebc",
+      "match_ref": null,
+      "reconciliation": null
+    },
+    {
+      "incident_id": "a8a44043910dbb14848e",
+      "status": "UNRECONCILED",
+      "detected_at": "2026-11-08T17:39:17Z",
+      "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
+      "kind": "direct_commit",
+      "pull_request": null,
+      "merge_sha": null,
+      "commit_sha": "84fb06a2736b3d70bb2c63aafbb1f783ad42bdad",
+      "head_branch": null,
+      "base_branch": "main",
+      "change_at": "2026-11-08T17:31:07Z",
+      "title": "docs(roadmap): checkpoint 8 Nov memory corrections and LOCAL AUTO gates",
+      "url": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/84fb06a2736b3d70bb2c63aafbb1f783ad42bdad",
+      "match_ref": null,
+      "reconciliation": null
     }
   ],
   "reconciliation_history": [
@@ -5246,35 +5297,35 @@
       "note": "Known motivating example for CP-HARDEN-03. It predates this incremental detector and is not retroactively reopened."
     }
   ],
-  "last_scan_at": "2026-11-08T16:38:50Z",
+  "last_scan_at": "2026-11-08T17:39:17Z",
   "scan_health": {
     "pilialvu75-hue/AI-Orchestrator-Module-Library": {
       "state": "OK",
-      "last_success_at": "2026-11-08T16:38:50Z",
+      "last_success_at": "2026-11-08T17:39:17Z",
       "last_failure_at": null,
       "error_code": null
     },
     "pilialvu75-hue/Ai-orchestrator-riserva": {
       "state": "OK",
-      "last_success_at": "2026-11-08T16:38:50Z",
+      "last_success_at": "2026-11-08T17:39:17Z",
       "last_failure_at": "2026-10-28T07:39:58Z",
       "error_code": null
     },
     "pilialvu75-hue/Ai-orchestrator-diagnostics": {
       "state": "OK",
-      "last_success_at": "2026-11-08T16:38:50Z",
+      "last_success_at": "2026-11-08T17:39:17Z",
       "last_failure_at": "2026-10-28T07:39:58Z",
       "error_code": null
     },
     "pilialvu75-hue/AI-Orchestrator-Module-Researcher": {
       "state": "OK",
-      "last_success_at": "2026-11-08T16:38:50Z",
+      "last_success_at": "2026-11-08T17:39:17Z",
       "last_failure_at": "2026-10-28T07:39:58Z",
       "error_code": null
     },
     "pilialvu75-hue/Ai_orchestrator-prova": {
       "state": "OK",
-      "last_success_at": "2026-11-08T16:38:50Z",
+      "last_success_at": "2026-11-08T17:39:17Z",
       "last_failure_at": "2026-10-28T07:39:58Z",
       "error_code": null
     }
