@@ -3,6 +3,8 @@ on:
   pull_request:
     paths:
       - 'tools/generated_dart_tested_admission.py'
+      - 'tools/generated_dart_certification_preflight.py'
+      - 'tools/test_generated_dart_certification_preflight.py'
       - '.github/workflows/generated-dart-tested-intake.yml'
   workflow_dispatch:
 permissions:
@@ -23,6 +25,11 @@ jobs:
           dart test
       - name: Generate verified candidate
         run: python3 tools/generated_dart_intake_candidate.py --package "$RUNNER_TEMP/generated" --output "$RUNNER_TEMP/candidate" --source-commit "$GITHUB_SHA"
+      - name: Check certification blockers without promoting candidate
+        run: |
+          PYTHONPATH=tools python3 -m unittest tools/test_generated_dart_certification_preflight.py
+          python3 tools/generated_dart_certification_preflight.py --bundle "$RUNNER_TEMP/candidate/bundle.json" --sha256-file "$RUNNER_TEMP/candidate/bundle.sha256" > "$RUNNER_TEMP/certification-preflight.json"
+          python3 -c 'import json,os; p=json.load(open(os.environ["RUNNER_TEMP"]+"/certification-preflight.json")); assert not p["ready_for_certification"] and "INDEPENDENT_SIGNED_SECURITY_REVIEW_MISSING" in p["blockers"]'
       - name: Advance isolated candidate through intake pipeline
         run: python3 tools/generated_dart_tested_admission.py --bundle "$RUNNER_TEMP/candidate/bundle.json" --sha256-file "$RUNNER_TEMP/candidate/bundle.sha256" --root "$RUNNER_TEMP/library-workspace" --dart-test-passed
       - name: Upload TESTED evidence (not CERTIFIED)
