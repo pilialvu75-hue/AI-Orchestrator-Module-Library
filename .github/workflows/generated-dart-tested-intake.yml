@@ -2,6 +2,11 @@ name: Generated Dart TESTED intake admission
 on:
   pull_request:
     paths:
+      - 'tools/generate_first_dart_module.py'
+      - 'tools/generated_dart_intake_candidate.py'
+      - 'tools/test_generate_first_dart_module.py'
+      - 'tools/test_generated_dart_intake_candidate.py'
+      - 'examples/first-generated-module-spec.json'
       - 'tools/generated_dart_tested_admission.py'
       - 'tools/generated_dart_certification_preflight.py'
       - 'tools/test_generated_dart_certification_preflight.py'
