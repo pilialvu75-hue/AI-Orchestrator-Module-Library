@@ -1,0 +1,4 @@
+{
+  "capability": "math.running_total.v1",
+  "language": "dart"
+}
