@@ -46,7 +46,7 @@ def main():
     manifest_path.write_text(json.dumps(manifest, indent=2) + "\n", encoding="utf-8")
     pipeline = Path(__file__).resolve().parent / "library_pipeline.py"
     for status in ("quarantined", "normalized", "tested"):
-        subprocess.run([sys.executable, str(pipeline), "advance", verified.ref.asset_id, verified.ref.version, status, "--root", str(root)], check=True)
+        subprocess.run([sys.executable, str(pipeline), "--root", str(root), "advance", verified.ref.asset_id, verified.ref.version, status], check=True)
     final = json.loads(manifest_path.read_text(encoding="utf-8"))
     if final["status"] != "tested":
         raise SystemExit("TESTED transition did not complete")
