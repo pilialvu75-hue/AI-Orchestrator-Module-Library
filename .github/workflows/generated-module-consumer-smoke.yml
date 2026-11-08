@@ -1,0 +1,58 @@
+name: Generated Dart module independent consumer smoke
+on:
+  pull_request:
+    paths:
+      - 'tools/generate_first_dart_module.py'
+      - 'examples/first-generated-module-spec.json'
+      - '.github/workflows/generated-module-consumer-smoke.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  consumer-smoke:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dart-lang/setup-dart@v1
+      - name: Generate module from capability spec
+        run: python3 tools/generate_first_dart_module.py --spec examples/first-generated-module-spec.json --output "$RUNNER_TEMP/generated-module"
+      - name: Create independent Dart consumer
+        shell: bash
+        run: |
+          mkdir -p "$RUNNER_TEMP/consumer"
+          cat > "$RUNNER_TEMP/consumer/pubspec.yaml" <<EOF
+          name: aivexus_module_consumer_smoke
+          publish_to: none
+          environment:
+            sdk: '>=3.3.0 <4.0.0'
+          dependencies:
+            aivexus_running_total:
+              path: ../generated-module
+          EOF
+          cat > "$RUNNER_TEMP/consumer/main.dart" <<'EOF'
+          import 'package:aivexus_running_total/aivexus_running_total.dart';
+
+          void main() {
+            final input = [7, -2, 11];
+            final actual = runningTotals(input);
+            if (actual.length != 3 ||
+                actual[0] != 7 || actual[1] != 5 || actual[2] != 16) {
+              throw StateError('Unexpected running totals: $actual');
+            }
+            if (input.join(',') != '7,-2,11') {
+              throw StateError('Input was mutated');
+            }
+            print('INDEPENDENT_CONSUMER_PASS: $actual');
+          }
+          EOF
+      - name: Resolve consumer path dependency
+        working-directory: ${{ runner.temp }}/consumer
+        run: dart pub get
+      - name: Analyze consumer
+        working-directory: ${{ runner.temp }}/consumer
+        run: dart analyze --fatal-infos
+      - name: Execute independent consumer
+        working-directory: ${{ runner.temp }}/consumer
+        run: dart run main.dart
