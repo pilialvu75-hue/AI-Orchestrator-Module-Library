@@ -32,6 +32,10 @@ def main():
     test_report = (f"https://github.com/{repository}/actions/runs/{run_id}"
                    if run_id.isdecimal() and repository == "pilialvu75-hue/AI-Orchestrator-Module-Library"
                    else None)
+    tests_verified = (test_report is not None and
+                      os.environ.get("AIVEXUS_DART_TESTS_PASSED") == "true")
+    if not tests_verified:
+        test_report = None
     manifest = {
         "id": asset_id, "name": "Generated Dart running total", "version": version,
         "kind": "module", "status": "discovered",
@@ -39,7 +43,7 @@ def main():
         "capabilities": ["math.running_total"], "platforms": ["linux"], "languages": ["dart"],
         "entry_paths": ["lib/aivexus_running_total.dart"],
         "provenance": {"origin": "built_in", "source_repository": "https://github.com/pilialvu75-hue/AI-Orchestrator-Module-Library", "source_commit": args.source_commit, "source_task_id": "314", "license": None},
-        "validation": {"score": 0.8, "tests_passed": True, "test_report": test_report, "validated_on": ["linux"]},
+        "validation": {"score": 0.8, "tests_passed": tests_verified, "test_report": test_report, "validated_on": ["linux"]},
         "security": {"reviewed": False, "notes": "Unreviewed; not certified or trusted for automatic reuse."},
         "integration": {"estimated_effort": "low", "adaptation_allowed": True, "known_constraints": ["Independent consumer tested on Linux CI only; Cantiere integration unverified."]},
         "connector": {"standard": "ai-orchestrator-lego", "standard_version": "1.0.0", "provides": [{"capability_id": "math.running_total", "contract_id": "math.running_total.v1", "contract_version": "1.0"}], "requires": [], "integration_mode": "package"},

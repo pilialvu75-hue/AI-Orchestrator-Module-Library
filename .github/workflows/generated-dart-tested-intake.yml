@@ -29,6 +29,8 @@ jobs:
           dart analyze --fatal-infos
           dart test
       - name: Generate verified candidate
+        env:
+          AIVEXUS_DART_TESTS_PASSED: "true"
         run: python3 tools/generated_dart_intake_candidate.py --package "$RUNNER_TEMP/generated" --output "$RUNNER_TEMP/candidate" --source-commit "$GITHUB_SHA"
       - name: Check certification blockers without promoting candidate
         run: |

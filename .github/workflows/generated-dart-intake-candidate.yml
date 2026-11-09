@@ -23,6 +23,8 @@ jobs:
           dart analyze --fatal-infos
           dart test
       - name: Create immutable candidate bundle
+        env:
+          AIVEXUS_DART_TESTS_PASSED: "true"
         run: python3 tools/generated_dart_intake_candidate.py --package "$RUNNER_TEMP/generated" --output "$RUNNER_TEMP/candidate" --source-commit "$GITHUB_SHA"
       - name: Verify candidate digest and structure
         run: python3 tools/library_intake_bundle.py verify "$RUNNER_TEMP/candidate/bundle.json" --expected-sha256 "$(cat "$RUNNER_TEMP/candidate/bundle.sha256")"
