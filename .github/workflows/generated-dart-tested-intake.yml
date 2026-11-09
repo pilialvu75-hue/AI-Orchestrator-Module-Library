@@ -4,6 +4,7 @@ on:
     paths:
       - 'tools/generate_first_dart_module.py'
       - 'tools/generated_dart_intake_candidate.py'
+      - 'tools/test_generated_dart_intake_evidence.py'
       - 'tools/test_generate_first_dart_module.py'
       - 'tools/test_generated_dart_intake_candidate.py'
       - 'examples/first-generated-module-spec.json'
@@ -20,6 +21,8 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: dart-lang/setup-dart@v1
+      - name: Regression test candidate evidence gating
+        run: python3 -m unittest discover -s tools -p test_generated_dart_intake_evidence.py
       - name: Generate Dart module
         run: python3 tools/generate_first_dart_module.py --spec examples/first-generated-module-spec.json --output "$RUNNER_TEMP/generated"
       - name: Run actual Dart tests
