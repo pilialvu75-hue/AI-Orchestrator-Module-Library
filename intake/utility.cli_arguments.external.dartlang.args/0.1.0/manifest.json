@@ -1,10 +1,10 @@
 {
   "id": "utility.cli_arguments.external.dartlang.args",
-  "name": "Dart args — discovered and independently exercised",
+  "name": "Dart args \u2014 discovered and independently exercised",
   "version": "0.1.0",
   "kind": "module",
   "status": "tested",
-  "description": "Discovered external Dart args; upstream tests, independent consumer and packaged AIVEXUS adapter consumer passed on Linux; functional TESTED only, not security-certified.",
+  "description": "CLI argument parsing; upstream and independent consumer tested on Linux; not certified.",
   "tags": [
     "autonomous-researcher",
     "public-source",
@@ -45,7 +45,7 @@
     "score": 0.8,
     "tests_passed": true,
     "test_report": "tests/dart-linux-ci-report.json",
-    "validated_at": "2026-11-07T11:24:54.070209+00:00",
+    "validated_at": "2026-11-09T09:24:03.698933+00:00",
     "validated_on": [
       "linux"
     ]
