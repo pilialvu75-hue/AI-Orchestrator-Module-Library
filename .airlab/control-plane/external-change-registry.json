@@ -16,7 +16,7 @@
     {
       "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
       "baseline_at": "2026-10-03T16:20:00Z",
-      "cursor_merged_at": "2026-11-09T17:31:16Z"
+      "cursor_merged_at": "2026-11-09T18:16:23Z"
     },
     {
       "repository": "pilialvu75-hue/Ai-orchestrator-diagnostics",
@@ -5440,6 +5440,23 @@
       "url": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/c70e83b8cfaeb1e482da989f7d3eb2b38e559390",
       "match_ref": null,
       "reconciliation": null
+    },
+    {
+      "incident_id": "fa2effdaa11257c09774",
+      "status": "UNRECONCILED",
+      "detected_at": "2026-11-09T18:39:01Z",
+      "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
+      "kind": "unmatched_merge_commit",
+      "pull_request": null,
+      "merge_sha": null,
+      "commit_sha": "c9e45949a07a2166994ad8090760cd5e530c15fb",
+      "head_branch": null,
+      "base_branch": "main",
+      "change_at": "2026-11-09T18:16:23Z",
+      "title": "Merge pull request #1094 from pilialvu75-hue/feat/p0-generated-library-flutter-smoke-app",
+      "url": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/c9e45949a07a2166994ad8090760cd5e530c15fb",
+      "match_ref": null,
+      "reconciliation": null
     }
   ],
   "reconciliation_history": [
@@ -5450,35 +5467,35 @@
       "note": "Known motivating example for CP-HARDEN-03. It predates this incremental detector and is not retroactively reopened."
     }
   ],
-  "last_scan_at": "2026-11-09T17:39:34Z",
+  "last_scan_at": "2026-11-09T18:39:01Z",
   "scan_health": {
     "pilialvu75-hue/AI-Orchestrator-Module-Library": {
       "state": "OK",
-      "last_success_at": "2026-11-09T17:39:34Z",
+      "last_success_at": "2026-11-09T18:39:01Z",
       "last_failure_at": null,
       "error_code": null
     },
     "pilialvu75-hue/Ai-orchestrator-riserva": {
       "state": "OK",
-      "last_success_at": "2026-11-09T17:39:34Z",
+      "last_success_at": "2026-11-09T18:39:01Z",
       "last_failure_at": "2026-10-28T07:39:58Z",
       "error_code": null
     },
     "pilialvu75-hue/Ai-orchestrator-diagnostics": {
       "state": "OK",
-      "last_success_at": "2026-11-09T17:39:34Z",
+      "last_success_at": "2026-11-09T18:39:01Z",
       "last_failure_at": "2026-10-28T07:39:58Z",
       "error_code": null
     },
     "pilialvu75-hue/AI-Orchestrator-Module-Researcher": {
       "state": "OK",
-      "last_success_at": "2026-11-09T17:39:34Z",
+      "last_success_at": "2026-11-09T18:39:01Z",
       "last_failure_at": "2026-10-28T07:39:58Z",
       "error_code": null
     },
     "pilialvu75-hue/Ai_orchestrator-prova": {
       "state": "OK",
-      "last_success_at": "2026-11-09T17:39:34Z",
+      "last_success_at": "2026-11-09T18:39:01Z",
       "last_failure_at": "2026-10-28T07:39:58Z",
       "error_code": null
     }
