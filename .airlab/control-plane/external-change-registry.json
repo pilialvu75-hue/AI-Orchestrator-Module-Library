@@ -16,7 +16,7 @@
     {
       "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
       "baseline_at": "2026-10-03T16:20:00Z",
-      "cursor_merged_at": "2026-11-09T09:28:56Z"
+      "cursor_merged_at": "2026-11-09T11:20:20Z"
     },
     {
       "repository": "pilialvu75-hue/Ai-orchestrator-diagnostics",
@@ -5389,6 +5389,23 @@
       "url": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/2139043d71481bcb0f94f76627f076b9e9085d8c",
       "match_ref": null,
       "reconciliation": null
+    },
+    {
+      "incident_id": "94fd460d07a9c114a2a2",
+      "status": "UNRECONCILED",
+      "detected_at": "2026-11-09T11:39:23Z",
+      "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
+      "kind": "direct_commit",
+      "pull_request": null,
+      "merge_sha": null,
+      "commit_sha": "a7f7572c1d446ba7432a942731bcfa960fadd82c",
+      "head_branch": null,
+      "base_branch": "main",
+      "change_at": "2026-11-09T11:20:20Z",
+      "title": "P0 Live ASUS: richiedi tap esplicito tra i turni dopo rapporto video (#1033) (#1092)",
+      "url": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/a7f7572c1d446ba7432a942731bcfa960fadd82c",
+      "match_ref": null,
+      "reconciliation": null
     }
   ],
   "reconciliation_history": [
@@ -5399,35 +5416,35 @@
       "note": "Known motivating example for CP-HARDEN-03. It predates this incremental detector and is not retroactively reopened."
     }
   ],
-  "last_scan_at": "2026-11-09T10:39:08Z",
+  "last_scan_at": "2026-11-09T11:39:23Z",
   "scan_health": {
     "pilialvu75-hue/AI-Orchestrator-Module-Library": {
       "state": "OK",
-      "last_success_at": "2026-11-09T10:39:08Z",
+      "last_success_at": "2026-11-09T11:39:23Z",
       "last_failure_at": null,
       "error_code": null
     },
     "pilialvu75-hue/Ai-orchestrator-riserva": {
       "state": "OK",
-      "last_success_at": "2026-11-09T10:39:08Z",
+      "last_success_at": "2026-11-09T11:39:23Z",
       "last_failure_at": "2026-10-28T07:39:58Z",
       "error_code": null
     },
     "pilialvu75-hue/Ai-orchestrator-diagnostics": {
       "state": "OK",
-      "last_success_at": "2026-11-09T10:39:08Z",
+      "last_success_at": "2026-11-09T11:39:23Z",
       "last_failure_at": "2026-10-28T07:39:58Z",
       "error_code": null
     },
     "pilialvu75-hue/AI-Orchestrator-Module-Researcher": {
       "state": "OK",
-      "last_success_at": "2026-11-09T10:39:08Z",
+      "last_success_at": "2026-11-09T11:39:23Z",
       "last_failure_at": "2026-10-28T07:39:58Z",
       "error_code": null
     },
     "pilialvu75-hue/Ai_orchestrator-prova": {
       "state": "OK",
-      "last_success_at": "2026-11-09T10:39:08Z",
+      "last_success_at": "2026-11-09T11:39:23Z",
       "last_failure_at": "2026-10-28T07:39:58Z",
       "error_code": null
     }
