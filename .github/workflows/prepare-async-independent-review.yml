@@ -1,0 +1,39 @@
+name: Prepare async independent review evidence
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'tools/async_independent_review_packet.py'
+      - 'intake/utility.async_stream_queue.external.dartlang.async/**'
+      - '.github/workflows/prepare-async-independent-review.yml'
+  pull_request:
+    paths:
+      - 'tools/async_independent_review_packet.py'
+      - '.github/workflows/prepare-async-independent-review.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  review-packet:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validate exact source and prepare unsigned evidence
+        run: |
+          set -euo pipefail
+          python3 tools/async_independent_review_packet.py --root . --output "$RUNNER_TEMP/async-review-request.json"
+          python3 - "$RUNNER_TEMP/async-review-request.json" <<'PY'
+          import json,sys
+          p=json.load(open(sys.argv[1]))
+          assert p["security_reviewed"] is False
+          assert p["certification_authorized"] is False
+          assert p["sbom_complete"] is False
+          assert p["source"]["file_inventory"]
+          print("PASS: unsigned review packet; independent sign-off still required")
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: async-unsigned-independent-review-request
+          path: ${{ runner.temp }}/async-review-request.json
+          retention-days: 14
