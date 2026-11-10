@@ -6,6 +6,7 @@ on:
       - 'tools/async_independent_review_packet.py'
       - 'tools/async_osv_pub_scan.py'
       - 'tools/async_static_finding_triage.py'
+      - 'tools/async_resolved_sbom.py'
       - 'intake/utility.async_stream_queue.external.dartlang.async/**'
       - '.github/workflows/prepare-async-independent-review.yml'
   pull_request:
@@ -136,6 +137,11 @@ jobs:
           assert p["source"]["file_inventory"]
           print("PASS: unsigned review packet; independent sign-off still required")
           PY
+      - name: Produce source-bound resolved CycloneDX SBOM
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 tools/async_resolved_sbom.py --graph "$RUNNER_TEMP/async-resolved-dependencies.json" --packet "$RUNNER_TEMP/async-review-request.json" --output "$RUNNER_TEMP/async-resolved-sbom.cdx.json"
       - name: Audit exact source inventory for sensitive Dart operations
         shell: bash
         run: |
@@ -173,6 +179,7 @@ jobs:
           path: |
             ${{ runner.temp }}/async-review-request.json
             ${{ runner.temp }}/async-resolved-dependencies.json
+            ${{ runner.temp }}/async-resolved-sbom.cdx.json
             ${{ runner.temp }}/async-resolved-pubspec.lock
             ${{ runner.temp }}/async-outdated.json
             ${{ runner.temp }}/async-outdated.stderr
