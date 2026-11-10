@@ -241,6 +241,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: aivexus-async-library-intake-candidate-not-admitted
+          include-hidden-files: true
           path: ${{ runner.temp }}/tested-intake-candidate/
           if-no-files-found: ignore
           retention-days: 14
