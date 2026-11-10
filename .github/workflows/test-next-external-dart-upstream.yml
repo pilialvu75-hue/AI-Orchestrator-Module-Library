@@ -115,6 +115,57 @@ jobs:
           receipt["admission_authorized"]=False
           p.write_text(json.dumps(receipt,indent=2)+"\n")
           PY
+      - name: Re-test delivered adapter bundle from a separate clean consumer
+        if: success()
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [ ! -f "$RUNNER_TEMP/async-adapter-receipt.json" ]; then
+            echo "No async adapter was selected; no delivered bundle proof"
+            exit 0
+          fi
+          mkdir -p "$RUNNER_TEMP/delivered-bundle" "$RUNNER_TEMP/delivered-consumer/bin"
+          cp -a "$RUNNER_TEMP/async-adapter/." "$RUNNER_TEMP/delivered-bundle/"
+          cat > "$RUNNER_TEMP/delivered-consumer/pubspec.yaml" <<EOF
+          name: aivexus_delivered_async_consumer
+          publish_to: none
+          environment:
+            sdk: ^3.4.0
+          dependencies:
+            aivexus_external_async:
+              path: $RUNNER_TEMP/delivered-bundle
+          EOF
+          cp examples/async_adapter_consumer/bin/main.dart "$RUNNER_TEMP/delivered-consumer/bin/main.dart"
+          cd "$RUNNER_TEMP/delivered-consumer"
+          dart pub get
+          dart analyze
+          dart run bin/main.dart
+          python3 - "$RUNNER_TEMP/delivered-bundle" "$RUNNER_TEMP/async-adapter-receipt.json" "$RUNNER_TEMP/delivered-bundle-receipt.json" <<'PY'
+          import hashlib, json, pathlib, sys
+          root = pathlib.Path(sys.argv[1])
+          source_receipt = json.loads(pathlib.Path(sys.argv[2]).read_text())
+          files = sorted(p for p in root.rglob("*") if p.is_file())
+          if not files or any(p.is_symlink() for p in root.rglob("*")):
+              raise ValueError("invalid delivered bundle")
+          digest = hashlib.sha256()
+          for p in files:
+              data = p.read_bytes()
+              name = p.relative_to(root).as_posix().encode()
+              digest.update(len(name).to_bytes(8, "big") + name)
+              digest.update(len(data).to_bytes(8, "big") + data)
+          result = {
+              "schema": "aivexus.library.delivered-async-consumer.v1",
+              "package": "async",
+              "source_commit": source_receipt["source_commit"],
+              "bundle_sha256": digest.hexdigest(),
+              "file_count": len(files),
+              "separate_consumer": "BEHAVIOR_PASS",
+              "admission_authorized": False,
+              "certification_authorized": False,
+          }
+          pathlib.Path(sys.argv[3]).write_text(json.dumps(result, indent=2) + "\n")
+          print(json.dumps(result))
+          PY
       - name: Verify evidence before TESTED intake review
         if: success()
         shell: bash
@@ -136,6 +187,7 @@ jobs:
             ${{ runner.temp }}/async-adapter/
             ${{ runner.temp }}/async-adapter-receipt.json
             ${{ runner.temp }}/async-tested-intake-review.json
+            ${{ runner.temp }}/delivered-bundle-receipt.json
           if-no-files-found: ignore
           retention-days: 14
       - name: Publish discovery and test target evidence
