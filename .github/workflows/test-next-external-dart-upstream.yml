@@ -6,6 +6,7 @@ on:
       - '.github/workflows/test-next-external-dart-upstream.yml'
       - 'tools/select_next_external_dart_package.py'
       - 'tools/materialize_next_async_intake.py'
+      - 'contracts/index.json'
       - 'tools/library_evidence.py'
       - 'examples/async_adapter_consumer/**'
   pull_request:
