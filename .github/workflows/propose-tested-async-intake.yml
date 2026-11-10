@@ -4,6 +4,7 @@ on:
     workflows: ["Test next unadmitted upstream Dart package"]
     types: [completed]
 permissions:
+  actions: read
   contents: write
   pull-requests: write
 jobs:
