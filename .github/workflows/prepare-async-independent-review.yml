@@ -5,6 +5,7 @@ on:
     paths:
       - 'tools/async_independent_review_packet.py'
       - 'tools/async_osv_pub_scan.py'
+      - 'tools/async_static_finding_triage.py'
       - 'intake/utility.async_stream_queue.external.dartlang.async/**'
       - '.github/workflows/prepare-async-independent-review.yml'
   pull_request:
@@ -121,9 +122,14 @@ jobs:
           result=audit(Path("."),request)
           assert result["security_reviewed"] is False
           assert result["certification_authorized"] is False
-          Path(sys.argv[2]).write_text(json.dumps(result,indent=2,sort_keys=True)+"\\n")
+          Path(sys.argv[2]).write_text(json.dumps(result,indent=2,sort_keys=True)+chr(10))
           print("Source audit findings:",len(result["findings"]))
           PY
+      - name: Record source-bound triage for static finding
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 tools/async_static_finding_triage.py --root . --packet "$RUNNER_TEMP/async-review-request.json" --audit "$RUNNER_TEMP/async-static-source-audit.json" --output "$RUNNER_TEMP/async-static-finding-triage.json"
       - uses: actions/upload-artifact@v4
         with:
           name: async-unsigned-independent-review-request
@@ -138,4 +144,5 @@ jobs:
             ${{ runner.temp }}/async-advisory-audit-status.json
             ${{ runner.temp }}/async-osv-results.json
             ${{ runner.temp }}/async-static-source-audit.json
+            ${{ runner.temp }}/async-static-finding-triage.json
           retention-days: 14
