@@ -84,9 +84,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          python3 tools/async_osv_pub_scan.py \\
-            --graph "$RUNNER_TEMP/async-resolved-dependencies.json" \\
-            --output "$RUNNER_TEMP/async-osv-results.json"
+          python3 tools/async_osv_pub_scan.py --graph "$RUNNER_TEMP/async-resolved-dependencies.json" --output "$RUNNER_TEMP/async-osv-results.json"
       - name: Validate exact source and prepare unsigned evidence
         run: |
           set -euo pipefail
