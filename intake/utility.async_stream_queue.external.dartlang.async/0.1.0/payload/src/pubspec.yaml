@@ -1,0 +1,7 @@
+name: aivexus_external_async
+publish_to: none
+environment:
+  sdk: ^3.4.0
+dependencies:
+  async:
+    path: vendor/async

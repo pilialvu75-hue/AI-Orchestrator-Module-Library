@@ -1,0 +1,24 @@
+{
+  "schema": "ai-orchestrator.library-test-report.v1",
+  "asset_id": "utility.async_stream_queue.external.dartlang.async",
+  "version": "0.1.0",
+  "source_commit": "fa0c6b77d67b6837eb2891e251c40cdfbeab1f4d",
+  "payload_sha256": "b442409d8b25f12ca3b17e7a1a9fc4e79ee9772230aab5a063398d6e93f0af19",
+  "passed": true,
+  "validated_on": [
+    "linux"
+  ],
+  "generated_at": "2026-11-10T09:21:02.332888+00:00",
+  "evidence": {
+    "github_run_id": 42789892605,
+    "github_commit": "d54b3a011f6e3d0eaa2b85737fa5b9ad1f8c334d",
+    "checks": [
+      "upstream dart test",
+      "separate consumer dart analyze and run",
+      "delivered adapter consumer dart analyze and run"
+    ],
+    "delivery_bundle_sha256": "dd95611f3d39d6f497bd58c364311ffc82af4724965927991cb3c16d13d28421"
+  },
+  "independent_security_reviewed": false,
+  "certification_authorized": false
+}
