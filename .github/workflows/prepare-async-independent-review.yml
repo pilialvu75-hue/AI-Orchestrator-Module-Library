@@ -122,7 +122,7 @@ jobs:
           result=audit(Path("."),request)
           assert result["security_reviewed"] is False
           assert result["certification_authorized"] is False
-          Path(sys.argv[2]).write_text(json.dumps(result,indent=2,sort_keys=True)+"\\n")
+          Path(sys.argv[2]).write_text(json.dumps(result,indent=2,sort_keys=True)+chr(10))
           print("Source audit findings:",len(result["findings"]))
           PY
       - name: Record source-bound triage for static finding
