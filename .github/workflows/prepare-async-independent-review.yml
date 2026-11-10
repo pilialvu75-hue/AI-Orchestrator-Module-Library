@@ -4,6 +4,7 @@ on:
     branches: [main]
     paths:
       - 'tools/async_independent_review_packet.py'
+      - 'tools/async_osv_pub_scan.py'
       - 'intake/utility.async_stream_queue.external.dartlang.async/**'
       - '.github/workflows/prepare-async-independent-review.yml'
   pull_request:
@@ -79,6 +80,13 @@ jobs:
               json.dumps(summary,sort_keys=True,indent=2)+"\\n")
           print(json.dumps(summary,sort_keys=True))
           PY
+      - name: Query OSV for resolved Pub dependencies
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 tools/async_osv_pub_scan.py \\
+            --graph "$RUNNER_TEMP/async-resolved-dependencies.json" \\
+            --output "$RUNNER_TEMP/async-osv-results.json"
       - name: Validate exact source and prepare unsigned evidence
         run: |
           set -euo pipefail
@@ -104,4 +112,5 @@ jobs:
             ${{ runner.temp }}/async-advisory-audit.stdout
             ${{ runner.temp }}/async-advisory-audit.stderr
             ${{ runner.temp }}/async-advisory-audit-status.json
+            ${{ runner.temp }}/async-osv-results.json
           retention-days: 14
