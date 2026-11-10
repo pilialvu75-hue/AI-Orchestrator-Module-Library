@@ -5,6 +5,7 @@ This is evidence preparation, never an independent review or certification.
 import argparse
 import hashlib
 import json
+import re
 from pathlib import Path
 
 from library_evidence import verify_manifest_evidence
@@ -16,6 +17,24 @@ VERSION = "0.1.0"
 
 def sha(path):
     return hashlib.sha256(path.read_bytes()).hexdigest()
+
+
+def direct_dependencies(pubspec):
+    """Conservative scalar-only pubspec dependency inventory."""
+    active = False
+    found = {}
+    for line in pubspec.splitlines():
+        if not line.strip() or line.lstrip().startswith("#"):
+            continue
+        if not line.startswith((" ", "\t")):
+            active = line.strip() == "dependencies:"
+            continue
+        if active:
+            match = re.fullmatch(r"  ([a-z][a-z0-9_]*):\s*(\S.*?)\s*", line)
+            if not match or match.group(2).startswith(("{", "[")):
+                raise ValueError("unsupported runtime dependency declaration: " + line)
+            found[match.group(1)] = match.group(2)
+    return found
 
 
 def generate(root):
@@ -46,6 +65,13 @@ def generate(root):
     upstream = source / "vendor/async/pubspec.yaml"
     if not upstream.is_file():
         raise ValueError("original upstream package metadata missing")
+    pubspec = upstream.read_text()
+    dependencies = direct_dependencies(pubspec)
+    version = re.search(r"(?m)^version:\s*(\S+)\s*$", pubspec)
+    if not version:
+        raise ValueError("upstream version missing")
+    if "path: vendor/async" not in (source / "pubspec.yaml").read_text():
+        raise ValueError("adapter vendored source pin missing")
     report = json.loads((base / manifest["validation"]["test_report"]).read_text())
     return {
         "schema": "aivexus.library.async-independent-review-request.v1",
@@ -64,15 +90,25 @@ def generate(root):
             "validated_on": manifest["validation"]["validated_on"],
             "test_report_sha256": sha(base / manifest["validation"]["test_report"]),
         },
+        "dependency_inventory": {
+            "upstream_version": version.group(1),
+            "direct_runtime_dependencies": dependencies,
+            "transitive_dependencies_resolved": False,
+            "advisory_scan_completed": False,
+        },
         "sbom": {
             "bomFormat": "CycloneDX", "specVersion": "1.5", "version": 1,
             "metadata": {"component": {"type": "library", "name": ASSET, "version": VERSION}},
             "components": [
-                {"type": "library", "name": "async", "version": "upstream-pinned",
+                {"type": "library", "name": "async", "version": version.group(1),
                  "properties": [{"name": "aivexus:upstream_commit",
                                  "value": manifest["provenance"]["source_commit"]}]},
                 {"type": "library", "name": "aivexus_external_async", "version": VERSION,
                  "properties": [{"name": "aivexus:payload_sha256", "value": digest}]},
+            ] + [
+                {"type": "library", "name": name, "version": constraint,
+                 "properties": [{"name": "aivexus:unresolved_version_constraint", "value": "true"}]}
+                for name, constraint in sorted(dependencies.items())
             ],
         },
         "review_tasks": [
