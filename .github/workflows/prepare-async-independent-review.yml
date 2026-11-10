@@ -98,6 +98,32 @@ jobs:
           assert p["source"]["file_inventory"]
           print("PASS: unsigned review packet; independent sign-off still required")
           PY
+      - name: Audit exact source inventory for sensitive Dart operations
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - "$RUNNER_TEMP/async-review-request.json" "$RUNNER_TEMP/async-static-source-audit.json" <<'PY'
+          import json,sys
+          from pathlib import Path
+          import importlib.util
+          import sys as _sys
+          _sys.path.insert(0, "tools")
+          from library_independent_dart_static_audit import audit
+          packet=json.loads(Path(sys.argv[1]).read_text())
+          request={
+              "asset_id":packet["asset_id"],
+              "version":packet["version"],
+              "source":{
+                  "payload_tree_sha256":packet["source"]["payload_tree_sha256"],
+                  "all_file_digests":packet["source"]["file_inventory"],
+              },
+          }
+          result=audit(Path("."),request)
+          assert result["security_reviewed"] is False
+          assert result["certification_authorized"] is False
+          Path(sys.argv[2]).write_text(json.dumps(result,indent=2,sort_keys=True)+"\\n")
+          print("Source audit findings:",len(result["findings"]))
+          PY
       - uses: actions/upload-artifact@v4
         with:
           name: async-unsigned-independent-review-request
@@ -111,4 +137,5 @@ jobs:
             ${{ runner.temp }}/async-advisory-audit.stderr
             ${{ runner.temp }}/async-advisory-audit-status.json
             ${{ runner.temp }}/async-osv-results.json
+            ${{ runner.temp }}/async-static-source-audit.json
           retention-days: 14
