@@ -3,13 +3,13 @@
   "report_type": "read_only_evidence_gaps_not_certification",
   "summary": {
     "certified_catalog_entries": 3,
-    "intake_candidates": 30,
-    "blocked_intake_candidates": 30,
+    "intake_candidates": 31,
+    "blocked_intake_candidates": 31,
     "ready_for_automatic_certification": 0,
     "blocker_counts": {
       "LICENSE_EVIDENCE_MISSING": 20,
       "REPRODUCIBLE_TEST_EVIDENCE_MISSING": 18,
-      "SECURITY_REVIEW_EVIDENCE_MISSING": 30,
+      "SECURITY_REVIEW_EVIDENCE_MISSING": 31,
       "SOURCE_SNAPSHOT_MISSING": 18
     }
   },
@@ -1359,6 +1359,23 @@
         "Resolve the upstream license and supply its attributable license file.",
         "Materialize immutable source bytes from the pinned commit in an isolated evidence workflow.",
         "Run isolated reproducible tests on the pinned source and attach a bound report.",
+        "Attach an independently generated security report and SBOM bound to the pinned source."
+      ],
+      "independent_certification_authorized": false
+    },
+    {
+      "asset_id": "utility.async_stream_queue.external.dartlang.async",
+      "version": "0.1.0",
+      "status": "tested",
+      "capabilities": [
+        "utility.async_stream_queue"
+      ],
+      "source_repository": "https://github.com/dart-lang/core",
+      "source_commit": "fa0c6b77d67b6837eb2891e251c40cdfbeab1f4d",
+      "blockers": [
+        "SECURITY_REVIEW_EVIDENCE_MISSING"
+      ],
+      "next_actions": [
         "Attach an independently generated security report and SBOM bound to the pinned source."
       ],
       "independent_certification_authorized": false
