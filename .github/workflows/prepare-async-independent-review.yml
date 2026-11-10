@@ -45,6 +45,43 @@ jobs:
           assert {"async","collection","meta"}.issubset(names)
           print("PASS: resolved dependency graph includes async, collection, meta")
           PY
+      - name: Test async from a separate disposable Dart consumer
+        shell: bash
+        run: |
+          set -euo pipefail
+          consumer="$RUNNER_TEMP/async-external-consumer"
+          source="$GITHUB_WORKSPACE/intake/utility.async_stream_queue.external.dartlang.async/0.1.0/payload/src"
+          mkdir -p "$consumer/bin"
+          cat > "$consumer/pubspec.yaml" <<EOF
+          name: async_external_consumer_smoke
+          publish_to: none
+          environment:
+            sdk: ^3.4.0
+          dependencies:
+            aivexus_external_async:
+              path: $source
+          EOF
+          cat > "$consumer/bin/main.dart" <<'DART'
+          import 'dart:async';
+          import 'package:aivexus_external_async/aivexus_external.dart';
+
+          Future<void> main() async {
+            final queue = StreamQueue<int>(Stream<int>.fromIterable([4, 7, 11]));
+            try {
+              if (await queue.next != 4) throw StateError('first element mismatch');
+              if (await queue.peek != 7) throw StateError('peek mismatch');
+              if (await queue.next != 7) throw StateError('peek consumed element');
+              if (await queue.next != 11) throw StateError('third element mismatch');
+              if (await queue.hasNext) throw StateError('unexpected trailing element');
+              print('PASS: external consumer StreamQueue next/peek/exhaustion');
+            } finally {
+              await queue.cancel();
+            }
+          }
+          DART
+          cd "$consumer"
+          dart pub get
+          dart run bin/main.dart | tee "$RUNNER_TEMP/async-external-consumer-test.log"
       - name: Capture dependency recheck while independent OSV scan remains pending
         shell: bash
         run: |
@@ -145,4 +182,5 @@ jobs:
             ${{ runner.temp }}/async-osv-results.json
             ${{ runner.temp }}/async-static-source-audit.json
             ${{ runner.temp }}/async-static-finding-triage.json
+            ${{ runner.temp }}/async-external-consumer-test.log
           retention-days: 14
