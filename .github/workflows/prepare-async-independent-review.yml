@@ -43,7 +43,7 @@ jobs:
           assert {"async","collection","meta"}.issubset(names)
           print("PASS: resolved dependency graph includes async, collection, meta")
           PY
-      - name: Run Dart dependency advisory audit without authorizing review
+      - name: Capture dependency recheck while independent OSV scan remains pending
         shell: bash
         run: |
           set -euo pipefail
@@ -51,7 +51,7 @@ jobs:
           set +e
           dart pub outdated --json > "$RUNNER_TEMP/async-outdated.json" 2> "$RUNNER_TEMP/async-outdated.stderr"
           outdated_rc=$?
-          dart pub audit --json > "$RUNNER_TEMP/async-advisory-audit.json" 2> "$RUNNER_TEMP/async-advisory-audit.stderr"
+          dart pub get --offline > "$RUNNER_TEMP/async-advisory-audit.stdout" 2> "$RUNNER_TEMP/async-advisory-audit.stderr"
           audit_rc=$?
           set -e
           python3 - "$RUNNER_TEMP" "$outdated_rc" "$audit_rc" <<'PY'
@@ -71,8 +71,10 @@ jobs:
                   summary[label+"_json_valid"]=isinstance(parsed,dict)
               except (ValueError,OSError):
                   summary[label+"_json_valid"]=False
-          summary["advisory_scan_completed"]=(summary["audit_exit_code"]==0
-              and summary["advisory-audit_json_valid"])
+          # pub get is dependency resolution, NOT an independent advisory scan.
+          summary["advisory_scan_completed"]=False
+          summary["advisory_scan_reason"]="INDEPENDENT_OSV_SCAN_NOT_IMPLEMENTED"
+          summary["dependency_resolution_recheck_passed"]=(summary["audit_exit_code"]==0)
           (root/"async-advisory-audit-status.json").write_text(
               json.dumps(summary,sort_keys=True,indent=2)+"\\n")
           print(json.dumps(summary,sort_keys=True))
@@ -99,7 +101,7 @@ jobs:
             ${{ runner.temp }}/async-resolved-pubspec.lock
             ${{ runner.temp }}/async-outdated.json
             ${{ runner.temp }}/async-outdated.stderr
-            ${{ runner.temp }}/async-advisory-audit.json
+            ${{ runner.temp }}/async-advisory-audit.stdout
             ${{ runner.temp }}/async-advisory-audit.stderr
             ${{ runner.temp }}/async-advisory-audit-status.json
           retention-days: 14
