@@ -144,20 +144,34 @@ jobs:
           import hashlib, json, pathlib, sys
           root = pathlib.Path(sys.argv[1])
           source_receipt = json.loads(pathlib.Path(sys.argv[2]).read_text())
+          original = pathlib.Path(sys.argv[1]).parent / "async-adapter"
+          if not original.is_dir() or original.is_symlink():
+              raise ValueError("original adapter bundle missing")
+          def bundle_digest(directory):
+              entries = sorted(p for p in directory.rglob("*") if p.is_file())
+              if not entries or any(p.is_symlink() for p in directory.rglob("*")):
+                  raise ValueError("invalid adapter bundle")
+              h = hashlib.sha256()
+              for entry in entries:
+                  data = entry.read_bytes()
+                  name = entry.relative_to(directory).as_posix().encode()
+                  h.update(len(name).to_bytes(8, "big") + name)
+                  h.update(len(data).to_bytes(8, "big") + data)
+              return h.hexdigest(), len(entries)
+          original_sha, original_count = bundle_digest(original)
+          delivered_sha, delivered_count = bundle_digest(root)
+          if original_sha != delivered_sha or original_count != delivered_count:
+              raise ValueError("delivered bundle differs from tested original")
           files = sorted(p for p in root.rglob("*") if p.is_file())
           if not files or any(p.is_symlink() for p in root.rglob("*")):
               raise ValueError("invalid delivered bundle")
-          digest = hashlib.sha256()
-          for p in files:
-              data = p.read_bytes()
-              name = p.relative_to(root).as_posix().encode()
-              digest.update(len(name).to_bytes(8, "big") + name)
-              digest.update(len(data).to_bytes(8, "big") + data)
           result = {
               "schema": "aivexus.library.delivered-async-consumer.v1",
               "package": "async",
               "source_commit": source_receipt["source_commit"],
-              "bundle_sha256": digest.hexdigest(),
+              "bundle_sha256": delivered_sha,
+              "original_bundle_sha256": original_sha,
+              "delivery_integrity": "MATCH",
               "file_count": len(files),
               "separate_consumer": "BEHAVIOR_PASS",
               "admission_authorized": False,
