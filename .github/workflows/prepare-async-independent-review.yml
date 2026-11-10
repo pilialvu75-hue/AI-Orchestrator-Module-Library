@@ -63,7 +63,7 @@ jobs:
           EOF
           cat > "$consumer/bin/main.dart" <<'DART'
           import 'dart:async';
-          import 'package:aivexus_external_async/async.dart';
+          import 'package:aivexus_external_async/aivexus_external.dart';
 
           Future<void> main() async {
             final queue = StreamQueue<int>(Stream<int>.fromIterable([4, 7, 11]));
