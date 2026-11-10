@@ -19,6 +19,30 @@ jobs:
     timeout-minutes: 8
     steps:
       - uses: actions/checkout@v4
+      - uses: dart-lang/setup-dart@v1
+        with:
+          sdk: stable
+      - name: Resolve pinned candidate dependencies in disposable copy
+        shell: bash
+        run: |
+          set -euo pipefail
+          source="intake/utility.async_stream_queue.external.dartlang.async/0.1.0/payload/src"
+          mkdir -p "$RUNNER_TEMP/async-dependency-resolution"
+          cp -a "$source/." "$RUNNER_TEMP/async-dependency-resolution/"
+          cd "$RUNNER_TEMP/async-dependency-resolution"
+          dart pub get
+          test -s pubspec.lock
+          dart pub deps --json > "$RUNNER_TEMP/async-resolved-dependencies.json"
+          cp pubspec.lock "$RUNNER_TEMP/async-resolved-pubspec.lock"
+          python3 - "$RUNNER_TEMP/async-resolved-dependencies.json" <<'PY'
+          import json,sys
+          d=json.load(open(sys.argv[1]))
+          packages=d.get("packages")
+          assert isinstance(packages,list) and packages
+          names={p["name"] for p in packages}
+          assert {"async","collection","meta"}.issubset(names)
+          print("PASS: resolved dependency graph includes async, collection, meta")
+          PY
       - name: Validate exact source and prepare unsigned evidence
         run: |
           set -euo pipefail
@@ -35,5 +59,8 @@ jobs:
       - uses: actions/upload-artifact@v4
         with:
           name: async-unsigned-independent-review-request
-          path: ${{ runner.temp }}/async-review-request.json
+          path: |
+            ${{ runner.temp }}/async-review-request.json
+            ${{ runner.temp }}/async-resolved-dependencies.json
+            ${{ runner.temp }}/async-resolved-pubspec.lock
           retention-days: 14
