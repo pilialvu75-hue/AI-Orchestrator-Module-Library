@@ -221,7 +221,7 @@ jobs:
             echo "No async candidate selected"
             exit 0
           fi
-          python3 - "$RUNNER_TEMP/tested-intake-candidate" <<'PY'
+          PYTHONPATH=tools python3 - "$RUNNER_TEMP/tested-intake-candidate" <<'PY'
           import json, pathlib, sys
           from tools.library_evidence import verify_manifest_evidence
           root = pathlib.Path(sys.argv[1])
