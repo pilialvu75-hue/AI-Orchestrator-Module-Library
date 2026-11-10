@@ -281,6 +281,14 @@
       "status": "draft",
       "description": "Pure command-line argument parsing for options, flags, and positional inputs in Dart; no process execution or external I/O.",
       "replacement": null
+    },
+    {
+      "capability_id": "utility.async_stream_queue",
+      "contract_id": "utility.async_stream_queue.v1",
+      "contract_version": "1.0",
+      "status": "draft",
+      "description": "Dart StreamQueue sequential asynchronous stream consumption; no network, device access or background service implied.",
+      "replacement": null
     }
   ]
 }

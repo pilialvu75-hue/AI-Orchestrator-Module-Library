@@ -1,0 +1,75 @@
+name: Propose persistent TESTED async intake
+on:
+  workflow_run:
+    workflows: ["Test next unadmitted upstream Dart package"]
+    types: [completed]
+permissions:
+  actions: read
+  contents: write
+  pull-requests: write
+jobs:
+  propose-tested-intake:
+    if: ${{ github.event.workflow_run.conclusion == 'success' && github.event.workflow_run.event == 'push' && github.event.workflow_run.head_branch == 'main' }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          persist-credentials: true
+      - name: Download exact successful CI candidate
+        env:
+          GH_TOKEN: ${{ github.token }}
+          RUN_ID: ${{ github.event.workflow_run.id }}
+        run: |
+          set -euo pipefail
+          mkdir -p "$RUNNER_TEMP/candidate"
+          gh run download "$RUN_ID" -R "$GITHUB_REPOSITORY" \
+            -n aivexus-async-library-intake-candidate-not-admitted \
+            -D "$RUNNER_TEMP/candidate"
+      - name: Validate staged candidate against Library registry
+        shell: bash
+        run: |
+          set -euo pipefail
+          asset="utility.async_stream_queue.external.dartlang.async"
+          source="$RUNNER_TEMP/candidate/intake/$asset/0.1.0"
+          dest="intake/$asset/0.1.0"
+          test -f "$source/manifest.json"
+          if [ -e "$dest" ]; then
+            echo "Already in intake; no duplicate PR"
+            echo "SKIP_PROPOSAL=true" >> "$GITHUB_ENV"
+            exit 0
+          fi
+          mkdir -p "intake/$asset"
+          cp -a "$source" "$dest"
+          PYTHONPATH=tools python3 - "$dest" <<'PY'
+          import json, pathlib, sys
+          from library_evidence import verify_manifest_evidence
+          p = pathlib.Path(sys.argv[1])
+          m = json.loads((p / "manifest.json").read_text())
+          if m["status"] != "tested" or m["security"]["reviewed"] is not False:
+              raise ValueError("only TESTED non-certified source allowed")
+          if m["provenance"]["source_subtree"] != "pkgs/async":
+              raise ValueError("wrong upstream subtree")
+          verify_manifest_evidence(p, m)
+          print("PASS: source-bound test evidence")
+          PY
+          python3 tools/validate_library.py
+      - name: Open persistent intake review PR
+        if: ${{ env.SKIP_PROPOSAL != 'true' }}
+        env:
+          GH_TOKEN: ${{ github.token }}
+          RUN_ID: ${{ github.event.workflow_run.id }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          branch="bot/p0-async-tested-intake-$RUN_ID"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git switch -c "$branch"
+          git add intake/utility.async_stream_queue.external.dartlang.async/0.1.0
+          git commit -m "Propose source-bound TESTED async intake from CI run $RUN_ID"
+          git push origin "$branch"
+          gh pr create -R "$GITHUB_REPOSITORY" --base main --head "$branch" \
+            --title "P0: persist verified TESTED async intake from CI run $RUN_ID" \
+            --body "Automatically proposed from successful main-branch CI run $RUN_ID. Full source, license, test report and payload digest are staged. TESTED only; security.reviewed=false; NOT certified or production-installable. Requires normal PR review and CI."
