@@ -68,6 +68,14 @@
       "replacement": null
     },
     {
+      "capability_id": "math.running_total",
+      "contract_id": "math.running_total.v1",
+      "contract_version": "1.0",
+      "status": "draft",
+      "description": "Pure Dart integer running totals over an iterable, preserving input and returning an unmodifiable cumulative-sum list; no external I/O.",
+      "replacement": null
+    },
+    {
       "capability_id": "network.http",
       "contract_id": "network.http.v1",
       "contract_version": "1.0",
@@ -217,6 +225,14 @@
       "contract_version": "1.0",
       "status": "draft",
       "description": "Logical secure secret storage capability boundary.",
+      "replacement": null
+    },
+    {
+      "capability_id": "utility.async_stream_queue",
+      "contract_id": "utility.async_stream_queue.v1",
+      "contract_version": "1.0",
+      "status": "draft",
+      "description": "Dart StreamQueue sequential asynchronous stream consumption; no network, device access or background service implied.",
       "replacement": null
     },
     {
@@ -1076,5 +1092,5 @@
       ]
     }
   ],
-  "snapshot_sha256": "cc1fe21e1936f337ce6f3b4bc4c4b346020745994a9ea2b2e32d3d799a7ac2a8"
+  "snapshot_sha256": "9baa7ebf288cea4fc6e6955af1359f4e781d81b46bf6a6c3a7a93b8b656e5b02"
 }
