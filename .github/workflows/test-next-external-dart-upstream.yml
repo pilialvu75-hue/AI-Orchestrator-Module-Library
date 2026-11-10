@@ -5,6 +5,7 @@ on:
     paths:
       - '.github/workflows/test-next-external-dart-upstream.yml'
       - 'tools/select_next_external_dart_package.py'
+      - 'tools/materialize_next_async_intake.py'
       - 'examples/async_adapter_consumer/**'
   pull_request:
     paths:
@@ -192,6 +193,32 @@ jobs:
               --adapter "$RUNNER_TEMP/async-adapter-receipt.json" \
               --output "$RUNNER_TEMP/async-tested-intake-review.json"
           fi
+      - name: Materialize source-bound TESTED-only Library intake candidate
+        if: success()
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [ ! -f "$RUNNER_TEMP/delivered-bundle-receipt.json" ]; then
+            echo "No delivered async proof; no candidate generated"
+            exit 0
+          fi
+          python3 tools/materialize_next_async_intake.py \
+            --root . \
+            --candidate "$RUNNER_TEMP/next.json" \
+            --upstream "$RUNNER_TEMP/next-upstream-test-receipt.json" \
+            --consumer "$RUNNER_TEMP/next-consumer-receipt.json" \
+            --adapter "$RUNNER_TEMP/async-adapter-receipt.json" \
+            --delivery "$RUNNER_TEMP/delivered-bundle-receipt.json" \
+            --bundle "$RUNNER_TEMP/delivered-bundle" \
+            --output "$RUNNER_TEMP/tested-intake-candidate"
+      - name: Publish TESTED-only Library intake candidate (not admitted)
+        if: success()
+        uses: actions/upload-artifact@v4
+        with:
+          name: aivexus-async-library-intake-candidate-not-admitted
+          path: ${{ runner.temp }}/tested-intake-candidate/
+          if-no-files-found: ignore
+          retention-days: 14
       - name: Publish verified AIVEXUS async adapter bundle
         if: success()
         uses: actions/upload-artifact@v4
