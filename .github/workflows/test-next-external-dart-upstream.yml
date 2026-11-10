@@ -6,6 +6,7 @@ on:
       - '.github/workflows/test-next-external-dart-upstream.yml'
       - 'tools/select_next_external_dart_package.py'
       - 'tools/materialize_next_async_intake.py'
+      - 'tools/library_evidence.py'
       - 'examples/async_adapter_consumer/**'
   pull_request:
     paths:
@@ -211,6 +212,29 @@ jobs:
             --delivery "$RUNNER_TEMP/delivered-bundle-receipt.json" \
             --bundle "$RUNNER_TEMP/delivered-bundle" \
             --output "$RUNNER_TEMP/tested-intake-candidate"
+      - name: Re-validate generated intake in its standalone artifact directory
+        if: success()
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [ ! -d "$RUNNER_TEMP/tested-intake-candidate/intake" ]; then
+            echo "No async candidate selected"
+            exit 0
+          fi
+          python3 - "$RUNNER_TEMP/tested-intake-candidate" <<'PY'
+          import json, pathlib, sys
+          from tools.library_evidence import verify_manifest_evidence
+          root = pathlib.Path(sys.argv[1])
+          manifests = list(root.glob("intake/*/*/manifest.json"))
+          if len(manifests) != 1:
+              raise ValueError("expected exactly one candidate manifest")
+          path = manifests[0]
+          manifest = json.loads(path.read_text())
+          if manifest.get("status") != "tested" or manifest["security"]["reviewed"] is not False:
+              raise ValueError("candidate cannot claim independent certification")
+          verify_manifest_evidence(path.parent, manifest)
+          print("PASS: independently re-validated materialized intake evidence", manifest["id"])
+          PY
       - name: Publish TESTED-only Library intake candidate (not admitted)
         if: success()
         uses: actions/upload-artifact@v4
