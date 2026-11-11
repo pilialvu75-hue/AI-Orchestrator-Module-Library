@@ -1,0 +1,29 @@
+name: Certification decision boundary tests
+
+on:
+  pull_request:
+    paths:
+      - 'tools/library_certification_decision.py'
+      - 'tests/test_library_certification_decision.py'
+      - '.github/workflows/certification-decision-boundary.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'tools/library_certification_decision.py'
+      - 'tests/test_library_certification_decision.py'
+      - '.github/workflows/certification-decision-boundary.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  certification-decision-boundary:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Test fail-closed decision policy
+        run: python3 -m unittest discover -s tests -p 'test_library_certification_decision.py' -v
