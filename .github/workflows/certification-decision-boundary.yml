@@ -8,11 +8,13 @@ on:
       - 'tools/library_reviewer_signature_verify.py'
       - 'tools/library_reviewer_attestation_verify.py'
       - 'tools/library_reviewer_nonce_ledger.py'
+      - 'tools/library_reviewer_attestation_consume.py'
       - 'tests/test_library_certification_decision.py'
       - 'tests/test_library_reviewer_attestation_contract.py'
       - 'tests/test_library_reviewer_signature_verify.py'
       - 'tests/test_library_reviewer_attestation_verify.py'
       - 'tests/test_library_reviewer_nonce_ledger.py'
+      - 'tests/test_library_reviewer_attestation_consume.py'
       - '.github/workflows/certification-decision-boundary.yml'
   push:
     branches: [main]
@@ -22,11 +24,13 @@ on:
       - 'tools/library_reviewer_signature_verify.py'
       - 'tools/library_reviewer_attestation_verify.py'
       - 'tools/library_reviewer_nonce_ledger.py'
+      - 'tools/library_reviewer_attestation_consume.py'
       - 'tests/test_library_certification_decision.py'
       - 'tests/test_library_reviewer_attestation_contract.py'
       - 'tests/test_library_reviewer_signature_verify.py'
       - 'tests/test_library_reviewer_attestation_verify.py'
       - 'tests/test_library_reviewer_nonce_ledger.py'
+      - 'tests/test_library_reviewer_attestation_consume.py'
       - '.github/workflows/certification-decision-boundary.yml'
   workflow_dispatch:
 
@@ -48,3 +52,4 @@ jobs:
           python3 -m unittest discover -s tests -p 'test_library_reviewer_signature_verify.py' -v
           python3 -m unittest discover -s tests -p 'test_library_reviewer_attestation_verify.py' -v
           python3 -m unittest discover -s tests -p 'test_library_reviewer_nonce_ledger.py' -v
+          python3 -m unittest discover -s tests -p 'test_library_reviewer_attestation_consume.py' -v
