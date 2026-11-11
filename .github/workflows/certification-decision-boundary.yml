@@ -12,6 +12,7 @@ on:
       - 'tools/library_protected_replay_store.py'
       - 'tools/library_sqlite_replay_store.py'
       - 'tools/library_review_workflow_isolation.py'
+      - 'tools/library_candidate_review_packet.py'
       - 'tools/library_reviewer_shared_nonce_ledger.py'
       - 'tests/test_library_certification_decision.py'
       - 'tests/test_library_reviewer_attestation_contract.py'
@@ -22,6 +23,7 @@ on:
       - 'tests/test_library_protected_replay_store.py'
       - 'tests/test_library_sqlite_replay_store.py'
       - 'tests/test_library_review_workflow_isolation.py'
+      - 'tests/test_library_candidate_review_packet.py'
       - 'tests/test_library_reviewer_shared_nonce_ledger.py'
       - '.github/workflows/certification-decision-boundary.yml'
   push:
@@ -73,4 +75,5 @@ jobs:
           python3 -m unittest discover -s tests -p 'test_library_sqlite_replay_store.py' -v
           python3 -m unittest discover -s tests -p 'test_library_review_workflow_isolation.py' -v
           python3 tools/library_review_workflow_isolation.py
+          python3 -m unittest discover -s tests -p 'test_library_candidate_review_packet.py' -v
           python3 -m unittest discover -s tests -p 'test_library_reviewer_shared_nonce_ledger.py' -v
