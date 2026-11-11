@@ -1,5 +1,6 @@
 """End-to-end local verification and replay rejection."""
 import base64
+import hashlib
 import subprocess
 import sys
 import tempfile
@@ -33,7 +34,13 @@ class ConsumeTests(unittest.TestCase):
             args = dict(asset_id="asset", source_sha256="a" * 64,
                         evidence_sha256="b" * 64, now=150, trusted_key_id="reviewer",
                         trusted_public_key_pem=(root / "pub").read_text(),
+                        trusted_key_sha256=hashlib.sha256((root / "pub").read_bytes()).hexdigest(),
                         ledger_dir=root / "ledger")
+            bad_pin = verify_and_reserve(record, **dict(args, trusted_key_sha256="0" * 64))
+            self.assertFalse(bad_pin["signature_verified"])
+            self.assertFalse(bad_pin["nonce_reserved"])
+            with self.assertRaisesRegex(ValueError, "key pin"):
+                verify_and_reserve(record, **dict(args, trusted_key_sha256=""))
             first = verify_and_reserve(record, **args)
             self.assertTrue(first["signature_verified"])
             self.assertTrue(first["nonce_reserved"])
