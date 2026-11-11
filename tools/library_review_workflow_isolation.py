@@ -21,7 +21,7 @@ def check_review_workflow(text):
             failures.append("forbidden: " + pattern)
     # Only the exact top-level permissions block is accepted. No job-level
     # override may silently widen privileges.
-    permission_blocks = list(re.finditer(r"(?m)^([ \t]*)permissions\s*:\s*(.*)$", text))
+    permission_blocks = list(re.finditer(r"(?m)^([ \\t]*)permissions[ \\t]*:[ \\t]*(.*)$", text))
     if len(permission_blocks) != 1 or permission_blocks[0].group(1):
         failures.append("exactly one top-level permissions block required")
     elif permission_blocks[0].group(2).strip():
