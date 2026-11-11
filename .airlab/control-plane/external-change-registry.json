@@ -16,7 +16,7 @@
     {
       "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
       "baseline_at": "2026-10-03T16:20:00Z",
-      "cursor_merged_at": "2026-11-11T09:21:03Z"
+      "cursor_merged_at": "2026-11-11T14:30:27Z"
     },
     {
       "repository": "pilialvu75-hue/Ai-orchestrator-diagnostics",
@@ -5712,6 +5712,57 @@
       "url": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/cfb49f06263903cf078040a0291c8841f9b8f084",
       "match_ref": null,
       "reconciliation": null
+    },
+    {
+      "incident_id": "72d6d00f6b8428f9bf02",
+      "status": "UNRECONCILED",
+      "detected_at": "2026-11-11T14:39:09Z",
+      "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
+      "kind": "direct_commit",
+      "pull_request": null,
+      "merge_sha": null,
+      "commit_sha": "f1efbd1673d862fbc24692dca89864ddf5310d83",
+      "head_branch": null,
+      "base_branch": "main",
+      "change_at": "2026-11-11T14:09:15Z",
+      "title": "[source-only] macOS owner recovery PKG builder (#1119)",
+      "url": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/f1efbd1673d862fbc24692dca89864ddf5310d83",
+      "match_ref": null,
+      "reconciliation": null
+    },
+    {
+      "incident_id": "48f1a3906b71f740e9c8",
+      "status": "UNRECONCILED",
+      "detected_at": "2026-11-11T14:39:09Z",
+      "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
+      "kind": "direct_commit",
+      "pull_request": null,
+      "merge_sha": null,
+      "commit_sha": "1c85ad835bb9492728a85163e29bac9eeb60fd90",
+      "head_branch": null,
+      "base_branch": "main",
+      "change_at": "2026-11-11T14:13:16Z",
+      "title": "[source-only] Fix PKG payload root entry validation (#1120)",
+      "url": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/1c85ad835bb9492728a85163e29bac9eeb60fd90",
+      "match_ref": null,
+      "reconciliation": null
+    },
+    {
+      "incident_id": "f3575ac4291536093578",
+      "status": "UNRECONCILED",
+      "detected_at": "2026-11-11T14:39:09Z",
+      "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
+      "kind": "direct_commit",
+      "pull_request": null,
+      "merge_sha": null,
+      "commit_sha": "03b62177229df30fcd7425a53a849e97afe409cb",
+      "head_branch": null,
+      "base_branch": "main",
+      "change_at": "2026-11-11T14:30:27Z",
+      "title": "[source-only] Fix recovery postinstall and require real PKG install smoke (#1121)",
+      "url": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/03b62177229df30fcd7425a53a849e97afe409cb",
+      "match_ref": null,
+      "reconciliation": null
     }
   ],
   "reconciliation_history": [
@@ -5722,35 +5773,35 @@
       "note": "Known motivating example for CP-HARDEN-03. It predates this incremental detector and is not retroactively reopened."
     }
   ],
-  "last_scan_at": "2026-11-11T13:39:41Z",
+  "last_scan_at": "2026-11-11T14:39:09Z",
   "scan_health": {
     "pilialvu75-hue/AI-Orchestrator-Module-Library": {
       "state": "OK",
-      "last_success_at": "2026-11-11T13:39:41Z",
+      "last_success_at": "2026-11-11T14:39:09Z",
       "last_failure_at": null,
       "error_code": null
     },
     "pilialvu75-hue/Ai-orchestrator-riserva": {
       "state": "OK",
-      "last_success_at": "2026-11-11T13:39:41Z",
+      "last_success_at": "2026-11-11T14:39:09Z",
       "last_failure_at": "2026-10-28T07:39:58Z",
       "error_code": null
     },
     "pilialvu75-hue/Ai-orchestrator-diagnostics": {
       "state": "OK",
-      "last_success_at": "2026-11-11T13:39:41Z",
+      "last_success_at": "2026-11-11T14:39:09Z",
       "last_failure_at": "2026-10-28T07:39:58Z",
       "error_code": null
     },
     "pilialvu75-hue/AI-Orchestrator-Module-Researcher": {
       "state": "OK",
-      "last_success_at": "2026-11-11T13:39:41Z",
+      "last_success_at": "2026-11-11T14:39:09Z",
       "last_failure_at": "2026-10-28T07:39:58Z",
       "error_code": null
     },
     "pilialvu75-hue/Ai_orchestrator-prova": {
       "state": "OK",
-      "last_success_at": "2026-11-11T13:39:41Z",
+      "last_success_at": "2026-11-11T14:39:09Z",
       "last_failure_at": "2026-10-28T07:39:58Z",
       "error_code": null
     }
