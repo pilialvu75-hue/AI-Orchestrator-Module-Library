@@ -1,4 +1,5 @@
 """Persistent SQLite replay protection across independent connections."""
+import os
 import sys
 import tempfile
 import unittest
@@ -30,6 +31,23 @@ class SQLiteReplayTests(unittest.TestCase):
                 results = list(pool.map(consume, range(20)))
             self.assertEqual(results.count(True), 1)
             self.assertEqual(results.count(False), 19)
+
+    def test_symlink_database_rejected(self):
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp)
+            target = root / "target.sqlite"
+            SQLiteReplayStore(target)
+            (root / "link.sqlite").symlink_to(target)
+            with self.assertRaises(ValueError):
+                SQLiteReplayStore(root / "link.sqlite")
+
+    def test_broad_permissions_rejected(self):
+        with tempfile.TemporaryDirectory() as temp:
+            path = Path(temp) / "replay.sqlite"
+            SQLiteReplayStore(path)
+            os.chmod(path, 0o644)
+            with self.assertRaises(ValueError):
+                SQLiteReplayStore(path)
 
     def test_missing_parent_fails_closed(self):
         with tempfile.TemporaryDirectory() as temp:
