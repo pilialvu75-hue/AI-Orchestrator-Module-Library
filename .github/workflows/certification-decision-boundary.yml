@@ -5,16 +5,20 @@ on:
     paths:
       - 'tools/library_certification_decision.py'
       - 'tools/library_reviewer_attestation_contract.py'
+      - 'tools/library_reviewer_signature_verify.py'
       - 'tests/test_library_certification_decision.py'
       - 'tests/test_library_reviewer_attestation_contract.py'
+      - 'tests/test_library_reviewer_signature_verify.py'
       - '.github/workflows/certification-decision-boundary.yml'
   push:
     branches: [main]
     paths:
       - 'tools/library_certification_decision.py'
       - 'tools/library_reviewer_attestation_contract.py'
+      - 'tools/library_reviewer_signature_verify.py'
       - 'tests/test_library_certification_decision.py'
       - 'tests/test_library_reviewer_attestation_contract.py'
+      - 'tests/test_library_reviewer_signature_verify.py'
       - '.github/workflows/certification-decision-boundary.yml'
   workflow_dispatch:
 
@@ -33,3 +37,4 @@ jobs:
         run: |
           python3 -m unittest discover -s tests -p 'test_library_certification_decision.py' -v
           python3 -m unittest discover -s tests -p 'test_library_reviewer_attestation_contract.py' -v
+          python3 -m unittest discover -s tests -p 'test_library_reviewer_signature_verify.py' -v
