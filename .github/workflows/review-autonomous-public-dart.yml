@@ -134,10 +134,10 @@ jobs:
         run: |
           set -euo pipefail
           python3 -m unittest discover -s tests -p test_library_candidate_review_packet.py -v
-          python3 tools/library_candidate_review_packet.py \\
-            --requests "$RUNNER_TEMP/autonomous-researcher-review-REQUEST.json" \\
-            --preflight "$RUNNER_TEMP/independent-review-preflight-BLOCKED.json" \\
-            --asset-id utility.int64_arithmetic.external.dartlang.fixnum \\
+          python3 tools/library_candidate_review_packet.py \
+            --requests "$RUNNER_TEMP/autonomous-researcher-review-REQUEST.json" \
+            --preflight "$RUNNER_TEMP/independent-review-preflight-BLOCKED.json" \
+            --asset-id utility.int64_arithmetic.external.dartlang.fixnum \
             --output "$RUNNER_TEMP/fixnum-independent-review-HANDOFF-BLOCKED.json"
 
       - name: Publish source-bound independent audit requests (never sign)
