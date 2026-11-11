@@ -14,7 +14,7 @@ def check_review_workflow(text):
                  r"(?m)^\s*permissions\s*:\s*(?:write-all|read-all)\s*$",
                  r"(?m)^\s*id-token\s*:\s*write\s*$",
                  r"(?m)^\s*contents\s*:\s*write\s*$",
-                 r"\$\{\{\s*secrets\.", r"\bself-hosted\b",
+                 r"(?:\$\{\{\s*)?secrets\.", r"\bself-hosted\b",
                  r"(?m)^\s*persist-credentials\s*:\s*true\s*$")
     for pattern in forbidden:
         if re.search(pattern, text, re.IGNORECASE):
