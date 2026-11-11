@@ -9,6 +9,7 @@ on:
       - 'tools/library_reviewer_attestation_verify.py'
       - 'tools/library_reviewer_nonce_ledger.py'
       - 'tools/library_reviewer_attestation_consume.py'
+      - 'tools/library_protected_replay_store.py'
       - 'tools/library_reviewer_shared_nonce_ledger.py'
       - 'tests/test_library_certification_decision.py'
       - 'tests/test_library_reviewer_attestation_contract.py'
@@ -16,6 +17,7 @@ on:
       - 'tests/test_library_reviewer_attestation_verify.py'
       - 'tests/test_library_reviewer_nonce_ledger.py'
       - 'tests/test_library_reviewer_attestation_consume.py'
+      - 'tests/test_library_protected_replay_store.py'
       - 'tests/test_library_reviewer_shared_nonce_ledger.py'
       - '.github/workflows/certification-decision-boundary.yml'
   push:
@@ -27,6 +29,7 @@ on:
       - 'tools/library_reviewer_attestation_verify.py'
       - 'tools/library_reviewer_nonce_ledger.py'
       - 'tools/library_reviewer_attestation_consume.py'
+      - 'tools/library_protected_replay_store.py'
       - 'tools/library_reviewer_shared_nonce_ledger.py'
       - 'tests/test_library_certification_decision.py'
       - 'tests/test_library_reviewer_attestation_contract.py'
@@ -34,6 +37,7 @@ on:
       - 'tests/test_library_reviewer_attestation_verify.py'
       - 'tests/test_library_reviewer_nonce_ledger.py'
       - 'tests/test_library_reviewer_attestation_consume.py'
+      - 'tests/test_library_protected_replay_store.py'
       - 'tests/test_library_reviewer_shared_nonce_ledger.py'
       - '.github/workflows/certification-decision-boundary.yml'
   workflow_dispatch:
@@ -57,4 +61,5 @@ jobs:
           python3 -m unittest discover -s tests -p 'test_library_reviewer_attestation_verify.py' -v
           python3 -m unittest discover -s tests -p 'test_library_reviewer_nonce_ledger.py' -v
           python3 -m unittest discover -s tests -p 'test_library_reviewer_attestation_consume.py' -v
+          python3 -m unittest discover -s tests -p 'test_library_protected_replay_store.py' -v
           python3 -m unittest discover -s tests -p 'test_library_reviewer_shared_nonce_ledger.py' -v
