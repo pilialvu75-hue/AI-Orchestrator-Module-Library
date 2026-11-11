@@ -13,7 +13,9 @@ def decide(preflight, attestation=None):
     rows = preflight.get("items")
     if not isinstance(rows, list) or not rows or preflight.get("count") != len(rows):
         raise ValueError("missing or inconsistent review items")
-    if len({r.get("asset_id") for r in rows if isinstance(r, dict)}) != len(rows):
+    ids = [r.get("asset_id") for r in rows if isinstance(r, dict)]
+    if (len(ids) != len(rows) or any(not isinstance(x, str) or not x for x in ids)
+            or len(set(ids)) != len(ids)):
         raise ValueError("duplicate or malformed review identities")
     if attestation is not None and not isinstance(attestation, dict):
         raise ValueError("attestation must be an object")
@@ -22,7 +24,8 @@ def decide(preflight, attestation=None):
         if not isinstance(row, dict) or not isinstance(row.get("asset_id"), str) or not row["asset_id"]:
             raise ValueError("malformed review item")
         reasons = row.get("reasons")
-        if row.get("decision") != "BLOCKED" or not isinstance(reasons, list) or not reasons:
+        if (row.get("decision") != "BLOCKED" or not isinstance(reasons, list)
+                or not reasons or any(not isinstance(reason, str) or not reason for reason in reasons)):
             raise ValueError("preflight must remain fail-closed")
         # This job is intentionally incapable of independently validating a
         # protected reviewer signature. Never trust a caller-supplied boolean
