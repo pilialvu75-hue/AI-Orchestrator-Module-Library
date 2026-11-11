@@ -6,6 +6,12 @@ from library_candidate_review_packet import packet
 
 
 class CandidatePacketTests(unittest.TestCase):
+    def test_handoff_shell_continuations(self):
+        workflow = (Path(__file__).resolve().parents[1] / '.github/workflows/review-autonomous-public-dart.yml').read_text()
+        step = workflow.split('Produce fixnum reviewer handoff', 1)[1].split('Publish source-bound', 1)[0]
+        self.assertNotIn('\\\\\\\\' + '\\n', step)
+        self.assertEqual(step.count('\\\\' + '\\n'), 4)
+
     def test_source_bound_blocked_packet(self):
         asset = "utility.int64_arithmetic.external.dartlang.fixnum"
         requests = {"schema": "aivexus.library.autonomous-public-dart-review-collection.v1",
