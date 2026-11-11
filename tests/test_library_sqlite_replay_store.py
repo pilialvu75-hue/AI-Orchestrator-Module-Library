@@ -32,6 +32,14 @@ class SQLiteReplayTests(unittest.TestCase):
             self.assertEqual(results.count(True), 1)
             self.assertEqual(results.count(False), 19)
 
+    def test_writable_parent_rejected(self):
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp) / "unsafe"
+            root.mkdir(mode=0o777)
+            os.chmod(root, 0o777)
+            with self.assertRaisesRegex(ValueError, "parent directory"):
+                SQLiteReplayStore(root / "db.sqlite")
+
     def test_symlink_database_rejected(self):
         with tempfile.TemporaryDirectory() as temp:
             root = Path(temp)
