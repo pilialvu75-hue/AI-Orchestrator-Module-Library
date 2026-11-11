@@ -4,7 +4,6 @@ Use only on a trusted shared filesystem with correct SQLite locking. A
 GitHub-hosted runner's local disk is ephemeral and NOT cross-run protection.
 """
 import os
-import stat
 import sqlite3
 from pathlib import Path
 
@@ -14,6 +13,8 @@ class SQLiteReplayStore:
         path = Path(database_path)
         if not path.parent.is_dir() or path.parent.is_symlink() or path.is_symlink():
             raise ValueError("protected persistent database directory required")
+        if path.parent.stat().st_mode & 0o022:
+            raise ValueError("replay database parent directory must not be group/world writable")
         if path.exists() and not path.is_file():
             raise ValueError("replay database must be a regular file")
         if path.exists() and (path.stat().st_mode & 0o077):
