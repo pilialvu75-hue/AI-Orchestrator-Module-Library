@@ -1,0 +1,79 @@
+name: Certification decision boundary tests
+
+on:
+  pull_request:
+    paths:
+      - 'tools/library_certification_decision.py'
+      - 'tools/library_reviewer_attestation_contract.py'
+      - 'tools/library_reviewer_signature_verify.py'
+      - 'tools/library_reviewer_attestation_verify.py'
+      - 'tools/library_reviewer_nonce_ledger.py'
+      - 'tools/library_reviewer_attestation_consume.py'
+      - 'tools/library_protected_replay_store.py'
+      - 'tools/library_sqlite_replay_store.py'
+      - 'tools/library_review_workflow_isolation.py'
+      - 'tools/library_candidate_review_packet.py'
+      - 'tools/library_reviewer_shared_nonce_ledger.py'
+      - 'tests/test_library_certification_decision.py'
+      - 'tests/test_library_reviewer_attestation_contract.py'
+      - 'tests/test_library_reviewer_signature_verify.py'
+      - 'tests/test_library_reviewer_attestation_verify.py'
+      - 'tests/test_library_reviewer_nonce_ledger.py'
+      - 'tests/test_library_reviewer_attestation_consume.py'
+      - 'tests/test_library_protected_replay_store.py'
+      - 'tests/test_library_sqlite_replay_store.py'
+      - 'tests/test_library_review_workflow_isolation.py'
+      - 'tests/test_library_candidate_review_packet.py'
+      - 'tests/test_library_reviewer_shared_nonce_ledger.py'
+      - '.github/workflows/certification-decision-boundary.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'tools/library_certification_decision.py'
+      - 'tools/library_reviewer_attestation_contract.py'
+      - 'tools/library_reviewer_signature_verify.py'
+      - 'tools/library_reviewer_attestation_verify.py'
+      - 'tools/library_reviewer_nonce_ledger.py'
+      - 'tools/library_reviewer_attestation_consume.py'
+      - 'tools/library_protected_replay_store.py'
+      - 'tools/library_sqlite_replay_store.py'
+      - 'tools/library_review_workflow_isolation.py'
+      - 'tools/library_reviewer_shared_nonce_ledger.py'
+      - 'tests/test_library_certification_decision.py'
+      - 'tests/test_library_reviewer_attestation_contract.py'
+      - 'tests/test_library_reviewer_signature_verify.py'
+      - 'tests/test_library_reviewer_attestation_verify.py'
+      - 'tests/test_library_reviewer_nonce_ledger.py'
+      - 'tests/test_library_reviewer_attestation_consume.py'
+      - 'tests/test_library_protected_replay_store.py'
+      - 'tests/test_library_sqlite_replay_store.py'
+      - 'tests/test_library_review_workflow_isolation.py'
+      - 'tests/test_library_reviewer_shared_nonce_ledger.py'
+      - '.github/workflows/certification-decision-boundary.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  certification-decision-boundary:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Test fail-closed decision policy
+        run: |
+          python3 -m unittest discover -s tests -p 'test_library_certification_decision.py' -v
+          python3 -m unittest discover -s tests -p 'test_library_reviewer_attestation_contract.py' -v
+          python3 -m unittest discover -s tests -p 'test_library_reviewer_signature_verify.py' -v
+          python3 -m unittest discover -s tests -p 'test_library_reviewer_attestation_verify.py' -v
+          python3 -m unittest discover -s tests -p 'test_library_reviewer_nonce_ledger.py' -v
+          python3 -m unittest discover -s tests -p 'test_library_reviewer_attestation_consume.py' -v
+          python3 -m unittest discover -s tests -p 'test_library_protected_replay_store.py' -v
+          python3 -m unittest discover -s tests -p 'test_library_sqlite_replay_store.py' -v
+          python3 -m unittest discover -s tests -p 'test_library_review_workflow_isolation.py' -v
+          python3 tools/library_review_workflow_isolation.py
+          python3 -m unittest discover -s tests -p 'test_library_candidate_review_packet.py' -v
+          python3 -m unittest discover -s tests -p 'test_library_reviewer_shared_nonce_ledger.py' -v

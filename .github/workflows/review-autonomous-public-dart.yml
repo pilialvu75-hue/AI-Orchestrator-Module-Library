@@ -6,6 +6,10 @@ on:
     paths:
       - '.github/workflows/fixnum-separate-consumer.yml'
       - 'tools/autonomous_public_dart_review.py'
+      - 'tools/library_certification_decision.py'
+      - 'tools/library_candidate_review_packet.py'
+      - 'tests/test_library_candidate_review_packet.py'
+      - 'tests/test_library_certification_decision.py'
       - 'tools/autonomous_public_dart_osv_scan.py'
       - 'tools/library_review_evidence_crosscheck.py'
       - 'tools/library_independent_review_preflight.py'
@@ -109,6 +113,33 @@ jobs:
           assert saved_lines == lines, "review summary must preserve one line per decision"
           PY
 
+      - name: Produce fail-closed certification decision receipt (never approve)
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 -m unittest discover -s tests -p test_library_certification_decision.py -v
+          python3 tools/library_certification_decision.py \
+            --preflight "$RUNNER_TEMP/independent-review-preflight-BLOCKED.json" \
+            --output "$RUNNER_TEMP/certification-decision-BLOCKED.json"
+          python3 - <<'PY'
+          import json, os
+          from pathlib import Path
+          report = json.loads((Path(os.environ["RUNNER_TEMP"]) / "certification-decision-BLOCKED.json").read_text())
+          assert report["certification_authorized"] is False
+          assert all(item["decision"] == "BLOCKED" and not item["certification_authorized"] for item in report["items"])
+          PY
+
+      - name: Produce fixnum reviewer handoff (BLOCKED, unsigned)
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 -m unittest discover -s tests -p test_library_candidate_review_packet.py -v
+          python3 tools/library_candidate_review_packet.py \
+            --requests "$RUNNER_TEMP/autonomous-researcher-review-REQUEST.json" \
+            --preflight "$RUNNER_TEMP/independent-review-preflight-BLOCKED.json" \
+            --asset-id utility.int64_arithmetic.external.dartlang.fixnum \
+            --output "$RUNNER_TEMP/fixnum-independent-review-HANDOFF-BLOCKED.json"
+
       - name: Publish source-bound independent audit requests (never sign)
         uses: actions/upload-artifact@v4
         with:
@@ -118,6 +149,8 @@ jobs:
             ${{ runner.temp }}/review-summary.txt
             ${{ runner.temp }}/autonomous-researcher-osv-EVIDENCE.json
             ${{ runner.temp }}/independent-review-preflight-BLOCKED.json
+            ${{ runner.temp }}/certification-decision-BLOCKED.json
             ${{ runner.temp }}/independent-dart-static-audit-EVIDENCE.json
+            ${{ runner.temp }}/fixnum-independent-review-HANDOFF-BLOCKED.json
           if-no-files-found: error
           retention-days: 14
