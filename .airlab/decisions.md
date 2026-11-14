@@ -144,3 +144,16 @@ Decision date: 2026-10-10
 - Library remains the reuse/certification boundary; Diagnostics carries closed evidence/verification references; Researcher code never executes directly in Cantiere.
 - `AIVEXUS-GAME-1` depends on the shared Cantiere base but **does not depend on `AIVEXUS-CAD-1` or any 3D asset**. The first 2D game must be buildable with original/licensed 2D resources.
 - Registration and coherent documentation do not make CAD runners, Godot export, Fusion compatibility, browser gameplay or physical print operational. Those require their own claims, implementation and runtime/target evidence.
+
+## Aivexus evolutionary modular application factory
+
+Decision date: 2026-10-11
+
+- The target is an offline-first modular application factory built on the existing Aivexus/Cantiere stack, not a replacement toy builder.
+- Planning follows reuse-first semantics: query certified Library capabilities before generating a missing capability; record the gap on first detection.
+- Cantiere remains the single project lifecycle, assembly and release owner. Library remains the quarantine, certification, versioning, provenance and dependency authority. Researcher submits candidates only to Library intake; Diagnostics stores reproducible verification and target receipts.
+- Generated or downloaded code must execute only in isolated validation contexts and never with trusted writer credentials.
+- The evolutionary loop is not considered operational until a validated capability produced for one application is captured/certified and then reused by a second application offline without AI regeneration, with pinned hashes and Diagnostics evidence.
+- EVO-01 through EVO-05 are staged milestones for planner/reuse, reusable capture, project capability lockfile, cross-application reuse proof, then impact-driven guarded evolution.
+- CI or build success never substitutes for required physical-target acceptance before stable release.
+
