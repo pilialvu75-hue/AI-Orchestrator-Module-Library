@@ -16,7 +16,7 @@
     {
       "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
       "baseline_at": "2026-10-03T16:20:00Z",
-      "cursor_merged_at": "2026-11-14T11:23:28Z"
+      "cursor_merged_at": "2026-11-14T11:51:05Z"
     },
     {
       "repository": "pilialvu75-hue/Ai-orchestrator-diagnostics",
@@ -5984,6 +5984,23 @@
       "url": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/3ca68bb6f76b7b783e50bb8fd5185774e60a8e4d",
       "match_ref": null,
       "reconciliation": null
+    },
+    {
+      "incident_id": "a541fa302fff2ff1418b",
+      "status": "UNRECONCILED",
+      "detected_at": "2026-11-14T12:39:09Z",
+      "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
+      "kind": "direct_commit",
+      "pull_request": null,
+      "merge_sha": null,
+      "commit_sha": "53be9ef6fc7b50ea7ca35add39cec2c5b43ad6b0",
+      "head_branch": null,
+      "base_branch": "main",
+      "change_at": "2026-11-14T11:51:05Z",
+      "title": "feat(web): securely resolve Cloudflare Access JWT using pinned JWKS (#1138)",
+      "url": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/53be9ef6fc7b50ea7ca35add39cec2c5b43ad6b0",
+      "match_ref": null,
+      "reconciliation": null
     }
   ],
   "reconciliation_history": [
@@ -5994,35 +6011,35 @@
       "note": "Known motivating example for CP-HARDEN-03. It predates this incremental detector and is not retroactively reopened."
     }
   ],
-  "last_scan_at": "2026-11-14T11:39:06Z",
+  "last_scan_at": "2026-11-14T12:39:09Z",
   "scan_health": {
     "pilialvu75-hue/AI-Orchestrator-Module-Library": {
       "state": "OK",
-      "last_success_at": "2026-11-14T11:39:06Z",
+      "last_success_at": "2026-11-14T12:39:09Z",
       "last_failure_at": null,
       "error_code": null
     },
     "pilialvu75-hue/Ai-orchestrator-riserva": {
       "state": "OK",
-      "last_success_at": "2026-11-14T11:39:06Z",
+      "last_success_at": "2026-11-14T12:39:09Z",
       "last_failure_at": "2026-10-28T07:39:58Z",
       "error_code": null
     },
     "pilialvu75-hue/Ai-orchestrator-diagnostics": {
       "state": "OK",
-      "last_success_at": "2026-11-14T11:39:06Z",
+      "last_success_at": "2026-11-14T12:39:09Z",
       "last_failure_at": "2026-10-28T07:39:58Z",
       "error_code": null
     },
     "pilialvu75-hue/AI-Orchestrator-Module-Researcher": {
       "state": "OK",
-      "last_success_at": "2026-11-14T11:39:06Z",
+      "last_success_at": "2026-11-14T12:39:09Z",
       "last_failure_at": "2026-10-28T07:39:58Z",
       "error_code": null
     },
     "pilialvu75-hue/Ai_orchestrator-prova": {
       "state": "OK",
-      "last_success_at": "2026-11-14T11:39:06Z",
+      "last_success_at": "2026-11-14T12:39:09Z",
       "last_failure_at": "2026-10-28T07:39:58Z",
       "error_code": null
     }
