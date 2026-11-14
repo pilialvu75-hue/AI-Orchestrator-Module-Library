@@ -16,7 +16,7 @@
     {
       "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
       "baseline_at": "2026-10-03T16:20:00Z",
-      "cursor_merged_at": "2026-11-14T09:50:06Z"
+      "cursor_merged_at": "2026-11-14T11:23:28Z"
     },
     {
       "repository": "pilialvu75-hue/Ai-orchestrator-diagnostics",
@@ -5933,6 +5933,57 @@
       "url": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/e73f7c8ac96f0afeaf5e03c7a52de7bf1dcfff2f",
       "match_ref": null,
       "reconciliation": null
+    },
+    {
+      "incident_id": "d96a19aedd0c5ee9b5cb",
+      "status": "UNRECONCILED",
+      "detected_at": "2026-11-14T11:39:06Z",
+      "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
+      "kind": "direct_commit",
+      "pull_request": null,
+      "merge_sha": null,
+      "commit_sha": "3d04a43e039f3f6cf75ba1c9308745334c4d853f",
+      "head_branch": null,
+      "base_branch": "main",
+      "change_at": "2026-11-14T11:10:50Z",
+      "title": "fix(web): make approved proposals immutable and preserve revocation provenance (#1136)",
+      "url": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/3d04a43e039f3f6cf75ba1c9308745334c4d853f",
+      "match_ref": null,
+      "reconciliation": null
+    },
+    {
+      "incident_id": "a349764d84b465cd92fa",
+      "status": "UNRECONCILED",
+      "detected_at": "2026-11-14T11:39:06Z",
+      "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
+      "kind": "direct_commit",
+      "pull_request": null,
+      "merge_sha": null,
+      "commit_sha": "0960d0b7dff76d6803ce0cdb934028ebeb9a35e2",
+      "head_branch": null,
+      "base_branch": "main",
+      "change_at": "2026-11-14T11:18:07Z",
+      "title": "feat(web): verify Cloudflare Access RS256 assertion before internal identity (#1137)",
+      "url": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/0960d0b7dff76d6803ce0cdb934028ebeb9a35e2",
+      "match_ref": null,
+      "reconciliation": null
+    },
+    {
+      "incident_id": "a82e5159cdf4b734db3e",
+      "status": "UNRECONCILED",
+      "detected_at": "2026-11-14T11:39:06Z",
+      "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
+      "kind": "direct_commit",
+      "pull_request": null,
+      "merge_sha": null,
+      "commit_sha": "3ca68bb6f76b7b783e50bb8fd5185774e60a8e4d",
+      "head_branch": null,
+      "base_branch": "main",
+      "change_at": "2026-11-14T11:23:28Z",
+      "title": "fix(memory): suppress proposals for already-current confirmed facts (#1134)",
+      "url": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/3ca68bb6f76b7b783e50bb8fd5185774e60a8e4d",
+      "match_ref": null,
+      "reconciliation": null
     }
   ],
   "reconciliation_history": [
@@ -5943,35 +5994,35 @@
       "note": "Known motivating example for CP-HARDEN-03. It predates this incremental detector and is not retroactively reopened."
     }
   ],
-  "last_scan_at": "2026-11-14T10:38:57Z",
+  "last_scan_at": "2026-11-14T11:39:06Z",
   "scan_health": {
     "pilialvu75-hue/AI-Orchestrator-Module-Library": {
       "state": "OK",
-      "last_success_at": "2026-11-14T10:38:57Z",
+      "last_success_at": "2026-11-14T11:39:06Z",
       "last_failure_at": null,
       "error_code": null
     },
     "pilialvu75-hue/Ai-orchestrator-riserva": {
       "state": "OK",
-      "last_success_at": "2026-11-14T10:38:57Z",
+      "last_success_at": "2026-11-14T11:39:06Z",
       "last_failure_at": "2026-10-28T07:39:58Z",
       "error_code": null
     },
     "pilialvu75-hue/Ai-orchestrator-diagnostics": {
       "state": "OK",
-      "last_success_at": "2026-11-14T10:38:57Z",
+      "last_success_at": "2026-11-14T11:39:06Z",
       "last_failure_at": "2026-10-28T07:39:58Z",
       "error_code": null
     },
     "pilialvu75-hue/AI-Orchestrator-Module-Researcher": {
       "state": "OK",
-      "last_success_at": "2026-11-14T10:38:57Z",
+      "last_success_at": "2026-11-14T11:39:06Z",
       "last_failure_at": "2026-10-28T07:39:58Z",
       "error_code": null
     },
     "pilialvu75-hue/Ai_orchestrator-prova": {
       "state": "OK",
-      "last_success_at": "2026-11-14T10:38:57Z",
+      "last_success_at": "2026-11-14T11:39:06Z",
       "last_failure_at": "2026-10-28T07:39:58Z",
       "error_code": null
     }
