@@ -16,7 +16,7 @@
     {
       "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
       "baseline_at": "2026-10-03T16:20:00Z",
-      "cursor_merged_at": "2026-11-14T16:18:47Z"
+      "cursor_merged_at": "2026-11-14T17:33:30Z"
     },
     {
       "repository": "pilialvu75-hue/Ai-orchestrator-diagnostics",
@@ -6052,6 +6052,74 @@
       "url": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/feef9fc2abe2c7709d2105ac5c79d5dc958463af",
       "match_ref": null,
       "reconciliation": null
+    },
+    {
+      "incident_id": "186ffc374110270eeb50",
+      "status": "UNRECONCILED",
+      "detected_at": "2026-11-14T17:39:26Z",
+      "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
+      "kind": "direct_commit",
+      "pull_request": null,
+      "merge_sha": null,
+      "commit_sha": "df8c5ed24f1f461e2534e73dc4b2e6f5d3eb6ef5",
+      "head_branch": null,
+      "base_branch": "main",
+      "change_at": "2026-11-14T16:41:31Z",
+      "title": "feat(windows): add verified rollback snapshots and emergency recovery for QA",
+      "url": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/df8c5ed24f1f461e2534e73dc4b2e6f5d3eb6ef5",
+      "match_ref": null,
+      "reconciliation": null
+    },
+    {
+      "incident_id": "5532e909d48dfe10f622",
+      "status": "UNRECONCILED",
+      "detected_at": "2026-11-14T17:39:26Z",
+      "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
+      "kind": "direct_commit",
+      "pull_request": null,
+      "merge_sha": null,
+      "commit_sha": "0c4d90f4757ebd27b48439037d135ea9685f1280",
+      "head_branch": null,
+      "base_branch": "main",
+      "change_at": "2026-11-14T16:48:47Z",
+      "title": "fix(voice): reconcile Live deduplication and PCM diagnostics from #1100 onto latest main (#1145)",
+      "url": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/0c4d90f4757ebd27b48439037d135ea9685f1280",
+      "match_ref": null,
+      "reconciliation": null
+    },
+    {
+      "incident_id": "faeb37b545a7309e0d91",
+      "status": "UNRECONCILED",
+      "detected_at": "2026-11-14T17:39:26Z",
+      "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
+      "kind": "direct_commit",
+      "pull_request": null,
+      "merge_sha": null,
+      "commit_sha": "2e17ee58897cdd951facf0adef5081e6d0a62854",
+      "head_branch": null,
+      "base_branch": "main",
+      "change_at": "2026-11-14T17:28:50Z",
+      "title": "fix(models): reconcile safe app-owned GGUF picker cache removal from #1112 (#1146)",
+      "url": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/2e17ee58897cdd951facf0adef5081e6d0a62854",
+      "match_ref": null,
+      "reconciliation": null
+    },
+    {
+      "incident_id": "5862e5b3a79d25a2184b",
+      "status": "UNRECONCILED",
+      "detected_at": "2026-11-14T17:39:26Z",
+      "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
+      "kind": "direct_commit",
+      "pull_request": null,
+      "merge_sha": null,
+      "commit_sha": "4a64032fc5daee5461f274aa39d17ca99147c161",
+      "head_branch": null,
+      "base_branch": "main",
+      "change_at": "2026-11-14T17:33:30Z",
+      "title": "test(computer-use): validate isolated Windows portable preview without Inno installer",
+      "url": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/4a64032fc5daee5461f274aa39d17ca99147c161",
+      "match_ref": null,
+      "reconciliation": null
     }
   ],
   "reconciliation_history": [
@@ -6062,35 +6130,35 @@
       "note": "Known motivating example for CP-HARDEN-03. It predates this incremental detector and is not retroactively reopened."
     }
   ],
-  "last_scan_at": "2026-11-14T16:38:53Z",
+  "last_scan_at": "2026-11-14T17:39:26Z",
   "scan_health": {
     "pilialvu75-hue/AI-Orchestrator-Module-Library": {
       "state": "OK",
-      "last_success_at": "2026-11-14T16:38:53Z",
+      "last_success_at": "2026-11-14T17:39:26Z",
       "last_failure_at": null,
       "error_code": null
     },
     "pilialvu75-hue/Ai-orchestrator-riserva": {
       "state": "OK",
-      "last_success_at": "2026-11-14T16:38:53Z",
+      "last_success_at": "2026-11-14T17:39:26Z",
       "last_failure_at": "2026-10-28T07:39:58Z",
       "error_code": null
     },
     "pilialvu75-hue/Ai-orchestrator-diagnostics": {
       "state": "OK",
-      "last_success_at": "2026-11-14T16:38:53Z",
+      "last_success_at": "2026-11-14T17:39:26Z",
       "last_failure_at": "2026-10-28T07:39:58Z",
       "error_code": null
     },
     "pilialvu75-hue/AI-Orchestrator-Module-Researcher": {
       "state": "OK",
-      "last_success_at": "2026-11-14T16:38:53Z",
+      "last_success_at": "2026-11-14T17:39:26Z",
       "last_failure_at": "2026-10-28T07:39:58Z",
       "error_code": null
     },
     "pilialvu75-hue/Ai_orchestrator-prova": {
       "state": "OK",
-      "last_success_at": "2026-11-14T16:38:53Z",
+      "last_success_at": "2026-11-14T17:39:26Z",
       "last_failure_at": "2026-10-28T07:39:58Z",
       "error_code": null
     }
