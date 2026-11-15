@@ -16,7 +16,7 @@
     {
       "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
       "baseline_at": "2026-10-03T16:20:00Z",
-      "cursor_merged_at": "2026-11-15T12:03:19Z"
+      "cursor_merged_at": "2026-11-15T13:27:08Z"
     },
     {
       "repository": "pilialvu75-hue/Ai-orchestrator-diagnostics",
@@ -6273,6 +6273,125 @@
       "url": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/2ad3a57f36f5f23ea062fa9ff3b578322f7029d2",
       "match_ref": null,
       "reconciliation": null
+    },
+    {
+      "incident_id": "424ed6fee91044e2c5a7",
+      "status": "UNRECONCILED",
+      "detected_at": "2026-11-15T13:39:08Z",
+      "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
+      "kind": "direct_commit",
+      "pull_request": null,
+      "merge_sha": null,
+      "commit_sha": "44ee50e20ea2b79c428345ac1f9505c2e99b12bd",
+      "head_branch": null,
+      "base_branch": "main",
+      "change_at": "2026-11-15T12:55:17Z",
+      "title": "fix(cantiere): enforce explicit scoped paths for certified Library adaptation (#1153)",
+      "url": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/44ee50e20ea2b79c428345ac1f9505c2e99b12bd",
+      "match_ref": null,
+      "reconciliation": null
+    },
+    {
+      "incident_id": "2c282a7d00a831aa082f",
+      "status": "UNRECONCILED",
+      "detected_at": "2026-11-15T13:39:08Z",
+      "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
+      "kind": "direct_commit",
+      "pull_request": null,
+      "merge_sha": null,
+      "commit_sha": "9b4e57bcf144959b4f50f695f4480f777138d4e4",
+      "head_branch": null,
+      "base_branch": "main",
+      "change_at": "2026-11-15T12:57:16Z",
+      "title": "test(cantiere): cover separate Reviewer batches for scoped dependency adaptation",
+      "url": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/9b4e57bcf144959b4f50f695f4480f777138d4e4",
+      "match_ref": null,
+      "reconciliation": null
+    },
+    {
+      "incident_id": "bb01dee24d7d5c5b3715",
+      "status": "UNRECONCILED",
+      "detected_at": "2026-11-15T13:39:08Z",
+      "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
+      "kind": "direct_commit",
+      "pull_request": null,
+      "merge_sha": null,
+      "commit_sha": "31f54b2018d57a09e0c27ef09f6350e0d86683f3",
+      "head_branch": null,
+      "base_branch": "main",
+      "change_at": "2026-11-15T12:58:32Z",
+      "title": "fix(cantiere): fail closed on ambiguous JSON repair crossing verdict fields (#1152)",
+      "url": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/31f54b2018d57a09e0c27ef09f6350e0d86683f3",
+      "match_ref": null,
+      "reconciliation": null
+    },
+    {
+      "incident_id": "838cde6afea499ac4d07",
+      "status": "UNRECONCILED",
+      "detected_at": "2026-11-15T13:39:08Z",
+      "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
+      "kind": "direct_commit",
+      "pull_request": null,
+      "merge_sha": null,
+      "commit_sha": "c89a98a058609d93fc2b1c7a0115f1fecd672627",
+      "head_branch": null,
+      "base_branch": "main",
+      "change_at": "2026-11-15T13:00:06Z",
+      "title": "test(cantiere): supply two review and three validation batches for scoped three-file diff",
+      "url": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/c89a98a058609d93fc2b1c7a0115f1fecd672627",
+      "match_ref": null,
+      "reconciliation": null
+    },
+    {
+      "incident_id": "0f7c71b6bffbf595e929",
+      "status": "UNRECONCILED",
+      "detected_at": "2026-11-15T13:39:08Z",
+      "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
+      "kind": "direct_commit",
+      "pull_request": null,
+      "merge_sha": null,
+      "commit_sha": "9a1c27785d70c94dcb17eee8360f9d47d741a813",
+      "head_branch": null,
+      "base_branch": "main",
+      "change_at": "2026-11-15T13:10:38Z",
+      "title": "release(win81): prepare isolated recoverable 1.0.16 Dev update on main",
+      "url": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/9a1c27785d70c94dcb17eee8360f9d47d741a813",
+      "match_ref": null,
+      "reconciliation": null
+    },
+    {
+      "incident_id": "505ef40a0c7cb05121a6",
+      "status": "UNRECONCILED",
+      "detected_at": "2026-11-15T13:39:08Z",
+      "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
+      "kind": "unmatched_merge_commit",
+      "pull_request": null,
+      "merge_sha": null,
+      "commit_sha": "9e948a3d206a1d560f08072df2a97843a474b1bb",
+      "head_branch": null,
+      "base_branch": "main",
+      "change_at": "2026-11-15T13:26:55Z",
+      "title": "Merge PR #1153: certified Library adaptation evidence (#583)",
+      "url": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/9e948a3d206a1d560f08072df2a97843a474b1bb",
+      "match_ref": null,
+      "reconciliation": null
+    },
+    {
+      "incident_id": "c0285dfb3d032785a22d",
+      "status": "UNRECONCILED",
+      "detected_at": "2026-11-15T13:39:08Z",
+      "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
+      "kind": "unmatched_merge_commit",
+      "pull_request": null,
+      "merge_sha": null,
+      "commit_sha": "ac1db4452124c3741b188573e09922c2aeeff2ed",
+      "head_branch": null,
+      "base_branch": "main",
+      "change_at": "2026-11-15T13:27:08Z",
+      "title": "Merge PR #1152: staged gate resume and fail-closed JSON repair (#769)",
+      "url": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/ac1db4452124c3741b188573e09922c2aeeff2ed",
+      "match_ref": null,
+      "reconciliation": null
     }
   ],
   "reconciliation_history": [
@@ -6283,35 +6402,35 @@
       "note": "Known motivating example for CP-HARDEN-03. It predates this incremental detector and is not retroactively reopened."
     }
   ],
-  "last_scan_at": "2026-11-15T12:39:29Z",
+  "last_scan_at": "2026-11-15T13:39:08Z",
   "scan_health": {
     "pilialvu75-hue/AI-Orchestrator-Module-Library": {
       "state": "OK",
-      "last_success_at": "2026-11-15T12:39:29Z",
+      "last_success_at": "2026-11-15T13:39:08Z",
       "last_failure_at": null,
       "error_code": null
     },
     "pilialvu75-hue/Ai-orchestrator-riserva": {
       "state": "OK",
-      "last_success_at": "2026-11-15T12:39:29Z",
+      "last_success_at": "2026-11-15T13:39:08Z",
       "last_failure_at": "2026-10-28T07:39:58Z",
       "error_code": null
     },
     "pilialvu75-hue/Ai-orchestrator-diagnostics": {
       "state": "OK",
-      "last_success_at": "2026-11-15T12:39:29Z",
+      "last_success_at": "2026-11-15T13:39:08Z",
       "last_failure_at": "2026-10-28T07:39:58Z",
       "error_code": null
     },
     "pilialvu75-hue/AI-Orchestrator-Module-Researcher": {
       "state": "OK",
-      "last_success_at": "2026-11-15T12:39:29Z",
+      "last_success_at": "2026-11-15T13:39:08Z",
       "last_failure_at": "2026-10-28T07:39:58Z",
       "error_code": null
     },
     "pilialvu75-hue/Ai_orchestrator-prova": {
       "state": "OK",
-      "last_success_at": "2026-11-15T12:39:29Z",
+      "last_success_at": "2026-11-15T13:39:08Z",
       "last_failure_at": "2026-10-28T07:39:58Z",
       "error_code": null
     }
