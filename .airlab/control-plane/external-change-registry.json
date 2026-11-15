@@ -16,7 +16,7 @@
     {
       "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
       "baseline_at": "2026-10-03T16:20:00Z",
-      "cursor_merged_at": "2026-11-15T13:27:08Z"
+      "cursor_merged_at": "2026-11-15T14:14:52Z"
     },
     {
       "repository": "pilialvu75-hue/Ai-orchestrator-diagnostics",
@@ -6392,6 +6392,74 @@
       "url": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/ac1db4452124c3741b188573e09922c2aeeff2ed",
       "match_ref": null,
       "reconciliation": null
+    },
+    {
+      "incident_id": "90bab1e585232cf069aa",
+      "status": "UNRECONCILED",
+      "detected_at": "2026-11-15T14:39:15Z",
+      "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
+      "kind": "direct_commit",
+      "pull_request": null,
+      "merge_sha": null,
+      "commit_sha": "60b8fb38a60807a1321fce125124406a055a3347",
+      "head_branch": null,
+      "base_branch": "main",
+      "change_at": "2026-11-15T13:30:55Z",
+      "title": "ci(android): reconcile safe NDK alignment and split native caches from #748",
+      "url": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/60b8fb38a60807a1321fce125124406a055a3347",
+      "match_ref": null,
+      "reconciliation": null
+    },
+    {
+      "incident_id": "031ed47387931050c1e1",
+      "status": "UNRECONCILED",
+      "detected_at": "2026-11-15T14:39:15Z",
+      "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
+      "kind": "direct_commit",
+      "pull_request": null,
+      "merge_sha": null,
+      "commit_sha": "4f22a6e5ce1cdb631d2364b11e20007072a25221",
+      "head_branch": null,
+      "base_branch": "main",
+      "change_at": "2026-11-15T13:35:05Z",
+      "title": "fix(ci): version native compiler cache with pinned llama.cpp revision and bridge sources",
+      "url": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/4f22a6e5ce1cdb631d2364b11e20007072a25221",
+      "match_ref": null,
+      "reconciliation": null
+    },
+    {
+      "incident_id": "fe9d26e5ef4b0893d2db",
+      "status": "UNRECONCILED",
+      "detected_at": "2026-11-15T14:39:15Z",
+      "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
+      "kind": "direct_commit",
+      "pull_request": null,
+      "merge_sha": null,
+      "commit_sha": "389983ac581e2c37e7c8336e93817306681eb93a",
+      "head_branch": null,
+      "base_branch": "main",
+      "change_at": "2026-11-15T14:09:03Z",
+      "title": "test(win81): verify recoverable 1.0.16 Dev OTA stays isolated from Beta/Stable",
+      "url": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/389983ac581e2c37e7c8336e93817306681eb93a",
+      "match_ref": null,
+      "reconciliation": null
+    },
+    {
+      "incident_id": "17d6d0e069db0ce7cb3e",
+      "status": "UNRECONCILED",
+      "detected_at": "2026-11-15T14:39:15Z",
+      "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
+      "kind": "unmatched_merge_commit",
+      "pull_request": null,
+      "merge_sha": null,
+      "commit_sha": "814dcb71f468c07a6e884c880830a59dc11f1b12",
+      "head_branch": null,
+      "base_branch": "main",
+      "change_at": "2026-11-15T14:14:52Z",
+      "title": "Merge PR #1160: safe Android native cache and NDK alignment (#748)",
+      "url": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/814dcb71f468c07a6e884c880830a59dc11f1b12",
+      "match_ref": null,
+      "reconciliation": null
     }
   ],
   "reconciliation_history": [
@@ -6402,35 +6470,35 @@
       "note": "Known motivating example for CP-HARDEN-03. It predates this incremental detector and is not retroactively reopened."
     }
   ],
-  "last_scan_at": "2026-11-15T13:39:08Z",
+  "last_scan_at": "2026-11-15T14:39:15Z",
   "scan_health": {
     "pilialvu75-hue/AI-Orchestrator-Module-Library": {
       "state": "OK",
-      "last_success_at": "2026-11-15T13:39:08Z",
+      "last_success_at": "2026-11-15T14:39:15Z",
       "last_failure_at": null,
       "error_code": null
     },
     "pilialvu75-hue/Ai-orchestrator-riserva": {
       "state": "OK",
-      "last_success_at": "2026-11-15T13:39:08Z",
+      "last_success_at": "2026-11-15T14:39:15Z",
       "last_failure_at": "2026-10-28T07:39:58Z",
       "error_code": null
     },
     "pilialvu75-hue/Ai-orchestrator-diagnostics": {
       "state": "OK",
-      "last_success_at": "2026-11-15T13:39:08Z",
+      "last_success_at": "2026-11-15T14:39:15Z",
       "last_failure_at": "2026-10-28T07:39:58Z",
       "error_code": null
     },
     "pilialvu75-hue/AI-Orchestrator-Module-Researcher": {
       "state": "OK",
-      "last_success_at": "2026-11-15T13:39:08Z",
+      "last_success_at": "2026-11-15T14:39:15Z",
       "last_failure_at": "2026-10-28T07:39:58Z",
       "error_code": null
     },
     "pilialvu75-hue/Ai_orchestrator-prova": {
       "state": "OK",
-      "last_success_at": "2026-11-15T13:39:08Z",
+      "last_success_at": "2026-11-15T14:39:15Z",
       "last_failure_at": "2026-10-28T07:39:58Z",
       "error_code": null
     }
