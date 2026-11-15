@@ -16,7 +16,7 @@
     {
       "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
       "baseline_at": "2026-10-03T16:20:00Z",
-      "cursor_merged_at": "2026-11-15T11:10:36Z"
+      "cursor_merged_at": "2026-11-15T12:03:19Z"
     },
     {
       "repository": "pilialvu75-hue/Ai-orchestrator-diagnostics",
@@ -6239,6 +6239,40 @@
       "url": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/13ee1b789955bd666986f5269801cc9f04a7d95c",
       "match_ref": null,
       "reconciliation": null
+    },
+    {
+      "incident_id": "745b85b923417c6b15fa",
+      "status": "UNRECONCILED",
+      "detected_at": "2026-11-15T12:39:29Z",
+      "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
+      "kind": "direct_commit",
+      "pull_request": null,
+      "merge_sha": null,
+      "commit_sha": "987ca62b19c3b5f0490c7f20559822cb8582fe14",
+      "head_branch": null,
+      "base_branch": "main",
+      "change_at": "2026-11-15T11:49:28Z",
+      "title": "fix(windows): require verified rollback in standard Windows installer",
+      "url": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/987ca62b19c3b5f0490c7f20559822cb8582fe14",
+      "match_ref": null,
+      "reconciliation": null
+    },
+    {
+      "incident_id": "3931ac4cee48c21a201a",
+      "status": "UNRECONCILED",
+      "detected_at": "2026-11-15T12:39:29Z",
+      "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
+      "kind": "direct_commit",
+      "pull_request": null,
+      "merge_sha": null,
+      "commit_sha": "2ad3a57f36f5f23ea062fa9ff3b578322f7029d2",
+      "head_branch": null,
+      "base_branch": "main",
+      "change_at": "2026-11-15T12:03:19Z",
+      "title": "qa(win81): restrict unsigned recovery-enabled diagnostic installer to Windows 8.1",
+      "url": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/2ad3a57f36f5f23ea062fa9ff3b578322f7029d2",
+      "match_ref": null,
+      "reconciliation": null
     }
   ],
   "reconciliation_history": [
@@ -6249,35 +6283,35 @@
       "note": "Known motivating example for CP-HARDEN-03. It predates this incremental detector and is not retroactively reopened."
     }
   ],
-  "last_scan_at": "2026-11-15T11:39:22Z",
+  "last_scan_at": "2026-11-15T12:39:29Z",
   "scan_health": {
     "pilialvu75-hue/AI-Orchestrator-Module-Library": {
       "state": "OK",
-      "last_success_at": "2026-11-15T11:39:22Z",
+      "last_success_at": "2026-11-15T12:39:29Z",
       "last_failure_at": null,
       "error_code": null
     },
     "pilialvu75-hue/Ai-orchestrator-riserva": {
       "state": "OK",
-      "last_success_at": "2026-11-15T11:39:22Z",
+      "last_success_at": "2026-11-15T12:39:29Z",
       "last_failure_at": "2026-10-28T07:39:58Z",
       "error_code": null
     },
     "pilialvu75-hue/Ai-orchestrator-diagnostics": {
       "state": "OK",
-      "last_success_at": "2026-11-15T11:39:22Z",
+      "last_success_at": "2026-11-15T12:39:29Z",
       "last_failure_at": "2026-10-28T07:39:58Z",
       "error_code": null
     },
     "pilialvu75-hue/AI-Orchestrator-Module-Researcher": {
       "state": "OK",
-      "last_success_at": "2026-11-15T11:39:22Z",
+      "last_success_at": "2026-11-15T12:39:29Z",
       "last_failure_at": "2026-10-28T07:39:58Z",
       "error_code": null
     },
     "pilialvu75-hue/Ai_orchestrator-prova": {
       "state": "OK",
-      "last_success_at": "2026-11-15T11:39:22Z",
+      "last_success_at": "2026-11-15T12:39:29Z",
       "last_failure_at": "2026-10-28T07:39:58Z",
       "error_code": null
     }
