@@ -16,7 +16,7 @@
     {
       "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
       "baseline_at": "2026-10-03T16:20:00Z",
-      "cursor_merged_at": "2026-11-16T05:14:47Z"
+      "cursor_merged_at": "2026-11-16T09:20:53Z"
     },
     {
       "repository": "pilialvu75-hue/Ai-orchestrator-diagnostics",
@@ -6800,6 +6800,57 @@
       "url": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/bf2112bf6c51faf83938ea4acc2a8077f044855c",
       "match_ref": null,
       "reconciliation": null
+    },
+    {
+      "incident_id": "7a6ca2d6f7344600c56c",
+      "status": "UNRECONCILED",
+      "detected_at": "2026-11-16T09:46:46Z",
+      "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
+      "kind": "direct_commit",
+      "pull_request": null,
+      "merge_sha": null,
+      "commit_sha": "02e045916559fb2d8275d4e6a0150466c2477c8c",
+      "head_branch": null,
+      "base_branch": "main",
+      "change_at": "2026-11-16T05:17:34Z",
+      "title": "fix(cantiere): require frozen generation-bound source for durable GitHub dispatch (#781)",
+      "url": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/02e045916559fb2d8275d4e6a0150466c2477c8c",
+      "match_ref": null,
+      "reconciliation": null
+    },
+    {
+      "incident_id": "7cda9990140d874eac01",
+      "status": "UNRECONCILED",
+      "detected_at": "2026-11-16T09:46:46Z",
+      "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
+      "kind": "direct_commit",
+      "pull_request": null,
+      "merge_sha": null,
+      "commit_sha": "3063246b42838371629b8d99479f1fd2349d77d5",
+      "head_branch": null,
+      "base_branch": "main",
+      "change_at": "2026-11-16T05:18:04Z",
+      "title": "test(cantiere): compare frozen bytes against actual newline source",
+      "url": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/3063246b42838371629b8d99479f1fd2349d77d5",
+      "match_ref": null,
+      "reconciliation": null
+    },
+    {
+      "incident_id": "5a0b8b15bf858988e0bb",
+      "status": "UNRECONCILED",
+      "detected_at": "2026-11-16T09:46:46Z",
+      "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
+      "kind": "unmatched_merge_commit",
+      "pull_request": null,
+      "merge_sha": null,
+      "commit_sha": "bd5f3e2907e3473370d91aa43cb3557ce097af7b",
+      "head_branch": null,
+      "base_branch": "main",
+      "change_at": "2026-11-16T09:20:53Z",
+      "title": "Merge PR #1173: bind durable GitHub dispatch to verified frozen source (#781)",
+      "url": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/bd5f3e2907e3473370d91aa43cb3557ce097af7b",
+      "match_ref": null,
+      "reconciliation": null
     }
   ],
   "reconciliation_history": [
@@ -6810,35 +6861,35 @@
       "note": "Known motivating example for CP-HARDEN-03. It predates this incremental detector and is not retroactively reopened."
     }
   ],
-  "last_scan_at": "2026-11-16T08:50:17Z",
+  "last_scan_at": "2026-11-16T09:46:46Z",
   "scan_health": {
     "pilialvu75-hue/AI-Orchestrator-Module-Library": {
       "state": "OK",
-      "last_success_at": "2026-11-16T08:50:17Z",
+      "last_success_at": "2026-11-16T09:46:46Z",
       "last_failure_at": null,
       "error_code": null
     },
     "pilialvu75-hue/Ai-orchestrator-riserva": {
       "state": "OK",
-      "last_success_at": "2026-11-16T08:50:17Z",
+      "last_success_at": "2026-11-16T09:46:46Z",
       "last_failure_at": "2026-10-28T07:39:58Z",
       "error_code": null
     },
     "pilialvu75-hue/Ai-orchestrator-diagnostics": {
       "state": "OK",
-      "last_success_at": "2026-11-16T08:50:17Z",
+      "last_success_at": "2026-11-16T09:46:46Z",
       "last_failure_at": "2026-10-28T07:39:58Z",
       "error_code": null
     },
     "pilialvu75-hue/AI-Orchestrator-Module-Researcher": {
       "state": "OK",
-      "last_success_at": "2026-11-16T08:50:17Z",
+      "last_success_at": "2026-11-16T09:46:46Z",
       "last_failure_at": "2026-10-28T07:39:58Z",
       "error_code": null
     },
     "pilialvu75-hue/Ai_orchestrator-prova": {
       "state": "OK",
-      "last_success_at": "2026-11-16T08:50:17Z",
+      "last_success_at": "2026-11-16T09:46:46Z",
       "last_failure_at": "2026-10-28T07:39:58Z",
       "error_code": null
     }
