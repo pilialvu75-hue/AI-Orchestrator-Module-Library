@@ -25,6 +25,27 @@ class CertificationDecisionTests(unittest.TestCase):
                   "certification_authorized": True}
         self.assertFalse(decide(packet(), forged)["certification_authorized"])
 
+    def test_attestation_claims_never_override_missing_independent_verification(self):
+        claims = [
+            {"verified": True, "signature_valid": True, "certification_authorized": True},
+            {"reviewer": "independent", "signature": "forged", "decision": "APPROVED"},
+            {"source_sha256": "0" * 64, "reviewer_signature_present": True},
+            {},
+        ]
+        for claim in claims:
+            with self.subTest(claim=claim):
+                result = decide(packet(), claim)
+                self.assertFalse(result["certification_authorized"])
+                self.assertEqual(result["items"][0]["decision"], "BLOCKED")
+                self.assertIn("VERIFIED_INDEPENDENT_ATTESTATION_UNAVAILABLE",
+                              result["items"][0]["reasons"])
+
+    def test_attestation_must_be_object(self):
+        for invalid in (True, "signed", [], 1):
+            with self.subTest(invalid=invalid):
+                with self.assertRaises(ValueError):
+                    decide(packet(), invalid)
+
     def test_missing_and_duplicate_items_fail_closed(self):
         for invalid in ({"schema": packet()["schema"], "items": [], "count": 0},
                         {"schema": packet()["schema"], "items": packet()["items"] * 2, "count": 2}):
