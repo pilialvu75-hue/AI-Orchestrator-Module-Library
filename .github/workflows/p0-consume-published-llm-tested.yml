@@ -65,8 +65,8 @@ jobs:
             const state = '${{ needs.real-published-consumer.result }}';
             const text = [
               '### P0 Library exported-module independent consumer (#324)',
-              \`Run: https://github.com/\${context.repo.owner}/\${context.repo.repo}/actions/runs/\${context.runId}\`,
-              \`Status: **\${state}**\`,
+              'Run: https://github.com/' + context.repo.owner + '/' + context.repo.repo + '/actions/runs/' + context.runId,
+              'Status: **' + state + '**',
               state === 'success'
                 ? 'PASS: independent Dart app imported and exercised the actual published TESTED sandbox package.'
                 : 'BLOCKED: exported package consumer not proven; check run artifact/logs.',
