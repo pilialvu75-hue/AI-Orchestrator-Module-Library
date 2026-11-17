@@ -67,6 +67,13 @@
       "production_approved": false
     },
     {
+      "pin": "utility.llm_generated.delta_codec@0.1.0",
+      "path": "packages/experimental/utility.llm_generated.delta_codec/0.1.0/package.json",
+      "package_sha256": "b00844091532b305cb1c0bc67449ccf43eacf2d1da99dfcacf45480ebc81db9c",
+      "tier": "sandbox_preview",
+      "production_approved": false
+    },
+    {
       "pin": "utility.path_operations.external.dartlang.path@0.1.0",
       "path": "packages/experimental/utility.path_operations.external.dartlang.path/0.1.0/package.json",
       "package_sha256": "05a0cfc295a7f3240ad32de23ac5e975959a361d21220c1566e0b9d316cf8a45",
