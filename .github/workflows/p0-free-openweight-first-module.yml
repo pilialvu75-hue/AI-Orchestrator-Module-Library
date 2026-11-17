@@ -5,6 +5,7 @@ on:
     paths:
       - 'tools/generate_local_ollama_candidate.py'
       - 'tools/run_real_llm_module_trials.py'
+      - 'tools/select_next_llm_trials.py'
       - 'examples/real-llm-module-trials.json'
       - '.github/workflows/p0-free-openweight-first-module.yml'
   push:
@@ -15,11 +16,12 @@ on:
       - '.github/workflows/p0-admit-verified-llm-tested.yml'
       - 'tools/generate_local_ollama_candidate.py'
       - 'tools/run_real_llm_module_trials.py'
+      - 'tools/select_next_llm_trials.py'
       - 'examples/real-llm-module-trials.json'
       - '.github/workflows/p0-free-openweight-first-module.yml'
   workflow_dispatch:
   schedule:
-    - cron: '17 6 * * 2,5'
+    - cron: '17 6 * * *'
 
 # Runs only on a standard Linux runner in a PUBLIC repository (GitHub's
 # documented zero-cost tier). No hosted paid models, secrets, write token,
@@ -41,26 +43,66 @@ jobs:
           persist-credentials: false
       - name: Verify P0 model runner and independent consumer contracts
         run: |
-          python3 -m py_compile tools/generate_local_ollama_candidate.py tools/run_real_llm_module_trials.py
+          python3 -m py_compile tools/generate_local_ollama_candidate.py tools/run_real_llm_module_trials.py tools/select_next_llm_trials.py
           python3 - <<'PY'
           import sys
           from pathlib import Path
           sys.path.insert(0, "tools")
           from run_real_llm_module_trials import read_trials
           trials = read_trials(Path("examples/real-llm-module-trials.json"))
-          assert len(trials) == 2
-          print("P0 contracts valid; this is NOT a model execution or module certification")
+          assert len(trials) >= 2
+          print(f"Trusted backlog contains {len(trials)} modules; selection, not the model, decides independent acceptance contracts.")
           PY
 
-  real-model-and-consumers:
+  select-new-trials:
     needs: contract
     if: github.event_name != 'pull_request'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 3
+    outputs:
+      count: ${{ steps.choose.outputs.count }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Choose up to two unadmitted model contracts (rotate failed retries)
+        id: choose
+        shell: bash
+        env:
+          ROTATE: ${{ github.event_name == 'schedule' && github.run_number || 0 }}
+        run: |
+          set -euo pipefail
+          python3 tools/select_next_llm_trials.py \
+            --root . --offset "$ROTATE" --batch 2 \
+            --output "$RUNNER_TEMP/selected-trials.json"
+          count="$(python3 -c "import json,os; print(len(json.load(open(os.environ['RUNNER_TEMP']+'/selected-trials.json'))['trials']))")"
+          echo "count=$count" >> "$GITHUB_OUTPUT"
+          echo "Unadmitted contracts selected for real inference: $count"
+      - name: Preserve exact selected contracts for isolated builder and trusted publisher
+        uses: actions/upload-artifact@v4
+        with:
+          name: p0-free-openweight-selected-trials
+          path: ${{ runner.temp }}/selected-trials.json
+          if-no-files-found: error
+          retention-days: 7
+
+  real-model-and-consumers:
+    needs: [contract, select-new-trials]
+    if: >-
+      github.event_name != 'pull_request' &&
+      needs.select-new-trials.outputs.count != '0'
     runs-on: ubuntu-24.04
     timeout-minutes: 35
     steps:
       - uses: actions/checkout@v4
         with:
           persist-credentials: false
+      - name: Read exact selected public contract (no model writes)
+        uses: actions/download-artifact@v4
+        with:
+          name: p0-free-openweight-selected-trials
+          path: ${{ runner.temp }}/selection
+      - run: python3 tools/select_next_llm_trials.py --root . --verify "$RUNNER_TEMP/selection/selected-trials.json"
       - uses: dart-lang/setup-dart@v1
       - name: Install Ollama and start loopback-only model server
         shell: bash
@@ -78,19 +120,19 @@ jobs:
           ollama --version
           ollama pull qwen2.5-coder:3b
           ollama show qwen2.5-coder:3b
-      - name: Generate two new Dart modules with genuine local Qwen inference
+      - name: Generate up to two missing Dart modules with genuine local Qwen inference
         env:
           MODULE_LLM_LOCAL: ollama
         run: |
           python3 tools/run_real_llm_module_trials.py \
-            --spec examples/real-llm-module-trials.json \
+            --spec "$RUNNER_TEMP/selection/selected-trials.json" \
             --output "$RUNNER_TEMP/generated" --generate
       - name: Run model's Dart tests plus separate independent Dart apps
         env:
           MODULE_LLM_LOCAL: ollama
         run: |
           python3 tools/run_real_llm_module_trials.py \
-            --spec examples/real-llm-module-trials.json \
+            --spec "$RUNNER_TEMP/selection/selected-trials.json" \
             --output "$RUNNER_TEMP/generated" \
             --report "$RUNNER_TEMP/p0-local-consumer-report.json" --verify
       - name: Preserve actual generated source and unvalidated metadata
@@ -114,7 +156,7 @@ jobs:
   # credentials. It makes real push/schedule results visible in issue #324.
   publish-result-receipt:
     if: always() && github.event_name != 'pull_request'
-    needs: [contract, real-model-and-consumers]
+    needs: [contract, select-new-trials, real-model-and-consumers]
     runs-on: ubuntu-24.04
     timeout-minutes: 2
     permissions:
@@ -134,7 +176,7 @@ jobs:
               `Workflow run: ${url}`,
               `Result: **${status}** — ${marker}`,
               'Inference: Qwen2.5-Coder 3B via loopback Ollama on a public standard runner (no paid API).',
-              'This is TESTED-IN-ISOLATION only; no automatic Library admission, certification or Cantiere installation.'
+              'Builder is TESTED-IN-ISOLATION; separate publisher/consumer workflows handle internal-development availability. No production certification or automatic app installation.'
             ].join('\n\n');
             await github.rest.issues.createComment({
               ...context.repo, issue_number: 324, body: message

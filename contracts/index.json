@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-17T19:59:00Z",
+  "updated_at": "2026-11-17T22:45:00Z",
   "contracts": [
     {
       "capability_id": "auth.session",
@@ -320,6 +320,110 @@
       "contract_version": "1.0",
       "status": "draft",
       "description": "Pure Dart integer list deduplication preserving first occurrence order and not mutating input; independently tested sandbox only, not production-approved.",
+      "replacement": null
+    },
+    {
+      "capability_id": "utility.llm_generated.integer_frequencies",
+      "contract_id": "utility.llm_generated.integer_frequencies.v1",
+      "contract_version": "1.0",
+      "status": "draft",
+      "description": "Original pure-Dart reusable internal-development module integer_frequencies; independently generated code tested against repository-authorized aivexus_integer_frequencies contract and separate consumer. No automatic production/license/security approval.",
+      "replacement": null
+    },
+    {
+      "capability_id": "utility.llm_generated.fixed_chunks",
+      "contract_id": "utility.llm_generated.fixed_chunks.v1",
+      "contract_version": "1.0",
+      "status": "draft",
+      "description": "Original pure-Dart reusable internal-development module fixed_chunks; independently generated code tested against repository-authorized aivexus_fixed_chunks contract and separate consumer. No automatic production/license/security approval.",
+      "replacement": null
+    },
+    {
+      "capability_id": "utility.llm_generated.cumulative_max",
+      "contract_id": "utility.llm_generated.cumulative_max.v1",
+      "contract_version": "1.0",
+      "status": "draft",
+      "description": "Original pure-Dart reusable internal-development module cumulative_max; independently generated code tested against repository-authorized aivexus_cumulative_max contract and separate consumer. No automatic production/license/security approval.",
+      "replacement": null
+    },
+    {
+      "capability_id": "utility.llm_generated.first_subsequence",
+      "contract_id": "utility.llm_generated.first_subsequence.v1",
+      "contract_version": "1.0",
+      "status": "draft",
+      "description": "Original pure-Dart reusable internal-development module first_subsequence; independently generated code tested against repository-authorized aivexus_first_subsequence contract and separate consumer. No automatic production/license/security approval.",
+      "replacement": null
+    },
+    {
+      "capability_id": "utility.llm_generated.running_product",
+      "contract_id": "utility.llm_generated.running_product.v1",
+      "contract_version": "1.0",
+      "status": "draft",
+      "description": "Original pure-Dart reusable internal-development module running_product; independently generated code tested against repository-authorized aivexus_running_product contract and separate consumer. No automatic production/license/security approval.",
+      "replacement": null
+    },
+    {
+      "capability_id": "utility.llm_generated.index_positions",
+      "contract_id": "utility.llm_generated.index_positions.v1",
+      "contract_version": "1.0",
+      "status": "draft",
+      "description": "Original pure-Dart reusable internal-development module index_positions; independently generated code tested against repository-authorized aivexus_index_positions contract and separate consumer. No automatic production/license/security approval.",
+      "replacement": null
+    },
+    {
+      "capability_id": "utility.llm_generated.rotate_left",
+      "contract_id": "utility.llm_generated.rotate_left.v1",
+      "contract_version": "1.0",
+      "status": "draft",
+      "description": "Original pure-Dart reusable internal-development module rotate_left; independently generated code tested against repository-authorized aivexus_rotate_left contract and separate consumer. No automatic production/license/security approval.",
+      "replacement": null
+    },
+    {
+      "capability_id": "utility.llm_generated.palindrome_filter",
+      "contract_id": "utility.llm_generated.palindrome_filter.v1",
+      "contract_version": "1.0",
+      "status": "draft",
+      "description": "Original pure-Dart reusable internal-development module palindrome_filter; independently generated code tested against repository-authorized aivexus_palindrome_filter contract and separate consumer. No automatic production/license/security approval.",
+      "replacement": null
+    },
+    {
+      "capability_id": "utility.llm_generated.adjacent_pairs",
+      "contract_id": "utility.llm_generated.adjacent_pairs.v1",
+      "contract_version": "1.0",
+      "status": "draft",
+      "description": "Original pure-Dart reusable internal-development module adjacent_pairs; independently generated code tested against repository-authorized aivexus_adjacent_pairs contract and separate consumer. No automatic production/license/security approval.",
+      "replacement": null
+    },
+    {
+      "capability_id": "utility.llm_generated.interleave_lists",
+      "contract_id": "utility.llm_generated.interleave_lists.v1",
+      "contract_version": "1.0",
+      "status": "draft",
+      "description": "Original pure-Dart reusable internal-development module interleave_lists; independently generated code tested against repository-authorized aivexus_interleave_lists contract and separate consumer. No automatic production/license/security approval.",
+      "replacement": null
+    },
+    {
+      "capability_id": "utility.llm_generated.intersection_unique",
+      "contract_id": "utility.llm_generated.intersection_unique.v1",
+      "contract_version": "1.0",
+      "status": "draft",
+      "description": "Original pure-Dart reusable internal-development module intersection_unique; independently generated code tested against repository-authorized aivexus_intersection_unique contract and separate consumer. No automatic production/license/security approval.",
+      "replacement": null
+    },
+    {
+      "capability_id": "utility.llm_generated.count_in_range",
+      "contract_id": "utility.llm_generated.count_in_range.v1",
+      "contract_version": "1.0",
+      "status": "draft",
+      "description": "Original pure-Dart reusable internal-development module count_in_range; independently generated code tested against repository-authorized aivexus_count_in_range contract and separate consumer. No automatic production/license/security approval.",
+      "replacement": null
+    },
+    {
+      "capability_id": "utility.llm_generated.max_run_length",
+      "contract_id": "utility.llm_generated.max_run_length.v1",
+      "contract_version": "1.0",
+      "status": "draft",
+      "description": "Original pure-Dart reusable internal-development module max_run_length; independently generated code tested against repository-authorized aivexus_max_run_length contract and separate consumer. No automatic production/license/security approval.",
       "replacement": null
     }
   ]
