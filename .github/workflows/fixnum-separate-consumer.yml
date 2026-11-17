@@ -11,17 +11,25 @@ on:
       - 'intake/utility.int64_arithmetic.external.dartlang.fixnum/**'
       - '.github/workflows/fixnum-separate-consumer.yml'
   workflow_dispatch:
+  workflow_run:
+    workflows: ['Certify eligible intake']
+    types: [completed]
 
 permissions:
   contents: read
 
 jobs:
   separate-consumer:
+    if: >-
+      github.event_name != 'workflow_run' ||
+      (github.event.workflow_run.conclusion == 'success' &&
+       github.event.workflow_run.head_branch == 'main')
     runs-on: ubuntu-24.04
     timeout-minutes: 8
     steps:
       - uses: actions/checkout@v4
         with:
+          ref: main
           persist-credentials: false
           submodules: false
       - uses: dart-lang/setup-dart@v1
@@ -40,10 +48,47 @@ jobs:
           assert m["security"]["reviewed"] is False
           assert payload_tree_sha256(base / m["payload"]["path"]) == m["payload"]["sha256"]
           PY
-      - name: Build independent consumer outside Library payload
+      - name: Consume published experimental package in a separate Dart app
         shell: bash
         run: |
           set -euo pipefail
+          python3 - <<'PY'
+          import hashlib, json, os, sys
+          from pathlib import Path
+          sys.path.insert(0, 'tools')
+          from library_consumer_execution import canonical, safe_path
+          pin = 'utility.int64_arithmetic.external.dartlang.fixnum@0.1.0'
+          index = json.loads(Path('packages/experimental-index.json').read_text())
+          assert index['certified'] is False
+          rows = [r for r in index['packages'] if r['pin'] == pin]
+          assert len(rows) == 1, 'fixnum is missing from published preview'
+          row = rows[0]
+          assert row['path'].startswith('packages/experimental/')
+          envelope = json.loads(Path(row['path']).read_text())
+          package = envelope['package']
+          digest = hashlib.sha256(canonical(package).encode('utf-8')).hexdigest()
+          assert digest == row['package_sha256'] == envelope['package_sha256']
+          assert (package['pin'] == pin and package['tier'] == 'sandbox_preview'
+                  and package['availability'] == 'experimental'
+                  and package['certified'] is False and
+                  package['review']['production_approved'] is False)
+          assert package['integrity']['payload_sha256'] == (
+              'b7241fcdfca77f7ec525da0279fa527ff9ca403ca7af592cc9bff804d4776f6a')
+          output = Path(os.environ['RUNNER_TEMP']) / 'exported_fixnum'
+          output.mkdir()
+          seen = set()
+          assert 0 < len(package['files']) <= 512
+          for item in package['files']:
+              relative = safe_path(item['target_path'])
+              assert str(relative) not in seen and isinstance(item['content'], str)
+              seen.add(str(relative))
+              target = output.joinpath(*relative.parts)
+              target.parent.mkdir(parents=True, exist_ok=True)
+              target.write_text(item['content'], encoding='utf-8')
+          assert {'pubspec.yaml', 'lib/aivexus_external.dart', 'tool/self_test.dart'} <= seen
+          print('PASS: reconstructed actual exported sandbox package', digest)
+          PY
+          mkdir -p "$RUNNER_TEMP/fixnum_consumer/bin"
           mkdir -p "$RUNNER_TEMP/fixnum_consumer/bin"
           cat > "$RUNNER_TEMP/fixnum_consumer/pubspec.yaml" <<EOF
           name: independent_fixnum_consumer
@@ -52,7 +97,7 @@ jobs:
             sdk: ^3.4.0
           dependencies:
             aivexus_external_fixnum:
-              path: $GITHUB_WORKSPACE/intake/utility.int64_arithmetic.external.dartlang.fixnum/0.1.0/payload/src
+              path: $RUNNER_TEMP/exported_fixnum
           EOF
           cat > "$RUNNER_TEMP/fixnum_consumer/bin/main.dart" <<'EOF'
           import 'package:aivexus_external_fixnum/aivexus_external.dart';
