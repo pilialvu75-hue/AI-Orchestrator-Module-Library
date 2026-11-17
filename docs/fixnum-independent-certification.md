@@ -36,15 +36,16 @@ non approvazioni indipendenti.
 
 6. Dopo merge su `main`, `accept-signed-fixnum-review.yml` rilegge
    i byte reali, verifica la firma contro la chiave pubblica protetta,
-   ricontrolla sorgente, licenza, SBOM, metadati e test e aggiorna
-   `intake/...` con un **nuovo commit**. Firme false, dati mancanti,
-   hash discordanti o chiavi non configurate interrompono il job.
-7. Il workflow già presente `certify-intake.yml` valida *nuovamente*
-   l'evidenza firmata e soltanto allora può spostare il modulo in
-   `modules/`, iscriverlo nel catalogo ed esportarlo in
-   `packages/index.json`. Infine eseguire
-   `prove-certified-consumer.yml` per dimostrare il riuso del
-   pacchetto **certificato** da un consumer esterno.
+   ricontrolla sorgente, licenza, SBOM, metadati e test, quindi esegue
+   **promozione, esportazione e commit nello stesso job protetto**.
+   Firme false, dati mancanti, hash discordanti o chiavi non configurate
+   interrompono il job. Non si attende un secondo workflow `push`:
+   GitHub non li avvia normalmente a seguito di un commit con `GITHUB_TOKEN`.
+7. Il job senza permessi di scrittura di `prove-certified-consumer.yml`
+   parte automaticamente con `workflow_run` al completamento riuscito della
+   promozione e importa il pacchetto **certificato** in un consumer esterno.
+   Una certificazione resta priva di prova d'uso finché questo consumer
+   non ha completato l'esecuzione reale con esito positivo.
 
 ## Criteri di completamento
 
