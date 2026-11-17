@@ -67,9 +67,23 @@
       "production_approved": false
     },
     {
+      "pin": "utility.llm_generated.cumulative_max@0.1.0",
+      "path": "packages/experimental/utility.llm_generated.cumulative_max/0.1.0/package.json",
+      "package_sha256": "3ab9518c0039d781a421acac56d829ccf09df65a1ea5c07b29db1ec6eadf912a",
+      "tier": "sandbox_preview",
+      "production_approved": false
+    },
+    {
       "pin": "utility.llm_generated.delta_codec@0.1.0",
       "path": "packages/experimental/utility.llm_generated.delta_codec/0.1.0/package.json",
       "package_sha256": "b00844091532b305cb1c0bc67449ccf43eacf2d1da99dfcacf45480ebc81db9c",
+      "tier": "sandbox_preview",
+      "production_approved": false
+    },
+    {
+      "pin": "utility.llm_generated.first_subsequence@0.1.0",
+      "path": "packages/experimental/utility.llm_generated.first_subsequence/0.1.0/package.json",
+      "package_sha256": "02601d536c3a0eb13730b0e9f917bd70c5e676ef978b49ad523517edd3d9b6ba",
       "tier": "sandbox_preview",
       "production_approved": false
     },

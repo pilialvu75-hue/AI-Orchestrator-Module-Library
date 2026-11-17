@@ -1,0 +1,79 @@
+{
+  "schema": "ai-orchestrator.library-module-package-envelope.v1",
+  "package": {
+    "schema": "ai-orchestrator.library-module-package.v1",
+    "asset_id": "utility.llm_generated.first_subsequence",
+    "version": "0.1.0",
+    "pin": "utility.llm_generated.first_subsequence@0.1.0",
+    "tier": "sandbox_preview",
+    "status": "tested",
+    "certified": false,
+    "availability": "experimental",
+    "usage_policy": "internal-isolated-evaluation-only",
+    "capabilities": [
+      "utility.llm_generated.first_subsequence"
+    ],
+    "contracts": [
+      "utility.llm_generated.first_subsequence.v1"
+    ],
+    "targets": [
+      "linux"
+    ],
+    "files": [
+      {
+        "source_path": "payload/src/generation.json",
+        "target_path": "generation.json",
+        "content": "{\"acceptance\": \"independently pre-authored contract\", \"attempt\": 0, \"code_source_sha256\": \"0be85041319df10378f386c236c037f8e6ffe6c7f20b690cc114b82699f602eb\", \"eval_count\": 159, \"generator\": \"aivexus-llm-candidate-v1\", \"inference_backend\": \"local_open_weight_no_api_key\", \"instruction\": \"Create an ORIGINAL PURE-DART reusable package named aivexus_first_subsequence, Dart SDK >=3.3.0 <4.0.0. Implement exactly this PUBLIC TOP-LEVEL Dart function in lib/first_subsequence.dart: int findSubsequence(List<int> haystack, List<int> needle). Find the first starting position of contiguous needle inside haystack. Return -1 if not found. An empty needle returns 0 even for empty haystack. Compare signed integers exactly, do not mutate either list. Fully implement working behavior yourself, not a stub. Write reasonable tests under test/. You may use Dart core List, Map, Set, loops and standard library methods only. No third-party runtime dependencies, networking, filesystem, FFI, shell or privileged APIs. Always use valid Dart SDK APIs and compileable types. Return the strict JSON source object requested by the system prompt.\", \"model\": \"ollama-local/qwen2.5-coder:3b\", \"packaging\": \"deterministic, no functional implementation\", \"prompt_eval_count\": 337, \"provider_endpoint\": \"http://127.0.0.1:11434/api/chat\", \"repair_diagnostic_sha256\": null, \"status\": \"UNVALIDATED\"}\n"
+      },
+      {
+        "source_path": "payload/src/lib/first_subsequence.dart",
+        "target_path": "lib/first_subsequence.dart",
+        "content": "library aivexus_first_subsequence;\n\nint findSubsequence(List<int> haystack, List<int> needle) {\n  if (needle.isEmpty) return 0;\n\n  int n = haystack.length;\n  int m = needle.length;\n\n  for (int i = 0; i <= n - m; i++) {\n    bool found = true;\n    for (int j = 0; j < m; j++) {\n      if (haystack[i + j] != needle[j]) {\n        found = false;\n        break;\n      }\n    }\n    if (found) return i;\n  }\n\n  return -1;\n}\n"
+      },
+      {
+        "source_path": "payload/src/pubspec.yaml",
+        "target_path": "pubspec.yaml",
+        "content": "name: aivexus_first_subsequence\nversion: 0.1.0\npublish_to: none\nenvironment:\n  sdk: '>=3.3.0 <4.0.0'\ndev_dependencies:\n  test: ^1.25.0\n"
+      },
+      {
+        "source_path": "payload/src/test/independent_contract_test.dart",
+        "target_path": "test/independent_contract_test.dart",
+        "content": "import 'package:aivexus_first_subsequence/first_subsequence.dart';\nimport 'package:test/test.dart';\n\nvoid main() {\n  test('independent contract, not model-authored', () {\n    if (findSubsequence(<int>[2, 3, 2, 3, 4], <int>[2, 3, 4]) != 2)\n      throw StateError('first match');\n    if (findSubsequence(<int>[1, 2, 1, 2], <int>[1, 2]) != 0)\n      throw StateError('earliest');\n    if (findSubsequence(<int>[1, 2], <int>[3]) != -1)\n      throw StateError('missing');\n    if (findSubsequence(<int>[], <int>[]) != 0) throw StateError('empty');\n    if (findSubsequence(<int>[1], <int>[1, 2]) != -1)\n      throw StateError('too long');\n    print(\n        'PASS: independent Dart consumer for original model-generated first_subsequence');\n  });\n}\n"
+      }
+    ],
+    "requirements": [
+      {
+        "kind": "distributionRestriction",
+        "description": "Isolated internal tests only. No production, release, redistribution, or automatic privileged execution; license and security certification pending.",
+        "required": true
+      },
+      {
+        "kind": "manualReview",
+        "description": "No privilege, release or redistribution authorized.",
+        "required": false
+      },
+      {
+        "kind": "manualReview",
+        "description": "Only public Linux runner real-model Dart and independent consumer passed; no Android or production host proof.",
+        "required": false
+      }
+    ],
+    "integrity": {
+      "manifest_sha256": "4e1163c6652c4e14519aec59b0513db7698eab48b994a32170a5b8ad806e7790",
+      "module_tree_sha256": "b925f21734302b9406d2ac3bc55e55a268b191d9a2c1c0f6efed932242b1d5cf",
+      "payload_sha256": "debcd0b8b3c17709aca3efbd9a0cfe135c3a349caf597d8e4a422e39e20a77c2",
+      "test_report_sha256": "5c15d6bc7fc0691d5582fe81dad9933c398a4c02eb627cc228872d35c8194711"
+    },
+    "source": {
+      "payload_type": "repository_path",
+      "source_repository": "https://github.com/pilialvu75-hue/AI-Orchestrator-Module-Library",
+      "source_commit": "9e575ceae0227c1a3c3a97ca5425398b0d3faa1e"
+    },
+    "review": {
+      "license_verified": false,
+      "security_reviewed": false,
+      "production_approved": false
+    }
+  },
+  "package_sha256": "02601d536c3a0eb13730b0e9f917bd70c5e676ef978b49ad523517edd3d9b6ba"
+}
