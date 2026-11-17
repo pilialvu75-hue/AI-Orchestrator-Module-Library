@@ -21,7 +21,10 @@ on:
       - '.github/workflows/p0-free-openweight-first-module.yml'
   workflow_dispatch:
   schedule:
-    - cron: '17 6 * * *'
+    # Bounded unattended growth: up to two new modules every eight hours.
+    # Missing-pins selector skips existing intake; Ollama never runs for an
+    # exhausted backlog, and production signature gates stay unchanged.
+    - cron: '17 6,14,22 * * *'
 
 # Runs only on a standard Linux runner in a PUBLIC repository (GitHub's
 # documented zero-cost tier). No hosted paid models, secrets, write token,
