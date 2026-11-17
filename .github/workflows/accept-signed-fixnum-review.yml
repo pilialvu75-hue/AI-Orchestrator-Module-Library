@@ -1,0 +1,88 @@
+name: Accept independent signed fixnum review and stage certification
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'review-submissions/utility.int64_arithmetic.external.dartlang.fixnum/0.1.0/**'
+      - 'tools/library_signed_review_stage.py'
+      - '.github/workflows/accept-signed-fixnum-review.yml'
+  workflow_dispatch:
+
+# No candidate code is executed in this trusted job. The trusted Ed25519 public
+# key must exist in repository Actions variables; never read a key from intake.
+permissions:
+  contents: read
+
+concurrency:
+  group: accept-independent-fixnum-review-main
+  cancel-in-progress: false
+
+jobs:
+  stage-review:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    permissions:
+      contents: write
+    env:
+      LIBRARY_SECURITY_REVIEW_PUBLIC_KEY_PEM: ${{ vars.LIBRARY_SECURITY_REVIEW_PUBLIC_KEY_PEM }}
+    steps:
+      - name: Check out trusted main
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+          submodules: false
+
+      - name: Require preconfigured independent reviewer trust anchor
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -n "${LIBRARY_SECURITY_REVIEW_PUBLIC_KEY_PEM:-}" || {
+            echo "BLOCKED: protected independent reviewer public key not configured"
+            exit 1
+          }
+
+      - name: Verify exact signed review and stage TESTED intake
+        shell: bash
+        run: |
+          set -euo pipefail
+          ROOT="review-submissions/utility.int64_arithmetic.external.dartlang.fixnum/0.1.0"
+          test -s "$ROOT/sbom.json"
+          test -s "$ROOT/independent-attestation.json"
+          python3 tools/library_signed_review_stage.py \
+            --root . \
+            --asset-id utility.int64_arithmetic.external.dartlang.fixnum \
+            --version 0.1.0 \
+            --sbom "$ROOT/sbom.json" \
+            --attestation "$ROOT/independent-attestation.json" \
+            --output-dir "$RUNNER_TEMP/verified-review" \
+            --apply
+
+      - name: Confirm the exact module passes real promotion checks
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 tools/library_pipeline.py promote \
+            utility.int64_arithmetic.external.dartlang.fixnum 0.1.0 --dry-run
+          python3 tools/validate_library.py
+          python3 -m unittest discover -s tests -p 'test_library_signed_review_stage.py' -v
+
+      - name: Commit independently verified evidence to main
+        shell: bash
+        run: |
+          set -euo pipefail
+          git add -- intake/utility.int64_arithmetic.external.dartlang.fixnum/0.1.0
+          test -n "$(git diff --cached --name-only)" || {
+            echo "BLOCKED: no new signed evidence"
+            exit 1
+          }
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -m "library: stage signed independent fixnum review"
+          git push origin HEAD:main
+
+# The existing certify-intake.yml reacts to the intake commit and separately
+# validates, promotes, exports and tests the candidate. This workflow never
+# writes directly to catalog/modules/packages or calls them certified.
