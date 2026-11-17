@@ -45,6 +45,12 @@ def stage(root: Path, asset_id: str, version: str, sbom_path: Path,
         raise ValueError("manifest identity mismatch")
     if manifest.get("status") != "tested" or (manifest.get("security") or {}).get("reviewed") is not False:
         raise ValueError("only unsigned TESTED intake can be staged")
+    # Existing Ed25519 verifier only authenticates repository_path or materialized
+    # upstream_reference sources. Never accept an archive or metadata-only
+    # reference, even if it carries an APPROVED-looking JSON document.
+    payload = manifest.get("payload") or {}
+    if payload.get("type") != "repository_path" or payload.get("path") != "payload/src":
+        raise ValueError("signed fixnum review requires materialized repository_path source")
     validate_normalization_gates(manifest, base)
     validate_testing_gates(manifest)
     verify_test_evidence(base, manifest)
