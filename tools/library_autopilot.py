@@ -105,6 +105,13 @@ def refresh_consumption_exports(root: Path) -> dict[str, object]:
     snapshot = load_json(snapshot_path)
 
     packages_root = root / "packages"
+    # This export rebuild must not erase an independently proved development
+    # qualification. Recheck every saved pin against freshly exported source;
+    # drop it if its sandbox source has been formally promoted or removed.
+    previous_development = (
+        load_json(packages_root / "development-index.json")
+        if (packages_root / "development-index.json").is_file() else None
+    )
     if packages_root.exists():
         shutil.rmtree(packages_root)
     packages_root.mkdir(parents=True, exist_ok=True)
@@ -180,12 +187,21 @@ def refresh_consumption_exports(root: Path) -> dict[str, object]:
     # Cantiere experiments. Never promote it to the certified catalog or
     # declare licenses, runtime safety or reviewer approval.
     experimental = export_experimental_packages(root)
+    preserved_development = 0
+    if previous_development is not None:
+        from library_development_promotion import reconcile_existing
+        current = reconcile_existing(root, previous_development)
+        (packages_root / "development-index.json").write_text(
+            json.dumps(current, sort_keys=True, indent=2) + "\n",
+            encoding="utf-8")
+        preserved_development = len(current["packages"])
     return {
         "snapshot_sha256": snapshot_result["snapshot_sha256"],
         "package_count": len(rows),
         "not_exportable_count": len(not_exportable),
         "not_exportable": not_exportable,
         "sandbox_preview_count": experimental["count"],
+        "development_qualified_preserved": preserved_development,
         "sandbox_preview_blocked": experimental["blocked"],
     }
 

@@ -4,6 +4,7 @@ on:
   pull_request:
     paths:
       - 'tools/consume_published_llm_preview.py'
+      - 'tools/library_development_promotion.py'
       - '.github/workflows/p0-consume-published-llm-tested.yml'
   workflow_run:
     workflows:
@@ -21,13 +22,15 @@ jobs:
       - uses: actions/checkout@v4
         with:
           persist-credentials: false
-      - run: python3 -m py_compile tools/consume_published_llm_preview.py
+      - run: python3 -m py_compile tools/consume_published_llm_preview.py tools/library_development_promotion.py
 
   real-published-consumer:
     if: >-
       github.event_name == 'workflow_run' &&
       github.event.workflow_run.conclusion == 'success' &&
-      github.event.workflow_run.head_branch == 'main'
+      github.event.workflow_run.head_branch == 'main' &&
+      github.event.workflow_run.head_repository.full_name == github.repository &&
+      github.event.workflow_run.event == 'workflow_run'
     runs-on: ubuntu-24.04
     timeout-minutes: 10
     steps:
@@ -50,11 +53,78 @@ jobs:
           if-no-files-found: error
           retention-days: 7
 
+  # DEVELOPER-ONLY qualification. This job has a write token but never runs
+  # model-generated Dart. Independent consumer has already executed with READ.
+  # Its report is checked against current exact source and package SHA256.
+  promote-development:
+    needs: real-published-consumer
+    if: >-
+      needs.real-published-consumer.result == 'success' &&
+      github.event_name == 'workflow_run' &&
+      github.event.workflow_run.conclusion == 'success' &&
+      github.event.workflow_run.head_branch == 'main' &&
+      github.event.workflow_run.head_repository.full_name == github.repository &&
+      github.event.workflow_run.event == 'workflow_run'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 6
+    permissions:
+      contents: write
+      actions: read
+    concurrency:
+      group: module-library-certification-main
+      cancel-in-progress: false
+    steps:
+      - name: Checkout trusted Library index (no model code execution)
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+      - name: Retrieve exact PASS from the completed independent consumer
+        uses: actions/download-artifact@v4
+        with:
+          name: p0-exported-llm-consumer-report
+          path: ${{ runner.temp }}/consumer-report
+          run-id: ${{ github.run_id }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Qualify immutable package pins for internal development only
+        shell: bash
+        env:
+          CONSUMER_RUN: ${{ github.run_id }}
+        run: |
+          set -euo pipefail
+          python3 tools/library_development_promotion.py \
+            --root . \
+            --consumer-report "$RUNNER_TEMP/consumer-report/p0-published-consumer-report.json" \
+            --consumer-run "$CONSUMER_RUN"
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+          data=json.loads(Path("packages/development-index.json").read_text())
+          assert data["production_certified"] is False
+          assert data["production_approved"] is False
+          assert data["packages"]
+          for row in data["packages"]:
+              assert row["status"] == "development_qualified"
+              assert row["independent_export_consumer"] == "PASS"
+              assert row["production_certified"] is False
+              assert row["security_reviewed"] is False
+          print("PASS: internal development qualified only")
+          PY
+          git add packages/development-index.json
+          if git diff --cached --quiet --exit-code; then
+            echo "Existing development qualification unchanged."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -m "library: qualify verified Qwen sandbox modules for internal development"
+          git push origin HEAD:main
+
   receipt:
     if: >-
       always() && github.event_name == 'workflow_run' &&
       needs.real-published-consumer.result != 'skipped'
-    needs: real-published-consumer
+    needs: [real-published-consumer, promote-development]
     runs-on: ubuntu-24.04
     permissions:
       issues: write
@@ -63,14 +133,16 @@ jobs:
         with:
           script: |
             const state = '${{ needs.real-published-consumer.result }}';
+            const development = '${{ needs.promote-development.result }}';
             const text = [
               '### P0 Library exported-module independent consumer (#324)',
               'Run: https://github.com/' + context.repo.owner + '/' + context.repo.repo + '/actions/runs/' + context.runId,
               'Status: **' + state + '**',
+              'Internal development qualification: **' + development + '**',
               state === 'success'
                 ? 'PASS: independent Dart app imported and exercised the actual published TESTED sandbox package.'
                 : 'BLOCKED: exported package consumer not proven; check run artifact/logs.',
-              'No CERTIFIED promotion or production installation.'
+              'No formal CERTIFIED promotion, license approval, or production installation.'
             ].join('\n\n');
             await github.rest.issues.createComment({
               ...context.repo, issue_number: 324, body: text
