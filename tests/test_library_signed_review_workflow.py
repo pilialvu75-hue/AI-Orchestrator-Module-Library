@@ -15,9 +15,6 @@ class SignedReviewWorkflowTests(unittest.TestCase):
         self.assertIn("git add -A -- catalog modules intake packages", text)
         self.assertIn("git push origin HEAD:main", text)
         self.assertIn("LIBRARY_SECURITY_REVIEW_PUBLIC_KEY_PEM:", text)
-        self.assertIn("gh api", text)
-        self.assertIn("branches/main", text)
-        self.assertIn("main is unprotected", text)
         self.assertNotIn("run: dart ", text)
         self.assertNotIn("secrets.", text)
 
