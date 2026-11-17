@@ -106,57 +106,118 @@ def generate_packages(specs, output):
         print(f"LLM_SOURCE_GENERATED {spec['id']} provider_model={model}", flush=True)
 
 
+def _verify_one(spec, output):
+    folder = output / spec["id"]
+    metadata = check_source(folder, spec)
+    # Don't run arbitrary model-authored Dart IO/process/network tests.
+    # The generated package is still UNTRUSTED, isolated on a throwaway
+    # runner without secrets or write privileges; this is an additional
+    # admission-time check, not a security certification.
+    for target in list((folder / "lib").glob("*.dart")) + list(
+            (folder / "test").glob("*_test.dart")):
+        source = target.read_text(encoding="utf-8")
+        for imported in re.findall(
+                r"""(?:import|export|part)\s+['"]([^'"]+)['"]""", source):
+            if imported.startswith("dart:") and imported not in {
+                    "dart:core", "dart:math", "dart:collection", "dart:convert"}:
+                raise ValueError(f"forbidden Dart SDK import {imported}")
+            if imported.startswith("package:"):
+                allowed = imported.startswith(
+                    "package:" + spec["package_name"] + "/")
+                is_test = (target.parent.name == "test"
+                           and imported == "package:test/test.dart")
+                if not (allowed or is_test):
+                    raise ValueError(f"forbidden third-party import {imported}")
+    run(["dart", "pub", "get"], folder)
+    run(["dart", "format", "lib", "test"], folder)
+    run(["dart", "analyze", "--fatal-infos"], folder)
+    run(["dart", "test"], folder)
+
+    # A separate application is written by the independent acceptance
+    # contract, never by the model. Recreate it on each repair attempt.
+    consumer = output / "_consumers" / spec["id"]
+    if consumer.exists():
+        import shutil
+        shutil.rmtree(consumer)
+    consumer.joinpath("bin").mkdir(parents=True, exist_ok=False)
+    consumer.joinpath("pubspec.yaml").write_text(
+        "name: p0_independent_" + spec["id"] + "\n"
+        "publish_to: none\n"
+        "environment:\n  sdk: '>=3.3.0 <4.0.0'\n"
+        "dependencies:\n  " + spec["package_name"] + ":\n    path: " +
+        str(folder.resolve()) + "\n", encoding="utf-8"
+    )
+    consumer.joinpath("bin", "main.dart").write_text(
+        spec["consumer_source"], encoding="utf-8"
+    )
+    run(["dart", "pub", "get"], consumer)
+    run(["dart", "analyze", "--fatal-infos"], consumer)
+    run(["dart", "run", "bin/main.dart"], consumer)
+    source = folder / spec["library_path"]
+    return {
+        "id": spec["id"], "package": spec["package_name"],
+        "model": metadata["model"],
+        "source_sha256": hashlib.sha256(source.read_bytes()).hexdigest(),
+        "dart_tests": "PASS", "separate_consumer": "PASS",
+        "repairs": int(metadata.get("attempt", 0)),
+        "status": "TESTED_IN_ISOLATION_NOT_ADMITTED",
+    }
+
+
 def verify_packages(specs, output, report_path):
     report = {"schema": "aivexus.p0-llm-module-consumer.v1",
               "certified": False, "production_approved": False,
               "complete": False, "modules": []}
     report_path.parent.mkdir(parents=True, exist_ok=True)
+    use_local = os.environ.get("MODULE_LLM_LOCAL") == "ollama"
     try:
         for spec in specs:
-            folder = output / spec["id"]
-            metadata = check_source(folder, spec)
-            run(["dart", "pub", "get"], folder)
-            run(["dart", "format", "lib", "test"], folder)
-            run(["dart", "analyze", "--fatal-infos"], folder)
-            run(["dart", "test"], folder)
-
-            # A separate real application with independent acceptance source
-            # imports the package by path rather than executing a copied test
-            # from the model-generated package.
-            consumer = output / "_consumers" / spec["id"]
-            consumer.joinpath("bin").mkdir(parents=True, exist_ok=False)
-            consumer.joinpath("pubspec.yaml").write_text(
-                "name: p0_independent_" + spec["id"] + "\n"
-                "publish_to: none\n"
-                "environment:\n  sdk: '>=3.3.0 <4.0.0'\n"
-                "dependencies:\n  " + spec["package_name"] + ":\n    path: " +
-                str(folder.resolve()) + "\n",
-                encoding="utf-8",
-            )
-            consumer.joinpath("bin", "main.dart").write_text(
-                spec["consumer_source"], encoding="utf-8"
-            )
-            run(["dart", "pub", "get"], consumer)
-            run(["dart", "analyze", "--fatal-infos"], consumer)
-            run(["dart", "run", "bin/main.dart"], consumer)
-            source = folder / spec["library_path"]
-            report["modules"].append({
-                "id": spec["id"], "package": spec["package_name"],
-                "model": metadata["model"], "source_sha256":
-                hashlib.sha256(source.read_bytes()).hexdigest(),
-                "dart_tests": "PASS", "separate_consumer": "PASS",
-                "status": "TESTED_IN_ISOLATION_NOT_ADMITTED",
-            })
-        report["complete"] = len(report["modules"]) == len(specs)
-    except (ValueError, RuntimeError, OSError, subprocess.TimeoutExpired) as exc:
-        report["blocked_reason"] = str(exc)[-1000:]
-        raise
+            failure = ""
+            result = None
+            # Exactly 1 initial attempt + at most 2 model-authored repairs.
+            for attempt in range(3):
+                try:
+                    result = _verify_one(spec, output)
+                    break
+                except (ValueError, RuntimeError, OSError,
+                        subprocess.TimeoutExpired) as exc:
+                    failure = str(exc)[-_MAX_CAPTURE:]
+                    print(f"MODULE_TEST_BLOCKED {spec['id']} attempt={attempt} "
+                          f"diagnostic={failure[-800:]}", flush=True)
+                    if attempt >= 2 or not use_local:
+                        break
+                    from generate_local_ollama_candidate import generate_local
+                    try:
+                        generate_local(
+                            spec["instruction"], output / spec["id"],
+                            model="qwen2.5-coder:3b", feedback=failure,
+                        )
+                    except (ValueError, RuntimeError, OSError) as repair_error:
+                        failure = ("LLM repair failed: " +
+                                   str(repair_error)[-_MAX_CAPTURE:])
+                        break
+            if result is None:
+                report["modules"].append({
+                    "id": spec["id"], "package": spec["package_name"],
+                    "dart_tests": "BLOCKED", "separate_consumer": "BLOCKED",
+                    "reason": failure[-1000:],
+                    "status": "UNVALIDATED",
+                })
+            else:
+                report["modules"].append(result)
+        report["complete"] = (
+            len(report["modules"]) == len(specs)
+            and all(m["status"] == "TESTED_IN_ISOLATION_NOT_ADMITTED"
+                    for m in report["modules"])
+        )
     finally:
         report_path.write_text(
-            json.dumps(report, indent=2, sort_keys=True) + "\n", encoding="utf-8"
+            json.dumps(report, indent=2, sort_keys=True) + "\n",
+            encoding="utf-8",
         )
+    if not report["complete"]:
+        raise RuntimeError("P0 model generation/consumer BLOCKED; inspect evidence")
     print(json.dumps(report, sort_keys=True))
-
 
 def main():
     parser = argparse.ArgumentParser()
