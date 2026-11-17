@@ -25,8 +25,8 @@ def read_trials(path: Path):
     if not isinstance(data, dict) or data.get("schema") != TRIAL_SCHEMA:
         raise ValueError("invalid module trial specification")
     trials = data.get("trials")
-    if not isinstance(trials, list) or len(trials) != 2:
-        raise ValueError("P0 requires exactly two distinct module specifications")
+    if not isinstance(trials, list) or not (1 <= len(trials) <= 32):
+        raise ValueError("expected 1 to 32 independent module specifications")
     ids = set()
     for trial in trials:
         if not isinstance(trial, dict) or set(trial) != {
