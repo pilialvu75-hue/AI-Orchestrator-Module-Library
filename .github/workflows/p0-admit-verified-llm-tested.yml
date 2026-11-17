@@ -107,7 +107,7 @@ jobs:
                          row.get("production_approved") is False
                          for row in index["packages"]), pin
           assert index["certified"] is False
-          print("PASS: two original modules now consumable from TESTED sandbox packages")
+          print(f"PASS: {len(staged)} real Qwen consumer-PASS module(s) available as TESTED sandbox packages")
           PY
           git add intake packages
           git commit -m "library: admit consumer-PASS Qwen modules as TESTED sandbox only"
