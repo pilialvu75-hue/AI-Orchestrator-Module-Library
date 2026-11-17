@@ -32,7 +32,28 @@ jobs:
         with:
           ref: main
           fetch-depth: 0
+      - name: Retrieve immutable contract selection from model run
+        uses: actions/download-artifact@v4
+        with:
+          name: p0-free-openweight-selected-trials
+          path: ${{ runner.temp }}/selection
+          run-id: ${{ github.event.workflow_run.id }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Validate selected contracts against canonical Library registry
+        id: selected
+        shell: bash
+        run: |
+          set -euo pipefail
+          count="$(python3 -c "import json,os; print(len(json.load(open(os.environ['RUNNER_TEMP']+'/selection/selected-trials.json'))['trials']))")"
+          echo "count=$count" >> "$GITHUB_OUTPUT"
+          if [ "$count" != "0" ]; then
+            python3 tools/select_next_llm_trials.py \
+              --root . --verify "$RUNNER_TEMP/selection/selected-trials.json"
+          else
+            echo "Backlog exhausted: no source admission or new module to publish."
+          fi
       - name: Retrieve verified original source, not executable code
+        if: steps.selected.outputs.count != '0'
         uses: actions/download-artifact@v4
         with:
           name: p0-free-openweight-dart-source
@@ -40,6 +61,7 @@ jobs:
           run-id: ${{ github.event.workflow_run.id }}
           github-token: ${{ secrets.GITHUB_TOKEN }}
       - name: Retrieve completed real independent consumer report
+        if: steps.selected.outputs.count != '0'
         uses: actions/download-artifact@v4
         with:
           name: p0-free-openweight-consumer-report
@@ -47,6 +69,7 @@ jobs:
           run-id: ${{ github.event.workflow_run.id }}
           github-token: ${{ secrets.GITHUB_TOKEN }}
       - name: Stage only immutable model source matching consumer receipts
+        if: steps.selected.outputs.count != '0'
         env:
           SOURCE_RUN: ${{ github.event.workflow_run.id }}
         shell: bash
@@ -56,10 +79,11 @@ jobs:
           python3 tools/stage_verified_llm_tested.py prepare \
             --source "$RUNNER_TEMP/generated" \
             --report "$RUNNER_TEMP/report/p0-local-consumer-report.json" \
-            --spec examples/real-llm-module-trials.json \
+            --spec "$RUNNER_TEMP/selection/selected-trials.json" \
             --root . --run-id "$SOURCE_RUN" \
             --staged-list "$RUNNER_TEMP/llm-test-stage.json"
       - name: Bind source to an immutable Git commit, then publish TESTED evidence
+        if: steps.selected.outputs.count != '0'
         shell: bash
         env:
           SOURCE_RUN: ${{ github.event.workflow_run.id }}
@@ -86,7 +110,7 @@ jobs:
           python3 tools/stage_verified_llm_tested.py finalize \
             --source "$RUNNER_TEMP/generated" \
             --report "$RUNNER_TEMP/report/p0-local-consumer-report.json" \
-            --spec examples/real-llm-module-trials.json \
+            --spec "$RUNNER_TEMP/selection/selected-trials.json" \
             --root . --run-id "$SOURCE_RUN" \
             --staged-list "$RUNNER_TEMP/llm-test-stage.json" \
             --source-commit "$SOURCE_COMMIT"
