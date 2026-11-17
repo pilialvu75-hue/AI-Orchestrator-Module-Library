@@ -1,0 +1,42 @@
+{
+  "proposal": {
+    "acceptance_gates": [
+      "implementation_tests_pass",
+      "security_gates_pass",
+      "regression_tests_pass",
+      "library_contract_pass"
+    ],
+    "capability_id": "diagnostics.logging",
+    "created_at": "2026-11-17T06:37:40.164824Z",
+    "novelty": [
+      "concept:chrome",
+      "concept:cloning",
+      "concept:devtools",
+      "concept:extraction",
+      "concept:hooks",
+      "concept:navigation",
+      "concept:network",
+      "concept:pixel-accurate",
+      "concept:protocol",
+      "topic:ai-agent-tools",
+      "topic:anthropic",
+      "topic:anti-bot-bypass",
+      "topic:automation-tools",
+      "topic:chrome-devtools",
+      "topic:claude-mcp",
+      "topic:cloudflare-bypass",
+      "topic:fastmcp",
+      "topic:mcp-server",
+      "topic:network-interception",
+      "topic:nodriver",
+      "topic:stealth-browser",
+      "topic:undetectable-browser",
+      "topic:web-automation"
+    ],
+    "proposal_id": "8fd43ebcb2f0a37ee21300d3567e7525fafa2c5c9c7889dcd070c9912ad69c07",
+    "status": "PROPOSED"
+  },
+  "schema_version": 1,
+  "source": "AI-Orchestrator-Module-Researcher",
+  "state": "AWAITING_TRIAGE"
+}

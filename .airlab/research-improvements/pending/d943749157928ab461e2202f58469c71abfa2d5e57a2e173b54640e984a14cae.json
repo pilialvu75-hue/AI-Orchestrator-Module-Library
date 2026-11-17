@@ -1,0 +1,27 @@
+{
+  "proposal": {
+    "acceptance_gates": [
+      "implementation_tests_pass",
+      "security_gates_pass",
+      "regression_tests_pass",
+      "library_contract_pass"
+    ],
+    "capability_id": "diagnostics.logging",
+    "created_at": "2026-10-31T12:25:47.025643Z",
+    "novelty": [
+      "topic:html",
+      "topic:java",
+      "topic:javascript",
+      "topic:linux",
+      "topic:nodejs",
+      "topic:python",
+      "topic:react",
+      "topic:security"
+    ],
+    "proposal_id": "d943749157928ab461e2202f58469c71abfa2d5e57a2e173b54640e984a14cae",
+    "status": "PROPOSED"
+  },
+  "schema_version": 1,
+  "source": "AI-Orchestrator-Module-Researcher",
+  "state": "AWAITING_TRIAGE"
+}
