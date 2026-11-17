@@ -67,6 +67,15 @@ def generate_local(instruction: str, output: Path, *,
         raise ValueError("generation directory must start empty")
     if feedback is not None and (not feedback.strip() or library_path not in previous):
         raise ValueError("repair needs existing model source and real diagnostics")
+    # A repair must be genuinely different from the earlier deterministic
+    # answer. Keep the original generation reproducible; vary only the
+    # sampling for evidence-driven retries, never the acceptance contract.
+    attempt_no = 0
+    if feedback is not None:
+        meta_path = output / "generation.json"
+        if not meta_path.is_file():
+            raise ValueError("repair requires original generation metadata")
+        attempt_no = int(json.loads(meta_path.read_text(encoding="utf-8")).get("attempt", 0)) + 1
     messages = [
         {"role": "system", "content":
             "You write one original, compilable PURE DART LIBRARY SOURCE FILE. "
@@ -99,7 +108,11 @@ def generate_local(instruction: str, output: Path, *,
         data=json.dumps({
             "model": model, "stream": False, "format": "json",
             "keep_alive": "5m",
-            "options": {"temperature": 0.1, "seed": 42, "num_predict": 1800},
+            "options": {
+                "temperature": 0.1 if attempt_no == 0 else 0.32,
+                "seed": 42 if attempt_no == 0 else 42 + attempt_no * 101,
+                "num_predict": 1800,
+            },
             "messages": messages,
         }).encode("utf-8"),
         headers={"Content-Type": "application/json"}, method="POST")
@@ -126,7 +139,7 @@ def generate_local(instruction: str, output: Path, *,
     metadata = output / "generation.json"
     if metadata.is_file():
         prior = json.loads(metadata.read_text(encoding="utf-8"))
-    attempt = int(prior.get("attempt", 0)) + 1 if feedback else 0
+    attempt = attempt_no
     if feedback:
         records = output / "revisions"
         records.mkdir(exist_ok=True)
