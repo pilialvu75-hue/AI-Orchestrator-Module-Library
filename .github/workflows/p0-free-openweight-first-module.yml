@@ -83,6 +83,8 @@ jobs:
             --spec examples/real-llm-module-trials.json \
             --output "$RUNNER_TEMP/generated" --generate
       - name: Run model's Dart tests plus separate independent Dart apps
+        env:
+          MODULE_LLM_LOCAL: ollama
         run: |
           python3 tools/run_real_llm_module_trials.py \
             --spec examples/real-llm-module-trials.json \
