@@ -23,6 +23,7 @@ from library_pipeline import AssetRef, PipelineError, validate_ref
 from library_resolver import sha256_file, tree_sha256
 
 TRUSTED_OWNER_PREFIX = "https://github.com/pilialvu75-hue/"
+TESTED_PUBLIC_UPSTREAM = "https://github.com/dart-lang/core"
 INDEX_SCHEMA = "ai-orchestrator.library-experimental-index.v1"
 PREVIEW_POLICY = "internal-isolated-evaluation-only"
 _SHA40 = re.compile(r"[0-9a-f]{40}\Z")
@@ -57,13 +58,51 @@ def preview_package(root: Path, asset_id: str, version: str) -> dict[str, Any]:
             "only concrete local modules can use experimental packaging")
     provenance = manifest.get("provenance") or {}
     repository = provenance.get("source_repository")
-    require(isinstance(repository, str)
-            and repository.startswith(TRUSTED_OWNER_PREFIX)
-            and bool(repository[len(TRUSTED_OWNER_PREFIX):])
-            and "/" not in repository[len(TRUSTED_OWNER_PREFIX):]
-            and isinstance(provenance.get("source_commit"), str)
-            and _SHA40.fullmatch(provenance["source_commit"]) is not None,
-            "experimental source must be pinned in an Aivexus-owned repository")
+    internal_source = (
+        isinstance(repository, str)
+        and repository.startswith(TRUSTED_OWNER_PREFIX)
+        and bool(repository[len(TRUSTED_OWNER_PREFIX):])
+        and "/" not in repository[len(TRUSTED_OWNER_PREFIX):]
+    )
+    public_dart_source = (
+        repository == TESTED_PUBLIC_UPSTREAM
+        and provenance.get("origin") == "researcher"
+        and provenance.get("license") == "BSD-3-Clause"
+    )
+    require(
+        (internal_source or public_dart_source)
+        and isinstance(provenance.get("source_commit"), str)
+        and _SHA40.fullmatch(provenance["source_commit"]) is not None,
+        "experimental source must be pinned in an Aivexus-owned repository or verified public Dart upstream",
+    )
+    if public_dart_source:
+        # Original upstream copyright must accompany every redistributed
+        # experimental source bundle. No independent security approval implied.
+        license_file = base / "provenance" / "LICENSE"
+        vendor = base / "payload" / "src" / "vendor"
+        require(
+            license_file.is_file() and not license_file.is_symlink()
+            and 0 < license_file.stat().st_size <= 2 * 1024 * 1024
+            and vendor.is_dir() and not vendor.is_symlink(),
+            "public Dart source requires original license and vendored upstream",
+        )
+        license_bytes = license_file.read_bytes()
+        verified_vendor_license = False
+        for source_license in vendor.glob("*/LICENSE"):
+            if (source_license.is_file() and not source_license.is_symlink()
+                    and source_license.read_bytes() == license_bytes):
+                verified_vendor_license = True
+                break
+        require(verified_vendor_license,
+                "public Dart upstream license does not match materialized source")
+        payload_ref = manifest.get("payload") or {}
+        require(
+            payload_ref.get("type") == "repository_path"
+            and payload_ref.get("path") == "payload/src"
+            and payload_ref.get("upstream_repository") == TESTED_PUBLIC_UPSTREAM
+            and payload_ref.get("upstream_commit") == provenance["source_commit"],
+            "public Dart source must bind its payload to the original upstream commit",
+        )
     # Dependencies are declared as requirements, not automatically installed
     # or executed. Requiring zero dependencies would block real modules before
     # the isolated Cantiere builder can even attempt integration tests.
