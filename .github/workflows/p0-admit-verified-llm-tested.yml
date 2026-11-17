@@ -36,19 +36,19 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: p0-free-openweight-dart-source
-          path: \${{ runner.temp }}/generated
-          run-id: \${{ github.event.workflow_run.id }}
-          github-token: \${{ secrets.GITHUB_TOKEN }}
+          path: ${{ runner.temp }}/generated
+          run-id: ${{ github.event.workflow_run.id }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
       - name: Retrieve completed real independent consumer report
         uses: actions/download-artifact@v4
         with:
           name: p0-free-openweight-consumer-report
-          path: \${{ runner.temp }}/report
-          run-id: \${{ github.event.workflow_run.id }}
-          github-token: \${{ secrets.GITHUB_TOKEN }}
+          path: ${{ runner.temp }}/report
+          run-id: ${{ github.event.workflow_run.id }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
       - name: Stage only immutable model source matching consumer receipts
         env:
-          SOURCE_RUN: \${{ github.event.workflow_run.id }}
+          SOURCE_RUN: ${{ github.event.workflow_run.id }}
         shell: bash
         run: |
           set -euo pipefail
@@ -62,7 +62,7 @@ jobs:
       - name: Bind source to an immutable Git commit, then publish TESTED evidence
         shell: bash
         env:
-          SOURCE_RUN: \${{ github.event.workflow_run.id }}
+          SOURCE_RUN: ${{ github.event.workflow_run.id }}
         run: |
           set -euo pipefail
           python3 - <<'PY'

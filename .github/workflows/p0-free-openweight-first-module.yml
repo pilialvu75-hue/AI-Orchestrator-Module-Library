@@ -10,6 +10,9 @@ on:
   push:
     branches: [main]
     paths:
+      # Changes to the TESTED publisher must be followed by a fresh
+      # credential-free real-model run so publish failures are actually fixed.
+      - '.github/workflows/p0-admit-verified-llm-tested.yml'
       - 'tools/generate_local_ollama_candidate.py'
       - 'tools/run_real_llm_module_trials.py'
       - 'examples/real-llm-module-trials.json'
