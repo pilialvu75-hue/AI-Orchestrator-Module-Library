@@ -13,6 +13,9 @@ permissions:
 jobs:
   validate:
     runs-on: ubuntu-24.04
+    env:
+      # Public trust anchor only; required to validate signed reviewed assets.
+      LIBRARY_SECURITY_REVIEW_PUBLIC_KEY_PEM: ${{ vars.LIBRARY_SECURITY_REVIEW_PUBLIC_KEY_PEM }}
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
