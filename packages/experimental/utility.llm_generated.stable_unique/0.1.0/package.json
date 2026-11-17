@@ -1,0 +1,79 @@
+{
+  "schema": "ai-orchestrator.library-module-package-envelope.v1",
+  "package": {
+    "schema": "ai-orchestrator.library-module-package.v1",
+    "asset_id": "utility.llm_generated.stable_unique",
+    "version": "0.1.0",
+    "pin": "utility.llm_generated.stable_unique@0.1.0",
+    "tier": "sandbox_preview",
+    "status": "tested",
+    "certified": false,
+    "availability": "experimental",
+    "usage_policy": "internal-isolated-evaluation-only",
+    "capabilities": [
+      "utility.llm_generated.stable_unique"
+    ],
+    "contracts": [
+      "utility.llm_generated.stable_unique.v1"
+    ],
+    "targets": [
+      "linux"
+    ],
+    "files": [
+      {
+        "source_path": "payload/src/generation.json",
+        "target_path": "generation.json",
+        "content": "{\"acceptance\": \"independently pre-authored contract\", \"adaptation\": \"generic-static-api-forwarders-only\", \"adapter_forwarders\": 1, \"attempt\": 0, \"code_source_sha256\": \"5b4d3e2a213ec7d4f1dc3ad732097557bcfd78921e778e2dd926d927f8193a62\", \"eval_count\": 104, \"generator\": \"aivexus-llm-candidate-v1\", \"inference_backend\": \"local_open_weight_no_api_key\", \"instruction\": \"Create an ORIGINAL reusable PURE DART module named aivexus_stable_unique for Dart SDK >=3.3.0 <4.0.0. In lib/stable_unique.dart implement the single PUBLIC TOP-LEVEL function List<int> uniqueStable(List<int> input). Return a NEW List<int> containing each distinct integer from input exactly once in the order of its FIRST appearance; do not sort or otherwise modify the original input list. All signed integers are valid, including zero, negative values and duplicates; an empty list returns an empty list. Examples: [3,3,-1,3,2,-1,0,2,0] => [3,-1,2,0]; [5,5,5] => [5]; [] => []. Use only standard Dart core types (List, Set and loops are available); no third-party packages, IO, networking, shell, FFI, or asynchronous behavior. IMPORTANT DART: implement a real TOP-LEVEL function with exactly this name/signature (not an instance method, not class-only), and never invoke String or collection methods that Dart doesn't provide. Write COMPLETE functional implementation yourself, not a stub, prewritten template, or source copied from this request. Return only the strict JSON source object required by the system prompt.\", \"model\": \"ollama-local/qwen2.5-coder:3b\", \"packaging\": \"deterministic, no functional implementation\", \"prompt_eval_count\": 423, \"provider_endpoint\": \"http://127.0.0.1:11434/api/chat\", \"repair_diagnostic_sha256\": null, \"status\": \"UNVALIDATED\"}\n"
+      },
+      {
+        "source_path": "payload/src/lib/stable_unique.dart",
+        "target_path": "lib/stable_unique.dart",
+        "content": "class StableUnique {\n  static List<int> uniqueStable(List<int> input) {\n    final Set<int> seen = <int>{};\n    final List<int> result = <int>[];\n\n    for (final int num in input) {\n      if (!seen.contains(num)) {\n        seen.add(num);\n        result.add(num);\n      }\n    }\n\n    return result;\n  }\n}\n\nList<int> uniqueStable(List<int> input) => StableUnique.uniqueStable(input);\n"
+      },
+      {
+        "source_path": "payload/src/pubspec.yaml",
+        "target_path": "pubspec.yaml",
+        "content": "name: aivexus_stable_unique\nversion: 0.1.0\npublish_to: none\nenvironment:\n  sdk: '>=3.3.0 <4.0.0'\ndev_dependencies:\n  test: ^1.25.0\n"
+      },
+      {
+        "source_path": "payload/src/test/independent_contract_test.dart",
+        "target_path": "test/independent_contract_test.dart",
+        "content": "import 'package:aivexus_stable_unique/stable_unique.dart';\nimport 'package:test/test.dart';\n\nvoid main() {\n  test('independent contract, not model-authored', () {\n    final original = <int>[3, 3, -1, 3, 2, -1, 0, 2, 0];\n    final before = List<int>.from(original);\n    final result = uniqueStable(original);\n    if (result.toString() != '[3, -1, 2, 0]')\n      throw StateError('stable distinct order failed: $result');\n    if (original.toString() != before.toString())\n      throw StateError('input mutated');\n    if (identical(result, original))\n      throw StateError('result is not a new list');\n    if (uniqueStable(<int>[]).isNotEmpty)\n      throw StateError('empty input failed');\n    if (uniqueStable(<int>[5, 5, 5]).toString() != '[5]')\n      throw StateError('duplicate removal failed');\n    if (uniqueStable(<int>[-2, 7, -2, 7, 1]).toString() != '[-2, 7, 1]')\n      throw StateError('negative number order failed');\n    print('PASS: independent consumer of Qwen-generated stable-unique module');\n  });\n}\n"
+      }
+    ],
+    "requirements": [
+      {
+        "kind": "distributionRestriction",
+        "description": "Isolated internal tests only. No production, release, redistribution, or automatic privileged execution; license and security certification pending.",
+        "required": true
+      },
+      {
+        "kind": "manualReview",
+        "description": "No privilege, release or redistribution authorized.",
+        "required": false
+      },
+      {
+        "kind": "manualReview",
+        "description": "Only public Linux runner real-model Dart and independent consumer passed; no Android or production host proof.",
+        "required": false
+      }
+    ],
+    "integrity": {
+      "manifest_sha256": "8be7430593d404d8cd0b8d01d6c66cbc8eb2597dcc9fa0110ab64ecda17638ad",
+      "module_tree_sha256": "2897557a6698e6dbdf794c5b547fa4795eae9256197d68a7aa9d9c610c0edb4e",
+      "payload_sha256": "3f87e5e27e43baaa9f089cb0d26eb36821d2b86ebbd5e1a36cbfdb3dd40584fe",
+      "test_report_sha256": "4e1e85ba6fc0db1ab1f3deb2d5219c8ef1048d9740e4ed123ecd819f15d5edfa"
+    },
+    "source": {
+      "payload_type": "repository_path",
+      "source_repository": "https://github.com/pilialvu75-hue/AI-Orchestrator-Module-Library",
+      "source_commit": "19b8dc55c421c7e8233ce0d5bfd8d5090c571c0f"
+    },
+    "review": {
+      "license_verified": false,
+      "security_reviewed": false,
+      "production_approved": false
+    }
+  },
+  "package_sha256": "0da4742d7ed1cd47ee5e27b6ec7a2ed041baf8ad0589414171dcc0a0dc61dc5f"
+}

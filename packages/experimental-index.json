@@ -74,6 +74,13 @@
       "production_approved": false
     },
     {
+      "pin": "utility.llm_generated.stable_unique@0.1.0",
+      "path": "packages/experimental/utility.llm_generated.stable_unique/0.1.0/package.json",
+      "package_sha256": "0da4742d7ed1cd47ee5e27b6ec7a2ed041baf8ad0589414171dcc0a0dc61dc5f",
+      "tier": "sandbox_preview",
+      "production_approved": false
+    },
+    {
       "pin": "utility.path_operations.external.dartlang.path@0.1.0",
       "path": "packages/experimental/utility.path_operations.external.dartlang.path/0.1.0/package.json",
       "package_sha256": "05a0cfc295a7f3240ad32de23ac5e975959a361d21220c1566e0b9d316cf8a45",
