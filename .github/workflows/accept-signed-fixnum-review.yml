@@ -34,6 +34,18 @@ jobs:
           fetch-depth: 0
           submodules: false
 
+      - name: Refuse certification while main lacks GitHub branch protection
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          PROTECTED="$(gh api "/repos/${GITHUB_REPOSITORY}/branches/main" --jq '.protected')"
+          test "$PROTECTED" = "true" || {
+            echo "BLOCKED: main is unprotected; independent reviewer code can be changed without governance"
+            exit 1
+          }
+
       - name: Require independently configured reviewer trust anchor
         shell: bash
         run: |

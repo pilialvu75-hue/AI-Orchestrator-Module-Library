@@ -1,0 +1,144 @@
+name: Keyless technical review evidence for TESTED fixnum (not certification)
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'tools/library_fixnum_technical_review.py'
+      - 'tests/test_library_fixnum_technical_review.py'
+      - '.github/workflows/fixnum-keyless-technical-review.yml'
+      - 'intake/utility.int64_arithmetic.external.dartlang.fixnum/**'
+  workflow_dispatch:
+  schedule:
+    - cron: '17 5 * * *'
+
+# The automated evidence audit has NO repository write permission, no
+# access to any reviewer signing key, and NEVER runs untrusted Dart code.
+permissions:
+  contents: read
+
+concurrency:
+  group: fixnum-keyless-technical-review
+  cancel-in-progress: true
+
+jobs:
+  technical-evidence:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 12
+    permissions:
+      contents: read
+      id-token: write
+      attestations: write
+      artifact-metadata: write
+    env:
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - name: Check out trusted source without credentials
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          persist-credentials: false
+          submodules: false
+
+      - name: Regenerate real source and vulnerability evidence
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 tools/autonomous_public_dart_review.py --root . \
+            --output "$RUNNER_TEMP/requests.json"
+          python3 tools/autonomous_public_dart_osv_scan.py \
+            --requests "$RUNNER_TEMP/requests.json" \
+            --output "$RUNNER_TEMP/osv.json"
+          python3 tools/library_independent_dart_static_audit.py --root . \
+            --requests "$RUNNER_TEMP/requests.json" \
+            --output "$RUNNER_TEMP/static.json"
+          python3 tools/library_independent_review_preflight.py \
+            --requests "$RUNNER_TEMP/requests.json" \
+            --evidence "$RUNNER_TEMP/osv.json" \
+            --static-audit "$RUNNER_TEMP/static.json" \
+            --output "$RUNNER_TEMP/preflight.json"
+
+      - name: Verify actual historical CI run via GitHub API
+        shell: bash
+        run: |
+          set -euo pipefail
+          gh api "/repos/${GITHUB_REPOSITORY}/actions/runs/41015199646" \
+            --jq '{id,head_sha,name,conclusion,status,event}' \
+            > "$RUNNER_TEMP/ci.json"
+          gh api "/repos/${GITHUB_REPOSITORY}/branches/main" --jq '.protected' \
+            > "$RUNNER_TEMP/main-protected.json"
+
+      - name: Recompute exact evidence and test technical policy
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 -m unittest discover -s tests \
+            -p 'test_library_fixnum_technical_review.py' -v
+          python3 tools/library_fixnum_technical_review.py --root . \
+            --requests "$RUNNER_TEMP/requests.json" \
+            --evidence "$RUNNER_TEMP/osv.json" \
+            --static-audit "$RUNNER_TEMP/static.json" \
+            --preflight "$RUNNER_TEMP/preflight.json" \
+            --ci "$RUNNER_TEMP/ci.json" \
+            --output "$RUNNER_TEMP/fixnum-technical-review.json"
+          python3 - <<'PY'
+          import json, os
+          from pathlib import Path
+          root = Path(os.environ["RUNNER_TEMP"])
+          result = json.loads((root / "fixnum-technical-review.json").read_text())
+          protected = json.loads((root / "main-protected.json").read_text())
+          assert type(protected) is bool
+          assert result["certification_authorized"] is False
+          assert result["technical_evidence_checked"] is True
+          assert "PROTECTED_REVIEWER_SIGNATURE_REQUIRED" in result["open_blockers"]
+          if not protected:
+              print("WARNING: main is unprotected. This evidence cannot be trusted as independent authorization.")
+          print("TECHNICAL_EVIDENCE_READY / CERTIFICATION_BLOCKED")
+          PY
+
+      - name: Sign technical report provenance via GitHub OIDC (never an approval)
+        id: signed
+        uses: actions/attest@v4
+        with:
+          subject-path: ${{ runner.temp }}/fixnum-technical-review.json
+          predicate-type: 'https://github.com/pilialvu75-hue/AI-Orchestrator-Module-Library/predicates/fixnum-technical-review/v1'
+          predicate-path: ${{ runner.temp }}/fixnum-technical-review.json
+
+      - name: Independently verify signed artifact and exact workflow identity
+        shell: bash
+        run: |
+          set -euo pipefail
+          gh attestation verify "$RUNNER_TEMP/fixnum-technical-review.json" \
+            --repo "$GITHUB_REPOSITORY" \
+            --bundle "${{ steps.signed.outputs.bundle-path }}" \
+            --cert-identity "https://github.com/${GITHUB_REPOSITORY}/.github/workflows/fixnum-keyless-technical-review.yml@refs/heads/main" \
+            --predicate-type 'https://github.com/pilialvu75-hue/AI-Orchestrator-Module-Library/predicates/fixnum-technical-review/v1' \
+            --format json > "$RUNNER_TEMP/verified-attestation.json"
+          python3 - <<'PY'
+          import json, os
+          from pathlib import Path
+          base = Path(os.environ["RUNNER_TEMP"])
+          report = json.loads((base / "fixnum-technical-review.json").read_text())
+          verified = json.loads((base / "verified-attestation.json").read_text())
+          assert isinstance(verified, list) and verified
+          assert any(row.get("verificationResult", {}).get("statement", {}).get("predicate") == report
+                     for row in verified), "Sigstore verified subject has a different review predicate"
+          assert report["certification_authorized"] is False
+          print("PASS: authenticated technical evidence; no certification approval")
+          PY
+
+      - name: Preserve technical findings and authenticated evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: fixnum-technical-review-NOT-CERTIFIED-${{ github.run_id }}
+          path: |
+            ${{ runner.temp }}/fixnum-technical-review.json
+            ${{ runner.temp }}/main-protected.json
+            ${{ runner.temp }}/ci.json
+            ${{ runner.temp }}/osv.json
+            ${{ runner.temp }}/static.json
+            ${{ runner.temp }}/preflight.json
+            ${{ steps.signed.outputs.bundle-path }}
+          if-no-files-found: ignore
+          retention-days: 14

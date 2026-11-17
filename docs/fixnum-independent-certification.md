@@ -60,3 +60,35 @@ L'integrazione iniziale è dimostrata su **Linux/Dart**; Windows, Android e
 macOS devono disporre di collaudi propri prima di dichiarare supporto reale.
 Il flusso successivo alla consegna dell'approvazione è automatico; una
 autorizzazione indipendente non può essere inventata dal produttore.
+
+## Evidenze tecniche firmate in autonomia (senza certificazione)
+
+Il workflow `fixnum-keyless-technical-review.yml`, attivo su `main`,
+a richiesta e giornalmente, ricostruisce l'intero handoff da sorgenti
+materializzati: controlla la licenza originale identica alla copia vendor,
+gli hash sorgente, l'inventario SBOM, il risultato di una nuova scansione
+OSV, l'analisi statica e l'identità dell'esecuzione CI storica recuperata
+direttamente dalle API GitHub. Il risultato è
+`TECHNICAL_EVIDENCE_READY_PENDING_INDEPENDENT_REVIEW`, **mai**
+`APPROVED` né `CERTIFIED`.
+
+GitHub Actions usa `actions/attest@v4` per produrre una attestazione
+Sigstore *delle prove tecniche* e verifica il bundle con
+`gh attestation verify` contro l'identità **esatta** del workflow
+`fixnum-keyless-technical-review.yml@refs/heads/main`. È un documento
+crittograficamente autenticato riguardo a chi ha prodotto le prove;
+**non** è una firma indipendente di security approval.
+
+### Prerequisito operativo di governance
+
+Alla verifica del 17 novembre 2026, `main` risulta **non protetto**
+(`GET /repos/.../branches/main: protected=false`) e non sono state
+trovate ruleset attive. Il workflow di accettazione firmata rifiuta ora
+qualsiasi promozione in queste condizioni. Un amministratore deve
+configurare in GitHub le regole di `main`: pull request obbligatorie,
+approvazioni indipendenti e check CI richiesti, senza bypass per i
+produttori del candidato. Prima di definire realmente autonoma la
+certificazione, occorre anche stabilire se la policy di sicurezza
+consenta una decisione automatica indipendente e come renderne
+immutabile/controllabile l'identità. Non creare approvazioni
+retroattive o chiavi fittizie per oltrepassare questo requisito.
