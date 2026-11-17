@@ -17,6 +17,13 @@ on:
       - "tools/validate_library.py"
       - ".github/workflows/certify-intake.yml"
   workflow_dispatch:
+  # A TESTED source is committed by GITHUB_TOKEN, which does NOT emit a
+  # second push event. Resume certification from the successful first-party
+  # intake publisher instead of silently stranding the new module.
+  workflow_run:
+    workflows:
+      - Publish real-model consumer-PASS modules as TESTED sandbox intake
+    types: [completed]
 
 permissions:
   contents: write
@@ -27,6 +34,14 @@ concurrency:
 
 jobs:
   certify:
+    # Trust only completed publisher runs from this repository's main branch.
+    # A PR/fork/failed source workflow must not run write-enabled promotion.
+    if: >-
+      github.event_name != 'workflow_run' ||
+      (github.event.workflow_run.conclusion == 'success' &&
+       github.event.workflow_run.head_branch == 'main' &&
+       github.event.workflow_run.head_repository.full_name == github.repository &&
+       github.event.workflow_run.event == 'workflow_run')
     runs-on: ubuntu-24.04
     timeout-minutes: 10
     env:
