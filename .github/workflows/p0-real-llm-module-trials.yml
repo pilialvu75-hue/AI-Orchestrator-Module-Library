@@ -4,6 +4,7 @@ on:
   pull_request:
     paths:
       - 'tools/run_real_llm_module_trials.py'
+      - 'tools/select_next_llm_trials.py'
       - 'examples/real-llm-module-trials.json'
       - '.github/workflows/p0-real-llm-module-trials.yml'
   workflow_dispatch:
@@ -37,15 +38,46 @@ jobs:
           sys.path.insert(0, 'tools')
           from run_real_llm_module_trials import read_trials
           trials = read_trials(Path('examples/real-llm-module-trials.json'))
-          assert len({t['instruction'] for t in trials}) == 2
-          assert len({t['package_name'] for t in trials}) == 2
-          print('PASS: two distinct natural-language contracts; no generated Dart source in this workflow')
+          assert len(trials) >= 2
+          assert len({t['instruction'] for t in trials}) == len(trials)
+          assert len({t['package_name'] for t in trials}) == len(trials)
+          print(f'PASS: {len(trials)} independent natural-language contracts; no generated Dart implementations')
           PY
 
-  generate:
+  select-new-trials:
     needs: contract
     if: >-
       github.event_name != 'pull_request' &&
+      vars.AIVEXUS_P0_LLM_ZERO_COST_ENABLED == 'true'
+    runs-on: ubuntu-24.04
+    outputs:
+      count: ${{ steps.choose.outputs.count }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Pick bounded original contracts
+        id: choose
+        shell: bash
+        env:
+          ROTATE: ${{ github.run_number }}
+        run: |
+          set -euo pipefail
+          python3 tools/select_next_llm_trials.py --root . \
+            --offset "$ROTATE" --output "$RUNNER_TEMP/selected-trials.json"
+          count="$(python3 -c "import json,os; print(len(json.load(open(os.environ['RUNNER_TEMP']+'/selected-trials.json'))['trials']))")"
+          echo "count=$count" >> "$GITHUB_OUTPUT"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: p0-optional-provider-selected-trials
+          path: ${{ runner.temp }}/selected-trials.json
+          retention-days: 7
+
+  generate:
+    needs: select-new-trials
+    if: >-
+      github.event_name != 'pull_request' &&
+      needs.select-new-trials.outputs.count != '0' &&
       vars.AIVEXUS_P0_LLM_ZERO_COST_ENABLED == 'true'
     runs-on: ubuntu-24.04
     timeout-minutes: 8
@@ -53,14 +85,19 @@ jobs:
       - uses: actions/checkout@v4
         with:
           persist-credentials: false
-      - name: Generate two original Dart packages using real model responses
+      - uses: actions/download-artifact@v4
+        with:
+          name: p0-optional-provider-selected-trials
+          path: ${{ runner.temp }}/selection
+      - run: python3 tools/select_next_llm_trials.py --root . --verify "$RUNNER_TEMP/selection/selected-trials.json"
+      - name: Generate up to two original Dart packages using real model responses
         env:
           MODULE_LLM_API_KEY: ${{ secrets.MODULE_LLM_API_KEY }}
           MODULE_LLM_ENDPOINT: ${{ vars.MODULE_LLM_ENDPOINT }}
           MODULE_LLM_MODEL: ${{ vars.MODULE_LLM_MODEL }}
         run: |
           python3 tools/run_real_llm_module_trials.py \
-            --spec examples/real-llm-module-trials.json \
+            --spec "$RUNNER_TEMP/selection/selected-trials.json" \
             --output "$RUNNER_TEMP/generated" --generate
       - name: Preserve original model output for independent execution
         uses: actions/upload-artifact@v4
@@ -83,12 +120,16 @@ jobs:
       - uses: dart-lang/setup-dart@v1
       - uses: actions/download-artifact@v4
         with:
+          name: p0-optional-provider-selected-trials
+          path: ${{ runner.temp }}/selection
+      - uses: actions/download-artifact@v4
+        with:
           name: p0-real-model-dart-source-unvalidated
           path: ${{ runner.temp }}/generated
       - name: Execute model-generated code and independent real consumers
         run: |
           python3 tools/run_real_llm_module_trials.py \
-            --spec examples/real-llm-module-trials.json \
+            --spec "$RUNNER_TEMP/selection/selected-trials.json" \
             --output "$RUNNER_TEMP/generated" \
             --report "$RUNNER_TEMP/real-model-consumer-report.json" --verify
       - name: Publish actual TESTED-only trial result (no admission)
