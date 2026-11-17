@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-17T19:40:00Z",
+  "updated_at": "2026-11-17T19:59:00Z",
   "contracts": [
     {
       "capability_id": "auth.session",
@@ -312,6 +312,14 @@
       "contract_version": "1.0",
       "status": "draft",
       "description": "Pure Dart top-level ASCII slug formatting of text for local identifiers and URL path segments: lowercasing A-Z, replacing non-alphanumeric runs with single hyphens, removing leading/trailing separators; no external I/O or production approval.",
+      "replacement": null
+    },
+    {
+      "capability_id": "utility.llm_generated.stable_unique",
+      "contract_id": "utility.llm_generated.stable_unique.v1",
+      "contract_version": "1.0",
+      "status": "draft",
+      "description": "Pure Dart integer list deduplication preserving first occurrence order and not mutating input; independently tested sandbox only, not production-approved.",
       "replacement": null
     }
   ]
