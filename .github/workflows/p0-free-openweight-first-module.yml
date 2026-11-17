@@ -1,0 +1,106 @@
+name: P0 free open-weight module generation with real independent consumer
+
+on:
+  pull_request:
+    paths:
+      - 'tools/generate_local_ollama_candidate.py'
+      - 'tools/run_real_llm_module_trials.py'
+      - 'examples/real-llm-module-trials.json'
+      - '.github/workflows/p0-free-openweight-first-module.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'tools/generate_local_ollama_candidate.py'
+      - 'tools/run_real_llm_module_trials.py'
+      - 'examples/real-llm-module-trials.json'
+      - '.github/workflows/p0-free-openweight-first-module.yml'
+  workflow_dispatch:
+  schedule:
+    - cron: '17 6 * * 2,5'
+
+# Runs only on a standard Linux runner in a PUBLIC repository (GitHub's
+# documented zero-cost tier). No hosted paid models, secrets, write token,
+# deployment or app installation; model-generated code is untrusted.
+permissions:
+  contents: read
+
+concurrency:
+  group: aivexus-p0-free-openweight-module-generation
+  cancel-in-progress: false
+
+jobs:
+  contract:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 3
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Verify P0 model runner and independent consumer contracts
+        run: |
+          python3 -m py_compile tools/generate_local_ollama_candidate.py tools/run_real_llm_module_trials.py
+          python3 - <<'PY'
+          import sys
+          from pathlib import Path
+          sys.path.insert(0, "tools")
+          from run_real_llm_module_trials import read_trials
+          trials = read_trials(Path("examples/real-llm-module-trials.json"))
+          assert len(trials) == 2
+          print("P0 contracts valid; this is NOT a model execution or module certification")
+          PY
+
+  real-model-and-consumers:
+    needs: contract
+    if: github.event_name != 'pull_request'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: dart-lang/setup-dart@v1
+      - name: Install Ollama and start loopback-only model server
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl -fsSL https://ollama.com/install.sh -o "$RUNNER_TEMP/ollama-install.sh"
+          sh "$RUNNER_TEMP/ollama-install.sh"
+          export OLLAMA_HOST=127.0.0.1:11434
+          ollama serve > "$RUNNER_TEMP/ollama-server.log" 2>&1 &
+          for i in $(seq 1 50); do
+            if curl -fsS http://127.0.0.1:11434/api/tags > /dev/null; then break; fi
+            sleep 2
+          done
+          curl --fail --silent --show-error http://127.0.0.1:11434/api/tags >/dev/null
+          ollama --version
+          ollama pull qwen2.5-coder:3b
+          ollama show qwen2.5-coder:3b
+      - name: Generate two new Dart modules with genuine local Qwen inference
+        env:
+          MODULE_LLM_LOCAL: ollama
+        run: |
+          python3 tools/run_real_llm_module_trials.py \
+            --spec examples/real-llm-module-trials.json \
+            --output "$RUNNER_TEMP/generated" --generate
+      - name: Run model's Dart tests plus separate independent Dart apps
+        run: |
+          python3 tools/run_real_llm_module_trials.py \
+            --spec examples/real-llm-module-trials.json \
+            --output "$RUNNER_TEMP/generated" \
+            --report "$RUNNER_TEMP/p0-local-consumer-report.json" --verify
+      - name: Preserve actual generated source and unvalidated metadata
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: p0-free-openweight-dart-source
+          path: ${{ runner.temp }}/generated/
+          if-no-files-found: ignore
+          retention-days: 7
+      - name: Preserve real consumer evidence or explicit failure reason
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: p0-free-openweight-consumer-report
+          path: ${{ runner.temp }}/p0-local-consumer-report.json
+          if-no-files-found: ignore
+          retention-days: 7
