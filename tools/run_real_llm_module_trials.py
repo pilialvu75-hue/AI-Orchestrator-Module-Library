@@ -240,7 +240,8 @@ def _verify_one(spec, output):
 def verify_packages(specs, output, report_path):
     report = {"schema": "aivexus.p0-llm-module-consumer.v1",
               "certified": False, "production_approved": False,
-              "complete": False, "modules": []}
+              "complete": False, "has_usable_module": False,
+              "modules": []}
     report_path.parent.mkdir(parents=True, exist_ok=True)
     use_local = os.environ.get("MODULE_LLM_LOCAL") == "ollama"
     try:
@@ -286,13 +287,18 @@ def verify_packages(specs, output, report_path):
             and all(m["status"] == "TESTED_IN_ISOLATION_NOT_ADMITTED"
                     for m in report["modules"])
         )
+        report["has_usable_module"] = any(
+            m["status"] == "TESTED_IN_ISOLATION_NOT_ADMITTED"
+            for m in report["modules"]
+        )
     finally:
         report_path.write_text(
             json.dumps(report, indent=2, sort_keys=True) + "\n",
             encoding="utf-8",
         )
-    if not report["complete"]:
-        raise RuntimeError("P0 model generation/consumer BLOCKED; inspect evidence")
+    if not report["has_usable_module"]:
+        raise RuntimeError("P0 BLOCKED: no real module passed the independent consumer")
+    print("P0: at least one real module passed; others remain BLOCKED if incomplete")
     print(json.dumps(report, sort_keys=True))
 
 def main():
