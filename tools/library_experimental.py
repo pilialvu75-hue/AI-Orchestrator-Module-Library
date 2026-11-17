@@ -66,7 +66,7 @@ def preview_package(root: Path, asset_id: str, version: str) -> dict[str, Any]:
     )
     public_dart_source = (
         repository == TESTED_PUBLIC_UPSTREAM
-        and provenance.get("origin") == "researcher"
+        and provenance.get("origin") in {"researcher", "open_source"}
         and provenance.get("license") == "BSD-3-Clause"
     )
     require(
