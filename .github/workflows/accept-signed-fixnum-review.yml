@@ -7,20 +7,21 @@ on:
       - 'review-submissions/utility.int64_arithmetic.external.dartlang.fixnum/0.1.0/**'
   workflow_dispatch:
 
-# No candidate code is executed in this trusted job. The trusted Ed25519 public
-# key must exist in repository Actions variables; never read a key from intake.
+# Only trusted Library metadata tools run with a write token; never execute
+# candidate Dart code in this job. The independent signature is mandatory.
 permissions:
   contents: read
 
+# Serialize with the existing Library promotion workflow.
 concurrency:
-  group: accept-independent-fixnum-review-main
+  group: module-library-certification-main
   cancel-in-progress: false
 
 jobs:
-  stage-review:
+  verify-stage-promote:
     if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-24.04
-    timeout-minutes: 10
+    timeout-minutes: 12
     permissions:
       contents: write
     env:
@@ -33,16 +34,16 @@ jobs:
           fetch-depth: 0
           submodules: false
 
-      - name: Require preconfigured independent reviewer trust anchor
+      - name: Require independently configured reviewer trust anchor
         shell: bash
         run: |
           set -euo pipefail
           test -n "${LIBRARY_SECURITY_REVIEW_PUBLIC_KEY_PEM:-}" || {
-            echo "BLOCKED: protected independent reviewer public key not configured"
+            echo "BLOCKED: independent reviewer public key not configured"
             exit 1
           }
 
-      - name: Verify exact signed review and stage TESTED intake
+      - name: Authenticate exact review and stage TESTED intake
         shell: bash
         run: |
           set -euo pipefail
@@ -58,29 +59,60 @@ jobs:
             --output-dir "$RUNNER_TEMP/verified-review" \
             --apply
 
-      - name: Confirm the exact module passes real promotion checks
+      - name: Verify exact candidate and promote under the same trusted job
         shell: bash
         run: |
           set -euo pipefail
           python3 tools/library_pipeline.py promote \
             utility.int64_arithmetic.external.dartlang.fixnum 0.1.0 --dry-run
-          python3 tools/validate_library.py
-          python3 -m unittest discover -s tests -p 'test_library_signed_review_stage.py' -v
+          python3 tools/library_pipeline.py promote \
+            utility.int64_arithmetic.external.dartlang.fixnum 0.1.0
+          # GITHUB_TOKEN commits cannot trigger a second push workflow.
+          # Export certified packages here, before committing, to avoid an
+          # unverified TESTED intermediate state on main.
+          python3 tools/library_autopilot.py --report "$RUNNER_TEMP/autopilot.json"
 
-      - name: Commit independently verified evidence to main
+      - name: Validate catalog, package export and signed evidence
         shell: bash
         run: |
           set -euo pipefail
-          git add -- intake/utility.int64_arithmetic.external.dartlang.fixnum/0.1.0
+          python3 tools/validate_library.py
+          python3 tools/validate_history.py
+          python3 tools/validate_lifecycle.py
+          python3 tools/validate_snapshot.py catalog/offline-snapshot.json
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+          pin = 'utility.int64_arithmetic.external.dartlang.fixnum@0.1.0'
+          index = json.loads(Path('packages/index.json').read_text())
+          matches = [p for p in index.get('packages', []) if p.get('pin') == pin]
+          assert len(matches) == 1, 'certified fixnum was not exported'
+          path = Path(matches[0]['path'])
+          assert path.is_file() and path.is_relative_to('packages')
+          package = json.loads(path.read_text())['package']
+          assert package['pin'] == pin and package['availability'] == 'active'
+          files = {f['target_path'] for f in package['files']}
+          assert {'pubspec.yaml', 'tool/self_test.dart', 'lib/aivexus_external.dart'} <= files
+          module = json.loads(Path(
+              'modules/utility.int64_arithmetic.external.dartlang.fixnum/0.1.0/manifest.json'
+          ).read_text())
+          assert module['status'] == 'certified' and module['security']['reviewed'] is True
+          print('PASS: signed source promoted, exported and eligible for isolated consumer proof')
+          PY
+
+      - name: Commit verified certified package and catalog
+        shell: bash
+        run: |
+          set -euo pipefail
+          git add -A -- catalog modules intake packages
           test -n "$(git diff --cached --name-only)" || {
-            echo "BLOCKED: no new signed evidence"
+            echo "BLOCKED: no certified package or catalog changes"
             exit 1
           }
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git commit -m "library: stage signed independent fixnum review"
+          git commit -m "library: certify independently approved fixnum and export package"
           git push origin HEAD:main
 
-# The existing certify-intake.yml reacts to the intake commit and separately
-# validates, promotes, exports and tests the candidate. This workflow never
-# writes directly to catalog/modules/packages or calls them certified.
+# A separate workflow_run consumer checks the actual exported package without
+# write credentials. A signed review never serves as consumer execution proof.
