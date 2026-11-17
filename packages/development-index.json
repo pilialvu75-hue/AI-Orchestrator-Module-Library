@@ -1,0 +1,41 @@
+{
+  "formal_security_license_review_deferred": true,
+  "packages": [
+    {
+      "consumer_workflow_run_id": 44184354633,
+      "development_qualified": true,
+      "independent_export_consumer": "PASS",
+      "license_approved": false,
+      "package_sha256": "b00844091532b305cb1c0bc67449ccf43eacf2d1da99dfcacf45480ebc81db9c",
+      "path": "packages/experimental/utility.llm_generated.delta_codec/0.1.0/package.json",
+      "pin": "utility.llm_generated.delta_codec@0.1.0",
+      "production_approved": false,
+      "production_certified": false,
+      "security_reviewed": false,
+      "status": "development_qualified",
+      "validated_targets": [
+        "linux"
+      ]
+    },
+    {
+      "consumer_workflow_run_id": 44184354633,
+      "development_qualified": true,
+      "independent_export_consumer": "PASS",
+      "license_approved": false,
+      "package_sha256": "0da4742d7ed1cd47ee5e27b6ec7a2ed041baf8ad0589414171dcc0a0dc61dc5f",
+      "path": "packages/experimental/utility.llm_generated.stable_unique/0.1.0/package.json",
+      "pin": "utility.llm_generated.stable_unique@0.1.0",
+      "production_approved": false,
+      "production_certified": false,
+      "security_reviewed": false,
+      "status": "development_qualified",
+      "validated_targets": [
+        "linux"
+      ]
+    }
+  ],
+  "policy": "internal-development-only-no-production-or-redistribution",
+  "production_approved": false,
+  "production_certified": false,
+  "schema": "aivexus.library.development-qualified-index.v1"
+}
