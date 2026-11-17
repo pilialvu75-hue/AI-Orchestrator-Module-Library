@@ -2,12 +2,21 @@ name: Prove certified Dart package consumer execution
 
 on:
   workflow_dispatch:
+  # A certified export commit may contain [skip ci]. workflow_run still
+  # launches a separate unprivileged consumer after the trusted autopilot.
+  workflow_run:
+    workflows: ['Certify eligible intake']
+    types: [completed]
 
 # The consumer executes third-party source; it must never hold write credentials.
 permissions: {}
 
 jobs:
   consumer:
+    if: >-
+      github.event_name != 'workflow_run' ||
+      (github.event.workflow_run.conclusion == 'success' &&
+       github.event.workflow_run.head_branch == 'main')
     runs-on: ubuntu-24.04
     timeout-minutes: 15
     steps:
