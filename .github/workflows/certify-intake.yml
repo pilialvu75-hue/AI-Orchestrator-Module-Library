@@ -8,6 +8,7 @@ on:
       - "schemas/module.manifest.schema.json"
       - "tools/library_autopilot.py"
       - "tools/library_experimental.py"
+      - "tools/library_experimental.py"
       - "tools/library_pipeline.py"
       - "tools/library_evidence.py"
       - "tools/library_review_attestation.py"
