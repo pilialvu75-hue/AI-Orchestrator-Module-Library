@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-09-14T19:55:00Z",
+  "updated_at": "2026-11-17T19:14:00Z",
   "contracts": [
     {
       "capability_id": "auth.session",
@@ -288,6 +288,22 @@
       "contract_version": "1.0",
       "status": "draft",
       "description": "Dart StreamQueue sequential asynchronous stream consumption; no network, device access or background service implied.",
+      "replacement": null
+    },
+    {
+      "capability_id": "utility.llm_generated.delta_codec",
+      "contract_id": "utility.llm_generated.delta_codec.v1",
+      "contract_version": "1.0",
+      "status": "draft",
+      "description": "Pure Dart integer-delta encoding and decoding, top-level encodeDeltas/decodeDeltas APIs, empty and negative input handling, no external I/O or production approval.",
+      "replacement": null
+    },
+    {
+      "capability_id": "utility.llm_generated.interval_union",
+      "contract_id": "utility.llm_generated.interval_union.v1",
+      "contract_version": "1.0",
+      "status": "draft",
+      "description": "Pure Dart normalization of half-open integer intervals with overlap and adjacency merging, a new ordered output list and input immutability; no external I/O or production approval.",
       "replacement": null
     }
   ]
