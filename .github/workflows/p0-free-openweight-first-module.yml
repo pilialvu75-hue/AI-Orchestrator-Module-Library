@@ -130,7 +130,7 @@ jobs:
               `Result: **${status}** — ${marker}`,
               'Inference: Qwen2.5-Coder 3B via loopback Ollama on a public standard runner (no paid API).',
               'This is TESTED-IN-ISOLATION only; no automatic Library admission, certification or Cantiere installation.'
-            ].join('\\n\\n');
+            ].join('\n\n');
             await github.rest.issues.createComment({
               ...context.repo, issue_number: 324, body: message
             });
