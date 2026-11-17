@@ -1,0 +1,77 @@
+name: P0 execute published LLM TESTED module from Library sandbox package
+
+on:
+  pull_request:
+    paths:
+      - 'tools/consume_published_llm_preview.py'
+      - '.github/workflows/p0-consume-published-llm-tested.yml'
+  workflow_run:
+    workflows:
+      - Publish real-model consumer-PASS modules as TESTED sandbox intake
+    types: [completed]
+
+permissions:
+  contents: read
+
+jobs:
+  syntax:
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - run: python3 -m py_compile tools/consume_published_llm_preview.py
+
+  real-published-consumer:
+    if: >-
+      github.event_name == 'workflow_run' &&
+      github.event.workflow_run.conclusion == 'success' &&
+      github.event.workflow_run.head_branch == 'main'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          persist-credentials: false
+      - uses: dart-lang/setup-dart@v1
+      - name: Run real independent Dart app from exported Library package only
+        run: |
+          python3 tools/consume_published_llm_preview.py \
+            --root . \
+            --report "$RUNNER_TEMP/p0-published-consumer-report.json"
+      - name: Preserve actual exported-consumer proof
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: p0-exported-llm-consumer-report
+          path: \${{ runner.temp }}/p0-published-consumer-report.json
+          if-no-files-found: error
+          retention-days: 7
+
+  receipt:
+    if: >-
+      always() && github.event_name == 'workflow_run' &&
+      needs.real-published-consumer.result != 'skipped'
+    needs: real-published-consumer
+    runs-on: ubuntu-24.04
+    permissions:
+      issues: write
+    steps:
+      - uses: actions/github-script@v7
+        with:
+          script: |
+            const state = '\${{ needs.real-published-consumer.result }}';
+            const text = [
+              '### P0 Library exported-module independent consumer (#324)',
+              \`Run: https://github.com/\${context.repo.owner}/\${context.repo.repo}/actions/runs/\${context.runId}\`,
+              \`Status: **\${state}**\`,
+              state === 'success'
+                ? 'PASS: independent Dart app imported and exercised the actual published TESTED sandbox package.'
+                : 'BLOCKED: exported package consumer not proven; check run artifact/logs.',
+              'No CERTIFIED promotion or production installation.'
+            ].join('\n\n');
+            await github.rest.issues.createComment({
+              ...context.repo, issue_number: 324, body: text
+            });
