@@ -5,7 +5,9 @@ on:
   # A certified export commit may contain [skip ci]. workflow_run still
   # launches a separate unprivileged consumer after the trusted autopilot.
   workflow_run:
-    workflows: ['Certify eligible intake']
+    workflows:
+      - 'Certify eligible intake'
+      - 'Accept independent signed fixnum review and stage certification'
     types: [completed]
 
 # The consumer executes third-party source; it must never hold write credentials.
