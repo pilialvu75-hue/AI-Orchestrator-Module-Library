@@ -107,6 +107,44 @@ def entry_from_proof(root, existing, pin, digest, run_id):
     }
 
 
+def reconcile_existing(root, prior):
+    """Revalidate every previously published development pin after exports.
+
+    A formally promoted/deleted sandbox pin must disappear from this index.
+    No new development qualification is ever granted without a real consumer.
+    """
+    require(prior.get("schema") == SCHEMA and
+            prior.get("production_certified") is False and
+            prior.get("production_approved") is False,
+            "unrecognized development index")
+    existing = prior.get("packages")
+    require(isinstance(existing, list), "invalid development index entries")
+    available = lookup(root)
+    rows = {}
+    for record in existing:
+        require(isinstance(record, dict), "invalid existing development record")
+        pin, digest = record.get("pin"), record.get("package_sha256")
+        require(isinstance(pin, str) and pin not in rows, "duplicate development pin")
+        if pin not in available:
+            continue
+        require(record.get("development_qualified") is True and
+                record.get("independent_export_consumer") == "PASS" and
+                type(record.get("consumer_workflow_run_id")) is int and
+                record.get("production_certified") is False and
+                record.get("production_approved") is False,
+                "previous development record not independently verified")
+        rows[pin] = entry_from_proof(
+            root, available[pin], pin, digest, record["consumer_workflow_run_id"])
+    return {
+        "schema": SCHEMA,
+        "policy": "internal-development-only-no-production-or-redistribution",
+        "formal_security_license_review_deferred": True,
+        "production_certified": False,
+        "production_approved": False,
+        "packages": [rows[pin] for pin in sorted(rows)],
+    }
+
+
 def qualify(root, consumer_path, run_id):
     require(type(run_id) is int and run_id > 0, "invalid trusted consumer run ID")
     receipt = load(consumer_path)
@@ -118,31 +156,12 @@ def qualify(root, consumer_path, run_id):
     items = receipt.get("items")
     require(isinstance(items, list) and items, "no real exported-module proof")
     reference = lookup(root)
-    rows = {}
     destination = root / "packages" / "development-index.json"
     if destination.is_file():
-        prior = load(destination)
-        require(prior.get("schema") == SCHEMA and
-                prior.get("production_certified") is False and
-                prior.get("production_approved") is False,
-                "unrecognized existing development index")
-        old = prior.get("packages")
-        require(isinstance(old, list), "existing development entries invalid")
-        for record in old:
-            require(isinstance(record, dict), "invalid old development entry")
-            pin, digest = record.get("pin"), record.get("package_sha256")
-            require(isinstance(pin, str) and pin not in rows,
-                    "duplicated old development pin")
-            if pin not in reference:
-                continue
-            require(record.get("development_qualified") is True and
-                    record.get("independent_export_consumer") == "PASS" and
-                    type(record.get("consumer_workflow_run_id")) is int and
-                    record.get("production_certified") is False and
-                    record.get("production_approved") is False,
-                    "old development record lost its evidence")
-            rows[pin] = entry_from_proof(
-                root, reference[pin], pin, digest, record["consumer_workflow_run_id"])
+        rows = {row["pin"]: row for row in
+                reconcile_existing(root, load(destination))["packages"]}
+    else:
+        rows = {}
     seen = set()
     for item in items:
         require(isinstance(item, dict), "invalid independent consumer result")
