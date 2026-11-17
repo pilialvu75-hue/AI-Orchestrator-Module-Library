@@ -4,6 +4,20 @@
   "certified": false,
   "packages": [
     {
+      "pin": "diagnostics.logging.dartlang.logging_adapter@0.1.0",
+      "path": "packages/experimental/diagnostics.logging.dartlang.logging_adapter/0.1.0/package.json",
+      "package_sha256": "57351b8e99c525d5d1117cd7480ebb93ba1f0ec6faa64b7b05abfe7f18e73438",
+      "tier": "sandbox_preview",
+      "production_approved": false
+    },
+    {
+      "pin": "diagnostics.logging.dartlang.logging_adapter@0.1.1",
+      "path": "packages/experimental/diagnostics.logging.dartlang.logging_adapter/0.1.1/package.json",
+      "package_sha256": "8789ea2e61f66fa1e49e008858016bae59f19fe7fecb2be9349aa9c9aa5c8a46",
+      "tier": "sandbox_preview",
+      "production_approved": false
+    },
+    {
       "pin": "diagnostics.logging.library.privacy_events@0.1.0",
       "path": "packages/experimental/diagnostics.logging.library.privacy_events/0.1.0/package.json",
       "package_sha256": "f36be29147f99aa8c61003beabd40dabd5c13399df962898eb2c646fb5eed722",
@@ -32,6 +46,34 @@
       "production_approved": false
     },
     {
+      "pin": "utility.async_stream_queue.external.dartlang.async@0.1.0",
+      "path": "packages/experimental/utility.async_stream_queue.external.dartlang.async/0.1.0/package.json",
+      "package_sha256": "9a6f4dde9ff10c5c3b7cbc77ab73c2d5d6fce9cf48efccf44de1755edc50258d",
+      "tier": "sandbox_preview",
+      "production_approved": false
+    },
+    {
+      "pin": "utility.cli_arguments.external.dartlang.args@0.1.0",
+      "path": "packages/experimental/utility.cli_arguments.external.dartlang.args/0.1.0/package.json",
+      "package_sha256": "ab8990866a6125f06dd438f56421b13ab16326571920c211dfa55a49dcdf7b64",
+      "tier": "sandbox_preview",
+      "production_approved": false
+    },
+    {
+      "pin": "utility.int64_arithmetic.external.dartlang.fixnum@0.1.0",
+      "path": "packages/experimental/utility.int64_arithmetic.external.dartlang.fixnum/0.1.0/package.json",
+      "package_sha256": "d07d8fbc1776b640df699ed0196ca33daa64ddb42f7bd2ec372ed06b7b622759",
+      "tier": "sandbox_preview",
+      "production_approved": false
+    },
+    {
+      "pin": "utility.path_operations.external.dartlang.path@0.1.0",
+      "path": "packages/experimental/utility.path_operations.external.dartlang.path/0.1.0/package.json",
+      "package_sha256": "05a0cfc295a7f3240ad32de23ac5e975959a361d21220c1566e0b9d316cf8a45",
+      "tier": "sandbox_preview",
+      "production_approved": false
+    },
+    {
       "pin": "vision.image_label_postprocessing.firstparty.cantiere@0.1.0",
       "path": "packages/experimental/vision.image_label_postprocessing.firstparty.cantiere/0.1.0/package.json",
       "package_sha256": "b858b49e07aee624a3d9d888336984614e95098a082ced5b5613b513289ab949",
@@ -46,30 +88,5 @@
       "production_approved": false
     }
   ],
-  "blocked": [
-    {
-      "pin": "diagnostics.logging.dartlang.logging_adapter@0.1.0",
-      "reason": "experimental source must be pinned in an Aivexus-owned repository"
-    },
-    {
-      "pin": "diagnostics.logging.dartlang.logging_adapter@0.1.1",
-      "reason": "experimental source must be pinned in an Aivexus-owned repository"
-    },
-    {
-      "pin": "utility.async_stream_queue.external.dartlang.async@0.1.0",
-      "reason": "experimental source must be pinned in an Aivexus-owned repository"
-    },
-    {
-      "pin": "utility.cli_arguments.external.dartlang.args@0.1.0",
-      "reason": "experimental source must be pinned in an Aivexus-owned repository"
-    },
-    {
-      "pin": "utility.int64_arithmetic.external.dartlang.fixnum@0.1.0",
-      "reason": "experimental source must be pinned in an Aivexus-owned repository"
-    },
-    {
-      "pin": "utility.path_operations.external.dartlang.path@0.1.0",
-      "reason": "experimental source must be pinned in an Aivexus-owned repository"
-    }
-  ]
+  "blocked": []
 }
