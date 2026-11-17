@@ -5,8 +5,6 @@ on:
     branches: [main]
     paths:
       - 'review-submissions/utility.int64_arithmetic.external.dartlang.fixnum/0.1.0/**'
-      - 'tools/library_signed_review_stage.py'
-      - '.github/workflows/accept-signed-fixnum-review.yml'
   workflow_dispatch:
 
 # No candidate code is executed in this trusted job. The trusted Ed25519 public
