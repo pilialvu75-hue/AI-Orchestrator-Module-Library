@@ -7,6 +7,7 @@ Ed25519 sign-off before making any changes to intake.
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
 import os
 import shutil
@@ -57,6 +58,10 @@ def stage(root: Path, asset_id: str, version: str, sbom_path: Path,
             or not isinstance(sbom.get("components"), list)
             or not sbom["components"]):
         raise ValueError("a populated CycloneDX SBOM is required")
+    if asset_id == "utility.int64_arithmetic.external.dartlang.fixnum" and not any(
+            isinstance(row, dict) and row.get("purl") == "pkg:pub/fixnum@1.1.1"
+            for row in sbom["components"]):
+        raise ValueError("reviewed SBOM must contain the exact fixnum 1.1.1 dependency")
 
     try:
         attestation = json.loads(_input_file(attestation_path, "attestation"))
@@ -65,7 +70,7 @@ def stage(root: Path, asset_id: str, version: str, sbom_path: Path,
     if not isinstance(attestation, dict) or not isinstance(attestation.get("statement"), dict):
         raise ValueError("independent signed review statement required")
     statement = attestation["statement"]
-    if statement.get("decision") != "APPROVED" or statement.get("known_vulnerabilities") != 0:
+    if statement.get("decision") != "APPROVED" or type(statement.get("known_vulnerabilities")) is not int or statement["known_vulnerabilities"] != 0:
         raise ValueError("independent reviewer did not approve a zero-vulnerability candidate")
 
     security = dict(manifest["security"])
@@ -81,7 +86,7 @@ def stage(root: Path, asset_id: str, version: str, sbom_path: Path,
         "asset_id": asset_id, "version": version,
         "source_commit": (manifest.get("provenance") or {}).get("source_commit"),
         "payload_sha256": (manifest.get("payload") or {}).get("sha256"),
-        "sbom_sha256": __import__("hashlib").sha256(sbom_bytes).hexdigest(),
+        "sbom_sha256": hashlib.sha256(sbom_bytes).hexdigest(),
         "reviewed": True, "reviewed_at": statement.get("reviewed_at"),
         "reviewer_id": statement.get("reviewer_id"),
         "known_vulnerabilities": 0, "decision": "APPROVED",
