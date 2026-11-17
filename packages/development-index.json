@@ -2,6 +2,22 @@
   "formal_security_license_review_deferred": true,
   "packages": [
     {
+      "consumer_workflow_run_id": 44192299335,
+      "development_qualified": true,
+      "independent_export_consumer": "PASS",
+      "license_approved": false,
+      "package_sha256": "3ab9518c0039d781a421acac56d829ccf09df65a1ea5c07b29db1ec6eadf912a",
+      "path": "packages/experimental/utility.llm_generated.cumulative_max/0.1.0/package.json",
+      "pin": "utility.llm_generated.cumulative_max@0.1.0",
+      "production_approved": false,
+      "production_certified": false,
+      "security_reviewed": false,
+      "status": "development_qualified",
+      "validated_targets": [
+        "linux"
+      ]
+    },
+    {
       "consumer_workflow_run_id": 44184354633,
       "development_qualified": true,
       "independent_export_consumer": "PASS",
@@ -9,6 +25,22 @@
       "package_sha256": "b00844091532b305cb1c0bc67449ccf43eacf2d1da99dfcacf45480ebc81db9c",
       "path": "packages/experimental/utility.llm_generated.delta_codec/0.1.0/package.json",
       "pin": "utility.llm_generated.delta_codec@0.1.0",
+      "production_approved": false,
+      "production_certified": false,
+      "security_reviewed": false,
+      "status": "development_qualified",
+      "validated_targets": [
+        "linux"
+      ]
+    },
+    {
+      "consumer_workflow_run_id": 44192299335,
+      "development_qualified": true,
+      "independent_export_consumer": "PASS",
+      "license_approved": false,
+      "package_sha256": "02601d536c3a0eb13730b0e9f917bd70c5e676ef978b49ad523517edd3d9b6ba",
+      "path": "packages/experimental/utility.llm_generated.first_subsequence/0.1.0/package.json",
+      "pin": "utility.llm_generated.first_subsequence@0.1.0",
       "production_approved": false,
       "production_certified": false,
       "security_reviewed": false,
