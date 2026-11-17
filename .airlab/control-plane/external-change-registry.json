@@ -16,7 +16,7 @@
     {
       "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
       "baseline_at": "2026-10-03T16:20:00Z",
-      "cursor_merged_at": "2026-11-17T10:55:20Z"
+      "cursor_merged_at": "2026-11-17T16:33:02Z"
     },
     {
       "repository": "pilialvu75-hue/Ai-orchestrator-diagnostics",
@@ -7242,6 +7242,74 @@
       "url": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/cd9b67c46c710f2047c606402a5fbffbc99a22e1",
       "match_ref": null,
       "reconciliation": null
+    },
+    {
+      "incident_id": "b77dd751b73bbbb7d2dc",
+      "status": "UNRECONCILED",
+      "detected_at": "2026-11-17T16:39:15Z",
+      "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
+      "kind": "direct_commit",
+      "pull_request": null,
+      "merge_sha": null,
+      "commit_sha": "f5a7559326402af9f15cc89dfa926b9188e3207f",
+      "head_branch": null,
+      "base_branch": "main",
+      "change_at": "2026-11-17T10:57:08Z",
+      "title": "test(cantiere): launch direct Dart VM PID for reliable cross-process crash proof (#781)",
+      "url": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/f5a7559326402af9f15cc89dfa926b9188e3207f",
+      "match_ref": null,
+      "reconciliation": null
+    },
+    {
+      "incident_id": "be29c1ff2e7818e9175f",
+      "status": "UNRECONCILED",
+      "detected_at": "2026-11-17T16:39:15Z",
+      "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
+      "kind": "direct_commit",
+      "pull_request": null,
+      "merge_sha": null,
+      "commit_sha": "da0216d2b999d614b2250efd5e06363e136335f7",
+      "head_branch": null,
+      "base_branch": "main",
+      "change_at": "2026-11-17T10:57:25Z",
+      "title": "test(cantiere): honor Windows Path casing when locating direct Dart VM (#781)",
+      "url": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/da0216d2b999d614b2250efd5e06363e136335f7",
+      "match_ref": null,
+      "reconciliation": null
+    },
+    {
+      "incident_id": "e4a71d6a569adda11111",
+      "status": "UNRECONCILED",
+      "detected_at": "2026-11-17T16:39:15Z",
+      "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
+      "kind": "direct_commit",
+      "pull_request": null,
+      "merge_sha": null,
+      "commit_sha": "736ec0ddfe5acd895d2fc703354da53b21f5365c",
+      "head_branch": null,
+      "base_branch": "main",
+      "change_at": "2026-11-17T14:51:15Z",
+      "title": "test(cantiere): reject Dart wrappers and symlinks to scripts before kill probe (#781)",
+      "url": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/736ec0ddfe5acd895d2fc703354da53b21f5365c",
+      "match_ref": null,
+      "reconciliation": null
+    },
+    {
+      "incident_id": "765597d4cbff2e45cf32",
+      "status": "UNRECONCILED",
+      "detected_at": "2026-11-17T16:39:15Z",
+      "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
+      "kind": "unmatched_merge_commit",
+      "pull_request": null,
+      "merge_sha": null,
+      "commit_sha": "1f5cbb3362bfa2fecc13a8daefe89f9ca6ea794a",
+      "head_branch": null,
+      "base_branch": "main",
+      "change_at": "2026-11-17T16:33:02Z",
+      "title": "Merge pull request #1183 from pilialvu75-hue/reconcile/durable-file-authority-process-test-781-20261117",
+      "url": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/1f5cbb3362bfa2fecc13a8daefe89f9ca6ea794a",
+      "match_ref": null,
+      "reconciliation": null
     }
   ],
   "reconciliation_history": [
@@ -7252,35 +7320,35 @@
       "note": "Known motivating example for CP-HARDEN-03. It predates this incremental detector and is not retroactively reopened."
     }
   ],
-  "last_scan_at": "2026-11-17T15:39:09Z",
+  "last_scan_at": "2026-11-17T16:39:15Z",
   "scan_health": {
     "pilialvu75-hue/AI-Orchestrator-Module-Library": {
       "state": "OK",
-      "last_success_at": "2026-11-17T15:39:09Z",
+      "last_success_at": "2026-11-17T16:39:15Z",
       "last_failure_at": null,
       "error_code": null
     },
     "pilialvu75-hue/Ai-orchestrator-riserva": {
       "state": "OK",
-      "last_success_at": "2026-11-17T15:39:09Z",
+      "last_success_at": "2026-11-17T16:39:15Z",
       "last_failure_at": "2026-10-28T07:39:58Z",
       "error_code": null
     },
     "pilialvu75-hue/Ai-orchestrator-diagnostics": {
       "state": "OK",
-      "last_success_at": "2026-11-17T15:39:09Z",
+      "last_success_at": "2026-11-17T16:39:15Z",
       "last_failure_at": "2026-10-28T07:39:58Z",
       "error_code": null
     },
     "pilialvu75-hue/AI-Orchestrator-Module-Researcher": {
       "state": "OK",
-      "last_success_at": "2026-11-17T15:39:09Z",
+      "last_success_at": "2026-11-17T16:39:15Z",
       "last_failure_at": "2026-10-28T07:39:58Z",
       "error_code": null
     },
     "pilialvu75-hue/Ai_orchestrator-prova": {
       "state": "OK",
-      "last_success_at": "2026-11-17T15:39:09Z",
+      "last_success_at": "2026-11-17T16:39:15Z",
       "last_failure_at": "2026-10-28T07:39:58Z",
       "error_code": null
     }
