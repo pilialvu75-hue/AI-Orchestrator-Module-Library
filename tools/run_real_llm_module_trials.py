@@ -99,7 +99,12 @@ def generate_packages(specs, output):
         # Every module goes through the SAME generator, no prewritten Dart
         # source, no canned response, and never a fallback to running_total.
         if use_local:
-            generate_local(spec["instruction"], folder, model=model)
+            generate_local(
+                spec["instruction"], folder, model=model,
+                package_name=spec["package_name"],
+                library_path=spec["library_path"],
+                acceptance_source=spec["consumer_source"],
+            )
         else:
             generate(spec["instruction"], folder, endpoint=endpoint, model=model, api_key=token)
         check_source(folder, spec)
@@ -191,6 +196,9 @@ def verify_packages(specs, output, report_path):
                         generate_local(
                             spec["instruction"], output / spec["id"],
                             model="qwen2.5-coder:3b", feedback=failure,
+                            package_name=spec["package_name"],
+                            library_path=spec["library_path"],
+                            acceptance_source=spec["consumer_source"],
                         )
                     except (ValueError, RuntimeError, OSError) as repair_error:
                         failure = ("LLM repair failed: " +
