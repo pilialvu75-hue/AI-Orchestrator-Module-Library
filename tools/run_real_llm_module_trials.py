@@ -80,10 +80,16 @@ def check_source(package_dir, spec):
 
 
 def generate_packages(specs, output):
+    use_local = os.environ.get("MODULE_LLM_LOCAL") == "ollama"
     endpoint = os.environ.get("MODULE_LLM_ENDPOINT", "")
     model = os.environ.get("MODULE_LLM_MODEL", "")
     token = os.environ.get("MODULE_LLM_API_KEY", "")
-    if not token or not model or not endpoint.startswith("https://"):
+    if use_local:
+        # The model is actually executed inside an isolated GitHub runner,
+        # without credentials, paid inference or any pretrained source fixtures.
+        from generate_local_ollama_candidate import generate_local
+        model = "qwen2.5-coder:3b"
+    elif not token or not model or not endpoint.startswith("https://"):
         raise RuntimeError("BLOCKED: configure real HTTPS LLM endpoint/model and a zero-cost-approved API credential")
     if output.exists() and any(output.iterdir()):
         raise RuntimeError("generation output must start empty")
@@ -92,7 +98,10 @@ def generate_packages(specs, output):
         folder = output / spec["id"]
         # Every module goes through the SAME generator, no prewritten Dart
         # source, no canned response, and never a fallback to running_total.
-        generate(spec["instruction"], folder, endpoint=endpoint, model=model, api_key=token)
+        if use_local:
+            generate_local(spec["instruction"], folder, model=model)
+        else:
+            generate(spec["instruction"], folder, endpoint=endpoint, model=model, api_key=token)
         check_source(folder, spec)
         print(f"LLM_SOURCE_GENERATED {spec['id']} provider_model={model}", flush=True)
 
