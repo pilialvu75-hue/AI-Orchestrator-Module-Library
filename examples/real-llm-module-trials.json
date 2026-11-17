@@ -1,0 +1,20 @@
+{
+  "schema": "aivexus.module-llm-trials.v1",
+  "policy": "ISOLATED_NONCERTIFIED_NO_AUTOMATIC_RELEASE",
+  "trials": [
+    {
+      "id": "interval_union",
+      "package_name": "aivexus_interval_union",
+      "library_path": "lib/interval_union.dart",
+      "instruction": "Create a NEW original, pure-Dart reusable package named aivexus_interval_union, SDK >=3.3.0 <4.0.0, code at lib/interval_union.dart and behavioral tests under test/. Implement exactly the public function List<(int, int)> normalizeIntervals(List<(int, int)> input). Input ranges are half-open [start,end), start<end required, otherwise throw ArgumentError. Return a fresh list of ranges sorted by start and merged if overlapping OR touching, do not mutate input. Empty input yields empty list. No external runtime dependencies, network, IO, shell or FFI. Return only the strict JSON files object specified by the system prompt.",
+      "consumer_source": "import 'package:aivexus_interval_union/interval_union.dart';\nvoid main() {\n  final input = <(int,int)>[(5, 9), (1, 3), (3, 6), (15, 16)];\n  final original = List<(int,int)>.from(input);\n  final out = normalizeIntervals(input);\n  if (out.length != 2 || out[0] != (1, 9) || out[1] != (15, 16)) throw StateError('merge overlap/touch failed: $out');\n  if (input.toString() != original.toString()) throw StateError('input was mutated');\n  if (normalizeIntervals(<(int,int)>[]).isNotEmpty) throw StateError('empty input failed');\n  var rejected = false;\n  try { normalizeIntervals(<(int,int)>[(4, 4)]); } on ArgumentError { rejected = true; }\n  if (!rejected) throw StateError('invalid half-open range accepted');\n  print('PASS: independently consumed LLM-generated interval module');\n}\n"
+    },
+    {
+      "id": "delta_codec",
+      "package_name": "aivexus_delta_codec",
+      "library_path": "lib/delta_codec.dart",
+      "instruction": "Create a NEW original, pure-Dart reusable package named aivexus_delta_codec, SDK >=3.3.0 <4.0.0, code at lib/delta_codec.dart and behavioral tests under test/. Implement exactly two public functions: List<int> encodeDeltas(List<int> samples), encoding the first sample unchanged and each later entry as current minus previous; List<int> decodeDeltas(List<int> deltas), reconstructing original sample values. Return fresh lists, never mutate arguments. Empty input gives empty output; negative values must work. No external runtime dependencies, network, IO, shell or FFI. Return only the strict JSON files object specified by the system prompt.",
+      "consumer_source": "import 'package:aivexus_delta_codec/delta_codec.dart';\nvoid main() {\n  final samples = <int>[12, -4, -4, 9, 0];\n  final original = List<int>.from(samples);\n  final encoded = encodeDeltas(samples);\n  if (encoded.toString() != '[12, -16, 0, 13, -9]') throw StateError('encoding failed: $encoded');\n  if (decodeDeltas(encoded).toString() != samples.toString()) throw StateError('decoding failed');\n  if (samples.toString() != original.toString()) throw StateError('input mutated');\n  if (encodeDeltas(<int>[]).isNotEmpty || decodeDeltas(<int>[]).isNotEmpty) throw StateError('empty input failed');\n  print('PASS: independently consumed LLM-generated delta module');\n}\n"
+    }
+  ]
+}
