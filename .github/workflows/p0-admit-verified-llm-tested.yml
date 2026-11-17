@@ -1,0 +1,116 @@
+name: Publish real-model consumer-PASS modules as TESTED sandbox intake
+
+on:
+  workflow_run:
+    workflows:
+      - P0 free open-weight module generation with real independent consumer
+    types: [completed]
+
+# This separate job NEVER executes LLM-authored Dart and never sees an LLM API
+# key. A successful first-party main workflow and source-bound evidence are
+# mandatory. The only destination is noncertified intake + sandbox packages.
+permissions:
+  contents: write
+  actions: read
+
+concurrency:
+  group: module-library-certification-main
+  cancel-in-progress: false
+
+jobs:
+  stage-tested:
+    if: >-
+      github.event.workflow_run.conclusion == 'success' &&
+      github.event.workflow_run.head_branch == 'main' &&
+      github.event.workflow_run.head_repository.full_name == github.repository &&
+      github.event.workflow_run.event != 'pull_request'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 12
+    steps:
+      - name: Checkout canonical Library
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+      - name: Retrieve verified original source, not executable code
+        uses: actions/download-artifact@v4
+        with:
+          name: p0-free-openweight-dart-source
+          path: \${{ runner.temp }}/generated
+          run-id: \${{ github.event.workflow_run.id }}
+          github-token: \${{ secrets.GITHUB_TOKEN }}
+      - name: Retrieve completed real independent consumer report
+        uses: actions/download-artifact@v4
+        with:
+          name: p0-free-openweight-consumer-report
+          path: \${{ runner.temp }}/report
+          run-id: \${{ github.event.workflow_run.id }}
+          github-token: \${{ secrets.GITHUB_TOKEN }}
+      - name: Stage only immutable model source matching consumer receipts
+        env:
+          SOURCE_RUN: \${{ github.event.workflow_run.id }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 -m py_compile tools/stage_verified_llm_tested.py
+          python3 tools/stage_verified_llm_tested.py prepare \
+            --source "$RUNNER_TEMP/generated" \
+            --report "$RUNNER_TEMP/report/p0-local-consumer-report.json" \
+            --spec examples/real-llm-module-trials.json \
+            --root . --run-id "$SOURCE_RUN" \
+            --staged-list "$RUNNER_TEMP/llm-test-stage.json"
+      - name: Bind source to an immutable Git commit, then publish TESTED evidence
+        shell: bash
+        env:
+          SOURCE_RUN: \${{ github.event.workflow_run.id }}
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import json, os
+          with open(os.environ["RUNNER_TEMP"]+"/llm-test-stage.json") as f:
+              value=json.load(f)
+          if value["modules"]:
+              print("New model-generated sources:", value["modules"])
+          else:
+              print("No new source: already published without overwrite")
+          PY
+          if ! python3 -c "import json,os,sys; s=json.load(open(os.environ['RUNNER_TEMP']+'/llm-test-stage.json')); sys.exit(0 if s['modules'] else 1)"; then
+            echo "All successful modules already staged; no duplicate commit."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add intake
+          git commit -m "library: capture actual Qwen-generated tested source from CI run $SOURCE_RUN"
+          SOURCE_COMMIT="$(git rev-parse HEAD)"
+          python3 tools/stage_verified_llm_tested.py finalize \
+            --source "$RUNNER_TEMP/generated" \
+            --report "$RUNNER_TEMP/report/p0-local-consumer-report.json" \
+            --spec examples/real-llm-module-trials.json \
+            --root . --run-id "$SOURCE_RUN" \
+            --staged-list "$RUNNER_TEMP/llm-test-stage.json" \
+            --source-commit "$SOURCE_COMMIT"
+          python3 tools/validate_library.py
+          python3 tools/validate_history.py
+          python3 tools/validate_lifecycle.py
+          python3 tools/library_experimental.py --export
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+          index=json.loads(Path("packages/experimental-index.json").read_text())
+          for name in ("interval_union", "delta_codec"):
+              pin="utility.llm_generated."+name+"@0.1.0"
+              assert any(row.get("pin")==pin and
+                         row.get("production_approved") is False
+                         for row in index["packages"]), pin
+          assert index["certified"] is False
+          print("PASS: two original modules now consumable from TESTED sandbox packages")
+          PY
+          git add intake packages
+          git commit -m "library: admit consumer-PASS Qwen modules as TESTED sandbox only"
+          git push origin HEAD:main
+      - name: Publish blocked reasons if source/evidence check fails
+        if: failure()
+        run: |
+          echo 'P0 TESTED publication BLOCKED: source integrity or Library validation failed.'
+          echo 'No model-generated code has been run with repository write permissions.'
