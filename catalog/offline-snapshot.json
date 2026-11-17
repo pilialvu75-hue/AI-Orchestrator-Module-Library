@@ -4,7 +4,7 @@
   "catalog_version": "1.0.3",
   "source_state": {
     "catalog_updated_at": "2026-09-17T23:10:06Z",
-    "contracts_updated_at": "2026-09-14T19:55:00Z",
+    "contracts_updated_at": "2026-11-17T19:59:00Z",
     "needs_updated_at": "2026-10-18T11:05:00Z",
     "lifecycle_revision": 0,
     "lifecycle_updated_at": null
@@ -249,6 +249,38 @@
       "contract_version": "1.0",
       "status": "draft",
       "description": "Pure fixed-width integer arithmetic operations; no process execution or external I/O.",
+      "replacement": null
+    },
+    {
+      "capability_id": "utility.llm_generated.ascii_slug",
+      "contract_id": "utility.llm_generated.ascii_slug.v1",
+      "contract_version": "1.0",
+      "status": "draft",
+      "description": "Pure Dart top-level ASCII slug formatting of text for local identifiers and URL path segments: lowercasing A-Z, replacing non-alphanumeric runs with single hyphens, removing leading/trailing separators; no external I/O or production approval.",
+      "replacement": null
+    },
+    {
+      "capability_id": "utility.llm_generated.delta_codec",
+      "contract_id": "utility.llm_generated.delta_codec.v1",
+      "contract_version": "1.0",
+      "status": "draft",
+      "description": "Pure Dart integer-delta encoding and decoding, top-level encodeDeltas/decodeDeltas APIs, empty and negative input handling, no external I/O or production approval.",
+      "replacement": null
+    },
+    {
+      "capability_id": "utility.llm_generated.interval_union",
+      "contract_id": "utility.llm_generated.interval_union.v1",
+      "contract_version": "1.0",
+      "status": "draft",
+      "description": "Pure Dart normalization of half-open integer intervals with overlap and adjacency merging, a new ordered output list and input immutability; no external I/O or production approval.",
+      "replacement": null
+    },
+    {
+      "capability_id": "utility.llm_generated.stable_unique",
+      "contract_id": "utility.llm_generated.stable_unique.v1",
+      "contract_version": "1.0",
+      "status": "draft",
+      "description": "Pure Dart integer list deduplication preserving first occurrence order and not mutating input; independently tested sandbox only, not production-approved.",
       "replacement": null
     },
     {
@@ -1092,5 +1124,5 @@
       ]
     }
   ],
-  "snapshot_sha256": "9baa7ebf288cea4fc6e6955af1359f4e781d81b46bf6a6c3a7a93b8b656e5b02"
+  "snapshot_sha256": "e60712838020663c63953be0334456c78be4fa7eb2d59180d59e688337f6cc6e"
 }
