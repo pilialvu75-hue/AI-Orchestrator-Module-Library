@@ -1,0 +1,101 @@
+name: P0 real-model autonomous Dart modules (two independent consumers)
+
+on:
+  pull_request:
+    paths:
+      - 'tools/run_real_llm_module_trials.py'
+      - 'examples/real-llm-module-trials.json'
+      - '.github/workflows/p0-real-llm-module-trials.yml'
+  workflow_dispatch:
+  schedule:
+    - cron: '17 4 * * 2,5'
+
+# A model is called only if the repository owner has explicitly configured
+# AIVEXUS_P0_LLM_ZERO_COST_ENABLED=true and a genuinely free provider.
+# No paid quota, GitHub Models (retired July 2026), or other automatic billing.
+permissions:
+  contents: read
+
+concurrency:
+  group: aivexus-p0-real-llm-trial
+  cancel-in-progress: false
+
+jobs:
+  contract:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 3
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Check reusable generator input is not a canned Dart template
+        run: |
+          python3 -m py_compile tools/run_real_llm_module_trials.py tools/generate_llm_dart_candidate.py
+          python3 - <<'PY'
+          import sys
+          from pathlib import Path
+          sys.path.insert(0, 'tools')
+          from run_real_llm_module_trials import read_trials
+          trials = read_trials(Path('examples/real-llm-module-trials.json'))
+          assert len({t['instruction'] for t in trials}) == 2
+          assert len({t['package_name'] for t in trials}) == 2
+          print('PASS: two distinct natural-language contracts; no generated Dart source in this workflow')
+          PY
+
+  generate:
+    needs: contract
+    if: >-
+      github.event_name != 'pull_request' &&
+      vars.AIVEXUS_P0_LLM_ZERO_COST_ENABLED == 'true'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Generate two original Dart packages using real model responses
+        env:
+          MODULE_LLM_API_KEY: ${{ secrets.MODULE_LLM_API_KEY }}
+          MODULE_LLM_ENDPOINT: ${{ vars.MODULE_LLM_ENDPOINT }}
+          MODULE_LLM_MODEL: ${{ vars.MODULE_LLM_MODEL }}
+        run: |
+          python3 tools/run_real_llm_module_trials.py \
+            --spec examples/real-llm-module-trials.json \
+            --output "$RUNNER_TEMP/generated" --generate
+      - name: Preserve original model output for independent execution
+        uses: actions/upload-artifact@v4
+        with:
+          name: p0-real-model-dart-source-unvalidated
+          path: ${{ runner.temp }}/generated/
+          if-no-files-found: error
+          retention-days: 7
+
+  verify:
+    needs: generate
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    # No provider token, no repository write permission, no credential-bearing
+    # action steps when executing model-authored Dart source.
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: dart-lang/setup-dart@v1
+      - uses: actions/download-artifact@v4
+        with:
+          name: p0-real-model-dart-source-unvalidated
+          path: ${{ runner.temp }}/generated
+      - name: Execute model-generated code and independent real consumers
+        run: |
+          python3 tools/run_real_llm_module_trials.py \
+            --spec examples/real-llm-module-trials.json \
+            --output "$RUNNER_TEMP/generated" \
+            --report "$RUNNER_TEMP/real-model-consumer-report.json" --verify
+      - name: Publish actual TESTED-only trial result (no admission)
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: p0-real-model-independent-consumer-evidence
+          path: ${{ runner.temp }}/real-model-consumer-report.json
+          if-no-files-found: ignore
+          retention-days: 7
