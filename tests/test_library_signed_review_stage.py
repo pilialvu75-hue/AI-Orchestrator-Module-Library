@@ -168,6 +168,22 @@ class SignedReviewStagingTests(unittest.TestCase):
             self.invoke()
         self.assertFalse((self.base / "evidence").exists())
 
+    def test_archive_or_metadata_reference_never_bypasses_signature_verification(self):
+        original = json.loads((self.base / "manifest.json").read_text())
+        for payload in (
+            {"type": "archive", "path": "payload/src", "sha256": original["payload"]["sha256"]},
+            {"type": "upstream_reference", "upstream_repository": "https://github.com/dart-lang/core",
+             "upstream_commit": self.commit},
+        ):
+            with self.subTest(payload=payload["type"]):
+                altered = json.loads(json.dumps(original))
+                altered["payload"] = payload
+                dump(self.base / "manifest.json", altered)
+                with self.assertRaisesRegex(ValueError, "materialized repository_path"):
+                    self.invoke()
+                self.assertFalse((self.base / "evidence").exists())
+        dump(self.base / "manifest.json", original)
+
     def test_attestation_reviewer_and_decision_tamper_are_rejected(self):
         original = json.loads(self.attestation.read_text())
         for field, value in (("reviewer_id", "attacker"), ("decision", "REJECTED")):
