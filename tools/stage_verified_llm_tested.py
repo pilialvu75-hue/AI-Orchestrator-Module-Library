@@ -48,8 +48,9 @@ def _data(spec_path, report_path, run_id):
               and report.get("production_approved") is False,
               "cannot stage a report with no consumer-PASS module")
     rows = report.get("modules")
-    _required(isinstance(rows, list) and len(rows) == len(specs) == 2,
-              "both specifications must be attempted and reported")
+    _required(isinstance(rows, list) and len(rows) == len(specs)
+              and 1 <= len(specs) <= 2,
+              "all selected new specifications must be attempted and reported")
     by_id = {r.get("id"): r for r in rows if isinstance(r, dict)}
     _required(len(by_id) == len(specs), "duplicate or missing module records")
     passed = {}
