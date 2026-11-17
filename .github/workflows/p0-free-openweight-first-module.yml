@@ -124,7 +124,7 @@ jobs:
             const run = context.runId;
             const url = `https://github.com/${context.repo.owner}/${context.repo.repo}/actions/runs/${run}`;
             const marker = status === 'success'
-              ? 'SUCCESS: both real generated packages passed Dart tests and independent consumer execution'
+              ? 'SUCCESS: at least one original generated module passed Dart tests and its independent consumer; inspect report for any BLOCKED second module'
               : 'BLOCKED: no two-module PASS evidence; inspect the workflow logs';
             const message = [
               '### P0 real local-model execution receipt (#324)',

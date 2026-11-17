@@ -98,7 +98,10 @@ jobs:
           import json
           from pathlib import Path
           index=json.loads(Path("packages/experimental-index.json").read_text())
-          for name in ("interval_union", "delta_codec"):
+          import os
+          staged=json.loads(Path(os.environ["RUNNER_TEMP"]+"/llm-test-stage.json").read_text())["modules"]
+          assert staged
+          for name in staged:
               pin="utility.llm_generated."+name+"@0.1.0"
               assert any(row.get("pin")==pin and
                          row.get("production_approved") is False

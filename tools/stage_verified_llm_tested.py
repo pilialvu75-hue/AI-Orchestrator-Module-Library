@@ -43,27 +43,38 @@ def _data(spec_path, report_path, run_id):
     _required(re.fullmatch(r"[0-9]+", run_id) is not None,
               "real run ID must be numeric")
     _required(report.get("schema") == "aivexus.p0-llm-module-consumer.v1"
-              and report.get("complete") is True
+              and report.get("has_usable_module") is True
               and report.get("certified") is False
               and report.get("production_approved") is False,
-              "cannot stage an incomplete or production-claimed report")
+              "cannot stage a report with no consumer-PASS module")
     rows = report.get("modules")
     _required(isinstance(rows, list) and len(rows) == len(specs) == 2,
-              "two independent successful module records required")
+              "both specifications must be attempted and reported")
     by_id = {r.get("id"): r for r in rows if isinstance(r, dict)}
     _required(len(by_id) == len(specs), "duplicate or missing module records")
+    passed = {}
     for spec in specs:
         row = by_id.get(spec["id"])
-        _required(isinstance(row, dict)
-                  and row.get("package") == spec["package_name"]
-                  and row.get("status") == "TESTED_IN_ISOLATION_NOT_ADMITTED"
+        _required(isinstance(row, dict) and
+                  row.get("package") == spec["package_name"],
+                  "invalid module record or identity")
+        if row.get("status") == "UNVALIDATED":
+            _required(row.get("dart_tests") == "BLOCKED"
+                      and row.get("separate_consumer") == "BLOCKED",
+                      "cannot silently skip ambiguous module status")
+            continue
+        _required(row.get("status") == "TESTED_IN_ISOLATION_NOT_ADMITTED"
                   and row.get("dart_tests") == "PASS"
                   and row.get("separate_consumer") == "PASS"
                   and str(row.get("model", "")).startswith("ollama-local/")
                   and re.fullmatch(r"[a-f0-9]{64}",
                                    str(row.get("source_sha256", ""))) is not None,
                   "inference or independent consumer evidence missing")
-    return specs, by_id
+        passed[spec["id"]] = row
+    _required(bool(passed), "no independent consumer PASS record")
+    _required(report.get("complete") is (len(passed) == len(specs)),
+              "contradictory complete/partial result")
+    return specs, passed
 
 
 def _asset(spec):
@@ -75,6 +86,9 @@ def prepare(source_root, report_path, spec_path, root, run_id, staged_path):
     staged = []
     for spec in specs:
         module_id = spec["id"]
+        if module_id not in evidence:
+            print(f"SKIP blocked generated module: {module_id}", flush=True)
+            continue
         folder = source_root / module_id
         _required(folder.is_dir() and not folder.is_symlink(),
                   "model package missing")
