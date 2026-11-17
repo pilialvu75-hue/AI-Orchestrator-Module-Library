@@ -148,6 +148,20 @@ class SignedReviewStagingTests(unittest.TestCase):
             self.invoke()
         self.assertFalse((self.base / "evidence").exists())
 
+    def test_wrong_dependency_inventory_is_rejected_before_signature(self):
+        sbom = json.loads(self.sbom.read_text())
+        sbom["components"][0]["purl"] = "pkg:pub/unrelated@1.0.0"
+        dump(self.sbom, sbom)
+        with self.assertRaisesRegex(ValueError, "exact fixnum"):
+            self.invoke()
+
+    def test_boolean_known_vulnerabilities_cannot_mean_signed_zero(self):
+        tampered = json.loads(self.attestation.read_text())
+        tampered["statement"]["known_vulnerabilities"] = False
+        dump(self.attestation, tampered)
+        with self.assertRaisesRegex(ValueError, "zero-vulnerability"):
+            self.invoke()
+
     def test_source_tamper_is_rejected(self):
         (self.base / "payload" / "src" / "lib" / "math.dart").write_text("int add(int a,int b)=>0;\n")
         with self.assertRaises(Exception):
