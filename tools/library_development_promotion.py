@@ -155,7 +155,10 @@ def qualify(root, consumer_path, run_id):
                 item.get("certified") is False and
                 item.get("production_approved") is False,
                 "not a real independently executed TESTED package")
-        rows[pin] = entry_from_proof(root, reference[pin], pin, digest, run_id)
+        # Repeated successful consumers must not rewrite the same immutable
+        # development qualification or make another Git commit.
+        if pin not in rows or rows[pin]["package_sha256"] != digest:
+            rows[pin] = entry_from_proof(root, reference[pin], pin, digest, run_id)
     return {
         "schema": SCHEMA,
         "policy": "internal-development-only-no-production-or-redistribution",
