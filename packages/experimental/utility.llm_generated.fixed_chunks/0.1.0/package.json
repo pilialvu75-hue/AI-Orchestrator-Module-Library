@@ -1,0 +1,79 @@
+{
+  "schema": "ai-orchestrator.library-module-package-envelope.v1",
+  "package": {
+    "schema": "ai-orchestrator.library-module-package.v1",
+    "asset_id": "utility.llm_generated.fixed_chunks",
+    "version": "0.1.0",
+    "pin": "utility.llm_generated.fixed_chunks@0.1.0",
+    "tier": "sandbox_preview",
+    "status": "tested",
+    "certified": false,
+    "availability": "experimental",
+    "usage_policy": "internal-isolated-evaluation-only",
+    "capabilities": [
+      "utility.llm_generated.fixed_chunks"
+    ],
+    "contracts": [
+      "utility.llm_generated.fixed_chunks.v1"
+    ],
+    "targets": [
+      "linux"
+    ],
+    "files": [
+      {
+        "source_path": "payload/src/generation.json",
+        "target_path": "generation.json",
+        "content": "{\"acceptance\": \"independently pre-authored contract\", \"adaptation\": \"generic-static-api-forwarders-only\", \"adapter_forwarders\": 1, \"attempt\": 0, \"code_source_sha256\": \"245d7a43e8816fd3560f98b2c385b598dff381e35e2e4becf3c942fb273fb768\", \"eval_count\": 173, \"generator\": \"aivexus-llm-candidate-v1\", \"inference_backend\": \"local_open_weight_no_api_key\", \"instruction\": \"Create an ORIGINAL PURE-DART reusable package named aivexus_fixed_chunks, Dart SDK >=3.3.0 <4.0.0. Implement exactly this PUBLIC TOP-LEVEL Dart function in lib/fixed_chunks.dart: List<List<int>> chunkIntegers(List<int> input, int chunkSize). Partition signed input integers into consecutive independent nonempty chunks of at most chunkSize, preserving order. Last chunk can be shorter. A zero or negative chunkSize throws ArgumentError, including for empty input. Return new lists, do not mutate input. Fully implement working behavior yourself, not a stub. Write reasonable tests under test/. You may use Dart core List, Map, Set, loops and standard library methods only. No third-party runtime dependencies, networking, filesystem, FFI, shell or privileged APIs. Always use valid Dart SDK APIs and compileable types. Return the strict JSON source object requested by the system prompt.\", \"model\": \"ollama-local/qwen2.5-coder:3b\", \"packaging\": \"deterministic, no functional implementation\", \"prompt_eval_count\": 345, \"provider_endpoint\": \"http://127.0.0.1:11434/api/chat\", \"repair_diagnostic_sha256\": null, \"status\": \"UNVALIDATED\"}\n"
+      },
+      {
+        "source_path": "payload/src/lib/fixed_chunks.dart",
+        "target_path": "lib/fixed_chunks.dart",
+        "content": "class FixedChunks {\n  static List<List<int>> chunkIntegers(List<int> input, int chunkSize) {\n    if (chunkSize <= 0) {\n      throw ArgumentError('chunkSize must be greater than zero');\n    }\n    if (input.isEmpty) {\n      return [];\n    }\n\n    List<List<int>> chunks = [];\n    int startIndex = 0;\n\n    while (startIndex < input.length) {\n      int endIndex = startIndex + chunkSize;\n      if (endIndex > input.length) {\n        endIndex = input.length;\n      }\n\n      chunks.add(input.sublist(startIndex, endIndex));\n      startIndex = endIndex;\n    }\n\n    return chunks;\n  }\n}\n\nList<List<int>> chunkIntegers(List<int> input, int chunkSize) =>\n    FixedChunks.chunkIntegers(input, chunkSize);\n"
+      },
+      {
+        "source_path": "payload/src/pubspec.yaml",
+        "target_path": "pubspec.yaml",
+        "content": "name: aivexus_fixed_chunks\nversion: 0.1.0\npublish_to: none\nenvironment:\n  sdk: '>=3.3.0 <4.0.0'\ndev_dependencies:\n  test: ^1.25.0\n"
+      },
+      {
+        "source_path": "payload/src/test/independent_contract_test.dart",
+        "target_path": "test/independent_contract_test.dart",
+        "content": "import 'package:aivexus_fixed_chunks/fixed_chunks.dart';\nimport 'package:test/test.dart';\n\nvoid main() {\n  test('independent contract, not model-authored', () {\n    final d = <int>[1, 2, 3, 4, 5];\n    final before = List<int>.from(d);\n    if (chunkIntegers(d, 2).toString() != '[[1, 2], [3, 4], [5]]')\n      throw StateError('partition');\n    if (chunkIntegers(<int>[], 3).isNotEmpty) throw StateError('empty');\n    if (chunkIntegers(<int>[-1, 0], 9).toString() != '[[-1, 0]]')\n      throw StateError('large');\n    if (d.toString() != before.toString()) throw StateError('mutated');\n    var rejected = false;\n    try {\n      chunkIntegers(d, 0);\n    } on ArgumentError {\n      rejected = true;\n    }\n    if (!rejected) throw StateError('invalid size');\n    print(\n        'PASS: independent Dart consumer for original model-generated fixed_chunks');\n  });\n}\n"
+      }
+    ],
+    "requirements": [
+      {
+        "kind": "distributionRestriction",
+        "description": "Isolated internal tests only. No production, release, redistribution, or automatic privileged execution; license and security certification pending.",
+        "required": true
+      },
+      {
+        "kind": "manualReview",
+        "description": "No privilege, release or redistribution authorized.",
+        "required": false
+      },
+      {
+        "kind": "manualReview",
+        "description": "Only public Linux runner real-model Dart and independent consumer passed; no Android or production host proof.",
+        "required": false
+      }
+    ],
+    "integrity": {
+      "manifest_sha256": "0ce9dce9674aaae0465a5263b887d027bf46f90069046904d31565bf93500a09",
+      "module_tree_sha256": "4fc6b67b0e6b24c3fd0ed8ce40a10f0e0344bb139844b067883c1968b9f2be8e",
+      "payload_sha256": "0ebdb7046ce5ba3708f791614d33c2dec0bdaf711b205793154e0ce46c5f7a75",
+      "test_report_sha256": "e6ae2fcb35593e837c43b43d67d459b7825bc591f2c4b6783d38364f1c635f40"
+    },
+    "source": {
+      "payload_type": "repository_path",
+      "source_repository": "https://github.com/pilialvu75-hue/AI-Orchestrator-Module-Library",
+      "source_commit": "014f782f3e25db557fd2f9da3a7b3e459011f514"
+    },
+    "review": {
+      "license_verified": false,
+      "security_reviewed": false,
+      "production_approved": false
+    }
+  },
+  "package_sha256": "7e2378c7aae121c430e81dc1464b908f971626d48381500a7a5656c8e58f2ee6"
+}

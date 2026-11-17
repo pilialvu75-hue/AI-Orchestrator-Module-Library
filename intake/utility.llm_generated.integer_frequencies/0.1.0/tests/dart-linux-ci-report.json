@@ -1,0 +1,17 @@
+{
+  "asset_id": "utility.llm_generated.integer_frequencies",
+  "independent_consumer_executed": true,
+  "model": "ollama-local/qwen2.5-coder:3b",
+  "passed": true,
+  "payload_sha256": "8d3c0b864eeb63945761ce320dac18429df4974d334f65e7c72679c874943362",
+  "real_workflow_run": 44188713470,
+  "repairs": 1,
+  "schema": "ai-orchestrator.library-test-report.v1",
+  "source_commit": "014f782f3e25db557fd2f9da3a7b3e459011f514",
+  "source_sha256": "148bb0544747ab9be405696056f0d4b4bfd1e0edc0aba56cfc64ed5f315ade91",
+  "test_command": "dart pub get && dart analyze --fatal-infos && dart test && separate independent Dart consumer",
+  "validated_on": [
+    "linux"
+  ],
+  "version": "0.1.0"
+}

@@ -1,0 +1,79 @@
+{
+  "schema": "ai-orchestrator.library-module-package-envelope.v1",
+  "package": {
+    "schema": "ai-orchestrator.library-module-package.v1",
+    "asset_id": "utility.llm_generated.integer_frequencies",
+    "version": "0.1.0",
+    "pin": "utility.llm_generated.integer_frequencies@0.1.0",
+    "tier": "sandbox_preview",
+    "status": "tested",
+    "certified": false,
+    "availability": "experimental",
+    "usage_policy": "internal-isolated-evaluation-only",
+    "capabilities": [
+      "utility.llm_generated.integer_frequencies"
+    ],
+    "contracts": [
+      "utility.llm_generated.integer_frequencies.v1"
+    ],
+    "targets": [
+      "linux"
+    ],
+    "files": [
+      {
+        "source_path": "payload/src/generation.json",
+        "target_path": "generation.json",
+        "content": "{\"acceptance\": \"independently pre-authored contract\", \"attempt\": 1, \"code_source_sha256\": \"c00bc46c9155e304faa71c37d0c99340666dfaa1efc9b0cda4227af90a6e200f\", \"eval_count\": 138, \"generator\": \"aivexus-llm-candidate-v1\", \"inference_backend\": \"local_open_weight_no_api_key\", \"instruction\": \"Create an ORIGINAL PURE-DART reusable package named aivexus_integer_frequencies, Dart SDK >=3.3.0 <4.0.0. Implement exactly this PUBLIC TOP-LEVEL Dart function in lib/integer_frequencies.dart: Map<int, int> countFrequencies(List<int> input). Count how often each signed integer occurs. Return a NEW insertion-ordered Map, keys ordered by first encounter. Do not mutate input. Empty input returns an empty map. Fully implement working behavior yourself, not a stub. Write reasonable tests under test/. You may use Dart core List, Map, Set, loops and standard library methods only. No third-party runtime dependencies, networking, filesystem, FFI, shell or privileged APIs. Always use valid Dart SDK APIs and compileable types. Return the strict JSON source object requested by the system prompt.\", \"model\": \"ollama-local/qwen2.5-coder:3b\", \"packaging\": \"deterministic, no functional implementation\", \"prompt_eval_count\": 681, \"provider_endpoint\": \"http://127.0.0.1:11434/api/chat\", \"repair_diagnostic_sha256\": \"f7c67ddc8cecbd728687a0ab53d9f90ca8586f826c3d4b1f3c1008637226f43a\", \"status\": \"UNVALIDATED\"}\n"
+      },
+      {
+        "source_path": "payload/src/lib/integer_frequencies.dart",
+        "target_path": "lib/integer_frequencies.dart",
+        "content": "class IntegerFrequencies {\n  static Map<int, int> countFrequencies(List<int> input) {\n    Map<int, int> frequencyMap = <int, int>{};\n    for (int number in input) {\n      if (frequencyMap.containsKey(number)) {\n        frequencyMap[number] = frequencyMap[number]! + 1;\n      } else {\n        frequencyMap[number] = 1;\n      }\n    }\n    return frequencyMap;\n  }\n}\n\nMap<int, int> countFrequencies(List<int> input) =>\n    IntegerFrequencies.countFrequencies(input);\n"
+      },
+      {
+        "source_path": "payload/src/pubspec.yaml",
+        "target_path": "pubspec.yaml",
+        "content": "name: aivexus_integer_frequencies\nversion: 0.1.0\npublish_to: none\nenvironment:\n  sdk: '>=3.3.0 <4.0.0'\ndev_dependencies:\n  test: ^1.25.0\n"
+      },
+      {
+        "source_path": "payload/src/test/independent_contract_test.dart",
+        "target_path": "test/independent_contract_test.dart",
+        "content": "import 'package:aivexus_integer_frequencies/integer_frequencies.dart';\nimport 'package:test/test.dart';\n\nvoid main() {\n  test('independent contract, not model-authored', () {\n    final data = <int>[3, -1, 3, 0, -1, 3];\n    final before = List<int>.from(data);\n    final r = countFrequencies(data);\n    if (r.length != 3 || r[3] != 3 || r[-1] != 2 || r[0] != 1)\n      throw StateError('counts $r');\n    if (r.keys.toList().toString() != '[3, -1, 0]')\n      throw StateError('order $r');\n    if (data.toString() != before.toString()) throw StateError('mutated');\n    if (countFrequencies(<int>[]).isNotEmpty) throw StateError('empty');\n    print(\n        'PASS: independent Dart consumer for original model-generated integer_frequencies');\n  });\n}\n"
+      }
+    ],
+    "requirements": [
+      {
+        "kind": "distributionRestriction",
+        "description": "Isolated internal tests only. No production, release, redistribution, or automatic privileged execution; license and security certification pending.",
+        "required": true
+      },
+      {
+        "kind": "manualReview",
+        "description": "No privilege, release or redistribution authorized.",
+        "required": false
+      },
+      {
+        "kind": "manualReview",
+        "description": "Only public Linux runner real-model Dart and independent consumer passed; no Android or production host proof.",
+        "required": false
+      }
+    ],
+    "integrity": {
+      "manifest_sha256": "af87771441de3607cb2fd89cfaca8497d0147025cf3b3f41be388a37898bd23f",
+      "module_tree_sha256": "6ba5fce63363b74816558f72c13dfe2747b3d698a2911e22bfe10cc8b6f53150",
+      "payload_sha256": "8d3c0b864eeb63945761ce320dac18429df4974d334f65e7c72679c874943362",
+      "test_report_sha256": "0ab016a54e8790b20d7d6c2d427f0c45ff7841a8028c0b095b5c4869ade0c534"
+    },
+    "source": {
+      "payload_type": "repository_path",
+      "source_repository": "https://github.com/pilialvu75-hue/AI-Orchestrator-Module-Library",
+      "source_commit": "014f782f3e25db557fd2f9da3a7b3e459011f514"
+    },
+    "review": {
+      "license_verified": false,
+      "security_reviewed": false,
+      "production_approved": false
+    }
+  },
+  "package_sha256": "821a1df5e04298f4f53588166084a684ac657765bc19ba65e3c5a4de0d1c4eee"
+}
