@@ -1,0 +1,79 @@
+{
+  "schema": "ai-orchestrator.library-module-package-envelope.v1",
+  "package": {
+    "schema": "ai-orchestrator.library-module-package.v1",
+    "asset_id": "utility.llm_generated.rotate_left",
+    "version": "0.1.0",
+    "pin": "utility.llm_generated.rotate_left@0.1.0",
+    "tier": "sandbox_preview",
+    "status": "tested",
+    "certified": false,
+    "availability": "experimental",
+    "usage_policy": "internal-isolated-evaluation-only",
+    "capabilities": [
+      "utility.llm_generated.rotate_left"
+    ],
+    "contracts": [
+      "utility.llm_generated.rotate_left.v1"
+    ],
+    "targets": [
+      "linux"
+    ],
+    "files": [
+      {
+        "source_path": "payload/src/generation.json",
+        "target_path": "generation.json",
+        "content": "{\"acceptance\": \"independently pre-authored contract\", \"adaptation\": \"generic-static-api-forwarders-only\", \"adapter_forwarders\": 1, \"attempt\": 0, \"code_source_sha256\": \"9e801fbb7aa9ca404938466787e495914d7d5ffaec27381f1fb87d09c5db5584\", \"eval_count\": 158, \"generator\": \"aivexus-llm-candidate-v1\", \"inference_backend\": \"local_open_weight_no_api_key\", \"instruction\": \"Create an ORIGINAL PURE-DART reusable package named aivexus_rotate_left, Dart SDK >=3.3.0 <4.0.0. Implement exactly this PUBLIC TOP-LEVEL Dart function in lib/rotate_left.dart: List<int> rotateLeft(List<int> input, int steps). Return a new list rotated left by steps positions with wraparound. Steps may be positive, zero, larger than length or negative (negative means right shift). Empty input gives empty output for any steps. Do not mutate input. Fully implement working behavior yourself, not a stub. Write reasonable tests under test/. You may use Dart core List, Map, Set, loops and standard library methods only. No third-party runtime dependencies, networking, filesystem, FFI, shell or privileged APIs. Always use valid Dart SDK APIs and compileable types. Return the strict JSON source object requested by the system prompt.\", \"model\": \"ollama-local/qwen2.5-coder:3b\", \"packaging\": \"deterministic, no functional implementation\", \"prompt_eval_count\": 339, \"provider_endpoint\": \"http://127.0.0.1:11434/api/chat\", \"repair_diagnostic_sha256\": null, \"status\": \"UNVALIDATED\"}\n"
+      },
+      {
+        "source_path": "payload/src/lib/rotate_left.dart",
+        "target_path": "lib/rotate_left.dart",
+        "content": "class RotateLeft {\n  static List<int> rotateLeft(List<int> input, int steps) {\n    if (input.isEmpty) return [];\n\n    int length = input.length;\n    steps = steps % length; // Handle cases where steps > length\n    if (steps == 0) return input; // No rotation needed\n\n    List<int> rotated = List<int>.from(input);\n    List<int> rotatedLeft = List<int>.from(rotated.sublist(steps));\n    List<int> rotatedRight = List<int>.from(rotated.sublist(0, steps));\n\n    rotatedLeft.addAll(rotatedRight);\n\n    return rotatedLeft;\n  }\n}\n\nList<int> rotateLeft(List<int> input, int steps) =>\n    RotateLeft.rotateLeft(input, steps);\n"
+      },
+      {
+        "source_path": "payload/src/pubspec.yaml",
+        "target_path": "pubspec.yaml",
+        "content": "name: aivexus_rotate_left\nversion: 0.1.0\npublish_to: none\nenvironment:\n  sdk: '>=3.3.0 <4.0.0'\ndev_dependencies:\n  test: ^1.25.0\n"
+      },
+      {
+        "source_path": "payload/src/test/independent_contract_test.dart",
+        "target_path": "test/independent_contract_test.dart",
+        "content": "import 'package:aivexus_rotate_left/rotate_left.dart';\nimport 'package:test/test.dart';\n\nvoid main() {\n  test('independent contract, not model-authored', () {\n    final d = <int>[1, 2, 3, 4];\n    if (rotateLeft(d, 1).toString() != '[2, 3, 4, 1]') throw StateError('left');\n    if (rotateLeft(d, 5).toString() != '[2, 3, 4, 1]') throw StateError('wrap');\n    if (rotateLeft(d, -1).toString() != '[4, 1, 2, 3]')\n      throw StateError('right');\n    if (rotateLeft(<int>[], 3).isNotEmpty) throw StateError('empty');\n    if (d.toString() != '[1, 2, 3, 4]') throw StateError('mutated');\n    print(\n        'PASS: independent Dart consumer for original model-generated rotate_left');\n  });\n}\n"
+      }
+    ],
+    "requirements": [
+      {
+        "kind": "distributionRestriction",
+        "description": "Isolated internal tests only. No production, release, redistribution, or automatic privileged execution; license and security certification pending.",
+        "required": true
+      },
+      {
+        "kind": "manualReview",
+        "description": "No privilege, release or redistribution authorized.",
+        "required": false
+      },
+      {
+        "kind": "manualReview",
+        "description": "Only public Linux runner real-model Dart and independent consumer passed; no Android or production host proof.",
+        "required": false
+      }
+    ],
+    "integrity": {
+      "manifest_sha256": "ff76e5ac1e6512a2688fb0afd6cdc4a7feec3e4e66ec56f373b603c3b119779c",
+      "module_tree_sha256": "0eb1bdb77147aa90933492f19bd42ba7beae7209e4d814efa699157f66fda0cd",
+      "payload_sha256": "46442f1d0a53d3765b2d7d80339d110d77942193925447b9564b08a6a0909635",
+      "test_report_sha256": "8c34efb628918e6aaac07cec03e96752def3a8930f011aa0ff2b77a41a7023f9"
+    },
+    "source": {
+      "payload_type": "repository_path",
+      "source_repository": "https://github.com/pilialvu75-hue/AI-Orchestrator-Module-Library",
+      "source_commit": "17aac3901fb4100d28e69c78912e77b8fb303bb3"
+    },
+    "review": {
+      "license_verified": false,
+      "security_reviewed": false,
+      "production_approved": false
+    }
+  },
+  "package_sha256": "fb34ec76d40fca8a2977f62a5473cc4dead53fe485acecfd0090531a03d8e5bf"
+}
