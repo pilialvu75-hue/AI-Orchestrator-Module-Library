@@ -114,6 +114,22 @@
       ]
     },
     {
+      "consumer_workflow_run_id": 44410927209,
+      "development_qualified": true,
+      "independent_export_consumer": "PASS",
+      "license_approved": false,
+      "package_sha256": "d1bf15f2149cde20d9c5dfa052ef71942ae9b294c638e75c5be21ae54de1d704",
+      "path": "packages/experimental/utility.llm_generated.interleave_lists/0.1.0/package.json",
+      "pin": "utility.llm_generated.interleave_lists@0.1.0",
+      "production_approved": false,
+      "production_certified": false,
+      "security_reviewed": false,
+      "status": "development_qualified",
+      "validated_targets": [
+        "linux"
+      ]
+    },
+    {
       "consumer_workflow_run_id": 44323792179,
       "development_qualified": true,
       "independent_export_consumer": "PASS",
@@ -137,6 +153,22 @@
       "package_sha256": "fb34ec76d40fca8a2977f62a5473cc4dead53fe485acecfd0090531a03d8e5bf",
       "path": "packages/experimental/utility.llm_generated.rotate_left/0.1.0/package.json",
       "pin": "utility.llm_generated.rotate_left@0.1.0",
+      "production_approved": false,
+      "production_certified": false,
+      "security_reviewed": false,
+      "status": "development_qualified",
+      "validated_targets": [
+        "linux"
+      ]
+    },
+    {
+      "consumer_workflow_run_id": 44410927209,
+      "development_qualified": true,
+      "independent_export_consumer": "PASS",
+      "license_approved": false,
+      "package_sha256": "dd7656397d71baa02ed8a281ef33d798ffc64028cf1765469e839279c5d3941c",
+      "path": "packages/experimental/utility.llm_generated.running_product/0.1.0/package.json",
+      "pin": "utility.llm_generated.running_product@0.1.0",
       "production_approved": false,
       "production_certified": false,
       "security_reviewed": false,
