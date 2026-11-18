@@ -1,0 +1,79 @@
+{
+  "schema": "ai-orchestrator.library-module-package-envelope.v1",
+  "package": {
+    "schema": "ai-orchestrator.library-module-package.v1",
+    "asset_id": "utility.llm_generated.running_product",
+    "version": "0.1.0",
+    "pin": "utility.llm_generated.running_product@0.1.0",
+    "tier": "sandbox_preview",
+    "status": "tested",
+    "certified": false,
+    "availability": "experimental",
+    "usage_policy": "internal-isolated-evaluation-only",
+    "capabilities": [
+      "utility.llm_generated.running_product"
+    ],
+    "contracts": [
+      "utility.llm_generated.running_product.v1"
+    ],
+    "targets": [
+      "linux"
+    ],
+    "files": [
+      {
+        "source_path": "payload/src/generation.json",
+        "target_path": "generation.json",
+        "content": "{\"acceptance\": \"independently pre-authored contract\", \"adaptation\": \"generic-static-api-forwarders-only\", \"adapter_forwarders\": 1, \"attempt\": 0, \"code_source_sha256\": \"c0a2b5d8bc32b1d3ca18b6b56553d34de6f109b5c188c69bb9ad52a1b95cbab6\", \"eval_count\": 270, \"generator\": \"aivexus-llm-candidate-v1\", \"inference_backend\": \"local_open_weight_no_api_key\", \"instruction\": \"Create an ORIGINAL PURE-DART reusable package named aivexus_running_product, Dart SDK >=3.3.0 <4.0.0. Implement exactly this PUBLIC TOP-LEVEL Dart function in lib/running_product.dart: List<int> runningProducts(List<int> input). Return fresh list of cumulative integer products: each element is product of all values up to that position. Handle zeros, negatives and empty input. No mutation or IO. Fully implement working behavior yourself, not a stub. Write reasonable tests under test/. You may use Dart core List, Map, Set, loops and standard library methods only. No third-party runtime dependencies, networking, filesystem, FFI, shell or privileged APIs. Always use valid Dart SDK APIs and compileable types. Return the strict JSON source object requested by the system prompt.\", \"model\": \"ollama-local/qwen2.5-coder:3b\", \"packaging\": \"deterministic, no functional implementation\", \"prompt_eval_count\": 324, \"provider_endpoint\": \"http://127.0.0.1:11434/api/chat\", \"repair_diagnostic_sha256\": null, \"status\": \"UNVALIDATED\"}\n"
+      },
+      {
+        "source_path": "payload/src/lib/running_product.dart",
+        "target_path": "lib/running_product.dart",
+        "content": "class RunningProductCalculator {\n  static List<int> runningProducts(List<int> input) {\n    List<int> result = [];\n    int product = 1;\n\n    for (int i = 0; i < input.length; i++) {\n      if (input[i] == 0) {\n        product = 0;\n      } else {\n        product *= input[i];\n      }\n      result.add(product);\n    }\n\n    return result;\n  }\n}\n\nvoid main() {\n  // Test cases\n  print(RunningProductCalculator.runningProducts([])); // Output: [0]\n  print(\n      RunningProductCalculator.runningProducts([1, 2, 3])); // Output: [1, 2, 6]\n  print(\n      RunningProductCalculator.runningProducts([0, 2, 3])); // Output: [0, 0, 0]\n  print(RunningProductCalculator.runningProducts(\n      [-1, 2, 3])); // Output: [-1, -2, -6]\n  print(\n      RunningProductCalculator.runningProducts([1, 0, 3])); // Output: [1, 0, 0]\n}\n\nList<int> runningProducts(List<int> input) =>\n    RunningProductCalculator.runningProducts(input);\n"
+      },
+      {
+        "source_path": "payload/src/pubspec.yaml",
+        "target_path": "pubspec.yaml",
+        "content": "name: aivexus_running_product\nversion: 0.1.0\npublish_to: none\nenvironment:\n  sdk: '>=3.3.0 <4.0.0'\ndev_dependencies:\n  test: ^1.25.0\n"
+      },
+      {
+        "source_path": "payload/src/test/independent_contract_test.dart",
+        "target_path": "test/independent_contract_test.dart",
+        "content": "import 'package:aivexus_running_product/running_product.dart';\nimport 'package:test/test.dart';\n\nvoid main() {\n  test('independent contract, not model-authored', () {\n    final d = <int>[2, -3, 4, 0, 9];\n    if (runningProducts(d).toString() != '[2, -6, -24, 0, 0]')\n      throw StateError('products');\n    if (runningProducts(<int>[]).isNotEmpty) throw StateError('empty');\n    if (runningProducts(<int>[-2, -2]).toString() != '[-2, 4]')\n      throw StateError('negatives');\n    if (d.length != 5) throw StateError('mutation');\n    print(\n        'PASS: independent Dart consumer for original model-generated running_product');\n  });\n}\n"
+      }
+    ],
+    "requirements": [
+      {
+        "kind": "distributionRestriction",
+        "description": "Isolated internal tests only. No production, release, redistribution, or automatic privileged execution; license and security certification pending.",
+        "required": true
+      },
+      {
+        "kind": "manualReview",
+        "description": "No privilege, release or redistribution authorized.",
+        "required": false
+      },
+      {
+        "kind": "manualReview",
+        "description": "Only public Linux runner real-model Dart and independent consumer passed; no Android or production host proof.",
+        "required": false
+      }
+    ],
+    "integrity": {
+      "manifest_sha256": "f04e69ffe129772724b315291970961527beaa25f89425f66815e8541bbce2c2",
+      "module_tree_sha256": "4c81621e6008b653c0d6a1335ebd91ee3d3350093dd9109b206c9d9801b1ab27",
+      "payload_sha256": "eb5650c27ce73c8969c17134a186026ab8bc42ef5e597bf1ce42ec6bb40fc06c",
+      "test_report_sha256": "af08974e06872dd635acc6887d7362d1dbf92d35b551351cac406e68926bb226"
+    },
+    "source": {
+      "payload_type": "repository_path",
+      "source_repository": "https://github.com/pilialvu75-hue/AI-Orchestrator-Module-Library",
+      "source_commit": "bf8d4a83f2867df4a7c253825731445145ee1a06"
+    },
+    "review": {
+      "license_verified": false,
+      "security_reviewed": false,
+      "production_approved": false
+    }
+  },
+  "package_sha256": "dd7656397d71baa02ed8a281ef33d798ffc64028cf1765469e839279c5d3941c"
+}

@@ -1,0 +1,17 @@
+{
+  "asset_id": "utility.llm_generated.running_product",
+  "independent_consumer_executed": true,
+  "model": "ollama-local/qwen2.5-coder:3b",
+  "passed": true,
+  "payload_sha256": "eb5650c27ce73c8969c17134a186026ab8bc42ef5e597bf1ce42ec6bb40fc06c",
+  "real_workflow_run": 44410335783,
+  "repairs": 0,
+  "schema": "ai-orchestrator.library-test-report.v1",
+  "source_commit": "bf8d4a83f2867df4a7c253825731445145ee1a06",
+  "source_sha256": "996f3a9f6b024d1e17d287a7f36d78d0458111c8d97f7335dce331c05add1a01",
+  "test_command": "dart pub get && dart analyze --fatal-infos && dart test && separate independent Dart consumer",
+  "validated_on": [
+    "linux"
+  ],
+  "version": "0.1.0"
+}

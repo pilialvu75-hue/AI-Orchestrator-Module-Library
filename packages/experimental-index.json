@@ -116,6 +116,13 @@
       "production_approved": false
     },
     {
+      "pin": "utility.llm_generated.interleave_lists@0.1.0",
+      "path": "packages/experimental/utility.llm_generated.interleave_lists/0.1.0/package.json",
+      "package_sha256": "d1bf15f2149cde20d9c5dfa052ef71942ae9b294c638e75c5be21ae54de1d704",
+      "tier": "sandbox_preview",
+      "production_approved": false
+    },
+    {
       "pin": "utility.llm_generated.palindrome_filter@0.1.0",
       "path": "packages/experimental/utility.llm_generated.palindrome_filter/0.1.0/package.json",
       "package_sha256": "bfd36536c7a98cba0d34e1fcd212a8db8c426405874bc0d397309e49ffd8473a",
@@ -126,6 +133,13 @@
       "pin": "utility.llm_generated.rotate_left@0.1.0",
       "path": "packages/experimental/utility.llm_generated.rotate_left/0.1.0/package.json",
       "package_sha256": "fb34ec76d40fca8a2977f62a5473cc4dead53fe485acecfd0090531a03d8e5bf",
+      "tier": "sandbox_preview",
+      "production_approved": false
+    },
+    {
+      "pin": "utility.llm_generated.running_product@0.1.0",
+      "path": "packages/experimental/utility.llm_generated.running_product/0.1.0/package.json",
+      "package_sha256": "dd7656397d71baa02ed8a281ef33d798ffc64028cf1765469e839279c5d3941c",
       "tier": "sandbox_preview",
       "production_approved": false
     },
