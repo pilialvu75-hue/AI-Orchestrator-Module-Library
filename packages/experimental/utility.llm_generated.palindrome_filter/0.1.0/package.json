@@ -1,0 +1,79 @@
+{
+  "schema": "ai-orchestrator.library-module-package-envelope.v1",
+  "package": {
+    "schema": "ai-orchestrator.library-module-package.v1",
+    "asset_id": "utility.llm_generated.palindrome_filter",
+    "version": "0.1.0",
+    "pin": "utility.llm_generated.palindrome_filter@0.1.0",
+    "tier": "sandbox_preview",
+    "status": "tested",
+    "certified": false,
+    "availability": "experimental",
+    "usage_policy": "internal-isolated-evaluation-only",
+    "capabilities": [
+      "utility.llm_generated.palindrome_filter"
+    ],
+    "contracts": [
+      "utility.llm_generated.palindrome_filter.v1"
+    ],
+    "targets": [
+      "linux"
+    ],
+    "files": [
+      {
+        "source_path": "payload/src/generation.json",
+        "target_path": "generation.json",
+        "content": "{\"acceptance\": \"independently pre-authored contract\", \"attempt\": 1, \"code_source_sha256\": \"01f550d0ba5063143833e36294c484a0f2d9f08262a238b9fd7c6f0d37e8fdca\", \"eval_count\": 300, \"generator\": \"aivexus-llm-candidate-v1\", \"inference_backend\": \"local_open_weight_no_api_key\", \"instruction\": \"Create an ORIGINAL PURE-DART reusable package named aivexus_palindrome_filter, Dart SDK >=3.3.0 <4.0.0. Implement exactly this PUBLIC TOP-LEVEL Dart function in lib/palindrome_filter.dart: List<String> filterPalindromes(List<String> input). Return a new list of input strings that are identical forward and backward, with exact case-sensitive comparison. Retain duplicates and original order. The empty string and single-character strings count as palindromes. Do not mutate input. Fully implement working behavior yourself, not a stub. Write reasonable tests under test/. You may use Dart core List, Map, Set, loops and standard library methods only. No third-party runtime dependencies, networking, filesystem, FFI, shell or privileged APIs. Always use valid Dart SDK APIs and compileable types. Return the strict JSON source object requested by the system prompt.\", \"model\": \"ollama-local/qwen2.5-coder:3b\", \"packaging\": \"deterministic, no functional implementation\", \"prompt_eval_count\": 788, \"provider_endpoint\": \"http://127.0.0.1:11434/api/chat\", \"repair_diagnostic_sha256\": \"c4e72877cf7c71389b4c3bd9c508424d02b305dd2b56bbbfeb37b940fae232ca\", \"status\": \"UNVALIDATED\"}\n"
+      },
+      {
+        "source_path": "payload/src/lib/palindrome_filter.dart",
+        "target_path": "lib/palindrome_filter.dart",
+        "content": "class PalindromeFilter {\n  static List<String> filterPalindromes(List<String> input) {\n    List<String> palindromes = [];\n    for (String str in input) {\n      if (str == str.split('').reversed.join('')) {\n        palindromes.add(str);\n      }\n    }\n    return palindromes;\n  }\n}\n\nvoid main() {\n  List<String> testInput = [\n    'radar',\n    'hello',\n    'world',\n    '',\n    'a',\n    'ab',\n    'aba',\n    'racecar',\n    'noon',\n    'deified',\n    'madam',\n    'civic',\n    'level',\n    'rotor',\n    'refer',\n    'deified',\n    'madam',\n    'civic',\n    'level',\n    'rotor',\n    'refer'\n  ];\n  List<String> filtered = PalindromeFilter.filterPalindromes(testInput);\n  print(filtered);\n}\n\nList<String> filterPalindromes(List<String> input) =>\n    PalindromeFilter.filterPalindromes(input);\n"
+      },
+      {
+        "source_path": "payload/src/pubspec.yaml",
+        "target_path": "pubspec.yaml",
+        "content": "name: aivexus_palindrome_filter\nversion: 0.1.0\npublish_to: none\nenvironment:\n  sdk: '>=3.3.0 <4.0.0'\ndev_dependencies:\n  test: ^1.25.0\n"
+      },
+      {
+        "source_path": "payload/src/test/independent_contract_test.dart",
+        "target_path": "test/independent_contract_test.dart",
+        "content": "import 'package:aivexus_palindrome_filter/palindrome_filter.dart';\nimport 'package:test/test.dart';\n\nvoid main() {\n  test('independent contract, not model-authored', () {\n    final d = <String>['aba', 'abc', 'Aba', '', 'aa', 'aba', 'z'];\n    final r = filterPalindromes(d);\n    if (r.toString() != '[aba, , aa, aba, z]') throw StateError('filter: $r');\n    if (filterPalindromes(<String>[]).isNotEmpty)\n      throw StateError('empty input');\n    if (d.length != 7) throw StateError('mutation');\n    print(\n        'PASS: independent Dart consumer for original model-generated palindrome_filter');\n  });\n}\n"
+      }
+    ],
+    "requirements": [
+      {
+        "kind": "distributionRestriction",
+        "description": "Isolated internal tests only. No production, release, redistribution, or automatic privileged execution; license and security certification pending.",
+        "required": true
+      },
+      {
+        "kind": "manualReview",
+        "description": "No privilege, release or redistribution authorized.",
+        "required": false
+      },
+      {
+        "kind": "manualReview",
+        "description": "Only public Linux runner real-model Dart and independent consumer passed; no Android or production host proof.",
+        "required": false
+      }
+    ],
+    "integrity": {
+      "manifest_sha256": "7095577cec362f49e8a396abf9b878dcbd3e048f5b387b7c69a6388c5a9605ef",
+      "module_tree_sha256": "58a30e59737730e2adfa12803f03ae44e5120dce7621b86104886eca5b3b2573",
+      "payload_sha256": "b4da789960659d6513f4cc0ad720b9e9541459ac4a0087f402fe1ab050bfadfa",
+      "test_report_sha256": "ae10e40fa413bdda49a58c2ca8f3d1dffbb864b62c73de933e2e262bb831c648"
+    },
+    "source": {
+      "payload_type": "repository_path",
+      "source_repository": "https://github.com/pilialvu75-hue/AI-Orchestrator-Module-Library",
+      "source_commit": "d9cc22acdc7da6bbf6562b05e397a44c86133fdc"
+    },
+    "review": {
+      "license_verified": false,
+      "security_reviewed": false,
+      "production_approved": false
+    }
+  },
+  "package_sha256": "bfd36536c7a98cba0d34e1fcd212a8db8c426405874bc0d397309e49ffd8473a"
+}

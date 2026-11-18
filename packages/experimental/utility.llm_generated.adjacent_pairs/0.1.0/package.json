@@ -1,0 +1,79 @@
+{
+  "schema": "ai-orchestrator.library-module-package-envelope.v1",
+  "package": {
+    "schema": "ai-orchestrator.library-module-package.v1",
+    "asset_id": "utility.llm_generated.adjacent_pairs",
+    "version": "0.1.0",
+    "pin": "utility.llm_generated.adjacent_pairs@0.1.0",
+    "tier": "sandbox_preview",
+    "status": "tested",
+    "certified": false,
+    "availability": "experimental",
+    "usage_policy": "internal-isolated-evaluation-only",
+    "capabilities": [
+      "utility.llm_generated.adjacent_pairs"
+    ],
+    "contracts": [
+      "utility.llm_generated.adjacent_pairs.v1"
+    ],
+    "targets": [
+      "linux"
+    ],
+    "files": [
+      {
+        "source_path": "payload/src/generation.json",
+        "target_path": "generation.json",
+        "content": "{\"acceptance\": \"independently pre-authored contract\", \"adaptation\": \"generic-static-api-forwarders-only\", \"adapter_forwarders\": 1, \"attempt\": 0, \"code_source_sha256\": \"0ca4fa7aff3d3fd36b70c2a67145b5eaa57a94f4b407b8b33a830144d2310d49\", \"eval_count\": 112, \"generator\": \"aivexus-llm-candidate-v1\", \"inference_backend\": \"local_open_weight_no_api_key\", \"instruction\": \"Create an ORIGINAL PURE-DART reusable package named aivexus_adjacent_pairs, Dart SDK >=3.3.0 <4.0.0. Implement exactly this PUBLIC TOP-LEVEL Dart function in lib/adjacent_pairs.dart: List<List<int>> adjacentPairs(List<int> input). Build a new list of consecutive overlapping integer pairs: for each adjacent indices i,i+1 output a new two-element list. For length 0 or 1 return empty list. Preserve negatives, duplicates and input. Fully implement working behavior yourself, not a stub. Write reasonable tests under test/. You may use Dart core List, Map, Set, loops and standard library methods only. No third-party runtime dependencies, networking, filesystem, FFI, shell or privileged APIs. Always use valid Dart SDK APIs and compileable types. Return the strict JSON source object requested by the system prompt.\", \"model\": \"ollama-local/qwen2.5-coder:3b\", \"packaging\": \"deterministic, no functional implementation\", \"prompt_eval_count\": 337, \"provider_endpoint\": \"http://127.0.0.1:11434/api/chat\", \"repair_diagnostic_sha256\": null, \"status\": \"UNVALIDATED\"}\n"
+      },
+      {
+        "source_path": "payload/src/lib/adjacent_pairs.dart",
+        "target_path": "lib/adjacent_pairs.dart",
+        "content": "class AivexusAdjacentPairs {\n  static List<List<int>> adjacentPairs(List<int> input) {\n    if (input.length < 2) {\n      return [];\n    }\n\n    List<List<int>> result = [];\n    for (int i = 0; i < input.length - 1; i++) {\n      result.add([input[i], input[i + 1]]);\n    }\n\n    return result;\n  }\n}\n\nList<List<int>> adjacentPairs(List<int> input) =>\n    AivexusAdjacentPairs.adjacentPairs(input);\n"
+      },
+      {
+        "source_path": "payload/src/pubspec.yaml",
+        "target_path": "pubspec.yaml",
+        "content": "name: aivexus_adjacent_pairs\nversion: 0.1.0\npublish_to: none\nenvironment:\n  sdk: '>=3.3.0 <4.0.0'\ndev_dependencies:\n  test: ^1.25.0\n"
+      },
+      {
+        "source_path": "payload/src/test/independent_contract_test.dart",
+        "target_path": "test/independent_contract_test.dart",
+        "content": "import 'package:aivexus_adjacent_pairs/adjacent_pairs.dart';\nimport 'package:test/test.dart';\n\nvoid main() {\n  test('independent contract, not model-authored', () {\n    if (adjacentPairs(<int>[3, -1, 0, 0]).toString() !=\n        '[[3, -1], [-1, 0], [0, 0]]') throw StateError('pairs');\n    if (adjacentPairs(<int>[]).isNotEmpty) throw StateError('empty');\n    if (adjacentPairs(<int>[5]).isNotEmpty) throw StateError('singleton');\n    print(\n        'PASS: independent Dart consumer for original model-generated adjacent_pairs');\n  });\n}\n"
+      }
+    ],
+    "requirements": [
+      {
+        "kind": "distributionRestriction",
+        "description": "Isolated internal tests only. No production, release, redistribution, or automatic privileged execution; license and security certification pending.",
+        "required": true
+      },
+      {
+        "kind": "manualReview",
+        "description": "No privilege, release or redistribution authorized.",
+        "required": false
+      },
+      {
+        "kind": "manualReview",
+        "description": "Only public Linux runner real-model Dart and independent consumer passed; no Android or production host proof.",
+        "required": false
+      }
+    ],
+    "integrity": {
+      "manifest_sha256": "2bb3e92f19129b3c020f66ddc4d8b3e41ca4e7f64f83f42637c3a8a85ce5fb86",
+      "module_tree_sha256": "02f0f1d10a1320bbcb90f6d7ddf1a28c4f217e5f42ec808381f1bc421bd747d1",
+      "payload_sha256": "99968e9e9597fcc3e9a4ed8ffc7301bf1ec054e19653a6c469acd9641cf48ac6",
+      "test_report_sha256": "bc96bce67617df2ffbe7e4cf523c74f4b7a19f3fe835f9475a8e48fac3c08917"
+    },
+    "source": {
+      "payload_type": "repository_path",
+      "source_repository": "https://github.com/pilialvu75-hue/AI-Orchestrator-Module-Library",
+      "source_commit": "d9cc22acdc7da6bbf6562b05e397a44c86133fdc"
+    },
+    "review": {
+      "license_verified": false,
+      "security_reviewed": false,
+      "production_approved": false
+    }
+  },
+  "package_sha256": "49c918d031cd698b97d7e37c7a40c610566231f324ae1b0adb9d85cabaf03365"
+}

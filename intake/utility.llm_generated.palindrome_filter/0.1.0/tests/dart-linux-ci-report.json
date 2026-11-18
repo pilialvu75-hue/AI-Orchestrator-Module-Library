@@ -1,0 +1,17 @@
+{
+  "asset_id": "utility.llm_generated.palindrome_filter",
+  "independent_consumer_executed": true,
+  "model": "ollama-local/qwen2.5-coder:3b",
+  "passed": true,
+  "payload_sha256": "b4da789960659d6513f4cc0ad720b9e9541459ac4a0087f402fe1ab050bfadfa",
+  "real_workflow_run": 44323061741,
+  "repairs": 1,
+  "schema": "ai-orchestrator.library-test-report.v1",
+  "source_commit": "d9cc22acdc7da6bbf6562b05e397a44c86133fdc",
+  "source_sha256": "01f550d0ba5063143833e36294c484a0f2d9f08262a238b9fd7c6f0d37e8fdca",
+  "test_command": "dart pub get && dart analyze --fatal-infos && dart test && separate independent Dart consumer",
+  "validated_on": [
+    "linux"
+  ],
+  "version": "0.1.0"
+}

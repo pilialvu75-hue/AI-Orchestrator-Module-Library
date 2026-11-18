@@ -67,6 +67,13 @@
       "production_approved": false
     },
     {
+      "pin": "utility.llm_generated.adjacent_pairs@0.1.0",
+      "path": "packages/experimental/utility.llm_generated.adjacent_pairs/0.1.0/package.json",
+      "package_sha256": "49c918d031cd698b97d7e37c7a40c610566231f324ae1b0adb9d85cabaf03365",
+      "tier": "sandbox_preview",
+      "production_approved": false
+    },
+    {
       "pin": "utility.llm_generated.cumulative_max@0.1.0",
       "path": "packages/experimental/utility.llm_generated.cumulative_max/0.1.0/package.json",
       "package_sha256": "3ab9518c0039d781a421acac56d829ccf09df65a1ea5c07b29db1ec6eadf912a",
@@ -105,6 +112,13 @@
       "pin": "utility.llm_generated.integer_frequencies@0.1.0",
       "path": "packages/experimental/utility.llm_generated.integer_frequencies/0.1.0/package.json",
       "package_sha256": "821a1df5e04298f4f53588166084a684ac657765bc19ba65e3c5a4de0d1c4eee",
+      "tier": "sandbox_preview",
+      "production_approved": false
+    },
+    {
+      "pin": "utility.llm_generated.palindrome_filter@0.1.0",
+      "path": "packages/experimental/utility.llm_generated.palindrome_filter/0.1.0/package.json",
+      "package_sha256": "bfd36536c7a98cba0d34e1fcd212a8db8c426405874bc0d397309e49ffd8473a",
       "tier": "sandbox_preview",
       "production_approved": false
     },
