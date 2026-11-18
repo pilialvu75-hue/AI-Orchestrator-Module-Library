@@ -66,6 +66,22 @@
       ]
     },
     {
+      "consumer_workflow_run_id": 44251900931,
+      "development_qualified": true,
+      "independent_export_consumer": "PASS",
+      "license_approved": false,
+      "package_sha256": "901048e501f4f3cd77b2b8653f0c3a8f18d0aa7bcc4652043711dcb055c3cced",
+      "path": "packages/experimental/utility.llm_generated.index_positions/0.1.0/package.json",
+      "pin": "utility.llm_generated.index_positions@0.1.0",
+      "production_approved": false,
+      "production_certified": false,
+      "security_reviewed": false,
+      "status": "development_qualified",
+      "validated_targets": [
+        "linux"
+      ]
+    },
+    {
       "consumer_workflow_run_id": 44189390470,
       "development_qualified": true,
       "independent_export_consumer": "PASS",
@@ -73,6 +89,22 @@
       "package_sha256": "821a1df5e04298f4f53588166084a684ac657765bc19ba65e3c5a4de0d1c4eee",
       "path": "packages/experimental/utility.llm_generated.integer_frequencies/0.1.0/package.json",
       "pin": "utility.llm_generated.integer_frequencies@0.1.0",
+      "production_approved": false,
+      "production_certified": false,
+      "security_reviewed": false,
+      "status": "development_qualified",
+      "validated_targets": [
+        "linux"
+      ]
+    },
+    {
+      "consumer_workflow_run_id": 44251900931,
+      "development_qualified": true,
+      "independent_export_consumer": "PASS",
+      "license_approved": false,
+      "package_sha256": "fb34ec76d40fca8a2977f62a5473cc4dead53fe485acecfd0090531a03d8e5bf",
+      "path": "packages/experimental/utility.llm_generated.rotate_left/0.1.0/package.json",
+      "pin": "utility.llm_generated.rotate_left@0.1.0",
       "production_approved": false,
       "production_certified": false,
       "security_reviewed": false,
