@@ -3,13 +3,13 @@
   "report_type": "read_only_evidence_gaps_not_certification",
   "summary": {
     "certified_catalog_entries": 3,
-    "intake_candidates": 37,
-    "blocked_intake_candidates": 37,
+    "intake_candidates": 39,
+    "blocked_intake_candidates": 39,
     "ready_for_automatic_certification": 0,
     "blocker_counts": {
-      "LICENSE_EVIDENCE_MISSING": 26,
+      "LICENSE_EVIDENCE_MISSING": 28,
       "REPRODUCIBLE_TEST_EVIDENCE_MISSING": 18,
-      "SECURITY_REVIEW_EVIDENCE_MISSING": 37,
+      "SECURITY_REVIEW_EVIDENCE_MISSING": 39,
       "SOURCE_SNAPSHOT_MISSING": 18
     }
   },
@@ -1491,6 +1491,25 @@
       "independent_certification_authorized": false
     },
     {
+      "asset_id": "utility.llm_generated.index_positions",
+      "version": "0.1.0",
+      "status": "tested",
+      "capabilities": [
+        "utility.llm_generated.index_positions"
+      ],
+      "source_repository": "https://github.com/pilialvu75-hue/AI-Orchestrator-Module-Library",
+      "source_commit": "17aac3901fb4100d28e69c78912e77b8fb303bb3",
+      "blockers": [
+        "LICENSE_EVIDENCE_MISSING",
+        "SECURITY_REVIEW_EVIDENCE_MISSING"
+      ],
+      "next_actions": [
+        "Resolve the upstream license and supply its attributable license file.",
+        "Attach an independently generated security report and SBOM bound to the pinned source."
+      ],
+      "independent_certification_authorized": false
+    },
+    {
       "asset_id": "utility.llm_generated.integer_frequencies",
       "version": "0.1.0",
       "status": "tested",
@@ -1499,6 +1518,25 @@
       ],
       "source_repository": "https://github.com/pilialvu75-hue/AI-Orchestrator-Module-Library",
       "source_commit": "014f782f3e25db557fd2f9da3a7b3e459011f514",
+      "blockers": [
+        "LICENSE_EVIDENCE_MISSING",
+        "SECURITY_REVIEW_EVIDENCE_MISSING"
+      ],
+      "next_actions": [
+        "Resolve the upstream license and supply its attributable license file.",
+        "Attach an independently generated security report and SBOM bound to the pinned source."
+      ],
+      "independent_certification_authorized": false
+    },
+    {
+      "asset_id": "utility.llm_generated.rotate_left",
+      "version": "0.1.0",
+      "status": "tested",
+      "capabilities": [
+        "utility.llm_generated.rotate_left"
+      ],
+      "source_repository": "https://github.com/pilialvu75-hue/AI-Orchestrator-Module-Library",
+      "source_commit": "17aac3901fb4100d28e69c78912e77b8fb303bb3",
       "blockers": [
         "LICENSE_EVIDENCE_MISSING",
         "SECURITY_REVIEW_EVIDENCE_MISSING"
