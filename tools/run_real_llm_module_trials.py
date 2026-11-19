@@ -199,7 +199,7 @@ def _repair_missing_dart_math_import(spec, output, diagnostic):
         # Do not attempt to repair namespace/shadowing mistakes blindly.
         return False
     needed = [name for name in names
-              if re.search(r"(?<![.\\w])" + name + r"\\s*\\(", source)]
+              if re.search(r"(?<![.\w])" + name + r"\s*\(", source)]
     if not needed:
         return False
     path.write_text("import 'dart:math' show " + ", ".join(needed) +
