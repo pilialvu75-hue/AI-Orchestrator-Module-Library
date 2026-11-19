@@ -18,6 +18,22 @@
       ]
     },
     {
+      "consumer_workflow_run_id": 44472788707,
+      "development_qualified": true,
+      "independent_export_consumer": "PASS",
+      "license_approved": false,
+      "package_sha256": "830b337b817124647a8f82e8325264c91d96ee15439260c9ed1fc3a3d02055b2",
+      "path": "packages/experimental/utility.llm_generated.count_in_range/0.1.0/package.json",
+      "pin": "utility.llm_generated.count_in_range@0.1.0",
+      "production_approved": false,
+      "production_certified": false,
+      "security_reviewed": false,
+      "status": "development_qualified",
+      "validated_targets": [
+        "linux"
+      ]
+    },
+    {
       "consumer_workflow_run_id": 44192299335,
       "development_qualified": true,
       "independent_export_consumer": "PASS",
