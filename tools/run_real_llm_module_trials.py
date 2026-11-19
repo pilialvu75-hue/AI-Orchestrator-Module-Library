@@ -178,6 +178,48 @@ def _adapt_static_class_api(spec, folder):
                     encoding="utf-8")
 
 
+def _repair_missing_dart_math_import(spec, output, diagnostic):
+    """Fix only a real Dart analyzer missing max/min import; never invent logic.
+
+    This is compiler-driven source packaging, not functional implementation.
+    The actual Dart tests and a separate consumer MUST pass after adaptation.
+    """
+    names = []
+    for symbol in ("max", "min"):
+        if (f"The method '{symbol}' isn't defined" in diagnostic or
+                f"Undefined name '{symbol}'" in diagnostic):
+            names.append(symbol)
+    if not names:
+        return False
+    path = output / spec["id"] / spec["library_path"]
+    if not path.is_file() or path.is_symlink():
+        return False
+    source = path.read_text(encoding="utf-8")
+    if "import 'dart:math'" in source or 'import "dart:math"' in source:
+        # Do not attempt to repair namespace/shadowing mistakes blindly.
+        return False
+    needed = [name for name in names
+              if re.search(r"(?<![.\\w])" + name + r"\\s*\\(", source)]
+    if not needed:
+        return False
+    path.write_text("import 'dart:math' show " + ", ".join(needed) +
+                    ";\n" + source, encoding="utf-8")
+    meta = path.parents[1] / "generation.json"
+    data = json.loads(meta.read_text(encoding="utf-8"))
+    fixes = data.get("compiler_driven_repairs", [])
+    if not isinstance(fixes, list):
+        fixes = []
+    fixes.append({
+        "kind": "dart_math_missing_import_only",
+        "symbols": needed,
+        "diagnostic_sha256": hashlib.sha256(
+            diagnostic.encode("utf-8")).hexdigest(),
+    })
+    data["compiler_driven_repairs"] = fixes
+    meta.write_text(json.dumps(data, sort_keys=True) + "\n", encoding="utf-8")
+    return True
+
+
 def _verify_one(spec, output):
     folder = output / spec["id"]
     metadata = check_source(folder, spec)
@@ -258,6 +300,19 @@ def verify_packages(specs, output, report_path):
                     failure = str(exc)[-_MAX_CAPTURE:]
                     print(f"MODULE_TEST_BLOCKED {spec['id']} attempt={attempt} "
                           f"diagnostic={failure[-800:]}", flush=True)
+                    # A missing permitted SDK import is a packaging error, not
+                    # an algorithmic failure: apply a minimal compiler-driven
+                    # repair before spending another Qwen generation attempt.
+                    if use_local and _repair_missing_dart_math_import(
+                            spec, output, failure):
+                        try:
+                            result = _verify_one(spec, output)
+                            break
+                        except (ValueError, RuntimeError, OSError,
+                                subprocess.TimeoutExpired) as adapted_error:
+                            failure = str(adapted_error)[-_MAX_CAPTURE:]
+                            print(f"MODULE_SDK_IMPORT_REPAIR_BLOCKED {spec['id']} "
+                                  f"diagnostic={failure[-800:]}", flush=True)
                     if attempt >= 2 or not use_local:
                         break
                     from generate_local_ollama_candidate import generate_local
