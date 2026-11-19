@@ -130,6 +130,20 @@
       "production_approved": false
     },
     {
+      "pin": "utility.llm_generated.intersection_unique@0.1.0",
+      "path": "packages/experimental/utility.llm_generated.intersection_unique/0.1.0/package.json",
+      "package_sha256": "e49870419085ac582b88dba4417848c7e57d7fc66bb34d48523f3f2bde3372e9",
+      "tier": "sandbox_preview",
+      "production_approved": false
+    },
+    {
+      "pin": "utility.llm_generated.max_run_length@0.1.0",
+      "path": "packages/experimental/utility.llm_generated.max_run_length/0.1.0/package.json",
+      "package_sha256": "2a755751f9838e66b61f20e239389491718597be9706ace0993e61f422fc86eb",
+      "tier": "sandbox_preview",
+      "production_approved": false
+    },
+    {
       "pin": "utility.llm_generated.palindrome_filter@0.1.0",
       "path": "packages/experimental/utility.llm_generated.palindrome_filter/0.1.0/package.json",
       "package_sha256": "bfd36536c7a98cba0d34e1fcd212a8db8c426405874bc0d397309e49ffd8473a",
