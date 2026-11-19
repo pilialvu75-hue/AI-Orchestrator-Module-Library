@@ -16,7 +16,7 @@
     {
       "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
       "baseline_at": "2026-10-03T16:20:00Z",
-      "cursor_merged_at": "2026-11-18T22:51:29Z"
+      "cursor_merged_at": "2026-11-19T10:54:20Z"
     },
     {
       "repository": "pilialvu75-hue/Ai-orchestrator-diagnostics",
@@ -7378,6 +7378,91 @@
       "url": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/83aec4771da4b0a0a9fbc2df10aeef4e806067d2",
       "match_ref": null,
       "reconciliation": null
+    },
+    {
+      "incident_id": "059e669851a147fe979d",
+      "status": "UNRECONCILED",
+      "detected_at": "2026-11-19T11:39:17Z",
+      "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
+      "kind": "direct_commit",
+      "pull_request": null,
+      "merge_sha": null,
+      "commit_sha": "d2a464d351806d7ceda7a1e7eb2abf15bce54de9",
+      "head_branch": null,
+      "base_branch": "main",
+      "change_at": "2026-11-19T10:32:24Z",
+      "title": "ux(computer-use): guide Windows users with 4 steps and visible session state",
+      "url": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/d2a464d351806d7ceda7a1e7eb2abf15bce54de9",
+      "match_ref": null,
+      "reconciliation": null
+    },
+    {
+      "incident_id": "3025ba7b577b3f9003ba",
+      "status": "UNRECONCILED",
+      "detected_at": "2026-11-19T11:39:17Z",
+      "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
+      "kind": "unmatched_merge_commit",
+      "pull_request": null,
+      "merge_sha": null,
+      "commit_sha": "4199bfce60355c7ccf5edbca9576c0875ef68c78",
+      "head_branch": null,
+      "base_branch": "main",
+      "change_at": "2026-11-19T10:40:15Z",
+      "title": "Merge PR #1196: guided Windows Computer Use menu",
+      "url": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/4199bfce60355c7ccf5edbca9576c0875ef68c78",
+      "match_ref": null,
+      "reconciliation": null
+    },
+    {
+      "incident_id": "6e5f566439bce3b3b0fb",
+      "status": "UNRECONCILED",
+      "detected_at": "2026-11-19T11:39:17Z",
+      "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
+      "kind": "direct_commit",
+      "pull_request": null,
+      "merge_sha": null,
+      "commit_sha": "7fa242315853d867d93f44d15e68e35c1bd3ac56",
+      "head_branch": null,
+      "base_branch": "main",
+      "change_at": "2026-11-19T10:52:30Z",
+      "title": "fix(windows): launch offline 2048 via UTF-16LE encoded PowerShell command",
+      "url": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/7fa242315853d867d93f44d15e68e35c1bd3ac56",
+      "match_ref": null,
+      "reconciliation": null
+    },
+    {
+      "incident_id": "71b23ef1647ce02166b4",
+      "status": "UNRECONCILED",
+      "detected_at": "2026-11-19T11:39:17Z",
+      "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
+      "kind": "direct_commit",
+      "pull_request": null,
+      "merge_sha": null,
+      "commit_sha": "fc069183f07d27a21cb5177b74e34f2428513432",
+      "head_branch": null,
+      "base_branch": "main",
+      "change_at": "2026-11-19T10:52:55Z",
+      "title": "test(windows): verify actual UTF-16 encoded 2048 launch command in headless CI",
+      "url": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/fc069183f07d27a21cb5177b74e34f2428513432",
+      "match_ref": null,
+      "reconciliation": null
+    },
+    {
+      "incident_id": "b045326e0b55b3ce6697",
+      "status": "UNRECONCILED",
+      "detected_at": "2026-11-19T11:39:17Z",
+      "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
+      "kind": "unmatched_merge_commit",
+      "pull_request": null,
+      "merge_sha": null,
+      "commit_sha": "ad9be92593bc4b20ebd24ee97d6f8abd744e4c2b",
+      "head_branch": null,
+      "base_branch": "main",
+      "change_at": "2026-11-19T10:54:20Z",
+      "title": "Merge PR #1198: robust offline 2048 Windows launch",
+      "url": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/ad9be92593bc4b20ebd24ee97d6f8abd744e4c2b",
+      "match_ref": null,
+      "reconciliation": null
     }
   ],
   "reconciliation_history": [
@@ -7388,35 +7473,35 @@
       "note": "Known motivating example for CP-HARDEN-03. It predates this incremental detector and is not retroactively reopened."
     }
   ],
-  "last_scan_at": "2026-11-19T10:39:10Z",
+  "last_scan_at": "2026-11-19T11:39:17Z",
   "scan_health": {
     "pilialvu75-hue/AI-Orchestrator-Module-Library": {
       "state": "OK",
-      "last_success_at": "2026-11-19T10:39:10Z",
+      "last_success_at": "2026-11-19T11:39:17Z",
       "last_failure_at": null,
       "error_code": null
     },
     "pilialvu75-hue/Ai-orchestrator-riserva": {
       "state": "OK",
-      "last_success_at": "2026-11-19T10:39:10Z",
+      "last_success_at": "2026-11-19T11:39:17Z",
       "last_failure_at": "2026-10-28T07:39:58Z",
       "error_code": null
     },
     "pilialvu75-hue/Ai-orchestrator-diagnostics": {
       "state": "OK",
-      "last_success_at": "2026-11-19T10:39:10Z",
+      "last_success_at": "2026-11-19T11:39:17Z",
       "last_failure_at": "2026-10-28T07:39:58Z",
       "error_code": null
     },
     "pilialvu75-hue/AI-Orchestrator-Module-Researcher": {
       "state": "OK",
-      "last_success_at": "2026-11-19T10:39:10Z",
+      "last_success_at": "2026-11-19T11:39:17Z",
       "last_failure_at": "2026-10-28T07:39:58Z",
       "error_code": null
     },
     "pilialvu75-hue/Ai_orchestrator-prova": {
       "state": "OK",
-      "last_success_at": "2026-11-19T10:39:10Z",
+      "last_success_at": "2026-11-19T11:39:17Z",
       "last_failure_at": "2026-10-28T07:39:58Z",
       "error_code": null
     }
