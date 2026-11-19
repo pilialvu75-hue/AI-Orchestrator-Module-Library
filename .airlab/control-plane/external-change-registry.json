@@ -16,7 +16,7 @@
     {
       "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
       "baseline_at": "2026-10-03T16:20:00Z",
-      "cursor_merged_at": "2026-11-19T19:44:33Z"
+      "cursor_merged_at": "2026-11-19T20:50:09Z"
     },
     {
       "repository": "pilialvu75-hue/Ai-orchestrator-diagnostics",
@@ -7514,6 +7514,125 @@
       "url": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/7e6d16c9784824029d79a0d87cd56ba310324be7",
       "match_ref": null,
       "reconciliation": null
+    },
+    {
+      "incident_id": "c7d829db55be8c0d114a",
+      "status": "UNRECONCILED",
+      "detected_at": "2026-11-19T21:38:53Z",
+      "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
+      "kind": "direct_commit",
+      "pull_request": null,
+      "merge_sha": null,
+      "commit_sha": "7951be99c82d9d3eb9c323084f5314d327e686f2",
+      "head_branch": null,
+      "base_branch": "main",
+      "change_at": "2026-11-19T20:05:53Z",
+      "title": "Connect the Web counter proposal, status and ZIP download",
+      "url": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/7951be99c82d9d3eb9c323084f5314d327e686f2",
+      "match_ref": null,
+      "reconciliation": null
+    },
+    {
+      "incident_id": "dd3822b924260824e4ab",
+      "status": "UNRECONCILED",
+      "detected_at": "2026-11-19T21:38:53Z",
+      "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
+      "kind": "direct_commit",
+      "pull_request": null,
+      "merge_sha": null,
+      "commit_sha": "7604d138005dc6bc1bee3b6a10f65dac7db981f4",
+      "head_branch": null,
+      "base_branch": "main",
+      "change_at": "2026-11-19T20:21:43Z",
+      "title": "Run the real Web counter generator and verify its ZIP delivery",
+      "url": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/7604d138005dc6bc1bee3b6a10f65dac7db981f4",
+      "match_ref": null,
+      "reconciliation": null
+    },
+    {
+      "incident_id": "a65fb8734db6a8c88402",
+      "status": "UNRECONCILED",
+      "detected_at": "2026-11-19T21:38:53Z",
+      "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
+      "kind": "direct_commit",
+      "pull_request": null,
+      "merge_sha": null,
+      "commit_sha": "89494cf75fcf52f7810413fbe341a3dcf3b48396",
+      "head_branch": null,
+      "base_branch": "main",
+      "change_at": "2026-11-19T20:22:21Z",
+      "title": "Handle D1 change counts that include audit and journal triggers",
+      "url": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/89494cf75fcf52f7810413fbe341a3dcf3b48396",
+      "match_ref": null,
+      "reconciliation": null
+    },
+    {
+      "incident_id": "875baa9815801c5bc105",
+      "status": "UNRECONCILED",
+      "detected_at": "2026-11-19T21:38:53Z",
+      "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
+      "kind": "direct_commit",
+      "pull_request": null,
+      "merge_sha": null,
+      "commit_sha": "b468105bc6d14690bbbb4b7de1b9209c8dfa885a",
+      "head_branch": null,
+      "base_branch": "main",
+      "change_at": "2026-11-19T20:23:24Z",
+      "title": "Verify generated ZIP integrity without a platform-specific fixture digest",
+      "url": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/b468105bc6d14690bbbb4b7de1b9209c8dfa885a",
+      "match_ref": null,
+      "reconciliation": null
+    },
+    {
+      "incident_id": "2cf0810094e535f54ef7",
+      "status": "UNRECONCILED",
+      "detected_at": "2026-11-19T21:38:53Z",
+      "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
+      "kind": "unmatched_merge_commit",
+      "pull_request": null,
+      "merge_sha": null,
+      "commit_sha": "ee50ebd78d93988362519738590f2e5c46d95352",
+      "head_branch": null,
+      "base_branch": "main",
+      "change_at": "2026-11-19T20:23:27Z",
+      "title": "Verify generated ZIP integrity without a platform-specific fixture digest",
+      "url": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/ee50ebd78d93988362519738590f2e5c46d95352",
+      "match_ref": null,
+      "reconciliation": null
+    },
+    {
+      "incident_id": "7db0c12d89a5679c39df",
+      "status": "UNRECONCILED",
+      "detected_at": "2026-11-19T21:38:53Z",
+      "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
+      "kind": "unmatched_merge_commit",
+      "pull_request": null,
+      "merge_sha": null,
+      "commit_sha": "85e639b8e1e85f684c367b66ef350feaa7835c0b",
+      "head_branch": null,
+      "base_branch": "main",
+      "change_at": "2026-11-19T20:25:53Z",
+      "title": "Bring the approved Web stack up to date with main",
+      "url": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/85e639b8e1e85f684c367b66ef350feaa7835c0b",
+      "match_ref": null,
+      "reconciliation": null
+    },
+    {
+      "incident_id": "9037ab32fed6a51493c5",
+      "status": "UNRECONCILED",
+      "detected_at": "2026-11-19T21:38:53Z",
+      "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
+      "kind": "unmatched_merge_commit",
+      "pull_request": null,
+      "merge_sha": null,
+      "commit_sha": "65e622e3f3b64f2eff617011adc920206d22806f",
+      "head_branch": null,
+      "base_branch": "main",
+      "change_at": "2026-11-19T20:50:09Z",
+      "title": "Merge Aivexus Web authenticated counter lifecycle (#1208)",
+      "url": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/65e622e3f3b64f2eff617011adc920206d22806f",
+      "match_ref": null,
+      "reconciliation": null
     }
   ],
   "reconciliation_history": [
@@ -7524,35 +7643,35 @@
       "note": "Known motivating example for CP-HARDEN-03. It predates this incremental detector and is not retroactively reopened."
     }
   ],
-  "last_scan_at": "2026-11-19T20:39:14Z",
+  "last_scan_at": "2026-11-19T21:38:53Z",
   "scan_health": {
     "pilialvu75-hue/AI-Orchestrator-Module-Library": {
       "state": "OK",
-      "last_success_at": "2026-11-19T20:39:14Z",
+      "last_success_at": "2026-11-19T21:38:53Z",
       "last_failure_at": null,
       "error_code": null
     },
     "pilialvu75-hue/Ai-orchestrator-riserva": {
       "state": "OK",
-      "last_success_at": "2026-11-19T20:39:14Z",
+      "last_success_at": "2026-11-19T21:38:53Z",
       "last_failure_at": "2026-10-28T07:39:58Z",
       "error_code": null
     },
     "pilialvu75-hue/Ai-orchestrator-diagnostics": {
       "state": "OK",
-      "last_success_at": "2026-11-19T20:39:14Z",
+      "last_success_at": "2026-11-19T21:38:53Z",
       "last_failure_at": "2026-10-28T07:39:58Z",
       "error_code": null
     },
     "pilialvu75-hue/AI-Orchestrator-Module-Researcher": {
       "state": "OK",
-      "last_success_at": "2026-11-19T20:39:14Z",
+      "last_success_at": "2026-11-19T21:38:53Z",
       "last_failure_at": "2026-10-28T07:39:58Z",
       "error_code": null
     },
     "pilialvu75-hue/Ai_orchestrator-prova": {
       "state": "OK",
-      "last_success_at": "2026-11-19T20:39:14Z",
+      "last_success_at": "2026-11-19T21:38:53Z",
       "last_failure_at": "2026-10-28T07:39:58Z",
       "error_code": null
     }
