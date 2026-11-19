@@ -1,0 +1,79 @@
+{
+  "schema": "ai-orchestrator.library-module-package-envelope.v1",
+  "package": {
+    "schema": "ai-orchestrator.library-module-package.v1",
+    "asset_id": "utility.llm_generated.count_in_range",
+    "version": "0.1.0",
+    "pin": "utility.llm_generated.count_in_range@0.1.0",
+    "tier": "sandbox_preview",
+    "status": "tested",
+    "certified": false,
+    "availability": "experimental",
+    "usage_policy": "internal-isolated-evaluation-only",
+    "capabilities": [
+      "utility.llm_generated.count_in_range"
+    ],
+    "contracts": [
+      "utility.llm_generated.count_in_range.v1"
+    ],
+    "targets": [
+      "linux"
+    ],
+    "files": [
+      {
+        "source_path": "payload/src/generation.json",
+        "target_path": "generation.json",
+        "content": "{\"acceptance\": \"independently pre-authored contract\", \"adaptation\": \"generic-static-api-forwarders-only\", \"adapter_forwarders\": 1, \"attempt\": 0, \"code_source_sha256\": \"53718cb86521684668d422c4d36e6c405f7a0f19deb0f3751fa4c9e37c151761\", \"eval_count\": 105, \"generator\": \"aivexus-llm-candidate-v1\", \"inference_backend\": \"local_open_weight_no_api_key\", \"instruction\": \"Create an ORIGINAL PURE-DART reusable package named aivexus_count_in_range, Dart SDK >=3.3.0 <4.0.0. Implement exactly this PUBLIC TOP-LEVEL Dart function in lib/count_in_range.dart: int countInRange(List<int> input, int lower, int upper). Return the number of signed integers x in input with lower <= x <= upper (both bounds inclusive). Repetitions count. If lower > upper return 0. Do not modify input or do IO. Fully implement working behavior yourself, not a stub. Write reasonable tests under test/. You may use Dart core List, Map, Set, loops and standard library methods only. No third-party runtime dependencies, networking, filesystem, FFI, shell or privileged APIs. Always use valid Dart SDK APIs and compileable types. Return the strict JSON source object requested by the system prompt.\", \"model\": \"ollama-local/qwen2.5-coder:3b\", \"packaging\": \"deterministic, no functional implementation\", \"prompt_eval_count\": 337, \"provider_endpoint\": \"http://127.0.0.1:11434/api/chat\", \"repair_diagnostic_sha256\": null, \"status\": \"UNVALIDATED\"}\n"
+      },
+      {
+        "source_path": "payload/src/lib/count_in_range.dart",
+        "target_path": "lib/count_in_range.dart",
+        "content": "class AivexusCountInRange {\n  static int countInRange(List<int> input, int lower, int upper) {\n    if (lower > upper) {\n      return 0;\n    }\n    int count = 0;\n    for (int x in input) {\n      if (x >= lower && x <= upper) {\n        count++;\n      }\n    }\n    return count;\n  }\n}\n\nint countInRange(List<int> input, int lower, int upper) =>\n    AivexusCountInRange.countInRange(input, lower, upper);\n"
+      },
+      {
+        "source_path": "payload/src/pubspec.yaml",
+        "target_path": "pubspec.yaml",
+        "content": "name: aivexus_count_in_range\nversion: 0.1.0\npublish_to: none\nenvironment:\n  sdk: '>=3.3.0 <4.0.0'\ndev_dependencies:\n  test: ^1.25.0\n"
+      },
+      {
+        "source_path": "payload/src/test/independent_contract_test.dart",
+        "target_path": "test/independent_contract_test.dart",
+        "content": "import 'package:aivexus_count_in_range/count_in_range.dart';\nimport 'package:test/test.dart';\n\nvoid main() {\n  test('independent contract, not model-authored', () {\n    final d = <int>[-4, -1, 0, 2, 2, 9];\n    if (countInRange(d, -1, 2) != 4) throw StateError('range');\n    if (countInRange(d, 3, 3) != 0) throw StateError('none');\n    if (countInRange(d, 10, -10) != 0) throw StateError('reverse');\n    if (countInRange(<int>[], 0, 3) != 0) throw StateError('empty');\n    if (d.length != 6) throw StateError('mutated');\n    print(\n        'PASS: independent Dart consumer for original model-generated count_in_range');\n  });\n}\n"
+      }
+    ],
+    "requirements": [
+      {
+        "kind": "distributionRestriction",
+        "description": "Isolated internal tests only. No production, release, redistribution, or automatic privileged execution; license and security certification pending.",
+        "required": true
+      },
+      {
+        "kind": "manualReview",
+        "description": "No privilege, release or redistribution authorized.",
+        "required": false
+      },
+      {
+        "kind": "manualReview",
+        "description": "Only public Linux runner real-model Dart and independent consumer passed; no Android or production host proof.",
+        "required": false
+      }
+    ],
+    "integrity": {
+      "manifest_sha256": "0aa6155181e474d92554b145f8fabfcc12ca83c742e968bf92f65800dcce654e",
+      "module_tree_sha256": "85e79780aec77f8b6ccd821883cee6c4d236e5a35c54fb37825319fa619dd316",
+      "payload_sha256": "b4d29a8857c3927e30410d564879ce792e24e3abcd5d7934c0dc52a6726a93d4",
+      "test_report_sha256": "478b7ca3d470b273710c6e110ab63b38b2587a569cb386cdd2fb0792cefb0de1"
+    },
+    "source": {
+      "payload_type": "repository_path",
+      "source_repository": "https://github.com/pilialvu75-hue/AI-Orchestrator-Module-Library",
+      "source_commit": "dadbae0e61951c15f97eb91ba65db7da7d6cadba"
+    },
+    "review": {
+      "license_verified": false,
+      "security_reviewed": false,
+      "production_approved": false
+    }
+  },
+  "package_sha256": "830b337b817124647a8f82e8325264c91d96ee15439260c9ed1fc3a3d02055b2"
+}
