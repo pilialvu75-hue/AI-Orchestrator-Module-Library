@@ -3,13 +3,13 @@
   "report_type": "read_only_evidence_gaps_not_certification",
   "summary": {
     "certified_catalog_entries": 3,
-    "intake_candidates": 44,
-    "blocked_intake_candidates": 44,
+    "intake_candidates": 46,
+    "blocked_intake_candidates": 46,
     "ready_for_automatic_certification": 0,
     "blocker_counts": {
-      "LICENSE_EVIDENCE_MISSING": 33,
+      "LICENSE_EVIDENCE_MISSING": 35,
       "REPRODUCIBLE_TEST_EVIDENCE_MISSING": 18,
-      "SECURITY_REVIEW_EVIDENCE_MISSING": 44,
+      "SECURITY_REVIEW_EVIDENCE_MISSING": 46,
       "SOURCE_SNAPSHOT_MISSING": 18
     }
   },
@@ -1575,6 +1575,44 @@
       ],
       "source_repository": "https://github.com/pilialvu75-hue/AI-Orchestrator-Module-Library",
       "source_commit": "bf8d4a83f2867df4a7c253825731445145ee1a06",
+      "blockers": [
+        "LICENSE_EVIDENCE_MISSING",
+        "SECURITY_REVIEW_EVIDENCE_MISSING"
+      ],
+      "next_actions": [
+        "Resolve the upstream license and supply its attributable license file.",
+        "Attach an independently generated security report and SBOM bound to the pinned source."
+      ],
+      "independent_certification_authorized": false
+    },
+    {
+      "asset_id": "utility.llm_generated.intersection_unique",
+      "version": "0.1.0",
+      "status": "tested",
+      "capabilities": [
+        "utility.llm_generated.intersection_unique"
+      ],
+      "source_repository": "https://github.com/pilialvu75-hue/AI-Orchestrator-Module-Library",
+      "source_commit": "ff41f328a3f449b22db1e8ff62000f61ba2749ff",
+      "blockers": [
+        "LICENSE_EVIDENCE_MISSING",
+        "SECURITY_REVIEW_EVIDENCE_MISSING"
+      ],
+      "next_actions": [
+        "Resolve the upstream license and supply its attributable license file.",
+        "Attach an independently generated security report and SBOM bound to the pinned source."
+      ],
+      "independent_certification_authorized": false
+    },
+    {
+      "asset_id": "utility.llm_generated.max_run_length",
+      "version": "0.1.0",
+      "status": "tested",
+      "capabilities": [
+        "utility.llm_generated.max_run_length"
+      ],
+      "source_repository": "https://github.com/pilialvu75-hue/AI-Orchestrator-Module-Library",
+      "source_commit": "ff41f328a3f449b22db1e8ff62000f61ba2749ff",
       "blockers": [
         "LICENSE_EVIDENCE_MISSING",
         "SECURITY_REVIEW_EVIDENCE_MISSING"
