@@ -16,7 +16,7 @@
     {
       "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
       "baseline_at": "2026-10-03T16:20:00Z",
-      "cursor_merged_at": "2026-11-19T20:50:09Z"
+      "cursor_merged_at": "2026-11-19T23:20:42Z"
     },
     {
       "repository": "pilialvu75-hue/Ai-orchestrator-diagnostics",
@@ -7633,6 +7633,125 @@
       "url": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/65e622e3f3b64f2eff617011adc920206d22806f",
       "match_ref": null,
       "reconciliation": null
+    },
+    {
+      "incident_id": "d96be5163c59ee8df5cf",
+      "status": "UNRECONCILED",
+      "detected_at": "2026-11-19T23:39:29Z",
+      "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
+      "kind": "direct_commit",
+      "pull_request": null,
+      "merge_sha": null,
+      "commit_sha": "300bc8c79fe86bcf644fe0661118c27db4f6bbef",
+      "head_branch": null,
+      "base_branch": "main",
+      "change_at": "2026-11-19T21:00:18Z",
+      "title": "Store small Web counter ZIP artifacts in D1 without an R2 subscription",
+      "url": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/300bc8c79fe86bcf644fe0661118c27db4f6bbef",
+      "match_ref": null,
+      "reconciliation": null
+    },
+    {
+      "incident_id": "fa07d9a5c358fc211aa2",
+      "status": "UNRECONCILED",
+      "detected_at": "2026-11-19T23:39:29Z",
+      "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
+      "kind": "direct_commit",
+      "pull_request": null,
+      "merge_sha": null,
+      "commit_sha": "4f518cf697146a1c59bd5c1a1229f36f2d4e7082",
+      "head_branch": null,
+      "base_branch": "main",
+      "change_at": "2026-11-19T21:21:17Z",
+      "title": "Connect the Web counter to the isolated GitHub runner",
+      "url": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/4f518cf697146a1c59bd5c1a1229f36f2d4e7082",
+      "match_ref": null,
+      "reconciliation": null
+    },
+    {
+      "incident_id": "74a098292364e0522861",
+      "status": "UNRECONCILED",
+      "detected_at": "2026-11-19T23:39:29Z",
+      "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
+      "kind": "direct_commit",
+      "pull_request": null,
+      "merge_sha": null,
+      "commit_sha": "3dc419c682c0efa697bc520993fcf42bf9fbc78f",
+      "head_branch": null,
+      "base_branch": "main",
+      "change_at": "2026-11-19T22:42:42Z",
+      "title": "Fix Access key fetch in Cloudflare Pages (#1211)",
+      "url": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/3dc419c682c0efa697bc520993fcf42bf9fbc78f",
+      "match_ref": null,
+      "reconciliation": null
+    },
+    {
+      "incident_id": "be70aff9bc28a5ddf7e0",
+      "status": "UNRECONCILED",
+      "detected_at": "2026-11-19T23:39:29Z",
+      "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
+      "kind": "unmatched_merge_commit",
+      "pull_request": null,
+      "merge_sha": null,
+      "commit_sha": "c9940ae1bf7b047b2b85c6aec0825c844bca491b",
+      "head_branch": null,
+      "base_branch": "main",
+      "change_at": "2026-11-19T22:48:35Z",
+      "title": "Merge remote-tracking branch 'origin/main' into aivexus-web/phase02-workerd-integration",
+      "url": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/c9940ae1bf7b047b2b85c6aec0825c844bca491b",
+      "match_ref": null,
+      "reconciliation": null
+    },
+    {
+      "incident_id": "7e19acf4eac1b2be3457",
+      "status": "UNRECONCILED",
+      "detected_at": "2026-11-19T23:39:29Z",
+      "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
+      "kind": "direct_commit",
+      "pull_request": null,
+      "merge_sha": null,
+      "commit_sha": "576a719ca1573f7147ce4b933290cc649cdd4dc0",
+      "head_branch": null,
+      "base_branch": "main",
+      "change_at": "2026-11-19T22:49:18Z",
+      "title": "Use manual redirects for counter runner subrequests",
+      "url": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/576a719ca1573f7147ce4b933290cc649cdd4dc0",
+      "match_ref": null,
+      "reconciliation": null
+    },
+    {
+      "incident_id": "0195d0025a5d6c142031",
+      "status": "UNRECONCILED",
+      "detected_at": "2026-11-19T23:39:29Z",
+      "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
+      "kind": "unmatched_merge_commit",
+      "pull_request": null,
+      "merge_sha": null,
+      "commit_sha": "13c405a082fc127370b7ed8dd7a5462e9d51e059",
+      "head_branch": null,
+      "base_branch": "main",
+      "change_at": "2026-11-19T22:52:44Z",
+      "title": "Integrate free D1 counter storage and GitHub runner (#1209, #1210)",
+      "url": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/13c405a082fc127370b7ed8dd7a5462e9d51e059",
+      "match_ref": null,
+      "reconciliation": null
+    },
+    {
+      "incident_id": "caab49600e22cb30c8e4",
+      "status": "UNRECONCILED",
+      "detected_at": "2026-11-19T23:39:29Z",
+      "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
+      "kind": "direct_commit",
+      "pull_request": null,
+      "merge_sha": null,
+      "commit_sha": "2525004cc586e75d61a956523cf7a384847fb586",
+      "head_branch": null,
+      "base_branch": "main",
+      "change_at": "2026-11-19T23:20:42Z",
+      "title": "Enable private app generation with Workers AI Free (#1212)",
+      "url": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/2525004cc586e75d61a956523cf7a384847fb586",
+      "match_ref": null,
+      "reconciliation": null
     }
   ],
   "reconciliation_history": [
@@ -7643,35 +7762,35 @@
       "note": "Known motivating example for CP-HARDEN-03. It predates this incremental detector and is not retroactively reopened."
     }
   ],
-  "last_scan_at": "2026-11-19T22:39:27Z",
+  "last_scan_at": "2026-11-19T23:39:29Z",
   "scan_health": {
     "pilialvu75-hue/AI-Orchestrator-Module-Library": {
       "state": "OK",
-      "last_success_at": "2026-11-19T22:39:27Z",
+      "last_success_at": "2026-11-19T23:39:29Z",
       "last_failure_at": null,
       "error_code": null
     },
     "pilialvu75-hue/Ai-orchestrator-riserva": {
       "state": "OK",
-      "last_success_at": "2026-11-19T22:39:27Z",
+      "last_success_at": "2026-11-19T23:39:29Z",
       "last_failure_at": "2026-10-28T07:39:58Z",
       "error_code": null
     },
     "pilialvu75-hue/Ai-orchestrator-diagnostics": {
       "state": "OK",
-      "last_success_at": "2026-11-19T22:39:27Z",
+      "last_success_at": "2026-11-19T23:39:29Z",
       "last_failure_at": "2026-10-28T07:39:58Z",
       "error_code": null
     },
     "pilialvu75-hue/AI-Orchestrator-Module-Researcher": {
       "state": "OK",
-      "last_success_at": "2026-11-19T22:39:27Z",
+      "last_success_at": "2026-11-19T23:39:29Z",
       "last_failure_at": "2026-10-28T07:39:58Z",
       "error_code": null
     },
     "pilialvu75-hue/Ai_orchestrator-prova": {
       "state": "OK",
-      "last_success_at": "2026-11-19T22:39:27Z",
+      "last_success_at": "2026-11-19T23:39:29Z",
       "last_failure_at": "2026-10-28T07:39:58Z",
       "error_code": null
     }
