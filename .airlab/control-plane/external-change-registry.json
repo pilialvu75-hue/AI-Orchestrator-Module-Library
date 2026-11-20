@@ -16,7 +16,7 @@
     {
       "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
       "baseline_at": "2026-10-03T16:20:00Z",
-      "cursor_merged_at": "2026-11-20T07:48:46Z"
+      "cursor_merged_at": "2026-11-20T12:37:47Z"
     },
     {
       "repository": "pilialvu75-hue/Ai-orchestrator-diagnostics",
@@ -7922,6 +7922,125 @@
       "url": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/4d3196b4f2f11929ab615e684975e43c2f3f5af1",
       "match_ref": null,
       "reconciliation": null
+    },
+    {
+      "incident_id": "2b07e1f4e818c928f078",
+      "status": "UNRECONCILED",
+      "detected_at": "2026-11-20T12:40:47Z",
+      "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
+      "kind": "direct_commit",
+      "pull_request": null,
+      "merge_sha": null,
+      "commit_sha": "fabc9b5b75196da63e36c3c7e4b0d496d39a7772",
+      "head_branch": null,
+      "base_branch": "main",
+      "change_at": "2026-11-20T11:31:13Z",
+      "title": "feat(hybrid H51): use existing localOnly inference stream for protected checkpoint stages",
+      "url": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/fabc9b5b75196da63e36c3c7e4b0d496d39a7772",
+      "match_ref": null,
+      "reconciliation": null
+    },
+    {
+      "incident_id": "9fd3f40153bc6435a541",
+      "status": "UNRECONCILED",
+      "detected_at": "2026-11-20T12:40:47Z",
+      "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
+      "kind": "direct_commit",
+      "pull_request": null,
+      "merge_sha": null,
+      "commit_sha": "321e19cde758821e383574934acfd32c0c92829c",
+      "head_branch": null,
+      "base_branch": "main",
+      "change_at": "2026-11-20T11:31:37Z",
+      "title": "test(hybrid H51): enforce localOnly stream, successful final, bounds and no Cloud source",
+      "url": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/321e19cde758821e383574934acfd32c0c92829c",
+      "match_ref": null,
+      "reconciliation": null
+    },
+    {
+      "incident_id": "e23212f9a0ca8baed2cb",
+      "status": "UNRECONCILED",
+      "detected_at": "2026-11-20T12:40:47Z",
+      "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
+      "kind": "direct_commit",
+      "pull_request": null,
+      "merge_sha": null,
+      "commit_sha": "25335e6230a9110023fc2ae4882ac6c7dcb9bee0",
+      "head_branch": null,
+      "base_branch": "main",
+      "change_at": "2026-11-20T11:31:45Z",
+      "title": "ci(hybrid H51): execute LOCAL runtime stream bridge safety tests",
+      "url": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/25335e6230a9110023fc2ae4882ac6c7dcb9bee0",
+      "match_ref": null,
+      "reconciliation": null
+    },
+    {
+      "incident_id": "717e4d1c63ed240519f7",
+      "status": "UNRECONCILED",
+      "detected_at": "2026-11-20T12:40:47Z",
+      "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
+      "kind": "direct_commit",
+      "pull_request": null,
+      "merge_sha": null,
+      "commit_sha": "c5d10ee5a967d5eca9d93176f6e45468744c792c",
+      "head_branch": null,
+      "base_branch": "main",
+      "change_at": "2026-11-20T11:31:48Z",
+      "title": "ci(hybrid H51): execute LOCAL runtime stream bridge safety tests",
+      "url": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/c5d10ee5a967d5eca9d93176f6e45468744c792c",
+      "match_ref": null,
+      "reconciliation": null
+    },
+    {
+      "incident_id": "50ee1ebcf5a6fef76ca3",
+      "status": "UNRECONCILED",
+      "detected_at": "2026-11-20T12:40:47Z",
+      "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
+      "kind": "unmatched_merge_commit",
+      "pull_request": null,
+      "merge_sha": null,
+      "commit_sha": "7afc3a3dd276c7078d3a56e93ec7b57f1fbb2935",
+      "head_branch": null,
+      "base_branch": "main",
+      "change_at": "2026-11-20T11:47:36Z",
+      "title": "[source-only] merge(hybrid): H51 LOCAL-only runtime bridge (#1224)",
+      "url": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/7afc3a3dd276c7078d3a56e93ec7b57f1fbb2935",
+      "match_ref": null,
+      "reconciliation": null
+    },
+    {
+      "incident_id": "6511183d7b02a7bf05d4",
+      "status": "UNRECONCILED",
+      "detected_at": "2026-11-20T12:40:47Z",
+      "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
+      "kind": "direct_commit",
+      "pull_request": null,
+      "merge_sha": null,
+      "commit_sha": "4eadb421d186d0da708c20893fdeb185c50536ed",
+      "head_branch": null,
+      "base_branch": "main",
+      "change_at": "2026-11-20T12:02:10Z",
+      "title": "feat(windows): gated ASUS CUDA engine and signed Windows Beta delivery (#1203)",
+      "url": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/4eadb421d186d0da708c20893fdeb185c50536ed",
+      "match_ref": null,
+      "reconciliation": null
+    },
+    {
+      "incident_id": "5a8112ca0158ec4be1ba",
+      "status": "UNRECONCILED",
+      "detected_at": "2026-11-20T12:40:47Z",
+      "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
+      "kind": "direct_commit",
+      "pull_request": null,
+      "merge_sha": null,
+      "commit_sha": "1f342cd5cb6d678fd31e19fd4f5786cb8f5825df",
+      "head_branch": null,
+      "base_branch": "main",
+      "change_at": "2026-11-20T12:37:47Z",
+      "title": "feat(windows): enable explicit owner unsigned CUDA Beta QA build (#1226)",
+      "url": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/1f342cd5cb6d678fd31e19fd4f5786cb8f5825df",
+      "match_ref": null,
+      "reconciliation": null
     }
   ],
   "reconciliation_history": [
@@ -7932,35 +8051,35 @@
       "note": "Known motivating example for CP-HARDEN-03. It predates this incremental detector and is not retroactively reopened."
     }
   ],
-  "last_scan_at": "2026-11-20T11:39:05Z",
+  "last_scan_at": "2026-11-20T12:40:47Z",
   "scan_health": {
     "pilialvu75-hue/AI-Orchestrator-Module-Library": {
       "state": "OK",
-      "last_success_at": "2026-11-20T11:39:05Z",
+      "last_success_at": "2026-11-20T12:40:47Z",
       "last_failure_at": null,
       "error_code": null
     },
     "pilialvu75-hue/Ai-orchestrator-riserva": {
       "state": "OK",
-      "last_success_at": "2026-11-20T11:39:05Z",
+      "last_success_at": "2026-11-20T12:40:47Z",
       "last_failure_at": "2026-10-28T07:39:58Z",
       "error_code": null
     },
     "pilialvu75-hue/Ai-orchestrator-diagnostics": {
       "state": "OK",
-      "last_success_at": "2026-11-20T11:39:05Z",
+      "last_success_at": "2026-11-20T12:40:47Z",
       "last_failure_at": "2026-10-28T07:39:58Z",
       "error_code": null
     },
     "pilialvu75-hue/AI-Orchestrator-Module-Researcher": {
       "state": "OK",
-      "last_success_at": "2026-11-20T11:39:05Z",
+      "last_success_at": "2026-11-20T12:40:47Z",
       "last_failure_at": "2026-10-28T07:39:58Z",
       "error_code": null
     },
     "pilialvu75-hue/Ai_orchestrator-prova": {
       "state": "OK",
-      "last_success_at": "2026-11-20T11:39:05Z",
+      "last_success_at": "2026-11-20T12:40:47Z",
       "last_failure_at": "2026-10-28T07:39:58Z",
       "error_code": null
     }
