@@ -16,7 +16,7 @@
     {
       "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
       "baseline_at": "2026-10-03T16:20:00Z",
-      "cursor_merged_at": "2026-11-20T13:23:40Z"
+      "cursor_merged_at": "2026-11-20T15:14:14Z"
     },
     {
       "repository": "pilialvu75-hue/Ai-orchestrator-diagnostics",
@@ -8058,6 +8058,108 @@
       "url": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/27c816f9657ffdcec49d99409023f20661301040",
       "match_ref": null,
       "reconciliation": null
+    },
+    {
+      "incident_id": "aec221c259affdcfeb60",
+      "status": "UNRECONCILED",
+      "detected_at": "2026-11-20T15:39:22Z",
+      "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
+      "kind": "direct_commit",
+      "pull_request": null,
+      "merge_sha": null,
+      "commit_sha": "74d0856692b6fdddc47db8db03919450a52325df",
+      "head_branch": null,
+      "base_branch": "main",
+      "change_at": "2026-11-20T14:47:09Z",
+      "title": "fix(windows): route installed CUDA QA engine instead of CPU CLI (#1229)",
+      "url": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/74d0856692b6fdddc47db8db03919450a52325df",
+      "match_ref": null,
+      "reconciliation": null
+    },
+    {
+      "incident_id": "8bd601a2405fc06a2c57",
+      "status": "UNRECONCILED",
+      "detected_at": "2026-11-20T15:39:22Z",
+      "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
+      "kind": "direct_commit",
+      "pull_request": null,
+      "merge_sha": null,
+      "commit_sha": "ed1f7255ec67f93d3e9ce1f95e9f5d2c6975b27a",
+      "head_branch": null,
+      "base_branch": "main",
+      "change_at": "2026-11-20T14:49:38Z",
+      "title": "fix(win): remove Qwen forced CLI exception on top of CUDA bootstrap fix #1229",
+      "url": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/ed1f7255ec67f93d3e9ce1f95e9f5d2c6975b27a",
+      "match_ref": null,
+      "reconciliation": null
+    },
+    {
+      "incident_id": "94589d1cd62d0dae9339",
+      "status": "UNRECONCILED",
+      "detected_at": "2026-11-20T15:39:22Z",
+      "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
+      "kind": "direct_commit",
+      "pull_request": null,
+      "merge_sha": null,
+      "commit_sha": "4be91a4f68fbd8f0805ae9184fbcd710f22063e4",
+      "head_branch": null,
+      "base_branch": "main",
+      "change_at": "2026-11-20T14:49:53Z",
+      "title": "test(win): restore Qwen catalog/chat/import resident route while preserving CUDA bootstrap tests",
+      "url": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/4be91a4f68fbd8f0805ae9184fbcd710f22063e4",
+      "match_ref": null,
+      "reconciliation": null
+    },
+    {
+      "incident_id": "696af4461b685a89dba0",
+      "status": "UNRECONCILED",
+      "detected_at": "2026-11-20T15:39:22Z",
+      "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
+      "kind": "unmatched_merge_commit",
+      "pull_request": null,
+      "merge_sha": null,
+      "commit_sha": "dd970b4a5267cc80fb28dba337888abf54d959aa",
+      "head_branch": null,
+      "base_branch": "main",
+      "change_at": "2026-11-20T15:09:59Z",
+      "title": "[source-only] fix(win): restore resident Qwen after CUDA bootstrap (#1231)",
+      "url": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/dd970b4a5267cc80fb28dba337888abf54d959aa",
+      "match_ref": null,
+      "reconciliation": null
+    },
+    {
+      "incident_id": "506e5557f1d319af6964",
+      "status": "UNRECONCILED",
+      "detected_at": "2026-11-20T15:39:22Z",
+      "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
+      "kind": "direct_commit",
+      "pull_request": null,
+      "merge_sha": null,
+      "commit_sha": "e583ca8fff420f81c0c7f43f05d3bc434fbfaf4c",
+      "head_branch": null,
+      "base_branch": "main",
+      "change_at": "2026-11-20T15:11:51Z",
+      "title": "fix(web): expand app generation prompt to 8000 Unicode characters",
+      "url": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/e583ca8fff420f81c0c7f43f05d3bc434fbfaf4c",
+      "match_ref": null,
+      "reconciliation": null
+    },
+    {
+      "incident_id": "b1fca8ec001ba1cd965b",
+      "status": "UNRECONCILED",
+      "detected_at": "2026-11-20T15:39:22Z",
+      "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
+      "kind": "direct_commit",
+      "pull_request": null,
+      "merge_sha": null,
+      "commit_sha": "55b25447d58f90199e08877b5f2afd2bf2ede6a5",
+      "head_branch": null,
+      "base_branch": "main",
+      "change_at": "2026-11-20T15:14:14Z",
+      "title": "ops(web): request private deployment of 8000-character prompts",
+      "url": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/55b25447d58f90199e08877b5f2afd2bf2ede6a5",
+      "match_ref": null,
+      "reconciliation": null
     }
   ],
   "reconciliation_history": [
@@ -8068,35 +8170,35 @@
       "note": "Known motivating example for CP-HARDEN-03. It predates this incremental detector and is not retroactively reopened."
     }
   ],
-  "last_scan_at": "2026-11-20T14:39:17Z",
+  "last_scan_at": "2026-11-20T15:39:22Z",
   "scan_health": {
     "pilialvu75-hue/AI-Orchestrator-Module-Library": {
       "state": "OK",
-      "last_success_at": "2026-11-20T14:39:17Z",
+      "last_success_at": "2026-11-20T15:39:22Z",
       "last_failure_at": null,
       "error_code": null
     },
     "pilialvu75-hue/Ai-orchestrator-riserva": {
       "state": "OK",
-      "last_success_at": "2026-11-20T14:39:17Z",
+      "last_success_at": "2026-11-20T15:39:22Z",
       "last_failure_at": "2026-10-28T07:39:58Z",
       "error_code": null
     },
     "pilialvu75-hue/Ai-orchestrator-diagnostics": {
       "state": "OK",
-      "last_success_at": "2026-11-20T14:39:17Z",
+      "last_success_at": "2026-11-20T15:39:22Z",
       "last_failure_at": "2026-10-28T07:39:58Z",
       "error_code": null
     },
     "pilialvu75-hue/AI-Orchestrator-Module-Researcher": {
       "state": "OK",
-      "last_success_at": "2026-11-20T14:39:17Z",
+      "last_success_at": "2026-11-20T15:39:22Z",
       "last_failure_at": "2026-10-28T07:39:58Z",
       "error_code": null
     },
     "pilialvu75-hue/Ai_orchestrator-prova": {
       "state": "OK",
-      "last_success_at": "2026-11-20T14:39:17Z",
+      "last_success_at": "2026-11-20T15:39:22Z",
       "last_failure_at": "2026-10-28T07:39:58Z",
       "error_code": null
     }
