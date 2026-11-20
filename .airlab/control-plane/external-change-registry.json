@@ -16,7 +16,7 @@
     {
       "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
       "baseline_at": "2026-10-03T16:20:00Z",
-      "cursor_merged_at": "2026-11-20T17:01:54Z"
+      "cursor_merged_at": "2026-11-20T18:17:26Z"
     },
     {
       "repository": "pilialvu75-hue/Ai-orchestrator-diagnostics",
@@ -8313,6 +8313,57 @@
       "url": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/61a4869f01275823d1bef3c2d3eb7207d664ef63",
       "match_ref": null,
       "reconciliation": null
+    },
+    {
+      "incident_id": "b5e11dfd8a323c460699",
+      "status": "UNRECONCILED",
+      "detected_at": "2026-11-20T18:39:05Z",
+      "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
+      "kind": "direct_commit",
+      "pull_request": null,
+      "merge_sha": null,
+      "commit_sha": "22c0b7dc0b911bfc82b578f0275449ad2a3dc3a9",
+      "head_branch": null,
+      "base_branch": "main",
+      "change_at": "2026-11-20T18:11:20Z",
+      "title": "feat(web): free-gated administrator NVIDIA 500B+ app builder",
+      "url": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/22c0b7dc0b911bfc82b578f0275449ad2a3dc3a9",
+      "match_ref": null,
+      "reconciliation": null
+    },
+    {
+      "incident_id": "931b2dd1e79f79123398",
+      "status": "UNRECONCILED",
+      "detected_at": "2026-11-20T18:39:05Z",
+      "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
+      "kind": "direct_commit",
+      "pull_request": null,
+      "merge_sha": null,
+      "commit_sha": "2cb0e4974e74a3f0d1f0151b53ef984a14709a66",
+      "head_branch": null,
+      "base_branch": "main",
+      "change_at": "2026-11-20T18:15:29Z",
+      "title": "ops(web): request protected private release of large NVIDIA builder adapter",
+      "url": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/2cb0e4974e74a3f0d1f0151b53ef984a14709a66",
+      "match_ref": null,
+      "reconciliation": null
+    },
+    {
+      "incident_id": "e3e33fb3bb3ec26ea3c0",
+      "status": "UNRECONCILED",
+      "detected_at": "2026-11-20T18:39:05Z",
+      "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
+      "kind": "direct_commit",
+      "pull_request": null,
+      "merge_sha": null,
+      "commit_sha": "7836e437c304f76b8d0919edfcc1d8a130ce4284",
+      "head_branch": null,
+      "base_branch": "main",
+      "change_at": "2026-11-20T18:17:26Z",
+      "title": "ops(web): inspect NVIDIA 500B+ binding configuration read-only",
+      "url": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/7836e437c304f76b8d0919edfcc1d8a130ce4284",
+      "match_ref": null,
+      "reconciliation": null
     }
   ],
   "reconciliation_history": [
@@ -8323,35 +8374,35 @@
       "note": "Known motivating example for CP-HARDEN-03. It predates this incremental detector and is not retroactively reopened."
     }
   ],
-  "last_scan_at": "2026-11-20T17:39:15Z",
+  "last_scan_at": "2026-11-20T18:39:05Z",
   "scan_health": {
     "pilialvu75-hue/AI-Orchestrator-Module-Library": {
       "state": "OK",
-      "last_success_at": "2026-11-20T17:39:15Z",
+      "last_success_at": "2026-11-20T18:39:05Z",
       "last_failure_at": null,
       "error_code": null
     },
     "pilialvu75-hue/Ai-orchestrator-riserva": {
       "state": "OK",
-      "last_success_at": "2026-11-20T17:39:15Z",
+      "last_success_at": "2026-11-20T18:39:05Z",
       "last_failure_at": "2026-10-28T07:39:58Z",
       "error_code": null
     },
     "pilialvu75-hue/Ai-orchestrator-diagnostics": {
       "state": "OK",
-      "last_success_at": "2026-11-20T17:39:15Z",
+      "last_success_at": "2026-11-20T18:39:05Z",
       "last_failure_at": "2026-10-28T07:39:58Z",
       "error_code": null
     },
     "pilialvu75-hue/AI-Orchestrator-Module-Researcher": {
       "state": "OK",
-      "last_success_at": "2026-11-20T17:39:15Z",
+      "last_success_at": "2026-11-20T18:39:05Z",
       "last_failure_at": "2026-10-28T07:39:58Z",
       "error_code": null
     },
     "pilialvu75-hue/Ai_orchestrator-prova": {
       "state": "OK",
-      "last_success_at": "2026-11-20T17:39:15Z",
+      "last_success_at": "2026-11-20T18:39:05Z",
       "last_failure_at": "2026-10-28T07:39:58Z",
       "error_code": null
     }
