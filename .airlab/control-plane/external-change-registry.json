@@ -16,7 +16,7 @@
     {
       "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
       "baseline_at": "2026-10-03T16:20:00Z",
-      "cursor_merged_at": "2026-11-19T23:20:42Z"
+      "cursor_merged_at": "2026-11-20T00:36:08Z"
     },
     {
       "repository": "pilialvu75-hue/Ai-orchestrator-diagnostics",
@@ -7752,6 +7752,91 @@
       "url": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/2525004cc586e75d61a956523cf7a384847fb586",
       "match_ref": null,
       "reconciliation": null
+    },
+    {
+      "incident_id": "0d28324e262bb1ed4962",
+      "status": "UNRECONCILED",
+      "detected_at": "2026-11-20T00:49:14Z",
+      "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
+      "kind": "direct_commit",
+      "pull_request": null,
+      "merge_sha": null,
+      "commit_sha": "22d3183df26af6a61c0ddcb10eb11d48efbd3804",
+      "head_branch": null,
+      "base_branch": "main",
+      "change_at": "2026-11-19T23:49:45Z",
+      "title": "Verify and repair Web apps in the isolated runner (#1213)",
+      "url": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/22d3183df26af6a61c0ddcb10eb11d48efbd3804",
+      "match_ref": null,
+      "reconciliation": null
+    },
+    {
+      "incident_id": "201b188c693d3d48e83e",
+      "status": "UNRECONCILED",
+      "detected_at": "2026-11-20T00:49:14Z",
+      "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
+      "kind": "direct_commit",
+      "pull_request": null,
+      "merge_sha": null,
+      "commit_sha": "3c6cedee4324b486ef5583b8b937077779ec457d",
+      "head_branch": null,
+      "base_branch": "main",
+      "change_at": "2026-11-20T00:02:24Z",
+      "title": "Request structured Web repairs and report provider outcomes (#1214)",
+      "url": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/3c6cedee4324b486ef5583b8b937077779ec457d",
+      "match_ref": null,
+      "reconciliation": null
+    },
+    {
+      "incident_id": "9716067cdc5eb817cf6c",
+      "status": "UNRECONCILED",
+      "detected_at": "2026-11-20T00:49:14Z",
+      "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
+      "kind": "direct_commit",
+      "pull_request": null,
+      "merge_sha": null,
+      "commit_sha": "afd1983ca3357cfd003237de652cfd212bfe0c75",
+      "head_branch": null,
+      "base_branch": "main",
+      "change_at": "2026-11-20T00:13:08Z",
+      "title": "Apply repaired files without replacing trusted app metadata (#1215)",
+      "url": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/afd1983ca3357cfd003237de652cfd212bfe0c75",
+      "match_ref": null,
+      "reconciliation": null
+    },
+    {
+      "incident_id": "70bca0a8dd2c421fe492",
+      "status": "UNRECONCILED",
+      "detected_at": "2026-11-20T00:49:14Z",
+      "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
+      "kind": "direct_commit",
+      "pull_request": null,
+      "merge_sha": null,
+      "commit_sha": "3ec7d093bb8be6ab2a0d4cf4c641272f1eba1083",
+      "head_branch": null,
+      "base_branch": "main",
+      "change_at": "2026-11-20T00:24:21Z",
+      "title": "Stabilize Chromium startup on the free Web runner (#1216)",
+      "url": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/3ec7d093bb8be6ab2a0d4cf4c641272f1eba1083",
+      "match_ref": null,
+      "reconciliation": null
+    },
+    {
+      "incident_id": "84bcb45c6d0dfc4019e6",
+      "status": "UNRECONCILED",
+      "detected_at": "2026-11-20T00:49:14Z",
+      "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
+      "kind": "direct_commit",
+      "pull_request": null,
+      "merge_sha": null,
+      "commit_sha": "c58ec2a13fe5cdf2c898b9f614ad9f92b5f3ca82",
+      "head_branch": null,
+      "base_branch": "main",
+      "change_at": "2026-11-20T00:36:08Z",
+      "title": "Initialize an isolated Chromium target and retry startup (#1217)",
+      "url": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/c58ec2a13fe5cdf2c898b9f614ad9f92b5f3ca82",
+      "match_ref": null,
+      "reconciliation": null
     }
   ],
   "reconciliation_history": [
@@ -7762,35 +7847,35 @@
       "note": "Known motivating example for CP-HARDEN-03. It predates this incremental detector and is not retroactively reopened."
     }
   ],
-  "last_scan_at": "2026-11-19T23:39:29Z",
+  "last_scan_at": "2026-11-20T00:49:14Z",
   "scan_health": {
     "pilialvu75-hue/AI-Orchestrator-Module-Library": {
       "state": "OK",
-      "last_success_at": "2026-11-19T23:39:29Z",
+      "last_success_at": "2026-11-20T00:49:14Z",
       "last_failure_at": null,
       "error_code": null
     },
     "pilialvu75-hue/Ai-orchestrator-riserva": {
       "state": "OK",
-      "last_success_at": "2026-11-19T23:39:29Z",
+      "last_success_at": "2026-11-20T00:49:14Z",
       "last_failure_at": "2026-10-28T07:39:58Z",
       "error_code": null
     },
     "pilialvu75-hue/Ai-orchestrator-diagnostics": {
       "state": "OK",
-      "last_success_at": "2026-11-19T23:39:29Z",
+      "last_success_at": "2026-11-20T00:49:14Z",
       "last_failure_at": "2026-10-28T07:39:58Z",
       "error_code": null
     },
     "pilialvu75-hue/AI-Orchestrator-Module-Researcher": {
       "state": "OK",
-      "last_success_at": "2026-11-19T23:39:29Z",
+      "last_success_at": "2026-11-20T00:49:14Z",
       "last_failure_at": "2026-10-28T07:39:58Z",
       "error_code": null
     },
     "pilialvu75-hue/Ai_orchestrator-prova": {
       "state": "OK",
-      "last_success_at": "2026-11-19T23:39:29Z",
+      "last_success_at": "2026-11-20T00:49:14Z",
       "last_failure_at": "2026-10-28T07:39:58Z",
       "error_code": null
     }
