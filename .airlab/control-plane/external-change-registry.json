@@ -16,7 +16,7 @@
     {
       "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
       "baseline_at": "2026-10-03T16:20:00Z",
-      "cursor_merged_at": "2026-11-20T22:25:55Z"
+      "cursor_merged_at": "2026-11-20T23:03:13Z"
     },
     {
       "repository": "pilialvu75-hue/Ai-orchestrator-diagnostics",
@@ -8568,6 +8568,23 @@
       "url": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/067088780ac100394f3a7d8f93a393b1df691c0b",
       "match_ref": null,
       "reconciliation": null
+    },
+    {
+      "incident_id": "e0483351fa751810294d",
+      "status": "UNRECONCILED",
+      "detected_at": "2026-11-20T23:39:39Z",
+      "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
+      "kind": "direct_commit",
+      "pull_request": null,
+      "merge_sha": null,
+      "commit_sha": "d802d2f7b222b9f89be6f6c9c8648fc0644eae61",
+      "head_branch": null,
+      "base_branch": "main",
+      "change_at": "2026-11-20T23:03:13Z",
+      "title": "feat(android): selectable offline Android TTS and monotonic beta updater (#1262)",
+      "url": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/d802d2f7b222b9f89be6f6c9c8648fc0644eae61",
+      "match_ref": null,
+      "reconciliation": null
     }
   ],
   "reconciliation_history": [
@@ -8578,35 +8595,35 @@
       "note": "Known motivating example for CP-HARDEN-03. It predates this incremental detector and is not retroactively reopened."
     }
   ],
-  "last_scan_at": "2026-11-20T22:38:55Z",
+  "last_scan_at": "2026-11-20T23:39:39Z",
   "scan_health": {
     "pilialvu75-hue/AI-Orchestrator-Module-Library": {
       "state": "OK",
-      "last_success_at": "2026-11-20T22:38:55Z",
+      "last_success_at": "2026-11-20T23:39:39Z",
       "last_failure_at": null,
       "error_code": null
     },
     "pilialvu75-hue/Ai-orchestrator-riserva": {
       "state": "OK",
-      "last_success_at": "2026-11-20T22:38:55Z",
+      "last_success_at": "2026-11-20T23:39:39Z",
       "last_failure_at": "2026-10-28T07:39:58Z",
       "error_code": null
     },
     "pilialvu75-hue/Ai-orchestrator-diagnostics": {
       "state": "OK",
-      "last_success_at": "2026-11-20T22:38:55Z",
+      "last_success_at": "2026-11-20T23:39:39Z",
       "last_failure_at": "2026-10-28T07:39:58Z",
       "error_code": null
     },
     "pilialvu75-hue/AI-Orchestrator-Module-Researcher": {
       "state": "OK",
-      "last_success_at": "2026-11-20T22:38:55Z",
+      "last_success_at": "2026-11-20T23:39:39Z",
       "last_failure_at": "2026-10-28T07:39:58Z",
       "error_code": null
     },
     "pilialvu75-hue/Ai_orchestrator-prova": {
       "state": "OK",
-      "last_success_at": "2026-11-20T22:38:55Z",
+      "last_success_at": "2026-11-20T23:39:39Z",
       "last_failure_at": "2026-10-28T07:39:58Z",
       "error_code": null
     }
