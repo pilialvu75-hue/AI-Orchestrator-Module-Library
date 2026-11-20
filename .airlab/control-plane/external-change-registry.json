@@ -16,7 +16,7 @@
     {
       "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
       "baseline_at": "2026-10-03T16:20:00Z",
-      "cursor_merged_at": "2026-11-20T21:07:53Z"
+      "cursor_merged_at": "2026-11-20T22:25:55Z"
     },
     {
       "repository": "pilialvu75-hue/Ai-orchestrator-diagnostics",
@@ -8432,6 +8432,142 @@
       "url": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/d4e28520a6671614a49527862c0fac1f27f91efc",
       "match_ref": null,
       "reconciliation": null
+    },
+    {
+      "incident_id": "e20d2fef208f8765051a",
+      "status": "UNRECONCILED",
+      "detected_at": "2026-11-20T22:38:55Z",
+      "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
+      "kind": "direct_commit",
+      "pull_request": null,
+      "merge_sha": null,
+      "commit_sha": "c65e7cdc4c22c4de3662bfe2396547d77ed30131",
+      "head_branch": null,
+      "base_branch": "main",
+      "change_at": "2026-11-20T22:04:00Z",
+      "title": "feat(hybrid): integrate H53 switching policy for Android and Windows beta",
+      "url": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/c65e7cdc4c22c4de3662bfe2396547d77ed30131",
+      "match_ref": null,
+      "reconciliation": null
+    },
+    {
+      "incident_id": "6ccef6017fa3aefdfd26",
+      "status": "UNRECONCILED",
+      "detected_at": "2026-11-20T22:38:55Z",
+      "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
+      "kind": "direct_commit",
+      "pull_request": null,
+      "merge_sha": null,
+      "commit_sha": "b4eced0aca9ab91e878ea532a21cc4bc02bdf2a4",
+      "head_branch": null,
+      "base_branch": "main",
+      "change_at": "2026-11-20T22:04:04Z",
+      "title": "feat(hybrid): integrate H53 switching policy for Android and Windows beta",
+      "url": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/b4eced0aca9ab91e878ea532a21cc4bc02bdf2a4",
+      "match_ref": null,
+      "reconciliation": null
+    },
+    {
+      "incident_id": "0d25a838a68439f0bba8",
+      "status": "UNRECONCILED",
+      "detected_at": "2026-11-20T22:38:55Z",
+      "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
+      "kind": "direct_commit",
+      "pull_request": null,
+      "merge_sha": null,
+      "commit_sha": "1f33b26f3f3e98cdab2a9fa391a7b2c1b1183d3c",
+      "head_branch": null,
+      "base_branch": "main",
+      "change_at": "2026-11-20T22:04:18Z",
+      "title": "fix(android): pin compatible PostHog native SDK for beta build",
+      "url": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/1f33b26f3f3e98cdab2a9fa391a7b2c1b1183d3c",
+      "match_ref": null,
+      "reconciliation": null
+    },
+    {
+      "incident_id": "6bac34d4f9eb35e736b3",
+      "status": "UNRECONCILED",
+      "detected_at": "2026-11-20T22:38:55Z",
+      "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
+      "kind": "direct_commit",
+      "pull_request": null,
+      "merge_sha": null,
+      "commit_sha": "8689678df53002b0e289bf1f206e1f54d002cc58",
+      "head_branch": null,
+      "base_branch": "main",
+      "change_at": "2026-11-20T22:04:27Z",
+      "title": "ci(hybrid): test H53 policy on Android and shared runners",
+      "url": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/8689678df53002b0e289bf1f206e1f54d002cc58",
+      "match_ref": null,
+      "reconciliation": null
+    },
+    {
+      "incident_id": "801347bfa84a276973cd",
+      "status": "UNRECONCILED",
+      "detected_at": "2026-11-20T22:38:55Z",
+      "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
+      "kind": "direct_commit",
+      "pull_request": null,
+      "merge_sha": null,
+      "commit_sha": "19a3f61a06718559556cbfb31924f40a6fa550d5",
+      "head_branch": null,
+      "base_branch": "main",
+      "change_at": "2026-11-20T22:04:31Z",
+      "title": "ci(hybrid): test H53 policy on Android and shared runners",
+      "url": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/19a3f61a06718559556cbfb31924f40a6fa550d5",
+      "match_ref": null,
+      "reconciliation": null
+    },
+    {
+      "incident_id": "a6e9fb1ce0ee300c94ef",
+      "status": "UNRECONCILED",
+      "detected_at": "2026-11-20T22:38:55Z",
+      "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
+      "kind": "unmatched_merge_commit",
+      "pull_request": null,
+      "merge_sha": null,
+      "commit_sha": "f52065cfba0e9d4130cfda2258da7ae588b1c094",
+      "head_branch": null,
+      "base_branch": "main",
+      "change_at": "2026-11-20T22:21:45Z",
+      "title": "[source-only] HYBRID H53 quality routing and Android PostHog compatibility (#1257)",
+      "url": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/f52065cfba0e9d4130cfda2258da7ae588b1c094",
+      "match_ref": null,
+      "reconciliation": null
+    },
+    {
+      "incident_id": "c85e64da591e6b65b3b9",
+      "status": "UNRECONCILED",
+      "detected_at": "2026-11-20T22:38:55Z",
+      "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
+      "kind": "direct_commit",
+      "pull_request": null,
+      "merge_sha": null,
+      "commit_sha": "9736641486a2a899d3abfece421fd9e647b1e5c2",
+      "head_branch": null,
+      "base_branch": "main",
+      "change_at": "2026-11-20T22:24:09Z",
+      "title": "feat(web): owner-only private Studio with full bounded free quota",
+      "url": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/9736641486a2a899d3abfece421fd9e647b1e5c2",
+      "match_ref": null,
+      "reconciliation": null
+    },
+    {
+      "incident_id": "c7086adc9dcbd9d63af6",
+      "status": "UNRECONCILED",
+      "detected_at": "2026-11-20T22:38:55Z",
+      "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
+      "kind": "direct_commit",
+      "pull_request": null,
+      "merge_sha": null,
+      "commit_sha": "067088780ac100394f3a7d8f93a393b1df691c0b",
+      "head_branch": null,
+      "base_branch": "main",
+      "change_at": "2026-11-20T22:25:55Z",
+      "title": "ops(web): guard and request private release of owner-only Studio",
+      "url": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/067088780ac100394f3a7d8f93a393b1df691c0b",
+      "match_ref": null,
+      "reconciliation": null
     }
   ],
   "reconciliation_history": [
@@ -8442,35 +8578,35 @@
       "note": "Known motivating example for CP-HARDEN-03. It predates this incremental detector and is not retroactively reopened."
     }
   ],
-  "last_scan_at": "2026-11-20T21:39:12Z",
+  "last_scan_at": "2026-11-20T22:38:55Z",
   "scan_health": {
     "pilialvu75-hue/AI-Orchestrator-Module-Library": {
       "state": "OK",
-      "last_success_at": "2026-11-20T21:39:12Z",
+      "last_success_at": "2026-11-20T22:38:55Z",
       "last_failure_at": null,
       "error_code": null
     },
     "pilialvu75-hue/Ai-orchestrator-riserva": {
       "state": "OK",
-      "last_success_at": "2026-11-20T21:39:12Z",
+      "last_success_at": "2026-11-20T22:38:55Z",
       "last_failure_at": "2026-10-28T07:39:58Z",
       "error_code": null
     },
     "pilialvu75-hue/Ai-orchestrator-diagnostics": {
       "state": "OK",
-      "last_success_at": "2026-11-20T21:39:12Z",
+      "last_success_at": "2026-11-20T22:38:55Z",
       "last_failure_at": "2026-10-28T07:39:58Z",
       "error_code": null
     },
     "pilialvu75-hue/AI-Orchestrator-Module-Researcher": {
       "state": "OK",
-      "last_success_at": "2026-11-20T21:39:12Z",
+      "last_success_at": "2026-11-20T22:38:55Z",
       "last_failure_at": "2026-10-28T07:39:58Z",
       "error_code": null
     },
     "pilialvu75-hue/Ai_orchestrator-prova": {
       "state": "OK",
-      "last_success_at": "2026-11-20T21:39:12Z",
+      "last_success_at": "2026-11-20T22:38:55Z",
       "last_failure_at": "2026-10-28T07:39:58Z",
       "error_code": null
     }
