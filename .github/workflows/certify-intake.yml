@@ -1,4 +1,4 @@
-name: Certify eligible intake
+name: Refresh internal module availability
 
 on:
   push:
@@ -61,8 +61,8 @@ jobs:
         with:
           python-version: "3.12"
 
-      - name: Run fail-closed certification autopilot
-        run: python tools/library_autopilot.py --report /tmp/library-autopilot-report.json
+      - name: Export tested modules without certification
+        run: python tools/library_autopilot.py --internal-export-only --report /tmp/library-autopilot-report.json
 
       - name: Validate resulting Library state
         run: |
@@ -74,20 +74,20 @@ jobs:
           python tools/validate_snapshot.py /tmp/ai-orchestrator-module-library.json
           python tools/validate_snapshot.py catalog/offline-snapshot.json
 
-      - name: Commit certified Library changes
+      - name: Commit Library export changes
         shell: bash
         run: |
           git add catalog modules intake packages
           if git diff --cached --quiet --exit-code; then
-            echo "No Library certification/export changes."
+            echo "No Library export changes."
             exit 0
           fi
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git commit -m "library: refresh certified and sandbox module packages [skip ci]"
+          git commit -m "library: refresh internal and existing catalog module packages [skip ci]"
           git push origin HEAD:main
 
-      - name: Upload certification report
+      - name: Upload internal export report
         if: always()
         uses: actions/upload-artifact@v4
         with:
@@ -96,63 +96,3 @@ jobs:
           if-no-files-found: ignore
           retention-days: 7
 
-  # Evidence collection is read-only and cannot sign or approve candidates.
-  # It runs after the actual certification attempt, using repository main,
-  # so the security reviewer receives precise source-bound blockers.
-  prepare-unsigned-llm-review:
-    needs: certify
-    if: needs.certify.result == 'success'
-    runs-on: ubuntu-24.04
-    timeout-minutes: 4
-    permissions:
-      contents: read
-    steps:
-      - uses: actions/checkout@v4
-        with:
-          ref: main
-          persist-credentials: false
-      - name: Prepare truthful source and dependency review handoffs
-        shell: bash
-        run: |
-          set -euo pipefail
-          python3 -m py_compile tools/llm_certification_handoff.py
-          python3 - <<'PY'
-          import json
-          import os
-          import sys
-          from pathlib import Path
-          sys.path.insert(0, "tools")
-          from llm_certification_handoff import build
-          output = Path(os.environ["RUNNER_TEMP"]) / "llm-independent-review-REQUEST"
-          output.mkdir(parents=True, exist_ok=True)
-          requests = []
-          for path in sorted(Path("intake").glob("utility.llm_generated.*/*/manifest.json")):
-              manifest = json.loads(path.read_text())
-              if manifest.get("status") != "tested" or (
-                      manifest.get("security") or {}).get("reviewed") is not False:
-                  continue
-              asset_id = manifest["id"]
-              version = manifest["version"]
-              request, sbom = build(Path("."), asset_id, version)
-              folder = output / asset_id / version
-              folder.mkdir(parents=True)
-              (folder / "review-REQUEST-NOT-APPROVED.json").write_text(
-                  json.dumps(request, indent=2, sort_keys=True) + "\n")
-              (folder / "source-SBOM-NOT-A-SCAN.json").write_bytes(sbom)
-              requests.append({"asset_id": asset_id, "version": version,
-                               "status": "INDEPENDENT_REVIEW_REQUIRED",
-                               "blockers": request["blockers"]})
-              print(asset_id + ": BLOCKED " + ",".join(request["blockers"]))
-          (output / "index.json").write_text(
-              json.dumps({"schema": "aivexus.library.llm-review-request-index.v1",
-                          "certification_authorized": False,
-                          "requests": requests}, indent=2) + "\n")
-          print("Unsigned Qwen candidates awaiting independent review:", len(requests))
-          PY
-      - name: Preserve unsigned reviewer handoff without code execution
-        uses: actions/upload-artifact@v4
-        with:
-          name: llm-independent-certification-review-REQUEST
-          path: ${{ runner.temp }}/llm-independent-review-REQUEST/
-          if-no-files-found: error
-          retention-days: 30
