@@ -236,9 +236,15 @@ def _main(argv: list[str]) -> int:
         default=Path(__file__).resolve().parents[1],
     )
     parser.add_argument("--report", type=Path)
+    parser.add_argument("--internal-export-only", action="store_true",
+                        help="refresh tested source exports without attempting certification")
     args = parser.parse_args(argv)
 
-    report = run(args.root)
+    if args.internal_export_only:
+        report = {"schema": "ai-orchestrator.library-internal-export-report.v1",
+                  "exports": refresh_consumption_exports(args.root.resolve())}
+    else:
+        report = run(args.root)
     rendered = json.dumps(report, indent=2, sort_keys=True) + "\n"
     if args.report is not None:
         args.report.parent.mkdir(parents=True, exist_ok=True)
