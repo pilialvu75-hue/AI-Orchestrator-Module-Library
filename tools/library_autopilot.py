@@ -206,6 +206,38 @@ def refresh_consumption_exports(root: Path) -> dict[str, object]:
     }
 
 
+def internal_recovery_queue(root: Path) -> dict:
+    """List every unavailable candidate by its next technical action."""
+    from library_intake_readiness import _candidate
+    exported = load_json(root / "packages" / "experimental-index.json")
+    available = {row["pin"] for row in exported["packages"]}
+    export_errors = {row["pin"]: row["reason"] for row in exported["blocked"]}
+    pending = []
+    for ref in _discover(root):
+        pin = f"{ref.asset_id}@{ref.version}"
+        if pin in available:
+            continue
+        row = _candidate(manifest_path(root, "intake", ref).parent)
+        technical = [x for x in row["blockers"] if x not in {
+            "SECURITY_REVIEW_EVIDENCE_MISSING", "LICENSE_EVIDENCE_MISSING",
+            "RESTRICTED_LICENSE_REVIEW_REQUIRED"}]
+        if "PINNED_SOURCE_MISSING" in technical:
+            action = "resolve_source"
+        elif "KNOWN_VULNERABILITIES_PRESENT" in technical:
+            action = "repair_vulnerability"
+        elif "SOURCE_SNAPSHOT_MISSING" in technical:
+            action = "materialize_source"
+        elif "REPRODUCIBLE_TEST_EVIDENCE_MISSING" in technical:
+            action = "run_functional_tests"
+        else:
+            action = "repair_packaging"
+        pending.append({"pin": pin, "action": action, "technical_blockers": technical,
+                        "export_error": export_errors.get(pin),
+                        "source_repository": row["source_repository"],
+                        "source_commit": row["source_commit"]})
+    return {"available_export_count": len(available), "pending": pending}
+
+
 def run(root: Path) -> dict[str, object]:
     resolved = root.resolve()
     results = [process_one(resolved, ref) for ref in _discover(resolved)]
@@ -243,6 +275,7 @@ def _main(argv: list[str]) -> int:
     if args.internal_export_only:
         report = {"schema": "ai-orchestrator.library-internal-export-report.v1",
                   "exports": refresh_consumption_exports(args.root.resolve())}
+        report["recovery"] = internal_recovery_queue(args.root.resolve())
     else:
         report = run(args.root)
     rendered = json.dumps(report, indent=2, sort_keys=True) + "\n"
