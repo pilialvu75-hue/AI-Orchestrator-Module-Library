@@ -15,8 +15,8 @@ class ReadinessWorkflowRaceTests(unittest.TestCase):
         self.assertLess(section.index("git fetch origin main"),
                         section.index("git reset --hard origin/main"))
         self.assertLess(section.index("git reset --hard origin/main"),
-                        section.index("python -m tools.library_firstparty_quarantine --apply"))
-        self.assertLess(section.index("python -m tools.library_firstparty_quarantine --apply"),
+                        section.index("python -m tools.library_firstparty_quarantine"))
+        self.assertLess(section.index("python -m tools.library_firstparty_quarantine"),
                         section.index("python -m tools.library_intake_readiness --output"))
         self.assertLess(section.index("python -m tools.library_intake_readiness --output"),
                         section.index("python tools/validate_library.py"))
@@ -26,6 +26,7 @@ class ReadinessWorkflowRaceTests(unittest.TestCase):
                         section.index("git add -- catalog/intake-readiness.json"))
         self.assertLess(section.index("git add -- catalog/intake-readiness.json"),
                         section.index("if git push origin HEAD:main; then"))
+        self.assertNotIn("python -m tools.library_firstparty_quarantine --apply", text)
         self.assertNotIn("git push --force", text)
         self.assertNotIn("git push -f", text)
         self.assertIn("Readiness reconciliation exhausted three compare-and-swap retries", text)

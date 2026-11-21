@@ -1,4 +1,4 @@
-name: Library First-Party Quarantine Triage
+name: Library First-Party Readiness Inventory
 
 on:
   push:
@@ -35,10 +35,10 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: "3.12"
-      - name: Quarantine only allowlisted first-party intake
+      - name: Inspect first-party intake without quarantine mutation
         run: |
           set -euo pipefail
-          python -m tools.library_firstparty_quarantine --apply > "$RUNNER_TEMP/firstparty-triage.json"
+          python -m tools.library_firstparty_quarantine > "$RUNNER_TEMP/firstparty-triage.json"
           cat "$RUNNER_TEMP/firstparty-triage.json"
       - name: Build deterministic intake evidence-gap and coverage inventory
         shell: bash
@@ -51,7 +51,7 @@ jobs:
           set -euo pipefail
           python tools/validate_library.py
           python -m unittest discover -s tests -p 'test_*.py' -v
-      - name: Persist allowlisted quarantine and evidence inventory with bounded CAS retry
+      - name: Persist evidence inventory with bounded CAS retry
         shell: bash
         run: |
           set -euo pipefail
@@ -67,14 +67,11 @@ jobs:
             git fetch origin main
             git reset --hard origin/main
 
-            python -m tools.library_firstparty_quarantine --apply > "$RUNNER_TEMP/firstparty-triage.json"
+            python -m tools.library_firstparty_quarantine > "$RUNNER_TEMP/firstparty-triage.json"
             python -m tools.library_intake_readiness --output catalog/intake-readiness.json
             python tools/validate_library.py
             python -m unittest discover -s tests -p 'test_*.py' -v
 
-            git add -u -- \
-              intake/ai.acceleration_backend.firstparty.ai-orchestrator-core/0.1.0/manifest.json \
-              intake/ai.local_inference.firstparty.ai-orchestrator-core/0.1.0/manifest.json
             git add -- catalog/intake-readiness.json
             if git diff --cached --quiet; then
               echo "The current main already has up-to-date evidence inventory."
@@ -107,7 +104,7 @@ jobs:
           if [[ -s "$RUNNER_TEMP/firstparty-triage.json" ]]; then
             {
               echo "## First-party Library quarantine triage"
-              echo "Protected main workflow; metadata-only quarantine, no executable promotion."
+              echo "Read-only first-party triage; no automatic quarantine or executable promotion."
               echo '~~~json'
               cat "$RUNNER_TEMP/firstparty-triage.json"
               echo '~~~'
