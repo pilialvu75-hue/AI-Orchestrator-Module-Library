@@ -276,6 +276,8 @@ def _main(argv: list[str]) -> int:
         report = {"schema": "ai-orchestrator.library-internal-export-report.v1",
                   "exports": refresh_consumption_exports(args.root.resolve())}
         report["recovery"] = internal_recovery_queue(args.root.resolve())
+        from library_consolidator import comparison_groups
+        report["consolidation"] = comparison_groups(args.root.resolve())
     else:
         report = run(args.root)
     rendered = json.dumps(report, indent=2, sort_keys=True) + "\n"
