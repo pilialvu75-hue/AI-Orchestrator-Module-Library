@@ -1,10 +1,10 @@
 {
   "id": "utility.cli_arguments.external.dartlang.args",
-  "name": "Dart args — discovered and independently exercised",
+  "name": "Dart args \u2014 discovered and independently exercised",
   "version": "0.1.0",
   "kind": "module",
   "status": "tested",
-  "description": "Discovered external Dart args; upstream tests, independent consumer and packaged AIVEXUS adapter consumer passed on Linux; functional TESTED only, not security-certified.",
+  "description": "CLI argument parsing; upstream and independent consumer tested on Linux; not certified.",
   "tags": [
     "autonomous-researcher",
     "public-source",
@@ -31,7 +31,7 @@
   "provenance": {
     "origin": "researcher",
     "source_repository": "https://github.com/dart-lang/core",
-    "source_commit": "fa0c6b77d67b6837eb2891e251c40cdfbeab1f4d",
+    "source_commit": "56f97d516e642f41dd628107d95f87a3c05e0678",
     "source_tag": null,
     "source_subtree": "pkgs/args",
     "source_project_id": null,
@@ -45,7 +45,7 @@
     "score": 0.8,
     "tests_passed": true,
     "test_report": "tests/dart-linux-ci-report.json",
-    "validated_at": "2026-11-07T11:24:54.070209+00:00",
+    "validated_at": "2026-11-23T09:24:57.866114+00:00",
     "validated_on": [
       "linux"
     ]
@@ -91,9 +91,9 @@
   "payload": {
     "type": "repository_path",
     "path": "payload/src",
-    "sha256": "952ad2125aef1fd9eeea0630ba77e1e7dbca3fbd0f83d3732e227ee9058a0465",
+    "sha256": "c904f4d27942e4f8b34e730f1249b9f529fd86ea1875e1ca841dd016be3702ef",
     "upstream_repository": "https://github.com/dart-lang/core",
-    "upstream_commit": "fa0c6b77d67b6837eb2891e251c40cdfbeab1f4d"
+    "upstream_commit": "56f97d516e642f41dd628107d95f87a3c05e0678"
   },
   "quality": {
     "reuse_count": 0,
