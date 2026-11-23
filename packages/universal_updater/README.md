@@ -16,7 +16,10 @@ not installed in VoiceBridge, and does **not** alter AI Orchestrator's updater.
   on errors, explicit consent before passing a verified artifact to an installer.
 - Caller-driven checks, default minimum 2 minutes while app is active, bounded
   retry backoff; no background process, timers, CLI, or token storage.
-- Platform interfaces only. **No live installer adapter yet**.
+- Desktop staging with unique temporary directories and an atomic installer-file move.
+- Windows Authenticode-pinned installer handoff with a second on-disk SHA-256
+  verification. This is a development adapter, **not yet validated with a
+  signed real VoiceBridge release**.
 
 The real installer adapter must perform publisher/OS-signature validation and
 post-installation version checks, protect the user data directory, and only
