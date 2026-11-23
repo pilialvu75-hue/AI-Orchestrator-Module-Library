@@ -134,7 +134,7 @@ void main() {
   });
 
   test('wrong downloaded SHA is rejected and staged data is aborted', () async {
-    final signed = await envelope(digest: 'a' * 64);
+    final signed = await envelope(digest: List<String>.filled(64, 'a').join());
     final store = _MemoryStore();
     final updater = UniversalUpdater(
       config: config(),

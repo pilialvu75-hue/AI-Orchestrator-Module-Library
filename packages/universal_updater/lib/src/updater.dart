@@ -45,7 +45,7 @@ final class UpdateConfig {
 
 /// An authenticated update candidate. A hash alone is NOT manifest authenticity.
 final class UpdateCandidate {
-  const UpdateCandidate({
+  const UpdateCandidate._({
     required this.version,
     required this.artifactUri,
     required this.sha256Hex,
@@ -199,13 +199,13 @@ final class UniversalUpdater {
           !RegExp(r'^[a-f0-9]{64}$').hasMatch(digest) ||
           size <= 0 || size > config.maxArtifactBytes ||
           artifactId.isEmpty || releaseId.isEmpty ||
-          artifactId.contains('/') || artifactId.contains(r'\')) {
+          artifactId.contains('/') || artifactId.contains(String.fromCharCode(92))) {
         throw const UpdaterFailure('Unsafe signed artifact metadata');
       }
       _failures = 0;
       _nextCheckAt = _now().add(config.checkInterval);
       if (version <= Version.parse(config.currentVersion)) return null;
-      return UpdateCandidate(
+      return UpdateCandidate._(
         version: version.toString(),
         artifactUri: uri,
         sha256Hex: digest,
@@ -215,9 +215,9 @@ final class UniversalUpdater {
         notes: (payload['notes'] is String ? payload['notes'] as String : ''),
       );
     } catch (_) {
-      _failures = (_failures + 1).clamp(1, 5);
+      _failures = (_failures + 1).clamp(1, 5).toInt();
       final factor = 1 << _failures;
-      final minutes = (config.checkInterval.inMinutes * factor).clamp(2, 60);
+      final minutes = (config.checkInterval.inMinutes * factor).clamp(2, 60).toInt();
       _nextCheckAt = _now().add(Duration(minutes: minutes));
       rethrow;
     } finally {
