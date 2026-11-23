@@ -1,0 +1,30 @@
+name: Universal Updater Core
+on:
+  pull_request:
+    paths:
+      - 'packages/universal_updater/**'
+      - '.github/workflows/universal-updater-core.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'packages/universal_updater/**'
+      - '.github/workflows/universal-updater-core.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  dart-core:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    defaults:
+      run:
+        working-directory: packages/universal_updater
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dart-lang/setup-dart@v1
+        with:
+          sdk: stable
+      - run: dart pub get
+      - run: dart format lib test
+      - run: dart analyze
+      - run: dart test
