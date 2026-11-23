@@ -28,3 +28,16 @@ jobs:
       - run: dart format lib test
       - run: dart analyze
       - run: dart test
+  windows-adapter:
+    runs-on: windows-latest
+    timeout-minutes: 15
+    defaults:
+      run:
+        working-directory: packages/universal_updater
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dart-lang/setup-dart@v1
+        with:
+          sdk: stable
+      - run: dart pub get
+      - run: dart test test/desktop_adapter_test.dart
