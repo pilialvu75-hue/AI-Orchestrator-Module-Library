@@ -103,7 +103,7 @@ def run_real_consumer(root, row, spec, work):
         "publish_to: none\n"
         "environment:\n  sdk: '>=3.3.0 <4.0.0'\n"
         "dependencies:\n"
-        f"  {spec['package_name']}:\n    path: {package}\n",
+        f"  {spec['package_name']}:\n    path: ../package\n",
         encoding="utf-8")
     (app / "bin/main.dart").write_text(spec["consumer_source"],
                                        encoding="utf-8")
