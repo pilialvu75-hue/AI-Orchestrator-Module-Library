@@ -364,6 +364,33 @@ def query(
     return records
 
 
+def select_independent_pair(candidates: list[dict]) -> dict:
+    """Select ranked active implementations, never another version of primary."""
+    active = [r for r in candidates if r.get("availability") == "active"]
+    primary = active[0] if active else None
+    reserve = None
+    if primary:
+        origin = (primary.get("provenance") or {}).get("source_repository")
+        digest = (primary.get("payload") or {}).get("sha256")
+        for row in active[1:]:
+            other_origin = (row.get("provenance") or {}).get("source_repository")
+            other_digest = (row.get("payload") or {}).get("sha256")
+            if row["id"] == primary["id"] or row.get("status") != primary.get("status"):
+                continue
+            if not origin or not other_origin or origin.strip().lower().rstrip("/") == other_origin.strip().lower().rstrip("/"):
+                continue
+            if not digest or not other_digest or digest == other_digest:
+                continue
+            reserve = row
+            break
+    return {
+        "primary": primary,
+        "reserve": reserve,
+        "reserve_missing": primary is not None and reserve is None,
+        "independence": "distinct asset identity, source repository and payload digest; runtime failover not yet verified",
+    }
+
+
 def resolve(root: Path, **filters: object) -> dict:
     candidates = query(root, **filters)
     return {
@@ -375,6 +402,7 @@ def resolve(root: Path, **filters: object) -> dict:
         "filters": filters,
         "selected": None if not candidates else candidates[0],
         "candidate_count": len(candidates),
+        "pair": select_independent_pair(candidates),
         "candidates": candidates,
     }
 
