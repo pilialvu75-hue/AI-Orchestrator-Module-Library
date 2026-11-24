@@ -48,3 +48,22 @@ class PlatformEvidenceTests(unittest.TestCase):
         self.receipts["linux"]["items"].append(self.items[0])
         with self.assertRaises(ValueError):
             reconcile(ROOT, self.receipts, 123, self.jobs)
+
+
+    def test_missing_evidence_is_recovered(self):
+        import shutil
+        import tempfile
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            shutil.copytree(ROOT, root, dirs_exist_ok=True, ignore=shutil.ignore_patterns(".git", "__pycache__", ".dart_tool", ".venv"))
+            path = root / "packages/development-platform-evidence.json"
+            prior = json.loads(path.read_text())
+            missing = prior["records"].pop()
+            path.write_text(json.dumps(prior))
+            actual = reconcile(root, self.receipts, 123, self.jobs)
+            self.assertEqual(len(actual["records"]), len(prior["records"]) + 1)
+            recovered = next(r for r in actual["records"]
+                             if r["pin"] == missing["pin"] and r["target"] == missing["target"])
+            self.assertEqual(recovered["package_sha256"], missing["package_sha256"])
+            self.assertEqual(recovered["run_id"], 123)
+            self.assertEqual(recovered["job_id"], self.jobs[missing["target"]])
