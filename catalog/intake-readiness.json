@@ -838,9 +838,9 @@
       "capability_id": "platform.clipboard",
       "title": "Clipboard abstraction with platform policy boundaries",
       "priority": "low",
-      "desired_candidates": 1,
+      "desired_candidates": 2,
       "certified_count": 0,
-      "remaining_to_goal": 1,
+      "remaining_to_goal": 2,
       "intake_candidates": 0,
       "blocked_candidates": 0,
       "certified_by_target": [
