@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-10-18T11:05:00Z",
+  "updated_at": "2026-11-24T10:10:00Z",
   "items": [
     {
       "capability_id": "ai.acceleration_backend",
@@ -119,7 +119,7 @@
       "capability_id": "platform.clipboard",
       "title": "Clipboard abstraction with platform policy boundaries",
       "priority": "low",
-      "desired_candidates": 1,
+      "desired_candidates": 2,
       "status": "needed",
       "targets": [
         "android",
