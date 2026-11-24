@@ -43,6 +43,12 @@ See `policies/LEGO_CONNECTOR.md`.
 - `project_template` — larger starting point for a new application
 - `policy_bundle` — reusable security/privacy/hardening rules and tests
 
+## Current development path
+
+Formal certification is deferred for internal development. The development catalog (`packages/development-index.json`) records modules that passed independent exported-package consumer tests, with explicit validated targets. Experimental packages without this evidence are not development-qualified. Development qualification does not authorize production distribution or imply certification. The legacy certified resolver below remains a separate interface; it does not establish development-catalog coverage.
+
+The current priority is unattended discovery, adaptation, repair, testing and integration, followed by autonomous comparison and independent reserves (#381), internal repository mining (#382), then Starter Pack (#380). Do not require a signature or manual formal review for ordinary internal development qualification. Keep actual integrity, functional and isolation checks.
+
 ## Library lifecycle
 
 `discovered -> quarantined -> normalized -> tested -> certified -> deprecated/revoked`
