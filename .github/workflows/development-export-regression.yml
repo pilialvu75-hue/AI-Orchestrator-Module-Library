@@ -8,6 +8,13 @@ on:
       - 'tools/library_consumer_execution.py'
       - 'examples/real-llm-module-trials.json'
       - '.github/workflows/development-export-regression.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'packages/development-index.json'
+      - 'packages/experimental/**'
+      - 'tools/consume_published_llm_preview.py'
+      - '.github/workflows/development-export-regression.yml'
   workflow_dispatch:
 
 permissions:
