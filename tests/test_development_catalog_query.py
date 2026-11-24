@@ -55,3 +55,31 @@ class DevelopmentCatalogTests(unittest.TestCase):
                             self.assertEqual(len(matching), 1)
                             self.assertEqual(matching[0]["package_sha256"], entry["package_sha256"])
                             self.assertFalse(matching[0]["production_approved"])
+
+    def test_desktop_evidence_resolves_all_recorded_pins(self):
+        ledger = json.loads((ROOT / "packages/development-platform-evidence.json").read_text())
+        index = json.loads((ROOT / "packages/development-index.json").read_text())
+        entries = {e["pin"]: e for e in index["packages"]}
+        for row in ledger["records"]:
+            entry = entries.get(row["pin"])
+            if not entry or entry["package_sha256"] != row["package_sha256"]:
+                continue
+            package = json.loads((ROOT / entry["path"]).read_text())["package"]
+            for cap in package["capabilities"]:
+                for contract in package["contracts"]:
+                    found = query(ROOT, cap, contract, row["target"])
+                    self.assertTrue(any(x["pin"] == row["pin"] for x in found))
+
+    def test_stale_platform_evidence_cannot_authorize(self):
+        cap = "utility.llm_generated.adjacent_pairs"
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            shutil.copytree(ROOT / "packages", root / "packages")
+            path = root / "packages/development-platform-evidence.json"
+            ledger = json.loads(path.read_text())
+            for row in ledger["records"]:
+                if row["target"] == "windows":
+                    row["package_sha256"] = "0" * 64
+            path.write_text(json.dumps(ledger))
+            self.assertEqual(query(root, cap, cap + ".v1", "windows"), [])
+            self.assertTrue(query(root, cap, cap + ".v1", "linux"))
