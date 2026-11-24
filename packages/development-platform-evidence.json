@@ -1,0 +1,321 @@
+{
+  "schema": "aivexus.development-platform-evidence.v1",
+  "scope": "independent Dart desktop consumer only",
+  "records": [
+    {
+      "pin": "utility.llm_generated.adjacent_pairs@0.1.0",
+      "package_sha256": "49c918d031cd698b97d7e37c7a40c610566231f324ae1b0adb9d85cabaf03365",
+      "target": "linux",
+      "run_id": 45409769364,
+      "job_id": 138500090008
+    },
+    {
+      "pin": "utility.llm_generated.count_in_range@0.1.0",
+      "package_sha256": "830b337b817124647a8f82e8325264c91d96ee15439260c9ed1fc3a3d02055b2",
+      "target": "linux",
+      "run_id": 45409769364,
+      "job_id": 138500090008
+    },
+    {
+      "pin": "utility.llm_generated.cumulative_max@0.1.0",
+      "package_sha256": "3ab9518c0039d781a421acac56d829ccf09df65a1ea5c07b29db1ec6eadf912a",
+      "target": "linux",
+      "run_id": 45409769364,
+      "job_id": 138500090008
+    },
+    {
+      "pin": "utility.llm_generated.delta_codec@0.1.0",
+      "package_sha256": "b00844091532b305cb1c0bc67449ccf43eacf2d1da99dfcacf45480ebc81db9c",
+      "target": "linux",
+      "run_id": 45409769364,
+      "job_id": 138500090008
+    },
+    {
+      "pin": "utility.llm_generated.first_subsequence@0.1.0",
+      "package_sha256": "02601d536c3a0eb13730b0e9f917bd70c5e676ef978b49ad523517edd3d9b6ba",
+      "target": "linux",
+      "run_id": 45409769364,
+      "job_id": 138500090008
+    },
+    {
+      "pin": "utility.llm_generated.fixed_chunks@0.1.0",
+      "package_sha256": "7e2378c7aae121c430e81dc1464b908f971626d48381500a7a5656c8e58f2ee6",
+      "target": "linux",
+      "run_id": 45409769364,
+      "job_id": 138500090008
+    },
+    {
+      "pin": "utility.llm_generated.index_positions@0.1.0",
+      "package_sha256": "901048e501f4f3cd77b2b8653f0c3a8f18d0aa7bcc4652043711dcb055c3cced",
+      "target": "linux",
+      "run_id": 45409769364,
+      "job_id": 138500090008
+    },
+    {
+      "pin": "utility.llm_generated.integer_frequencies@0.1.0",
+      "package_sha256": "821a1df5e04298f4f53588166084a684ac657765bc19ba65e3c5a4de0d1c4eee",
+      "target": "linux",
+      "run_id": 45409769364,
+      "job_id": 138500090008
+    },
+    {
+      "pin": "utility.llm_generated.interleave_lists@0.1.0",
+      "package_sha256": "d1bf15f2149cde20d9c5dfa052ef71942ae9b294c638e75c5be21ae54de1d704",
+      "target": "linux",
+      "run_id": 45409769364,
+      "job_id": 138500090008
+    },
+    {
+      "pin": "utility.llm_generated.intersection_unique@0.1.0",
+      "package_sha256": "e49870419085ac582b88dba4417848c7e57d7fc66bb34d48523f3f2bde3372e9",
+      "target": "linux",
+      "run_id": 45409769364,
+      "job_id": 138500090008
+    },
+    {
+      "pin": "utility.llm_generated.max_run_length@0.1.0",
+      "package_sha256": "2a755751f9838e66b61f20e239389491718597be9706ace0993e61f422fc86eb",
+      "target": "linux",
+      "run_id": 45409769364,
+      "job_id": 138500090008
+    },
+    {
+      "pin": "utility.llm_generated.palindrome_filter@0.1.0",
+      "package_sha256": "bfd36536c7a98cba0d34e1fcd212a8db8c426405874bc0d397309e49ffd8473a",
+      "target": "linux",
+      "run_id": 45409769364,
+      "job_id": 138500090008
+    },
+    {
+      "pin": "utility.llm_generated.rotate_left@0.1.0",
+      "package_sha256": "fb34ec76d40fca8a2977f62a5473cc4dead53fe485acecfd0090531a03d8e5bf",
+      "target": "linux",
+      "run_id": 45409769364,
+      "job_id": 138500090008
+    },
+    {
+      "pin": "utility.llm_generated.running_product@0.1.0",
+      "package_sha256": "dd7656397d71baa02ed8a281ef33d798ffc64028cf1765469e839279c5d3941c",
+      "target": "linux",
+      "run_id": 45409769364,
+      "job_id": 138500090008
+    },
+    {
+      "pin": "utility.llm_generated.stable_unique@0.1.0",
+      "package_sha256": "0da4742d7ed1cd47ee5e27b6ec7a2ed041baf8ad0589414171dcc0a0dc61dc5f",
+      "target": "linux",
+      "run_id": 45409769364,
+      "job_id": 138500090008
+    },
+    {
+      "pin": "utility.llm_generated.adjacent_pairs@0.1.0",
+      "package_sha256": "49c918d031cd698b97d7e37c7a40c610566231f324ae1b0adb9d85cabaf03365",
+      "target": "windows",
+      "run_id": 45409769364,
+      "job_id": 138500090452
+    },
+    {
+      "pin": "utility.llm_generated.count_in_range@0.1.0",
+      "package_sha256": "830b337b817124647a8f82e8325264c91d96ee15439260c9ed1fc3a3d02055b2",
+      "target": "windows",
+      "run_id": 45409769364,
+      "job_id": 138500090452
+    },
+    {
+      "pin": "utility.llm_generated.cumulative_max@0.1.0",
+      "package_sha256": "3ab9518c0039d781a421acac56d829ccf09df65a1ea5c07b29db1ec6eadf912a",
+      "target": "windows",
+      "run_id": 45409769364,
+      "job_id": 138500090452
+    },
+    {
+      "pin": "utility.llm_generated.delta_codec@0.1.0",
+      "package_sha256": "b00844091532b305cb1c0bc67449ccf43eacf2d1da99dfcacf45480ebc81db9c",
+      "target": "windows",
+      "run_id": 45409769364,
+      "job_id": 138500090452
+    },
+    {
+      "pin": "utility.llm_generated.first_subsequence@0.1.0",
+      "package_sha256": "02601d536c3a0eb13730b0e9f917bd70c5e676ef978b49ad523517edd3d9b6ba",
+      "target": "windows",
+      "run_id": 45409769364,
+      "job_id": 138500090452
+    },
+    {
+      "pin": "utility.llm_generated.fixed_chunks@0.1.0",
+      "package_sha256": "7e2378c7aae121c430e81dc1464b908f971626d48381500a7a5656c8e58f2ee6",
+      "target": "windows",
+      "run_id": 45409769364,
+      "job_id": 138500090452
+    },
+    {
+      "pin": "utility.llm_generated.index_positions@0.1.0",
+      "package_sha256": "901048e501f4f3cd77b2b8653f0c3a8f18d0aa7bcc4652043711dcb055c3cced",
+      "target": "windows",
+      "run_id": 45409769364,
+      "job_id": 138500090452
+    },
+    {
+      "pin": "utility.llm_generated.integer_frequencies@0.1.0",
+      "package_sha256": "821a1df5e04298f4f53588166084a684ac657765bc19ba65e3c5a4de0d1c4eee",
+      "target": "windows",
+      "run_id": 45409769364,
+      "job_id": 138500090452
+    },
+    {
+      "pin": "utility.llm_generated.interleave_lists@0.1.0",
+      "package_sha256": "d1bf15f2149cde20d9c5dfa052ef71942ae9b294c638e75c5be21ae54de1d704",
+      "target": "windows",
+      "run_id": 45409769364,
+      "job_id": 138500090452
+    },
+    {
+      "pin": "utility.llm_generated.intersection_unique@0.1.0",
+      "package_sha256": "e49870419085ac582b88dba4417848c7e57d7fc66bb34d48523f3f2bde3372e9",
+      "target": "windows",
+      "run_id": 45409769364,
+      "job_id": 138500090452
+    },
+    {
+      "pin": "utility.llm_generated.max_run_length@0.1.0",
+      "package_sha256": "2a755751f9838e66b61f20e239389491718597be9706ace0993e61f422fc86eb",
+      "target": "windows",
+      "run_id": 45409769364,
+      "job_id": 138500090452
+    },
+    {
+      "pin": "utility.llm_generated.palindrome_filter@0.1.0",
+      "package_sha256": "bfd36536c7a98cba0d34e1fcd212a8db8c426405874bc0d397309e49ffd8473a",
+      "target": "windows",
+      "run_id": 45409769364,
+      "job_id": 138500090452
+    },
+    {
+      "pin": "utility.llm_generated.rotate_left@0.1.0",
+      "package_sha256": "fb34ec76d40fca8a2977f62a5473cc4dead53fe485acecfd0090531a03d8e5bf",
+      "target": "windows",
+      "run_id": 45409769364,
+      "job_id": 138500090452
+    },
+    {
+      "pin": "utility.llm_generated.running_product@0.1.0",
+      "package_sha256": "dd7656397d71baa02ed8a281ef33d798ffc64028cf1765469e839279c5d3941c",
+      "target": "windows",
+      "run_id": 45409769364,
+      "job_id": 138500090452
+    },
+    {
+      "pin": "utility.llm_generated.stable_unique@0.1.0",
+      "package_sha256": "0da4742d7ed1cd47ee5e27b6ec7a2ed041baf8ad0589414171dcc0a0dc61dc5f",
+      "target": "windows",
+      "run_id": 45409769364,
+      "job_id": 138500090452
+    },
+    {
+      "pin": "utility.llm_generated.adjacent_pairs@0.1.0",
+      "package_sha256": "49c918d031cd698b97d7e37c7a40c610566231f324ae1b0adb9d85cabaf03365",
+      "target": "macos",
+      "run_id": 45409769364,
+      "job_id": 138500090550
+    },
+    {
+      "pin": "utility.llm_generated.count_in_range@0.1.0",
+      "package_sha256": "830b337b817124647a8f82e8325264c91d96ee15439260c9ed1fc3a3d02055b2",
+      "target": "macos",
+      "run_id": 45409769364,
+      "job_id": 138500090550
+    },
+    {
+      "pin": "utility.llm_generated.cumulative_max@0.1.0",
+      "package_sha256": "3ab9518c0039d781a421acac56d829ccf09df65a1ea5c07b29db1ec6eadf912a",
+      "target": "macos",
+      "run_id": 45409769364,
+      "job_id": 138500090550
+    },
+    {
+      "pin": "utility.llm_generated.delta_codec@0.1.0",
+      "package_sha256": "b00844091532b305cb1c0bc67449ccf43eacf2d1da99dfcacf45480ebc81db9c",
+      "target": "macos",
+      "run_id": 45409769364,
+      "job_id": 138500090550
+    },
+    {
+      "pin": "utility.llm_generated.first_subsequence@0.1.0",
+      "package_sha256": "02601d536c3a0eb13730b0e9f917bd70c5e676ef978b49ad523517edd3d9b6ba",
+      "target": "macos",
+      "run_id": 45409769364,
+      "job_id": 138500090550
+    },
+    {
+      "pin": "utility.llm_generated.fixed_chunks@0.1.0",
+      "package_sha256": "7e2378c7aae121c430e81dc1464b908f971626d48381500a7a5656c8e58f2ee6",
+      "target": "macos",
+      "run_id": 45409769364,
+      "job_id": 138500090550
+    },
+    {
+      "pin": "utility.llm_generated.index_positions@0.1.0",
+      "package_sha256": "901048e501f4f3cd77b2b8653f0c3a8f18d0aa7bcc4652043711dcb055c3cced",
+      "target": "macos",
+      "run_id": 45409769364,
+      "job_id": 138500090550
+    },
+    {
+      "pin": "utility.llm_generated.integer_frequencies@0.1.0",
+      "package_sha256": "821a1df5e04298f4f53588166084a684ac657765bc19ba65e3c5a4de0d1c4eee",
+      "target": "macos",
+      "run_id": 45409769364,
+      "job_id": 138500090550
+    },
+    {
+      "pin": "utility.llm_generated.interleave_lists@0.1.0",
+      "package_sha256": "d1bf15f2149cde20d9c5dfa052ef71942ae9b294c638e75c5be21ae54de1d704",
+      "target": "macos",
+      "run_id": 45409769364,
+      "job_id": 138500090550
+    },
+    {
+      "pin": "utility.llm_generated.intersection_unique@0.1.0",
+      "package_sha256": "e49870419085ac582b88dba4417848c7e57d7fc66bb34d48523f3f2bde3372e9",
+      "target": "macos",
+      "run_id": 45409769364,
+      "job_id": 138500090550
+    },
+    {
+      "pin": "utility.llm_generated.max_run_length@0.1.0",
+      "package_sha256": "2a755751f9838e66b61f20e239389491718597be9706ace0993e61f422fc86eb",
+      "target": "macos",
+      "run_id": 45409769364,
+      "job_id": 138500090550
+    },
+    {
+      "pin": "utility.llm_generated.palindrome_filter@0.1.0",
+      "package_sha256": "bfd36536c7a98cba0d34e1fcd212a8db8c426405874bc0d397309e49ffd8473a",
+      "target": "macos",
+      "run_id": 45409769364,
+      "job_id": 138500090550
+    },
+    {
+      "pin": "utility.llm_generated.rotate_left@0.1.0",
+      "package_sha256": "fb34ec76d40fca8a2977f62a5473cc4dead53fe485acecfd0090531a03d8e5bf",
+      "target": "macos",
+      "run_id": 45409769364,
+      "job_id": 138500090550
+    },
+    {
+      "pin": "utility.llm_generated.running_product@0.1.0",
+      "package_sha256": "dd7656397d71baa02ed8a281ef33d798ffc64028cf1765469e839279c5d3941c",
+      "target": "macos",
+      "run_id": 45409769364,
+      "job_id": 138500090550
+    },
+    {
+      "pin": "utility.llm_generated.stable_unique@0.1.0",
+      "package_sha256": "0da4742d7ed1cd47ee5e27b6ec7a2ed041baf8ad0589414171dcc0a0dc61dc5f",
+      "target": "macos",
+      "run_id": 45409769364,
+      "job_id": 138500090550
+    }
+  ]
+}
