@@ -1,0 +1,42 @@
+name: Development exported module regression
+
+on:
+  pull_request:
+    paths:
+      - 'packages/**'
+      - 'tools/consume_published_llm_preview.py'
+      - 'tools/library_consumer_execution.py'
+      - 'examples/real-llm-module-trials.json'
+      - '.github/workflows/development-export-regression.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  independent-consumer:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-24.04, windows-latest, macos-latest]
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - uses: dart-lang/setup-dart@v1
+      - name: Execute actual exported packages in independent Dart apps
+        shell: bash
+        run: python tools/consume_published_llm_preview.py --root . --report consumer-report.json
+      - name: Preserve platform-specific results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: development-export-${{ matrix.os }}
+          path: consumer-report.json
+          if-no-files-found: error
+          retention-days: 7
