@@ -55,7 +55,7 @@ class PlatformEvidenceTests(unittest.TestCase):
         import tempfile
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)
-            shutil.copytree(ROOT / "packages", root / "packages")
+            shutil.copytree(ROOT, root, dirs_exist_ok=True, ignore=shutil.ignore_patterns(".git", "__pycache__", ".dart_tool", ".venv"))
             path = root / "packages/development-platform-evidence.json"
             prior = json.loads(path.read_text())
             missing = prior["records"].pop()
