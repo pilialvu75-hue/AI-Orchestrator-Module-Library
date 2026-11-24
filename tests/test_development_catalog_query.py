@@ -39,3 +39,19 @@ class DevelopmentCatalogTests(unittest.TestCase):
             path.write_text(json.dumps(envelope))
             with self.assertRaisesRegex(ValueError, "integrity mismatch"):
                 query(root, cap, cap + ".v1", "linux")
+
+    def test_every_qualified_package_is_resolvable(self):
+        index = json.loads((ROOT / "packages/development-index.json").read_text())
+        entries = index["packages"]
+        self.assertGreaterEqual(len(entries), 15)
+        for entry in entries:
+            package = json.loads((ROOT / entry["path"]).read_text())["package"]
+            for target in entry["validated_targets"]:
+                for capability in package["capabilities"]:
+                    for contract in package["contracts"]:
+                        with self.subTest(pin=entry["pin"], target=target, contract=contract):
+                            found = query(ROOT, capability, contract, target)
+                            matching = [r for r in found if r["pin"] == entry["pin"]]
+                            self.assertEqual(len(matching), 1)
+                            self.assertEqual(matching[0]["package_sha256"], entry["package_sha256"])
+                            self.assertFalse(matching[0]["production_approved"])
