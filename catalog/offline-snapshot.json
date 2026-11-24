@@ -5,7 +5,7 @@
   "source_state": {
     "catalog_updated_at": "2026-09-17T23:10:06Z",
     "contracts_updated_at": "2026-11-17T22:45:00Z",
-    "needs_updated_at": "2026-10-18T11:05:00Z",
+    "needs_updated_at": "2026-11-24T10:10:00Z",
     "lifecycle_revision": 0,
     "lifecycle_updated_at": null
   },
@@ -562,7 +562,7 @@
       "capability_id": "platform.clipboard",
       "title": "Clipboard abstraction with platform policy boundaries",
       "priority": "low",
-      "desired_candidates": 1,
+      "desired_candidates": 2,
       "status": "needed",
       "targets": [
         "android",
@@ -1228,5 +1228,5 @@
       ]
     }
   ],
-  "snapshot_sha256": "2e58871dbfaf67b2e72a558d74d1d46665a73b679337e1ebc213c07a5e069aa5"
+  "snapshot_sha256": "811dbe3045d02abf1d47a555b8c4db323777d93f8ec607f23517ab7c29c5fd5f"
 }
