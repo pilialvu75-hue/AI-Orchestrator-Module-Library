@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import '../lib/main.dart';
+import 'package:__PROJECT_SLUG__/main.dart';
 
 void main() {
   for (final entry in AppHome.labels.entries) {
