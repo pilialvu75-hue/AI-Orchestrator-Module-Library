@@ -1,0 +1,184 @@
+{
+  "source_repository": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva",
+  "source_commit": "5d5a3905ceced2c01c8f1d4a8c44ac75d9215fe0",
+  "status": "experimental_uncertified",
+  "files": [
+    {
+      "path": "lib/core/config/app/app_constants.dart",
+      "source_blob_sha": "6c273dd8b95c75057296c6414e09ae08bf823862"
+    },
+    {
+      "path": "lib/core/error/failures.dart",
+      "source_blob_sha": "f06b101bec1c83442816b6d40435cf86e7b06b74"
+    },
+    {
+      "path": "lib/core/system/background_download.dart",
+      "source_blob_sha": "4e4475d30f6b7dc2effe3e36a0dba0a4fa0eaf52"
+    },
+    {
+      "path": "lib/core/system/update/linux_update_installer.dart",
+      "source_blob_sha": "2b19ccb176d66a67d1610950d6372c4aa559eeb1"
+    },
+    {
+      "path": "lib/core/system/update/linux_update_manager.dart",
+      "source_blob_sha": "d3ce35b509f276ec9b39db7a3eea1159f4393f88"
+    },
+    {
+      "path": "lib/core/system/update/macos_update_installer.dart",
+      "source_blob_sha": "156e1747bd6158e3a5913ec6e66a476b26936b71"
+    },
+    {
+      "path": "lib/core/system/update/macos_update_manager.dart",
+      "source_blob_sha": "e1f493a69c6da0bd30968978412366dbd51109d4"
+    },
+    {
+      "path": "lib/core/system/update/platform_update_services.dart",
+      "source_blob_sha": "035bf4cf637e35f75db86538af590654f467efd6"
+    },
+    {
+      "path": "lib/core/system/update/platform_update_services_io.dart",
+      "source_blob_sha": "3006492e8596064de189de80427e4bbc04d31005"
+    },
+    {
+      "path": "lib/core/system/update/platform_update_services_stub.dart",
+      "source_blob_sha": "3375463aaeb2572f0db019452996e7bed29f3141"
+    },
+    {
+      "path": "lib/core/system/update/release_channel.dart",
+      "source_blob_sha": "943e9d8fbe567a36dc7083f9a53c55fcbdbb634f"
+    },
+    {
+      "path": "lib/core/system/update/update_checker.dart",
+      "source_blob_sha": "4fc892750591a29e6d68327ec0d234c4df5c199f"
+    },
+    {
+      "path": "lib/core/system/update/update_manager.dart",
+      "source_blob_sha": "f17451dab795499e59c6e6f4f62b22054135c698"
+    },
+    {
+      "path": "lib/core/system/update/update_manifest.dart",
+      "source_blob_sha": "78723ded4f583a14b1c120d07963718ffa142495"
+    },
+    {
+      "path": "lib/core/system/update/update_state.dart",
+      "source_blob_sha": "9699e8f7632125f0995df95f112500c1fb4c8a6a"
+    },
+    {
+      "path": "lib/core/system/update/version_comparator.dart",
+      "source_blob_sha": "9df018dc79e5260b4c90562e24b02e3b144cac7a"
+    },
+    {
+      "path": "lib/core/system/update/version_info.dart",
+      "source_blob_sha": "82695cb473d2b8c166db60fd136536acad8c4d00"
+    },
+    {
+      "path": "lib/core/system/update/version_parser.dart",
+      "source_blob_sha": "f50ca89672ed1d68a96148007f77173c83f80129"
+    },
+    {
+      "path": "lib/core/system/update/windows_update_installer.dart",
+      "source_blob_sha": "ddc0c5dd6c6a9c52bdea4ca360c14e58b4582371"
+    },
+    {
+      "path": "lib/core/system/update/windows_update_manager.dart",
+      "source_blob_sha": "999398d8f8b5d0d8f5647123a0f76cf01ac2a3c5"
+    },
+    {
+      "path": "lib/native/platform/android_intent_handler.dart",
+      "source_blob_sha": "0e150c54f04b9b04e1bc106f1128e1986ac962ac"
+    },
+    {
+      "path": "test/core/system/update/android_beta_ota_detection_test.dart",
+      "source_blob_sha": "140fd1185472636c338273880a53e57a794a316d"
+    },
+    {
+      "path": "test/core/system/update/computer_use_windows_beta_update_test.dart",
+      "source_blob_sha": "73d7bae30a7b1f995ed6b86c047dc78dfe3a0dc3"
+    },
+    {
+      "path": "test/core/system/update/desktop_beta_update_test.dart",
+      "source_blob_sha": "71dd67d4613f6decaec88160e2b56b720f556530"
+    },
+    {
+      "path": "test/core/system/update/linux_update_checker_test.dart",
+      "source_blob_sha": "61340907c3e1c4e1257f5575f9440273644449df"
+    },
+    {
+      "path": "test/core/system/update/linux_update_installer_test.dart",
+      "source_blob_sha": "a8cedfa94f4189efb3516cba36fdcbad7757168a"
+    },
+    {
+      "path": "test/core/system/update/linux_update_manifest_test.dart",
+      "source_blob_sha": "8e958bccd3f468dd79d21557eebc2fb691527a59"
+    },
+    {
+      "path": "test/core/system/update/macos_update_installer_test.dart",
+      "source_blob_sha": "0f6b184b74e99fb2d56c28e40d86fbd9ab76c7d0"
+    },
+    {
+      "path": "test/core/system/update/macos_update_manager_test.dart",
+      "source_blob_sha": "9a52d8fc1765865454860cd91d00e58c295c18dd"
+    },
+    {
+      "path": "test/core/system/update/official_beta_ota_test.dart",
+      "source_blob_sha": "8df13e1878a485b63c3afb00f21222a4fece264a"
+    },
+    {
+      "path": "test/core/system/update/stable_manifest_regression_test.dart",
+      "source_blob_sha": "0c5e4a7042d28b0e3ea2aafd49660681ee6349cf"
+    },
+    {
+      "path": "test/core/system/update/update_checker_platform_test.dart",
+      "source_blob_sha": "de0fbc53777457908bf9ada2a7c73da099de9c2d"
+    },
+    {
+      "path": "test/core/system/update/update_manager_test.dart",
+      "source_blob_sha": "d898cf396a1a6f9d182681ce9c1f9c2b24dd2017"
+    },
+    {
+      "path": "test/core/system/update/update_manifest_test.dart",
+      "source_blob_sha": "9c3c016a688dc9cc409fef5be4299e1e67b1ba14"
+    },
+    {
+      "path": "test/core/system/update/version_comparator_test.dart",
+      "source_blob_sha": "c31766de5f6d701ebd506cd9a88edad834ea00a4"
+    },
+    {
+      "path": "test/core/system/update/version_parser_test.dart",
+      "source_blob_sha": "ab1198140fd5bc221bfb6e67ec0231b4c6028b64"
+    },
+    {
+      "path": "test/core/system/update/windows_81_dev_followup_update_test.dart",
+      "source_blob_sha": "a6133b46c54ea805d7195c794d0cc79d5bf17ae4"
+    },
+    {
+      "path": "test/core/system/update/windows_81_dev_ota_selection_test.dart",
+      "source_blob_sha": "af78839af354f6e6754e6456852caae557768b5d"
+    },
+    {
+      "path": "test/core/system/update/windows_beta_same_version_upgrade_test.dart",
+      "source_blob_sha": "525d0b7e5aace9e0eacd5c1b6b301dd88694b6b4"
+    },
+    {
+      "path": "test/core/system/update/windows_update_installer_test.dart",
+      "source_blob_sha": "ae2def31810903bf3ba9b0cbf9d9dcab6ccf9ef2"
+    },
+    {
+      "path": "test/core/system/update/windows_update_manager_test.dart",
+      "source_blob_sha": "ceafea7b09cb41288f5d023d79e4c19b22178e31"
+    },
+    {
+      "path": "update/version.json",
+      "source_blob_sha": "e586fa16410983e634095bafe9da6ad3cf3a060f"
+    }
+  ],
+  "adaptations": [
+    "Package import namespace changed; minimal AppConstants bridge replaces unrelated constants; platform bootstrap accepts explicit endpoint and installer names; UpdateChecker accepts configurable desktop asset names. Original default names retained for regression tests."
+  ],
+  "missing_evidence": [
+    "CI results",
+    "Android host native integration",
+    "VoiceBridge OTA end-to-end",
+    "license/security approval"
+  ]
+}
