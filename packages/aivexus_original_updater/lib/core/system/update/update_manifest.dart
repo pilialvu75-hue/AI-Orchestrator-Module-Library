@@ -34,6 +34,7 @@ class UpdateManifest {
     required this.apkUrl,
     this.apkFileName,
     this.apkSizeBytes,
+    this.apkSha256,
     this.windowsUrl,
     this.windowsFileName,
     this.windowsSizeBytes,
@@ -57,6 +58,7 @@ class UpdateManifest {
   final String apkUrl;
   final String? apkFileName;
   final int? apkSizeBytes;
+  final String? apkSha256;
   final String? windowsUrl;
   final String? windowsFileName;
   final int? windowsSizeBytes;
@@ -76,6 +78,7 @@ class UpdateManifest {
         url: apkUrl,
         fileName: apkFileName ?? Uri.parse(apkUrl).pathSegments.last,
         sizeBytes: apkSizeBytes,
+        sha256: apkSha256,
       );
 
   UpdateArtifact? get windowsArtifact {
@@ -139,6 +142,7 @@ class UpdateManifest {
         'apk_url': apkUrl,
         if (apkFileName != null) 'apk_file_name': apkFileName,
         if (apkSizeBytes != null) 'apk_size_bytes': apkSizeBytes,
+        if (apkSha256 != null) 'apk_sha256': apkSha256,
         if (windowsUrl != null) 'windows_url': windowsUrl,
         if (windowsFileName != null) 'windows_file_name': windowsFileName,
         if (windowsSizeBytes != null) 'windows_size_bytes': windowsSizeBytes,
@@ -166,6 +170,289 @@ class UpdateManifest {
     final rawApkFileName =
         ((json['apk_file_name'] ?? json['apkFileName']) as String?)?.trim();
     final rawApkSizeBytes = json['apk_size_bytes'] ?? json['apkSizeBytes'];
+    // Only APK-specific aliases; a generic digest might refer to another asset.
+    final rawApkSha256 = json['apk_sha256'] ?? json['apkSha256'];
+    if (rawApkSha256 != null &&
+        (rawApkSha256 is! String ||
+         !RegExp(r'^[a-fA-F0-9]{64}
+    final rawWindowsUrl =
+        ((json['windows_url'] ?? json['windowsUrl']) as String?)?.trim();
+    final rawWindowsFileName =
+        ((json['windows_file_name'] ?? json['windowsFileName']) as String?)?.trim();
+    final rawWindowsSizeBytes =
+        json['windows_size_bytes'] ?? json['windowsSizeBytes'];
+    final rawWindowsSha256 =
+        ((json['windows_sha256'] ?? json['windowsSha256']) as String?)?.trim();
+    final rawMacosUrl =
+        ((json['macos_url'] ?? json['macosUrl']) as String?)?.trim();
+    final rawMacosFileName =
+        ((json['macos_file_name'] ?? json['macosFileName']) as String?)?.trim();
+    final rawMacosSizeBytes =
+        json['macos_size_bytes'] ?? json['macosSizeBytes'];
+    final rawMacosSha256 =
+        ((json['macos_sha256'] ?? json['macosSha256']) as String?)?.trim();
+    final rawLinuxUrl =
+        ((json['linux_url'] ?? json['linuxUrl']) as String?)?.trim();
+    final rawLinuxFileName =
+        ((json['linux_file_name'] ?? json['linuxFileName']) as String?)?.trim();
+    final rawLinuxSizeBytes =
+        json['linux_size_bytes'] ?? json['linuxSizeBytes'];
+    final rawLinuxSha256 =
+        ((json['linux_sha256'] ?? json['linuxSha256']) as String?)?.trim();
+
+    if (rawVersion == null || rawVersion.isEmpty) {
+      throw const FormatException('Invalid manifest: missing version');
+    }
+    if (rawApkUrl.isEmpty && rawWindowsUrl == null && rawMacosUrl == null && rawLinuxUrl == null) {
+      throw const FormatException('Invalid manifest: missing apk_url');
+    }
+
+    final parsedVersion = parser.parse(rawVersion);
+    if (parsedVersion == null) {
+      throw FormatException('Invalid manifest: malformed version "$rawVersion"');
+    }
+
+    final apkUri = rawApkUrl.isEmpty ? null : _validateHttpUrl(rawApkUrl, fieldName: 'apk_url');
+
+    final derivedApkFileName =
+        rawApkFileName ??
+        (apkUri != null && apkUri.pathSegments.isNotEmpty ? apkUri.pathSegments.last.trim() : '');
+    if (rawApkUrl.isNotEmpty && (derivedApkFileName.isEmpty ||
+        derivedApkFileName.contains('/') ||
+        !derivedApkFileName.toLowerCase().endsWith('.apk'))) {
+      throw FormatException(
+        'Invalid manifest: apk filename must be a non-empty .apk name, got: $derivedApkFileName',
+      );
+    }
+
+    String? windowsUrl;
+    String? windowsFileName;
+    int? windowsSizeBytes;
+    String? windowsSha256;
+    final hasWindowsMetadata =
+        rawWindowsUrl != null ||
+        rawWindowsFileName != null ||
+        rawWindowsSizeBytes != null ||
+        rawWindowsSha256 != null;
+    if (hasWindowsMetadata) {
+      if (rawWindowsUrl == null || rawWindowsUrl.isEmpty) {
+        throw const FormatException(
+          'Invalid manifest: windows_url is required when Windows metadata is present',
+        );
+      }
+      final windowsUri =
+          _validateHttpUrl(rawWindowsUrl, fieldName: 'windows_url');
+      final derivedWindowsFileName =
+          rawWindowsFileName ??
+          (windowsUri.pathSegments.isNotEmpty
+              ? windowsUri.pathSegments.last.trim()
+              : '');
+      if (derivedWindowsFileName.isEmpty ||
+          derivedWindowsFileName.contains('/') ||
+          !derivedWindowsFileName.toLowerCase().endsWith('.exe')) {
+        throw FormatException(
+          'Invalid manifest: Windows filename must be a non-empty .exe name, got: $derivedWindowsFileName',
+        );
+      }
+      windowsUrl = rawWindowsUrl;
+      windowsFileName = derivedWindowsFileName;
+      windowsSizeBytes = switch (rawWindowsSizeBytes) {
+        int value => value,
+        String value => int.tryParse(value.trim()),
+        _ => null,
+      };
+      if (windowsSizeBytes != null && windowsSizeBytes <= 0) {
+        throw FormatException(
+          'Invalid manifest: Windows installer size must be > 0, got: $windowsSizeBytes',
+        );
+      }
+      if (rawWindowsSha256 != null && rawWindowsSha256.isNotEmpty) {
+        final normalizedSha = rawWindowsSha256.toLowerCase();
+        if (!RegExp(r'^[0-9a-f]{64}$').hasMatch(normalizedSha)) {
+          throw const FormatException(
+            'Invalid manifest: windows_sha256 must be a 64-character hexadecimal SHA-256',
+          );
+        }
+        windowsSha256 = normalizedSha;
+      }
+    }
+
+    String? macosUrl;
+    String? macosFileName;
+    int? macosSizeBytes;
+    String? macosSha256;
+    final hasMacosMetadata =
+        rawMacosUrl != null ||
+        rawMacosFileName != null ||
+        rawMacosSizeBytes != null ||
+        rawMacosSha256 != null;
+    if (hasMacosMetadata) {
+      if (rawMacosUrl == null || rawMacosUrl.isEmpty) {
+        throw const FormatException(
+          'Invalid manifest: macos_url is required when macOS metadata is present',
+        );
+      }
+      final macosUri = _validateHttpUrl(rawMacosUrl, fieldName: 'macos_url');
+      final derivedMacosFileName =
+          rawMacosFileName ??
+          (macosUri.pathSegments.isNotEmpty
+              ? macosUri.pathSegments.last.trim()
+              : '');
+      if (derivedMacosFileName.isEmpty ||
+          derivedMacosFileName.contains('/') ||
+          !derivedMacosFileName.toLowerCase().endsWith('.dmg')) {
+        throw FormatException(
+          'Invalid manifest: macOS filename must be a non-empty .dmg name, got: $derivedMacosFileName',
+        );
+      }
+      macosUrl = rawMacosUrl;
+      macosFileName = derivedMacosFileName;
+      macosSizeBytes = switch (rawMacosSizeBytes) {
+        int value => value,
+        String value => int.tryParse(value.trim()),
+        _ => null,
+      };
+      if (macosSizeBytes != null && macosSizeBytes <= 0) {
+        throw FormatException(
+          'Invalid manifest: macOS installer size must be > 0, got: $macosSizeBytes',
+        );
+      }
+      if (rawMacosSha256 != null && rawMacosSha256.isNotEmpty) {
+        final normalizedSha = rawMacosSha256.toLowerCase();
+        if (!RegExp(r'^[0-9a-f]{64}$').hasMatch(normalizedSha)) {
+          throw const FormatException(
+            'Invalid manifest: macos_sha256 must be a 64-character hexadecimal SHA-256',
+          );
+        }
+        macosSha256 = normalizedSha;
+      }
+    }
+
+    String? linuxUrl;
+    String? linuxFileName;
+    int? linuxSizeBytes;
+    String? linuxSha256;
+    final hasLinuxMetadata =
+        rawLinuxUrl != null ||
+        rawLinuxFileName != null ||
+        rawLinuxSizeBytes != null ||
+        rawLinuxSha256 != null;
+    if (hasLinuxMetadata) {
+      if (rawLinuxUrl == null || rawLinuxUrl.isEmpty) {
+        throw const FormatException(
+          'Invalid manifest: linux_url is required when Linux metadata is present',
+        );
+      }
+      final linuxUri = _validateHttpUrl(rawLinuxUrl, fieldName: 'linux_url');
+      final derivedLinuxFileName =
+          rawLinuxFileName ??
+          (linuxUri.pathSegments.isNotEmpty
+              ? linuxUri.pathSegments.last.trim()
+              : '');
+      if (derivedLinuxFileName.isEmpty ||
+          derivedLinuxFileName.contains('/') ||
+          !derivedLinuxFileName.toLowerCase().endsWith('.deb')) {
+        throw FormatException(
+          'Invalid manifest: Linux filename must be a non-empty .deb name, got: $derivedLinuxFileName',
+        );
+      }
+      linuxUrl = rawLinuxUrl;
+      linuxFileName = derivedLinuxFileName;
+      linuxSizeBytes = switch (rawLinuxSizeBytes) {
+        int value => value,
+        String value => int.tryParse(value.trim()),
+        _ => null,
+      };
+      if (linuxSizeBytes != null && linuxSizeBytes <= 0) {
+        throw FormatException(
+          'Invalid manifest: Linux installer size must be > 0, got: $linuxSizeBytes',
+        );
+      }
+      if (rawLinuxSha256 != null && rawLinuxSha256.isNotEmpty) {
+        final normalizedSha = rawLinuxSha256.toLowerCase();
+        if (!RegExp(r'^[0-9a-f]{64}$').hasMatch(normalizedSha)) {
+          throw const FormatException(
+            'Invalid manifest: linux_sha256 must be a 64-character hexadecimal SHA-256',
+          );
+        }
+        linuxSha256 = normalizedSha;
+      }
+    }
+
+    // Missing min_supported must never block updates by default.
+    final rawResolvedMinSupported =
+        (rawMinSupported != null && rawMinSupported.isNotEmpty)
+            ? rawMinSupported
+            : defaultMinSupportedVersion;
+    final parsedMinSupported = parser.parse(rawResolvedMinSupported);
+    if (parsedMinSupported == null) {
+      throw FormatException(
+        'Invalid manifest: malformed min_supported "$rawResolvedMinSupported"',
+      );
+    }
+    final versionCode = switch (rawVersionCode) {
+      int value => value,
+      String value => int.tryParse(value.trim()),
+      _ => null,
+    };
+    final apkSizeBytes = switch (rawApkSizeBytes) {
+      int value => value,
+      String value => int.tryParse(value.trim()),
+      _ => null,
+    };
+    if (apkSizeBytes != null && apkSizeBytes <= 0) {
+      throw FormatException(
+        'Invalid manifest: apk size must be > 0, got: $apkSizeBytes',
+      );
+    }
+
+    return UpdateManifest(
+      version: parsedVersion.displayValue,
+      versionCode: versionCode,
+      channel: json['channel'] is String
+          ? ReleaseChannel.fromString(json['channel'] as String?)
+          : parsedVersion.channel,
+      minSupported: parsedMinSupported.displayValue,
+      apkUrl: rawApkUrl,
+      apkFileName: derivedApkFileName,
+      apkSizeBytes: apkSizeBytes,
+      apkSha256: apkSha256,
+      windowsUrl: windowsUrl,
+      windowsFileName: windowsFileName,
+      windowsSizeBytes: windowsSizeBytes,
+      windowsSha256: windowsSha256,
+      macosUrl: macosUrl,
+      macosFileName: macosFileName,
+      macosSizeBytes: macosSizeBytes,
+      macosSha256: macosSha256,
+      linuxUrl: linuxUrl,
+      linuxFileName: linuxFileName,
+      linuxSizeBytes: linuxSizeBytes,
+      linuxSha256: linuxSha256,
+      changelog: (json['changelog'] as String?)?.trim() ?? '',
+      critical: json['critical'] == true || json['forceUpdate'] == true,
+    );
+  }
+
+  static Uri _validateHttpUrl(
+    String rawUrl, {
+    required String fieldName,
+  }) {
+    final uri = Uri.tryParse(rawUrl);
+    if (uri == null ||
+        !(uri.scheme == 'https' || uri.scheme == 'http') ||
+        uri.host.isEmpty) {
+      throw FormatException(
+        'Invalid manifest: $fieldName must be http/https, got: $rawUrl',
+      );
+    }
+    return uri;
+  }
+}
+).hasMatch(rawApkSha256.trim()))) {
+      throw const FormatException('Invalid manifest: apk_sha256 must be SHA-256');
+    }
+    final apkSha256 = (rawApkSha256 as String?)?.trim().toLowerCase();
     final rawWindowsUrl =
         ((json['windows_url'] ?? json['windowsUrl']) as String?)?.trim();
     final rawWindowsFileName =

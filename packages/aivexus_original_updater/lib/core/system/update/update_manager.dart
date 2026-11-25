@@ -4,6 +4,7 @@ import 'dart:async';
 import 'dart:io';
 
 import 'package:dio/dio.dart';
+import 'package:crypto/crypto.dart';
 import 'package:flutter/foundation.dart';
 import 'package:path/path.dart' as p;
 import 'package:path_provider/path_provider.dart';
@@ -71,6 +72,8 @@ class UpdateManager {
   static const String _prefApprovedDownload = 'update_approved_background_manifest';
   static const String _prefPendingApkPath = 'update_pending_apk_path';
   static const String _prefPendingVersion = 'update_pending_version';
+  static const String _prefPendingSha = 'update_pending_apk_sha256';
+  static const String _prefPendingSize = 'update_pending_apk_size';
   static const String _prefPendingSavedAt = 'update_pending_saved_at';
   static const String _prefDownloadPartialPath = 'update_download_partial_path';
   static const String _prefDownloadVersion = 'update_download_version';
@@ -92,6 +95,7 @@ class UpdateManager {
     required AndroidIntentHandler intentHandler,
     required String currentVersion,
     bool? allowDebugSignatureMismatchBypass,
+    this.requireApkSha256 = false,
     bool enableAndroidBetaBuildNumberComparison = false,
     bool enableWindowsBetaBuildNumberComparison = false,
     Dio? dio,
@@ -101,7 +105,7 @@ class UpdateManager {
         _intentHandler = intentHandler,
         _currentVersion = comparator.normalize(currentVersion) ?? currentVersion,
         _allowDebugSignatureMismatchBypass =
-            allowDebugSignatureMismatchBypass ?? kDebugMode,
+            !requireApkSha256 && (allowDebugSignatureMismatchBypass ?? kDebugMode),
         _enableAndroidBetaBuildNumberComparison =
             enableAndroidBetaBuildNumberComparison,
         _enableWindowsBetaBuildNumberComparison =
@@ -122,6 +126,7 @@ class UpdateManager {
   final AndroidIntentHandler _intentHandler;
   final String _currentVersion;
   final bool _allowDebugSignatureMismatchBypass;
+  final bool requireApkSha256;
   final bool _enableAndroidBetaBuildNumberComparison;
   final bool _enableWindowsBetaBuildNumberComparison;
   final Dio _dio;
@@ -342,6 +347,11 @@ class UpdateManager {
       );
       return false;
     }
+    if (requireApkSha256 && manifest.apkSha256 == null) {
+      state.value = state.value.copyWith(status: UpdateStatus.error,
+        errorMessage: 'APK manifest SHA-256 required');
+      return false;
+    }
     if (state.value.status == UpdateStatus.downloading) {
       _logStructuredDownloadTrigger(
         detectedVersion: manifest.version,
@@ -427,6 +437,7 @@ class UpdateManager {
         final verified = await _verifyApkFile(
           finalPath,
           expectedSizeBytes: manifest.apkSizeBytes,
+          expectedSha256: manifest.apkSha256,
         );
         if (verified.valid) {
           _logUpdateApkReady(
@@ -457,6 +468,8 @@ class UpdateManager {
           await _persistPendingInstallerState(
             apkPath: finalPath,
             version: manifest.version,
+            expectedSha256: manifest.apkSha256,
+            expectedSizeBytes: manifest.apkSizeBytes,
           );
           state.value = state.value.copyWith(
             status: UpdateStatus.readyToInstall,
@@ -505,6 +518,7 @@ class UpdateManager {
       final verification = await _verifyApkFile(
         finalPath,
         expectedSizeBytes: manifest.apkSizeBytes,
+        expectedSha256: manifest.apkSha256,
       );
       if (!verification.valid) {
         if (Platform.isAndroid) await BackgroundDownload.release(manifest.apkUrl);
@@ -554,6 +568,8 @@ class UpdateManager {
       await _persistPendingInstallerState(
         apkPath: finalPath,
         version: manifest.version,
+        expectedSha256: manifest.apkSha256,
+        expectedSizeBytes: manifest.apkSizeBytes,
       );
       _logUpdateDownloadComplete(
         'path=$finalPath size_bytes=${verification.sizeBytes}',
@@ -658,9 +674,17 @@ class UpdateManager {
         'apk_filename=${p.basename(apkPath)}',
       );
 
+      final hasPending = _preferences.getString(_prefPendingApkPath) == apkPath;
+      final expectedSha = hasPending
+          ? _preferences.getString(_prefPendingSha)
+          : state.value.latestManifest?.apkSha256;
+      final expectedSize = hasPending
+          ? _preferences.getInt(_prefPendingSize)
+          : state.value.latestManifest?.apkSizeBytes;
       final verification = await _verifyApkFile(
         apkPath,
-        expectedSizeBytes: state.value.latestManifest?.apkSizeBytes,
+        expectedSizeBytes: expectedSize,
+        expectedSha256: expectedSha,
       );
       if (!verification.valid) {
         _logUpdateInstallFail(verification.reason);
@@ -854,6 +878,8 @@ class UpdateManager {
       await _persistPendingInstallerState(
         apkPath: apkPath,
         version: persistedVersion,
+        expectedSha256: expectedSha,
+        expectedSizeBytes: expectedSize,
       );
       _logUpdateInstallResume(
         'installer_ready path=$apkPath version=$persistedVersion',
@@ -1087,7 +1113,9 @@ class UpdateManager {
             );
           }
         } else {
-          final verification = await _verifyApkFile(pendingPath);
+          final verification = await _verifyApkFile(pendingPath,
+              expectedSha256: _preferences.getString(_prefPendingSha),
+              expectedSizeBytes: _preferences.getInt(_prefPendingSize));
           if (!verification.valid) {
             await _cleanupInstallerArtifacts(pendingPath);
             await _clearPendingInstallerState();
@@ -1168,6 +1196,7 @@ class UpdateManager {
     final verification = await _verifyApkFile(
       pendingPath,
       expectedSizeBytes: manifest.apkSizeBytes,
+      expectedSha256: manifest.apkSha256,
     );
     if (!verification.valid) {
       await _cleanupInstallerArtifacts(pendingPath);
@@ -1267,7 +1296,9 @@ class UpdateManager {
       return;
     }
 
-    final verification = await _verifyApkFile(pendingPath);
+    final verification = await _verifyApkFile(pendingPath,
+              expectedSha256: _preferences.getString(_prefPendingSha),
+              expectedSizeBytes: _preferences.getInt(_prefPendingSize));
     if (!verification.valid) {
       _logUpdateInstallCleanup(
         'stale_pending_path_invalid path=$pendingPath reason=${verification.reason}',
@@ -1299,7 +1330,20 @@ class UpdateManager {
   Future<void> _persistPendingInstallerState({
     required String apkPath,
     required String version,
+    String? expectedSha256,
+    int? expectedSizeBytes,
   }) async {
+    // Save expected metadata from the approved manifest, never the observed digest.
+    if (expectedSha256 == null) {
+      await _preferences.remove(_prefPendingSha);
+    } else {
+      await _preferences.setString(_prefPendingSha, expectedSha256);
+    }
+    if (expectedSizeBytes == null) {
+      await _preferences.remove(_prefPendingSize);
+    } else {
+      await _preferences.setInt(_prefPendingSize, expectedSizeBytes);
+    }
     await _preferences.setString(_prefPendingApkPath, apkPath);
     await _preferences.setString(_prefPendingVersion, version);
     await _preferences.setInt(
@@ -1314,6 +1358,8 @@ class UpdateManager {
   Future<void> _clearPendingInstallerState() async {
     await _preferences.remove(_prefPendingApkPath);
     await _preferences.remove(_prefPendingVersion);
+    await _preferences.remove(_prefPendingSha);
+    await _preferences.remove(_prefPendingSize);
     await _preferences.remove(_prefPendingSavedAt);
     _logUpdateInstallCleanup('pending_state_cleared');
   }
@@ -1486,6 +1532,7 @@ class UpdateManager {
   Future<_ApkVerificationResult> _verifyApkFile(
     String apkPath, {
     int? expectedSizeBytes,
+    String? expectedSha256,
   }) async {
     final apkFile = File(apkPath);
     final exists = await apkFile.exists();
@@ -1541,7 +1588,18 @@ class UpdateManager {
       reason = reason == 'ok' ? 'package_parse_failed' : reason;
     }
 
-    final valid = exists &&
+    var integrityValid = true;
+    if (expectedSha256 == null && requireApkSha256) {
+      integrityValid = false;
+      reason = 'APK manifest SHA-256 required';
+    } else if (expectedSha256 != null && exists && readable) {
+      final actual = (await sha256.bind(apkFile.openRead()).first).toString();
+      fileSha256 = actual;
+      integrityValid = actual == expectedSha256.toLowerCase() &&
+          (expectedSizeBytes == null || sizeBytes == expectedSizeBytes);
+      if (!integrityValid) reason = 'APK SHA-256 or exact size mismatch';
+    }
+    final valid = integrityValid && exists &&
         readable &&
         hasApkExtension &&
         sizeBytes >= minimumRequiredBytes &&

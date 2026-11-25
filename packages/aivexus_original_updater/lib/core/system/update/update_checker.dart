@@ -42,6 +42,7 @@ class UpdateChecker {
     required this.githubOwner,
     required this.githubRepo,
     this.targetPlatform = UpdateTargetPlatform.android,
+    this.requireApkSha256 = false,
     this.windowsSetupAssetName = 'AI-Orchestrator-Setup-x64.exe',
     this.macosDmgAssetName = 'AI-Orchestrator-macOS.dmg',
     this.linuxDebAssetName = 'AI-Orchestrator-Linux-amd64.deb',
@@ -57,6 +58,7 @@ class UpdateChecker {
   final String githubOwner;
   final String githubRepo;
   final UpdateTargetPlatform targetPlatform;
+  final bool requireApkSha256;
 
   static const String _cachedManifestLegacyKey = 'system.update.cached_manifest';
   static const String _cachedManifestKeyPrefix = 'system.update.cached_manifest.v2';
@@ -378,6 +380,7 @@ class UpdateChecker {
         apkUrl: apkAsset?.url ?? '',
         apkFileName: apkAsset?.name,
         apkSizeBytes: apkAsset?.sizeBytes,
+        apkSha256: apkAsset?.sha256,
         windowsUrl: windowsAsset?.url,
         windowsFileName: windowsAsset?.name,
         windowsSizeBytes: windowsAsset?.sizeBytes,
@@ -475,6 +478,7 @@ class UpdateChecker {
       final candidate = _validatedReleaseAsset(
         asset,
         requiredExtension: '.apk',
+        requireSha256: requireApkSha256 && targetPlatform == UpdateTargetPlatform.android,
       );
       if (candidate == null) continue;
 
@@ -620,7 +624,9 @@ class UpdateChecker {
   }
 
   bool _supportsTarget(UpdateManifest manifest) =>
-      manifest.artifactFor(targetPlatform) != null;
+      manifest.artifactFor(targetPlatform) != null &&
+      (targetPlatform != UpdateTargetPlatform.android || !requireApkSha256 ||
+          manifest.apkSha256 != null);
 
   String _cacheKeyForChannel(ReleaseChannel channel) =>
       '$_cachedManifestKeyPrefix.${channel.storageValue}';
