@@ -1,0 +1,7 @@
+{
+  "package_id": "com.aivexus.example",
+  "certificate_sha256": "REPLACE_WITH_OWNER_APPROVED_PUBLIC_CERTIFICATE_SHA256",
+  "channel": "stable",
+  "manifest_path": "update/version.json",
+  "distribution": "public-github-releases"
+}

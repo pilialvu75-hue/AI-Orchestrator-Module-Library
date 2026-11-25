@@ -47,7 +47,7 @@ jobs:
         run: sudo apt-get update && sudo apt-get install -y clang cmake ninja-build pkg-config libgtk-3-dev libstdc++-12-dev
       - name: Verify signing gate fixtures (no signing secrets)
         working-directory: starter-kits/aivexus/signing
-        run: python -m unittest -v test_verify_apk
+        run: python -m unittest -v test_verify_apk test_release_gate
       - name: Generate clean app
         run: python starter-kits/aivexus/generate.py --name starter_smoke --display-name "AIVEXUS Starter Smoke" --out starter-smoke
       - name: Analyze and test generated application
