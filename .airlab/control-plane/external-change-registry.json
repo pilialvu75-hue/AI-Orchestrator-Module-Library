@@ -16,7 +16,7 @@
     {
       "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
       "baseline_at": "2026-10-03T16:20:00Z",
-      "cursor_merged_at": "2026-11-25T20:12:37Z"
+      "cursor_merged_at": "2026-11-25T22:39:25Z"
     },
     {
       "repository": "pilialvu75-hue/Ai-orchestrator-diagnostics",
@@ -26,7 +26,7 @@
     {
       "repository": "pilialvu75-hue/AI-Orchestrator-Module-Researcher",
       "baseline_at": "2026-10-03T16:20:00Z",
-      "cursor_merged_at": "2026-11-25T10:24:23Z"
+      "cursor_merged_at": "2026-11-25T23:04:28Z"
     },
     {
       "repository": "pilialvu75-hue/Ai_orchestrator-prova",
@@ -9571,6 +9571,142 @@
       "url": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/833fc0d751fa5e2ed74a3eeb73aee7683f491708",
       "match_ref": null,
       "reconciliation": null
+    },
+    {
+      "incident_id": "d6a5ea42ae8d130d8307",
+      "status": "UNRECONCILED",
+      "detected_at": "2026-11-25T23:39:04Z",
+      "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
+      "kind": "direct_commit",
+      "pull_request": null,
+      "merge_sha": null,
+      "commit_sha": "67ae2cc352e6d54ec5cbbe7917958ad6e9e8ce28",
+      "head_branch": null,
+      "base_branch": "main",
+      "change_at": "2026-11-25T22:39:25Z",
+      "title": "feat(metrics): show request-scoped Windows inference telemetry (#1281)",
+      "url": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/67ae2cc352e6d54ec5cbbe7917958ad6e9e8ce28",
+      "match_ref": null,
+      "reconciliation": null
+    },
+    {
+      "incident_id": "e944bece7327730eedb3",
+      "status": "UNRECONCILED",
+      "detected_at": "2026-11-25T23:39:04Z",
+      "repository": "pilialvu75-hue/AI-Orchestrator-Module-Researcher",
+      "kind": "direct_commit",
+      "pull_request": null,
+      "merge_sha": null,
+      "commit_sha": "b6069a14502f3a2e6d873b9ae5990b9df9c0a07f",
+      "head_branch": null,
+      "base_branch": "main",
+      "change_at": "2026-11-25T22:31:27Z",
+      "title": "Read pinned first-party extracted package register",
+      "url": "https://github.com/pilialvu75-hue/AI-Orchestrator-Module-Researcher/commit/b6069a14502f3a2e6d873b9ae5990b9df9c0a07f",
+      "match_ref": null,
+      "reconciliation": null
+    },
+    {
+      "incident_id": "6bd7d5316e9bbda99a9e",
+      "status": "UNRECONCILED",
+      "detected_at": "2026-11-25T23:39:04Z",
+      "repository": "pilialvu75-hue/AI-Orchestrator-Module-Researcher",
+      "kind": "direct_commit",
+      "pull_request": null,
+      "merge_sha": null,
+      "commit_sha": "bc9aad05944e8c9bf1ef705541b5b132b52f82a8",
+      "head_branch": null,
+      "base_branch": "main",
+      "change_at": "2026-11-25T22:33:26Z",
+      "title": "Refresh first-party preview register during research cycles",
+      "url": "https://github.com/pilialvu75-hue/AI-Orchestrator-Module-Researcher/commit/bc9aad05944e8c9bf1ef705541b5b132b52f82a8",
+      "match_ref": null,
+      "reconciliation": null
+    },
+    {
+      "incident_id": "45a23602bcfb89774636",
+      "status": "UNRECONCILED",
+      "detected_at": "2026-11-25T23:39:04Z",
+      "repository": "pilialvu75-hue/AI-Orchestrator-Module-Researcher",
+      "kind": "direct_commit",
+      "pull_request": null,
+      "merge_sha": null,
+      "commit_sha": "733345e9641cdd9228b46c2dd893e6f0bf6a87df",
+      "head_branch": null,
+      "base_branch": "main",
+      "change_at": "2026-11-25T22:33:33Z",
+      "title": "Test preview discovery and reject mutable source pins",
+      "url": "https://github.com/pilialvu75-hue/AI-Orchestrator-Module-Researcher/commit/733345e9641cdd9228b46c2dd893e6f0bf6a87df",
+      "match_ref": null,
+      "reconciliation": null
+    },
+    {
+      "incident_id": "076062d740358473682e",
+      "status": "UNRECONCILED",
+      "detected_at": "2026-11-25T23:39:04Z",
+      "repository": "pilialvu75-hue/AI-Orchestrator-Module-Researcher",
+      "kind": "unmatched_merge_commit",
+      "pull_request": null,
+      "merge_sha": null,
+      "commit_sha": "7fe35236e8924dfb8e36087d4f72499112ffe53b",
+      "head_branch": null,
+      "base_branch": "main",
+      "change_at": "2026-11-25T22:51:50Z",
+      "title": "Merge pull request #145 from pilialvu75-hue/feat/first-party-preview-feedback",
+      "url": "https://github.com/pilialvu75-hue/AI-Orchestrator-Module-Researcher/commit/7fe35236e8924dfb8e36087d4f72499112ffe53b",
+      "match_ref": null,
+      "reconciliation": null
+    },
+    {
+      "incident_id": "4815d822f77f41c0da66",
+      "status": "UNRECONCILED",
+      "detected_at": "2026-11-25T23:39:04Z",
+      "repository": "pilialvu75-hue/AI-Orchestrator-Module-Researcher",
+      "kind": "direct_commit",
+      "pull_request": null,
+      "merge_sha": null,
+      "commit_sha": "3f54ec712f16ebe292995803a67aa94e736d61e1",
+      "head_branch": null,
+      "base_branch": "main",
+      "change_at": "2026-11-25T22:52:06Z",
+      "title": "Use fresh functional coverage even when all candidate slots are filled",
+      "url": "https://github.com/pilialvu75-hue/AI-Orchestrator-Module-Researcher/commit/3f54ec712f16ebe292995803a67aa94e736d61e1",
+      "match_ref": null,
+      "reconciliation": null
+    },
+    {
+      "incident_id": "c579bcb67c1f6b89fcf8",
+      "status": "UNRECONCILED",
+      "detected_at": "2026-11-25T23:39:04Z",
+      "repository": "pilialvu75-hue/AI-Orchestrator-Module-Researcher",
+      "kind": "direct_commit",
+      "pull_request": null,
+      "merge_sha": null,
+      "commit_sha": "6fedbf1f5c0e6379dd7e50d6326c8b0f58653b83",
+      "head_branch": null,
+      "base_branch": "main",
+      "change_at": "2026-11-25T22:52:08Z",
+      "title": "Test fresh zero-gap evidence without historical submissions",
+      "url": "https://github.com/pilialvu75-hue/AI-Orchestrator-Module-Researcher/commit/6fedbf1f5c0e6379dd7e50d6326c8b0f58653b83",
+      "match_ref": null,
+      "reconciliation": null
+    },
+    {
+      "incident_id": "acd3e20e6e0c7cabce0e",
+      "status": "UNRECONCILED",
+      "detected_at": "2026-11-25T23:39:04Z",
+      "repository": "pilialvu75-hue/AI-Orchestrator-Module-Researcher",
+      "kind": "unmatched_merge_commit",
+      "pull_request": null,
+      "merge_sha": null,
+      "commit_sha": "2387c0ac91fa74f1da3e5d6b0525e1824dd0d00c",
+      "head_branch": null,
+      "base_branch": "main",
+      "change_at": "2026-11-25T23:04:28Z",
+      "title": "Merge pull request #146 from pilialvu75-hue/fix/fresh-functional-feedback",
+      "url": "https://github.com/pilialvu75-hue/AI-Orchestrator-Module-Researcher/commit/2387c0ac91fa74f1da3e5d6b0525e1824dd0d00c",
+      "match_ref": null,
+      "reconciliation": null
     }
   ],
   "reconciliation_history": [
@@ -9581,35 +9717,35 @@
       "note": "Known motivating example for CP-HARDEN-03. It predates this incremental detector and is not retroactively reopened."
     }
   ],
-  "last_scan_at": "2026-11-25T22:39:02Z",
+  "last_scan_at": "2026-11-25T23:39:04Z",
   "scan_health": {
     "pilialvu75-hue/AI-Orchestrator-Module-Library": {
       "state": "OK",
-      "last_success_at": "2026-11-25T22:39:02Z",
+      "last_success_at": "2026-11-25T23:39:04Z",
       "last_failure_at": null,
       "error_code": null
     },
     "pilialvu75-hue/Ai-orchestrator-riserva": {
       "state": "OK",
-      "last_success_at": "2026-11-25T22:39:02Z",
+      "last_success_at": "2026-11-25T23:39:04Z",
       "last_failure_at": "2026-10-28T07:39:58Z",
       "error_code": null
     },
     "pilialvu75-hue/Ai-orchestrator-diagnostics": {
       "state": "OK",
-      "last_success_at": "2026-11-25T22:39:02Z",
+      "last_success_at": "2026-11-25T23:39:04Z",
       "last_failure_at": "2026-10-28T07:39:58Z",
       "error_code": null
     },
     "pilialvu75-hue/AI-Orchestrator-Module-Researcher": {
       "state": "OK",
-      "last_success_at": "2026-11-25T22:39:02Z",
+      "last_success_at": "2026-11-25T23:39:04Z",
       "last_failure_at": "2026-10-28T07:39:58Z",
       "error_code": null
     },
     "pilialvu75-hue/Ai_orchestrator-prova": {
       "state": "OK",
-      "last_success_at": "2026-11-25T22:39:02Z",
+      "last_success_at": "2026-11-25T23:39:04Z",
       "last_failure_at": "2026-10-28T07:39:58Z",
       "error_code": null
     }
