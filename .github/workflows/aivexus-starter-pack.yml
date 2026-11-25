@@ -1,0 +1,64 @@
+name: AIVEXUS clean starter pack
+on:
+  pull_request:
+    paths:
+      - 'starter-kits/aivexus/**'
+      - '.github/workflows/aivexus-starter-pack.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'starter-kits/aivexus/**'
+      - '.github/workflows/aivexus-starter-pack.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  scaffold:
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: ubuntu-latest
+            target: apk
+          - os: ubuntu-latest
+            target: linux
+          - os: windows-2022
+            target: windows
+          - os: macos-latest
+            target: macos
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+      - uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.35.7'
+          channel: stable
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - uses: actions/setup-java@v4
+        if: matrix.target == 'apk'
+        with:
+          distribution: temurin
+          java-version: '17'
+      - name: Linux native build prerequisites
+        if: matrix.target == 'linux'
+        run: sudo apt-get update && sudo apt-get install -y clang cmake ninja-build pkg-config libgtk-3-dev libstdc++-12-dev
+      - name: Verify signing gate fixtures (no signing secrets)
+        working-directory: starter-kits/aivexus/signing
+        run: python -m unittest -v test_verify_apk
+      - name: Generate clean app
+        run: python starter-kits/aivexus/generate.py --name starter_smoke --display-name "AIVEXUS Starter Smoke" --out starter-smoke
+      - name: Analyze and test generated application
+        working-directory: starter-smoke
+        shell: bash
+        run: |
+          set -euo pipefail
+          flutter pub get
+          flutter analyze
+          flutter test
+          if grep -E 'aivexus_original_updater|beta_access|diagnostics|AI-Orchestrator-Module-Library' pubspec.yaml; then exit 1; fi
+      - name: Compile native target
+        working-directory: starter-smoke
+        run: flutter build ${{ matrix.target }} --debug
