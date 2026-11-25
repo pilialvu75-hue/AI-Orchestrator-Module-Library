@@ -782,6 +782,22 @@ class UpdateManager {
         return false;
       }
 
+      if (requireApkSha256 &&
+          (!verification.archiveParsed ||
+           verification.packageName != installedIdentity.applicationId ||
+           verification.versionCode == null ||
+           installedVersionCode == null ||
+           installedIdentity.signatureSha256 == null ||
+           installedIdentity.signatureSha256!.isEmpty ||
+           verification.signatureSha256 == null ||
+           verification.signatureSha256!.isEmpty)) {
+        const message = 'APK identity, versionCode or signature could not be verified';
+        state.value = state.value.copyWith(
+          status: UpdateStatus.error, errorMessage: message,
+          diagnostics: state.value.diagnostics.copyWith(
+            installerLaunchSuccess: false, lastException: message));
+        return false;
+      }
       final signaturesDiffer =
           installedIdentity.signatureSha256 != null &&
               verification.signatureSha256 != null &&
@@ -1212,6 +1228,9 @@ class UpdateManager {
       return false;
     }
 
+    await _persistPendingInstallerState(apkPath: pendingPath,
+      version: manifest.version, expectedSha256: manifest.apkSha256,
+      expectedSizeBytes: manifest.apkSizeBytes);
     _logUpdateInstallResume(
       'reuse_pending_download path=$pendingPath version=$pendingVersion',
     );
