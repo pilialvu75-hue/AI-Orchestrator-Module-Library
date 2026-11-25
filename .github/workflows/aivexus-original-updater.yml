@@ -1,0 +1,33 @@
+name: Original AIVEXUS updater regression
+on:
+  pull_request:
+    paths:
+      - 'packages/aivexus_original_updater/**'
+      - '.github/workflows/aivexus-original-updater.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'packages/aivexus_original_updater/**'
+      - '.github/workflows/aivexus-original-updater.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  regression:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 25
+    defaults:
+      run:
+        working-directory: packages/aivexus_original_updater
+    steps:
+      - uses: actions/checkout@v4
+      - uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+      - run: flutter pub get
+      - run: flutter analyze --no-fatal-infos --no-fatal-warnings
+      - run: flutter test
