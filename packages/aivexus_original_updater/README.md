@@ -11,3 +11,6 @@ The module has no Beta Access registration requirement. The Android MethodChanne
 ## Verification
 
 From this directory: `flutter pub get`, `flutter analyze --no-fatal-infos --no-fatal-warnings`, `flutter test`. CI runs original regression tests. Development-only until CI, consumer integration, license/security and actual OTA evidence are available. See provenance.json for original blob hashes.
+
+## Android integrity preview (issue #401)
+`apk_sha256` (alias `apkSha256`) is preserved in manifest/cache and GitHub asset digest. When provided it is checked against streamed file bytes, including resumed/pending APKs and immediately before install. New Android consumers should set `requireApkSha256: true` on both UpdateChecker and UpdateManager; missing checksum fails closed and the manager disables its legacy debug signature bypass. Existing consumers keep compatibility by default; no change to pinned dev.1 or desktop install flows. Physical OTA validation is still required.

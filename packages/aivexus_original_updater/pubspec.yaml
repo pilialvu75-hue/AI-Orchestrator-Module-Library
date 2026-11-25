@@ -1,6 +1,6 @@
 name: aivexus_original_updater
 description: Extracted first-party AIVEXUS OTA updater from AI Orchestrator Riserva.
-version: 0.1.0-dev.1
+version: 0.1.0-dev.2
 publish_to: none
 environment:
   sdk: '>=3.4.0 <4.0.0'

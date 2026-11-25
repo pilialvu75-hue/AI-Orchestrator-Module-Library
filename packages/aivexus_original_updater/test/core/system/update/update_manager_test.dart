@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:crypto/crypto.dart';
 
 import 'package:dartz/dartz.dart';
 import 'package:flutter/services.dart';
@@ -269,4 +270,54 @@ void main() {
     verify(() => mockIntentHandler.openApkInstaller(apkFile.path)).called(1);
     await tempDir.delete(recursive: true);
   });
+  for (final scenario in ['missing', 'tampered', 'wrong signature', 'wrong package']) {
+    test('strict OTA rejects $scenario before installer launch', () async {
+      final manager = UpdateManager(
+        updateChecker: mockUpdateChecker, comparator: const VersionComparator(),
+        preferences: preferences, intentHandler: mockIntentHandler,
+        currentVersion: '1.12.119+119', requireApkSha256: true,
+        allowDebugSignatureMismatchBypass: true,
+      );
+      final dir = await Directory.systemTemp.createTemp('apk-integrity-');
+      try {
+        final bytes = Uint8List(80 * 1024);
+        final expected = sha256.convert(bytes).toString();
+        if (scenario == 'tampered') bytes[0] = 1;
+        final apk = File('${dir.path}/candidate.apk');
+        await apk.writeAsBytes(bytes);
+        final manifest = UpdateManifest.fromJson({
+          'versionName': '1.12.120', 'versionCode': 120,
+          'apkUrl': 'https://example.test/app.apk',
+          'apk_size_bytes': bytes.length,
+          if (scenario != 'missing') 'apk_sha256': expected,
+        });
+        manager.state.value = manager.state.value.copyWith(
+          status: UpdateStatus.readyToInstall, latestManifest: manifest,
+          tempApkPath: apk.path,
+        );
+        when(() => mockIntentHandler.getInstallDiagnostics()).thenAnswer(
+          (_) async => const Right(<String, dynamic>{
+            'installerPackageName': 'com.android.packageinstaller',
+            'installedSignatureSha256': 'AA:BB',
+            'installedVersionCode': 119,
+          }));
+        when(() => mockIntentHandler.verifyApk(any())).thenAnswer(
+          (_) async => Right(<String, dynamic>{
+            'valid': true, 'reason': 'ok',
+            'packageName': scenario == 'wrong package' ? 'com.other.app' : 'com.aiorchestrator',
+            'versionName': '1.12.120', 'versionCode': 120,
+            'signatureSha256': scenario == 'wrong signature' ? 'CC:DD' : 'AA:BB',
+            'fileSha256': expected, // Deliberately do not trust native claimed hash.
+            'hasSplitConfig': false, 'archiveParsed': true,
+          }));
+        expect(await manager.prepareInstallIntent(), isFalse);
+        expect(manager.state.value.status, UpdateStatus.error);
+        verifyNever(() => mockIntentHandler.openApkInstaller(any()));
+      } finally {
+        manager.dispose();
+        await dir.delete(recursive: true);
+      }
+    });
+  }
+
 }

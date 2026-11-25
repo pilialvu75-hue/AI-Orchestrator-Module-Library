@@ -34,6 +34,7 @@ class UpdateManifest {
     required this.apkUrl,
     this.apkFileName,
     this.apkSizeBytes,
+    this.apkSha256,
     this.windowsUrl,
     this.windowsFileName,
     this.windowsSizeBytes,
@@ -57,6 +58,7 @@ class UpdateManifest {
   final String apkUrl;
   final String? apkFileName;
   final int? apkSizeBytes;
+  final String? apkSha256;
   final String? windowsUrl;
   final String? windowsFileName;
   final int? windowsSizeBytes;
@@ -76,6 +78,7 @@ class UpdateManifest {
         url: apkUrl,
         fileName: apkFileName ?? Uri.parse(apkUrl).pathSegments.last,
         sizeBytes: apkSizeBytes,
+        sha256: apkSha256,
       );
 
   UpdateArtifact? get windowsArtifact {
@@ -139,6 +142,7 @@ class UpdateManifest {
         'apk_url': apkUrl,
         if (apkFileName != null) 'apk_file_name': apkFileName,
         if (apkSizeBytes != null) 'apk_size_bytes': apkSizeBytes,
+        if (apkSha256 != null) 'apk_sha256': apkSha256,
         if (windowsUrl != null) 'windows_url': windowsUrl,
         if (windowsFileName != null) 'windows_file_name': windowsFileName,
         if (windowsSizeBytes != null) 'windows_size_bytes': windowsSizeBytes,
@@ -166,6 +170,13 @@ class UpdateManifest {
     final rawApkFileName =
         ((json['apk_file_name'] ?? json['apkFileName']) as String?)?.trim();
     final rawApkSizeBytes = json['apk_size_bytes'] ?? json['apkSizeBytes'];
+    final rawApkSha256 = json['apk_sha256'] ?? json['apkSha256'];
+    if (rawApkSha256 != null &&
+        (rawApkSha256 is! String ||
+         !RegExp(r'^[a-fA-F0-9]{64}$').hasMatch(rawApkSha256.trim()))) {
+      throw const FormatException('Invalid manifest: apk_sha256 must be SHA-256');
+    }
+    final apkSha256 = (rawApkSha256 as String?)?.trim().toLowerCase();
     final rawWindowsUrl =
         ((json['windows_url'] ?? json['windowsUrl']) as String?)?.trim();
     final rawWindowsFileName =
@@ -407,6 +418,7 @@ class UpdateManifest {
       apkUrl: rawApkUrl,
       apkFileName: derivedApkFileName,
       apkSizeBytes: apkSizeBytes,
+      apkSha256: apkSha256,
       windowsUrl: windowsUrl,
       windowsFileName: windowsFileName,
       windowsSizeBytes: windowsSizeBytes,
