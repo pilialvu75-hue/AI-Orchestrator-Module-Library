@@ -170,15 +170,24 @@
     {
       "path": "update/version.json",
       "source_blob_sha": "e586fa16410983e634095bafe9da6ad3cf3a060f"
+    },
+    {
+      "path": "lib/features/settings/presentation/pages/modules/update_settings_page.dart",
+      "source_blob_sha": "10412becc8df04a52b9060075a8b8a89d1d07afa"
+    },
+    {
+      "path": "lib/core/runtime/app_localizations.dart",
+      "source_blob_sha": "8e82f18d458a3765d6c457a9b56f69cd279351be"
     }
   ],
   "adaptations": [
-    "Package import namespace changed; minimal AppConstants bridge replaces unrelated constants; platform bootstrap accepts explicit endpoint and installer names; UpdateChecker accepts configurable desktop asset names. Original default names retained for regression tests."
+    "Package import namespace changed; minimal AppConstants bridge replaces unrelated constants; platform bootstrap accepts explicit endpoint and installer names; UpdateChecker accepts configurable desktop asset names. Original default names retained for regression tests.",
+    "dev.2 (#402): Android expected APK SHA-256 is retained and verified; optional strict checksum and identity policy.",
+    "dev.3: original settings page copied, only imports changed; original localization keys extracted into minimal adapter with English fallback."
   ],
   "missing_evidence": [
-    "CI results",
-    "Android host native integration",
-    "VoiceBridge OTA end-to-end",
+    "physical Android OTA with permanent signature across independent builds",
+    "physical desktop OTA and rollback",
     "license/security approval"
   ]
 }

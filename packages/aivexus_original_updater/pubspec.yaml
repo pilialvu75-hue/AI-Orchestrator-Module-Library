@@ -1,12 +1,13 @@
 name: aivexus_original_updater
 description: Extracted first-party AIVEXUS OTA updater from AI Orchestrator Riserva.
-version: 0.1.0-dev.2
+version: 0.1.0-dev.3
 publish_to: none
 environment:
   sdk: '>=3.4.0 <4.0.0'
 dependencies:
   flutter:
     sdk: flutter
+  intl: '>=0.19.0 <0.21.0'
   crypto: ^3.0.3
   dio: ^5.7.0
   path: ^1.9.0
