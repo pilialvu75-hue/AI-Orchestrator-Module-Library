@@ -43,6 +43,7 @@ class UpdateChecker {
     required this.githubRepo,
     this.targetPlatform = UpdateTargetPlatform.android,
     this.requireApkSha256 = false,
+    this.manifestOnly = false,
     this.windowsSetupAssetName = 'AI-Orchestrator-Setup-x64.exe',
     this.macosDmgAssetName = 'AI-Orchestrator-macOS.dmg',
     this.linuxDebAssetName = 'AI-Orchestrator-Linux-amd64.deb',
@@ -59,6 +60,8 @@ class UpdateChecker {
   final String githubRepo;
   final UpdateTargetPlatform targetPlatform;
   final bool requireApkSha256;
+  /// For manifest-last publication: GitHub releases are not an authorization source.
+  final bool manifestOnly;
 
   static const String _cachedManifestLegacyKey = 'system.update.cached_manifest';
   static const String _cachedManifestKeyPrefix = 'system.update.cached_manifest.v2';
@@ -78,7 +81,8 @@ class UpdateChecker {
     try {
       final resolved = await Future.wait<UpdateManifest?>([
         _fetchRemoteManifestSafe(preferredChannel, errors),
-        _fetchFromGitHubReleasesSafe(preferredChannel, errors),
+        if (manifestOnly) Future<UpdateManifest?>.value(null)
+        else _fetchFromGitHubReleasesSafe(preferredChannel, errors),
       ]);
       final fromManifest = resolved[0];
       final fromGitHub = resolved[1];
