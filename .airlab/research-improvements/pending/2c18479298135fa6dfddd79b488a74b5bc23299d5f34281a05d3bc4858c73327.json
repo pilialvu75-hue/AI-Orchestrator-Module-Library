@@ -1,0 +1,25 @@
+{
+  "proposal": {
+    "acceptance_gates": [
+      "implementation_tests_pass",
+      "security_gates_pass",
+      "regression_tests_pass",
+      "library_contract_pass"
+    ],
+    "capability_id": "platform.connectivity",
+    "created_at": "2026-11-25T12:33:14.993920Z",
+    "novelty": [
+      "concept:frameworks",
+      "concept:objective-c",
+      "topic:curated-list",
+      "topic:list",
+      "topic:macos",
+      "topic:objective-c"
+    ],
+    "proposal_id": "2c18479298135fa6dfddd79b488a74b5bc23299d5f34281a05d3bc4858c73327",
+    "status": "PROPOSED"
+  },
+  "schema_version": 1,
+  "source": "AI-Orchestrator-Module-Researcher",
+  "state": "AWAITING_TRIAGE"
+}

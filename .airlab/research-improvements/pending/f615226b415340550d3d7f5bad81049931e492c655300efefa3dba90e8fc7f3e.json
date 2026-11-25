@@ -1,0 +1,27 @@
+{
+  "proposal": {
+    "acceptance_gates": [
+      "implementation_tests_pass",
+      "security_gates_pass",
+      "regression_tests_pass",
+      "library_contract_pass"
+    ],
+    "capability_id": "platform.lifecycle",
+    "created_at": "2026-11-25T12:37:22.976017Z",
+    "novelty": [
+      "concept:buildpacks",
+      "concept:implementation",
+      "concept:reference",
+      "language:go",
+      "release:pinned",
+      "topic:buildpacks",
+      "topic:cloud-native-buildpacks",
+      "topic:cncf"
+    ],
+    "proposal_id": "f615226b415340550d3d7f5bad81049931e492c655300efefa3dba90e8fc7f3e",
+    "status": "PROPOSED"
+  },
+  "schema_version": 1,
+  "source": "AI-Orchestrator-Module-Researcher",
+  "state": "AWAITING_TRIAGE"
+}
