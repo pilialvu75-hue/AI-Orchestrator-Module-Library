@@ -1,0 +1,29 @@
+{
+  "schema": "aivexus.first-party-preview.v1",
+  "policy": "manual development evaluation only; not the certified resolver catalog",
+  "assets": [
+    {
+      "id": "release.update_manager.firstparty.ai-orchestrator-riserva",
+      "version": "0.1.0-dev.1",
+      "status": "experimental_uncertified",
+      "capabilities": [
+        "release.update_manager"
+      ],
+      "source_commit": "5d5a3905ceced2c01c8f1d4a8c44ac75d9215fe0",
+      "package_commit": "c715ff93324371f923666a0766035b02b20530ea",
+      "path": "packages/aivexus_original_updater",
+      "regression_run": "https://github.com/pilialvu75-hue/AI-Orchestrator-Module-Library/actions/runs/45595456287",
+      "automated_test_hosts": [
+        "linux",
+        "windows",
+        "macos"
+      ],
+      "physical_ota": "pending",
+      "production_approved": false,
+      "distribution": {
+        "workflow": ".github/workflows/export-original-updater.yml",
+        "artifact": "aivexus-original-updater-0.1.0-dev.1"
+      }
+    }
+  ]
+}

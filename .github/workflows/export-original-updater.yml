@@ -1,0 +1,53 @@
+name: Export standalone original updater
+on:
+  pull_request:
+    paths:
+      - '.github/workflows/export-original-updater.yml'
+      - 'catalog/first-party-preview.json'
+      - 'docs/ORIGINAL_UPDATER_DISTRIBUTION.md'
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/export-original-updater.yml'
+      - 'catalog/first-party-preview.json'
+      - 'docs/ORIGINAL_UPDATER_DISTRIBUTION.md'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  export:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: c715ff93324371f923666a0766035b02b20530ea
+      - name: Export exact pinned package, not entire Library
+        run: |
+          set -euo pipefail
+          mkdir -p "${RUNNER_TEMP}/updater-export" "${RUNNER_TEMP}/updater-check"
+          git archive --format=zip --output="${RUNNER_TEMP}/updater-export/aivexus-original-updater-0.1.0-dev.1.zip" HEAD:packages/aivexus_original_updater
+          cd "${RUNNER_TEMP}/updater-export"
+          sha256sum *.zip > SHA256SUMS.txt
+          sha256sum -c SHA256SUMS.txt
+          printf '%s\n' "c715ff93324371f923666a0766035b02b20530ea" > SOURCE-COMMIT.txt
+          unzip -q *.zip -d "${RUNNER_TEMP}/updater-check"
+          test -f "${RUNNER_TEMP}/updater-check/pubspec.yaml"
+          test -f "${RUNNER_TEMP}/updater-check/provenance.json"
+          test -z "$(find "${RUNNER_TEMP}/updater-check" -name .git)"
+      - uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+      - name: Test independent extracted package
+        run: |
+          set -euo pipefail
+          cd "${RUNNER_TEMP}/updater-check"
+          flutter pub get
+          flutter analyze --no-fatal-infos --no-fatal-warnings
+          flutter test
+      - uses: actions/upload-artifact@v4
+        with:
+          name: aivexus-original-updater-0.1.0-dev.1
+          path: ${{ runner.temp }}/updater-export/
+          if-no-files-found: error
+          retention-days: 30
