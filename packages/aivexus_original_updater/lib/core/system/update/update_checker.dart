@@ -633,7 +633,7 @@ class UpdateChecker {
           manifest.apkSha256 != null);
 
   String _cacheKeyForChannel(ReleaseChannel channel) =>
-      '$_cachedManifestKeyPrefix.${channel.storageValue}';
+      '$_cachedManifestKeyPrefix.${manifestOnly ? 'manifest_only.' : ''}${channel.storageValue}';
 
   Future<UpdateManifest?> getCachedManifest({
     ReleaseChannel? preferredChannel,
@@ -644,7 +644,7 @@ class UpdateChecker {
     } else {
       raw = _preferences.getString(_cacheKeyForChannel(ReleaseChannel.stable));
     }
-    raw ??= _preferences.getString(_cachedManifestLegacyKey);
+    if (!manifestOnly) raw ??= _preferences.getString(_cachedManifestLegacyKey);
     if (raw == null || raw.isEmpty) return null;
 
     try {
