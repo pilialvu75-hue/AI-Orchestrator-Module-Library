@@ -1,0 +1,16 @@
+export 'core/system/update/release_channel.dart';
+export 'core/system/update/update_checker.dart';
+export 'core/system/update/update_manager.dart';
+export 'core/system/update/update_manifest.dart';
+export 'core/system/update/update_state.dart';
+export 'core/system/update/version_comparator.dart';
+export 'core/system/update/version_info.dart';
+export 'core/system/update/version_parser.dart';
+export 'core/system/update/platform_update_services.dart';
+export 'core/system/update/windows_update_manager.dart';
+export 'core/system/update/windows_update_installer.dart';
+export 'core/system/update/macos_update_manager.dart';
+export 'core/system/update/macos_update_installer.dart';
+export 'core/system/update/linux_update_manager.dart';
+export 'core/system/update/linux_update_installer.dart';
+export 'native/platform/android_intent_handler.dart';
