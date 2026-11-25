@@ -22,7 +22,7 @@ jobs:
             target: apk
           - os: ubuntu-latest
             target: linux
-          - os: windows-latest
+          - os: windows-2022
             target: windows
           - os: macos-latest
             target: macos
@@ -45,6 +45,9 @@ jobs:
       - name: Linux native build prerequisites
         if: matrix.target == 'linux'
         run: sudo apt-get update && sudo apt-get install -y clang cmake ninja-build pkg-config libgtk-3-dev libstdc++-12-dev
+      - name: Verify signing gate fixtures (no signing secrets)
+        working-directory: starter-kits/aivexus/signing
+        run: python -m unittest -v test_verify_apk
       - name: Generate clean app
         run: python starter-kits/aivexus/generate.py --name starter_smoke --display-name "AIVEXUS Starter Smoke" --out starter-smoke
       - name: Analyze and test generated application
