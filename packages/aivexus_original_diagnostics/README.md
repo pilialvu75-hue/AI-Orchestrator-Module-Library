@@ -1,4 +1,4 @@
-# AIVEXUS Original Diagnostics 0.1.0-dev.5
+# AIVEXUS Original Diagnostics 0.1.0-dev.6
 
 Second proposed Starter Pack component, approved for development by the owner. Extracted from Riserva commit 67ae2cc352e6d54ec5cbbe7917958ad6e9e8ce28. Original event buffer, persistent crash-log sink, telemetry privacy policy and associated original tests retained with package import changes.
 
@@ -29,3 +29,6 @@ Use `await DiagnosticSession.instance.start()` after Flutter binding initializat
 
 ## Additional measured resources and localization
 Android reads process CPU time divided by wall time (100% equals one full core; may exceed 100% on multicore), and application-data volume capacity. Windows reads executable-volume capacity (not necessarily the user-data volume). Android system-wide CPU and GPU utilization remain unavailable; Windows process CPU and GPU remain unavailable. No estimated figures. UI labels follow IT/FR/EN/ES host locales, English fallback; internal event keys remain stable. Native builds and physical validation remain pending.
+
+## Optional consent-gated delivery (not deployed)
+Build `DiagnosticReport.fromSafeHistory(await AivexusDiagnostics.instance.readSafeHistory())`, show the exact JSON and explicit HTTPS destination to the user, and only on affirmative consent call `queueApproved(report, consent: true)`. Use a file in private application storage, one delivery owner per file. `sendPending()` is host-triggered; never silently upload or start a timer. The queue retains only one approved snapshot for up to 24h, three attempts with cooldown; destination changes reject the queue. No redirects, no GitHub tokens, no identity or raw logs. `revoke()` cancels the client and deletes pending data; an already accepted request cannot be recalled. Use a dedicated approved server adapter with authentication/abuse controls, schema validation, retention and Idempotency-Key deduplication before enabling this in any consumer. HTTPS alone is not proof of recipient privacy. No real endpoint configured, no upload UI/production server or actual network tests yet. Tests use mock clients. A cleared/expired queue is removed on next explicit processing, not by a background timer. No claim of complete delivery or global approval.

@@ -48,6 +48,7 @@ class DiagnosticDelivery extends ChangeNotifier {
   Future<bool> queueApproved(DiagnosticReport report, {required bool consent}) async {
     if (!consent || _busy || _disposed || report.events.isEmpty) return false;
     _busy = true;
+    _revoked = false;
     try {
       final verified = DiagnosticReport.decode(report.json);
       if (await _file.exists()) return false;
@@ -56,7 +57,7 @@ class DiagnosticDelivery extends ChangeNotifier {
         'endpoint': endpoint.toString(), 'approved': now.toIso8601String(),
         'attempts': 0, 'next': now.toIso8601String(), 'report': verified.json,
       });
-      _revoked = false;
+      if (_revoked || _disposed) { await _remove(); return false; }
       _set(DeliveryState.queued);
       return true;
     } catch (_) {
@@ -149,7 +150,8 @@ class DiagnosticDelivery extends ChangeNotifier {
         _activeClient = null;
       }
     } on FormatException {
-      await _remove(); _set(DeliveryState.rejected);
+      try { await _remove(); _set(DeliveryState.rejected); }
+      catch (_) { _set(DeliveryState.unavailable); }
     } catch (_) {
       _set(DeliveryState.unavailable);
     } finally {
