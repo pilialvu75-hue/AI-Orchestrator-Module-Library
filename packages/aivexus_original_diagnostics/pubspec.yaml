@@ -1,6 +1,6 @@
 name: aivexus_original_diagnostics
 description: Original AIVEXUS local diagnostics core extracted from AI Orchestrator Riserva.
-version: 0.1.0-dev.3
+version: 0.1.0-dev.4
 publish_to: none
 environment:
   sdk: '>=3.5.0 <4.0.0'
@@ -8,6 +8,7 @@ dependencies:
   flutter:
     sdk: flutter
   path_provider: ^2.1.5
+  package_info_plus: ^8.0.0
 dev_dependencies:
   flutter_test:
     sdk: flutter
