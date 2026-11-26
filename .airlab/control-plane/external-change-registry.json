@@ -26,7 +26,7 @@
     {
       "repository": "pilialvu75-hue/AI-Orchestrator-Module-Researcher",
       "baseline_at": "2026-10-03T16:20:00Z",
-      "cursor_merged_at": "2026-11-25T23:04:28Z"
+      "cursor_merged_at": "2026-11-26T10:27:47Z"
     },
     {
       "repository": "pilialvu75-hue/Ai_orchestrator-prova",
@@ -9707,6 +9707,91 @@
       "url": "https://github.com/pilialvu75-hue/AI-Orchestrator-Module-Researcher/commit/2387c0ac91fa74f1da3e5d6b0525e1824dd0d00c",
       "match_ref": null,
       "reconciliation": null
+    },
+    {
+      "incident_id": "658d0795a15bfcd9a22a",
+      "status": "UNRECONCILED",
+      "detected_at": "2026-11-26T10:38:59Z",
+      "repository": "pilialvu75-hue/AI-Orchestrator-Module-Researcher",
+      "kind": "direct_commit",
+      "pull_request": null,
+      "merge_sha": null,
+      "commit_sha": "24d9f6357357d1f8b152a2e1619539f182723feb",
+      "head_branch": null,
+      "base_branch": "main",
+      "change_at": "2026-11-25T23:04:39Z",
+      "title": "Reopen satisfied requirements when fresh functional evidence shows missing candidates",
+      "url": "https://github.com/pilialvu75-hue/AI-Orchestrator-Module-Researcher/commit/24d9f6357357d1f8b152a2e1619539f182723feb",
+      "match_ref": null,
+      "reconciliation": null
+    },
+    {
+      "incident_id": "41ba467d5fa7cd100867",
+      "status": "UNRECONCILED",
+      "detected_at": "2026-11-26T10:38:59Z",
+      "repository": "pilialvu75-hue/AI-Orchestrator-Module-Researcher",
+      "kind": "direct_commit",
+      "pull_request": null,
+      "merge_sha": null,
+      "commit_sha": "8045e7c232536bcb756091b29398c14a1d2508f0",
+      "head_branch": null,
+      "base_branch": "main",
+      "change_at": "2026-11-25T23:04:42Z",
+      "title": "Cover previously satisfied need with new functional gaps",
+      "url": "https://github.com/pilialvu75-hue/AI-Orchestrator-Module-Researcher/commit/8045e7c232536bcb756091b29398c14a1d2508f0",
+      "match_ref": null,
+      "reconciliation": null
+    },
+    {
+      "incident_id": "4e64a92df30f9d180b22",
+      "status": "UNRECONCILED",
+      "detected_at": "2026-11-26T10:38:59Z",
+      "repository": "pilialvu75-hue/AI-Orchestrator-Module-Researcher",
+      "kind": "unmatched_merge_commit",
+      "pull_request": null,
+      "merge_sha": null,
+      "commit_sha": "5394144cc7880ebfb6ccdfb9a297e625915f6029",
+      "head_branch": null,
+      "base_branch": "main",
+      "change_at": "2026-11-26T10:22:53Z",
+      "title": "Merge pull request #147 from pilialvu75-hue/fix/reopen-satisfied-functional-gaps",
+      "url": "https://github.com/pilialvu75-hue/AI-Orchestrator-Module-Researcher/commit/5394144cc7880ebfb6ccdfb9a297e625915f6029",
+      "match_ref": null,
+      "reconciliation": null
+    },
+    {
+      "incident_id": "1f649c27c3e66a4e6c34",
+      "status": "UNRECONCILED",
+      "detected_at": "2026-11-26T10:38:59Z",
+      "repository": "pilialvu75-hue/AI-Orchestrator-Module-Researcher",
+      "kind": "direct_commit",
+      "pull_request": null,
+      "merge_sha": null,
+      "commit_sha": "dc15ca28a71569c27a2c9aa63f1d7f2441f65e72",
+      "head_branch": null,
+      "base_branch": "main",
+      "change_at": "2026-11-26T10:23:13Z",
+      "title": "Exercise functional feedback through actual cycle entry point",
+      "url": "https://github.com/pilialvu75-hue/AI-Orchestrator-Module-Researcher/commit/dc15ca28a71569c27a2c9aa63f1d7f2441f65e72",
+      "match_ref": null,
+      "reconciliation": null
+    },
+    {
+      "incident_id": "c72866d3c847228559f4",
+      "status": "UNRECONCILED",
+      "detected_at": "2026-11-26T10:38:59Z",
+      "repository": "pilialvu75-hue/AI-Orchestrator-Module-Researcher",
+      "kind": "unmatched_merge_commit",
+      "pull_request": null,
+      "merge_sha": null,
+      "commit_sha": "5d396863b7d9cdf7594313e585e222b6cc88dba4",
+      "head_branch": null,
+      "base_branch": "main",
+      "change_at": "2026-11-26T10:27:47Z",
+      "title": "Merge pull request #148 from pilialvu75-hue/test/functional-feedback-cycle",
+      "url": "https://github.com/pilialvu75-hue/AI-Orchestrator-Module-Researcher/commit/5d396863b7d9cdf7594313e585e222b6cc88dba4",
+      "match_ref": null,
+      "reconciliation": null
     }
   ],
   "reconciliation_history": [
@@ -9717,35 +9802,35 @@
       "note": "Known motivating example for CP-HARDEN-03. It predates this incremental detector and is not retroactively reopened."
     }
   ],
-  "last_scan_at": "2026-11-26T09:39:14Z",
+  "last_scan_at": "2026-11-26T10:38:59Z",
   "scan_health": {
     "pilialvu75-hue/AI-Orchestrator-Module-Library": {
       "state": "OK",
-      "last_success_at": "2026-11-26T09:39:14Z",
+      "last_success_at": "2026-11-26T10:38:59Z",
       "last_failure_at": null,
       "error_code": null
     },
     "pilialvu75-hue/Ai-orchestrator-riserva": {
       "state": "OK",
-      "last_success_at": "2026-11-26T09:39:14Z",
+      "last_success_at": "2026-11-26T10:38:59Z",
       "last_failure_at": "2026-10-28T07:39:58Z",
       "error_code": null
     },
     "pilialvu75-hue/Ai-orchestrator-diagnostics": {
       "state": "OK",
-      "last_success_at": "2026-11-26T09:39:14Z",
+      "last_success_at": "2026-11-26T10:38:59Z",
       "last_failure_at": "2026-10-28T07:39:58Z",
       "error_code": null
     },
     "pilialvu75-hue/AI-Orchestrator-Module-Researcher": {
       "state": "OK",
-      "last_success_at": "2026-11-26T09:39:14Z",
+      "last_success_at": "2026-11-26T10:38:59Z",
       "last_failure_at": "2026-10-28T07:39:58Z",
       "error_code": null
     },
     "pilialvu75-hue/Ai_orchestrator-prova": {
       "state": "OK",
-      "last_success_at": "2026-11-26T09:39:14Z",
+      "last_success_at": "2026-11-26T10:38:59Z",
       "last_failure_at": "2026-10-28T07:39:58Z",
       "error_code": null
     }
