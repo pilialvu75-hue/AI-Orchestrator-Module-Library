@@ -1,0 +1,101 @@
+# Copy explicitly to .github/workflows/android-release.yml in the CONSUMER repository.
+# Configure a protected android-release environment before enabling.
+name: Android signed release
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: Release version (x.y.z)
+        required: true
+        type: string
+      version_code:
+        description: Android versionCode (strictly increasing)
+        required: true
+        type: string
+permissions:
+  contents: read
+concurrency:
+  group: android-stable-release
+  cancel-in-progress: false
+jobs:
+  build:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    environment: android-release
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+      - uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.35.7'
+          channel: stable
+      - name: Read app release configuration and previous manifest
+        env:
+          VERSION: ${{ inputs.version }}
+          VERSION_CODE: ${{ inputs.version_code }}
+        run: python signing/release_gate.py preflight
+      - name: Test and build release APK
+        env:
+          VERSION: ${{ inputs.version }}
+          VERSION_CODE: ${{ inputs.version_code }}
+        run: |
+          set -euo pipefail
+          flutter pub get
+          flutter analyze
+          flutter test
+          flutter build apk --release --build-name "$VERSION" --build-number "$VERSION_CODE"
+      - name: Sign with permanent owner key and verify
+        env:
+          ANDROID_KEYSTORE_B64: ${{ secrets.ANDROID_KEYSTORE_B64 }}
+          ANDROID_KEYSTORE_PASSWORD: ${{ secrets.ANDROID_KEYSTORE_PASSWORD }}
+          ANDROID_KEY_ALIAS: ${{ secrets.ANDROID_KEY_ALIAS }}
+          ANDROID_KEY_PASSWORD: ${{ secrets.ANDROID_KEY_PASSWORD }}
+          VERSION: ${{ inputs.version }}
+          VERSION_CODE: ${{ inputs.version_code }}
+        run: |
+          set -euo pipefail
+          umask 077
+          key=$(mktemp "$RUNNER_TEMP/android-key.XXXXXX")
+          trap 'rm -f "$key"' EXIT
+          python signing/release_gate.py restore-key "$key"
+          sdk=$(find "$ANDROID_HOME/build-tools" -maxdepth 1 -mindepth 1 -type d | sort -V | tail -1)
+          mkdir -p signed-output
+          "$sdk/zipalign" -P 16 -f 4 build/app/outputs/flutter-apk/app-release.apk "$RUNNER_TEMP/aligned.apk"
+          "$sdk/apksigner" sign --ks "$key" --ks-key-alias "$ANDROID_KEY_ALIAS" --ks-pass env:ANDROID_KEYSTORE_PASSWORD --key-pass env:ANDROID_KEY_PASSWORD --out signed-output/app-release.apk "$RUNNER_TEMP/aligned.apk"
+          python signing/release_gate.py verify "$sdk" signed-output/app-release.apk signed-output/receipt.json
+      - uses: actions/upload-artifact@v4
+        with:
+          name: signed-android-release
+          path: |
+            signed-output/app-release.apk
+            signed-output/receipt.json
+          if-no-files-found: error
+  publish:
+    needs: build
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    environment: android-publication
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/download-artifact@v4
+        with:
+          name: signed-android-release
+          path: signed-output
+      - name: Verify public asset and publish manifest last
+        env:
+          GH_TOKEN: ${{ github.token }}
+          VERSION: ${{ inputs.version }}
+          VERSION_CODE: ${{ inputs.version_code }}
+          SOURCE_SHA: ${{ github.sha }}
+        run: python signing/release_gate.py publish signed-output
