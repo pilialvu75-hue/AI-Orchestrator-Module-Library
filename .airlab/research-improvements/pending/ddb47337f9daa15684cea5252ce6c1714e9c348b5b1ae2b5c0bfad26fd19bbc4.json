@@ -1,0 +1,49 @@
+{
+  "proposal": {
+    "acceptance_gates": [
+      "implementation_tests_pass",
+      "security_gates_pass",
+      "regression_tests_pass",
+      "library_contract_pass"
+    ],
+    "capability_id": "platform.audio_io",
+    "created_at": "2026-11-25T12:28:07.004589Z",
+    "novelty": [
+      "concept:applications",
+      "concept:assistant",
+      "concept:automation",
+      "concept:cloud",
+      "concept:guide",
+      "concept:hosting",
+      "concept:including",
+      "concept:learn",
+      "concept:locally",
+      "concept:managing",
+      "concept:networking",
+      "language:dockerfile",
+      "topic:authentication",
+      "topic:decentralized",
+      "topic:docker-compose",
+      "topic:home-assistant",
+      "topic:home-automation",
+      "topic:linux",
+      "topic:oauth",
+      "topic:observability",
+      "topic:open-source",
+      "topic:privacy",
+      "topic:raspberry-pi",
+      "topic:reverse-proxy",
+      "topic:search",
+      "topic:self-hosted",
+      "topic:self-hosting",
+      "topic:selfhosted",
+      "topic:ssh",
+      "topic:wireguard"
+    ],
+    "proposal_id": "ddb47337f9daa15684cea5252ce6c1714e9c348b5b1ae2b5c0bfad26fd19bbc4",
+    "status": "PROPOSED"
+  },
+  "schema_version": 1,
+  "source": "AI-Orchestrator-Module-Researcher",
+  "state": "AWAITING_TRIAGE"
+}

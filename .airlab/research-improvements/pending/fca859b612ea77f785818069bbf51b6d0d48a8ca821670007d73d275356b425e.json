@@ -1,0 +1,24 @@
+{
+  "proposal": {
+    "acceptance_gates": [
+      "implementation_tests_pass",
+      "security_gates_pass",
+      "regression_tests_pass",
+      "library_contract_pass"
+    ],
+    "capability_id": "platform.connectivity",
+    "created_at": "2026-11-25T12:33:12.566111Z",
+    "novelty": [
+      "concept:curated",
+      "concept:github",
+      "concept:projects",
+      "concept:starred",
+      "concept:years"
+    ],
+    "proposal_id": "fca859b612ea77f785818069bbf51b6d0d48a8ca821670007d73d275356b425e",
+    "status": "PROPOSED"
+  },
+  "schema_version": 1,
+  "source": "AI-Orchestrator-Module-Researcher",
+  "state": "AWAITING_TRIAGE"
+}

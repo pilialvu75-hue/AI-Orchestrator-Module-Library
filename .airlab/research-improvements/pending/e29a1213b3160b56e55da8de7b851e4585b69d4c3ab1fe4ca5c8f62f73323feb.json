@@ -1,0 +1,42 @@
+{
+  "proposal": {
+    "acceptance_gates": [
+      "implementation_tests_pass",
+      "security_gates_pass",
+      "regression_tests_pass",
+      "library_contract_pass"
+    ],
+    "capability_id": "ai.acceleration_backend",
+    "created_at": "2026-11-25T18:36:56.503532Z",
+    "novelty": [
+      "concept:interface",
+      "concept:ollama",
+      "concept:openai",
+      "concept:supports",
+      "concept:user-friendly",
+      "language:svelte",
+      "practice:dependabot_present",
+      "release:pinned",
+      "topic:ai",
+      "topic:llm",
+      "topic:llm-ui",
+      "topic:llm-webui",
+      "topic:llms",
+      "topic:mcp",
+      "topic:ollama",
+      "topic:ollama-webui",
+      "topic:open-webui",
+      "topic:openai",
+      "topic:openapi",
+      "topic:rag",
+      "topic:self-hosted",
+      "topic:ui",
+      "topic:webui"
+    ],
+    "proposal_id": "e29a1213b3160b56e55da8de7b851e4585b69d4c3ab1fe4ca5c8f62f73323feb",
+    "status": "PROPOSED"
+  },
+  "schema_version": 1,
+  "source": "AI-Orchestrator-Module-Researcher",
+  "state": "AWAITING_TRIAGE"
+}

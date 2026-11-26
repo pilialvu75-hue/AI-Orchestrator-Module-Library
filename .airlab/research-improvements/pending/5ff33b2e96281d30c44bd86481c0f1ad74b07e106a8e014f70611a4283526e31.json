@@ -1,0 +1,48 @@
+{
+  "proposal": {
+    "acceptance_gates": [
+      "implementation_tests_pass",
+      "security_gates_pass",
+      "regression_tests_pass",
+      "library_contract_pass"
+    ],
+    "capability_id": "platform.connectivity",
+    "created_at": "2026-11-25T12:30:41.759672Z",
+    "novelty": [
+      "concept:access",
+      "concept:connectivity",
+      "concept:detecting",
+      "concept:detection",
+      "concept:internet",
+      "concept:makes",
+      "concept:networks",
+      "concept:robust",
+      "concept:wi-fi",
+      "concept:without",
+      "language:swift",
+      "license:evidence_present",
+      "practice:readme_present",
+      "practice:tests_present",
+      "topic:apple",
+      "topic:apple-reachability",
+      "topic:captive-portals",
+      "topic:carthage",
+      "topic:detecting-captive-portals",
+      "topic:internet-access",
+      "topic:internet-connection",
+      "topic:internet-connectivity",
+      "topic:ios",
+      "topic:notifications",
+      "topic:reachability",
+      "topic:swift",
+      "topic:wi-fi",
+      "topic:wifi",
+      "topic:wifi-network"
+    ],
+    "proposal_id": "5ff33b2e96281d30c44bd86481c0f1ad74b07e106a8e014f70611a4283526e31",
+    "status": "PROPOSED"
+  },
+  "schema_version": 1,
+  "source": "AI-Orchestrator-Module-Researcher",
+  "state": "AWAITING_TRIAGE"
+}
