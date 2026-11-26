@@ -1,4 +1,4 @@
-# AIVEXUS Original Diagnostics 0.1.0-dev.1
+# AIVEXUS Original Diagnostics 0.1.0-dev.2
 
 Second proposed Starter Pack component, approved for development by the owner. Extracted from Riserva commit 67ae2cc352e6d54ec5cbbe7917958ad6e9e8ce28. Original event buffer, persistent crash-log sink, telemetry privacy policy and associated original tests retained with package import changes.
 
@@ -17,3 +17,6 @@ No backend, token, analytics SDK, updater or Beta Access dependency. The origina
 - Review storage privacy, retention and licensing. No application repository or existing updater behavior is changed.
 
 Run flutter pub get, flutter analyze --no-fatal-infos --no-fatal-warnings, flutter test from this package.
+
+## Resource telemetry extraction
+Original Dart ResourceMonitor and original regression suite, with Android ResourceTelemetry.kt and isolated Windows resource channel. ResourceDiagnostics facade disables raw resource log persistence and samples only while a visible owner retains it; explicit sample() is available. Android reports available/total RAM, RSS, native heap, battery temperature proxy and pressure; Windows reports RAM, working set and CPU after a valid second sample. Missing GPU, disk, CPU or thermal readings are not estimated. macOS/Linux native metrics are not yet supported. Native sources require host registration and separate build/physical testing. For Android replace __ANDROID_NAMESPACE__, instantiate ResourceTelemetry(context, engine) when configuring the engine and call close() during cleanup. For Windows include resource_telemetry.h and call RegisterAivexusResourceTelemetry(engine->messenger()) after plugin registration. No network transport.
