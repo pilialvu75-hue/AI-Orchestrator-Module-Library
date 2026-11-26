@@ -46,8 +46,10 @@ class _ResourceDiagnosticsPageState extends State<ResourceDiagnosticsPage> with 
         line('System CPU', s?.systemCpuPercent == null ? 'Unavailable' : '${s!.systemCpuPercent!.toStringAsFixed(1)}%'),
         line('Battery temperature', s?.batteryTemperatureC == null ? 'Unavailable' : '${s!.batteryTemperatureC!.toStringAsFixed(1)} °C'),
         line('Memory pressure', s?.pressure ?? 'Unknown'),
+        line('Process CPU (one core = 100%)', s?.processCpuCorePercent == null ? 'Unavailable' : '${s!.processCpuCorePercent!.toStringAsFixed(1)}%'),
         line('GPU utilization', 'Unavailable'),
-        line('Disk free space', 'Unavailable'),
+        line('App volume free space', mb(s?.appVolumeFreeBytes)),
+        line('App volume total space', mb(s?.appVolumeTotalBytes)),
       ]);
     }),
   );
