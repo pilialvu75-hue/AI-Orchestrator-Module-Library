@@ -1,0 +1,32 @@
+{
+  "schema": "aivexus.library.reusable-source-index.v1",
+  "packages": [
+    {
+      "pin": "release.aivexus_original_updater@0.1.0-dev.1",
+      "path": "packages/aivexus_original_updater",
+      "repository": "https://github.com/pilialvu75-hue/AI-Orchestrator-Module-Library",
+      "commit": "c715ff93324371f923666a0766035b02b20530ea",
+      "source_repository": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva",
+      "source_commit": "5d5a3905ceced2c01c8f1d4a8c44ac75d9215fe0",
+      "capabilities": [
+        "release.auto_update",
+        "release.update_manager"
+      ],
+      "candidate_contracts": [
+        "release.auto_update.v1",
+        "release.update_manager.v1"
+      ],
+      "regression_targets": [
+        "linux",
+        "windows",
+        "macos"
+      ],
+      "regression_run_id": 45595456287,
+      "independent_export_consumer": "PENDING",
+      "physical_ota": "PENDING",
+      "android_host_bridge": "PENDING",
+      "development_qualified": false,
+      "scope": "internal-reuse-pilot"
+    }
+  ]
+}
