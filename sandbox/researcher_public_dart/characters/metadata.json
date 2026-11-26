@@ -1,0 +1,32 @@
+{
+  "capability_id": "platform.filesystem",
+  "certification_authorized": false,
+  "independent_security_reviewed": false,
+  "package": "characters",
+  "package_version": "1.4.1",
+  "payload_sha256": "65a823f251c28078b751c34cea05c0265c3e56e8e7459b9d6e1479a4d754b7f3",
+  "production_installation_authorized": false,
+  "schema": "aivexus.researcher.autonomous-public-dart-intake.v1",
+  "source_commit": "b59ecf4ceebe6153e1c0166b7c9a7fdd9458a89d",
+  "source_git_blobs": {
+    "AUTHORS": "846e4a15687b0f47aa65ee7ee12f2c0f0c15856a",
+    "LICENSE": "767000764bc79eb8bf4f6fce6ad173d21a052a81",
+    "lib/characters.dart": "f2fd1b129ebc50783863d6a8f7b37d515a943943",
+    "lib/src/characters.dart": "fe36863dc1f7e85fb6c628d5aec3e47a7fefef40",
+    "lib/src/characters_impl.dart": "a901b5175315766b7eae9f93118c5812b7f6e8ac",
+    "lib/src/extensions.dart": "b661dafcf1c3df2bc743d8d864cd651283c1d71c",
+    "lib/src/grapheme_clusters/breaks.dart": "ec373d70e40cfd4a730f44baa99316b9bb90de8d",
+    "lib/src/grapheme_clusters/constants.dart": "7f42d922db99ebd48e54eaa011c9fd61cc4b72b5",
+    "lib/src/grapheme_clusters/table.dart": "79d3365053edf8bc488833328dca30a7e8fa1731",
+    "pubspec.yaml": "3d36c1729f22ea75eafaab80341dfe72ebebe474",
+    "third_party/Wikipedia/License CC BY-SA 3.0.txt": "d6e56c1e23ec78d3c626dc677591b181c5eddbde"
+  },
+  "source_license": "BSD-3-Clause",
+  "source_materialized": true,
+  "source_repository": "https://github.com/dart-lang/core",
+  "source_selection": "runtime-and-license-notices",
+  "source_subtree": "pkgs/characters",
+  "source_tag": "characters-v1.4.1",
+  "state": "NORMALIZED_NOT_TESTED",
+  "upstream_files": 11
+}
