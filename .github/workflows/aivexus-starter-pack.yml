@@ -89,8 +89,10 @@ jobs:
         run: |
           set -euo pipefail
           test -f vendor/aivexus_original_updater/LIBRARY_COMMIT.txt
+          # Resolve the vendored package's own dev dependencies and run its tests.
+          (cd vendor/aivexus_original_updater && flutter pub get && flutter test)
           flutter pub get
-          flutter analyze --no-fatal-infos --no-fatal-warnings
+          flutter analyze lib test --no-fatal-infos --no-fatal-warnings
           flutter test
           flutter build apk --debug
       - uses: actions/upload-artifact@v4
