@@ -1,4 +1,4 @@
-# AIVEXUS Original Diagnostics 0.1.0-dev.4
+# AIVEXUS Original Diagnostics 0.1.0-dev.5
 
 Second proposed Starter Pack component, approved for development by the owner. Extracted from Riserva commit 67ae2cc352e6d54ec5cbbe7917958ad6e9e8ce28. Original event buffer, persistent crash-log sink, telemetry privacy policy and associated original tests retained with package import changes.
 
@@ -26,3 +26,6 @@ After initialize(), call attachAutomaticErrorCapture() once; it chains FlutterEr
 
 ## App startup and historical exit evidence
 Use `await DiagnosticSession.instance.start()` after Flutter binding initialization for automatic capture, startup marker, local version/build/platform and historical Android process exits. Do not attach a second error handler; call detach only on explicit host teardown. Install ProcessExitDiagnostics.kt.template with the consumer namespace and call ProcessExitDiagnostics.register(context, engine) at engine configuration. The original Android API records previous process exits (Android 11+); fields are deliberately restricted to timestamp and closed reason vocabulary. No raw tombstone/abort message is read. A user-requested stop is not a crash; no record or unsupported device is not proof of healthy shutdown. Native integration, actual crash and restart on device remain unverified. App information is local only; English console labels still pending localization.
+
+## Additional measured resources and localization
+Android reads process CPU time divided by wall time (100% equals one full core; may exceed 100% on multicore), and application-data volume capacity. Windows reads executable-volume capacity (not necessarily the user-data volume). Android system-wide CPU and GPU utilization remain unavailable; Windows process CPU and GPU remain unavailable. No estimated figures. UI labels follow IT/FR/EN/ES host locales, English fallback; internal event keys remain stable. Native builds and physical validation remain pending.
