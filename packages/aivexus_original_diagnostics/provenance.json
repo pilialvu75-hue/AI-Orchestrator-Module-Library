@@ -52,11 +52,17 @@
       "source_blob_sha": "8987cb2bd4bec7f5265cca843804b0a258c23ad4",
       "target": "host-adapters/windows/resource_telemetry.h",
       "extraction": "resource MethodChannel block only"
+    },
+    {
+      "path": "lib/features/settings/presentation/pages/modules/diagnostics_console_page.dart",
+      "source_blob_sha": "b0ff000788ed24d4ffb0264626ef42d65c6866ec",
+      "target": "lib/ui/diagnostics_console_page.dart"
     }
   ],
   "adaptations": [
     "Package imports only for copied sources and tests. App-facing privacy facade is additional, not a replacement of the original logger.",
-    "dev.2 resource monitor and its original tests copied; native Android namespace placeholder, Windows resource channel block extracted into standalone registration helper. Native source not yet built in a consumer."
+    "dev.2 resource monitor and its original tests copied; native Android namespace placeholder, Windows resource channel block extracted into standalone registration helper. Native source not yet built in a consumer.",
+    "dev.3: preserve original console layout and filters; replace GitHub upload action with local history and resources. Display/copy only fixed-vocabulary entries, bound console by original ring, add confirmation for deletion, hidden tap wrapper and framework/root-isolate error capture. Added visible resource panel. No remote transport."
   ],
   "missing_evidence": [
     "physical consumer crash/restart",
