@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'resource_diagnostics.dart';
+import 'diagnostic_labels.dart';
 
 /// Read-only local readings. Foreground-only, stops on lifecycle change and
 /// disposal; never sums native heap and process RSS.
@@ -31,11 +32,11 @@ class _ResourceDiagnosticsPageState extends State<ResourceDiagnosticsPage> with 
     _monitor.dispose();
     super.dispose();
   }
-  String mb(int? value) => value == null ? 'Unavailable' : '${(value / 1048576).toStringAsFixed(1)} MiB';
-  Widget line(String label, String value) => ListTile(title: Text(label), trailing: Text(value));
+  String mb(int? value) => value == null ? diagnosticLabel(context, 'Unavailable') : '${(value / 1048576).toStringAsFixed(1)} MiB';
+  Widget line(String label, String value) => ListTile(title: Text(diagnosticLabel(context, label)), trailing: Text(diagnosticLabel(context, value)));
   @override
   Widget build(BuildContext context) => Scaffold(
-    appBar: AppBar(title: const Text('Resources')),
+    appBar: AppBar(title: Text(diagnosticLabel(context, 'Resources'))),
     body: ListenableBuilder(listenable: _monitor, builder: (_, __) {
       final s = _monitor.latest;
       return ListView(children: [
