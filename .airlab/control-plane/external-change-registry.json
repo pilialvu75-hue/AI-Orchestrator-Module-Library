@@ -16,7 +16,7 @@
     {
       "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
       "baseline_at": "2026-10-03T16:20:00Z",
-      "cursor_merged_at": "2026-11-25T22:39:25Z"
+      "cursor_merged_at": "2026-11-26T13:38:39Z"
     },
     {
       "repository": "pilialvu75-hue/Ai-orchestrator-diagnostics",
@@ -26,7 +26,7 @@
     {
       "repository": "pilialvu75-hue/AI-Orchestrator-Module-Researcher",
       "baseline_at": "2026-10-03T16:20:00Z",
-      "cursor_merged_at": "2026-11-26T12:33:02Z"
+      "cursor_merged_at": "2026-11-26T12:51:50Z"
     },
     {
       "repository": "pilialvu75-hue/Ai_orchestrator-prova",
@@ -9826,6 +9826,125 @@
       "url": "https://github.com/pilialvu75-hue/AI-Orchestrator-Module-Researcher/commit/93ba088613c3e9fd3abee617f00183b9aa205ac2",
       "match_ref": null,
       "reconciliation": null
+    },
+    {
+      "incident_id": "c372358f7fdfe918110f",
+      "status": "UNRECONCILED",
+      "detected_at": "2026-11-26T13:39:16Z",
+      "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
+      "kind": "direct_commit",
+      "pull_request": null,
+      "merge_sha": null,
+      "commit_sha": "0a845c17e0240afe384f62199d6288a6c4d1c638",
+      "head_branch": null,
+      "base_branch": "main",
+      "change_at": "2026-11-26T13:38:04Z",
+      "title": "fix(debug): restore access and export complete persisted log (#1284)",
+      "url": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/0a845c17e0240afe384f62199d6288a6c4d1c638",
+      "match_ref": null,
+      "reconciliation": null
+    },
+    {
+      "incident_id": "c29cc5cf9ada4ef907a3",
+      "status": "UNRECONCILED",
+      "detected_at": "2026-11-26T13:39:16Z",
+      "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
+      "kind": "direct_commit",
+      "pull_request": null,
+      "merge_sha": null,
+      "commit_sha": "a5f3da8bbad49f542719d607a880ba259885a9c5",
+      "head_branch": null,
+      "base_branch": "main",
+      "change_at": "2026-11-26T13:38:39Z",
+      "title": "test(runtime): P0-B baseline for progress log write amplification (#1285)",
+      "url": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/a5f3da8bbad49f542719d607a880ba259885a9c5",
+      "match_ref": null,
+      "reconciliation": null
+    },
+    {
+      "incident_id": "605fbfce626449a9d65f",
+      "status": "UNRECONCILED",
+      "detected_at": "2026-11-26T13:39:16Z",
+      "repository": "pilialvu75-hue/AI-Orchestrator-Module-Researcher",
+      "kind": "direct_commit",
+      "pull_request": null,
+      "merge_sha": null,
+      "commit_sha": "e2b8b88f896a6b6a7017ff2001fbc6cd4f77cdac",
+      "head_branch": null,
+      "base_branch": "main",
+      "change_at": "2026-11-26T12:45:39Z",
+      "title": "Trace sweep stages immediately without changing JSON output",
+      "url": "https://github.com/pilialvu75-hue/AI-Orchestrator-Module-Researcher/commit/e2b8b88f896a6b6a7017ff2001fbc6cd4f77cdac",
+      "match_ref": null,
+      "reconciliation": null
+    },
+    {
+      "incident_id": "ea681efa2fc3bbad38b4",
+      "status": "UNRECONCILED",
+      "detected_at": "2026-11-26T13:39:16Z",
+      "repository": "pilialvu75-hue/AI-Orchestrator-Module-Researcher",
+      "kind": "unmatched_merge_commit",
+      "pull_request": null,
+      "merge_sha": null,
+      "commit_sha": "a3c62d946a1847abcab9334f5f773b07d6b39e39",
+      "head_branch": null,
+      "base_branch": "main",
+      "change_at": "2026-11-26T12:49:29Z",
+      "title": "Merge pull request #150 from pilialvu75-hue/fix/sweep-timeout-stage-trace",
+      "url": "https://github.com/pilialvu75-hue/AI-Orchestrator-Module-Researcher/commit/a3c62d946a1847abcab9334f5f773b07d6b39e39",
+      "match_ref": null,
+      "reconciliation": null
+    },
+    {
+      "incident_id": "05326d0a9cc507b97f53",
+      "status": "UNRECONCILED",
+      "detected_at": "2026-11-26T13:39:16Z",
+      "repository": "pilialvu75-hue/AI-Orchestrator-Module-Researcher",
+      "kind": "direct_commit",
+      "pull_request": null,
+      "merge_sha": null,
+      "commit_sha": "4693590669d7c5d1d0be35594e179b711c2a075a",
+      "head_branch": null,
+      "base_branch": "main",
+      "change_at": "2026-11-26T12:50:36Z",
+      "title": "Reuse verified immutable package descriptors without network calls",
+      "url": "https://github.com/pilialvu75-hue/AI-Orchestrator-Module-Researcher/commit/4693590669d7c5d1d0be35594e179b711c2a075a",
+      "match_ref": null,
+      "reconciliation": null
+    },
+    {
+      "incident_id": "5015eecbcc8ce5d9d16f",
+      "status": "UNRECONCILED",
+      "detected_at": "2026-11-26T13:39:16Z",
+      "repository": "pilialvu75-hue/AI-Orchestrator-Module-Researcher",
+      "kind": "direct_commit",
+      "pull_request": null,
+      "merge_sha": null,
+      "commit_sha": "37cf71ac957b24b3fc4ca89b9ac6692703ab470b",
+      "head_branch": null,
+      "base_branch": "main",
+      "change_at": "2026-11-26T12:50:39Z",
+      "title": "Test cache hits, corrupt cache recovery and remote integrity failure",
+      "url": "https://github.com/pilialvu75-hue/AI-Orchestrator-Module-Researcher/commit/37cf71ac957b24b3fc4ca89b9ac6692703ab470b",
+      "match_ref": null,
+      "reconciliation": null
+    },
+    {
+      "incident_id": "fe659cade5d8ea770996",
+      "status": "UNRECONCILED",
+      "detected_at": "2026-11-26T13:39:16Z",
+      "repository": "pilialvu75-hue/AI-Orchestrator-Module-Researcher",
+      "kind": "unmatched_merge_commit",
+      "pull_request": null,
+      "merge_sha": null,
+      "commit_sha": "6bdc83b952955e0b8857ab38058429c0aa272294",
+      "head_branch": null,
+      "base_branch": "main",
+      "change_at": "2026-11-26T12:51:50Z",
+      "title": "Merge pull request #151 from pilialvu75-hue/fix/immutable-feedback-cache",
+      "url": "https://github.com/pilialvu75-hue/AI-Orchestrator-Module-Researcher/commit/6bdc83b952955e0b8857ab38058429c0aa272294",
+      "match_ref": null,
+      "reconciliation": null
     }
   ],
   "reconciliation_history": [
@@ -9836,35 +9955,35 @@
       "note": "Known motivating example for CP-HARDEN-03. It predates this incremental detector and is not retroactively reopened."
     }
   ],
-  "last_scan_at": "2026-11-26T12:41:39Z",
+  "last_scan_at": "2026-11-26T13:39:16Z",
   "scan_health": {
     "pilialvu75-hue/AI-Orchestrator-Module-Library": {
       "state": "OK",
-      "last_success_at": "2026-11-26T12:41:39Z",
+      "last_success_at": "2026-11-26T13:39:16Z",
       "last_failure_at": null,
       "error_code": null
     },
     "pilialvu75-hue/Ai-orchestrator-riserva": {
       "state": "OK",
-      "last_success_at": "2026-11-26T12:41:39Z",
+      "last_success_at": "2026-11-26T13:39:16Z",
       "last_failure_at": "2026-10-28T07:39:58Z",
       "error_code": null
     },
     "pilialvu75-hue/Ai-orchestrator-diagnostics": {
       "state": "OK",
-      "last_success_at": "2026-11-26T12:41:39Z",
+      "last_success_at": "2026-11-26T13:39:16Z",
       "last_failure_at": "2026-10-28T07:39:58Z",
       "error_code": null
     },
     "pilialvu75-hue/AI-Orchestrator-Module-Researcher": {
       "state": "OK",
-      "last_success_at": "2026-11-26T12:41:39Z",
+      "last_success_at": "2026-11-26T13:39:16Z",
       "last_failure_at": "2026-10-28T07:39:58Z",
       "error_code": null
     },
     "pilialvu75-hue/Ai_orchestrator-prova": {
       "state": "OK",
-      "last_success_at": "2026-11-26T12:41:39Z",
+      "last_success_at": "2026-11-26T13:39:16Z",
       "last_failure_at": "2026-10-28T07:39:58Z",
       "error_code": null
     }
