@@ -75,7 +75,8 @@
     "dev.2 resource monitor and its original tests copied; native Android namespace placeholder, Windows resource channel block extracted into standalone registration helper. Native source not yet built in a consumer.",
     "dev.3: preserve original console layout and filters; replace GitHub upload action with local history and resources. Display/copy only fixed-vocabulary entries, bound console by original ring, add confirmation for deletion, hidden tap wrapper and framework/root-isolate error capture. Added visible resource panel. No remote transport.",
     "dev.4 app startup and information; process exit adapter excludes raw descriptions, names, status, abort traces and managed cause; no extra crash interceptor. Historical Android API 30+ records displayed separately, unsupported not treated as no crash.",
-    "dev.5: additive resource fields and native measurements: Android app-data volume StatFs and process CPU core-equivalent delta; Windows executable volume GetDiskFreeSpaceExW. GPU and unsupported readings remain unavailable. Local UI labels IT/FR/EN/ES, machine events unchanged."
+    "dev.5: additive resource fields and native measurements: Android app-data volume StatFs and process CPU core-equivalent delta; Windows executable volume GetDiskFreeSpaceExW. GPU and unsupported readings remain unavailable. Local UI labels IT/FR/EN/ES, machine events unchanged.",
+    "dev.6: additive opt-in transport adapter with typed report, minute-rounded event times, durable bounded consent snapshot, HTTPS destination binding, no redirects and retry/revoke controls. No production endpoint or automatic transmission. Original telemetry privacy policy retained."
   ],
   "missing_evidence": [
     "physical consumer crash/restart",

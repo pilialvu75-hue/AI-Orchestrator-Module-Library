@@ -7,3 +7,6 @@ export 'ui/hidden_diagnostics_entry.dart';
 export 'ui/diagnostics_console_page.dart';
 export 'src/application_diagnostics.dart';
 export 'src/exit_history.dart';
+export 'src/diagnostic_report.dart';
+export 'src/diagnostic_delivery.dart';
+export 'ui/diagnostic_delivery_page.dart';
