@@ -26,7 +26,7 @@
     {
       "repository": "pilialvu75-hue/AI-Orchestrator-Module-Researcher",
       "baseline_at": "2026-10-03T16:20:00Z",
-      "cursor_merged_at": "2026-11-26T10:27:47Z"
+      "cursor_merged_at": "2026-11-26T12:33:02Z"
     },
     {
       "repository": "pilialvu75-hue/Ai_orchestrator-prova",
@@ -9792,6 +9792,40 @@
       "url": "https://github.com/pilialvu75-hue/AI-Orchestrator-Module-Researcher/commit/5d396863b7d9cdf7594313e585e222b6cc88dba4",
       "match_ref": null,
       "reconciliation": null
+    },
+    {
+      "incident_id": "df4cf98aaaa0e0c3e51c",
+      "status": "UNRECONCILED",
+      "detected_at": "2026-11-26T12:41:39Z",
+      "repository": "pilialvu75-hue/AI-Orchestrator-Module-Researcher",
+      "kind": "direct_commit",
+      "pull_request": null,
+      "merge_sha": null,
+      "commit_sha": "e8e6c80e8c0391cd07d9201038a24c4d99b11af0",
+      "head_branch": null,
+      "base_branch": "main",
+      "change_at": "2026-11-26T10:28:18Z",
+      "title": "Collect bounded diagnostics before propagating sweep timeout",
+      "url": "https://github.com/pilialvu75-hue/AI-Orchestrator-Module-Researcher/commit/e8e6c80e8c0391cd07d9201038a24c4d99b11af0",
+      "match_ref": null,
+      "reconciliation": null
+    },
+    {
+      "incident_id": "048d29ddf92b6d4355e4",
+      "status": "UNRECONCILED",
+      "detected_at": "2026-11-26T12:41:39Z",
+      "repository": "pilialvu75-hue/AI-Orchestrator-Module-Researcher",
+      "kind": "unmatched_merge_commit",
+      "pull_request": null,
+      "merge_sha": null,
+      "commit_sha": "93ba088613c3e9fd3abee617f00183b9aa205ac2",
+      "head_branch": null,
+      "base_branch": "main",
+      "change_at": "2026-11-26T12:33:02Z",
+      "title": "Merge pull request #149 from pilialvu75-hue/fix/timeout-diagnostic-capture",
+      "url": "https://github.com/pilialvu75-hue/AI-Orchestrator-Module-Researcher/commit/93ba088613c3e9fd3abee617f00183b9aa205ac2",
+      "match_ref": null,
+      "reconciliation": null
     }
   ],
   "reconciliation_history": [
@@ -9802,35 +9836,35 @@
       "note": "Known motivating example for CP-HARDEN-03. It predates this incremental detector and is not retroactively reopened."
     }
   ],
-  "last_scan_at": "2026-11-26T11:39:07Z",
+  "last_scan_at": "2026-11-26T12:41:39Z",
   "scan_health": {
     "pilialvu75-hue/AI-Orchestrator-Module-Library": {
       "state": "OK",
-      "last_success_at": "2026-11-26T11:39:07Z",
+      "last_success_at": "2026-11-26T12:41:39Z",
       "last_failure_at": null,
       "error_code": null
     },
     "pilialvu75-hue/Ai-orchestrator-riserva": {
       "state": "OK",
-      "last_success_at": "2026-11-26T11:39:07Z",
+      "last_success_at": "2026-11-26T12:41:39Z",
       "last_failure_at": "2026-10-28T07:39:58Z",
       "error_code": null
     },
     "pilialvu75-hue/Ai-orchestrator-diagnostics": {
       "state": "OK",
-      "last_success_at": "2026-11-26T11:39:07Z",
+      "last_success_at": "2026-11-26T12:41:39Z",
       "last_failure_at": "2026-10-28T07:39:58Z",
       "error_code": null
     },
     "pilialvu75-hue/AI-Orchestrator-Module-Researcher": {
       "state": "OK",
-      "last_success_at": "2026-11-26T11:39:07Z",
+      "last_success_at": "2026-11-26T12:41:39Z",
       "last_failure_at": "2026-10-28T07:39:58Z",
       "error_code": null
     },
     "pilialvu75-hue/Ai_orchestrator-prova": {
       "state": "OK",
-      "last_success_at": "2026-11-26T11:39:07Z",
+      "last_success_at": "2026-11-26T12:41:39Z",
       "last_failure_at": "2026-10-28T07:39:58Z",
       "error_code": null
     }
