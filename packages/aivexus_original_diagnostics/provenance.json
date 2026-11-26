@@ -1,0 +1,41 @@
+{
+  "source_repository": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva",
+  "source_commit": "67ae2cc352e6d54ec5cbbe7917958ad6e9e8ce28",
+  "status": "experimental_uncertified",
+  "files": [
+    {
+      "path": "lib/core/runtime/inference/runtime_event_log.dart",
+      "source_blob_sha": "be9d0682f7d504c94625357c3334b06890db11ef"
+    },
+    {
+      "path": "lib/core/runtime/inference/runtime_crash_log_sink.dart",
+      "source_blob_sha": "93f8e5f7d69bee82c50e1b4a64cf55cc183a7e64"
+    },
+    {
+      "path": "lib/core/diagnostics/diagnostics_telemetry_bridge.dart",
+      "source_blob_sha": "3c83209cebbb3ecad946b45b98d0d209d34ac903"
+    },
+    {
+      "path": "lib/core/app_health/contracts/abstract_telemetry_service.dart",
+      "source_blob_sha": "2a125cb3b1cd41a01c167e1749e07fd0177ac56b"
+    },
+    {
+      "path": "test/core/runtime/inference/runtime_event_log_privacy_test.dart",
+      "source_blob_sha": "49b28fee1814c087913f5cdb29ae1e456e4303e1"
+    },
+    {
+      "path": "test/core/diagnostics/diagnostics_telemetry_bridge_test.dart",
+      "source_blob_sha": "8738c58989663e968aee2afcda2115f960df1038"
+    }
+  ],
+  "adaptations": [
+    "Package imports only for copied sources and tests. App-facing privacy facade is additional, not a replacement of the original logger."
+  ],
+  "missing_evidence": [
+    "physical consumer crash/restart",
+    "resource native bridges",
+    "diagnostics UI",
+    "consent-gated remote queue/transport",
+    "license/security approval"
+  ]
+}
