@@ -26,7 +26,7 @@
     {
       "repository": "pilialvu75-hue/AI-Orchestrator-Module-Researcher",
       "baseline_at": "2026-10-03T16:20:00Z",
-      "cursor_merged_at": "2026-11-26T14:02:34Z"
+      "cursor_merged_at": "2026-11-26T15:35:59Z"
     },
     {
       "repository": "pilialvu75-hue/Ai_orchestrator-prova",
@@ -9979,6 +9979,91 @@
       "url": "https://github.com/pilialvu75-hue/AI-Orchestrator-Module-Researcher/commit/8cb990c49eb792b130da9947f551d07a493c2028",
       "match_ref": null,
       "reconciliation": null
+    },
+    {
+      "incident_id": "8ff82cfc982ae5214b9c",
+      "status": "UNRECONCILED",
+      "detected_at": "2026-11-26T15:39:03Z",
+      "repository": "pilialvu75-hue/AI-Orchestrator-Module-Researcher",
+      "kind": "direct_commit",
+      "pull_request": null,
+      "merge_sha": null,
+      "commit_sha": "f77f07a9d561d77f7bc42080bc97a94cb6efd378",
+      "head_branch": null,
+      "base_branch": "main",
+      "change_at": "2026-11-26T15:30:27Z",
+      "title": "Record allowlisted public Dart rejection reasons",
+      "url": "https://github.com/pilialvu75-hue/AI-Orchestrator-Module-Researcher/commit/f77f07a9d561d77f7bc42080bc97a94cb6efd378",
+      "match_ref": null,
+      "reconciliation": null
+    },
+    {
+      "incident_id": "716234bd204e75903cb8",
+      "status": "UNRECONCILED",
+      "detected_at": "2026-11-26T15:39:03Z",
+      "repository": "pilialvu75-hue/AI-Orchestrator-Module-Researcher",
+      "kind": "unmatched_merge_commit",
+      "pull_request": null,
+      "merge_sha": null,
+      "commit_sha": "2335ff29c1cce5285ee5cd03bb9cf12cab008793",
+      "head_branch": null,
+      "base_branch": "main",
+      "change_at": "2026-11-26T15:32:36Z",
+      "title": "Merge pull request #153 from pilialvu75-hue/fix/public-dart-rejection-reasons",
+      "url": "https://github.com/pilialvu75-hue/AI-Orchestrator-Module-Researcher/commit/2335ff29c1cce5285ee5cd03bb9cf12cab008793",
+      "match_ref": null,
+      "reconciliation": null
+    },
+    {
+      "incident_id": "787ff68c539e33308dd0",
+      "status": "UNRECONCILED",
+      "detected_at": "2026-11-26T15:39:03Z",
+      "repository": "pilialvu75-hue/AI-Orchestrator-Module-Researcher",
+      "kind": "direct_commit",
+      "pull_request": null,
+      "merge_sha": null,
+      "commit_sha": "c76b310a70d88ff7a9761fa71e7c557ee91737ae",
+      "head_branch": null,
+      "base_branch": "main",
+      "change_at": "2026-11-26T15:34:04Z",
+      "title": "Select runtime sources and retain license notices",
+      "url": "https://github.com/pilialvu75-hue/AI-Orchestrator-Module-Researcher/commit/c76b310a70d88ff7a9761fa71e7c557ee91737ae",
+      "match_ref": null,
+      "reconciliation": null
+    },
+    {
+      "incident_id": "e12143dc1bbb6416b966",
+      "status": "UNRECONCILED",
+      "detected_at": "2026-11-26T15:39:03Z",
+      "repository": "pilialvu75-hue/AI-Orchestrator-Module-Researcher",
+      "kind": "direct_commit",
+      "pull_request": null,
+      "merge_sha": null,
+      "commit_sha": "baba8a79e9fe55921e3a53d8afd984872a51e744",
+      "head_branch": null,
+      "base_branch": "main",
+      "change_at": "2026-11-26T15:34:06Z",
+      "title": "Test omission of oversized development data",
+      "url": "https://github.com/pilialvu75-hue/AI-Orchestrator-Module-Researcher/commit/baba8a79e9fe55921e3a53d8afd984872a51e744",
+      "match_ref": null,
+      "reconciliation": null
+    },
+    {
+      "incident_id": "86059b04b486bc9c87e2",
+      "status": "UNRECONCILED",
+      "detected_at": "2026-11-26T15:39:03Z",
+      "repository": "pilialvu75-hue/AI-Orchestrator-Module-Researcher",
+      "kind": "unmatched_merge_commit",
+      "pull_request": null,
+      "merge_sha": null,
+      "commit_sha": "3e34be40199cf495916e8bd4c33f94894bc71a9f",
+      "head_branch": null,
+      "base_branch": "main",
+      "change_at": "2026-11-26T15:35:59Z",
+      "title": "Merge pull request #154 from pilialvu75-hue/fix/selective-dart-runtime-extraction",
+      "url": "https://github.com/pilialvu75-hue/AI-Orchestrator-Module-Researcher/commit/3e34be40199cf495916e8bd4c33f94894bc71a9f",
+      "match_ref": null,
+      "reconciliation": null
     }
   ],
   "reconciliation_history": [
@@ -9989,35 +10074,35 @@
       "note": "Known motivating example for CP-HARDEN-03. It predates this incremental detector and is not retroactively reopened."
     }
   ],
-  "last_scan_at": "2026-11-26T14:39:34Z",
+  "last_scan_at": "2026-11-26T15:39:03Z",
   "scan_health": {
     "pilialvu75-hue/AI-Orchestrator-Module-Library": {
       "state": "OK",
-      "last_success_at": "2026-11-26T14:39:34Z",
+      "last_success_at": "2026-11-26T15:39:03Z",
       "last_failure_at": null,
       "error_code": null
     },
     "pilialvu75-hue/Ai-orchestrator-riserva": {
       "state": "OK",
-      "last_success_at": "2026-11-26T14:39:34Z",
+      "last_success_at": "2026-11-26T15:39:03Z",
       "last_failure_at": "2026-10-28T07:39:58Z",
       "error_code": null
     },
     "pilialvu75-hue/Ai-orchestrator-diagnostics": {
       "state": "OK",
-      "last_success_at": "2026-11-26T14:39:34Z",
+      "last_success_at": "2026-11-26T15:39:03Z",
       "last_failure_at": "2026-10-28T07:39:58Z",
       "error_code": null
     },
     "pilialvu75-hue/AI-Orchestrator-Module-Researcher": {
       "state": "OK",
-      "last_success_at": "2026-11-26T14:39:34Z",
+      "last_success_at": "2026-11-26T15:39:03Z",
       "last_failure_at": "2026-10-28T07:39:58Z",
       "error_code": null
     },
     "pilialvu75-hue/Ai_orchestrator-prova": {
       "state": "OK",
-      "last_success_at": "2026-11-26T14:39:34Z",
+      "last_success_at": "2026-11-26T15:39:03Z",
       "last_failure_at": "2026-10-28T07:39:58Z",
       "error_code": null
     }
