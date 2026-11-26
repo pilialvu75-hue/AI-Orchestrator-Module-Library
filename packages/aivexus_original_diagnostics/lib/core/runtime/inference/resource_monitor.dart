@@ -16,6 +16,9 @@ class ResourceSample {
         thresholdBytes = _number(data['thresholdBytes']),
         rssBytes = _number(data['rssBytes']),
         systemCpuPercent = _percent(data['systemCpuPercent']),
+        processCpuCorePercent = _corePercent(data['processCpuCorePercent']),
+        appVolumeFreeBytes = _number(data['appVolumeFreeBytes']),
+        appVolumeTotalBytes = _number(data['appVolumeTotalBytes']),
         nativeHeapBytes = _number(data['nativeHeapBytes']),
         batteryTemperatureDeciC = _number(data['batteryTempDeciC']),
         deviceManufacturer = _text(data['deviceManufacturer']),
@@ -27,14 +30,14 @@ class ResourceSample {
         trimLevel = _number(data['trimLevel']) ?? 0;
 
   final DateTime timestamp;
-  final double? systemCpuPercent;
+  final double? systemCpuPercent, processCpuCorePercent;
   final int? availableBytes,
       totalBytes,
       thresholdBytes,
       rssBytes,
       nativeHeapBytes,
       batteryTemperatureDeciC,
-      sdkInt;
+      sdkInt, appVolumeFreeBytes, appVolumeTotalBytes;
   final String? deviceManufacturer, deviceModel, deviceName, primaryAbi;
   final bool lowMemory;
   final int trimLevel;
@@ -52,6 +55,10 @@ class ResourceSample {
       value is num && value.isFinite && value >= 0 && value <= 100
           ? value.toDouble()
           : null;
+
+  static double? _corePercent(Object? value) =>
+      value is num && value.isFinite && value >= 0 && value <= 409600
+          ? value.toDouble() : null;
 
   static String? _text(Object? value) {
     final text = value is String ? value.trim() : '';
