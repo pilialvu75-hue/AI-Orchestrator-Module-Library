@@ -13,6 +13,19 @@ void main() {
     expect(sample.batteryTemperatureC, isNull);
     expect(sample.nativeHeapBytes, isNull);
   });
+  test('disk and process CPU preserve measured zero and reject invalid values', () {
+    final sample = ResourceSample({'appVolumeFreeBytes': 0, 'appVolumeTotalBytes': 4096,
+      'processCpuCorePercent': 180.5});
+    expect(sample.appVolumeFreeBytes, 0);
+    expect(sample.appVolumeTotalBytes, 4096);
+    expect(sample.processCpuCorePercent, 180.5);
+    expect(sample.systemCpuPercent, isNull);
+    final invalid = ResourceSample({'appVolumeFreeBytes': -1, 'appVolumeTotalBytes': double.nan,
+      'processCpuCorePercent': double.infinity});
+    expect(invalid.appVolumeFreeBytes, isNull);
+    expect(invalid.appVolumeTotalBytes, isNull);
+    expect(invalid.processCpuCorePercent, isNull);
+  });
   test('unsupported platform data remains null', () async {
     final monitor = ResourceDiagnostics(sampler: () async => null);
     addTearDown(monitor.dispose);

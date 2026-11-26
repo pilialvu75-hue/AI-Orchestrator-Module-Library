@@ -2,6 +2,7 @@ import 'package:aivexus_original_diagnostics/src/diagnostics.dart';
 import 'package:aivexus_original_diagnostics/src/resource_diagnostics_page.dart';
 import 'dart:async';
 import 'application_diagnostics_page.dart';
+import '../src/diagnostic_labels.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -97,8 +98,8 @@ class _DiagnosticsConsolePageState extends State<DiagnosticsConsolePage> {
     await Clipboard.setData(ClipboardData(text: text));
     if (!mounted) return;
     ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(
-        content: Text('Log copied to clipboard'),
+      SnackBar(
+        content: Text(diagnosticLabel(context, 'Log copied to clipboard')),
         duration: Duration(seconds: 2),
       ),
     );
@@ -108,26 +109,26 @@ class _DiagnosticsConsolePageState extends State<DiagnosticsConsolePage> {
     final history = await AivexusDiagnostics.instance.readSafeHistory();
     if (!mounted) return;
     await showDialog<void>(context: context, builder: (context) => AlertDialog(
-      title: const Text('Local history'),
+      title: Text(diagnosticLabel(context, 'Local history')),
       content: SingleChildScrollView(child: SelectableText(
-        history.isEmpty ? 'No retained events' : history)),
+        history.isEmpty ? diagnosticLabel(context, 'No retained events') : history)),
       actions: [
         TextButton(onPressed: history.isEmpty ? null : () async {
           await Clipboard.setData(ClipboardData(text: history));
           if (context.mounted) Navigator.pop(context);
-        }, child: const Text('Copy')),
-        TextButton(onPressed: () => Navigator.pop(context), child: const Text('Close')),
+        }, child: Text(diagnosticLabel(context, 'Copy'))),
+        TextButton(onPressed: () => Navigator.pop(context), child: Text(diagnosticLabel(context, 'Close'))),
       ],
     ));
   }
 
   Future<void> _clearLog() async {
     final confirmed = await showDialog<bool>(context: context, builder: (context) => AlertDialog(
-      title: const Text('Clear local diagnostics?'),
-      content: const Text('This removes the retained diagnostic history.'),
+      title: Text(diagnosticLabel(context, 'Clear local diagnostics?')),
+      content: Text(diagnosticLabel(context, 'This removes the retained diagnostic history.')),
       actions: [
-        TextButton(onPressed: () => Navigator.pop(context, false), child: const Text('Cancel')),
-        TextButton(onPressed: () => Navigator.pop(context, true), child: const Text('Clear')),
+        TextButton(onPressed: () => Navigator.pop(context, false), child: Text(diagnosticLabel(context, 'Cancel'))),
+        TextButton(onPressed: () => Navigator.pop(context, true), child: Text(diagnosticLabel(context, 'Clear'))),
       ],
     ));
     if (confirmed != true || !mounted) return;
@@ -143,31 +144,31 @@ class _DiagnosticsConsolePageState extends State<DiagnosticsConsolePage> {
         backgroundColor: const Color(0xFF111827),
         elevation: 0,
         iconTheme: const IconThemeData(color: Colors.white),
-        title: const Text(
-          'Runtime Diagnostics',
+        title: Text(
+          diagnosticLabel(context, 'Runtime Diagnostics'),
           style: TextStyle(color: Colors.white, fontWeight: FontWeight.w500),
         ),
         actions: [
           IconButton(
-            tooltip: 'Local history',
+            tooltip: diagnosticLabel(context, 'Local history'),
             icon: const Icon(Icons.history, color: Colors.white),
             onPressed: _showHistory,
           ),
           IconButton(
-            tooltip: 'Resources',
+            tooltip: diagnosticLabel(context, 'Resources'),
             icon: const Icon(Icons.memory, color: Colors.white),
             onPressed: () => Navigator.of(context).push(MaterialPageRoute<void>(
               builder: (_) => const ResourceDiagnosticsPage(),
             )),
           ),
           IconButton(
-            tooltip: 'Application information',
+            tooltip: diagnosticLabel(context, 'Application information'),
             icon: const Icon(Icons.info_outline, color: Colors.white),
             onPressed: () => Navigator.of(context).push(MaterialPageRoute<void>(builder: (_) => const ApplicationDiagnosticsPage())),
           ),
           // Auto-scroll toggle
           IconButton(
-            tooltip: _autoScroll ? 'Auto-scroll ON' : 'Auto-scroll OFF',
+            tooltip: diagnosticLabel(context, _autoScroll ? 'Auto-scroll ON' : 'Auto-scroll OFF'),
             icon: Icon(
               _autoScroll
                   ? Icons.vertical_align_bottom_rounded
@@ -178,13 +179,13 @@ class _DiagnosticsConsolePageState extends State<DiagnosticsConsolePage> {
           ),
           // Copy button
           IconButton(
-            tooltip: 'Copy all entries',
+            tooltip: diagnosticLabel(context, 'Copy all entries'),
             icon: const Icon(Icons.copy_outlined, color: Colors.white),
             onPressed: _filtered.isEmpty ? null : _copyAll,
           ),
           // Clear button
           IconButton(
-            tooltip: 'Clear log',
+            tooltip: diagnosticLabel(context, 'Clear log'),
             icon: const Icon(Icons.delete_outline, color: Colors.white),
             onPressed: _clearLog,
           ),
@@ -204,15 +205,15 @@ class _DiagnosticsConsolePageState extends State<DiagnosticsConsolePage> {
             child: Row(
               children: [
                 Text(
-                  '${_filtered.length} event${_filtered.length == 1 ? '' : 's'}',
+                  '${diagnosticLabel(context, 'Events')}: ${_filtered.length}',
                   style: const TextStyle(
                     color: Color(0xFF6B7280),
                     fontSize: 11,
                   ),
                 ),
                 const Spacer(),
-                const Text(
-                  'buffer max ${RuntimeEventLog.maxEntries}',
+                Text(
+                  '${diagnosticLabel(context, 'Buffer limit')}: ${RuntimeEventLog.maxEntries}',
                   style: TextStyle(
                     color: Color(0xFF374151),
                     fontSize: 10,
@@ -224,10 +225,9 @@ class _DiagnosticsConsolePageState extends State<DiagnosticsConsolePage> {
           // ── Log entries ──────────────────────────────────────────────────────
           Expanded(
             child: _filtered.isEmpty
-                ? const Center(
+                ? Center(
                     child: Text(
-                      'No runtime events captured yet.\n'
-                      'Diagnostic events will appear automatically.',
+                      '${diagnosticLabel(context, 'No runtime events captured yet.')}\n${diagnosticLabel(context, 'Diagnostic events will appear automatically.')}',
                       textAlign: TextAlign.center,
                       style: TextStyle(color: Color(0xFF4B5563), height: 1.6),
                     ),
@@ -266,14 +266,14 @@ class _CategoryFilterBar extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 6),
         children: [
           _FilterChip(
-            label: 'All',
+            label: diagnosticLabel(context, 'All'),
             color: const Color(0xFF6B7280),
             selected: selected == null,
             onTap: () => onSelected(null),
           ),
           ...RuntimeEventCategory.values.map(
             (cat) => _FilterChip(
-              label: _labelFor(cat),
+              label: diagnosticLabel(context, _labelFor(cat)),
               color: _colorFor(cat),
               selected: selected == cat,
               onTap: () => onSelected(selected == cat ? null : cat),

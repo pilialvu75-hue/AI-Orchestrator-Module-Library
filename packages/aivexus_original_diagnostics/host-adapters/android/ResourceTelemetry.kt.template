@@ -10,6 +10,8 @@ import android.content.Context
 import android.content.res.Configuration
 import android.os.Debug
 import android.os.SystemClock
+import android.os.StatFs
+import android.os.Process
 import io.flutter.embedding.engine.FlutterEngine
 import io.flutter.plugin.common.MethodChannel
 import java.io.File
@@ -19,6 +21,8 @@ class ResourceTelemetry(private val context: Context, engine: FlutterEngine) : C
     private val channel = MethodChannel(engine.dartExecutor.binaryMessenger, "com.aiorchestrator/resources")
     private var trimLevel = 0
     private var trimAt = 0L
+    private var previousCpu: Long? = null
+    private var previousTime: Long? = null
 
     init {
         context.registerComponentCallbacks(this)
@@ -43,8 +47,19 @@ class ResourceTelemetry(private val context: Context, engine: FlutterEngine) : C
                     val batteryTempDeciC = batteryIntent
                         ?.getIntExtra(BatteryManager.EXTRA_TEMPERATURE, Int.MIN_VALUE)
                         ?.takeIf { it != Int.MIN_VALUE && it >= 0 }
+                    val now = SystemClock.elapsedRealtime()
+                    val cpu = Process.getElapsedCpuTime()
+                    val previousWall = previousTime
+                    val previousProcess = previousCpu
+                    val processPercent = if (previousWall != null && previousProcess != null && now > previousWall && cpu >= previousProcess) 100.0 * (cpu - previousProcess) / (now - previousWall) else null
+                    previousTime = now
+                    previousCpu = cpu
+                    val storage = try { StatFs(context.filesDir.absolutePath) } catch (_: Exception) { null }
                     result.success(mapOf(
                         "availableBytes" to info.availMem,
+                        "processCpuCorePercent" to processPercent,
+                        "appVolumeFreeBytes" to storage?.availableBytes,
+                        "appVolumeTotalBytes" to storage?.totalBytes,
                         "totalBytes" to info.totalMem,
                         "thresholdBytes" to info.threshold,
                         "lowMemory" to info.lowMemory,
