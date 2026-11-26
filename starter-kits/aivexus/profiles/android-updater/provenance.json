@@ -1,0 +1,31 @@
+{
+  "status": "owner_approved_android_source_adaptation_pending_consumer_ci",
+  "approval_issue": 401,
+  "engine_commit": "5f0b3093c15177dff850a914fcfe52ac7e2fc70a",
+  "engine_version": "0.1.0-dev.3",
+  "ui": {
+    "repository": "pilialvu75-hue/AIVEXUS-RendezVous",
+    "commit": "ee4b06f8fc4a175fe0de9a615880148ca311d1d0",
+    "path": "preview/update_main.dart",
+    "blob_sha": "b1aaeb90eeaafa98178adb162e5a09a059dffd72"
+  },
+  "tests": {
+    "commit": "51d873d12d9a9e3ad85df73ea93451cd8c03350b",
+    "path": "preview/update_notice_test.dart",
+    "blob_sha": "81e0709fa2ee0b7c66172f03b2830a0ded20c648"
+  },
+  "adaptations": [
+    "Remove appointment app and HTTP initialization; inject manager/preferences/body/title; caller owns manager/client; hide channel selector for customer profile; preserve notice and installer flow.",
+    "French labels from approved RV flow retained until localization pass."
+  ],
+  "native": {
+    "repository": "pilialvu75-hue/AIVEXUS-RendezVous",
+    "commit": "f8a2e2d3f8936b890e151cd0c8ace4d46a87d253",
+    "archive_blob_sha": "1988833cbc6eba6946d4b8f58fd230225ea8398e",
+    "paths": [
+      "overlay/android/app/src/main/kotlin/com/aivexus/rendezvous/MainActivity.kt",
+      "overlay/android/app/src/main/res/xml/ota_paths.xml"
+    ],
+    "adaptations": "Remove WebView and appointment file chooser; parameterize app identity/release repo and display label."
+  }
+}
