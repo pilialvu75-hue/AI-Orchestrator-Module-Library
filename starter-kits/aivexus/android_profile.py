@@ -29,12 +29,15 @@ def validate_profile(enabled, owner, repo, tester):
 
 def install_android_updater(output, name, display, owner, repo, tester):
     # Export only the pinned package. Generated projects have no git dependency on Library.
-    blob = subprocess.check_output(["git", "-C", str(ROOT), "archive", "--format=zip",
+    git_root = subprocess.check_output(["git", "-C", str(ROOT), "rev-parse", "--show-toplevel"], text=True).strip()
+    blob = subprocess.check_output(["git", "-C", git_root, "archive", "--format=zip",
                                     ENGINE_PIN + ":packages/aivexus_original_updater"])
     vendor = output / "vendor/aivexus_original_updater"
     vendor.mkdir(parents=True)
     with zipfile.ZipFile(io.BytesIO(blob)) as archive:
         archive.extractall(vendor)  # trusted pinned Git tree
+    if not (vendor / "pubspec.yaml").is_file():
+        raise RuntimeError("Pinned updater export missing pubspec.yaml")
     (vendor / "LIBRARY_COMMIT.txt").write_text(ENGINE_PIN + "\n")
     substitutions = {"__PROJECT_SLUG__": name,
                      "__DISPLAY_NAME_DART__": json.dumps(display, ensure_ascii=False).replace("$", r"\$"),
