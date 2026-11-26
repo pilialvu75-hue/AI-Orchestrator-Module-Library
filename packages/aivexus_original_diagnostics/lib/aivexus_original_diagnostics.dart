@@ -10,3 +10,4 @@ export 'src/exit_history.dart';
 export 'src/diagnostic_report.dart';
 export 'src/diagnostic_delivery.dart';
 export 'ui/diagnostic_delivery_page.dart';
+export 'src/automatic_diagnostic_delivery.dart';
