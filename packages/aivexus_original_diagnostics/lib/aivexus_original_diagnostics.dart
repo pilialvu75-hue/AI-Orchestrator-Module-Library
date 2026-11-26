@@ -5,3 +5,5 @@ export 'src/resource_diagnostics.dart';
 export 'core/runtime/inference/resource_monitor.dart' show ResourceSample;
 export 'ui/hidden_diagnostics_entry.dart';
 export 'ui/diagnostics_console_page.dart';
+export 'src/application_diagnostics.dart';
+export 'src/exit_history.dart';

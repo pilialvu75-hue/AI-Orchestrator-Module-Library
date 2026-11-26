@@ -1,4 +1,4 @@
-# AIVEXUS Original Diagnostics 0.1.0-dev.3
+# AIVEXUS Original Diagnostics 0.1.0-dev.4
 
 Second proposed Starter Pack component, approved for development by the owner. Extracted from Riserva commit 67ae2cc352e6d54ec5cbbe7917958ad6e9e8ce28. Original event buffer, persistent crash-log sink, telemetry privacy policy and associated original tests retained with package import changes.
 
@@ -23,3 +23,6 @@ Original Dart ResourceMonitor and original regression suite, with Android Resour
 
 ## Hidden console and automatic capture
 After initialize(), call attachAutomaticErrorCapture() once; it chains FlutterError and root PlatformDispatcher handlers without suppressing original error behavior or recording exception text. Keep the detach callback. Wrap a non-interactive label in HiddenDiagnosticsEntry(child: ...). Seven taps within five seconds open the original adapted console, no visible menu button. This is not authentication. The console and copy/history features only present strict typed events, no GitHub upload. Local raw internal logger still exists for original regression equivalence and must not be exposed or used with user data. Clearing history requires confirmation. Labels are currently English; localization remains pending. Resources are shown in a foreground panel and polling stops on dispose/background. Native readings require host adapters. Isolate-specific errors and native crash detection require additional host evidence; retained markers are not proof of crash cause.
+
+## App startup and historical exit evidence
+Use `await DiagnosticSession.instance.start()` after Flutter binding initialization for automatic capture, startup marker, local version/build/platform and historical Android process exits. Do not attach a second error handler; call detach only on explicit host teardown. Install ProcessExitDiagnostics.kt.template with the consumer namespace and call ProcessExitDiagnostics.register(context, engine) at engine configuration. The original Android API records previous process exits (Android 11+); fields are deliberately restricted to timestamp and closed reason vocabulary. No raw tombstone/abort message is read. A user-requested stop is not a crash; no record or unsupported device is not proof of healthy shutdown. Native integration, actual crash and restart on device remain unverified. App information is local only; English console labels still pending localization.

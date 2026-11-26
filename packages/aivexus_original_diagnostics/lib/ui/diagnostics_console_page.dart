@@ -1,6 +1,7 @@
 import 'package:aivexus_original_diagnostics/src/diagnostics.dart';
 import 'package:aivexus_original_diagnostics/src/resource_diagnostics_page.dart';
 import 'dart:async';
+import 'application_diagnostics_page.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -158,6 +159,11 @@ class _DiagnosticsConsolePageState extends State<DiagnosticsConsolePage> {
             onPressed: () => Navigator.of(context).push(MaterialPageRoute<void>(
               builder: (_) => const ResourceDiagnosticsPage(),
             )),
+          ),
+          IconButton(
+            tooltip: 'Application information',
+            icon: const Icon(Icons.info_outline, color: Colors.white),
+            onPressed: () => Navigator.of(context).push(MaterialPageRoute<void>(builder: (_) => const ApplicationDiagnosticsPage())),
           ),
           // Auto-scroll toggle
           IconButton(

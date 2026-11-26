@@ -1,0 +1,52 @@
+package __ANDROID_NAMESPACE__
+
+import android.app.ActivityManager
+import android.app.ApplicationExitInfo
+import android.content.Context
+import android.os.Build
+import io.flutter.embedding.engine.FlutterEngine
+import io.flutter.plugin.common.MethodChannel
+import io.flutter.plugin.common.StandardMethodCodec
+
+/** Own-process history only. Does not intercept signals or restart the app. */
+object ProcessExitDiagnostics {
+    fun register(context: Context, engine: FlutterEngine) {
+        val app = context.applicationContext
+        val messenger = engine.dartExecutor.binaryMessenger
+        MethodChannel(
+            messenger,
+            "com.aiorchestrator/process_exit",
+            StandardMethodCodec.INSTANCE,
+            messenger.makeBackgroundTaskQueue()
+        ).setMethodCallHandler { call, result ->
+            if (call.method != "readHistory") {
+                result.notImplemented()
+            } else if (Build.VERSION.SDK_INT < Build.VERSION_CODES.R) {
+                result.error("UNSUPPORTED", "Exit history requires Android 11", null)
+            } else {
+                try {
+                    val manager = app.getSystemService(Context.ACTIVITY_SERVICE) as ActivityManager
+                    val records = manager.getHistoricalProcessExitReasons(app.packageName, 0, 3)
+                    result.success(records.map { info ->
+                        mapOf(
+                            "timestamp_ms" to info.timestamp,
+                            "reason_code" to info.reason,
+                            "reason" to when (info.reason) {
+                                ApplicationExitInfo.REASON_CRASH_NATIVE -> "native_crash"
+                                ApplicationExitInfo.REASON_CRASH -> "managed_crash"
+                                ApplicationExitInfo.REASON_LOW_MEMORY -> "low_memory"
+                                ApplicationExitInfo.REASON_ANR -> "anr"
+                                ApplicationExitInfo.REASON_SIGNALED -> "signal"
+                                ApplicationExitInfo.REASON_EXIT_SELF -> "exit_self"
+                                ApplicationExitInfo.REASON_USER_REQUESTED -> "user_requested"
+                                else -> "other_or_unknown"
+                            }
+                        )
+                    })
+                } catch (error: Exception) {
+                    result.error("EXIT_HISTORY_UNAVAILABLE", "Exit history unavailable", null)
+                }
+            }
+        }
+    }
+}
