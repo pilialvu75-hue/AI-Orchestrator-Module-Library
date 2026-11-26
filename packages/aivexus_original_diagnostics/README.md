@@ -1,4 +1,4 @@
-# AIVEXUS Original Diagnostics 0.1.0-dev.6
+# AIVEXUS Original Diagnostics 0.1.0-dev.7
 
 Second proposed Starter Pack component, approved for development by the owner. Extracted from Riserva commit 67ae2cc352e6d54ec5cbbe7917958ad6e9e8ce28. Original event buffer, persistent crash-log sink, telemetry privacy policy and associated original tests retained with package import changes.
 
@@ -35,3 +35,6 @@ Build `DiagnosticReport.fromSafeHistory(await AivexusDiagnostics.instance.readSa
 
 ### Consent interface
 `DiagnosticDeliveryPage(delivery: ownerConfiguredDelivery)` provides localized exact-payload preview, explicit approval, separate send and revocation. Do not mount it until a private receiver is approved. No auto-send. The status represents the current delivery instance; after restart, a pending snapshot can be processed explicitly. Queue storage must be private. No actual recipient selected.
+
+## Automatic delivery pilot (not deployed)
+`AutomaticDiagnosticDelivery` is separate from the dev.6 manual snapshot interface. Fixed HTTPS `DiagnosticRelayTarget` binds destination, producer, build and platform. Host supplies a securely provisioned independent pilot credential; do not embed it in an APK, request a GitHub token, or use Beta Access. Start the owner after binding initialization. The host must show an explicit informed consent describing PUBLIC archive, event categories, destination, automatic retry, retention, and revocation. `grant(informedConsent:true)` starts future-only collection. No pre-consent history. Batches max 100, local 7-day eligibility, durable pending state and up to eight attempts with bounded cooldown. Foreground timer and app resume retry; no OS background service. Cursor advances only after the exact expected archive SHA-256 and namespace receipt, not any 2xx. Blocked batches remain local until explicitly resolved/revoked; revocation removes pending local state but does not recall published data. The local timestamp cursor assumes monotonic source timestamps; clock rollback/identical timestamps at a batch boundary can omit events and requires a stronger event-ID scheme before production. Existing manual sender is not used for automatic relay. Actual receiver deployment, per-install enrollment, UI consent, live synthetic receipt and RV OTA integration remain open. No payment or deployment authorized here.

@@ -218,6 +218,7 @@ class AutomaticDiagnosticDelivery extends ChangeNotifier with WidgetsBindingObse
       }
       d={...d,'attempts':attempt+1,'next':_utc(now.add(Duration(minutes:_delays[attempt])))};
       _save(d);_set(AutomaticDeliveryStatus.sending);
+      if(!_enabled||_disposed||!_foreground) return;
       final client=_clientFactory();_active=client;
       try {
         final req=http.Request('POST',target.endpoint)
