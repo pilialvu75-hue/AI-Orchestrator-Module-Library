@@ -1,0 +1,34 @@
+name: Original AIVEXUS diagnostics regression
+on:
+  pull_request:
+    paths:
+      - 'packages/aivexus_original_diagnostics/**'
+      - '.github/workflows/aivexus-original-diagnostics.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'packages/aivexus_original_diagnostics/**'
+      - '.github/workflows/aivexus-original-diagnostics.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  regression:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-2022, macos-latest]
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 25
+    defaults:
+      run:
+        working-directory: packages/aivexus_original_diagnostics
+    steps:
+      - uses: actions/checkout@v4
+      - uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.35.7'
+          channel: stable
+      - run: flutter pub get
+      - run: flutter analyze --no-fatal-infos --no-fatal-warnings
+      - run: flutter test
