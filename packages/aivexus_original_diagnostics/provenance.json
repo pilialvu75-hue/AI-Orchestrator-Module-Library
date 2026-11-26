@@ -26,10 +26,37 @@
     {
       "path": "test/core/diagnostics/diagnostics_telemetry_bridge_test.dart",
       "source_blob_sha": "8738c58989663e968aee2afcda2115f960df1038"
+    },
+    {
+      "path": "lib/core/runtime/inference/resource_monitor.dart",
+      "source_blob_sha": "9a88c3d699df31891bea94773d40f089c114a2e6",
+      "target": "lib/core/runtime/inference/resource_monitor.dart"
+    },
+    {
+      "path": "lib/core/runtime/inference/android/native_generation_budget.dart",
+      "source_blob_sha": "4e7f9754ce459aab1fc04fe22b9e31cca6c2b02f",
+      "target": "lib/core/runtime/inference/android/native_generation_budget.dart"
+    },
+    {
+      "path": "test/core/runtime/inference/resource_monitor_test.dart",
+      "source_blob_sha": "d5c6b876b69351592924420a0b9f30fbaacffc81",
+      "target": "test/core/runtime/inference/resource_monitor_test.dart"
+    },
+    {
+      "path": "android/app/src/main/kotlin/com/aiorchestrator/ResourceTelemetry.kt",
+      "source_blob_sha": "b3117c07780608793ec3edae82eeb2a523dac61f",
+      "target": "host-adapters/android/ResourceTelemetry.kt.template"
+    },
+    {
+      "path": "windows/runner/flutter_window.cpp",
+      "source_blob_sha": "8987cb2bd4bec7f5265cca843804b0a258c23ad4",
+      "target": "host-adapters/windows/resource_telemetry.h",
+      "extraction": "resource MethodChannel block only"
     }
   ],
   "adaptations": [
-    "Package imports only for copied sources and tests. App-facing privacy facade is additional, not a replacement of the original logger."
+    "Package imports only for copied sources and tests. App-facing privacy facade is additional, not a replacement of the original logger.",
+    "dev.2 resource monitor and its original tests copied; native Android namespace placeholder, Windows resource channel block extracted into standalone registration helper. Native source not yet built in a consumer."
   ],
   "missing_evidence": [
     "physical consumer crash/restart",
