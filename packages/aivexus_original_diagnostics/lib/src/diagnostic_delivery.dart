@@ -15,7 +15,7 @@ class DiagnosticDelivery extends ChangeNotifier {
   DiagnosticDelivery({required Uri endpoint, required File queueFile,
     http.Client Function()? clientFactory, DateTime Function()? clock})
       : endpoint = _validateEndpoint(endpoint), _file = queueFile,
-        _clientFactory = clientFactory ?? http.Client,
+        _clientFactory = clientFactory ?? (() => http.Client()),
         _clock = clock ?? DateTime.now;
   final Uri endpoint;
   final File _file;
