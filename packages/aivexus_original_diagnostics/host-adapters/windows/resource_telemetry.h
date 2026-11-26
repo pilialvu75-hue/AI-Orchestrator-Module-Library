@@ -1,6 +1,7 @@
 #pragma once
 #include <windows.h>
 #include <cstdint>
+#include <string>
 #include <psapi.h>
 #pragma comment(lib, "Psapi.lib")
 #include <flutter/method_channel.h>
@@ -61,6 +62,23 @@ inline void RegisterAivexusResourceTelemetry(flutter::BinaryMessenger* messenger
             has_previous = true;
           } else {
             has_previous = false;
+          }
+          // Measure the executable volume, not an arbitrary drive.
+          wchar_t exe[32768]{};
+          const DWORD n = GetModuleFileNameW(nullptr, exe, 32768);
+          if (n > 0 && n < 32768) {
+            const std::wstring full(exe, n);
+            const auto slash = full.find_last_of(L"\\\\/");
+            if (slash != std::wstring::npos) {
+              const auto directory = full.substr(0, slash + 1);
+              ULARGE_INTEGER available{}, total{};
+              if (GetDiskFreeSpaceExW(directory.c_str(), &available, &total, nullptr)) {
+                sample[flutter::EncodableValue("appVolumeFreeBytes")] =
+                    flutter::EncodableValue(static_cast<int64_t>(available.QuadPart));
+                sample[flutter::EncodableValue("appVolumeTotalBytes")] =
+                    flutter::EncodableValue(static_cast<int64_t>(total.QuadPart));
+              }
+            }
           }
           result->Success(flutter::EncodableValue(sample));
         });
