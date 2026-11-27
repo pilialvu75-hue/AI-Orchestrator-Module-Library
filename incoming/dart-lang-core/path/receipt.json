@@ -1,0 +1,26 @@
+{
+  "source": "https://github.com/dart-lang/core",
+  "commit": "0762ac318188cf0ade513d1c62b02b72b45f6b33",
+  "package": "path",
+  "status": "SOURCE_REFERENCE_ONLY",
+  "security": "baseline static screening only; not malware clearance",
+  "license": "BSD-style; see original LICENSE",
+  "files": {
+    "LICENSE": "3c32b53167c7dae9190c38dab5dd9fe1789c53623ebc7d1babcb29914c5b3f16",
+    "README.md": "f27b9c5376597fc91c7e21941f4ce84bdb2a7a48808d0f39abf35beffd80f5a7",
+    "lib/path.dart": "958c7c6491e3c2f4c4fc3c8f86563fd33392bbac1dd081c5fe6ddd5cbd1e94c1",
+    "lib/src/characters.dart": "06a6cd6af83695a81bda4910546a5ba6eb37efef769c01d4c605ed2d2953b8c7",
+    "lib/src/context.dart": "6e25ae07dac41db6c808ea9c84bc7944b6dc9e820133efd39bf401804cba9d08",
+    "lib/src/internal_style.dart": "9bb84c2092d965ae2efcac54e3048da7b23212dd7900cf60b35686a9a12188eb",
+    "lib/src/parsed_path.dart": "ef719226b9092759508527c29febbf18bfd5d82d89b888e910c21b4ba7861ec2",
+    "lib/src/path_exception.dart": "5c50581d3a1eb0701f68f76cd3adf1cf65bc5dfef12a80904161c64962122ebc",
+    "lib/src/path_map.dart": "076a46cac841634d5f47763949bb9badf29826be06f1f14195d19abfa3045464",
+    "lib/src/path_set.dart": "57275d424e90522c6da437131e907d11833ad6f714927899ca8aa52531944c35",
+    "lib/src/style.dart": "f1753808e82cb5e63c2666a55738483ca788feea0794a47225e7855f0a7c6dd1",
+    "lib/src/style/posix.dart": "2ec0ab807e00c47a1632550a8e774ae040c6ca7b5a5bcb6ae71a4179ed07fbef",
+    "lib/src/style/url.dart": "d19b7d4261c137e9c3b31c66faf5c6e0d239cb773b64f04275c559fce3340f76",
+    "lib/src/style/windows.dart": "533c98e6cb66c55627591951e320e40bf312a65c2333b095135bc82e241c65b6",
+    "lib/src/utils.dart": "508dad7611db4cde1c9ec873cc9497b866e13e6b6e813a2fc36295cc5b684613",
+    "pubspec.yaml": "88dd9401b5dfd2bce9fae282119333b6490e342b0587a5e0a02a9e0528fb95ea"
+  }
+}

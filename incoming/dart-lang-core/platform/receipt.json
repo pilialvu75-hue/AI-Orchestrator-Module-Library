@@ -1,0 +1,29 @@
+{
+  "source": "https://github.com/dart-lang/core",
+  "commit": "0762ac318188cf0ade513d1c62b02b72b45f6b33",
+  "package": "platform",
+  "status": "SOURCE_REFERENCE_ONLY",
+  "security": "baseline static screening only; not malware clearance",
+  "license": "BSD-style; see original LICENSE",
+  "files": {
+    "LICENSE": "143839f62c9b7f88143ea9f688361c27050888acde7696b34e04414bd254fafc",
+    "README.md": "8d7e984c41025c50b5e5fb1c7f77d5cc0b57f2eeea291723839f45d09846be6c",
+    "lib/platform.dart": "d2e9054210bc3da5ae3f4e53034688da56fbe3e8eb913410b4ba9f54f0700759",
+    "lib/src/legacy_implementation/legacy_classes.dart": "815cae825b5225cc2429476570d1c7b72b4401aa9e2dfe60e5b905520355cc85",
+    "lib/src/legacy_implementation/legacy_platform_members.dart": "b7a560573c10eefe16d0b3c8a7851d9181adcbc6aa8ef4424ed2d2b212e330f7",
+    "lib/src/platform_apis.dart": "f7355cf60627b4c59cc1970bc9105ad1181554d45d73bbf4402a1d71abe2d183",
+    "lib/src/platform_specific/io_native_platform.dart": "1bcbb46fb1fbc98e128ba6b18e3835387afb3eca658a456e6569d3381bdfd1ae",
+    "lib/src/platform_specific/io_platform.dart": "2853a071948bbb38cc37071690e77d8d02d74f3d8db38b205cfa308ef17210a2",
+    "lib/src/platform_specific/unknown_platform.dart": "d7424393aa2b7a63dd22ba30825a9d297f9e2e5ad5a4a57ad0fec64cf5595d62",
+    "lib/src/platform_specific/web_browser_platform.dart": "afc8937f2f1f4e17abb77e81a3ca8aaadf52da55ed8e8be9d21205104dddf28c",
+    "lib/src/platform_specific/web_platform.dart": "4bf799a25f3907db2e462ab6ce63798a057bf4b75032d792eaab4ed9cccf3393",
+    "lib/src/platforms.dart": "b6c6548105d1d18552bd58a448703cf3f8dd922af49bfea637ed60e1c5c87e32",
+    "lib/src/testing/test_platforms.dart": "07d22470f0f4b9c1af014161752d5f1efade8b4b8fad83719d6ae93296c56d73",
+    "lib/src/testing/zone_overrides.dart": "9df0465da6266b1e95bf88387bbbaa094dbd108ce6ee11eebbace8b06ccde0d6",
+    "lib/src/util/environment_override_keys.dart": "59a80f2c838b52c6980548c9222aecaddcb38eb3eade0b0745bb69c3ec00681d",
+    "lib/src/util/json_keys.dart": "89398ebb60e861e6209fd26301474ccf2eaa38348955f752b8c3e0f8469f3ea8",
+    "lib/src/util/platform_browser_interop.dart": "7474ca72645c979b3906778c34adc8fc0ee727eb4bb894bbb0b1711a099515c6",
+    "lib/testing.dart": "cd3c38493a3bafadfa27e983df6d86d2888a7c06502ffed33fab921a91fc606c",
+    "pubspec.yaml": "c503ed86338d3a89913965410295fe1cb12d7faf69886fbff0a2d2ba49fccc77"
+  }
+}

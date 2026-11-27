@@ -1,0 +1,17 @@
+{
+  "source": "https://github.com/dart-lang/core",
+  "commit": "0762ac318188cf0ade513d1c62b02b72b45f6b33",
+  "package": "typed_data",
+  "status": "SOURCE_REFERENCE_ONLY",
+  "security": "baseline static screening only; not malware clearance",
+  "license": "BSD-style; see original LICENSE",
+  "files": {
+    "LICENSE": "ff15faa32a2e638107b7789592b14426162a75ba620044ee2340a20ec6ce5e73",
+    "README.md": "ee8993713d76f8505925f184ef6091b2d03c8e845dd982e346592e14dda4c258",
+    "lib/src/typed_buffer.dart": "ab9977317f1a61b63d9c1e920244635ff8a4ab0d7f7cbcd9ae5991cede8d328e",
+    "lib/src/typed_queue.dart": "74c62bf816085506c9d989b6e0715760939e5f6eac8bdb594d922b1d299a15f6",
+    "lib/typed_buffers.dart": "84f1cfa516c6d51c549fbea2bc65306a61cfaaf1b30c19720983dd49b5191d29",
+    "lib/typed_data.dart": "f898e68142775920e82aae3d26a29fcaf1791e94c3bcc5c15b836b6aeb6aeac2",
+    "pubspec.yaml": "9367201982b1b652df5d020973f565968d9e472b8febbceada33686b236cebe9"
+  }
+}
