@@ -1,0 +1,26 @@
+{
+  "source": "https://github.com/dart-lang/core",
+  "commit": "0762ac318188cf0ade513d1c62b02b72b45f6b33",
+  "package": "crypto",
+  "status": "SOURCE_REFERENCE_ONLY",
+  "security": "baseline static screening only; not malware clearance",
+  "license": "BSD-style; see original LICENSE",
+  "files": {
+    "LICENSE": "ad6a71997da90924b2cfb1fb47ec46537f70faf469efe016168794ae45ed6888",
+    "README.md": "2c17c1f7c1b42b95638b5d49efb5883444119c00e81e8b4b70710d754377dfb5",
+    "lib/crypto.dart": "b40a054df79c99691aeca18db7a0c4bda1d99793538015841e858a59149b6935",
+    "lib/src/digest.dart": "0aa3fc33d3f17661ba26881463ae30e63bef2dc3a70089a3b9369b79c574349d",
+    "lib/src/digest_sink.dart": "9912d304a55d1b9eb534ad49e9983eed9acf914e13444e1c51c7d3b71be40ca2",
+    "lib/src/hash.dart": "6a896dc98a5de35ebf6a71deb41cd0af940e3468fec1912c24c17a5a65fdd45a",
+    "lib/src/hash_sink.dart": "9bd0177b10913298127fbe82b6c3005384aaa8db30668edb7ecb23c7c9b6c831",
+    "lib/src/hmac.dart": "ed0b7522c291cad055bfb5ede4d67f344dacefddc00277aa1dfddd6a5f5a203f",
+    "lib/src/md5.dart": "54842744e6b8bc1114ee8a741c0f8d2c67b14f81dffc1377e9a4a30f656cb327",
+    "lib/src/sha1.dart": "4f2037ccbbdd0aa6c95f661e5ff096039dd79e071569f5f0794f80cca75d8c54",
+    "lib/src/sha256.dart": "df0c04c26f96173d8deaa1bc14e03073c8588270747fdd1509024777119ca21d",
+    "lib/src/sha512.dart": "c4f357c4159c4b0f21cfa659acbaacc64d1ec646ea3c61cefe2f517d4e4cff09",
+    "lib/src/sha512_fastsinks.dart": "2773970d02c1f916d2d1a19463443d460276d8b921f3d2f8d5971769f94a138e",
+    "lib/src/sha512_slowsinks.dart": "48595f83d8ee7eb2418f097a08af89b2dc11b4c76a89f8deb75432f5ad7c7022",
+    "lib/src/utils.dart": "fe32b66150d96b3d66fda37a3b31fe33cd9e25de73d61bfc750273bbabb05deb",
+    "pubspec.yaml": "693a8d277af90a4ad9bef3bdafff1e8a758fd5e2e086919c34ecadf84694d0ab"
+  }
+}

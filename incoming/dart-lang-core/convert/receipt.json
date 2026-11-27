@@ -1,0 +1,28 @@
+{
+  "source": "https://github.com/dart-lang/core",
+  "commit": "0762ac318188cf0ade513d1c62b02b72b45f6b33",
+  "package": "convert",
+  "status": "SOURCE_REFERENCE_ONLY",
+  "security": "baseline static screening only; not malware clearance",
+  "license": "BSD-style; see original LICENSE",
+  "files": {
+    "LICENSE": "ad6a71997da90924b2cfb1fb47ec46537f70faf469efe016168794ae45ed6888",
+    "README.md": "39f83280929f7371fea426abaacfd4cb7218911c110eb70092a5e6190b2ac4b4",
+    "lib/convert.dart": "b47d7bcea5b80ca604e195b2d06b241a02f427841abae8efa4c1ee7959ce5408",
+    "lib/src/accumulator_sink.dart": "cf8dd490616cc98330ef7b080642138fe6580b27a1559e8ec78c31b284facf8d",
+    "lib/src/byte_accumulator_sink.dart": "8e8c0fbe3b196bc350429439ef32c7b32044bb6dc6e47f67adad303308571ea7",
+    "lib/src/charcodes.dart": "4e4c88aaa0449c65b2112771b50d6d46dce1b5e91dc8616b400c285f97e7b161",
+    "lib/src/codepage.dart": "476d5cf80e9957c8c6527240b589dbbd3a846742fe18e2e4a558c2aca40b7fcf",
+    "lib/src/fixed_datetime_formatter.dart": "d943b9616d3a1479b0332e5dbd3f8d6bf88dddc8554aeeb96869d0969ad7c2f5",
+    "lib/src/hex.dart": "36a0cd63ad610bde935ba152aaa23b51d609f698b8871d156981261c3f13206f",
+    "lib/src/hex/decoder.dart": "b0239836d5d44172ed65400116e1f9505d1de2f0d0e27e8733b6678a51aeed89",
+    "lib/src/hex/encoder.dart": "9e2f3ec7195e1df0b93877b3b6acd5d0dea22aedde4fae5e9cafcc8cae2213c1",
+    "lib/src/identity_codec.dart": "8a973857ab1ca53b3341c711d7804b2ba9028f1f1036ae721f6dc46e71a96114",
+    "lib/src/percent.dart": "2c86cdffdfb1b91d8a24e96c97f3dd6482d5fbfb9c63f69d23828354c6a1d779",
+    "lib/src/percent/decoder.dart": "d2590a4e51d9d25d0f36576d74d6c9dac316a1b24bd34437d7a08c06bfd7cb75",
+    "lib/src/percent/encoder.dart": "8ffef896bd92bce121d5a8ced92112d45824c3025420859b6f3294bf8e192fb8",
+    "lib/src/string_accumulator_sink.dart": "04be3ac87852a6897a2da7226ea87d33d36e56357d3609b5ebeaf340e92f8fae",
+    "lib/src/utils.dart": "720f3a2e79a8130a73d3d52216dcfe65c040158cf72e4b57ccda211a3b549801",
+    "pubspec.yaml": "16188b7d75f54bf9ab55ab446352d856595d801203342b63681ee300441853b7"
+  }
+}
