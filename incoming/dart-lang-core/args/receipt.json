@@ -1,0 +1,25 @@
+{
+  "source": "https://github.com/dart-lang/core",
+  "commit": "0762ac318188cf0ade513d1c62b02b72b45f6b33",
+  "package": "args",
+  "status": "SOURCE_REFERENCE_ONLY",
+  "security": "baseline static screening only; not malware clearance",
+  "license": "BSD-style; see original LICENSE",
+  "files": {
+    "LICENSE": "dfb09c74e29386cd3e2719f32d4995d59526179753931d31840757c77fbf2791",
+    "README.md": "2e9ed351a900a070143a94b0ac268256e2622688541fbe6dbf88a723db3d2b4b",
+    "lib/args.dart": "0cca982895010d0c39adfa6e77902f4d90a8963ab5e5ec3b446344d7a3a005ca",
+    "lib/command_runner.dart": "bbe7546616d74624f1b13904505c9e071c626e70586d021fc8dd6464238c63d7",
+    "lib/src/allow_anything_parser.dart": "3c2535ef14655f8c10f33dd4d97659bc243fe5e0540749d8204338d1c8b79c3f",
+    "lib/src/arg_parser.dart": "5c8fc3a09793a75fa72bf1eb3cf3b4794cf439fa89ac2f2e7317049f448536a2",
+    "lib/src/arg_parser_exception.dart": "c021f72e653a1d801ff416db125b426c1e79ec3148e9fd2eff227a5887e1704e",
+    "lib/src/arg_results.dart": "3db08b91ecb5a610ca3f8d3ff6ebc3c6c11dcdd13a9ea903c4246b56e1f5899e",
+    "lib/src/help_command.dart": "61a9b215ef14cb83c5ddc651dbba2ec636f05c7c3a3589bf231290daa88d7667",
+    "lib/src/option.dart": "65eb28decde419b4a178a2524bcc027dd9ff058b46fc064e00af7252220a8d6a",
+    "lib/src/parser.dart": "55c3fa188bda138393b41a3d56b778cfbd06220bc8017539e642944874486c99",
+    "lib/src/usage.dart": "163523e6fe06ccbdf2099fe67fd316be7250ca8c1126a09ba5ce84e0d4d66e4a",
+    "lib/src/usage_exception.dart": "ac30c63429710dba80900f441317a46569495b81ebefad7f0acfebdb3c1ea0fb",
+    "lib/src/utils.dart": "540cca92b96ce15d05502afbec9a26791fda9fe4ffe985b57b78969fa170604f",
+    "pubspec.yaml": "125588401ffc7aff9d43f307e1f2ac1a5233377c7f0fdd763c21043887494084"
+  }
+}

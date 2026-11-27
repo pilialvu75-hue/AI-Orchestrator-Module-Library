@@ -1,0 +1,20 @@
+{
+  "source": "https://github.com/dart-lang/core",
+  "commit": "0762ac318188cf0ade513d1c62b02b72b45f6b33",
+  "package": "characters",
+  "status": "SOURCE_REFERENCE_ONLY",
+  "security": "baseline static screening only; not malware clearance",
+  "license": "BSD-style; see original LICENSE",
+  "files": {
+    "LICENSE": "0371d1da6a57fb791db29d29b95333429205f51f3cb2eb3a0c12d91838a38744",
+    "README.md": "fdd6005b6f11f0216b5126eaefe4dbb385ba2543ba8bf600e2de6bb3aa6c97c6",
+    "lib/characters.dart": "086108618ce81dcbd9f28a4e39c9d3577c10d55797fb79feca7f7430ae86e2ba",
+    "lib/src/characters.dart": "47f40b038ced8f32be1267528d0565126f0714ce3535ee2ac98edeb44b86140e",
+    "lib/src/characters_impl.dart": "1438879f1ff54ac56f85f1723f762b6d3632d46fcf9351c89e5cefe70ce544c1",
+    "lib/src/extensions.dart": "f475776a8ca9fc81f5d8cf0a610cccbf248bd52d3be0c17283c209e4ed1b8731",
+    "lib/src/grapheme_clusters/breaks.dart": "0d37b35a72cb7e37085cfb8da485fec05323e4407b9e51a92e5bf62307c07396",
+    "lib/src/grapheme_clusters/constants.dart": "41115f3b755f6c721b373eaf7330cfdea72e21b152afe16a53be65e535a1fd9b",
+    "lib/src/grapheme_clusters/table.dart": "cacb85604514320e2701d93038b2cc44afe2f8b5ff85ceec79b146d6103a2d55",
+    "pubspec.yaml": "2b9bce1bf46f178b1c4679d9d307f850c69524b174c9fde982887117ac5250d3"
+  }
+}
