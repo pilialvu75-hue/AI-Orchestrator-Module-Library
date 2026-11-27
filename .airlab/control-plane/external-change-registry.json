@@ -16,7 +16,7 @@
     {
       "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
       "baseline_at": "2026-10-03T16:20:00Z",
-      "cursor_merged_at": "2026-11-27T09:34:59Z"
+      "cursor_merged_at": "2026-11-27T11:01:02Z"
     },
     {
       "repository": "pilialvu75-hue/Ai-orchestrator-diagnostics",
@@ -10642,6 +10642,40 @@
       "url": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/7ab222b130ffff0cd9616058c31f528f3b18bdf2",
       "match_ref": null,
       "reconciliation": null
+    },
+    {
+      "incident_id": "5cedfe887558bd1542b3",
+      "status": "UNRECONCILED",
+      "detected_at": "2026-11-27T11:39:02Z",
+      "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
+      "kind": "direct_commit",
+      "pull_request": null,
+      "merge_sha": null,
+      "commit_sha": "f29d1a9f02822ef4cfa111fe0a9965e2fc570b65",
+      "head_branch": null,
+      "base_branch": "main",
+      "change_at": "2026-11-27T11:00:24Z",
+      "title": "feat(metrics): optional NVIDIA GPU utilization and VRAM telemetry on Windows (#1302)",
+      "url": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/f29d1a9f02822ef4cfa111fe0a9965e2fc570b65",
+      "match_ref": null,
+      "reconciliation": null
+    },
+    {
+      "incident_id": "866cb852134eb17241af",
+      "status": "UNRECONCILED",
+      "detected_at": "2026-11-27T11:39:02Z",
+      "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
+      "kind": "direct_commit",
+      "pull_request": null,
+      "merge_sha": null,
+      "commit_sha": "5ef14ae06b71d13d800aba92f368f45d3b9e6ab5",
+      "head_branch": null,
+      "base_branch": "main",
+      "change_at": "2026-11-27T11:01:02Z",
+      "title": "fix(windows beta): restore CUDA-first resident runtime in coordinated OTA bundle (#1289)",
+      "url": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/5ef14ae06b71d13d800aba92f368f45d3b9e6ab5",
+      "match_ref": null,
+      "reconciliation": null
     }
   ],
   "reconciliation_history": [
@@ -10652,35 +10686,35 @@
       "note": "Known motivating example for CP-HARDEN-03. It predates this incremental detector and is not retroactively reopened."
     }
   ],
-  "last_scan_at": "2026-11-27T10:39:28Z",
+  "last_scan_at": "2026-11-27T11:39:02Z",
   "scan_health": {
     "pilialvu75-hue/AI-Orchestrator-Module-Library": {
       "state": "OK",
-      "last_success_at": "2026-11-27T10:39:28Z",
+      "last_success_at": "2026-11-27T11:39:02Z",
       "last_failure_at": null,
       "error_code": null
     },
     "pilialvu75-hue/Ai-orchestrator-riserva": {
       "state": "OK",
-      "last_success_at": "2026-11-27T10:39:28Z",
+      "last_success_at": "2026-11-27T11:39:02Z",
       "last_failure_at": "2026-10-28T07:39:58Z",
       "error_code": null
     },
     "pilialvu75-hue/Ai-orchestrator-diagnostics": {
       "state": "OK",
-      "last_success_at": "2026-11-27T10:39:28Z",
+      "last_success_at": "2026-11-27T11:39:02Z",
       "last_failure_at": "2026-10-28T07:39:58Z",
       "error_code": null
     },
     "pilialvu75-hue/AI-Orchestrator-Module-Researcher": {
       "state": "OK",
-      "last_success_at": "2026-11-27T10:39:28Z",
+      "last_success_at": "2026-11-27T11:39:02Z",
       "last_failure_at": "2026-10-28T07:39:58Z",
       "error_code": null
     },
     "pilialvu75-hue/Ai_orchestrator-prova": {
       "state": "OK",
-      "last_success_at": "2026-11-27T10:39:28Z",
+      "last_success_at": "2026-11-27T11:39:02Z",
       "last_failure_at": "2026-10-28T07:39:58Z",
       "error_code": null
     }
