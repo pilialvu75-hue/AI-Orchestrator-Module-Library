@@ -1,0 +1,20 @@
+{
+  "source": "https://github.com/dart-lang/core",
+  "commit": "0762ac318188cf0ade513d1c62b02b72b45f6b33",
+  "package": "os_detect",
+  "status": "SOURCE_REFERENCE_ONLY",
+  "security": "baseline static screening only; not malware clearance",
+  "license": "BSD-style; see original LICENSE",
+  "files": {
+    "LICENSE": "f3fedf65adeec4d6ccb2abf053ebc0f07603d402db3d3c5651322b50502e1071",
+    "README.md": "5d635aff248131896f55d42f26ba4fccc854311f8bbf4a0f8c7c503fd9a49c6b",
+    "lib/os_detect.dart": "6bc5893962c05ed31b1cfb67d20598083898cc65aaae44155af3931b08dfee5a",
+    "lib/override.dart": "63a407aafda53c3532b367f325675aff7cbb1e35c37447baf93db3c135acfb83",
+    "lib/src/os_kind.dart": "9e7238d1dc4949261833b0cf6823bf53c3b8cebe0edec5743d183424ba84c0c0",
+    "lib/src/os_override.dart": "306aa7df79d867e509f764dbe6d1b77486eb2d1307a3655c26203656c44d01c7",
+    "lib/src/osid_html.dart": "cbeccc7d112eb38f1a4f7885c0177e9414231a051c80c96dc7210a3cd0420e19",
+    "lib/src/osid_io.dart": "332d661fdff12f9ec6e672d46515f654807646cbe56ff7324514e16e523147ba",
+    "lib/src/osid_unknown.dart": "87f440ec3c2ef9d2eae83403323e9a011c540e74ef17fc0466f23c9e75853e87",
+    "pubspec.yaml": "eac9f8dae1e2d5c7b1da8ab9f36b43a75cf6f4c0391a38843aa1f2366b3de023"
+  }
+}

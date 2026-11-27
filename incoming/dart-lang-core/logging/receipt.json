@@ -1,0 +1,17 @@
+{
+  "source": "https://github.com/dart-lang/core",
+  "commit": "0762ac318188cf0ade513d1c62b02b72b45f6b33",
+  "package": "logging",
+  "status": "SOURCE_REFERENCE_ONLY",
+  "security": "baseline static screening only; not malware clearance",
+  "license": "BSD-style; see original LICENSE",
+  "files": {
+    "LICENSE": "dfb09c74e29386cd3e2719f32d4995d59526179753931d31840757c77fbf2791",
+    "README.md": "e4f6eeffa2bc58bbeb470104ef4ea6c19bb0faf4a3b9037aaf577b71f8844632",
+    "lib/logging.dart": "436051fb9143e31a6e9817546589bb91e5943b8d330405b6f83ce83943bf7fd2",
+    "lib/src/level.dart": "23bb88ebc754b80e1279a53161b65197ba7e54081442e0052c85b2e885e8f901",
+    "lib/src/log_record.dart": "f6e4def86dfbd75abe8e8391f6b2bccef8f1399bfee15dc5877a19f679e0b05a",
+    "lib/src/logger.dart": "6aa3fc83571ad3e5324c6dd5c9ae7ba063d895451c9f9de067d7f02d03598ecf",
+    "pubspec.yaml": "66c0d91e6687e7e837f2bf9236ea6552d705103f13e746f24c9af51ea7fc57fe"
+  }
+}

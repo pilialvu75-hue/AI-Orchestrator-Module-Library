@@ -1,0 +1,18 @@
+{
+  "source": "https://github.com/dart-lang/core",
+  "commit": "0762ac318188cf0ade513d1c62b02b72b45f6b33",
+  "package": "fixnum",
+  "status": "SOURCE_REFERENCE_ONLY",
+  "security": "baseline static screening only; not malware clearance",
+  "license": "BSD-style; see original LICENSE",
+  "files": {
+    "LICENSE": "ff0b91d4f3c32b25cb6ec84985e8da89b0ba2a2b2f7eef353cda5e5423a20390",
+    "README.md": "84c7d7d42d061c5aa2bda43ef02f766374bc294677eeeea5cccec524d5a12431",
+    "lib/fixnum.dart": "bdfb242fae6aedcaeceb4b19bd0ae685e8aca7c10255d5a605fe4ebbc31b1690",
+    "lib/src/int32.dart": "3448d5dfbd97b4c72d139aa18508344c059c5e2d3d795939d8a280f19bfc61aa",
+    "lib/src/int64.dart": "2fa0559e78d7a3edf6b6dcc1bc5f4b43d409fe64d67079d7fae2553408e3c085",
+    "lib/src/intx.dart": "cb45a641889a956c1ba5ada6386e9f75d2b58ae6bf23558bf06626405503e29d",
+    "lib/src/utilities.dart": "2e9f4f4bf3a5183a51bb9a1e762369ebd1c05266b55b054a7da1c3cb978b9d3b",
+    "pubspec.yaml": "41d740d02fe4bf6c18ff6ce591059548e6e3caa0d7156d92703b36815371cc79"
+  }
+}
