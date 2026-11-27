@@ -16,7 +16,7 @@
     {
       "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
       "baseline_at": "2026-10-03T16:20:00Z",
-      "cursor_merged_at": "2026-11-27T14:24:03Z"
+      "cursor_merged_at": "2026-11-27T15:30:52Z"
     },
     {
       "repository": "pilialvu75-hue/Ai-orchestrator-diagnostics",
@@ -10795,6 +10795,108 @@
       "url": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/b8091c2ad22037af17586789fa53f71354ae54ff",
       "match_ref": null,
       "reconciliation": null
+    },
+    {
+      "incident_id": "ef913c3737a248b51e2a",
+      "status": "UNRECONCILED",
+      "detected_at": "2026-11-27T15:39:14Z",
+      "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
+      "kind": "direct_commit",
+      "pull_request": null,
+      "merge_sha": null,
+      "commit_sha": "874887f6c75463c9c5550e3dfe4093ffa6a14093",
+      "head_branch": null,
+      "base_branch": "main",
+      "change_at": "2026-11-27T14:47:44Z",
+      "title": "feat(metrics): Windows WDDM busiest-engine GPU utilization (#1312)",
+      "url": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/874887f6c75463c9c5550e3dfe4093ffa6a14093",
+      "match_ref": null,
+      "reconciliation": null
+    },
+    {
+      "incident_id": "6a12c5bd0e47ffcbebcd",
+      "status": "UNRECONCILED",
+      "detected_at": "2026-11-27T15:39:14Z",
+      "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
+      "kind": "direct_commit",
+      "pull_request": null,
+      "merge_sha": null,
+      "commit_sha": "631886c155a15de5539409053b6570e0effd7b6a",
+      "head_branch": null,
+      "base_branch": "main",
+      "change_at": "2026-11-27T14:47:52Z",
+      "title": "fix(metrics): Windows RAM pressure and generation phase diagnostics (#1314)",
+      "url": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/631886c155a15de5539409053b6570e0effd7b6a",
+      "match_ref": null,
+      "reconciliation": null
+    },
+    {
+      "incident_id": "9fc639d7c05c43e86003",
+      "status": "UNRECONCILED",
+      "detected_at": "2026-11-27T15:39:14Z",
+      "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
+      "kind": "direct_commit",
+      "pull_request": null,
+      "merge_sha": null,
+      "commit_sha": "423be0a9eff3f669caf4036432d406644ec3f975",
+      "head_branch": null,
+      "base_branch": "main",
+      "change_at": "2026-11-27T15:11:55Z",
+      "title": "fix(gpu): prioritize available GPU for user-selected Windows GGUF models (#1315)",
+      "url": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/423be0a9eff3f669caf4036432d406644ec3f975",
+      "match_ref": null,
+      "reconciliation": null
+    },
+    {
+      "incident_id": "8cf3840aec82559e8f47",
+      "status": "UNRECONCILED",
+      "detected_at": "2026-11-27T15:39:14Z",
+      "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
+      "kind": "direct_commit",
+      "pull_request": null,
+      "merge_sha": null,
+      "commit_sha": "022e7fdd6afc4a9c6d381309a605939cde2e4eb6",
+      "head_branch": null,
+      "base_branch": "main",
+      "change_at": "2026-11-27T15:13:39Z",
+      "title": "feat(gpu): bounded GGUF layer sizing and dual-memory partial offload planner (#1316)",
+      "url": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/022e7fdd6afc4a9c6d381309a605939cde2e4eb6",
+      "match_ref": null,
+      "reconciliation": null
+    },
+    {
+      "incident_id": "5a59485f552674c370b3",
+      "status": "UNRECONCILED",
+      "detected_at": "2026-11-27T15:39:14Z",
+      "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
+      "kind": "direct_commit",
+      "pull_request": null,
+      "merge_sha": null,
+      "commit_sha": "9f0cd6585029d899ad52f934f2247e800736f464",
+      "head_branch": null,
+      "base_branch": "main",
+      "change_at": "2026-11-27T15:16:14Z",
+      "title": "fix(memory): actively stop Windows LOCAL inference on critical physical RAM (#1317)",
+      "url": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/9f0cd6585029d899ad52f934f2247e800736f464",
+      "match_ref": null,
+      "reconciliation": null
+    },
+    {
+      "incident_id": "fc332f3e5eacf16fc096",
+      "status": "UNRECONCILED",
+      "detected_at": "2026-11-27T15:39:14Z",
+      "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
+      "kind": "direct_commit",
+      "pull_request": null,
+      "merge_sha": null,
+      "commit_sha": "cd857872b54f9351b2caad8150d01864d36b3d69",
+      "head_branch": null,
+      "base_branch": "main",
+      "change_at": "2026-11-27T15:30:52Z",
+      "title": "feat(gpu): validated device capacities and fresh probe option for model admission (#1318)",
+      "url": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/cd857872b54f9351b2caad8150d01864d36b3d69",
+      "match_ref": null,
+      "reconciliation": null
     }
   ],
   "reconciliation_history": [
@@ -10805,35 +10907,35 @@
       "note": "Known motivating example for CP-HARDEN-03. It predates this incremental detector and is not retroactively reopened."
     }
   ],
-  "last_scan_at": "2026-11-27T14:39:41Z",
+  "last_scan_at": "2026-11-27T15:39:14Z",
   "scan_health": {
     "pilialvu75-hue/AI-Orchestrator-Module-Library": {
       "state": "OK",
-      "last_success_at": "2026-11-27T14:39:41Z",
+      "last_success_at": "2026-11-27T15:39:14Z",
       "last_failure_at": null,
       "error_code": null
     },
     "pilialvu75-hue/Ai-orchestrator-riserva": {
       "state": "OK",
-      "last_success_at": "2026-11-27T14:39:41Z",
+      "last_success_at": "2026-11-27T15:39:14Z",
       "last_failure_at": "2026-10-28T07:39:58Z",
       "error_code": null
     },
     "pilialvu75-hue/Ai-orchestrator-diagnostics": {
       "state": "OK",
-      "last_success_at": "2026-11-27T14:39:41Z",
+      "last_success_at": "2026-11-27T15:39:14Z",
       "last_failure_at": "2026-10-28T07:39:58Z",
       "error_code": null
     },
     "pilialvu75-hue/AI-Orchestrator-Module-Researcher": {
       "state": "OK",
-      "last_success_at": "2026-11-27T14:39:41Z",
+      "last_success_at": "2026-11-27T15:39:14Z",
       "last_failure_at": "2026-10-28T07:39:58Z",
       "error_code": null
     },
     "pilialvu75-hue/Ai_orchestrator-prova": {
       "state": "OK",
-      "last_success_at": "2026-11-27T14:39:41Z",
+      "last_success_at": "2026-11-27T15:39:14Z",
       "last_failure_at": "2026-10-28T07:39:58Z",
       "error_code": null
     }
