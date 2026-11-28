@@ -1,0 +1,41 @@
+name: Generated utility independent stability
+on:
+  pull_request:
+    paths:
+      - 'tests/generated_utilities/**'
+      - '.github/workflows/generated-utilities-stability.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  stability:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-24.04, windows-latest, macos-latest]
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: dart-lang/setup-dart@v1
+      - name: Run independent tests sequentially per module
+        shell: bash
+        run: |
+          set -o pipefail
+          failed=0
+          for module in adjacent_pairs count_in_range cumulative_max first_subsequence fixed_chunks index_positions integer_frequencies interleave_lists intersection_unique max_run_length palindrome_filter rotate_left running_product stable_unique; do
+            if ! dart run tests/generated_utilities/stability.dart "$module" | tee -a utility-results.jsonl; then
+              echo "{\"module\":\"$module\",\"status\":\"FAIL\"}" | tee -a utility-results.jsonl
+              failed=1
+            fi
+          done
+          exit "$failed"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: utility-results-${{ matrix.os }}
+          path: utility-results.jsonl
+          if-no-files-found: error
+          retention-days: 7
