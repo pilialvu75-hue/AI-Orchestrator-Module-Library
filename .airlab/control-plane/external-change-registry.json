@@ -16,7 +16,7 @@
     {
       "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
       "baseline_at": "2026-10-03T16:20:00Z",
-      "cursor_merged_at": "2026-11-27T22:17:53Z"
+      "cursor_merged_at": "2026-11-28T07:46:57Z"
     },
     {
       "repository": "pilialvu75-hue/Ai-orchestrator-diagnostics",
@@ -11101,6 +11101,57 @@
       "url": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/5b5352150c78a4cbc61aa5e5a337647b62cd4dbf",
       "match_ref": null,
       "reconciliation": null
+    },
+    {
+      "incident_id": "4fb8e149499e030941f1",
+      "status": "UNRECONCILED",
+      "detected_at": "2026-11-28T08:39:11Z",
+      "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
+      "kind": "direct_commit",
+      "pull_request": null,
+      "merge_sha": null,
+      "commit_sha": "65e8a946302bc2ae7c20503fa79f62e327954a1a",
+      "head_branch": null,
+      "base_branch": "main",
+      "change_at": "2026-11-27T22:26:18Z",
+      "title": "Open Web Studio from saved Game projects",
+      "url": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/65e8a946302bc2ae7c20503fa79f62e327954a1a",
+      "match_ref": null,
+      "reconciliation": null
+    },
+    {
+      "incident_id": "38ed7436cbb07042757b",
+      "status": "UNRECONCILED",
+      "detected_at": "2026-11-28T08:39:11Z",
+      "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
+      "kind": "direct_commit",
+      "pull_request": null,
+      "merge_sha": null,
+      "commit_sha": "eecf1706a5d9045080eb763d1de826d49bd55405",
+      "head_branch": null,
+      "base_branch": "main",
+      "change_at": "2026-11-28T07:25:30Z",
+      "title": "Show the Studio entry for existing Game drafts",
+      "url": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/eecf1706a5d9045080eb763d1de826d49bd55405",
+      "match_ref": null,
+      "reconciliation": null
+    },
+    {
+      "incident_id": "886a1d60eae3046bc10e",
+      "status": "UNRECONCILED",
+      "detected_at": "2026-11-28T08:39:11Z",
+      "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
+      "kind": "unmatched_merge_commit",
+      "pull_request": null,
+      "merge_sha": null,
+      "commit_sha": "9ae4a4996beaceae1ef51b7cb5aab70454d796c6",
+      "head_branch": null,
+      "base_branch": "main",
+      "change_at": "2026-11-28T07:46:57Z",
+      "title": "Merge pull request #1322 from pilialvu75-hue/aivexus-web/studio-game",
+      "url": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/9ae4a4996beaceae1ef51b7cb5aab70454d796c6",
+      "match_ref": null,
+      "reconciliation": null
     }
   ],
   "reconciliation_history": [
@@ -11111,35 +11162,35 @@
       "note": "Known motivating example for CP-HARDEN-03. It predates this incremental detector and is not retroactively reopened."
     }
   ],
-  "last_scan_at": "2026-11-28T07:38:58Z",
+  "last_scan_at": "2026-11-28T08:39:11Z",
   "scan_health": {
     "pilialvu75-hue/AI-Orchestrator-Module-Library": {
       "state": "OK",
-      "last_success_at": "2026-11-28T07:38:58Z",
+      "last_success_at": "2026-11-28T08:39:11Z",
       "last_failure_at": null,
       "error_code": null
     },
     "pilialvu75-hue/Ai-orchestrator-riserva": {
       "state": "OK",
-      "last_success_at": "2026-11-28T07:38:58Z",
+      "last_success_at": "2026-11-28T08:39:11Z",
       "last_failure_at": "2026-10-28T07:39:58Z",
       "error_code": null
     },
     "pilialvu75-hue/Ai-orchestrator-diagnostics": {
       "state": "OK",
-      "last_success_at": "2026-11-28T07:38:58Z",
+      "last_success_at": "2026-11-28T08:39:11Z",
       "last_failure_at": "2026-10-28T07:39:58Z",
       "error_code": null
     },
     "pilialvu75-hue/AI-Orchestrator-Module-Researcher": {
       "state": "OK",
-      "last_success_at": "2026-11-28T07:38:58Z",
+      "last_success_at": "2026-11-28T08:39:11Z",
       "last_failure_at": "2026-10-28T07:39:58Z",
       "error_code": null
     },
     "pilialvu75-hue/Ai_orchestrator-prova": {
       "state": "OK",
-      "last_success_at": "2026-11-28T07:38:58Z",
+      "last_success_at": "2026-11-28T08:39:11Z",
       "last_failure_at": "2026-10-28T07:39:58Z",
       "error_code": null
     }
