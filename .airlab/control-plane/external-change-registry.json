@@ -16,7 +16,7 @@
     {
       "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
       "baseline_at": "2026-10-03T16:20:00Z",
-      "cursor_merged_at": "2026-11-28T07:46:57Z"
+      "cursor_merged_at": "2026-11-28T08:51:43Z"
     },
     {
       "repository": "pilialvu75-hue/Ai-orchestrator-diagnostics",
@@ -11152,6 +11152,91 @@
       "url": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/9ae4a4996beaceae1ef51b7cb5aab70454d796c6",
       "match_ref": null,
       "reconciliation": null
+    },
+    {
+      "incident_id": "24080eea844fef678f39",
+      "status": "UNRECONCILED",
+      "detected_at": "2026-11-28T09:39:22Z",
+      "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
+      "kind": "direct_commit",
+      "pull_request": null,
+      "merge_sha": null,
+      "commit_sha": "59e23b37eb33f4e617357f51c86ecfd2a0aba463",
+      "head_branch": null,
+      "base_branch": "main",
+      "change_at": "2026-11-28T08:07:48Z",
+      "title": "Generate printable extrusions from photo outlines",
+      "url": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/59e23b37eb33f4e617357f51c86ecfd2a0aba463",
+      "match_ref": null,
+      "reconciliation": null
+    },
+    {
+      "incident_id": "f7a9853aeb0e1c6189e5",
+      "status": "UNRECONCILED",
+      "detected_at": "2026-11-28T09:39:22Z",
+      "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
+      "kind": "direct_commit",
+      "pull_request": null,
+      "merge_sha": null,
+      "commit_sha": "8a499b765ffa1f65ba9d2e53c746227f516292c7",
+      "head_branch": null,
+      "base_branch": "main",
+      "change_at": "2026-11-28T08:18:49Z",
+      "title": "Verify the photo outline STL flow in Chromium",
+      "url": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/8a499b765ffa1f65ba9d2e53c746227f516292c7",
+      "match_ref": null,
+      "reconciliation": null
+    },
+    {
+      "incident_id": "48209a04750323f724de",
+      "status": "UNRECONCILED",
+      "detected_at": "2026-11-28T09:39:22Z",
+      "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
+      "kind": "unmatched_merge_commit",
+      "pull_request": null,
+      "merge_sha": null,
+      "commit_sha": "fc03f02682545bd4f3b38e23466e0855f2153cde",
+      "head_branch": null,
+      "base_branch": "main",
+      "change_at": "2026-11-28T08:41:11Z",
+      "title": "Merge pull request #1325 from pilialvu75-hue/aivexus-web/cad-photo-profile",
+      "url": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/fc03f02682545bd4f3b38e23466e0855f2153cde",
+      "match_ref": null,
+      "reconciliation": null
+    },
+    {
+      "incident_id": "355963ba35c14d101488",
+      "status": "UNRECONCILED",
+      "detected_at": "2026-11-28T09:39:22Z",
+      "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
+      "kind": "direct_commit",
+      "pull_request": null,
+      "merge_sha": null,
+      "commit_sha": "976a0bdcf1e23d161cbf53f657969153a7aa899c",
+      "head_branch": null,
+      "base_branch": "main",
+      "change_at": "2026-11-28T08:51:22Z",
+      "title": "fix(memory): rollback diagnostic 5% Windows RAM process-kill regression (#1323)",
+      "url": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/976a0bdcf1e23d161cbf53f657969153a7aa899c",
+      "match_ref": null,
+      "reconciliation": null
+    },
+    {
+      "incident_id": "369657b835628b64631e",
+      "status": "UNRECONCILED",
+      "detected_at": "2026-11-28T09:39:22Z",
+      "repository": "pilialvu75-hue/Ai-orchestrator-riserva",
+      "kind": "direct_commit",
+      "pull_request": null,
+      "merge_sha": null,
+      "commit_sha": "1c494920fb9dadd31532a7768d9c4a315a2a49b0",
+      "head_branch": null,
+      "base_branch": "main",
+      "change_at": "2026-11-28T08:51:43Z",
+      "title": "fix(diagnostics): expose Windows model admission evidence after physical 8B/14B/32B failures (#1321)",
+      "url": "https://github.com/pilialvu75-hue/Ai-orchestrator-riserva/commit/1c494920fb9dadd31532a7768d9c4a315a2a49b0",
+      "match_ref": null,
+      "reconciliation": null
     }
   ],
   "reconciliation_history": [
@@ -11162,35 +11247,35 @@
       "note": "Known motivating example for CP-HARDEN-03. It predates this incremental detector and is not retroactively reopened."
     }
   ],
-  "last_scan_at": "2026-11-28T08:39:11Z",
+  "last_scan_at": "2026-11-28T09:39:22Z",
   "scan_health": {
     "pilialvu75-hue/AI-Orchestrator-Module-Library": {
       "state": "OK",
-      "last_success_at": "2026-11-28T08:39:11Z",
+      "last_success_at": "2026-11-28T09:39:22Z",
       "last_failure_at": null,
       "error_code": null
     },
     "pilialvu75-hue/Ai-orchestrator-riserva": {
       "state": "OK",
-      "last_success_at": "2026-11-28T08:39:11Z",
+      "last_success_at": "2026-11-28T09:39:22Z",
       "last_failure_at": "2026-10-28T07:39:58Z",
       "error_code": null
     },
     "pilialvu75-hue/Ai-orchestrator-diagnostics": {
       "state": "OK",
-      "last_success_at": "2026-11-28T08:39:11Z",
+      "last_success_at": "2026-11-28T09:39:22Z",
       "last_failure_at": "2026-10-28T07:39:58Z",
       "error_code": null
     },
     "pilialvu75-hue/AI-Orchestrator-Module-Researcher": {
       "state": "OK",
-      "last_success_at": "2026-11-28T08:39:11Z",
+      "last_success_at": "2026-11-28T09:39:22Z",
       "last_failure_at": "2026-10-28T07:39:58Z",
       "error_code": null
     },
     "pilialvu75-hue/Ai_orchestrator-prova": {
       "state": "OK",
-      "last_success_at": "2026-11-28T08:39:11Z",
+      "last_success_at": "2026-11-28T09:39:22Z",
       "last_failure_at": "2026-10-28T07:39:58Z",
       "error_code": null
     }
